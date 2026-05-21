@@ -316,9 +316,40 @@ async def main():
                             ok, msg = verify_flac_integrity(local_path)
                             info['verified'] = True
                             info['sha256'] = sha
-                            info['integrity'] = "VERIFIED_VALID" if ok else f"CORRUPT: {msg}"
-                            print(f"    [+] SHA-256: {sha}")
-                            print(f"    [+] Integrity: {info['integrity']}")
+                            
+                            if ok:
+                                info['integrity'] = "VERIFIED_VALID"
+                                print(f"    [+] SHA-256: {sha}")
+                                print(f"    [+] Integrity: VERIFIED_VALID")
+                                
+                                # Registrar en el cortex_treasury_ledger.jsonl
+                                ledger_dir = os.path.expanduser("~/.gemini/antigravity/brain")
+                                os.makedirs(ledger_dir, exist_ok=True)
+                                ledger_path = os.path.join(ledger_dir, "cortex_treasury_ledger.jsonl")
+                                import json
+                                import time
+                                entry = {
+                                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                                    "filename": os.path.basename(local_path),
+                                    "filepath": local_path,
+                                    "sha256": sha,
+                                    "status": "VERIFIED_VALID",
+                                    "size_bytes": os.path.getsize(local_path)
+                                }
+                                try:
+                                    with open(ledger_path, "a") as f_ledger:
+                                        f_ledger.write(json.dumps(entry) + "\n")
+                                    print(f"    [+] Firma criptográfica registrada en ledger: {ledger_path}")
+                                except Exception as le:
+                                    print(f"    [!] Error writing ledger: {le}")
+                            else:
+                                info['integrity'] = f"CORRUPT: {msg}"
+                                print(f"    [!] Integrity check FAILED: {msg}")
+                                print(f"    [!] Purgando archivo corrupto de forma inmediata: {local_path}")
+                                try:
+                                    os.remove(local_path)
+                                except Exception as re:
+                                    print(f"    [!] Error al purgar archivo: {re}")
                         else:
                             all_complete = False
                 elif state in (TransferState.State.FAILED, TransferState.State.ABORTED, TransferState.State.INCOMPLETE):
