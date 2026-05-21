@@ -10,6 +10,8 @@ import signal
 import hashlib
 import subprocess
 import unicodedata
+import json
+import time
 from aioslsk.client import SoulSeekClient
 from aioslsk.settings import Settings, CredentialsSettings, NetworkSettings, ListeningSettings, PeerSettings, UpnpSettings
 from aioslsk.network.network import PeerConnectMode
@@ -21,8 +23,41 @@ random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k
 username = f"moskv_down_{random_suffix}"
 password = "cortex_password_2026"
 
+# CORTEX Sovereign Key-Value Persistent State Engine
+class CortexKVStore:
+    def __init__(self, filename="cortex_state_kv.json"):
+        self.path = os.path.expanduser(f"~/.gemini/antigravity/brain/{filename}")
+        os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        self.data = {}
+        self.load()
+
+    def load(self):
+        try:
+            if os.path.exists(self.path):
+                with open(self.path, "r") as f:
+                    self.data = json.load(f)
+        except Exception as e:
+            print(f"[!] Error loading KV Store: {e}")
+
+    def save(self):
+        try:
+            with open(self.path, "w") as f:
+                json.dump(self.data, f, indent=4)
+        except Exception as e:
+            print(f"[!] Error saving KV Store: {e}")
+
+    def get(self, key, default=None):
+        return self.data.get(key, default)
+
+    def set(self, key, value):
+        self.data[key] = value
+        self.save()
+
+# Persistent state mapping
+KV_STORE = CortexKVStore()
+
 # TIP ALPHA Latency Cache to optimize socket re-evaluations
-LATENCY_CACHE = {}      # Maps peer_name -> (timestamp, lat_info_dict)
+LATENCY_CACHE = KV_STORE.get("latency_cache", {})
 LATENCY_CACHE_TTL = 300 # Cache results for 300 seconds (5 minutes)
 LATENCY_CACHE_LOCK = None
 
@@ -238,8 +273,9 @@ async def main():
                         print(f"[!] Failed to resolve address or measure latency for peer '{peer}': {e}")
                         lat_info = {"status": "ERROR", "rtt_ms": None, "notes": f"Error: {str(e)}"}
                     
-                    # Store evaluated metrics in local cache
+                    # Store evaluated metrics in local cache and persist to KV Store
                     LATENCY_CACHE[peer] = (time.time(), lat_info)
+                    KV_STORE.set("latency_cache", LATENCY_CACHE)
             
             # Evaluate latency metrics against threshold
             if lat_info and lat_info["status"] == "SUCCESS":
@@ -340,8 +376,18 @@ async def main():
                                     with open(ledger_path, "a") as f_ledger:
                                         f_ledger.write(json.dumps(entry) + "\n")
                                     print(f"    [+] Firma criptográfica registrada en ledger: {ledger_path}")
+                                    
+                                    # Persistencia en CORTEX-State KV Store
+                                    downloaded_files = KV_STORE.get("downloaded_files", {})
+                                    downloaded_files[sha] = entry
+                                    KV_STORE.set("downloaded_files", downloaded_files)
+                                    
+                                    targets_status = KV_STORE.get("targets_status", {})
+                                    targets_status[os.path.basename(local_path)] = "SUCCESS"
+                                    KV_STORE.set("targets_status", targets_status)
+                                    print("    [+] Registro de estado completado en CORTEX Key-Value Store.")
                                 except Exception as le:
-                                    print(f"    [!] Error writing ledger: {le}")
+                                    print(f"    [!] Error writing ledger or KV store: {le}")
                             else:
                                 info['integrity'] = f"CORRUPT: {msg}"
                                 print(f"    [!] Integrity check FAILED: {msg}")
