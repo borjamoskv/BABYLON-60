@@ -321,12 +321,18 @@ async def main():
                 'integrity': None
             }
             
-        print("\n[*] Starting forensic acquisition loop...")
+        print("\n\033[H\033[J[*] Starting forensic acquisition loop...")
         await asyncio.sleep(2)
         
         while not stop_event.is_set():
             all_complete = True
-            print("-" * 60)
+            
+            # Dynamic screen clearing / reset to top-left for absolute premium dashboard
+            sys.stdout.write("\033[H")
+            sys.stdout.write("\033[38;2;43;59;229m" + "┌" + "─"*78 + "┐\n" + "\033[0m")
+            sys.stdout.write("\033[38;2;43;59;229m" + "│" + "\033[1;37m" + "   CORTEX-PERSIST · HIGH-FIDELITY P2P FORENSIC ACQUISITION ENGINE v2.0".ljust(78) + "\033[38;2;43;59;229m" + "│\n" + "\033[0m")
+            sys.stdout.write("\033[38;2;43;59;229m" + "│" + "\033[38;2;128;128;128m" + f"   Status: Active Connection | Standard: C5-REAL | Peer: {selected_peer}".ljust(78) + "\033[38;2;43;59;229m" + "│\n" + "\033[0m")
+            sys.stdout.write("\033[38;2;43;59;229m" + "└" + "─"*78 + "┘\n\033[0m")
             
             for remote_path, info in transfers_map.items():
                 tf = info['transfer']
@@ -340,14 +346,32 @@ async def main():
                 speed_kb = speed / 1024.0
                 
                 state_str = state.name if hasattr(state, 'name') else str(state)
-                print(f"Asset: {info['filename'][:30]:30} | State: {state_str:12} | Progress: {pct:.1f}% ({bytes_tx/(1024*1024):.1f}/{total_size/(1024*1024):.1f} MB) | Speed: {speed_kb:.1f} KB/s")
+                
+                # Visual progress bar using high-end blocks
+                bar_width = 16
+                filled_len = int(bar_width * pct / 100)
+                bar = "█" * filled_len + "░" * (bar_width - filled_len)
+                
+                # Colors based on state
+                if state_str == "COMPLETE":
+                    st_color = "\033[38;2;0;255;128m" # Success Green
+                elif state_str in ("FAILED", "ABORTED"):
+                    st_color = "\033[38;2;255;64;64m" # Danger Red
+                elif state_str == "DOWNLOADING":
+                    st_color = "\033[38;2;0;229;255m" # Secondary Cyan
+                else:
+                    st_color = "\033[38;2;255;200;0m" # Warning Yellow
+                
+                filename_short = info['filename'][:28].ljust(28)
+                sys.stdout.write(f"  Asset: \033[1;37m{filename_short}\033[0m | {st_color}{state_str:12}\033[0m | [{bar}] \033[1;37m{pct:5.1f}%\033[0m | \033[38;2;128;128;128m{speed_kb:5.1f} KB/s\033[0m\n")
                 
                 if state == TransferState.State.COMPLETE:
                     if not info['verified']:
+                        sys.stdout.write("\n" + "─"*80 + "\n")
                         local_path = tf.local_path
                         if local_path and os.path.exists(local_path):
-                            print(f"    [+] Asset saved to: {local_path}")
-                            print("    [*] Verifying asset integrity...")
+                            sys.stdout.write(f"    \033[38;2;0;255;128m[+]\033[0m Asset saved to: {local_path}\n")
+                            sys.stdout.write("    [*] Verifying asset integrity...\n")
                             sha = compute_sha256(local_path)
                             ok, msg = verify_flac_integrity(local_path)
                             info['verified'] = True
@@ -355,8 +379,8 @@ async def main():
                             
                             if ok:
                                 info['integrity'] = "VERIFIED_VALID"
-                                print(f"    [+] SHA-256: {sha}")
-                                print(f"    [+] Integrity: VERIFIED_VALID")
+                                sys.stdout.write(f"    \033[38;2;0;255;128m[+]\033[0m SHA-256: {sha}\n")
+                                sys.stdout.write(f"    \033[38;2;0;255;128m[+]\033[0m Integrity: VERIFIED_VALID\n")
                                 
                                 # Registrar en el cortex_treasury_ledger.jsonl
                                 ledger_dir = os.path.expanduser("~/.gemini/antigravity/brain")
@@ -375,7 +399,7 @@ async def main():
                                 try:
                                     with open(ledger_path, "a") as f_ledger:
                                         f_ledger.write(json.dumps(entry) + "\n")
-                                    print(f"    [+] Firma criptográfica registrada en ledger: {ledger_path}")
+                                    sys.stdout.write(f"    \033[38;2;0;255;128m[+]\033[0m Firma criptográfica registrada en ledger: {ledger_path}\n")
                                     
                                     # Persistencia en CORTEX-State KV Store
                                     downloaded_files = KV_STORE.get("downloaded_files", {})
@@ -385,38 +409,38 @@ async def main():
                                     targets_status = KV_STORE.get("targets_status", {})
                                     targets_status[os.path.basename(local_path)] = "SUCCESS"
                                     KV_STORE.set("targets_status", targets_status)
-                                    print("    [+] Registro de estado completado en CORTEX Key-Value Store.")
+                                    sys.stdout.write("    \033[38;2;0;255;128m[+]\033[0m Registro de estado completado en CORTEX Key-Value Store.\n")
                                 except Exception as le:
-                                    print(f"    [!] Error writing ledger or KV store: {le}")
+                                    sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Error writing ledger or KV store: {le}\n")
                             else:
                                 info['integrity'] = f"CORRUPT: {msg}"
-                                print(f"    [!] Integrity check FAILED: {msg}")
-                                print(f"    [!] Purgando archivo corrupto de forma inmediata: {local_path}")
+                                sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Integrity check FAILED: {msg}\n")
+                                sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Purgando archivo corrupto de forma inmediata: {local_path}\n")
                                 try:
                                     os.remove(local_path)
                                 except Exception as re:
-                                    print(f"    [!] Error al purgar archivo: {re}")
+                                    sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Error al purgar archivo: {re}\n")
                         else:
                             all_complete = False
                 elif state in (TransferState.State.FAILED, TransferState.State.ABORTED, TransferState.State.INCOMPLETE):
                     all_complete = False
                     info['retries'] += 1
                     if info['retries'] <= 10:
-                        print(f"    [!] Transfer interrupted. Dispatching Tip Alpha direct retry {info['retries']}/10...")
+                        sys.stdout.write(f"    \033[38;2;255;200;0m[!]\033[0m Transfer interrupted. Dispatching Tip Alpha direct retry {info['retries']}/10...\n")
                         try:
                             await client.transfers.queue(tf)
                         except Exception as e:
-                            print(f"    [!] Retry dispatch failed: {e}")
+                            sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Retry dispatch failed: {e}\n")
                     else:
-                        print(f"    [!] Maximum retry attempts exceeded for {info['filename']}.")
+                        sys.stdout.write(f"    \033[38;2;255;64;64m[!]\033[0m Maximum retry attempts exceeded for {info['filename']}.\n")
                 else:
                     all_complete = False
                     
             if all_complete:
-                print("\n[+] Forensic acquisition completed successfully.")
+                sys.stdout.write("\n\033[38;2;0;255;128m[+] Forensic acquisition completed successfully.\033[0m\n")
                 break
                 
-            await asyncio.sleep(5)
+            await asyncio.sleep(1)
             
         print("\n" + "="*70)
         print("  C5-REAL FORENSIC ACQUISITION REPORT")
