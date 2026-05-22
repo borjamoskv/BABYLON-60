@@ -1,0 +1,50 @@
+# ============================================
+# MOSKV ECOSYSTEM — Master .gitignore
+# Only track: antigravity/, borjamoskv_site/, game/
+# ============================================
+
+# === IGNORE EVERYTHING BY DEFAULT ===
+/*
+
+# === ALLOW ONLY PROJECT DIRECTORIES ===
+!/Music/
+!/COLD_STORAGE/
+!/.gitignore
+
+# === INSIDE PROJECTS: Standard ignores ===
+node_modules/
+.DS_Store
+*.log
+*.tmp
+.env
+.env.*
+__pycache__/
+*.pyc
+.cache/
+dist/
+build/
+.next/
+.turbo/
+.vercel/
+.netlify/
+
+# === Binary/Media (don't track in git) ===
+*.aif
+*.aiff
+*.wav
+*.mp3
+*.mp4
+*.mov
+*.webm
+*.flac
+*.ogg
+*.psd
+*.heic
+*.numbers
+
+# === OS files ===
+Thumbs.db
+.DS_Store
+*.swp
+*~
+.vercel
