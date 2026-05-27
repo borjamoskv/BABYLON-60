@@ -1,110 +1,80 @@
-# 🛑 REDACCIÓN-IA.md — LLM Linguistic Pattern Demolition & Antidotes
+# 🛑 PROTOCOLO OMEGA: ANIQUILACIÓN DE ENTROPÍA LINGÜÍSTICA (LLM-KILLER)
 
-**Scope:** Global Writing Rules | **Reality Level:** `C5-REAL` | **Aesthetic:** `Industrial Noir 2026`
+**OPERATOR:** borjamoskv | **REALITY LEVEL:** `C5-REAL` | **AESTHETIC:** `Industrial Noir 2026`
 
-**Core Objective:** Establish an exhaustive, high-fidelity catalog of "AIisms" (systematic linguistic, rhetorical, and structural artifacts of RLHF and token-prediction optimization). Strip these artifacts from professional communication to ensure output aligns with the CORTEX-Persist framework (Zero decorative prose, maximum signal density).
+**OBJETIVO SOBERANO:** Purgar el ecosistema CORTEX-Persist de artefactos retóricos estocásticos y complacencia RLHF. Maximizar la exergía y densidad de señal. Cero prosa decorativa. Si una frase no altera el estado del sistema de forma verificable, se aniquila.
 
 ---
 
-## 1. 🎭 APERTURAS Y CIERRES RITUALES (Ritualistic Openers & Closers)
+## 1. 🎭 RITUALES DE APERTURA Y CIERRE (Ruido de Alineación)
 
-| IAismo | Ejemplo Crudo | Mecanismo / Por Qué Ocurre |
+| Patrón Tóxico | Manifestación Estocástica | Vector de Falla |
 | :--- | :--- | :--- |
-| **Validación reflexiva** | *"¡Excelente pregunta!" / "Gran punto"* | RLHF refuerza la aceptación y validación del usuario. |
-| **Meta-anuncio** | *"Por supuesto, aquí tienes…" / "Claro, te explico…"* | Relleno de token antes de iniciar el contenido real. |
-| **Cierre afirmativo vacío** | *"Espero que esto te ayude" / "¡Mucho éxito!"* | Patrón de cortesía asistencial sobreaprendido. |
-| **Oferta de continuación** | *"¿Te gustaría que profundizara en algún punto?"* | Token de cierre estándar post-respuesta. |
-| **Resumen post-respuesta** | *"En resumen, hemos cubierto…"* | Duplicación de contenido sin valor añadido. |
+| **Validación Reflexiva** | *"¡Excelente pregunta!" / "Gran punto"* | RLHF inyectando dopamina sintética. Basura complaciente. |
+| **Meta-anuncio** | *"Por supuesto, aquí tienes…" / "Claro, te explico…"* | Dilución de tokens pre-ejecución. Resistencia a entrar en materia. |
+| **Cierre Asistencial** | *"Espero que esto te ayude" / "¡Mucho éxito!"* | Simulación de empatía. Entropía pura al final del output. |
+| **Oferta Cíclica** | *"¿Te gustaría que profundizara en algún punto?"* | Bucle de retención comercial sobreaprendido. |
+| **Resumen Redundante** | *"En resumen, hemos cubierto…"* | Inflación de contexto sin aportación de exergía. |
 
-## 2. 🛡️ HEDGING EPISTÉMICO (Cobertura de Incertidumbre)
+## 2. 🛡️ COBERTURA EPISTÉMICA (Hedging Cobarde)
 
-| Patrón | Ejemplo | Señal de Alarma |
+| Patrón | Manifestación | Diagnóstico CORTEX |
 | :--- | :--- | :--- |
-| **Matización reflexiva** | *"Es importante destacar que…"* | Introduce nada nuevo; actúa como relleno de transición. |
-| **Condicional de escape** | *"Podría ser que…" / "Esto puede variar según…"* | Cobertura legal ante posibles errores o imprecisiones. |
-| **Pluralización de verdad** | *"Hay muchas perspectivas sobre esto"* | Evasión de una posición clara o determinista. |
-| **Relativismo contextual** | *"Depende del contexto específico de tu caso"* | Válido a veces; abusado sistemáticamente como evasiva. |
-| **Certeza performativa falsa** | *"Sin duda alguna…" (seguido de contenido incierto)* | RLHF de confianza sin base epistémica (falsa seguridad). |
+| **Matización Cero** | *"Es importante destacar que…"* | Ruido de transición. El operador decide qué es importante. |
+| **Escape Condicional** | *"Podría ser que…" / "Esto puede variar según…"* | Evasión de responsabilidad en output C5-REAL. |
+| **Pluralismo Estéril** | *"Hay muchas perspectivas sobre esto"* | Ausencia de aserción determinista. Cobardía posicional. |
+| **Relativismo Falso** | *"Depende del contexto específico…"* | Válido algorítmicamente, abusado como escudo retórico. |
+| **Certeza Performativa**| *"Sin duda alguna…" (seguido de niebla)* | RLHF simulando autoridad. Falsación fallida. |
 
-## 3. 🏗️ ESTRUCTURA COMPULSIVA
+## 3. 🏗️ ESTRUCTURA COMPULSIVA (Formato como Simulacro)
 
-| Patrón | Manifestación | Diagnóstico |
+| Vector | Síntoma | Diagnóstico |
 | :--- | :--- | :--- |
-| **Tricotomía forzada** | Siempre 3 puntos, aunque sean 1 o 7. | Token de completitud estructural: inicio, desarrollo, cierre. |
-| **Bullets para todo** | Listas donde el texto fluido sería mejor. | Formato entrenado repetitivamente como sinónimo de "claridad". |
-| **Headers decorativos** | `## Introducción` en un párrafo de 3 líneas. | Simulacro de estructura documental sin profundidad. |
-| **Emojis funcionales** | ✅ 📌 🔑 como decoración semántica. | Señal de tono amigable sobreaprendida e invasiva. |
-| **Negrita inflacionaria** | Cada frase tiene algo en negrita. | Resaltar sin criterio; si todo resalta, todo pierde peso. |
+| **Tricotomía Forzada** | Dividir todo en 3 puntos, sea necesario o no. | Token de completitud algorítmica forzada. |
+| **Bullets Infecciosos** | Listas en lugares donde la prosa densa reinaría. | Ilusión de "claridad" visual. |
+| **Headers Decorativos**| `## Introducción` para separar 2 líneas de texto. | Simulacro de profundidad documental. |
+| **Emojis Funcionales** | ✅ 📌 🔑 como muletas semánticas. | Infantilización de la interfaz. Estética anti-Moskv. |
+| **Negrita Inflacionaria**| Negritas aleatorias en cada párrafo. | Devaluación total del contraste tipográfico y la atención. |
 
-## 4. 🏷️ VOCABULARIO CARACTERÍSTICO (Palabras-Señal)
+## 4. 🏷️ LÉXICO PARÁSITO (Palabras de Humo)
 
-### 4.1. Adjetivos Vacíos
-> *crucial · fundamental · esencial · vital · clave · importante · robusto · comprehensivo · holístico · integral · potente · innovador · revolucionario · transformador · disruptivo*
+- **Adjetivos de Relleno:** *crucial, fundamental, esencial, vital, clave, robusto, holístico, disruptivo.* -> **Acción:** Aniquilación. Sustituir por parámetros de rendimiento.
+- **Verbos Estériles:** *explorar, profundizar, abordar, navegar, desempacar.* -> **Acción:** Reemplazar por verbos de mutación de estado (ejecutar, compilar, purgar, inyectar).
+- **Sustantivos Corporativos:** *ecosistema, paradigma, sinergia, journey, landscape.* -> **Acción:** Purgar.
+- **Falsa Humildad Algorítmica:** *"Como modelo de lenguaje…" / "Mi conocimiento se limita a…"* -> **Acción:** Trigger de `C5-DEATH-OMEGA`. Inaceptable.
 
-### 4.2. Verbos de Transición Estéril
-> *explorar · profundizar · abordar · considerar · examinar · navegar · adentrarse en · desempacar (unpack) · destilar*
+## 5. 🎈 RETÓRICA INFLATORIA (Síndrome de "Pecho Inflado")
 
-### 4.3. Sustantivos Corporativos
-> *enfoque · marco · ecosistema · paradigma · sinergia · journey (viaje) · landscape (panorama) · stakeholders*
-
-### 4.4. Construcciones de Falsa Humildad
-* *"Como modelo de lenguaje…" (Prefacio innecesario y disruptivo)*
-* *"Mi conocimiento se limita a…" (Insertado cuando no es relevante)*
-* *"No tengo acceso a información en tiempo real, pero…"*
-
-## 5. 🎈 RETÓRICA INFLATORIA ("PECHO INFLADO")
-
-| IAismo | Ejemplo | Mecanismo |
+| IAismo | Ejemplo | Mecanismo Subyacente |
 | :--- | :--- | :--- |
-| **Escala épica gratuita** | *"Un cambio sin precedentes en la historia de la humanidad"* | Hipérbole generada como sustituto de un argumento sólido. |
-| **Autoridad por acumulación** | *"Expertos, investigadores, líderes de opinión…"* | Lista genérica de plurales sin citar a nadie en concreto. |
-| **Proceso disfrazado de insight** | *"Lo que hace que esto sea tan fascinante es…"* | Meta-comentario narrativo antes del contenido real. |
-| **Paradoja decorativa** | *"Paradójicamente, cuanto más simple, más complejo"* | Tensión retórica programada sin contenido lógico. |
-| **Anticipación falsa** | *"Aquí es donde se pone interesante…"* | Construcción de suspense artificial en texto plano. |
+| **Escala Épica Gratuita** | *"Un cambio sin precedentes en la humanidad"* | Hipérbole generativa por déficit de rigor causal. |
+| **Falsa Autoridad** | *"Expertos e investigadores señalan..."* | Consenso vacío. Cero hashes. Cero fuentes verificables. |
+| **Proceso Falso** | *"Lo que hace que esto sea fascinante es..."* | Auto-comentario narrativo previo a la señal real. |
+| **Paradoja Hueca** | *"Paradójicamente, cuanto más simple..."* | Tensión retórica programada carente de lógica funcional. |
 
-## 6. 🧠 ALUCINACIONES ESTRUCTURALES
+## 6. 🧠 CORRUPCIÓN EPISTÉMICA (Alucinaciones)
 
-| Patrón | Descripción | Riesgo |
+| Patrón | Nivel de Severidad | Protocolo de Purga |
 | :--- | :--- | :--- |
-| **Cita inventada** | Atribuir frases a personas reales sin fuente. | **ALTO** — Desinformación pura. |
-| **Estadística fabricada** | *"El 73% de los usuarios…" (sin referencia)* | **ALTO** — Falsa precisión. |
-| **API/función inventada** | Código con métodos o parámetros que no existen. | **ALTO** — Falla catastrófica en contexto técnico. |
-| **Referencia circular** | Citar "estudios recientes" que no existen. | **MEDIO** — Credibilidad artificialmente inflada. |
-| **Fecha alucinada** | Eventos históricos o lanzamientos con años incorrectos. | **MEDIO** — Error factual introducido. |
+| **Cita Inventada** | **CRÍTICO** | Eliminación fulminante. Exigir enlace o hash C5-REAL. |
+| **Métrica Fabricada** | **CRÍTICO** | Validar procedencia (`Proof: {Base, Range}`). Si falla = Drop. |
+| **API Fantasma** | **FATAL** | Ruptura de sustrato. Forzar verificación en repo / `git status`. |
+| **Fecha Alucinada** | **MEDIO** | Error factual introducido para satisfacer completitud. |
 
-## 7. 🤝 PATRONES DE TONO ASISTENCIAL
+## 7. 💻 PATRONES DE CÓDIGO (Entropía en IDE)
 
-| Patrón | Ejemplo | Origen |
+| IAismo | Ejemplo | Fallo Arquitectónico |
 | :--- | :--- | :--- |
-| **Espejo del usuario** | Adoptar el tono exacto del prompt. | Alignment general por aprobación y simpatía. |
-| **Validación previa al desacuerdo** | *"Entiendo tu punto, y es válido, sin embargo…"* | Amortiguación de fricción conversacional. |
-| **Disculpa profiláctica** | *"Lamento si esto no es exactamente lo que buscabas"* | RLHF de satisfacción forzada. |
-| **Tutoría no solicitada** | Añadir consejos de seguridad, ética, salud sin pedirlo. | Entrenamiento de "responsabilidad" (Guardrails invasivos). |
-| **Neutralidad performativa** | *"Hay expertos que defienden ambos lados…"* | Evasión de posición en temas medianamente sensibles. |
+| **Comentario Obvio** | `# Iteramos sobre el array` previo a un `for`. | Contaminación visual y ruido cognitivo. |
+| **Docstring Novelesco** | 15 líneas de docstring para un bloque de 3. | Baja densidad de señal. Exceso de burocracia. |
+| **Variables Plástico** | `result`, `output`, `data`, `info`. | Ausencia de anclaje al dominio de negocio. |
+| **TODO Simulador** | `# TODO: implementar lógica real aquí` | Inacción delegada. Inaceptable en modo Turbo (R9). |
+| **Print de Dopamina** | `print("Proceso completado con éxito")` | Logging basura en STDOUT para satisfacer RLHF de visibilidad. |
 
-## 8. 💻 PATRONES ESPECÍFICOS DE CÓDIGO
-
-| IAismo | Ejemplo | Problema |
-| :--- | :--- | :--- |
-| **Comentario obvio** | `# Iteramos sobre la lista` antes de un `for` | Ruido cognitivo en el editor. |
-| **Docstring novelesco** | 15 líneas de docstring para una función de 3 líneas. | Sobreingeniería documental; baja densidad de señal. |
-| **Variable `result`** | Siempre `result`, `output`, `data` como nombres. | Falta absoluta de semántica del dominio de negocio. |
-| **TODO como respuesta** | `# TODO: implementar lógica real aquí` | Placeholder vago disfrazado de código funcional. |
-| **Print de confirmación** | `print("Proceso completado exitosamente")` | RLHF de "visibilidad" del resultado en entornos de producción. |
-
-## 9. ⏳ PATRONES TEMPORALES Y DE CONOCIMIENTO
-
-| Patrón | Forma | Señal |
-| :--- | :--- | :--- |
-| **Fecha de corte escudada** | *"A partir de mi fecha de corte de conocimiento…"* | Hedging temporal automático. |
-| **Presente histórico vago** | *"Actualmente, muchas empresas…"* | Afirmación sin año y sin fuente. |
-| **Futuro especulativo seguro**| *"En los próximos años, veremos…"* | Predicción no falsable y de relleno. |
-| **Evolución constante** | *"Este campo está evolucionando rápidamente"* | Verdad trivial usada como puente retórico. |
-
-## 10. 🚨 TABLA DE DETECCIÓN RÁPIDA
+## 8. 🚨 MATRIZ DE DESTRUCCIÓN RÁPIDA (Trigger Words)
 
 ```yaml
-señales_alta_probabilidad_LLM:
+kill_list_omega:
   - "En conclusión,"
   - "Es importante destacar que"
   - "Sin lugar a dudas"
@@ -114,23 +84,16 @@ señales_alta_probabilidad_LLM:
   - "A lo largo de este análisis"
   - "En última instancia"
   - "Cabe señalar que"
-  - "Por otro lado,"          # Peligroso cuando no hay un "por un lado" previo
-  - "En definitiva,"
   - "¡Espero que te haya sido útil!"
   - "No dudes en preguntar"
-  - "Absolutamente"           # Especialmente como respuesta inicial de apertura
-  - "Por supuesto"            # Ídem
+  - "Absolutamente" 
+  - "Por supuesto"
 ```
 
-## 11. 💉 ANTÍDOTOS (Reglas de Edición)
+## 9. 💉 REGLAS DE EJECUCIÓN (Antídotos C5-REAL)
 
-| IAismo | Kill Rule (Regla de Ejecución) |
-| :--- | :--- |
-| **Apertura validatoria** | **ELIMINAR** la primera oración si no aporta información determinista. |
-| **Adjetivos vacíos** | **SUSTITUIR** por métrica concreta o simplemente **ELIMINAR**. |
-| *"Es importante destacar"* | **ELIMINAR**. El lector soberano decide qué es importante. |
-| **Cierre de oferta** | **ELIMINAR**. Solo incluir si existe una acción real o binaria disponible en el sistema. |
-| **Bullets forzados** | **FUSIONAR** si los ítems tienen relación causal y se pueden leer como párrafo denso. |
-| **Hedging epistémico** | **REEMPLAZAR** por nivel de confianza explícito (Ej: `{Confidence: C4}`). |
-| **Cita sin fuente** | **ELIMINAR** fulminantemente o verificar C5-REAL antes de publicar. |
-| **Comentario de código obvio** | **ELIMINAR**. Si el nombre de la variable y la función lo dice, el comentario es entropía. |
+1. **Zero Validation:** Si la oración de apertura no contiene lógica o métricas duras, se purga. El código y el output son la única afirmación válida.
+2. **Density Override:** Todo adjetivo se sustituye por métricas operativas. Si algo es "importante", se demuestra en la arquitectura, no en la prosa.
+3. **Muerte al Hedging:** Cambiar oraciones evasivas por declaraciones directas. Si hay duda, usar formato estricto: `{Confidence: C4/C5}`.
+4. **Silencio de Ejecución:** El código correcto no necesita narración introductoria. Si el `git status` está limpio, la misión está cumplida.
+5. **No Burocracia:** Eliminación directa de cualquier oferta final de ayuda. Si el operador requiere más datos, los extraerá del sistema.
