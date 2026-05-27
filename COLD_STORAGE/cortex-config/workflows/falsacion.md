@@ -79,7 +79,7 @@ PELIGRO: Falsa equivalencia de contexto destino.
 3. **Restaurar el estado C5-REAL** — Antes del L3 (Resurrection), siempre reiniciar demonios o limpiar caché para evitar envenenamiento de estado.
 4. **Persistir Causalidad en CORTEX**:
    ```bash
-   cd ~/cortex && .venv/bin/python -m cortex.cli store --type decision --source agent:gemini PROJECT "FALSACIÓN [C5-REAL]: El Guard [X] demostró causalidad directa sobre [Y] tras L3 Resurrection."
+   cortex store --type decision --source agent:gemini --project PROJECT "FALSACIÓN [C5-REAL]: El Guard [X] demostró causalidad directa sobre [Y] tras L3 Resurrection."
    ```
 
 ## Anti-patrones Penados
