@@ -105,6 +105,36 @@ Skip any step = lying, not verifying
 ❌ Trust agent report
 ```
 
+**End-to-End Integration (Full-flow validation):**
+```
+✅ [Run full integration harness/script] [See: 0 errors, output matches expected results] "End-to-end integration verified"
+❌ "Unit tests pass, so integration must be fine" / "Parts run manually, assuming they connect"
+```
+
+**Browser & UI E2E (Visual / Viewport validation):**
+```
+✅ [Start server] → [Run Browser Subagent / Playwright] [See: recording/screenshots confirm error-free flow] "Visual UI flow verified end-to-end"
+❌ "HTML renders, so UI is fine" / "Checked a static template file in editor"
+```
+
+**Rust FFI & Native Binding E2E (Zero-GIL / C-bindings):**
+```
+✅ [Compile native lib] → [Run Pytest/binary exercising FFI] [See: O(1) performance confirmed, no segfaults] "Native FFI pipeline verified end-to-end"
+❌ "Rust tests pass" / "Python test suite runs without native execution"
+```
+
+**Stateful/Database E2E (Migrations & Schema updates):**
+```
+✅ [Apply migrations] → [Run stateful commands] [See: query results match schema expectations] "Database E2E states validated"
+❌ "SQL files look correct, assuming migration succeeds" / "Local mock DB tests pass"
+```
+
+**CLI / Daemon E2E (Terminal interface verification):**
+```
+✅ [Run actual CLI command with --help and real parameters] [See: correct exit codes, help output matches parser] "CLI command interface verified end-to-end"
+❌ "Argparse definition looks clean, assuming command works"
+```
+
 ## Why This Matters
 
 From 24 failure memories:
