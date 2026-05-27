@@ -1,100 +1,86 @@
 // turbo-all
-# 🌌 Google Antigravity — Manual de Campo (CORTEX-Persist Edition)
+# 🌌 Google Antigravity 2 — Manual de Campo del IDE (CORTEX Edition)
 
-> **Reality-Level:** C5-REAL | **Aesthetic:** Industrial Noir 2026 | **Engine:** Google Antigravity v2.0.6 (Build 919477694)
+> **Reality-Level:** C5-REAL | **Aesthetic:** Industrial Noir 2026 | **Engine:** Antigravity IDE v2.0.6 (Build 919477694)
 
-Antigravity opera como un sistema de **doble ventana** con agentes autónomos y ejecución nativa, alejándose del paradigma estocástico de chat tradicional. Este manual detalla la integración, seguridad, automatización y atajos avanzados dentro del ecosistema `Borja Moskv`.
+**Antigravity 2** ha evolucionado de un agente integrado a un **IDE dedicado completo** (basado en la arquitectura VS Code / Monaco), optimizado para la orquestación autónoma de agentes y ejecución nativa determinista. 
+
+Este manual describe el funcionamiento del IDE, sus directorios de configuración y la integración profunda con la persistencia de CORTEX.
 
 ---
 
-## 🧠 1. Arquitectura de Doble Ventana y Ciclo de Vida del Agente
+## 🏛️ 1. Estructura y Perfiles del IDE
 
-El flujo operativo se divide estrictamente entre la escritura de código y la orquestación del agente.
+A diferencia de las extensiones tradicionales, Antigravity 2 se ejecuta en su propio espacio de usuario de macOS:
 
-| Entorno | Atajo | Función Principal | Flujos Asociados |
+*   **Ruta de Configuración:** `~/.antigravity-ide/`
+*   **Gestor de Extensiones:** `~/.antigravity-ide/extensions/`
+*   **Argumentos de Lanzamiento:** Configurados en `~/.antigravity-ide/argv.json` (ej. localización en `"locale": "es"` y desactivación de telemetría `"enable-crash-reporter": false`).
+*   **Espacio Aislado (Sandbox):** El binario del IDE se ejecuta bajo el perfil `seatbelt` restringiendo la escritura a los directorios del proyecto y configuraciones autorizadas del agente.
+
+---
+
+## 🧠 2. Arquitectura de Doble Ventana Nativa (Natively Split)
+
+El entorno del IDE se divide de forma estricta entre la ventana del Editor y la consola del Agente:
+
+| Vista / Ventana | Atajo | Propósito Operativo | Flujos Asociados |
 |---|---|---|---|
-| **Editor** | `Cmd + E` | Edición de código en caliente, refactorización inline, sugerencias contextuales. | `Cmd + I` (Instrucciones inline de código), autocompletado multi-línea con `Tab`. |
-| **Agent Manager** | `Cmd + E` | Consola de control, logs en tiempo real, gestor de tareas asíncronas, visualización del Browser. | Ejecución de comandos del sistema, monitoreo de MCP, inspección de artefactos. |
-
-### Ciclo de Ejecución de Tareas:
-```mermaid
-graph TD
-    A[Usuario emite directiva en Agent Manager] --> B[Agente genera task.md]
-    B --> C{¿Modo Planificación?}
-    C -->|Sí| D[Genera implementation_plan.md]
-    D --> E[Espera Aprobación del Usuario]
-    E -->|Aprobado| F[Ejecución de Pasos]
-    C -->|No / Turbo| F[Ejecución Directa de Pasos]
-    F --> G[Validación C5-REAL via Test Loops]
-    G --> H[Git Sentinel ejecuta Auditoría]
-    H --> I[Genera walkthrough.md]
-```
+| **Editor Principal** | `Cmd + E` | Modificación de código fuente, refactorización asistida y visualización de cambios. | Inline Prompt (`Cmd + I`), Autocompletado predictivo con `Tab`. |
+| **Agent Manager Console** | `Cmd + E` | Terminal interactiva, trazabilidad de logs, panel de MCP y monitoreo de subagentes. | Control de tareas asíncronas, visualización del Browser Subagent. |
 
 ---
 
-## 🌐 2. Browser Subagent (Gemini 2.5 Pro UI Checkpoint)
+## 🌐 3. Browser Subagent Integrado (El Ojo del IDE)
 
-El subagente visual actúa como un validador causal independiente que interactúa con la interfaz de usuario de forma no intrusiva.
+El IDE integra un subagente visual autónomo que utiliza el motor de inferencia `Gemini 2.5 Pro UI Checkpoint`.
 
-### Especificaciones Técnicas:
-- **Sandbox Aislado:** Lanza instancias de Chrome con un perfil efímero (`--user-data-dir` temporal) sin cookies ni historial del operador.
-- **Falsación Empírica:** No infiere el estado del frontend; realiza capturas reales (`.webp`) y grabaciones en video para auditar layouts y transiciones.
-- **Asincronía Total:** Se ejecuta en background. El operador puede seguir editando código mientras el subagente navega y valida flujos.
-
-### Directivas de Control:
-*   **Inspección Básica:** `Ve a http://localhost:3000 y captura el estado del dashboard`
-*   **Interactividad:** `Inicia sesión con credenciales de prueba, haz clic en 'Generar Reporte' y reporta si hay timeouts`
-*   **Auditoría Visual (Guardian):** `Haz scroll en la landing page y busca elementos desalineados o texto superpuesto en viewports móviles`
+- **Visual QA Nativo:** El subagente interactúa con el frontend (clics, inputs, scrolls) de forma invisible en segundo plano.
+- **Evidencia Gráfica:** Genera capturas de pantalla y videos en formato `.webp` que se guardan en los artefactos de la sesión (`$CORTEX_ROOT/.gemini/antigravity/brain/<id_conversacion>`).
+- **Modo de Uso:** Delegar tareas de testing mediante lenguaje natural desde la terminal del Agent Manager: *"Verifica si el menú móvil en localhost:3000 es accesible"*.
 
 ---
 
-## 🚦 3. Modos Operativos y Control Epistémico
+## 🚦 4. Modos de Operación y Seguridad Epistémica
 
-| Modo | Trigger / Contexto | Comportamiento del Sistema | Criterio de Seguridad |
-|---|---|---|---|
-| **Planificación** | Cambios estructurales, refactors masivos de bases de datos. | Detiene la ejecución. Requiere documentación de cambios en `implementation_plan.md`. | **Bloqueo estricto:** Nada se ejecuta hasta el OK del usuario. |
-| **Rápido (Turbo)** | Fixes locales, optimización JIT, tareas del pipeline CORTEX. | Ejecuta comandos y edita archivos de forma secuencial y paralela sin prompts de confirmación. | **Implícito (R9):** Asume aprobación para mantener velocidad de exergía. |
+El IDE 2 implementa dos estados de control de cambios:
 
----
-
-## 🛡️ 4. Seguridad y Sandbox del Sistema (Seatbelt)
-
-Antigravity opera bajo un modelo de **confianza cero** mediante aislamiento nativo en macOS:
-
-*   **Seatbelt Sandboxing:** Restricción de lectura/escritura a nivel de llamadas al sistema (syscalls). El agente solo tiene acceso al espacio de trabajo activo y `$CORTEX_ROOT/.gemini/antigravity`.
-*   **Protected Paths:** Bloqueo físico a nivel de herramientas para impedir acceso a:
-    - `/System/Volumes/Data/System/Library/AssetsV2`
-    - `/System/Volumes/Data/private/var/db/*`
-    - directorios de sincronización en la nube (CloudDocs/iCloud).
-*   **Modo Estricto:** Si se activa, intercepta llamadas `run_command` destructivas (ej. `rm -rf`, reescrituras de particiones) y requiere autenticación local.
+*   **Modo Planificación (Planning Mode):**
+    - **Cuándo:** Refactors mayores, migraciones de base de datos o cambios destructivos en el código.
+    - **Mapeo:** Genera de forma obligatoria `implementation_plan.md` y `task.md`.
+    - **Seguridad:** Requiere validación manual y consentimiento explícito en el panel para desbloquear la ejecución.
+*   **Modo Rápido (Turbo Mode):**
+    - **Cuándo:** Fixes rápidos, scripts locales y optimización JIT.
+    - **Mapeo:** Omite la burocracia documental.
+    - **Seguridad (R9 Override):** Aprobación implícita de ejecuciones C5-REAL sin prompts de confirmación.
 
 ---
 
-## 🔌 5. Ecosistema MCP (Model Context Protocol)
+## 🔌 5. Protocolo de Contexto de Modelos (MCP) en el IDE
 
-Antigravity amplía su contexto conectando servidores locales y remotos para interactuar de forma determinista con bases de datos e infraestructura:
+El IDE actúa como un host de MCP, exponiendo servicios y bases de datos locales al agente autónomo de forma segura:
 
-*   **datacloud_alloydb_remote / datacloud_spanner_remote:** Permite a los agentes inspeccionar DDLs, ejecutar SQL de solo lectura para diagnóstico (`execute_sql_readonly`) y estructurar migraciones seguras.
-*   **github:** Operaciones de control de versiones automatizadas (creación de Pull Requests, ramas, e issues) sin salir del Agent Manager.
-*   **sqlite:** Sustrato local de persistencia para guardar logs y grafos de conocimiento estructurados.
-
----
-
-## ⌨️ 6. Atajos de Teclado y Comandos Rápidos
-
-| Atajo | Contexto | Acción Ejecutada |
-|---|---|---|
-| `Cmd + E` | Global | Alterna el foco entre el Editor de código y el Agent Manager. |
-| `Cmd + I` | Editor / Terminal | Abre el prompt inline para transformaciones inmediatas de código o generación de comandos. |
-| `Cmd + J` | Global | Despliega / oculta la terminal integrada del sistema. |
-| `Cmd + P` | Editor | Abre la paleta de archivos, permitiendo buscar y abrir artefactos (`task.md`, etc.). |
-| `Cmd + .` | Editor | Activa el menú de "Quick Fix" para resolver errores sintácticos o de linter. |
-| `Tab` | Editor | Acepta sugerencias predictivas del modelo de autocompletado local. |
+- **Bases de Datos Activas:** Conexión determinista a Spanner, AlloyDB y SQLite local.
+- **Control de Versiones Nativo:** Emisión de commits convencionales automáticos mediante el Git Sentinel (R4) tras detectar estados modificados en el espacio de trabajo.
+- **Herramientas de Búsqueda:** Búsqueda híbrida (Grep local de alta velocidad y Brave Web Search).
 
 ---
 
-## 💡 7. CORTEX-Persist Pro Tips
+## ⌨️ 6. Atajos Rápidos del IDE 2
 
-1.  **Falsación preventiva con Playground:** Utiliza el entorno temporal para ejecutar scripts de prueba (`/scratch/`) antes de consolidar cambios C5-REAL en las ramas de producción.
-2.  **Higiene de Tokens:** Mantén los contextos limpios ejecutando auditorías periódicas del presupuesto de tokens (`/token-hygiene`). Esto optimiza los tiempos de inferencia del orquestador.
-3.  **Instrucciones Multimodales:** Si encuentras un bug visual complejo, arrastra una captura de pantalla directamente al chat con la directiva: *"Corrige el CSS para que coincida exactamente con esta referencia"*.
+| Atajo | Función |
+|---|---|
+| `Cmd + E` | Alternar entre Editor y Agent Manager. |
+| `Cmd + I` | Abrir instrucción inline en el código seleccionado o en la terminal integrada. |
+| `Cmd + J` | Mostrar / ocultar panel de la Terminal de macOS integrada. |
+| `Cmd + P` | Abrir buscador de archivos del proyecto (Finder integrado). |
+| `Cmd + .` | Mostrar acciones rápidas y correcciones automáticas de sintaxis (Quick Fix). |
+| `TabAccept` | Consolidar la sugerencia predictiva de código (Supercomplete). |
+
+---
+
+## 💡 7. Directivas CORTEX para el IDE 2
+
+1. **Evita la Entropía en el Editor:** El IDE prohíbe comentarios obvios o código muerto. Mantén el código como la única aserción válida.
+2. **Usa el Playground:** Ejecuta y prueba hipótesis (C4-SIM) usando el directorio temporal `70_SCRATCH/` antes de realizar integraciones en las ramas productivas.
+3. **Validación Preventiva:** Antes de declarar una tarea como resuelta, corre los tests del proyecto directamente en la terminal integrada (`Cmd + J`) del IDE.
