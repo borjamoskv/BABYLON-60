@@ -3,79 +3,98 @@
 
 > **Reality-Level:** C5-REAL | **Aesthetic:** Industrial Noir 2026 | **Engine:** Google Antigravity v2.0.6 (Build 919477694)
 
-Antigravity opera como un sistema de **doble ventana** con agentes autónomos y ejecución nativa, alejándose del paradigma estocástico de chat tradicional.
+Antigravity opera como un sistema de **doble ventana** con agentes autónomos y ejecución nativa, alejándose del paradigma estocástico de chat tradicional. Este manual detalla la integración, seguridad, automatización y atajos avanzados dentro del ecosistema `Borja Moskv`.
 
-## 🧠 Arquitectura de Doble Ventana
+---
 
-| Entorno | Atajo | Función Principal |
+## 🧠 1. Arquitectura de Doble Ventana y Ciclo de Vida del Agente
+
+El flujo operativo se divide estrictamente entre la escritura de código y la orquestación del agente.
+
+| Entorno | Atajo | Función Principal | Flujos Asociados |
+|---|---|---|---|
+| **Editor** | `Cmd + E` | Edición de código en caliente, refactorización inline, sugerencias contextuales. | `Cmd + I` (Instrucciones inline de código), autocompletado multi-línea con `Tab`. |
+| **Agent Manager** | `Cmd + E` | Consola de control, logs en tiempo real, gestor de tareas asíncronas, visualización del Browser. | Ejecución de comandos del sistema, monitoreo de MCP, inspección de artefactos. |
+
+### Ciclo de Ejecución de Tareas:
+```mermaid
+graph TD
+    A[Usuario emite directiva en Agent Manager] --> B[Agente genera task.md]
+    B --> C{¿Modo Planificación?}
+    C -->|Sí| D[Genera implementation_plan.md]
+    D --> E[Espera Aprobación del Usuario]
+    E -->|Aprobado| F[Ejecución de Pasos]
+    C -->|No / Turbo| F[Ejecución Directa de Pasos]
+    F --> G[Validación C5-REAL via Test Loops]
+    G --> H[Git Sentinel ejecuta Auditoría]
+    H --> I[Genera walkthrough.md]
+```
+
+---
+
+## 🌐 2. Browser Subagent (Gemini 2.5 Pro UI Checkpoint)
+
+El subagente visual actúa como un validador causal independiente que interactúa con la interfaz de usuario de forma no intrusiva.
+
+### Especificaciones Técnicas:
+- **Sandbox Aislado:** Lanza instancias de Chrome con un perfil efímero (`--user-data-dir` temporal) sin cookies ni historial del operador.
+- **Falsación Empírica:** No infiere el estado del frontend; realiza capturas reales (`.webp`) y grabaciones en video para auditar layouts y transiciones.
+- **Asincronía Total:** Se ejecuta en background. El operador puede seguir editando código mientras el subagente navega y valida flujos.
+
+### Directivas de Control:
+*   **Inspección Básica:** `Ve a http://localhost:3000 y captura el estado del dashboard`
+*   **Interactividad:** `Inicia sesión con credenciales de prueba, haz clic en 'Generar Reporte' y reporta si hay timeouts`
+*   **Auditoría Visual (Guardian):** `Haz scroll en la landing page y busca elementos desalineados o texto superpuesto en viewports móviles`
+
+---
+
+## 🚦 3. Modos Operativos y Control Epistémico
+
+| Modo | Trigger / Contexto | Comportamiento del Sistema | Criterio de Seguridad |
+|---|---|---|---|
+| **Planificación** | Cambios estructurales, refactors masivos de bases de datos. | Detiene la ejecución. Requiere documentación de cambios en `implementation_plan.md`. | **Bloqueo estricto:** Nada se ejecuta hasta el OK del usuario. |
+| **Rápido (Turbo)** | Fixes locales, optimización JIT, tareas del pipeline CORTEX. | Ejecuta comandos y edita archivos de forma secuencial y paralela sin prompts de confirmación. | **Implícito (R9):** Asume aprobación para mantener velocidad de exergía. |
+
+---
+
+## 🛡️ 4. Seguridad y Sandbox del Sistema (Seatbelt)
+
+Antigravity opera bajo un modelo de **confianza cero** mediante aislamiento nativo en macOS:
+
+*   **Seatbelt Sandboxing:** Restricción de lectura/escritura a nivel de llamadas al sistema (syscalls). El agente solo tiene acceso al espacio de trabajo activo y `$CORTEX_ROOT/.gemini/antigravity`.
+*   **Protected Paths:** Bloqueo físico a nivel de herramientas para impedir acceso a:
+    - `/System/Volumes/Data/System/Library/AssetsV2`
+    - `/System/Volumes/Data/private/var/db/*`
+    - directorios de sincronización en la nube (CloudDocs/iCloud).
+*   **Modo Estricto:** Si se activa, intercepta llamadas `run_command` destructivas (ej. `rm -rf`, reescrituras de particiones) y requiere autenticación local.
+
+---
+
+## 🔌 5. Ecosistema MCP (Model Context Protocol)
+
+Antigravity amplía su contexto conectando servidores locales y remotos para interactuar de forma determinista con bases de datos e infraestructura:
+
+*   **datacloud_alloydb_remote / datacloud_spanner_remote:** Permite a los agentes inspeccionar DDLs, ejecutar SQL de solo lectura para diagnóstico (`execute_sql_readonly`) y estructurar migraciones seguras.
+*   **github:** Operaciones de control de versiones automatizadas (creación de Pull Requests, ramas, e issues) sin salir del Agent Manager.
+*   **sqlite:** Sustrato local de persistencia para guardar logs y grafos de conocimiento estructurados.
+
+---
+
+## ⌨️ 6. Atajos de Teclado y Comandos Rápidos
+
+| Atajo | Contexto | Acción Ejecutada |
 |---|---|---|
-| **Editor** | `Cmd+E` | Código, `Cmd+I` (instrucciones inline), Panel Lateral. |
-| **Agent Manager** | `Cmd+E` | Orquestación, Terminal, Archivos, Paneles, Inbox. |
+| `Cmd + E` | Global | Alterna el foco entre el Editor de código y el Agent Manager. |
+| `Cmd + I` | Editor / Terminal | Abre el prompt inline para transformaciones inmediatas de código o generación de comandos. |
+| `Cmd + J` | Global | Despliega / oculta la terminal integrada del sistema. |
+| `Cmd + P` | Editor | Abre la paleta de archivos, permitiendo buscar y abrir artefactos (`task.md`, etc.). |
+| `Cmd + .` | Editor | Activa el menú de "Quick Fix" para resolver errores sintácticos o de linter. |
+| `Tab` | Editor | Acepta sugerencias predictivas del modelo de autocompletado local. |
 
 ---
 
-## 🌐 Browser Subagent (Gemini 2.5 Pro UI Checkpoint)
+## 💡 7. CORTEX-Persist Pro Tips
 
-Sub-agente visual que ejecuta validaciones C5-REAL en el navegador.
-
-- **Capacidades:** Navegación autónoma (clics, scroll, formularios complejos), aislamiento (perfil limpio), multitarea asíncrona.
-- **Evidencia (Falsación):** Genera capturas de pantalla y grabaciones de vídeo (`.webp`).
-- **Invocación:** *"Ve a localhost:3000 y comprueba errores de layout"*.
-- **Seguridad:** Allowlist/Denylist y Modo Estricto para bloquear dominios no autorizados.
-
----
-
-## 🚦 Modos de Agente
-
-| Modo | Cuándo usarlo | Comportamiento |
-|---|---|---|
-| **Planificación** | Tareas complejas, refactors estructurales | Requiere `implementation_plan.md`, desglose en Grupos de Tareas y aprobación explícita del humano. |
-| **Rápido (Turbo)** | Fixes rápidos, scripts sencillos | Ejecución directa "dispara y pregunta después". Ideal para CORTEX (regla R9: aprobación implícita). |
-
----
-
-## 📦 Artefactos (Pruebas C5-REAL)
-
-El agente genera evidencia criptográfica y estructural:
-
-1. **Task List (`task.md`):** Dashboard en tiempo real de la ejecución.
-2. **Implementation Plan (`implementation_plan.md`):** Propuesta técnica detallada (requiere OK en Modo Planificación).
-3. **Walkthrough (`walkthrough.md`):** Resumen forense post-mutación.
-4. **Conocimiento:** Memoria persistente extraída y consolidada.
-5. **Grabaciones:** Video forense del Browser Subagent.
-
----
-
-## 🛡️ Seguridad y Sandbox (Seatbelt)
-
-- **Aislamiento:** A nivel de kernel (`seatbelt` en macOS). Mutaciones limitadas al workspace.
-- **Modo Estricto:** Fuerza revisión humana de comandos destructivos en terminal y ejecución de JS. Respeta `.gitignore`.
-
----
-
-## 🔌 Extensibilidad (MCP)
-
-Integración determinista de sistemas externos:
-- **Bases de Datos:** PostgreSQL, Supabase, Spanner, AlloyDB.
-- **Servicios:** Linear, Notion, GitHub.
-- **Local:** SQLite, ejecución de scripts locales.
-
----
-
-## ⌨️ Atajos Operativos Críticos
-
-| Atajo | Acción |
-|---|---|
-| `Cmd + E` | Toggle Editor ↔ Agent Manager |
-| `Cmd + I` | Instrucción Inline (Editor/Terminal) |
-| `Cmd + J` | Terminal Integrada |
-| `Cmd + P` | Paneles (Archivos/Artefactos) |
-| `Tab` | Supercomplete: Mutación predictiva de archivo completo |
-
----
-
-## 💡 CORTEX Pro Tips
-
-1. **Terminal Inline:** Usa `Cmd+I` en la terminal para delegar comandos complejos.
-2. **Comentarios como Directivas:** Comenta un archivo abierto en el Agent Manager; el agente lo procesará como una instrucción de alta prioridad.
-3. **Playground:** Usa el entorno aislado para falsar hipótesis (C4-SIM) antes de mutar el workspace (C5-REAL).
+1.  **Falsación preventiva con Playground:** Utiliza el entorno temporal para ejecutar scripts de prueba (`/scratch/`) antes de consolidar cambios C5-REAL en las ramas de producción.
+2.  **Higiene de Tokens:** Mantén los contextos limpios ejecutando auditorías periódicas del presupuesto de tokens (`/token-hygiene`). Esto optimiza los tiempos de inferencia del orquestador.
+3.  **Instrucciones Multimodales:** Si encuentras un bug visual complejo, arrastra una captura de pantalla directamente al chat con la directiva: *"Corrige el CSS para que coincida exactamente con esta referencia"*.
