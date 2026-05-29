@@ -1,0 +1,40 @@
+{
+  "harmony-forge": {
+    "last_task": "feat(harmony-forge): integrate cortex-memory API and fix PWA service worker caching issues",
+    "last_file": "harmony-forge/service-worker.js",
+    "timestamp": "2026-05-27T07:23:45+02:00",
+    "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6"
+  },
+  "cortex": {
+    "last_task": "Applied MOSKV aesthetics and Industrial Noir 2026 rules to redaccion-ia.md",
+    "last_file": "COLD_STORAGE/cortex-config/workflows/redaccion-ia.md",
+    "timestamp": "2026-05-27T17:06:06.003919Z",
+    "last_conversation": "3ab74bd3-9977-4c54-98a3-4967e7ae3926"
+  },
+  "cortex-persist": {
+    "last_task": "Inyección de Rust Ouroboros Stream Kernel (CQRS) y WASM Agent Swarm para poda topológica (Hitos 13 y 14).",
+    "last_file": "crates/wasm-runtime/src/swarm.rs",
+    "last_conversation": "40a9548b-55d6-4ec9-83dd-215ef1e5afec",
+    "timestamp": "2026-05-29T04:13:26.230882+00:00"
+  },
+  "borjamoskv-web": {
+    "last_task": "Reescrito webgl.js usando shaders custom GLSL, optimizado index.html y actualizado site.css con z-index corregido, glows y transitions.",
+    "last_file": "assets/site.css",
+    "timestamp": "2026-05-29T05:13:46+02:00",
+    "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+  },
+  "active_projects": {
+    "cortex-persist": {
+      "last_task": "Recompilada extensión Rust cortex_rs para Python 3.14.4 ABI resolviendo fallos de segmentación (segfaults), corregidos lints y formateado del SMTE.",
+      "last_file": "cortex_rs/src/lib.rs",
+      "timestamp": "2026-05-29T05:13:46+02:00",
+      "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+    },
+    "borjamoskv-web": {
+      "last_task": "Reescrito webgl.js usando shaders custom GLSL, optimizado index.html y actualizado site.css con z-index corregido, glows y transitions.",
+      "last_file": "assets/site.css",
+      "timestamp": "2026-05-29T05:13:46+02:00",
+      "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+    }
+  }
+}

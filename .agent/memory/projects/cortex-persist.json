@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "id": "cortex-persist",
+    "name": "CORTEX-Persist",
+    "path": "$CORTEX_ROOT/10_PROJECTS/cortex-persist",
+    "stack": [
+      "Python",
+      "SQLite",
+      "mmap",
+      "Rust"
+    ],
+    "created": "2026-05-26T22:49:50.419234+00:00",
+    "last_touched": "2026-05-29T04:13:26.230882+00:00"
+  },
+  "status": "shipped",
+  "health": "green",
+  "health_score": 100,
+  "ghost": {
+    "last_task": "Inyección de Rust Ouroboros Stream Kernel (CQRS) y WASM Agent Swarm para poda topológica (Hitos 13 y 14).",
+    "last_file": "crates/wasm-runtime/src/swarm.rs",
+    "timestamp": "2026-05-29T04:13:26.230882+00:00",
+    "last_conversation": "40a9548b-55d6-4ec9-83dd-215ef1e5afec"
+  },
+  "known_issues": [],
+  "pending_tasks": [],
+  "recent_changes": [
+    "Implementado Ouroboros Stream Kernel en Rust (crates/ouroboros-stream) consumiendo Redpanda/Kafka.",
+    "Implementado WASM Runtime Engine y WasmSwarm (crates/wasm-runtime) para funciones puras sandboxed.",
+    "Documentados HITO 13 (CQRS) y HITO 14 (WASM Swarm) cerrando el pipeline soberano.",
+    "[7c2b5d9e] Recompilada extensión Rust cortex_rs para Python 3.14.4 ABI resolviendo fallos de segmentación (segfaults).",
+    "[7c2b5d9e] Corregidos lints y warnings de Ruff en exergy.py, parser.py, y claude_stress_test.py.",
+    "[7c2b5d9e] Formateados archivos del SMTE usando ruff format para pasar los checks pre-commit.",
+    "[8b8c980b] Creado paper_clinico_beatriz.md (Caballo de Troya Clínico) y exergia_beatriz.md. Operación asimétrica de alta densidad.",
+    "[2026-05-27T15:05:00Z] Consolidated cortex-persist repo under [/autonomo] & [/speed-parallel], passed 2296 unit tests, resolved PyO3 compiler warnings, and cleared import deprecations.",
+    "[2026-05-27T15:05:12Z] Pushed 13 local commits in Music/VISUALES ahead of remote origin/master.",
+    "[2026-05-27T13:37:00Z] Systemic convergence crystallized between CORTEX-Persist Engine and EXERGIA-Ω HUD. SOC2/C5 integrated."
+  ],
+  "decisions": [
+    "Agentes CORTEX ejecutados como funciones puras en WASMtime para cero latencia estocástica.",
+    "Event-sourcing adoptado como memoria inmutable de conflicto (Redpanda) en vez de estado en memoria.",
+    {
+      "date": "2026-05-29T05:13:46Z",
+      "decision": "Recompilar cortex_rs con la versión exacta de Python activa en el sistema (3.14.4) para evitar desalineamiento de ABI y segfaults."
+    },
+    "Usar formato de paper científico para eludir barreras de OpSec y sesgos cognitivos clínicos (Vector 2 de despliegue).",
+    {
+      "date": "2026-05-27T18:12:00Z",
+      "decision": "Structure AgentOp trees as pure JSON-serializable Python data models executing inside Rust Rayon FFI with Reflexion self-healing wrappers."
+    },
+    {
+      "date": "2026-05-27T15:05:00Z",
+      "decision": "Increase consumer polling timeout and wait directly on enqueuer tasks in test_swarm_queue.py to prevent flakes under pytest-xdist."
+    },
+    {
+      "date": "2026-05-27T11:14:06.541534+00:00",
+      "decision": "Inject actor_id explicitly into eu_meta during log_decision to satisfy strict SOC2 C5-REAL JISAuditor requirements."
+    },
+    {
+      "date": "2026-05-27T13:06:27+02:00",
+      "decision": "Enforce JIS Auditor Policy as a soft-enforcement telemetry check on ledger transactions to track C5-REAL compliance entropy."
+    },
+    {
+      "date": "2026-05-27T09:59:55Z",
+      "decision": "Bound ZeroCopyRingBuffer to OutboxDaemon for O(1) Lock-Free Architectural Determinism."
+    },
+    {
+      "date": "2026-05-26T22:49:50.419234+00:00",
+      "decision": "Use direct zero-copy mmap for high-dimensional VSA memory and SQLite for atomic operations to bypass OS file lock friction."
+    },
+    "Eradication of threading.Lock in favor of O(1) in-memory queues for LEGION-10k scaling.",
+    "Eradicated SQLite fallbacks entirely for lock-free O(1) ZeroCopyRingBuffer execution substrate.",
+    "[2026-05-27T02:08:42.845745Z] Enforce 1000 bytes/ETH thermodynamic bound for AST mutations via ZK-STARK",
+    {
+      "date": "2026-05-27T10:58:07Z",
+      "decision": "Unify init_cmds.py async flow and enforce SyncMixin _closing guard to prevent background checkpointing during teardown."
+    },
+    {
+      "date": "2026-05-27T11:15:24.457032+00:00",
+      "decision": "Use u_entropy and CORTISOL variable for non-blocking WebGL reactive feedback.",
+      "context": "Visualizing stress without GIL lock."
+    },
+    {
+      "date": "2026-05-27T13:37:00Z",
+      "decision": "Execute SHIP-Ω closure protocol and emit Time Capsule for the systemic convergence of CORTEX-Persist and EXERGIA-Ω."
+    },
+    "Falsation Protocol uses contradiction_guard to cull derived facts before persisting",
+    "AUDITOR-Ω Circuit Breaker raises EntropySpikeException to prevent ledger pollution on high CV"
+  ],
+  "knowledge": [],
+  "bridges": [],
+  "runbook": {},
+  "shipped_date": "2026-05-27T03:59:35+02:00"
+}

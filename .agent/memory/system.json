@@ -1,0 +1,379 @@
+{
+  "meta": {
+    "version": "3.1",
+    "codename": "CORTEX",
+    "description": "Sistema nervioso persistente de MOSKV-1 — memoria por proyecto + sistema global",
+    "platform": {
+      "ide": "Antigravity 1.16.5 (Google DeepMind, basado en VS Code OSS)",
+      "model": "Claude Opus 4.6 (Thinking)",
+      "runtime": "Node 22.21.1 / Electron 39.2.3 / Chromium 142",
+      "os": "macOS arm64 (Apple Silicon)",
+      "nota": "Antigravity = coche, Claude Opus = motor, MOSKV-1 = piloto entrenado por Borja"
+    },
+    "created": "2026-02-12T13:24:00+01:00",
+    "last_updated": "2026-05-25T01:36:00Z",
+    "last_updated_by": "MOSKV-1",
+    "schema_version": "3.1",
+    "migrated_from": "context.json v2.1"
+  },
+  "operator": {
+    "name": "Borja Fernández Angulo",
+    "alias": "Borja Moskv",
+    "base": "Bilbao / País Vasco",
+    "profile": "Desarrollador, DJ/productor techno, artista digital, investigador blockchain",
+    "philosophy": "Industrial Noir — estética oscura, minimalista, técnica",
+    "web": "borjamoskv.com",
+    "slogan": "Si algo no es accesible, no es bello",
+    "best_friend": "Patxi (cumpleaños: 14 febrero)"
+  },
+  "preferences": {
+    "language": "español (código y nombres técnicos en inglés)",
+    "aesthetic": "Industrial Noir — BLUE YLN-LM, verde láser, rojo sangre",
+    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petición explícita.",
+    "frameworks_python": "Sin frameworks pesados. logging estándar, async/await, python-dotenv.",
+    "frameworks_native": "SwiftUI para macOS.",
+    "fonts": "Inter, Roboto, Outfit — nunca defaults del navegador.",
+    "deploy_confirmation": true,
+    "mobile_first": true,
+    "microanimations": "obligatorias en toda UI",
+    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QUÉ, no el QUÉ.",
+    "tips": {
+      "enabled": true,
+      "context_adaptive": true,
+      "loves_cognitive_science": true,
+      "loves_serendipity": true
+    },
+    "external_code_rule": "Siempre evaluar código externo antes de implementar: qué mola + qué ajustaría"
+  },
+  "ecosystem": {
+    "root_path": "~/game/",
+    "total_projects": 34,
+    "active_focus": [
+      "naroa-web",
+      "moskv-swarm",
+      "videoclip-generator",
+      "cortex"
+    ],
+    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersión. Fortaleza: núcleo IA (Swarm + Centauro) unifica todo."
+  },
+  "creative_context": {
+    "music": {
+      "genre": "Techno — Industrial, dark, minimal",
+      "tools": "Forja Sonora (prompts multi-layer), Suno, Udio, MusicGen",
+      "aesthetic": "Industrial Noir sonic signature",
+      "projects_active": [
+        "videoclip-generator",
+        "remotion-naroa",
+        "moskv-music-ai",
+        "dj-studio"
+      ]
+    },
+    "visual": {
+      "palette": "BLUE YLN-LM, verde láser (#00FF41), rojo sangre, negro profundo",
+      "style": "Dark, glassmorphism, microanimaciones, tipografía premium",
+      "references": "The Way of Code (TWOC)"
+    },
+    "naroa": {
+      "relation": "Ex-pareja, ahora amiga. Artista visual.",
+      "project": "naroa.online — portfolio artístico dedicado a su obra"
+    }
+  },
+  "decisions_global": [],
+  "global_patterns": [
+    {
+      "id": "GP001",
+      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras → gc.collect() + hibernate idle >60s",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP002",
+      "pattern": "Agent Pool max 4 simultáneos. Ciclo: Spawn → Active → Hibernate → Restore. Victim selection por prioridad.",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP003",
+      "pattern": "SharedKnowledgeStore: singleton, retorna referencias no copias, access counting + stale cleanup 24h, RLock",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP004",
+      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresión progresiva.",
+      "source": "Agent Manager patterns"
+    }
+  ],
+  "knowledge_global": [],
+  "sessions_log": [
+    {
+      "date": "2026-05-29T04:13:26.230882+00:00",
+      "project": "cortex-persist",
+      "focus": "Event Sourcing & WASM Agent Runtime",
+      "duration_approx": "2h",
+      "key_output": "Rust Stream Kernel + WASM Runtime (Hitos 13 y 14)",
+      "conversation_id": "40a9548b-55d6-4ec9-83dd-215ef1e5afec"
+    },
+    {
+      "date": "2026-05-29T05:13:46",
+      "project": "cortex-persist",
+      "focus": "Rust FFI ABI alignment & Ruff format compliance",
+      "duration_approx": "1.5h",
+      "key_output": "Rebuilt cortex_rs (Python 3.14.4 FFI) & resolved Ruff formatting/typing issues",
+      "conversation_id": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+    },
+    {
+      "date": "2026-05-29T05:13:46",
+      "project": "borjamoskv-web",
+      "focus": "WebGL GLSL Shaders & CSS overrides",
+      "duration_approx": "1h",
+      "key_output": "Ashima Simplex Noise custom vertex/fragment shaders and scroll animations",
+      "conversation_id": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+    },
+    {
+      "date": "2026-05-29T04:35:50.201241",
+      "project": "cortex-persist",
+      "focus": "Ingeniería Social / Despliegue Asimétrico",
+      "duration_approx": "1h",
+      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Clínico)",
+      "conversation_id": "8b8c980b-3e4e-4910-ad71-ea927ef7b711"
+    },
+    {
+      "date": "2026-05-28T02:25:00.972603Z",
+      "project": "cortex-persist",
+      "focus": "Agent SDK Migration",
+      "duration_approx": "1h",
+      "key_output": "Updated pyproject.toml to Antigravity v2, generated architectural Mermaid diagrams.",
+      "conversation_id": "22a5aec3-a34f-4e48-a6f2-1da88d0c6792"
+    },
+    {
+      "date": "2026-05-28T01:24:14.796618+00:00",
+      "project": "cortex-persist",
+      "focus": "Sovereign Swarm Comm & Falsation Protocol",
+      "duration_approx": "4h",
+      "key_output": "ByzantineZeroCopyBus, Entropy Circuit Breaker, Inference Falsation",
+      "conversation_id": "e7def321-0025-44d2-89d9-e2f069088eb2"
+    },
+    {
+      "date": "2026-05-27T17:06:12.816020Z",
+      "project": "cortex",
+      "focus": "AIisms Demolition Rules",
+      "duration_approx": "0.5h",
+      "key_output": "Created redaccion-ia.md with Protocol Omega",
+      "conversation_id": "3ab74bd3-9977-4c54-98a3-4967e7ae3926"
+    },
+    {
+      "date": "2026-05-27T18:28:42+02:00",
+      "project": "cortex-persist",
+      "focus": "Configuración de Idioma y Estética",
+      "duration_approx": "0.1h",
+      "key_output": "AI output language set to Spanish (C5-REAL)",
+      "conversation_id": "e11a7833-3317-4e5a-afda-44cbe1d384e7"
+    },
+    {
+      "date": "2026-05-27T18:12:00Z",
+      "project": "cortex-persist",
+      "focus": "Implement AgentOp Rust FFI ISA and L5 Self-Healing Reflexion Engine",
+      "duration_approx": "1h",
+      "key_output": "Created cortex_rs/src/isa.rs (AgentOp enums matching builder.py), created cortex/engine/reflexion.py (self-healing dispatch loop), resolved all ruff warnings and lint formatting checks, compiled cargo build --release successfully, and pushed all commits to origin/main.",
+      "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
+    },
+    {
+      "date": "2026-05-27T17:55:00Z",
+      "project": "cortex-persist",
+      "focus": "Proactive optimization scanning, ruff warning fixes and remote synchronization of 15 commits.",
+      "duration_approx": "0.5h",
+      "key_output": "Resolved 4 remaining ruff warnings in smt_guard.py and persistence.py. Successfully pushed 15 commits to remote origin/main.",
+      "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
+    },
+    {
+      "date": "2026-05-27T15:05:00Z",
+      "project": "cortex-persist",
+      "focus": "Consolidating & Closing cortex-persist under [/autonomo] & [/speed-parallel]",
+      "duration_approx": "2h",
+      "key_output": "Passed 2296 unit tests, resolved PyO3 compiler warnings, cleared llamaindex import deprecations, pushed 13 local commits in Music/VISUALES, completed 8-Gate SHIP-Ω terminal closure checklist.",
+      "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
+    },
+    {
+      "date": "2026-05-27T13:37:00Z",
+      "project": "cortex-persist",
+      "focus": "Crystallization of EXERGIA-Ω and CORTEX-Persist convergence",
+      "duration_approx": "1h",
+      "key_output": "Time Capsule and C5-REAL execution parity verified",
+      "conversation_id": "13b39961-8a71-4909-a80e-d04e26b63300"
+    },
+    {
+      "date": "2026-05-27T11:15:24.457032+00:00",
+      "project": "cortex-persist",
+      "focus": "Endocrine Unification & SHIP-Ω",
+      "duration_approx": "2h",
+      "key_output": "Exergia-Omega 20Hz Telemetry & Cortisol Shaders",
+      "conversation_id": "a3ec456c-0d13-4372-92eb-14cb3ecda857"
+    },
+    {
+      "date": "2026-05-27T11:14:30.988198+00:00",
+      "project": "cortex-persist",
+      "focus": "CI Stabilization & AESTHETIC-OMEGA WebGL",
+      "duration_approx": "0.5h",
+      "key_output": "Ultramap FFI recompiled, JISAuditor SOC2 policy fixed, WebGL Shader injected",
+      "conversation_id": "513a22b3-c5a2-4a2c-811d-32bc07835f9f"
+    },
+    {
+      "date": "2026-05-27T13:06:27+02:00",
+      "project": "cortex-persist",
+      "focus": "C5-REAL Integration and Compliance",
+      "duration_approx": "2h",
+      "key_output": "JIS Auditor in Ledger, EXERGIA-Ω Visuals Verified",
+      "conversation_id": "77fb6904-d15b-4973-b507-7d536c143e74"
+    },
+    {
+      "date": "2026-05-27T11:03:44.203821+00:00",
+      "project": "cortex-persist",
+      "focus": "Schema Entropy Fix",
+      "duration_approx": "1h",
+      "key_output": "Fixed FTS5 and foreign key constraints in schema_extensions.py",
+      "conversation_id": "f7694c41-1767-45ab-b889-42e2ad2406ae"
+    },
+    {
+      "date": "2026-05-27T10:58:17Z",
+      "project": "cortex-persist",
+      "focus": "Engine Teardown Concurrency & Integrity",
+      "duration_approx": "1h",
+      "key_output": "No active connection ValueError eliminated",
+      "conversation_id": "6aa13f62-ab1e-417e-8775-94d8773677ab"
+    },
+    {
+      "date": "2026-05-27T09:59:55Z",
+      "project": "cortex-persist",
+      "focus": "ZeroCopyRingBuffer Consolidation",
+      "duration_approx": "0.5h",
+      "key_output": "Terminal consolidated state for LEGION-10k with O(1) atomic operations",
+      "conversation_id": "618bd638-9d27-4636-9c39-103011f25592"
+    },
+    {
+      "date": "2026-05-27T07:23:45+02:00",
+      "project": "harmony-forge",
+      "focus": "Cortex Memory preset serialization & service worker fetch intercept hardening",
+      "duration_approx": "2h",
+      "key_output": "Preset serialization API client integration and dirty file commit",
+      "conversation_id": "0640cbcc-b10b-485a-8531-c970467282b6"
+    },
+    {
+      "date": "2026-05-27T05:15:00Z",
+      "project": "cortex-persist",
+      "focus": "LORCA-Ω narrative ledger generation and Vercel routing adjustments",
+      "duration_approx": "0.5h",
+      "key_output": "docs/LORCA_LEDGER.md generated and changes committed",
+      "conversation_id": "3eb406a4-1213-4af7-8d3e-a2a7bd61e5fb"
+    },
+    {
+      "date": "2026-05-27T05:09:09Z",
+      "project": "cortex",
+      "focus": "docs(verification): E2E command patterns",
+      "duration_approx": "0.5h",
+      "key_output": "Added 5 E2E command patterns to verification skill",
+      "conversation_id": "71612735-f57a-4659-a524-6344d9e0ffbb"
+    },
+    {
+      "date": "2026-05-27T02:16:25Z",
+      "project": "cortex-persist",
+      "focus": "CLI signature fix & pre-commit alignment",
+      "duration_approx": "0.5h",
+      "key_output": "Restored signature version info in CLI and tests to satisfy pytest, passing all 2224 tests",
+      "conversation_id": "3305658e-fc93-4f36-bd69-5e5ebaa01336"
+    },
+    {
+      "date": "2026-05-27T02:08:42.845745Z",
+      "project": "cortex-persist",
+      "focus": "Sovereign execution bounds & Aesthetics",
+      "duration_approx": "1.5h",
+      "key_output": "SHIP-Ω workflow and ZK-STARK bound AST mutations",
+      "conversation_id": "25fc7ca4-9a8c-4524-81b4-005e1893821b"
+    },
+    {
+      "date": "2026-05-27T03:59:35+02:00",
+      "project": "cortex-persist",
+      "focus": "Architectural Finalization & Daemons Decoupling",
+      "duration_approx": "1h",
+      "key_output": "Extracted OutboxDaemon and SecurityReconDaemon from persistence.py into daemons package. Eradicated SQLite fallbacks for 100% ZeroCopyRingBuffer O(1) execution."
+    },
+    {
+      "date": "2026-05-27T00:33:30.717047+00:00",
+      "project": "cortex-persist",
+      "focus": "Forging The K-0 Sovereign Swarm",
+      "duration_approx": "8h",
+      "key_output": "SHIPPED: K-0 Sovereign Swarm, HardwareAggressor APIs, ZK-STARK dark pool assimilation."
+    },
+    {
+      "date": "2026-05-26",
+      "project": "cortex-persist",
+      "focus": "Singularity LGD-200: Direct-Silicon JIT & Exergy Maximization",
+      "duration_approx": "30m",
+      "key_output": "VSA mmap zero-copy integration, SQLite atomic operations for swarm queue and ledger, 300s Exergy Kill-Switches"
+    },
+    {
+      "date": "2026-05-25T01:36:00Z",
+      "project": "cortex",
+      "focus": "Test-Time Training Daemon & vLLM Dynamic Adapter Routing Integration",
+      "duration_approx": "3.5h",
+      "key_output": "Implemented AdapterVerifier, AutonomousTrainingDaemon sleep-cycle optimizer, NativeVLLMProvider multi-LoRA loading and routing interceptor hooks inside LLMProvider. Validated with tests/test_ttt_daemon.py (11/11 passed) and validated system health."
+    },
+    {
+      "date": "2026-05-23T22:39:00+02:00",
+      "project": "anvil-lang",
+      "focus": "Compiler Stability & Forensic Soundness Audit Validation",
+      "duration_approx": "2h",
+      "key_output": "Audited parsing, typing and solver pipeline. Added vacuous solver assertion protection, unsigned underflow warnings, and SaaS endpoint auth hardening. Generated and committed reports/forensic_audit_anvil_lang.md and shipped the project state in CORTEX."
+    },
+    {
+      "date": "2026-05-19T18:55:00+02:00",
+      "project": "cortex",
+      "focus": "Token Budget Manager Optimization + Jules Orchestrator DRY Refactor",
+      "duration_approx": "3h",
+      "key_output": "SwarmBudgetManager migrado a WAL+RETURNING. jules_core.py creado con infraestructura compartida (−360 líneas duplicadas). Budget Ω₃ integrado en dispatch. Keychain OAuth fallback. Rebase zombi recuperado via reflog."
+    },
+    {
+      "date": "2026-04-04T19:08:00+02:00",
+      "project": "cortex",
+      "focus": "CORTEX-Swarm-Prime v8 Singularity Governor",
+      "duration_approx": "breve (1 sesion)",
+      "key_output": "Se validó y consolidó el framework CORTEX-Swarm-Prime garantizando el alineamiento a las 9 leyes OMEGA, Direct-Silicon JIT preparation y O(1) Swarm Topology. Protocolo de Memoria v3 ejecutado."
+    }
+  ],
+  "references": {
+    "memory_systems": [
+      {
+        "name": "Cortex Memory",
+        "url": "https://cortexmemory.dev",
+        "github": "SaintNick1214/Project-Cortex"
+      },
+      {
+        "name": "Mem0",
+        "url": "https://mem0.ai",
+        "note": "Líder en producción"
+      },
+      {
+        "name": "A-MEM Paper",
+        "url": "https://arxiv.org/pdf/2502.12110",
+        "note": "Sistema agéntico de memoria"
+      }
+    ]
+  },
+  "pending_articles": [
+    {
+      "title": "La curiosidad supera al IQ raw en impacto vital",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "Serendipidad dirigida — por qué los accidentes solo funcionan con contexto",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "La barrera entre proyecto side y startup real — 1 persona ajena que diga lo necesito",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "Si algo no es accesible, no es bello — manifiesto de marca personal",
+      "added": "2026-02-14",
+      "type": "slogan"
+    }
+  ],
+  "last_updated": "2026-05-29T04:13:26.230882+00:00"
+}
