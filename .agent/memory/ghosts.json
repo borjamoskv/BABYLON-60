@@ -12,20 +12,20 @@
     "last_conversation": "3ab74bd3-9977-4c54-98a3-4967e7ae3926"
   },
   "cortex-persist": {
-    "last_task": "Inyección de Rust Ouroboros Stream Kernel (CQRS) y WASM Agent Swarm para poda topológica (Hitos 13 y 14).",
-    "last_file": "crates/wasm-runtime/src/swarm.rs",
-    "last_conversation": "40a9548b-55d6-4ec9-83dd-215ef1e5afec",
-    "timestamp": "2026-05-29T04:13:26.230882+00:00"
+    "last_task": "Executed C5-REAL PoC for deterministic AST cryptographic sealing (<1ms latency)",
+    "last_file": "poc_ast_seal.py",
+    "timestamp": "2026-05-29T10:58:02.121009Z",
+    "last_conversation": "02a142bc-7e07-447c-9e9e-7f7d4c14369a"
   },
   "borjamoskv-web": {
-    "last_task": "Reescrito webgl.js usando shaders custom GLSL, optimizado index.html y actualizado site.css con z-index corregido, glows y transitions.",
-    "last_file": "assets/site.css",
-    "timestamp": "2026-05-29T05:13:46+02:00",
-    "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+    "last_task": "Committed metric parsing scripts, lighthouse deployment",
+    "last_file": "assets/css-modules/00-base.css",
+    "last_conversation": "d7703111-0363-43c4-8627-1545e29ea05d",
+    "timestamp": "2026-05-29T06:14:38.097906+00:00"
   },
   "active_projects": {
     "cortex-persist": {
-      "last_task": "Recompilada extensión Rust cortex_rs para Python 3.14.4 ABI resolviendo fallos de segmentación (segfaults), corregidos lints y formateado del SMTE.",
+      "last_task": "Recompilada extensi\u00f3n Rust cortex_rs para Python 3.14.4 ABI resolviendo fallos de segmentaci\u00f3n (segfaults), corregidos lints y formateado del SMTE.",
       "last_file": "cortex_rs/src/lib.rs",
       "timestamp": "2026-05-29T05:13:46+02:00",
       "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
