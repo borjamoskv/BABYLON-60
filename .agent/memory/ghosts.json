@@ -12,10 +12,10 @@
     "last_conversation": "75785400-ecf9-4b02-8c17-ab4a671dc707"
   },
   "cortex-persist": {
-    "last_task": "Completed digital influence and polarization audit pipeline (ingestion, VTT parser, comments scraper, SQL analytics, HTML report, integration tests)",
-    "last_file": "test_audit_pipeline.py",
-    "last_conversation": "471f9e8f-b34d-443f-ac78-30882d4ede68",
-    "timestamp": "2026-05-31T11:39:17Z"
+    "last_task": "style: format codebase using ruff (42 files modified)",
+    "last_file": "cortex/ledger/public_export.py",
+    "timestamp": "2026-05-31T13:16:07Z",
+    "last_conversation": "75785400-ecf9-4b02-8c17-ab4a671dc707"
   },
   "borjamoskv-web": {
     "last_task": "Regenerated audio overlays and rendered concatenated Acts 1-3 based on new Substack script",

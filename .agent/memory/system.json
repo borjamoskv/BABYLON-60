@@ -104,6 +104,22 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-05-31T13:16:07Z",
+      "project": "cortex-persist",
+      "focus": "Codebase Formatting",
+      "duration_approx": "0.1h",
+      "key_output": "style: format codebase using ruff (42 files modified)",
+      "conversation_id": "75785400-ecf9-4b02-8c17-ab4a671dc707"
+    },
+    {
+      "date": "2026-05-31T13:10:00.353543Z",
+      "project": "cortex-persist",
+      "focus": "System & Hardening",
+      "duration_approx": "2h",
+      "key_output": "State Root (41e39...) & 0.98 Entropy Level via AST purge",
+      "conversation_id": "47cc7311-37ca-4af7-810f-76605cfde0df"
+    },
+    {
       "date": "2026-05-31T13:02:05Z",
       "project": "cortex",
       "focus": "Skills Registry and Validation Repair",
@@ -334,22 +350,6 @@
       "duration_approx": "0.5h",
       "key_output": "Terminal consolidated state for LEGION-10k with O(1) atomic operations",
       "conversation_id": "618bd638-9d27-4636-9c39-103011f25592"
-    },
-    {
-      "date": "2026-05-27T07:23:45+02:00",
-      "project": "harmony-forge",
-      "focus": "Cortex Memory preset serialization & service worker fetch intercept hardening",
-      "duration_approx": "2h",
-      "key_output": "Preset serialization API client integration and dirty file commit",
-      "conversation_id": "0640cbcc-b10b-485a-8531-c970467282b6"
-    },
-    {
-      "date": "2026-05-27T05:15:00Z",
-      "project": "cortex-persist",
-      "focus": "LORCA-Ω narrative ledger generation and Vercel routing adjustments",
-      "duration_approx": "0.5h",
-      "key_output": "docs/LORCA_LEDGER.md generated and changes committed",
-      "conversation_id": "3eb406a4-1213-4af7-8d3e-a2a7bd61e5fb"
     }
   ],
   "references": {
@@ -390,5 +390,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T13:02:05Z"
+  "last_updated": "2026-05-31T13:16:07Z"
 }
