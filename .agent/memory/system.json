@@ -104,6 +104,38 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-05-31T16:05:40+02:00",
+      "project": "cortex-persist",
+      "focus": "Health annotations & Ouroboros dead function checking",
+      "duration_approx": "<0.5h",
+      "key_output": "Restored forward-reference type hints and made Ouroboros dead code check safer via rg validation",
+      "conversation_id": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+    },
+    {
+      "date": "2026-05-31T16:05:40+02:00",
+      "project": "borjamoskv-web",
+      "focus": "Visual remastering, Substack automation & site interaction enhancements",
+      "duration_approx": "<2.5h",
+      "key_output": "Rendered and stitched Gon Agents Master V3, automated Substack video upload, and committed interactive copy buttons/reading progress fallback",
+      "conversation_id": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+    },
+    {
+      "date": "2026-05-31T15:21:41+02:00",
+      "project": "cortex-persist",
+      "focus": "Resolved undefined events_queue",
+      "duration_approx": "<1h",
+      "key_output": "Injected asyncio.Queue to fix strict pyright typing in x100_cortex_server.py",
+      "conversation_id": "9f644366-9282-4852-8bd6-54a74045fa69"
+    },
+    {
+      "date": "2026-05-31T13:21:21Z",
+      "project": "cortex-persist",
+      "focus": "Compilación y Validación",
+      "duration_approx": "0.5h",
+      "key_output": "Build OK. Ruff y py_compile verificados.",
+      "conversation_id": "75785400-ecf9-4b02-8c17-ab4a671dc707"
+    },
+    {
       "date": "2026-05-31T13:16:07Z",
       "project": "cortex-persist",
       "focus": "Codebase Formatting",
@@ -318,38 +350,6 @@
       "duration_approx": "0.5h",
       "key_output": "Ultramap FFI recompiled, JISAuditor SOC2 policy fixed, WebGL Shader injected",
       "conversation_id": "513a22b3-c5a2-4a2c-811d-32bc07835f9f"
-    },
-    {
-      "date": "2026-05-27T13:06:27+02:00",
-      "project": "cortex-persist",
-      "focus": "C5-REAL Integration and Compliance",
-      "duration_approx": "2h",
-      "key_output": "JIS Auditor in Ledger, EXERGIA-Ω Visuals Verified",
-      "conversation_id": "77fb6904-d15b-4973-b507-7d536c143e74"
-    },
-    {
-      "date": "2026-05-27T11:03:44.203821+00:00",
-      "project": "cortex-persist",
-      "focus": "Schema Entropy Fix",
-      "duration_approx": "1h",
-      "key_output": "Fixed FTS5 and foreign key constraints in schema_extensions.py",
-      "conversation_id": "f7694c41-1767-45ab-b889-42e2ad2406ae"
-    },
-    {
-      "date": "2026-05-27T10:58:17Z",
-      "project": "cortex-persist",
-      "focus": "Engine Teardown Concurrency & Integrity",
-      "duration_approx": "1h",
-      "key_output": "No active connection ValueError eliminated",
-      "conversation_id": "6aa13f62-ab1e-417e-8775-94d8773677ab"
-    },
-    {
-      "date": "2026-05-27T09:59:55Z",
-      "project": "cortex-persist",
-      "focus": "ZeroCopyRingBuffer Consolidation",
-      "duration_approx": "0.5h",
-      "key_output": "Terminal consolidated state for LEGION-10k with O(1) atomic operations",
-      "conversation_id": "618bd638-9d27-4636-9c39-103011f25592"
     }
   ],
   "references": {
@@ -390,5 +390,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T13:16:07Z"
+  "last_updated": "2026-05-31T16:05:40+02:00"
 }
