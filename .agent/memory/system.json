@@ -104,6 +104,46 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-05-31T08:58:26.947258Z",
+      "project": "cortex-persist",
+      "focus": "Genetic Heuristics & Narrative Extraction",
+      "duration_approx": "1h",
+      "key_output": "cortex_rs mutation AST upgrades, tech debt clean, ROBALAS narrative closed",
+      "conversation_id": "47cc7311-37ca-4af7-810f-76605cfde0df"
+    },
+    {
+      "date": "2026-05-31T10:34:15.826692",
+      "project": "agents-archi",
+      "focus": "Audit update",
+      "duration_approx": "0.1h",
+      "key_output": "Added fictional Easter egg audit to agents.archi",
+      "conversation_id": "f7645ff7-5068-41d7-80fd-b846c4131998"
+    },
+    {
+      "date": "2026-05-31T10:28:00Z",
+      "project": "agents-archi/cortex-persist",
+      "focus": "SOTA/SOAT verification report for agents.archi & Rust ABI rebuild for Python 3.14 FFI",
+      "duration_approx": "1.0h",
+      "key_output": "Committed docs/sota_soat_audit.md, compiled cortex_rs native library, resolved segfault, and verified all 2618 tests passed.",
+      "conversation_id": "a82f4f87-6fff-4f84-9eac-324d4eddc4a8"
+    },
+    {
+      "date": "2026-05-31T10:24:00.071546+02:00",
+      "project": "cortex-persist",
+      "focus": "Sprint 4: C5-REAL Segfault Fix",
+      "duration_approx": "1h",
+      "key_output": "OnceLock Mmap Registry in cortex_rs/src/lib.rs",
+      "conversation_id": "47cc7311-37ca-4af7-810f-76605cfde0df"
+    },
+    {
+      "date": "2026-05-31T06:46:00Z",
+      "project": "cortex-persist/borjamoskv-web",
+      "focus": "AST Mocks, union isinstance checks, master branch merge and Vercel production deployment",
+      "duration_approx": "0.5h",
+      "key_output": "Pushed test fixes to cortex-persist and deployed SOTA vinyl deck to production",
+      "conversation_id": "b942f684-1530-4eaa-9c22-8e1e4abf305b"
+    },
+    {
       "date": "2026-05-29T10:58:02.121009Z",
       "project": "cortex-persist",
       "focus": "C5-REAL AST Sealing validation",
@@ -309,34 +349,6 @@
       "focus": "Architectural Finalization & Daemons Decoupling",
       "duration_approx": "1h",
       "key_output": "Extracted OutboxDaemon and SecurityReconDaemon from persistence.py into daemons package. Eradicated SQLite fallbacks for 100% ZeroCopyRingBuffer O(1) execution."
-    },
-    {
-      "date": "2026-05-27T00:33:30.717047+00:00",
-      "project": "cortex-persist",
-      "focus": "Forging The K-0 Sovereign Swarm",
-      "duration_approx": "8h",
-      "key_output": "SHIPPED: K-0 Sovereign Swarm, HardwareAggressor APIs, ZK-STARK dark pool assimilation."
-    },
-    {
-      "date": "2026-05-26",
-      "project": "cortex-persist",
-      "focus": "Singularity LGD-200: Direct-Silicon JIT & Exergy Maximization",
-      "duration_approx": "30m",
-      "key_output": "VSA mmap zero-copy integration, SQLite atomic operations for swarm queue and ledger, 300s Exergy Kill-Switches"
-    },
-    {
-      "date": "2026-05-25T01:36:00Z",
-      "project": "cortex",
-      "focus": "Test-Time Training Daemon & vLLM Dynamic Adapter Routing Integration",
-      "duration_approx": "3.5h",
-      "key_output": "Implemented AdapterVerifier, AutonomousTrainingDaemon sleep-cycle optimizer, NativeVLLMProvider multi-LoRA loading and routing interceptor hooks inside LLMProvider. Validated with tests/test_ttt_daemon.py (11/11 passed) and validated system health."
-    },
-    {
-      "date": "2026-05-23T22:39:00+02:00",
-      "project": "anvil-lang",
-      "focus": "Compiler Stability & Forensic Soundness Audit Validation",
-      "duration_approx": "2h",
-      "key_output": "Audited parsing, typing and solver pipeline. Added vacuous solver assertion protection, unsigned underflow warnings, and SaaS endpoint auth hardening. Generated and committed reports/forensic_audit_anvil_lang.md and shipped the project state in CORTEX."
     }
   ],
   "references": {
@@ -377,5 +389,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-29T10:58:02.121009Z"
+  "last_updated": "2026-05-31T08:58:26.947258Z"
 }

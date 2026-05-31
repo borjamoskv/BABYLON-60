@@ -1,0 +1,79 @@
+{
+  "patterns": [
+    {
+      "id": "IMP-001",
+      "name": "Kinetic Typography",
+      "tags": ["hero", "text", "scroll", "motion"],
+      "complexity": "medio",
+      "emotion": ["asombro", "confianza"],
+      "origin": "naroa-web hero 2026",
+      "fitness": 0.90,
+      "description": "Texto del hero responde al scroll con transformaciones CSS — skew, scale, opacity shift",
+      "versions": { "desktop": true, "mobile": true, "reduced_motion": true },
+      "performance": { "fps": 60, "kb": 1.5 },
+      "a11y": { "contrast": "4.5:1+", "focus": true, "semantic": true },
+      "tested": ["chrome", "safari"],
+      "used_in": ["naroa-web"]
+    },
+    {
+      "id": "IMP-002",
+      "name": "Magnetic Depth",
+      "tags": ["gallery", "hover", "3d", "transform"],
+      "complexity": "medio",
+      "emotion": ["asombro", "lujo"],
+      "origin": "naroa-web gallery 2026",
+      "fitness": 0.85,
+      "description": "3D tilt en hover de imágenes de galería — rotateX/Y basado en posición del mouse",
+      "versions": { "desktop": true, "mobile": false, "reduced_motion": true },
+      "performance": { "fps": 60, "kb": 2.0 },
+      "a11y": { "contrast": "N/A", "focus": true, "semantic": true },
+      "tested": ["chrome", "safari"],
+      "used_in": ["naroa-web"]
+    },
+    {
+      "id": "IMP-003",
+      "name": "Memory Fragments",
+      "tags": ["scroll", "afterimage", "chromatic", "aberration"],
+      "complexity": "alto",
+      "emotion": ["asombro", "emoción"],
+      "origin": "naroa-web scroll 2026",
+      "fitness": 0.75,
+      "description": "Afterimages con chromatic shift al scroll — capas desplazadas con blend modes",
+      "versions": { "desktop": true, "mobile": false, "reduced_motion": true },
+      "performance": { "fps": 55, "kb": 3.2 },
+      "a11y": { "contrast": "4.5:1+", "focus": true, "semantic": true },
+      "tested": ["chrome"],
+      "used_in": ["naroa-web"]
+    },
+    {
+      "id": "IMP-004",
+      "name": "Glassmorphism Card",
+      "tags": ["card", "glass", "blur", "surface"],
+      "complexity": "bajo",
+      "emotion": ["lujo", "calma"],
+      "origin": "live-notch ALCOVE 2026",
+      "fitness": 0.92,
+      "description": "Tarjeta con backdrop-blur, borde semitransparente, sombra sutil — efecto vidrio premium",
+      "versions": { "desktop": true, "mobile": true, "reduced_motion": true },
+      "performance": { "fps": 60, "kb": 0.5 },
+      "a11y": { "contrast": "4.5:1+", "focus": true, "semantic": true },
+      "tested": ["chrome", "safari", "firefox"],
+      "used_in": ["live-notch-swift", "naroa-web"]
+    },
+    {
+      "id": "IMP-005",
+      "name": "Reveal on Scroll",
+      "tags": ["scroll", "intersection", "reveal", "stagger"],
+      "complexity": "bajo",
+      "emotion": ["asombro", "calma"],
+      "origin": "common pattern",
+      "fitness": 0.95,
+      "description": "Elementos aparecen con fade+translate al entrar en viewport — IntersectionObserver + stagger delay",
+      "versions": { "desktop": true, "mobile": true, "reduced_motion": true },
+      "performance": { "fps": 60, "kb": 1.0 },
+      "a11y": { "contrast": "N/A", "focus": true, "semantic": true },
+      "tested": ["chrome", "safari", "firefox"],
+      "used_in": ["naroa-web"]
+    }
+  ]
+}

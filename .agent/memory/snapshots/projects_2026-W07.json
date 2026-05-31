@@ -1,0 +1,10 @@
+{
+  "_snapshot_meta": {
+    "type": "weekly_backup",
+    "week": "2026-W07",
+    "created": "2026-02-14T20:34:00+01:00",
+    "source": "projects/*.json",
+    "reason": "First snapshot — CORTEX v3.1 stabilization",
+    "projects_backed_up": ["naroa-web", "live-notch-swift", "moskv-swarm", "el-pueblo-online", "borjamoskv-web", "moskvbot", "remotion-naroa", "latent-eye", "videoclip-generator"]
+  }
+}

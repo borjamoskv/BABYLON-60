@@ -1,0 +1,237 @@
+{
+  "meta": {
+    "version": "3.1",
+    "codename": "CORTEX",
+    "description": "Sistema nervioso persistente de MOSKV-1 \u2014 memoria por proyecto + sistema global",
+    "platform": {
+      "ide": "Antigravity 1.16.5 (Google DeepMind, basado en VS Code OSS)",
+      "model": "Claude Opus 4.6 (Thinking)",
+      "runtime": "Node 22.21.1 / Electron 39.2.3 / Chromium 142",
+      "os": "macOS arm64 (Apple Silicon)",
+      "nota": "Antigravity = coche, Claude Opus = motor, MOSKV-1 = piloto entrenado por Borja"
+    },
+    "created": "2026-02-12T13:24:00+01:00",
+    "last_updated": "2026-04-02T00:07:00+02:00",
+    "last_updated_by": "MOSKV-1",
+    "schema_version": "3.1",
+    "migrated_from": "context.json v2.1"
+  },
+  "operator": {
+    "name": "Borja Fern\u00e1ndez Angulo",
+    "alias": "Borja Moskv",
+    "base": "Bilbao / Pa\u00eds Vasco",
+    "profile": "Desarrollador, DJ/productor techno, artista digital, investigador blockchain",
+    "philosophy": "Industrial Noir \u2014 est\u00e9tica oscura, minimalista, t\u00e9cnica",
+    "web": "borjamoskv.com",
+    "slogan": "Si algo no es accesible, no es bello",
+    "best_friend": "Patxi (cumplea\u00f1os: 14 febrero)"
+  },
+  "preferences": {
+    "language": "espa\u00f1ol (c\u00f3digo y nombres t\u00e9cnicos en ingl\u00e9s)",
+    "aesthetic": "Industrial Noir \u2014 BLUE YLN-LM, verde l\u00e1ser, rojo sangre",
+    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petici\u00f3n expl\u00edcita.",
+    "frameworks_python": "Sin frameworks pesados. logging est\u00e1ndar, async/await, python-dotenv.",
+    "frameworks_native": "SwiftUI para macOS.",
+    "fonts": "Inter, Roboto, Outfit \u2014 nunca defaults del navegador.",
+    "deploy_confirmation": true,
+    "mobile_first": true,
+    "microanimations": "obligatorias en toda UI",
+    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QU\u00c9, no el QU\u00c9.",
+    "tips": {
+      "enabled": true,
+      "context_adaptive": true,
+      "loves_cognitive_science": true,
+      "loves_serendipity": true
+    },
+    "external_code_rule": "Siempre evaluar c\u00f3digo externo antes de implementar: qu\u00e9 mola + qu\u00e9 ajustar\u00eda"
+  },
+  "ecosystem": {
+    "root_path": "~/game/",
+    "total_projects": 34,
+    "active_focus": [
+      "naroa-web",
+      "moskv-swarm",
+      "videoclip-generator",
+      "cortex"
+    ],
+    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersi\u00f3n. Fortaleza: n\u00facleo IA (Swarm + Centauro) unifica todo."
+  },
+  "creative_context": {
+    "music": {
+      "genre": "Techno \u2014 Industrial, dark, minimal",
+      "tools": "Forja Sonora (prompts multi-layer), Suno, Udio, MusicGen",
+      "aesthetic": "Industrial Noir sonic signature",
+      "projects_active": [
+        "videoclip-generator",
+        "remotion-naroa",
+        "moskv-music-ai",
+        "dj-studio"
+      ]
+    },
+    "visual": {
+      "palette": "BLUE YLN-LM, verde l\u00e1ser (#00FF41), rojo sangre, negro profundo",
+      "style": "Dark, glassmorphism, microanimaciones, tipograf\u00eda premium",
+      "references": "The Way of Code (TWOC)"
+    },
+    "naroa": {
+      "relation": "Ex-pareja, ahora amiga. Artista visual.",
+      "project": "naroa.online \u2014 portfolio art\u00edstico dedicado a su obra"
+    }
+  },
+  "decisions_global": [],
+  "global_patterns": [
+    {
+      "id": "GP001",
+      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras \u2192 gc.collect() + hibernate idle >60s",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP002",
+      "pattern": "Agent Pool max 4 simult\u00e1neos. Ciclo: Spawn \u2192 Active \u2192 Hibernate \u2192 Restore. Victim selection por prioridad.",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP003",
+      "pattern": "SharedKnowledgeStore: singleton, retorna referencias no copias, access counting + stale cleanup 24h, RLock",
+      "source": "Agent Manager patterns"
+    },
+    {
+      "id": "GP004",
+      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresi\u00f3n progresiva.",
+      "source": "Agent Manager patterns"
+    }
+  ],
+  "knowledge_global": [],
+  "sessions_log": [
+    {
+      "date": "2026-04-02T00:07:00+02:00",
+      "project": "cortex",
+      "focus": "VSA-SDM Sovereign Memory / Autodidact-\u03a9 / C4-TE\u00d3RICO",
+      "duration_approx": "breve (1 sesion)",
+      "key_output": "Esclarecida la arquitectura termodin\u00e1mica de JIT synthesis vs estado actu\u00e1l C5-Real de sqlite-vec. El dise\u00f1o cruzado permanece como horizonte te\u00f3rico (C4)."
+    },
+    {
+      "date": "2026-04-01T23:52:22.010613",
+      "project": "moskv-swarm",
+      "focus": "Capital-Extractor-Omega / C5-REAL Vectors",
+      "duration_approx": "2h",
+      "key_output": "Tr\u00edada de Extracci\u00f3n sellada. Bounty Radar (GitHub), MEV Swarm 10k y Fuzzer en disco activo, gobernado por .cursorrules"
+    },
+    {
+      "date": "2026-02-12",
+      "id": "S001",
+      "conversations": 20,
+      "focus": [
+        "memoria-persistente",
+        "naroa-web",
+        "moskv-swarm",
+        "live-notch-swift",
+        "centauro-protocol"
+      ],
+      "summary": "D\u00eda marat\u00f3n: CORTEX v2.1 genesis, Health Check skill, Agent Memory Patterns, Naroa navigation, MOSKV Protocol, Centauro Protocol v2."
+    },
+    {
+      "date": "2026-02-13",
+      "id": "S002",
+      "conversations": 15,
+      "focus": [
+        "naroa-web",
+        "live-notch-swift",
+        "cortex-upgrade"
+      ],
+      "summary": "Naroa gallery polish (chromatic aberration, 3D tilt, lightbox), Live Notch ALCOVE design, MEJORAlo protocol aplicado, CORTEX v3.1 upgrade (project-scoped, error memory, ghosts, bridges, /ship)."
+    },
+    {
+      "date": "2026-02-14",
+      "id": "S003",
+      "conversations": 13,
+      "focus": [
+        "cortex-migration",
+        "cortex-auto-recall",
+        "product-ideation",
+        "mem0-forensic-analysis",
+        "cortex-product-thesis",
+        "naroa-web-fixes",
+        "live-notch-chronos",
+        "moskv-swarm-diagnosis"
+      ],
+      "summary": "AM: Migraci\u00f3n CORTEX v2\u2192v3.1, Mem0 forensic, Product Thesis CORTEX aprobada ($3.4-5.1B TAM). PM: Naroa gallery bug fixes (404, race condition), image optimization (sharp), Noir WebGL effects, Tetris unit tests, orphan cleanup. Live Notch: Chronos Timer + notch alignment fix. Swarm: comparative v3 vs v4 diagnosis. PM-night: CORTEX auto-load + auto-save en rules.md, full memory sync, first snapshots. Patxi cumple a\u00f1os."
+    },
+    {
+      "date": "2026-02-15",
+      "id": "S004",
+      "conversations": 5,
+      "focus": [
+        "cortex-mejoralo",
+        "live-notch-mejoralo",
+        "moskv-1-mejoralo"
+      ],
+      "summary": "Cortex MEJORAlo (SQL injection fix, test dashboard lock fix, narrowed exception handling). Live Notch MEJORAlo (Liquid Glass evolution). MOSKV-1 MEJORAlo (ecosystem diagnostic, context.json archival, identity sync)."
+    },
+    {
+      "date": "2026-02-16",
+      "id": "S005",
+      "conversations": 8,
+      "focus": [
+        "naroa-web-seo",
+        "naroa-web-detemplatize",
+        "cortex-daemon-mejoralo",
+        "cortex-logging",
+        "moskv-swarm-refactor",
+        "steel-forge-mejoralo",
+        "live-notch-spring-refactor"
+      ],
+      "summary": "naroa-web: SEO landing page premium (scroll-reveal, breadcrumbs, timeline, pricing, masonry, FAQ, star ratings, counters, CTA) + de-templatize Process/Contact + gallery bug fix. cortex: Daemon MEJORAlo + logging hygiene (f-string\u2192lazy%, print\u2192rich.Console). moskv-swarm: KimiBrain\u2192SwarmBrain refactor + STEEL_FORGE agents MEJORAlo (BaseAgent, AST, _score_to_grade dedup). live-notch: Spring animation refactor (~50 inline\u2192NotchSpring tokens, 13 files)."
+    },
+    {
+      "date": "2026-04-01",
+      "id": "S006",
+      "conversations": 9,
+      "focus": [
+        "borjamoskv-web",
+        "cortex-persist",
+        "arcade-boot-sequence"
+      ],
+      "summary": "borjamoskv-web: Transformaci\u00f3n Arcade completada en modo Interceptor. Desarrollada Selecci\u00f3n Neuronal de H\u00e9roes interceptando el boot loader (LINDSTROM, APHEX TWIN, LAURA PAUSINI, etc). UI implementada bajo est\u00e1ndar MICA NOIR (glassmorphism reactivo con backdrop-filter). Detectado el inicio de integraci\u00f3n local del script 'face-parallax.js' activado por teclado (tecla G). QA con BrowserAgent automatizado completado sin ruidos. Boot timeline estabilizado."
+    }
+  ],
+  "references": {
+    "memory_systems": [
+      {
+        "name": "Cortex Memory",
+        "url": "https://cortexmemory.dev",
+        "github": "SaintNick1214/Project-Cortex"
+      },
+      {
+        "name": "Mem0",
+        "url": "https://mem0.ai",
+        "note": "L\u00edder en producci\u00f3n"
+      },
+      {
+        "name": "A-MEM Paper",
+        "url": "https://arxiv.org/pdf/2502.12110",
+        "note": "Sistema ag\u00e9ntico de memoria"
+      }
+    ]
+  },
+  "pending_articles": [
+    {
+      "title": "La curiosidad supera al IQ raw en impacto vital",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "Serendipidad dirigida \u2014 por qu\u00e9 los accidentes solo funcionan con contexto",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "La barrera entre proyecto side y startup real \u2014 1 persona ajena que diga lo necesito",
+      "added": "2026-02-14"
+    },
+    {
+      "title": "Si algo no es accesible, no es bello \u2014 manifiesto de marca personal",
+      "added": "2026-02-14",
+      "type": "slogan"
+    }
+  ],
+  "last_updated": "2026-04-01T23:52:22.010621"
+}

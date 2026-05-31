@@ -1,0 +1,17 @@
+{
+  "meta": { "project_id": "moskvbot", "created": "2026-02-12T13:24:00+01:00", "last_touched": "2026-02-12T13:24:00+01:00", "migrated_from": "context.json v2.1" },
+  "status": "partial", "health": "unknown", "health_score": 15,
+  "path": "~/game/moskvbot/",
+  "stack": "Node.js, WebSocket, Baileys, grammY",
+  "category": "core-ia",
+  "summary": "Asistente IA multi-canal (WhatsApp, Telegram, CLI). v3.0 con memoria persistente.",
+  "ghost": { "last_task": null, "last_file": "package.json", "last_conversation": null, "timestamp": "2026-02-12T13:24:00+01:00", "mood": "dormant", "blocked_by": null, "unblock_condition": null },
+  "recent_changes": [],
+  "known_issues": [],
+  "pending_tasks": [],
+  "decisions": [],
+  "knowledge": [],
+  "bridges": ["moskv-swarm"],
+  "runbook": { "dev": "cd ~/game/moskvbot && npm start", "build": "npm install", "test": "N/A", "deploy": "N/A" },
+  "files_key": ["package.json"]
+}

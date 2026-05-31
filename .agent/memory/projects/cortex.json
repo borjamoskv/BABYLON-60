@@ -1,0 +1,248 @@
+{
+  "meta": {
+    "project_id": "cortex",
+    "created": "2026-02-12T13:24:00+01:00",
+    "last_touched": "2026-05-27T17:06:06.003919Z",
+    "migrated_from": "ghosts.json"
+  },
+  "status": "active",
+  "health": "green",
+  "health_score": 98,
+  "path": "~/cortex/",
+  "stack": "Python, SQLite, Rich, Click, launchd, vLLM",
+  "category": "core-infra",
+  "summary": "Sistema nervioso de MOSKV-1. Memoria persistente multi-nivel (L1 Session, L2 Project, L3 System). Daemon watchdog con monitorizaci\u00f3n de sitios, freshness checks, notificaciones macOS.",
+  "ghost": {
+    "last_task": "Applied MOSKV aesthetics and Industrial Noir 2026 rules to redaccion-ia.md",
+    "last_file": "COLD_STORAGE/cortex-config/workflows/redaccion-ia.md",
+    "conversation_id": "3ab74bd3-9977-4c54-98a3-4967e7ae3926",
+    "timestamp": "2026-05-27T17:06:06.003919Z"
+  },
+  "recent_changes": [
+    "[2026-05-27T17:06:06.003919Z] Applied MOSKV aesthetics and Protocol Omega for AIisms demolition to redaccion-ia.md",
+    "[2026-05-27T05:09:09Z] Added 5 E2E command validation patterns to verification-before-completion skill",
+    "\ud83e\udde0 Implemented AdapterVerifier to audit and validate LoRA config + weights (.npz/.safetensors)",
+    "\ud83c\udf19 Implemented AutonomousTrainingDaemon running async nocturnal sleep-cycle TTT validation",
+    "\ud83d\ude80 Configured NativeVLLMProvider to dynamically load registered verified adapters via LoRARequest",
+    "\ud83d\udee3\ufe0f Added dynamic model resolution and routing interceptor hooks inside LLMProvider",
+    "\ud83e\uddea Deployed tests/test_ttt_daemon.py with 11 async unit tests covering verifier, daemon, and routing",
+    "\ud83d\uddc4\ufe0f SwarmBudgetManager migrado a cortex.database.core.connect (WAL + busy_timeout 5000ms + mmap)",
+    "\u26a1 report_usage optimizado con INSERT...ON CONFLICT...RETURNING \u2014 elimina doble query de I/O",
+    "\ud83d\udd27 HARD_LIMIT_USD externalizado a env CORTEX_MAX_MISSION_USD (default $0.10)"
+  ],
+  "known_issues": [
+    "Jules API 403 con OAuth access token \u2014 posible scope issue",
+    "Rebase interactivo causa colisiones con agentes concurrentes del enjambre",
+    "No semantic search yet (grep only)"
+  ],
+  "pending_tasks": [
+    "Validar Jules API auth con API Key dedicada vs OAuth token",
+    "Ejecutar sweep completo con 5+ agents tras resolver auth",
+    "Add semantic search (local embeddings)",
+    "Expand test coverage for daemon and CLI",
+    "Monitorear archivos -wal/-shm para confirmar WAL mode en producci\u00f3n"
+  ],
+  "decisions": [
+    {
+      "id": "D009",
+      "date": "2026-05-27",
+      "decision": "Establish Protocol Omega as global CORTEX LLM-Killer syntax rule",
+      "context": "Annihilate entropy and stocastic RLHF behavior across the workspace.",
+      "status": "active"
+    },
+    {
+      "id": "D001",
+      "date": "2026-02-12",
+      "decision": "CORTEX = sistema nervioso agn\u00f3stico del agente, no producto a\u00fan",
+      "context": "Resolver p\u00e9rdida total de contexto entre conversaciones.",
+      "status": "active"
+    },
+    {
+      "id": "D002",
+      "date": "2026-02-14",
+      "decision": "3-level architecture: L1 Session, L2 Project, L3 System",
+      "context": "Migraci\u00f3n de monolito context.json a arquitectura escalable.",
+      "status": "active"
+    },
+    {
+      "id": "D003",
+      "date": "2026-02-14",
+      "decision": "Product Thesis aprobada \u2014 TAM $3.4-5.1B sovereign AI memory",
+      "context": "4 pilares: Sovereign Appliance, Cryptographic Vaults, Temporal Knowledge Graph, Transaction Ledger.",
+      "status": "active"
+    },
+    {
+      "id": "D004",
+      "date": "2026-02-16",
+      "decision": "Logging: lazy % formatting + rich.Console en lugar de print()",
+      "context": "Higiene de logs para producci\u00f3n. Evitar f-string en logging por seguridad y rendimiento.",
+      "status": "active"
+    },
+    {
+      "id": "D005",
+      "date": "2026-04-04",
+      "decision": "Despliegue Anthropic Assimilation Protocol V9",
+      "context": "Reemplazo de regex fr\u00e1giles por 7 Axiomas de Intenci\u00f3n y Taint Tracking (provenance).",
+      "status": "active"
+    },
+    {
+      "id": "D006",
+      "date": "2026-04-04",
+      "decision": "System prompts sovereign-grade: identity anchoring + \u03a9-axiom enforcement + per-category role injection",
+      "context": "Prompts eran 1-liner sin contexto. Ahora cada executor recibe: identidad CORTEX, axiomas activos, rol de dominio, contrato de output, nivel de realidad C5/C4.",
+      "status": "active"
+    },
+    {
+      "id": "D007",
+      "date": "2026-04-05",
+      "decision": "CORTEX-Sovereign Monorepo Fusionado y C5-REAL Executivo",
+      "context": "Abandono total de simulaciones L3. Toda decisi\u00f3n del enjambre se env\u00eda al Smart Contract (DecisionProof.sol).",
+      "status": "active"
+    },
+    {
+      "id": "D008",
+      "date": "2026-05-19",
+      "decision": "Jules orchestrators comparten infraestructura via jules_core.py \u2014 DRY enforcement",
+      "context": "sweep_orchestrator y bounty_hunter ten\u00edan 80% c\u00f3digo duplicado. Extra\u00eddo a m\u00f3dulo com\u00fan con budget integration.",
+      "status": "active"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "CK001",
+      "topic": "cortex-architecture",
+      "content": "3-level memory: Hot (in-context), Warm (vector cache <100ms), Cold (archive >500ms). L1/L2/L3 implemented in v3.1.",
+      "confidence": "verified",
+      "added": "2026-02-14"
+    },
+    {
+      "id": "CK002",
+      "topic": "daemon-architecture",
+      "content": "moskv-daemon: persistent watchdog with site monitoring, ghost staleness, memory freshness, macOS notifications. Runs via launchd agent. Dashboard card for status.",
+      "confidence": "verified",
+      "added": "2026-02-15"
+    },
+    {
+      "id": "CK003",
+      "topic": "vsa-sdm-autodidact-epistemology",
+      "content": "La integraci\u00f3n termodin\u00e1mica de VSA-SDM con Autodidact-\u03a9 (Stigmergic Mode) es un C4-DISE\u00d1O TE\u00d3RICO. Actualmente Autodidact utiliza sqlite-vec para su tejido cicatricial.",
+      "confidence": "verified",
+      "added": "2026-04-02"
+    },
+    {
+      "id": "CK004",
+      "topic": "c4-layerzero-stellar-audit",
+      "content": "LayerZero Endpoint V2 in Soroban is vulnerable to: 1. Persistent TTL Nonce reset. 2. Fee Refund balance drain. 3. Out-of-Order execution over sequence boundaries inside 'clear'.",
+      "confidence": "C5-REAL",
+      "added": "2026-04-02"
+    },
+    {
+      "id": "CK005",
+      "topic": "euler-riemann-convergence",
+      "content": "Refinamiento Ultra-Think (Newton-Raphson 200 dps) escala candidatos a precisiones de 10^-12. t=503515.43 confirmado en recta cr\u00edtica.",
+      "confidence": "verified",
+      "added": "2026-04-02",
+      "audit_result": {
+        "mood": "victory",
+        "exergy_yield": 510000.0,
+        "findings": [
+          "CK005",
+          "CK006",
+          "CK007",
+          "CK008",
+          "CK009"
+        ],
+        "operation": "FINAL_STRIKE_LAYERZERO",
+        "summary": "9 high-fidelity findings delivered to Code4rena. Euler-Riemann convergence stable at 10e-12. Sovereign agency confirmed."
+      }
+    },
+    {
+      "id": "CK006",
+      "topic": "stellar-uln302-vulnerabilities",
+      "content": "H-01 (Rad Limit DoS) y H-02 (Fee Manipulation via Hostile Worker) verificadas en LayerZero Stellar implementation.",
+      "confidence": "C5-REAL",
+      "added": "2026-04-02"
+    },
+    {
+      "id": "CK007",
+      "topic": "security-hardening",
+      "content": "StochasticSandbox a\u00edsla comandos agresivos en arenas temporales bajo Apple sandbox-exec. ZeroTrustToolFilter bloquea inyecci\u00f3n de scraping en comandos cr\u00edticos.",
+      "confidence": "verified",
+      "added": "2026-04-04"
+    },
+    {
+      "id": "CK008",
+      "topic": "semantic-router-v3",
+      "content": "Router V3.0 uses 4 gears: Flash, Pro, Qwen-3 Max (Math/Code), Opus 4.6 (Circuit Breaker). SSE native streaming mapped to Ritxie. Cost ledger mapped.",
+      "confidence": "C5-REAL",
+      "added": "2026-04-04T11:17:32.706933+02:00"
+    },
+    {
+      "id": "CK009",
+      "topic": "system-prompt-architecture-v5",
+      "content": "Cada executor del Semantic Router tiene prompt soberano: Classifier (\u03a91/\u03a95/\u03a99 + scoring rubric + output contract), Opus (\u03a92/\u03a95/\u03a99 + exec summary mandate), Qwen (\u03a95/\u03a96/\u03a99 + deep-think falsification), Gemini (\u03a91/\u03a95/\u03a99 + reality-level declaration). _CATEGORY_ROLE_MAP inyecta rol preciso para cada uno de los 27 dominios Arena-X.",
+      "confidence": "C5-REAL",
+      "added": "2026-04-04T13:37:47.451122+02:00"
+    },
+    {
+      "id": "CK010",
+      "topic": "evm-ultrathink-integration",
+      "content": "Integraci\u00f3n del nodo Swarm O(log N) -> SyncManager -> SQLite Ledger -> EVMRelayer Web3. Resultado local benchmark: 90.02 TPS. Fricci\u00f3n cero, C5-REAL alcanzado.",
+      "confidence": "C5-REAL",
+      "added": "2026-04-05T01:19:56.368408+02:00"
+    },
+    {
+      "id": "CK011",
+      "topic": "jules-keychain-auth",
+      "content": "Jules CLI almacena OAuth tokens en macOS Keychain bajo servicio 'jules-cli'. Formato: go-keyring-base64:<base64 JSON>. El JSON contiene access_token (ya29.*), refresh_token y expiry. Requiere padding base64 manual (len%4).",
+      "confidence": "C5-REAL",
+      "added": "2026-05-19T18:55:00+02:00"
+    },
+    {
+      "id": "CK012",
+      "topic": "budget-manager-wal-optimization",
+      "content": "SwarmBudgetManager usa cortex.database.core.connect para WAL mode + busy_timeout=5000ms. report_usage usa INSERT...ON CONFLICT DO UPDATE...RETURNING total_cost_usd para enforcement at\u00f3mico \u03a9\u2083 en una sola transacci\u00f3n.",
+      "confidence": "C5-REAL",
+      "added": "2026-05-19T18:55:00+02:00"
+    },
+    {
+      "id": "CK013",
+      "topic": "test-time-training-lora",
+      "content": "Nocturnal TTT Daemon runs MLX SFT tuning on golden trajectories (>0.4 reward) and registers the path in ~/.cortex/training/verified_adapter.json for NativeVLLMProvider mapping.",
+      "confidence": "C5-REAL",
+      "added": "2026-05-25T01:36:00Z"
+    }
+  ],
+  "archaeology": {
+    "active_targets": [
+      "Euler-Riemann",
+      "LayerZero-Stellar-Endpoint",
+      "ULN302-Security"
+    ],
+    "critical_paths": [
+      "/contracts/endpoint-v2/src/messaging_channel.rs:H-01",
+      "/contracts/message-libs/uln-302/src/send_uln.rs:H-02",
+      "/contracts/endpoint-v2/src/messaging_composer.rs:H-03",
+      "/contracts/endpoint-v2/src/endpoint_v2.rs:H-04",
+      "/contracts/endpoint-v2/src/messaging_channel.rs:H-05"
+    ]
+  },
+  "bridges": [
+    "moskv-swarm",
+    "naroa-web"
+  ],
+  "runbook": {
+    "dev": "cd ~/cortex && .venv/bin/python -m cortex.cli",
+    "build": "pip install -e .",
+    "test": "cd ~/cortex && .venv/bin/python -m pytest",
+    "deploy": "launchctl load ~/Library/LaunchAgents/com.moskv.cortex-daemon.plist"
+  },
+  "files_key": [
+    "cortex/extensions/training/daemon.py",
+    "cortex/extensions/training/verifier.py",
+    "cortex/extensions/llm/vllm_edge.py",
+    "cortex/extensions/llm/provider.py",
+    "tests/test_ttt_daemon.py"
+  ],
+  "last_updated": "2026-05-25T01:36:00Z"
+}

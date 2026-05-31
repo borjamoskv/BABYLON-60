@@ -12,29 +12,41 @@
     "last_conversation": "3ab74bd3-9977-4c54-98a3-4967e7ae3926"
   },
   "cortex-persist": {
-    "last_task": "Executed C5-REAL PoC for deterministic AST cryptographic sealing (<1ms latency)",
-    "last_file": "poc_ast_seal.py",
-    "timestamp": "2026-05-29T10:58:02.121009Z",
-    "last_conversation": "02a142bc-7e07-447c-9e9e-7f7d4c14369a"
+    "last_task": "Completed ROBALAS Arc IV and Epilogue",
+    "last_file": "robalas_arco_epilogo.md",
+    "last_conversation": "47cc7311-37ca-4af7-810f-76605cfde0df",
+    "timestamp": "2026-05-31T08:58:26.947258Z"
   },
   "borjamoskv-web": {
-    "last_task": "Committed metric parsing scripts, lighthouse deployment",
-    "last_file": "assets/css-modules/00-base.css",
-    "last_conversation": "d7703111-0363-43c4-8627-1545e29ea05d",
-    "timestamp": "2026-05-29T06:14:38.097906+00:00"
+    "last_task": "Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
+    "last_file": "index.html",
+    "last_conversation": "b942f684-1530-4eaa-9c22-8e1e4abf305b",
+    "timestamp": "2026-05-31T06:46:00Z"
+  },
+  "agents-archi": {
+    "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
+    "last_file": "index.html",
+    "last_conversation": "f7645ff7-5068-41d7-80fd-b846c4131998",
+    "timestamp": "2026-05-31T10:34:15.826692"
   },
   "active_projects": {
     "cortex-persist": {
-      "last_task": "Recompilada extensi\u00f3n Rust cortex_rs para Python 3.14.4 ABI resolviendo fallos de segmentaci\u00f3n (segfaults), corregidos lints y formateado del SMTE.",
-      "last_file": "cortex_rs/src/lib.rs",
-      "timestamp": "2026-05-29T05:13:46+02:00",
-      "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+      "last_task": "Corrected CortexEngine mock targets and union isinstance checks in test_smte.py, verifying all 2606 tests passed",
+      "last_file": "tests/test_smte.py",
+      "timestamp": "2026-05-31T06:46:00Z",
+      "last_conversation": "b942f684-1530-4eaa-9c22-8e1e4abf305b"
     },
     "borjamoskv-web": {
-      "last_task": "Reescrito webgl.js usando shaders custom GLSL, optimizado index.html y actualizado site.css con z-index corregido, glows y transitions.",
-      "last_file": "assets/site.css",
-      "timestamp": "2026-05-29T05:13:46+02:00",
-      "last_conversation": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
+      "last_task": "Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
+      "last_file": "index.html",
+      "timestamp": "2026-05-31T06:46:00Z",
+      "last_conversation": "b942f684-1530-4eaa-9c22-8e1e4abf305b"
+    },
+    "agents-archi": {
+      "last_task": "docs(sota): add SOTA/SOAT verification and audit report",
+      "last_file": "docs/sota_soat_audit.md",
+      "timestamp": "2026-05-31T07:34:00Z",
+      "last_conversation": "a82f4f87-6fff-4f84-9eac-324d4eddc4a8"
     }
   }
 }

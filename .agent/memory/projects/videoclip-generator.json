@@ -1,0 +1,17 @@
+{
+  "meta": { "project_id": "videoclip-generator", "created": "2026-02-12T13:24:00+01:00", "last_touched": "2026-02-12T15:00:00+01:00", "migrated_from": "context.json v2.1" },
+  "status": "prototype", "health": "unknown", "health_score": 25,
+  "path": "~/game/videoclip-generator/",
+  "stack": "HTML/CSS/JS, WebGL, Web Audio API, Canvas",
+  "category": "music-audio",
+  "summary": "Generador de videoclips audio-reactivos. Usa FFT para análisis de audio que impulsa efectos visuales.",
+  "ghost": { "last_task": "Exploración inicial para mejoras", "last_file": "index.html", "last_conversation": "Vitaminizing The Ecosystem", "timestamp": "2026-02-12T15:00:00+01:00", "mood": "exploring", "blocked_by": null, "unblock_condition": null },
+  "recent_changes": ["Exploración inicial del proyecto para mejoras"],
+  "known_issues": [],
+  "pending_tasks": ["Mejoras identificadas pendientes de implementar"],
+  "decisions": [],
+  "knowledge": [],
+  "bridges": ["naroa-web", "remotion-naroa"],
+  "runbook": { "dev": "cd ~/game/videoclip-generator && npx serve . -l 3000", "build": "N/A", "test": "open http://localhost:3000", "deploy": "N/A" },
+  "files_key": ["index.html", "src/js/canvas.js", "src/js/webgl.js", "src/js/recorder.js"]
+}

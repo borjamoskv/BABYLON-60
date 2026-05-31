@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "id": "anvil-lang",
+    "name": "anvil-lang",
+    "path": "$CORTEX_ROOT/10_PROJECTS/anvil-lang",
+    "stack": ["rust", "z3", "axum", "sqlite", "sqlx"],
+    "created": "2026-05-20T04:40:15+02:00",
+    "last_touched": "2026-05-23T22:38:00+02:00"
+  },
+  "status": "shipped",
+  "health": "stable",
+  "health_score": 100,
+  "ghost": {
+    "last_task": "docs: add forensic audit report for anvil-lang and seal reality verification entries",
+    "last_file": "reports/forensic_audit_anvil_lang.md",
+    "last_conversation": "a7b23a80-ac97-42c5-8c04-10dfc2ca539e",
+    "timestamp": "2026-05-23T22:38:00+02:00"
+  },
+  "known_issues": [],
+  "pending_tasks": [],
+  "recent_changes": [
+    "Added vacuous proof pre-assertion checking to verifier",
+    "Integrated custom warnings in typechecker for unsigned subtractions",
+    "Added concurrent test locking in integration test suite to prevent file race conditions",
+    "Refactored SaaS server payload limits and added SQLite parameterized validations",
+    "Completed forensic audit validation and created reports/forensic_audit_anvil_lang.md"
+  ],
+  "decisions": [
+    {
+      "decision": "Use SSA encoding for Z3 variables to prevent logic mutations within solver state",
+      "rationale": "Direct variable mutation in solver constraints causes conflicting predicates, generating incorrect proof models or solver undecidability"
+    }
+  ],
+  "knowledge": [],
+  "bridges": [],
+  "runbook": {
+    "dev": "cargo run",
+    "build": "cargo build --release",
+    "test": "cargo test",
+    "deploy": "anvil-saas.sh",
+    "health": "curl http://localhost:8080/health"
+  }
+}

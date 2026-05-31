@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "id": "harmony-forge",
+    "name": "Harmony Forge",
+    "path": "$CORTEX_ROOT/Music/VISUALES/harmony-forge",
+    "stack": [
+      "HTML5",
+      "CSS3",
+      "Vanilla JS",
+      "Web Audio API",
+      "HTML5 Canvas"
+    ],
+    "created": "2026-05-22T03:25:00+02:00",
+    "last_touched": "2026-05-27T07:23:45+02:00"
+  },
+  "status": "active",
+  "health": "green",
+  "health_score": 95,
+  "ghost": {
+    "last_task": "feat(harmony-forge): integrate cortex-memory API and fix PWA service worker caching issues",
+    "last_file": "service-worker.js",
+    "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6",
+    "timestamp": "2026-05-27T07:23:45+02:00"
+  },
+  "known_issues": [],
+  "pending_tasks": [
+    "Mejorar la modulación dinámica de Wow & Flutter utilizando osciladores LFO continuos en lugar de cálculo estático al trigger",
+    "Integrar visualizador FFT reactivo avanzado en el osciloscopio canvas"
+  ],
+  "recent_changes": [
+    "Integrado panel CORTEX MEMORY INTERFACE en el HTML para guardar y buscar presets semánticamente.",
+    "Implementadas funciones en app.js para serializar y deserializar presets de estado del sintetizador.",
+    "Corregida la interceptación del service worker en service-worker.js para evitar el cacheo de peticiones POST y de la API cortex-memory.",
+    "Optimizado decaimiento exponencial de Theremin y Guitarra utilizando setTargetAtTime",
+    "Confirmado commit quirúrgico en el repositorio local"
+  ],
+  "decisions": [
+    {
+      "id": "D001",
+      "date": "2026-05-22",
+      "decision": "Uso de setTargetAtTime en lugar de exponentialRampToValueAtTime para las envolventes analógicas",
+      "context": "Evitar clics abruptos al llegar a cero y simular descarga RC física",
+      "status": "active"
+    },
+    {
+      "id": "D002",
+      "date": "2026-05-27",
+      "decision": "Bypass de cacheo del service worker para métodos no-GET y el puerto de la base de datos de vectores",
+      "context": "Resolver bloqueos de red tipo TypeError al guardar presets en cortex-memory (puerto 8009)",
+      "status": "active"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "HK001",
+      "topic": "audio-envelopes",
+      "content": "setTargetAtTime produce un decaimiento exponencial natural asintótico a cero sin causar errores de rango dinámico o discontinuidades audibles en los nodos de ganancia",
+      "confidence": "verified",
+      "added": "2026-05-22"
+    },
+    {
+      "id": "HK002",
+      "topic": "service-worker-caching",
+      "content": "Los service workers intentarán cachear todas las peticiones fetch de forma predeterminada, lanzando excepciones críticas en peticiones tipo POST a menos que se apliquen filtros restrictivos sobre el método HTTP o la URL de destino.",
+      "confidence": "verified",
+      "added": "2026-05-27"
+    }
+  ],
+  "bridges": [
+    "videoclip-generator"
+  ],
+  "runbook": {
+    "dev": "npx serve $CORTEX_ROOT/Music/VISUALES/harmony-forge -l 3000",
+    "build": "N/A",
+    "test": "N/A",
+    "deploy": "N/A",
+    "health": "N/A"
+  }
+}

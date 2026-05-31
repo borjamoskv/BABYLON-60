@@ -1,0 +1,17 @@
+{
+  "meta": { "project_id": "remotion-naroa", "created": "2026-02-12T13:24:00+01:00", "last_touched": "2026-02-12T15:00:00+01:00", "migrated_from": "context.json v2.1" },
+  "status": "prototype", "health": "unknown", "health_score": 20,
+  "path": "~/game/remotion-naroa/",
+  "stack": "Remotion, TypeScript, Next.js",
+  "category": "music-audio",
+  "summary": "Generación de video programática para Naroa. App Remotion audio-reactiva con estética Industrial Noir.",
+  "ghost": { "last_task": "Arquitectura inicial planificada", "last_file": "package.json", "last_conversation": null, "timestamp": "2026-02-12T15:00:00+01:00", "mood": "planning", "blocked_by": null, "unblock_condition": null },
+  "recent_changes": ["Arquitectura inicial con Next.js + Remotion planificada", "Composición audio-reactiva con FFT diseñada"],
+  "known_issues": [],
+  "pending_tasks": ["Implementación completa"],
+  "decisions": [],
+  "knowledge": [],
+  "bridges": ["naroa-web", "videoclip-generator"],
+  "runbook": { "dev": "cd ~/game/remotion-naroa && npm run dev", "build": "npm run build", "test": "N/A", "deploy": "N/A" },
+  "files_key": ["package.json"]
+}

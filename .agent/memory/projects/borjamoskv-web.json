@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "project_id": "borjamoskv-web",
+    "created": "2026-02-12T13:24:00+01:00",
+    "last_touched": "2026-05-31T06:46:00Z",
+    "migrated_from": "context.json v2.1"
+  },
+  "status": "active",
+  "health": "green",
+  "health_score": 10,
+  "path": "$CORTEX_ROOT/10_PROJECTS/borjamoskv-site/",
+  "stack": "Concepto Industrial Noir / MICA / GSAP / Three.js / GLSL Shaders",
+  "category": "web",
+  "summary": "Web personal convertida en experiencia de Videojuego Arcade Soberano.",
+  "ghost": {
+    "last_task": "Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
+    "last_file": "index.html",
+    "last_conversation": "b942f684-1530-4eaa-9c22-8e1e4abf305b",
+    "timestamp": "2026-05-31T06:46:00Z",
+    "mood": "focused",
+    "blocked_by": null,
+    "unblock_condition": null
+  },
+  "recent_changes": [
+    "[2026-05-31T06:46:00Z] Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
+    "Added Lighthouse audit scripts, perf parsing and base aesthetic fixes",
+    "[7c2b5d9e] Reescrito webgl.js usando shaders custom GLSL (Ashima noise, 10K partículas con drift orgánico).",
+    "[7c2b5d9e] Optimizado index.html añadiendo lazy-loading, async decoding, y fetchpriority=high.",
+    "[7c2b5d9e] Actualizado site.css con z-index corregido, mix-blend-mode: screen, scroll-driven entry animations, nav glows, y view-transition timing.",
+    "Añadido modal hero-select-modal interceptando el press-start boot flow.",
+    "CSS adaptado para glassmorphism (MICA NOIR) con -webkit-backdrop-filter.",
+    "Configurado elenco de 12 héroes + 4 Locked Souls.",
+    "Añadida Laura Pausini al rooster (DRAMA EXTREMO).",
+    "Integración de face-parallax.js y hotkey G habilitados por el usuario."
+  ],
+  "known_issues": [],
+  "pending_tasks": [
+    "Refinar las respuestas visuales y variaciones del HUD según el héroe elegido",
+    "Persistir el progreso y la selección de héroe mediante CORTEX v4 DB local"
+  ],
+  "decisions": [
+    "Usar custom GLSL vertex/fragment shaders con simplex noise para el fondo WebGL en vez de PointsMaterial básico.",
+    "La selección de héroe no es una opción del menú, es un interceptor mandatorio antes de inyectar el HUD timeline."
+  ],
+  "knowledge": [
+    "El protocolo GSAP ScrollTrigger convive bien con modales de posición fixed z-index extremo."
+  ],
+  "bridges": [],
+  "runbook": {
+    "dev": "python3 -m http.server",
+    "build": "N/A",
+    "test": "Browser Subagent QA visual",
+    "deploy": "N/A"
+  },
+  "files_key": [
+    "index.html",
+    "game-hud.js",
+    "industrial-noir-overrides.css"
+  ]
+}

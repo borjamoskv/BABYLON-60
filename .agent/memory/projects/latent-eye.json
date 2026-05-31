@@ -1,0 +1,17 @@
+{
+  "meta": { "project_id": "latent-eye", "created": "2026-02-12T13:24:00+01:00", "last_touched": "2026-02-12T13:24:00+01:00", "migrated_from": "context.json v2.1" },
+  "status": "prototype", "health": "unknown", "health_score": 10,
+  "path": "~/game/latent-eye/",
+  "stack": "Next.js, TypeScript, TSX",
+  "category": "web",
+  "summary": "Proyecto Next.js/TypeScript. Layout TSX detectado.",
+  "ghost": { "last_task": null, "last_file": "src/app/layout.tsx", "last_conversation": null, "timestamp": "2026-02-12T13:24:00+01:00", "mood": "dormant", "blocked_by": null, "unblock_condition": null },
+  "recent_changes": [],
+  "known_issues": [],
+  "pending_tasks": [],
+  "decisions": [],
+  "knowledge": [],
+  "bridges": [],
+  "runbook": { "dev": "cd ~/game/latent-eye && npm run dev", "build": "npm run build", "test": "N/A", "deploy": "N/A" },
+  "files_key": ["src/app/layout.tsx", "package.json"]
+}
