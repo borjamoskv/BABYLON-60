@@ -2,7 +2,7 @@
   "meta": {
     "project_id": "borjamoskv-web",
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-05-31T06:46:00Z",
+    "last_touched": "2026-05-31T12:42:46Z",
     "migrated_from": "context.json v2.1"
   },
   "status": "active",
@@ -13,15 +13,17 @@
   "category": "web",
   "summary": "Web personal convertida en experiencia de Videojuego Arcade Soberano.",
   "ghost": {
-    "last_task": "Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
-    "last_file": "index.html",
-    "last_conversation": "b942f684-1530-4eaa-9c22-8e1e4abf305b",
-    "timestamp": "2026-05-31T06:46:00Z",
+    "last_task": "Applied Industrial Noir 2026 aesthetic to Gon web player and stabilized video rendering in Remotion",
+    "last_file": "Music/VISUALES/remotion-forge/render_all.sh",
+    "last_conversation": "543255f1-50f7-40e7-bf03-81a7e38c3a60",
+    "timestamp": "2026-05-31T12:42:46Z",
     "mood": "focused",
     "blocked_by": null,
     "unblock_condition": null
   },
   "recent_changes": [
+    "[2026-05-31T12:42:46Z] Created OOM-safe render_all.sh sequence for Acts 1-3 using --concurrency=1 for Remotion",
+    "[2026-05-31T12:42:46Z] Applied Industrial Noir 2026 design tokens (Abyssal Void #0A0A0A, YInMn Blue accents) and fractal SVG grain to gon-intervalo.html",
     "[2026-05-31T06:46:00Z] Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout",
     "Added Lighthouse audit scripts, perf parsing and base aesthetic fixes",
     "[7c2b5d9e] Reescrito webgl.js usando shaders custom GLSL (Ashima noise, 10K partículas con drift orgánico).",
@@ -29,9 +31,7 @@
     "[7c2b5d9e] Actualizado site.css con z-index corregido, mix-blend-mode: screen, scroll-driven entry animations, nav glows, y view-transition timing.",
     "Añadido modal hero-select-modal interceptando el press-start boot flow.",
     "CSS adaptado para glassmorphism (MICA NOIR) con -webkit-backdrop-filter.",
-    "Configurado elenco de 12 héroes + 4 Locked Souls.",
-    "Añadida Laura Pausini al rooster (DRAMA EXTREMO).",
-    "Integración de face-parallax.js y hotkey G habilitados por el usuario."
+    "Configurado elenco de 12 héroes + 4 Locked Souls."
   ],
   "known_issues": [],
   "pending_tasks": [

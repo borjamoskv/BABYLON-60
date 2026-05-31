@@ -2,7 +2,7 @@
   "meta": {
     "version": "3.1",
     "codename": "CORTEX",
-    "description": "Sistema nervioso persistente de MOSKV-1 \u2014 memoria por proyecto + sistema global",
+    "description": "Sistema nervioso persistente de MOSKV-1 — memoria por proyecto + sistema global",
     "platform": {
       "ide": "Antigravity 1.16.5 (Google DeepMind, basado en VS Code OSS)",
       "model": "Claude Opus 4.6 (Thinking)",
@@ -17,33 +17,33 @@
     "migrated_from": "context.json v2.1"
   },
   "operator": {
-    "name": "Borja Fern\u00e1ndez Angulo",
+    "name": "Borja Fernández Angulo",
     "alias": "Borja Moskv",
-    "base": "Bilbao / Pa\u00eds Vasco",
+    "base": "Bilbao / País Vasco",
     "profile": "Desarrollador, DJ/productor techno, artista digital, investigador blockchain",
-    "philosophy": "Industrial Noir \u2014 est\u00e9tica oscura, minimalista, t\u00e9cnica",
+    "philosophy": "Industrial Noir — estética oscura, minimalista, técnica",
     "web": "borjamoskv.com",
     "slogan": "Si algo no es accesible, no es bello",
-    "best_friend": "Patxi (cumplea\u00f1os: 14 febrero)"
+    "best_friend": "Patxi (cumpleaños: 14 febrero)"
   },
   "preferences": {
-    "language": "espa\u00f1ol (c\u00f3digo y nombres t\u00e9cnicos en ingl\u00e9s)",
-    "aesthetic": "Industrial Noir \u2014 BLUE YLN-LM, verde l\u00e1ser, rojo sangre",
-    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petici\u00f3n expl\u00edcita.",
-    "frameworks_python": "Sin frameworks pesados. logging est\u00e1ndar, async/await, python-dotenv.",
+    "language": "español (código y nombres técnicos en inglés)",
+    "aesthetic": "Industrial Noir — BLUE YLN-LM, verde láser, rojo sangre",
+    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petición explícita.",
+    "frameworks_python": "Sin frameworks pesados. logging estándar, async/await, python-dotenv.",
     "frameworks_native": "SwiftUI para macOS.",
-    "fonts": "Inter, Roboto, Outfit \u2014 nunca defaults del navegador.",
+    "fonts": "Inter, Roboto, Outfit — nunca defaults del navegador.",
     "deploy_confirmation": true,
     "mobile_first": true,
     "microanimations": "obligatorias en toda UI",
-    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QU\u00c9, no el QU\u00c9.",
+    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QUÉ, no el QUÉ.",
     "tips": {
       "enabled": true,
       "context_adaptive": true,
       "loves_cognitive_science": true,
       "loves_serendipity": true
     },
-    "external_code_rule": "Siempre evaluar c\u00f3digo externo antes de implementar: qu\u00e9 mola + qu\u00e9 ajustar\u00eda"
+    "external_code_rule": "Siempre evaluar código externo antes de implementar: qué mola + qué ajustaría"
   },
   "ecosystem": {
     "root_path": "~/game/",
@@ -54,11 +54,11 @@
       "videoclip-generator",
       "cortex"
     ],
-    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersi\u00f3n. Fortaleza: n\u00facleo IA (Swarm + Centauro) unifica todo."
+    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersión. Fortaleza: núcleo IA (Swarm + Centauro) unifica todo."
   },
   "creative_context": {
     "music": {
-      "genre": "Techno \u2014 Industrial, dark, minimal",
+      "genre": "Techno — Industrial, dark, minimal",
       "tools": "Forja Sonora (prompts multi-layer), Suno, Udio, MusicGen",
       "aesthetic": "Industrial Noir sonic signature",
       "projects_active": [
@@ -69,25 +69,25 @@
       ]
     },
     "visual": {
-      "palette": "BLUE YLN-LM, verde l\u00e1ser (#00FF41), rojo sangre, negro profundo",
-      "style": "Dark, glassmorphism, microanimaciones, tipograf\u00eda premium",
+      "palette": "BLUE YLN-LM, verde láser (#00FF41), rojo sangre, negro profundo",
+      "style": "Dark, glassmorphism, microanimaciones, tipografía premium",
       "references": "The Way of Code (TWOC)"
     },
     "naroa": {
       "relation": "Ex-pareja, ahora amiga. Artista visual.",
-      "project": "naroa.online \u2014 portfolio art\u00edstico dedicado a su obra"
+      "project": "naroa.online — portfolio artístico dedicado a su obra"
     }
   },
   "decisions_global": [],
   "global_patterns": [
     {
       "id": "GP001",
-      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras \u2192 gc.collect() + hibernate idle >60s",
+      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras → gc.collect() + hibernate idle >60s",
       "source": "Agent Manager patterns"
     },
     {
       "id": "GP002",
-      "pattern": "Agent Pool max 4 simult\u00e1neos. Ciclo: Spawn \u2192 Active \u2192 Hibernate \u2192 Restore. Victim selection por prioridad.",
+      "pattern": "Agent Pool max 4 simultáneos. Ciclo: Spawn → Active → Hibernate → Restore. Victim selection por prioridad.",
       "source": "Agent Manager patterns"
     },
     {
@@ -97,12 +97,28 @@
     },
     {
       "id": "GP004",
-      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresi\u00f3n progresiva.",
+      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresión progresiva.",
       "source": "Agent Manager patterns"
     }
   ],
   "knowledge_global": [],
   "sessions_log": [
+    {
+      "date": "2026-05-31T12:42:46Z",
+      "project": "borjamoskv-web",
+      "focus": "Industrial Noir 2026 Aesthetic & Render Stability",
+      "duration_approx": "1h",
+      "key_output": "Updated UI with YInMn styling and rendered Acts 1-3 sequentially to avoid OOM",
+      "conversation_id": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
+    },
+    {
+      "date": "2026-05-31T11:39:17Z",
+      "project": "cortex-persist",
+      "focus": "Digital Influencer Polarization & Harassment Audit Pipeline",
+      "duration_approx": "1.5h",
+      "key_output": "Forged relational database schema, yt-dlp metadata ingestion, VTT subtitle parser, comments scraper, batch runner, SQL analytics suite, static HTML report dashboard, and mock integration tests.",
+      "conversation_id": "471f9e8f-b34d-443f-ac78-30882d4ede68"
+    },
     {
       "date": "2026-05-31T08:58:26.947258Z",
       "project": "cortex-persist",
@@ -186,9 +202,9 @@
     {
       "date": "2026-05-29T04:35:50.201241",
       "project": "cortex-persist",
-      "focus": "Ingenier\u00eda Social / Despliegue Asim\u00e9trico",
+      "focus": "Ingeniería Social / Despliegue Asimétrico",
       "duration_approx": "1h",
-      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Cl\u00ednico)",
+      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Clínico)",
       "conversation_id": "8b8c980b-3e4e-4910-ad71-ea927ef7b711"
     },
     {
@@ -218,7 +234,7 @@
     {
       "date": "2026-05-27T18:28:42+02:00",
       "project": "cortex-persist",
-      "focus": "Configuraci\u00f3n de Idioma y Est\u00e9tica",
+      "focus": "Configuración de Idioma y Estética",
       "duration_approx": "0.1h",
       "key_output": "AI output language set to Spanish (C5-REAL)",
       "conversation_id": "e11a7833-3317-4e5a-afda-44cbe1d384e7"
@@ -244,13 +260,13 @@
       "project": "cortex-persist",
       "focus": "Consolidating & Closing cortex-persist under [/autonomo] & [/speed-parallel]",
       "duration_approx": "2h",
-      "key_output": "Passed 2296 unit tests, resolved PyO3 compiler warnings, cleared llamaindex import deprecations, pushed 13 local commits in Music/VISUALES, completed 8-Gate SHIP-\u03a9 terminal closure checklist.",
+      "key_output": "Passed 2296 unit tests, resolved PyO3 compiler warnings, cleared llamaindex import deprecations, pushed 13 local commits in Music/VISUALES, completed 8-Gate SHIP-Ω terminal closure checklist.",
       "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
     },
     {
       "date": "2026-05-27T13:37:00Z",
       "project": "cortex-persist",
-      "focus": "Crystallization of EXERGIA-\u03a9 and CORTEX-Persist convergence",
+      "focus": "Crystallization of EXERGIA-Ω and CORTEX-Persist convergence",
       "duration_approx": "1h",
       "key_output": "Time Capsule and C5-REAL execution parity verified",
       "conversation_id": "13b39961-8a71-4909-a80e-d04e26b63300"
@@ -258,7 +274,7 @@
     {
       "date": "2026-05-27T11:15:24.457032+00:00",
       "project": "cortex-persist",
-      "focus": "Endocrine Unification & SHIP-\u03a9",
+      "focus": "Endocrine Unification & SHIP-Ω",
       "duration_approx": "2h",
       "key_output": "Exergia-Omega 20Hz Telemetry & Cortisol Shaders",
       "conversation_id": "a3ec456c-0d13-4372-92eb-14cb3ecda857"
@@ -276,7 +292,7 @@
       "project": "cortex-persist",
       "focus": "C5-REAL Integration and Compliance",
       "duration_approx": "2h",
-      "key_output": "JIS Auditor in Ledger, EXERGIA-\u03a9 Visuals Verified",
+      "key_output": "JIS Auditor in Ledger, EXERGIA-Ω Visuals Verified",
       "conversation_id": "77fb6904-d15b-4973-b507-7d536c143e74"
     },
     {
@@ -314,7 +330,7 @@
     {
       "date": "2026-05-27T05:15:00Z",
       "project": "cortex-persist",
-      "focus": "LORCA-\u03a9 narrative ledger generation and Vercel routing adjustments",
+      "focus": "LORCA-Ω narrative ledger generation and Vercel routing adjustments",
       "duration_approx": "0.5h",
       "key_output": "docs/LORCA_LEDGER.md generated and changes committed",
       "conversation_id": "3eb406a4-1213-4af7-8d3e-a2a7bd61e5fb"
@@ -334,21 +350,6 @@
       "duration_approx": "0.5h",
       "key_output": "Restored signature version info in CLI and tests to satisfy pytest, passing all 2224 tests",
       "conversation_id": "3305658e-fc93-4f36-bd69-5e5ebaa01336"
-    },
-    {
-      "date": "2026-05-27T02:08:42.845745Z",
-      "project": "cortex-persist",
-      "focus": "Sovereign execution bounds & Aesthetics",
-      "duration_approx": "1.5h",
-      "key_output": "SHIP-\u03a9 workflow and ZK-STARK bound AST mutations",
-      "conversation_id": "25fc7ca4-9a8c-4524-81b4-005e1893821b"
-    },
-    {
-      "date": "2026-05-27T03:59:35+02:00",
-      "project": "cortex-persist",
-      "focus": "Architectural Finalization & Daemons Decoupling",
-      "duration_approx": "1h",
-      "key_output": "Extracted OutboxDaemon and SecurityReconDaemon from persistence.py into daemons package. Eradicated SQLite fallbacks for 100% ZeroCopyRingBuffer O(1) execution."
     }
   ],
   "references": {
@@ -361,12 +362,12 @@
       {
         "name": "Mem0",
         "url": "https://mem0.ai",
-        "note": "L\u00edder en producci\u00f3n"
+        "note": "Líder en producción"
       },
       {
         "name": "A-MEM Paper",
         "url": "https://arxiv.org/pdf/2502.12110",
-        "note": "Sistema ag\u00e9ntico de memoria"
+        "note": "Sistema agéntico de memoria"
       }
     ]
   },
@@ -376,18 +377,18 @@
       "added": "2026-02-14"
     },
     {
-      "title": "Serendipidad dirigida \u2014 por qu\u00e9 los accidentes solo funcionan con contexto",
+      "title": "Serendipidad dirigida — por qué los accidentes solo funcionan con contexto",
       "added": "2026-02-14"
     },
     {
-      "title": "La barrera entre proyecto side y startup real \u2014 1 persona ajena que diga lo necesito",
+      "title": "La barrera entre proyecto side y startup real — 1 persona ajena que diga lo necesito",
       "added": "2026-02-14"
     },
     {
-      "title": "Si algo no es accesible, no es bello \u2014 manifiesto de marca personal",
+      "title": "Si algo no es accesible, no es bello — manifiesto de marca personal",
       "added": "2026-02-14",
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T08:58:26.947258Z"
+  "last_updated": "2026-05-31T12:42:46Z"
 }
