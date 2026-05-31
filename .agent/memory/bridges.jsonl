@@ -1,0 +1,1 @@
+{"ts":"2026-05-31T16:12:00+02:00","from":"borjamoskv-web","to":"videoclip-generator","tag":"#remotion","note":"El renderizado headless en macOS requiere --concurrency=1 y --disable-gpu para evitar caídas OOM y distorsión de pixeles en buffers de canvas."}

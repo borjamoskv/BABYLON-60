@@ -18,10 +18,10 @@
     "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
   },
   "borjamoskv-web": {
-    "last_task": "Stitch video master V3, automate Substack upload, and commit reading progress bar / copy code enhancements to site",
-    "last_file": "Music/VISUALES/remotion-forge/out/El_Ultimo_Solo_de_Gon_Master_V3.mp4",
-    "timestamp": "2026-05-31T16:05:40+02:00",
-    "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+    "last_task": "Optimize Remotion rendering using --disable-gpu to bypass Chromium sandbox/canvas corruption, concatenate acts into 6m 1s master, map RSS Substack slugs to local HTML pages in blog.html, and automate publication of Substack draft.",
+    "last_file": "10_PROJECTS/borjamoskv-site/blog.html",
+    "timestamp": "2026-05-31T16:12:00+02:00",
+    "last_conversation": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
   },
   "agents-archi": {
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
@@ -37,10 +37,10 @@
       "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
     },
     "borjamoskv-web": {
-      "last_task": "Stitch video master V3, automate Substack upload, and commit reading progress bar / copy code enhancements to site",
-      "last_file": "Music/VISUALES/remotion-forge/out/El_Ultimo_Solo_de_Gon_Master_V3.mp4",
-      "timestamp": "2026-05-31T16:05:40+02:00",
-      "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+      "last_task": "Optimize Remotion rendering using --disable-gpu to bypass Chromium sandbox/canvas corruption, concatenate acts into 6m 1s master, map RSS Substack slugs to local HTML pages in blog.html, and automate publication of Substack draft.",
+      "last_file": "10_PROJECTS/borjamoskv-site/blog.html",
+      "timestamp": "2026-05-31T16:12:00+02:00",
+      "last_conversation": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
     },
     "agents-archi": {
       "last_task": "docs(sota): add SOTA/SOAT verification and audit report",

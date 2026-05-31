@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-05-31T16:12:00+02:00",
+      "project": "borjamoskv-web",
+      "focus": "Render stability, script consolidation & Substack automation",
+      "duration_approx": "<1h",
+      "key_output": "Stitched 6-minute clean video master using --disable-gpu, pushed blog.html routing, and automated Substack publication.",
+      "conversation_id": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
+    },
+    {
       "date": "2026-05-31T16:05:40+02:00",
       "project": "cortex-persist",
       "focus": "Health annotations & Ouroboros dead function checking",
@@ -334,22 +342,6 @@
       "duration_approx": "1h",
       "key_output": "Time Capsule and C5-REAL execution parity verified",
       "conversation_id": "13b39961-8a71-4909-a80e-d04e26b63300"
-    },
-    {
-      "date": "2026-05-27T11:15:24.457032+00:00",
-      "project": "cortex-persist",
-      "focus": "Endocrine Unification & SHIP-Ω",
-      "duration_approx": "2h",
-      "key_output": "Exergia-Omega 20Hz Telemetry & Cortisol Shaders",
-      "conversation_id": "a3ec456c-0d13-4372-92eb-14cb3ecda857"
-    },
-    {
-      "date": "2026-05-27T11:14:30.988198+00:00",
-      "project": "cortex-persist",
-      "focus": "CI Stabilization & AESTHETIC-OMEGA WebGL",
-      "duration_approx": "0.5h",
-      "key_output": "Ultramap FFI recompiled, JISAuditor SOC2 policy fixed, WebGL Shader injected",
-      "conversation_id": "513a22b3-c5a2-4a2c-811d-32bc07835f9f"
     }
   ],
   "references": {
@@ -390,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T16:05:40+02:00"
+  "last_updated": "2026-05-31T16:12:00+02:00"
 }
