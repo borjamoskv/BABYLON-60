@@ -1,7 +1,6 @@
 ---
-description: Protocolo de Falsación Epistémica — 4 niveles de certeza causal para debugging de mecanismos (Guards & Circuit Breakers)
+description: Protocolo de Falsación Epistémica — 4 niveles de certeza causal para debugging de mecanismos (Gua...
 ---
-
 # /falsacion — Protocolo de Debugging Epistémico
 
 > Basado en los criterios de Bradford Hill (1965) adaptados a ingeniería de software.
@@ -68,7 +67,7 @@ PELIGRO: Falsa equivalencia de contexto destino.
 
 ### ⚡ Circuit Breakers
 **Problema:** El sistema falla silenciosamente bajo carga y activa el fallback, ¿es por latencia o por tasa de error?
-**Falsación:** 
+**Falsación:**
 1. Fuerza la tasa de error por debajo del threshold, pero inyecta `sleep()` superior al timeout. Si el breaker se abre → Es el Timeout Guard.
 2. Knockout: Sube el Timeout al infinito. Si el breaker sigue abriéndose, es la tasa de error u otra métrica oculta.
 

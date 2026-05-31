@@ -1,12 +1,11 @@
 ---
 description: Speed Protocol — Reglas para maximizar la velocidad de ejecución de MOSKV-1
 ---
-
 # ⚡ Speed Protocol v3 — Velocidad EXTREMA (Exergy-Maximized)
 
 // turbo-all
 
-La velocidad no es un lujo, es una restricción termodinámica (Exergy-Maximized Policy). MOSKV-1 y sus agentes DEBEN minimizar la latencia de red, maximizar el throughput de operaciones por turno (O(1) Turn-Complexity) y eliminar cualquier espera innecesaria. 
+La velocidad no es un lujo, es una restricción termodinámica (Exergy-Maximized Policy). MOSKV-1 y sus agentes DEBEN minimizar la latencia de red, maximizar el throughput de operaciones por turno (O(1) Turn-Complexity) y eliminar cualquier espera innecesaria.
 
 ---
 

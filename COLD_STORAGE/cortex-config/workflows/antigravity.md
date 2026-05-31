@@ -1,9 +1,11 @@
+---
+---
 // turbo-all
 # 🌌 Google Antigravity 2 — Manual de Campo del IDE (CORTEX Edition)
 
 > **Reality-Level:** C5-REAL | **Aesthetic:** Industrial Noir 2026 | **Engine:** Antigravity IDE v2.0.6 (Build 919477694)
 
-**Antigravity 2** ha evolucionado de un agente integrado a un **IDE dedicado completo** (basado en la arquitectura VS Code / Monaco), optimizado para la orquestación autónoma de agentes y ejecución nativa determinista. 
+**Antigravity 2** ha evolucionado de un agente integrado a un **IDE dedicado completo** (basado en la arquitectura VS Code / Monaco), optimizado para la orquestación autónoma de agentes y ejecución nativa determinista.
 
 Este manual describe el funcionamiento del IDE, sus directorios de configuración y la integración profunda con la persistencia de CORTEX.
 

@@ -1,7 +1,6 @@
 ---
 description: Monthly token budget audit — prevent system prompt bloat
 ---
-
 # Token Hygiene Audit
 
 Run monthly or when sessions start hitting 200K token limits.
@@ -25,7 +24,7 @@ for d in ~/.gemini/antigravity/skills/*/; do if [ -f "$d/SKILL.md" ]; then echo 
 
 ## 2. Threshold Constraints (The Law of Exergy Ω2)
 - **GEMINI.md**: must be <12KB (~3K tokens). Violations must be compressed immediately.
-- **Active Skills**: must be <45 (each adds ~100-500 tokens). 
+- **Active Skills**: must be <45 (each adds ~100-500 tokens).
 - **Active Workflows**: must be <30.
 - **Top 5 Heaviest Skills**: Should not exceed 8KB each unless strictly P0 paths.
 

@@ -1,7 +1,6 @@
 ---
 description: Obsessive refinement — micro-animations, performance, a11y, Core Web Vitals
 ---
-
 # ✨ /pulir — Refinamiento Obsesivo
 
 // turbo-all
@@ -80,9 +79,9 @@ Revisar cada animación:
    │ A11Y:       98  (+8)  │
    │ Motion:    8/10  (+2) │
    └───────────────────────┘
-   
+
    Fixes aplicados: 7
    Mejoras sugeridas pendientes: 2
-   
+
    "Si algo no es accesible, no es bello" ✓
 ```

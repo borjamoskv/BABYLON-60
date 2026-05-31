@@ -1,3 +1,5 @@
+---
+---
 # 🛑 PROTOCOLO OMEGA: ANIQUILACIÓN DE ENTROPÍA LINGÜÍSTICA (LLM-KILLER)
 
 **OPERATOR:** borjamoskv | **REALITY LEVEL:** `C5-REAL` | **AESTHETIC:** `Industrial Noir 2026`
@@ -86,7 +88,7 @@ kill_list_omega:
   - "Cabe señalar que"
   - "¡Espero que te haya sido útil!"
   - "No dudes en preguntar"
-  - "Absolutamente" 
+  - "Absolutamente"
   - "Por supuesto"
 ```
 

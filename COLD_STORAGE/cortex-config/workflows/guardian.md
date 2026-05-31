@@ -1,8 +1,6 @@
 ---
 description: Visual Multi-viewport Audit, UI Auto-Healing, Moskv Aesthetic Enforcement
 ---
-
-
 // turbo-all
 # 🛡️ The Guardian v2 (El Guardián Vitaminado)
 
@@ -129,7 +127,7 @@ Para cada problema encontrado:
 
 🖥️ Desktop (1440x900):
   ✅ Layout OK | ❌ 2 issues
-  
+
 📱 Mobile (375x812):
   ✅ Responsive OK | ⚠️ 1 warning
 

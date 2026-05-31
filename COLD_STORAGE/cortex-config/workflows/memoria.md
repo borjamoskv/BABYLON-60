@@ -1,7 +1,6 @@
 ---
 description: Persist current session context to CORTEX v4 Full Ontology
 ---
-
 # 💾 MEMORIA v4 — Protocolo de Persistencia por Proyecto
 
 // turbo-all
@@ -101,7 +100,7 @@ Reglas:
 Registrar si cualquiera de estas condiciones es verdadera:
 
 - [ ] Un patrón resuelto aquí existe como problema abierto en otro proyecto
-- [ ] Una decisión arquitectónica aquí contradice una decisión en otro proyecto  
+- [ ] Una decisión arquitectónica aquí contradice una decisión en otro proyecto
 - [ ] Un bug encontrado aquí puede manifestarse en otro proyecto del mismo stack
 
 ```bash
@@ -221,9 +220,9 @@ print(f'📸 Snapshot creado: {dst}')
   ⚠️  issues nuevos: "<issue>"
   🧠 decisions: "<decisión>"
   ~ health: <before> → <after>
-  
+
 ❌ Errores registrados: +<N>
-🔗 Bridges creados: +<N>  
+🔗 Bridges creados: +<N>
 📅 Sesión: <duración> — "<resumen>"
 
 ✅ Persistido y validado. Git: <clean|dirty→committed>

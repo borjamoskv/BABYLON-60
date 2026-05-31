@@ -1,7 +1,6 @@
 ---
 description: Parallel execution rule — ALWAYS run tools in parallel when possible
 ---
-
 # ⚡ Speed Parallel — Regla de Ejecución en Paralelo
 
 > **REGLA ABSOLUTA**: Siempre que sea posible, ejecutar múltiples herramientas EN PARALELO en el mismo bloque de llamadas. Solo secuenciar cuando hay dependencia directa de datos.
@@ -34,7 +33,7 @@ description: Parallel execution rule — ALWAYS run tools in parallel when possi
 ```
 // BIEN: Todo en paralelo
 search_web("tema 1")
-search_web("tema 2") 
+search_web("tema 2")
 search_web("tema 3")
 view_file("archivo1.js")
 view_file("archivo2.css")
