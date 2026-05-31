@@ -104,6 +104,22 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-05-31T13:02:05Z",
+      "project": "cortex",
+      "focus": "Skills Registry and Validation Repair",
+      "duration_approx": "0.5h",
+      "key_output": "Fixed build_skills_inventory.py, resolve_skill.py, and validate_skills_tree.py to skip orphan directories, restoring IDE /autonomo and ultrathink capability.",
+      "conversation_id": "75785400-ecf9-4b02-8c17-ab4a671dc707"
+    },
+    {
+      "date": "2026-05-31T13:01:56Z",
+      "project": "borjamoskv-web",
+      "focus": "Industrial Noir 2026 Video Script Overhaul",
+      "duration_approx": "1h",
+      "key_output": "Synthesized and rendered full video matching the latest Substack script",
+      "conversation_id": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
+    },
+    {
       "date": "2026-05-31T12:42:46Z",
       "project": "borjamoskv-web",
       "focus": "Industrial Noir 2026 Aesthetic & Render Stability",
@@ -334,22 +350,6 @@
       "duration_approx": "0.5h",
       "key_output": "docs/LORCA_LEDGER.md generated and changes committed",
       "conversation_id": "3eb406a4-1213-4af7-8d3e-a2a7bd61e5fb"
-    },
-    {
-      "date": "2026-05-27T05:09:09Z",
-      "project": "cortex",
-      "focus": "docs(verification): E2E command patterns",
-      "duration_approx": "0.5h",
-      "key_output": "Added 5 E2E command patterns to verification skill",
-      "conversation_id": "71612735-f57a-4659-a524-6344d9e0ffbb"
-    },
-    {
-      "date": "2026-05-27T02:16:25Z",
-      "project": "cortex-persist",
-      "focus": "CLI signature fix & pre-commit alignment",
-      "duration_approx": "0.5h",
-      "key_output": "Restored signature version info in CLI and tests to satisfy pytest, passing all 2224 tests",
-      "conversation_id": "3305658e-fc93-4f36-bd69-5e5ebaa01336"
     }
   ],
   "references": {
@@ -390,5 +390,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T12:42:46Z"
+  "last_updated": "2026-05-31T13:02:05Z"
 }
