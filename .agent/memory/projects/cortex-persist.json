@@ -10,22 +10,20 @@
       "Rust"
     ],
     "created": "2026-05-26T22:49:50.419234+00:00",
-    "last_touched": "2026-05-31T16:05:40+02:00"
+    "last_touched": "2026-06-01T00:11:56.242610+00:00"
   },
   "status": "shipped",
   "health": "green",
   "health_score": 100,
   "ghost": {
-    "last_task": "fix(health): restore annotations & refactor ouroboros safety guard for dead function detection",
-    "last_file": "cortex/extensions/health/models.py",
-    "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209",
-    "timestamp": "2026-05-31T16:05:40+02:00"
+    "last_task": "Forged CORTEX Fiscal Beachhead (Parasitic Decorator @seal_decision & Astro Landing Page)",
+    "last_file": "src/pages/fiscal.astro",
+    "last_conversation": "d6fdb934-41b8-4eca-be4b-41558a35e7a1",
+    "timestamp": "2026-06-01T00:11:56.242610+00:00"
   },
   "known_issues": [],
   "pending_tasks": [],
   "recent_changes": [
-    "[2026-05-31T16:05:40+02:00] fix(health): restore annotations & refactor ouroboros safety guard for dead function detection (Commit 844445a)",
-    "[2026-05-31T15:21:41+02:00] fix(cortex-server): resolve undefined events_queue and strict pyright typing (Commit 24ee254)",
     "Compilación de python3 y ruff pass exitoso sobre x100_cortex_server.py",
     "[2026-05-31T13:16:07Z] style: format codebase using ruff (42 files modified)",
     "Implemented genetic parameter drift in mutator.rs",
@@ -33,7 +31,9 @@
     "Purged technical debt via LEA-Omega (clippy fixes)",
     "Forged Arco IV (robalas_arco_2.md)",
     "Forged Epilogue (robalas_arco_epilogo.md)",
-    "fix(cortex_rs): implement global mmap registry via OnceLock to resolve PyO3 segfaults"
+    "fix(cortex_rs): implement global mmap registry via OnceLock to resolve PyO3 segfaults",
+    "[2026-06-01T00:11:56.242610+00:00] feat(web): inject fiscal beachhead sales matrix and landing page",
+    "[2026-06-01T00:11:56.242610+00:00] feat(fiscal): implement zero-friction parasitic overlay decorator"
   ],
   "decisions": [
     "Crystallize genetic drift directly in Rust (C5-REAL) for performance.",
@@ -106,6 +106,10 @@
     {
       "date": "2026-05-31T13:10:00.353543Z",
       "decision": "State Root must be computed exclusively at Gate Check (ouroboros_daily.py) to prevent violation of Ed25519 payload_hash L3 integrity on raw Ledger events."
+    },
+    {
+      "date": "2026-06-01T00:11:56.242610+00:00",
+      "decision": "Adopt Parasitic Overlay (@seal_decision) for Fiscal AI Agents to eliminate integration friction and capture CFOs via zero-code due diligence."
     }
   ],
   "knowledge": [],

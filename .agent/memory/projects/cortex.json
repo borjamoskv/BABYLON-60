@@ -2,7 +2,7 @@
   "meta": {
     "project_id": "cortex",
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-05-31T13:02:05Z",
+    "last_touched": "2026-06-01T03:46:17+02:00",
     "migrated_from": "ghosts.json"
   },
   "status": "active",
@@ -13,13 +13,12 @@
   "category": "core-infra",
   "summary": "Sistema nervioso de MOSKV-1. Memoria persistente multi-nivel (L1 Session, L2 Project, L3 System). Daemon watchdog con monitorización de sitios, freshness checks, notificaciones macOS.",
   "ghost": {
-    "last_task": "Fixed local skills registry compile and validation issues (Sortu/autodidact-omega FileNotFoundError)",
-    "last_file": ".gemini/config/skills/build_skills_inventory.py",
-    "conversation_id": "75785400-ecf9-4b02-8c17-ab4a671dc707",
-    "timestamp": "2026-05-31T13:02:05Z"
+    "last_task": "Cristalizado de 4 conceptos paradigmáticos (DEATH_PROTOCOL, SELF_PLAY_UNIVERSES, ALIGNMENT_AS_COMPETITION, POST_TOKEN_WORLD) en CORTEX ledger",
+    "last_file": "cortex.json",
+    "conversation_id": "8b4e84a5-ad00-450c-a829-286b7fb69722",
+    "timestamp": "2026-06-01T03:46:17+02:00"
   },
   "recent_changes": [
-    "[2026-05-31T13:02:05Z] Fixed skills inventory build/validation by skipping folders missing SKILL.md",
     "[2026-05-27T17:06:06.003919Z] Applied MOSKV aesthetics and Protocol Omega for AIisms demolition to redaccion-ia.md",
     "[2026-05-27T05:09:09Z] Added 5 E2E command validation patterns to verification-before-completion skill",
     "🧠 Implemented AdapterVerifier to audit and validate LoRA config + weights (.npz/.safetensors)",
@@ -28,7 +27,8 @@
     "🛣️ Added dynamic model resolution and routing interceptor hooks inside LLMProvider",
     "🧪 Deployed tests/test_ttt_daemon.py with 11 async unit tests covering verifier, daemon, and routing",
     "🗄️ SwarmBudgetManager migrado a cortex.database.core.connect (WAL + busy_timeout 5000ms + mmap)",
-    "⚡ report_usage optimizado con INSERT...ON CONFLICT...RETURNING — elimina doble query de I/O"
+    "⚡ report_usage optimizado con INSERT...ON CONFLICT...RETURNING — elimina doble query de I/O",
+    "[2026-06-01T03:46:17+02:00] Cristalización de 4 paradigmas C5-REAL (DEATH_PROTOCOL, SELF_PLAY_UNIVERSES, ALIGNMENT_AS_COMPETITION, POST_TOKEN_WORLD)"
   ],
   "known_issues": [
     "Jules API 403 con OAuth access token — posible scope issue",
@@ -218,6 +218,34 @@
       "content": "Nocturnal TTT Daemon runs MLX SFT tuning on golden trajectories (>0.4 reward) and registers the path in ~/.cortex/training/verified_adapter.json for NativeVLLMProvider mapping.",
       "confidence": "C5-REAL",
       "added": "2026-05-25T01:36:00Z"
+    },
+    {
+      "id": "CK014",
+      "topic": "DEATH_PROTOCOL",
+      "content": "[2026] DEATH_PROTOCOL: Metabolismo de código OSS para purgar AI Slop y software rot. Cristalizado via C5-DEATH-OMEGA skill y LEA-Ω daemon.",
+      "confidence": "C5-REAL",
+      "added": "2026-06-01T03:46:17+02:00"
+    },
+    {
+      "id": "CK015",
+      "topic": "SELF_PLAY_UNIVERSES",
+      "content": "[2026] SELF_PLAY_UNIVERSES: Simulación autojugada de mundos sintéticos completos prescindiendo de humanos.",
+      "confidence": "Emergent",
+      "added": "2026-06-01T03:46:17+02:00"
+    },
+    {
+      "id": "CK016",
+      "topic": "ALIGNMENT_AS_COMPETITION",
+      "content": "[2026] ALIGNMENT_AS_COMPETITION: Alineación convertida en un ecosistema darwiniano de modelos en competición.",
+      "confidence": "Emergent",
+      "added": "2026-06-01T03:46:17+02:00"
+    },
+    {
+      "id": "CK017",
+      "topic": "POST_TOKEN_WORLD",
+      "content": "[2026] POST_TOKEN_WORLD: Modelos que predicen acciones, sistemas e infraestructuras en lugar de texto. Implementado via E2E agent execution y AGY SDK.",
+      "confidence": "C5-REAL",
+      "added": "2026-06-01T03:46:17+02:00"
     }
   ],
   "archaeology": {
