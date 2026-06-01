@@ -12,16 +12,16 @@
     "last_conversation": "75785400-ecf9-4b02-8c17-ab4a671dc707"
   },
   "cortex-persist": {
-    "last_task": "fix(health): restore annotations & refactor ouroboros safety guard for dead function detection",
-    "last_file": "cortex/extensions/health/models.py",
-    "timestamp": "2026-05-31T16:05:40+02:00",
-    "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+    "last_task": "Forged CORTEX Fiscal Beachhead (Parasitic Decorator @seal_decision & Astro Landing Page)",
+    "last_file": "src/pages/fiscal.astro",
+    "last_conversation": "d6fdb934-41b8-4eca-be4b-41558a35e7a1",
+    "timestamp": "2026-06-01T00:11:56.242610+00:00"
   },
   "borjamoskv-web": {
-    "last_task": "Optimize Remotion rendering using --disable-gpu to bypass Chromium sandbox/canvas corruption, concatenate acts into 6m 1s master, map RSS Substack slugs to local HTML pages in blog.html, and automate publication of Substack draft.",
-    "last_file": "10_PROJECTS/borjamoskv-site/blog.html",
-    "timestamp": "2026-05-31T16:12:00+02:00",
-    "last_conversation": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
+    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+    "last_file": "takedown_dossier_pau_garcia_mila.md",
+    "timestamp": "2026-06-01T02:30:56+02:00",
+    "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
   },
   "agents-archi": {
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
@@ -37,10 +37,10 @@
       "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
     },
     "borjamoskv-web": {
-      "last_task": "Optimize Remotion rendering using --disable-gpu to bypass Chromium sandbox/canvas corruption, concatenate acts into 6m 1s master, map RSS Substack slugs to local HTML pages in blog.html, and automate publication of Substack draft.",
-      "last_file": "10_PROJECTS/borjamoskv-site/blog.html",
-      "timestamp": "2026-05-31T16:12:00+02:00",
-      "last_conversation": "543255f1-50f7-40e7-bf03-81a7e38c3a60"
+      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+      "last_file": "takedown_dossier_pau_garcia_mila.md",
+      "timestamp": "2026-06-01T02:30:56+02:00",
+      "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
     },
     "agents-archi": {
       "last_task": "docs(sota): add SOTA/SOAT verification and audit report",

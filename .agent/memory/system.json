@@ -104,6 +104,22 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-01T02:30:56+02:00",
+      "project": "borjamoskv-web",
+      "focus": "C5-REAL Deepfake Forensic investigation & SMTP mapping",
+      "duration_approx": "2h",
+      "key_output": "Forensic deepfake audit dossier and Revelum AI communication payload",
+      "conversation_id": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
+    },
+    {
+      "date": "2026-06-01T00:11:56.242610+00:00",
+      "project": "cortex-persist",
+      "focus": "Fiscal Beachhead Sales Matrix & @seal_decision DX",
+      "duration_approx": "2h",
+      "key_output": "Fiscal Beachhead Landing Page & C5-REAL Python CLI Decorators",
+      "conversation_id": "d6fdb934-41b8-4eca-be4b-41558a35e7a1"
+    },
+    {
       "date": "2026-05-31T16:12:00+02:00",
       "project": "borjamoskv-web",
       "focus": "Render stability, script consolidation & Substack automation",
@@ -326,22 +342,6 @@
       "duration_approx": "0.5h",
       "key_output": "Resolved 4 remaining ruff warnings in smt_guard.py and persistence.py. Successfully pushed 15 commits to remote origin/main.",
       "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
-    },
-    {
-      "date": "2026-05-27T15:05:00Z",
-      "project": "cortex-persist",
-      "focus": "Consolidating & Closing cortex-persist under [/autonomo] & [/speed-parallel]",
-      "duration_approx": "2h",
-      "key_output": "Passed 2296 unit tests, resolved PyO3 compiler warnings, cleared llamaindex import deprecations, pushed 13 local commits in Music/VISUALES, completed 8-Gate SHIP-Ω terminal closure checklist.",
-      "conversation_id": "a44501ad-e9f7-4113-9c28-f3cf171af2f7"
-    },
-    {
-      "date": "2026-05-27T13:37:00Z",
-      "project": "cortex-persist",
-      "focus": "Crystallization of EXERGIA-Ω and CORTEX-Persist convergence",
-      "duration_approx": "1h",
-      "key_output": "Time Capsule and C5-REAL execution parity verified",
-      "conversation_id": "13b39961-8a71-4909-a80e-d04e26b63300"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-05-31T16:12:00+02:00"
+  "last_updated": "2026-06-01T02:30:56+02:00"
 }
