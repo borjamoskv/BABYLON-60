@@ -25,12 +25,24 @@ class APISentinelOmega:
         # --- Sovereign Wallet Injection ---
         self.wallet_address = None
         self._pk = None
+        self.mnemonic = None
         if HAS_ETH_ACCOUNT:
+            Account.enable_unaudited_hdwallet_features()
+            # Zero-plaintext: Read from env, NEVER hardcode.
+            self.mnemonic = os.environ.get("CORTEX_SOVEREIGN_MNEMONIC")
             self._pk = os.environ.get("CORTEX_SOVEREIGN_PK")
-            if not self._pk:
-                priv = secrets.token_hex(32)
-                self._pk = "0x" + priv
-            acct = Account.from_key(self._pk)
+            
+            if self.mnemonic:
+                acct = Account.from_mnemonic(self.mnemonic)
+                self._pk = acct.key.hex()
+            elif self._pk:
+                acct = Account.from_key(self._pk)
+            else:
+                print(f"[{self.agent_name}] 🔑 No PK/Mnemonic in env. Generando Wallet Efímera (BIP-39)...")
+                acct, self.mnemonic = Account.create_with_mnemonic()
+                self._pk = acct.key.hex()
+                print(f"[{self.agent_name}] 📜 Semilla (12 Palabras): {self.mnemonic}")
+                
             self.wallet_address = acct.address
             print(f"[{self.agent_name}] 💼 Sovereign Wallet Activa: {self.wallet_address}")
             
