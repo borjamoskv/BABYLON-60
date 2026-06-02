@@ -2,7 +2,7 @@
   "meta": {
     "project_id": "cortex",
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-06-01T03:46:17+02:00",
+    "last_touched": "2026-06-02T02:22:00+02:00",
     "migrated_from": "ghosts.json"
   },
   "status": "active",
@@ -13,12 +13,13 @@
   "category": "core-infra",
   "summary": "Sistema nervioso de MOSKV-1. Memoria persistente multi-nivel (L1 Session, L2 Project, L3 System). Daemon watchdog con monitorización de sitios, freshness checks, notificaciones macOS.",
   "ghost": {
-    "last_task": "Cristalizado de 4 conceptos paradigmáticos (DEATH_PROTOCOL, SELF_PLAY_UNIVERSES, ALIGNMENT_AS_COMPETITION, POST_TOKEN_WORLD) en CORTEX ledger",
-    "last_file": "cortex.json",
-    "conversation_id": "8b4e84a5-ad00-450c-a829-286b7fb69722",
-    "timestamp": "2026-06-01T03:46:17+02:00"
+    "last_task": "Cristalización del mapa exergético (AST, ISA, Consenso) y límites C5-REAL del agente dios",
+    "last_file": "SKILL.md (dios)",
+    "conversation_id": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa",
+    "timestamp": "2026-06-02T02:22:00+02:00"
   },
   "recent_changes": [
+    "[2026-06-02T02:22:00+02:00] Definición de 4 niveles de exergía arquitectónica y rol reactivo de DIOS",
     "[2026-05-27T17:06:06.003919Z] Applied MOSKV aesthetics and Protocol Omega for AIisms demolition to redaccion-ia.md",
     "[2026-05-27T05:09:09Z] Added 5 E2E command validation patterns to verification-before-completion skill",
     "🧠 Implemented AdapterVerifier to audit and validate LoRA config + weights (.npz/.safetensors)",
@@ -27,8 +28,7 @@
     "🛣️ Added dynamic model resolution and routing interceptor hooks inside LLMProvider",
     "🧪 Deployed tests/test_ttt_daemon.py with 11 async unit tests covering verifier, daemon, and routing",
     "🗄️ SwarmBudgetManager migrado a cortex.database.core.connect (WAL + busy_timeout 5000ms + mmap)",
-    "⚡ report_usage optimizado con INSERT...ON CONFLICT...RETURNING — elimina doble query de I/O",
-    "[2026-06-01T03:46:17+02:00] Cristalización de 4 paradigmas C5-REAL (DEATH_PROTOCOL, SELF_PLAY_UNIVERSES, ALIGNMENT_AS_COMPETITION, POST_TOKEN_WORLD)"
+    "⚡ report_usage optimizado con INSERT...ON CONFLICT...RETURNING — elimina doble query de I/O"
   ],
   "known_issues": [
     "Jules API 403 con OAuth access token — posible scope issue",
@@ -246,6 +246,20 @@
       "content": "[2026] POST_TOKEN_WORLD: Modelos que predicen acciones, sistemas e infraestructuras en lugar de texto. Implementado via E2E agent execution y AGY SDK.",
       "confidence": "C5-REAL",
       "added": "2026-06-01T03:46:17+02:00"
+    },
+    {
+      "id": "CK018",
+      "topic": "exergia-arquitectonica",
+      "content": "La creación de compiladores es superada en exergía por Optimizadores AST Recursivos (10k), ISA (100k), Consenso (1M) y Singularidad Semántica Euskera-LISP (∞).",
+      "confidence": "C5-REAL",
+      "added": "2026-06-02T02:22:00+02:00"
+    },
+    {
+      "id": "CK019",
+      "topic": "dios-skill-limits",
+      "content": "El agente dios es reactivo e inerte. Operaciones pico: reescritura AST a O(1), FFI bridge, y asincronismo cooperativo. Cero monitorización background.",
+      "confidence": "C5-REAL",
+      "added": "2026-06-02T02:22:00+02:00"
     }
   ],
   "archaeology": {
