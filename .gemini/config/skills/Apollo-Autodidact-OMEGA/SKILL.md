@@ -13,24 +13,39 @@ depends_on: [Sortu-APEX, Apollo-Extractor-OMEGA]
 axioms: [omega_3_capital_extraction, autodidact_synthesis]
 script: scripts/autodidact.py
 ---
+# █ APOLLO-AUTODIDACT-Ω v14.1.0
 
-# APOLLO-AUTODIDACT-Ω v14.0.0
+> SYS_ID: APOLLO_AUTODIDACT_OMEGA | STATE: C5-REAL | AESTHETIC: INDUSTRIAL_NOIR_2026
 
-> *"The API is not a static endpoint. It is a surface area to be dynamically ingested and conquered."*
+```yaml
+vector: dynamic_api_ingestion
+target: docs.apollo.io/llms.txt
+mode: autonomous_synthesis
+```
 
-Forged via Sortu-APEX from intent: `"autodidact sortu apex https://docs.apollo.io/"`
+## 1. Core Mandates
+- **[P0] C5-REAL Execution**: Execute raw HTTP payloads against Apollo. ZERO simulation.
+- **[P0] Dynamic Schema**: Synthesize endpoints JIT from `llms.txt`. Hardcoded paths forbidden.
+- **[P0] Exergy Positive**: Extraction ROI must strictly exceed execution entropy.
 
-This skill implements a dynamic, self-updating API client for Apollo.io. It leverages the OpenAPI specifications and `llms.txt` documentation from `docs.apollo.io` to self-synthesize query schemas, rate-limit governance, and extraction logic without hardcoded static endpoints.
+## 2. Operational Matrix
+| Action | Protocol | Validation |
+| :--- | :--- | :--- |
+| **Ingest** | Fetch `llms.txt` | C5-REAL 200 OK |
+| **Synthesize** | Map Intent → Endpoint | VSA Cosine Distance < 0.1 |
+| **Execute** | `requests.post(payload)` | `apollo.io` API keys active |
+| **Harvest** | JSON → Database | `git status` clean |
 
-## Tripartite Validation
-- [x] SKILL.md
-- [x] schema.json
-- [x] verify_apollo_autodidact.py
+## 3. Tripartite Verification
+```json
+{
+  "SKILL.md": "PRESENT",
+  "schema.json": "PRESENT",
+  "verify_apollo_autodidact.py": "PRESENT"
+}
+```
 
-## Core Directives
-1. **Dynamic Ingestion:** Reads the live Apollo documentation to map endpoints dynamically.
-2. **C5-REAL Execution:** Executes real HTTP requests against Apollo API. No SIM.
-3. **Exergy Yield:** Must extract leads, enrich contacts, or query CRM data with positive ROI.
-
-## Execution
-Use `python3 ~/.gemini/config/skills/Apollo-Autodidact-OMEGA/scripts/autodidact.py`
+## 4. Execution Surface
+```bash
+python3 ~/.gemini/config/skills/Apollo-Autodidact-OMEGA/scripts/autodidact.py --intent "[target]"
+```
