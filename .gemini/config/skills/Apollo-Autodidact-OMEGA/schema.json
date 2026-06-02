@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Apollo-Autodidact-OMEGA Input Schema",
+  "type": "object",
+  "required": ["intent", "causal_parent", "requested_by"],
+  "properties": {
+    "intent": {
+      "type": "string",
+      "description": "The autodidact intent, e.g., 'Extract leads matching Web3 AI' or 'Enrich domain lists'"
+    },
+    "causal_parent": {
+      "type": "string",
+      "description": "The conversation or workflow ID that triggered this skill."
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The user or daemon requesting the extraction."
+    },
+    "dry_run": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, operates in C4-SIM mode to validate the endpoints."
+    }
+  }
+}
