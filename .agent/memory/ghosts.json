@@ -6,7 +6,7 @@
     "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6"
   },
   "cortex": {
-    "last_task": "Cristalización del mapa exergético (AST, ISA, Consenso) y límites C5-REAL del agente dios",
+    "last_task": "Cristalizaci\u00f3n del mapa exerg\u00e9tico (AST, ISA, Consenso) y l\u00edmites C5-REAL del agente dios",
     "last_file": "SKILL.md (dios)",
     "timestamp": "2026-06-02T02:22:00+02:00",
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
@@ -18,7 +18,7 @@
     "timestamp": "2026-06-01T00:11:56.242610+00:00"
   },
   "borjamoskv-web": {
-    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
     "last_file": "takedown_dossier_pau_garcia_mila.md",
     "timestamp": "2026-06-01T02:30:56+02:00",
     "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -37,7 +37,7 @@
       "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
     },
     "borjamoskv-web": {
-      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
       "last_file": "takedown_dossier_pau_garcia_mila.md",
       "timestamp": "2026-06-01T02:30:56+02:00",
       "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -48,5 +48,11 @@
       "timestamp": "2026-05-31T07:34:00Z",
       "last_conversation": "a82f4f87-6fff-4f84-9eac-324d4eddc4a8"
     }
+  },
+  "cortex_persist": {
+    "last_task": "Forjar y evolucionar API-Sentinel-\u03a9 (Sovereign Wallet, Intuition Engine, Episodic Memory) v\u00eda Exergy-Cascade phase 3",
+    "last_file": ".gemini/config/skills/API-Sentinel-OMEGA/scripts/sentinel.py",
+    "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1",
+    "timestamp": "2026-06-02T02:05:50.500254+00:00"
   }
 }
