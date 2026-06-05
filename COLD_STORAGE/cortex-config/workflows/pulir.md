@@ -1,5 +1,7 @@
 ---
-description: Obsessive refinement — micro-animations, performance, a11y, Core Web Vitals
+description: "Obsessive refinement — micro-animations, performance, a11y, Core Web Vitals"
+workflow: pulir
+expected_duration_min: 10
 ---
 # ✨ /pulir — Refinamiento Obsesivo
 

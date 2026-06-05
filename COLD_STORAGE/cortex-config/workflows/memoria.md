@@ -1,5 +1,7 @@
 ---
-description: Persist current session context to CORTEX v4 Full Ontology
+description: "Persist current session context to CORTEX v4 Full Ontology"
+workflow: memoria
+expected_duration_min: 5
 ---
 # 💾 MEMORIA v4 — Protocolo de Persistencia por Proyecto
 

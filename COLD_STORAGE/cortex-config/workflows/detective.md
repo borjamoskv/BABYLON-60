@@ -1,5 +1,7 @@
 ---
-description: The Detective v2 — Deep Code Analysis and Tech Debt Hunting
+description: "The Detective v2 — Deep Code Analysis and Tech Debt Hunting"
+workflow: detective
+expected_duration_min: 15
 ---
 # 🕵️ DETECTIVE-Ω (Code Forensics)
 

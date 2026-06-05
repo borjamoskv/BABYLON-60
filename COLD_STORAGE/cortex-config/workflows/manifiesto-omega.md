@@ -1,3 +1,8 @@
+---
+description: "Workflow for manifiesto-omega"
+workflow: manifiesto-omega
+expected_duration_min: 10
+---
 # PROTOCOLO OMEGA: MANIFIESTO DE ANIQUILACIÓN ESTOCÁSTICA
 
 **OPERATOR:** borjamoskv | **REALITY LEVEL:** `C5-REAL` | **AESTHETIC:** `Industrial Noir 2026`

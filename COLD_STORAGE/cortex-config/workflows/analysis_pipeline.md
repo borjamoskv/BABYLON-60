@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 ---
 description: "Exponer CORTEX y MOSKV‑1 para análisis por IA externas"
+workflow: analysis_pipeline
+expected_duration_min: 15
 ---
 1. **Crear un entorno virtual** (si aún no existe)
    ```bash

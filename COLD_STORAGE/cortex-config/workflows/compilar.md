@@ -1,5 +1,7 @@
 ---
-description: Preventive build rule — compile after each logical group of changes
+description: "Preventive build rule — compile after each logical group of changes"
+workflow: compilar
+expected_duration_min: 5
 ---
 
 # 🔨 Compilación Preventiva v2 — Regla de Oro

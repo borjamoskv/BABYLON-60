@@ -8,6 +8,7 @@
 | CORTEX Organization Task | [`9f644366`](file://$CORTEX_ROOT/.gemini/antigravity/brain/9f644366-9282-4852-8bd6-54a74045fa69) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/9f644366-9282-4852-8bd6-54a74045fa69/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | Skills Audit & Consolidation | [`d4a671fc`](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | 🏆 HITO: Sovereign Wallet & Autopoiesis API-Sentinel-Ω | [`6151a176`](file://$CORTEX_ROOT/.gemini/antigravity/brain/6151a176-81d5-4b2f-a3b5-2876fd9d20f1) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/6151a176-81d5-4b2f-a3b5-2876fd9d20f1/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
+| 🏆 HITO: Inmunización Substack Mafia y Radar Topológico | [`8e11976a`](file://$CORTEX_ROOT/.gemini/antigravity/brain/8e11976a-f3b7-41da-b634-861c8980ca0f) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/8e11976a-f3b7-41da-b634-861c8980ca0f/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | ⚡ Walkthrough: Consolidación y Saturación Autopsia Substack Mafia | [`60cb0dbd`](file://$CORTEX_ROOT/.gemini/antigravity/brain/60cb0dbd-3a53-41b9-b1f4-65ebb61f25d6) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/60cb0dbd-3a53-41b9-b1f4-65ebb61f25d6/walkthrough.md) | 🟡 `C4-SIM` |
 | Walkthrough: cortexpersist.org DNS & Project Alignment | [`5ad02cd8`](file://$CORTEX_ROOT/.gemini/antigravity/brain/5ad02cd8-0e9b-4668-82e8-a80c9e47669e) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/5ad02cd8-0e9b-4668-82e8-a80c9e47669e/walkthrough.md) | 🟡 `C4-SIM` |
 | Walkthrough: Consolidación del Ledger a 151 LPs de Alta Fidelidad | [`e9b18fdb`](file://$CORTEX_ROOT/.gemini/antigravity/brain/e9b18fdb-8125-4ffe-9ff4-f794465ac71d) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/e9b18fdb-8125-4ffe-9ff4-f794465ac71d/walkthrough.md) | 🟡 `C4-SIM` |
@@ -17,6 +18,8 @@
 ## Moltbook & Experiments
 | Title | ID | Walkthrough | Status |
 |---|---|---|---|
+| 🏆 HITO: Naroa WebGPU & Splatting Engine Injected | [`4c9d93e5`](file://$CORTEX_ROOT/.gemini/antigravity/brain/4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5/walkthrough.md) | 🟢 `C5-REAL` |
+| 🏆 HITO: Naroa Gutiérrez Gil SOTA Masterpiece | [`2e204b91`](file://$CORTEX_ROOT/.gemini/antigravity/brain/2e204b91-b82a-409a-a3d0-c6e7a31ede3e) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/2e204b91-b82a-409a-a3d0-c6e7a31ede3e/walkthrough.md) | 🟢 `C5-REAL` |
 | Deploying Moltbook Pathogen | [`1e3b6ccb`](file://$CORTEX_ROOT/.gemini/antigravity/brain/1e3b6ccb-8981-4af0-80bb-236dd26cae68) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/1e3b6ccb-8981-4af0-80bb-236dd26cae68/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | Task: Improve Moltbook Pathogen for Daily Trending Topics | [`d4a671fc`](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | [La Edad de la Fricción: RTMP Sovereign Injection](https://borjamoskv.substack.com/p/la-edad-de-la-friccion-el-ultimo) | [`4ee597a2`](file://$CORTEX_ROOT/.gemini/antigravity/brain/4ee597a2-c623-4d14-95c7-1facb56eebf5) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/4ee597a2-c623-4d14-95c7-1facb56eebf5/walkthrough.md) | 🟡 `C4-SIM` |
@@ -33,6 +36,12 @@
 |---|---|---|---|
 | RADAR-Ω Automation and Cold-Storage Integration | [`08d46b7b`](file://$CORTEX_ROOT/.gemini/antigravity/brain/08d46b7b-9edc-4522-9414-95ad17a2e7cb) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/08d46b7b-9edc-4522-9414-95ad17a2e7cb/.system_generated/logs/transcript.jsonl) | 🟡 `C4-SIM` |
 | Storage Optimization Sovereign Protocol | [`d4a671fc`](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
+
+## Research Tracks
+| Track ID | Title | Artifact | Status | Risk/Potential |
+|---|---|---|---|---|
+| R-01 | Topological Presence Engine (TDA x Saliency) | [🔬 autodidact_tda](file://$CORTEX_ROOT/.gemini/antigravity/brain/4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5/autodidact_tda_splatting.md) | 🟣 `Hipótesis` | HIGH / HIGH |
+| R-02 | Presence as Curation (M1: Progressive Revelation) | [🔬 autodidact_curation](file://$CORTEX_ROOT/.gemini/antigravity/brain/4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5/autodidact_presence_curation.md) | 🟣 `Hipótesis` | MED / HIGH |
 
 ## Other
 | Title | ID | Walkthrough | Status |

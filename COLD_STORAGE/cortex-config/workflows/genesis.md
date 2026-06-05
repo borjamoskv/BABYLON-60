@@ -1,5 +1,7 @@
 ---
 description: "GENESIS-1: Un Prompt → Un Proyecto Millonario Completo → Ship"
+workflow: genesis
+expected_duration_min: 40
 ---
 
 # 🔫 GENESIS-1 — El Protocolo Bala

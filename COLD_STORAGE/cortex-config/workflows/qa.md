@@ -1,5 +1,7 @@
 ---
-description: Visual QA with browser subagent — UI, responsive, animations, states
+description: "Visual QA with browser subagent — UI, responsive, animations, states"
+workflow: qa
+expected_duration_min: 15
 ---
 
 # 🔍 QA Visual v2 — Testing PREMIUM

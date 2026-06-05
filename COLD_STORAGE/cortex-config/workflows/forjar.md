@@ -1,5 +1,7 @@
 ---
-description: Forge complete web projects with YInMn design tokens and Impact Patterns
+description: "Forge complete web projects with YInMn design tokens and Impact Patterns"
+workflow: forjar
+expected_duration_min: 30
 ---
 
 # 🔨 /forjar — Crear Proyecto Web

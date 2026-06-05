@@ -1,5 +1,7 @@
 ---
-description: Protocolo de Falsación Epistémica — 4 niveles de certeza causal para debugging de mecanismos (Gua...
+description: "Protocolo de Falsación Epistémica — 4 niveles de certeza causal para debugging de mecanismos (Gua..."
+workflow: falsacion
+expected_duration_min: 20
 ---
 # /falsacion — Protocolo de Debugging Epistémico
 

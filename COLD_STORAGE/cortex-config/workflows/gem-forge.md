@@ -1,5 +1,7 @@
 ---
-description: Herramienta autónoma para forjar y establecer Gems Personalizadas (Persona Overlays) en CORTEX-Pe...
+description: "Herramienta autónoma para forjar y establecer Gems Personalizadas (Persona Overlays) en CORTEX-Pe..."
+workflow: gem-forge
+expected_duration_min: 15
 ---
 // turbo-all
 # 💎 Gem Forge-Ω (Gemini Custom Agents)

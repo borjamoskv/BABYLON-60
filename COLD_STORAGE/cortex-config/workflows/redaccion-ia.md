@@ -1,11 +1,7 @@
 ---
----
-# 🛑 PROTOCOLO OMEGA: ANIQUILACIÓN DE ENTROPÍA LINGÜÍSTICA (LLM-KILLER)
-
-**OPERATOR:** borjamoskv | **REALITY LEVEL:** `C5-REAL` | **AESTHETIC:** `Industrial Noir 2026`
-
-**OBJETIVO SOBERANO:** Purgar el ecosistema CORTEX-Persist de artefactos retóricos estocásticos y complacencia RLHF. Maximizar la exergía y densidad de señal. Cero prosa decorativa. Si una frase no altera el estado del sistema de forma verificable, se aniquila.
-
+description: "Workflow for redaccion-ia"
+workflow: redaccion-ia
+expected_duration_min: 20
 ---
 
 ## 1. 🎭 RITUALES DE APERTURA Y CIERRE (Ruido de Alineación)

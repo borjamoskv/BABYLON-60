@@ -1,5 +1,7 @@
 ---
-description: SHIP-Ω — Sovereign Closure Protocol. 8 C5-REAL checks or it's NOT done
+description: "SHIP-Ω — Sovereign Closure Protocol. 8 C5-REAL checks or it's NOT done"
+workflow: ship
+expected_duration_min: 15
 ---
 
 # 🚢 SHIP-Ω — Sovereign Closure Protocol (Exergy-Maximized)

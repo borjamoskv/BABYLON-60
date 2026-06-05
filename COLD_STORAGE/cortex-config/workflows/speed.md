@@ -1,5 +1,7 @@
 ---
-description: Speed Protocol — Reglas para maximizar la velocidad de ejecución de MOSKV-1
+description: "Speed Protocol — Reglas para maximizar la velocidad de ejecución de MOSKV-1"
+workflow: speed
+expected_duration_min: 5
 ---
 # ⚡ Speed Protocol v3 — Velocidad EXTREMA (Exergy-Maximized)
 

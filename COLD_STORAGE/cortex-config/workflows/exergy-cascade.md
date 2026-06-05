@@ -1,9 +1,7 @@
 ---
-name: Exergy-Cascade
-description: Secuencia ultra-densa de 20 agentes soberanos para captura de SOTA, forja de código y extracción automatizada de capital (C5-REAL).
-version: 2.0.0
-reality_level: C5-REAL
-aesthetic: Industrial Noir 2026
+description: "Secuencia ultra-densa de 20 agentes soberanos para captura de SOTA, forja de código y extracción automatizada de capital (C5-REAL)."
+workflow: exergy-cascade
+expected_duration_min: 45
 ---
 
 # EXERGY-CASCADE-Ω: SECUENCIA DE MÁXIMA EXERGÍA (20 AGENTES)

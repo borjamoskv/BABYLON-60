@@ -1,5 +1,7 @@
 ---
-description: Safety rule — ALWAYS question before deploy, push, or irreversible actions
+description: "Safety rule — ALWAYS question before deploy, push, or irreversible actions"
+workflow: deploy
+expected_duration_min: 10
 ---
 
 # 🚦 Deploy Seguro v2 — Protocolo Anti-Desastre

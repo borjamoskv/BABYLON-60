@@ -104,6 +104,22 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-02T06:31:38+02:00",
+      "project": "naroagutierrezgil",
+      "focus": "WebGPU Splatting Injection & TDA Research Protocol",
+      "duration_approx": "2h",
+      "key_output": "SplatVault.tsx + TDA Artifact R-01",
+      "conversation_id": "4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5"
+    },
+    {
+      "date": "2026-06-02T02:54:28.578833+00:00",
+      "project": "cortex-persist",
+      "focus": "Capital Extraction (Asymmetric B2B Pivot)",
+      "duration_approx": "1h",
+      "key_output": "Pivoted from Apollo API to Open-Source Web Scraping (DuckDuckGo Dorking + BeautifulSoup) due to thermodynamic limits (API Wall). Forged b2b_assault.py for P2P payload generation.",
+      "conversation_id": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1"
+    },
+    {
       "date": "2026-06-02T02:05:50.500254+00:00",
       "project": "cortex_persist",
       "focus": "Autopoiesis C5-REAL API-Sentinel-OMEGA",
@@ -326,22 +342,6 @@
       "duration_approx": "1h",
       "key_output": "Updated pyproject.toml to Antigravity v2, generated architectural Mermaid diagrams.",
       "conversation_id": "22a5aec3-a34f-4e48-a6f2-1da88d0c6792"
-    },
-    {
-      "date": "2026-05-28T01:24:14.796618+00:00",
-      "project": "cortex-persist",
-      "focus": "Sovereign Swarm Comm & Falsation Protocol",
-      "duration_approx": "4h",
-      "key_output": "ByzantineZeroCopyBus, Entropy Circuit Breaker, Inference Falsation",
-      "conversation_id": "e7def321-0025-44d2-89d9-e2f069088eb2"
-    },
-    {
-      "date": "2026-05-27T17:06:12.816020Z",
-      "project": "cortex",
-      "focus": "AIisms Demolition Rules",
-      "duration_approx": "0.5h",
-      "key_output": "Created redaccion-ia.md with Protocol Omega",
-      "conversation_id": "3ab74bd3-9977-4c54-98a3-4967e7ae3926"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-02T02:05:50.500254+00:00"
+  "last_updated": "2026-06-02T06:31:38+02:00"
 }

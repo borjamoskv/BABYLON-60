@@ -1,5 +1,7 @@
 ---
-description: Activates ANAMNESIS-Ω for memory archaeology, deduplication and state drift resolution.
+description: "Activates ANAMNESIS-Ω for memory archaeology, deduplication and state drift resolution."
+workflow: anamnesis
+expected_duration_min: 10
 ---
 
 # 🏛️ WORKFLOW: ANAMNESIS-Ω (Memory Activation)

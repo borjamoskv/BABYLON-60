@@ -1,3 +1,8 @@
+---
+description: "Workflow for consolidator-omega"
+workflow: consolidator-omega
+expected_duration_min: 25
+---
 # WORKFLOW OMEGA: CONSOLIDATOR-Ω (100% PRODUCT CLOSURE)
 
 **OPERATOR:** borjamoskv | **REALITY LEVEL:** `C5-REAL` | **AESTHETIC:** `Industrial Noir 2026`

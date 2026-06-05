@@ -1,5 +1,7 @@
 ---
-description: Proactive Optimization Radar — Continuous improvement detection and execution
+description: "Proactive Optimization Radar — Continuous improvement detection and execution"
+workflow: proactivo
+expected_duration_min: 15
 ---
 
 # 🔭 PROACTIVO v1 — Radar de Optimización Continua

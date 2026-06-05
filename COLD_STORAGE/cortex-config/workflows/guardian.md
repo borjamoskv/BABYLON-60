@@ -1,5 +1,7 @@
 ---
-description: Visual Multi-viewport Audit, UI Auto-Healing, Moskv Aesthetic Enforcement
+description: "Visual Multi-viewport Audit, UI Auto-Healing, Moskv Aesthetic Enforcement"
+workflow: guardian
+expected_duration_min: 20
 ---
 // turbo-all
 # 🛡️ The Guardian v2 (El Guardián Vitaminado)

@@ -1,5 +1,7 @@
 ---
-description: Health Cortex — Unified System Diagnostic & Recovery Protocol
+description: "Health Cortex — Unified System Diagnostic & Recovery Protocol"
+workflow: health-cortex
+expected_duration_min: 10
 ---
 
 # 🩺 Health Cortex v1 — Sovereign System Integrity

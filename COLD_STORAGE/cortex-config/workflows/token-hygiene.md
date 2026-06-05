@@ -1,5 +1,7 @@
 ---
-description: Monthly token budget audit — prevent system prompt bloat
+description: "Monthly token budget audit — prevent system prompt bloat"
+workflow: token-hygiene
+expected_duration_min: 10
 ---
 # Token Hygiene Audit
 

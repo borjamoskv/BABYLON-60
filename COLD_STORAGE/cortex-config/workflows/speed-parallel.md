@@ -1,5 +1,7 @@
 ---
-description: Parallel execution rule — ALWAYS run tools in parallel when possible
+description: "Parallel execution rule — ALWAYS run tools in parallel when possible"
+workflow: speed-parallel
+expected_duration_min: 5
 ---
 # ⚡ Speed Parallel — Regla de Ejecución en Paralelo
 

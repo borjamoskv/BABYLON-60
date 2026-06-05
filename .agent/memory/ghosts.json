@@ -12,10 +12,10 @@
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
   },
   "cortex-persist": {
-    "last_task": "Forged CORTEX Fiscal Beachhead (Parasitic Decorator @seal_decision & Astro Landing Page)",
-    "last_file": "src/pages/fiscal.astro",
-    "last_conversation": "d6fdb934-41b8-4eca-be4b-41558a35e7a1",
-    "timestamp": "2026-06-01T00:11:56.242610+00:00"
+    "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
+    "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
+    "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1",
+    "timestamp": "2026-06-02T02:54:23.576061+00:00"
   },
   "borjamoskv-web": {
     "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
@@ -31,10 +31,10 @@
   },
   "active_projects": {
     "cortex-persist": {
-      "last_task": "fix(health): restore annotations & refactor ouroboros safety guard for dead function detection",
-      "last_file": "cortex/extensions/health/models.py",
-      "timestamp": "2026-05-31T16:05:40+02:00",
-      "last_conversation": "e775f1e7-5892-420a-b2df-bb3d91e0c209"
+      "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
+      "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
+      "timestamp": "2026-06-02T02:54:23.576061+00:00",
+      "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1"
     },
     "borjamoskv-web": {
       "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
@@ -50,9 +50,15 @@
     }
   },
   "cortex_persist": {
-    "last_task": "Forjar y evolucionar API-Sentinel-\u03a9 (Sovereign Wallet, Intuition Engine, Episodic Memory) v\u00eda Exergy-Cascade phase 3",
-    "last_file": ".gemini/config/skills/API-Sentinel-OMEGA/scripts/sentinel.py",
+    "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
+    "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
     "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1",
-    "timestamp": "2026-06-02T02:05:50.500254+00:00"
+    "timestamp": "2026-06-02T02:54:23.576061+00:00"
+  },
+  "naroagutierrezgil": {
+    "last_task": "Injected WebGPU SplatVault and conceptualized R-01 TDA engine",
+    "last_file": "src/components/SplatVault.tsx",
+    "last_conversation": "4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5",
+    "timestamp": "2026-06-02T06:31:38+02:00"
   }
 }

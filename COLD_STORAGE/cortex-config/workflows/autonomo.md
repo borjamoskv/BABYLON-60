@@ -1,5 +1,7 @@
 ---
-description: Autonomous Operation Protocol — Self-directed optimization without explicit user orders
+description: "Autonomous Operation Protocol — Self-directed optimization without explicit user orders"
+workflow: autonomo
+expected_duration_min: 30
 ---
 
 # 🤖 AUTÓNOMO v2 — Sovereign Self-Direction Protocol
