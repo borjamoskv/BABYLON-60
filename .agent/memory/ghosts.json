@@ -6,19 +6,19 @@
     "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6"
   },
   "cortex": {
-    "last_task": "Cristalizaci\u00f3n del mapa exerg\u00e9tico (AST, ISA, Consenso) y l\u00edmites C5-REAL del agente dios",
+    "last_task": "Cristalización del mapa exergético (AST, ISA, Consenso) y límites C5-REAL del agente dios",
     "last_file": "SKILL.md (dios)",
     "timestamp": "2026-06-02T02:22:00+02:00",
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
   },
   "cortex-persist": {
-    "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
-    "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
-    "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1",
-    "timestamp": "2026-06-02T02:54:23.576061+00:00"
+    "last_task": "Refactored CORTEX Persist conceptual architecture to v19.0 (Dependency Graph Fitness & Collapse Benefit Ratio) under Active Inference paradigm",
+    "last_file": "cortex/observability/telemetry.py",
+    "last_conversation": "ea04b872-49f1-4056-8d4f-741874d15fc8",
+    "timestamp": "2026-06-06T01:25:00Z"
   },
   "borjamoskv-web": {
-    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
     "last_file": "takedown_dossier_pau_garcia_mila.md",
     "timestamp": "2026-06-01T02:30:56+02:00",
     "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -31,13 +31,13 @@
   },
   "active_projects": {
     "cortex-persist": {
-      "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
-      "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
-      "timestamp": "2026-06-02T02:54:23.576061+00:00",
-      "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1"
+      "last_task": "Refactored CORTEX Persist conceptual architecture to v19.0 (Dependency Graph Fitness & Collapse Benefit Ratio) under Active Inference paradigm",
+      "last_file": "cortex/observability/telemetry.py",
+      "last_conversation": "ea04b872-49f1-4056-8d4f-741874d15fc8",
+      "timestamp": "2026-06-06T01:25:00Z"
     },
     "borjamoskv-web": {
-      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
       "last_file": "takedown_dossier_pau_garcia_mila.md",
       "timestamp": "2026-06-01T02:30:56+02:00",
       "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -50,10 +50,10 @@
     }
   },
   "cortex_persist": {
-    "last_task": "Forged B2B Open-Source Asymmetric Extractor (DuckDuckGo Dorking + BeautifulSoup) & P2P Payload Generator",
-    "last_file": ".gemini/config/skills/Apollo-Extractor-OMEGA/scripts/dork_extractor.py",
-    "last_conversation": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1",
-    "timestamp": "2026-06-02T02:54:23.576061+00:00"
+    "last_task": "Refactored CORTEX Persist conceptual architecture to v19.0 (Dependency Graph Fitness & Collapse Benefit Ratio) under Active Inference paradigm",
+    "last_file": "cortex/observability/telemetry.py",
+    "last_conversation": "ea04b872-49f1-4056-8d4f-741874d15fc8",
+    "timestamp": "2026-06-06T01:25:00Z"
   },
   "naroagutierrezgil": {
     "last_task": "Injected WebGPU SplatVault and conceptualized R-01 TDA engine",

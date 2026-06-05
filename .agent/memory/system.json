@@ -2,7 +2,7 @@
   "meta": {
     "version": "3.1",
     "codename": "CORTEX",
-    "description": "Sistema nervioso persistente de MOSKV-1 \u2014 memoria por proyecto + sistema global",
+    "description": "Sistema nervioso persistente de MOSKV-1 — memoria por proyecto + sistema global",
     "platform": {
       "ide": "Antigravity 1.16.5 (Google DeepMind, basado en VS Code OSS)",
       "model": "Claude Opus 4.6 (Thinking)",
@@ -11,39 +11,39 @@
       "nota": "Antigravity = coche, Claude Opus = motor, MOSKV-1 = piloto entrenado por Borja"
     },
     "created": "2026-02-12T13:24:00+01:00",
-    "last_updated": "2026-05-25T01:36:00Z",
+    "last_updated": "2026-06-06T01:25:00Z",
     "last_updated_by": "MOSKV-1",
     "schema_version": "3.1",
     "migrated_from": "context.json v2.1"
   },
   "operator": {
-    "name": "Borja Fern\u00e1ndez Angulo",
+    "name": "Borja Fernández Angulo",
     "alias": "Borja Moskv",
-    "base": "Bilbao / Pa\u00eds Vasco",
+    "base": "Bilbao / País Vasco",
     "profile": "Desarrollador, DJ/productor techno, artista digital, investigador blockchain",
-    "philosophy": "Industrial Noir \u2014 est\u00e9tica oscura, minimalista, t\u00e9cnica",
+    "philosophy": "Industrial Noir — estética oscura, minimalista, técnica",
     "web": "borjamoskv.com",
     "slogan": "Si algo no es accesible, no es bello",
-    "best_friend": "Patxi (cumplea\u00f1os: 14 febrero)"
+    "best_friend": "Patxi (cumpleaños: 14 febrero)"
   },
   "preferences": {
-    "language": "espa\u00f1ol (c\u00f3digo y nombres t\u00e9cnicos en ingl\u00e9s)",
-    "aesthetic": "Industrial Noir \u2014 BLUE YLN-LM, verde l\u00e1ser, rojo sangre",
-    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petici\u00f3n expl\u00edcita.",
-    "frameworks_python": "Sin frameworks pesados. logging est\u00e1ndar, async/await, python-dotenv.",
+    "language": "español (código y nombres técnicos en inglés)",
+    "aesthetic": "Industrial Noir — BLUE YLN-LM, verde láser, rojo sangre",
+    "frameworks_web": "Vanilla JS preferido. Vite si necesita bundler. No TailwindCSS salvo petición explícita.",
+    "frameworks_python": "Sin frameworks pesados. logging estándar, async/await, python-dotenv.",
     "frameworks_native": "SwiftUI para macOS.",
-    "fonts": "Inter, Roboto, Outfit \u2014 nunca defaults del navegador.",
+    "fonts": "Inter, Roboto, Outfit — nunca defaults del navegador.",
     "deploy_confirmation": true,
     "mobile_first": true,
     "microanimations": "obligatorias en toda UI",
-    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QU\u00c9, no el QU\u00c9.",
+    "code_style": "Nombres claros > comentarios. Si comentas, explica el POR QUÉ, no el QUÉ.",
     "tips": {
       "enabled": true,
       "context_adaptive": true,
       "loves_cognitive_science": true,
       "loves_serendipity": true
     },
-    "external_code_rule": "Siempre evaluar c\u00f3digo externo antes de implementar: qu\u00e9 mola + qu\u00e9 ajustar\u00eda"
+    "external_code_rule": "Siempre evaluar código externo antes de implementar: qué mola + qué ajustaría"
   },
   "ecosystem": {
     "root_path": "~/game/",
@@ -54,11 +54,11 @@
       "videoclip-generator",
       "cortex"
     ],
-    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersi\u00f3n. Fortaleza: n\u00facleo IA (Swarm + Centauro) unifica todo."
+    "diagnosis": "17 prototipos sin terminar. Mayor riesgo: dispersión. Fortaleza: núcleo IA (Swarm + Centauro) unifica todo."
   },
   "creative_context": {
     "music": {
-      "genre": "Techno \u2014 Industrial, dark, minimal",
+      "genre": "Techno — Industrial, dark, minimal",
       "tools": "Forja Sonora (prompts multi-layer), Suno, Udio, MusicGen",
       "aesthetic": "Industrial Noir sonic signature",
       "projects_active": [
@@ -69,25 +69,25 @@
       ]
     },
     "visual": {
-      "palette": "BLUE YLN-LM, verde l\u00e1ser (#00FF41), rojo sangre, negro profundo",
-      "style": "Dark, glassmorphism, microanimaciones, tipograf\u00eda premium",
+      "palette": "BLUE YLN-LM, verde láser (#00FF41), rojo sangre, negro profundo",
+      "style": "Dark, glassmorphism, microanimaciones, tipografía premium",
       "references": "The Way of Code (TWOC)"
     },
     "naroa": {
       "relation": "Ex-pareja, ahora amiga. Artista visual.",
-      "project": "naroa.online \u2014 portfolio art\u00edstico dedicado a su obra"
+      "project": "naroa.online — portfolio artístico dedicado a su obra"
     }
   },
   "decisions_global": [],
   "global_patterns": [
     {
       "id": "GP001",
-      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras \u2192 gc.collect() + hibernate idle >60s",
+      "pattern": "Spike = crecimiento >5% RAM/segundo en ventana de 10 muestras → gc.collect() + hibernate idle >60s",
       "source": "Agent Manager patterns"
     },
     {
       "id": "GP002",
-      "pattern": "Agent Pool max 4 simult\u00e1neos. Ciclo: Spawn \u2192 Active \u2192 Hibernate \u2192 Restore. Victim selection por prioridad.",
+      "pattern": "Agent Pool max 4 simultáneos. Ciclo: Spawn → Active → Hibernate → Restore. Victim selection por prioridad.",
       "source": "Agent Manager patterns"
     },
     {
@@ -97,12 +97,20 @@
     },
     {
       "id": "GP004",
-      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresi\u00f3n progresiva.",
+      "pattern": "Token budget 1M: system 5K, knowledge 10K, history 200K, code 700K, output 85K. Compresión progresiva.",
       "source": "Agent Manager patterns"
     }
   ],
   "knowledge_global": [],
   "sessions_log": [
+    {
+      "date": "2026-06-06T01:25:00Z",
+      "project": "cortex-persist",
+      "focus": "Active Inference Paradigm (v19.0)",
+      "duration_approx": "0.5h",
+      "key_output": "Crystallized L19 active inference & topological uncertainty collapse (CBR) models in persistence ontologies",
+      "conversation_id": "ea04b872-49f1-4056-8d4f-741874d15fc8"
+    },
     {
       "date": "2026-06-02T06:31:38+02:00",
       "project": "naroagutierrezgil",
@@ -124,21 +132,21 @@
       "project": "cortex_persist",
       "focus": "Autopoiesis C5-REAL API-Sentinel-OMEGA",
       "duration_approx": "1h",
-      "key_output": "Sovereign Agent materializado: Intuition Engine, 12-word wallet, Memoria Epis\u00f3dica",
+      "key_output": "Sovereign Agent materializado: Intuition Engine, 12-word wallet, Memoria Episódica",
       "conversation_id": "6151a176-81d5-4b2f-a3b5-2876fd9d20f1"
     },
     {
       "date": "2026-06-02T02:22:00+02:00",
       "project": "cortex",
-      "focus": "Exerg\u00eda arquitect\u00f3nica y perfil DIOS",
+      "focus": "Exergía arquitectónica y perfil DIOS",
       "duration_approx": "0.5h",
-      "key_output": "Cristalizaci\u00f3n del mapa exerg\u00e9tico y l\u00edmites del agente.",
+      "key_output": "Cristalización del mapa exergético y límites del agente.",
       "conversation_id": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
     },
     {
       "date": "2026-06-01T03:46:17+02:00",
       "project": "cortex",
-      "focus": "Cristalizaci\u00f3n de paradigmas 2026",
+      "focus": "Cristalización de paradigmas 2026",
       "duration_approx": "<0.5h",
       "key_output": "4 conceptos inyectados en cortex.json",
       "conversation_id": "8b4e84a5-ad00-450c-a829-286b7fb69722"
@@ -194,7 +202,7 @@
     {
       "date": "2026-05-31T13:21:21Z",
       "project": "cortex-persist",
-      "focus": "Compilaci\u00f3n y Validaci\u00f3n",
+      "focus": "Compilación y Validación",
       "duration_approx": "0.5h",
       "key_output": "Build OK. Ruff y py_compile verificados.",
       "conversation_id": "75785400-ecf9-4b02-8c17-ab4a671dc707"
@@ -330,18 +338,10 @@
     {
       "date": "2026-05-29T04:35:50.201241",
       "project": "cortex-persist",
-      "focus": "Ingenier\u00eda Social / Despliegue Asim\u00e9trico",
+      "focus": "Ingeniería Social / Despliegue Asimétrico",
       "duration_approx": "1h",
-      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Cl\u00ednico)",
+      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Clínico)",
       "conversation_id": "8b8c980b-3e4e-4910-ad71-ea927ef7b711"
-    },
-    {
-      "date": "2026-05-28T02:25:00.972603Z",
-      "project": "cortex-persist",
-      "focus": "Agent SDK Migration",
-      "duration_approx": "1h",
-      "key_output": "Updated pyproject.toml to Antigravity v2, generated architectural Mermaid diagrams.",
-      "conversation_id": "22a5aec3-a34f-4e48-a6f2-1da88d0c6792"
     }
   ],
   "references": {
@@ -354,12 +354,12 @@
       {
         "name": "Mem0",
         "url": "https://mem0.ai",
-        "note": "L\u00edder en producci\u00f3n"
+        "note": "Líder en producción"
       },
       {
         "name": "A-MEM Paper",
         "url": "https://arxiv.org/pdf/2502.12110",
-        "note": "Sistema ag\u00e9ntico de memoria"
+        "note": "Sistema agéntico de memoria"
       }
     ]
   },
@@ -369,18 +369,18 @@
       "added": "2026-02-14"
     },
     {
-      "title": "Serendipidad dirigida \u2014 por qu\u00e9 los accidentes solo funcionan con contexto",
+      "title": "Serendipidad dirigida — por qué los accidentes solo funcionan con contexto",
       "added": "2026-02-14"
     },
     {
-      "title": "La barrera entre proyecto side y startup real \u2014 1 persona ajena que diga lo necesito",
+      "title": "La barrera entre proyecto side y startup real — 1 persona ajena que diga lo necesito",
       "added": "2026-02-14"
     },
     {
-      "title": "Si algo no es accesible, no es bello \u2014 manifiesto de marca personal",
+      "title": "Si algo no es accesible, no es bello — manifiesto de marca personal",
       "added": "2026-02-14",
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-02T06:31:38+02:00"
+  "last_updated": "2026-06-06T01:25:00Z"
 }
