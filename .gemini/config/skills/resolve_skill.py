@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""C5-REAL. Resolve skill to execution contract."""
+# C5-REAL
+"""Contract resolution."""
 
 from __future__ import annotations
 
@@ -18,12 +19,12 @@ SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidac
 
 
 def load_resolution() -> dict[str, Any]:
-    """Load resolution contract."""
+    """Load JSON."""
     return json.loads(RESOLUTION_FILE.read_text(encoding="utf-8"))
 
 
 def load_front_matter(skill_dir: Path) -> dict[str, Any]:
-    """Extract YAML front matter."""
+    """Extract YAML."""
     skill_md = skill_dir / "SKILL.md"
     text = skill_md.read_text(encoding="utf-8")
     parts = text.split("---", 2)
@@ -36,7 +37,7 @@ def load_front_matter(skill_dir: Path) -> dict[str, Any]:
 
 
 def infer_script(skill_dir: Path, manifest: dict[str, Any]) -> str | None:
-    """Resolve explicit/implicit script path deterministically."""
+    """Resolve path."""
     explicit = manifest.get("script")
     if explicit:
         return str(explicit)
@@ -53,7 +54,7 @@ def infer_script(skill_dir: Path, manifest: dict[str, Any]) -> str | None:
 
 
 def list_skill_dirs() -> list[Path]:
-    """Scan valid skill directories."""
+    """Scan dirs."""
     return sorted(
         path
         for path in ROOT.iterdir()
@@ -62,7 +63,7 @@ def list_skill_dirs() -> list[Path]:
 
 
 def resolve_skill(name: str, resolution: dict[str, Any]) -> dict[str, Any]:
-    """Map skill to execution payload."""
+    """Map payload."""
     skill_dir = ROOT / name
     if not skill_dir.is_dir():
         raise FileNotFoundError(f"Unknown skill directory: {name}")
@@ -141,7 +142,7 @@ def resolve_skill(name: str, resolution: dict[str, Any]) -> dict[str, Any]:
 
 
 def build_all_resolutions(resolution: dict[str, Any]) -> list[dict[str, Any]]:
-    """Batch resolve all skills."""
+    """Batch resolve."""
     resolved = [resolve_skill(skill_dir.name, resolution) for skill_dir in list_skill_dirs()]
     return sorted(resolved, key=lambda item: item["requested"].lower())
 
@@ -164,7 +165,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    """Execute resolution and emit JSON."""
+    """Emit JSON."""
     args = parse_args()
     if not args.name and not args.all:
         print("Provide a skill name or use --all.", file=sys.stderr)

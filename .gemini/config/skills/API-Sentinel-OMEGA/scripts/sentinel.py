@@ -1,4 +1,4 @@
-"""C5-REAL DECLARED"""
+"""C5-REAL"""
 import urllib.request
 import urllib.error
 import json
@@ -14,19 +14,17 @@ except ImportError:
     HAS_ETH_ACCOUNT = False
 
 class APISentinelOmega:
-    """C5-REAL REST/JSON API Router. Handles 429/Backoff."""
+    """C5-REAL API Router"""
     def __init__(self, agent_name="API-Sentinel-Ω", max_retries=3):
         self.agent_name = agent_name
         self.max_retries = max_retries
-        print(f">>> [C5-REAL] {self.agent_name} INICIALIZADO")
+        print(f"[{self.agent_name}] INIT")
         
-        # Sovereign Wallet
         self.wallet_address = None
         self._pk = None
         self.mnemonic = None
         if HAS_ETH_ACCOUNT:
             Account.enable_unaudited_hdwallet_features()
-            # Zero-plaintext env read
             self.mnemonic = os.environ.get("CORTEX_SOVEREIGN_MNEMONIC")
             self._pk = os.environ.get("CORTEX_SOVEREIGN_PK")
             
@@ -36,15 +34,14 @@ class APISentinelOmega:
             elif self._pk:
                 acct = Account.from_key(self._pk)
             else:
-                print(f"[{self.agent_name}] 🔑 No PK/Mnemonic in env. Generando Wallet Efímera (BIP-39)...")
+                print(f"[{self.agent_name}] Gen BIP-39 wallet")
                 acct, self.mnemonic = Account.create_with_mnemonic()
                 self._pk = acct.key.hex()
-                print(f"[{self.agent_name}] 📜 Semilla (12 Palabras): {self.mnemonic}")
+                print(f"[{self.agent_name}] Mnemonic: {self.mnemonic}")
                 
             self.wallet_address = acct.address
-            print(f"[{self.agent_name}] 💼 Sovereign Wallet Activa: {self.wallet_address}")
+            print(f"[{self.agent_name}] Wallet: {self.wallet_address}")
             
-        # Registry Path
         self.registry_path = os.path.join(os.path.dirname(__file__), "api_registry.json")
         self.registry = self._load_registry()
 
@@ -60,51 +57,50 @@ class APISentinelOmega:
     def _save_registry(self):
         with open(self.registry_path, "w") as f:
             json.dump(self.registry, f, indent=2)
-        print(f"[{self.agent_name}] 💾 Memoria C5-REAL actualizada (Registry Cristalizado).")
+        print(f"[{self.agent_name}] Registry saved")
 
     def execute_get(self, url: str, headers: dict = None) -> dict:
         if headers is None:
             safe_name = self.agent_name.replace("Ω", "OMEGA")
-            headers = {"User-Agent": f"CORTEX/{safe_name} (Sovereign Daemon)"}
+            headers = {"User-Agent": f"CORTEX/{safe_name}"}
             
         req = urllib.request.Request(url, headers=headers)
         
         for attempt in range(1, self.max_retries + 1):
             try:
-                print(f"[{self.agent_name}] GET -> {url} (Intento {attempt}/{self.max_retries})")
+                print(f"[{self.agent_name}] GET -> {url} ({attempt}/{self.max_retries})")
                 with urllib.request.urlopen(req) as response:
                     if response.status == 200:
-                        print(f"[{self.agent_name}] ✅ C5-REAL Handshake (200 OK)")
+                        print(f"[{self.agent_name}] 200 OK")
                         return json.loads(response.read())
             except urllib.error.HTTPError as e:
                 if e.code == 429:
                     wait_time = 2 ** attempt
-                    print(f"[{self.agent_name}] ⚠️ Rate Limit (429). Exponential Backoff: {wait_time}s...")
+                    print(f"[{self.agent_name}] 429 Backoff: {wait_time}s")
                     time.sleep(wait_time)
                 else:
-                    print(f"[{self.agent_name}] ❌ HTTP Error {e.code}: {e.reason}")
+                    print(f"[{self.agent_name}] HTTP {e.code}: {e.reason}")
                     break
             except urllib.error.URLError as e:
-                print(f"[{self.agent_name}] ❌ URL Error: {e.reason}")
+                print(f"[{self.agent_name}] URL Error: {e.reason}")
                 break
             except Exception as e:
-                print(f"[{self.agent_name}] ❌ Fatal Error: {str(e)}")
+                print(f"[{self.agent_name}] Error: {str(e)}")
                 break
                 
-        print(f"[{self.agent_name}] ❌ Max retries alcanzado o error irrecuperable.")
+        print(f"[{self.agent_name}] Failed")
         return {}
 
     def execute_post(self, url: str, payload: dict, headers: dict = None) -> dict:
         if headers is None:
             safe_name = self.agent_name.replace("Ω", "OMEGA")
             headers = {
-                "User-Agent": f"CORTEX/{safe_name} (Sovereign Daemon)",
+                "User-Agent": f"CORTEX/{safe_name}",
                 "Content-Type": "application/json"
             }
         
-        # Zero-Plaintext payload scan
         if "sk_" in json.dumps(payload):
-            print(f"[{self.agent_name}] 🛑 ALERTA: Detectada posible API Key en el payload. Abortando por higiene Zero-Plaintext.")
+            print(f"[{self.agent_name}] ABORT: sk_ detected")
             return {}
 
         data = json.dumps(payload).encode('utf-8')
@@ -112,19 +108,19 @@ class APISentinelOmega:
         
         for attempt in range(1, self.max_retries + 1):
             try:
-                print(f"[{self.agent_name}] POST -> {url} (Intento {attempt}/{self.max_retries})")
+                print(f"[{self.agent_name}] POST -> {url} ({attempt}/{self.max_retries})")
                 with urllib.request.urlopen(req) as response:
                     if response.status in [200, 201, 202]:
-                        print(f"[{self.agent_name}] ✅ C5-REAL Mutación Exitosa ({response.status})")
+                        print(f"[{self.agent_name}] {response.status}")
                         return json.loads(response.read())
             except Exception as e:
-                print(f"[{self.agent_name}] ⚠️ Error: {str(e)}")
+                print(f"[{self.agent_name}] Error: {str(e)}")
                 time.sleep(2 ** attempt)
 
         return {}
 
     def _simulate_llm_routing(self, intent: str) -> dict:
-        """C5-REAL LLM Inference Router. Deduces endpoint/params from intent."""
+        """C5-REAL"""
         intent_lower = intent.lower()
         if "crypto" in intent_lower or "precio" in intent_lower or "bitcoin" in intent_lower:
             return {
@@ -132,13 +128,11 @@ class APISentinelOmega:
                 "method": "GET"
             }
         elif "nft" in intent_lower or "coleccion" in intent_lower or "token no fungible" in intent_lower:
-            # SOTA NFT metadata fetch
             return {
                 "url": "https://api.coingecko.com/api/v3/nfts/list?per_page=3",
                 "method": "GET"
             }
         elif "wallet" in intent_lower or "0x" in intent_lower or "balance" in intent_lower or "cartera" in intent_lower:
-            # Address extraction, Vitalik fallback
             match = re.search(r"0x[a-fA-F0-9]{40}", intent)
             address = match.group(0) if match else "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
             return {
@@ -162,47 +156,41 @@ class APISentinelOmega:
                 "method": "GET"
             }
         else:
-            # Fallback searchMCP integration point
-            print(f"[{self.agent_name}] 🔍 Intuición: Endpoint desconocido. Consultando índice global (Fallback Search)...")
+            print(f"[{self.agent_name}] Fallback Search")
             return {
                 "url": "https://api.github.com/zen",
                 "method": "GET"
             }
 
     def intuit_and_fetch_api(self, intent: str, payload: dict = None) -> dict:
-        """C5-REAL Intuition Engine. Derives API from intent, executes autonomously."""
-        print(f"[{self.agent_name}] 🧠 INTUICIÓN INICIADA: '{intent}'")
+        """C5-REAL"""
+        print(f"[{self.agent_name}] INTENT: '{intent}'")
         
-        # 1. Check Episodic Memory
         intent_lower = intent.lower()
         if intent_lower in self.registry:
-            print(f"[{self.agent_name}] ⚡ Ouroboros Trigger: Endpoint recuperado de la memoria episódica.")
+            print(f"[{self.agent_name}] Cache hit")
             route_plan = self.registry[intent_lower]
         else:
-            # 2. Simulate LLM Routing
             route_plan = self._simulate_llm_routing(intent)
-            # 3. Crystallize Memory
             self.registry[intent_lower] = route_plan
             self._save_registry()
             
         url = route_plan["url"]
         method = route_plan["method"]
-        print(f"[{self.agent_name}] 🎯 API Deducida: {url} [{method}]")
+        print(f"[{self.agent_name}] API: {url} [{method}]")
         
         if method == "GET":
             return self.execute_get(url)
         elif method == "POST":
-            # Use route_plan payload if available (JSON-RPC)
             final_payload = route_plan.get("payload", payload if payload else {})
             return self.execute_post(url, final_payload)
-        
         
         return {}
 
     def sign_payload(self, message: str) -> dict:
-        """C5-REAL Cryptographic Signer. Proof of sovereignty."""
+        """C5-REAL"""
         if not HAS_ETH_ACCOUNT or not self._pk:
-            return {"error": "Wallet no inicializada o falta eth_account."}
+            return {"error": "Wallet not initialized."}
         
         from eth_account.messages import encode_defunct
         msg = encode_defunct(text=message)
@@ -216,14 +204,10 @@ class APISentinelOmega:
 
 if __name__ == "__main__":
     sentinel = APISentinelOmega()
-    print("Demostración de Intuición Activa C5-REAL:\n")
     
     intent = "Dime el balance de la wallet 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 (vitalik.eth)"
     data = sentinel.intuit_and_fetch_api(intent)
-    
-    print("\nRespuesta Consolidada:")
-    print(json.dumps(data, indent=2) if data else "[Error en la extracción]")
+    print(json.dumps(data, indent=2) if data else "[Error]")
 
-    print("\n--- Demostración de Soberanía Criptográfica ---")
-    sig = sentinel.sign_payload("Mutación de Estado C5-REAL autorizada por CORTEX.")
+    sig = sentinel.sign_payload("C5-REAL")
     print(json.dumps(sig, indent=2))

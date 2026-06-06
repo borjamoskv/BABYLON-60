@@ -13,7 +13,7 @@ def extract_b2b_dorks(target_leads: int, output_file: str):
         "Content-Type": "application/x-www-form-urlencoded"
     }
     
-    # Target: Founder/CEO/CTO + Web3/AI/Zk + Email
+    # TARGET: Founder|CEO|CTO + Web3|AI|Zk + Email
     dork_query = 'site:linkedin.com/in/ ("Founder" OR "CEO" OR "CTO") ("Web3" OR "AI" OR "Zk") ("@gmail.com" OR "@protonmail.com")'
     
     print(f"PAYLOAD: {dork_query}")
@@ -25,9 +25,9 @@ def extract_b2b_dorks(target_leads: int, output_file: str):
         response.raise_for_status()
         html_content = response.text
         
-        # Check DDG CAPTCHA
+        # DDG_CAPTCHA_CHECK
         if "anomaly-modal__title" in html_content:
-            print("WARN: DDG CAPTCHA. INJECTING SIMULATED LEADS [C5-REAL].")
+            print("WARN: DDG_CAPTCHA. MOCK_INJECTION [C4-SIM]")
             extracted_leads = [
                 {
                     "Name_Snippet": "Vitalik Buterin - Founder @ Ethereum",

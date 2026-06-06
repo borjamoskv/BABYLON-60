@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # C5-REAL
-"""Regenerate inventory artifacts."""
+"""Artifact compilation."""
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ CATALOG_JSON = ROOT / "skills_catalog.json"
 
 
 def iter_skill_dirs() -> list[Path]:
-    """Return concrete skill directories."""
+    """Yield valid skill dirs."""
     return sorted(
         path
         for path in ROOT.iterdir()
@@ -31,7 +31,7 @@ def iter_skill_dirs() -> list[Path]:
 
 
 def load_front_matter(skill_dir: Path) -> dict[str, Any]:
-    """Load SKILL.md YAML front matter."""
+    """Extract SKILL.md YAML."""
     skill_md = skill_dir / "SKILL.md"
     text = skill_md.read_text(encoding="utf-8")
     parts = text.split("---", 2)
@@ -44,7 +44,7 @@ def load_front_matter(skill_dir: Path) -> dict[str, Any]:
 
 
 def build_inventory() -> dict[str, Any]:
-    """Build inventory payload."""
+    """Compile inventory."""
     resolution = json.loads(RESOLUTION_FILE.read_text(encoding="utf-8"))
     skill_dirs = iter_skill_dirs()
 
@@ -108,7 +108,7 @@ def build_inventory() -> dict[str, Any]:
 
 
 def render_inventory_markdown(inventory: dict[str, Any]) -> str:
-    """Render Markdown inventory."""
+    """Render MD."""
     totals = inventory["totals"]
     lines: list[str] = []
     lines.append("# Skills Inventory")
@@ -162,7 +162,7 @@ def render_inventory_markdown(inventory: dict[str, Any]) -> str:
 
 
 def main() -> int:
-    """Regenerate inventory artifacts."""
+    """Main execution."""
     inventory = build_inventory()
     resolution = load_resolution()
     catalog = sorted(
@@ -178,10 +178,7 @@ def main() -> int:
         json.dumps(catalog, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
-    print("SKILLS INVENTORY REBUILT")
-    print(f"- markdown: {INVENTORY_MD}")
-    print(f"- json: {INVENTORY_JSON}")
-    print(f"- catalog: {CATALOG_JSON}")
+    print(f"C5-REAL: REBUILT {INVENTORY_MD.name} | {INVENTORY_JSON.name} | {CATALOG_JSON.name}")
     return 0
 
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""C5-REAL
-Validate local Antigravity skills tree.
+# C5-REAL
+"""
 Invariants:
-1. Parseable YAML in SKILL.md.
-2. Local `script:` exists.
-3. skills_resolution.json matches tree.
+- SKILL.md: YAML valid
+- Target: script exists
+- State: sync
 """
 
 from __future__ import annotations
@@ -24,7 +24,6 @@ CATALOG_FILE = ROOT / "skills_catalog.json"
 
 
 def load_front_matter(skill_md: Path) -> dict[str, Any]:
-    """Load YAML front matter."""
     text = skill_md.read_text(encoding="utf-8")
     if not text.startswith("---"):
         raise ValueError("missing front matter opener")
@@ -40,7 +39,6 @@ def load_front_matter(skill_md: Path) -> dict[str, Any]:
 
 
 def iter_skill_dirs(root: Path) -> list[Path]:
-    """Return valid skill directories."""
     return sorted(
         path
         for path in root.iterdir()
@@ -49,7 +47,6 @@ def iter_skill_dirs(root: Path) -> list[Path]:
 
 
 def validate_skill_manifests(skill_dirs: list[Path]) -> list[str]:
-    """Validate YAML and script targets."""
     errors: list[str] = []
 
     for skill_dir in skill_dirs:
@@ -74,7 +71,6 @@ def validate_skill_manifests(skill_dirs: list[Path]) -> list[str]:
 
 
 def validate_resolution_contract(skill_dirs: list[Path]) -> list[str]:
-    """Validate resolution matches tree."""
     errors: list[str] = []
 
     if not RESOLUTION_FILE.exists():
@@ -128,7 +124,6 @@ def validate_resolution_contract(skill_dirs: list[Path]) -> list[str]:
 
 
 def validate_catalog_snapshot() -> list[str]:
-    """Validate catalog vs resolution."""
     if not CATALOG_FILE.exists():
         return ["skills_catalog.json: missing"]
 
@@ -140,7 +135,6 @@ def validate_catalog_snapshot() -> list[str]:
 
 
 def main() -> int:
-    """Run validation."""
     skill_dirs = iter_skill_dirs(ROOT)
     errors = [
         *validate_skill_manifests(skill_dirs),

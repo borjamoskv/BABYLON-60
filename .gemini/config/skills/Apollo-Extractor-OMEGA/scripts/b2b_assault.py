@@ -1,4 +1,4 @@
-# C5-REAL
+# Level: C4-SIM (Local Payload Generation)
 import json
 import sys
 import os

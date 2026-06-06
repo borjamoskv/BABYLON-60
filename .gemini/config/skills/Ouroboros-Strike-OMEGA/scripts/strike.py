@@ -1,7 +1,5 @@
-"""
-C5-REAL
-Ouroboros-Strike-OMEGA Asymmetric Bounty Engine
-"""
+# C5-REAL
+# Ouroboros-Strike-OMEGA
 import os
 import sys
 import json
@@ -21,7 +19,7 @@ except ImportError:
 
 
 def fetch_contract_source(address: str) -> str:
-    # C5-REAL: Etherscan RPC call
+    # C5-REAL: ETHERSCAN_RPC
     api_key = os.environ.get("ETHERSCAN_API_KEY", "")
     url = f"https://api.etherscan.io/v2/api?chainid=1&module=contract&action=getsourcecode&address={address}&apikey={api_key}"
     print(f"C5-REAL: FETCH_SOURCE {address}")
@@ -36,7 +34,7 @@ def fetch_contract_source(address: str) -> str:
         return ""
 
 def scan_memepool_and_tvl(iteration: int = 1):
-    print("C5-REAL: SCAN_INIT")
+    print("C4-SIM: SCAN_INIT")
     time.sleep(1)
     
     targets = [
