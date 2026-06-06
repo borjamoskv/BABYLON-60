@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "id": "cortexpersist-com",
+    "name": "cortexpersist-com",
+    "path": "$CORTEX_ROOT/10_PROJECTS/cortexpersist-com",
+    "stack": [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Python"
+    ],
+    "created": "2026-06-06T11:17:15+02:00",
+    "last_touched": "2026-06-06T11:17:15+02:00"
+  },
+  "status": "active",
+  "health": "green",
+  "health_score": 100,
+  "ghost": {
+    "last_task": "Resolve OMEGA-EVAL recall deficit for Strike-OMEGA auditor (H-STRIKE-OMEGA-001 alive)",
+    "last_file": "CARS/evaluation/state_simulator.py",
+    "last_conversation": "98031ed1-8885-4324-95ce-13f0c8da9321",
+    "timestamp": "2026-06-06T11:17:15+02:00"
+  },
+  "error_count": 0,
+  "known_issues": [],
+  "pending_tasks": [
+    "Refinar las respuestas visuales y variaciones del HUD según el héroe elegido",
+    "Persistir el progreso y la selección de héroe mediante CORTEX v4 DB local"
+  ],
+  "recent_changes": [
+    "[2026-06-06T11:17:15+02:00] fix(cars): correct Uniswap reserves swap direction in ASM simulation to drive spot price upward for oracle manipulation validation, achieving 100% recall.",
+    "[2026-06-06T11:17:15+02:00] docs(walkthrough): update walkthrough metrics to 100% precision and 100% recall for H-STRIKE-OMEGA-001 verification."
+  ],
+  "decisions": [
+    "Simular dinámicamente reservas de Uniswap mediante un ASM local (C5-REAL) para comprobar la viabilidad de la manipulación de oráculo de precios."
+  ],
+  "knowledge": [],
+  "bridges": [],
+  "runbook": {
+    "dev": "npm run dev",
+    "build": "npm run build",
+    "test": "npm run test",
+    "deploy": "",
+    "health": ""
+  }
+}

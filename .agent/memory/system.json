@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-06T11:17:15+02:00",
+      "project": "cortexpersist-com",
+      "focus": "OMEGA-EVAL Recall Deficit & Swap Math Correction",
+      "duration_approx": "0.5h",
+      "key_output": "Corrected Uniswap reserves swap direction in state_simulator.py to resolve the recall deficit (H-STRIKE-OMEGA-001 alive)",
+      "conversation_id": "98031ed1-8885-4324-95ce-13f0c8da9321"
+    },
+    {
       "date": "2026-06-06T01:30:31.952306Z",
       "project": "cortex-persist / borjamoskv-site",
       "focus": "C8 Reputation Metabolism & Substack Ingestion",
@@ -334,14 +342,6 @@
       "duration_approx": "1.5h",
       "key_output": "Rebuilt cortex_rs (Python 3.14.4 FFI) & resolved Ruff formatting/typing issues",
       "conversation_id": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
-    },
-    {
-      "date": "2026-05-29T05:13:46",
-      "project": "borjamoskv-web",
-      "focus": "WebGL GLSL Shaders & CSS overrides",
-      "duration_approx": "1h",
-      "key_output": "Ashima Simplex Noise custom vertex/fragment shaders and scroll animations",
-      "conversation_id": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-06T01:30:31.952306Z"
+  "last_updated": "2026-06-06T11:17:15+02:00"
 }
