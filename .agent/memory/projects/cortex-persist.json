@@ -10,20 +10,24 @@
       "Rust"
     ],
     "created": "2026-05-26T22:49:50.419234+00:00",
-    "last_touched": "2026-06-06T01:25:00Z"
+    "last_touched": "2026-06-06T01:30:31.952306Z"
   },
   "status": "shipped",
   "health": "green",
   "health_score": 100,
   "ghost": {
-    "last_task": "Refactored CORTEX Persist conceptual architecture to v19.0 (Dependency Graph Fitness & Collapse Benefit Ratio) under Active Inference paradigm",
-    "last_file": "cortex/observability/telemetry.py",
-    "last_conversation": "ea04b872-49f1-4056-8d4f-741874d15fc8",
-    "timestamp": "2026-06-06T01:25:00Z"
+    "last_task": "Metabolismo Evolutivo de Reputación C8 (BeliefObjects)",
+    "last_file": "cortex/c8_reputation_metabolism.py",
+    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
+    "timestamp": "2026-06-06T01:30:31.952306Z"
   },
   "known_issues": [],
-  "pending_tasks": [],
+  "pending_tasks": [
+    "Implementar persistencia en ledger de las mutaciones de BeliefObjects de reputación"
+  ],
   "recent_changes": [
+    "Añadida arquitectura de metabolismo para forjar BeliefObjects empíricos desde extensiones (DOM)",
+    "Implementado C8_REPUTATION_METABOLISM.md y c8_reputation_metabolism.py",
     "[2026-06-06T01:25:00Z] feat(observability): integrate audit correlation and telemetry hooks for metadata tracing",
     "[2026-06-02T02:54:14.369253+00:00] feat(apollo): pivot to DuckDuckGo HTML parsing and build P2P payload generator",
     "Compilación de python3 y ruff pass exitoso sobre x100_cortex_server.py",
@@ -31,11 +35,10 @@
     "Implemented genetic parameter drift in mutator.rs",
     "Implemented heuristic_optimization in mutator.rs",
     "Purged technical debt via LEA-Omega (clippy fixes)",
-    "Forged Arco IV (robalas_arco_2.md)",
-    "Forged Epilogue (robalas_arco_epilogo.md)",
-    "fix(cortex_rs): implement global mmap registry via OnceLock to resolve PyO3 segfaults"
+    "Forged Arco IV (robalas_arco_2.md)"
   ],
   "decisions": [
+    "Reputación no es constante: muta a C8 BeliefObject evolutivo basado en acumulación de evidencia",
     "Crystallize genetic drift directly in Rust (C5-REAL) for performance.",
     "Agentes CORTEX ejecutados como funciones puras en WASMtime para cero latencia estocástica.",
     "Event-sourcing adoptado como memoria inmutable de conflicto (Redpanda) en vez de estado en memoria.",

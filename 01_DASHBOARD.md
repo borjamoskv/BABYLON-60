@@ -5,6 +5,8 @@
 ## System & Hardening
 | Title | ID | Walkthrough | Status |
 |---|---|---|---|
+| 🏆 HITO: CORTEX-Persist C8 Governance Boundary | [`ea04b872`](file://$CORTEX_ROOT/.gemini/antigravity/brain/ea04b872-49f1-4056-8d4f-741874d15fc8) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/ea04b872-49f1-4056-8d4f-741874d15fc8/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
+| 🏆 HITO: Ultramap-Ω Sovereign Visualizer | [`7975c378`](file://$CORTEX_ROOT/.gemini/antigravity/brain/7975c378-29af-4d4c-b2c0-26c39b8caf3a) | [✅ walkthrough.md](file://$CORTEX_ROOT/.gemini/antigravity/brain/7975c378-29af-4d4c-b2c0-26c39b8caf3a/walkthrough.md) | 🟢 `C5-REAL` |
 | CORTEX Organization Task | [`9f644366`](file://$CORTEX_ROOT/.gemini/antigravity/brain/9f644366-9282-4852-8bd6-54a74045fa69) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/9f644366-9282-4852-8bd6-54a74045fa69/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | Skills Audit & Consolidation | [`d4a671fc`](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/d4a671fc-9cb0-490e-b6fd-9185214abebb/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |
 | 🏆 HITO: Sovereign Wallet & Autopoiesis API-Sentinel-Ω | [`6151a176`](file://$CORTEX_ROOT/.gemini/antigravity/brain/6151a176-81d5-4b2f-a3b5-2876fd9d20f1) | [📝 transcript](file://$CORTEX_ROOT/.gemini/antigravity/brain/6151a176-81d5-4b2f-a3b5-2876fd9d20f1/.system_generated/logs/transcript.jsonl) | 🟢 `C5-REAL` |

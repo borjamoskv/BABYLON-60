@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-06T01:30:31.952306Z",
+      "project": "cortex-persist / borjamoskv-site",
+      "focus": "C8 Reputation Metabolism & Substack Ingestion",
+      "duration_approx": "1h",
+      "key_output": "Transición a Reputación Evolutiva (BeliefObject) + 26 Posts importados",
+      "conversation_id": "8e11976a-f3b7-41da-b634-861c8980ca0f"
+    },
+    {
       "date": "2026-06-06T01:25:00Z",
       "project": "cortex-persist",
       "focus": "Active Inference Paradigm (v19.0)",
@@ -334,14 +342,6 @@
       "duration_approx": "1h",
       "key_output": "Ashima Simplex Noise custom vertex/fragment shaders and scroll animations",
       "conversation_id": "7c2b5d9e-b468-4aac-a5b8-9e8ac24dbe4d"
-    },
-    {
-      "date": "2026-05-29T04:35:50.201241",
-      "project": "cortex-persist",
-      "focus": "Ingeniería Social / Despliegue Asimétrico",
-      "duration_approx": "1h",
-      "key_output": "paper_clinico_beatriz.md (Caballo de Troya Clínico)",
-      "conversation_id": "8b8c980b-3e4e-4910-ad71-ea927ef7b711"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-06T01:25:00Z"
+  "last_updated": "2026-06-06T01:30:31.952306Z"
 }

@@ -12,16 +12,16 @@
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
   },
   "cortex-persist": {
-    "last_task": "Refactored CORTEX Persist conceptual architecture to v19.0 (Dependency Graph Fitness & Collapse Benefit Ratio) under Active Inference paradigm",
-    "last_file": "cortex/observability/telemetry.py",
-    "last_conversation": "ea04b872-49f1-4056-8d4f-741874d15fc8",
-    "timestamp": "2026-06-06T01:25:00Z"
+    "last_task": "Metabolismo Evolutivo C8",
+    "last_file": "cortex/c8_reputation_metabolism.py",
+    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
+    "timestamp": "2026-06-06T01:30:31.952306Z"
   },
   "borjamoskv-web": {
-    "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
-    "last_file": "takedown_dossier_pau_garcia_mila.md",
-    "timestamp": "2026-06-01T02:30:56+02:00",
-    "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
+    "last_task": "Migración de Substack a MDX",
+    "last_file": "src/content/articles/substack-mafia-autopsia-estructural.mdx",
+    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
+    "timestamp": "2026-06-06T01:30:31.952306Z"
   },
   "agents-archi": {
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
@@ -60,5 +60,11 @@
     "last_file": "src/components/SplatVault.tsx",
     "last_conversation": "4c9d93e5-3197-4c12-a5f4-6cbab8e79ef5",
     "timestamp": "2026-06-02T06:31:38+02:00"
+  },
+  "smoke-detector-extension": {
+    "last_task": "Filtro Substack & Listas CORTEX",
+    "last_file": "content.js",
+    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
+    "timestamp": "2026-06-06T01:30:31.952306Z"
   }
 }
