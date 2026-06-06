@@ -7,8 +7,6 @@
 /*
 
 # === ALLOW ONLY PROJECT DIRECTORIES ===
-!/Music/
-!/COLD_STORAGE/
 !/.gitignore
 
 # === INSIDE PROJECTS: Standard ignores ===
