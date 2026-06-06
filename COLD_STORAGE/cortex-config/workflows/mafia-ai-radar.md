@@ -1,9 +1,8 @@
 ---
-description: "Protocolo automatizado C5-REAL para extraer grafos de recomendación, medir concentración anómala y filtrar SOTA mediante inferencia causal estructural."
+description: Protocolo automatizado C5-REAL para extraer grafos de recomendación, medir concentración anómala ...
 workflow: mafia-ai-radar
 expected_duration_min: 30
 ---
-
 # /Mafia-AI-Radar (C5-REAL Structural Protocol)
 
 **Objetivo:** Medir empíricamente la concentración anómala de recomendaciones cruzadas en ecosistemas de creadores/newsletters y detectar asimetrías entre visibilidad y output real (Alpha).

@@ -1,8 +1,7 @@
 ---
 name: production-boundary
-description: CORTEX C5-REAL Production Boundary Protocol. Congela la arquitectura y activa la observabilidad para transicionar de iteración a explotación.
+description: CORTEX C5-REAL Production Boundary Protocol. Congela la arquitectura y activa la observabilidad p...
 ---
-
 # 🛑 PRODUCTION BOUNDARY PROTOCOL (CORTEX)
 
 > "Se deja de iterar cuando el sistema deja de mejorar en el mundo real y solo mejora en el plano de diseño."

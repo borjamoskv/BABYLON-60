@@ -1,9 +1,8 @@
 ---
-description: "Protocolo de consolidación absoluta. 50 agentes operando en 5 bloques paralelos de 10 para procesar, verificar y cristalizar cualquier volumen de datos o código en C5-REAL."
+description: Protocolo de consolidación absoluta. 50 agentes operando en 5 bloques paralelos de 10 para proces...
 workflow: consolidacion-masiva
 expected_duration_min: 60
 ---
-
 # CONSOLIDACIÓN MASIVA-Ω (50 AGENTES, 5 BLOQUES)
 
 Workflow de fuerza bruta determinista para consolidar "lo que sea" (bases de datos enteras, repositorios legados, ingestas masivas de SOTA, o reestructuraciones arquitectónicas). Emplea 5 bloques de 10 agentes en ejecución paralela para minimizar latencia y maximizar la densidad del output cristalizado (C5-REAL).

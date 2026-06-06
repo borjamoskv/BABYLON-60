@@ -150,6 +150,16 @@
     "runnable": false
   },
   {
+    "requested": "Browser-CDP-Automation-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Browser-CDP-Automation-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Browser-CDP-Automation-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Browser-CDP-Automation-OMEGA/SKILL.md",
+    "script": "scripts/cdp_agent.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Browser-CDP-Automation-OMEGA/scripts/cdp_agent.py",
+    "runnable": true
+  },
+  {
     "requested": "C5-DEATH-OMEGA",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/C5-DEATH-OMEGA",

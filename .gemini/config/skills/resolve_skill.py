@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Resolve a local Antigravity skill name into its execution contract."""
+"""C5-REAL. Resolve skill to execution contract."""
 
 from __future__ import annotations
 
@@ -18,12 +18,12 @@ SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidac
 
 
 def load_resolution() -> dict[str, Any]:
-    """Load the machine-readable resolution contract."""
+    """Load resolution contract."""
     return json.loads(RESOLUTION_FILE.read_text(encoding="utf-8"))
 
 
 def load_front_matter(skill_dir: Path) -> dict[str, Any]:
-    """Load a skill manifest front matter block."""
+    """Extract YAML front matter."""
     skill_md = skill_dir / "SKILL.md"
     text = skill_md.read_text(encoding="utf-8")
     parts = text.split("---", 2)
@@ -36,7 +36,7 @@ def load_front_matter(skill_dir: Path) -> dict[str, Any]:
 
 
 def infer_script(skill_dir: Path, manifest: dict[str, Any]) -> str | None:
-    """Return the explicit script or infer a single local script deterministically."""
+    """Resolve explicit/implicit script path deterministically."""
     explicit = manifest.get("script")
     if explicit:
         return str(explicit)
@@ -53,7 +53,7 @@ def infer_script(skill_dir: Path, manifest: dict[str, Any]) -> str | None:
 
 
 def list_skill_dirs() -> list[Path]:
-    """Return the set of local skill directories."""
+    """Scan valid skill directories."""
     return sorted(
         path
         for path in ROOT.iterdir()
@@ -62,7 +62,7 @@ def list_skill_dirs() -> list[Path]:
 
 
 def resolve_skill(name: str, resolution: dict[str, Any]) -> dict[str, Any]:
-    """Resolve a single skill name into a stable execution contract."""
+    """Map skill to execution payload."""
     skill_dir = ROOT / name
     if not skill_dir.is_dir():
         raise FileNotFoundError(f"Unknown skill directory: {name}")
@@ -141,13 +141,13 @@ def resolve_skill(name: str, resolution: dict[str, Any]) -> dict[str, Any]:
 
 
 def build_all_resolutions(resolution: dict[str, Any]) -> list[dict[str, Any]]:
-    """Resolve every local skill directory into a stable summary."""
+    """Batch resolve all skills."""
     resolved = [resolve_skill(skill_dir.name, resolution) for skill_dir in list_skill_dirs()]
     return sorted(resolved, key=lambda item: item["requested"].lower())
 
 
 def parse_args() -> argparse.Namespace:
-    """Parse command-line arguments."""
+    """Parse args."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("name", nargs="?", help="Skill directory name to resolve")
     parser.add_argument(
@@ -164,7 +164,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> int:
-    """Resolve one or more skills and emit JSON."""
+    """Execute resolution and emit JSON."""
     args = parse_args()
     if not args.name and not args.all:
         print("Provide a skill name or use --all.", file=sys.stderr)

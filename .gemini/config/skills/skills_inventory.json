@@ -1,10 +1,10 @@
 {
   "updated_at": "2026-06-06",
   "totals": {
-    "directories": 34,
-    "yaml_ok": 34,
+    "directories": 35,
+    "yaml_ok": 35,
     "script_backed": 10,
-    "docs_only": 24,
+    "docs_only": 25,
     "missing_script_links": 0,
     "external_repo_refs": 0
   },
@@ -17,6 +17,7 @@
     "Antigravity-Github-Omega",
     "Autodidact-Research-OMEGA",
     "Autonomous-Audit-OMEGA",
+    "Browser-CDP-Automation-OMEGA",
     "C5-DEATH-OMEGA",
     "Cortex-Live-Broadcaster",
     "Cortex-Research-Loop-OMEGA",

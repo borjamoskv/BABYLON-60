@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Regenerate the local Antigravity skills inventory artifacts."""
+# C5-REAL
+"""Regenerate inventory artifacts."""
 
 from __future__ import annotations
 
@@ -21,7 +22,7 @@ CATALOG_JSON = ROOT / "skills_catalog.json"
 
 
 def iter_skill_dirs() -> list[Path]:
-    """Return the concrete skill directories that participate in the inventory."""
+    """Return concrete skill directories."""
     return sorted(
         path
         for path in ROOT.iterdir()
@@ -30,7 +31,7 @@ def iter_skill_dirs() -> list[Path]:
 
 
 def load_front_matter(skill_dir: Path) -> dict[str, Any]:
-    """Load YAML front matter from `SKILL.md`."""
+    """Load SKILL.md YAML front matter."""
     skill_md = skill_dir / "SKILL.md"
     text = skill_md.read_text(encoding="utf-8")
     parts = text.split("---", 2)
@@ -43,7 +44,7 @@ def load_front_matter(skill_dir: Path) -> dict[str, Any]:
 
 
 def build_inventory() -> dict[str, Any]:
-    """Build the machine-readable inventory payload."""
+    """Build inventory payload."""
     resolution = json.loads(RESOLUTION_FILE.read_text(encoding="utf-8"))
     skill_dirs = iter_skill_dirs()
 
@@ -107,7 +108,7 @@ def build_inventory() -> dict[str, Any]:
 
 
 def render_inventory_markdown(inventory: dict[str, Any]) -> str:
-    """Render the human-readable Markdown inventory."""
+    """Render Markdown inventory."""
     totals = inventory["totals"]
     lines: list[str] = []
     lines.append("# Skills Inventory")
@@ -116,17 +117,12 @@ def render_inventory_markdown(inventory: dict[str, Any]) -> str:
     lines.append("")
     lines.append("## Summary")
     lines.append("")
-    lines.append(f"- Total skill directories audited: `{totals['directories']}`")
-    lines.append(f"- Skill manifests with parseable YAML front matter: `{totals['yaml_ok']}`")
-    lines.append(f"- Script-backed skills: `{totals['script_backed']}`")
-    lines.append(f"- Documentation-only skills: `{totals['docs_only']}`")
-    lines.append(f"- Missing local script links in manifests: `{totals['missing_script_links']}`")
-    lines.append(
-        "- Residual references to "
-        "`$CORTEX_ROOT/30_CORTEX`, `compiled_skills`, or "
-        "`worktrees/sigint-monitor-fix`: "
-        f"`{totals['external_repo_refs']}`"
-    )
+    lines.append(f"- Dirs: `{totals['directories']}`")
+    lines.append(f"- YAML OK: `{totals['yaml_ok']}`")
+    lines.append(f"- Script-backed: `{totals['script_backed']}`")
+    lines.append(f"- Docs-only: `{totals['docs_only']}`")
+    lines.append(f"- Missing script links: `{totals['missing_script_links']}`")
+    lines.append(f"- Ext repo refs: `{totals['external_repo_refs']}`")
     lines.append("")
     lines.append("## Duplicate Clusters")
     lines.append("")
@@ -157,28 +153,16 @@ def render_inventory_markdown(inventory: dict[str, Any]) -> str:
     lines.append("")
     lines.append("## Next Decisions")
     lines.append("")
-    lines.append(
-        "1. Canonicalize duplicate clusters and decide whether alias directories "
-        "should remain human-readable markers or be removed entirely."
-    )
-    lines.append(
-        "2. Decide whether documentation-only skills are valid product surfaces "
-        "or should be marked archived/non-executable."
-    )
-    lines.append(
-        "3. Regenerate any external registry that consumes this tree so it matches "
-        "the repaired local manifests."
-    )
-    lines.append(
-        "4. Use `resolve_skill.py` and `validate_skills_tree.py` as the machine "
-        "entrypoints instead of scraping manifests ad hoc."
-    )
+    lines.append("1. Canonicalize duplicate clusters.")
+    lines.append("2. Archive docs-only skills.")
+    lines.append("3. Regenerate external registry.")
+    lines.append("4. Use `resolve_skill.py` and `validate_skills_tree.py`.")
     lines.append("")
     return "\n".join(lines)
 
 
 def main() -> int:
-    """Regenerate JSON and Markdown inventory artifacts."""
+    """Regenerate inventory artifacts."""
     inventory = build_inventory()
     resolution = load_resolution()
     catalog = sorted(

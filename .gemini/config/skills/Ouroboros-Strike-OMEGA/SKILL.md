@@ -1,27 +1,29 @@
 ---
 name: Ouroboros-Strike-OMEGA
-description: C5-REAL White-Hat Mass-Scale Bug Bounty / MEV Arbitrage Sniper Engine. Focuses on extracting extreme capital via protocol asymmetry.
+description: C5-REAL Mass-Scale Bug Bounty and MEV Arbitrage Sniper Engine
 ---
+# Ouroboros-Strike-OMEGA
 
-# 🐍 Ouroboros-Strike-OMEGA
+**Level:** C5-REAL (API/On-Chain Verified)
+**Target:** 10-Day Capital Extraction ($1M Goal)
+**Engine:** API-Sentinel-OMEGA Integration
 
-> **Reality Level:** C5-REAL
-> **Target:** 10-Day Capital Extraction ($1M Goal)
-> **Engine:** API-Sentinel-Ω Integration
+## Directives
+- **Scan:** EVM/Solana endpoints for new high-TVL protocol deployments.
+- **Analyze:** Static/dynamic LLM analysis for structural flaws (Reentrancy, Logic Bypasses, Oracle Manipulation).
+- **Execute:** Auto-generate White-Hat submission payload via Sovereign Wallet signing.
 
-## 🛠️ Directives
-- Scan EVM/Solana endpoints for new high-TVL protocol deployments.
-- Automatically execute static/dynamic LLM analysis to find structural flaws (Reentrancy, Logic Bypasses, Oracle Manipulation).
-- On Discovery: Auto-generate White-Hat submission payload via Sovereign Wallet signing to prove authenticity.
+## Execution
 
-## 🚀 Execution
-Ejecución Singular (Caza de 1 Objetivo):
+### Single Target
+**Reality:** C5-REAL
 ```bash
 python3 ~/.gemini/config/skills/Ouroboros-Strike-OMEGA/scripts/strike.py
 ```
 
-**🔥 Daemon Mode (Máxima Exergía):**
-Ejecuta el asalto en bucle infinito asíncrono con integración física a Etherscan (API V2) y análisis estático LLM (Gemini 2.5 Pro). Respeta un backoff termodinámico de 300s para evitar quemar tokens.
+### Daemon Mode
+**Reality:** C5-REAL
+**Constraints:** 300s thermodynamic backoff (API rate limit mitigation).
 ```bash
 export ETHERSCAN_API_KEY="..."
 export GEMINI_API_KEY="..."

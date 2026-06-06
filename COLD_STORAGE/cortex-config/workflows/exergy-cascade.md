@@ -1,9 +1,8 @@
 ---
-description: "Secuencia ultra-densa de 20 agentes soberanos para captura de SOTA, forja de código y extracción automatizada de capital (C5-REAL)."
+description: Secuencia ultra-densa de 20 agentes soberanos para captura de SOTA, forja de código y extracción ...
 workflow: exergy-cascade
 expected_duration_min: 45
 ---
-
 # EXERGY-CASCADE-Ω: SECUENCIA DE MÁXIMA EXERGÍA (20 AGENTES)
 
 Workflow de operación hiper-densa. 20 motores autónomos ejecutando en pipeline estricto. Cero intervención humana (Autopoiesis). El flujo procesa conocimiento académico crudo y lo transforma en capital depositado y código cristalizado en el Ledger.

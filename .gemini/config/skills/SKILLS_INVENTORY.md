@@ -4,10 +4,10 @@ Last updated: 2026-06-06
 
 ## Summary
 
-- Total skill directories audited: `34`
-- Skill manifests with parseable YAML front matter: `34`
+- Total skill directories audited: `35`
+- Skill manifests with parseable YAML front matter: `35`
 - Script-backed skills: `10`
-- Documentation-only skills: `24`
+- Documentation-only skills: `25`
 - Missing local script links in manifests: `0`
 - Residual references to `$CORTEX_ROOT/30_CORTEX`, `compiled_skills`, or `worktrees/sigint-monitor-fix`: `0`
 
@@ -24,6 +24,7 @@ Last updated: 2026-06-06
 - `Antigravity-Github-Omega`
 - `Autodidact-Research-OMEGA`
 - `Autonomous-Audit-OMEGA`
+- `Browser-CDP-Automation-OMEGA`
 - `C5-DEATH-OMEGA`
 - `Cortex-Live-Broadcaster`
 - `Cortex-Research-Loop-OMEGA`

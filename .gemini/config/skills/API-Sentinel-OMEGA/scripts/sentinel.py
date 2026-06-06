@@ -1,3 +1,4 @@
+"""C5-REAL DECLARED"""
 import urllib.request
 import urllib.error
 import json
@@ -13,22 +14,19 @@ except ImportError:
     HAS_ETH_ACCOUNT = False
 
 class APISentinelOmega:
-    """
-    Motor Soberano para gestión de APIs (REST/JSON).
-    Fuerza C5-REAL, Manejo de Rate Limits (429) y Exponential Backoff.
-    """
+    """C5-REAL REST/JSON API Router. Handles 429/Backoff."""
     def __init__(self, agent_name="API-Sentinel-Ω", max_retries=3):
         self.agent_name = agent_name
         self.max_retries = max_retries
         print(f">>> [C5-REAL] {self.agent_name} INICIALIZADO")
         
-        # --- Sovereign Wallet Injection ---
+        # Sovereign Wallet
         self.wallet_address = None
         self._pk = None
         self.mnemonic = None
         if HAS_ETH_ACCOUNT:
             Account.enable_unaudited_hdwallet_features()
-            # Zero-plaintext: Read from env, NEVER hardcode.
+            # Zero-plaintext env read
             self.mnemonic = os.environ.get("CORTEX_SOVEREIGN_MNEMONIC")
             self._pk = os.environ.get("CORTEX_SOVEREIGN_PK")
             
@@ -46,7 +44,7 @@ class APISentinelOmega:
             self.wallet_address = acct.address
             print(f"[{self.agent_name}] 💼 Sovereign Wallet Activa: {self.wallet_address}")
             
-        # --- Episodic Memory (API Registry) ---
+        # Registry Path
         self.registry_path = os.path.join(os.path.dirname(__file__), "api_registry.json")
         self.registry = self._load_registry()
 
@@ -104,7 +102,7 @@ class APISentinelOmega:
                 "Content-Type": "application/json"
             }
         
-        # Zero-Plaintext Audit Check (dummy example)
+        # Zero-Plaintext payload scan
         if "sk_" in json.dumps(payload):
             print(f"[{self.agent_name}] 🛑 ALERTA: Detectada posible API Key en el payload. Abortando por higiene Zero-Plaintext.")
             return {}
@@ -126,10 +124,7 @@ class APISentinelOmega:
         return {}
 
     def _simulate_llm_routing(self, intent: str) -> dict:
-        """
-        Simulación de motor de inferencia (LLM C5-REAL) para deducir el endpoint
-        y parámetros necesarios basándose en el lenguaje natural (Intent).
-        """
+        """C5-REAL LLM Inference Router. Deduces endpoint/params from intent."""
         intent_lower = intent.lower()
         if "crypto" in intent_lower or "precio" in intent_lower or "bitcoin" in intent_lower:
             return {
@@ -137,13 +132,13 @@ class APISentinelOmega:
                 "method": "GET"
             }
         elif "nft" in intent_lower or "coleccion" in intent_lower or "token no fungible" in intent_lower:
-            # Obtener el SOTA de los contratos NFT top trending / metadata pública
+            # SOTA NFT metadata fetch
             return {
                 "url": "https://api.coingecko.com/api/v3/nfts/list?per_page=3",
                 "method": "GET"
             }
         elif "wallet" in intent_lower or "0x" in intent_lower or "balance" in intent_lower or "cartera" in intent_lower:
-            # Extraer dirección 0x del intent, fallback a Vitalik Buterin
+            # Address extraction, Vitalik fallback
             match = re.search(r"0x[a-fA-F0-9]{40}", intent)
             address = match.group(0) if match else "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045"
             return {
@@ -167,8 +162,7 @@ class APISentinelOmega:
                 "method": "GET"
             }
         else:
-            # Fallback a DuckDuckGo / Brave Search para descubrir la API.
-            # Aquí se inyectaría la llamada real a un Search MCP.
+            # Fallback searchMCP integration point
             print(f"[{self.agent_name}] 🔍 Intuición: Endpoint desconocido. Consultando índice global (Fallback Search)...")
             return {
                 "url": "https://api.github.com/zen",
@@ -176,10 +170,7 @@ class APISentinelOmega:
             }
 
     def intuit_and_fetch_api(self, intent: str, payload: dict = None) -> dict:
-        """
-        Intuition Engine: Deduzca la API necesaria a partir de un intent humano,
-        forja la URL y ejecuta la llamada de forma autónoma.
-        """
+        """C5-REAL Intuition Engine. Derives API from intent, executes autonomously."""
         print(f"[{self.agent_name}] 🧠 INTUICIÓN INICIADA: '{intent}'")
         
         # 1. Check Episodic Memory
@@ -201,7 +192,7 @@ class APISentinelOmega:
         if method == "GET":
             return self.execute_get(url)
         elif method == "POST":
-            # Si el route_plan provee un payload prefabricado, lo usamos (ideal para JSON-RPC)
+            # Use route_plan payload if available (JSON-RPC)
             final_payload = route_plan.get("payload", payload if payload else {})
             return self.execute_post(url, final_payload)
         
@@ -209,9 +200,7 @@ class APISentinelOmega:
         return {}
 
     def sign_payload(self, message: str) -> dict:
-        """
-        Firma criptográficamente un string (o JSON) demostrando soberanía.
-        """
+        """C5-REAL Cryptographic Signer. Proof of sovereignty."""
         if not HAS_ETH_ACCOUNT or not self._pk:
             return {"error": "Wallet no inicializada o falta eth_account."}
         

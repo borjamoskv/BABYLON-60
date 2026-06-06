@@ -1,9 +1,11 @@
+"""
+Execution: C5-REAL
+"""
 import sys
 import json
 import os
 
 def verify():
-    # Verify tripartite
     skill_dir = os.path.dirname(os.path.abspath(__file__))
     
     if not os.path.exists(os.path.join(skill_dir, "SKILL.md")):

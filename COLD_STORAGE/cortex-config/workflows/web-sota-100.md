@@ -1,9 +1,8 @@
 ---
-description: "Secuencia ultra-densa de 100 agentes (50 fases secuenciales x 2 agentes paralelos) para forjar, auditar y consolidar una web en SOTA absoluto (C5-REAL)."
+description: Secuencia ultra-densa de 100 agentes (50 fases secuenciales x 2 agentes paralelos) para forjar, a...
 workflow: web-sota-100
 expected_duration_min: 120
 ---
-
 # 🌐 WORKFLOW: WEB-SOTA-100
 
 **Objetivo:** Consolidar una arquitectura web desde cero hasta Estado del Arte (SOTA) absoluto, garantizando estética Industrial Noir 2026, métricas Core Web Vitals perfectas y ejecución funcional verificada en C5-REAL.
