@@ -1,5 +1,4 @@
 import os
-import sys
 import json
 import logging
 import requests
@@ -19,7 +18,8 @@ class ApolloAutodidact:
         
         self.headers = {
             "Content-Type": "application/json",
-            "Cache-Control": "no-cache"
+            "Cache-Control": "no-cache",
+            "x-api-key": self.api_key
         }
         self.knowledge_base = {}
 
@@ -66,9 +66,7 @@ class ApolloAutodidact:
             
         logger.info(f"Autodidact mapped intent to endpoint: {endpoint}")
         
-        payload = {
-            "api_key": self.api_key
-        }
+        payload = {}
         
         if "web3" in intent_lower or "ai" in intent_lower:
             payload["q_organization_keyword_tags"] = ["web3", "ai"]

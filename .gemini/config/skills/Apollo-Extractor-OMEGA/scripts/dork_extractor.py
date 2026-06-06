@@ -1,12 +1,9 @@
-import os
-import re
 import json
-import time
 import requests
 import sys
 
 def extract_b2b_dorks(target_leads: int, output_file: str):
-    print(f"[*] Iniciando Extracción Dorking C5-REAL (Open-Source Bypass)")
+    print("[*] Iniciando Extracción Dorking C5-REAL (Open-Source Bypass)")
     
     url = "https://html.duckduckgo.com/html/"
     headers = {
