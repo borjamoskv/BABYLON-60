@@ -30,26 +30,6 @@
     "runnable": false
   },
   {
-    "requested": "agente-sota",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/agente-sota",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/agente-sota",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/agente-sota/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "Alpha-Target-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Alpha-Target-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Alpha-Target-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Alpha-Target-OMEGA/SKILL.md",
-    "script": "scripts/execute.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Alpha-Target-OMEGA/scripts/execute.py",
-    "runnable": true
-  },
-  {
     "requested": "Antigravity-Github-Omega",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Antigravity-Github-Omega",
@@ -68,46 +48,6 @@
     "script": null,
     "script_path": null,
     "runnable": false
-  },
-  {
-    "requested": "API-Sentinel-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/API-Sentinel-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/API-Sentinel-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/API-Sentinel-OMEGA/SKILL.md",
-    "script": "scripts/sentinel.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/API-Sentinel-OMEGA/scripts/sentinel.py",
-    "runnable": true
-  },
-  {
-    "requested": "Apollo-Autodidact-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Autodidact-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Autodidact-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Autodidact-OMEGA/SKILL.md",
-    "script": "scripts/autodidact.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Autodidact-OMEGA/scripts/autodidact.py",
-    "runnable": true
-  },
-  {
-    "requested": "Apollo-Extractor-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Extractor-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Extractor-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Extractor-OMEGA/SKILL.md",
-    "script": "scripts/extract.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Apollo-Extractor-OMEGA/scripts/extract.py",
-    "runnable": true
-  },
-  {
-    "requested": "Autodidact-21EDO-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Autodidact-21EDO-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Autodidact-21EDO-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Autodidact-21EDO-OMEGA/SKILL.md",
-    "script": "scripts/engine_21edo.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Autodidact-21EDO-OMEGA/scripts/engine_21edo.py",
-    "runnable": true
   },
   {
     "requested": "Autodidact-History-OMEGA",
@@ -140,16 +80,6 @@
     "runnable": false
   },
   {
-    "requested": "borja-moskv-ultrathink",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/borja-moskv-ultrathink",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/borja-moskv-ultrathink",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/borja-moskv-ultrathink/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
     "requested": "Browser-CDP-Automation-OMEGA",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Browser-CDP-Automation-OMEGA",
@@ -160,56 +90,6 @@
     "runnable": true
   },
   {
-    "requested": "C5-DEATH-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/C5-DEATH-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/C5-DEATH-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/C5-DEATH-OMEGA/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "Cortex-Live-Broadcaster",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Live-Broadcaster",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Live-Broadcaster",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Live-Broadcaster/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "Cortex-Research-Loop-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Research-Loop-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Research-Loop-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Research-Loop-OMEGA/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "Crystallize-Knowledge-JIT",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Crystallize-Knowledge-JIT",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Crystallize-Knowledge-JIT",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Crystallize-Knowledge-JIT/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "Deep-Research-SOTA-Edition-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Deep-Research-SOTA-Edition-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Deep-Research-SOTA-Edition-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Deep-Research-SOTA-Edition-OMEGA/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
     "requested": "dios",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/dios",
@@ -218,16 +98,6 @@
     "script": null,
     "script_path": null,
     "runnable": false
-  },
-  {
-    "requested": "Episodic-Memory-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Episodic-Memory-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Episodic-Memory-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Episodic-Memory-OMEGA/SKILL.md",
-    "script": "scripts/memory_store.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Episodic-Memory-OMEGA/scripts/memory_store.py",
-    "runnable": true
   },
   {
     "requested": "Estado-Del-Arte-OMEGA",
@@ -245,16 +115,6 @@
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Exergy-Engine-OMEGA",
     "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Exergy-Engine-OMEGA",
     "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Exergy-Engine-OMEGA/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
-    "requested": "filologa-de-combate",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/filologa-de-combate",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/filologa-de-combate",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/filologa-de-combate/SKILL.md",
     "script": null,
     "script_path": null,
     "runnable": false
@@ -290,26 +150,6 @@
     "runnable": false
   },
   {
-    "requested": "Ouroboros-Strike-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Ouroboros-Strike-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Ouroboros-Strike-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Ouroboros-Strike-OMEGA/SKILL.md",
-    "script": "scripts/strike.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Ouroboros-Strike-OMEGA/scripts/strike.py",
-    "runnable": true
-  },
-  {
-    "requested": "P2P-Comms-OMEGA",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/P2P-Comms-OMEGA",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/P2P-Comms-OMEGA",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/P2P-Comms-OMEGA/SKILL.md",
-    "script": "scripts/send_p2p_email.py",
-    "script_path": "$CORTEX_ROOT/.gemini/config/skills/P2P-Comms-OMEGA/scripts/send_p2p_email.py",
-    "runnable": true
-  },
-  {
     "requested": "Python-Extractor-OMEGA",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Python-Extractor-OMEGA",
@@ -320,16 +160,6 @@
     "runnable": true
   },
   {
-    "requested": "skill-repair",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/skill-repair",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/skill-repair",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/skill-repair/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
-  },
-  {
     "requested": "Sortu-APEX",
     "status": "script-backed",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Sortu-APEX",
@@ -338,15 +168,5 @@
     "script": "scripts/sortu.py",
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Sortu-APEX/scripts/sortu.py",
     "runnable": true
-  },
-  {
-    "requested": "UI-Mechanisms-Rule",
-    "status": "script-backed",
-    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/UI-Mechanisms-Rule",
-    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/UI-Mechanisms-Rule",
-    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/UI-Mechanisms-Rule/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
   }
 ]
