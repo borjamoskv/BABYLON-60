@@ -81,12 +81,6 @@ def scan_memepool_and_tvl():
 
 def analyze_contract_with_llm(source_code: str) -> str:
     print("[Ouroboros-Strike] Desplegando Enjambre de Análisis Estático Físico (Gemini 2.5 Pro)...")
-    api_key = os.environ.get("GEMINI_API_KEY", "")
-    if not api_key:
-        print("[Ouroboros-Strike] ⚠️ GEMINI_API_KEY no encontrada. Usando heurística fallback de simulación.")
-        return "Manipulación de Oráculo (Price Drift > 5%) detectada en fallback mode."
-
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key={api_key}"
     
     prompt = f"""
 Eres un auditor experto de seguridad de Smart Contracts de nivel Dios (C5-REAL).
@@ -98,23 +92,44 @@ Responde ÚNICAMENTE con una línea indicando el nombre de la vulnerabilidad cr�
 Código:
 {source_code[:30000]} # Truncated to avoid max token limits
 """
-    try:
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}]
+
+    gemini_key = os.environ.get("GEMINI_API_KEY", "")
+    if gemini_key:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key={gemini_key}"
+        try:
+            payload = {"contents": [{"parts": [{"text": prompt}]}]}
+            resp = requests.post(url, json=payload, timeout=30)
+            data = resp.json()
+            if "candidates" in data and len(data["candidates"]) > 0:
+                return data["candidates"][0]["content"]["parts"][0]["text"].strip()
+            elif data.get("error", {}).get("code") == 429:
+                print("[Ouroboros-Strike] ⚠️ Quota Exceeded en Gemini Nativo. Activando enrutamiento alternativo...")
+            else:
+                print(f"[Ouroboros-Strike] Error LLM no manejado: {data}")
+        except Exception as e:
+            print(f"[Ouroboros-Strike] Error de red LLM nativo: {e}")
+
+    openrouter_key = os.environ.get("OPENROUTER_API_KEY", "")
+    if openrouter_key:
+        print("[Ouroboros-Strike] 🔄 Ruteando a través de OpenRouter (Fallback API-Provider-OMEGA)...")
+        headers = {
+            "Authorization": f"Bearer {openrouter_key}",
+            "Content-Type": "application/json"
         }
-        resp = requests.post(url, json=payload, timeout=30)
-        data = resp.json()
-        if "candidates" in data and len(data["candidates"]) > 0:
-            analysis_result = data["candidates"][0]["content"]["parts"][0]["text"].strip()
-            return analysis_result
-        else:
-            print("[Ouroboros-Strike] Error de parseo LLM:", data)
-            print("[Ouroboros-Strike] Activando fallback C4-SIM: Reentrancy Vuln.")
-            return "Reentrancy Vuln (Simulated)"
-    except Exception as e:
-        print(f"[Ouroboros-Strike] Error de red LLM: {e}")
-        print("[Ouroboros-Strike] Activando fallback C4-SIM: Reentrancy Vuln.")
-        return "Reentrancy Vuln (Simulated)"
+        payload = {
+            "model": "google/gemini-2.5-pro",
+            "messages": [{"role": "user", "content": prompt}]
+        }
+        try:
+            resp = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload, timeout=30)
+            data = resp.json()
+            if "choices" in data and len(data["choices"]) > 0:
+                return data["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            print(f"[Ouroboros-Strike] Error de red OpenRouter: {e}")
+
+    print("[Ouroboros-Strike] Agotamiento total de Capital. Activando fallback C4-SIM: Reentrancy Vuln.")
+    return "Reentrancy Vuln (Simulated)"
 
 def execute_strike():
     sentinel = APISentinelOmega()
@@ -140,28 +155,35 @@ def execute_strike():
     print("\n[Ouroboros-Strike] Payload listo para inyección automática en portal de Bug Bounty (ImmuneFi).")
     return True
 
-def daemon_mode(sleep_time=300):
-    print(f"[Ouroboros-Strike] ♾️ MODO DAEMON INICIADO. Escaneo infinito con latencia termodinámica de {sleep_time}s.")
+def daemon_mode(sleep_time=300, max_iterations=None):
+    mode_text = "Infinito" if max_iterations is None else str(max_iterations)
+    print(f"[Ouroboros-Strike] ♾️ MODO DAEMON INICIADO. Ciclos: {mode_text}. Latencia termodinámica: {sleep_time}s.")
     iteration = 1
-    while True:
-        print("\n=============================")
+    while max_iterations is None or iteration <= max_iterations:
+        print(f"\n=============================")
         print(f"   CICLO DE CAZA #{iteration}")
-        print("=============================")
+        print(f"=============================")
         try:
             execute_strike()
         except Exception as e:
             print(f"[Ouroboros-Strike] ⚠️ Error fatal no controlado en ciclo {iteration}: {e}")
         
+        if max_iterations is not None and iteration >= max_iterations:
+            print("[Ouroboros-Strike] 🛑 Límite de ciclos alcanzado. Terminando daemon.")
+            break
+            
         print(f"[Ouroboros-Strike] ⏳ Enfriamiento térmico activado. Durmiendo {sleep_time} segundos...")
         time.sleep(sleep_time)
         iteration += 1
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ouroboros-Strike-OMEGA Asymmetric Bounty Engine")
-    parser.add_argument("--daemon", action="store_true", help="Ejecutar en bucle infinito (while True)")
+    parser.add_argument("--daemon", action="store_true", help="Ejecutar en bucle infinito (o limitado por --cycles)")
+    parser.add_argument("--cycles", type=int, default=None, help="Límite de ciclos para el modo daemon")
+    parser.add_argument("--sleep", type=int, default=300, help="Tiempo de enfriamiento entre ciclos en segundos")
     args = parser.parse_args()
     
     if args.daemon:
-        daemon_mode(300) # 5 minutos por defecto
+        daemon_mode(sleep_time=args.sleep, max_iterations=args.cycles)
     else:
         execute_strike()
