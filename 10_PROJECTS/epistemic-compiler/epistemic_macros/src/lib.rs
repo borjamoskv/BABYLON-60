@@ -12,6 +12,7 @@ struct EpistemicGraph {
 struct EpistemicEdge {
     pub from: Ident,
     pub to: Ident,
+    pub weight: f64,
 }
 
 impl Parse for EpistemicGraph {
@@ -28,9 +29,23 @@ impl Parse for EpistemicGraph {
             let from: Ident = content.parse()?;
             let _arrow: Token![->] = content.parse()?;
             let to: Ident = content.parse()?;
+            
+            let weight: f64 = if content.peek(syn::token::Bracket) {
+                let bracketed_content;
+                syn::bracketed!(bracketed_content in content);
+                let lit: syn::Lit = bracketed_content.parse()?;
+                match lit {
+                    syn::Lit::Float(f) => f.base10_parse()?,
+                    syn::Lit::Int(i) => i.base10_parse::<f64>()?,
+                    _ => return Err(syn::Error::new(lit.span(), "Expected float or int weight")),
+                }
+            } else {
+                1.0
+            };
+
             let _semi: Token![;] = content.parse()?;
 
-            edges.push(EpistemicEdge { from, to });
+            edges.push(EpistemicEdge { from, to, weight });
         }
 
         Ok(Self { name, edges })
@@ -112,13 +127,14 @@ pub fn epistemic(input: TokenStream) -> TokenStream {
     let transitions = graph.edges.iter().map(|edge| {
         let from = &edge.from;
         let to = &edge.to;
+        let weight = edge.weight;
         quote! {
             impl epistemic_engine::Transition<states::#from> for epistemic_engine::Inference<states::#from> {
                 type To = states::#to;
                 fn apply(self) -> epistemic_engine::Inference<Self::To> {
                     epistemic_engine::Inference {
                         value: self.value,
-                        confidence: self.confidence,
+                        confidence: self.confidence * #weight,
                         _state: std::marker::PhantomData,
                     }
                 }
