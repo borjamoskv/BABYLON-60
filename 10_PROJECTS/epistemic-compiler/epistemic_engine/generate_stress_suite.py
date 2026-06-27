@@ -60,4 +60,38 @@ fn main() {{}}
     with open(f"{FAIL_DIR}/fuzz_{i:02d}.rs", "w") as f:
         f.write(code)
 
-print("100 pruebas generadas correctamente.")
+# ----------------- MASSIVE STRESS TESTS ----------------- #
+
+# Massive Linear (1000 nodes)
+nodes_lin = [f"M{j}" for j in range(1000)]
+edges_lin = [f"{nodes_lin[j]} -> {nodes_lin[j+1]};" for j in range(999)]
+code_lin = f"""use epistemic_engine::epistemic;
+
+epistemic! {{
+    graph massive_linear {{
+        {chr(10).join(edges_lin)}
+    }}
+}}
+
+fn main() {{}}
+"""
+with open(f"{PASS_DIR}/massive_linear.rs", "w") as f:
+    f.write(code_lin)
+
+# Massive Fan-In (1000 nodes -> 1 target)
+nodes_fanin = [f"F{j}" for j in range(1000)]
+edges_fanin = [f"{n} -> TargetNode;" for n in nodes_fanin]
+code_fanin = f"""use epistemic_engine::epistemic;
+
+epistemic! {{
+    graph massive_fan_in {{
+        {chr(10).join(edges_fanin)}
+    }}
+}}
+
+fn main() {{}}
+"""
+with open(f"{PASS_DIR}/massive_fan_in.rs", "w") as f:
+    f.write(code_fanin)
+
+print("100 pruebas + Massive Stress Tests generadas correctamente.")

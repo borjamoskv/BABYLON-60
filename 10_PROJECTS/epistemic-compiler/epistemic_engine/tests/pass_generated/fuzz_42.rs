@@ -3,23 +3,22 @@ use epistemic_engine::epistemic;
 epistemic! {
     graph pass_fuzz_42 {
         N1 -> N0;
-N2 -> N1;
-N3 -> N0;
-N4 -> N2;
-N5 -> N1;
-N6 -> N2;
-N7 -> N5;
-N8 -> N5;
-N9 -> N5;
-N10 -> N1;
-N11 -> N3;
-N12 -> N11;
-N13 -> N0;
+N2 -> N0;
+N3 -> N1;
+N4 -> N0;
+N5 -> N3;
+N6 -> N1;
+N7 -> N0;
+N8 -> N6;
+N9 -> N6;
+N10 -> N2;
+N11 -> N2;
+N12 -> N1;
+N13 -> N10;
 N14 -> N11;
-N15 -> N11;
-N16 -> N2;
-N17 -> N11;
-N18 -> N6;
+N15 -> N7;
+N16 -> N3;
+N17 -> N12;
     }
 }
 
