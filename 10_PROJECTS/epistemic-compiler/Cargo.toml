@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "epistemic_engine",
+    "epistemic_macros"
+]
+resolver = "2"

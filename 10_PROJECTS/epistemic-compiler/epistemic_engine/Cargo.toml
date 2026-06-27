@@ -1,0 +1,10 @@
+[package]
+name = "epistemic_engine"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+epistemic_macros = { path = "../epistemic_macros" }
+
+[dev-dependencies]
+trybuild = "1.0.117"

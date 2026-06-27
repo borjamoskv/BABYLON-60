@@ -1,0 +1,5 @@
+error: EPISTEMIC_001: invalid causal inversion (cycle detected)
+ --> tests/fail/cycle_detected.rs:6:14
+  |
+6 |         B -> C;
+  |              ^
