@@ -1,0 +1,15 @@
+error[E0119]: conflicting implementations of trait `Transition<RawEvidence>` for type `Inference<RawEvidence>`
+ --> tests/fail/duplicate_edge.rs:3:1
+  |
+3 | / epistemic! {
+4 | |     graph duplicate {
+5 | |         RawEvidence -> Evidence;
+6 | |         RawEvidence -> Evidence; // DUPLICATE EDGE!
+7 | |     }
+8 | | }
+  | | ^
+  | | |
+  | |_first implementation here
+  |   conflicting implementation for `Inference<RawEvidence>`
+  |
+  = note: this error originates in the macro `epistemic` (in Nightly builds, run with -Z macro-backtrace for more info)

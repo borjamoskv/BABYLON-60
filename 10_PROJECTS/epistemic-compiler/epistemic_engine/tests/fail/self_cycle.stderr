@@ -1,0 +1,5 @@
+error: EPISTEMIC_001: invalid causal inversion (cycle detected)
+ --> tests/fail/self_cycle.rs:6:18
+  |
+6 |         NodeB -> NodeB; // Ciclo directo!
+  |                  ^^^^^
