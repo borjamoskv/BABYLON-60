@@ -1,0 +1,10 @@
+meta:
+  skill: bounty-exergy-extractor-omega
+  version: "14.0.0"
+  updated: "2026-06-22"
+  classification: OPERATIONAL
+  escalation: x10000
+
+states:
+  - DRAFT
+  - ACTIVE

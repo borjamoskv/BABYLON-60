@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex.naroa-2026/skills/APEX-Epistemic-Synthesis-OMEGA.schema.json",
+  "title": "APEX Epistemic Synthesis OMEGA Schema",
+  "type": "object",
+  "properties": {
+    "query_vector": { "type": "string" },
+    "domains": { "type": "array", "items": {"type": "string"} }
+  },
+  "required": ["query_vector"]
+}

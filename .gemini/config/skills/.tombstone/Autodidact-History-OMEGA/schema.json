@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Autodidact-History-OMEGA Schema v3.0",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Historical AI topic to retrieve (e.g., 'turing', 'alexnet', 'chatgpt_moment', 'backprop')."
+    },
+    "search": {
+      "type": "string",
+      "description": "Full-text search term to match across all milestone fields."
+    },
+    "timeline": {
+      "type": "boolean",
+      "description": "If true, renders a complete ASCII timeline grouped by era."
+    },
+    "markdown": {
+      "type": "boolean",
+      "description": "If true, outputs a markdown-formatted table with era and protagonist columns."
+    },
+    "range": {
+      "type": "string",
+      "description": "Year range filter in YYYY-YYYY format (e.g., '2012-2026')."
+    },
+    "era": {
+      "type": "string",
+      "description": "Era filter. Valid: genesis, symbolic, winters, renaissance, deep_learning, foundation, singularity.",
+      "enum": ["genesis", "symbolic", "winters", "renaissance", "deep_learning", "foundation", "singularity"]
+    },
+    "dot": {
+      "type": "boolean",
+      "description": "If true, exports a Graphviz DOT directed graph."
+    },
+    "stats": {
+      "type": "boolean",
+      "description": "If true, shows distribution statistics across eras."
+    },
+    "json": {
+      "type": "boolean",
+      "description": "If true, outputs in JSON format.",
+      "default": false
+    },
+    "thermodynamic_focus": {
+      "type": "boolean",
+      "description": "If true, enforces O(1) exergy explanation.",
+      "default": true
+    }
+  }
+}

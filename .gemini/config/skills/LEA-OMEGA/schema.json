@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex.naroa-2026/skills/LEA-OMEGA.schema.json",
+  "title": "LEA OMEGA Schema",
+  "type": "object",
+  "properties": {
+    "target_path": { "type": "string" },
+    "dry_run": { "type": "boolean" }
+  },
+  "required": ["target_path"]
+}

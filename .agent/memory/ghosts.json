@@ -12,10 +12,10 @@
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
   },
   "cortex-persist": {
-    "last_task": "Metabolismo Evolutivo C8",
-    "last_file": "cortex/c8_reputation_metabolism.py",
-    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
-    "timestamp": "2026-06-06T01:30:31.952306Z"
+    "last_task": "Resolución de drift de llaves en BFT y cierre criptográfico de SandboxJIT (C5-REAL)",
+    "last_file": "tests/swarm/test_byzantine_judge_stress.py",
+    "last_conversation": "a532a8b3-a9f6-49f1-8ac9-4cd76c97757a",
+    "timestamp": "2026-06-26T14:03:04Z"
   },
   "borjamoskv-web": {
     "last_task": "Migración de Substack a MDX",
@@ -27,7 +27,9 @@
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
     "last_file": "index.html",
     "last_conversation": "f7645ff7-5068-41d7-80fd-b846c4131998",
-    "timestamp": "2026-05-31T10:34:15.826692"
+    "timestamp": "2026-06-22T01:02:59+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
   },
   "cortexpersist-com": {
     "last_task": "Resolve OMEGA-EVAL recall deficit for Strike-OMEGA auditor (H-STRIKE-OMEGA-001 alive)",
@@ -77,6 +79,228 @@
     "last_task": "Filtro Substack & Listas CORTEX",
     "last_file": "content.js",
     "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
-    "timestamp": "2026-06-06T01:30:31.952306Z"
+    "timestamp": "2026-06-22T01:03:07+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "cortex-docs-site": {
+    "timestamp": "2026-06-22T01:03:11+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "blissful-einstein": {
+    "timestamp": "2026-06-21T12:37:06+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(ci): inject C5-REAL weaponized pre",
+    "blocked_by": null
+  },
+  "rustchain-telegram-bot": {
+    "timestamp": "2026-06-22T01:03:50+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortex-flow-agent": {
+    "timestamp": "2026-06-21T06:18:15+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-experiments": {
+    "timestamp": "2026-06-21T06:18:19+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-fas": {
+    "timestamp": "2026-06-22T01:03:16+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "sanedrin": {
+    "timestamp": "2026-06-21T06:18:19+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "subnitter": {
+    "timestamp": "2026-06-21T06:18:19+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "asl-spec": {
+    "timestamp": "2026-06-22T01:03:07+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortex-bounties": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-ram-guard": {
+    "timestamp": "2026-06-22T01:03:30+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "cassandra-mythos": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "eu-ai-act-consultora": {
+    "timestamp": "2026-06-22T01:03:11+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortex-demo": {
+    "timestamp": "2026-06-22T01:03:10+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "naroagutierrezgil.com": {
+    "timestamp": "2026-06-22T01:03:20+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "cortex-memory": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-persist-pr434": {
+    "timestamp": "2026-06-09T03:04:10+02:00",
+    "mood": "Author: Tester | Commit: fix: purge technical debt via lea-omega",
+    "blocked_by": null
+  },
+  "claude-builders-bounty-1": {
+    "timestamp": "2026-06-22T01:02:58+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "exa-forge": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "templar-contracts": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "ctre-optimal-stopping": {
+    "timestamp": "2026-06-22T01:03:37+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "moskv-1-apex": {
+    "timestamp": "2026-06-22T01:06:20+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "homebrew-tap": {
+    "timestamp": "2026-06-22T01:03:32+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "wiki": {
+    "timestamp": "2026-06-22T01:03:31+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortex-persist-401-api-docs": {
+    "timestamp": "2026-06-09T03:04:06+02:00",
+    "mood": "Author: Tester | Commit: fix: purge technical debt via lea-omega",
+    "blocked_by": null
+  },
+  "FinMind": {
+    "timestamp": "2026-06-22T01:03:29+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "mac-maestro": {
+    "timestamp": "2026-06-22T01:03:36+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortex-persist-401-api-docs-20260606": {
+    "timestamp": "2026-06-09T03:04:09+02:00",
+    "mood": "Author: Tester | Commit: fix: purge technical debt via lea-omega",
+    "blocked_by": null
+  },
+  "20_VAULT": {
+    "timestamp": "2026-06-21T06:18:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-web": {
+    "timestamp": "2026-06-22T01:03:35+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "babylon-60": {
+    "timestamp": "2026-06-22T01:03:19+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "borjamoskv": {
+    "timestamp": "2026-06-22T01:03:09+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "electro-cosmico": {
+    "timestamp": "2026-06-21T06:18:23+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "launchpad-audit": {
+    "timestamp": "2026-06-22T01:02:57+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "lo-bueno-de-mi-ex": {
+    "timestamp": "2026-06-22T01:02:59+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "borjamoskv-site": {
+    "timestamp": "2026-06-22T01:02:51+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "blocked_by": null
+  },
+  "cortexpersist-monorepo": {
+    "timestamp": "2026-06-21T06:18:24+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-routing-bunker": {
+    "timestamp": "2026-06-21T06:18:24+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "Arquitectura_Nobel": {
+    "timestamp": "2026-06-21T18:42:58+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat(core): synthesize C5-REAL ",
+    "blocked_by": null
+  },
+  "gordacorp-immersive": {
+    "timestamp": "2026-06-22T01:03:18+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "substack-osint-miner": {
+    "timestamp": "2026-06-21T06:18:24+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "smoke-extension": {
+    "timestamp": "2026-06-21T06:18:24+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "anvil-lang": {
+    "timestamp": "2026-06-22T01:03:23+02:00",
+    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "blocked_by": null
+  },
+  "death-protocol": {
+    "timestamp": "2026-06-21T06:18:24+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
   }
 }

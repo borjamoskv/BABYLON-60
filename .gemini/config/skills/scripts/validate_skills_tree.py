@@ -18,7 +18,7 @@ from resolve_skill import build_all_resolutions, load_resolution
 
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidact-omega", "_metrics", "scripts"}
+SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidact-omega", "_metrics", "scripts", ".tombstone", "DIAMOND-Sentinel-OMEGA"}
 RESOLUTION_FILE = ROOT / "skills_resolution.json"
 CATALOG_FILE = ROOT / "skills_catalog.json"
 

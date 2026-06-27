@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex.local/schemas/og-agent-standards.json",
+  "title": "OG-Agent-Standards-OMEGA Contract",
+  "type": "object",
+  "properties": {
+    "exigencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 7,
+      "maxItems": 7
+    },
+    "execution_level": {
+      "type": "string",
+      "const": "C5-REAL"
+    }
+  },
+  "required": ["exigencies", "execution_level"]
+}

@@ -1,0 +1,119 @@
+schema_version: "2026.2"
+subsystem: "Cognitive_Routing_Matrix"
+operator: "borjamoskv"
+policy: "Minimum_Exergy_Preservation"
+
+# ─────────────────────────────────────────────────────────
+# PRINCIPLE: "¿Cuál es el mínimo exergy necesario para
+# preservar la integridad del sistema?"
+#
+# Reasoning is a scarce thermodynamic resource.
+# Route it by type of uncertainty, not perceived complexity.
+# ─────────────────────────────────────────────────────────
+
+routing_inputs:
+  blast_radius:
+    type: integer
+    description: "Number of modules affected by the change"
+    source: "AST dependency graph OR manual estimate"
+
+  severity:
+    type: enum
+    values: [low, medium, high, critical]
+    description: "Impact magnitude independent of scope"
+    examples:
+      critical: "Root key exposure, data corruption, auth bypass"
+      high: "Breaking API change, schema migration, state loss"
+      medium: "Feature addition with external dependencies"
+      low: "Cosmetic, docs, config tweaks"
+
+  info_state:
+    exists_internally:
+      type: boolean
+      description: "Does the required information exist within workspace/memory?"
+    is_reliable:
+      type: boolean
+      description: "Is the information from a verified C5-REAL source?"
+    is_current:
+      type: boolean
+      description: "Has the information been validated within its TTL?"
+      ttl_rules:
+        security_advisories: "24h"
+        dependency_versions: "7d"
+        architectural_patterns: "30d"
+        protocol_specs: "on_change"
+
+# ─────────────────────────────────────────────────────────
+# ROUTING DECISION TREE (deterministic, short-circuit OR)
+# ─────────────────────────────────────────────────────────
+
+routing_rules:
+  # GATE 1: Catastrophe / UltraThink (short-circuit)
+  - id: GATE_ULTRA
+    condition: "severity == 'critical' OR blast_radius >= 3"
+    result: ultra_think
+    maps_to_state: APEX_STATE
+    rationale: >
+      Critical severity bypasses blast_radius check.
+      A root key exposure affecting 1 module is still catastrophic.
+
+  # GATE 2: Information Deficit / Deep Research
+  - id: GATE_RESEARCH
+    condition: >
+      NOT info_state.exists_internally
+      OR NOT info_state.is_reliable
+      OR NOT info_state.is_current
+    result: deep_research
+    maps_to_state: CONSTRUCT_STATE
+    rationale: >
+      Many architectural errors come from having information
+      that exists but is obsolete. Each axis is independent.
+
+  # GATE 3: Structural Decisions / Deep Think
+  - id: GATE_DEEP
+    condition: "blast_radius == 2 OR severity == 'high'"
+    result: deep_think
+    maps_to_state: APEX_STATE
+    rationale: >
+      Irreversible decisions or compound effects require
+      explicit chain-of-thought before execution.
+
+  # GATE 4: Default / Normal
+  - id: GATE_NORMAL
+    condition: "default"
+    result: normal
+    maps_to_state: CONSTRUCT_STATE
+    rationale: "Routine maintenance, isolated bugs, config changes"
+
+# ─────────────────────────────────────────────────────────
+# DECISION MATRIX (quick reference)
+# ─────────────────────────────────────────────────────────
+
+decision_matrix:
+  - problem: "Elegir arquitectura"
+    mode: deep_think
+    gate: GATE_DEEP
+
+  - problem: "Comparar tecnologías desconocidas"
+    mode: deep_research
+    gate: GATE_RESEARCH
+
+  - problem: "Brecha de seguridad"
+    mode: ultra_think
+    gate: GATE_ULTRA
+
+  - problem: "Refactor rutinario"
+    mode: normal
+    gate: GATE_NORMAL
+
+  - problem: "Bug aislado"
+    mode: "normal | deep_think"
+    gate: "GATE_NORMAL | GATE_DEEP (if severity >= high)"
+
+  - problem: "Corrupción sistémica"
+    mode: ultra_think
+    gate: GATE_ULTRA
+
+  - problem: "Exposición de clave root (1 módulo)"
+    mode: ultra_think
+    gate: "GATE_ULTRA (severity == critical, short-circuit)"

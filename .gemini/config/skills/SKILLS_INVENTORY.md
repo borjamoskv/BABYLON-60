@@ -1,13 +1,13 @@
 # Skills Inventory
 
-Last updated: 2026-06-06
+Last updated: 2026-06-22
 
 ## Summary
 
-- Dirs: `17`
-- YAML OK: `17`
-- Script-backed: `6`
-- Docs-only: `11`
+- Dirs: `21`
+- YAML OK: `21`
+- Script-backed: `21`
+- Docs-only: `0`
 - Missing script links: `0`
 - Ext repo refs: `0`
 
@@ -17,30 +17,34 @@ Last updated: 2026-06-06
 
 ## Documentation-Only Skills
 
-- `API-Provider-OMEGA`
-- `Agent-Paper-RedTeam-OMEGA`
-- `Antigravity-Github-Omega`
-- `Autodidact-Research-OMEGA`
-- `Autonomous-Audit-OMEGA`
-- `Browser-CDP-Automation-OMEGA`
-- `Exergy-Engine-OMEGA`
-- `accidental-data-loss-prevention`
-- `dios`
-- `managing-python-dependencies`
-- `ouroboros-infinity`
 
 ## Script-Backed Skills
 
 - `Aesthetic-Foundry-Omega` → `scripts/aesthetic_foundry_omega.py`
-- `Autodidact-History-OMEGA` → `scripts/retrieve_history.py`
-- `Estado-Del-Arte-OMEGA` → `scripts/sota_forge.py`
-- `Mac-Control-OMEGA` → `scripts/mac_control_omega.py`
+- `Algorithmic-Music-OMEGA` → `scripts/synth_engine.py`
+- `Antigravity-Github-Omega` → `scripts/antigravity__github__omega.py`
+- `Bounty-Exergy-Extractor-OMEGA` → `verify_bounty_exergy_extractor.py`
+- `Browser-CDP-Automation-OMEGA` → `scripts/browser_cdp__automation_omega.py`
+- `Cortex-Omega-ATMS-OMEGA` → `scripts/exergy_parser.py`
+- `Epistemic-Purge-OMEGA` → `scripts/purge.py`
+- `Frontier-RevEng-OMEGA` → `scripts/frontier__rev_eng_omega.py`
+- `LEA-OMEGA` → `verify_LEA-OMEGA.py`
+- `Local-Inference-OMEGA` → `scripts/local__inference_omega.py`
+- `Mac-Control-Ω` → `scripts/mac_control_omega.py`
 - `Python-Extractor-OMEGA` → `scripts/sovereign_python_extractor.py`
+- `SOTA-Vector-Engine-Omega` → `scripts/sota_ingest.py`
+- `Session-Crystallizer-OMEGA` → `scripts/crystallize.py`
 - `Sortu-APEX` → `scripts/sortu.py`
+- `Thermodynamic-Context-Compression-OMEGA` → `verify_Thermodynamic-Context-Compression-OMEGA.py`
+- `Vesicular-Runtime-Omega` → `scripts/run_vesicular.py`
+- `accidental-data-loss-prevention` → `scripts/accidental_data_loss_prevention.py`
+- `managing-python-dependencies` → `scripts/managing_python_dependencies.py`
+- `ouroboros-infinity` → `scripts/ouroboros_infinity.py`
+- `singularity-nexus` → `verify_singularity-nexus.py`
 
 ## Resolution Snapshot
 
-- `canonical`: None
+- `canonical`: `Aesthetic-Foundry-Omega`, `Algorithmic-Music-OMEGA`, `Antigravity-Github-Omega`, `Bounty-Exergy-Extractor-OMEGA`, `Browser-CDP-Automation-OMEGA`, `Cortex-Omega-ATMS-OMEGA`, `Epistemic-Purge-OMEGA`, `Frontier-RevEng-OMEGA`, `LEA-OMEGA`, `Local-Inference-OMEGA`, `Mac-Control-Ω`, `Python-Extractor-OMEGA`, `SOTA-Vector-Engine-Omega`, `Session-Crystallizer-OMEGA`, `Sortu-APEX`, `Thermodynamic-Context-Compression-OMEGA`, `Vesicular-Runtime-Omega`, `accidental-data-loss-prevention`, `managing-python-dependencies`, `ouroboros-infinity`, `singularity-nexus`
 - `alias_only`: None
 - `local_stubs`: None
 

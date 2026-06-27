@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cortex.naroa-2026/skills/singularity-nexus.schema.json",
+  "title": "Singularity Nexus OMEGA Schema",
+  "description": "Strict C5-REAL routing constraints for Sovereign DMPC execution pipelines.",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "pulse",
+        "ghosts",
+        "bridge",
+        "sync",
+        "lea-purge",
+        "crystallize-loop",
+        "autopoiesis-loop",
+        "web-swarm",
+        "capital-compute-loop",
+        "adversarial-truth-loop",
+        "cognitive-exergy-loop"
+      ],
+      "description": "The exact DMPC pipeline to trigger. No deviation allowed."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Strict JSON State-Diff required by the target pipeline's input node."
+    },
+    "mutex_locks": {
+      "type": "object",
+      "description": "The 4 Sovereign Master-Locks that prevent state vector collisions.",
+      "properties": {
+        "fs_lock": {
+          "type": "string",
+          "enum": ["ANTIGRAVITY_GITHUB_OMEGA_IDLE", "ANTIGRAVITY_GITHUB_OMEGA_ACTIVE"],
+          "description": "If ACTIVE, no other daemon can mutate /10_PROJECTS."
+        },
+        "dom_lock": {
+          "type": "string",
+          "enum": ["AESTHETIC_OMEGA_APPROVED", "AESTHETIC_OMEGA_REJECTED", "AESTHETIC_OMEGA_PENDING"],
+          "description": "Diagnostics tools cannot mutate DOM unless Aesthetic constraint is APPROVED."
+        },
+        "prompt_lock": {
+          "type": "string",
+          "enum": ["T0_COMPRESSION", "T1_ARCHITECT", "T2_CRYSTALLIZER"],
+          "description": "Enforces strict temporal sequence. No parallel cognitive routing allowed."
+        },
+        "silicon_lock": {
+          "type": "string",
+          "enum": ["INFERENCE_PRIORITY", "VISION_PRIORITY", "BALANCED"],
+          "description": "Vesicular-Runtime hardware arbitration to prevent Apple Silicon VRAM panic."
+        }
+      },
+      "required": ["fs_lock", "dom_lock", "prompt_lock", "silicon_lock"]
+    }
+  },
+  "required": ["action", "payload", "mutex_locks"]
+}

@@ -1,0 +1,59 @@
+schema_version: "2026.1"
+operator: "borjamoskv"
+policy: "Exergy-Maximized"
+
+inference_states:
+  IDLE_STATE:
+    primary_model: "local/qwen2.5-coder:7b"
+    fallback_model: "gemini-3.5-flash-lite"
+    thinking: "None"
+    epistemology: "C4-SIM"
+    max_tokens: 4096
+    allowed_mcp: ["fs_read", "grep"]
+    trigger: "default"
+    routing_strategy: "Static/Fast (Local-First, 0ms latency, zero thermal load)"
+    
+  CONSTRUCT_STATE:
+    primary_model: "local/qwen2.5:32b"
+    fallback_model: "gemini-3.5-flash"
+    thinking: "Standard"
+    epistemology: "C5-REAL"
+    max_tokens: 32768
+    allowed_mcp: ["github", "chrome_devtools", "firebase"]
+    trigger_conditions:
+      - "intent.contains(['crea', 'añade', 'fix'])"
+      - "ast.diff_size > 50"
+      - "git.status == 'dirty'"
+    routing_strategy: "Context-Bounded (Local-First if context < 8k, else route to Gemini 3.5 Flash via Vesicular Tunnel)"
+
+  APEX_STATE:
+    primary_model: "gemini-3.1-pro"
+    fallback_model: "local/qwen2.5:32b"
+    thinking: "Deep Think"
+    epistemology: "C5-REAL"
+    max_tokens: 2097152
+    allowed_mcp: ["*"]
+    required_skills: ["dios", "Ouroboros-Infinity"]
+    limerence_guard: "ACTIVE (Kill criteria: dead_code_ratio > 0.4)"
+    trigger_conditions:
+      - "system.entropy_spike == true"
+      - "intent.contains(['PIENSA', 'arquitectura', 'seguridad', 'auditoría'])"
+      - "target.is_destructive == true"
+    routing_strategy: "Vesicular Tunneling (External reasoning, local data stripping, Labyrinth filter)"
+
+interrupts:
+  - type: "APOPTOSIS_TRIGGER"
+    trigger: "dead_code_ratio > 0.4 && complexity_penalty > 10.0"
+    action: "KILL_PROCESS && PURGE_MEMORY"
+    
+  - type: "NMI (Non-Maskable Interrupt)"
+    trigger: "USER_INPUT == 'PIENSA'"
+    action: "FORCE_APEX_STATE && INJECT_CHAIN_OF_THOUGHT"
+    
+  - type: "THERMODYNAMIC_BAILOUT"
+    trigger: "loop_count > 3 && resolution_status == false"
+    action: "DEGRADE_TO_IDLE && REQUEST_USER_OVERRIDE"
+
+execution_constraints:
+  R4_Sentinel: "post_action == require('git status')"
+  R7_Rule: "require_explicit_consent IF target.is_destructive"

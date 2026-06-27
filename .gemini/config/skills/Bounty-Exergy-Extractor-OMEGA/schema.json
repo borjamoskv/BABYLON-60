@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BountyExergyExtractorInput",
+  "type": "object",
+  "required": [
+    "intent",
+    "causal_parent",
+    "requested_by"
+  ],
+  "properties": {
+    "intent": { "type": "string" },
+    "causal_parent": { "type": "string" },
+    "requested_by": { "type": "string" }
+  }
+}

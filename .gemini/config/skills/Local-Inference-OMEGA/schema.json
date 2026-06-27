@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "API-Provider-OMEGA Input Schema",
+  "type": "object",
+  "properties": {
+    "provider_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Base URL of the remote API provider."
+    },
+    "fallback_model": {
+      "type": "string",
+      "description": "The exact model string to use for the API fallback."
+    },
+    "original_intent": {
+      "type": "string",
+      "description": "The intent profile that triggered the initial request."
+    }
+  },
+  "required": ["provider_url", "fallback_model"]
+}

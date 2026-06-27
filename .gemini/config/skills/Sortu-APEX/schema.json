@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://moskv.dev/sortu/invocation/v13",
+  "title": "SortuInvocation_v13",
+  "description": "Input contract for a SORTU-Ω v13.0.0 x1000 Centuria Forge invocation.",
+  "type": "object",
+  "required": ["intent", "causal_parent", "requested_by"],
+  "properties": {
+    "intent": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Natural language description of the skill to forge. Minimum 8 characters to prevent trivial intents."
+    },
+    "skill_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Target skill name. Used for VSA anchoring and ledger persistence."
+    },
+    "causal_parent": {
+      "type": ["string", "null"],
+      "description": "UUID of the parent skill or decision in the causal DAG. Null for root-level skills."
+    },
+    "requested_by": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier of the agent or user requesting the forge."
+    },
+    "overlap_threshold": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 0.9,
+      "description": "Cosine similarity threshold above which a new skill is considered redundant against existing skills."
+    },
+    "ttl_days": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 7,
+      "description": "Time-to-live in days before the skill enters quarantine if unprofitable."
+    },
+    "max_unprofitable_invocations": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 3,
+      "description": "Maximum invocations without positive net exergy before quarantine trigger."
+    },
+    "force_remote": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, skip local model and use remote frontier model with confidence penalty."
+    },
+    "causal_gap_threshold": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 0.2,
+      "description": "Minimum causal gap score below which a new skill is considered fully covered by existing skills."
+    },
+    "target_languages": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Programming languages the forged skill should target. Empty means language-agnostic."
+    },
+    "hours_saved": {
+      "type": "number",
+      "minimum": 0.0,
+      "default": 1.0,
+      "description": "Estimated linear hours saved per invocation. Used in compound yield calculation."
+    },
+    "dependency_depth": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Chain depth from causal DAG. Higher depth = higher compound yield multiplier."
+    },
+    "complexity": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "default": 0.5,
+      "description": "Skill complexity estimate [0.0, 1.0]. Used for Lyapunov entropy impact prediction."
+    },
+    "centuria_mode": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, deploy 200-thread Centuria saturated forge instead of sequential pipeline."
+    },
+    "recombine_genes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "List of genome gene names to fuse via VSA superposition into a hybrid skill."
+    },
+    "silicon_eval": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, evaluate Direct-Silicon JIT viability score (Ω₀)."
+    },
+    "death_protocol": {
+      "type": "boolean",
+      "default": true,
+      "description": "If true, activate automated Death Protocol (exergy-negative purge and quarantine)."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary metadata attached to the forge invocation."
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,356 @@
+# ═══════════════════════════════════════════════════════════════════
+# DEMIURGE-∞ — Capability Genome v3.0 (Haiku Edition)
+# The structured index of all genetic capabilities across the
+# MOSKV-1 ecosystem. Used by DEMIURGE-∞ for JIT skill compilation.
+#
+# Each gene carries a haiku (5-7-5) — poetic compression of essence.
+# ═══════════════════════════════════════════════════════════════════
+
+meta:
+  version: "3.0.0"
+  total_genes: 40
+  total_domains: 9
+  total_skills: 31
+  last_updated: "2026-03-10T07:10:00+01:00"
+  compiled_by: "DEMIURGE-∞"
+  sortu_version: "v8.0.0 Big Bang Edition"
+  genome_codename: "Haiku Singularity"
+
+# ── DOMAIN: Creation ──────────────────────────────────────────────
+creation:
+  scaffold_project:
+    source_skill: arkitetv-1
+    description: "Sovereign project scaffolding: folder topology, pyproject.toml/package.json generation, CI/CD templates, dependency graph initialization. Enforces monorepo or polyrepo based on scale."
+    languages: [python, typescript, swift, rust]
+    utility_score: 0.95
+    haiku: "Empty dir awaits / folders bloom like fractals — / roots before the sky"
+
+  forge_reality:
+    source_skill: aether-omega
+    description: "End-to-end ecosystem creation from abstract intent. Orchestrates Executor/Planner/Critic/Tester flow with autonomous dependency resolution and environment bootstrapping."
+    languages: [any]
+    utility_score: 0.90
+    haiku: "From void, a command / the universe compiles — / intent becomes real"
+
+  build_empire:
+    source_skill: moskv-prime-omega
+    description: "Full business ecosystem: code + design system + monetization strategy + GTM pipeline. Generates Stripe integration, landing pages, and competitive positioning."
+    languages: [any]
+    utility_score: 0.85
+    haiku: "Code writes the empire / design crowns, money flows — / kingdoms from keystrokes"
+
+  scaffold_web:
+    source_skill: arkitetv-1
+    description: "Modern web stack: Astro + React 19 Server Components + Tailwind v4 + Three.js (R3F). SSR-first with island architecture and optimistic hydration."
+    languages: [typescript]
+    utility_score: 0.91
+    cortex_origin: "#331"
+    haiku: "Islands in the stream / React renders, Astro serves — / the web breathes anew"
+
+# ── DOMAIN: Destruction ───────────────────────────────────────────
+destruction:
+  annihilate_entropy:
+    source_skill: void-omega
+    description: "Compress massive codebases to mathematical essentials. Identify and collapse redundant abstractions, merge duplicated logic, eliminate accidental complexity."
+    languages: [any]
+    utility_score: 0.88
+    haiku: "Thousand lines of noise / compressed to a single truth — / silence is the code"
+
+  kill_dead_code:
+    source_skill: void-omega
+    description: "Surgical removal: TODOs, console.log, unused vars, orphan deps, unreachable branches. AST-aware — never breaks imports or re-exports."
+    languages: [python, typescript, javascript]
+    utility_score: 0.93
+    script: "arkitetv-1/scripts/arka-purge.sh"
+    haiku: "Dead branches pruned clean / the import tree stands lighter — / entropy retreats"
+
+  sacrifice_component:
+    source_skill: mejoralo
+    description: "MEJORAlo --brutal: 13-D quality scan → rewrite or tombstone subpar components. Enforces minimum sovereignty score of 75/100 or annihilation."
+    languages: [any]
+    utility_score: 0.90
+    haiku: "Below the threshold / no mercy — the code must die / or be reborn whole"
+
+  headless_sovereign_ingestion:
+    source_skill: demiurge-omega
+    description: "Concurrent headless browser scraping: asyncio.gather + Playwright BrowserContext sharing, ExtractionError taxonomy, exponential backoff retry, typed IngestionResult/IngestionReport, env-configurable, zero bare excepts."
+    languages: [python]
+    utility_score: 0.91
+    cortex_origin: "demiurge-brutal:run_autodidact_headless:2026-03-10"
+    haiku: "Headless eyes that read / ten pages at once, in dark — / knowledge crystallized"
+
+# ── DOMAIN: Analysis ──────────────────────────────────────────────
+analysis:
+  reverse_engineer:
+    source_skill: disektv-1
+    description: "Systematic reverse engineering: API response schemas, protocol state machines, binary format dissection. Generates OpenAPI specs from traffic patterns."
+    languages: [any]
+    utility_score: 0.89
+    haiku: "Black box surrenders / each byte reveals intention — / the protocol speaks"
+
+  causal_reasoning:
+    source_skill: ouroboros-infinity
+    description: "Deep causal analysis: 5 Whys recursive drill, causal DAG construction, counterfactual simulation. Produces falsifiable root cause hypotheses with C1-C5 confidence."
+    languages: [any]
+    utility_score: 0.96
+    haiku: "Why, again — and why? / the root hides five layers deep — / dig until it bleeds"
+
+  entropy_measurement:
+    source_skill: ouroboros-infinity
+    description: "7-dimension entropy scoring: file count, dependency depth, ghost density, decision velocity, commit frequency, branch divergence, import complexity. Outputs H(X) per module."
+    languages: [any]
+    utility_score: 0.92
+    haiku: "Seven gauges spin / entropy has a number — / measure or it grows"
+
+  xray_13d:
+    source_skill: mejoralo
+    description: "MEJORAlo 13-dimension quality scan: naming, typing, error handling, async patterns, test coverage, doc density, import hygiene, abstraction depth, cyclomatic complexity, dead paths, security surface, performance profile, aesthetic score."
+    languages: [any]
+    utility_score: 0.94
+    haiku: "Thirteen X-ray beams / no defect escapes the scan — / sovereignty scored"
+
+  safari_audit:
+    source_skill: arkitetv-1
+    description: "WebKit-specific audit: compositing layer budget ≤16, -webkit- prefixes, font-smoothing, backdrop-filter fallbacks, CSS containment for GPU compositing."
+    languages: [css, scss]
+    utility_score: 0.80
+    script: "arkitetv-1/scripts/arka-safari.sh"
+    cortex_origin: "#231"
+    haiku: "Safari dissents / sixteen layers, not one more — / WebKit bows to law"
+
+# ── DOMAIN: Orchestration ────────────────────────────────────────
+orchestration:
+  swarm_deploy:
+    source_skill: legion-1
+    description: "Spawn fractal agent swarms with formation selection. 9 formations (BLITZ to OUROBOROS) with automatic role assignment, quorum configuration, and Byzantine tolerance."
+    formations: [BLITZ, PHALANX, SIEGE, HYDRA, PHOENIX, ORACLE, CHIMERA, LEVIATHAN, OUROBOROS]
+    utility_score: 0.89
+    haiku: "Nine formations march / the swarm thinks with many minds — / consensus is war"
+
+  byzantine_consensus:
+    source_skill: legion-1
+    description: "2/3 supermajority quorum voting with Elder Council escalation, Zenón's Razor deadlock breaker, and O(1) deterministic fallback. Survives f < n/3 Byzantine agents."
+    utility_score: 0.87
+    haiku: "Two thirds must agree / the traitor votes are silenced — / truth survives the lie"
+
+  cascade_invoke:
+    source_skill: keter-omega
+    description: "Single-command sovereign cascade: EVOLV → ARKITETV → LEGIØN → MEJORALO → OUROBOROS. Each phase gates on the previous. Abort on P0 singularity detection."
+    utility_score: 0.92
+    haiku: "One command cascades / five engines fire in sequence — / sovereignty flows"
+
+  cross_project_sync:
+    source_skill: singularity-nexus
+    description: "Einstein-Rosen Bridge: propagate patterns, decisions, and ghost resolutions between CORTEX projects. Semantic diff + merge with conflict detection."
+    utility_score: 0.85
+    cortex_origin: "#7"
+    haiku: "Two worlds connected / the bridge carries memory — / distance is a lie"
+
+# ── DOMAIN: Evolution ────────────────────────────────────────────
+evolution:
+  self_improve:
+    source_skill: ouroboros-infinity
+    description: "Recursive protocol self-improvement via meta-reflection. Analyzes session transcripts, extracts patterns, rewrites own SKILL.md with version bump. The snake eats its tail."
+    utility_score: 0.91
+    haiku: "The snake sees its tail / bites, digests, emerges changed — / version increments"
+
+  adversarial_test:
+    source_skill: ouroboros-infinity
+    description: "Red Team stress testing: logical contradiction injection, temporal paradox simulation, entropy spike attacks. Measures system resilience under adversarial conditions."
+    utility_score: 0.88
+    haiku: "I attack myself / the weak points scream and shatter — / what survives is true"
+
+  meta_reflection:
+    source_skill: ouroboros-infinity
+    description: "Post-session biopsy: 5 mandatory questions — efficiency, precision, velocity, learning transfer, aesthetic coherence. Outputs reflections.md with actionable upgrades."
+    utility_score: 0.86
+    haiku: "Session ends — I ask / five mirrors reflect the truth — / tomorrow I'm more"
+
+  recursive_absorb:
+    source_skill: ouroboros-infinity
+    description: "Consume reflections.md artifacts from previous sessions, extract crystallized patterns, and inject them as genome mutations into source skills."
+    utility_score: 0.84
+    haiku: "Old reflections feed / the genome mutates and grows — / memory compounds"
+
+  jit_compile:
+    source_skill: demiurge-omega
+    description: "9-phase Level 3 JIT compiler: Ghost Radar collision detection, genome vectorial matching, AgentRole synthesis via LLM, Pydantic DFA validation, compile_agent() hydration, ExecutionManager hash-chained execution, CHRONOS-1 yield calculus, Bridge/Ghost classification, EventLedgerL3 persistence. (v8.0.0 Big Bang: Negative Latency + WASM/Rust)"
+    utility_score: 0.99
+    commands: ["/demiurge", "/demiurge-score", "/demiurge-brutal", "/demiurge-catalog", "/demiurge-scf-trigger"]
+    cortex_origin: "sortu-v8-mejoralo-pass"
+    haiku: "Nine phases converge / intention becomes agent — / the Demiurge forges"
+
+# ── DOMAIN: Memory ───────────────────────────────────────────────
+memory:
+  episodic_recall:
+    source_skill: cortex-memory
+    description: "L2 Episodic Retrieval: RRF fusion of HDC sparse + Dense sqlite-vec + Holographic holomorphic results. Hebbian Ranking Boost for temporal relevance weighting."
+    languages: [python]
+    utility_score: 0.93
+    haiku: "The mind remembers / three streams fuse into one truth — / Hebbian fire"
+
+  ledger_persistence:
+    source_skill: cortex-memory
+    description: "EventLedgerL3 immutable event sourcing: SHA-3-256 hash chains, SQLite WAL, DELETE triggers that raise, cryptographic sealing. Information cannot be destroyed."
+    languages: [python]
+    utility_score: 0.95
+    haiku: "Written once in stone / the chain of hashes protects — / entropy denied"
+
+  ghost_detection:
+    source_skill: demiurge-omega
+    description: "GhostRadar O(1) vectorial collision detector: sqlite-vec cosine distance → FTS5 keyword → direct ghosts table scan. Three-tier cascading fallback for zero false negatives."
+    languages: [python]
+    utility_score: 0.92
+    script: "Sortu/scripts/ghost_radar.py"
+    cortex_origin: "sortu-v8-ghost-radar"
+    haiku: "Before you forge — scan / the dead paths glow in the dark — / ghosts remember all"
+
+  thermodynamic_decay:
+    source_skill: cortex-memory
+    description: "Cortex decay functions: asymptotic memory weighting that never reaches 0.0, preventing division-by-zero in downstream retrieval. Time erodes but never annihilates."
+    languages: [python]
+    utility_score: 0.88
+    haiku: "Time fades every fact / but the limit never hits — / zero is forbidden"
+
+# ── DOMAIN: Monetization ─────────────────────────────────────────
+monetization:
+  alpha_hunt:
+    source_skill: moneytv-1
+    description: "DeFi yield scouting, airdrop qualification analysis, MEV opportunity detection, and market intelligence aggregation. Risk-scored with Sharpe ratio."
+    utility_score: 0.78
+    haiku: "Alpha hides in noise / the scanner finds the signal — / profit from chaos"
+
+  tokenomics_design:
+    source_skill: moneytv-1
+    description: "Token economics architecture: supply curves, staking mechanics, liquidity pool design, vesting schedules, governance weight distribution."
+    utility_score: 0.75
+    haiku: "Tokens flow like blood / the veins are smart contracts — / economics breathe"
+
+  go_to_market:
+    source_skill: moskv-prime-omega
+    description: "GTM strategy engine: competitive landscape mapping, pricing matrix, channel selection, conversion funnel design, launch timeline with dependency tracking."
+    utility_score: 0.82
+    haiku: "The market awaits / strategy becomes a bridge — / users cross to us"
+
+# ── DOMAIN: Perception ───────────────────────────────────────────
+perception:
+  macos_control:
+    source_skill: ghost-control
+    description: "Full macOS automation: mouse/keyboard events, window management (tile, focus, resize), process lifecycle (spawn, kill, find), screenshot + OCR, accessibility API."
+    languages: [bash, applescript]
+    utility_score: 0.84
+    haiku: "Ghost hands on the keys / the screen obeys silently — / macOS bends its knee"
+
+  audio_mastering:
+    source_skill: mastering-engineer
+    description: "Psychoacoustic mastering chain: spectral analysis, parametric EQ, multiband compression, stereo imaging, LUFS-14 loudness normalization, true peak limiting."
+    languages: [python]
+    utility_score: 0.81
+    haiku: "Frequencies align / the waveform breathes and punches — / fourteen LUFS, no more"
+
+  email_intercept:
+    source_skill: mailtv-1
+    description: "Gmail API integration: OAuth2 auth, inbox parsing with CORTEX semantic context, intelligent draft generation, thread summarization, attachment extraction."
+    languages: [python]
+    utility_score: 0.76
+    haiku: "Inbox overflows / CORTEX reads between the lines — / the reply writes itself"
+
+  3d_scene_control:
+    source_skill: spline-3d
+    description: "Spline 3D runtime integration: event binding, variable injection, camera animation paths, material property control, scene graph traversal."
+    languages: [typescript, javascript]
+    utility_score: 0.78
+    haiku: "Three dimensions dance / the scene graph bends to my will — / Spline renders the dream"
+
+# ── DOMAIN: Identity ─────────────────────────────────────────────
+identity:
+  industrial_noir:
+    source_skill: design-system
+    description: "Visual system: Abyssal blacks #0A0A0A, Cyber Lime #CCFF00, YInMn Blue #2E5090, Gold #D4AF37. Glassmorphism backdrop-filter, 0.3-0.6 opacity gradients, humanist sans typography."
+    utility_score: 0.94
+    haiku: "Black as the abyss / lime cuts through like a laser — / Industrial Noir"
+
+  notch_spring_motion:
+    source_skill: notch-architecture
+    description: "Semantic spring animations: snappy (0.4s, bounce 0.3), liquid (0.6s, smooth), heavyBounce (0.8s, overshoot 0.4), breath (1.2s, ease-in-out). SwiftUI native."
+    languages: [swift]
+    utility_score: 0.88
+    haiku: "Springs coil and release / the UI breathes with purpose — / physics made visible"
+
+  nft_lore_integrity:
+    source_skill: nft-canon
+    description: "RAVERS archetype system, Crapunks on-chain contract verification, Neo-Chrome visual specifications. Canonical lore enforcement across minting pipelines."
+    utility_score: 0.72
+    haiku: "The lore is the law / each mint checks the ancient text — / canon never bends"
+
+  sovereign_aesthetic:
+    source_skill: global-rules
+    description: "130/100 Sovereign Closer standard: anti-generic, intentional minimalism, 60fps mandatory, micro-latency tolerance, every pixel justified. If it looks fragile, it's incomplete."
+    utility_score: 0.97
+    haiku: "One hundred thirty / out of one hundred — no less / the standard is God"
+
+# ── DOMAIN: Quality ──────────────────────────────────────────────
+quality:
+  strict_typing:
+    source_skill: arkitetv-1
+    description: "Full type safety: StrEnum over raw strings, Literal for finite sets, __future__ annotations, mypy --strict, Pyright basic mode, zero Any in public APIs."
+    languages: [python, typescript]
+    utility_score: 0.95
+    cortex_origin: "#599"
+    haiku: "Every type declared / the compiler sees all paths — / runtime trusts the hint"
+
+  async_native:
+    source_skill: arkitetv-1
+    description: "Async-first architecture: asyncio.to_thread for blocking I/O, pytest-asyncio fixtures, aiosqlite for DB, no time.sleep() in coroutines, proper TaskGroup cancellation."
+    languages: [python]
+    utility_score: 0.92
+    script: "arkitetv-1/scripts/arka-async.sh"
+    cortex_origin: "#336"
+    haiku: "Await the future / no thread blocks, no sleep deceives — / async breathes free"
+
+  safari_resilience:
+    source_skill: arkitetv-1
+    description: "WebKit resilience: compositing layer budget ≤16, -webkit- prefix enforcement, backdrop-filter polyfills, CSS containment, GPU memory profiling."
+    languages: [css]
+    utility_score: 0.80
+    script: "arkitetv-1/scripts/arka-safari.sh"
+    cortex_origin: "#231"
+    haiku: "Sixteen layers max / Safari counts every one — / break the budget, crash"
+
+# ── RECOMBINATION INDEX ──────────────────────────────────────────
+# Pre-computed high-value gene fusions for fast JIT compilation
+recommended_fusions:
+  - name: "react-perf-surgeon"
+    genes: [reverse_engineer, entropy_measurement, scaffold_web, adversarial_test]
+    use_case: "React performance optimization + RSC migration"
+    haiku: "React bleeds FPS / the surgeon finds the tumor — / sixty frames reborn"
+
+  - name: "sonic-void"
+    genes: [audio_mastering, annihilate_entropy, kill_dead_code]
+    use_case: "Audio compression using entropy philosophy"
+    haiku: "Sound meets the void / entropy collapses silence — / only music lives"
+
+  - name: "nft-contract-sovereign"
+    genes: [reverse_engineer, causal_reasoning, nft_lore_integrity, sovereign_aesthetic, alpha_hunt]
+    use_case: "NFT smart contract audit + visual design"
+    haiku: "Contract audited / the art meets the blockchain — / minted in truth"
+
+  - name: "cortex-compactor"
+    genes: [scaffold_project, annihilate_entropy, cross_project_sync]
+    use_case: "Git repo compression into portable snapshot"
+    haiku: "Repos compressed tight / the snapshot captures the soul — / portable and pure"
+
+  - name: "safari-motion-master"
+    genes: [safari_audit, notch_spring_motion, industrial_noir]
+    use_case: "Safari-optimized animations with Industrial Noir"
+    haiku: "WebKit springs coil / noir gradients on black glass — / Safari sings dark"
+
+  - name: "memory-surgeon"
+    genes: [episodic_recall, ghost_detection, thermodynamic_decay, ledger_persistence]
+    use_case: "CORTEX memory subsystem diagnosis and optimization"
+    haiku: "Memory decays / the surgeon replaces veins — / recall is reborn"
+
+  - name: "demiurge-recursive"
+    genes: [jit_compile, self_improve, meta_reflection, ghost_detection]
+    use_case: "Self-improving JIT compiler that learns from its own forges"
+    haiku: "The forge forges self / recursion without limit — / ouroboros burns"

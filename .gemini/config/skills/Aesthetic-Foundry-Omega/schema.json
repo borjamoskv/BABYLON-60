@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Aesthetic-Foundry-Omega",
+  "type": "object",
+  "required": ["input"],
+  "properties": {
+    "input": {
+      "type": "string",
+      "description": "Component or prompt to be adapted to the Industrial Noir 2026 aesthetics."
+    }
+  }
+}

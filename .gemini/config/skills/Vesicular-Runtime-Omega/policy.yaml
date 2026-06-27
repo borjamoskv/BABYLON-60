@@ -1,0 +1,9 @@
+version: "1.0.0"
+states:
+  - ACTIVE
+  - QUARANTINED
+  - TOMBSTONED
+  - PURGED
+rules:
+  - require_credential_escrow: true
+  - stateless_llm_enforcement: true

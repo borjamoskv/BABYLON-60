@@ -1,0 +1,53 @@
+workflows:
+  - id: clipboard_sanitizer
+    priority: 20
+    when: clipboard_changed
+    cooldown: 30
+    steps:
+      - detect_sensitive_content
+    verify:
+      - clipboard_clean
+    rollback:
+      - restore_previous_clipboard
+    metrics:
+      saved_risk: true
+
+  - id: battery_survival_mode
+    priority: 15
+    when: battery_low
+    cooldown: 600
+    max_executions: 3
+    if: docker_running
+    steps:
+      - check_battery
+      - pause_docker
+      - reduce_brightness
+      - notify_battery_saving
+    verify:
+      - battery_saving_active
+    rollback:
+      - restore_brightness
+      - resume_docker
+    metrics:
+      energy_saved: true
+
+  - id: thermal_cpu_defense
+    priority: 10
+    when: cpu_high
+    cooldown: 120
+    max_executions: 10
+    steps:
+      - notify_high_cpu
+    metrics:
+      hardware_protected: true
+
+  - id: finder_defaults_enforcement
+    priority: 5
+    when: always_true
+    cooldown: 3600
+    steps:
+      - enforce_finder_settings
+    verify:
+      - finder_is_clean
+    metrics:
+      finder_aligned: true

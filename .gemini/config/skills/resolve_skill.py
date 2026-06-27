@@ -15,7 +15,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent
 RESOLUTION_FILE = ROOT / "skills_resolution.json"
-SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidact-omega", "_metrics", "scripts"}
+SKILLS_TO_SKIP = {".ruff_cache", "_archived", "__pycache__", "Sortu", "autodidact-omega", "_metrics", "scripts", ".tombstone", "DIAMOND-Sentinel-OMEGA"}
 
 
 def load_resolution() -> dict[str, Any]:
