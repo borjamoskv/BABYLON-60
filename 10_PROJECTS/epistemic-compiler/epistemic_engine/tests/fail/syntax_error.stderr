@@ -1,0 +1,5 @@
+error: expected `;`
+ --> tests/fail/syntax_error.rs:6:5
+  |
+6 |     }
+  |     ^
