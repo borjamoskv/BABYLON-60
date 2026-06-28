@@ -1,5 +1,5 @@
 error: EPISTEMIC_001: invalid causal inversion (cycle detected)
- --> tests/fail_generated/fuzz_46.rs:9:7
-  |
-9 | N4 -> N5;
-  |       ^^
+  --> tests/fail_generated/fuzz_46.rs:13:7
+   |
+13 | N8 -> N9;
+   |       ^^

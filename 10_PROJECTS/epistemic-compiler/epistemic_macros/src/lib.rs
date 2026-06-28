@@ -156,6 +156,13 @@ pub fn epistemic(input: TokenStream) -> TokenStream {
         }
     });
     
+    let mut dot_edges = String::new();
+    for edge in &graph.edges {
+        dot_edges.push_str(&format!("    {} -> {} [label=\"{}\"];\n", edge.from, edge.to, edge.weight));
+    }
+    let graph_name = &graph.name;
+    let dot_graph = format!("digraph {} {{\n    rankdir=LR;\n    node [shape=box, style=filled, fillcolor=\"#0A0A0A\", fontcolor=\"#2B3BE5\", fontname=\"Helvetica\"];\n    edge [color=\"#2B3BE5\", fontcolor=\"#ffffff\"];\n    bgcolor=\"#000000\";\n\n{}}}", graph_name, dot_edges);
+
     let expanded = quote! {
         pub mod states {
             #(#node_structs)*
@@ -168,6 +175,8 @@ pub fn epistemic(input: TokenStream) -> TokenStream {
             pub trait EpistemicState: sealed::Sealed {}
             
             #(impl EpistemicState for #nodes {})*
+
+            pub const CORTEX_SANEDRIN_DOT: &str = #dot_graph;
         }
         
         pub trait EpistemicNew {
