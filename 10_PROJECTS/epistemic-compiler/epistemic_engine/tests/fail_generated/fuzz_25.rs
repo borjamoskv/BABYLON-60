@@ -3,7 +3,10 @@ use epistemic_engine::epistemic;
 epistemic! {
     graph fail_fuzz_25 {
         N0 -> N1;
-N0 -> N2;
+N1 -> N2;
+N2 -> N3;
+N3 -> N4;
+N4 -> N0;
     }
 }
 

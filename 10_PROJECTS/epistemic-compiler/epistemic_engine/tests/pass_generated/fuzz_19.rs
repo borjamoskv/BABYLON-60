@@ -4,13 +4,9 @@ epistemic! {
     graph pass_fuzz_19 {
         N1 -> N0;
 N2 -> N0;
-N3 -> N1;
-N4 -> N2;
-N5 -> N0;
-N6 -> N3;
-N7 -> N0;
-N8 -> N4;
-N9 -> N3;
+N3 -> N0;
+N4 -> N3;
+N5 -> N4;
     }
 }
 

@@ -94,4 +94,26 @@ fn main() {{}}
 with open(f"{PASS_DIR}/massive_fan_in.rs", "w") as f:
     f.write(code_fanin)
 
+# Massive Sanedrin Dump
+nodes_san = [f"S{j}" for j in range(2000)]
+edges_san = [f"{nodes_san[j]} -> {nodes_san[j+1]} [{random.uniform(0.1, 0.99):.2f}];" for j in range(1999)]
+code_san = f"""use epistemic_engine::epistemic;
+use std::fs;
+
+epistemic! {{
+    graph massive_sanedrin {{
+        {chr(10).join(edges_san)}
+    }}
+}}
+
+fn main() {{
+    let dot = states::CORTEX_SANEDRIN_DOT;
+    assert!(dot.len() > 10000);
+    fs::write("target/massive_sanedrin_dump.dot", dot).unwrap();
+}}
+"""
+with open(f"{PASS_DIR}/massive_sanedrin.rs", "w") as f:
+    f.write(code_san)
+
 print("100 pruebas + Massive Stress Tests generadas correctamente.")
+
