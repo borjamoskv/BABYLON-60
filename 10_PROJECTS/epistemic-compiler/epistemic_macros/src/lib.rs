@@ -72,7 +72,37 @@ impl Parse for EpistemicGraph {
     }
 }
 
-fn detect_cycle(edges: &[EpistemicEdge]) -> syn::Result<()> {
+fn validate_epistemology(edges: &[EpistemicEdge]) -> syn::Result<()> {
+    // 1. Matriz de Rechazo Ontológico (EPISTEMIC_002)
+    for edge in edges {
+        if let (Some(k1), Some(k2)) = (&edge.from.kind, &edge.to.kind) {
+            let k1_str = k1.to_string();
+            let k2_str = k2.to_string();
+            
+            if k1_str == "Latent" && k2_str == "Observable" {
+                return Err(syn::Error::new_spanned(
+                    &edge.to.name,
+                    "EPISTEMIC_002: Observables cannot be derived from Latent variables. Provenance violation."
+                ));
+            }
+            
+            if k1_str == "Intervention" && (k2_str == "Evidence" || k2_str == "RawEvidence") {
+                return Err(syn::Error::new_spanned(
+                    &edge.to.name,
+                    "EPISTEMIC_002: An intervention cannot mutate basal Evidence. Temporal violation."
+                ));
+            }
+            
+            if k1_str == "Invariant" {
+                return Err(syn::Error::new_spanned(
+                    &edge.from.name,
+                    "EPISTEMIC_002: Invariants are terminal bounds. They cannot emit causality to other nodes."
+                ));
+            }
+        }
+    }
+
+    // 2. Cycle Detection (EPISTEMIC_001)
     let mut graph: HashMap<&Ident, Vec<&Ident>> = HashMap::new();
 
     for e in edges {
@@ -125,7 +155,7 @@ fn detect_cycle(edges: &[EpistemicEdge]) -> syn::Result<()> {
 pub fn epistemic(input: TokenStream) -> TokenStream {
     let graph = syn::parse_macro_input!(input as EpistemicGraph);
 
-    if let Err(e) = detect_cycle(&graph.edges) {
+    if let Err(e) = validate_epistemology(&graph.edges) {
         return e.to_compile_error().into();
     }
 
