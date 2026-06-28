@@ -18,10 +18,10 @@
     "timestamp": "2026-06-28T01:11:25Z"
   },
   "borjamoskv-web": {
-    "last_task": "Migración de Substack a MDX",
-    "last_file": "src/content/articles/substack-mafia-autopsia-estructural.mdx",
-    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
-    "timestamp": "2026-06-06T01:30:31.952306Z"
+    "last_task": "Operación SANEDRÍN: Saneamiento TypeScript en Astro y mitigación OOM V8 para compilación SSR Cloudflare (C5-REAL)",
+    "last_file": "package.json / tsconfig.json",
+    "last_conversation": "38b1da73-0421-49f9-b6e2-0b1753117ede",
+    "timestamp": "2026-06-28T02:04:57Z"
   },
   "agents-archi": {
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",

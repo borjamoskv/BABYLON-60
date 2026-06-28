@@ -2,7 +2,7 @@
   "meta": {
     "project_id": "cortex",
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-06-02T02:22:00+02:00",
+    "last_touched": "2026-06-28T05:26:42+02:00",
     "migrated_from": "ghosts.json"
   },
   "status": "active",
@@ -13,12 +13,13 @@
   "category": "core-infra",
   "summary": "Sistema nervioso de MOSKV-1. Memoria persistente multi-nivel (L1 Session, L2 Project, L3 System). Daemon watchdog con monitorización de sitios, freshness checks, notificaciones macOS.",
   "ghost": {
-    "last_task": "Cristalización del mapa exergético (AST, ISA, Consenso) y límites C5-REAL del agente dios",
-    "last_file": "SKILL.md (dios)",
-    "conversation_id": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa",
-    "timestamp": "2026-06-02T02:22:00+02:00"
+    "last_task": "Forjada de la Ontología C5-REAL: 100 Invariantes Físicas e Isomorfismo Transversal",
+    "last_file": "100_invariantes_fisicas.md",
+    "conversation_id": "21ded5b2-71a4-4ba2-824e-b6da2e0e1031",
+    "timestamp": "2026-06-28T05:26:42+02:00"
   },
   "recent_changes": [
+    "[2026-06-28T05:26:42+02:00] Cristalización de las 100 Invariantes Físicas C5-REAL y Matriz de Isomorfismo",
     "[2026-06-02T02:22:00+02:00] Definición de 4 niveles de exergía arquitectónica y rol reactivo de DIOS",
     "[2026-05-27T17:06:06.003919Z] Applied MOSKV aesthetics and Protocol Omega for AIisms demolition to redaccion-ia.md",
     "[2026-05-27T05:09:09Z] Added 5 E2E command validation patterns to verification-before-completion skill",
@@ -27,8 +28,7 @@
     "🚀 Configured NativeVLLMProvider to dynamically load registered verified adapters via LoRARequest",
     "🛣️ Added dynamic model resolution and routing interceptor hooks inside LLMProvider",
     "🧪 Deployed tests/test_ttt_daemon.py with 11 async unit tests covering verifier, daemon, and routing",
-    "🗄️ SwarmBudgetManager migrado a cortex.database.core.connect (WAL + busy_timeout 5000ms + mmap)",
-    "⚡ report_usage optimizado con INSERT...ON CONFLICT...RETURNING — elimina doble query de I/O"
+    "🗄️ SwarmBudgetManager migrado a cortex.database.core.connect (WAL + busy_timeout 5000ms + mmap)"
   ],
   "known_issues": [
     "Jules API 403 con OAuth access token — posible scope issue",
@@ -293,5 +293,5 @@
     "cortex/extensions/llm/provider.py",
     "tests/test_ttt_daemon.py"
   ],
-  "last_updated": "2026-05-31T13:02:05Z"
+  "last_updated": "2026-06-28T05:26:42Z"
 }

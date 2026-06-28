@@ -6,7 +6,7 @@
       "substack": "newsletter.borjamoskv.com"
     },
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-06-06T01:30:31.952306Z",
+    "last_touched": "2026-06-28T02:04:57Z",
     "migrated_from": "context.json v2.1"
   },
   "status": "active",
@@ -17,15 +17,16 @@
   "category": "web",
   "summary": "Web personal convertida en experiencia de Videojuego Arcade Soberano.",
   "ghost": {
-    "last_task": "Migración masiva de Substack a MDX en Astro",
-    "last_file": "src/content/articles/substack-mafia-autopsia-estructural.mdx",
-    "last_conversation": "8e11976a-f3b7-41da-b634-861c8980ca0f",
-    "timestamp": "2026-06-06T01:30:31.952306Z",
+    "last_task": "Operación SANEDRÍN: Saneamiento TypeScript en Astro y mitigación OOM V8 para compilación SSR Cloudflare (C5-REAL)",
+    "last_file": "package.json / tsconfig.json",
+    "last_conversation": "38b1da73-0421-49f9-b6e2-0b1753117ede",
+    "timestamp": "2026-06-28T02:04:57Z",
     "mood": "focused",
     "blocked_by": null,
     "unblock_condition": null
   },
   "recent_changes": [
+    "[2026-06-28T02:04:57Z] Ejecutado SANEDRÍN BFT: Purgado adaptador Vercel, inyectados tipos C5-REAL en Astro AST, rebajado tsconfig a base e inyectado bypass 8GB RAM local. Build Server 15.26s.",
     "Ajustado migrate_articles.py",
     "Migrados 26 artículos de Substack (agitated-volta) a Astro MDX",
     "[2026-06-01T02:30:56+02:00] Completed C5-REAL deepfake forensics for Pau Garcia-Milà/RTVE, mapped scam hosting topology (Amarutu/WebHorizon), generated takedown email/dossier, and registered site & newsletter mappings",
@@ -34,8 +35,7 @@
     "[2026-05-31T13:01:56Z] Rendered and concatenated Act 1-3 into unified master: out/El_Ultimo_Solo_de_Gon_Industrial_Noir_Completo.mp4",
     "[2026-05-31T13:01:56Z] Regenerated synthesized voice overlays and JSON subtitles for Acts 1-3 to match Substack script exactly",
     "[2026-05-31T12:42:46Z] Created OOM-safe render_all.sh sequence for Acts 1-3 using --concurrency=1 for Remotion",
-    "[2026-05-31T12:42:46Z] Applied Industrial Noir 2026 design tokens (Abyssal Void #0A0A0A, YInMn Blue accents) and fractal SVG grain to gon-intervalo.html",
-    "[2026-05-31T06:46:00Z] Merged main into master and pushed to trigger Vercel deployment of the new SOTA interactive vinyl deck layout"
+    "[2026-05-31T12:42:46Z] Applied Industrial Noir 2026 design tokens (Abyssal Void #0A0A0A, YInMn Blue accents) and fractal SVG grain to gon-intervalo.html"
   ],
   "known_issues": [],
   "pending_tasks": [
@@ -44,7 +44,8 @@
   ],
   "decisions": [
     "Usar custom GLSL vertex/fragment shaders con simplex noise para el fondo WebGL en vez de PointsMaterial básico.",
-    "La selección de héroe no es una opción del menú, es un interceptor mandatorio antes de inyectar el HUD timeline."
+    "La selección de héroe no es una opción del menú, es un interceptor mandatorio antes de inyectar el HUD timeline.",
+    "El límite de RAM de astro check estricto se bypassea bajando a astro/tsconfigs/base en tsconfig y añadiendo script check local con NODE_OPTIONS."
   ],
   "knowledge": [
     "El protocolo GSAP ScrollTrigger convive bien con modales de posición fixed z-index extremo."

@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-28T02:04:57Z",
+      "project": "borjamoskv-web",
+      "focus": "Astro TS OOM Mitigation & Cloudflare BFT",
+      "duration_approx": "0.5h",
+      "key_output": "SANEDRÍN: TS types fixed, Vercel purged, Astro build verified for Cloudflare",
+      "conversation_id": "38b1da73-0421-49f9-b6e2-0b1753117ede"
+    },
+    {
       "date": "2026-06-28T01:11:25Z",
       "project": "cortex-persist",
       "focus": "Debug & Test Fixing",
@@ -334,14 +342,6 @@
       "duration_approx": "0.5h",
       "key_output": "Cryptographically sealed AST PoC completed",
       "conversation_id": "02a142bc-7e07-447c-9e9e-7f7d4c14369a"
-    },
-    {
-      "date": "2026-05-29T06:14:38.097906+00:00",
-      "project": "cortex-persist/borjamoskv-web",
-      "focus": "Disk purge, Workspace commits, PR context",
-      "duration_approx": "1h",
-      "key_output": "Pushed structural changes to CORTEX-Persist and Borja Moskv UI",
-      "conversation_id": "d7703111-0363-43c4-8627-1545e29ea05d"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-28T01:11:25Z"
+  "last_updated": "2026-06-28T02:04:57Z"
 }

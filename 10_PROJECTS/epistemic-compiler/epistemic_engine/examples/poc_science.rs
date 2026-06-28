@@ -7,7 +7,7 @@ epistemic! {
         Hypothesis Hypothesis -> Intervention SandboxDeployment [0.95];
         Intervention SandboxDeployment -> Observable EmpiricalExecution [0.95];
         Observable EmpiricalExecution -> Derived DataIngestion [0.98];
-        Derived DataIngestion -> Latent CausalAssertion [0.85];
+        Derived DataIngestion -> Latent CausalAssertion [0.42];
     }
 }
 

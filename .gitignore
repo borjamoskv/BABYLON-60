@@ -46,3 +46,6 @@ Thumbs.db
 *.swp
 *~
 .vercel
+full_transcript.txt
+scratch_rust/
+data/vectors/*.bin
