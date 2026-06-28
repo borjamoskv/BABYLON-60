@@ -1,5 +1,10 @@
 pub use epistemic_macros::epistemic;
 use std::marker::PhantomData;
+use std::collections::{HashMap, BinaryHeap};
+use std::cmp::Ordering;
+
+pub mod ontology;
+pub use ontology::*;
 
 /// El runtime mínimo de C5-REAL.
 #[derive(Debug)]

@@ -4,10 +4,10 @@ use std::path::PathBuf;
 
 epistemic! {
     graph scientific_method {
-        Hypothesis -> SandboxDeployment [0.95];
-        SandboxDeployment -> EmpiricalExecution [0.90];
-        EmpiricalExecution -> DataIngestion [0.98];
-        DataIngestion -> CausalAssertion [0.85];
+        Hypothesis Hypothesis -> Intervention SandboxDeployment [0.95];
+        Intervention SandboxDeployment -> Observable EmpiricalExecution [0.90];
+        Observable EmpiricalExecution -> Derived DataIngestion [0.98];
+        Derived DataIngestion -> Latent CausalAssertion [0.85];
     }
 }
 

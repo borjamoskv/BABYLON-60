@@ -9,9 +9,15 @@ struct EpistemicGraph {
     pub edges: Vec<EpistemicEdge>,
 }
 
+#[derive(Clone, Debug)]
+struct EpistemicNode {
+    pub kind: Option<Ident>,
+    pub name: Ident,
+}
+
 struct EpistemicEdge {
-    pub from: Ident,
-    pub to: Ident,
+    pub from: EpistemicNode,
+    pub to: EpistemicNode,
     pub weight: f64,
 }
 
@@ -26,9 +32,23 @@ impl Parse for EpistemicGraph {
         let mut edges = Vec::new();
 
         while !content.is_empty() {
-            let from: Ident = content.parse()?;
+            let mut kind1 = None;
+            let mut name1: Ident = content.parse()?;
+            if content.peek(syn::Ident) && !content.peek(Token![->]) {
+                kind1 = Some(name1);
+                name1 = content.parse()?;
+            }
+            let from = EpistemicNode { kind: kind1, name: name1 };
+
             let _arrow: Token![->] = content.parse()?;
-            let to: Ident = content.parse()?;
+
+            let mut kind2 = None;
+            let mut name2: Ident = content.parse()?;
+            if content.peek(syn::Ident) && !content.peek(syn::token::Bracket) && !content.peek(Token![;]) {
+                kind2 = Some(name2);
+                name2 = content.parse()?;
+            }
+            let to = EpistemicNode { kind: kind2, name: name2 };
             
             let weight: f64 = if content.peek(syn::token::Bracket) {
                 let bracketed_content;
@@ -53,11 +73,10 @@ impl Parse for EpistemicGraph {
 }
 
 fn detect_cycle(edges: &[EpistemicEdge]) -> syn::Result<()> {
-    // Store Ident to preserve span for error reporting
     let mut graph: HashMap<&Ident, Vec<&Ident>> = HashMap::new();
 
     for e in edges {
-        graph.entry(&e.from).or_default().push(&e.to);
+        graph.entry(&e.from.name).or_default().push(&e.to.name);
     }
 
     fn dfs<'a>(
@@ -110,23 +129,30 @@ pub fn epistemic(input: TokenStream) -> TokenStream {
         return e.to_compile_error().into();
     }
 
-    let mut unique_nodes = HashMap::new();
+    let mut unique_nodes: HashMap<String, EpistemicNode> = HashMap::new();
     for edge in &graph.edges {
-        unique_nodes.insert(edge.from.to_string(), edge.from.clone());
-        unique_nodes.insert(edge.to.to_string(), edge.to.clone());
+        unique_nodes.insert(edge.from.name.to_string(), edge.from.clone());
+        unique_nodes.insert(edge.to.name.to_string(), edge.to.clone());
     }
     
-    let nodes: Vec<_> = unique_nodes.values().collect();
+    let nodes: Vec<_> = unique_nodes.values().map(|n| &n.name).collect();
 
-    let node_structs = nodes.iter().map(|n| {
-        quote! {
-            pub struct #n;
+    let node_structs = unique_nodes.values().map(|n| {
+        let name = &n.name;
+        if let Some(kind) = &n.kind {
+            quote! {
+                pub struct #name(pub epistemic_engine::#kind);
+            }
+        } else {
+            quote! {
+                pub struct #name;
+            }
         }
     });
     
     let transitions = graph.edges.iter().map(|edge| {
-        let from = &edge.from;
-        let to = &edge.to;
+        let from = &edge.from.name;
+        let to = &edge.to.name;
         let weight = edge.weight;
         quote! {
             impl epistemic_engine::Transition<states::#from> for epistemic_engine::Inference<states::#from> {
@@ -158,7 +184,9 @@ pub fn epistemic(input: TokenStream) -> TokenStream {
     
     let mut dot_edges = String::new();
     for edge in &graph.edges {
-        dot_edges.push_str(&format!("    {} -> {} [label=\"{}\"];\n", edge.from, edge.to, edge.weight));
+        let from_str = if let Some(k) = &edge.from.kind { format!("{}_{}", k, edge.from.name) } else { edge.from.name.to_string() };
+        let to_str = if let Some(k) = &edge.to.kind { format!("{}_{}", k, edge.to.name) } else { edge.to.name.to_string() };
+        dot_edges.push_str(&format!("    {} -> {} [label=\"{}\"];\n", from_str, to_str, edge.weight));
     }
     let graph_name = &graph.name;
     let dot_graph = format!("digraph {} {{\n    rankdir=LR;\n    node [shape=box, style=filled, fillcolor=\"#0A0A0A\", fontcolor=\"#2B3BE5\", fontname=\"Helvetica\"];\n    edge [color=\"#2B3BE5\", fontcolor=\"#ffffff\"];\n    bgcolor=\"#000000\";\n\n{}}}", graph_name, dot_edges);

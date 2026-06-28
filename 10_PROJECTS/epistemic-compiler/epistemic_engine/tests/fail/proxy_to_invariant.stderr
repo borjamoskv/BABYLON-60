@@ -6,5 +6,5 @@ error[E0308]: mismatched types
    |                     |
    |                     expected due to this
    |
-   = note: expected struct `Inference<Invariant>`
-              found struct `Inference<Observable>`
+   = note: expected struct `Inference<states::Invariant>`
+              found struct `Inference<states::Observable>`

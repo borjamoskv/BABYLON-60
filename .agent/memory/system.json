@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-28T01:11:25Z",
+      "project": "cortex-persist",
+      "focus": "Debug & Test Fixing",
+      "duration_approx": "2h",
+      "key_output": "13 fallos de test corregidos y Pyright baseline actualizado a 206",
+      "conversation_id": "c76c56c2-82ee-4a94-9160-98730439b9f1"
+    },
+    {
       "date": "2026-06-26T14:03:04Z",
       "project": "cortex-persist",
       "focus": "BFT Stress Test y SandboxJIT Resilience",
@@ -334,14 +342,6 @@
       "duration_approx": "1h",
       "key_output": "Pushed structural changes to CORTEX-Persist and Borja Moskv UI",
       "conversation_id": "d7703111-0363-43c4-8627-1545e29ea05d"
-    },
-    {
-      "date": "2026-05-29T04:13:26.230882+00:00",
-      "project": "cortex-persist",
-      "focus": "Event Sourcing & WASM Agent Runtime",
-      "duration_approx": "2h",
-      "key_output": "Rust Stream Kernel + WASM Runtime (Hitos 13 y 14)",
-      "conversation_id": "40a9548b-55d6-4ec9-83dd-215ef1e5afec"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-26T14:03:04Z"
+  "last_updated": "2026-06-28T01:11:25Z"
 }
