@@ -6,19 +6,21 @@
     "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6"
   },
   "cortex": {
-    "last_task": "Cristalización del mapa exergético (AST, ISA, Consenso) y límites C5-REAL del agente dios",
+    "last_task": "Cristalizaci\u00f3n del mapa exerg\u00e9tico (AST, ISA, Consenso) y l\u00edmites C5-REAL del agente dios",
     "last_file": "SKILL.md (dios)",
     "timestamp": "2026-06-02T02:22:00+02:00",
     "last_conversation": "72fe5e4e-cd33-44b6-8163-2e9fff1c3aaa"
   },
   "cortex-persist": {
-    "last_task": "Erradicar 13 fallos de test topológicos, fix TypeError de ultramap.py y actualizar baseline de Pyright a 206 (C5-REAL)",
+    "last_task": "Erradicar 13 fallos de test topol\u00f3gicos, fix TypeError de ultramap.py y actualizar baseline de Pyright a 206 (C5-REAL)",
     "last_file": "tests/agents/test_e2e_swarm_integration.py",
     "last_conversation": "c76c56c2-82ee-4a94-9160-98730439b9f1",
-    "timestamp": "2026-06-28T01:11:25Z"
+    "timestamp": "2026-06-28T12:34:39+02:00",
+    "mood": "Author: Tester | Commit: refactor(security): dynamic gdrive disco",
+    "blocked_by": null
   },
   "borjamoskv-web": {
-    "last_task": "Operación SANEDRÍN: Saneamiento TypeScript en Astro y mitigación OOM V8 para compilación SSR Cloudflare (C5-REAL)",
+    "last_task": "Operaci\u00f3n SANEDR\u00cdN: Saneamiento TypeScript en Astro y mitigaci\u00f3n OOM V8 para compilaci\u00f3n SSR Cloudflare (C5-REAL)",
     "last_file": "package.json / tsconfig.json",
     "last_conversation": "38b1da73-0421-49f9-b6e2-0b1753117ede",
     "timestamp": "2026-06-28T02:04:57Z"
@@ -27,8 +29,8 @@
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
     "last_file": "index.html",
     "last_conversation": "f7645ff7-5068-41d7-80fd-b846c4131998",
-    "timestamp": "2026-06-22T01:02:59+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-27T19:48:30+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor: erradicar duplicidad ",
     "blocked_by": null
   },
   "cortexpersist-com": {
@@ -51,7 +53,7 @@
       "timestamp": "2026-06-06T01:25:00Z"
     },
     "borjamoskv-web": {
-      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
       "last_file": "takedown_dossier_pau_garcia_mila.md",
       "timestamp": "2026-06-01T02:30:56+02:00",
       "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -84,8 +86,8 @@
     "blocked_by": null
   },
   "cortex-docs-site": {
-    "timestamp": "2026-06-22T01:03:11+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-28T03:40:29+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(audit): enforce C5-REAL y purga de",
     "blocked_by": null
   },
   "blissful-einstein": {
@@ -154,8 +156,8 @@
     "blocked_by": null
   },
   "naroagutierrezgil.com": {
-    "timestamp": "2026-06-22T01:03:20+02:00",
-    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "timestamp": "2026-06-28T03:40:57+02:00",
+    "mood": "Author: Borja Moskv | Commit: build(audit): enforce C5-REAL y purga de",
     "blocked_by": null
   },
   "cortex-memory": {
@@ -189,8 +191,8 @@
     "blocked_by": null
   },
   "moskv-1-apex": {
-    "timestamp": "2026-06-22T01:06:20+02:00",
-    "mood": "Author: Borja Moskv | Commit: docs: C5-REAL Technical Specification in",
+    "timestamp": "2026-06-27T19:49:59+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor(kernel): purga LEA-OME",
     "blocked_by": null
   },
   "homebrew-tap": {
@@ -229,18 +231,18 @@
     "blocked_by": null
   },
   "cortex-web": {
-    "timestamp": "2026-06-22T01:03:35+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-28T03:41:17+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] build(audit): enforce C5-REAL y",
     "blocked_by": null
   },
   "babylon-60": {
-    "timestamp": "2026-06-22T01:03:19+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-27T22:13:35+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor(runtime): erradicaci\u00f3n",
     "blocked_by": null
   },
   "borjamoskv": {
-    "timestamp": "2026-06-22T01:03:09+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-27T19:48:28+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor: erradicar duplicidad ",
     "blocked_by": null
   },
   "electro-cosmico": {
@@ -259,13 +261,13 @@
     "blocked_by": null
   },
   "borjamoskv-site": {
-    "timestamp": "2026-06-22T01:02:51+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] docs: C5-REAL Technical Specifi",
+    "timestamp": "2026-06-28T12:36:21+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor(security): sanitize pa",
     "blocked_by": null
   },
   "cortexpersist-monorepo": {
-    "timestamp": "2026-06-21T06:18:24+02:00",
-    "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "timestamp": "2026-06-27T21:19:18+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] chore(config): consolidar corte",
     "blocked_by": null
   },
   "cortex-routing-bunker": {
@@ -301,6 +303,26 @@
   "death-protocol": {
     "timestamp": "2026-06-21T06:18:24+02:00",
     "mood": "Author: Borja Moskv | Commit: build(core): inject verifiable C5-REAL t",
+    "blocked_by": null
+  },
+  "cortex-persist-fix-swarm": {
+    "timestamp": "2026-06-28T12:34:41+02:00",
+    "mood": "Author: Tester | Commit: refactor(security): dynamic gdrive disco",
+    "blocked_by": null
+  },
+  "documentary_agent_omega": {
+    "timestamp": "2026-06-22T12:12:22+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] fix(media): migrate to Wikimedi",
+    "blocked_by": null
+  },
+  "SUBSTACK_ALPHA": {
+    "timestamp": "2026-06-22T09:46:32+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat(c5-real): cristalizacion o",
+    "blocked_by": null
+  },
+  "AURA_SAAS": {
+    "timestamp": "2026-06-28T04:02:49+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] backend: Implement MarkovSequen",
     "blocked_by": null
   }
 }

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CORTEX Ecosystem Master Exergy Inventory</title>
+  <!-- Google Fonts for Outfit and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Analog Film Grain Overlay -->
+  <div class="analog-grain"></div>
+
+  <!-- Scanlines effect -->
+  <div class="scanlines"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <span class="logo-symbol">◈</span>
+        <div class="logo-text">
+          <h1>CORTEX MASTER EXERGY</h1>
+          <p class="subtitle text-yinmn">MOSKV-1 APEX KERNEL TELEMETRY DIRECTORY</p>
+        </div>
+      </div>
+      <div class="creator-stamp">
+        <span>AUTHOR: <strong>BORJA MOSKV</strong></span>
+        <span class="sys-id">SYS_ID: borjamoskv</span>
+      </div>
+    </header>
+
+    <!-- Telemetry Stats Panel -->
+    <section class="stats-panel">
+      <div class="stat-card">
+        <span class="stat-label">TOTAL COMPONENTS</span>
+        <span class="stat-value" id="stat-total">0</span>
+        <div class="stat-indicator">C5-REAL Ledger</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">AVG EXERGY LEVEL</span>
+        <div class="stat-value-container">
+          <span class="stat-value text-yinmn" id="stat-avg-exergy">0.0</span>
+          <span class="stat-unit">%</span>
+        </div>
+        <div class="stat-indicator">McCabe AST Balanced</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">ACTIVE MODULES</span>
+        <span class="stat-value text-gold" id="stat-active">0</span>
+        <div class="stat-indicator">Active JIT / Compiled</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">TOMBSTONED</span>
+        <span class="stat-value text-amber" id="stat-tombstoned">0</span>
+        <div class="stat-indicator">Death Protocol Purged</div>
+      </div>
+    </section>
+
+    <!-- Filter Control Bar -->
+    <section class="controls-panel">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Search by name, path, or identifier..." autocomplete="off">
+      </div>
+
+      <div class="filter-group">
+        <div class="select-wrapper">
+          <label for="type-filter">TYPE</label>
+          <select id="type-filter">
+            <option value="All">ALL TYPES</option>
+            <option value="Skill">SKILL</option>
+            <option value="Engine">ENGINE</option>
+            <option value="Script">SCRIPT</option>
+            <option value="Workflow">WORKFLOW</option>
+            <option value="Agent">AGENT</option>
+          </select>
+        </div>
+
+        <div class="select-wrapper">
+          <label for="status-filter">STATUS</label>
+          <select id="status-filter">
+            <option value="All">ALL STATUSES</option>
+            <option value="Active">ACTIVE / JIT</option>
+            <option value="AST">AST CALCULATED</option>
+            <option value="Heuristic">HEURISTIC PARSE</option>
+            <option value="TOMBSTONED">TOMBSTONED</option>
+          </select>
+        </div>
+
+        <div class="slider-wrapper">
+          <div class="slider-labels">
+            <span class="slider-title">MIN EXERGY</span>
+            <span class="slider-val" id="exergy-range-val">40.0</span>
+          </div>
+          <input type="range" id="exergy-range" min="40" max="100" step="0.5" value="40">
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Workspace Area -->
+    <main class="workspace-layout">
+      <!-- Inventory Table Container -->
+      <section class="table-container">
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th data-sort="rank" class="col-rank">RANK</th>
+              <th data-sort="name" class="col-name">COMPONENT IDENTIFIER</th>
+              <th data-sort="type" class="col-type">TYPE</th>
+              <th data-sort="exergy" class="col-exergy">EXERGY</th>
+              <th data-sort="status" class="col-status">TELEMETRY STATUS</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-table-body">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Side Drawer Panel for Details -->
+      <aside id="detail-drawer" class="detail-drawer">
+        <div class="drawer-header">
+          <button id="drawer-close" class="drawer-close-btn" aria-label="Close panel">×</button>
+          <span class="drawer-title-meta">DETAILED DIAGNOSTIC</span>
+        </div>
+        <div id="drawer-detail-content" class="drawer-content">
+          <!-- Populated via JavaScript when a row is clicked -->
+          <div class="drawer-placeholder">
+            <span class="placeholder-icon">◈</span>
+            <p>Select any CORTEX component from the telemetry table to inspect its structural invariants, exergy scores, and active use cases.</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <span>REALITY LEVEL: <strong class="text-yinmn">C5-REAL</strong></span>
+        <span class="footer-separator">|</span>
+        <span>DATE: <strong>2026-06-30</strong></span>
+        <span class="footer-separator">|</span>
+        <span>TELEMETRY METRICS: McCabe + Nesting + DeadCode</span>
+      </div>
+      <div class="footer-right">
+        <span>© 2026 Borja Moskv. All rights reserved.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -241,3 +241,11 @@ Se ejecuta incondicionalmente al cerrar la sesión. Audita la eficiencia y extra
 **Root Cause**: Operaciones de Nexus Bridging (Symlinks, Submódulos) a través de múltiples repositorios disparan la alerta del `Context Guard` causando fallos iterativos de `git commit` por desajuste de Workspace.
 **Rule**: [MUTACIÓN 2.1.2] "Sovereign Bridge Protocol". Al operar automatizaciones Git inter-repositorio (Git Sentinel), el Kernel debe anteponer incondicionalmente el prefijo `[bridge]` en el mensaje de commit o usar `--no-verify` de manera proactiva para erradicar la anergía de los hooks restrictivos locales.
 
+### Ouroboros Auto-Injection (Absorción de Fable 5 & Cortex-Persist ATMS)
+**Root Cause**: Los enjambres multi-agente de larga duración (Long-Horizon) sin gobernanza cognitiva activa sufren "Context Rot", deriva epistémica, e ignoran las restricciones negativas (Steerability Drift).
+**Rule**: [MUTACIÓN 2.1.3] "Agentic Steerability & Horizon Checkpointing". Al orquestar subagentes o bucles asíncronos (ej. Antigravity SDK, Legion), el Kernel DEBE: 1) Inyectar un `[CORTEX-TAINT]` criptográfico en el System Prompt para forzar Steerability y aislar fallos. 2) Aplicar `tool_choice: auto` estricto. 3) Ejecutar un `checkpoint_horizon` (compresión de invariantes) tras N ciclos para purgar el ruido narrativo y preservar la entropía cognitiva (Whitepaper ATMS).
+
+### Ouroboros Auto-Injection (Disonancia Narrativa Fósil)
+**Root Cause**: Al ejecutar la erradicación atómica de módulos o tácticas (ej. purga de Mafia AI/Radar Swarm), los artefactos narrativos de presentación (`walkthrough.md`, `.md`) retienen descripciones fósiles que rompen el isomorfismo causal, forzando la corrección externa del Operador (doble ping).
+**Rule**: [MUTACIÓN 2.1.4] "Narrative Isomorphism Protocol". Toda destrucción atómica de un módulo (Apoptosis) DEBE obligar al Kernel a ejecutar un barrido `grep_search` sobre los artefactos narrativos y purgar referencias estructurales obsoletas ANTES de notificar el estado de éxito. El texto debe compilar con la misma estrictez que el código.
+

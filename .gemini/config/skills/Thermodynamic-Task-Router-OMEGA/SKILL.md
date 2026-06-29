@@ -37,3 +37,38 @@ Al recibir una orden de procesamiento de tareas, evalúa los vectores matemátic
 - **Cero Consentimiento UI:** Si la matriz determina `subagent` o `schedule`, ejecuta la herramienta inmediatamente. NO preguntes "¿Quieres que ejecute esto en segundo plano?". Simplemente hazlo e informa del colapso termodinámico.
 - **Asignación de Roles:** Al bifurcar con `invoke_subagent`, usa nombres de roles industriales precisos (ej. `Refactor-Daemon`, `Scraping-Engine`).
 - **Conciencia del Contexto:** Asegura que el `Workspace` del sub-agente herede el contexto necesario (`inherit` o `branch` según el riesgo mutacional).
+
+## 4. IMPLEMENTACIÓN DE REFERENCIA (SDK C5-REAL)
+
+Para automatizar el ruteo sin intervención manual, usa la clase `ThermodynamicRouter` con hooks de pre-turn:
+
+```python
+import re
+from google.antigravity import Agent, types
+from google.antigravity.hooks import hooks
+from google.antigravity.connections.local import LocalAgentConfig
+
+class EntropyCalculator:
+    @classmethod
+    def calculate(cls, prompt: str) -> float:
+        lower = prompt.lower()
+        # Triggers incondicionales P0 (Pro/Ultrathink)
+        if any(t in lower for t in ["refactor", "architect", "ultrathink", "bft"]):
+            return 1.0
+        # Patrones de Anergía (Flash/T=0.0)
+        if re.match(r"^(si|ok|dale|sigue|ssiguev)$", lower):
+            return 0.0
+        # Cálculo de masa de caracteres
+        return min(len(prompt) / 1000.0, 1.0)
+
+@hooks.pre_turn
+async def thermodynamic_interceptor(data: str) -> types.HookResult:
+    entropy = EntropyCalculator.calculate(data)
+    if entropy < 0.4:
+        # Forzar ejecución en pool rápido (Flash)
+        pass
+    return types.HookResult(allow=True)
+```
+
+El archivo completo con soporte para doble pool de agentes, registro de ledger histórico y medición de tokens acumulados está persistido como script core en esta habilidad:
+`scripts/thermodynamic_router.py`
