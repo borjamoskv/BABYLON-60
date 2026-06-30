@@ -1,0 +1,5 @@
+error: EPISTEMIC_002: Observables cannot be derived from Latent variables. Provenance violation.
+ --> tests/fail_generated/epistemic_002_provenance.rs:5:41
+  |
+5 |         Latent Hypothesis -> Observable RealWorldEvent [0.8];
+  |                                         ^^^^^^^^^^^^^^
