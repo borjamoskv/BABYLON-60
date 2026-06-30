@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anglomorph Portal // Industrial Noir 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="noir-ambient"></div>
+    
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="status-badge">
+                <span class="pulse-node"></span>
+                <span>REALITY LEVEL: C5-REAL</span>
+            </div>
+            <h1>ANGLOMORPH</h1>
+            <p class="subtitle">Biyectiva. Determinista. Pérdida de Información = 0.</p>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <main class="translation-grid">
+            <!-- PANEL 1 -->
+            <div class="card panel" id="input-panel">
+                <div class="panel-header">
+                    <span class="lang-label" id="label-left">INGLÉS (V)</span>
+                    <button class="btn-action" id="btn-clear-left">Limpiar</button>
+                </div>
+                <textarea id="text-left" placeholder="Escribe o pega texto en inglés aquí..."></textarea>
+            </div>
+
+            <!-- INTERACTION ZONE -->
+            <div class="switch-zone">
+                <button class="btn-switch" id="btn-swap" title="Intercambiar dirección">
+                    <svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- PANEL 2 -->
+            <div class="card panel" id="output-panel">
+                <div class="panel-header">
+                    <span class="lang-label" id="label-right">ANGLOMORPH (W)</span>
+                    <button class="btn-action" id="btn-copy-right">Copiar</button>
+                </div>
+                <textarea id="text-right" placeholder="Traducción en tiempo real..."></textarea>
+            </div>
+        </main>
+
+        <!-- STATISTICS & METRICS -->
+        <section class="metrics-grid">
+            <div class="card metric">
+                <span class="metric-title">BFT LOCAL CONSENSUS</span>
+                <span class="metric-value text-green" id="consensus-status">STABLE</span>
+                <span class="metric-desc">Invariante topológica verificada</span>
+            </div>
+            <div class="card metric">
+                <span class="metric-title">SHANNON ENTROPY DETECTED</span>
+                <span class="metric-value" id="entropy-value">0.00</span>
+                <span class="metric-desc">Preservada en el espacio W</span>
+            </div>
+            <div class="card metric">
+                <span class="metric-title">CHARACTER DISTORTION</span>
+                <span class="metric-value" id="distortion-value">0.00%</span>
+                <span class="metric-desc">Tasa de expansión de la matriz</span>
+            </div>
+        </section>
+
+        <!-- INFORMATIONAL PANEL -->
+        <footer class="system-footer">
+            <p>CONSTRUIDO PARA <strong>BORJA MOSKV</strong> // SYS_ID: borjamoskv</p>
+            <p class="copyright">Autónomamente operado por MOSKV-1 APEX Kernel.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
