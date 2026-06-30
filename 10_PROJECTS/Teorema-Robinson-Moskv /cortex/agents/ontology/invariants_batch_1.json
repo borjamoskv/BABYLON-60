@@ -1,0 +1,242 @@
+[
+  {
+    "ID": "I001",
+    "Invariante": "Conservación del Flujo de Exergía",
+    "Logica": "La exergía total del sistema es igual a la exergía de entrada menos la anergía disipada.",
+    "Implicacion": "Cada ciclo de cómputo debe justificar formalmente el consumo de tokens y llamadas a herramientas.",
+    "Condicion": "La tasa de disipación de exergía debe mantenerse por debajo del 20% del presupuesto asignado.",
+    "Metrica": "Exergy_Efficiency = (Output_Exergy / Input_Tokens) > 0.8"
+  },
+  {
+    "ID": "I002",
+    "Invariante": "Inmutabilidad del Ledger Transaccional",
+    "Logica": "Cualquier registro de transacción confirmado en el ledger no puede ser modificado ni eliminado.",
+    "Implicacion": "Toda modificación del balance se realiza mediante nuevas inserciones de saldo positivo o negativo.",
+    "Condicion": "El hash criptográfico de los registros debe coincidir con la secuencia consecutiva de firmas de bloques.",
+    "Metrica": "Verify_Hash_Chain(ledger) == True"
+  },
+  {
+    "ID": "I003",
+    "Invariante": "Consistencia de Tipos en el AST",
+    "Logica": "Cualquier mutación en caliente del código fuente debe mantener la tipificación estática declarada.",
+    "Implicacion": "No se permite inyectar variables u objetos de tipos distintos a los definidos en las firmas del AST.",
+    "Condicion": "La validación por comprobador de tipos (ej. mypy) debe ser exitosa antes de guardar los cambios.",
+    "Metrica": "Run_Mypy(file_path) == 0"
+  },
+  {
+    "ID": "I004",
+    "Invariante": "Principio de Landauer de Borrado Físico",
+    "Logica": "La eliminación de un bit de información disipa una cantidad mínima de calor termodinámico (kT ln 2).",
+    "Implicacion": "El descarte de contexto o borrado de historiales inyecta entropía que debe minimizarse.",
+    "Condicion": "Las purgas de caché deben ejecutarse de manera planificada e incremental para mitigar caídas de rendimiento.",
+    "Metrica": "Cache_Purge_Overhead_Seconds < 1.0"
+  },
+  {
+    "ID": "I005",
+    "Invariante": "Decidibilidad del Teorema de Robinson",
+    "Logica": "La validez de cualquier fórmula de primer orden es decidible mediante el algoritmo de resolución si la fórmula es insatisfacible.",
+    "Implicacion": "El resolvedor de teoremas del sistema puede encontrar contradicciones de forma determinista.",
+    "Condicion": "El espacio de cláusulas debe ser acotado en profundidad y el tamaño de unificación limitado.",
+    "Metrica": "Solver_Execution_Steps < Max_Allowed_Steps"
+  },
+  {
+    "ID": "I006",
+    "Invariante": "Conservación del Número de Inodos",
+    "Logica": "El número de archivos abiertos y en disco no puede superar el límite físico de inodos del host.",
+    "Implicacion": "Cada archivo temporal creado debe ser registrado con su política correspondiente de destrucción.",
+    "Condicion": "La creación de nuevos snapshots JIT debe purgar de manera automática los más antiguos.",
+    "Metrica": "Current_Inodes_Usage / Total_Inodes_Limit < 0.85"
+  },
+  {
+    "ID": "I007",
+    "Invariante": "Aislamiento Estricto del Sandbox de Ejecución",
+    "Logica": "Cualquier código evaluado dinámicamente no puede acceder al sistema de archivos del host sin permisos explícitos.",
+    "Implicacion": "Las llamadas ffi o exec se ejecutan bajo entornos virtuales con control de llamadas del sistema.",
+    "Condicion": "Las llamadas a sys.modules y import os deben retornar excepciones de acceso denegado.",
+    "Metrica": "Assert_Error(exec('import os', restricted_globals))"
+  },
+  {
+    "ID": "I008",
+    "Invariante": "Conservación de la Cuota de Tokens de API",
+    "Logica": "El consumo acumulado de llamadas a modelos remotos no puede exceder el límite establecido para la ventana de tiempo.",
+    "Implicacion": "El Kernel debe priorizar modelos locales (ej. MLX) cuando la cuota externa esté en rango de peligro.",
+    "Condicion": "La velocidad de consumo de cuota por minuto debe ser monitorizada de forma continua.",
+    "Metrica": "Current_Usage_Rate < Limit_Per_Minute"
+  },
+  {
+    "ID": "I009",
+    "Invariante": "Atomicidad de Escritura en Disco",
+    "Logica": "Una operación de actualización de datos se completa en su totalidad o no se ejecuta en absoluto.",
+    "Implicacion": "No se toleran estados parciales en archivos de configuración tras caídas del sistema.",
+    "Condicion": "La escritura se realiza a través de un archivo temporal que reemplaza de forma atómica al archivo destino.",
+    "Metrica": "Verify_Json_Syntax(target_file) == True"
+  },
+  {
+    "ID": "I010",
+    "Invariante": "Unicidad de Identificadores de Skills",
+    "Logica": "Dos habilidades distintas no pueden compartir el mismo identificador o ruta en el registro global.",
+    "Implicacion": "El cargador de módulos debe verificar y rechazar registros colisionantes en el arranque.",
+    "Condicion": "Cada registro de skill debe poseer un hash sha256 único de su archivo descriptor.",
+    "Metrica": "Count_Duplicate_IDs(registry) == 0"
+  },
+  {
+    "ID": "I011",
+    "Invariante": "Consistencia Eventual del Ledger de Red",
+    "Logica": "Los nodos distribuidos en la red Zenoh deben sincronizar sus historiales hasta coincidir en el hash raíz.",
+    "Implicacion": "Se permiten deltas temporales pero la reconciliación final es obligatoria mediante el protocolo Saga.",
+    "Condicion": "La divergencia de tiempo de actualización entre nodos no debe superar la ventana de resolución (30s).",
+    "Metrica": "Hash_Deltas(node_A, node_B) == 0 despues de Sync_Window"
+  },
+  {
+    "ID": "I012",
+    "Invariante": "Independencia de Entropía del Generador de Claves",
+    "Logica": "El generador de números aleatorios para firmas de transacciones debe depender de fuentes de entropía física no predecibles.",
+    "Implicacion": "Se prohíben semillas predecibles en la generación de llaves criptográficas del sistema.",
+    "Condicion": "La salida del generador debe pasar pruebas de aleatoriedad del estándar NIST.",
+    "Metrica": "Shannon_Entropy(random_stream) > 7.99"
+  },
+  {
+    "ID": "I013",
+    "Invariante": "Conservación del Límite de Pila de Llamadas",
+    "Logica": "La recursión de resolvedores lógicos debe estar acotada a una profundidad máxima constante.",
+    "Implicacion": "Se previene el desbordamiento de pila en ejecuciones lógicas recursivas profundas.",
+    "Condicion": "El contador de profundidad de pila no debe superar el límite de recursión de Python establecido.",
+    "Metrica": "Recursion_Depth < Get_Recursion_Limit()"
+  },
+  {
+    "ID": "I014",
+    "Invariante": "Consistencia de Esquemas de Base de Datos JIT",
+    "Logica": "El esquema de la base de datos en ejecución debe coincidir exactamente con la definición del modelo de datos activo.",
+    "Implicacion": "Cualquier migración dinámica de base de datos debe validar la presencia y el tipo de todas las columnas.",
+    "Condicion": "Las consultas de control del esquema (PRAGMA table_info) deben coincidir con la clase Pydantic.",
+    "Metrica": "Verify_Schema_Match(sqlite_conn, pydantic_model) == True"
+  },
+  {
+    "ID": "I015",
+    "Invariante": "Aislamiento de Permisos del Proceso Principal",
+    "Logica": "El proceso del Kernel no debe ejecutarse bajo permisos de superusuario (root) a menos que sea estrictamente necesario.",
+    "Implicacion": "Se limitan los vectores de ataque en caso de inyecciones de código dinámico en subagentes.",
+    "Condicion": "El UID del proceso principal debe corresponder al usuario del entorno de desarrollo local.",
+    "Metrica": "Get_Process_UID() != 0"
+  },
+  {
+    "ID": "I016",
+    "Invariante": "Consistencia de Rutas de Archivos en Monorepo",
+    "Logica": "Todas las referencias de importación en el monorepo deben ser relativas y resueltas dentro del espacio de trabajo.",
+    "Implicacion": "No se permiten referencias absolutas a directorios fuera de $CORTEX_ROOT/.",
+    "Condicion": "La verificación estática de enlaces debe validar que todos los archivos existan localmente.",
+    "Metrica": "Count_Broken_Imports(monorepo) == 0"
+  },
+  {
+    "ID": "I017",
+    "Invariante": "Sincronía Temporal en Transacciones Distribuidas",
+    "Logica": "Todas las transacciones de actualización de balance deben registrarse con marcas temporales basadas en un reloj lógico unificado.",
+    "Implicacion": "Se evita la reordenación maliciosa o inconsistente de transacciones distribuidas concurrentes.",
+    "Condicion": "Las marcas de tiempo de las transacciones recibidas deben cumplir la causalidad del reloj de Lamport.",
+    "Metrica": "Transaction_Timestamp(T2) > Transaction_Timestamp(T1) si T2 depende de T1"
+  },
+  {
+    "ID": "I018",
+    "Invariante": "Conservación de la Capacidad de Memoria Virtual RSS",
+    "Logica": "El consumo de memoria residente (RSS) del daemon no debe superar la cuota máxima asignada por el sistema operativo.",
+    "Implicacion": "Se previenen bloqueos y abortos forzados de procesos del host por falta de memoria física.",
+    "Condicion": "La memoria consumida debe ser monitorizada de forma continua con disparadores de alarma.",
+    "Metrica": "Current_Process_RSS < Max_Memory_Threshold"
+  },
+  {
+    "ID": "I019",
+    "Invariante": "Fidelidad de Comentarios de AST en Ediciones",
+    "Logica": "Las ediciones automatizadas del código no deben eliminar ni desplazar los comentarios asociados a los bloques de código.",
+    "Implicacion": "Se mantiene la documentación en línea intacta para análisis estático posterior.",
+    "Condicion": "El parser sintáctico (LibCST) debe mapear los nodos de comentario a sus líneas correspondientes.",
+    "Metrica": "Verify_Comments_Preserved(original_file, edited_file) == True"
+  },
+  {
+    "ID": "I020",
+    "Invariante": "Conservación del Límite de Conexiones de Base de Datos",
+    "Logica": "El pool de conexiones no debe superar el número máximo de descriptores de socket de base de datos permitidos.",
+    "Implicacion": "Se evitan caídas en cascada del servidor web por falta de descriptores al consultar la base de datos.",
+    "Condicion": "Las conexiones inactivas deben expirar y ser cerradas automáticamente por el administrador del pool.",
+    "Metrica": "Active_Connections_Count <= Max_Pool_Limit"
+  },
+  {
+    "ID": "I021",
+    "Invariante": "Unicidad de Claves de Caché de Inferencia",
+    "Logica": "No pueden existir dos entradas de caché distintas con la misma clave de identificación hash.",
+    "Implicacion": "Se evitan colisiones donde se devuelven respuestas de inferencia incorrectas para prompts distintos.",
+    "Condicion": "Las claves deben calcularse usando algoritmos de hash seguros (ej. sha256) sobre la estructura del prompt completo.",
+    "Metrica": "Count_Cache_Collisions(cache_store) == 0"
+  },
+  {
+    "ID": "I022",
+    "Invariante": "Decidibilidad de Exclusión Mutua en Regiones Críticas",
+    "Logica": "Solo un hilo de ejecución puede acceder a una región crítica protegida por un cerrojo exclusivo en un instante de tiempo.",
+    "Implicacion": "Se evita la corrupción de memoria y condiciones de carrera en variables compartidas.",
+    "Condicion": "Los intentos de adquisición paralelos del lock por otros hilos deben ser bloqueados o rechazados.",
+    "Metrica": "Active_Threads_In_Critical_Section <= 1"
+  },
+  {
+    "ID": "I023",
+    "Invariante": "Consistencia de Formato en Exportaciones de Reportes",
+    "Logica": "Todos los reportes generados dinámicamente deben cumplir el formato sintáctico especificado sin códigos de color ANSI de control.",
+    "Implicacion": "Se garantiza la compatibilidad de lectura del texto por linters y visualizadores estructurados.",
+    "Condicion": "La salida en formato string no debe contener secuencias de escape de formato de terminal.",
+    "Metrica": "Check_ANSI_Codes_Presence(report_output) == False"
+  },
+  {
+    "ID": "I024",
+    "Invariante": "Conservación de Ancho de Banda de Sockets Locales",
+    "Logica": "El volumen de datos transmitido a través de WebSockets de consola no debe saturar la red interna local del host.",
+    "Implicacion": "Se previene la degradación del rendimiento de la interfaz de usuario en el navegador del operador.",
+    "Condicion": "Las ráfagas de logs deben ser comprimidas y agrupadas en intervalos de tiempo mínimos.",
+    "Metrica": "Network_Throughput_MBps < Max_Bw_Limit"
+  },
+  {
+    "ID": "I025",
+    "Invariante": "Consistencia Temporal de Reloj del Sistema",
+    "Logica": "La hora local de los servidores no puede retroceder en el orden secuencial de registro de eventos.",
+    "Implicacion": "Se previene la inyección de marcas de tiempo del pasado que corrompan los cálculos de secuencia.",
+    "Condicion": "El sistema operativo debe mantener la sincronización NTP activa y rechazar derivas negativas.",
+    "Metrica": "Check_NTP_Status() == Synced"
+  },
+  {
+    "ID": "I026",
+    "Invariante": "Estabilidad del Entorno JIT tras Carga de Dependencias",
+    "Logica": "La instalación de una nueva librería JIT no debe alterar ni sobrescribir las versiones de las dependencias base del Kernel.",
+    "Implicacion": "Se previenen incompatibilidades que provoquen fallas en los módulos core del monorepo.",
+    "Condicion": "Las instalaciones de librerías deben realizarse en entornos virtuales aislados con lockfiles estrictos.",
+    "Metrica": "Verify_Core_Dependencies_Version() == Match_Expectation"
+  },
+  {
+    "ID": "I027",
+    "Invariante": "Fidelidad de la Pila de Control en resolvedor de Robinson",
+    "Logica": "La pila que simula la recursión en el resolvedor de Robinson debe reflejar fielmente la traza de unificación lógica.",
+    "Implicacion": "Se garantiza el retorno de caminos válidos de refutación en caso de insatisfacibilidad lógica.",
+    "Condicion": "Cada nodo de decisión insertado en la pila debe guardar el estado de las variables unificadas para posibilitar backtracking.",
+    "Metrica": "Verify_Stack_State_Integrity() == True"
+  },
+  {
+    "ID": "I028",
+    "Invariante": "Conservación de Inodos Libres en Particiones Temporales",
+    "Logica": "El uso de la partición temporal del disco del host no debe alcanzar el límite que impida la creación de nuevos archivos lock.",
+    "Implicacion": "Se previene el bloqueo de procesos del sistema operativo por falta de recursos de escritura temporales.",
+    "Condicion": "La cuota de inodos disponibles en /tmp debe estar por encima del margen mínimo del sistema.",
+    "Metrica": "Check_Free_Inodes_Percentage('/tmp') > 15%"
+  },
+  {
+    "ID": "I029",
+    "Invariante": "Atomicidad de Transacciones en SQLite WAL",
+    "Logica": "Los volcados del log de transacciones .wal a la base de datos principal de SQLite deben completarse de forma íntegra.",
+    "Implicacion": "Se evita la pérdida de registros lógicos en la base de datos de telemetría de exergía.",
+    "Condicion": "El proceso del daemon de base de datos no debe ser interrumpido de forma síncrona durante la llamada checkpoint.",
+    "Metrica": "Verify_DB_Integrity_After_Checkpoint() == True"
+  },
+  {
+    "ID": "I030",
+    "Invariante": "Sanitización Absoluta de Rutas en File System Operations",
+    "Mecanismo Causal": "Toda ruta de archivo resuelta a partir de entradas dinámicas debe residir dentro de los límites del directorio del proyecto.",
+    "Implicacion": "Se previene el acceso no autorizado de lectura o modificación a archivos sensibles del host (ej. claves privadas SSH).",
+    "Condicion": "El path absoluto de destino debe comenzar con el prefijo del directorio del workspace.",
+    "Metrica": "Resolved_Path.startswith(Workspace_Root) == True"
+  }
+]
