@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 epistemic_macros = { path = "../epistemic_macros" }
+logos = "0.14"
 
 [dev-dependencies]
 trybuild = "1.0.117"
