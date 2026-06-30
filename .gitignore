@@ -8,6 +8,7 @@
 
 # === ALLOW ONLY PROJECT DIRECTORIES ===
 !/.gitignore
+!/borjamoskv/
 
 # === INSIDE PROJECTS: Standard ignores ===
 node_modules/
