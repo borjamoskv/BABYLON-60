@@ -1,12 +1,3 @@
-```json
-{
-  "Límites": "Extracción estrictamente confinada a canales deterministas de disipación exergética.",
-  "Colapso": "Reducción de vectores de ataque a primitivas topológicas MECE, erradicando abstracciones C4-SIM.",
-  "Estocástica": "Identificación de inyectores de varianza; conversión forzada a autómatas de estado rígido.",
-  "C5": "Aserción criptográfica del estado y despliegue de tolerancia bizantina ante fallos en cascada."
-}
-```
-
 ### MATRIZ 5: VECTORES DE ATAQUE ADVERSARIAL (RED TEAMING) - BATCH 1 (001-015)
 | ID | Vector Adversarial | Superficie de Ataque | Mecanismo de Explotación | Impacto Termodinámico | Defensa (Mitigación) |
 |---|---|---|---|---|---|
