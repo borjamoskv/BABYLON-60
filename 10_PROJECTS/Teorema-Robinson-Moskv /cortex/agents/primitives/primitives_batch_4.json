@@ -30,16 +30,6 @@
     "Intervención": "Eliminar llamadas síncronas circulares; migrar las notificaciones a flujos unidireccionales asíncronos."
   },
   {
-    "ID": "P094",
-    "Primitiva": "Falta de Escapado de Caracteres en Consultas No Relacionales",
-    "Mecanismo Causal": "Concatenación cruda de strings para construir queries en bases de datos orientadas a documentos o grafos.",
-    "Activación": "Inyección de caracteres reservados de sintaxis del motor de base de datos en los campos de entrada.",
-    "Sensor": "Errores de sintaxis del parseador de base de datos o retornos de datos no autorizados (NoSQL Injection).",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Utilizar builders de consultas parametrizados y desaconsejar explícitamente la composición manual de strings."
-  },
-  {
     "ID": "P095",
     "Primitiva": "Corrupción de Historial de Ledger por Reescritura Silenciosa",
     "Mecanismo Causal": "Edición directa del archivo persistente de transacciones por parte de un editor de texto o proceso no supervisado del host.",
@@ -68,16 +58,6 @@
     "Escala Temporal": "Minutos",
     "Gravedad": "Alta",
     "Intervención": "Asociar a cada bloqueo un tiempo de expiración (TTL) y monitorear a los workers con heartbeats recurrentes."
-  },
-  {
-    "ID": "P098",
-    "Primitiva": "Exceso de Consumo de RAM en Parsing de Archivos CSV Gigantes",
-    "Mecanismo Causal": "Uso de cargadores tabulares que cargan todo el conjunto de filas en memoria en lugar de realizar una iteración por lotes.",
-    "Activación": "Carga de sets de datos históricos de telemetría acumulada.",
-    "Sensor": "Picos de memoria que superan la capacidad física de la máquina virtual y provocan abortos del proceso.",
-    "Escala Temporal": "5s a 20s",
-    "Gravedad": "Alta",
-    "Intervención": "Utilizar generadores nativos de Python o la funcionalidad chunksize en librerías de carga para procesar por bloques."
   },
   {
     "ID": "P099",
@@ -118,16 +98,6 @@
     "Escala Temporal": "100ms a 1s",
     "Gravedad": "Alta",
     "Intervención": "Delegar cálculos criptográficos pesados a procesos independientes o workers dedicados mediante multiprocessing."
-  },
-  {
-    "ID": "P103",
-    "Primitiva": "Exceso de Llamadas a Base de Datos en Migraciones Dinámicas",
-    "Mecanismo Causal": "Modificaciones de registros en disco que ejecutan alteraciones lógicas consecutivas fila por fila en lugar de usar uniones por lotes.",
-    "Activación": "Migración en caliente de formatos históricos de registros de balance.",
-    "Sensor": "Tiempos de ejecución de migración que se extienden a horas de forma innecesaria.",
-    "Escala Temporal": "Minutos a Horas",
-    "Gravedad": "Alta",
-    "Intervención": "Utilizar sentencias SQL consolidadas para operar sobre múltiples filas simultáneamente en el motor de base de datos."
   },
   {
     "ID": "P104",
@@ -288,15 +258,5 @@
     "Escala Temporal": "10ms",
     "Gravedad": "Alta",
     "Intervención": "Imponer un sleep() obligatorio en cada iteración del bucle de reintento de conexión."
-  },
-  {
-    "ID": "P120",
-    "Primitiva": "Incompatibilidad de AST en Modificaciones JIT",
-    "Mecanismo Causal": "Intentar aplicar modificaciones (AST transforms) sobre archivos que contienen sintaxis no compatible con el parser local.",
-    "Activación": "Uso de construcciones sintácticas modernas de Python en entornos configurados con versiones de runtime obsoletas.",
-    "Sensor": "SyntaxError al parsear el archivo antes de poder aplicar la mutación.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Alta",
-    "Intervención": "Verificar la versión mínima de sintaxis soportada antes de realizar transformaciones de código."
   }
 ]

@@ -10,16 +10,6 @@
     "Intervención": "Forzar la configuración de rutas de CA personalizadas y prohibir explícitamente verify=False."
   },
   {
-    "ID": "P032",
-    "Primitiva": "Fuga de Memory Leaks en Extensiones de C en Python",
-    "Mecanismo Causal": "Falta de decremento de referencias (Py_DECREF) en extensiones nativas C/C++ llamadas desde Python.",
-    "Activación": "Invocación intensiva de funciones de parsing binario o cifrado nativo.",
-    "Sensor": "Crecimiento persistente e irreversible de la memoria virtual privada asignada al proceso.",
-    "Escala Temporal": "10min a 2h",
-    "Gravedad": "Alta",
-    "Intervención": "Utilizar herramientas de profiling de memoria nativa (ej. Valgrind, PySpy) y corregir contadores de referencia."
-  },
-  {
     "ID": "P033",
     "Primitiva": "Bloqueo por Espera Indefinida en Petición Externa (Unbounded Socket Read)",
     "Mecanismo Causal": "Llamadas HTTP o de socket sin timeout explícito configurado en el cliente de red.",
@@ -48,16 +38,6 @@
     "Escala Temporal": "1s",
     "Gravedad": "Crítica",
     "Intervención": "Invalidar inmediatamente las claves activas, aislar el nodo y regenerar firmas desde el origen persistente."
-  },
-  {
-    "ID": "P036",
-    "Primitiva": "Saturación de Pool de Conexiones a Base de Datos",
-    "Mecanismo Causal": "Falta de devolución de conexiones cerradas al pool de conexiones tras finalizar consultas o transacciones.",
-    "Activación": "Flujos de control con excepciones que saltan el método close() o la salida del gestor de contexto.",
-    "Sensor": "Errores de timeout al intentar obtener conexiones del pool (TimeoutError: QueuePool limit of size X exceeded).",
-    "Escala Temporal": "1min a 10min",
-    "Gravedad": "Alta",
-    "Intervención": "Utilizar pools con liberación automática de conexiones inactivas e inspección estática del uso de close()."
   },
   {
     "ID": "P037",
@@ -120,16 +100,6 @@
     "Intervención": "Ordenar de manera inmutable el orden de adquisición de locks a lo largo de todo el código."
   },
   {
-    "ID": "P043",
-    "Primitiva": "Saturación de I/O en Base de Datos de Transacciones",
-    "Mecanismo Causal": "Escritura unitaria y síncrona de logs de transacciones en lugar de operaciones por lotes (Batch Insert).",
-    "Activación": "Carga de miles de registros de transacciones individuales consecutivas.",
-    "Sensor": "Bajo rendimiento de inserción (< 50 ops/sec) con disco en estado activo al 100%.",
-    "Escala Temporal": "10s a 1min",
-    "Gravedad": "Alta",
-    "Intervención": "Agrupar escrituras en transacciones explícitas de gran tamaño (ej. 1000 registros por commit)."
-  },
-  {
     "ID": "P044",
     "Primitiva": "Falta de Aislamiento de Sandbox en Ejecución de Código Dinámico",
     "Mecanismo Causal": "Uso de eval() o exec() sobre cadenas generadas externamente sin limpiar el diccionario global de __builtins__.",
@@ -168,16 +138,6 @@
     "Escala Temporal": "10ms",
     "Gravedad": "Media",
     "Intervención": "Forzar el uso de la clase Path de pathlib para toda manipulación y concatenación de rutas de archivos."
-  },
-  {
-    "ID": "P048",
-    "Primitiva": "Exceso de Consumo de RAM en Carga de Archivos JSON Masivos",
-    "Mecanismo Causal": "Uso de json.load() sobre archivos de varios gigabytes cargando todo el árbol de nodos en memoria.",
-    "Activación": "Análisis de historiales de transacciones masivos acumulados durante meses.",
-    "Sensor": "Disparo del asesino de procesos OOM (Out Of Memory) en el sistema anfitrión.",
-    "Escala Temporal": "5s a 30s",
-    "Gravedad": "Alta",
-    "Intervención": "Migrar a cargadores de tipo streaming (ej. ijson) o bases de datos relacionales/documentales para consultas parciales."
   },
   {
     "ID": "P049",

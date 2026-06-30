@@ -130,16 +130,6 @@
     "Intervención": "Definir un límite máximo absoluto de 3 reintentos antes de delegar la resolución a un humano."
   },
   {
-    "ID": "P014",
-    "Primitiva": "Falta de Sanitización de Entrada en Shell Scripts",
-    "Mecanismo Causal": "Concatenación cruda de parámetros proporcionados por subagentes en comandos de sistema operativo.",
-    "Activación": "Pasar nombres de archivo con caracteres especiales (; | &) a funciones de ejecución de shell.",
-    "Sensor": "Ejecución inesperada de comandos secundarios o accesos de lectura prohibidos.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Bypass absoluto de shells; forzar paso de listas ordenadas a subprocesos nativos."
-  },
-  {
     "ID": "P015",
     "Primitiva": "Corrupción de Archivo de Configuración JSON/YAML",
     "Mecanismo Causal": "Interrupción del proceso de escritura o falta de atomicidad al escribir archivos de configuración en disco.",
@@ -148,16 +138,6 @@
     "Escala Temporal": "100ms",
     "Gravedad": "Alta",
     "Intervención": "Implementar escritura atómica (escribir a archivo temporal y luego reemplazar vía os.replace)."
-  },
-  {
-    "ID": "P016",
-    "Primitiva": "Bucle Sucio de Git Sentinel",
-    "Mecanismo Causal": "Inclusión accidental de archivos dinámicos o temporales generados por el proceso en el changeset vigilado.",
-    "Activación": "Ausencia de logs, caches o archivos dinámicos en .gitignore.",
-    "Sensor": "Commits automatizados infinitos encadenados cada pocos segundos.",
-    "Escala Temporal": "5s a 1min",
-    "Gravedad": "Alta",
-    "Intervención": "Añadir de forma inmediata las rutas de logs e historiales a `.git/info/exclude`."
   },
   {
     "ID": "P017",

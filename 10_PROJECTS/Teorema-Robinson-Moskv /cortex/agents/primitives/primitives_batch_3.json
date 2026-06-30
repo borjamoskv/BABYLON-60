@@ -80,16 +80,6 @@
     "Intervención": "Asegurar que todo proceso hijo sea registrado en un gestor de subprocesos que llame a wait() en su ciclo de vida."
   },
   {
-    "ID": "P069",
-    "Primitiva": "Fuga de Memory Leaks en Rust vía PyO3 bindings",
-    "Mecanismo Causal": "Falta de liberación de referencias de Python (Py<PyAny>) dentro de bloques unsafe en código compilado en Rust.",
-    "Activación": "Llamadas repetitivas de análisis estático utilizando parsers de sintaxis abstracta implementados en Rust.",
-    "Sensor": "Crecimiento de consumo de RAM sin capacidad de recuperación mediante la llamada a gc.collect() de Python.",
-    "Escala Temporal": "10min a 1h",
-    "Gravedad": "Alta",
-    "Intervención": "Utilizar constructores de Scope en PyO3 (Python::with_gil) y validar de manera estricta el ciclo de vida de referencias nativas."
-  },
-  {
     "ID": "P070",
     "Primitiva": "Falta de Coherencia en Caché de Compilador de JIT",
     "Mecanismo Causal": "Sobrescribir el directorio de caché de artefactos compilados sin invalidación de dependencias ni control de hashes de código original.",
@@ -160,16 +150,6 @@
     "Intervención": "Retornar siempre copias profundas (deepcopy) o forzar el uso de tipos de datos inmutables (ej. FrozenDict, Mapping)."
   },
   {
-    "ID": "P077",
-    "Primitiva": "Fuga de Descriptores de Base de Datos en Subprocesos",
-    "Mecanismo Causal": "Mapeo de descriptores de archivos de base de datos abiertos en hilos del proceso padre a procesos hijos creados mediante fork.",
-    "Activación": "Lanzamiento de subprocesos nativos de Python usando el método fork en macOS/Linux con conexiones DB abiertas.",
-    "Sensor": "Corrupción de datos en la base de datos o fallas de concurrencia al escribir desde procesos paralelos.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Cerrar explícitamente todas las conexiones de base de datos antes de bifurcar procesos o usar el método spawn."
-  },
-  {
     "ID": "P078",
     "Primitiva": "Bloqueo por Inundación de Logs (Log Flooding Hang)",
     "Mecanismo Causal": "Intento de escribir logs a través de flujos estándar bloqueantes (stdout) cuando el buffer de lectura de la terminal está lleno.",
@@ -230,16 +210,6 @@
     "Intervención": "Implementar tiempos de inactividad (timeouts) estrictos en las conexiones de transporte SSH."
   },
   {
-    "ID": "P084",
-    "Primitiva": "Falta de Sanitización de Salidas de Consola en Reportes PDF/HTML",
-    "Mecanismo Causal": "Inclusión directa de códigos de color ANSI de la consola en reportes legibles por humanos, resultando en basura de control.",
-    "Activación": "Generación automática de walkthroughs a partir de volcados de terminal.",
-    "Sensor": "Presencia de caracteres '\\u001b[32m' o similares que corrompen la visualización del texto de los reportes.",
-    "Escala Temporal": "100ms",
-    "Gravedad": "Baja",
-    "Intervención": "Aplicar filtros regex de limpieza para remover secuencias de escape ANSI antes de exportar texto."
-  },
-  {
     "ID": "P085",
     "Primitiva": "Falta de Sincronización de Transacciones Distribuidas",
     "Mecanismo Causal": "Confirmación parcial de estados transaccionales en un nodo sin validación del resto de nodos que participan en la misma saga.",
@@ -278,16 +248,6 @@
     "Escala Temporal": "10ms",
     "Gravedad": "Alta",
     "Intervención": "Validar y deserializar mediante modelos de datos definidos con fallbacks de campos por defecto."
-  },
-  {
-    "ID": "P089",
-    "Primitiva": "Exceso de Llamadas a Base de Datos en Bucles de Control (N+1 Query)",
-    "Mecanismo Causal": "Consulta recursiva e individual de registros en un bucle que procesa colecciones de datos, en lugar de realizar una única consulta agrupada.",
-    "Activación": "Cálculo de exergía para cada componente en la lista de inventario de forma síncrona.",
-    "Sensor": "Rendimiento deficiente de carga de la página del dashboard y saturación de la base de datos local.",
-    "Escala Temporal": "100ms a 2s",
-    "Gravedad": "Alta",
-    "Intervención": "Reescribir las consultas utilizando joins o filtros combinados de tipo IN en SQL para extraer todo el lote a la vez."
   },
   {
     "ID": "P090",

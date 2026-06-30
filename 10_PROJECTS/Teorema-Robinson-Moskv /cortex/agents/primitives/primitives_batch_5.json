@@ -70,16 +70,6 @@
     "Intervención": "Implementar un cerrojo de lectura-escritura (RWLock) con prioridad estricta para solicitudes de escritura."
   },
   {
-    "ID": "P128",
-    "Primitiva": "Exceso de Llamadas a la API de GitHub por Polling",
-    "Mecanismo Causal": "Consultas continuas al estado de repositorios remotos sin respetar los límites de rate limit e inyectando demoras síncronas.",
-    "Activación": "Procesos git sentinel configurados con intervalos de consulta inferiores a 60 segundos.",
-    "Sensor": "Respuestas de error 403 con mensaje de límites de cuota de API excedidos.",
-    "Escala Temporal": "1min",
-    "Gravedad": "Alta",
-    "Intervención": "Sustituir el polling periódico por webhooks o utilizar cabeceras de caché condicional (ETags)."
-  },
-  {
     "ID": "P129",
     "Primitiva": "Fuga de Recursos de Memoria en Intérprete por Loops en Closures",
     "Mecanismo Causal": "Creación dinámica de funciones anidadas que capturan variables externas mutables grandes, impidiendo la recolección del entorno.",
@@ -100,16 +90,6 @@
     "Intervención": "Implementar latidos de corazón (heartbeats) en el canal WebSockets y forzar reconexión con refresco inmediato."
   },
   {
-    "ID": "P131",
-    "Primitiva": "Falta de Sanitización de Salidas en Trazas de Logs de Error",
-    "Mecanismo Causal": "Escritura de trazas de excepciones de base de datos directamente en el archivo de registro sin filtrar campos sensibles.",
-    "Activación": "Fallas en la conexión que exponen credenciales de base de datos en las cadenas de conexión del traceback.",
-    "Sensor": "Presencia de contraseñas de bases de datos locales legibles en los archivos de logs del host.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Sanitizar las cadenas de error interceptadas antes de pasarlas a los adaptadores de almacenamiento de logs."
-  },
-  {
     "ID": "P132",
     "Primitiva": "Exceso de Procesos Secundarios por Falta de Limpieza en Fallas",
     "Mecanismo Causal": "Caída del hilo principal del Kernel que deja subprocesos hijos compiladores e inferenciadores activos sin padre.",
@@ -120,26 +100,6 @@
     "Intervención": "Registrar manejadores de apagado atómicos que envíen señales SIGKILL a todos los procesos hijos del grupo en la salida."
   },
   {
-    "ID": "P133",
-    "Primitiva": "Fuga de Memoria por Frecuencia de Refresh en UI",
-    "Mecanismo Causal": "Creación e inserción continua de nuevos nodos HTML en el DOM en intervalos de milisegundos en lugar de actualizar elementos existentes.",
-    "Activación": "Actualizaciones de telemetría de alta frecuencia en el dashboard principal.",
-    "Sensor": "Consumo de CPU del navegador al 100% y aumento constante del tamaño del árbol DOM.",
-    "Escala Temporal": "10s a 1min",
-    "Gravedad": "Media",
-    "Intervención": "Utilizar técnicas de Virtual DOM o reconciliación de nodos existentes mediante modificadores de contenido de texto."
-  },
-  {
-    "ID": "P134",
-    "Primitiva": "Falta de Validación de Certificados SSL en Clientes WebSocket",
-    "Mecanismo Causal": "Conexión a servidores WebSocket sobre TLS con verificación desactivada para ignorar certificados locales autofirmados.",
-    "Activación": "Establecimiento de puentes de sincronización asíncrona distribuidos en redes locales inseguras.",
-    "Sensor": "Vulnerabilidad a intercepciones y modificaciones de mensajes en tránsito (MitM).",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Alta",
-    "Intervención": "Forzar verificación de certificados importando la entidad emisora autorizada en el truststore de la aplicación."
-  },
-  {
     "ID": "P135",
     "Primitiva": "Saturación de CPU por Recolección de Basura Frecuente",
     "Mecanismo Causal": "Umbrales de asignación de memoria configurados a niveles demasiado bajos, forzando ciclos de recolección de basura constantes.",
@@ -148,16 +108,6 @@
     "Escala Temporal": "1s a 10s",
     "Gravedad": "Media",
     "Intervención": "Ajustar los umbrales de inicio de GC o reutilizar buffers de asignación de memoria para evitar picos."
-  },
-  {
-    "ID": "P136",
-    "Primitiva": "Corrupción de Archivos en Disco por Escritura Concurrente Directa",
-    "Mecanismo Causal": "Dos o más procesos del Kernel intentando escribir sobre el mismo archivo de configuración persistente simultáneamente.",
-    "Activación": "Mutación paralela de propiedades de las skills por agentes de optimización coordinados.",
-    "Sensor": "Contenido del archivo truncado, mezclado o con formato de sintaxis dañado en lecturas posteriores.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Imponer un mecanismo de bloqueo exclusivo de archivos (flock) a nivel de sistema operativo antes de cualquier escritura."
   },
   {
     "ID": "P137",
@@ -220,16 +170,6 @@
     "Intervención": "Utilizar decodificación con tolerancia a errores (ej. bytes.decode('utf-8', errors='replace')) en la recepción."
   },
   {
-    "ID": "P143",
-    "Primitiva": "Exceso de Llamadas Concurrentes a Base de Datos de Transacciones",
-    "Mecanismo Causal": "Falta de multiplexación o limitación en el número de conexiones simultáneas abiertas hacia la base de datos local SQLite.",
-    "Activación": "Invocaciones paralelas de múltiples subagentes de la legión intentando registrar exergía.",
-    "Sensor": "Errores repetitivos de bloqueo de base de datos a pesar de contar con timeouts de espera altos.",
-    "Escala Temporal": "100ms a 1s",
-    "Gravedad": "Alta",
-    "Intervención": "Implementar un despachador central de consultas en base de datos que encole las peticiones de escritura de forma secuencial."
-  },
-  {
     "ID": "P144",
     "Primitiva": "Falta de Control de Versiones en Caché de Paquetes Instalados",
     "Mecanismo Causal": "Instalación JIT de dependencias de python sin especificar versión exacta y reutilizando caches locales potencialmente obsoletas.",
@@ -268,26 +208,6 @@
     "Escala Temporal": "1s",
     "Gravedad": "Media",
     "Intervención": "Imponer el uso de marcas de tiempo lógicas (ej. relojes lógicos de Lamport o vectores de marcas temporales) en las firmas."
-  },
-  {
-    "ID": "P148",
-    "Primitiva": "Exceso de Uso de CPU por Inferencia de Modelos Locales sin Aceleración de Hardware",
-    "Mecanismo Causal": "Lanzar inferencia local (ej. transformers en python) sin activar enlaces con Metal (macOS) o CUDA (Linux), ejecutando en CPU clásica.",
-    "Activación": "Inicio de tareas de inferencia de red neuronal en caliente por parte de un subagente.",
-    "Sensor": "Consumo de todos los núcleos de CPU al 100% y tiempos de prefill de tokens inaceptables.",
-    "Escala Temporal": "10s a 1min",
-    "Gravedad": "Alta",
-    "Intervención": "Forzar validación del entorno e inicializar obligatoriamente con frameworks optimizados nativos (ej. MLX en Apple Silicon)."
-  },
-  {
-    "ID": "P149",
-    "Primitiva": "Fuga de Memoria por Retención de Referencias en Intérprete de JavaScript en UI",
-    "Mecanismo Causal": "Retención de referencias a variables globales o elementos DOM en closures de larga duración dentro del código del visualizador.",
-    "Activación": "Uso interactivo prolongado del dashboard por parte del operador sin recargar la pestaña del navegador.",
-    "Sensor": "Consumo de memoria de la pestaña del navegador que supera el gigabyte y provoca la recarga forzada del visualizador.",
-    "Escala Temporal": "1h a 6h",
-    "Gravedad": "Media",
-    "Intervención": "Eliminar referencias a objetos en desuso estableciéndolos a null y auditar closures recurrentes con Chrome DevTools."
   },
   {
     "ID": "P150",
