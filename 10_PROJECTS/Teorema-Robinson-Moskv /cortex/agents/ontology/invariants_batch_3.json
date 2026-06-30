@@ -1,0 +1,242 @@
+[
+  {
+    "ID": "I061",
+    "Invariante": "Filtro de URLs en OAuth Local",
+    "Logica": "Los endpoints de inicio de sesión deben verificar que la URL de redirección final (next) coincida con la lista blanca del servidor.",
+    "Implicacion": "Se evitan ataques de Open Redirect que comprometan credenciales del operador.",
+    "Condicion": "La validación debe rechazar cualquier dominio que no coincida exactamente con localhost o cortexpersist.com.",
+    "Metrica": "Verify_OAuth_Redirect(redirect_url) == Safe"
+  },
+  {
+    "ID": "I062",
+    "Invariante": "Atomicidad de Cierre de Descriptores de Socket UDP",
+    "Logica": "Cualquier socket de red UDP creado para sincronización debe cerrarse de manera garantizada al finalizar la llamada.",
+    "Implicacion": "Se evita la saturación de recursos de I/O en el host macOS por descriptores huérfanos.",
+    "Condicion": "La inicialización del socket debe realizarse mediante bloques contextmanager que invoquen close() en el bloque exit.",
+    "Metrica": "Verify_UDP_Socket_Closure() == Complete"
+  },
+  {
+    "ID": "I063",
+    "Invariante": "Decidibilidad del Bucle de Lectura de Sesión",
+    "Logica": "Los hilos de lectura de sesión activa deben poseer mecanismos de desconexión por inactividad y límites de reintentos.",
+    "Implicacion": "Se previene el consumo inútil de ciclos de CPU por procesos zombies en el host.",
+    "Condicion": "La lectura del stream debe lanzar un timeout tras superar la ventana de inactividad establecida (ej. 300s).",
+    "Metrica": "Check_Session_Activity_Timeout() == Expired"
+  },
+  {
+    "ID": "I064",
+    "Invariante": "Sanitización de Salidas de Consola en Reportes Estáticos",
+    "Logica": "Los reportes generados a partir de salidas de terminal no deben contener caracteres de formato de color ANSI.",
+    "Implicacion": "Se garantiza la compatibilidad de lectura del reporte por analizadores de texto automatizados.",
+    "Condicion": "Las cadenas de texto deben limpiarse aplicando una expresión regular de eliminación de secuencias de escape ANSI.",
+    "Metrica": "Check_ANSI_Codes_Cleanliness(text_output) == True"
+  },
+  {
+    "ID": "I065",
+    "Invariante": "Consistencia de Transacciones en Bases de Datos SQLite WAL",
+    "Logica": "La base de datos SQLite debe forzar el modo Write-Ahead Logging (WAL) en todas las operaciones concurrentes.",
+    "Implicacion": "Se previene el error de base de datos bloqueada (database is locked) bajo alta carga competitiva.",
+    "Condicion": "La conexión inicial debe ejecutar la consulta PRAGMA journal_mode=WAL y establecer busy_timeout a 5000ms.",
+    "Metrica": "Check_WAL_Mode_Active(sqlite_conn) == True"
+  },
+  {
+    "ID": "I066",
+    "Invariante": "Consistencia de Esquemas en APIs de Terceros",
+    "Logica": "Cualquier respuesta en formato JSON recibida de webhooks de terceros debe validarse contra un esquema de tipos rígido.",
+    "Implicacion": "Se previenen errores del tipo KeyError y TypeError en fases de integración dinámicas.",
+    "Condicion": "Los payloads de entrada deben deserializarse utilizando modelos de datos definidos con fallbacks (ej. Pydantic).",
+    "Metrica": "Verify_Incoming_JSON_Schema(webhook_payload) == Valid"
+  },
+  {
+    "ID": "I067",
+    "Invariante": "Aislamiento de Lockfiles de Git en Monorepo",
+    "Logica": "Los archivos index.lock creados por comandos de git locales deben eliminarse automáticamente tras finalizar la tarea.",
+    "Implicacion": "Se evita el bloqueo permanente de operaciones git sentinel secundarias concurrentes.",
+    "Condicion": "El proceso que invoca comandos de git debe controlar excepciones y asegurar el borrado del lockfile residual.",
+    "Metrica": "Check_Index_Lockfile_Presence() == False"
+  },
+  {
+    "ID": "I068",
+    "Invariante": "Conservación del Límite de Procesos Hijos Zombie",
+    "Logica": "Cualquier subproceso lanzado por el Kernel debe ser recolectado llamando a wait() o communicate().",
+    "Implicacion": "Se evita la saturación de la tabla de procesos del sistema operativo del host.",
+    "Condicion": "El gestor de subprocesos debe verificar de forma recurrente el estado de procesos hijos y limpiarlos.",
+    "Metrica": "Count_Zombie_Processes() == 0"
+  },
+  {
+    "ID": "I069",
+    "Invariante": "Fidelidad de Referencias de Python en Extensiones de Rust",
+    "Logica": "Las llamadas nativas implementadas en Rust no deben retener copias de referencias dinámicas de Python sin liberar.",
+    "Implicacion": "Se evitan pérdidas de memoria virtual no recuperables mediante el garbage collector local.",
+    "Condicion": "El código compilado debe utilizar bloques de GIL guardados de PyO3 que automaticen la liberación al salir.",
+    "Metrica": "Verify_Rust_Python_References() == Clean"
+  },
+  {
+    "ID": "I070",
+    "Invariante": "Consistencia de Caché del Compilador JIT por Hashes de Contenido",
+    "Logica": "Las rutas de caché de los binarios compilados en caliente deben incluir el hash sha256 de su código fuente.",
+    "Implicacion": "Se evita la ejecución involuntaria de binarios obsoletos tras modificar archivos del monorepo.",
+    "Condicion": "La generación del path de caché debe utilizar el sha256 del código y de la lista de dependencias.",
+    "Metrica": "Verify_JIT_Cache_Path_Is_Sha256_Based() == True"
+  },
+  {
+    "ID": "I071",
+    "Invariante": "Filtro CRLF en Cabeceras HTTP de Respuesta",
+    "Logica": "Cualquier parámetro dinámico inyectado en cabeceras HTTP de respuesta debe excluir caracteres de retorno de carro y salto de línea (\\r\\n).",
+    "Implicacion": "Se previenen ataques de inyección de cabeceras y manipulación de la estructura de respuestas de red.",
+    "Condicion": "La función constructora de cabeceras debe limpiar las cadenas aplicando filtros regex estrictos.",
+    "Metrica": "Verify_HTTP_Headers_Cleanliness(response_headers) == Safe"
+  },
+  {
+    "ID": "I072",
+    "Invariante": "Conservación del Límite de Conexiones a Base de Datos en el Pool",
+    "Logica": "El número de conexiones de base de datos activas simultáneas en el pool no debe superar el límite físico de sockets.",
+    "Implicacion": "Se evitan fallas en cascada por falta de sockets de base de datos al realizar consultas concurrentes.",
+    "Condicion": "El pool debe configurar políticas de expiración y cierre automático de conexiones inactivas.",
+    "Metrica": "Pool_Active_Connections <= Max_Allowed_Database_Connections"
+  },
+  {
+    "ID": "I073",
+    "Invariante": "Unicidad de Claves en Almacén de Caché de Inferencia",
+    "Logica": "Cada entrada en el almacén de caché de inferencia debe etiquetarse con un identificador hash único basado en la firma del prompt.",
+    "Implicacion": "Se previenen colisiones de caché donde se devuelven respuestas de inferencia incorrectas para prompts distintos.",
+    "Condicion": "La clave debe calcularse utilizando un hash seguro sha256 sobre la estructura del prompt completo.",
+    "Metrica": "Count_Cache_Store_Collisions() == 0"
+  },
+  {
+    "ID": "I074",
+    "Invariante": "Decidibilidad del Acceso Exclusivo en Regiones Críticas de Hilos",
+    "Logica": "Solo un hilo de ejecución puede poseer el cerrojo exclusivo de una variable compartida en un instante de tiempo.",
+    "Implicacion": "Se evita la corrupción de memoria y condiciones de carrera en variables y diccionarios concurrentes.",
+    "Condicion": "Los intentos de adquisición paralelos del lock por otros hilos deben ser bloqueados o rechazados.",
+    "Metrica": "Threads_In_Critical_Section <= 1"
+  },
+  {
+    "ID": "I075",
+    "Invariante": "Consistencia de Formato en Exportaciones de Telemetría",
+    "Logica": "Todas las exportaciones de datos de telemetría a formato JSON deben seguir un esquema JSON Schema cerrado.",
+    "Implicacion": "Se garantiza la compatibilidad de lectura del texto por linters y visualizadores estructurados.",
+    "Condicion": "La salida debe validarse contra el esquema antes de confirmarse su escritura en el Ledger.",
+    "Metrica": "Validate_JSON_Schema(telemetry_output) == True"
+  },
+  {
+    "ID": "I076",
+    "Invariante": "Conservación de Ancho de Banda en Canales WebSocket Locales",
+    "Logica": "El volumen de datos de logs volcado por segundo a través de canales WebSocket locales no debe saturar la red interna.",
+    "Implicacion": "Se previene la degradación del rendimiento de la interfaz de usuario en el navegador del operador.",
+    "Condicion": "Las actualizaciones de logs deben agruparse en lotes y enviarse con un límite de frecuencia de 10Hz.",
+    "Metrica": "WebSocket_Throughput_MBps < Max_WebSocket_Throughput_Limit"
+  },
+  {
+    "ID": "I077",
+    "Invariante": "Consistencia Temporal de Reloj del Sistema local",
+    "Logica": "El reloj del sistema local del host debe estar sincronizado con la red de servidores de tiempo oficiales NTP.",
+    "Implicacion": "Se previene la firma de bloques del Ledger con fechas y horas desalineadas del orden secuencial.",
+    "Condicion": "La deriva temporal del host con respecto a los servidores de referencia debe ser inferior a 1s.",
+    "Metrica": "Check_NTP_Drift_Seconds() < 1.0"
+  },
+  {
+    "ID": "I078",
+    "Invariante": "Estabilidad del Entorno de Ejecución JIT tras Instalación de Skills",
+    "Logica": "La instalación de una nueva skill JIT no debe alterar ni sobrescribir las versiones de las dependencias base.",
+    "Implicacion": "Se previenen fallas en los módulos core del monorepo causadas por actualizaciones silenciosas.",
+    "Condicion": "Las instalaciones de librerías deben realizarse en entornos virtuales específicos con lockfiles inmutables.",
+    "Metrica": "Verify_Core_Dependencies() == Consistent"
+  },
+  {
+    "ID": "I079",
+    "Invariante": "Fidelidad del Historial de Logs ante Purga por Falta de Espacio",
+    "Logica": "Las tareas automáticas de limpieza de almacenamiento deben mantener intactos los registros correspondientes al día activo.",
+    "Implicacion": "Se garantiza la capacidad de auditoría forense ante incidentes lógicos recientes del Kernel.",
+    "Condicion": "El algoritmo de purga debe excluir explícitamente los logs que posean una fecha de modificación inferior a 24 horas.",
+    "Metrica": "Check_Active_Day_Logs_Presence() == True"
+  },
+  {
+    "ID": "I080",
+    "Invariante": "Conservación de Inodos Libres en Partición de Temp del Host",
+    "Logica": "La partición de almacenamiento /tmp del host macOS no debe alcanzar el límite de inodos libres.",
+    "Implicacion": "Se previene el bloqueo de procesos del sistema por imposibilidad de escribir archivos .lock de control.",
+    "Condicion": "El monitor del sistema debe verificar los inodos libres y alertar al rebasar el umbral del 85% de uso.",
+    "Metrica": "Check_Temp_Inodes_Usage_Percentage() < 85%"
+  },
+  {
+    "ID": "I081",
+    "Invariante": "Atomicidad de Escritura en Archivo de Configuración Global",
+    "Logica": "Las actualizaciones del archivo de configuración del Kernel deben completarse mediante transacciones ACID virtuales.",
+    "Implicacion": "Se evita la corrupción del estado lógico de las propiedades de las skills ante caídas del daemon.",
+    "Condicion": "La escritura se realiza a través de un archivo temporal que reemplaza de forma atómica al archivo destino.",
+    "Metrica": "Verify_Config_JSON_Syntax(config_file) == True"
+  },
+  {
+    "ID": "I082",
+    "Invariante": "Sanitización de Nombres de Archivo en Operaciones de Guardado JIT",
+    "Logica": "Los nombres de archivo generados dinámicamente deben ser sanitizados y excluir caracteres especiales y saltos de directorio (../).",
+    "Implicacion": "Se previene la modificación no autorizada de archivos del host fuera de la subcarpeta del proyecto.",
+    "Condicion": "La ruta final absoluta debe comenzar con el prefijo de la carpeta del proyecto antes de escribir en disco.",
+    "Metrica": "Check_Path_In_Workspace_Limits(target_file_path) == True"
+  },
+  {
+    "ID": "I083",
+    "Invariante": "Exclusividad de Escritura en Disco para Ledger",
+    "Logica": "Solo un hilo de ejecución de la cola asíncrona puede escribir en el Ledger en un instante de tiempo.",
+    "Implicacion": "Se previene la aparición de escrituras cruzadas corruptas en los registros del balance de exergía.",
+    "Condicion": "Cualquier intento de escritura paralela debe ser encolado en un gestor FIFO secuencial estricto.",
+    "Metrica": "Active_Ledger_Writers_Count <= 1"
+  },
+  {
+    "ID": "I084",
+    "Invariante": "Conservación de la Capacidad de Memoria Virtual RSS de Inferencia",
+    "Logica": "La memoria RSS consumida por el daemon de inferencia de modelos locales no debe superar la cuota del host.",
+    "Implicacion": "Se previenen bloqueos y abortos forzados de procesos del host por falta de memoria RAM física.",
+    "Condicion": "La memoria asignada debe ser monitorizada de forma continua con disparadores de limpieza automáticos.",
+    "Metrica": "Current_Inference_RSS_Memory < Max_Allowed_Inference_Memory"
+  },
+  {
+    "ID": "I085",
+    "Invariante": "Fidelidad de Comentarios de AST en Refactorizaciones en Caliente",
+    "Logica": "Cualquier mutación de AST aplicada dinámicamente sobre código fuente debe conservar los comentarios de las líneas editadas.",
+    "Implicacion": "Se mantiene la documentación en línea intacta para análisis estático posterior.",
+    "Condicion": "El parser sintáctico (LibCST) debe mapear los nodos de comentario a sus líneas correspondientes tras la edición.",
+    "Metrica": "Verify_Code_Comments_Integrity(edited_file_path) == True"
+  },
+  {
+    "ID": "I086",
+    "Invariante": "Conservación del Límite de Sockets Abiertos por Peers Zenoh",
+    "Logica": "El número de sockets de red TCP y UDP abiertos por los peers de Zenoh no debe superar la cuota máxima configurada.",
+    "Implicacion": "Se evita la falla de nuevas conexiones de red y caídas del servidor local.",
+    "Condicion": "Las conexiones inactivas deben expirar y ser cerradas automáticamente por los daemons de Zenoh.",
+    "Metrica": "Active_Zenoh_Sockets_Count <= Max_Zenoh_Sockets_Limit"
+  },
+  {
+    "ID": "I087",
+    "Invariante": "Unicidad de Claves de Cifrado en Mensajes de Red",
+    "Logica": "Cada payload de datos inter-agente transmitido por la red local debe cifrarse con una clave temporal única.",
+    "Implicacion": "Se previene la intercepción y lectura no autorizada de mensajes lógicos del Ledger.",
+    "Condicion": "El generador debe utilizar el módulo de cifrado seguro nativo (os.urandom) para inicializar el vector de inicialización.",
+    "Metrica": "Check_IV_Uniqueness(sent_messages) == True"
+  },
+  {
+    "ID": "I088",
+    "Invariante": "Decidibilidad del Bucle de Sincronización de Archivos locales",
+    "Logica": "La sincronización de archivos entre directorios locales del monorepo debe completarse en un único sentido a la vez.",
+    "Implicacion": "Se evitan conflictos de escritura bidireccionales y pérdida de cambios de código en caliente.",
+    "Condicion": "El proceso de sincronización debe bloquear la modificación en el destino antes de iniciar la copia de archivos.",
+    "Metrica": "Verify_Active_Sync_Channels() == 1"
+  },
+  {
+    "ID": "I089",
+    "Invariante": "Consistencia de Codificación en Consolas de Logs locales",
+    "Logica": "Cualquier salida de texto volcada a las consolas de logs locales debe decodificarse a Unicode sin excepciones de tipo.",
+    "Implicacion": "Se previene el crash de daemons de logs al procesar códigos de error con sintaxis regionales.",
+    "Condicion": "Las tuberías de lectura de streams de subprocesos deben especificar codificación UTF-8 con reemplazo de caracteres rotos.",
+    "Metrica": "Check_Logs_Format_Valid(log_stream) == True"
+  },
+  {
+    "ID": "I090",
+    "Invariante": "Conservación del Límite de Tamaño de Archivos de Logs",
+    "Logica": "El tamaño de cualquier archivo de logs generado por los daemons del sistema no debe superar los 100MB.",
+    "Implicacion": "Se previene la saturación del espacio en disco por buffers masivos huérfanos de logs.",
+    "Condicion": "Los daemons deben aplicar políticas de rotación de logs basadas en tamaño de forma automática.",
+    "Metrica": "Check_Logs_File_Size(log_file_path) <= 100MB"
+  }
+]
