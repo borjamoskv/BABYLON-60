@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-30T09:45:00+02:00",
+      "project": "cortex",
+      "focus": "Estandarización de Tipología de Entes y la Parquía Termodinámica",
+      "duration_approx": "0.5h",
+      "key_output": "Establecida notación de 7 caracteres Triple-Lock Perceptual v2.1 y la formalización de la Parquía",
+      "conversation_id": "0bc51ee5-dce3-4f20-97cd-86d1128be3ae"
+    },
+    {
       "date": "2026-06-28T02:04:57Z",
       "project": "borjamoskv-web",
       "focus": "Astro TS OOM Mitigation & Cloudflare BFT",
@@ -334,14 +342,6 @@
       "duration_approx": "0.5h",
       "key_output": "Pushed test fixes to cortex-persist and deployed SOTA vinyl deck to production",
       "conversation_id": "b942f684-1530-4eaa-9c22-8e1e4abf305b"
-    },
-    {
-      "date": "2026-05-29T10:58:02.121009Z",
-      "project": "cortex-persist",
-      "focus": "C5-REAL AST Sealing validation",
-      "duration_approx": "0.5h",
-      "key_output": "Cryptographically sealed AST PoC completed",
-      "conversation_id": "02a142bc-7e07-447c-9e9e-7f7d4c14369a"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-28T02:04:57Z"
+  "last_updated": "2026-06-30T09:45:00Z"
 }
