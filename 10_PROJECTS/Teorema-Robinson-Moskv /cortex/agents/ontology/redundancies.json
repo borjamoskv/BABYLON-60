@@ -1,0 +1,162 @@
+[
+  {
+    "ID": "R001",
+    "Redundancia_C5": "Doble Firma de Bloques del Ledger",
+    "Funcion": "Verificación redundante de hashes y firmas criptográficas en cada bloque del Ledger por dos hilos independientes.",
+    "Riesgo": "Corrupción silenciosa de datos o inyección de transacciones no autorizadas.",
+    "Coste": "Bajo (CPU insignificante, delay de firma < 5ms).",
+    "Dependencias": "Librerías de criptografía (hashlib / cryptography)."
+  },
+  {
+    "ID": "R002",
+    "Redundancia_C5": "Replica en Memoria Virtual WAL de SQLite",
+    "Funcion": "Clonación en caliente de transacciones confirmadas a un almacén temporal en RAM (:memory:) además del archivo .db.",
+    "Riesgo": "Pérdida de datos transitorios por caídas abruptas de energía del host.",
+    "Coste": "Medio (duplicación de escrituras de base de datos, RAM adicional < 10MB).",
+    "Dependencias": "Módulo sqlite3 estándar de Python."
+  },
+  {
+    "ID": "R003",
+    "Redundancia_C5": "Reserva de Pool de Descriptores de Sockets",
+    "Funcion": "Mantenimiento preventivo de un conjunto cerrado de descriptores de archivos libres para emergencias de E/S.",
+    "Riesgo": "Bloqueo total del Kernel por error 'too many open files' (EMFILE).",
+    "Coste": "Bajo (reserva estática de descriptores en la inicialización del daemon).",
+    "Dependencias": "Llamadas de sistema del kernel del host macOS."
+  },
+  {
+    "ID": "R004",
+    "Redundancia_C5": "Canales de Inferencia Alternativos (Failover LLM)",
+    "Funcion": "Mapeo de múltiples clientes de inferencia (ej. API remota con fallback a modelo local MLX).",
+    "Riesgo": "Interrupción de tareas de inferencia lógica por caída de red o agotamiento de cuota de API.",
+    "Coste": "Alto (tiempos de respuesta mayores al degradar a modelos locales menores).",
+    "Dependencias": "Configuración de credenciales de red y frameworks locales (MLX)."
+  },
+  {
+    "ID": "R005",
+    "Redundancia_C5": "Doble Validación AST antes de Compilación",
+    "Funcion": "Ejecución recursiva de validaciones sintácticas usando parsers independientes (ast nativo + LibCST).",
+    "Riesgo": "Inyección de fallas semánticas o sintácticas desalineadas con la versión del intérprete.",
+    "Coste": "Medio (doble parsing sintáctico del código fuente modificado).",
+    "Dependencias": "Librería LibCST y módulo ast estándar."
+  },
+  {
+    "ID": "R006",
+    "Redundancia_C5": "Almacén de Snapshots de Estado Geodistribuidos",
+    "Funcion": "Persistencia redundante de volcados de memoria en directorios locales y repositorios remotos Git.",
+    "Riesgo": "Corrupción o pérdida física del disco duro local del host.",
+    "Coste": "Alto (tiempos de subida por red y almacenamiento en disco duplicado).",
+    "Dependencias": "Git Sentinel y túneles SSH configurados."
+  },
+  {
+    "ID": "R007",
+    "Redundancia_C5": "Relojes Lógicos y Físicos Combinados para Ledger",
+    "Funcion": "Uso coordinado de Relojes de Lamport y marcas de tiempo NTP para validar el orden secuencial.",
+    "Riesgo": "Falla de sincronía de tiempo local (relojes desalineados) que corrompa la secuencia.",
+    "Coste": "Bajo (operaciones de comparación aritméticas simples en el Ledger).",
+    "Dependencias": "Sincronía NTP del sistema del host macOS."
+  },
+  {
+    "ID": "R008",
+    "Redundancia_C5": "Redundancia de Sockets UDP para Quórums Zenoh",
+    "Funcion": "Difusión paralela de transacciones a través de múltiples canales UDP e interfaces de red locales.",
+    "Riesgo": "Pérdida de paquetes en redes locales inalámbricas o caídas de puertos específicos.",
+    "Coste": "Medio (duplicación de tráfico de red local < 1MB/s).",
+    "Dependencias": "Librería Zenoh de red distribuida."
+  },
+  {
+    "ID": "R009",
+    "Redundancia_C5": "Aislamiento de Caches de Inferencia",
+    "Funcion": "Mapeo de caches de claves-valores en memoria local (Fast Cache) con persistencia en SQLite (Cold Cache).",
+    "Riesgo": "Pérdida de hits de caché y aumento de costes por reinicios del daemon principal.",
+    "Coste": "Bajo (lecturas rápidas de memoria con volcados periódicos asíncronos).",
+    "Dependencias": "SQLite de base de datos local."
+  },
+  {
+    "ID": "R010",
+    "Redundancia_C5": "Cuentas de Respaldo en Ledger para Quórums Bizantinos",
+    "Funcion": "Mantenimiento de claves secundarias firmantes válidas autorizadas en el Ledger del monorepo.",
+    "Riesgo": "Pérdida de la clave principal firmante del operador.",
+    "Coste": "Bajo (almacenamiento criptográfico cifrado de claves de respaldo).",
+    "Dependencias": "Módulo de criptografía asimétrica."
+  },
+  {
+    "ID": "R011",
+    "Redundancia_C5": "Heartbeats Redundantes en Red de Workers",
+    "Funcion": "Emisión de señales de salud a través de HTTP ping y canales WebSocket concurrentes.",
+    "Riesgo": "Workers caídos que siguen apareciendo como saludables debido a hilos zombies.",
+    "Coste": "Bajo (tráfico de red e hilos de control mínimos).",
+    "Dependencias": "WebSockets locales y HTTP Client."
+  },
+  {
+    "ID": "R012",
+    "Redundancia_C5": "Verificación de Integridad de Archivos por Hashes sha256 y md5",
+    "Funcion": "Validación cruzada de integridad de archivos de indexación comparando ambos hashes.",
+    "Riesgo": "Colisión de hashes o manipulaciones maliciosas de archivos de configuración JIT.",
+    "Coste": "Bajo (operaciones de cálculo de hash en el arranque).",
+    "Dependencias": "Módulo hashlib estándar."
+  },
+  {
+    "ID": "R013",
+    "Redundancia_C5": "Sandboxes de Ejecución Virtuales Múltiples",
+    "Funcion": "Lanzamiento de código dinámico en entornos virtuales independientes WASM y subprocesos aislados.",
+    "Riesgo": "Escape de sandbox de código malicioso generado por modelos locales.",
+    "Coste": "Alto (overhead de inicialización de la máquina virtual WASM).",
+    "Dependencias": "Runtime WASM integrado en Python."
+  },
+  {
+    "ID": "R014",
+    "Redundancia_C5": "Doble Cola de Tareas en Broker de Mensajes",
+    "Funcion": "Mapeo de cola en memoria RAM (Fast Queue) respaldada por una tabla persistente en base de datos.",
+    "Riesgo": "Pérdida de tareas asignadas en cola por apagado abrupto del host.",
+    "Coste": "Medio (escrituras y confirmaciones de tareas duplicadas en base de datos).",
+    "Dependencias": "Base de datos SQLite local."
+  },
+  {
+    "ID": "R015",
+    "Redundancia_C5": "Canales de Salida Estándar Duplicados en Logs",
+    "Funcion": "Direccionar simultáneamente trazas a stdout de consola y a rotador de archivos local.",
+    "Riesgo": "Pérdida de trazas de depuración por redirecciones de consola o buffers llenos.",
+    "Coste": "Bajo (escritura doble de strings de logs).",
+    "Dependencias": "Logger del sistema de archivos."
+  },
+  {
+    "ID": "R016",
+    "Redundancia_C5": "Doble Indexación de Skills en el monorepo",
+    "Funcion": "Indexación recursiva en base de datos relacional y archivo YAML de configuración de respaldo.",
+    "Riesgo": "Corrupción de base de datos que impida arrancar las habilidades JIT del monorepo.",
+    "Coste": "Bajo (lectura inicial redundante en la carga de módulos).",
+    "Dependencias": "Módulos yaml y sqlite3 de Python."
+  },
+  {
+    "ID": "R017",
+    "Redundancia_C5": "Verificación de Certificados TLS en Clientes locales",
+    "Funcion": "Validación cruzada de certificados SSL/TLS utilizando almacenes locales y listas blancas del Kernel.",
+    "Riesgo": "Ataques de intermediación (MitM) facilitados por certificados locales autofirmados corruptos.",
+    "Coste": "Bajo (verificación criptográfica en el establecimiento de conexión).",
+    "Dependencias": "Librería ssl nativa de Python."
+  },
+  {
+    "ID": "R018",
+    "Redundancia_C5": "Sincronización en Espejo de Repositorios Locales",
+    "Funcion": "Mapeo del repositorio del monorepo local en dos rutas físicas de disco distintas.",
+    "Riesgo": "Pérdida de archivos de desarrollo por fallas en la partición activa.",
+    "Coste": "Alto (duplicación de almacenamiento y tiempo de copia en espejo).",
+    "Dependencias": "Daemon de sincronización del host."
+  },
+  {
+    "ID": "R019",
+    "Redundancia_C5": "Canales de Heartbeat cruzados en Red Zenoh",
+    "Funcion": "Monitorear peers enviando señales a través de sockets TCP y canales de quórum de Zenoh paralelos.",
+    "Riesgo": "Falla silenciosa de comunicaciones asíncronas en subredes locales.",
+    "Coste": "Bajo (tráfico de latidos de red insignificante).",
+    "Dependencias": "Peers de red Zenoh."
+  },
+  {
+    "ID": "R020",
+    "Redundancia_C5": "Doble Firma de Commits en Git Sentinel",
+    "Funcion": "Firmado criptográfico de commits usando claves GPG nativas y llaves SSH de firma combinadas.",
+    "Riesgo": "Suplantación de identidad del operador en el monorepo de control.",
+    "Coste": "Bajo (delay de firmado GPG/SSH en confirmaciones).",
+    "Dependencias": "Agentes GPG/SSH locales y Git Sentinel."
+  }
+]
