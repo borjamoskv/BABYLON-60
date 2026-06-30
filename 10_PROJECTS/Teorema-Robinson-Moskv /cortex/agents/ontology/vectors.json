@@ -48,14 +48,6 @@
     "Defensa": "Sanitizar y validar que las URLs de redirección comiencen estrictamente con el host local."
   },
   {
-    "ID": "AV007",
-    "Vector_Adversarial": "Inyección de Cabeceras HTTP en Servidor de Logs",
-    "Superficie": "Respuestas de los adaptadores de API web locales.",
-    "Mecanismo": "Introducir saltos de línea (\\r\\n) en las entradas reflejadas en las cabeceras de respuesta HTTP.",
-    "Impacto": "Secuestro de sesiones y desalineación de estados del navegador del operador.",
-    "Defensa": "Filtrar de forma estricta caracteres de control en cualquier string asignada a cabeceras."
-  },
-  {
     "ID": "AV008",
     "Vector_Adversarial": "Agotamiento de Descriptores por Ataque Slowloris",
     "Superficie": "Sockets TCP de conexión del servidor web del dashboard.",
@@ -168,14 +160,6 @@
     "Defensa": "Forzar la especificación de versiones exactas (version locking) y auditoría con lockfiles."
   },
   {
-    "ID": "AV022",
-    "Vector_Adversarial": "Fuga de memoria virtual en JavaScript de UI",
-    "Superficie": "Código del visualizador del dashboard en el navegador.",
-    "Mecanismo": "Retener referencias de closures sobre elementos DOM eliminados de forma iterativa.",
-    "Impacto": "Uso de RAM que supera el gigabyte en el navegador hasta forzar la recarga del visualizador.",
-    "Defensa": "Asegurar que las variables dinámicas de estadísticas se pongan a null tras actualizar el DOM."
-  },
-  {
     "ID": "AV023",
     "Vector_Adversarial": "Desalineación de Esquemas de Red por payloads Zenoh corruptos",
     "Superficie": "Receptores de mensajes asíncronos de Zenoh.",
@@ -206,14 +190,6 @@
     "Mecanismo": "Enviar peticiones simuladas que no contengan la firma de verificación secreta (X-Hub-Signature).",
     "Impacto": "Inserción de eventos falsos de commits JIT y alteración de los saldos de exergía.",
     "Defensa": "Validar estrictamente la firma HMACS de cada webhook contra la clave compartida configurada."
-  },
-  {
-    "ID": "AV027",
-    "Vector_Adversarial": "Saturación de I/O por polling persistente de base de datos relacional",
-    "Superficie": "Base de datos de configuración de las skills.",
-    "Mecanismo": "Lanzar consultas SELECT en bucles while sin pausas intermitentes para detectar cambios de estado.",
-    "Impacto": "Degradación en el rendimiento de disco y consumo excesivo de CPU en el host macOS.",
-    "Defensa": "Utilizar disparadores reactivos o notificaciones de base de datos en lugar de polling activo."
   },
   {
     "ID": "AV028",
@@ -296,14 +272,6 @@
     "Defensa": "Validar y sanitizar que el path de destino comience con el prefijo de la carpeta del proyecto."
   },
   {
-    "ID": "AV038",
-    "Vector_Adversarial": "Saturación de CPU por Loops de Reintento de Conexión sin Sleep",
-    "Superficie": "Clientes de sockets locales del host.",
-    "Mecanismo": "Intentar reconectar a un puerto cerrado en un bucle while vacío sin pausas intermitentes.",
-    "Impacto": "Consumo de un núcleo de CPU al 100% de forma indefinida en el hilo de red.",
-    "Defensa": "Establecer una pausa sleep() obligatoria en cada iteración del bucle de reintento de conexión."
-  },
-  {
     "ID": "AV039",
     "Vector_Adversarial": "Desalineación de Esquemas en APIs de WebSockets por payloads malformados",
     "Superficie": "Receptor de mensajes del visualizador del dashboard.",
@@ -320,28 +288,12 @@
     "Defensa": "Asegurar confirmaciones atómicas mediante backups e implementar sqlite3 recovery."
   },
   {
-    "ID": "AV041",
-    "Vector_Adversarial": "Inyección de dependencias locales con API desalineada",
-    "Superficie": "Entorno virtual y monorepo local.",
-    "Mecanismo": "Modificar de forma silenciosa dependencias locales instaladas en modo editable.",
-    "Impacto": "Fallas de compilación JIT y TypeError al invocar submódulos del monorepo.",
-    "Defensa": "Aislar las dependencias del monorepo usando workspaces virtuales específicos por proyecto."
-  },
-  {
     "ID": "AV042",
     "Vector_Adversarial": "Fuga de memory leaks en PythonBindings de Rust JIT",
     "Superficie": "Adaptadores compilados en caliente en Rust PyO3.",
     "Mecanismo": "Lanzar compilaciones repetidas acumulando referencias PyObject en Rust sin liberar el GIL.",
     "Impacto": "Fallas de OOM de la máquina virtual del host tras ejecuciones de análisis estático.",
     "Defensa": "Utilizar constructores de Scope en PyO3 (Python::with_gil) en la inicialización."
-  },
-  {
-    "ID": "AV043",
-    "Vector_Adversarial": "Bypass de validación SSL/TLS en peticiones HTTPS JIT",
-    "Superficie": "Cliente de red e importador de recursos de internet.",
-    "Mecanismo": "Desactivar la validación de certificados HTTPS (verify=False) para omitir alertas locales.",
-    "Impacto": "Vulnerabilidad a intercepciones y modificaciones de payloads de dependencias (MitM).",
-    "Defensa": "Importar los certificados de confianza autorizados y prohibir verify=False."
   },
   {
     "ID": "AV044",

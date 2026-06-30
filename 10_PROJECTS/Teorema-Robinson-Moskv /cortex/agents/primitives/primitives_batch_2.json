@@ -100,16 +100,6 @@
     "Intervención": "Ordenar de manera inmutable el orden de adquisición de locks a lo largo de todo el código."
   },
   {
-    "ID": "P044",
-    "Primitiva": "Falta de Aislamiento de Sandbox en Ejecución de Código Dinámico",
-    "Mecanismo Causal": "Uso de eval() o exec() sobre cadenas generadas externamente sin limpiar el diccionario global de __builtins__.",
-    "Activación": "Ejecución de un script generado por un modelo de lenguaje que importa el módulo os y altera el host.",
-    "Sensor": "Detección de comandos de sistema no permitidos ejecutados por el proceso de Python.",
-    "Escala Temporal": "10ms",
-    "Gravedad": "Crítica",
-    "Intervención": "Migrar a entornos de ejecución aislados reales (ej. WASM en python o contenedores Docker efímeros)."
-  },
-  {
     "ID": "P045",
     "Primitiva": "Desbordamiento de Búfer en Consola Virtual Tmux",
     "Mecanismo Causal": "Generación excesiva de salidas de consola sin lectura o limpieza activa de la terminal virtual controlada.",
@@ -138,16 +128,6 @@
     "Escala Temporal": "10ms",
     "Gravedad": "Media",
     "Intervención": "Forzar el uso de la clase Path de pathlib para toda manipulación y concatenación de rutas de archivos."
-  },
-  {
-    "ID": "P049",
-    "Primitiva": "Fuga de Threads por Creación Descontrolada (Unbounded Thread Creation)",
-    "Mecanismo Causal": "Instanciación de hilos individuales para cada tarea sin usar agrupaciones o ThreadPoolExecutor.",
-    "Activación": "Lanzamiento de peticiones asíncronas en paralelo por agentes que gestionan flujos de control recursivos.",
-    "Sensor": "Caída del sistema con errores de falta de recursos de memoria nativa o límites de thread alcanzados.",
-    "Escala Temporal": "1s a 10s",
-    "Gravedad": "Alta",
-    "Intervención": "Definir un ThreadPoolExecutor global estático con límite máximo de concurrencia adaptativo."
   },
   {
     "ID": "P050",
