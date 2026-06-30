@@ -1,81 +1,78 @@
-# ANGLOMORPH (V ↔ W): Isomorfismo Biyectivo Sin Pérdida de Información
+# Plan de Implementación: Anglomorph Singularity (v2.0)
 
 ```yaml
-Claim: Generación y Reversión de lenguaje artificial isomorfo al Inglés.
-Proof: { Base: Conversión Biyectiva Base-26 ↔ Base-85 (CV Syllables), Range: [1,1], Confidence: C5-REAL }
+Claim: Especificación formal e implementación del isomorfismo sintáctico-léxico V ↔ W.
+Proof: { Base: Homomorfismo biyectivo de monoides libres Σ_26* ↔ (Σ_CV)*, Range: [1,1], Confidence: C5-REAL }
 ```
 
-## 1. Definición Topológica
-Para que un lenguaje $W$ sea estrictamente isomorfo a un lenguaje $V$ (Inglés), debe existir una función $f: V \to W$ tal que:
-1. **Preservación Estructural:** Para cada oración $S \in V$, la estructura sintáctica, puntuación y gramática se mantiene inalterada en $f(S) \in W$.
-2. **Biyección:** Existe una función inversa $f^{-1}: W \to V$ tal que $f^{-1}(f(S)) = S$, con pérdida de información cero ($I(S; f(S)) = H(S)$).
+Este documento establece la arquitectura formal y el plan de despliegue para el sistema de transmutación isomorfa **Anglomorph**.
 
-## 2. Metodología: Transmutación de Bases Numéricas
-En lugar de depender de diccionarios estáticos en memoria (que violan la autarquía del autómata), Anglomorph utiliza un cambio de base numérica biyectivo:
-* **Entrada (Inglés):** Las palabras se tratan como cadenas en un alfabeto de 26 caracteres. Se mapean a un entero $N \in \mathbb{N}$ usando **Aritmética Biyectiva en Base 26** (donde "a"=1, "z"=26, "aa"=27, etc.).
-* **Salida (Anglomorph):** El entero $N$ se convierte a **Base 85** usando un silabario de tipo $CV$ (Consonante-Vocal) de longitud fija (2 caracteres). Cada "dígito" de la Base 85 corresponde a una sílaba como `ba`, `de`, `fi`, etc.
+---
 
-Dado que la conversión entre bases numéricas biyectivas es determinista y reversible a nivel matemático, la traducción de ida y vuelta es exacta.
+## 1. Formalismo Matemático
 
-## 3. Implementación Empírica ([isomorph.py](file://$CORTEX_ROOT/.gemini/antigravity/brain/4b0e2eef-c26c-4c2d-937b-0085a14c9c87/isomorph.py))
-El script adjunto realiza la traducción en ambas direcciones:
+Definimos los lenguajes $V$ (Inglés) y $W$ (Anglomorph) como monoides libres sobre sus respectivos alfabetos $\Sigma_V$ y $\Sigma_W$.
 
-```python
-import re
+$$\Sigma_V = \{a, b, c, \dots, z\}$$
+$$\Sigma_W = \{c_i v_j \mid c_i \in \text{Consonantes}, v_j \in \text{Vocales}\} \quad (|\Sigma_W| = 85)$$
 
-CONSONANTS = "bdfghjklmnprstvwz"
-VOWELS = "aeiou"
-SYLLABLES = [c + v for c in CONSONANTS for v in VOWELS] # 85 sílabas únicas de longitud 2
-ENGLISH_ALPHABET = "abcdefghijklmnopqrstuvwxyz"
+El isomorfismo se define a través de una aplicación biyectiva $f: \Sigma_V^* \to \Sigma_W^*$ parametrizada mediante el isomorfismo intermedio en el anillo de los enteros $\mathbb{Z}$:
 
-def eng_to_int(word: str) -> int:
-    k = len(ENGLISH_ALPHABET)
-    val = 0
-    for char in word.lower():
-        if char in ENGLISH_ALPHABET:
-            val = val * k + (ENGLISH_ALPHABET.index(char) + 1)
-    return val
+$$\phi: \Sigma_V^* \to \mathbb{Z}^+ \quad \text{(Codificación en Base 26 Biyectiva)}$$
+$$\psi: \mathbb{Z}^+ \to \Sigma_W^* \quad \text{(Decodificación en Base 85 Biyectiva)}$$
 
-def int_to_eng(n: int) -> str:
-    k = len(ENGLISH_ALPHABET)
-    s = []
-    while n > 0:
-        n -= 1
-        s.append(ENGLISH_ALPHABET[n % k])
-        n //= k
-    return "".join(reversed(s))
+$$f = \psi \circ \phi \quad \text{y} \quad f^{-1} = \phi^{-1} \circ \psi^{-1}$$
 
-def int_to_ang(n: int) -> str:
-    k = len(SYLLABLES)
-    s = []
-    while n > 0:
-        n -= 1
-        s.append(SYLLABLES[n % k])
-        n //= k
-    return "".join(reversed(s))
+### Invariantes Estructurales Enforzados
+1. **Pérdida de Información Nula:** La entropía de Shannon del texto original $H(X)$ es isomorfa a la del texto traducido bajo correspondencia de tokens: $H(V) \equiv H(f(V))$.
+2. **Preservación de Topología Sintáctica:** Si $S = (w_1, p_1, w_2, \dots)$ es una secuencia de palabras y puntuaciones en $V$, entonces $f(S) = (f(w_1), p_1, f(w_2), \dots)$ preserva los límites de palabra y puntuación de manera idéntica.
 
-def ang_to_int(word: str) -> int:
-    word_lower = word.lower()
-    if len(word_lower) % 2 != 0:
-        raise ValueError(f"Longitud inválida para palabra Anglomorph: {word}")
-    chunks = [word_lower[i:i+2] for i in range(0, len(word_lower), 2)]
-    k = len(SYLLABLES)
-    val = 0
-    for chunk in chunks:
-        if chunk not in SYLLABLES:
-            raise ValueError(f"Sílaba inválida en Anglomorph: {chunk}")
-        val = val * k + (SYLLABLES.index(chunk) + 1)
-    return val
-```
+---
 
-## 4. Ejecución del Isomorfismo
-Al ejecutar el traductor, obtenemos:
+## 2. Cambios Propuestos y Módulos
 
-* **Texto en Inglés (V):**
-  > *"To be, or not to be, that is the question."*
-* **Texto en Anglomorph (W):**
-  > *"Dahu re, boti bakafo dahu re, nokoro bezi bawani kehahirehehu."*
-* **Restauración (W → V):**
-  > *"To be, or not to be, that is the question."*
+### Componente de Traducción y Pruebas
 
-La estructura formal del libro (oraciones, cláusulas, puntuación, mayúsculas) y los tokens semánticos subyacentes se han conservado de manera idéntica.
+#### [MODIFY] [isomorph.py](file://$CORTEX_ROOT/10_PROJECTS/anglomorph/isomorph.py)
+* Optimizar la conversión de cadenas largas mediante aritmética arbitraria de enteros (`BigInt` / enteros nativos de Python).
+* Implementar tokenización estricta mediante regex determinista:
+  * Exclusión de tokens no ASCII de la mutación léxica.
+  * Preservación exacta de metacaracteres de formato (saltos de línea, tabulaciones, espacios múltiples).
+
+#### [NEW] [test_isomorph.py](file://$CORTEX_ROOT/.gemini/antigravity/brain/4b0e2eef-c26c-4c2d-937b-0085a14c9c87/test_isomorph.py)
+* Bucle adversarial de testing:
+  * Generación aleatoria de strings de prueba en $V$.
+  * Validación de la condición de identidad: $f^{-1}(f(x)) == x$.
+  * Verificación de preservación de mayúsculas (All-Caps, Title Case, Lower Case).
+
+### Componente de Visualización (UI Industrial Noir)
+
+#### [NEW] [index.html](file://$CORTEX_ROOT/10_PROJECTS/anglomorph/web/index.html)
+* Interfaz de doble terminal interactiva.
+* Panel reactivo para visualización del estado del consenso BFT local.
+
+#### [NEW] [style.css](file://$CORTEX_ROOT/10_PROJECTS/anglomorph/web/style.css)
+* Estilización Industrial Noir 2026:
+  * Paleta estricta: `#0A0A0A` (Luminancia mínima), `#2B3BE5` (Acento activo), `#FFFFFF` (Texto de alto contraste).
+  * Tipografías: Space Grotesk (Cabeceras) y JetBrains Mono (Métricas).
+
+#### [NEW] [app.js](file://$CORTEX_ROOT/10_PROJECTS/anglomorph/web/app.js)
+* Implementación de la composición $f = \psi \circ \phi$ en JavaScript mediante `BigInt` para evitar el desbordamiento de precisión IEEE 754.
+* Cálculo en tiempo real de la entropía de Shannon $H(X)$ del texto fuente.
+
+---
+
+## 3. Plan de Verificación
+
+### Pruebas Automatizadas
+* Ejecutar verificación cruzada sobre el corpus literario:
+  ```bash
+  python3 $CORTEX_ROOT/.gemini/antigravity/brain/4b0e2eef-c26c-4c2d-937b-0085a14c9c87/test_isomorph.py
+  ```
+
+### Verificación Manual
+* Ejecutar el servidor web local:
+  ```bash
+  python3 -m http.server 8089 --directory $CORTEX_ROOT/10_PROJECTS/anglomorph/web
+  ```
+* Inspeccionar la equivalencia estructural y de estilo a través del navegador.
