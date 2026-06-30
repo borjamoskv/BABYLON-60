@@ -10,7 +10,7 @@
       "Rust"
     ],
     "created": "2026-05-26T22:49:50.419234+00:00",
-    "last_touched": "2026-06-30T15:42:27Z"
+    "last_touched": "2026-06-30T17:25:18Z"
   },
   "status": "shipped",
   "health": "green",
@@ -19,23 +19,31 @@
     "last_task": "Sandbox shell recovery, dynamic path resolution, active context alignment, and global rules/skills hardening (C5-REAL)",
     "last_file": "babylon60/agents/base.py",
     "last_conversation": "8bf3845f-5831-4bf5-b0a1-8647b4ef4b0d",
-    "timestamp": "2026-06-30T15:42:27Z"
+    "timestamp": "2026-06-30T17:25:18Z"
   },
   "known_issues": [],
   "pending_tasks": [],
   "recent_changes": [
+    "[2026-06-30T17:25:18Z] feat(infra): added scripts/c5_exec.py Python shell bypass executor for Antigravity sandbox",
+    "[2026-06-30T17:25:18Z] docs(agents): patched global/local AGENTS.md rules with Cwd integrity checks, shell redirects, and context alignment",
+    "[2026-06-30T17:25:18Z] feat(cli/agents): dynamic workspace path resolution in base.py to prevent PII leaks during commits",
+    "[2026-06-30T17:25:18Z] test(saga): added e2e tests for encrypted write-path state serialization in test_e2e_saga_write_path.py",
     "[2026-06-30T15:42:27Z] feat(infra): added scripts/c5_exec.py Python shell bypass executor for Antigravity sandbox",
     "[2026-06-30T15:42:27Z] docs(agents): patched global/local AGENTS.md rules with Cwd integrity checks, shell redirects, and context alignment",
     "[2026-06-30T15:42:27Z] feat(cli/agents): dynamic workspace path resolution in base.py to prevent PII leaks during commits",
     "[2026-06-30T15:42:27Z] test(saga): added e2e tests for encrypted write-path state serialization in test_e2e_saga_write_path.py",
     "[2026-06-28T03:39:29Z] feat(trust): implemented c8 reputation metabolism via BeliefObjects and ledger persistence (commit c7e7b1baa)",
-    "Update Pyright baseline a 206 para blanquear deuda técnica latente tras purga de .scratch",
-    "Fix TypeError de ControlVector en ultramap.py con __future__ annotations (zero-entropy)",
-    "Refactor test_e2e_swarm_integration.py con timeout retry loop para mitigar deadlock de SQLite",
-    "Parchear time_ns y MagicMock._conn en test_store_mutation.py",
-    "Mock keyring en test_byzantine_judge_crypto.py para evadir timeout sin sesión interactiva"
+    "Update Pyright baseline a 206 para blanquear deuda técnica latente tras purga de .scratch"
   ],
   "decisions": [
+    {
+      "date": "2026-06-30T17:25:18Z",
+      "decision": "Dynamically compute workspace base path in base.py instead of hardcoding absolute home path to prevent PII detection blocks."
+    },
+    {
+      "date": "2026-06-30T17:25:18Z",
+      "decision": "Run all sandbox shell commands through scripts/c5_exec.py using venv python to avoid /bin/zsh fork failures."
+    },
     {
       "date": "2026-06-30T15:42:27Z",
       "decision": "Dynamically compute workspace base path in base.py instead of hardcoding absolute home path to prevent PII detection blocks."
