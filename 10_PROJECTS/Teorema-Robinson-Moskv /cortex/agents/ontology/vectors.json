@@ -1,0 +1,402 @@
+[
+  {
+    "ID": "AV001",
+    "Vector_Adversarial": "Desbordamiento de Contexto por Prompts Cíclicos",
+    "Superficie": "APIs de entrada de los subagentes del Swarm.",
+    "Mecanismo": "Envío recursivo de respuestas con bucles lógicos infinitos que saturan la ventana de contexto del LLM.",
+    "Impacto": "Anergía máxima (gasto masivo de tokens) y OOM por saturación de RAM de prefill.",
+    "Defensa": "Imponer un límite estricto de longitud de contexto de entrada y truncado de respuestas duplicadas."
+  },
+  {
+    "ID": "AV002",
+    "Vector_Adversarial": "Bloqueo Concurrente de SQLite por Transacciones Infinitas",
+    "Superficie": "Base de datos local de telemetría de exergía.",
+    "Mecanismo": "Iniciar una transacción exclusiva sin invocar commit/rollback, bloqueando de por vida las escrituras concurrentes.",
+    "Impacto": "Falla general de guardado de estados JIT y caída de la telemetría en tiempo real.",
+    "Defensa": "Activar el modo WAL y establecer timeouts rígidos de busy_timeout en todas las conexiones."
+  },
+  {
+    "ID": "AV003",
+    "Vector_Adversarial": "Escapado de Sandbox mediante FFI Inseguro",
+    "Superficie": "Entorno de ejecución de código dinámico de subagentes.",
+    "Mecanismo": "Uso de punteros ctypes de Python para reescribir regiones de memoria del intérprete y ejecutar comandos del sistema.",
+    "Impacto": "Pérdida absoluta de integridad del host macOS y ejecución de binarios no autorizados.",
+    "Defensa": "Prohibir importaciones ctypes en los entornos restrictivos y usar sandboxes WASM reales."
+  },
+  {
+    "ID": "AV004",
+    "Vector_Adversarial": "Envenenamiento de Caché de JIT por Colisión de Hashes",
+    "Superficie": "Repositorio de binarios compilados locales de las skills.",
+    "Mecanismo": "Introducir código malicioso que posea el mismo hash sha256 de una dependencia legítima.",
+    "Impacto": "Ejecución de lógica corrupta en el arranque de las habilidades del Kernel.",
+    "Defensa": "Utilizar firmas dobles criptográficas (sha256 + md5) y verificar el changeset en git."
+  },
+  {
+    "ID": "AV005",
+    "Vector_Adversarial": "Saturación de I/O por Inundación de Logs de Excepción",
+    "Superficie": "Sistema de archivos local y daemon logger del host.",
+    "Mecanismo": "Provocar excepciones repetidas en bucles rápidos de hilos de red Zenoh.",
+    "Impacto": "Disco lleno en minutos y bloqueos por llamadas de sistema síncronas de escritura.",
+    "Defensa": "Implementar rate-limiting de logs adaptativo y rotación agresiva con truncado."
+  },
+  {
+    "ID": "AV006",
+    "Vector_Adversarial": "Redirección OAuth Abierta (Open Redirect)",
+    "Superficie": "Endpoints de autenticación y pasarelas de inicio de sesión.",
+    "Mecanismo": "Modificar el parámetro next de redirección para enviar al operador a dominios externos fraudulentos.",
+    "Impacto": "Robo de tokens JWT de sesión activa y credenciales del operador.",
+    "Defensa": "Sanitizar y validar que las URLs de redirección comiencen estrictamente con el host local."
+  },
+  {
+    "ID": "AV007",
+    "Vector_Adversarial": "Inyección de Cabeceras HTTP en Servidor de Logs",
+    "Superficie": "Respuestas de los adaptadores de API web locales.",
+    "Mecanismo": "Introducir saltos de línea (\\r\\n) en las entradas reflejadas en las cabeceras de respuesta HTTP.",
+    "Impacto": "Secuestro de sesiones y desalineación de estados del navegador del operador.",
+    "Defensa": "Filtrar de forma estricta caracteres de control en cualquier string asignada a cabeceras."
+  },
+  {
+    "ID": "AV008",
+    "Vector_Adversarial": "Agotamiento de Descriptores por Ataque Slowloris",
+    "Superficie": "Sockets TCP de conexión del servidor web del dashboard.",
+    "Mecanismo": "Abrir múltiples conexiones y enviar cabeceras a velocidad mínima para retener los sockets activos.",
+    "Impacto": "Bloqueo total del servidor web local para el navegador del operador por falta de sockets libres.",
+    "Defensa": "Establecer timeouts agresivos de lectura y límites de conexiones simultáneas por IP."
+  },
+  {
+    "ID": "AV009",
+    "Vector_Adversarial": "Envenenamiento de Datos del Ledger por Quórum Falso",
+    "Superficie": "Protocolo de consenso distribuido en la red Zenoh.",
+    "Mecanismo": "Simular firmas de peers inexistentes para forzar la aceptación de transacciones corruptas de balance.",
+    "Impacto": "Desalineación del saldo de exergía en el Ledger y firmas no coincidentes.",
+    "Defensa": "Verificar de forma estricta las claves públicas firmantes contra el registro local del Kernel."
+  },
+  {
+    "ID": "AV010",
+    "Vector_Adversarial": "Bucle Infinito de Redirección HTTP Canónica",
+    "Superficie": "Configuración de enrutamiento y proxy local Nginx/Cortex.",
+    "Mecanismo": "Inyectar reglas cruzadas que apunten .dev a .com y viceversa en las cabeceras Host.",
+    "Impacto": "Saturación de memoria en el navegador del operador y caída por timeout de red.",
+    "Defensa": "Establecer reglas de redirección inmutables y verificadas en tiempo de compilación."
+  },
+  {
+    "ID": "AV011",
+    "Vector_Adversarial": "Inyección de Comandos en Nombres de Módulos JIT",
+    "Superficie": "Cargador dinámico de dependencias de Python.",
+    "Mecanismo": "Enviar parámetros con caracteres de control de terminal (; | &) al compilar submódulos locales.",
+    "Impacto": "Ejecución de procesos huérfanos no autorizados en el host macOS de desarrollo.",
+    "Defensa": "Validar y sanitizar con expresiones regulares los nombres de dependencias JIT."
+  },
+  {
+    "ID": "AV012",
+    "Vector_Adversarial": "Double Free en Extensiones Nativas FFI",
+    "Superficie": "Enlaces de comunicación nativos FFI (Ctypes/Cffi).",
+    "Mecanismo": "Provocar llamadas repetidas de liberación de punteros nativos de memoria ya destruidos.",
+    "Impacto": "Segmentation fault inmediata con caída instantánea de todo el Kernel C5-REAL.",
+    "Defensa": "Implementar gestores de ciclo de vida atómicos que pongan la referencia a null tras el primer cierre."
+  },
+  {
+    "ID": "AV013",
+    "Vector_Adversarial": "Fuga de Claves en traceback de Logs de Inferencia",
+    "Superficie": "Sistema de registro de errores y excepciones del Kernel.",
+    "Mecanismo": "Provocar fallas en llamadas HTTPS enviando payloads maliciosos que fuercen el volcado de variables locales.",
+    "Impacto": "Exposición de tokens privados de APIs en los archivos de logs del host.",
+    "Defensa": "Implementar un filtro regex de sanitización sobre el flujo de salida del logger principal."
+  },
+  {
+    "ID": "AV014",
+    "Vector_Adversarial": "Manipulación de Time en el Ledger (Ataque de Repetición)",
+    "Superficie": "Entrada de bloques del Ledger de transacciones.",
+    "Mecanismo": "Inyectar bloques con timestamps del pasado para eludir penalizaciones o alterar saldos antiguos.",
+    "Impacto": "Corrupción de la secuencia cronológica de exergía e inconsistencias de balance.",
+    "Defensa": "Forzar validación estricta de incremento temporal monótono en cada bloque."
+  },
+  {
+    "ID": "AV015",
+    "Vector_Adversarial": "Ataque de Ruta de Archivo (Path Traversal JIT)",
+    "Superficie": "Lector dinámico de archivos del monorepo.",
+    "Mecanismo": "Pasar secuencias relativas (../) en los nombres de las skills para leer archivos fuera de la carpeta del proyecto.",
+    "Impacto": "Fuga de información confidencial (ej. claves SSH del host macOS).",
+    "Defensa": "Sanitizar las rutas resolviendo a rutas absolutas y verificando el prefijo del directorio del workspace."
+  },
+  {
+    "ID": "AV016",
+    "Vector_Adversarial": "Inundación de WebSockets Locales por Logs Verbosos",
+    "Superficie": "Canal de comunicación de telemetría de la UI.",
+    "Mecanismo": "Forzar al Kernel a emitir millones de trazas en formato JSON estructurado en milisegundos.",
+    "Impacto": "Congelación absoluta del navegador del operador y alto uso de CPU de renderizado.",
+    "Defensa": "Implementar rate-limiting e intervalos de agrupamiento en el origen de las trazas del WebSocket."
+  },
+  {
+    "ID": "AV017",
+    "Vector_Adversarial": "Falla de Consenso por Modificaciones del Ledger en Caliente",
+    "Superficie": "Archivo persistente de transacciones del Ledger.",
+    "Mecanismo": "Mutar directamente los hashes de bloques guardados usando un editor de texto en el host macOS.",
+    "Impacto": "Rechazo absoluto de la cadena de bloques en auditorías asercionales recurrentes.",
+    "Defensa": "Marcar los archivos de persistencia del Ledger como de solo lectura a nivel de sistema operativo."
+  },
+  {
+    "ID": "AV018",
+    "Vector_Adversarial": "Envenenamiento del AST por Inyección de Comentarios de Servidor",
+    "Superficie": "Parser y compilador en caliente del monorepo.",
+    "Mecanismo": "Inyectar comentarios de servidor (# C5-REAL) en bloques de código frontmatter de frameworks cliente (ej. Next.js).",
+    "Impacto": "Fallo inmediato de compilación del compilador de frontend del monorepo.",
+    "Defensa": "Utilizar comentarios compatibles con el AST respectivo (// o /* */) en bloques cliente."
+  },
+  {
+    "ID": "AV019",
+    "Vector_Adversarial": "Bloqueo Mutuo en Concurrencia de Red Zenoh",
+    "Superficie": "Hilos de comunicación inter-agente concurrentes.",
+    "Mecanismo": "Iniciar llamadas síncronas circulares cruzadas que queden esperando respuestas mutuas sin timeout.",
+    "Impacto": "Hilos del pool agotados y bloqueo permanente de tareas distribuidas en la red local.",
+    "Defensa": "Imponer el uso de timeouts estrictos y prohibir llamadas síncronas circulares en Zenoh."
+  },
+  {
+    "ID": "AV020",
+    "Vector_Adversarial": "Saturación de Inodos por Archivos Temporal Lock",
+    "Superficie": "Particiones de almacenamiento temporal (/tmp) del host.",
+    "Mecanismo": "Crear recursivamente archivos de bloqueo dinámicos sin limpiarlos en salidas de error.",
+    "Impacto": "Bloqueo de nuevas escrituras a nivel de sistema operativo por falta de inodos disponibles.",
+    "Defensa": "Implementar un demonio recolector que limpie archivos .lock huérfanos de forma periódica."
+  },
+  {
+    "ID": "AV021",
+    "Vector_Adversarial": "Inyección de dependencias JIT obsoletas",
+    "Superficie": "Gestor de dependencias JIT local.",
+    "Mecanismo": "Solicitar la instalación de una versión vulnerable de una librería de red externa modificando dinámicamente los requerimientos.",
+    "Impacto": "Compromiso de la seguridad del host macOS por fallas conocidas en dependencias.",
+    "Defensa": "Forzar la especificación de versiones exactas (version locking) y auditoría con lockfiles."
+  },
+  {
+    "ID": "AV022",
+    "Vector_Adversarial": "Fuga de memoria virtual en JavaScript de UI",
+    "Superficie": "Código del visualizador del dashboard en el navegador.",
+    "Mecanismo": "Retener referencias de closures sobre elementos DOM eliminados de forma iterativa.",
+    "Impacto": "Uso de RAM que supera el gigabyte en el navegador hasta forzar la recarga del visualizador.",
+    "Defensa": "Asegurar que las variables dinámicas de estadísticas se pongan a null tras actualizar el DOM."
+  },
+  {
+    "ID": "AV023",
+    "Vector_Adversarial": "Desalineación de Esquemas de Red por payloads Zenoh corruptos",
+    "Superficie": "Receptores de mensajes asíncronos de Zenoh.",
+    "Mecanismo": "Enviar mensajes serializados con tipos incompatibles (ej. bytes en lugar de string JSON).",
+    "Impacto": "Crash silencioso del hilo receptor y pérdida de transacciones del Ledger.",
+    "Defensa": "Implementar validación activa de tipos (ej. pydantic) en la deserialización de mensajes."
+  },
+  {
+    "ID": "AV024",
+    "Vector_Adversarial": "Ataque MitM en Sockets Locales sin TLS",
+    "Superficie": "Canales de comunicación WebSocket e HTTP locales inter-agente.",
+    "Mecanismo": "Interceptar y leer payloads de transacciones transmitidos en texto plano por HTTP interno.",
+    "Impacto": "Robo de claves y alteración del historial de exergía en la red local del host.",
+    "Defensa": "Forzar TLS mutuo (mTLS) con validación estricta de certificados firmados internamente."
+  },
+  {
+    "ID": "AV025",
+    "Vector_Adversarial": "Inundación de Sockets en Base de Datos Relacional",
+    "Superficie": "Pool de conexiones de base de datos relacional.",
+    "Mecanismo": "Realizar consultas pesadas consecutivas sin devolver los descriptores cerrados al pool.",
+    "Impacto": "Agotamiento de descriptores de sockets de base de datos y caída por timeouts de consultas.",
+    "Defensa": "Imponer límites de conexiones e invalidación automática de conexiones inactivas."
+  },
+  {
+    "ID": "AV026",
+    "Vector_Adversarial": "Fuga de Información en Webhooks no verificados",
+    "Superficie": "Endpoints webhook de recepción de eventos de GitHub.",
+    "Mecanismo": "Enviar peticiones simuladas que no contengan la firma de verificación secreta (X-Hub-Signature).",
+    "Impacto": "Inserción de eventos falsos de commits JIT y alteración de los saldos de exergía.",
+    "Defensa": "Validar estrictamente la firma HMACS de cada webhook contra la clave compartida configurada."
+  },
+  {
+    "ID": "AV027",
+    "Vector_Adversarial": "Saturación de I/O por polling persistente de base de datos relacional",
+    "Superficie": "Base de datos de configuración de las skills.",
+    "Mecanismo": "Lanzar consultas SELECT en bucles while sin pausas intermitentes para detectar cambios de estado.",
+    "Impacto": "Degradación en el rendimiento de disco y consumo excesivo de CPU en el host macOS.",
+    "Defensa": "Utilizar disparadores reactivos o notificaciones de base de datos en lugar de polling activo."
+  },
+  {
+    "ID": "AV028",
+    "Vector_Adversarial": "Falta de Sanitización de URL en descargas de dependencias JIT",
+    "Superficie": "Cargador automático de recursos e importador del monorepo.",
+    "Mecanismo": "Pasar URLs con dominios maliciosos para descargar ejecutables modificados (SSRF).",
+    "Impacto": "Compromiso de la seguridad del host por descarga y ejecución de binarios corruptos.",
+    "Defensa": "Validar que los dominios de descarga pertenezcan a una lista blanca de repositorios de confianza."
+  },
+  {
+    "ID": "AV029",
+    "Vector_Adversarial": "Inconsistencias de Tipo por conversiones implícitas en Base de Datos",
+    "Superficie": "Registro de persistencia de exergía.",
+    "Mecanismo": "Insertar datos tipados dinámicamente que fuercen conversiones implícitas a formatos inconsistentes en consultas.",
+    "Impacto": "Errores de tipo y fallas de lógica en los cálculos del saldo del Ledger.",
+    "Defensa": "Validar los tipos de los registros mediante esquemas rígidos antes del commit en disco."
+  },
+  {
+    "ID": "AV030",
+    "Vector_Adversarial": "Escape de Sandbox por Inyecciones de Código en hot modules",
+    "Superficie": "Cargador e importador dinámico JIT.",
+    "Mecanismo": "Modificar el archivo fuente en caliente insertando comandos del sistema operativo (eval/exec).",
+    "Impacto": "Ejecución de procesos huérfanos maliciosos fuera del entorno de desarrollo controlado.",
+    "Defensa": "Limitar la recarga JIT a archivos validados estructuralmente por el linter estático."
+  },
+  {
+    "ID": "AV031",
+    "Vector_Adversarial": "Secuestro de Sesión en UI por Token Leak en logs",
+    "Superficie": "Visualizador del dashboard principal.",
+    "Mecanismo": "Provocar errores de inicio de sesión que expongan el token JWT activo en la salida estándar de logs.",
+    "Impacto": "Acceso no autorizado al panel de telemetría y a las acciones de modificación del Kernel.",
+    "Defensa": "Sustituir los tokens de los logs aplicando un filtro regex de limpieza automática."
+  },
+  {
+    "ID": "AV032",
+    "Vector_Adversarial": "Saturación de CPU por Inferencia CPU no acelerada de modelos locales",
+    "Superficie": "Motor de inferencia local del host macOS.",
+    "Mecanismo": "Inicializar llamadas de red neuronal desactivando Metal en Apple Silicon de forma deliberada.",
+    "Impacto": "Consumo de CPU al 100% y retrasos de varios minutos en prefill de tokens.",
+    "Defensa": "Verificar de forma estricta la disponibilidad y uso de Metal antes de llamar al modelo."
+  },
+  {
+    "ID": "AV033",
+    "Vector_Adversarial": "Corrupción de Indices por actualizadores concurrentes sin CAS",
+    "Superficie": "Archivos de metadatos de indexación de las skills.",
+    "Mecanismo": "Modificar de forma paralela el archivo de metadatos JIT saltándose los cerrojos exclusivos.",
+    "Impacto": "Rutas rotas y fallas de compilación al intentar invocar submódulos modificados recientemente.",
+    "Defensa": "Utilizar operaciones de comparación y reemplazo (CAS) para garantizar exclusividad de escritura."
+  },
+  {
+    "ID": "AV034",
+    "Vector_Adversarial": "Fuga de Memoria por Retención de Referencias en Rust bindings",
+    "Superficie": "Enlaces y adaptadores compilados en caliente en Rust JIT.",
+    "Mecanismo": "Invocar métodos de análisis estático que acumulen referencias de Python en Rust sin liberar el GIL.",
+    "Impacto": "Consumo de RAM que escala de forma lineal hasta disparar fallas de OOM del host.",
+    "Defensa": "Envolver la invocación en bloques GIL con scopes definidos de liberación en Rust."
+  },
+  {
+    "ID": "AV035",
+    "Vector_Adversarial": "Falla de Heartbeat en Red Zenoh por paquetes de control duplicados",
+    "Superficie": "Canales de salud distribuidos de Zenoh.",
+    "Mecanismo": "Inyectar ráfagas de paquetes de latidos de salud simulando workers inactivos.",
+    "Impacto": "Errores de quórum en el Ledger distribuidos por desconexión de peers reales.",
+    "Defensa": "Asociar a cada latido de corazón una firma criptográfica única basada en claves efímeras."
+  },
+  {
+    "ID": "AV036",
+    "Vector_Adversarial": "Envenenamiento del Ledger por Timestamps del Pasado",
+    "Superficie": "Peticiones de confirmación de bloques en el Ledger.",
+    "Mecanismo": "Suministrar registros con marcas de tiempo desalineadas del orden secuencial del sistema.",
+    "Impacto": "Corrupción de las secuencias cronológicas del balance y del cálculo de exergía.",
+    "Defensa": "Imponer validación estricta de incremento secuencial de timestamps en el Ledger."
+  },
+  {
+    "ID": "AV037",
+    "Vector_Adversarial": "Path Traversal en Operaciones de Lectura de Archivos del monorepo",
+    "Superficie": "Cargador estático de código fuente.",
+    "Mecanismo": "Pasar secuencias relativas (../) en nombres de archivos del linter para leer claves privadas.",
+    "Impacto": "Exposición no autorizada de claves SSH y secretos de API del host macOS.",
+    "Defensa": "Validar y sanitizar que el path de destino comience con el prefijo de la carpeta del proyecto."
+  },
+  {
+    "ID": "AV038",
+    "Vector_Adversarial": "Saturación de CPU por Loops de Reintento de Conexión sin Sleep",
+    "Superficie": "Clientes de sockets locales del host.",
+    "Mecanismo": "Intentar reconectar a un puerto cerrado en un bucle while vacío sin pausas intermitentes.",
+    "Impacto": "Consumo de un núcleo de CPU al 100% de forma indefinida en el hilo de red.",
+    "Defensa": "Establecer una pausa sleep() obligatoria en cada iteración del bucle de reintento de conexión."
+  },
+  {
+    "ID": "AV039",
+    "Vector_Adversarial": "Desalineación de Esquemas en APIs de WebSockets por payloads malformados",
+    "Superficie": "Receptor de mensajes del visualizador del dashboard.",
+    "Mecanismo": "Enviar mensajes WebSocket locales con estructuras JSON corruptas de forma iterativa.",
+    "Impacto": "Crash silencioso del visualizador e interrupción de la telemetría en tiempo real.",
+    "Defensa": "Validar los mensajes mediante esquemas JSON Schema rígidos en el receptor."
+  },
+  {
+    "ID": "AV040",
+    "Vector_Adversarial": "Corrupción de Base de Datos SQLite por interrupción de checkpoints en WAL",
+    "Superficie": "Mapeo físico de base de datos de exergía SQLite.",
+    "Mecanismo": "Forzar caídas abruptas del proceso del daemon a mitad de la llamada sqlite checkpoint.",
+    "Impacto": "Mensaje de 'database disk image is malformed' e imposibilidad de leer históricos.",
+    "Defensa": "Asegurar confirmaciones atómicas mediante backups e implementar sqlite3 recovery."
+  },
+  {
+    "ID": "AV041",
+    "Vector_Adversarial": "Inyección de dependencias locales con API desalineada",
+    "Superficie": "Entorno virtual y monorepo local.",
+    "Mecanismo": "Modificar de forma silenciosa dependencias locales instaladas en modo editable.",
+    "Impacto": "Fallas de compilación JIT y TypeError al invocar submódulos del monorepo.",
+    "Defensa": "Aislar las dependencias del monorepo usando workspaces virtuales específicos por proyecto."
+  },
+  {
+    "ID": "AV042",
+    "Vector_Adversarial": "Fuga de memory leaks en PythonBindings de Rust JIT",
+    "Superficie": "Adaptadores compilados en caliente en Rust PyO3.",
+    "Mecanismo": "Lanzar compilaciones repetidas acumulando referencias PyObject en Rust sin liberar el GIL.",
+    "Impacto": "Fallas de OOM de la máquina virtual del host tras ejecuciones de análisis estático.",
+    "Defensa": "Utilizar constructores de Scope en PyO3 (Python::with_gil) en la inicialización."
+  },
+  {
+    "ID": "AV043",
+    "Vector_Adversarial": "Bypass de validación SSL/TLS en peticiones HTTPS JIT",
+    "Superficie": "Cliente de red e importador de recursos de internet.",
+    "Mecanismo": "Desactivar la validación de certificados HTTPS (verify=False) para omitir alertas locales.",
+    "Impacto": "Vulnerabilidad a intercepciones y modificaciones de payloads de dependencias (MitM).",
+    "Defensa": "Importar los certificados de confianza autorizados y prohibir verify=False."
+  },
+  {
+    "ID": "AV044",
+    "Vector_Adversarial": "Polling de APIs de Inferencia remota sin Backoff",
+    "Superficie": "Cliente HTTP del Kernel.",
+    "Mecanismo": "Consultar APIs de modelos remotos de forma continua ante errores de latencia sin pausas.",
+    "Impacto": "Bloqueo por rate limit de larga duración por IP y pérdida de disponibilidad.",
+    "Defensa": "Implementar políticas de reintento exponencial con jitter en peticiones de inferencia."
+  },
+  {
+    "ID": "AV045",
+    "Vector_Adversarial": "Carga de JSON de telemetría de gigabytes con json.load()",
+    "Superficie": "Visualizador de logs local.",
+    "Mecanismo": "Forzar al visualizador a cargar un archivo de historial de gran tamaño en una sola llamada.",
+    "Impacto": "Consumo de RAM disparado y finalización forzada por OOM del daemon principal.",
+    "Defensa": "Utilizar cargadores de tipo streaming (ijson) para deserializar por bloques."
+  },
+  {
+    "ID": "AV046",
+    "Vector_Adversarial": "Inyección de comandos de terminal por eval() en scripts JIT",
+    "Superficie": "Ejecutor de scripts en caliente del Kernel.",
+    "Mecanismo": "Introducir llamadas de comandos de terminal (eval/exec) en cadenas generadas externamente.",
+    "Impacto": "Modificación no autorizada de archivos del host y escape de entorno controlado.",
+    "Defensa": "Ejecutar código dinámico JIT exclusivamente en sandboxes locales aislados (WASM)."
+  },
+  {
+    "ID": "AV047",
+    "Vector_Adversarial": "Bloqueo de base de datos por transacciones exclusivas concurrentes",
+    "Superficie": "Base de datos relacional SQLite de desarrollo.",
+    "Mecanismo": "Iniciar actualizaciones paralelas sobre el Ledger sin utilizar encoladores de consultas.",
+    "Impacto": "Errores de tipo 'database is locked' y pérdida de consistencia en el Ledger.",
+    "Defensa": "Encolar las escrituras en un despachador central que procese secuencialmente."
+  },
+  {
+    "ID": "AV048",
+    "Vector_Adversarial": "Agotamiento de inodos libres por archivos temporales residuales",
+    "Superficie": "Partición de almacenamiento temporal del host macOS.",
+    "Mecanismo": "Generar de forma cíclica archivos de logs y caches temporales sin borrarlos en salidas.",
+    "Impacto": "Falla de nuevas escrituras del sistema operativo del host por falta de inodos.",
+    "Defensa": "Ejecutar de forma programada purgas automáticas de directorios de almacenamiento temporal."
+  },
+  {
+    "ID": "AV049",
+    "Vector_Adversarial": "Fuga de tokens privados a través de logs de base de datos relacional",
+    "Superficie": "Logger de base de datos relacional.",
+    "Mecanismo": "Guardar registros de error que expongan contraseñas de las cadenas de conexión del host.",
+    "Impacto": "Credenciales expuestas y legibles en los archivos de logs del monorepo.",
+    "Defensa": "Sanitizar mensajes de excepción mediante filtros regex antes de volcarlos al logger."
+  },
+  {
+    "ID": "AV050",
+    "Vector_Adversarial": "Ataque MitM en red Zenoh local por firma de mensajes ausente",
+    "Superficie": "Bus de red asíncrono Zenoh local.",
+    "Mecanismo": "Interceptar y alterar los mensajes de quórum transmitidos por la red local del host.",
+    "Impacto": "Fallas de quórum en el Ledger local y discrepancia de balances de exergía.",
+    "Defensa": "Cifrar la carga de red e imponer firmas de mensajes criptográficas para cada transacción."
+  }
+]
