@@ -1,0 +1,302 @@
+[
+  {
+    "ID": "P031",
+    "Primitiva": "Falta de Validación de Certificados SSL/TLS",
+    "Mecanismo Causal": "Desactivación del parámetro verify en llamadas HTTP (verify=False) para evitar fallas en certificados locales autofirmados.",
+    "Activación": "Lanzamiento de llamadas a endpoints de staging sobre HTTPS sin almacenamiento del CA root en el sistema.",
+    "Sensor": "Vulnerabilidad detectada por escáneres estáticos o advertencias de InsecureRequestWarning en logs.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Forzar la configuración de rutas de CA personalizadas y prohibir explícitamente verify=False."
+  },
+  {
+    "ID": "P032",
+    "Primitiva": "Fuga de Memory Leaks en Extensiones de C en Python",
+    "Mecanismo Causal": "Falta de decremento de referencias (Py_DECREF) en extensiones nativas C/C++ llamadas desde Python.",
+    "Activación": "Invocación intensiva de funciones de parsing binario o cifrado nativo.",
+    "Sensor": "Crecimiento persistente e irreversible de la memoria virtual privada asignada al proceso.",
+    "Escala Temporal": "10min a 2h",
+    "Gravedad": "Alta",
+    "Intervención": "Utilizar herramientas de profiling de memoria nativa (ej. Valgrind, PySpy) y corregir contadores de referencia."
+  },
+  {
+    "ID": "P033",
+    "Primitiva": "Bloqueo por Espera Indefinida en Petición Externa (Unbounded Socket Read)",
+    "Mecanismo Causal": "Llamadas HTTP o de socket sin timeout explícito configurado en el cliente de red.",
+    "Activación": "Caída silenciosa o bloqueo de red del servidor destino durante la lectura de la respuesta.",
+    "Sensor": "Procesos colgados en estado 'read' sin consumir CPU pero consumiendo recursos de conexión.",
+    "Escala Temporal": "Horas",
+    "Gravedad": "Alta",
+    "Intervención": "Imponertimeouts estrictos globales (ej. timeout=10) en todas las conexiones de red."
+  },
+  {
+    "ID": "P034",
+    "Primitiva": "Inyección de Comandos en Argumentos de Compilador",
+    "Mecanismo Causal": "Concatenación no sanitizada de rutas proporcionadas por el usuario al llamar a herramientas de compilación externas.",
+    "Activación": "Inclusión de caracteres de control de shell en nombres de dependencias o subcarpetas.",
+    "Sensor": "Ejecución de procesos no autorizados hijos del compilador local.",
+    "Escala Temporal": "5ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Sanitizar y validar con expresiones regulares estrictas todas las cadenas pasadas al compilador."
+  },
+  {
+    "ID": "P035",
+    "Primitiva": "Corrupción de Historial de Ledger por Firma Inválida",
+    "Mecanismo Causal": "Firma errónea o falta de integridad criptográfica al registrar transacciones en el ledger descentralizado.",
+    "Activación": "Uso de claves privadas incorrectas o corruptas durante el proceso de firmado asíncrono.",
+    "Sensor": "Error de verificación criptográfica en auditorías asercionales recurrentes del Ledger.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Crítica",
+    "Intervención": "Invalidar inmediatamente las claves activas, aislar el nodo y regenerar firmas desde el origen persistente."
+  },
+  {
+    "ID": "P036",
+    "Primitiva": "Saturación de Pool de Conexiones a Base de Datos",
+    "Mecanismo Causal": "Falta de devolución de conexiones cerradas al pool de conexiones tras finalizar consultas o transacciones.",
+    "Activación": "Flujos de control con excepciones que saltan el método close() o la salida del gestor de contexto.",
+    "Sensor": "Errores de timeout al intentar obtener conexiones del pool (TimeoutError: QueuePool limit of size X exceeded).",
+    "Escala Temporal": "1min a 10min",
+    "Gravedad": "Alta",
+    "Intervención": "Utilizar pools con liberación automática de conexiones inactivas e inspección estática del uso de close()."
+  },
+  {
+    "ID": "P037",
+    "Primitiva": "Lectura Sucia de Variables de Entorno en Configuración JIT",
+    "Mecanismo Causal": "Mutación dinámica del diccionario os.environ por múltiples hilos sin sincronización estricta.",
+    "Activación": "Subagentes intentando sobrescribir variables de entorno locales de forma paralela en el mismo proceso.",
+    "Sensor": "Carga de configuraciones inconsistentes en módulos inicializados simultáneamente.",
+    "Escala Temporal": "100ms",
+    "Gravedad": "Media",
+    "Intervención": "Prohibir la modificación dinámica de os.environ en runtime; forzar el uso de diccionarios de configuración inmutables."
+  },
+  {
+    "ID": "P038",
+    "Primitiva": "Incompatibilidad de Formato en Archivo de Snapshot",
+    "Mecanismo Causal": "Serialización de estructuras complejas con librerías dinámicas sin backward compatibility asegurada.",
+    "Activación": "Lectura de snapshots de estado creados con versiones previas de esquemas de datos del Kernel.",
+    "Sensor": "Excepciones de parseo de clase o datos inconsistentes al arrancar desde snapshot.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Alta",
+    "Intervención": "Incluir versión del esquema en la cabecera del snapshot y aplicar transformadores de esquema dinámicos."
+  },
+  {
+    "ID": "P039",
+    "Primitiva": "Exceso de Llamadas al File System por Polling (Busy Loop)",
+    "Mecanismo Causal": "Lecturas recursivas y continuas de archivos en disco en bucles while sin tiempos de espera (sleep).",
+    "Activación": "Monitoreo manual de cambios de archivos en lugar de utilizar eventos del kernel (Inotify/FSEvents).",
+    "Sensor": "Consumo de CPU de un solo núcleo al 100% por llamadas del sistema stat o open.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Migrar los observadores de archivos a librerías nativas basadas en eventos del SO (ej. watchdog)."
+  },
+  {
+    "ID": "P040",
+    "Primitiva": "Error de Codificación Unicode en Procesamiento de Logs",
+    "Mecanismo Causal": "Falta de especificación de codificación UTF-8 en llamadas de lectura/escritura de streams de entrada/salida estándar.",
+    "Activación": "Intento de escribir caracteres no ASCII en sistemas configurados con codificaciones locales obsoletas (ej. ANSI, ASCII).",
+    "Sensor": "Error 'UnicodeEncodeError: ascii codec can not encode characters in position X'.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Configurar PYTHONIOENCODING=utf-8 en el host y forzar encoding='utf-8' en todas las aperturas de archivos."
+  },
+  {
+    "ID": "P041",
+    "Primitiva": "Falta de Atomicidad en Actualización de Índices",
+    "Mecanismo Causal": "Modificaciones de índices de búsqueda sin transacciones bloqueantes ni mecanismos de comparación y reemplazo (CAS).",
+    "Activación": "Actualizaciones simultáneas del índice de persistencia del monorepo por múltiples agentes concurrentes.",
+    "Sensor": "Búsquedas que devuelven referencias rotas o inconsistencia de claves duplicadas.",
+    "Escala Temporal": "50ms",
+    "Gravedad": "Alta",
+    "Intervención": "Proteger los índices con bloqueos exclusivos de nivel de tabla o implementar algoritmos CRDT sin bloqueo."
+  },
+  {
+    "ID": "P042",
+    "Primitiva": "Bloqueo Mutuo Directo en Subprocesos (Deadlock de Hilos)",
+    "Mecanismo Causal": "Adquisición cruzada de dos o más locks en orden inverso por dos hilos que se bloquean mutuamente de por vida.",
+    "Activación": "Hilo A adquiere Lock 1 y espera Lock 2; Hilo B adquiere Lock 2 y espera Lock 1.",
+    "Sensor": "Hilos suspendidos indefinidamente en wait_locks sin consumir ciclos de CPU.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Ordenar de manera inmutable el orden de adquisición de locks a lo largo de todo el código."
+  },
+  {
+    "ID": "P043",
+    "Primitiva": "Saturación de I/O en Base de Datos de Transacciones",
+    "Mecanismo Causal": "Escritura unitaria y síncrona de logs de transacciones en lugar de operaciones por lotes (Batch Insert).",
+    "Activación": "Carga de miles de registros de transacciones individuales consecutivas.",
+    "Sensor": "Bajo rendimiento de inserción (< 50 ops/sec) con disco en estado activo al 100%.",
+    "Escala Temporal": "10s a 1min",
+    "Gravedad": "Alta",
+    "Intervención": "Agrupar escrituras en transacciones explícitas de gran tamaño (ej. 1000 registros por commit)."
+  },
+  {
+    "ID": "P044",
+    "Primitiva": "Falta de Aislamiento de Sandbox en Ejecución de Código Dinámico",
+    "Mecanismo Causal": "Uso de eval() o exec() sobre cadenas generadas externamente sin limpiar el diccionario global de __builtins__.",
+    "Activación": "Ejecución de un script generado por un modelo de lenguaje que importa el módulo os y altera el host.",
+    "Sensor": "Detección de comandos de sistema no permitidos ejecutados por el proceso de Python.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Migrar a entornos de ejecución aislados reales (ej. WASM en python o contenedores Docker efímeros)."
+  },
+  {
+    "ID": "P045",
+    "Primitiva": "Desbordamiento de Búfer en Consola Virtual Tmux",
+    "Mecanismo Causal": "Generación excesiva de salidas de consola sin lectura o limpieza activa de la terminal virtual controlada.",
+    "Activación": "Ejecución de bucles de pruebas verbosas dentro de una sesión de tmux controlada remotamente.",
+    "Sensor": "Consumo elevado de RAM en el daemon de tmux y congelación de la lectura de historial.",
+    "Escala Temporal": "10min",
+    "Gravedad": "Media",
+    "Intervención": "Establecer límites estrictos de historial en la configuración de tmux y aplicar tuberías de filtrado."
+  },
+  {
+    "ID": "P046",
+    "Primitiva": "Falta de Sincronización en la Cache Lógica",
+    "Mecanismo Causal": "Lectura de valores obsoletos guardados en memoria local sin validación de expiración ni marcas de tiempo actualizadas.",
+    "Activación": "Mutación de recursos en almacenamiento persistente sin invalidación en los caches de memoria locales.",
+    "Sensor": "Lecturas que retornan datos antiguos (Stale Data) rompiendo la lógica causal.",
+    "Escala Temporal": "1s a 10min",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar políticas de invalidación basadas en eventos (ej. pub/sub) o tiempos TTL rígidos de corta duración."
+  },
+  {
+    "ID": "P047",
+    "Primitiva": "Error en Rutas por Separadores Incompatibles (Windows vs Posix)",
+    "Mecanismo Causal": "Concatenación manual de cadenas de directorios usando barra inclinada en lugar del operador nativo del sistema operativo.",
+    "Activación": "Ejecución del mismo script en hosts macOS y Windows indistintamente.",
+    "Sensor": "FileNotFoundError al intentar acceder a rutas con separadores inválidos.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Forzar el uso de la clase Path de pathlib para toda manipulación y concatenación de rutas de archivos."
+  },
+  {
+    "ID": "P048",
+    "Primitiva": "Exceso de Consumo de RAM en Carga de Archivos JSON Masivos",
+    "Mecanismo Causal": "Uso de json.load() sobre archivos de varios gigabytes cargando todo el árbol de nodos en memoria.",
+    "Activación": "Análisis de historiales de transacciones masivos acumulados durante meses.",
+    "Sensor": "Disparo del asesino de procesos OOM (Out Of Memory) en el sistema anfitrión.",
+    "Escala Temporal": "5s a 30s",
+    "Gravedad": "Alta",
+    "Intervención": "Migrar a cargadores de tipo streaming (ej. ijson) o bases de datos relacionales/documentales para consultas parciales."
+  },
+  {
+    "ID": "P049",
+    "Primitiva": "Fuga de Threads por Creación Descontrolada (Unbounded Thread Creation)",
+    "Mecanismo Causal": "Instanciación de hilos individuales para cada tarea sin usar agrupaciones o ThreadPoolExecutor.",
+    "Activación": "Lanzamiento de peticiones asíncronas en paralelo por agentes que gestionan flujos de control recursivos.",
+    "Sensor": "Caída del sistema con errores de falta de recursos de memoria nativa o límites de thread alcanzados.",
+    "Escala Temporal": "1s a 10s",
+    "Gravedad": "Alta",
+    "Intervención": "Definir un ThreadPoolExecutor global estático con límite máximo de concurrencia adaptativo."
+  },
+  {
+    "ID": "P050",
+    "Primitiva": "Inconsistencia de Permisos en Archivos Creados JIT",
+    "Mecanismo Causal": "Escritura de archivos sin definir los bits de máscara de permisos de usuario correctos (umask por defecto inseguro o restrictivo).",
+    "Activación": "Generación de ejecutables temporales que no pueden ser lanzados debido a falta de permisos de ejecución.",
+    "Sensor": "PermissionError al intentar leer o ejecutar recursos generados dinámicamente.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Forzar los permisos del archivo tras su escritura usando os.chmod con flags específicos (ej. 0o755)."
+  },
+  {
+    "ID": "P051",
+    "Primitiva": "Falta de Robustez ante Conexiones Intermitentes (Flaky Network)",
+    "Mecanismo Causal": "Ausencia de políticas de reintento exponencial con jitter en peticiones críticas a servicios cloud externos.",
+    "Activación": "Caídas cortas de red o picos de latencia en la pasarela de la API de inferencia.",
+    "Sensor": "Fallo inmediato de la ejecución de la tarea al primer error de conexión transitorio.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Media",
+    "Intervención": "Implementar decoradores de reintento seguro con factor de retroceso exponencial (Exponential Backoff)."
+  },
+  {
+    "ID": "P052",
+    "Primitiva": "Corrupción de Pila Interna en Intérprete de Python",
+    "Mecanismo Causal": "Uso inadecuado de APIs ctypes o manipulación directa de punteros de memoria de bajo nivel del runtime.",
+    "Activación": "Inyecciones experimentales en memoria para monitorizar telemetría interna del motor de inferencia.",
+    "Sensor": "Pánico del intérprete y crash inmediato del proceso con salida silenciosa o volcado de core.",
+    "Escala Temporal": "1ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Aislar ejecuciones de bajo nivel en subprocesos independientes para no comprometer el intérprete principal."
+  },
+  {
+    "ID": "P053",
+    "Primitiva": "Invalidez de Firma en Archivos de Caché de AST",
+    "Mecanismo Causal": "Persistencia de archivos de bytecode compilado (.pyc) o caches de análisis estático desalineados con los archivos fuente originales.",
+    "Activación": "Edición directa de código fuente saltándose los linters e invalidando los metadatos de timestamp.",
+    "Sensor": "Errores lógicos donde el compilador ejecuta código obsoleto o lanza fallas de desalineación.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Forzar la limpieza de __pycache__ y de archivos de indexación estáticos ante variaciones en git hash."
+  },
+  {
+    "ID": "P054",
+    "Primitiva": "Saturación de Cola de Tareas en Broker de Mensajería",
+    "Mecanismo Causal": "Consumidores caídos o lentos que no procesan eventos de la cola mientras los productores envían tareas sin control de flujo.",
+    "Activación": "Pico de actividad de agentes externos que llenan la cola de la base de datos o de sockets locales.",
+    "Sensor": "Aumento lineal de la latencia de respuesta y consumo desmedido de RAM en el broker de tareas.",
+    "Escala Temporal": "1min a 5min",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar contrapresión (Backpressure) bloqueando a los productores si la longitud de la cola supera un umbral estricto."
+  },
+  {
+    "ID": "P055",
+    "Primitiva": "Falta de Validación de Tipos en Serialización JSON",
+    "Mecanismo Causal": "Guardar objetos dinámicos o complejos forzando la representación en string sin validar el esquema destino.",
+    "Activación": "Exportación de métricas a archivos estáticos de reporte en formato plano.",
+    "Sensor": "TypeError al deserializar los datos esperando tipos nativos numéricos pero recibiendo strings vacíos.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Implementar esquemas de datos estrictos (ej. pydantic o esquemas JSON Schema) en todas las salidas del Ledger."
+  },
+  {
+    "ID": "P056",
+    "Primitiva": "Exceso de Recursión en Algoritmos de Grafos Semánticos",
+    "Mecanismo Causal": "Cálculo de caminos o transitividad sobre grafos acíclicos dirigidos que contienen ciclos ocultos.",
+    "Activación": "Introducción de dependencias circulares en las referencias cruzadas de los módulos de la base de datos.",
+    "Sensor": "Congelamiento del hilo de ejecución seguido de crash por desbordamiento de pila.",
+    "Escala Temporal": "100ms",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar validación activa de ciclos (ej. algoritmo de Tarjan) antes de procesar caminos en grafos."
+  },
+  {
+    "ID": "P057",
+    "Primitiva": "Fuga de Información en Mensajes de Error de API",
+    "Mecanismo Causal": "Devolución de trazas de error completas del sistema (Tracebacks) a clientes externos o logs accesibles.",
+    "Activación": "Lanzamiento de excepciones internas de base de datos no capturadas expuestas por la capa de presentación.",
+    "Sensor": "Presencia de consultas SQL, rutas de archivos internas o contraseñas en los cuerpos de respuesta de error.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Interceptar excepciones de forma global y devolver mensajes de error opacos junto con códigos de seguimiento únicos."
+  },
+  {
+    "ID": "P058",
+    "Primitiva": "Falta de Control de Versión en Base de Datos Migrada JIT",
+    "Mecanismo Causal": "Ejecución de scripts de mutación de esquemas (DDL) sin registrar la versión actual del esquema de la base de datos.",
+    "Activación": "Actualizaciones del código del Kernel que requieren nuevas tablas pero se ejecutan sobre esquemas antiguos.",
+    "Sensor": "Errores de ejecución SQL indicando que faltan columnas o que existen tipos de datos incompatibles.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Alta",
+    "Intervención": "Imponer un gestor de migraciones estricto (ej. Alembic) con validación previa de integridad de esquema en el arranque."
+  },
+  {
+    "ID": "P059",
+    "Primitiva": "Incoherencia en Conversión de Bytes a Unicode",
+    "Mecanismo Causal": "Suposición errónea de codificación nativa (ej. asumiendo latin1) al convertir streams de bytes crudos de sockets externos.",
+    "Activación": "Lectura de payloads provenientes de peers distribuidos configurados con lenguajes regionales.",
+    "Sensor": "Errores de decodificación o caracteres corruptos en las cadenas procesadas por los módulos del analizador.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Negociar explícitamente la codificación en las cabeceras del protocolo o forzar UTF-8 con reemplazo de caracteres rotos."
+  },
+  {
+    "ID": "P060",
+    "Primitiva": "Exceso de Latencia en Operación de Escritura de Ledger",
+    "Mecanismo Causal": "Falta de paralelismo o encolamiento síncrono al confirmar y validar transacciones de bloques de historial.",
+    "Activación": "Saturación del sistema de almacenamiento flash local del host con operaciones de lectura competitivas.",
+    "Sensor": "Demoras superiores a 500ms al registrar cambios de estado simples en el Ledger.",
+    "Escala Temporal": "500ms a 2s",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar colas de escritura no bloqueantes asíncronas con buffering optimizado en memoria RAM."
+  }
+]
