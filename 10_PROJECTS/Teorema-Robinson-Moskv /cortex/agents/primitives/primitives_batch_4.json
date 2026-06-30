@@ -1,0 +1,302 @@
+[
+  {
+    "ID": "P091",
+    "Primitiva": "Falta de Validación de Argumentos en Comandos CLI",
+    "Mecanismo Causal": "Ejecución de scripts que asumen que los argumentos de entrada pasados a sys.argv están siempre completos y con el formato esperado.",
+    "Activación": "Lanzamiento manual o automatizado de scripts de inicialización sin pasar todos los flags requeridos.",
+    "Sensor": "Error 'IndexError: list index out of range' durante el arranque de los módulos.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Media",
+    "Intervención": "Utilizar parseadores estructurados como argparse o click para validar y definir valores por defecto."
+  },
+  {
+    "ID": "P092",
+    "Primitiva": "Fuga de Recursos de Memoria Nativa por No Llamar a free()",
+    "Mecanismo Causal": "Asignación de memoria en el heap nativo mediante llamadas ffi sin su correspondiente liberación una vez procesados los datos.",
+    "Activación": "Operaciones intensivas de procesamiento multimedia o compilación intermedia en caliente.",
+    "Sensor": "Incremento de memoria RSS en el monitor del sistema que no es devuelta al sistema operativo al terminar la función.",
+    "Escala Temporal": "5min a 30min",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar el patrón de RAII para envolver la liberación en destructores de clases envolventes."
+  },
+  {
+    "ID": "P093",
+    "Primitiva": "Bloqueo Mutuo Indirecto por Dependencias Circulares",
+    "Mecanismo Causal": "Dos o más microservicios que intentan llamarse recursivamente entre sí para completar transacciones distribuidas sin acoplamiento asíncrono.",
+    "Activación": "Eventos coordinados en caliente sobre la red Zenoh que requieren sincronía bidireccional.",
+    "Sensor": "Peticiones bloqueadas por timeout (Gateway Timeout 504) e hilos del pool de servidores web agotados.",
+    "Escala Temporal": "5s a 30s",
+    "Gravedad": "Alta",
+    "Intervención": "Eliminar llamadas síncronas circulares; migrar las notificaciones a flujos unidireccionales asíncronos."
+  },
+  {
+    "ID": "P094",
+    "Primitiva": "Falta de Escapado de Caracteres en Consultas No Relacionales",
+    "Mecanismo Causal": "Concatenación cruda de strings para construir queries en bases de datos orientadas a documentos o grafos.",
+    "Activación": "Inyección de caracteres reservados de sintaxis del motor de base de datos en los campos de entrada.",
+    "Sensor": "Errores de sintaxis del parseador de base de datos o retornos de datos no autorizados (NoSQL Injection).",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Utilizar builders de consultas parametrizados y desaconsejar explícitamente la composición manual de strings."
+  },
+  {
+    "ID": "P095",
+    "Primitiva": "Corrupción de Historial de Ledger por Reescritura Silenciosa",
+    "Mecanismo Causal": "Edición directa del archivo persistente de transacciones por parte de un editor de texto o proceso no supervisado del host.",
+    "Activación": "Apertura accidental o intencionada de logs de auditoría sin permisos de solo lectura configurados.",
+    "Sensor": "El hash criptográfico raíz acumulado difiere del valor esperado en el arranque del sistema.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Marcar los archivos de persistencia de transacciones como inmutables a nivel de sistema operativo (chattr +i o uchg)."
+  },
+  {
+    "ID": "P096",
+    "Primitiva": "Falta de Validación de Cabeceras HTTP en Servidor Local",
+    "Mecanismo Causal": "Procesamiento de peticiones sin validar la presencia y el valor de cabeceras de autenticación y de control del host originario.",
+    "Activación": "Conexiones entrantes provenientes de redes públicas expuestas por fallas de configuración del cortafuegos.",
+    "Sensor": "Respuestas exitosas del servidor a clientes anónimos no autorizados.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Implementar middleware de validación estricta de host y tokens Bearer en todos los routers de entrada."
+  },
+  {
+    "ID": "P097",
+    "Primitiva": "Bloqueo de Recursos por Falla de Heartbeat",
+    "Mecanismo Causal": "Nodos distribuidos que marcan un recurso compartido como bloqueado y mueren de forma silenciosa sin enviar la señal de liberación.",
+    "Activación": "Crash por falta de memoria (OOM) o caída de red en un worker que retiene una tarea exclusiva.",
+    "Sensor": "Tareas bloqueadas de forma indefinida en la cola con estado 'en proceso' sin workers activos asociados.",
+    "Escala Temporal": "Minutos",
+    "Gravedad": "Alta",
+    "Intervención": "Asociar a cada bloqueo un tiempo de expiración (TTL) y monitorear a los workers con heartbeats recurrentes."
+  },
+  {
+    "ID": "P098",
+    "Primitiva": "Exceso de Consumo de RAM en Parsing de Archivos CSV Gigantes",
+    "Mecanismo Causal": "Uso de cargadores tabulares que cargan todo el conjunto de filas en memoria en lugar de realizar una iteración por lotes.",
+    "Activación": "Carga de sets de datos históricos de telemetría acumulada.",
+    "Sensor": "Picos de memoria que superan la capacidad física de la máquina virtual y provocan abortos del proceso.",
+    "Escala Temporal": "5s a 20s",
+    "Gravedad": "Alta",
+    "Intervención": "Utilizar generadores nativos de Python o la funcionalidad chunksize en librerías de carga para procesar por bloques."
+  },
+  {
+    "ID": "P099",
+    "Primitiva": "Fuga de Threads en Bloques de Espera Indefinida",
+    "Mecanismo Causal": "Hilos secundarios lanzados para esperar un evento de red o señal que nunca se produce debido a fallas externas.",
+    "Activación": "Uso de primitives de sincronización (Event, Condition) sin definir tiempos límite de espera (timeouts).",
+    "Sensor": "Incremento de hilos activos visibles en monitores de recursos pero sin realizar tareas útiles (Thread Leak).",
+    "Escala Temporal": "Horas a Días",
+    "Gravedad": "Alta",
+    "Intervención": "Asegurar que todas las llamadas await o join utilicen un parámetro de timeout estricto."
+  },
+  {
+    "ID": "P100",
+    "Primitiva": "Incoherencia de Tipos de Datos en el Registro de Persistencia",
+    "Mecanismo Causal": "Guardar registros en bases de datos sin validar que los tipos coincidan exactamente con la especificación del esquema.",
+    "Activación": "Escritura de tipos complejos convertidos implícitamente por librerías controladoras dinámicas.",
+    "Sensor": "Errores lógicos y excepciones de conversión al consultar y procesar los campos cargados de la base de datos.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Imponer el uso de ORMs con esquemas rígidos y tipado estricto verificado en tiempo de compilación/diseño."
+  },
+  {
+    "ID": "P101",
+    "Primitiva": "Falta de Sanitización de Nombres de Archivo (Path Traversal)",
+    "Mecanismo Causal": "Uso directo de entradas del usuario para concatenar rutas de guardado de archivos sin limpiar secuencias relativas (../).",
+    "Activación": "Peticiones de descarga o guardado que contienen referencias a directorios raíz o del sistema.",
+    "Sensor": "Lectura o modificación no autorizada de archivos de configuración fuera del directorio de trabajo.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Crítica",
+    "Intervención": "Sanitizar las entradas de ruta resolviendo siempre a rutas absolutas y verificando que comiencen con el prefijo permitido."
+  },
+  {
+    "ID": "P102",
+    "Primitiva": "Saturación de CPU por Cálculo de Cifrado en Hilo Principal",
+    "Mecanismo Causal": "Ejecución de algoritmos de derivación de claves o cifrado asimétrico síncronamente en el hilo principal del despachador.",
+    "Activación": "Peticiones concurrentes de registro de transacciones que requieren firmas criptográficas complejas.",
+    "Sensor": "Aumento del tiempo de respuesta del servidor a milisegundos de tres dígitos y caída de tasa de procesamiento.",
+    "Escala Temporal": "100ms a 1s",
+    "Gravedad": "Alta",
+    "Intervención": "Delegar cálculos criptográficos pesados a procesos independientes o workers dedicados mediante multiprocessing."
+  },
+  {
+    "ID": "P103",
+    "Primitiva": "Exceso de Llamadas a Base de Datos en Migraciones Dinámicas",
+    "Mecanismo Causal": "Modificaciones de registros en disco que ejecutan alteraciones lógicas consecutivas fila por fila en lugar de usar uniones por lotes.",
+    "Activación": "Migración en caliente de formatos históricos de registros de balance.",
+    "Sensor": "Tiempos de ejecución de migración que se extienden a horas de forma innecesaria.",
+    "Escala Temporal": "Minutos a Horas",
+    "Gravedad": "Alta",
+    "Intervención": "Utilizar sentencias SQL consolidadas para operar sobre múltiples filas simultáneamente en el motor de base de datos."
+  },
+  {
+    "ID": "P104",
+    "Primitiva": "Fuga de Archivos Temporales en Compilador JIT",
+    "Mecanismo Causal": "Escritura de código compilado de corta duración en carpetas del sistema sin su posterior borrado al terminar la tarea.",
+    "Activación": "Compilaciones repetidas de fragmentos de código por subagentes de prueba.",
+    "Sensor": "Pérdida lenta y constante de espacio en disco en la partición temporal del sistema operativo.",
+    "Escala Temporal": "Días a Semanas",
+    "Gravedad": "Media",
+    "Intervención": "Usar gestores de contexto temporales (tempfile.TemporaryDirectory) que garantizan la autolimpieza al salir."
+  },
+  {
+    "ID": "P105",
+    "Primitiva": "Falta de Sincronización en Cierre de Servidor (Graceful Shutdown Failure)",
+    "Mecanismo Causal": "Apagado abrupto de los daemons del sistema sin esperar a que finalicen las transacciones activas de escritura.",
+    "Activación": "Recepción de señales de terminación SIGTERM o apagado del host sin bloqueadores de salida.",
+    "Sensor": "Presencia de transacciones corruptas o índices desalineados en el siguiente arranque del sistema.",
+    "Escala Temporal": "1s a 5s",
+    "Gravedad": "Alta",
+    "Intervención": "Interceptar las señales de apagado y forzar el vaciado de búferes y cierre ordenado de todas las conexiones."
+  },
+  {
+    "ID": "P106",
+    "Primitiva": "Falta de Robustez ante Entradas Nulas (Null Pointer Reference)",
+    "Mecanismo Causal": "Acceso a métodos o propiedades sobre variables que no han sido inicializadas o contienen el valor None.",
+    "Activación": "Fallo en la resolución de APIs externas que retornan objetos vacíos sin verificación previa.",
+    "Sensor": "Error 'AttributeError: 'NoneType' object has no attribute 'X'' en el runtime de Python.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar comprobaciones de nulos en todas las uniones de datos y utilizar tipos opcionales en el código estático."
+  },
+  {
+    "ID": "P107",
+    "Primitiva": "Saturación de Buffer de Entrada en Tuberías de Procesamiento",
+    "Mecanismo Causal": "Envío de ráfagas masivas de datos a una cola de subprocesos a una velocidad superior a su capacidad de procesamiento sin colas de retención.",
+    "Activación": "Invocación concurrente masiva de tareas de parsing sintáctico sobre el monorepo.",
+    "Sensor": "Caídas por desbordamiento de búfer y pérdida de eventos lógicos intermedios.",
+    "Escala Temporal": "100ms a 1s",
+    "Gravedad": "Alta",
+    "Intervención": "Implementar colas con límites máximos de capacidad y mecanismos de descarte de eventos obsoletos."
+  },
+  {
+    "ID": "P108",
+    "Primitiva": "Falta de Coherencia de Versiones en Monorepos Cruzados",
+    "Mecanismo Causal": "Uso de dependencias locales instaladas en modo editable que divergen en su API pública entre ramas locales concurrentes.",
+    "Activación": "Trabajar en múltiples características del monorepo simultáneamente sobre distintas versiones sin aislamiento.",
+    "Sensor": "Errores de compilación o importación al cambiar de contexto de trabajo.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Alta",
+    "Intervención": "Aislar las dependencias del monorepo utilizando workspaces virtuales específicos por proyecto en su ejecución JIT."
+  },
+  {
+    "ID": "P109",
+    "Primitiva": "Incompatibilidad de Protocolo de Comunicación Zenoh",
+    "Mecanismo Causal": "Uso de versiones de librerías Zenoh incompatibles entre peers que participan en la misma red de mensajería.",
+    "Activación": "Actualización desalineada del daemon Zenoh en uno de los nodos de la red distribuida.",
+    "Sensor": "Peticiones que no se enrutan y desconexión silenciosa de nodos en el grafo de red.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Alta",
+    "Intervención": "Verificar la compatibilidad de versiones de las librerías en la fase de inicialización de la red."
+  },
+  {
+    "ID": "P110",
+    "Primitiva": "Bloqueo por Espera de IO en Loop de Procesamiento Crítico",
+    "Mecanismo Causal": "Ejecución de llamadas de lectura o escritura síncronas en disco dentro del loop de procesamiento de eventos en tiempo real.",
+    "Activación": "Guardado manual de historiales de logs en caliente dentro de la función de atención de peticiones.",
+    "Sensor": "Degradación brusca de la tasa de procesamiento y aumento en la fluctuación (jitter) de tiempos de ciclo.",
+    "Escala Temporal": "10ms a 100ms",
+    "Gravedad": "Media",
+    "Intervención": "Desplazar todas las operaciones de I/O de archivos a un pool de ejecución asíncrono o hilo secundario."
+  },
+  {
+    "ID": "P111",
+    "Primitiva": "Falta de Validación de Certificados en Red Local",
+    "Mecanismo Causal": "Omisión de verificación de certificados SSL/TLS para comunicaciones inter-agente en la red local asumiendo entorno seguro.",
+    "Activación": "Ataques de intermediación (MitM) facilitados por la intercepción de tráfico en la red local del host.",
+    "Sensor": "Auditorías de red que detectan claves privadas y tokens transmitidos en texto plano por HTTP interno.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Forzar TLS mutuo (mTLS) con validación estricta de certificados firmados por una entidad de certificación (CA) interna."
+  },
+  {
+    "ID": "P112",
+    "Primitiva": "Exceso de Uso de CPU por Inferencia de Modelos Locales en Lotes Pequeños",
+    "Mecanismo Causal": "Llamadas repetidas al motor de inferencia con batch size = 1, incrementando el coste de inicialización del coprocesador.",
+    "Activación": "Procesamiento secuencial de una cola de tareas de inferencia lógica.",
+    "Sensor": "Consumo de GPU o CPU sostenido al 100% con un rendimiento real de procesamiento bajo.",
+    "Escala Temporal": "1s a 10s",
+    "Gravedad": "Media",
+    "Intervención": "Agrupar dinámicamente peticiones consecutivas en lotes (batching) antes de invocar la inferencia física."
+  },
+  {
+    "ID": "P113",
+    "Primitiva": "Fuga de Memoria por Retención de Objetos en Colecciones de Estadísticas",
+    "Mecanismo Causal": "Almacenamiento ilimitado de trazas de eventos en listas de métricas globales sin políticas de agregación ni truncamiento.",
+    "Activación": "Monitoreo continuo de transacciones del monorepo durante ejecuciones de larga duración.",
+    "Sensor": "Crecimiento lento e imparable del consumo de memoria virtual asignada al daemon de telemetría.",
+    "Escala Temporal": "12h a 48h",
+    "Gravedad": "Alta",
+    "Intervención": "Utilizar buffers circulares con límites fijos o bases de datos de series temporales con expiración TTL."
+  },
+  {
+    "ID": "P114",
+    "Primitiva": "Falta de Aislamiento de Variables de Entorno entre Subprocesos",
+    "Mecanismo Causal": "Heredar el entorno completo del proceso padre al lanzar subprocesos nativos que ejecutan comandos de terceros.",
+    "Activación": "Lanzamiento de compilaciones locales ejecutando comandos shell que acceden a claves del sistema.",
+    "Sensor": "Fuga involuntaria de claves privadas a entornos de logs públicos externos a través del subproceso.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Pasar explícitamente un diccionario de variables de entorno limpio y acotado al constructor del subproceso."
+  },
+  {
+    "ID": "P115",
+    "Primitiva": "Inconsistencia de Permisos en Acceso a Repositorios Locales",
+    "Mecanismo Causal": "Ejecución de procesos del Kernel con identidades de usuario (UID) incompatibles con los permisos del sistema de archivos.",
+    "Activación": "Modificación de archivos en el monorepo usando permisos de superusuario (root) de forma esporádica.",
+    "Sensor": "Fallas de git status o errores de guardado al ejecutar el Kernel con privilegios de usuario regular.",
+    "Escala Temporal": "1s",
+    "Gravedad": "Alta",
+    "Intervención": "Auditar y restablecer los permisos de propietario (chown) de forma recursiva a nivel de monorepo."
+  },
+  {
+    "ID": "P116",
+    "Primitiva": "Bloqueo de Interfaz UI por Cálculo de McCabe AST en caliente",
+    "Mecanismo Causal": "Cálculo intensivo de métricas de complejidad ciclomática de McCabe sobre archivos masivos de código en el hilo del navegador.",
+    "Activación": "Selección de componentes de gran tamaño en la lista de telemetría del dashboard.",
+    "Sensor": "Mensaje de 'La página no responde' en el navegador y congelación del renderizado de la UI.",
+    "Escala Temporal": "500ms a 5s",
+    "Gravedad": "Media",
+    "Intervención": "Mudar el parser sintáctico y el cálculo de métricas a un Web Worker independiente del hilo de renderizado."
+  },
+  {
+    "ID": "P117",
+    "Primitiva": "Falta de Coherencia de Tipos de Datos en API de Intercambio",
+    "Mecanismo Causal": "Transmisión de estructuras de datos mixtas sin esquemas tipados entre servicios backend implementados en lenguajes distintos.",
+    "Activación": "Intercambio de mensajes JSON entre servicios Python y el visualizador del frontend.",
+    "Sensor": "Fallos lógicos al intentar acceder a campos con formatos inesperados (ej. timestamps representados como string en lugar de integer).",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Imponer un contrato estricto de API utilizando esquemas de OpenAPI o buffers de protocolo (Protobuf)."
+  },
+  {
+    "ID": "P118",
+    "Primitiva": "Falta de Validación de Entrada en URLs de Descarga",
+    "Mecanismo Causal": "Descarga directa de recursos de internet utilizando URLs proporcionadas por subagentes sin validación de dominio.",
+    "Activación": "Petición de importación de dependencias de repositorios remotos especificados en caliente.",
+    "Sensor": "Descarga de archivos potencialmente peligrosos o conexiones establecidas con dominios maliciosos (SSRF).",
+    "Escala Temporal": "1s a 10s",
+    "Gravedad": "Crítica",
+    "Intervención": "Verificar que los dominios de las URLs pertenezcan a una lista blanca de repositorios y hosts de confianza."
+  },
+  {
+    "ID": "P119",
+    "Primitiva": "Saturación de CPU por Bucles While de Reintento de Conexión",
+    "Mecanismo Causal": "Intentos continuos de reconexión a un puerto o socket cerrado en un bucle while sin pausas intermitentes.",
+    "Activación": "Inicio del cliente de red antes de que el servidor local esté listo.",
+    "Sensor": "Consumo de un núcleo de CPU al 100% inmediatamente en el hilo de red.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Imponer un sleep() obligatorio en cada iteración del bucle de reintento de conexión."
+  },
+  {
+    "ID": "P120",
+    "Primitiva": "Incompatibilidad de AST en Modificaciones JIT",
+    "Mecanismo Causal": "Intentar aplicar modificaciones (AST transforms) sobre archivos que contienen sintaxis no compatible con el parser local.",
+    "Activación": "Uso de construcciones sintácticas modernas de Python en entornos configurados con versiones de runtime obsoletas.",
+    "Sensor": "SyntaxError al parsear el archivo antes de poder aplicar la mutación.",
+    "Escala Temporal": "10ms",
+    "Gravedad": "Alta",
+    "Intervención": "Verificar la versión mínima de sintaxis soportada antes de realizar transformaciones de código."
+  }
+]
