@@ -2,8 +2,9 @@ import os
 import re
 import sqlite3
 
-DB_PATH = "$CORTEX_ROOT/10_PROJECTS/anglomorph/ontology/ontology.db"
-ONTOLOGY_DIR = "$CORTEX_ROOT/10_PROJECTS/anglomorph/ontology"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(SCRIPT_DIR, "ontology.db")
+ONTOLOGY_DIR = SCRIPT_DIR
 
 def parse_markdown_table(filepath):
     if not os.path.exists(filepath):
