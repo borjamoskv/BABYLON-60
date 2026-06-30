@@ -22,6 +22,26 @@
     "aliases": []
   },
   {
+    "requested": "AGENTE-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/AGENTE-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/AGENTE-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/AGENTE-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "Agentic-Eval-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Agentic-Eval-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Agentic-Eval-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Agentic-Eval-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
     "requested": "Algorithmic-Music-OMEGA",
     "status": "canonical",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Algorithmic-Music-OMEGA",
@@ -42,6 +62,16 @@
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Antigravity-Github-Omega/scripts/antigravity__github__omega.py",
     "runnable": true,
     "aliases": []
+  },
+  {
+    "requested": "AUTODIDACT-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/AUTODIDACT-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/AUTODIDACT-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/AUTODIDACT-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
   },
   {
     "requested": "Bounty-Exergy-Extractor-OMEGA",
@@ -75,6 +105,16 @@
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Cortex-Omega-ATMS-OMEGA/scripts/exergy_parser.py",
     "runnable": true,
     "aliases": []
+  },
+  {
+    "requested": "Cyber-RevEng-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
   },
   {
     "requested": "Epistemic-Purge-OMEGA",
@@ -143,6 +183,46 @@
     "aliases": []
   },
   {
+    "requested": "MAXWELL-DAEMON-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/MAXWELL-DAEMON-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/MAXWELL-DAEMON-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/MAXWELL-DAEMON-OMEGA/SKILL.md",
+    "script": "verify_maxwell_daemon.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/MAXWELL-DAEMON-OMEGA/verify_maxwell_daemon.py",
+    "runnable": true
+  },
+  {
+    "requested": "MOSKV1-Arsenal-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/MOSKV1-Arsenal-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/MOSKV1-Arsenal-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/MOSKV1-Arsenal-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "ONTOLOGY-FORGE-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/ONTOLOGY-FORGE-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/ONTOLOGY-FORGE-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/ONTOLOGY-FORGE-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "OSINT-Mitigation-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/OSINT-Mitigation-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/OSINT-Mitigation-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/OSINT-Mitigation-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
     "requested": "ouroboros-infinity",
     "status": "canonical",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/ouroboros-infinity",
@@ -163,6 +243,16 @@
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Python-Extractor-OMEGA/scripts/sovereign_python_extractor.py",
     "runnable": true,
     "aliases": []
+  },
+  {
+    "requested": "Scientific-Deconstruction-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Scientific-Deconstruction-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Scientific-Deconstruction-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Scientific-Deconstruction-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
   },
   {
     "requested": "Session-Crystallizer-OMEGA",
@@ -209,6 +299,16 @@
     "aliases": []
   },
   {
+    "requested": "Sovereign-Director-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
     "requested": "Thermodynamic-Context-Compression-OMEGA",
     "status": "canonical",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Context-Compression-OMEGA",
@@ -218,6 +318,56 @@
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Context-Compression-OMEGA/verify_Thermodynamic-Context-Compression-OMEGA.py",
     "runnable": true,
     "aliases": []
+  },
+  {
+    "requested": "Thermodynamic-Task-Router-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Task-Router-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Task-Router-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Task-Router-OMEGA/SKILL.md",
+    "script": "scripts/thermodynamic_router.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Thermodynamic-Task-Router-OMEGA/scripts/thermodynamic_router.py",
+    "runnable": true
+  },
+  {
+    "requested": "Tmux-PTY-Bridge-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Tmux-PTY-Bridge-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Tmux-PTY-Bridge-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Tmux-PTY-Bridge-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "ULTRATHINK-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/ULTRATHINK-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/ULTRATHINK-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/ULTRATHINK-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "Uniswap-v4-Auditor-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Uniswap-v4-Auditor-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Uniswap-v4-Auditor-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Uniswap-v4-Auditor-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "Vanguard-Transversal-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Vanguard-Transversal-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Vanguard-Transversal-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Vanguard-Transversal-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
   },
   {
     "requested": "Vesicular-Runtime-Omega",

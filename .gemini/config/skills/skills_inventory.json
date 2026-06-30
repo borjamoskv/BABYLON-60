@@ -1,15 +1,30 @@
 {
-  "updated_at": "2026-06-22",
+  "updated_at": "2026-06-30",
   "totals": {
-    "directories": 21,
-    "yaml_ok": 21,
-    "script_backed": 21,
-    "docs_only": 0,
+    "directories": 36,
+    "yaml_ok": 36,
+    "script_backed": 22,
+    "docs_only": 14,
     "missing_script_links": 0,
-    "external_repo_refs": 0
+    "external_repo_refs": 2
   },
   "duplicates": {},
-  "docs_only": [],
+  "docs_only": [
+    "AGENTE-OMEGA",
+    "AUTODIDACT-OMEGA",
+    "Agentic-Eval-OMEGA",
+    "Cyber-RevEng-OMEGA",
+    "MOSKV1-Arsenal-OMEGA",
+    "ONTOLOGY-FORGE-OMEGA",
+    "OSINT-Mitigation-OMEGA",
+    "Scientific-Deconstruction-OMEGA",
+    "Sovereign-Director-OMEGA",
+    "Thermodynamic-Task-Router-OMEGA",
+    "Tmux-PTY-Bridge-OMEGA",
+    "ULTRATHINK-OMEGA",
+    "Uniswap-v4-Auditor-OMEGA",
+    "Vanguard-Transversal-OMEGA"
+  ],
   "script_backed": {
     "Aesthetic-Foundry-Omega": "scripts/aesthetic_foundry_omega.py",
     "Algorithmic-Music-OMEGA": "scripts/synth_engine.py",
@@ -21,6 +36,7 @@
     "Frontier-RevEng-OMEGA": "scripts/frontier__rev_eng_omega.py",
     "LEA-OMEGA": "verify_LEA-OMEGA.py",
     "Local-Inference-OMEGA": "scripts/local__inference_omega.py",
+    "MAXWELL-DAEMON-OMEGA": "verify_maxwell_daemon.py",
     "Mac-Control-Ω": "scripts/mac_control_omega.py",
     "Python-Extractor-OMEGA": "scripts/sovereign_python_extractor.py",
     "SOTA-Vector-Engine-Omega": "scripts/sota_ingest.py",

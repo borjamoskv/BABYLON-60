@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # Mode: C5-REAL
 """
-AST extraction.
+Sovereign Python AST Extector.
+Extracts classes, methods, docstrings, decorators, and critical trust-infrastructure pathways.
 """
 
 import os
@@ -37,6 +38,17 @@ class SovereignPythonExtractorSkill:
         }
 
 
+def get_decorator_name(decorator_node) -> str:
+    """Recursively reconstructs decorator names (e.g. @pytest.mark.asyncio)."""
+    if isinstance(decorator_node, ast.Name):
+        return decorator_node.id
+    elif isinstance(decorator_node, ast.Attribute):
+        return f"{get_decorator_name(decorator_node.value)}.{decorator_node.attr}"
+    elif isinstance(decorator_node, ast.Call):
+        return get_decorator_name(decorator_node.func)
+    return "unknown"
+
+
 def analyze_file(filepath):
     try:
         with open(filepath, "r", encoding="utf-8") as f:
@@ -59,43 +71,57 @@ def analyze_file(filepath):
         if isinstance(node, ast.ClassDef):
             cls_doc = ast.get_docstring(node)
             methods = []
+            decorators = [get_decorator_name(d) for d in node.decorator_list]
+            bases = []
+            for b in node.bases:
+                if isinstance(b, ast.Name):
+                    bases.append(b.id)
+                elif isinstance(b, ast.Attribute):
+                    bases.append(f"{getattr(b.value, 'id', 'unknown')}.{b.attr}")
+
             for item in node.body:
                 if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
                     method_doc = ast.get_docstring(item)
                     args = [a.arg for a in item.args.args]
+                    method_decorators = [get_decorator_name(d) for d in item.decorator_list]
                     methods.append({
                         "name": item.name,
                         "docstring": method_doc,
                         "args": args,
+                        "decorators": method_decorators,
                         "line": item.lineno,
                         "is_async": isinstance(item, ast.AsyncFunctionDef)
                     })
             classes.append({
                 "name": node.name,
                 "docstring": cls_doc,
+                "bases": bases,
+                "decorators": decorators,
                 "methods": methods,
                 "line": node.lineno
             })
         elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             func_doc = ast.get_docstring(node)
             args = [a.arg for a in node.args.args]
+            decorators = [get_decorator_name(d) for d in node.decorator_list]
             functions.append({
                 "name": node.name,
                 "docstring": func_doc,
                 "args": args,
+                "decorators": decorators,
                 "line": node.lineno,
                 "is_async": isinstance(node, ast.AsyncFunctionDef)
             })
 
     critical_keywords = {"ledger", "guard", "commit", "verify", "sign", "encrypt", "decrypt", "hash"}
-    sovereign_keywords = {"c5-real", "c4-sim", "singularity", "sovereign", "exergy", "centinela", "moskv"}
+    sovereign_keywords = {"c5-real", "c4-sim", "singularity", "sovereign", "exergy", "centinela", "moskv", "cortex"}
 
     for subnode in ast.walk(tree):
         if isinstance(subnode, ast.Name):
             name_lower = subnode.id.lower()
             if any(k in name_lower for k in critical_keywords):
                 line_no = getattr(subnode, "lineno", None)
-                line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                 critical_paths.append({
                     "type": "identifier",
                     "name": subnode.id,
@@ -104,7 +130,7 @@ def analyze_file(filepath):
                 })
             if any(s in name_lower for s in sovereign_keywords):
                 line_no = getattr(subnode, "lineno", None)
-                line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                 sovereign_markers.append({
                     "type": "identifier",
                     "name": subnode.id,
@@ -116,7 +142,7 @@ def analyze_file(filepath):
             attr_lower = subnode.attr.lower()
             if any(k in attr_lower for k in critical_keywords):
                 line_no = getattr(subnode, "lineno", None)
-                line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                 critical_paths.append({
                     "type": "attribute",
                     "name": subnode.attr,
@@ -125,7 +151,7 @@ def analyze_file(filepath):
                 })
             if any(s in attr_lower for s in sovereign_keywords):
                 line_no = getattr(subnode, "lineno", None)
-                line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                 sovereign_markers.append({
                     "type": "attribute",
                     "name": subnode.attr,
@@ -135,7 +161,7 @@ def analyze_file(filepath):
 
         elif isinstance(subnode, ast.Await):
             line_no = getattr(subnode, "lineno", None)
-            line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+            line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
             critical_paths.append({
                 "type": "await",
                 "name": "await",
@@ -151,7 +177,7 @@ def analyze_file(filepath):
                 fn_lower = fn.lower()
                 if any(s in fn_lower for s in {"cortex", "omega", "solidity", "web3", "eth", "cryptography", "crypto", "blockchain"}):
                     line_no = getattr(subnode, "lineno", None)
-                    line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                    line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                     sovereign_markers.append({
                         "type": "import",
                         "name": fn,
@@ -163,7 +189,7 @@ def analyze_file(filepath):
             val_lower = subnode.value.lower()
             if any(s in val_lower for s in sovereign_keywords):
                 line_no = getattr(subnode, "lineno", None)
-                line_content = lines[line_no - 1].strip() if line_no and line_no <= len(lines) else ""
+                line_content = lines[line_no - 1].strip() if line_no and 1 <= line_no <= len(lines) else ""
                 sovereign_markers.append({
                     "type": "string_constant",
                     "value": subnode.value[:50] + "..." if len(subnode.value) > 50 else subnode.value,
@@ -200,7 +226,7 @@ def analyze_file(filepath):
 
 def print_report(filepath, result, audit_only=False):
     print("\033[1;30m======================================================================\033[0m")
-    print("\033[1;34m⚡ SOVEREIGN CORTEX STRUCTURAL REPORT \u2014 AST DETECTOR v8.2\033[0m")
+    print("\033[1;34m⚡ SOVEREIGN CORTEX STRUCTURAL REPORT \u2014 AST DETECTOR v8.3.0\033[0m")
     print(f"\033[1;30mTarget File: {filepath}\033[0m")
     print("\033[1;30m======================================================================\033[0m")
     
@@ -221,11 +247,14 @@ def print_report(filepath, result, audit_only=False):
             print("    None detected.")
         for cls in result["classes"]:
             doc_snippet = f" | \"{cls['docstring'].strip().splitlines()[0][:60]}\"" if cls["docstring"] else ""
-            print(f"  • \033[1;37mclass {cls['name']}\033[0m (Line {cls['line']}){doc_snippet}")
+            bases_str = f"({', '.join(cls['bases'])})" if cls["bases"] else ""
+            dec_str = " ".join([f"@{d}" for d in cls["decorators"]]) + " " if cls["decorators"] else ""
+            print(f"  • {dec_str}\033[1;37mclass {cls['name']}\033[0m{bases_str} (Line {cls['line']}){doc_snippet}")
             for method in cls["methods"]:
                 async_tag = "\033[1;35masync \033[0m" if method["is_async"] else ""
                 args_str = ", ".join(method["args"])
-                print(f"    └─ {async_tag}def {method['name']}({args_str}) (Line {method['line']})")
+                method_dec = " ".join([f"@{d}" for d in method["decorators"]]) + " " if method["decorators"] else ""
+                print(f"    └─ {method_dec}{async_tag}def {method['name']}({args_str}) (Line {method['line']})")
         print("")
 
         print("\033[1;36m[Global Functions]\033[0m")
@@ -234,7 +263,8 @@ def print_report(filepath, result, audit_only=False):
         for func in result["functions"]:
             async_tag = "\033[1;35masync \033[0m" if func["is_async"] else ""
             args_str = ", ".join(func["args"])
-            print(f"  • {async_tag}def {func['name']}({args_str}) (Line {func['line']})")
+            func_dec = " ".join([f"@{d}" for d in func["decorators"]]) + " " if func["decorators"] else ""
+            print(f"  • {func_dec}{async_tag}def {func['name']}({args_str}) (Line {func['line']})")
         print("")
 
     print("\033[1;33m[Critical Paths (ledger, guards, crypto, async)]\033[0m")

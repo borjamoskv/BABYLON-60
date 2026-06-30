@@ -1,15 +1,15 @@
 # Skills Inventory
 
-Last updated: 2026-06-22
+Last updated: 2026-06-30
 
 ## Summary
 
-- Dirs: `21`
-- YAML OK: `21`
-- Script-backed: `21`
-- Docs-only: `0`
+- Dirs: `36`
+- YAML OK: `36`
+- Script-backed: `22`
+- Docs-only: `14`
 - Missing script links: `0`
-- Ext repo refs: `0`
+- Ext repo refs: `2`
 
 ## Duplicate Clusters
 
@@ -17,6 +17,20 @@ Last updated: 2026-06-22
 
 ## Documentation-Only Skills
 
+- `AGENTE-OMEGA`
+- `AUTODIDACT-OMEGA`
+- `Agentic-Eval-OMEGA`
+- `Cyber-RevEng-OMEGA`
+- `MOSKV1-Arsenal-OMEGA`
+- `ONTOLOGY-FORGE-OMEGA`
+- `OSINT-Mitigation-OMEGA`
+- `Scientific-Deconstruction-OMEGA`
+- `Sovereign-Director-OMEGA`
+- `Thermodynamic-Task-Router-OMEGA`
+- `Tmux-PTY-Bridge-OMEGA`
+- `ULTRATHINK-OMEGA`
+- `Uniswap-v4-Auditor-OMEGA`
+- `Vanguard-Transversal-OMEGA`
 
 ## Script-Backed Skills
 
@@ -30,6 +44,7 @@ Last updated: 2026-06-22
 - `Frontier-RevEng-OMEGA` → `scripts/frontier__rev_eng_omega.py`
 - `LEA-OMEGA` → `verify_LEA-OMEGA.py`
 - `Local-Inference-OMEGA` → `scripts/local__inference_omega.py`
+- `MAXWELL-DAEMON-OMEGA` → `verify_maxwell_daemon.py`
 - `Mac-Control-Ω` → `scripts/mac_control_omega.py`
 - `Python-Extractor-OMEGA` → `scripts/sovereign_python_extractor.py`
 - `SOTA-Vector-Engine-Omega` → `scripts/sota_ingest.py`

@@ -16,7 +16,9 @@ import subprocess
 from pathlib import Path
 
 # Add cortex core to sys.path to allow native imports
-CORTEX_CORE_PATH = Path("$CORTEX_ROOT/30_CORTEX")
+CORTEX_CORE_PATH = Path("$CORTEX_ROOT/30_BABYLON-60")
+if not CORTEX_CORE_PATH.exists():
+    CORTEX_CORE_PATH = Path("$CORTEX_ROOT/30_CORTEX")
 if str(CORTEX_CORE_PATH) not in sys.path:
     sys.path.insert(0, str(CORTEX_CORE_PATH))
 

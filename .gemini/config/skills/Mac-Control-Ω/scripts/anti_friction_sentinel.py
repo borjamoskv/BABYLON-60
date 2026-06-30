@@ -8,6 +8,7 @@ Consumes 0.00% CPU when idle.
 import sys
 import os
 try:
+    import objc
     import CoreFoundation
     import ApplicationServices
     from AppKit import NSWorkspace, NSScreen, NSApplication
@@ -57,13 +58,16 @@ def check_window(ax_window):
                 print("[SENTINEL-V2] Rogue window size detected. Applying physics correction.")
                 apply_friction_correction(ax_window, screen_w, screen_h)
 
+@objc.callbackFor(ApplicationServices.AXObserverCreate)
 def ax_observer_callback(observer, ax_element, notification, refcon):
     if notification in (ApplicationServices.kAXWindowResizedNotification, ApplicationServices.kAXWindowCreatedNotification, ApplicationServices.kAXFocusedWindowChangedNotification):
         check_window(ax_element)
 
 class AppSwitchObserver(NSObject):
     def init(self):
-        self = super(AppSwitchObserver, self).init()
+        self = objc.super(AppSwitchObserver, self).init()
+        if self is None:
+            return None
         self.current_observer = None
         self.current_pid = None
         return self

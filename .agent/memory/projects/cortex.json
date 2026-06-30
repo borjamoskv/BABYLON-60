@@ -2,7 +2,7 @@
   "meta": {
     "project_id": "cortex",
     "created": "2026-02-12T13:24:00+01:00",
-    "last_touched": "2026-06-30T09:45:00+02:00",
+    "last_touched": "2026-06-30T11:36:13+02:00",
     "migrated_from": "ghosts.json"
   },
   "status": "active",
@@ -13,12 +13,13 @@
   "category": "core-infra",
   "summary": "Sistema nervioso de MOSKV-1. Memoria persistente multi-nivel (L1 Session, L2 Project, L3 System). Daemon watchdog con monitorización de sitios, freshness checks, notificaciones macOS.",
   "ghost": {
-    "last_task": "Establecido y formalizado el sistema de distinción visual Triple-Lock Perceptual v2.1 para la Parquía y los Entes de Acción",
-    "last_file": "babylon60/agents/primitives/ONTOLOGIA_CONSOLIDADA.md",
-    "conversation_id": "0bc51ee5-dce3-4f20-97cd-86d1128be3ae",
-    "timestamp": "2026-06-30T09:45:00+02:00"
+    "last_task": "Cristalización de la Matriz Ontológica de las 15 Meta-Combinaciones de Exergía",
+    "last_file": ".cortex/memory_vault/20260630_autodidact_matriz_15_meta_combinaciones_c5.md",
+    "conversation_id": "00e7fe56-2d9e-4280-9207-dc1f444770ae",
+    "timestamp": "2026-06-30T11:36:13+02:00"
   },
   "recent_changes": [
+    "[2026-06-30T11:36:13+02:00] Cristalización de matriz ontológica de 15 meta-combinaciones en memory_vault bajo AUTODIDACT-Ω",
     "[2026-06-30T09:45:00+02:00] feat(ontology): estandarizado e isomorfizado el sistema de distinción visual Triple-Lock v2.1 y la Parquía termodinámica",
     "[2026-06-28T05:26:42+02:00] Cristalización de las 100 Invariantes Físicas C5-REAL y Matriz de Isomorfismo",
     "[2026-06-02T02:22:00+02:00] Definición de 4 niveles de exergía arquitectónica y rol reactivo de DIOS",
@@ -27,8 +28,7 @@
     "🧠 Implemented AdapterVerifier to audit and validate LoRA config + weights (.npz/.safetensors)",
     "🌙 Implemented AutonomousTrainingDaemon running async nocturnal sleep-cycle TTT validation",
     "🚀 Configured NativeVLLMProvider to dynamically load registered verified adapters via LoRARequest",
-    "🛣️ Added dynamic model resolution and routing interceptor hooks inside LLMProvider",
-    "🧪 Deployed tests/test_ttt_daemon.py with 11 async unit tests covering verifier, daemon, and routing"
+    "🛣️ Added dynamic model resolution and routing interceptor hooks inside LLMProvider"
   ],
   "known_issues": [
     "Jules API 403 con OAuth access token — posible scope issue",
@@ -122,6 +122,13 @@
     }
   ],
   "knowledge": [
+    {
+      "id": "CK021",
+      "topic": "meta-combinaciones-ontologicas",
+      "content": "Las 4 entidades (A,R,P,I) generan 15 vectores de interacción. El Nivel 4 (Singularidad A-R-P-I) es entropía irreversible que exige apoptosis radical.",
+      "confidence": "C5-REAL",
+      "added": "2026-06-30"
+    },
     {
       "id": "CK020",
       "topic": "triple-lock-perceptual-notation",
@@ -307,5 +314,5 @@
     "cortex/extensions/llm/provider.py",
     "tests/test_ttt_daemon.py"
   ],
-  "last_updated": "2026-06-30T09:45:00Z"
+  "last_updated": "2026-06-30T11:36:13+02:00"
 }

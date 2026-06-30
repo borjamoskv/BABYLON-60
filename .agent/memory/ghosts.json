@@ -6,21 +6,22 @@
     "last_conversation": "0640cbcc-b10b-485a-8531-c970467282b6"
   },
   "cortex": {
-    "last_task": "Establecido y formalizado el sistema de distinción visual Triple-Lock Perceptual v2.1 para la Parquía y los Entes de Acción",
-    "last_file": "babylon60/agents/primitives/ONTOLOGIA_CONSOLIDADA.md",
-    "timestamp": "2026-06-30T09:45:00+02:00",
-    "last_conversation": "0bc51ee5-dce3-4f20-97cd-86d1128be3ae"
+    "last_task": "Cristalización de la Matriz Ontológica de las 15 Meta-Combinaciones de Exergía",
+    "last_file": ".cortex/memory_vault/20260630_autodidact_matriz_15_meta_combinaciones_c5.md",
+    "timestamp": "2026-06-30T11:36:13+02:00",
+    "last_conversation": "0bc51ee5-dce3-4f20-97cd-86d1128be3ae",
+    "conversation_id": "00e7fe56-2d9e-4280-9207-dc1f444770ae"
   },
   "cortex-persist": {
-    "last_task": "Erradicar 13 fallos de test topol\u00f3gicos, fix TypeError de ultramap.py y actualizar baseline de Pyright a 206 (C5-REAL)",
+    "last_task": "Erradicar 13 fallos de test topológicos, fix TypeError de ultramap.py y actualizar baseline de Pyright a 206 (C5-REAL)",
     "last_file": "tests/agents/test_e2e_swarm_integration.py",
     "last_conversation": "c76c56c2-82ee-4a94-9160-98730439b9f1",
-    "timestamp": "2026-06-28T12:34:39+02:00",
-    "mood": "Author: Tester | Commit: refactor(security): dynamic gdrive disco",
+    "timestamp": "2026-06-30T10:30:55+02:00",
+    "mood": "Author: Tester | Commit: feat(ontology): crystallize batches 6 to",
     "blocked_by": null
   },
   "borjamoskv-web": {
-    "last_task": "Operaci\u00f3n SANEDR\u00cdN: Saneamiento TypeScript en Astro y mitigaci\u00f3n OOM V8 para compilaci\u00f3n SSR Cloudflare (C5-REAL)",
+    "last_task": "Operación SANEDRÍN: Saneamiento TypeScript en Astro y mitigación OOM V8 para compilación SSR Cloudflare (C5-REAL)",
     "last_file": "package.json / tsconfig.json",
     "last_conversation": "38b1da73-0421-49f9-b6e2-0b1753117ede",
     "timestamp": "2026-06-28T02:04:57Z"
@@ -29,8 +30,8 @@
     "last_task": "Inject Oliver y Tom OOB spin exploit to bounty grid",
     "last_file": "index.html",
     "last_conversation": "f7645ff7-5068-41d7-80fd-b846c4131998",
-    "timestamp": "2026-06-27T19:48:30+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] refactor: erradicar duplicidad ",
+    "timestamp": "2026-06-30T04:34:39+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs: clean up remaining Vercel",
     "blocked_by": null
   },
   "cortexpersist-com": {
@@ -53,7 +54,7 @@
       "timestamp": "2026-06-06T01:25:00Z"
     },
     "borjamoskv-web": {
-      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Mil\u00e0, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
+      "last_task": "Forensic deepfake audit (C5-REAL), mapped fraud node infrastructure (capiturexapp.com, floventraapp.com, thalen-equibridge.org) targeting Pau Garcia-Milà, verified Revelum AI CEO contact, and mapped primary domains (borjamoskv.com and newsletter.borjamoskv.com).",
       "last_file": "takedown_dossier_pau_garcia_mila.md",
       "timestamp": "2026-06-01T02:30:56+02:00",
       "last_conversation": "fe89fe37-7da9-4b8c-b5f8-4f3c64db4ba1"
@@ -156,8 +157,8 @@
     "blocked_by": null
   },
   "naroagutierrezgil.com": {
-    "timestamp": "2026-06-28T03:40:57+02:00",
-    "mood": "Author: Borja Moskv | Commit: build(audit): enforce C5-REAL y purga de",
+    "timestamp": "2026-06-28T17:13:55+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] build(cortex): migración estruc",
     "blocked_by": null
   },
   "cortex-memory": {
@@ -236,8 +237,8 @@
     "blocked_by": null
   },
   "babylon-60": {
-    "timestamp": "2026-06-27T22:13:35+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] refactor(runtime): erradicaci\u00f3n",
+    "timestamp": "2026-06-30T10:31:55+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat: instrument rust runtime w",
     "blocked_by": null
   },
   "borjamoskv": {
@@ -261,13 +262,13 @@
     "blocked_by": null
   },
   "borjamoskv-site": {
-    "timestamp": "2026-06-28T12:36:21+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] refactor(security): sanitize pa",
+    "timestamp": "2026-06-30T03:09:09+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] refactor: resolve residual type",
     "blocked_by": null
   },
   "cortexpersist-monorepo": {
-    "timestamp": "2026-06-27T21:19:18+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] chore(config): consolidar corte",
+    "timestamp": "2026-06-30T07:41:14+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat(com): complete Astro migra",
     "blocked_by": null
   },
   "cortex-routing-bunker": {
@@ -323,6 +324,46 @@
   "AURA_SAAS": {
     "timestamp": "2026-06-28T04:02:49+02:00",
     "mood": "Author: Borja Moskv | Commit: [bridge] backend: Implement MarkovSequen",
+    "blocked_by": null
+  },
+  "zeta26": {
+    "timestamp": "2026-06-30T10:31:28+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat(ontology): crystallize bat",
+    "blocked_by": null
+  },
+  "epistemic-buffer-overflow": {
+    "timestamp": "2026-06-30T01:53:55+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] docs(provenance): add genesis c",
+    "blocked_by": null
+  },
+  "cortex_scheduler": {
+    "timestamp": "2026-06-29T21:26:47+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] chore: r9 dirty loop prevention",
+    "blocked_by": null
+  },
+  "Teorema-Robinson-Moskv": {
+    "timestamp": "2026-06-30T10:32:09+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat: implement web telemetry w",
+    "blocked_by": null
+  },
+  "Autodidact-Ω": {
+    "timestamp": "2026-06-29T15:30:34+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat: migrate Autodidact-PM age",
+    "blocked_by": null
+  },
+  "borjamoskv-substack": {
+    "timestamp": "2026-06-30T02:36:15+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] doc: add execution instructions",
+    "blocked_by": null
+  },
+  "canal-2e-optimizacion": {
+    "timestamp": "2026-06-29T22:57:58+02:00",
+    "mood": "Author: Borja Moskv | Commit: feat(pipeline): Inyectar guión E03 compl",
+    "blocked_by": null
+  },
+  "moskv-85": {
+    "timestamp": "2026-06-30T10:20:44+02:00",
+    "mood": "Author: Borja Moskv | Commit: [bridge] feat(ontology): crystallize bat",
     "blocked_by": null
   }
 }

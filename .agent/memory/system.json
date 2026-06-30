@@ -104,6 +104,14 @@
   "knowledge_global": [],
   "sessions_log": [
     {
+      "date": "2026-06-30T11:36:13+02:00",
+      "project": "cortex",
+      "focus": "Ontología y Exergía",
+      "duration_approx": "0.1h",
+      "key_output": "Cristalización de Matriz de 15 meta-combinaciones",
+      "conversation_id": "00e7fe56-2d9e-4280-9207-dc1f444770ae"
+    },
+    {
       "date": "2026-06-30T09:45:00+02:00",
       "project": "cortex",
       "focus": "Estandarización de Tipología de Entes y la Parquía Termodinámica",
@@ -334,14 +342,6 @@
       "duration_approx": "1h",
       "key_output": "OnceLock Mmap Registry in cortex_rs/src/lib.rs",
       "conversation_id": "47cc7311-37ca-4af7-810f-76605cfde0df"
-    },
-    {
-      "date": "2026-05-31T06:46:00Z",
-      "project": "cortex-persist/borjamoskv-web",
-      "focus": "AST Mocks, union isinstance checks, master branch merge and Vercel production deployment",
-      "duration_approx": "0.5h",
-      "key_output": "Pushed test fixes to cortex-persist and deployed SOTA vinyl deck to production",
-      "conversation_id": "b942f684-1530-4eaa-9c22-8e1e4abf305b"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-30T09:45:00Z"
+  "last_updated": "2026-06-30T11:36:13+02:00"
 }
