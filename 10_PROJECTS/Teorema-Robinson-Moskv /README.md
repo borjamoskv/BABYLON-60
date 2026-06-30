@@ -15,7 +15,7 @@ From the directory "10_PROJECTS/Teorema-Robinson-Moskv ", run:
 ```bash
 ./start.sh
 ```
-This script will auto-detect whether `npx` or `python3` is available on your machine and launch the dashboard on port `8000`. You can force a specific server runtime using flags:
+This script will auto-detect whether `node` or `python3` is available on your machine and launch the dashboard on port `8000`. You can force a specific server runtime using flags:
 * Node.js server: `./start.sh --node`
 * Python server: `./start.sh --python`
 * Custom port: `./start.sh --port 8080`

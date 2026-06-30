@@ -39,11 +39,11 @@ while [[ "$#" -gt 0 ]]; do
 done
 
 run_node() {
-    echo -e "${COLOR_BOLD}[-] Launching Server via Node.js (npx serve)...${COLOR_RESET}"
+    echo -e "${COLOR_BOLD}[-] Launching Server via Node.js (Pure/Zero-Dependency)...${COLOR_RESET}"
     echo -e "${COLOR_YINMN}Target Port: $PORT${COLOR_RESET}"
     echo -e "Access URL:  http://localhost:$PORT"
     echo ""
-    npx -y serve . -l "$PORT"
+    node server.js "$PORT"
 }
 
 run_python() {
@@ -61,14 +61,14 @@ elif [ "$MODE" = "python" ]; then
 else
     # Auto-detect mode
     echo -e "Checking server runtimes..."
-    if command -v node >/dev/null 2>&1 && command -v npx >/dev/null 2>&1; then
-        echo -e "  -> Node.js / npx detected."
+    if command -v node >/dev/null 2>&1; then
+        echo -e "  -> Node.js detected."
         run_node
     elif command -v python3 >/dev/null 2>&1; then
         echo -e "  -> Python 3 detected."
         run_python
     else
-        echo -e "${COLOR_AMBER}[!] Error: Neither Node.js (npx) nor Python 3 found in PATH.${COLOR_RESET}"
+        echo -e "${COLOR_AMBER}[!] Error: Neither Node.js nor Python 3 found in PATH.${COLOR_RESET}"
         echo -e "Please install either to run the dashboard."
         exit 1
     fi
