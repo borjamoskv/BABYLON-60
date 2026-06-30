@@ -1,0 +1,13 @@
+{
+  "name": "cortex-master-exergy-dashboard",
+  "version": "1.0.0",
+  "description": "Sovereign telemetry panel built inside the borjamoskv/Teorema-Robinson-Moskv logic kernel. Calculates, filters, and monitors computational exergy of all CORTEX components in real time.",
+  "main": "index.html",
+  "scripts": {
+    "start": "./start.sh",
+    "start:node": "./start.sh --node",
+    "start:python": "./start.sh --python"
+  },
+  "author": "Borja Moskv (borjamoskv)",
+  "license": "MIT"
+}

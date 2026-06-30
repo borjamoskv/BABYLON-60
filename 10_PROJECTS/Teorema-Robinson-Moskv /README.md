@@ -10,19 +10,27 @@ Sovereign telemetry panel built inside the "borjamoskv/Teorema-Robinson-Moskv" l
 ## ⚡ Deployment & Runbook
 To deploy and view the dashboard locally:
 
-### Option A: Python 3 Server
+### Option A: Unified Start Script (Recommended)
 From the directory "10_PROJECTS/Teorema-Robinson-Moskv ", run:
 ```bash
-python3 -m http.server 8000
+./start.sh
 ```
-Then navigate to: "http://localhost:8000"
+This script will auto-detect whether `npx` or `python3` is available on your machine and launch the dashboard on port `8000`. You can force a specific server runtime using flags:
+* Node.js server: `./start.sh --node`
+* Python server: `./start.sh --python`
+* Custom port: `./start.sh --port 8080`
 
-### Option B: Node.js Server
-From the directory "10_PROJECTS/Teorema-Robinson-Moskv ", run:
+### Option B: npm Runner
+If Node.js is installed locally, you can execute:
 ```bash
-npx serve . -l 8000
+npm start
 ```
-Then navigate to: "http://localhost:8000"
+Or execute target runtimes:
+```bash
+npm run start:node      # Launches via Node.js
+npm run start:python    # Launches via Python 3
+```
 
 ---
 *∴ Cero anergía es la muerte. Diseñado por Borja Moskv.*
+
