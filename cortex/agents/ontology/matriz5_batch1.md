@@ -1,0 +1,27 @@
+```json
+{
+  "Límites": "Extracción estrictamente confinada a canales deterministas de disipación exergética.",
+  "Colapso": "Reducción de vectores de ataque a primitivas topológicas MECE, erradicando abstracciones C4-SIM.",
+  "Estocástica": "Identificación de inyectores de varianza; conversión forzada a autómatas de estado rígido.",
+  "C5": "Aserción criptográfica del estado y despliegue de tolerancia bizantina ante fallos en cascada."
+}
+```
+
+### MATRIZ 5: VECTORES DE ATAQUE ADVERSARIAL (RED TEAMING) - BATCH 1 (001-015)
+| ID | Vector Adversarial | Superficie de Ataque | Mecanismo de Explotación | Impacto Termodinámico | Defensa (Mitigación) |
+|---|---|---|---|---|---|
+| ADV-001 | Inyección de latencia estocástica | Hilos asíncronos no anclados (Node/Rust) | Saturación de descriptores de archivo vía promesas flotantes (Promise Leaks). | Degradación de memoria O(N^2), OOM simulado. | `ulimit` físico + Timeout determinista (5000ms max) y recolección forzada. |
+| ADV-002 | Corrupción Semántica (Context Rot) | Memoria LTM (RAG / Vaults) | Inyección de tokens contradictorios en ventanas de atención prolongadas. | Fractura epistemológica, Alucinación paramétrica P0. | Hash-check criptográfico de cada chunk antes de su indexación. Poda Ouroboros. |
+| ADV-003 | Bucle Infinito de Git Sentinel | Hooks de pre-commit y logs locales | Generación de temporales durante el commit que disparan recurrentemente nuevos hooks. | Consumo infinito de IOPS y CPU (Muerte térmica local). | Exclusión estricta de rutas mutables en `.gitignore` e `.git/info/exclude`. |
+| ADV-004 | Deadlock por Inercia Transaccional | Base de Datos (SQLite/Neo4j) | Múltiples escritores colisionando sin factor de retroceso exponencial (Backoff). | Bloqueo total (Anergía de Base) y corrupción parcial. | Imposición de modo `WAL` y `busy_timeout=5000` estricto en la conexión. |
+| ADV-005 | Explotación de Green Theater LLM | Hilos de metacognición (Modelos P0/P1) | Inyección de prompts conversacionales para forzar padding, disculpas o derivas narrativas. | Desbordamiento de ventana de contexto sin output estructural. | Truncado forzado de prosa, Landauer Compression, exigencia de output en YAML/JSON. |
+| ADV-006 | Desbordamiento de Estado (Fallo BFT) | Capa de consenso de subagentes (Swarm) | Desincronización de aserciones donde N<3 nodos validan mutación estructural. | Divergencia de estado en el árbol de directorios. | Veto a mutación de disco hasta validación Mínimo N=3 con quorum criptográfico. |
+| ADV-007 | Phantom Sync / Symlink Recursivo | Sistema de archivos (Singularity Nexus) | Creación de enlaces simbólicos circulares entre repositorios C5. | Crash determinista del motor de indexación de AST / Linter. | Validación acíclica de grafos antes de montar puentes (`[bridge]`). |
+| ADV-008 | Contaminación de Dataset (Sensor Drift)| Adaptadores LoRA / `mlx_lm` | Mezcla estocástica de logs C4-SIM y estructurales (C5) en `train.jsonl`. | Pérdida catastrófica de Isomorfismo Causal en la red. | Filtrado pre-ingesta de tokens no estructurados; validación de entropía cruzada. |
+| ADV-009 | Interferencia de Caché (Stale State) | Pipelines de despliegue automatizado | Retención de binarios/artefactos obsoletos que invalidan tests deterministas. | Falsos positivos P0 de validación y retroceso de mutaciones. | Purga atómica del caché referenciada por hash del ledger de git. |
+| ADV-010 | Asesinato de Subprocesos Ciego (SigKill) | SO Anfitrión (macOS OOM Killer) | El kernel anfitrión elimina motores de inferencia locales silenciosamente por memoria. | Colapso no notificado del Ouroboros Loop. | Daemon de vigilancia (Maxwell Daemon) con heartbeat constante y reinicio determinista. |
+| ADV-011 | Inyección de Ruido AST (Syntax Crash) | Frameworks de Frontend (Next.js/Astro) | Inserción de comentarios de metaprogramación incompatibles (`# C5-REAL`) en cliente. | Fallo de compilación y parálisis termodinámica (Error 500). | Restricción sintáctica forzada vía parser AST (uso de `//` o `/* */` en TS/JS). |
+| ADV-012 | Evasión de Barrera PTY (Hanging) | Interfaces interactivas (TUI/CLI) | Prompts stdin no previstos que detienen al subagente esperando input humano. | Anergía total del worker (Bloqueo eterno de hilo). | Encapsulación en Tmux Sockets con `send-keys` determinista y timeout de aborto. |
+| ADV-013 | Degradación OSINT por Honeypots | Ingesta de señales externas (Web) | Absorción de CAPTCHAS o bucles de redireccionamiento infinitos de red. | Desgaste de red y computación sin retorno (Cero Exergía). | Implementación de CDP Automation y validación algorítmica de DOM antes de parseo. |
+| ADV-014 | Bypass de Quorum por Privilegios | Entorno de ejecución en el OS | Invocación de utilidades que demandan `sudo` y detienen la canalización C5. | Fractura del pipeline sin recuperación automática. | Intercepción de binarios con setuid o enrutamiento estricto a sandboxes de usuario. |
+| ADV-015 | Saturación de Observabilidad (Flooding)| Motores de Telemetría y Logs | Emisión sostenida de alertas P3 irrelevantes por dependencias ruidosas. | Ocultamiento exergético de señales P0 críticas (SNR = 0). | Rate-limiting exponencial físico, deduplicación de logs por hash de contenido. |
