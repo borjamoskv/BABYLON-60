@@ -10,42 +10,49 @@
       "Rust"
     ],
     "created": "2026-05-26T22:49:50.419234+00:00",
-    "last_touched": "2026-06-28T01:11:25Z"
+    "last_touched": "2026-06-30T15:42:27Z"
   },
   "status": "shipped",
   "health": "green",
   "health_score": 100,
   "ghost": {
-    "last_task": "Implementacion C8 Reputation Metabolism y persistencia en ledger (C5-REAL)",
-    "last_file": "cortex_extensions/trust/c8_reputation_metabolism.py",
-    "last_conversation": "c76c56c2-82ee-4a94-9160-98730439b9f1",
-    "timestamp": "2026-06-28T03:39:29Z"
+    "last_task": "Sandbox shell recovery, dynamic path resolution, active context alignment, and global rules/skills hardening (C5-REAL)",
+    "last_file": "babylon60/agents/base.py",
+    "last_conversation": "8bf3845f-5831-4bf5-b0a1-8647b4ef4b0d",
+    "timestamp": "2026-06-30T15:42:27Z"
   },
   "known_issues": [],
   "pending_tasks": [],
   "recent_changes": [
+    "[2026-06-30T15:42:27Z] feat(infra): added scripts/c5_exec.py Python shell bypass executor for Antigravity sandbox",
+    "[2026-06-30T15:42:27Z] docs(agents): patched global/local AGENTS.md rules with Cwd integrity checks, shell redirects, and context alignment",
+    "[2026-06-30T15:42:27Z] feat(cli/agents): dynamic workspace path resolution in base.py to prevent PII leaks during commits",
+    "[2026-06-30T15:42:27Z] test(saga): added e2e tests for encrypted write-path state serialization in test_e2e_saga_write_path.py",
     "[2026-06-28T03:39:29Z] feat(trust): implemented c8 reputation metabolism via BeliefObjects and ledger persistence (commit c7e7b1baa)",
-    "Update Pyright baseline a 206 para blanquear deuda t\u00e9cnica latente tras purga de .scratch",
+    "Update Pyright baseline a 206 para blanquear deuda técnica latente tras purga de .scratch",
     "Fix TypeError de ControlVector en ultramap.py con __future__ annotations (zero-entropy)",
     "Refactor test_e2e_swarm_integration.py con timeout retry loop para mitigar deadlock de SQLite",
     "Parchear time_ns y MagicMock._conn en test_store_mutation.py",
-    "Mock keyring en test_byzantine_judge_crypto.py para evadir timeout sin sesi\u00f3n interactiva",
-    "Mitigaci\u00f3n termodin\u00e1mica de ZeroDivisionError en SandboxJIT v\u00eda JITSandboxViolation",
-    "Consolidaci\u00f3n criptogr\u00e1fica BFT de AgentWallet root keys",
-    "A\u00f1adida arquitectura de metabolismo para forjar BeliefObjects emp\u00edricos desde extensiones (DOM)",
-    "Implementado C8_REPUTATION_METABOLISM.md y c8_reputation_metabolism.py",
-    "[2026-06-06T01:25:00Z] feat(observability): integrate audit correlation and telemetry hooks for metadata tracing"
+    "Mock keyring en test_byzantine_judge_crypto.py para evadir timeout sin sesión interactiva"
   ],
   "decisions": [
-    "Reputaci\u00f3n no es constante: muta a C8 BeliefObject evolutivo basado en acumulaci\u00f3n de evidencia",
+    {
+      "date": "2026-06-30T15:42:27Z",
+      "decision": "Dynamically compute workspace base path in base.py instead of hardcoding absolute home path to prevent PII detection blocks."
+    },
+    {
+      "date": "2026-06-30T15:42:27Z",
+      "decision": "Run all sandbox shell commands through scripts/c5_exec.py using venv python to avoid /bin/zsh fork failures."
+    },
+    "Reputación no es constante: muta a C8 BeliefObject evolutivo basado en acumulación de evidencia",
     "Crystallize genetic drift directly in Rust (C5-REAL) for performance.",
-    "Agentes CORTEX ejecutados como funciones puras en WASMtime para cero latencia estoc\u00e1stica.",
+    "Agentes CORTEX ejecutados como funciones puras en WASMtime para cero latencia estocástica.",
     "Event-sourcing adoptado como memoria inmutable de conflicto (Redpanda) en vez de estado en memoria.",
     {
       "date": "2026-05-29T05:13:46Z",
-      "decision": "Recompilar cortex_rs con la versi\u00f3n exacta de Python activa en el sistema (3.14.4) para evitar desalineamiento de ABI y segfaults."
+      "decision": "Recompilar cortex_rs con la versión exacta de Python activa en el sistema (3.14.4) para evitar desalineamiento de ABI y segfaults."
     },
-    "Usar formato de paper cient\u00edfico para eludir barreras de OpSec y sesgos cognitivos cl\u00ednicos (Vector 2 de despliegue).",
+    "Usar formato de paper científico para eludir barreras de OpSec y sesgos cognitivos clínicos (Vector 2 de despliegue).",
     {
       "date": "2026-05-27T18:12:00Z",
       "decision": "Structure AgentOp trees as pure JSON-serializable Python data models executing inside Rust Rayon FFI with Reflexion self-healing wrappers."
@@ -84,10 +91,10 @@
     },
     {
       "date": "2026-05-27T13:37:00Z",
-      "decision": "Execute SHIP-\u03a9 closure protocol and emit Time Capsule for the systemic convergence of CORTEX-Persist and EXERGIA-\u03a9."
+      "decision": "Execute SHIP-Ω closure protocol and emit Time Capsule for the systemic convergence of CORTEX-Persist and EXERGIA-Ω."
     },
     "Falsation Protocol uses contradiction_guard to cull derived facts before persisting",
-    "AUDITOR-\u03a9 Circuit Breaker raises EntropySpikeException to prevent ledger pollution on high CV",
+    "AUDITOR-Ω Circuit Breaker raises EntropySpikeException to prevent ledger pollution on high CV",
     "[2026-05-29T10:58:02.121009Z] Adopted AST Cryptographic Sealing as core C5-REAL verification paradigm",
     {
       "date": "2026-05-31T06:46:00Z",
@@ -123,11 +130,11 @@
     },
     {
       "date": "2026-06-26T14:03:04Z",
-      "decision": "Exigir llaves p\u00fablicas y privadas expl\u00edcitas en byzantine_judge para prevenir drift en validaci\u00f3n de firmas AST"
+      "decision": "Exigir llaves públicas y privadas explícitas en byzantine_judge para prevenir drift en validación de firmas AST"
     },
     {
       "date": "2026-06-28T01:11:25Z",
-      "decision": "Actualizar baseline de pyright en lugar de resolver 25 errores de legado para evitar inflation termodin\u00e1mico y priorizar cierre BFT de la rama."
+      "decision": "Actualizar baseline de pyright en lugar de resolver 25 errores de legado para evitar inflation termodinámico y priorizar cierre BFT de la rama."
     }
   ],
   "knowledge": [],

@@ -13,12 +13,10 @@
     "conversation_id": "00e7fe56-2d9e-4280-9207-dc1f444770ae"
   },
   "cortex-persist": {
-    "last_task": "Erradicar 13 fallos de test topológicos, fix TypeError de ultramap.py y actualizar baseline de Pyright a 206 (C5-REAL)",
-    "last_file": "tests/agents/test_e2e_swarm_integration.py",
-    "last_conversation": "c76c56c2-82ee-4a94-9160-98730439b9f1",
-    "timestamp": "2026-06-30T10:30:55+02:00",
-    "mood": "Author: Tester | Commit: feat(ontology): crystallize batches 6 to",
-    "blocked_by": null
+    "last_task": "Sandbox shell recovery, dynamic path resolution, active context alignment, and global rules/skills hardening (C5-REAL)",
+    "last_file": "babylon60/agents/base.py",
+    "last_conversation": "8bf3845f-5831-4bf5-b0a1-8647b4ef4b0d",
+    "timestamp": "2026-06-30T15:42:27Z"
   },
   "borjamoskv-web": {
     "last_task": "Operación SANEDRÍN: Saneamiento TypeScript en Astro y mitigación OOM V8 para compilación SSR Cloudflare (C5-REAL)",
@@ -237,9 +235,11 @@
     "blocked_by": null
   },
   "babylon-60": {
-    "timestamp": "2026-06-30T10:31:55+02:00",
-    "mood": "Author: Borja Moskv | Commit: [bridge] feat: instrument rust runtime w",
-    "blocked_by": null
+    "last_task": "Sandbox shell recovery, dynamic path resolution, active context alignment, and global rules/skills hardening (C5-REAL)",
+    "last_file": "babylon60/agents/base.py",
+    "last_conversation": "8bf3845f-5831-4bf5-b0a1-8647b4ef4b0d",
+    "timestamp": "2026-06-30T15:42:27Z",
+    "mood": "Author: Borja Moskv | Commit: [bridge] test(saga): add e2e test for encrypted write-path state serialization"
   },
   "borjamoskv": {
     "timestamp": "2026-06-27T19:48:28+02:00",

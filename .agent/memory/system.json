@@ -11,7 +11,7 @@
       "nota": "Antigravity = coche, Claude Opus = motor, MOSKV-1 = piloto entrenado por Borja"
     },
     "created": "2026-02-12T13:24:00+01:00",
-    "last_updated": "2026-06-06T01:25:00Z",
+    "last_updated": "2026-06-30T15:42:27Z",
     "last_updated_by": "MOSKV-1",
     "schema_version": "3.1",
     "migrated_from": "context.json v2.1"
@@ -103,6 +103,14 @@
   ],
   "knowledge_global": [],
   "sessions_log": [
+    {
+      "date": "2026-06-30T15:42:27Z",
+      "project": "cortex-persist",
+      "focus": "Sandbox shell recovery, dynamic path resolution, active context alignment, and global rules/skills hardening",
+      "duration_approx": "1.5h",
+      "key_output": "scripts/c5_exec.py implemented; AGENTS.md globally/locally updated; dynamic path resolved in base.py; ZKSwarmIdentity test written.",
+      "conversation_id": "8bf3845f-5831-4bf5-b0a1-8647b4ef4b0d"
+    },
     {
       "date": "2026-06-30T11:36:13+02:00",
       "project": "cortex",
@@ -334,14 +342,6 @@
       "duration_approx": "1.0h",
       "key_output": "Committed docs/sota_soat_audit.md, compiled cortex_rs native library, resolved segfault, and verified all 2618 tests passed.",
       "conversation_id": "a82f4f87-6fff-4f84-9eac-324d4eddc4a8"
-    },
-    {
-      "date": "2026-05-31T10:24:00.071546+02:00",
-      "project": "cortex-persist",
-      "focus": "Sprint 4: C5-REAL Segfault Fix",
-      "duration_approx": "1h",
-      "key_output": "OnceLock Mmap Registry in cortex_rs/src/lib.rs",
-      "conversation_id": "47cc7311-37ca-4af7-810f-76605cfde0df"
     }
   ],
   "references": {
@@ -382,5 +382,5 @@
       "type": "slogan"
     }
   ],
-  "last_updated": "2026-06-30T11:36:13+02:00"
+  "last_updated": "2026-06-30T15:42:27Z"
 }
