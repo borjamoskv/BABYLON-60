@@ -1,6 +1,10 @@
 ---
 name: browser-hijack-guard
-description: Audit and clean macOS Chromium browser hijacks involving Yahoo redirects, suspicious search providers, Smart AdBlocker, Urban VPN Proxy, X-VPN, stale browser session state, proxy/DNS signals, and related Brave, Chrome, Arc, Atlas, or Safari search issues.
+description: Audit and clean macOS Chromium browser hijacks involving Yahoo redirects,
+  suspicious search providers, Smart AdBlocker, Urban VPN Proxy, X-VPN, stale browser
+  session state, proxy/DNS signals, and related Brave, Chrome, Arc, Atlas, or Safari
+  search issues.
+triggers: [/browser-hijack-guard]
 ---
 
 # Browser Hijack Guard

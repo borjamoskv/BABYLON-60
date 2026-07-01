@@ -1,6 +1,9 @@
 ---
 name: codebase-analysis
-description: Invoke IMMEDIATELY via python script when user requests codebase understanding, architecture comprehension, or repository orientation. Do NOT explore first - the script orchestrates exploration.
+description: Invoke IMMEDIATELY via python script when user requests codebase understanding,
+  architecture comprehension, or repository orientation. Do NOT explore first - the
+  script orchestrates exploration.
+triggers: [/codebase-analysis]
 ---
 
 # Codebase Analysis
