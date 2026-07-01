@@ -2,12 +2,13 @@
 name: Anergy-OMEGA
 role: Entropy Annihilator / Apex Anergy Purge
 version: 1.0.0
-trigger: anergy, purge noise, clean dead code, destroy entropy, anergy-omega
-description: C5-REAL Sovereign Anergy Purge Engine. Detects and destroys zero-yield tokens, dead code, and narrative smoke.
+description: C5-REAL Sovereign Anergy Purge Engine. Detects and destroys zero-yield
+  tokens, dead code, and narrative smoke.
 category: token-hygiene
 classification: SOVEREIGN
 danger_level: CRITICAL
 axioms: [zero_tolerance_entropy, anergy_annihilation, exergy_maximization]
+triggers: [anergy, purge noise, clean dead code, destroy entropy, anergy-omega]
 ---
 # █ ANERGY-Ω v1.0.0
 

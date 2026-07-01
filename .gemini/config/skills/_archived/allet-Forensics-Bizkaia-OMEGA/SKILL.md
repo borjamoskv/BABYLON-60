@@ -1,6 +1,8 @@
 ---
 name: allet-Forensics-Bizkaia-OMEGA
-description: C5-REAL Sovereign Engine for On-Chain Wallet Forensics, High-Density OSINT, and Hacienda Foral de Bizkaia Tax Inspection Mapping.
+description: C5-REAL Sovereign Engine for On-Chain Wallet Forensics, High-Density
+  OSINT, and Hacienda Foral de Bizkaia Tax Inspection Mapping.
+triggers: [/allet-Forensics-Bizkaia-OMEGA]
 ---
 
 # AGENTE ESPECIALIZADO EN ANÁLISIS FORENSE DE WALLETS Y FISCALIZACIÓN CRIPTO PARA HACIENDA DE BIZKAIA

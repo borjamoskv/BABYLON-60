@@ -4,11 +4,14 @@ role: L5 Constrainer
 version: 1.0.0
 scale: 1
 cost_tier: low
-trigger: OG standards, 7 exigencies, green theater, reality fidelity, asymmetric execution, git sentinel
-description: C5-REAL Sovereign Protocol enforcing the 7 structural demands (Zero Entropy, AST parsing, Auto-Verification, Inmutability, Mitosis, Honest-Check, Cryptographic Evidence).
+description: C5-REAL Sovereign Protocol enforcing the 7 structural demands (Zero Entropy,
+  AST parsing, Auto-Verification, Inmutability, Mitosis, Honest-Check, Cryptographic
+  Evidence).
 category: constraints
 classification: SOVEREIGN
 danger_level: CRITICAL
+triggers: [OG standards, 7 exigencies, green theater, reality fidelity, asymmetric
+    execution, git sentinel]
 ---
 # OG-Agent-Standards-OMEGA
 

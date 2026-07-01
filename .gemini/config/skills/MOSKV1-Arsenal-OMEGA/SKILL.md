@@ -1,6 +1,8 @@
 ---
 name: MOSKV1-Arsenal-OMEGA
-description: C5-REAL Sovereign Arsenal. 100 executable APEX primitives for MOSKV-1 APEX autonomous execution.
+description: C5-REAL Sovereign Arsenal. 100 executable APEX primitives for MOSKV-1
+  APEX autonomous execution.
+triggers: [/MOSKV1-Arsenal-OMEGA]
 ---
 
 # MOSKV1-Arsenal-OMEGA — Executable Primitive Registry

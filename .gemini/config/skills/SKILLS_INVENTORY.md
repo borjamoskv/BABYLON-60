@@ -1,15 +1,15 @@
 # Skills Inventory
 
-Last updated: 2026-06-30
+Last updated: 2026-07-01
 
 ## Summary
 
-- Dirs: `36`
-- YAML OK: `36`
-- Script-backed: `22`
-- Docs-only: `14`
+- Dirs: `42`
+- YAML OK: `42`
+- Script-backed: `23`
+- Docs-only: `19`
 - Missing script links: `0`
-- Ext repo refs: `2`
+- Ext repo refs: `1`
 
 ## Duplicate Clusters
 
@@ -20,12 +20,17 @@ Last updated: 2026-06-30
 - `AGENTE-OMEGA`
 - `AUTODIDACT-OMEGA`
 - `Agentic-Eval-OMEGA`
+- `Bioinformatics-SOTA-OMEGA`
 - `Cyber-RevEng-OMEGA`
+- `Grill-Me-OMEGA`
+- `Invariant-Extractor-OMEGA`
+- `Isomorphism-Bridge-OMEGA`
 - `MOSKV1-Arsenal-OMEGA`
 - `ONTOLOGY-FORGE-OMEGA`
 - `OSINT-Mitigation-OMEGA`
 - `Scientific-Deconstruction-OMEGA`
 - `Sovereign-Director-OMEGA`
+- `Targeted-Exergy-Extractor-OMEGA`
 - `Thermodynamic-Task-Router-OMEGA`
 - `Tmux-PTY-Bridge-OMEGA`
 - `ULTRATHINK-OMEGA`
@@ -37,6 +42,7 @@ Last updated: 2026-06-30
 - `Aesthetic-Foundry-Omega` → `scripts/aesthetic_foundry_omega.py`
 - `Algorithmic-Music-OMEGA` → `scripts/synth_engine.py`
 - `Antigravity-Github-Omega` → `scripts/antigravity__github__omega.py`
+- `Babylon-Consolidation-OMEGA` → `scripts/consolidate_babylon.py`
 - `Bounty-Exergy-Extractor-OMEGA` → `verify_bounty_exergy_extractor.py`
 - `Browser-CDP-Automation-OMEGA` → `scripts/browser_cdp__automation_omega.py`
 - `Cortex-Omega-ATMS-OMEGA` → `scripts/exergy_parser.py`

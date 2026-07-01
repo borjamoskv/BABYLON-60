@@ -1,7 +1,8 @@
 ---
 name: Knowledge-Self-Healing-Agents
-description: C5-REAL Persistent Knowledge Binding for Self-Healing Frameworks and Reliable LLM Agents.
-trigger: self-healing, reliable agent, failure detection, recovery, replanning
+description: C5-REAL Persistent Knowledge Binding for Self-Healing Frameworks and
+  Reliable LLM Agents.
+triggers: [self-healing, reliable agent, failure detection, recovery, replanning]
 ---
 # █ KNOWLEDGE-SELF-HEALING-AGENTS v1.0.0
 

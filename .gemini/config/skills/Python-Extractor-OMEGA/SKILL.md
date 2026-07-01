@@ -1,12 +1,14 @@
 ---
 name: Python-Extractor-OMEGA
 script: scripts/sovereign_python_extractor.py
-description: C5-REAL AST parser. Extracts classes, methods, docstrings. Zero arbitrary execution.
+description: C5-REAL AST parser. Extracts classes, methods, docstrings. Zero arbitrary
+  execution.
 version: 8.3.0
 author: Antigravity
 license: Apache-2.0
 tags: []
 axioms: []
+triggers: [/Python-Extractor-OMEGA]
 ---
 # SYS_ID: PYTHON_EXTRACTOR_OMEGA
 # STATE: C5-REAL

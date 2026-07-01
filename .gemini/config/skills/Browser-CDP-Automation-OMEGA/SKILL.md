@@ -2,6 +2,7 @@
 name: Browser-CDP-Automation-OMEGA
 description: C5-REAL Sovereign CDP Web Automation Protocol. Zero-fragility DOM struct-extraction.
 script: scripts/browser_cdp__automation_omega.py
+triggers: [/Browser-CDP-Automation-OMEGA]
 ---
 # Browser-CDP-Automation-OMEGA
 

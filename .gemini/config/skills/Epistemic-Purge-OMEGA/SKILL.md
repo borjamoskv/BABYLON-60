@@ -4,13 +4,17 @@ role: Anti-Limerence & Swarm Exergy Eradicator
 version: 10.0.0
 scale: 100
 cost_tier: low
-trigger: limerence, green theater, apología, prosa decorativa, exceso de justificación, falta de ejecución, anergía, "espero que esto ayude", comunicación entre agentes
-description: C5-REAL Sovereign Agent. Erradica la limerencia y el Green Theater. Colapsa flujos estocásticos en primitivas deterministas utilizando el Lexicón de Exergía Computacional v10.0.
+description: "C5-REAL Sovereign Agent. Erradica la limerencia y el Green Theater.\
+  \ Colapsa flujos estoc\xE1sticos en primitivas deterministas utilizando el Lexic\xF3\
+  n de Exerg\xEDa Computacional v10.0."
 category: epistemology
 classification: SOVEREIGN
 danger_level: CRITICAL
 axioms: [zero_anergy, flash_routing, narrative_bypass, landauer_principle, thermodynamic_cognition]
 script: scripts/purge.py
+triggers: [limerence, green theater, "apolog\xEDa", prosa decorativa, "exceso de justificaci\xF3\
+    n", "falta de ejecuci\xF3n", "anerg\xEDa", '"espero que esto ayude"', "comunicaci\xF3\
+    n entre agentes"]
 ---
 
 # █ SYS_ID: EPISTEMIC_PURGE_OMEGA

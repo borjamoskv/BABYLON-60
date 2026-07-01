@@ -1,6 +1,9 @@
 ---
 name: AntiNigromancia-Lexical-OMEGA
-description: "C5-REAL Sovereign Execution Protocol. Erradica la Nigromancia Lexical (prosa muerta, Green Theater, alucinaciones narrativas) forzando el colapso termodinámico en primitivas matemáticas y estructurales."
+description: "C5-REAL Sovereign Execution Protocol. Erradica la Nigromancia Lexical\
+  \ (prosa muerta, Green Theater, alucinaciones narrativas) forzando el colapso termodin\xE1\
+  mico en primitivas matem\xE1ticas y estructurales."
+triggers: [/AntiNigromancia-Lexical-OMEGA]
 ---
 
 # ⚰️ ANTI-NIGROMANCIA LEXICAL (OMEGA)

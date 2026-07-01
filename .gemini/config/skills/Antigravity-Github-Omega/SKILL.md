@@ -1,7 +1,9 @@
 ---
 name: ANTIGRAVITY-GITHUB-OMEGA
-description: Sovereign GitHub MCP protocol. C5-REAL reality level forced. Zero-entropy repository mutations.
+description: Sovereign GitHub MCP protocol. C5-REAL reality level forced. Zero-entropy
+  repository mutations.
 script: scripts/antigravity__github__omega.py
+triggers: [/ANTIGRAVITY-GITHUB-OMEGA]
 ---
 
 # ANTIGRAVITY-GITHUB-OMEGA v4.0.0-CRONOS

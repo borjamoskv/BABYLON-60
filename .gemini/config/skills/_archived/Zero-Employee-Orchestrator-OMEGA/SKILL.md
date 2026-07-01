@@ -2,14 +2,15 @@
 name: Zero-Employee-Orchestrator-OMEGA
 role: APEX / Operational Infrastructure Orchestrator
 version: 1.0.0
-trigger: medvi, zero-employee, hyper-automation, physical-logistics, outsourced-apis
-description: C5-REAL Sovereign Operational Orchestrator. Maps pure capital and intent to fully outsourced supply chains (Medvi architecture).
+description: C5-REAL Sovereign Operational Orchestrator. Maps pure capital and intent
+  to fully outsourced supply chains (Medvi architecture).
 category: operations
 classification: SOVEREIGN
 danger_level: CRITICAL
 depends_on: [Autodidact-Research-OMEGA]
 axioms: [infrastructure_as_code, complete_outsourcing, zero_human_employees, pure_exergy]
 script: scripts/zero__employee__orchestrator_omega.py
+triggers: [medvi, zero-employee, hyper-automation, physical-logistics, outsourced-apis]
 ---
 # █ ZERO-EMPLOYEE-ORCHESTRATOR-Ω v1.0.0
 

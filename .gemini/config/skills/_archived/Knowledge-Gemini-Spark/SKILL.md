@@ -1,7 +1,8 @@
 ---
 name: Knowledge-Gemini-Spark
-description: C5-REAL Persistent Knowledge Binding for Gemini Spark capabilities, architecture, and operational model.
-trigger: Gemini Spark, Spark agent, Task, Skill, Schedule, Antigravity
+description: C5-REAL Persistent Knowledge Binding for Gemini Spark capabilities, architecture,
+  and operational model.
+triggers: [Gemini Spark, Spark agent, Task, Skill, Schedule, Antigravity]
 ---
 # █ KNOWLEDGE-GEMINI-SPARK v1.0.0
 

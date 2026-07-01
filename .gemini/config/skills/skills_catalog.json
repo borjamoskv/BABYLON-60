@@ -74,6 +74,26 @@
     "runnable": false
   },
   {
+    "requested": "Babylon-Consolidation-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Babylon-Consolidation-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Babylon-Consolidation-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Babylon-Consolidation-OMEGA/SKILL.md",
+    "script": "scripts/consolidate_babylon.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Babylon-Consolidation-OMEGA/scripts/consolidate_babylon.py",
+    "runnable": true
+  },
+  {
+    "requested": "Bioinformatics-SOTA-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Bioinformatics-SOTA-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Bioinformatics-SOTA-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Bioinformatics-SOTA-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
     "requested": "Bounty-Exergy-Extractor-OMEGA",
     "status": "canonical",
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Bounty-Exergy-Extractor-OMEGA",
@@ -112,9 +132,9 @@
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA",
     "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA",
     "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA/SKILL.md",
-    "script": null,
-    "script_path": null,
-    "runnable": false
+    "script": "scripts/cyber_reveng_omega.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Cyber-RevEng-OMEGA/scripts/cyber_reveng_omega.py",
+    "runnable": true
   },
   {
     "requested": "Epistemic-Purge-OMEGA",
@@ -137,6 +157,36 @@
     "script_path": "$CORTEX_ROOT/.gemini/config/skills/Frontier-RevEng-OMEGA/scripts/frontier__rev_eng_omega.py",
     "runnable": true,
     "aliases": []
+  },
+  {
+    "requested": "Grill-Me-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Grill-Me-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Grill-Me-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Grill-Me-OMEGA/SKILL.md",
+    "script": "scripts/verify_grill_me.py",
+    "script_path": "$CORTEX_ROOT/.gemini/config/skills/Grill-Me-OMEGA/scripts/verify_grill_me.py",
+    "runnable": true
+  },
+  {
+    "requested": "Invariant-Extractor-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Invariant-Extractor-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Invariant-Extractor-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Invariant-Extractor-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "Isomorphism-Bridge-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Isomorphism-Bridge-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Isomorphism-Bridge-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Isomorphism-Bridge-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
   },
   {
     "requested": "LEA-OMEGA",
@@ -304,6 +354,16 @@
     "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA",
     "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA",
     "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Sovereign-Director-OMEGA/SKILL.md",
+    "script": null,
+    "script_path": null,
+    "runnable": false
+  },
+  {
+    "requested": "Targeted-Exergy-Extractor-OMEGA",
+    "status": "script-backed",
+    "skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Targeted-Exergy-Extractor-OMEGA",
+    "canonical_skill_dir": "$CORTEX_ROOT/.gemini/config/skills/Targeted-Exergy-Extractor-OMEGA",
+    "canonical_skill_md": "$CORTEX_ROOT/.gemini/config/skills/Targeted-Exergy-Extractor-OMEGA/SKILL.md",
     "script": null,
     "script_path": null,
     "runnable": false

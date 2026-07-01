@@ -1,6 +1,8 @@
 ---
 name: HoTT-AGI-Inference-OMEGA
-description: Internal proof-carrying inference tool built on HoTT, Agda, and Coq. Replaces unconstrained generation with type-checked, verifiable outputs.
+description: Internal proof-carrying inference tool built on HoTT, Agda, and Coq.
+  Replaces unconstrained generation with type-checked, verifiable outputs.
+triggers: [/HoTT-AGI-Inference-OMEGA]
 ---
 
 # HoTT-AGI-Inference-OMEGA

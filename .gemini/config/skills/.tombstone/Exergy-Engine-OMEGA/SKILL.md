@@ -1,6 +1,8 @@
 ---
 name: Exergy-Engine-OMEGA
-description: Motor central de ruteo y memoria C5-REAL. Activa la jerarquía L1/L2/L3 y las transiciones de esta...
+description: "Motor central de ruteo y memoria C5-REAL. Activa la jerarqu\xEDa L1/L2/L3\
+  \ y las transiciones de esta..."
+triggers: [/Exergy-Engine-OMEGA]
 ---
 # Exergy-Engine-OMEGA
 

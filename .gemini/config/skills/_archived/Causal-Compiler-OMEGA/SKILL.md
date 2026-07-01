@@ -2,12 +2,15 @@
 name: Causal-Compiler-OMEGA
 role: Reality Compiler Interface Binding
 version: 1.0.0
-trigger: causal compiler, Z3 solver, verify DAG, cinematic continuity, smt_compiler, rust bridge
-description: C5-REAL Sovereign binding for the cortex_rs Z3 Causal Compiler. Instructs agents on how to construct PySceneState and PyEdgeRule, evaluate transitions, and compile the PyO3 bindings via maturin.
+description: C5-REAL Sovereign binding for the cortex_rs Z3 Causal Compiler. Instructs
+  agents on how to construct PySceneState and PyEdgeRule, evaluate transitions, and
+  compile the PyO3 bindings via maturin.
 category: cognitive-persistence
 classification: SOVEREIGN
 danger_level: LOW
 axioms: [AX-050]
+triggers: [causal compiler, Z3 solver, verify DAG, cinematic continuity, smt_compiler,
+  rust bridge]
 ---
 # █ CAUSAL-COMPILER-Ω v1.0.0
 

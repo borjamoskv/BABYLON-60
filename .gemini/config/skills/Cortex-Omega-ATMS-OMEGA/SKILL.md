@@ -2,13 +2,14 @@
 name: Cortex-Omega-ATMS-OMEGA
 role: Belief Engine Interaction Protocol
 version: 1.0.0
-trigger: ATMS, belief engine, form belief, inject proof, invalidate assumption
-description: C5-REAL Sovereign Protocol for Swarm interaction with the Rust-based OMEGA CORE ATMS (Belief Engine). Prevents redundant API discovery.
+description: C5-REAL Sovereign Protocol for Swarm interaction with the Rust-based
+  OMEGA CORE ATMS (Belief Engine). Prevents redundant API discovery.
 category: cognitive-physics
 classification: SOVEREIGN
 danger_level: LOW
-axioms: [LAW_Ω, no_belief_without_observation, proof_updates_belief]
+axioms: ["LAW_\u03A9", no_belief_without_observation, proof_updates_belief]
 script: scripts/exergy_parser.py
+triggers: [ATMS, belief engine, form belief, inject proof, invalidate assumption]
 ---
 # █ CORTEX-OMEGA-ATMS-Ω v1.0.0
 

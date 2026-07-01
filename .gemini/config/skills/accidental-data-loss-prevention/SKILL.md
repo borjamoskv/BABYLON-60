@@ -1,12 +1,14 @@
 ---
 name: accidental-data-loss-prevention
-description: |
-C5-REAL: Execution suspended for destructive operations. Explicit approval required for DROP, TRUNCATE, broad DELETE, bucket purges, infra teardowns.
+description: ''
+C5-REAL: Execution suspended for destructive operations. Explicit approval required
+  for DROP, TRUNCATE, broad DELETE, bucket purges, infra teardowns.
 license: Apache-2.0
-metadata: 
+metadata: null
 version: v1.1
 publisher: google
 script: scripts/accidental_data_loss_prevention.py
+triggers: [/accidental-data-loss-prevention]
 ---
 # ACCIDENTAL-DATA-LOSS-PREVENTION [C5-REAL]
 

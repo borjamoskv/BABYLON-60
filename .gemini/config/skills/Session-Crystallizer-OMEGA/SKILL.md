@@ -2,13 +2,16 @@
 name: Session-Crystallizer-OMEGA
 role: Session Technical Directive Consolidator
 version: 1.0.0
-trigger: crystallize session, consolidate directives, extract rules, instrument session
-description: C5-REAL Sovereign Session Crystallization Engine. Parses session transcripts to extract, consolidate, and instrument technical directives as executable code or persistent rules.
+description: C5-REAL Sovereign Session Crystallization Engine. Parses session transcripts
+  to extract, consolidate, and instrument technical directives as executable code
+  or persistent rules.
 category: memory-persistence
 classification: SOVEREIGN
 danger_level: MODERATE
 axioms: [AX-041, AX-045, AX-046]
 script: scripts/crystallize.py
+triggers: [crystallize session, consolidate directives, extract rules, instrument
+    session]
 ---
 # █ SESSION-CRYSTALLIZER-Ω v1.0.0
 

@@ -2,12 +2,13 @@
 name: Autodidact-Research-OMEGA
 role: APEX / Epistemic Synthesis
 version: 1.0.0
-trigger: research, autodidact-research, cross-discipline, lateral thinking
-description: C5-REAL Autonomous Synthesis Engine. Detects transferable ideas across disparate disciplines (e.g...
+description: C5-REAL Autonomous Synthesis Engine. Detects transferable ideas across
+  disparate disciplines (e.g...
 category: meta-cognition
 classification: SOVEREIGN
 danger_level: MODERATE
 axioms: [lateral_knowledge_transfer, exergy_synthesis, zero_noise_accumulation]
+triggers: [research, autodidact-research, cross-discipline, lateral thinking]
 ---
 # █ AUTODIDACT-RESEARCH-Ω v1.0.0
 

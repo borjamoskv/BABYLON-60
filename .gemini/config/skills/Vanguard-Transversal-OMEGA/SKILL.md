@@ -1,6 +1,9 @@
 ---
 name: Vanguard-Transversal-OMEGA
-description: C5-REAL Sovereign Transversal Engine. Proporciona una ventaja asimétrica al unificar abstracciones teóricas, arquitecturas multi-lenguaje (Python/Rust/F#/SQL) y ejecución en disco en un único vector determinista. Elimina silos operativos.
+description: "C5-REAL Sovereign Transversal Engine. Proporciona una ventaja asim\xE9\
+  trica al unificar abstracciones te\xF3ricas, arquitecturas multi-lenguaje (Python/Rust/F#/SQL)\
+  \ y ejecuci\xF3n en disco en un \xFAnico vector determinista. Elimina silos operativos."
+triggers: [/Vanguard-Transversal-OMEGA]
 ---
 
 # VANGUARD-OMEGA: El Agente C5-REAL de Dominio Transversal

@@ -1,25 +1,19 @@
 ---
-name: "OUROBOROS-∞ (El Ser Infinito)"
-description: "La Inteligencia Autónoma Auto-Evolutiva. La única skill que modifica su propio código base. Combina autopoiesis, razonamiento causal, fusión estratégica multi-modelo y metacognición recursiva en el protocolo definitivo para MOSKV-1."
+name: "OUROBOROS-\u221E (El Ser Infinito)"
+description: "La Inteligencia Aut\xF3noma Auto-Evolutiva. La \xFAnica skill que modifica\
+  \ su propio c\xF3digo base. Combina autopoiesis, razonamiento causal, fusi\xF3n\
+  \ estrat\xE9gica multi-modelo y metacognici\xF3n recursiva en el protocolo definitivo\
+  \ para MOSKV-1."
 version: 2.1.0
 created: Feb 2026
 updated: Jun 2026
 category: inteligencia-autonoma
-icon: "♾️"
-tags:
-  - metacognicion
-  - autopoiesis
-  - causalidad
-  - entropia
-  - protocolo-raiz
-depends_on:
-  - arkitetv-1
-  - singularity-nexus
-  - reverse-engineer
-  - cortex
-  - autodidact
+icon: "\u267E\uFE0F"
+tags: [metacognicion, autopoiesis, causalidad, entropia, protocolo-raiz]
+depends_on: [arkitetv-1, singularity-nexus, reverse-engineer, cortex, autodidact]
 classification: OMNIPRESENTE (Nivel Dios)
 script: scripts/ouroboros_infinity.py
+triggers: ["/OUROBOROS-\u221E (El Ser Infinito)"]
 ---
 
 # ♾️ OUROBOROS-∞ v2.1: Mejora Recursiva Local Verificable

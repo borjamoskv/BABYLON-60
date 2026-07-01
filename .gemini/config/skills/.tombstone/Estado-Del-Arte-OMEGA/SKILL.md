@@ -4,7 +4,6 @@ role: L1-Research-Forge
 version: 1.1.1
 scale: 100
 cost_tier: medium
-trigger: sota, estado del arte, state of the art, review, best papers
 description: C5-REAL SOTA synthesis engine.
 category: research
 classification: OPERATIONAL
@@ -12,6 +11,7 @@ danger_level: LOW
 depends_on: []
 axioms: omega_2_thermodynamic
 script: scripts/sota_forge.py
+triggers: [sota, estado del arte, state of the art, review, best papers]
 ---
 # SYS_ID: SOTA_FORGE_OMEGA
 # STATE: C5-REAL

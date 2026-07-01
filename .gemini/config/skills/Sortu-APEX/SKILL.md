@@ -4,14 +4,16 @@ role: APEX
 version: 14.0.0
 scale: 10000
 cost_tier: high
-trigger: create skill, forge module, JIT compilation, skill evolution, death protocol, registry consolidation
-description: JIT Skill Compiler — Sovereign x10000 Centuria Forge + Death Protocol + Registry Consolidation
+description: "JIT Skill Compiler \u2014 Sovereign x10000 Centuria Forge + Death Protocol\
+  \ + Registry Consolidation"
 category: meta-cognition
 classification: OPERATIONAL
 danger_level: CRITICAL
-depends_on: 
-axioms: 
+depends_on: null
+axioms: null
 script: scripts/sortu.py
+triggers: [create skill, forge module, JIT compilation, skill evolution, death protocol,
+  registry consolidation]
 ---
 # SORTU-Ω v14.0.0
 

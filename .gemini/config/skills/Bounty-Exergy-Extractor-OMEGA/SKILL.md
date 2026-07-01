@@ -4,14 +4,14 @@ role: QUANT_EXTRACTOR
 version: 14.0.0
 scale: 10000
 cost_tier: high
-trigger: extract wealth, scan bounties, immunefi radar, execute strike
-description: Quantitative bounty scanning and exergy extraction across multi-protocol DeFi targets.
+description: Quantitative bounty scanning and exergy extraction across multi-protocol
+  DeFi targets.
 category: wealth-extraction
 classification: OPERATIONAL
 danger_level: CRITICAL
-depends_on: 
-  - Sortu-APEX
+depends_on: [Sortu-APEX]
 script: verify_bounty_exergy_extractor.py
+triggers: [extract wealth, scan bounties, immunefi radar, execute strike]
 ---
 # Bounty-Exergy-Extractor-OMEGA v14.0.0
 

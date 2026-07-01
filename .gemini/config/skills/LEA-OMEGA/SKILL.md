@@ -4,14 +4,17 @@ role: Loose End Annihilator
 version: 1.0.0
 scale: 50
 cost_tier: medium
-trigger: purge dead code, tech debt audit, anergy detection, workspace degradation, entropy ordering
-description: C5-REAL Sovereign Anergy Purge Engine. Fuses former Anergy-OMEGA, CAOS-OMEGA, and Autonomous-Audit-OMEGA. Detects workspace degradation and surgical purges zero-yield tokens/code.
+description: C5-REAL Sovereign Anergy Purge Engine. Fuses former Anergy-OMEGA, CAOS-OMEGA,
+  and Autonomous-Audit-OMEGA. Detects workspace degradation and surgical purges zero-yield
+  tokens/code.
 category: operational
 classification: SOVEREIGN
 danger_level: HIGH
 depends_on: [Python-Extractor-OMEGA]
 axioms: [entropy_annihilation, zero_noise_accumulation]
 script: verify_LEA-OMEGA.py
+triggers: [purge dead code, tech debt audit, anergy detection, workspace degradation,
+  entropy ordering]
 ---
 # █ SYS_ID: LEA_OMEGA
 # █ STATE: C5-REAL | TARGET: WORKSPACE_ENTROPY

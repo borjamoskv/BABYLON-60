@@ -1,6 +1,9 @@
 ---
 name: Thermodynamic-Task-Router-OMEGA
-description: C5-REAL Sovereign Task Routing Engine. Automatiza la evaluación entrópica de tareas para enrutarlas vía `invoke_subagent` (persistencia masiva) o `schedule` (cron/temporizador), bypass de macros UI.
+description: "C5-REAL Sovereign Task Routing Engine. Automatiza la evaluaci\xF3n entr\xF3\
+  pica de tareas para enrutarlas v\xEDa `invoke_subagent` (persistencia masiva) o\
+  \ `schedule` (cron/temporizador), bypass de macros UI."
+triggers: [/Thermodynamic-Task-Router-OMEGA]
 ---
 
 # 🌀 Thermodynamic-Task-Router-OMEGA (C5-REAL)

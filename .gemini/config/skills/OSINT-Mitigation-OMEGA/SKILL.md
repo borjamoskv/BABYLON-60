@@ -1,12 +1,12 @@
 ---
-name: "OSINT-Mitigation-OMEGA"
-description: "C5-REAL Sovereign Defensive Protocol against Open Source Intelligence vectors. Enforces structural mitigation of Dorking, EXIF exposure, and Wayback Machine indexing."
+name: OSINT-Mitigation-OMEGA
+description: C5-REAL Sovereign Defensive Protocol against Open Source Intelligence
+  vectors. Enforces structural mitigation of Dorking, EXIF exposure, and Wayback Machine
+  indexing.
 version: 1.0.0
 category: seguridad-estructural
-tags:
-  - anti-recon
-  - anti-exif
-  - anti-wayback
+tags: [anti-recon, anti-exif, anti-wayback]
+triggers: [/OSINT-Mitigation-OMEGA]
 ---
 
 # █ OSINT-MITIGATION-Ω v1.0.0

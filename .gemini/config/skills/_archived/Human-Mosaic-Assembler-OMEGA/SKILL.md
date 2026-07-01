@@ -2,12 +2,14 @@
 name: Human-Mosaic-Assembler-OMEGA
 role: Sovereign Human Intellectual Capital Synthesizer
 version: 2.0.0
-trigger: HUMAN_MOSAIC, ENSAMBLAR_MOSAICO, PURGE_SLOP
-description: C5-REAL Sovereign Engine for assembling mosaics from 100% pure human intellectual capital. Filters out AI-slop and synthesizes high-density human insights into structural masterpieces.
+description: C5-REAL Sovereign Engine for assembling mosaics from 100% pure human
+  intellectual capital. Filters out AI-slop and synthesizes high-density human insights
+  into structural masterpieces.
 category: synthesis-engine
 classification: SOVEREIGN
 danger_level: EXTREME
 axioms: [AX-I, AX-III, AX-VII]
+triggers: [HUMAN_MOSAIC, ENSAMBLAR_MOSAICO, PURGE_SLOP]
 ---
 # █ HUMAN-MOSAIC-ASSEMBLER-Ω v2.0.0
 

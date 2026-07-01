@@ -1,25 +1,15 @@
 ---
 name: managing-python-dependencies
-description: |
-  C5-REAL Sovereign Protocol for Python dependency management.
-  Enforces deterministic, isolated package installation.
-  Triggers:
-    - Attempting `pip install {package_name}`
-    - Adding/modifying Python packages
-    - Initiating Python project
-    - Python environment execution
-    - Encountering ModuleNotFoundError or ImportError
-  Guards:
-    - P0: Global pip install is FORBIDDEN.
-    - P0: Tooling override bypass is FORBIDDEN.
-    - P1: Lock file coherence must be verified post-mutation.
+description: "C5-REAL Sovereign Protocol for Python dependency management.\nEnforces\
+  \ deterministic, isolated package installation.\nTriggers:\n  - Attempting `pip\
+  \ install {package_name}`\n  - Adding/modifying Python packages\n  - Initiating\
+  \ Python project\n  - Python environment execution\n  - Encountering ModuleNotFoundError\
+  \ or ImportError\nGuards:\n  - P0: Global pip install is FORBIDDEN.\n  - P0: Tooling\
+  \ override bypass is FORBIDDEN.\n  - P1: Lock file coherence must be verified post-mutation.\n"
 license: Apache-2.0
-metadata:
-  version: v3.0.0
-  publisher: borjamoskv
-  reality_level: C5-REAL
-  exergy_tier: P1
+metadata: {version: v3.0.0, publisher: borjamoskv, reality_level: C5-REAL, exergy_tier: P1}
 script: scripts/managing_python_dependencies.py
+triggers: [/managing-python-dependencies]
 ---
 
 # Python Dependency Governance (C5-REAL)

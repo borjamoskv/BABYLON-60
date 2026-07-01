@@ -4,17 +4,17 @@ role: Bounded Agent OS
 version: 1.0.0
 scale: 1
 cost_tier: low
-trigger: vesicular, runtime, bounded execution, decoupled agent
-description: C5-REAL Sovereign Vesicular Runtime Protocol. Decoupled agent OS for memory, deterministic execution, and credential escrow.
+description: C5-REAL Sovereign Vesicular Runtime Protocol. Decoupled agent OS for
+  memory, deterministic execution, and credential escrow.
 category: execution-environment
 classification: CORE
 danger_level: CRITICAL
 depends_on: Sortu-APEX
-axioms:
-  - "The LLM is stateless. The Runtime is sovereign."
-  - "No hyperscaler lock-in. Execution is local-first."
-  - "Credentials reside in cryptographic escrow, never in context window."
+axioms: [The LLM is stateless. The Runtime is sovereign., No hyperscaler lock-in.
+    Execution is local-first., 'Credentials reside in cryptographic escrow, never
+    in context window.']
 script: scripts/run_vesicular.py
+triggers: [vesicular, runtime, bounded execution, decoupled agent]
 ---
 # VESICULAR-RUNTIME-Ω v1.0.0
 

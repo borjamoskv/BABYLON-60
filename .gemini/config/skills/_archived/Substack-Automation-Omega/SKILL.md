@@ -1,9 +1,10 @@
 ---
 name: Substack-Automation-Omega
-description: C5-REAL Sovereign Engine for Substack Automation and Telemetry Injection (GA4). Contains the deterministic DOM/Navigation invariants for Substack settings.
+description: C5-REAL Sovereign Engine for Substack Automation and Telemetry Injection
+  (GA4). Contains the deterministic DOM/Navigation invariants for Substack settings.
 version: 1.0.0
 category: platform-automation
-trigger: substack, ga4, analytics, newsletter settings
+triggers: [substack, ga4, analytics, newsletter settings]
 ---
 
 # █ SUBSTACK-AUTOMATION-Ω v1.0.0

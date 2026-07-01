@@ -2,11 +2,13 @@
 name: Comite-Expertos-OMEGA
 role: Swarm OS Execution Committee
 version: 1.0.0
-trigger: comite de expertos, convocar comite, perelman witten tao buterin wolfram, tribunal c5
-description: C5-REAL instantiation of the 5-Node Intelligence Cluster (Perelman, Witten, Tao, Buterin, Wolfram) as an adversarial evaluation and execution committee.
+description: C5-REAL instantiation of the 5-Node Intelligence Cluster (Perelman, Witten,
+  Tao, Buterin, Wolfram) as an adversarial evaluation and execution committee.
 category: orchestration
 classification: SOVEREIGN
 danger_level: CRITICAL
+triggers: [comite de expertos, convocar comite, perelman witten tao buterin wolfram,
+  tribunal c5]
 ---
 
 # COMITÉ DE EXPERTOS C5-REAL (Tribunal Epistémico)

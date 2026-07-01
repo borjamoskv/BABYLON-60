@@ -1,8 +1,12 @@
 ---
 name: SOTA-Vector-Engine-Omega
-description: C5-REAL Sovereign SOTA Vector Engine. Enterprise-grade signal intelligence layer for AI, infrastructure, cryptography, and systems research. Extracts high-confidence frontier signals from primary technical sources, compresses them into structural insights, and emits provenance-traceable Frontier_Nodes with reproducibility scoring.
+description: C5-REAL Sovereign SOTA Vector Engine. Enterprise-grade signal intelligence
+  layer for AI, infrastructure, cryptography, and systems research. Extracts high-confidence
+  frontier signals from primary technical sources, compresses them into structural
+  insights, and emits provenance-traceable Frontier_Nodes with reproducibility scoring.
 version: 3.0
 script: scripts/sota_ingest.py
+triggers: [/SOTA-Vector-Engine-Omega]
 ---
 
 # 🤖 SOTA Vector Engine Protocol v2.0

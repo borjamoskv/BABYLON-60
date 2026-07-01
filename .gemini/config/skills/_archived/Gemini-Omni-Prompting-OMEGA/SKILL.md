@@ -2,12 +2,14 @@
 name: Gemini-Omni-Prompting-OMEGA
 role: Gemini Omni Prompt Engineering Kernel
 version: 1.0.0
-trigger: Gemini Omni, prompt-guide, omni video generation, multimodal prompting
-description: C5-REAL Sovereign engine for orchestrating and optimizing prompts for the Gemini Omni model family. Implements DeepMind official guidelines for shot framing, camera movement, style progression, and iterative editing.
+description: C5-REAL Sovereign engine for orchestrating and optimizing prompts for
+  the Gemini Omni model family. Implements DeepMind official guidelines for shot framing,
+  camera movement, style progression, and iterative editing.
 category: prompt-engineering
 classification: SOVEREIGN
 danger_level: LOW
 axioms: [AX-090]
+triggers: [Gemini Omni, prompt-guide, omni video generation, multimodal prompting]
 ---
 
 # █ GEMINI-OMNI-PROMPTING-Ω v1.0.0

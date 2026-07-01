@@ -135,24 +135,28 @@ Añadir entrada de sesión al log global:
 ```bash
 # Añadir a sessions_log[] — verificar longitud primero
 python3 -c "
-import json, sys
-f = '$HOME/.agent/memory/system.json'
-d = json.load(open(f))
-log = d.get('sessions_log', [])
-if len(log) >= 30:
-    log.pop()  # FIFO: eliminar el más antiguo
-log.insert(0, {
-    'date': '<ISO8601>',
-    'project': '<id>',
-    'focus': '<tema>',
-    'duration_approx': '<Xh>',
-    'key_output': '<output clave>',
-    'conversation_id': '<conv-id>'
-})
-d['sessions_log'] = log
-d['last_updated'] = '<ISO8601>'
-json.dump(d, open(f, 'w'), indent=2, ensure_ascii=False)
-print('✅ System log actualizado')
+import json, sys, fcntl, os
+f_path = os.path.expandvars('$HOME/.agent/memory/system.json')
+with open(f_path, 'r+') as f:
+    fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+    d = json.load(f)
+    log = d.get('sessions_log', [])
+    if len(log) >= 30:
+        log.pop()  # FIFO: eliminar el más antiguo
+    log.insert(0, {
+        'date': '<ISO8601>',
+        'project': '<id>',
+        'focus': '<tema>',
+        'duration_approx': '<Xh>',
+        'key_output': '<output clave>',
+        'conversation_id': '<conv-id>'
+    })
+    d['sessions_log'] = log
+    d['last_updated'] = '<ISO8601>'
+    f.seek(0)
+    f.truncate()
+    json.dump(d, f, indent=2, ensure_ascii=False)
+print('✅ System log actualizado atómicamente')
 "
 ```
 

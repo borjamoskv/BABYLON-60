@@ -1,6 +1,8 @@
 ---
 name: Autonomous-Audit-OMEGA
-description: C5-REAL Autonomous Technical Debt Audit and Purge Protocol. Triggers LEA-Ω for deterministic reso...
+description: "C5-REAL Autonomous Technical Debt Audit and Purge Protocol. Triggers\
+  \ LEA-\u03A9 for deterministic reso..."
+triggers: [/Autonomous-Audit-OMEGA]
 ---
 # Autonomous-Audit-OMEGA
 

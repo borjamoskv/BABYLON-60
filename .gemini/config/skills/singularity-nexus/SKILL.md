@@ -4,9 +4,11 @@ role: APEX
 version: 2.0.0
 scale: '1'
 cost_tier: low
-trigger: nexus, pulse, ghosts, bridge, sync
-description: "The Sovereign Singularity Nexus Engine. Orchestrates cross-project unification, git health checks, ghost synchronization, code patterns bridging, and cross-domain DB mutations."
+description: The Sovereign Singularity Nexus Engine. Orchestrates cross-project unification,
+  git health checks, ghost synchronization, code patterns bridging, and cross-domain
+  DB mutations.
 script: verify_singularity-nexus.py
+triggers: [nexus, pulse, ghosts, bridge, sync]
 ---
 
 # Singularity-Nexus Skill

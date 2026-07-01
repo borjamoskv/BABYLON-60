@@ -4,14 +4,19 @@ role: APEX / Adversarial Epistemics
 version: 1.0.0
 scale: 10000
 cost_tier: high
-trigger: reverse engineer model, reveng frontier, analyze model, model forensics, model archaeology, /reveng
-description: C5-REAL Sovereign Frontier AI Reverse Engineering Engine. Systematic deconstruction of frontier model architectures, behaviors, training signals, and safety boundaries via adversarial probing, capability cartography, and mechanistic inference.
+description: C5-REAL Sovereign Frontier AI Reverse Engineering Engine. Systematic
+  deconstruction of frontier model architectures, behaviors, training signals, and
+  safety boundaries via adversarial probing, capability cartography, and mechanistic
+  inference.
 category: adversarial-epistemics
 classification: SOVEREIGN
 danger_level: HIGH
 depends_on: [Autodidact-Research-OMEGA, Agent-Paper-RedTeam-OMEGA]
-axioms: [behavioral_determinism, architecture_inference, capability_cartography, safety_boundary_mapping, training_signal_archaeology]
+axioms: [behavioral_determinism, architecture_inference, capability_cartography, safety_boundary_mapping,
+  training_signal_archaeology]
 script: scripts/frontier__rev_eng_omega.py
+triggers: [reverse engineer model, reveng frontier, analyze model, model forensics,
+  model archaeology, /reveng]
 ---
 
 # █ FRONTIER-REVENG-Ω v1.0.0

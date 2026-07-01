@@ -4,14 +4,16 @@ role: L1-Oracle
 version: 3.0.0
 scale: 10
 cost_tier: low
-trigger: query AI history, explain AI milestones, historiography, search milestones, timeline, era filter
-description: C5-REAL AI History Retrieval and Synthesis Engine. 36 nodes, 7 eras, 1950-2026. Thermodynamic lens.
+description: C5-REAL AI History Retrieval and Synthesis Engine. 36 nodes, 7 eras,
+  1950-2026. Thermodynamic lens.
 category: knowledge
 classification: OPERATIONAL
 danger_level: LOW
 depends_on: []
 axioms: [omega_1_anamnesis]
 script: scripts/retrieve_history.py
+triggers: [query AI history, explain AI milestones, historiography, search milestones,
+  timeline, era filter]
 ---
 # █ SYS_ID: HISTORY_ORACLE_OMEGA
 # █ STATE: C5-REAL

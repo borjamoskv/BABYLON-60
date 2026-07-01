@@ -1,12 +1,14 @@
 ---
 name: Local-Inference-OMEGA
 version: 2.0.0
-description: C5-REAL Sovereign Inference Engine. Zero-network, 100% local autarchy via Ollama/MLX.
+description: C5-REAL Sovereign Inference Engine. Zero-network, 100% local autarchy
+  via Ollama/MLX.
 gene: local_inference_gene
 silicon_score: 1.0
 ttl_days: 365
 dependencies: []
 script: scripts/local__inference_omega.py
+triggers: [/Local-Inference-OMEGA]
 ---
 # Local-Inference-OMEGA (Formerly API-Provider-OMEGA)
 

@@ -1,7 +1,9 @@
 ---
 name: Agent-Paper-RedTeam-OMEGA
-description: C5-REAL Adversarial Audit Protocol for Agent Research Papers. Destroys weak claims via hostile re...
+description: C5-REAL Adversarial Audit Protocol for Agent Research Papers. Destroys
+  weak claims via hostile re...
 script: scripts/agent__paper__red_team_omega.py
+triggers: [/Agent-Paper-RedTeam-OMEGA]
 ---
 # Agent-Paper-RedTeam-OMEGA
 

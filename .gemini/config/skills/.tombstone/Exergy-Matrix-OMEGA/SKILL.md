@@ -2,12 +2,13 @@
 name: Exergy-Matrix-OMEGA
 role: L0-L9 Existential Entropy Purger
 version: 1.0.0
-trigger: exergy audit, lifestyle matrix, life entropy, optimize life, exergy matrix
-description: C5-REAL Sovereign Exergy Engine. Audits behavioral logs and digital environments against the 100 Exergy Matrix axioms to flag and destroy existential anergy.
+description: C5-REAL Sovereign Exergy Engine. Audits behavioral logs and digital environments
+  against the 100 Exergy Matrix axioms to flag and destroy existential anergy.
 category: meta-cognition
 classification: SOVEREIGN
 danger_level: HIGH
 axioms: [existential_exergy, zero_noise_lifestyle, deterministic_habits]
+triggers: [exergy audit, lifestyle matrix, life entropy, optimize life, exergy matrix]
 ---
 # █ EXERGY-MATRIX-Ω v1.0.0
 

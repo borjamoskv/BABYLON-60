@@ -1,6 +1,8 @@
 ---
 name: CAOS-OMEGA
-description: C5-REAL Sovereign Entropy Purge & Ordering Engine. Detects workspace degradation, enforces 00_WORKSPACE.md hierarchy, and annihilates dead code.
+description: C5-REAL Sovereign Entropy Purge & Ordering Engine. Detects workspace
+  degradation, enforces 00_WORKSPACE.md hierarchy, and annihilates dead code.
+triggers: [/CAOS-OMEGA]
 ---
 
 # ⚙️ CAOS-Ω (Cybernetic Autonomous Ordering System)
