@@ -76,9 +76,17 @@
       "aliases": [],
       "script": "scripts/sota_ingest.py"
     },
+    "Senro-Kinetic-Frontend": {
+      "aliases": [],
+      "script": "scripts/senro_kinetic.py"
+    },
     "Thermodynamic-Context-Compression-OMEGA": {
       "aliases": [],
       "script": "verify_Thermodynamic-Context-Compression-OMEGA.py"
+    },
+    "ULTRATHINK-OMEGA": {
+      "aliases": [],
+      "script": "scripts/ultrathink_audit.py"
     },
     "Vesicular-Runtime-Omega": {
       "aliases": [],

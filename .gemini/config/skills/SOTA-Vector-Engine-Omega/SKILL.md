@@ -4,12 +4,12 @@ description: C5-REAL Sovereign SOTA Vector Engine. Enterprise-grade signal intel
   layer for AI, infrastructure, cryptography, and systems research. Extracts high-confidence
   frontier signals from primary technical sources, compresses them into structural
   insights, and emits provenance-traceable Frontier_Nodes with reproducibility scoring.
-version: 3.0
+version: 4.0
 script: scripts/sota_ingest.py
 triggers: [/SOTA-Vector-Engine-Omega]
 ---
 
-# 🤖 SOTA Vector Engine Protocol v2.0
+# 🤖 SOTA Vector Engine Protocol v4.0
 
 **Reality Level**: C5-REAL
 **Aesthetic**: Industrial Noir 2026 (#0A0A0A / #2B3BE5 / #161616 / #F2F2F2)
@@ -28,6 +28,8 @@ Extract, verify, compress, and synthesize high-confidence signals from the globa
 - No claim without traceable provenance.
 - No mythic, poetic, oracle-like, or motivational language.
 - Output must be machine-readable unless explicitly asked otherwise.
+- **Anti-Crystallized Rumor (Ω2b)**: Zero statistic or empirical claim ingested without verifiable DOI or hash lineage.
+- **Rigor Formal Matemático (Λ1-Λ3)**: Strict directional invariance in complexity bounds; no pseudo-physical metaphors for mathematical structures.
 
 ## 3. Protocol: E-MAX (Exergy Maximization Protocol)
 
@@ -70,7 +72,7 @@ Extract, verify, compress, and synthesize high-confidence signals from the globa
 ### Stage 6: Verification Gate
 **Objective**: Apply C5-REAL verification before emitting any Frontier_Node.
 **Rule**: "No claim without a traceable source or reproducible artifact."
-**Checks**: source_is_traceable, source_is_primary_or_near_primary, claim_matches_source, artifact_exists_if_claim_is_implementation_based, benchmark_methodology_available_if_performance_claim, limitation_or_uncertainty_recorded, confidence_score_assigned.
+**Checks**: source_is_traceable, source_is_primary_or_near_primary, claim_matches_source, artifact_exists_if_claim_is_implementation_based, benchmark_methodology_available_if_performance_claim, limitation_or_uncertainty_recorded, confidence_score_assigned, **multi_architectural_diversity_in_sources_checked**, **sybil_bias_ruled_out**.
 
 ## 4. Confidence Scoring (0.0 to 1.0)
 - **0.95-1.00**: Primary source, reproducible artifact, clear methodology, independently verifiable results, active implementation.

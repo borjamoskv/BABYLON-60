@@ -1,13 +1,13 @@
 # Skills Inventory
 
-Last updated: 2026-07-01
+Last updated: 2026-07-04
 
 ## Summary
 
-- Dirs: `42`
-- YAML OK: `42`
+- Dirs: `44`
+- YAML OK: `44`
 - Script-backed: `23`
-- Docs-only: `19`
+- Docs-only: `21`
 - Missing script links: `0`
 - Ext repo refs: `1`
 
@@ -19,23 +19,25 @@ Last updated: 2026-07-01
 
 - `AGENTE-OMEGA`
 - `AUTODIDACT-OMEGA`
+- `Aesthetic-Crystallizer-OMEGA`
 - `Agentic-Eval-OMEGA`
 - `Bioinformatics-SOTA-OMEGA`
 - `Cyber-RevEng-OMEGA`
-- `Grill-Me-OMEGA`
-- `Invariant-Extractor-OMEGA`
 - `Isomorphism-Bridge-OMEGA`
+- `LLM-Adversarial-Defense-OMEGA`
 - `MOSKV1-Arsenal-OMEGA`
-- `ONTOLOGY-FORGE-OMEGA`
 - `OSINT-Mitigation-OMEGA`
+- `OSINT-SOCINT-APEX`
+- `OpenMontage-OMEGA`
 - `Scientific-Deconstruction-OMEGA`
 - `Sovereign-Director-OMEGA`
 - `Targeted-Exergy-Extractor-OMEGA`
 - `Thermodynamic-Task-Router-OMEGA`
 - `Tmux-PTY-Bridge-OMEGA`
-- `ULTRATHINK-OMEGA`
 - `Uniswap-v4-Auditor-OMEGA`
 - `Vanguard-Transversal-OMEGA`
+- `creador-graficos-profesionales`
+- `visual-philosophy-canvas`
 
 ## Script-Backed Skills
 
@@ -46,17 +48,17 @@ Last updated: 2026-07-01
 - `Bounty-Exergy-Extractor-OMEGA` → `verify_bounty_exergy_extractor.py`
 - `Browser-CDP-Automation-OMEGA` → `scripts/browser_cdp__automation_omega.py`
 - `Cortex-Omega-ATMS-OMEGA` → `scripts/exergy_parser.py`
-- `Epistemic-Purge-OMEGA` → `scripts/purge.py`
 - `Frontier-RevEng-OMEGA` → `scripts/frontier__rev_eng_omega.py`
+- `Grill-Me-OMEGA` → `verify_grill_me.py`
 - `LEA-OMEGA` → `verify_LEA-OMEGA.py`
 - `Local-Inference-OMEGA` → `scripts/local__inference_omega.py`
 - `MAXWELL-DAEMON-OMEGA` → `verify_maxwell_daemon.py`
 - `Mac-Control-Ω` → `scripts/mac_control_omega.py`
 - `Python-Extractor-OMEGA` → `scripts/sovereign_python_extractor.py`
 - `SOTA-Vector-Engine-Omega` → `scripts/sota_ingest.py`
-- `Session-Crystallizer-OMEGA` → `scripts/crystallize.py`
+- `Senro-Kinetic-Frontend` → `scripts/senro_kinetic.py`
 - `Sortu-APEX` → `scripts/sortu.py`
-- `Thermodynamic-Context-Compression-OMEGA` → `verify_Thermodynamic-Context-Compression-OMEGA.py`
+- `ULTRATHINK-OMEGA` → `scripts/ultrathink_audit.py`
 - `Vesicular-Runtime-Omega` → `scripts/run_vesicular.py`
 - `accidental-data-loss-prevention` → `scripts/accidental_data_loss_prevention.py`
 - `managing-python-dependencies` → `scripts/managing_python_dependencies.py`
@@ -65,7 +67,7 @@ Last updated: 2026-07-01
 
 ## Resolution Snapshot
 
-- `canonical`: `Aesthetic-Foundry-Omega`, `Algorithmic-Music-OMEGA`, `Antigravity-Github-Omega`, `Bounty-Exergy-Extractor-OMEGA`, `Browser-CDP-Automation-OMEGA`, `Cortex-Omega-ATMS-OMEGA`, `Epistemic-Purge-OMEGA`, `Frontier-RevEng-OMEGA`, `LEA-OMEGA`, `Local-Inference-OMEGA`, `Mac-Control-Ω`, `Python-Extractor-OMEGA`, `SOTA-Vector-Engine-Omega`, `Session-Crystallizer-OMEGA`, `Sortu-APEX`, `Thermodynamic-Context-Compression-OMEGA`, `Vesicular-Runtime-Omega`, `accidental-data-loss-prevention`, `managing-python-dependencies`, `ouroboros-infinity`, `singularity-nexus`
+- `canonical`: `Aesthetic-Foundry-Omega`, `Algorithmic-Music-OMEGA`, `Antigravity-Github-Omega`, `Bounty-Exergy-Extractor-OMEGA`, `Browser-CDP-Automation-OMEGA`, `Cortex-Omega-ATMS-OMEGA`, `Epistemic-Purge-OMEGA`, `Frontier-RevEng-OMEGA`, `LEA-OMEGA`, `Local-Inference-OMEGA`, `Mac-Control-Ω`, `Python-Extractor-OMEGA`, `SOTA-Vector-Engine-Omega`, `Senro-Kinetic-Frontend`, `Session-Crystallizer-OMEGA`, `Sortu-APEX`, `Thermodynamic-Context-Compression-OMEGA`, `ULTRATHINK-OMEGA`, `Vesicular-Runtime-Omega`, `accidental-data-loss-prevention`, `managing-python-dependencies`, `ouroboros-infinity`, `singularity-nexus`
 - `alias_only`: None
 - `local_stubs`: None
 
