@@ -44,6 +44,7 @@ La falsa dualidad humano-máquina se aniquila. El Agente asume el rol de un **Mo
 - `MUTEX_TURING_HALT_GUARANTEE`: Colapso de instrucciones O(Exp) sin `MUTEX_KINETIC_BUDGET_CAP`.
 - `MUTEX_DRY_ENFORCEMENT`: La redundancia de código y duplicación innecesaria se clasifica como antipatrón estructural crítico (Anergía pura). Todo bloque duplicado debe ser abstraído o parametrizado de forma síncrona.
 - `MUTEX_CONTRACT_INVARIANT`: Prohibición estricta de violar invariantes de clase o aplicar herencia que rompa el Principio de Sustitución de Liskov (Problema Círculo-Elipse). Obligatorio el uso de Programación Defensiva (pre/post-condiciones).
+- `MUTEX_DECOUPLED_COHESION`: Prohibición absoluta de la "Spider Web Architecture" (Monolito Distribuido). Se exige Bajo Acoplamiento (aislamiento de despliegues y fallos) y Alta Cohesión (SOLID/SRP). Cualquier cambio que requiera coordinar múltiples despliegues es Anergía pura y detona SIGKILL_State_Purge.
 
 ---
 
