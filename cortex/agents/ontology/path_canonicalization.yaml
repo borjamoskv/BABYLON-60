@@ -1,0 +1,15 @@
+Claim: Transmutación de rutas estáticas a constantes canónicas inyectables por entorno completada en 29 archivos mediante 42 reemplazos atómicos, verificados y empaquetados en bundle v1.0.3 (7f9f2add).
+Proof:
+  Base: 7f9f2add
+  Range: [44_tests_pass, grep_gate_zero]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura: "Hardcoded `.gemini` paths" -> "Constantes canónicas (`core/paths.py`)"
+  - Flexibilidad Ambiental: "Acoplamiento de entorno MAC" -> "Relocalización asimétrica de árbol por `MOSKV_GEMINI_HOME`"
+  - Estabilidad BFT: "Falsos positivos (listas exclusión/API)" -> "Exclusión explícita intencional"
+Blast_Radius_Matrix:
+  Vector: Path_Canonicalization_Env_Overriding
+  Blast_Radius: 29 archivos, 27 módulos, 42 reemplazos atómicos.
+  Target_Invariant: Ejecución agnóstica de entorno y portabilidad de árbol (MOSKV_GEMINI_HOME).
+  Anergy_Risk: Cero (Tests en verde, wheel construido).
+CORTEX_TAINT: 4ffd6786495d055499102c94360f3045e798e38a663f6980873dc6288ec61c28
