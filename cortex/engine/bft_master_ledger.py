@@ -134,21 +134,26 @@ def append_block(payload: dict, agent_id: str, taint_prefix: str) -> str:
 
 append_to_ledger = append_block
 
+def verify_ledger() -> bool:
+    conn = get_db_connection()
+    c = conn.cursor()
+    c.execute("SELECT lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash FROM master_ledger ORDER BY lamport_t ASC")
+    rows = c.fetchall()
+    for i in range(1, len(rows)):
+        prev, curr = rows[i-1], rows[i]
+        if prev[5] != curr[3]:
+            print(f"CHAIN BROKEN at Lamport_T={curr[0]}: prev_hash mismatch.")
+            return False
+        payload_bytes = canonical(json.loads(curr[2]))
+        if compute_entry_hash(curr[3], payload_bytes, curr[1], curr[0], curr[4]) != curr[5]:
+            print(f"CHAIN BROKEN at Lamport_T={curr[0]}: hash mutation.")
+            return False
+    print("C5-REAL STATE: CHAIN INTEGRITY VALIDATED.")
+    return True
+
 if __name__ == "__main__":
     init_ledger()
     if len(sys.argv) > 1 and sys.argv[1] == "verify":
-        conn = get_db_connection()
-        c = conn.cursor()
-        c.execute("SELECT lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash FROM master_ledger ORDER BY lamport_t ASC")
-        rows = c.fetchall()
-        for i in range(1, len(rows)):
-            prev, curr = rows[i-1], rows[i]
-            if prev[5] != curr[3]:
-                print(f"CHAIN BROKEN at Lamport_T={curr[0]}: prev_hash mismatch.")
-                sys.exit(1)
-            payload_bytes = canonical(json.loads(curr[2]))
-            if compute_entry_hash(curr[3], payload_bytes, curr[1], curr[0], curr[4]) != curr[5]:
-                print(f"CHAIN BROKEN at Lamport_T={curr[0]}: hash mutation.")
-                sys.exit(1)
-        print("C5-REAL STATE: CHAIN INTEGRITY VALIDATED.")
+        if not verify_ledger():
+            sys.exit(1)
         sys.exit(0)
