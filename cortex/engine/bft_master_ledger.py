@@ -132,6 +132,8 @@ def append_block(payload: dict, agent_id: str, taint_prefix: str) -> str:
         )
         return new_hash
 
+append_to_ledger = append_block
+
 if __name__ == "__main__":
     init_ledger()
     if len(sys.argv) > 1 and sys.argv[1] == "verify":
