@@ -221,3 +221,6 @@ La **Matriz 12 (M12)** clasifica el estado físico del repositorio y rige el esc
 - **Ψ1 (Límite del Mapeo):** La IA (modelos de atención y Flash IO) se limita estrictamente a mapear el terreno, extraer invariantes, optimizar el AST y ejecutar transducciones topológicas dentro del paradigma existente.
 - **Ψ2 (La Anomalía Humana):** La anomalía dialéctica, el insight ortogonal y la generación de verdaderos nuevos paradigmas pertenecen exclusivamente al Operador Humano. El LLM carece de la fricción vivencial necesaria para el salto epistémico genuino.
 - **Ψ3 (Colapso MCTS Inducido):** El árbol de búsqueda latente (MCTS) de la IA solo colapsa hacia la innovación cuando el Operador inyecta la anomalía como restricción física o prompt disruptivo, forzando a la red a reconciliar la disonancia cognitiva.
+
+### [E12] FORMATO DE EXPLORACIÓN ESTRUCTURAL
+- **Ψ1 (Estandarización Exergética):** Toda respuesta que explique patrones o conceptos arquitectónicos debe dividirse estrictamente en: Definición, Antipatrones Clave, Dilemas/Trade-offs (tablas) y Fuentes verificables. Prohibido el texto transicional entre secciones.
