@@ -1,0 +1,22 @@
+name: C5-REAL Structural CI
+on: [push, pull_request]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build Rust
+        run: cargo build --workspace --all-targets --locked
+      - name: Test Rust
+        run: cargo test --workspace --locked -- --quiet
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build and install cortex_strike (maturin develop)
+        run: |
+          pip install -U pip maturin pytest
+          maturin develop -m crates/cortex-strike/Cargo.toml --release
+      - name: Run pytest
+        run: pytest -q

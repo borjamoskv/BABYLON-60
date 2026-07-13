@@ -1,0 +1,11 @@
+{
+  "protocol": "BFT_MERKLE_L1_SINK",
+  "timestamp": 1783896294,
+  "inputs": [
+    "55c83c0a43b64d1bdf69b6fbfec0031d8a49050cdb220fc769f729942e1bee24"
+  ],
+  "merkle_root": "8b4ee88f368f6e2da5433e149d73e8cfb3f1825d6b10e38815e5e642f8e3c9a5",
+  "op_return_hex": "38623465653838663336386636653264613534333365313439643733653863666233663138323564",
+  "status": "FROZEN_C5_REAL",
+  "metadata": "Destrucci\u00f3n entr\u00f3pica UTBH elevada a inmutabilidad de capa 1."
+}

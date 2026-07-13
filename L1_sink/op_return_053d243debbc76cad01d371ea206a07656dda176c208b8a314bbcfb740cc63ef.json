@@ -1,0 +1,5 @@
+{
+  "merkle_root": "053d243debbc76cad01d371ea206a07656dda176c208b8a314bbcfb740cc63ef",
+  "history_length": 547,
+  "protocol": "BFT_MERKLE_L1_SINK"
+}

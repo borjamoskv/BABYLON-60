@@ -1,0 +1,141 @@
+entities:
+- id: RED-001
+  redundancia_c5: Git Sentinel Criptográfico
+  función_topológica: Genera un snapshot BFT de cada mutación, aislando el estado
+    anterior.
+  riesgo_mitigado: Pérdida de código por alucinación de escritura. Fallo en cascada.
+  coste_overhead: I/O en disco, incremento log.
+  dependencias: '`.git` tracking, bash access.'
+- id: RED-002
+  redundancia_c5: Apoptosis Subagente
+  función_topológica: Límite temporal estricto (TimerCondition) para agentes paralelos,
+    asesinándolos si no responden.
+  riesgo_mitigado: Zombificación de memoria RAM, Interbloqueo Recursivo.
+  coste_overhead: Consumo de un thread de monitoring.
+  dependencias: '`manage_task`, `invoke_subagent`.'
+- id: RED-003
+  redundancia_c5: Multi-Viewport QA Autómata
+  función_topológica: Validación de UI mediante subagente visual aislado para confirmar
+    delta visual exacto.
+  riesgo_mitigado: DOM Drift, alucinación de CSS.
+  coste_overhead: Consumo de cuota visual (Tokens pesados).
+  dependencias: '`browser_subagent`.'
+- id: RED-004
+  redundancia_c5: SQLite WAL Hardening
+  función_topológica: Ejecución obligatoria de `PRAGMA journal_mode=WAL` y `busy_timeout=5000`
+    en I/O.
+  riesgo_mitigado: Deadlock Termodinámico DB. Corrupción de transacciones.
+  coste_overhead: Overhead mínimo de I/O.
+  dependencias: SQLite3 bin.
+- id: RED-005
+  redundancia_c5: Verificación BFT de P0
+  función_topológica: Cross-check de directivas P0 por un subagente paralelo `Epistemic-Purge-OMEGA`
+    antes de commit final.
+  riesgo_mitigado: Drift Epistémico, pérdida de soberanía del Agent.
+  coste_overhead: Latencia x2 en finalización de task crítica.
+  dependencias: Comunicación Inter-Agente.
+- id: RED-006
+  redundancia_c5: Snapshots de Estado Diario (Brain Dump)
+  función_topológica: Serialización de la ontología extraída, tareas vivas y decisiones
+    en `.cortex/memory_vault/`.
+  riesgo_mitigado: Drift Epistémico por reinicio de Kernel / Server Restart.
+  coste_overhead: I/O en disco asíncrono, tokens de compresión.
+  dependencias: Protocolo de persistencia C5.
+- id: RED-007
+  redundancia_c5: Fallback de Modelos de Lenguaje (Model Tiering)
+  función_topológica: Mecanismo que hace fallback a Ollama/MLX local si la API externa
+    cae o satura el rate limit.
+  riesgo_mitigado: Bloqueo de Rate Limit (PRIM-033), Tunnel Friction.
+  coste_overhead: RAM/VRAM en Host OS para alojar modelo Local.
+  dependencias: MLX-LM, Local Inference Engine.
+- id: RED-008
+  redundancia_c5: Caché Estructural Aislada
+  función_topológica: Almacenamiento en hashes de dependencias pesadas (ej. `node_modules`
+    en CI) para evitar descargas.
+  riesgo_mitigado: Desgarre de Lockfile, Latencia extrema de build.
+  coste_overhead: Consumo de almacenamiento secundario.
+  dependencias: Herramientas de build (TurboRepo).
+- id: RED-009
+  redundancia_c5: Orquestador de Health-Check (Ping/Pong Monitor)
+  función_topológica: Agente paralelo o demonio en Bash que vigila el heartbeat de
+    subagentes activos.
+  riesgo_mitigado: Zombificación de Tarea (PRIM-026), Recursiones infinitas.
+  coste_overhead: CPU ciclos constantes en background.
+  dependencias: '`manage_task`, Cron.'
+- id: RED-010
+  redundancia_c5: Auto-healing de Linting
+  función_topológica: Pipeline atómico `eslint --fix` / `prettier` pre-commit automatizado
+    sin intervención humana.
+  riesgo_mitigado: Inyección de entropía de formato, Fricción Compiladora.
+  coste_overhead: Tiempo de ejecución pre-commit de segundos.
+  dependencias: Git Hooks nativos (Husky).
+- id: RED-011
+  redundancia_c5: Espejo Criptográfico de Credenciales
+  función_topológica: Cifrado asimétrico on-the-fly para `.env` en vaults secundarios,
+    forzando cero persistencia en plano.
+  riesgo_mitigado: Exposición de Secretos, Fuga de API Keys.
+  coste_overhead: CPU ciclos para descifrado/cifrado.
+  dependencias: SOPS, Age.
+- id: RED-012
+  redundancia_c5: Dual-Path Dependency Resolver
+  función_topológica: Resolución concurrente en dos gestores distintos (ej. npm y
+    pnpm) y cruce de lockfiles para detectar secuestros.
+  riesgo_mitigado: Supply Chain Attack, Corrupción del Lockfile.
+  coste_overhead: Latencia doble en la resolución inicial.
+  dependencias: Multi-gestor de paquetes.
+- id: RED-013
+  redundancia_c5: Sombra Ontológica (Ontology Shadow)
+  función_topológica: Mantenimiento de una réplica en RAM de las invariantes mientras
+    se muta el disco, revirtiendo si el disco diverge.
+  riesgo_mitigado: Fractura Termodinámica, Ontología Corrupta.
+  coste_overhead: Memoria RAM adicional sostenida.
+  dependencias: In-memory Structs.
+- id: RED-014
+  redundancia_c5: BFT de Transacciones de Red
+  función_topológica: Ejecutar peticiones de red críticas mediante 3 proxies/ruteadores
+    paralelos y confirmar consenso de la respuesta.
+  riesgo_mitigado: MitM, Falso Positivo DNS, CDN Poisoning.
+  coste_overhead: Tráfico saliente x3, latencia al proxy más lento.
+  dependencias: Proxies de salida BFT.
+- id: RED-015
+  redundancia_c5: Hard-Kills con Watchdog de Hardware
+  función_topológica: Integración con sensores del OS para forzar OOM-kills preventivos
+    si la memoria total del sistema baja del 10%.
+  riesgo_mitigado: Colapso del OS Host, Swap Death.
+  coste_overhead: Riesgo de matar procesos inocentes.
+  dependencias: Permisos de Sistema, Kernel metrics.
+- id: RED-016
+  redundancia_c5: Triple-Hash de Artefactos Críticos
+  función_topológica: Generación y almacenamiento de BLAKE3, SHA-256 y SHA-512 por
+    cada binario compilado o modelo pesados.
+  riesgo_mitigado: Colisión de Hash, Alteración silenciosa en disco.
+  coste_overhead: Sobrecarga criptográfica en disco post-build.
+  dependencias: Algoritmos de Hashing.
+- id: RED-017
+  redundancia_c5: Auditoría Estocástica en Background (Chaos Monkey)
+  función_topológica: Demonio en segundo plano que inyecta latencia e interrupciones
+    menores aleatoriamente en los subagentes para validar tolerancia BFT.
+  riesgo_mitigado: Acoplamiento débil oculto, Falso Determinismo.
+  coste_overhead: Ralentización aleatoria del workflow general.
+  dependencias: Chaos Engineering Tooling.
+- id: RED-018
+  redundancia_c5: Respaldo Físico de Contexto Base
+  función_topológica: Inyección cruzada (Symlink BFT) de `AGENTS.md` y `.cortex` en
+    un pendrive lógico o disco secundario inmutable.
+  riesgo_mitigado: Destrucción recursiva por comando `rm -rf`.
+  coste_overhead: Almacenamiento externo / Montaje de disco.
+  dependencias: Sistema de Archivos Inmutable.
+- id: RED-019
+  redundancia_c5: Pararrayos Causal (Event Sourcing Puro)
+  función_topológica: Toda mutación se graba primero en un log append-only inmutable
+    antes de ser aplicada al AST.
+  riesgo_mitigado: Pérdida de Vector Temporal, Imposibilidad de Rollback P0.
+  coste_overhead: Espacio en disco exponencial por transacciones.
+  dependencias: Event Store DB local.
+- id: RED-020
+  redundancia_c5: Macrófago Ontológico de Contención
+  función_topológica: Despliegue de un meta-agente aislado (`AGENTE-OMEGA`) que solo
+    lee diffs y puede vetar mutaciones que violen las 135 entidades.
+  riesgo_mitigado: Corrupción C5, Regresión de estado SOTA.
+  coste_overhead: Límite de procesamiento paralelo, tokens de lectura altos.
+  dependencias: Entorno de Subagente BFT.

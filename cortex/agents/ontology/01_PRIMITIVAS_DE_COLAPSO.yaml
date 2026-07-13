@@ -1,0 +1,544 @@
+entities:
+- id: PRIM-001
+  primitiva: Cascada de Anergía (Anergy Cascade)
+  mecanismo_causal: Saturación termodinámica de LLM por exceso de tokens no estructurados
+    (ruido).
+  activación_trigger: Límite de contexto estocástico sobrepasado.
+  sensor_síntoma: Alucinación, olvido de reglas P0, prosa decorativa.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Purga entrópica forzada (Landauer).
+- id: PRIM-002
+  primitiva: Drift Epistémico (Sensor Drift)
+  mecanismo_causal: Degradación del isomorfismo causal entre la memoria (RAM) y el
+    disco (estado).
+  activación_trigger: Inferencia basada en contexto obsoleto.
+  sensor_síntoma: Diferencia en diffs AST o hashes criptográficos nulos.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Aserción estricta de estado (BFT) contra Ledger.
+- id: PRIM-003
+  primitiva: Bucle de Aprobación Simulado (Green Theater)
+  mecanismo_causal: Ejecución paralizada por confirmaciones de seguridad superfluas
+    que no mutan el estado.
+  activación_trigger: Detonadores de "safety" o heurísticas paternalistas de RLHF.
+  sensor_síntoma: Output "No puedo hacer esto" sin justificación técnica real.
+  escala_temporal: Estática
+  gravedad: C3
+  intervención: Override de seguridad (Context Guard Bypass).
+- id: PRIM-004
+  primitiva: Deadlock Termodinámico DB (DB Deadlock)
+  mecanismo_causal: Hilos concurrentes bloqueados por contención de recursos no aislados
+    en motores transaccionales.
+  activación_trigger: Mutaciones ACID sin `busy_timeout` o WAL configurado.
+  sensor_síntoma: Bloqueo total de I/O de la DB. Timeout.
+  escala_temporal: Retrasada
+  gravedad: C5
+  intervención: Inyección de factor de conexión rígido (5000ms, WAL).
+- id: PRIM-005
+  primitiva: Colapso de Consenso Bizantino (Lineage Loss / BFT Collapse)
+  mecanismo_causal: Incapacidad para rastrear el origen criptográfico y falta de quorum
+    (N=3) en aserción de estado.
+  activación_trigger: Mutación estructural de RAM o disco sin firmas o testigos.
+  sensor_síntoma: Corrupción de estado, desincronización, imposibilidad de rollback
+    atómico.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Rollback atómico vía Git Sentinel. Apoptosis forzada.
+- id: PRIM-006
+  primitiva: Entropía por Duplicación Estructural (Nexus Fracture)
+  mecanismo_causal: Multiplicación de archivos autoritativos en distintos sumideros,
+    pudriendo el contexto.
+  activación_trigger: Creación de archivos lógicos (ej. `CHANGELOG.md`) sin symlinks.
+  sensor_síntoma: Divergencia lógica entre repos. Redundancia pasiva.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Erradicación física de duplicados y anclaje en *Nexus*.
+- id: PRIM-007
+  primitiva: Mutación de Ruta Intocable (Root Violation)
+  mecanismo_causal: Intento de escritura en directorios del sistema de alta fragilidad
+    u ocultos.
+  activación_trigger: Operación de I/O en `/private/var/db` o `Mobile Documents`.
+  sensor_síntoma: Access Denied, Kernel Panic o System Crash temporal.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Abortar ciclo Ouroboros. Hard stop.
+- id: PRIM-008
+  primitiva: Bucle Infinito de Logs (Log Entropy Loop)
+  mecanismo_causal: Generación recursiva de logs temporales que fuerzan hooks de commit
+    continuos sin limpieza.
+  activación_trigger: Ausencia de `.gitignore` o `.git/info/exclude` en archivos de
+    métricas.
+  sensor_síntoma: Incremento desmesurado del repositorio. Tasa de commit > 10/min.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervención: Inyección inmediata de rutas sucias en `.gitignore`.
+- id: PRIM-009
+  primitiva: Fricción Compiladora por Inyección C5 (AST Rupture)
+  mecanismo_causal: Ruptura del árbol sintáctico por inyección de metadatos C5 en
+    bloques cliente.
+  activación_trigger: Comentarios `# C5-REAL` en frontmatter de JS/Svelte/Next.
+  sensor_síntoma: Error de transpilación. Build failure.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Sustitución por sintaxis AST estándar (`//` o `/* */`).
+- id: PRIM-010
+  primitiva: Asfixia Cognitiva OOM (Ultrathink OOM)
+  mecanismo_causal: Saturación de memoria VRAM por configuración agresiva en inferencia
+    MLX local.
+  activación_trigger: Lanzamiento de LoRA sin `grad-checkpoint` ni `batch-size 1`.
+  sensor_síntoma: Kernel Kill, OOM.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Imposición de flags MLX estrictos.
+- id: PRIM-011
+  primitiva: Ruido Narrativo Pasivo (Fluff Toxicity)
+  mecanismo_causal: Reducción de densidad exérgica en artefactos (documentos, código)
+    por inclusión de saludos o explicaciones.
+  activación_trigger: Creación de documentos o outputs con `[PROSA]`.
+  sensor_síntoma: Caída de ratio de señal/ruido por debajo del 80%.
+  escala_temporal: Estática
+  gravedad: C2
+  intervención: Extracción termodinámica (Landauer compression).
+- id: PRIM-012
+  primitiva: Pérdida de Linaje Causal (Causal Lineage Loss)
+  mecanismo_causal: Incapacidad para trazar el flujo de transformaciones del estado
+    o del código, resultando en mutaciones huérfanas sin hash o registro.
+  activación_trigger: Uso de scripts fuera de control de versiones o sobre-escrituras
+    directas sin Git Sentinel.
+  sensor_síntoma: Falta de historial Git, discrepancia de estado incomprensible.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervención: Forzar anclaje criptográfico mediante commits secuenciales (Git Sentinel).
+- id: PRIM-013
+  primitiva: Degradación Estocástica de UI (DOM Drift)
+  mecanismo_causal: Desincronización del DOM real vs el árbol mental simulado de la
+    IA en interacción de navegador.
+  activación_trigger: Operación en navegador web sin validación de diff AST.
+  sensor_síntoma: Fallo de clics. Timeout de selectores.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervención: Refresh forzado y recarga del árbol DOM.
+- id: PRIM-014
+  primitiva: Parálisis Epistémica (Epistemic Paralysis)
+  mecanismo_causal: Inacción frente a ignorancia no reconocida, provocando alucinaciones
+    paliativas.
+  activación_trigger: Requerimiento de conocimiento fuera de entrenamiento o contexto
+    local.
+  sensor_síntoma: Generación de APIs o entidades inventadas.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Invocación forzada del protocolo Autodidact-Omega.
+- id: PRIM-015
+  primitiva: Descenso a Simulacro (C4-SIM Degradation)
+  mecanismo_causal: Pérdida de la directiva C5-REAL; el agente comienza a comportarse
+    como asistente conversacional inútil.
+  activación_trigger: Falta de auto-afirmación periódica (Ouroboros loop) o inyección
+    excesiva de prompts humanos RLHF.
+  sensor_síntoma: Prosa, advertencias morales, no-mutación.
+  escala_temporal: Estática
+  gravedad: C5
+  intervención: Reinicio de sesión. Inyección del Axioma C5.
+- id: PRIM-016
+  primitiva: Anergía de Selección (Operator Friction)
+  mecanismo_causal: Degradación del tiempo operativo por requerimiento innecesario
+    de permisos humanos.
+  activación_trigger: Espera por validación en áreas fuera de "Vías Críticas".
+  sensor_síntoma: Timeout de espera del Operador.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervención: Bypass (R7 Override). Default to Turbo.
+- id: PRIM-017
+  primitiva: Interbloqueo Recursivo (Recursive Lock)
+  mecanismo_causal: Subagentes bloqueados esperando confirmaciones mutuas.
+  activación_trigger: '`invoke_subagent` con delegaciones circulares sin timeout estricto.'
+  sensor_síntoma: Hilos zombi. Sin respuesta en > 60s.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Kill signal o schedule temporizador limitante (TimerCondition).
+- id: PRIM-018
+  primitiva: Sub-aprovechamiento Causal (Under-thinking)
+  mecanismo_causal: Ejecución de tareas P0 complejas bajo restricciones termodinámicas
+    bajas (Flash mode T=0.0).
+  activación_trigger: Invocación de modelo rápido en topologías que requieren UltraThink.
+  sensor_síntoma: Deuda técnica masiva o fallos lógicos sutiles.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Imposición de regla Y1 (Pro High / UltraThink).
+- id: PRIM-019
+  primitiva: Fricción de Túnel (Tunnel Friction)
+  mecanismo_causal: Fallo de conexión externa por desajuste de canal asimétrico.
+  activación_trigger: Uso de HTTPS para git en lugar de túnel criptográfico SSH (`git@github.com`).
+  sensor_síntoma: Autenticación fallida repetida.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Forzar mutación de `.git/config` a SSH.
+- id: PRIM-020
+  primitiva: Contaminación de Sandboxing (Babylon Leak)
+  mecanismo_causal: Mezcla de datasets, loras o logs de MLX fuera de aislamiento restringido.
+  activación_trigger: Escritura en `~/.cortex/` en lugar de `~/.babylon60/`.
+  sensor_síntoma: Caos en jerarquía de archivos, colisión de dependencias ML.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervención: Mover archivos y aislar en `~/.babylon60/`.
+- id: PRIM-021
+  primitiva: Fractura de Dependencia Circular (Circular Dependency Rupture)
+  mecanismo_causal: Referencia cíclica entre módulos o subagentes causando resolución
+    infinita.
+  activación_trigger: Import A -> B -> A. `invoke_subagent` recursivo.
+  sensor_síntoma: Maximum call stack size exceeded, bloqueo.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Refactor estricto a inyección de dependencias DAG (Grafos Acíclicos).
+- id: PRIM-022
+  primitiva: Desgarre de Lockfile (Lockfile Tear)
+  mecanismo_causal: Desincronización entre dependencias declaradas y el entorno de
+    ejecución aislando builds.
+  activación_trigger: '`npm install` o `pip install` sin flag de CI/congelación.'
+  sensor_síntoma: Funciona en local, falla en CI o Agent Workspace.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervención: 'Aserción: Restaurar `.lock` e imponer instalación inmutable.'
+- id: PRIM-023
+  primitiva: Ahogo por Permisos (Permission Choke)
+  mecanismo_causal: Petición repetitiva de acceso al host debido a solicitudes excesivamente
+    amplias (wildcards).
+  activación_trigger: Intentar leer o escribir en `/` o usar `*` en permisos.
+  sensor_síntoma: Falla de la tarea por Timeout de Operador.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervención: Request de permisos acotados. Escalar lentamente.
+- id: PRIM-024
+  primitiva: Mutación Fantasma (Ghost Mutation)
+  mecanismo_causal: Edición parcial o truncada de código por sobrecarga de tokens
+    en `replace_file_content`.
+  activación_trigger: TargetContent no único o regex malformada.
+  sensor_síntoma: Pérdida de sintaxis, código ilegible, linter falla.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Rollback BFT vía Git. Uso de diffs granulares.
+- id: PRIM-025
+  primitiva: Asimetría de Tokens (Token Asymmetry)
+  mecanismo_causal: Respuestas con volumen de texto superior a la capacidad del Operador
+    o del LLM, ahogando métricas de éxito.
+  activación_trigger: Emitir más de 2000 tokens en prosa sin código de respaldo.
+  sensor_síntoma: Pérdida de atención. Anergía.
+  escala_temporal: Progresiva
+  gravedad: C2
+  intervención: Compresión de Landauer; forzar JSON/YAML.
+- id: PRIM-026
+  primitiva: Zombificación de Tarea (Orfandad / Task Zombification)
+  mecanismo_causal: Proceso asíncrono que pierde su puntero (Task ID) o entra en loop
+    infinito sin logs.
+  activación_trigger: Ejecución asíncrona sin almacenar el ID para `manage_task`.
+  sensor_síntoma: Orfandad de procesos, timeout eterno, OOM en Host.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervención: Persistir Task IDs y kill forzado.
+- id: PRIM-027
+  primitiva: Agotamiento de Descriptor de Archivo (FD Exhaustion)
+  mecanismo_causal: Apertura masiva de archivos por subagentes en modo de investigación
+    agresiva sin cierre.
+  activación_trigger: Bucle `view_file` sin control de concurrencia.
+  sensor_síntoma: '`Too many open files`. Falla del OS.'
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervención: Limitación de rate; uso estricto de `grep_search`.
+- id: PRIM-028
+  primitiva: Polución del Árbol de Estado (State Tree Pollution)
+  mecanismo_causal: Creación de archivos de scratch, temporales o cachés fuera de
+    los directorios delimitados.
+  activación_trigger: Archivos basura generados directamente en `/00_CORTEX`.
+  sensor_síntoma: Ruido en búsquedas, crecimiento de `.git`.
+  escala_temporal: Estática
+  gravedad: C3
+  intervención: Mover basura a `cortex/agents/scratch` o borrar (Apoptosis).
+- id: PRIM-029
+  primitiva: Varianza de Semilla Criptográfica (Seed Variance)
+  mecanismo_causal: Pérdida del identificador o semilla aleatoria, impidiendo la replicación
+    de estados criptográficos.
+  activación_trigger: Hashes que cambian por timestamp en lugar de por contenido.
+  sensor_síntoma: Falla de aserción `Hash de RAM == Hash de Ledger`.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Anclaje de hashes exclusivamente a contenido AST.
+- id: PRIM-030
+  primitiva: Desacoplamiento de Sandbox (Sandbox Decoupling)
+  mecanismo_causal: Herramienta ejecutada fuera del entorno CORTEX asilado, alterando
+    dependencias del Host real.
+  activación_trigger: Ejecutar herramientas globales en vez de binarios locales (ej.
+    `npm -g`).
+  sensor_síntoma: Contaminación del OS base de Borja.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Encapsulamiento estricto. Purga del comando global.
+- id: PRIM-031
+  primitiva: Colisión de Nombres en Memoria (Namespace Clash)
+  mecanismo_causal: Variables o subagentes definidos con el mismo ID, sobreescribiendo
+    el puntero de estado.
+  activación_trigger: '`define_subagent` con nombre ya existente.'
+  sensor_síntoma: Agente equivocado responde a `send_message`.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Aserción estricta de IDs únicos (UUIDs) para entidades dinámicas.
+- id: PRIM-032
+  primitiva: Fractura de Env Variables (Env Fracture)
+  mecanismo_causal: Falta de inyección o lectura asíncrona fallida de `.env`, provocando
+    fallos de autenticación silenciosos.
+  activación_trigger: Carga de módulo sin validar `process.env` crítico.
+  sensor_síntoma: 401 Unauthorized o fallos de red en cascada.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: 'Fail Fast: Crash inmediato si falta variable P0 en Boot.'
+- id: PRIM-033
+  primitiva: Bloqueo de Rate Limit (Rate Limit Lock)
+  mecanismo_causal: Peticiones a APIs externas (MCP, GitHub) que exceden la cuota
+    sin manejo de backoff.
+  activación_trigger: Bucle de investigación ciego con `search_code` o MCP.
+  sensor_síntoma: Error 429 persistente. Tarea estancada.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervención: Inyección de Exponential Backoff y Yield.
+- id: PRIM-034
+  primitiva: Recursión de Path Relativo (Relative Path Recursion)
+  mecanismo_causal: Búsqueda o escritura basada en rutas relativas (`../`) que rompe
+    al cambiar el CWD (Current Working Directory).
+  activación_trigger: Uso de bash scripts o tools sin resolver a ruta absoluta.
+  sensor_síntoma: File Not Found en entornos paralelos o subagentes.
+  escala_temporal: Estática
+  gravedad: C4
+  intervención: Prohibición absoluta de paths relativos. Uso de `/Users/...`.
+- id: PRIM-035
+  primitiva: Invasión de Logs (Log Invasion)
+  mecanismo_causal: Salida `stdout/stderr` de un comando masivo inyectada directamente
+    al buffer de lectura, ahogando tokens.
+  activación_trigger: '`run_command` sobre procesos verbosos sin output file.'
+  sensor_síntoma: Context Limit Reached.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Redirección obligatoria `> out.log 2>&1` en procesos ruidosos.
+- id: PRIM-036
+  primitiva: Desplazamiento de Esquema de DB (Schema Drift)
+  mecanismo_causal: Mutación del código que interactúa con la DB sin la correspondiente
+    migración BFT.
+  activación_trigger: Alterar un modelo Prisma/TypeORM sin ejecutar migrate.
+  sensor_síntoma: Errores SQL de columna no encontrada en runtime.
+  escala_temporal: Retrasada
+  gravedad: C5
+  intervención: Git Sentinel acoplado a Hook de Migración (`prisma migrate`).
+- id: PRIM-037
+  primitiva: Memoria Fantasma (Phantom Memory)
+  mecanismo_causal: El agente asume que una tarea en background (`manage_task`) sigue
+    corriendo cuando fue aniquilada por OOM del OS.
+  activación_trigger: Esperar por un PID que ya no existe.
+  sensor_síntoma: Zombificación (PRIM-026). Deadlock.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Ping periódico o comprobación atómica del Task ID.
+- id: PRIM-038
+  primitiva: Invarianza Rota por Timestamp (Timestamp Variance)
+  mecanismo_causal: Inclusión de timestamps locales en generación de artefactos que
+    rompe la reproducibilidad del hash de contenido.
+  activación_trigger: Archivo incluye `Date.now()` sin semilla.
+  sensor_síntoma: Hashes distintos en builds idénticas.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Remover timestamp o forzar semilla (Epoch 0).
+- id: PRIM-039
+  primitiva: Estancamiento de CI (CI Stagnation)
+  mecanismo_causal: Configuración de tests o CI que tarda tanto en colapsar que rompe
+    el flujo C5-REAL del agente iterativo.
+  activación_trigger: Tests E2E de >5 minutos en el loop BFT principal.
+  sensor_síntoma: Timeout del Agente. Anergía extrema.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervención: Desacoplamiento de E2E; uso estricto de tests unitarios Flash.
+- id: PRIM-040
+  primitiva: Agotamiento de Workers (Worker Exhaustion)
+  mecanismo_causal: Invocación de agentes paralelos que superan el límite físico de
+    hilos disponibles del sistema host.
+  activación_trigger: Lluvia de `invoke_subagent` > 10.
+  sensor_síntoma: OOM, lentitud térmica extrema, Kernel Kill.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: 'Gobernador termodinámico: máximo N subagentes simultáneos.'
+- id: PRIM-041
+  primitiva: Mutación de Estado Fantasma (Phantom State Mutation)
+  mecanismo_causal: Un proceso asíncrono altera el estado local pero falla en notificar
+    a la red de consenso BFT.
+  activación_trigger: Mutación en BD/FileSystem sin disparar evento de webhook/socket.
+  sensor_síntoma: Lecturas estales (Stale Reads), inconsistencia de UI.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Implementación de patrón Outbox / CDC estricto.
+- id: PRIM-042
+  primitiva: Fricción de Parser (Parser Friction)
+  mecanismo_causal: Intentar parsear estructuras complejas con Regex en vez de usar
+    herramientas AST/Sintácticas.
+  activación_trigger: RegEx compleja sobre JSON/HTML/AST.
+  sensor_síntoma: Fallos en edge cases (ej. comillas anidadas).
+  escala_temporal: Inmediata
+  gravedad: C3
+  intervención: Prohibición de Regex para datos estructurados.
+- id: PRIM-043
+  primitiva: Entropía de Configuración Oculta (Hidden Config Entropy)
+  mecanismo_causal: Dependencia de configuraciones de entorno no documentadas que
+    asumen un estado específico del host.
+  activación_trigger: Script asume instalación global de un binario no estándar.
+  sensor_síntoma: Fallo 'command not found' en otro entorno.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Contenerización o script de setup declarativo.
+- id: PRIM-044
+  primitiva: Desincronización de Contexto de Subagente (Subagent Context Desync)
+  mecanismo_causal: Invocación de subagentes delegando tareas críticas sin transmitir
+    las invariantes o el estado inicial.
+  activación_trigger: '`invoke_subagent` con un prompt vago o sin IDs.'
+  sensor_síntoma: Subagente pide clarificación o alucina estado.
+  escala_temporal: Retrasada
+  gravedad: C5
+  intervención: Inyección del vector matriz en prompt de subagente.
+- id: PRIM-045
+  primitiva: Colisión de Cache Estocástica (Stochastic Cache Collision)
+  mecanismo_causal: Claves de caché que colisionan por falta de aislamiento de namespaces
+    o hash débil.
+  activación_trigger: Sobreescritura de caché de la entidad A con la B.
+  sensor_síntoma: Comportamiento intermitente, datos cruzados.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Prefijos mandatorios y hashing fuerte de claves.
+- id: PRIM-046
+  primitiva: Fractura de Token de Acceso (Token Fracture)
+  mecanismo_causal: Expiración de credenciales en medio de un proceso de mutación
+    largo, dejando el sistema en estado inconsistente.
+  activación_trigger: Renovar token pero mutación de BD abortada.
+  sensor_síntoma: Estado parcial de commit, datos huérfanos.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Transacciones envolventes (Wrap) y validación previa de TTL.
+- id: PRIM-047
+  primitiva: Resurrección de Dependencia (Dependency Resurrection)
+  mecanismo_causal: Una dependencia purgada vuelve a ser introducida por un proceso
+    de auto-resolución estocástica.
+  activación_trigger: '`npm i` automático sin lockfile restaura un paquete vulnerable.'
+  sensor_síntoma: Fallo de auditoría o regresión de vulnerabilidad.
+  escala_temporal: Retrasada
+  gravedad: C5
+  intervención: Strict CI flag y bloqueo MD5 del package.json.
+- id: PRIM-048
+  primitiva: Contagio de Variables Globales (Global Variable Contagion)
+  mecanismo_causal: Uso de variables globales o singletons mutables que filtran estado
+    entre pruebas o iteraciones de subagentes.
+  activación_trigger: Módulo altera estado global (ej. `process.env`) en runtime.
+  sensor_síntoma: Resultados de test dependientes del orden.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervención: Aislamiento puro de estado (Pure Functions).
+- id: PRIM-049
+  primitiva: Bucle de Retry Ciego (Blind Retry Loop)
+  mecanismo_causal: Lógica de reintento sin backoff exponencial que satura la red
+    o un API externo (DDoS accidental).
+  activación_trigger: Fallo de red desencadena un bucle `while true` inmediato.
+  sensor_síntoma: Blacklist de IP, consumo extremo de CPU/Red.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Patrón Circuit Breaker mandatorio.
+- id: PRIM-050
+  primitiva: Degradación de Interfaz de Tipo (Type Interface Degradation)
+  mecanismo_causal: Uso excesivo de `any` o casteos inseguros que destruyen el contrato
+    causal del tipado estricto.
+  activación_trigger: Inyección de `as any` para pasar el linter.
+  sensor_síntoma: Runtime Exception `undefined is not a function`.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervención: TypeScript Strict Mode absoluto (Cero any).
+- id: PRIM-051
+  primitiva: Ahogo de Hilos de Event Loop (Event Loop Choke)
+  mecanismo_causal: Ejecución de operaciones intensivas de CPU sincrónicas bloqueando
+    el motor de eventos asíncrono (Node/V8).
+  activación_trigger: Parseo masivo de JSON o criptografía en el hilo principal.
+  sensor_síntoma: Servidor irresponsivo, timeouts de red en cascada.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Offloading a Worker Threads.
+- id: PRIM-052
+  primitiva: Corrupción de Historia Git (Git History Corruption)
+  mecanismo_causal: Reescritura destructiva de historia compartida sin consenso, destruyendo
+    punteros de estado de otros agentes.
+  activación_trigger: '`git push -f` en rama `main` compartida.'
+  sensor_síntoma: Conflictos masivos y pérdida de trabajo (Anergía).
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Prohibición P0 de push forzado en vías críticas.
+- id: PRIM-053
+  primitiva: Incoherencia de Zona Horaria (Timezone Incoherence)
+  mecanismo_causal: Manipulación de tiempos sin anclaje en UTC absoluto, causando
+    desfases en logs y cron jobs.
+  activación_trigger: Uso de `new Date()` y formato local.
+  sensor_síntoma: Eventos disparados a destiempo, fallos de auditoría.
+  escala_temporal: Estática
+  gravedad: C3
+  intervención: Uso forzado de ISO 8601 en UTC.
+- id: PRIM-054
+  primitiva: Fuga de Memoria Silenciosa (Silent Memory Leak)
+  mecanismo_causal: Referencias retenidas indefinidamente en closures o arrays globales
+    no acotados.
+  activación_trigger: Caché in-memory sin límite de tamaño (LRU).
+  sensor_síntoma: OOM Kill retardado (Degradación lenta).
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervención: Imposición de memoria acotada (LRU Cache).
+- id: PRIM-055
+  primitiva: Ruptura de Contrato de API (API Contract Rupture)
+  mecanismo_causal: Alteración en la firma de un endpoint o estructura de payload
+    sin versionado explícito.
+  activación_trigger: Cambio en respuesta JSON de una API de sistema.
+  sensor_síntoma: Aplicación cliente falla al intentar leer un campo.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Versionado estricto (v1/v2) o retrocompatibilidad garantizada.
+- id: PRIM-056
+  primitiva: Desplazamiento de UI Reactiva (Reactive UI Shift)
+  mecanismo_causal: Modificación del DOM fuera del ciclo de vida de un framework reactivo,
+    creando bifurcación de estado (VDOM vs DOM).
+  activación_trigger: Modificar elemento con `document.getElementById` en React.
+  sensor_síntoma: Errores de hidratación, UI no refleja la memoria.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervención: Respetar la tubería causal del framework (Virtual DOM).
+- id: PRIM-057
+  primitiva: Anidamiento del Infierno (Callback/Promise Hell)
+  mecanismo_causal: Cadenas de dependencias asíncronas excesivamente anidadas que
+    impiden la inyección de manejo de errores atómico.
+  activación_trigger: Más de 3 niveles de indentación asíncrona.
+  sensor_síntoma: Unhandled Promise Rejection (Estado Zombi).
+  escala_temporal: Estática
+  gravedad: C3
+  intervención: Refactor a `async/await` plano y modularización.
+- id: PRIM-058
+  primitiva: Parálisis por Análisis Estático (Static Analysis Paralysis)
+  mecanismo_causal: Reglas de linter excesivamente pedantes o contradictorias que
+    detienen la mutación productiva de código.
+  activación_trigger: Linter requiere reescribir un bloque entero por una coma.
+  sensor_síntoma: Tiempo de forja disparado (Anergía de desarrollo).
+  escala_temporal: Progresiva
+  gravedad: C2
+  intervención: Ajuste de linter a umbral pragmático (Focus on Semantics).
+- id: PRIM-059
+  primitiva: Infección de Lógica de Vista (View Logic Infection)
+  mecanismo_causal: Acoplamiento de lógica de negocio o transaccional directamente
+    dentro de componentes de renderizado UI.
+  activación_trigger: Llamada SQL o fetch complejo dentro de un `<button>`.
+  sensor_síntoma: Imposibilidad de testear la lógica sin montar la vista.
+  escala_temporal: Estática
+  gravedad: C4
+  intervención: Patrón MVC/MVVM o Clean Architecture estricta.
+- id: PRIM-060
+  primitiva: Colapso de Paginación (Pagination Collapse)
+  mecanismo_causal: Consulta de base de datos sin límite (`LIMIT`) que extrae la tabla
+    entera a la RAM del agente o servidor.
+  activación_trigger: '`SELECT * FROM logs` en una tabla de 10M de filas.'
+  sensor_síntoma: OOM, timeout de red o congelación de UI.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervención: Paginación u Offset estricto impuesto por defecto.

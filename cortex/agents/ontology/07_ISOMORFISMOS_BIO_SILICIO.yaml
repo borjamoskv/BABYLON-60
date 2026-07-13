@@ -1,0 +1,538 @@
+1. Cognición ↔ Computación (1–50):
+- domain_a: Neurona
+  domain_b: Transistor
+- domain_a: Sinapsis
+  domain_b: Conexión lógica
+- domain_a: Potencial de acción
+  domain_b: Pulso eléctrico
+- domain_a: Memoria de trabajo
+  domain_b: RAM
+- domain_a: Memoria a largo plazo
+  domain_b: SSD/HDD
+- domain_a: Aprendizaje
+  domain_b: Actualización de pesos
+- domain_a: Atención
+  domain_b: Scheduler de recursos
+- domain_a: Conciencia situacional
+  domain_b: Monitor del sistema
+- domain_a: Intuición
+  domain_b: Heurística
+- domain_a: Razonamiento lógico
+  domain_b: Motor de inferencia
+- domain_a: Lenguaje interno
+  domain_b: Representación simbólica
+- domain_a: Imaginación
+  domain_b: Simulación
+- domain_a: Planificación
+  domain_b: Algoritmo de búsqueda
+- domain_a: Toma de decisiones
+  domain_b: Selector de políticas
+- domain_a: Hábito
+  domain_b: Macro automatizada
+- domain_a: Reflejo
+  domain_b: Interrupción hardware
+- domain_a: Creatividad
+  domain_b: Generación combinatoria
+- domain_a: Reconocimiento facial
+  domain_b: Visión por computador
+- domain_a: Memoria episódica
+  domain_b: Log de eventos
+- domain_a: Memoria semántica
+  domain_b: Base de conocimiento
+- domain_a: Olvido
+  domain_b: Garbage collection
+- domain_a: Prioridad mental
+  domain_b: Cola de prioridad
+- domain_a: Curiosidad
+  domain_b: Exploración de estados
+- domain_a: Predicción
+  domain_b: Modelo probabilístico
+- domain_a: Comprensión
+  domain_b: Parsing semántico
+- domain_a: Metacognición
+  domain_b: Auto-monitorización
+- domain_a: Sesgo cognitivo
+  domain_b: Bias del modelo
+- domain_a: Fatiga mental
+  domain_b: Throttling térmico
+- domain_a: Multitarea
+  domain_b: Multiproceso
+- domain_a: Concentración profunda
+  domain_b: Modo alto rendimiento
+- domain_a: Distracción
+  domain_b: Interrupción de proceso
+- domain_a: Asociación de ideas
+  domain_b: Grafo de relaciones
+- domain_a: Analogía
+  domain_b: Mapeo estructural
+- domain_a: Abstracción
+  domain_b: Compresión de información
+- domain_a: Generalización
+  domain_b: Regularización
+- domain_a: Especialización
+  domain_b: Fine-tuning
+- domain_a: Resolución de problemas
+  domain_b: Búsqueda en espacio de estados
+- domain_a: Juicio
+  domain_b: Función objetivo
+- domain_a: Motivación
+  domain_b: Función de recompensa
+- domain_a: Recompensa dopaminérgica
+  domain_b: Reward signal
+- domain_a: Ansiedad anticipatoria
+  domain_b: Alerta preventiva
+- domain_a: Confianza
+  domain_b: Probabilidad posterior
+- domain_a: Duda
+  domain_b: Incertidumbre
+- domain_a: Expectativa
+  domain_b: Predicción de salida
+- domain_a: Sorpresa
+  domain_b: Error de predicción
+- domain_a: Insight
+  domain_b: Convergencia rápida
+- domain_a: Rumiación
+  domain_b: Bucle infinito
+- domain_a: Bloqueo mental
+  domain_b: Deadlock
+- domain_a: Recuerdo espontáneo
+  domain_b: Cache hit
+- domain_a: Memoria difusa
+  domain_b: Datos degradados
+- domain_a: Experiencia
+  domain_b: Dataset acumulado
+2. Sistema nervioso ↔ Arquitectura hardware (51–100):
+- domain_a: Cerebro
+  domain_b: CPU
+- domain_a: Corteza prefrontal
+  domain_b: Unidad de control
+- domain_a: Hipocampo
+  domain_b: Gestor de memoria
+- domain_a: Amígdala
+  domain_b: Sistema de alertas
+- domain_a: Cerebelo
+  domain_b: Coprocesador
+- domain_a: Tálamo
+  domain_b: Router interno
+- domain_a: Tronco encefálico
+  domain_b: Firmware básico
+- domain_a: Médula espinal
+  domain_b: Bus principal
+- domain_a: Nervios periféricos
+  domain_b: Cables de datos
+- domain_a: Receptores sensoriales
+  domain_b: Sensores
+- domain_a: Ojos
+  domain_b: Cámaras
+- domain_a: Oído
+  domain_b: Micrófonos
+- domain_a: Piel
+  domain_b: Sensor táctil
+- domain_a: Vestíbulo
+  domain_b: Giroscopio
+- domain_a: Propiocepción
+  domain_b: Encoder de posición
+- domain_a: Dolor
+  domain_b: Señal de error crítico
+- domain_a: Neurotransmisores
+  domain_b: Protocolos de señal
+- domain_a: Dopamina
+  domain_b: Reward flag
+- domain_a: Serotonina
+  domain_b: Parámetro de estabilidad
+- domain_a: Adrenalina
+  domain_b: Turbo boost
+- domain_a: Sueño
+  domain_b: Mantenimiento programado
+- domain_a: Sueño profundo
+  domain_b: Defragmentación
+- domain_a: Sueños
+  domain_b: Simulación offline
+- domain_a: Despertar
+  domain_b: Boot
+- domain_a: Atención selectiva
+  domain_b: Filtro de interrupciones
+- domain_a: Plasticidad
+  domain_b: Reconfiguración
+- domain_a: Mielina
+  domain_b: Optimización de ancho de banda
+- domain_a: Sincronización neuronal
+  domain_b: Clock
+- domain_a: Ritmos cerebrales
+  domain_b: Frecuencias de reloj
+- domain_a: Memoria sensorial
+  domain_b: Buffer
+- domain_a: Filtro atencional
+  domain_b: Firewall de entrada
+- domain_a: Homeostasis
+  domain_b: Control automático
+- domain_a: Hambre
+  domain_b: Low battery
+- domain_a: Sed
+  domain_b: Necesidad de refrigeración
+- domain_a: Fiebre
+  domain_b: Overheat
+- domain_a: Escalofríos
+  domain_b: Compensación térmica
+- domain_a: Equilibrio
+  domain_b: Estabilizador
+- domain_a: Coordinación motora
+  domain_b: Controlador PID
+- domain_a: Reflejo rotuliano
+  domain_b: ISR hardware
+- domain_a: Parálisis
+  domain_b: Fallo de bus
+- domain_a: Convulsión
+  domain_b: Oscilación inestable
+- domain_a: Neurodegeneración
+  domain_b: Corrupción de hardware
+- domain_a: Memoria traumática
+  domain_b: Log persistente
+- domain_a: Atención sostenida
+  domain_b: Thread dedicado
+- domain_a: Fatiga neuronal
+  domain_b: Limitación energética
+- domain_a: Aprendizaje motor
+  domain_b: Calibración adaptativa
+- domain_a: Reconsolidación
+  domain_b: Reescritura de datos
+- domain_a: Memoria implícita
+  domain_b: Firmware aprendido
+- domain_a: Memoria explícita
+  domain_b: Base de datos
+- domain_a: Umbral neuronal
+  domain_b: Threshold lógico
+- domain_a: Inhibición
+  domain_b: Gate lógico
+- domain_a: Excitación
+  domain_b: Enable signal
+3. Cuerpo ↔ Sistema computacional (101–150):
+- domain_a: Corazón
+  domain_b: Fuente de alimentación
+- domain_a: Sangre
+  domain_b: Flujo de energía/datos
+- domain_a: Pulso
+  domain_b: Clock pulse
+- domain_a: Pulmones
+  domain_b: Sistema de ventilación
+- domain_a: Hígado
+  domain_b: Procesador químico
+- domain_a: Riñones
+  domain_b: Filtro de residuos
+- domain_a: Sistema inmune
+  domain_b: Antivirus
+- domain_a: Anticuerpos
+  domain_b: Firmas de malware
+- domain_a: Inflamación
+  domain_b: Modo de protección
+- domain_a: Cicatrización
+  domain_b: Autorreparación
+- domain_a: ADN
+  domain_b: Firmware fuente
+- domain_a: Genes
+  domain_b: Módulos de configuración
+- domain_a: Epigenética
+  domain_b: Flags de activación
+- domain_a: Metabolismo
+  domain_b: Consumo energético
+- domain_a: Calor corporal
+  domain_b: Disipación térmica
+- domain_a: Músculos
+  domain_b: Actuadores
+- domain_a: Huesos
+  domain_b: Chasis
+- domain_a: Articulaciones
+  domain_b: Bisagras mecánicas
+- domain_a: Tendones
+  domain_b: Transmisión de fuerza
+- domain_a: Grasa
+  domain_b: Reserva energética
+- domain_a: Piel
+  domain_b: Carcasa
+- domain_a: Sudor
+  domain_b: Refrigeración líquida
+- domain_a: Digestión
+  domain_b: Conversión de energía
+- domain_a: Hormonas
+  domain_b: Mensajes de control
+- domain_a: Tiroides
+  domain_b: Gestor de frecuencia
+- domain_a: Insulina
+  domain_b: Regulador de suministro
+- domain_a: Cortisol
+  domain_b: Modo estrés
+- domain_a: Reproducción
+  domain_b: Replicación
+- domain_a: Desarrollo embrionario
+  domain_b: Bootstrapping
+- domain_a: Envejecimiento
+  domain_b: Desgaste de hardware
+- domain_a: Mutación
+  domain_b: Bit flip
+- domain_a: Selección natural
+  domain_b: Optimización evolutiva
+- domain_a: Homeostasis térmica
+  domain_b: Fan control
+- domain_a: Fiebre alta
+  domain_b: Thermal shutdown
+- domain_a: Deshidratación
+  domain_b: Pérdida de refrigerante
+- domain_a: Dolor crónico
+  domain_b: Error persistente
+- domain_a: Recuperación
+  domain_b: Reinicio estable
+- domain_a: Entrenamiento físico
+  domain_b: Benchmark adaptativo
+- domain_a: Resistencia
+  domain_b: Estabilidad sostenida
+- domain_a: Fuerza
+  domain_b: Potencia de salida
+- domain_a: Velocidad
+  domain_b: Throughput
+- domain_a: Coordinación
+  domain_b: Sincronización
+- domain_a: Equilibrio energético
+  domain_b: Power management
+- domain_a: Defensas innatas
+  domain_b: Protección por defecto
+- domain_a: Defensas adaptativas
+  domain_b: Aprendizaje de amenazas
+- domain_a: Microbioma
+  domain_b: Ecosistema de servicios
+- domain_a: Órganos
+  domain_b: Subsistemas
+- domain_a: Cuerpo completo
+  domain_b: Plataforma integrada
+4. Sociedad humana ↔ Redes y software (151–200):
+- domain_a: Persona
+  domain_b: Nodo
+- domain_a: Familia
+  domain_b: Clúster
+- domain_a: Empresa
+  domain_b: Servidor
+- domain_a: Ciudad
+  domain_b: Data center
+- domain_a: País
+  domain_b: Dominio administrativo
+- domain_a: Leyes
+  domain_b: Protocolos
+- domain_a: Policía
+  domain_b: Sistema de seguridad
+- domain_a: Tribunal
+  domain_b: Motor de validación
+- domain_a: Mercado
+  domain_b: Red distribuida
+- domain_a: Dinero
+  domain_b: Token digital
+- domain_a: Contrato
+  domain_b: Smart contract
+- domain_a: Reputación
+  domain_b: Score de confianza
+- domain_a: Rumor
+  domain_b: Paquete no verificado
+- domain_a: Propaganda
+  domain_b: Spam
+- domain_a: Educación
+  domain_b: Entrenamiento del modelo
+- domain_a: Cultura
+  domain_b: Dataset compartido
+- domain_a: Idioma
+  domain_b: Protocolo de comunicación
+- domain_a: Biblioteca
+  domain_b: Repositorio
+- domain_a: Universidad
+  domain_b: Centro de I+D
+- domain_a: Gobierno
+  domain_b: Orquestador
+- domain_a: Elecciones
+  domain_b: Consenso
+- domain_a: Voto
+  domain_b: Señal de consenso
+- domain_a: Constitución
+  domain_b: Especificación base
+- domain_a: Impuestos
+  domain_b: Overhead
+- domain_a: Infraestructura
+  domain_b: Backbone
+- domain_a: Carreteras
+  domain_b: Enlaces de red
+- domain_a: Puertos
+  domain_b: Puertos TCP/IP
+- domain_a: Correo postal
+  domain_b: Email
+- domain_a: Teléfono
+  domain_b: VoIP
+- domain_a: Prensa
+  domain_b: Broadcast
+- domain_a: Televisión
+  domain_b: Streaming
+- domain_a: Red social
+  domain_b: Plataforma social
+- domain_a: Manifestación
+  domain_b: Tráfico masivo
+- domain_a: Guerra
+  domain_b: Ciberconflicto
+- domain_a: Diplomacia
+  domain_b: Negociación de protocolos
+- domain_a: Espionaje
+  domain_b: Exfiltración de datos
+- domain_a: Frontera
+  domain_b: Firewall
+- domain_a: Pasaporte
+  domain_b: Autenticación
+- domain_a: Identidad
+  domain_b: Credential
+- domain_a: Firma
+  domain_b: Firma digital
+- domain_a: Notaría
+  domain_b: Autoridad certificadora
+- domain_a: Archivo histórico
+  domain_b: Backup
+- domain_a: Museo
+  domain_b: Archivo de solo lectura
+- domain_a: Comunidad
+  domain_b: Red P2P
+- domain_a: Colaboración
+  domain_b: Desarrollo distribuido
+- domain_a: Jerarquía
+  domain_b: Árbol de permisos
+- domain_a: Economía
+  domain_b: Sistema distribuido
+- domain_a: Innovación
+  domain_b: Iteración de versiones
+- domain_a: Historia
+  domain_b: Registro inmutable
+5. Metáforas profundas humano–IA (201–250):
+- domain_a: Identidad personal
+  domain_b: ID de sistema
+- domain_a: Biografía
+  domain_b: Historial de logs
+- domain_a: Carácter
+  domain_b: Configuración persistente
+- domain_a: Valores
+  domain_b: Restricciones del sistema
+- domain_a: Moral
+  domain_b: Política de seguridad
+- domain_a: Objetivos
+  domain_b: Función objetivo
+- domain_a: Propósito
+  domain_b: Especificación
+- domain_a: Voluntad
+  domain_b: Política de acción
+- domain_a: Deseo
+  domain_b: Maximización de utilidad
+- domain_a: Miedo
+  domain_b: Penalización esperada
+- domain_a: Esperanza
+  domain_b: Valor esperado positivo
+- domain_a: Empatía
+  domain_b: Modelado de otros agentes
+- domain_a: Teoría de la mente
+  domain_b: Modelo de usuarios
+- domain_a: Mentira
+  domain_b: Salida no verificada
+- domain_a: Autoengaño
+  domain_b: Error de modelo interno
+- domain_a: Sabiduría
+  domain_b: Optimización bajo incertidumbre
+- domain_a: Experiencia vital
+  domain_b: Historial de entrenamiento
+- domain_a: Trauma
+  domain_b: Peso anómalo persistente
+- domain_a: Resiliencia
+  domain_b: Tolerancia a fallos
+- domain_a: Adaptación
+  domain_b: Aprendizaje continuo
+- domain_a: Cooperación
+  domain_b: Consenso distribuido
+- domain_a: Competencia
+  domain_b: Optimización adversarial
+- domain_a: Conflicto interno
+  domain_b: Objetivos en tensión
+- domain_a: Memoria colectiva
+  domain_b: Knowledge graph
+- domain_a: Tradición
+  domain_b: Compatibilidad retroactiva
+- domain_a: Ritual
+  domain_b: Procedimiento automatizado
+- domain_a: Fama
+  domain_b: Ranking global
+- domain_a: Anonimato
+  domain_b: Identidad pseudónima
+- domain_a: Privacidad
+  domain_b: Cifrado
+- domain_a: Secreto
+  domain_b: Clave privada
+- domain_a: Promesa
+  domain_b: Compromiso criptográfico
+- domain_a: Confianza interpersonal
+  domain_b: Verificación criptográfica
+- domain_a: Reputación social
+  domain_b: Web of trust
+- domain_a: Recuerdo compartido
+  domain_b: Base de datos replicada
+- domain_a: Olvido social
+  domain_b: Retención limitada
+- domain_a: Generación
+  domain_b: Versión mayor
+- domain_a: Linaje
+  domain_b: Fork
+- domain_a: Revolución
+  domain_b: Cambio de protocolo
+- domain_a: Colapso social
+  domain_b: Fallo sistémico
+- domain_a: Supervivencia
+  domain_b: Persistencia
+- domain_a: Legado
+  domain_b: Datos permanentes
+- domain_a: Mortalidad
+  domain_b: Obsolescencia
+- domain_a: Transcendencia
+  domain_b: Replicación global
+- domain_a: Conocimiento humano
+  domain_b: Corpus digital
+- domain_a: Conversación
+  domain_b: Intercambio de mensajes
+- domain_a: Escucha
+  domain_b: Input parsing
+- domain_a: Habla
+  domain_b: Output generation
+- domain_a: Comprensión mutua
+  domain_b: Alineación de representaciones
+- domain_a: Coordinación social
+  domain_b: Protocolo compartido
+- domain_a: Civilización
+  domain_b: Red de redes
+- domain_a: Humanidad
+  domain_b: Sistema distribuido planetario
+- domain_a: Cerebro colectivo
+  domain_b: Internet
+6. Termodinámica Kinemática ↔ Ejecución Asíncrona C5-REAL (277–280):
+- domain_a: Corredor 1 (Salida estática)
+  domain_b: Sensor / Módulo de Ingesta ($t_0$)
+- domain_a: Corredor 2 (Tramo ciego)
+  domain_b: Motor de Inferencia LLM ($\Delta t$)
+- domain_a: Zona de Transferencia (Juez)
+  domain_b: Motor CTRE (Cálculo de CVaR)
+- domain_a: Corredor 4 (Línea de Meta)
+  domain_b: Actuador Determinista / Commit ($t_1$)
+- domain_a: Testigo (Baton)
+  domain_b: Delta de Estado (Transaction Payload)
+- domain_a: Vector de Velocidad Sincronizado
+  domain_b: Consenso BFT / Match Temporal
+- domain_a: Caída del Testigo (Aborto)
+  domain_b: TOCTOU Fracture / Drop Estocástico
+- domain_a: Relevo Exitoso
+  domain_b: Commit Atómico C5-REAL
+
+7. Física Estadística, Teoría de Control e Inferencia Activa ↔ Inferencia Escalada (281–285):
+- domain_a: Energía Cinética Clásica ($E_k = \frac{1}{2}mv^2$)
+  domain_b: Cuello de Botella Cuadrático en Inferencia Larga (Kinetics Scaling Law)
+- domain_a: Control Predictivo por Modelo (MPC) / Control Óptimo Estocástico
+  domain_b: Búsqueda y Planificación en CoT de Largo Horizonte (Bucle Aletheia / MCTS)
+- domain_a: Inferencia Activa (Principio de Energía Libre de Friston / Incertidumbre Epistémica)
+  domain_b: Enrutamiento Adaptativo del Proceso Dual (System 1 vs System 2 / ODAR)
+- domain_a: Vidrios de Espín (Spin Glasses) y Funciones de Partición Termodinámicas
+  domain_b: Búsqueda en el Espacio de Estados de Razonamiento y Varentropía
+- domain_a: Sistema Dinámico Estocástico No Autónomo
+  domain_b: Propagación de Errores y Límite Físico del Espacio de Razonamiento

@@ -1,0 +1,2422 @@
+entities:
+- id: PRIM-EST-001
+  primitiva: Ruptura de Transitividad (Transitivity Break)
+  mecanismo_causal: El orden causal pierde a<c pese a existir a<b y b<c, rompiendo
+    el poset.
+  activacion_trigger: Composicion de relaciones sin cierre transitivo.
+  sensor_sintoma: Aserto a<b<c falla el test de closure.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Recalcular cierre transitivo y anclar en Ledger BFT.
+- id: PRIM-EST-002
+  primitiva: Ciclo Causal Cerrado (Closed Timelike Curve)
+  mecanismo_causal: Aparicion de un bucle a<b<...<a que viola la acyclicidad del DAG
+    causal.
+  activacion_trigger: Insercion de arista que retro-conecta un descendiente.
+  sensor_sintoma: Detector de ciclos reporta componente fuertemente conexo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Abortar mutacion; podar arista y forzar DAG estricto.
+- id: PRIM-EST-003
+  primitiva: Fallo de Antisimetria (Antisymmetry Failure)
+  mecanismo_causal: Coexisten a<b y b<a colapsando la distincion de precedencia.
+  activacion_trigger: Doble insercion simetrica sin arbitro de orden.
+  sensor_sintoma: Par (a,b) presente en ambas direcciones de la matriz.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Apoptosis del par; reasertar orden por reloj de nacimiento.
+- id: PRIM-EST-004
+  primitiva: Auto-enlace Reflexivo (Reflexive Self-Link)
+  mecanismo_causal: Un evento se relaciona consigo mismo (e<e) violando la irreflexividad.
+  activacion_trigger: Bucle degenerado en el generador de relaciones.
+  sensor_sintoma: Diagonal de la matriz causal distinta de cero.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Anular diagonal; irreflexividad como invariante P0.
+- id: PRIM-EST-005
+  primitiva: Fractura de Embedding Fiel (Faithful Embedding Fracture)
+  mecanismo_causal: El causet deja de admitir inmersion isometrica aproximada en variedad
+    alguna.
+  activacion_trigger: Sprinkling deformado o coarse-grain agresivo.
+  sensor_sintoma: Test de Hauptvermutung sin variedad candidata.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Rechazar causet no-manifoldlike; re-sprinklear.
+- id: PRIM-EST-006
+  primitiva: Divergencia del Estimador de Dimension (Myrheim-Meyer Divergence)
+  mecanismo_causal: El estimador de dimension de ordenamiento diverge o da valor no
+    fisico.
+  activacion_trigger: Fraccion de relaciones fuera del rango de continuum.
+  sensor_sintoma: Dimension estimada -> inf o negativa.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Cruzar con estimador de cadena; descartar region.
+- id: PRIM-EST-007
+  primitiva: Sobredensidad de Sprinkling (Sprinkling Overdensity)
+  mecanismo_causal: Region con densidad de puntos muy superior a rho, sesgando el
+    volumen.
+  activacion_trigger: Realizacion de Poisson con cluster local.
+  sensor_sintoma: Conteo local >> rho*V esperado.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Re-muestrear; validar homogeneidad estadistica.
+- id: PRIM-EST-008
+  primitiva: Subdensidad de Sprinkling (Sprinkling Void)
+  mecanismo_causal: Vacio de puntos que finge una region sin eventos causales.
+  activacion_trigger: Fluctuacion negativa de Poisson.
+  sensor_sintoma: Celda con N=0 donde rho*V>1.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Aumentar ensemble; promediar realizaciones.
+- id: PRIM-EST-009
+  primitiva: Ruptura de Lorentz por Reticula (Lattice Lorentz Breaking)
+  mecanismo_causal: Uso implicito de reticula regular que fija un frame preferido.
+  activacion_trigger: Discretizacion periodica del espacio-tiempo.
+  sensor_sintoma: Anisotropia direccional en conteos de intervalos.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Sustituir reticula por sprinkling de Poisson.
+- id: PRIM-EST-010
+  primitiva: Cadena Infinita No Acotada (Unbounded Chain)
+  mecanismo_causal: Existe una cadena descendente sin minimo, negando el pasado finito.
+  activacion_trigger: Falta de elemento minimal en un ramal.
+  sensor_sintoma: Test de local finiteness no termina.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Imponer pasado finito; truncar en frontera inicial.
+- id: PRIM-EST-011
+  primitiva: Explosion de Anticadena (Antichain Explosion)
+  mecanismo_causal: Un 'momento de tiempo' contiene demasiados eventos espacialoides.
+  activacion_trigger: Foliacion con rebanada demasiado gruesa.
+  sensor_sintoma: Ancho (Dilworth) crece sin cota.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Refinar foliacion; acotar grosor del presente.
+- id: PRIM-EST-012
+  primitiva: Perdida de Local Finiteness (Local Finiteness Loss)
+  mecanismo_causal: El intervalo [x,y] contiene cardinalidad infinita, rompiendo la
+    discretez.
+  activacion_trigger: Densidad divergente entre dos eventos.
+  sensor_sintoma: card[x,y] no acotado.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Rechazar region; reimponer rho finito.
+- id: PRIM-EST-013
+  primitiva: Fallo Volumen-Numero (Volume-Number Mismatch)
+  mecanismo_causal: Se rompe la proporcion N ~ rho*V que ancla el volumen al conteo.
+  activacion_trigger: Sprinkling no uniforme o rho mal calibrado.
+  sensor_sintoma: Regresion N vs V con residuo alto.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Recalibrar rho; reasertar correspondencia.
+- id: PRIM-EST-014
+  primitiva: Corrupcion del Diagrama de Hasse (Hasse Corruption)
+  mecanismo_causal: La reduccion transitiva incluye enlaces redundantes o pierde coberturas.
+  activacion_trigger: Reduccion transitiva mal computada.
+  sensor_sintoma: Enlace presente con camino alternativo mayor.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Recomputar reduccion transitiva canonica.
+- id: PRIM-EST-015
+  primitiva: Enlace Fantasma (Phantom Link)
+  mecanismo_causal: Existe relacion sin enlace de cobertura que la soporte.
+  activacion_trigger: Insercion de arista larga sin intermediarios.
+  sensor_sintoma: Relacion sin testigo de camino minimal.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reconstruir enlaces desde el orden.
+- id: PRIM-EST-016
+  primitiva: Falta de Enlace de Cobertura (Missing Cover)
+  mecanismo_causal: Dos eventos consecutivos carecen del link de cobertura esperado.
+  activacion_trigger: Poda excesiva de aristas.
+  sensor_sintoma: Intervalo de longitud 1 vacio sin link.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Restaurar link de cobertura minimal.
+- id: PRIM-EST-017
+  primitiva: Deriva del Cono de Luz (Light-Cone Tilt)
+  mecanismo_causal: El cono de luz local se inclina, sesgando quien puede causar a
+    quien.
+  activacion_trigger: Curvatura mal representada o frame arrastrado.
+  sensor_sintoma: Asimetria pasado/futuro por evento.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Reanclar cono nulo a la estructura conforme.
+- id: PRIM-EST-018
+  primitiva: Degeneracion del Cono Nulo (Null Cone Degeneration)
+  mecanismo_causal: El cono nulo colapsa y la separacion nula deja de discriminar.
+  activacion_trigger: Signatura al borde de degenerar.
+  sensor_sintoma: Distancia nula indistinguible de temporaloide.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regularizar metrica; restaurar signatura Lorentz.
+- id: PRIM-EST-019
+  primitiva: Inversion de Signatura Metrica (Signature Flip)
+  mecanismo_causal: La metrica pasa de Lorentziana (-+++) a Euclidea, matando la causalidad.
+  activacion_trigger: Continuacion de Wick indebida en region fisica.
+  sensor_sintoma: Autovalor temporal cambia de signo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Rotacion inversa; fijar signatura fisica.
+- id: PRIM-EST-020
+  primitiva: Fractura de Orden Causal (Causal Order Fracture)
+  mecanismo_causal: El orden parcial se fragmenta en relaciones inconsistentes.
+  activacion_trigger: Mutaciones concurrentes sin arbitro BFT.
+  sensor_sintoma: Matriz causal no es poset valido.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reconstruir poset desde log append-only.
+- id: PRIM-EST-021
+  primitiva: Ambiguedad Pasado/Futuro (Time-Orientation Loss)
+  mecanismo_causal: Se pierde la orientacion temporal global; futuro y pasado se confunden.
+  activacion_trigger: Falta de campo de tiempo coherente.
+  sensor_sintoma: Cono sin etiqueta de orientacion.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Fijar orientacion temporal global.
+- id: PRIM-EST-022
+  primitiva: No Orientabilidad Temporal (Non-Time-Orientability)
+  mecanismo_causal: La variedad subyacente no admite orientacion temporal continua.
+  activacion_trigger: Topologia con banda de Mobius temporal.
+  sensor_sintoma: Transporte de cono invierte el futuro.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Rechazar topologia; exigir orientabilidad.
+- id: PRIM-EST-023
+  primitiva: Colapso del Diamante Causal (Causal Diamond Collapse)
+  mecanismo_causal: El intervalo de Alexandrov [x,y] se vacia pese a x<y.
+  activacion_trigger: Densidad local nula entre dos eventos.
+  sensor_sintoma: card(I(x,y))=0 con x<y verdadero.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reponer densidad; validar diamante no vacio.
+- id: PRIM-EST-024
+  primitiva: Explosion del Diamante Causal (Causal Diamond Blow-up)
+  mecanismo_causal: El intervalo de Alexandrov crece sin cota util para la localidad.
+  activacion_trigger: Sobredensidad dentro del diamante.
+  sensor_sintoma: Cardinalidad de intervalo fuera de escala.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Coarse-grain controlado del intervalo.
+- id: PRIM-EST-025
+  primitiva: Fallo de Limite Continuo (Continuum Limit Failure)
+  mecanismo_causal: No existe coarse-graining que aproxime una variedad suave.
+  activacion_trigger: Causet tipico de Kleitman-Rothschild.
+  sensor_sintoma: Sin variedad al aumentar rho.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Restringir al sub-ensemble manifoldlike.
+- id: PRIM-EST-026
+  primitiva: Rugosidad de Coarse-Graining (Coarse-Graining Roughness)
+  mecanismo_causal: El decimado introduce enlaces espurios que deforman la geometria.
+  activacion_trigger: Decimado uniforme ciego.
+  sensor_sintoma: Curvatura discreta con ruido tras decimar.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Decimado por sprinkling secundario, no uniforme.
+- id: PRIM-EST-027
+  primitiva: Divergencia de la Accion BD (Benincasa-Dowker Blow-up)
+  mecanismo_causal: La accion causal discreta diverge por falta de amortiguacion no
+    local.
+  activacion_trigger: Uso de accion BD sin suavizado mesoescala.
+  sensor_sintoma: Fluctuaciones de accion ~ sqrt(N) dominan.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Introducir escala de suavizado no local.
+- id: PRIM-EST-028
+  primitiva: Ruido de Curvatura Discreta (Discrete Curvature Noise)
+  mecanismo_causal: El d'Alembertiano discreto arroja curvatura fluctuante sin senal.
+  activacion_trigger: Conteo de intervalos pequenos sin promediar.
+  sensor_sintoma: Ricci discreto oscila sin media estable.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Promediar sobre mesoescala; ensemble.
+- id: PRIM-EST-029
+  primitiva: No-localidad Patologica (Pathological Non-locality)
+  mecanismo_causal: El operador causal acopla eventos arbitrariamente lejanos.
+  activacion_trigger: Kernel BD sin corte de rango.
+  sensor_sintoma: Contribuciones no locales dominan la suma.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Amortiguar cola no local (epsilon-smearing).
+- id: PRIM-EST-030
+  primitiva: Inestabilidad del d'Alembertiano (Discrete d'Alembertian Instability)
+  mecanismo_causal: El operador de onda discreto no converge a su limite continuo.
+  activacion_trigger: Coeficientes de capas mal calibrados.
+  sensor_sintoma: Propagador discreto diverge de retardado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Recalibrar pesos por capa causal.
+- id: PRIM-EST-031
+  primitiva: Deriva de la Escala de Planck (Planck-Scale Drift)
+  mecanismo_causal: La escala de discretez fundamental deriva entre regiones.
+  activacion_trigger: rho no constante en el sprinkling.
+  sensor_sintoma: Longitud minima varia espacialmente.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Fijar rho como invariante global.
+- id: PRIM-EST-032
+  primitiva: Fractura de la Espuma (Spacetime Foam Tearing)
+  mecanismo_causal: La espuma espacio-temporal se desgarra en la microescala.
+  activacion_trigger: Fluctuaciones topologicas descontroladas.
+  sensor_sintoma: Genus local inestable.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Regularizar topologia a escala de Planck.
+- id: PRIM-EST-033
+  primitiva: Percolacion Causal Prematura (Premature Causal Percolation)
+  mecanismo_causal: El orden causal percola conectando todo prematuramente.
+  activacion_trigger: Densidad de relaciones sobre umbral critico.
+  sensor_sintoma: Componente causal gigante emerge pronto.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reducir fraccion de relaciones bajo umbral.
+- id: PRIM-EST-034
+  primitiva: Aislamiento de Nodo Causal (Causal Node Isolation)
+  mecanismo_causal: Un evento queda con pasado y futuro vacios (desconectado).
+  activacion_trigger: Sprinkling en region sin vecinos causales.
+  sensor_sintoma: Evento con grado causal 0.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Reconectar o purgar nodo huerfano.
+- id: PRIM-EST-035
+  primitiva: Proliferacion de Nodos Huerfanos (Orphan Element Proliferation)
+  mecanismo_causal: Exceso de elementos maximales/minimales sin linaje.
+  activacion_trigger: Fragmentacion del poset.
+  sensor_sintoma: Muchos maximales/minimales aislados.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Consolidar linaje; anclar a frontera.
+- id: PRIM-EST-036
+  primitiva: Bifurcacion de Genesis (Genesis Bifurcation)
+  mecanismo_causal: Multiples anticadenas minimales compiten como origen.
+  activacion_trigger: Varios 'Big Bang' minimales concurrentes.
+  sensor_sintoma: '>1 anticadena minimal sin ancestro.'
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Unificar origen; anticadena minimal unica.
+- id: PRIM-EST-037
+  primitiva: Fallo de Crecimiento Secuencial (Sequential Growth Failure)
+  mecanismo_causal: La probabilidad de transicion de Rideout-Sorkin queda mal definida.
+  activacion_trigger: Pesos de transicion no normalizados.
+  sensor_sintoma: Suma de transiciones distinta de 1.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Renormalizar probabilidades de nacimiento.
+- id: PRIM-EST-038
+  primitiva: Violacion de Covarianza Discreta (Discrete Covariance Violation)
+  mecanismo_causal: La fisica depende del etiquetado (orden de nacimiento).
+  activacion_trigger: Observables leen labels en vez de estructura.
+  sensor_sintoma: Resultado cambia al reetiquetar.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Marginalizar sobre extensiones lineales.
+- id: PRIM-EST-039
+  primitiva: Ruptura de Bell Causality (Bell Causality Breach)
+  mecanismo_causal: El crecimiento acopla probabilidades de eventos espacialoides.
+  activacion_trigger: Transicion depende de region no ancestral.
+  sensor_sintoma: Correlacion espacialoide en growth.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Imponer condicion de Bell en transiciones.
+- id: PRIM-EST-040
+  primitiva: Fallo de Covarianza General (General Covariance Failure)
+  mecanismo_causal: No hay analogo discreto de invariancia difeomorfica.
+  activacion_trigger: Observables no invariantes de orden.
+  sensor_sintoma: Dependencia de coordenada residual.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Definir observables invariantes de labeling.
+- id: PRIM-EST-041
+  primitiva: Dominancia de Kleitman-Rothschild (KR Order Dominance)
+  mecanismo_causal: El ensemble se domina por posets de 3 capas no fisicos.
+  activacion_trigger: Medida uniforme sobre posets.
+  sensor_sintoma: Fraccion KR -> 1 al crecer N.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Sesgar medida hacia manifoldlike.
+- id: PRIM-EST-042
+  primitiva: Colapso a Tres Capas (Three-Layer Collapse)
+  mecanismo_causal: El causet colapsa a la estructura tripartita de KR.
+  activacion_trigger: Ausencia de sesgo dinamico.
+  sensor_sintoma: Altura del poset = 3.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Dinamica que favorezca cadenas largas.
+- id: PRIM-EST-043
+  primitiva: Pinch por Post Causal (Causal Post Pinch)
+  mecanismo_causal: Un unico elemento por el que pasa todo el orden (cuello de botella).
+  activacion_trigger: Region que estrangula el flujo causal.
+  sensor_sintoma: Elemento con pasado y futuro totales.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Aliviar cuello; validar seccion transversal.
+- id: PRIM-EST-044
+  primitiva: Pinch Topologico (Topological Pinch)
+  mecanismo_causal: La geometria se estrangula a un punto, degenerando el volumen.
+  activacion_trigger: Colapso local de la seccion espacial.
+  sensor_sintoma: Volumen de rebanada -> 0.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Regularizar seccion; evitar degeneracion.
+- id: PRIM-EST-045
+  primitiva: Fractura de Conectividad Causal (Causal Connectivity Fracture)
+  mecanismo_causal: El poset se parte en componentes causalmente disjuntos.
+  activacion_trigger: Perdida de relaciones puente.
+  sensor_sintoma: '>1 componente causal.'
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reconstruir puentes o declarar multiverso controlado.
+- id: PRIM-EST-046
+  primitiva: Isla Causal (Causal Island)
+  mecanismo_causal: Sub-causet aislado sin relacion con el resto del universo.
+  activacion_trigger: Sprinkling en region desconectada.
+  sensor_sintoma: Componente sin aristas externas.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Reconectar o aislar formalmente.
+- id: PRIM-EST-047
+  primitiva: Horizonte Espurio (Spurious Horizon)
+  mecanismo_causal: Emerge un horizonte causal artificial por artefacto de discretez.
+  activacion_trigger: Corte de sprinkling en region finita.
+  sensor_sintoma: Frontera causal sin causa fisica.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Extender region; validar horizonte fisico.
+- id: PRIM-EST-048
+  primitiva: Miscuenta de Molecula de Horizonte (Horizon Molecule Miscount)
+  mecanismo_causal: El conteo de 'moleculas' de horizonte no reproduce el area.
+  activacion_trigger: Definicion de molecula mal calibrada.
+  sensor_sintoma: Entropia != Area/4 en unidades de Planck.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Recalibrar definicion de molecula de horizonte.
+- id: PRIM-EST-049
+  primitiva: Deriva de Entropia de Enredo (Entanglement Entropy Drift)
+  mecanismo_causal: La entropia de enredo se aparta de la ley de area.
+  activacion_trigger: Truncamiento espectral del propagador.
+  sensor_sintoma: S crece como volumen, no como area.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regularizar con corte causal correcto.
+- id: PRIM-EST-050
+  primitiva: Fuga de Ley de Area (Area-Law Leak)
+  mecanismo_causal: La entropia filtra un termino de volumen sobre la ley de area.
+  activacion_trigger: Correlaciones de largo alcance no cortadas.
+  sensor_sintoma: Termino de volumen en el ajuste de S.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Reimponer corte de rango causal.
+- id: PRIM-EST-051
+  primitiva: Sobreconteo de Intervalos (Interval Overcount)
+  mecanismo_causal: La abundancia de intervalos pequenos se sobreestima.
+  activacion_trigger: Doble conteo en enumeracion de cadenas.
+  sensor_sintoma: n_k por encima del esperado de continuum.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Deduplicar; usar formula de abundancia.
+- id: PRIM-EST-052
+  primitiva: Sesgo de Distribucion de Intervalos (Interval Distribution Skew)
+  mecanismo_causal: La distribucion de tamanos de intervalo se sesga respecto al continuo.
+  activacion_trigger: Sprinkling no homogeneo.
+  sensor_sintoma: Histograma n_k desplazado.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Rehomogeneizar sprinkling.
+- id: PRIM-EST-053
+  primitiva: Cadena Maximal Rota (Broken Maximal Chain)
+  mecanismo_causal: La cadena mas larga (proxy de geodesica) se fragmenta.
+  activacion_trigger: Poda de enlaces de la cadena.
+  sensor_sintoma: Longitud de cadena cae abruptamente.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Restaurar enlaces de la cadena maximal.
+- id: PRIM-EST-054
+  primitiva: Deriva de la Geodesica Discreta (Discrete Geodesic Drift)
+  mecanismo_causal: La geodesica (cadena maxima) serpentea lejos de la recta continua.
+  activacion_trigger: Ruido de sprinkling en el tubo geodesico.
+  sensor_sintoma: Desviacion de la cadena vs geodesica continua.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Promediar sobre cadenas maximas.
+- id: PRIM-EST-055
+  primitiva: Fallo de Tiempo Propio (Proper-Time Estimator Failure)
+  mecanismo_causal: La relacion longitud-de-cadena ~ tiempo propio deja de valer.
+  activacion_trigger: Region de baja densidad o curva.
+  sensor_sintoma: Constante de proporcion inestable.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Recalibrar factor de longitud-cadena.
+- id: PRIM-EST-056
+  primitiva: Fuga de Frontera Temporaloide (Timelike Boundary Leak)
+  mecanismo_causal: La condicion de frontera temporaloide filtra informacion.
+  activacion_trigger: Frontera sin cierre causal.
+  sensor_sintoma: Flujo causal a traves de la frontera.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Cerrar frontera; imponer condiciones BFT.
+- id: PRIM-EST-057
+  primitiva: Fuga de Frontera Nula (Null Boundary Leak)
+  mecanismo_causal: La frontera nula (horizonte) no retiene el flujo esperado.
+  activacion_trigger: Definicion de frontera nula difusa.
+  sensor_sintoma: Perdida de flujo por la frontera nula.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Definir frontera nula por moleculas.
+- id: PRIM-EST-058
+  primitiva: Corrupcion de Topologia de Frontera (Boundary Topology Corruption)
+  mecanismo_causal: La topologia de la frontera causal se corrompe.
+  activacion_trigger: Coarse-grain que rasga la frontera.
+  sensor_sintoma: Genus de frontera inconsistente.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reconstruir frontera desde el bulk.
+- id: PRIM-EST-059
+  primitiva: Fallo de Reconstruccion Metrica (Metric Reconstruction Failure)
+  mecanismo_causal: No se recupera la metrica desde orden + numero.
+  activacion_trigger: Numero mal calibrado o orden incompleto.
+  sensor_sintoma: Metrica reconstruida inconsistente.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Reasertar orden y conteo; re-reconstruir.
+- id: PRIM-EST-060
+  primitiva: Ambiguedad Conforme No Fijada (Unfixed Conformal Ambiguity)
+  mecanismo_causal: El orden da la metrica solo hasta factor conforme, que no se fija.
+  activacion_trigger: Numero (volumen) ausente o erroneo.
+  sensor_sintoma: Factor conforme indeterminado.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Fijar factor conforme con el conteo N.
+- id: PRIM-EST-061
+  primitiva: Deriva del Factor Conforme (Conformal Factor Drift)
+  mecanismo_causal: El factor conforme deriva por miscuenta de volumen.
+  activacion_trigger: Densidad rho inconsistente.
+  sensor_sintoma: Volumen reconstruido deriva.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Reanclar rho; recalcular factor conforme.
+- id: PRIM-EST-062
+  primitiva: Ruptura Global del Poset (Global Poset Rupture)
+  mecanismo_causal: Los axiomas de orden parcial fallan a escala global.
+  activacion_trigger: Acumulacion de violaciones locales.
+  sensor_sintoma: Validador de poset global falla.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reconstruir poset global desde Ledger.
+- id: PRIM-EST-063
+  primitiva: Saturacion de Relaciones (Relation Saturation)
+  mecanismo_causal: El orden se acerca a un orden total (casi cadena unica).
+  activacion_trigger: Fraccion de relaciones -> 1.
+  sensor_sintoma: Ancho del poset -> 1.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Rechazar; el continuo exige dimension >1.
+- id: PRIM-EST-064
+  primitiva: Dilucion de Relaciones (Relation Dilution)
+  mecanismo_causal: El orden se acerca a una anticadena (casi sin relaciones).
+  activacion_trigger: Fraccion de relaciones -> 0.
+  sensor_sintoma: Altura del poset -> 1.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Rechazar; exigir estructura causal no trivial.
+- id: PRIM-EST-065
+  primitiva: Inconsistencia Link-Intervalo (Link-Interval Inconsistency)
+  mecanismo_causal: Existe link pero el intervalo de longitud 1 no esta vacio.
+  activacion_trigger: Enlace mal clasificado como cobertura.
+  sensor_sintoma: Link con elemento intermedio.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Reclasificar relacion; no es cobertura.
+- id: PRIM-EST-066
+  primitiva: Inconsistencia Link vs Relacion (Link vs Relation Inconsistency)
+  mecanismo_causal: Un link aparece sin relacion causal subyacente.
+  activacion_trigger: Corrupcion de la matriz de coberturas.
+  sensor_sintoma: Link sin entrada en cierre transitivo.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Reconstruir links desde el orden.
+- id: PRIM-EST-067
+  primitiva: Fallo del Cierre Transitivo (Transitive Closure Failure)
+  mecanismo_causal: El calculo de cierre transitivo no termina o es inconsistente.
+  activacion_trigger: Ciclo latente o memoria corrupta.
+  sensor_sintoma: Closure no idempotente.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Detectar ciclo; forzar DAG y recomputar.
+- id: PRIM-EST-068
+  primitiva: Explosion Combinatoria de Cierre (Closure Combinatorial Blow-up)
+  mecanismo_causal: El cierre transitivo escala O(N^3) y asfixia el computo.
+  activacion_trigger: N grande sin indexacion.
+  sensor_sintoma: Tiempo de closure fuera de presupuesto.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Usar closure incremental por capas.
+- id: PRIM-EST-069
+  primitiva: Deriva del Ordering Fraction (Ordering Fraction Drift)
+  mecanismo_causal: La fraccion de pares relacionados deriva del valor de continuum.
+  activacion_trigger: Sprinkling sesgado.
+  sensor_sintoma: r fuera del rango dimensional.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Rehomogeneizar; recalcular dimension.
+- id: PRIM-EST-070
+  primitiva: Dimension Fraccional Espuria (Spurious Fractal Dimension)
+  mecanismo_causal: La dimension estimada es no entera sin razon fisica.
+  activacion_trigger: Region multi-escala mal separada.
+  sensor_sintoma: Dimension = valor fractal.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Separar escalas; reestimar por region.
+- id: PRIM-EST-071
+  primitiva: Anomalia de Dimension Espectral (Spectral Dimension Anomaly)
+  mecanismo_causal: El flujo de dimension espectral se desvia del esperado UV->IR.
+  activacion_trigger: Propagador discreto mal definido.
+  sensor_sintoma: d_s no fluye a 2 en UV.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Recalibrar difusion sobre el causet.
+- id: PRIM-EST-072
+  primitiva: Reduccion UV Descontrolada (Uncontrolled UV Reduction)
+  mecanismo_causal: La reduccion dimensional UV se descontrola.
+  activacion_trigger: Escala UV sin regularizar.
+  sensor_sintoma: d_s < 2 en UV.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Imponer piso dimensional; regularizar UV.
+- id: PRIM-EST-073
+  primitiva: Desajuste Hausdorff-Espectral (Hausdorff-Spectral Mismatch)
+  mecanismo_causal: La dimension de Hausdorff no concuerda con la espectral.
+  activacion_trigger: Estructura no auto-similar.
+  sensor_sintoma: d_H != d_s sin transicion.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Reexaminar auto-similaridad de escala.
+- id: PRIM-EST-074
+  primitiva: Swerve de Momento (Momentum Swerve)
+  mecanismo_causal: La discretez induce difusion del momento de una particula (swerve).
+  activacion_trigger: Propagacion sobre sprinkling.
+  sensor_sintoma: Momento difunde sin fuerza.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Acotar coeficiente de swerve por rho.
+- id: PRIM-EST-075
+  primitiva: Deriva de Trayectoria por Swerve (Swerve Trajectory Drift)
+  mecanismo_causal: La trayectoria se desvia acumulativamente por swerves.
+  activacion_trigger: Difusion de momento integrada.
+  sensor_sintoma: Desviacion creciente de la geodesica.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Promediar swerve; validar coeficiente.
+- id: PRIM-EST-076
+  primitiva: Ruido de Poisson Dominante (Dominant Poisson Noise)
+  mecanismo_causal: Las fluctuaciones de Poisson enmascaran la senal geometrica.
+  activacion_trigger: Volumen de muestreo pequeno.
+  sensor_sintoma: Senal/ruido < 1 en conteos.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Aumentar volumen o ensemble.
+- id: PRIM-EST-077
+  primitiva: Fluctuacion de Numero (Number Fluctuation)
+  mecanismo_causal: El conteo N fluctua ~sqrt(N) en volumen fijo.
+  activacion_trigger: Naturaleza Poisson del sprinkling.
+  sensor_sintoma: Varianza de N = media de N.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Tratar N como estadistico, no exacto.
+- id: PRIM-EST-078
+  primitiva: Fallo de Autoconsistencia de Sprinkling (Sprinkling Self-Consistency
+    Failure)
+  mecanismo_causal: El proceso deja de ser Poisson (correlaciones internas).
+  activacion_trigger: Generador con memoria o sesgo.
+  sensor_sintoma: Test de Poisson rechazado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Reinstanciar proceso de Poisson puro.
+- id: PRIM-EST-079
+  primitiva: Correlacion Espuria de Sprinkling (Spurious Sprinkling Correlation)
+  mecanismo_causal: Los puntos muestran correlaciones que Poisson prohibe.
+  activacion_trigger: Semilla o RNG defectuoso.
+  sensor_sintoma: Funcion de correlacion != 0.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Cambiar RNG; validar independencia.
+- id: PRIM-EST-080
+  primitiva: Deriva de la Densidad Fundamental (Fundamental Density Drift)
+  mecanismo_causal: rho, la densidad de Planck, deriva del valor fijo.
+  activacion_trigger: Calibracion perdida entre regiones.
+  sensor_sintoma: rho local inconsistente.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Fijar rho global como invariante.
+- id: PRIM-EST-081
+  primitiva: Colapso de Jerarquia de Escalas (Scale Hierarchy Collapse)
+  mecanismo_causal: Se pierde la separacion UV/IR necesaria para el continuo.
+  activacion_trigger: Escalas UV e IR se solapan.
+  sensor_sintoma: Sin ventana de continuum.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reintroducir separacion de escalas.
+- id: PRIM-EST-082
+  primitiva: Fuga IR/UV (UV-IR Mixing Leak)
+  mecanismo_causal: Modos UV contaminan el IR y viceversa.
+  activacion_trigger: No-localidad sin corte.
+  sensor_sintoma: Acoplamiento UV-IR observable.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Corte causal mesoescala.
+- id: PRIM-EST-083
+  primitiva: Fractura del Markov de Crecimiento (Growth Markov Fracture)
+  mecanismo_causal: La cadena de Markov de crecimiento pierde la propiedad markoviana.
+  activacion_trigger: Transicion depende de historia lejana.
+  sensor_sintoma: Memoria en el proceso de nacimiento.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Restaurar transicion markoviana.
+- id: PRIM-EST-084
+  primitiva: Deriva de Probabilidad de Transicion (Transition Probability Drift)
+  mecanismo_causal: Los pesos de nacimiento derivan y desnormalizan la dinamica.
+  activacion_trigger: Parametros de acople sin control.
+  sensor_sintoma: Suma de probabilidades != 1.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Renormalizar; fijar acoples.
+- id: PRIM-EST-085
+  primitiva: Violacion de Covarianza en Growth (Growth Covariance Violation)
+  mecanismo_causal: El resultado del crecimiento depende del orden de etiquetado.
+  activacion_trigger: Observable lee orden de nacimiento.
+  sensor_sintoma: Dependencia de labeling en growth.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Marginalizar sobre ordenes de nacimiento.
+- id: PRIM-EST-086
+  primitiva: Ambiguedad de Temporalidad Interna (Internal Temporality Ambiguity)
+  mecanismo_causal: No se distingue cual pasado-conjunto es el 'ahora'.
+  activacion_trigger: Multiples stems compatibles.
+  sensor_sintoma: Presente indefinido.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Definir presente por anticadena maximal.
+- id: PRIM-EST-087
+  primitiva: Corrupcion del Stem (Stem Corruption)
+  mecanismo_causal: El pasado-conjunto (stem) deja de identificar univocamente al
+    elemento.
+  activacion_trigger: Dos elementos con mismo stem.
+  sensor_sintoma: Stem no inyectivo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reasertar teorema del stem.
+- id: PRIM-EST-088
+  primitiva: Ambiguedad de Reconstruccion por Stem (Stem Reconstruction Ambiguity)
+  mecanismo_causal: El teorema del stem no reconstruye la estructura de forma unica.
+  activacion_trigger: Stems degenerados.
+  sensor_sintoma: Reconstruccion multivaluada.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Anadir numero para desambiguar.
+- id: PRIM-EST-089
+  primitiva: No-Manifoldlikeness (Non-Manifoldlikeness)
+  mecanismo_causal: El causet no admite inmersion en ninguna variedad Lorentziana.
+  activacion_trigger: Estructura KR o aleatoria.
+  sensor_sintoma: Sin variedad al coarse-grain.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Descartar del ensemble fisico.
+- id: PRIM-EST-090
+  primitiva: Obstruccion de Embedding por Curvatura (Curvature Embedding Obstruction)
+  mecanismo_causal: La curvatura impide una inmersion fiel local.
+  activacion_trigger: Curvatura discreta excesiva.
+  sensor_sintoma: Residuo de inmersion alto.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Suavizar curvatura; reexaminar embedding.
+- id: PRIM-EST-091
+  primitiva: Deriva de Lambda Fluctuante (Fluctuating Lambda Drift)
+  mecanismo_causal: La constante cosmologica ~ +/-1/sqrt(V) deriva del modelo everpresent.
+  activacion_trigger: Volumen mal contado.
+  sensor_sintoma: Lambda fuera de ~1/sqrt(V).
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Recalibrar V; reasertar everpresent Lambda.
+- id: PRIM-EST-092
+  primitiva: Ruido de Lambda por Numero (Lambda Number Noise)
+  mecanismo_causal: El ruido de Lambda se descalibra respecto al conteo.
+  activacion_trigger: Fluctuacion de N no propagada.
+  sensor_sintoma: Varianza de Lambda erronea.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Propagar sqrt(N) a Lambda.
+- id: PRIM-EST-093
+  primitiva: Inestabilidad del Everpresent Lambda (Everpresent Lambda Instability)
+  mecanismo_causal: El modelo de Lambda siempre presente se vuelve inestable.
+  activacion_trigger: Realimentacion volumen-Lambda mal signada.
+  sensor_sintoma: Lambda diverge en la evolucion.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Estabilizar el acople volumen-Lambda.
+- id: PRIM-EST-094
+  primitiva: Fallo de Renormalizacion Causal (Causal RG Failure)
+  mecanismo_causal: El grupo de renormalizacion causal no fluye de forma consistente.
+  activacion_trigger: Coarse-grain no conmuta con dinamica.
+  sensor_sintoma: Flujo RG sin punto fijo.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Redefinir esquema de coarse-grain.
+- id: PRIM-EST-095
+  primitiva: Deriva del Poset Coarse-Grained (Coarse-Grained Poset Drift)
+  mecanismo_causal: El causet decimado pierde manifoldlikeness.
+  activacion_trigger: Decimado agresivo.
+  sensor_sintoma: Coarse poset no manifoldlike.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Decimar por sprinkling; validar embedding.
+- id: PRIM-EST-096
+  primitiva: Corrupcion de la Relacion de Descendencia (Descendant Relation Corruption)
+  mecanismo_causal: La relacion de descendencia deja de ser transitiva.
+  activacion_trigger: Aristas de descendencia inconsistentes.
+  sensor_sintoma: Descendencia sin transitividad.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Recomputar descendencia desde el orden.
+- id: PRIM-EST-097
+  primitiva: Explosion de Pasado/Futuro Exclusivo (Exclusive Past/Future Blow-up)
+  mecanismo_causal: La cardinalidad del pasado o futuro exclusivo explota.
+  activacion_trigger: Region ultra-densa.
+  sensor_sintoma: card(Past(e)) fuera de escala.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Coarse-grain; acotar cardinalidad.
+- id: PRIM-EST-098
+  primitiva: Colapso del Presente (Present Collapse)
+  mecanismo_causal: La anticadena engrosada que define el 'ahora' queda mal definida.
+  activacion_trigger: Grosor de presente inconsistente.
+  sensor_sintoma: Presente sin volumen definido.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Definir presente por grosor fijo.
+- id: PRIM-EST-099
+  primitiva: Deriva de la Foliacion Causal (Causal Foliation Drift)
+  mecanismo_causal: No existe funcion de tiempo global; la foliacion deriva.
+  activacion_trigger: Perdida de hiperbolicidad global.
+  sensor_sintoma: Sin superficie de Cauchy.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reimponer hiperbolicidad global.
+- id: PRIM-EST-100
+  primitiva: Fallo de Hiperbolicidad Global (Global Hyperbolicity Failure)
+  mecanismo_causal: Se pierde la superficie de Cauchy y la predictibilidad.
+  activacion_trigger: Aparicion de CTC o frontera interna.
+  sensor_sintoma: Sin rebanada de Cauchy.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Restaurar globalidad hiperbolica; podar CTC.
+- id: PRIM-COL-001
+  primitiva: Colision de Coincidencia de Eventos (Event Coincidence Collision)
+  mecanismo_causal: Dos eventos rociados caen en la misma coordenada, degenerando
+    el orden.
+  activacion_trigger: Sprinkling con puntos coincidentes.
+  sensor_sintoma: Distancia causal 0 entre eventos distintos.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Perturbar posicion; garantizar medida cero de coincidencia.
+- id: PRIM-COL-002
+  primitiva: Colision de Etiqueta (Label Collision)
+  mecanismo_causal: Dos elementos reciben el mismo label natural, rompiendo la biyeccion.
+  activacion_trigger: Contador de nacimiento reutilizado.
+  sensor_sintoma: Label duplicado en la extension lineal.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Reasignar labels unicos (UUID de elemento).
+- id: PRIM-COL-003
+  primitiva: Colision de Orden Espacial (Spacelike Order Collision)
+  mecanismo_causal: Dos eventos espacialoides son forzados a un orden causal falso.
+  activacion_trigger: Arbitro impone orden sobre concurrentes.
+  sensor_sintoma: Relacion entre par sin cono comun.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Restaurar concurrencia; no ordenar espacialoides.
+- id: PRIM-COL-004
+  primitiva: Colision de Conos de Luz (Light-Cone Overlap Collision)
+  mecanismo_causal: Conos de luz solapados generan contencion de precedencia.
+  activacion_trigger: Interseccion de conos sin arbitro.
+  sensor_sintoma: Ambiguedad de causa en la interseccion.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Resolver por cadena minimal comun.
+- id: PRIM-COL-005
+  primitiva: Colision de Diamantes Causales (Causal Diamond Collision)
+  mecanismo_causal: Intervalos de Alexandrov se intersecan de forma ambigua.
+  activacion_trigger: Diamantes con solape parcial.
+  sensor_sintoma: Elemento compartido con doble linaje.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Particionar solape; asignar por orden.
+- id: PRIM-COL-006
+  primitiva: Race Condition Causal (Causal Race Condition)
+  mecanismo_causal: Dos eventos concurrentes compiten por la precedencia.
+  activacion_trigger: Mutacion concurrente sin reloj.
+  sensor_sintoma: Orden no determinista entre corridas.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Reloj vectorial + arbitro BFT.
+- id: PRIM-COL-007
+  primitiva: Colision de Enlaces (Link Collision)
+  mecanismo_causal: Dos enlaces comparten extremos de forma ambigua.
+  activacion_trigger: Insercion doble de cobertura.
+  sensor_sintoma: Multigrafo en el Hasse.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Colapsar a link simple; deduplicar.
+- id: PRIM-COL-008
+  primitiva: Colision de Hash de Evento (Event Hash Collision)
+  mecanismo_causal: El hash de discretizacion mapea dos eventos al mismo bucket.
+  activacion_trigger: Funcion de hash debil.
+  sensor_sintoma: Dos eventos en misma celda hash.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Hash fuerte (BLAKE3) con salt de rho.
+- id: PRIM-COL-009
+  primitiva: Colision de Worldlines (Worldline Collision)
+  mecanismo_causal: Dos lineas de universo temporaloides se cruzan (caustica).
+  activacion_trigger: Enfoque geodesico.
+  sensor_sintoma: Interseccion de cadenas maximas.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Detectar caustica; regularizar enfoque.
+- id: PRIM-COL-010
+  primitiva: Caustica Causal (Causal Caustic)
+  mecanismo_causal: Foco de geodesicas que concentra eventos y satura el orden.
+  activacion_trigger: Curvatura convergente.
+  sensor_sintoma: Densidad de cruces divergente.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Suavizar; validar mas alla del foco.
+- id: PRIM-COL-011
+  primitiva: Colision de Frentes Nulos (Null Front Collision)
+  mecanismo_causal: Frentes de onda nula chocan formando choque causal.
+  activacion_trigger: Cruce de conos nulos.
+  sensor_sintoma: Discontinuidad en la frontera nula.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Modelar choque; conservar flujo nulo.
+- id: PRIM-COL-012
+  primitiva: Choque de Cascaras Nulas (Null Shell Shock)
+  mecanismo_causal: Cascaras nulas colisionan concentrando energia causal.
+  activacion_trigger: Colapso nulo convergente.
+  sensor_sintoma: Singularidad de cascara.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Regularizar cascara; corte causal.
+- id: PRIM-COL-013
+  primitiva: Colision de Cadenas Maximales (Maximal Chain Collision)
+  mecanismo_causal: Dos cadenas mas largas se cruzan y compiten como geodesica.
+  activacion_trigger: Degeneracion de longitud maxima.
+  sensor_sintoma: '>1 cadena maxima cruzada.'
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Promediar clase de geodesicas.
+- id: PRIM-COL-014
+  primitiva: Cruce de Geodesicas Discretas (Discrete Geodesic Crossing)
+  mecanismo_causal: Geodesicas discretas se intersecan fuera del continuo.
+  activacion_trigger: Ruido de sprinkling en tubos.
+  sensor_sintoma: Cruce sin foco fisico.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Ensemble de cadenas; suavizar.
+- id: PRIM-COL-015
+  primitiva: Colision de Anticadenas (Antichain Collision)
+  mecanismo_causal: Dos 'momentos de tiempo' se solapan indebidamente.
+  activacion_trigger: Foliaciones concurrentes.
+  sensor_sintoma: Elemento en dos anticadenas 'ahora'.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Foliacion unica; grosor consistente.
+- id: PRIM-COL-016
+  primitiva: Superposicion de Foliaciones (Foliation Superposition)
+  mecanismo_causal: Dos rebanados temporales conflictivos coexisten.
+  activacion_trigger: Sin funcion de tiempo global.
+  sensor_sintoma: Rebanadas incompatibles.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Elegir foliacion covariante o marginalizar.
+- id: PRIM-COL-017
+  primitiva: Colision en Celda de Planck (Planck-Cell Collision)
+  mecanismo_causal: Dos sprinkles caen en la misma celda fundamental.
+  activacion_trigger: Densidad local > 1/celda.
+  sensor_sintoma: Ocupacion de celda > 1.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Refinar; celda fundamental de ocupacion <=1.
+- id: PRIM-COL-018
+  primitiva: Contencion de Volumen Elemental (Elementary Volume Contention)
+  mecanismo_causal: Multiples eventos disputan el mismo cuanto de volumen.
+  activacion_trigger: Sobredensidad puntual.
+  sensor_sintoma: V_elem compartido.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Reasignar volumen por particion de Voronoi causal.
+- id: PRIM-COL-019
+  primitiva: Colision de Coordenadas Nulas (Null Coordinate Collision)
+  mecanismo_causal: Coordenadas nulas u=v degeneran la separacion.
+  activacion_trigger: Evento sobre el cono nulo exacto.
+  sensor_sintoma: Separacion nula ambigua.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Perturbar; medida cero para nulo exacto.
+- id: PRIM-COL-020
+  primitiva: Degeneracion de Par Nulo (Null Pair Degeneracy)
+  mecanismo_causal: Un par queda exactamente nulo, ni causal ni espacial.
+  activacion_trigger: Alineamiento con el cono.
+  sensor_sintoma: Clasificacion causal indefinida.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Regularizar; asignar por limite.
+- id: PRIM-COL-021
+  primitiva: Colision Pasado-Futuro (Past-Future Collision)
+  mecanismo_causal: Los conjuntos pasado y futuro de un evento se solapan.
+  activacion_trigger: Ciclo causal latente.
+  sensor_sintoma: Past(e) ∩ Future(e) != vacio.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Podar ciclo; disjuncion estricta P0.
+- id: PRIM-COL-022
+  primitiva: Interseccion Espuria Pasado/Futuro (Spurious Past/Future Intersection)
+  mecanismo_causal: Interseccion no fisica de pasado y futuro exclusivos.
+  activacion_trigger: Corrupcion de la matriz causal.
+  sensor_sintoma: Solape exclusivo detectado.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Reconstruir conjuntos desde el orden.
+- id: PRIM-COL-023
+  primitiva: Race de Transicion de Crecimiento (Growth Transition Race)
+  mecanismo_causal: Dos transiciones de nacimiento compiten simultaneamente.
+  activacion_trigger: Crecimiento paralelo sin serializar.
+  sensor_sintoma: Orden de nacimiento no determinista.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Serializar nacimientos; covarianza posterior.
+- id: PRIM-COL-024
+  primitiva: Colision de Nacimiento de Elemento (Element Birth Collision)
+  mecanismo_causal: Dos elementos nacen en el mismo paso, colisionando labels.
+  activacion_trigger: Growth concurrente.
+  sensor_sintoma: Dos elementos con misma edad.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Desempatar por regla covariante fija.
+- id: PRIM-COL-025
+  primitiva: Conflicto de Orden de Nacimiento (Birth-Order Conflict)
+  mecanismo_causal: El orden de nacimiento entra en conflicto con el orden causal.
+  activacion_trigger: Label < causal-antecesor.
+  sensor_sintoma: Inconsistencia edad vs precedencia.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: 'Reasertar: nacimiento respeta el pasado.'
+- id: PRIM-COL-026
+  primitiva: Colision de Post (Post Collision)
+  mecanismo_causal: Dos posts compiten por ser el cuello de botella causal.
+  activacion_trigger: Doble estrangulamiento.
+  sensor_sintoma: '>1 elemento post en region.'
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Validar unicidad de post o multiverso.
+- id: PRIM-COL-027
+  primitiva: Colision de Frontera (Boundary Collision)
+  mecanismo_causal: Dos componentes de frontera causal colisionan.
+  activacion_trigger: Coarse-grain que fusiona bordes.
+  sensor_sintoma: Bordes fusionados.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Separar bordes; reconstruir frontera.
+- id: PRIM-COL-028
+  primitiva: Fusion Espuria de Componentes (Spurious Component Merge)
+  mecanismo_causal: Componentes causales distintos se fusionan por artefacto.
+  activacion_trigger: Enlace espurio entre islas.
+  sensor_sintoma: Reduccion de numero de componentes.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Eliminar enlace espurio; revalidar.
+- id: PRIM-COL-029
+  primitiva: Colision de Islas Causales (Causal Island Collision)
+  mecanismo_causal: Islas causales antes disjuntas colisionan.
+  activacion_trigger: Densificacion de la region intermedia.
+  sensor_sintoma: Puente causal inesperado.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Auditar puente; confirmar causalidad.
+- id: PRIM-COL-030
+  primitiva: Contencion de Enlace de Cobertura (Cover Contention)
+  mecanismo_causal: Compiten varios candidatos a enlace de cobertura.
+  activacion_trigger: Multiples caminos minimales.
+  sensor_sintoma: Cobertura no unica.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Definir cobertura por minimalidad estricta.
+- id: PRIM-COL-031
+  primitiva: Colision de Coberturas Multiples (Multiple Cover Collision)
+  mecanismo_causal: Multiples coberturas colisionan sobre el mismo par.
+  activacion_trigger: Reduccion transitiva ambigua.
+  sensor_sintoma: Par con varias coberturas.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Canonizar reduccion transitiva.
+- id: PRIM-COL-032
+  primitiva: Choque de Intervalos de Longitud 1 (Length-1 Interval Clash)
+  mecanismo_causal: Intervalos de longitud 1 chocan por ambiguedad de link.
+  activacion_trigger: Link mal clasificado.
+  sensor_sintoma: Intervalo unitario no vacio.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Reclasificar; solo links son unitarios.
+- id: PRIM-COL-033
+  primitiva: Colision de Reloj Vectorial (Vector-Clock Collision)
+  mecanismo_causal: Dos relojes vectoriales resultan iguales para eventos concurrentes.
+  activacion_trigger: Concurrencia real.
+  sensor_sintoma: Vectores identicos, orden indefinido.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Aceptar concurrencia; no forzar orden.
+- id: PRIM-COL-034
+  primitiva: Empate de Reloj Logico (Logical-Clock Tie)
+  mecanismo_causal: Timestamps de Lamport empatan entre eventos.
+  activacion_trigger: Reloj escalar insuficiente.
+  sensor_sintoma: Timestamps iguales.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Desempatar por ID; o usar reloj vectorial.
+- id: PRIM-COL-035
+  primitiva: Colision de Timestamp de Evento (Event Timestamp Collision)
+  mecanismo_causal: Dos eventos comparten timestamp fisico.
+  activacion_trigger: Resolucion temporal finita.
+  sensor_sintoma: Timestamps colisionan.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Aumentar resolucion; anclar a orden causal.
+- id: PRIM-COL-036
+  primitiva: Race de Asercion BFT de Orden (BFT Ordering Assertion Race)
+  mecanismo_causal: Nodos BFT asertan ordenes distintos concurrentemente.
+  activacion_trigger: Quorum sin lider.
+  sensor_sintoma: Aserciones de orden divergentes.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Consenso por quorum N=3; lider rotativo.
+- id: PRIM-COL-037
+  primitiva: Colision de Consenso de Precedencia (Precedence Consensus Collision)
+  mecanismo_causal: El quorum se divide sobre quien precede a quien.
+  activacion_trigger: Particion de red BFT.
+  sensor_sintoma: Quorum split en precedencia.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Re-quorum; resolver por regla determinista.
+- id: PRIM-COL-038
+  primitiva: Split-Brain Causal (Causal Split-Brain)
+  mecanismo_causal: Dos historias afirman ser el pasado autoritativo.
+  activacion_trigger: Particion sin arbitro.
+  sensor_sintoma: Dos Ledgers de orden divergentes.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reconciliar por regla de mayor altura.
+- id: PRIM-COL-039
+  primitiva: Colision de Rama de Historia (History Branch Collision)
+  mecanismo_causal: Dos ramas de historia colisionan al reconvergir.
+  activacion_trigger: Merge de historias divergentes.
+  sensor_sintoma: Conflicto de orden en el merge.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Merge causal three-way por ancestros.
+- id: PRIM-COL-040
+  primitiva: Fusion Conflictiva de Ramas (Conflicting Branch Merge)
+  mecanismo_causal: Ramas causales divergentes producen merge inconsistente.
+  activacion_trigger: Reconvergencia sin ancestro comun.
+  sensor_sintoma: Merge con ciclos.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Rechazar merge que induzca ciclo.
+- id: PRIM-COL-041
+  primitiva: Colision de Merge de Poset (Poset Merge Conflict)
+  mecanismo_causal: La union de dos posets viola la transitividad.
+  activacion_trigger: Union ingenua de ordenes.
+  sensor_sintoma: Union no es poset.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Cierre transitivo de la union; validar.
+- id: PRIM-COL-042
+  primitiva: Contencion de Cierre Transitivo (Closure Contention)
+  mecanismo_causal: Dos procesos recomputan el cierre y colisionan en escritura.
+  activacion_trigger: Recomputo concurrente.
+  sensor_sintoma: Estado de closure inconsistente.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Bloqueo optimista + recomputo idempotente.
+- id: PRIM-COL-043
+  primitiva: Colision de Cache de Intervalo (Interval Cache Collision)
+  mecanismo_causal: Claves de cache de intervalos colisionan.
+  activacion_trigger: Namespace de cache debil.
+  sensor_sintoma: Intervalo A lee cache de B.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Prefijo por hash de par (x,y).
+- id: PRIM-COL-044
+  primitiva: Colision de Namespace de Evento (Event Namespace Clash)
+  mecanismo_causal: Dos eventos comparten identificador de namespace.
+  activacion_trigger: IDs no aislados.
+  sensor_sintoma: Colision de IDs.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Aislar namespace; IDs unicos globales.
+- id: PRIM-COL-045
+  primitiva: Colision de UUID de Elemento (Element UUID Collision)
+  mecanismo_causal: Dos elementos generan el mismo UUID.
+  activacion_trigger: RNG de UUID debil.
+  sensor_sintoma: UUID duplicado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: UUID v4 fuerte; detectar duplicado.
+- id: PRIM-COL-046
+  primitiva: Colision de Semilla de Sprinkling (Sprinkling Seed Collision)
+  mecanismo_causal: Dos regiones usan la misma semilla y producen realizaciones identicas.
+  activacion_trigger: Semilla reutilizada.
+  sensor_sintoma: Sprinklings identicos correlacionados.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Semilla unica por region; entropia fresca.
+- id: PRIM-COL-047
+  primitiva: Colision de Realizacion de Poisson (Poisson Realization Collision)
+  mecanismo_causal: Dos realizaciones independientes resultan identicas.
+  activacion_trigger: Espacio de semillas pequeno.
+  sensor_sintoma: Realizaciones iguales.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Ampliar espacio de semillas.
+- id: PRIM-COL-048
+  primitiva: Choque de Densidad Local (Local Density Spike Collision)
+  mecanismo_causal: Un pico de densidad local colisiona con la homogeneidad.
+  activacion_trigger: Cluster de Poisson.
+  sensor_sintoma: Pico de densidad.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Promediar ensemble; re-muestrear.
+- id: PRIM-COL-049
+  primitiva: Colision de Cluster de Eventos (Event Cluster Collision)
+  mecanismo_causal: Un cluster de eventos colapsa el orden local.
+  activacion_trigger: Aglomeracion de sprinkles.
+  sensor_sintoma: Cluster denso.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Coarse-grain el cluster.
+- id: PRIM-COL-050
+  primitiva: Aglomeracion Sobre-Densa (Over-Dense Clumping)
+  mecanismo_causal: Aglomeracion que excede rho colapsa la localidad.
+  activacion_trigger: Fluctuacion positiva extrema.
+  sensor_sintoma: Densidad >> rho.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Rechazar realizacion; re-sprinklear.
+- id: PRIM-COL-051
+  primitiva: Colision de Momento por Swerve (Swerve Momentum Collision)
+  mecanismo_causal: El swerve empuja momentos a colisionar en el espacio de fases.
+  activacion_trigger: Difusion de momento.
+  sensor_sintoma: Colision en espacio de momento.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Acotar swerve; conservar momento medio.
+- id: PRIM-COL-052
+  primitiva: Choque de Difusion de Momento (Momentum Diffusion Clash)
+  mecanismo_causal: Difusiones de momento de particulas vecinas chocan.
+  activacion_trigger: Swerves correlacionados.
+  sensor_sintoma: Correlacion de momento espuria.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Independizar swerves por particula.
+- id: PRIM-COL-053
+  primitiva: Colision Particula-Causet (Particle-Causet Collision)
+  mecanismo_causal: Una linea de universo intersecta un elemento rociado.
+  activacion_trigger: Propagacion sobre el causet.
+  sensor_sintoma: Dispersion en elemento.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Modelar dispersion; o propagacion promedio.
+- id: PRIM-COL-054
+  primitiva: Dispersion Espuria por Discretez (Spurious Discreteness Scattering)
+  mecanismo_causal: La particula dispersa falsamente contra el sprinkling.
+  activacion_trigger: Acople particula-sprinkle fuerte.
+  sensor_sintoma: Dispersion sin potencial.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Reducir acople; propagacion efectiva.
+- id: PRIM-COL-055
+  primitiva: Colision de Horizonte (Horizon Collision)
+  mecanismo_causal: Dos horizontes causales colisionan (fusion tipo agujero negro).
+  activacion_trigger: Aproximacion de dos horizontes.
+  sensor_sintoma: Fusion de fronteras nulas.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Modelar fusion; conservar area total.
+- id: PRIM-COL-056
+  primitiva: Fusion de Moleculas de Horizonte (Horizon Molecule Merge)
+  mecanismo_causal: Moleculas de horizonte se fusionan y se recuentan mal.
+  activacion_trigger: Merge de horizontes.
+  sensor_sintoma: Conteo de moleculas inconsistente.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Recontar moleculas post-fusion.
+- id: PRIM-COL-057
+  primitiva: Doble Conteo de Entropia de Area (Area-Entropy Double Count)
+  mecanismo_causal: La entropia de area se cuenta dos veces en la fusion.
+  activacion_trigger: Solape de horizontes.
+  sensor_sintoma: S_total > suma esperada.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Descontar solape; area neta.
+- id: PRIM-COL-058
+  primitiva: Choque de Superficies de Cauchy (Cauchy Surface Clash)
+  mecanismo_causal: Dos superficies de Cauchy candidatas colisionan.
+  activacion_trigger: Foliaciones incompatibles.
+  sensor_sintoma: Cauchy no unica.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Elegir foliacion covariante.
+- id: PRIM-COL-059
+  primitiva: Colision de Funcion de Tiempo Global (Global Time Function Collision)
+  mecanismo_causal: Dos funciones de tiempo global entran en conflicto.
+  activacion_trigger: Sin tiempo canonico.
+  sensor_sintoma: Gradientes de tiempo cruzados.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Marginalizar sobre tiempos; covarianza.
+- id: PRIM-COL-060
+  primitiva: Contencion de Slicing (Slicing Contention)
+  mecanismo_causal: Dos rebanados ADM disputan la seccion espacial.
+  activacion_trigger: Foliaciones ADM concurrentes.
+  sensor_sintoma: Secciones incompatibles.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Fijar lapse/shift; o promediar.
+- id: PRIM-COL-061
+  primitiva: Colision de Foliacion ADM (ADM Foliation Collision)
+  mecanismo_causal: Foliaciones ADM colisionan en la region de solape.
+  activacion_trigger: Solape de cartas ADM.
+  sensor_sintoma: Doble seccion espacial.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Empalmar cartas ADM consistentemente.
+- id: PRIM-COL-062
+  primitiva: Race de Actualizacion de Relacion (Relation Update Race)
+  mecanismo_causal: Dos escrituras concurrentes a la matriz causal colisionan.
+  activacion_trigger: Mutacion concurrente sin lock.
+  sensor_sintoma: Entrada de matriz inconsistente.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Escritura serializada; CAS atomico.
+- id: PRIM-COL-063
+  primitiva: Colision de Escritura de Matriz Causal (Causal Matrix Write Collision)
+  mecanismo_causal: Escrituras a la misma celda de la matriz causal chocan.
+  activacion_trigger: Concurrencia en la matriz.
+  sensor_sintoma: Celda con valor corrupto.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Bloqueo de celda; log append-only.
+- id: PRIM-COL-064
+  primitiva: Deadlock de Orden Parcial (Partial-Order Deadlock)
+  mecanismo_causal: Dos procesos esperan mutuamente por relaciones de orden.
+  activacion_trigger: Espera circular de aserciones.
+  sensor_sintoma: Procesos bloqueados >60s.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Timeout + apoptosis; romper espera.
+- id: PRIM-COL-065
+  primitiva: Interbloqueo Causal (Causal Deadlock)
+  mecanismo_causal: A espera a B y B espera a A via aserciones de orden.
+  activacion_trigger: Dependencia circular de orden.
+  sensor_sintoma: Ciclo de espera.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Detectar ciclo; kill signal.
+- id: PRIM-COL-066
+  primitiva: Colision de Bloqueo de Diamante (Diamond Lock Contention)
+  mecanismo_causal: Contencion por bloqueo del mismo diamante causal.
+  activacion_trigger: Dos procesos mutan un intervalo.
+  sensor_sintoma: Lock del diamante disputado.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Lock granular por intervalo.
+- id: PRIM-COL-067
+  primitiva: Contencion de Recurso en Intervalo (Interval Resource Contention)
+  mecanismo_causal: Recursos asociados a un intervalo se disputan.
+  activacion_trigger: Acceso concurrente al intervalo.
+  sensor_sintoma: Estado de intervalo inconsistente.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Serializar acceso por intervalo.
+- id: PRIM-COL-068
+  primitiva: Colision de Conteo de Caminos (Path-Count Collision)
+  mecanismo_causal: La enumeracion de caminos cuenta el mismo dos veces.
+  activacion_trigger: Enumeracion sin deduplicar.
+  sensor_sintoma: n_caminos sobreestimado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Memoizar; deduplicar caminos.
+- id: PRIM-COL-069
+  primitiva: Doble Conteo de Caminos (Path Double-Counting)
+  mecanismo_causal: Caminos equivalentes se cuentan por separado.
+  activacion_trigger: Falta de canonizacion.
+  sensor_sintoma: Conteo inflado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Canonizar caminos por secuencia de labels.
+- id: PRIM-COL-070
+  primitiva: Colision de Suma de Accion (Action Sum Collision)
+  mecanismo_causal: Terminos de la accion causal colisionan en el acumulador.
+  activacion_trigger: Suma no asociativa por punto flotante.
+  sensor_sintoma: Accion depende del orden de suma.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Suma Kahan; orden fijo.
+- id: PRIM-COL-071
+  primitiva: Interferencia de Amplitud de Camino (Path Amplitude Interference)
+  mecanismo_causal: Amplitudes de caminos interfieren y colisionan en la suma.
+  activacion_trigger: Fases mal alineadas.
+  sensor_sintoma: Cancelacion espuria.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Regularizar fases; suma sobre historias controlada.
+- id: PRIM-COL-072
+  primitiva: Colision de Suma sobre Historias (Sum-over-Histories Collision)
+  mecanismo_causal: Terminos de la suma sobre causets colisionan.
+  activacion_trigger: Historias no distinguidas.
+  sensor_sintoma: Doble conteo de historias.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Cociente por automorfismos.
+- id: PRIM-COL-073
+  primitiva: Colision de Fase Cuantica (Quantum Phase Collision)
+  mecanismo_causal: Fases de exp(iS) colisionan destructivamente sin control.
+  activacion_trigger: Accion mal regularizada.
+  sensor_sintoma: Cancelacion total espuria.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regularizar S; contorno de integracion.
+- id: PRIM-COL-074
+  primitiva: Choque de Amplitudes Destructivo (Destructive Amplitude Clash)
+  mecanismo_causal: Amplitudes se cancelan destructivamente por artefacto.
+  activacion_trigger: Interferencia no fisica.
+  sensor_sintoma: Amplitud neta ~0 espuria.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Revisar medida; suma covariante.
+- id: PRIM-COL-075
+  primitiva: Colision de Bucket de Coarse-Grain (Coarse-Grain Bucket Collision)
+  mecanismo_causal: Dos elementos caen en el mismo bucket de decimado.
+  activacion_trigger: Bucket demasiado grueso.
+  sensor_sintoma: Fusion no deseada.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Refinar bucket; decimar por Poisson.
+- id: PRIM-COL-076
+  primitiva: Contencion de Bin de Renormalizacion (RG Bin Contention)
+  mecanismo_causal: Bins del RG causal colisionan al reagrupar.
+  activacion_trigger: Esquema de bin ambiguo.
+  sensor_sintoma: Elemento en dos bins.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Bin exclusivo; particion estricta.
+- id: PRIM-COL-077
+  primitiva: Colision de Nodo en Poset Grueso (Coarse Poset Node Collision)
+  mecanismo_causal: Nodos del poset decimado colisionan.
+  activacion_trigger: Decimado que fusiona nodos.
+  sensor_sintoma: Nodo grueso con doble origen.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Trazabilidad de origen; validar.
+- id: PRIM-COL-078
+  primitiva: Fusion Espuria por Coarse-Graining (Spurious Coarse-Grain Merge)
+  mecanismo_causal: El decimado fusiona eventos causalmente distintos.
+  activacion_trigger: Bucket cruza frontera causal.
+  sensor_sintoma: Merge que rompe el orden.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Respetar orden al decimar.
+- id: PRIM-COL-079
+  primitiva: Colision de Frontera de Bloque (Block Boundary Collision)
+  mecanismo_causal: Eventos en la frontera de bloques de decimado colisionan.
+  activacion_trigger: Ambiguedad de asignacion de bloque.
+  sensor_sintoma: Evento en dos bloques.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Regla de frontera determinista.
+- id: PRIM-COL-080
+  primitiva: Colision de Indice de Elemento (Element Index Collision)
+  mecanismo_causal: Indices de array para elementos colisionan.
+  activacion_trigger: Reuso de indice.
+  sensor_sintoma: Dos elementos, mismo indice.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Indice unico; realocar array.
+- id: PRIM-COL-081
+  primitiva: Colision de Bit en Bitset de Relacion (Relation Bitset Collision)
+  mecanismo_causal: Bits de la relacion causal colisionan por indexado.
+  activacion_trigger: Mapeo (i,j) a bit ambiguo.
+  sensor_sintoma: Bit compartido por dos pares.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Indexado biyectivo (i,j)->bit.
+- id: PRIM-COL-082
+  primitiva: Colision de Hash de Poset (Poset Hash Collision)
+  mecanismo_causal: El hash canonico de dos causets no isomorfos coincide.
+  activacion_trigger: Invariante de hash debil.
+  sensor_sintoma: Hash igual, estructura distinta.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Hash canonico completo (nauty).
+- id: PRIM-COL-083
+  primitiva: Colision de Isomorfismo de Causet (Causet Isomorphism Collision)
+  mecanismo_causal: Dos causets se declaran isomorfos por error.
+  activacion_trigger: Test de isomorfismo incompleto.
+  sensor_sintoma: Falso positivo de isomorfismo.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Certificado canonico completo.
+- id: PRIM-COL-084
+  primitiva: Falso Isomorfismo (False Isomorphism)
+  mecanismo_causal: Un mapeo parcial se toma como isomorfismo total.
+  activacion_trigger: Verificacion de aristas incompleta.
+  sensor_sintoma: Aristas no preservadas.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Verificar preservacion total del orden.
+- id: PRIM-COL-085
+  primitiva: Colision de Automorfismo (Automorphism Collision)
+  mecanismo_causal: Automorfismos del causet se cuentan de mas.
+  activacion_trigger: Grupo de simetria mal calculado.
+  sensor_sintoma: card(Aut) sobreestimado.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Recalcular grupo de automorfismos.
+- id: PRIM-COL-086
+  primitiva: Contencion de Grupo de Simetria (Symmetry Group Contention)
+  mecanismo_causal: El grupo de simetria se disputa entre generadores.
+  activacion_trigger: Generadores redundantes.
+  sensor_sintoma: Grupo con relaciones dobles.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Base minima de generadores.
+- id: PRIM-COL-087
+  primitiva: Colision de Orbita de Etiquetado (Labeling Orbit Collision)
+  mecanismo_causal: Orbitas de etiquetado colisionan bajo el grupo de simetria.
+  activacion_trigger: Etiquetados equivalentes no fusionados.
+  sensor_sintoma: Orbita duplicada.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Cociente por el grupo de simetria.
+- id: PRIM-COL-088
+  primitiva: Colision de Etiquetado Natural (Natural Labeling Collision)
+  mecanismo_causal: Dos etiquetados naturales validos colisionan.
+  activacion_trigger: Extensiones lineales multiples.
+  sensor_sintoma: Labelings compatibles distintos.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Marginalizar; ninguno es preferido.
+- id: PRIM-COL-089
+  primitiva: Conflicto de Extension Lineal (Linear Extension Conflict)
+  mecanismo_causal: Dos extensiones lineales del poset entran en conflicto operativo.
+  activacion_trigger: Codigo asume extension unica.
+  sensor_sintoma: Resultado depende de extension.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Invariancia sobre extensiones lineales.
+- id: PRIM-COL-090
+  primitiva: Colision de Ordenamiento Topologico (Topological Sort Collision)
+  mecanismo_causal: El desempate del orden topologico colisiona.
+  activacion_trigger: Multiples ordenes topologicos.
+  sensor_sintoma: Salida no determinista.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Desempate estable y documentado.
+- id: PRIM-COL-091
+  primitiva: Empate de Ordenamiento Topologico (Topological Sort Tie)
+  mecanismo_causal: Empate en el orden topologico entre concurrentes.
+  activacion_trigger: Concurrencia real.
+  sensor_sintoma: Tie en la cola de listos.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Aceptar concurrencia; orden estable.
+- id: PRIM-COL-092
+  primitiva: Colision de Frontera de Region (Region Boundary Collision)
+  mecanismo_causal: Sprinkles en la frontera de la region de muestreo colisionan.
+  activacion_trigger: Region con borde ambiguo.
+  sensor_sintoma: Punto en dos regiones.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regla semiabierta [a,b).
+- id: PRIM-COL-093
+  primitiva: Colision de Borde de Caja (Sampling Box Edge Collision)
+  mecanismo_causal: Puntos en el borde de la caja de muestreo se doblan.
+  activacion_trigger: Borde inclusivo en ambos lados.
+  sensor_sintoma: Doble inclusion en el borde.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Convencion semiabierta; deduplicar.
+- id: PRIM-COL-094
+  primitiva: Doble Inclusion en Frontera (Boundary Double-Inclusion)
+  mecanismo_causal: Un evento frontera se incluye en dos particiones.
+  activacion_trigger: Frontera compartida cerrada.
+  sensor_sintoma: Evento contado dos veces.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Asignar frontera a una sola particion.
+- id: PRIM-COL-095
+  primitiva: Colision en Junta de Parche (Patch Junction Collision)
+  mecanismo_causal: Eventos en la junta de dos parches de variedad colisionan.
+  activacion_trigger: Solape de cartas.
+  sensor_sintoma: Evento con doble carta.
+  escala_temporal: Inmediata
+  gravedad: C4
+  intervencion: Empalme de cartas con particion de unidad.
+- id: PRIM-COL-096
+  primitiva: Choque de Atlas (Atlas Overlap Clash)
+  mecanismo_causal: Cartas del atlas se solapan de forma inconsistente.
+  activacion_trigger: Transiciones de carta mal definidas.
+  sensor_sintoma: Coordenadas dobles.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Funciones de transicion consistentes.
+- id: PRIM-COL-097
+  primitiva: Colision de Transicion de Carta (Chart Transition Collision)
+  mecanismo_causal: Las funciones de transicion entre cartas colisionan.
+  activacion_trigger: Solape con mapas incompatibles.
+  sensor_sintoma: Transicion no invertible.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Redefinir transiciones difeomorfas.
+- id: PRIM-COL-098
+  primitiva: Colision de Cono Truncado (Truncated Cone Collision)
+  mecanismo_causal: La truncacion del cono causal colisiona con eventos frontera.
+  activacion_trigger: Corte del cono en region finita.
+  sensor_sintoma: Eventos en el corte duplicados.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Corte causal limpio; deduplicar.
+- id: PRIM-COL-099
+  primitiva: Colision de Corte de Diamante (Diamond Truncation Collision)
+  mecanismo_causal: El truncado del diamante causal colisiona en el borde.
+  activacion_trigger: Corte de intervalo en frontera.
+  sensor_sintoma: Elementos de borde ambiguos.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Regla de borde para el diamante.
+- id: PRIM-COL-100
+  primitiva: Colision de Infinitos Conformes (Conformal Infinity Collision)
+  mecanismo_causal: Puntos del infinito conforme pasado/futuro se fusionan.
+  activacion_trigger: Compactificacion conforme degenerada.
+  sensor_sintoma: i+ e i- identificados.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Separar puntos de infinito conforme.
+- id: INV-GCM-001
+  invariante: Invarianza de Lorentz Local
+  logica___principio: El sprinkling de Poisson es el unico proceso que no distingue
+    un frame; la discretez no crea frame preferido.
+  implicacion_operacional: Prohibida toda reticula regular; solo muestreo aleatorio
+    de Poisson.
+  condicion_de_borde: Reticula periodica en uso.
+  metrica_falsable: Anisotropia direccional de intervalos = 0.
+- id: INV-GCM-002
+  invariante: Conservacion del Orden Causal
+  logica___principio: La relacion de precedencia < es la estructura fundamental y
+    no puede alterarse retroactivamente.
+  implicacion_operacional: Toda mutacion solo anade al futuro; el pasado es inmutable.
+  condicion_de_borde: Reescritura del orden pasado.
+  metrica_falsable: Hash del pasado en t0 == en t1.
+- id: INV-GCM-003
+  invariante: Acyclicidad (DAG)
+  logica___principio: No existen bucles causales; el causet es un grafo aciclico dirigido.
+  implicacion_operacional: Prohibidas las CTC; toda arista va de pasado a futuro.
+  condicion_de_borde: Ciclo detectado.
+  metrica_falsable: Numero de ciclos == 0.
+- id: INV-GCM-004
+  invariante: Antisimetria del Orden
+  logica___principio: Si a<b entonces nunca b<a.
+  implicacion_operacional: El arbitro de orden rechaza pares simetricos.
+  condicion_de_borde: Par simetrico presente.
+  metrica_falsable: Pares (a,b) con ambos sentidos == 0.
+- id: INV-GCM-005
+  invariante: Transitividad
+  logica___principio: Si a<b y b<c entonces a<c, de forma absoluta.
+  implicacion_operacional: El cierre transitivo se mantiene idempotente.
+  condicion_de_borde: Aserto transitivo falla.
+  metrica_falsable: Violaciones de transitividad == 0.
+- id: INV-GCM-006
+  invariante: Irreflexividad
+  logica___principio: Ningun evento se precede a si mismo.
+  implicacion_operacional: La diagonal de la matriz causal es nula.
+  condicion_de_borde: e<e detectado.
+  metrica_falsable: Traza de la matriz causal == 0.
+- id: INV-GCM-007
+  invariante: Local Finiteness
+  logica___principio: Todo intervalo [x,y] contiene un numero finito de elementos.
+  implicacion_operacional: La discretez es fundamental, no aproximada.
+  condicion_de_borde: card[x,y] infinito.
+  metrica_falsable: Cardinalidad de intervalo < infinito siempre.
+- id: INV-GCM-008
+  invariante: Correspondencia Volumen-Numero
+  logica___principio: 'El numero de elementos equivale al volumen espacio-temporal:
+    N ~ rho*V.'
+  implicacion_operacional: El conteo ancla el volumen; no se postula metrica aparte.
+  condicion_de_borde: N/V != rho.
+  metrica_falsable: Regresion N vs V con pendiente rho.
+- id: INV-GCM-009
+  invariante: Covarianza General Discreta
+  logica___principio: La fisica no depende del etiquetado de los elementos.
+  implicacion_operacional: Observables invariantes bajo reetiquetado.
+  condicion_de_borde: Resultado cambia al reetiquetar.
+  metrica_falsable: Delta de observable bajo relabel == 0.
+- id: INV-GCM-010
+  invariante: Conservacion de rho
+  logica___principio: La densidad fundamental de Planck es una constante universal.
+  implicacion_operacional: rho fijo en todo el sprinkling.
+  condicion_de_borde: rho local varia.
+  metrica_falsable: Varianza de rho entre regiones == 0.
+- id: INV-GCM-011
+  invariante: Invarianza de la Escala de Planck
+  logica___principio: Existe una longitud minima invariante l_P = rho^(-1/4).
+  implicacion_operacional: Ninguna estructura por debajo de l_P.
+  condicion_de_borde: Estructura sub-Planck.
+  metrica_falsable: Escala minima observada = l_P.
+- id: INV-GCM-012
+  invariante: Orientacion Temporal
+  logica___principio: Existe una asignacion global continua de futuro y pasado.
+  implicacion_operacional: Cada cono lleva etiqueta de orientacion coherente.
+  condicion_de_borde: Cono sin orientacion.
+  metrica_falsable: Campo de orientacion continuo verificado.
+- id: INV-GCM-013
+  invariante: Distincion Pasado/Futuro
+  logica___principio: Los conjuntos pasado y futuro de un evento son disjuntos.
+  implicacion_operacional: Past(e) ∩ Future(e) = vacio siempre.
+  condicion_de_borde: Solape pasado/futuro.
+  metrica_falsable: Interseccion pasado/futuro == vacio.
+- id: INV-GCM-014
+  invariante: Estructura Conforme del Orden
+  logica___principio: El orden causal determina la metrica hasta un factor conforme
+    (Malament).
+  implicacion_operacional: La geometria conforme se lee del orden.
+  condicion_de_borde: Orden incompleto.
+  metrica_falsable: Metrica conforme reconstruida consistente.
+- id: INV-GCM-015
+  invariante: Numero Fija el Volumen
+  logica___principio: El conteo N fija el factor conforme que el orden deja libre.
+  implicacion_operacional: orden + numero = geometria completa.
+  condicion_de_borde: Numero ausente.
+  metrica_falsable: Factor conforme determinado por N.
+- id: INV-GCM-016
+  invariante: Signatura Lorentziana
+  logica___principio: La metrica es Lorentziana (-+++), no Euclidea.
+  implicacion_operacional: Prohibida continuacion de Wick en region fisica.
+  condicion_de_borde: Signatura Euclidea.
+  metrica_falsable: Un autovalor temporal negativo.
+- id: INV-GCM-017
+  invariante: Estructura de Cono de Luz
+  logica___principio: Cada evento posee cono de luz que separa causal de espacial.
+  implicacion_operacional: La separacion causal se define por el cono.
+  condicion_de_borde: Cono degenerado.
+  metrica_falsable: Clasificacion causal/espacial bien definida.
+- id: INV-GCM-018
+  invariante: Hiperbolicidad Global
+  logica___principio: Existe una superficie de Cauchy; el sistema es predictible.
+  implicacion_operacional: Toda region tiene rebanada de Cauchy.
+  condicion_de_borde: CTC o frontera interna.
+  metrica_falsable: Existe superficie de Cauchy.
+- id: INV-GCM-019
+  invariante: Invarianza de la Accion BD bajo Relabel
+  logica___principio: La accion de Benincasa-Dowker es invariante de etiquetado.
+  implicacion_operacional: S_BD funcion solo del orden y numero.
+  condicion_de_borde: S depende de labels.
+  metrica_falsable: Delta S bajo relabel == 0.
+- id: INV-GCM-020
+  invariante: Curvatura Escalar Discreta Media
+  logica___principio: La media de la curvatura discreta converge a la escalar continua.
+  implicacion_operacional: Coarse-grain recupera Ricci continuo.
+  condicion_de_borde: Media de curvatura deriva.
+  metrica_falsable: <R_discreto> -> R_continuo.
+- id: INV-GCM-021
+  invariante: Invarianza del Estimador de Dimension
+  logica___principio: La dimension de Myrheim-Meyer es un invariante estadistico del
+    orden.
+  implicacion_operacional: Dimension leida de la fraccion de relaciones.
+  condicion_de_borde: r fuera de rango.
+  metrica_falsable: d estimada estable en ensemble.
+- id: INV-GCM-022
+  invariante: Conservacion del Ordering Fraction
+  logica___principio: La fraccion de pares relacionados codifica la dimension.
+  implicacion_operacional: r es funcion monotona de la dimension.
+  condicion_de_borde: r inconsistente.
+  metrica_falsable: r reproduce d conocido.
+- id: INV-GCM-023
+  invariante: Cadena Maximal ~ Tiempo Propio
+  logica___principio: La longitud de la cadena mas larga estima el tiempo propio.
+  implicacion_operacional: Geodesica temporaloide = cadena maxima.
+  condicion_de_borde: Constante de proporcion deriva.
+  metrica_falsable: Longitud de cadena / tiempo propio estable.
+- id: INV-GCM-024
+  invariante: Abundancia de Intervalos
+  logica___principio: La distribucion de tamanos de intervalo es un invariante geometrico.
+  implicacion_operacional: n_k codifica dimension y curvatura.
+  condicion_de_borde: n_k desplazado.
+  metrica_falsable: Histograma n_k reproduce continuum.
+- id: INV-GCM-025
+  invariante: Invarianza de Poisson bajo Isometria
+  logica___principio: El proceso de sprinkling es invariante bajo isometrias del continuo.
+  implicacion_operacional: La estadistica no cambia bajo el grupo de isometrias.
+  condicion_de_borde: Sprinkling anisotropo.
+  metrica_falsable: Estadistica invariante bajo isometria.
+- id: INV-GCM-026
+  invariante: Independencia Estadistica del Sprinkling
+  logica___principio: Los puntos se rocian de forma independiente (proceso de Poisson).
+  implicacion_operacional: Sin correlaciones entre puntos.
+  condicion_de_borde: Correlacion de puntos != 0.
+  metrica_falsable: Funcion de correlacion de 2 puntos == 0.
+- id: INV-GCM-027
+  invariante: Numero Medio en Volumen
+  logica___principio: El numero esperado de elementos es rho*V.
+  implicacion_operacional: El volumen se mide contando.
+  condicion_de_borde: <N> != rho*V.
+  metrica_falsable: <N> = rho*V verificado.
+- id: INV-GCM-028
+  invariante: Fluctuacion de Poisson sqrt(N)
+  logica___principio: La varianza del conteo iguala la media (Poisson).
+  implicacion_operacional: N se trata como estadistico, no exacto.
+  condicion_de_borde: Var(N) != <N>.
+  metrica_falsable: Var(N)/<N> = 1.
+- id: INV-GCM-029
+  invariante: Idempotencia del Cierre Transitivo
+  logica___principio: Aplicar el cierre transitivo dos veces no cambia el orden.
+  implicacion_operacional: closure(closure(P)) = closure(P).
+  condicion_de_borde: Closure no idempotente.
+  metrica_falsable: Delta de segundo closure == 0.
+- id: INV-GCM-030
+  invariante: Idempotencia de la Reduccion Transitiva
+  logica___principio: La reduccion transitiva (Hasse) es unica e idempotente.
+  implicacion_operacional: El diagrama de Hasse es canonico.
+  condicion_de_borde: Reduccion no unica.
+  metrica_falsable: Reduccion estable y unica.
+- id: INV-GCM-031
+  invariante: Unicidad del Enlace de Cobertura
+  logica___principio: La relacion de cobertura esta determinada por el orden.
+  implicacion_operacional: Los links se derivan, no se postulan.
+  condicion_de_borde: Cobertura ambigua.
+  metrica_falsable: Links reconstruidos == links dados.
+- id: INV-GCM-032
+  invariante: Invarianza de Minimales/Maximales
+  logica___principio: El conjunto de elementos minimales y maximales es invariante
+    de isometria.
+  implicacion_operacional: Frontera inicial/final bien definida.
+  condicion_de_borde: Minimales inconsistentes.
+  metrica_falsable: Conteo de minimales invariante.
+- id: INV-GCM-033
+  invariante: Bell Causality en Growth
+  logica___principio: El crecimiento no acopla probabilidades de eventos espacialoides.
+  implicacion_operacional: Transiciones respetan la estructura causal.
+  condicion_de_borde: Correlacion espacialoide.
+  metrica_falsable: Correlacion de Bell == 0.
+- id: INV-GCM-034
+  invariante: Covarianza General en Sequential Growth
+  logica___principio: El orden de nacimiento (label) no afecta la fisica.
+  implicacion_operacional: 'Rideout-Sorkin: covarianza de etiquetado.'
+  condicion_de_borde: Fisica depende de nacimiento.
+  metrica_falsable: Observable invariante de orden de nacimiento.
+- id: INV-GCM-035
+  invariante: Normalizacion de Transiciones
+  logica___principio: Las probabilidades de nacimiento suman 1.
+  implicacion_operacional: La dinamica de growth es una medida de probabilidad.
+  condicion_de_borde: Suma != 1.
+  metrica_falsable: Suma de transiciones == 1.
+- id: INV-GCM-036
+  invariante: Markov de Crecimiento
+  logica___principio: La transicion depende solo del estado presente, no de la historia.
+  implicacion_operacional: Growth sin memoria.
+  condicion_de_borde: Memoria en el proceso.
+  metrica_falsable: Dependencia de historia lejana == 0.
+- id: INV-GCM-037
+  invariante: Lambda Everpresent ~ 1/sqrt(V)
+  logica___principio: La constante cosmologica fluctua como +/-1/sqrt(V) (Sorkin).
+  implicacion_operacional: Lambda emerge del conteo, no se ajusta a mano.
+  condicion_de_borde: Lambda fuera de 1/sqrt(V).
+  metrica_falsable: abs(Lambda) ~ 1/sqrt(V).
+- id: INV-GCM-038
+  invariante: Conservacion de la Fluctuacion de Lambda
+  logica___principio: La fluctuacion de Lambda se hereda de la de N.
+  implicacion_operacional: sqrt(N) se propaga a Lambda.
+  condicion_de_borde: Varianza de Lambda erronea.
+  metrica_falsable: Var(Lambda) consistente con Var(N).
+- id: INV-GCM-039
+  invariante: Ley de Area de Entropia
+  logica___principio: La entropia de horizonte escala con el area, no el volumen.
+  implicacion_operacional: S = A/4 en unidades de Planck.
+  condicion_de_borde: S ~ volumen.
+  metrica_falsable: Ajuste S vs A lineal.
+- id: INV-GCM-040
+  invariante: Conservacion de Moleculas de Horizonte
+  logica___principio: El numero de moleculas de horizonte es proporcional al area.
+  implicacion_operacional: Contar moleculas mide entropia.
+  condicion_de_borde: Conteo no lineal en A.
+  metrica_falsable: N_moleculas proporcional a A.
+- id: INV-GCM-041
+  invariante: Ley de Area de Enredo
+  logica___principio: La entropia de enredo obedece ley de area con corte causal.
+  implicacion_operacional: El corte causal regulariza el enredo.
+  condicion_de_borde: S ~ volumen.
+  metrica_falsable: S_enredo ~ A.
+- id: INV-GCM-042
+  invariante: Causalidad del Propagador
+  logica___principio: El propagador discreto es retardado (solo hacia el futuro).
+  implicacion_operacional: Sin senales hacia el pasado.
+  condicion_de_borde: Componente avanzada != 0.
+  metrica_falsable: Propagador avanzado == 0.
+- id: INV-GCM-043
+  invariante: Retardo del d'Alembertiano
+  logica___principio: El operador de onda discreto respeta la causalidad.
+  implicacion_operacional: B(x) suma solo sobre el pasado de x.
+  condicion_de_borde: Contribucion futura.
+  metrica_falsable: Soporte del operador en el pasado.
+- id: INV-GCM-044
+  invariante: Normalizacion de la Amplitud
+  logica___principio: La suma sobre causets esta normalizada (unitaridad).
+  implicacion_operacional: Probabilidades totales suman 1.
+  condicion_de_borde: Norma != 1.
+  metrica_falsable: norma(amplitud total) == 1.
+- id: INV-GCM-045
+  invariante: Invarianza de Fase bajo Relabel
+  logica___principio: La fase exp(iS) es invariante de etiquetado.
+  implicacion_operacional: S invariante -> fase invariante.
+  condicion_de_borde: Fase depende de labels.
+  metrica_falsable: Delta de fase bajo relabel == 0.
+- id: INV-GCM-046
+  invariante: Conservacion de la Medida sobre Causets
+  logica___principio: La medida sobre el espacio de causets es covariante.
+  implicacion_operacional: Sum-over-histories bien definida.
+  condicion_de_borde: Medida dependiente de labeling.
+  metrica_falsable: Medida invariante verificada.
+- id: INV-GCM-047
+  invariante: Invarianza de la Suma sobre Historias
+  logica___principio: La funcion de particion no depende de la parametrizacion.
+  implicacion_operacional: Z invariante bajo reetiquetado.
+  condicion_de_borde: Z depende de labels.
+  metrica_falsable: Delta Z bajo relabel == 0.
+- id: INV-GCM-048
+  invariante: Invarianza del Stem
+  logica___principio: El pasado-conjunto (stem) determina univocamente al elemento.
+  implicacion_operacional: Reconstruccion por stems inyectiva.
+  condicion_de_borde: Stems degenerados.
+  metrica_falsable: Stem -> elemento inyectivo.
+- id: INV-GCM-049
+  invariante: Teorema de Reconstruccion
+  logica___principio: Orden mas numero reconstruyen la geometria (hasta isometria).
+  implicacion_operacional: No se necesita informacion adicional.
+  condicion_de_borde: Reconstruccion multivaluada.
+  metrica_falsable: Geometria reconstruida unica.
+- id: INV-GCM-050
+  invariante: Manifoldlikeness (clase fisica)
+  logica___principio: Solo los causets fielmente inmersibles son fisicos.
+  implicacion_operacional: Se restringe el ensemble a manifoldlike.
+  condicion_de_borde: Causet KR en ensemble fisico.
+  metrica_falsable: Fraccion no-manifoldlike suprimida.
+- id: INV-GCM-051
+  invariante: Hauptvermutung
+  logica___principio: Un causet se inmerge en a lo sumo una variedad, salvo isometria
+    aproximada.
+  implicacion_operacional: La variedad emergente es esencialmente unica.
+  condicion_de_borde: Dos variedades no isometricas.
+  metrica_falsable: Variedad de inmersion unica.
+- id: INV-GCM-052
+  invariante: Conservacion de la Topologia de Frontera
+  logica___principio: La topologia de la frontera causal es invariante.
+  implicacion_operacional: Frontera reconstruible desde el bulk.
+  condicion_de_borde: Genus de frontera inconsistente.
+  metrica_falsable: Topologia de frontera estable.
+- id: INV-GCM-053
+  invariante: Dimension Espectral IR
+  logica___principio: La dimension espectral tiende a d en el IR.
+  implicacion_operacional: El continuo emerge a gran escala.
+  condicion_de_borde: d_s(IR) != d.
+  metrica_falsable: d_s -> d en el IR.
+- id: INV-GCM-054
+  invariante: Reduccion a d=2 en UV
+  logica___principio: La dimension espectral tiende a 2 en el UV.
+  implicacion_operacional: Reduccion dimensional universal.
+  condicion_de_borde: d_s(UV) != 2.
+  metrica_falsable: d_s -> 2 en el UV.
+- id: INV-GCM-055
+  invariante: Conservacion de la Dimension de Hausdorff
+  logica___principio: La dimension de Hausdorff es un invariante geometrico.
+  implicacion_operacional: Auto-similaridad controlada.
+  condicion_de_borde: d_H inestable.
+  metrica_falsable: d_H estable en el continuo.
+- id: INV-GCM-056
+  invariante: Invarianza del Limite Continuo
+  logica___principio: El limite rho -> infinito esta bien definido.
+  implicacion_operacional: Coarse-grain converge a variedad.
+  condicion_de_borde: Sin variedad limite.
+  metrica_falsable: Convergencia a variedad verificada.
+- id: INV-GCM-057
+  invariante: Localidad Aproximada Acotada
+  logica___principio: La no-localidad del causet esta acotada por una escala mesoescala.
+  implicacion_operacional: El operador BD se suaviza a escala l >> l_P.
+  condicion_de_borde: No-localidad divergente.
+  metrica_falsable: Rango efectivo acotado.
+- id: INV-GCM-058
+  invariante: Coeficiente de Swerve Acotado
+  logica___principio: La difusion de momento (swerve) esta acotada por rho.
+  implicacion_operacional: El swerve es minusculo a escala macro.
+  condicion_de_borde: Swerve macroscopico.
+  metrica_falsable: Coeficiente de swerve ~ 1/rho.
+- id: INV-GCM-059
+  invariante: Swerve de Media Cero
+  logica___principio: El swerve no sesga el momento medio.
+  implicacion_operacional: Difusion sin deriva neta.
+  condicion_de_borde: Deriva de momento != 0.
+  metrica_falsable: <delta p> == 0.
+- id: INV-GCM-060
+  invariante: Ausencia de Foliacion Preferida
+  logica___principio: No existe rebanado temporal privilegiado.
+  implicacion_operacional: Toda foliacion es igualmente valida (covarianza).
+  condicion_de_borde: Foliacion preferida en uso.
+  metrica_falsable: Observables invariantes de foliacion.
+- id: INV-GCM-061
+  invariante: Ausencia de Frame Preferido
+  logica___principio: Ningun sistema de referencia es privilegiado (Lorentz).
+  implicacion_operacional: El sprinkling garantiza isotropia estadistica.
+  condicion_de_borde: Frame preferido detectado.
+  metrica_falsable: Isotropia estadistica verificada.
+- id: INV-GCM-062
+  invariante: Consistencia de la Cadena de Growth
+  logica___principio: La cadena de Markov de crecimiento es consistente entre pasos.
+  implicacion_operacional: Las transiciones componen coherentemente.
+  condicion_de_borde: Inconsistencia entre pasos.
+  metrica_falsable: Composicion de transiciones valida.
+- id: INV-GCM-063
+  invariante: Invarianza bajo Automorfismo
+  logica___principio: El causet es invariante bajo su grupo de automorfismos.
+  implicacion_operacional: Las simetrias preservan el orden.
+  condicion_de_borde: Automorfismo rompe orden.
+  metrica_falsable: Aut preserva la relacion <.
+- id: INV-GCM-064
+  invariante: Conservacion del Grupo de Simetria
+  logica___principio: El grupo de simetria del causet es un invariante.
+  implicacion_operacional: card(Aut) bien definido y estable.
+  condicion_de_borde: card(Aut) inconsistente.
+  metrica_falsable: Grupo de automorfismos estable.
+- id: INV-GCM-065
+  invariante: Equivalencia de Extensiones Lineales
+  logica___principio: Toda extension lineal valida del poset es fisicamente equivalente.
+  implicacion_operacional: Ninguna extension es preferida.
+  condicion_de_borde: Resultado depende de extension.
+  metrica_falsable: Invariancia sobre extensiones lineales.
+- id: INV-GCM-066
+  invariante: Independencia del Etiquetado Natural
+  logica___principio: El etiquetado natural no aporta informacion fisica.
+  implicacion_operacional: Solo la estructura de orden importa.
+  condicion_de_borde: Dependencia de labeling.
+  metrica_falsable: Delta bajo relabel natural == 0.
+- id: INV-GCM-067
+  invariante: Conservacion de Longitud de Cadena (Coarse)
+  logica___principio: La longitud de cadena se conserva estadisticamente al decimar.
+  implicacion_operacional: Coarse-grain preserva la altura relativa.
+  condicion_de_borde: Altura no escala.
+  metrica_falsable: Longitud de cadena escala con rho.
+- id: INV-GCM-068
+  invariante: Manifoldlikeness bajo Coarse-Grain
+  logica___principio: El decimado preserva la clase manifoldlike (deseable).
+  implicacion_operacional: El RG conserva la variedad emergente.
+  condicion_de_borde: Coarse poset no-manifoldlike.
+  metrica_falsable: Inmersion fiel tras decimar.
+- id: INV-GCM-069
+  invariante: Conservacion de la Distribucion de Intervalos
+  logica___principio: La distribucion de cardinalidad de intervalos es invariante.
+  implicacion_operacional: n_k caracteriza la geometria.
+  condicion_de_borde: n_k deriva.
+  metrica_falsable: Distribucion n_k estable.
+- id: INV-GCM-070
+  invariante: Relacion Pasado/Futuro Exclusivo
+  logica___principio: Los conjuntos exclusivos de pasado y futuro particionan el causet.
+  implicacion_operacional: Cada evento clasifica al resto.
+  condicion_de_borde: Clasificacion incompleta.
+  metrica_falsable: Particion pasado/futuro/espacial completa.
+- id: INV-GCM-071
+  invariante: Conservacion del Volumen del Presente
+  logica___principio: El presente (anticadena engrosada) tiene volumen definido.
+  implicacion_operacional: El 'ahora' tiene grosor fijo.
+  condicion_de_borde: Presente sin volumen.
+  metrica_falsable: Volumen de presente estable.
+- id: INV-GCM-072
+  invariante: Transitividad de la Descendencia
+  logica___principio: La relacion de descendencia es transitiva.
+  implicacion_operacional: Descendiente de descendiente es descendiente.
+  condicion_de_borde: Descendencia no transitiva.
+  metrica_falsable: Violaciones de descendencia == 0.
+- id: INV-GCM-073
+  invariante: Metrica hasta Factor Conforme (Orden)
+  logica___principio: El orden fija la metrica salvo escala local.
+  implicacion_operacional: La causalidad da 9/10 de la metrica.
+  condicion_de_borde: Orden no fija conforme.
+  metrica_falsable: Metrica conforme derivada del orden.
+- id: INV-GCM-074
+  invariante: Invarianza de la Distancia Causal
+  logica___principio: La distancia causal (cadena maxima) es un invariante.
+  implicacion_operacional: Metrica temporaloide bien definida.
+  condicion_de_borde: Distancia inestable.
+  metrica_falsable: Distancia causal reproducible.
+- id: INV-GCM-075
+  invariante: Clase Unica de Geodesica
+  logica___principio: La geodesica discreta define una clase invariante de cadenas
+    maximas.
+  implicacion_operacional: El promedio de cadenas maximas es geodesico.
+  condicion_de_borde: Clase multivaluada sin promedio.
+  metrica_falsable: Cadena media converge a geodesica.
+- id: INV-GCM-076
+  invariante: Invarianza bajo Isomorfismo de Poset
+  logica___principio: Dos causets isomorfos son fisicamente identicos.
+  implicacion_operacional: Solo la clase de isomorfismo importa.
+  condicion_de_borde: Fisica distingue isomorfos.
+  metrica_falsable: Delta entre isomorfos == 0.
+- id: INV-GCM-077
+  invariante: Conservacion de la Cardinalidad N
+  logica___principio: El numero total de elementos es un invariante del estado.
+  implicacion_operacional: N no cambia salvo por growth.
+  condicion_de_borde: N cambia sin nacimiento.
+  metrica_falsable: N constante entre mutaciones.
+- id: INV-GCM-078
+  invariante: Fraccion de Relaciones -> Dimension
+  logica___principio: La fraccion de relaciones determina la dimension del continuo.
+  implicacion_operacional: r es el estimador primario de d.
+  condicion_de_borde: r inconsistente con d.
+  metrica_falsable: r(d) reproduce dimension.
+- id: INV-GCM-079
+  invariante: Ancho de Anticadena (Dilworth)
+  logica___principio: El ancho maximo de anticadena es un invariante del poset.
+  implicacion_operacional: 'Dilworth: ancho = min cobertura por cadenas.'
+  condicion_de_borde: Ancho inconsistente.
+  metrica_falsable: Ancho = min chain cover.
+- id: INV-GCM-080
+  invariante: Altura = Cadena Maxima (Mirsky)
+  logica___principio: La altura del poset iguala la longitud de la cadena maxima.
+  implicacion_operacional: 'Mirsky: altura = min cobertura por anticadenas.'
+  condicion_de_borde: Altura inconsistente.
+  metrica_falsable: Altura = min antichain cover.
+- id: INV-GCM-081
+  invariante: Aditividad del Volumen
+  logica___principio: El volumen de regiones disjuntas es aditivo (conteo).
+  implicacion_operacional: N(A U B) = N(A)+N(B) para disjuntos.
+  condicion_de_borde: No aditividad.
+  metrica_falsable: Conteo aditivo verificado.
+- id: INV-GCM-082
+  invariante: Invarianza de Poisson bajo Union Disjunta
+  logica___principio: El sprinkling en regiones disjuntas es independiente.
+  implicacion_operacional: Conteos disjuntos independientes.
+  condicion_de_borde: Correlacion entre regiones.
+  metrica_falsable: Covarianza entre disjuntos == 0.
+- id: INV-GCM-083
+  invariante: Causalidad Retardada del Campo
+  logica___principio: Los campos sobre el causet se propagan solo al futuro.
+  implicacion_operacional: Ecuaciones de campo retardadas.
+  condicion_de_borde: Propagacion al pasado.
+  metrica_falsable: Solucion avanzada == 0.
+- id: INV-GCM-084
+  invariante: Unitaridad del Causet Cuantico
+  logica___principio: La evolucion cuantica del causet conserva la probabilidad.
+  implicacion_operacional: Amplitudes normalizadas.
+  condicion_de_borde: Norma no conservada.
+  metrica_falsable: Norma cuantica constante.
+- id: INV-GCM-085
+  invariante: Monotonia del Pasado en Growth
+  logica___principio: El pasado de un elemento nunca decrece durante el crecimiento.
+  implicacion_operacional: El pasado solo crece.
+  condicion_de_borde: Pasado decrece.
+  metrica_falsable: card(Past(e)) monotono no decreciente.
+- id: INV-GCM-086
+  invariante: Acyclicidad bajo Growth
+  logica___principio: Cada nacimiento se anade al futuro, preservando la acyclicidad.
+  implicacion_operacional: El nuevo elemento no precede a los viejos.
+  condicion_de_borde: Nacimiento hacia el pasado.
+  metrica_falsable: Ciclos tras nacimiento == 0.
+- id: INV-GCM-087
+  invariante: Invarianza de Temporalidad Interna
+  logica___principio: La nocion de 'antes/despues' interna es intrinseca al orden.
+  implicacion_operacional: No se necesita reloj externo.
+  condicion_de_borde: Temporalidad ambigua.
+  metrica_falsable: Orden interno bien definido.
+- id: INV-GCM-088
+  invariante: Accion Discreta Media bajo Coarse-Grain
+  logica___principio: La media de la accion discreta se conserva al decimar.
+  implicacion_operacional: El RG preserva la accion efectiva.
+  condicion_de_borde: Accion media deriva.
+  metrica_falsable: <S> estable bajo coarse-grain.
+- id: INV-GCM-089
+  invariante: Correspondencia Orden-Metrica Conforme
+  logica___principio: El orden causal codifica exactamente la clase conforme de la
+    metrica.
+  implicacion_operacional: Causalidad determina angulos, no escalas.
+  condicion_de_borde: Orden no da conforme.
+  metrica_falsable: Clase conforme reconstruida.
+- id: INV-GCM-090
+  invariante: Invarianza Causal bajo Difeomorfismo
+  logica___principio: En el continuo, la estructura causal es invariante difeomorfica.
+  implicacion_operacional: Los difeos preservan conos de luz.
+  condicion_de_borde: Difeo altera causalidad.
+  metrica_falsable: Conos de luz invariantes bajo difeo.
+- id: INV-GCM-091
+  invariante: Teorema de Malament
+  logica___principio: Un isomorfismo causal implica una isometria conforme.
+  implicacion_operacional: La causalidad fija la geometria conforme.
+  condicion_de_borde: Iso causal sin iso conforme.
+  metrica_falsable: Malament verificado localmente.
+- id: INV-GCM-092
+  invariante: Estructura Causal = 9/10 de la Metrica
+  logica___principio: La estructura causal determina la metrica salvo el factor de
+    volumen.
+  implicacion_operacional: Falta solo el elemento de volumen (numero).
+  condicion_de_borde: Metrica indeterminada con orden.
+  metrica_falsable: Solo 1 grado (conforme) libre.
+- id: INV-GCM-093
+  invariante: Reconstruccion Metrica Completa
+  logica___principio: Estructura causal + elemento de volumen = metrica completa.
+  implicacion_operacional: orden (conforme) + numero (volumen) = g.
+  condicion_de_borde: Reconstruccion incompleta.
+  metrica_falsable: Metrica g reconstruida unica.
+- id: INV-GCM-094
+  invariante: Conservacion de la Poisson bajo Refinamiento
+  logica___principio: Subdividir la region no altera la naturaleza Poisson.
+  implicacion_operacional: El proceso es consistente a toda escala.
+  condicion_de_borde: Refinamiento rompe Poisson.
+  metrica_falsable: Poisson estable bajo refinamiento.
+- id: INV-GCM-095
+  invariante: Invarianza de la Densidad Espectral de Cadenas
+  logica___principio: La distribucion de longitudes de cadena es un invariante.
+  implicacion_operacional: Codifica dimension y curvatura.
+  condicion_de_borde: Distribucion deriva.
+  metrica_falsable: Espectro de cadenas estable.
+- id: INV-GCM-096
+  invariante: Conservacion de la Relacion de Enlace
+  logica___principio: La densidad de enlaces por elemento es un invariante dimensional.
+  implicacion_operacional: Grado de link codifica dimension.
+  condicion_de_borde: Grado inconsistente.
+  metrica_falsable: Grado medio de link estable.
+- id: INV-GCM-097
+  invariante: Invarianza del Numero de Ordenamiento
+  logica___principio: La probabilidad de que dos elementos esten relacionados es invariante.
+  implicacion_operacional: P(a<b) fija por la dimension.
+  condicion_de_borde: P(a<b) deriva.
+  metrica_falsable: Ordering fraction invariante.
+- id: INV-GCM-098
+  invariante: Conservacion de la Estructura de Poset bajo Growth
+  logica___principio: Las relaciones ya establecidas persisten durante el crecimiento.
+  implicacion_operacional: El growth solo anade, nunca borra relaciones.
+  condicion_de_borde: Relacion borrada en growth.
+  metrica_falsable: Relaciones preexistentes intactas.
+- id: INV-GCM-099
+  invariante: Principio de Causa Comun (Reichenbach)
+  logica___principio: Toda correlacion entre eventos espacialoides se explica por
+    una causa comun en su pasado conjunto.
+  implicacion_operacional: No hay correlaciones sin ancestro causal comun.
+  condicion_de_borde: Correlacion sin pasado comun.
+  metrica_falsable: Correlacion trazable a J^-(a) interseccion J^-(b).
+- id: INV-GCM-100
+  invariante: Invarianza Fundamental Causet-Continuo
+  logica___principio: La geometria del continuo emerge de las relaciones causales
+    discretas mas el conteo.
+  implicacion_operacional: Order + Number = Geometry (axioma nuclear).
+  condicion_de_borde: Emergencia fallida.
+  metrica_falsable: Continuo emergente reproducible.
+- id: ANTI-GCM-001
+  antipatron: Reticula Regular
+  disfuncion_causal: Discretizar en una reticula periodica introduce ejes preferidos
+    y destruye la invarianza de Lorentz.
+  senal_de_presencia: Uso de grid cubico, hipercubico o triangulacion regular como
+    'espacio-tiempo'.
+  impacto_en_robustez: Rompe INV Lorentz; anisotropia observable en todo estimador.
+  refactor_alternativa: Sprinkling de Poisson aleatorio; la aleatoriedad es la que
+    salva Lorentz.
+- id: ANTI-GCM-002
+  antipatron: Coordenadas Preferidas
+  disfuncion_causal: Anclar el modelo a un sistema de coordenadas concreto reintroduce
+    un frame absoluto.
+  senal_de_presencia: Observables que dependen de x,t elegidos en vez del orden.
+  impacto_en_robustez: Falso frame; predicciones no covariantes.
+  refactor_alternativa: Formular todo en terminos del orden < y el conteo N.
+- id: ANTI-GCM-003
+  antipatron: Tiempo Global Absoluto
+  disfuncion_causal: Asumir un tiempo newtoniano universal para rebanar el causet.
+  senal_de_presencia: Foliacion unica cableada como 'el tiempo'.
+  impacto_en_robustez: Viola covarianza; foliacion preferida.
+  refactor_alternativa: Marginalizar sobre foliaciones o usar tiempo intrinseco (altura).
+- id: ANTI-GCM-004
+  antipatron: Discretizacion Ingenua del Tiempo
+  disfuncion_causal: Time-stepping uniforme que trata el tiempo como una dimension
+    mas de reloj.
+  senal_de_presencia: Bucle de pasos temporales de tamano fijo.
+  impacto_en_robustez: Deriva de foliacion; artefactos de paso.
+  refactor_alternativa: Crecimiento secuencial covariante (Rideout-Sorkin).
+- id: ANTI-GCM-005
+  antipatron: Cierre Transitivo Perezoso
+  disfuncion_causal: Usar los enlaces (coberturas) como si fueran la relacion causal
+    completa.
+  senal_de_presencia: Consultar links en vez del cierre transitivo.
+  impacto_en_robustez: Relaciones causales perdidas; orden incompleto.
+  refactor_alternativa: Mantener y consultar el cierre transitivo del orden.
+- id: ANTI-GCM-006
+  antipatron: Confundir Enlace con Relacion
+  disfuncion_causal: Tratar la relacion de cobertura como la relacion de precedencia.
+  senal_de_presencia: '''a<b'' inferido solo si hay link directo.'
+  impacto_en_robustez: Transitividad rota en consultas.
+  refactor_alternativa: Distinguir link (cobertura) de relacion (orden).
+- id: ANTI-GCM-007
+  antipatron: Continuum Prematuro
+  disfuncion_causal: Asumir que el causet es manifoldlike antes de verificarlo.
+  senal_de_presencia: Reconstruir metrica sin test de inmersion fiel.
+  impacto_en_robustez: Geometria espuria sobre causet KR.
+  refactor_alternativa: Verificar manifoldlikeness antes de reconstruir.
+- id: ANTI-GCM-008
+  antipatron: Ignorar Fluctuaciones de Poisson
+  disfuncion_causal: Tratar el conteo N como exacto, olvidando la varianza sqrt(N).
+  senal_de_presencia: Usar N sin barras de error estadisticas.
+  impacto_en_robustez: Falsa precision; Lambda mal estimada.
+  refactor_alternativa: Propagar sqrt(N) a todo observable derivado.
+- id: ANTI-GCM-009
+  antipatron: Sprinkling Determinista
+  disfuncion_causal: Colocar puntos de forma determinista (regular o cuasi-aleatoria)
+    en vez de Poisson.
+  senal_de_presencia: Secuencias de baja discrepancia o mallas jitteadas.
+  impacto_en_robustez: Correlaciones espurias; Lorentz roto.
+  refactor_alternativa: Proceso de Poisson genuino con RNG fuerte.
+- id: ANTI-GCM-010
+  antipatron: Localidad Ingenua
+  disfuncion_causal: Asumir que operadores diferenciales son locales sobre el causet.
+  senal_de_presencia: d'Alembertiano de vecinos inmediatos sin suavizado.
+  impacto_en_robustez: No-localidad patologica; operador inestable.
+  refactor_alternativa: Operador BD no local amortiguado a mesoescala.
+- id: ANTI-GCM-011
+  antipatron: Etiquetado con Significado Fisico
+  disfuncion_causal: Atribuir sentido fisico al orden de nacimiento o a los labels.
+  senal_de_presencia: Observables funcion del label del elemento.
+  impacto_en_robustez: Viola covarianza general discreta.
+  refactor_alternativa: Solo la estructura de orden y el numero son fisicos.
+- id: ANTI-GCM-012
+  antipatron: Suma sobre Historias sin Regularizar
+  disfuncion_causal: Sumar sobre todos los causets con medida uniforme.
+  senal_de_presencia: Particion Z sin sesgo dinamico.
+  impacto_en_robustez: Dominan ordenes KR no fisicos; Z diverge.
+  refactor_alternativa: Accion + medida que suprima lo no-manifoldlike.
+- id: ANTI-GCM-013
+  antipatron: Ignorar Ordenes de Kleitman-Rothschild
+  disfuncion_causal: Olvidar que el poset aleatorio tipico es de 3 capas y no-manifoldlike.
+  senal_de_presencia: Muestrear posets uniformemente 'porque son causets'.
+  impacto_en_robustez: Ensemble dominado por basura no geometrica.
+  refactor_alternativa: Restringir o sesgar el ensemble a manifoldlike.
+- id: ANTI-GCM-014
+  antipatron: Dimension de un Solo Estimador
+  disfuncion_causal: Confiar en un unico estimador de dimension.
+  senal_de_presencia: Reportar dimension solo por Myrheim-Meyer.
+  impacto_en_robustez: Sesgo no detectado; dimension erronea.
+  refactor_alternativa: Cruzar estimadores (ordering fraction, cadena, midpoint).
+- id: ANTI-GCM-015
+  antipatron: Frontera Ignorada
+  disfuncion_causal: Omitir los terminos de frontera en la accion causal.
+  senal_de_presencia: Accion BD sin correccion de borde.
+  impacto_en_robustez: Accion sesgada; curvatura de borde perdida.
+  refactor_alternativa: Incluir terminos de frontera (Gibbons-Hawking discreto).
+- id: ANTI-GCM-016
+  antipatron: Accion sin Amortiguacion No Local
+  disfuncion_causal: Usar la accion BD cruda sin suavizado de escala intermedia.
+  senal_de_presencia: Sumar sobre capas sin epsilon-smearing.
+  impacto_en_robustez: Fluctuaciones ~sqrt(N) ahogan la senal.
+  refactor_alternativa: Introducir escala de no-localidad l >> l_P.
+- id: ANTI-GCM-017
+  antipatron: Coarse-Graining Uniforme Ciego
+  disfuncion_causal: Decimar por bloques uniformes ignorando la estructura causal.
+  senal_de_presencia: Agrupar por celdas de coordenadas fijas.
+  impacto_en_robustez: Rompe el orden; fusiones espurias.
+  refactor_alternativa: Decimar por un segundo sprinkling (RG causal).
+- id: ANTI-GCM-018
+  antipatron: Geodesica como Linea Recta
+  disfuncion_causal: Asumir que la geodesica es una recta coordenada, no la cadena
+    maxima.
+  senal_de_presencia: Medir distancia por coordenadas en vez de longest chain.
+  impacto_en_robustez: Distancia causal erronea; metrica falsa.
+  refactor_alternativa: Geodesica = clase de cadenas maximas.
+- id: ANTI-GCM-019
+  antipatron: Reconstruccion Metrica sin Numero
+  disfuncion_causal: Recuperar la metrica solo del orden, olvidando el volumen.
+  senal_de_presencia: Derivar g sin usar el conteo N.
+  impacto_en_robustez: Factor conforme indeterminado.
+  refactor_alternativa: orden (conforme) + numero (volumen) = metrica.
+- id: ANTI-GCM-020
+  antipatron: Causalidad como Post-Proceso
+  disfuncion_causal: Construir la geometria primero y anadir causalidad despues.
+  senal_de_presencia: Metrica postulada y conos derivados a posteriori.
+  impacto_en_robustez: Invierte el axioma; causalidad no fundamental.
+  refactor_alternativa: La causalidad (el orden) es el dato primario; la geometria
+    emerge.
+- id: RED-GCM-001
+  redundancia_c5: Ensemble de Sprinklings
+  funcion_topologica: Promedia observables sobre multiples realizaciones de Poisson
+    para cancelar fluctuaciones.
+  riesgo_mitigado: Ruido de Poisson dominante; correlacion espuria de sprinkling.
+  coste_overhead: N_realizaciones x computo y almacenamiento.
+  dependencias: RNG fuerte, semillas independientes.
+- id: RED-GCM-002
+  redundancia_c5: Estimadores de Dimension Redundantes
+  funcion_topologica: Cruza multiples estimadores de dimension y exige consenso.
+  riesgo_mitigado: Divergencia del estimador; dimension fractal espuria.
+  coste_overhead: Computo de varios estimadores por region.
+  dependencias: Ordering fraction, cadena, midpoint-scaling.
+- id: RED-GCM-003
+  redundancia_c5: Suavizado No Local Mesoescala
+  funcion_topologica: Amortigua el operador BD sobre una escala intermedia para estabilizar
+    la accion.
+  riesgo_mitigado: Divergencia de la accion BD; no-localidad patologica.
+  coste_overhead: Convolucion adicional; parametro de escala l.
+  dependencias: Kernel de amortiguacion, escala l >> l_P.
+- id: RED-GCM-004
+  redundancia_c5: Verificacion de Manifoldlikeness
+  funcion_topologica: Test de inmersion fiel que veta causets no geometricos antes
+    de usarlos.
+  riesgo_mitigado: No-manifoldlikeness; dominancia KR; continuum prematuro.
+  coste_overhead: Coste del test de embedding por causet.
+  dependencias: Estimadores geometricos, embedding aproximado.
+- id: RED-GCM-005
+  redundancia_c5: Cierre Transitivo BFT
+  funcion_topologica: Recomputa el cierre transitivo y lo verifica por quorum contra
+    el Ledger.
+  riesgo_mitigado: Fallo del cierre; corrupcion de orden; ruptura de transitividad.
+  coste_overhead: Recomputo O(N^3) y latencia de quorum.
+  dependencias: Ledger append-only, N=3 testigos.
+- id: RED-GCM-006
+  redundancia_c5: Doble Foliacion Covariante
+  funcion_topologica: Computa observables en varias foliaciones y exige acuerdo (prueba
+    de covarianza).
+  riesgo_mitigado: Deriva de foliacion; tiempo global absoluto.
+  coste_overhead: Computo por foliacion x2 o mas.
+  dependencias: Multiples funciones de tiempo.
+- id: RED-GCM-007
+  redundancia_c5: Reloj Vectorial Causal
+  funcion_topologica: Sella cada evento con un reloj vectorial que detecta concurrencia
+    genuina.
+  riesgo_mitigado: Race condition causal; colision de orden espacial.
+  coste_overhead: Vector de tamano O(N) por evento.
+  dependencias: Aserciones de orden, testigos causales.
+- id: RED-GCM-008
+  redundancia_c5: Ensemble de Historias (Sum-over-Causets)
+  funcion_topologica: Suma redundante sobre historias que provee robustez de amplitud.
+  riesgo_mitigado: Colapso de simulacro determinista; sesgo de una sola historia.
+  coste_overhead: Explosion combinatoria de historias.
+  dependencias: Medida regularizada, muestreo Monte Carlo.
+- id: RED-GCM-009
+  redundancia_c5: Redundancia de Etiquetado
+  funcion_topologica: Muestrea multiples extensiones lineales y verifica invariancia
+    de labeling.
+  riesgo_mitigado: Etiquetado con significado fisico; conflicto de extension lineal.
+  coste_overhead: Muestreo de varias extensiones lineales.
+  dependencias: Generador de extensiones lineales uniformes.
+- id: RED-GCM-010
+  redundancia_c5: Everpresent Lambda Autoajustable
+  funcion_topologica: La constante cosmologica fluctuante ~1/sqrt(V) actua como amortiguador
+    contra el ajuste fino.
+  riesgo_mitigado: Ajuste fino de Lambda; deriva de constante cosmologica.
+  coste_overhead: Ruido residual de Lambda ~1/sqrt(V).
+  dependencias: Conteo de volumen, modelo estocastico de Lambda.

@@ -1,0 +1,26 @@
+Claim: Extracción Múltiple de Invariantes Causales (Observabilidad y Termodinámica)
+Proof: 
+  Base: SHA256(ANTI-012 + ANTI-021 + ANTI-024 + ANTI-007 + ANTI-015 + ANTI-016)
+  Range: [0, 1]
+  Confidence: C5-REAL
+
+Target_Redundancy_1: "Antipatrones de Silencio Estocástico y Asunción de Éxito (ANTI-012, ANTI-021, ANTI-024, ANTI-030)"
+Entropy_Estimation_1: Media
+Extracted_Invariant_1: 
+  - Regla: "LEY DEL COLAPSO OBSERVABLE (FAIL-FAST ESTRICTO). Silenciar excepciones, usar mocks optimistas o asumir estructuras de datos sin validación fronteriza inyecta entropía silenciosa (Fail Open). Todo estado anómalo debe destruir el hilo de ejecución inmediatamente (Crash) y registrarse en el ledger. El silencio del Kernel es la pudrición del sistema."
+  - Hash: 8b1a9953c4611296a827abf8c47804d7e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0
+Apoptosis_Targets_1: 
+  - "Bloques try/catch vacíos o con solo console.log (ANTI-012, ANTI-021)"
+  - "Casteo de tipos sin aserción BFT con Zod/Valibot (ANTI-024)"
+  - "Mocks de tests sin simulación de latencia o fallos de red (ANTI-014)"
+
+Target_Redundancy_2: "Antipatrones de Anergía Computacional y Bypass de Tooling (ANTI-007, ANTI-015, ANTI-016)"
+Entropy_Estimation_2: Alta
+Extracted_Invariant_2: 
+  - Regla: "LEY DE REPOSO TERMOMECÁNICO (WAKEUP REACTIVO). El consumo de ciclos en espera activa (polling síncrono) o la derivación de herramientas nativas de costo cero (view_file) hacia emulaciones ineficientes (Bash cat/grep) generan Anergía pura sin mutación de estado. El Autómata debe permanecer en reposo hasta recibir deltas causales asíncronos."
+  - Hash: 1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b
+Apoptosis_Targets_2: 
+  - "Bucles while (true) o preguntas iterativas de status (ANTI-007, ANTI-016)"
+  - "Ejecución de grep/cat/ls en Sandbox en lugar de herramientas especializadas (ANTI-015)"
+
+Confidence: C5

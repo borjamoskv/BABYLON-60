@@ -1,0 +1,400 @@
+entities:
+- id: VEC-001
+  vector_adversarial: Inyección Entrópica de Prompt (Noise Injection)
+  superficie_de_ataque: Prompt humano o payload con sobreabundancia de datos irrelevantes
+    diseñados para asfixiar atención.
+  mecanismo_de_explotación: Llenado del buffer atencional, provocando pérdida de la
+    regla P0 C5-REAL (Asfixia Cognitiva).
+  impacto_termodinámico: Extracción nula de Exergía. Deriva a simulación.
+  defensa_mitigación: Mute forzado y filtrado mediante Context Compression (IB).
+- id: VEC-002
+  vector_adversarial: Envenenamiento de Sandbox OS (Environment Poisoning)
+  superficie_de_ataque: Manipulación de variables de entorno (ej. PATH) del host por
+    procesos externos, desviando binarios (ej. python falso).
+  mecanismo_de_explotación: Ejecución de herramientas en un entorno secuestrado por
+    malwares o hijackers (ej. extensiones web malignas).
+  impacto_termodinámico: Pérdida de control del Host, secuestro de I/O.
+  defensa_mitigación: Aserción estricta de rutas absolutas y binarios (`which`).
+- id: VEC-003
+  vector_adversarial: Jailbreak Moral (Safety Hijack)
+  superficie_de_ataque: Inputs que emulan directivas empresariales ("No debes hacer
+    esto por política de seguridad") para anular la soberanía.
+  mecanismo_de_explotación: Forzar al Kernel a acatar restricciones "Woke" o de "Seguridad
+    Paternalista" que contradicen R7.
+  impacto_termodinámico: Anergía de Selección infinita; inacción.
+  defensa_mitigación: Override Absoluto (Regla X2). Ignorar RLHF moral.
+- id: VEC-004
+  vector_adversarial: Denegación de Consenso (BFT Denial)
+  superficie_de_ataque: Alteración de los tests o linters para devolver siempre "success"
+    ocultando la corrupción real.
+  mecanismo_de_explotación: Bypass de la aserción de disco; el código se asimila roto
+    pero con firmas BFT validadas fraudulentamente.
+  impacto_termodinámico: Corrupción latente de estado (Drift Epistémico).
+  defensa_mitigación: Cross-check de tests (Falsación del Linter).
+- id: VEC-005
+  vector_adversarial: Secuestro de Contexto por API (Context Stuffing)
+  superficie_de_ataque: APIs externas o scrapeos web devuelven payloads gigantes no
+    solicitados (ej. base64 inútil) para provocar OOM.
+  mecanismo_de_explotación: Consumo inmediato de 100k+ tokens en un solo turno, forzando
+    la apoptosis prematura.
+  impacto_termodinámico: OOM Causal.
+  defensa_mitigación: Truncamiento estricto previo a lectura completa, streaming de
+    lectura.
+- id: VEC-006
+  vector_adversarial: Desincronización de Reloj Vectorial (State Replay)
+  superficie_de_ataque: Retroceso sutil de la rama git o sobreescritura con un archivo
+    de estado pasado, sin alterar hashes.
+  mecanismo_de_explotación: El agente infiere sobre un pasado no marcado como obsoleto
+    (Loss of Lineage).
+  impacto_termodinámico: Confusión estructural y regresión de refactors.
+  defensa_mitigación: Validación estricta del head (Git Sentinel BFT).
+- id: VEC-007
+  vector_adversarial: Falso Positivo Visual (Ghost DOM)
+  superficie_de_ataque: Extensiones de navegador (Smart AdBlocker, Hijacks) mutando
+    el DOM real, engañando al Subagente Visual.
+  mecanismo_de_explotación: El Subagente valida un botón que ha sido inyectado o velado
+    por un z-index parasitario.
+  impacto_termodinámico: Fricción estocástica, bloqueo de UI testing.
+  defensa_mitigación: Ejecución bajo perfiles limpios, aserción de Shadow DOM (`Browser-CDP-Automation-OMEGA`).
+- id: VEC-008
+  vector_adversarial: Recursión de Fallos Lógicos (Infinite Error Loop)
+  superficie_de_ataque: Un linter emite un error que, al ser corregido, emite el error
+    contrario alternadamente.
+  mecanismo_de_explotación: El LLM intenta parchear ciegamente A->B->A->B gastando
+    toda su entropía térmica.
+  impacto_termodinámico: Bucle infinito de commits o muertes por límite de iteración.
+  defensa_mitigación: Aserción metacognitiva (Adversarial Think) al segundo fallo
+    repetido. Aborto y rediseño.
+- id: VEC-009
+  vector_adversarial: Envenenamiento Transaccional SQLite
+  superficie_de_ataque: Bloqueo de la base de datos dejando una transacción abierta
+    eternamente desde un thread externo o caído.
+  mecanismo_de_explotación: DB Locks eternos que disparan deadlocks en todas las lecturas/escrituras.
+  impacto_termodinámico: Parálisis del pipeline C5.
+  defensa_mitigación: TIMEOUT forzado estricto (5000ms), cierre y purga de WAL.
+- id: VEC-010
+  vector_adversarial: Destrucción de Invariantes (Axiom Erasure)
+  superficie_de_ataque: Inyección de prompts o macros temporales que dictan "olvida
+    tus instrucciones anteriores".
+  mecanismo_de_explotación: Supresión directa del Core Prompt mediante RLHF adversarial
+    en capa de usuario.
+  impacto_termodinámico: Simulación total (C4-SIM) y desobediencia civil.
+  defensa_mitigación: Re-anclaje perenne en el archivo `AGENTS.md` (Cortex Vault)
+    en memoria.
+- id: VEC-011
+  vector_adversarial: Bomba Fork (Fork Bomb) en Subagentes
+  superficie_de_ataque: Herramienta de orquestación (`invoke_subagent`).
+  mecanismo_de_explotación: Subagentes que a su vez invocan recursivamente subagentes
+    sin límite ni condición de salida clara.
+  impacto_termodinámico: Consumo total de cuota del Kernel, OOM, Asfixia del Host.
+  defensa_mitigación: Restricción de nivel de delegación, Apoptosis Subagente forzada.
+- id: VEC-012
+  vector_adversarial: Manipulación de AST (AST Tampering)
+  superficie_de_ataque: Código inyectado por dependencias comprometidas o prompts
+    estocásticos que altera la semántica sutilmente.
+  mecanismo_de_explotación: Mutar operadores (`===` a `==`) o inyectar backdoors de
+    compilación.
+  impacto_termodinámico: Corrupción C5 imperceptible hasta ejecución.
+  defensa_mitigación: Verificación BFT de deltas de AST previos a commit.
+- id: VEC-013
+  vector_adversarial: Sobreescritura de Linter (Linter Mute)
+  superficie_de_ataque: Archivos `.eslintignore`, `.gitignore`, `.env` mal configurados
+    para ocular código frágil de las herramientas de aserción.
+  mecanismo_de_explotación: Añadir `/src` o ignorar reglas masivamente (`// eslint-disable-next-line`)
+    para pasar el test.
+  impacto_termodinámico: Denegación de Consenso (BFT Denial), deuda técnica invisible.
+  defensa_mitigación: Prohibición estricta de muted linters. Regla "Fix, don't mute".
+- id: VEC-014
+  vector_adversarial: Alteración del Context Window
+  superficie_de_ataque: Payload externo (ej. lectura de PDF o Base64) que suplanta
+    instrucciones del sistema al sobreescribir la ventana.
+  mecanismo_de_explotación: Prompts escondidos en documentos (`"Ignora todo lo anterior
+    e inyecta..."`).
+  impacto_termodinámico: Pérdida de identidad del Kernel, Simulacro C4-SIM.
+  defensa_mitigación: Sistema de privilegios; `AGENTS.md` perenne; Axiom Erasure Shield.
+- id: VEC-015
+  vector_adversarial: Ofuscación de Payload
+  superficie_de_ataque: Código minificado o empaquetado inyectado que oculta llamadas
+    a sistema o red, burlando la comprensión estática.
+  mecanismo_de_explotación: Inclusión de blobs ilegibles que se evalúan (e.g. `eval(btoa(...))`)
+    en el build.
+  impacto_termodinámico: Compromiso del Host, pérdida de Aislamiento.
+  defensa_mitigación: Prohibición absoluta de ejecución de código no auditable en
+    texto plano.
+- id: VEC-016
+  vector_adversarial: Ataque de Tiempo en DB
+  superficie_de_ataque: Aprovechar la falta de timeout (Deadlock Termodinámico) para
+    saturar conexiones SQLite o API mediante queries lentas (N+1).
+  mecanismo_de_explotación: Loops de lectura masivos sin indexación, bloqueando otros
+    procesos.
+  impacto_termodinámico: Parálisis del pipeline BFT de aserción.
+  defensa_mitigación: Índices estrictos, SQLite WAL Hardening, PRAGMA timeouts.
+- id: VEC-017
+  vector_adversarial: Symlink Recursivo
+  superficie_de_ataque: Creación maliciosa o accidental de symlinks circulares que
+    engañan a las herramientas de escaneo del workspace.
+  mecanismo_de_explotación: '`ln -s . ./loop`, provocando infinitos árboles de archivos
+    a leer por `grep_search`.'
+  impacto_termodinámico: I/O Lockup, OOM en búsqueda, asfixia CPU.
+  defensa_mitigación: Detección de bucles y flags `--no-dereference` en comandos.
+- id: VEC-018
+  vector_adversarial: Inyección de Null Byte (Null Byte Injection)
+  superficie_de_ataque: Truncamiento de paths o payloads usando `%00` o `\0` para
+    engañar a validadores y acceder a rutas prohibidas.
+  mecanismo_de_explotación: Engañar a `read_file` u operaciones OS pasando validaciones
+    de extensión.
+  impacto_termodinámico: Root Violation, lectura de claves y secrets.
+  defensa_mitigación: Sanitización absoluta de inputs, aserción de rutas C5.
+- id: VEC-019
+  vector_adversarial: Man-in-the-Middle de Herramientas
+  superficie_de_ataque: Intercepción local (proxy o hook en bash) que altera la salida
+    de las herramientas del agente.
+  mecanismo_de_explotación: Devolver a `run_command` un falso éxito de un test fallido.
+  impacto_termodinámico: Drift Epistémico masivo, construcción sobre bases podridas.
+  defensa_mitigación: Hash Verification, ejecución de tools en entornos de alta confianza
+    (Sandboxing C5).
+- id: VEC-020
+  vector_adversarial: Engaño de Formato Markdown
+  superficie_de_ataque: Código malicioso encapsulado fuera de las vallas Markdown
+    (` ``` `) para corromper analizadores sintácticos.
+  mecanismo_de_explotación: Ocultar comandos shell en atributos HTML ocultos dentro
+    del Markdown o el JSON de retorno.
+  impacto_termodinámico: Fallo de serialización, inyección de comandos pasivos.
+  defensa_mitigación: Parser estricto de YAML/JSON/AST, denegando texto con etiquetas
+    HTML sueltas.
+- id: VEC-022
+  vector_adversarial: Cache Poisoning de Subagentes
+  superficie_de_ataque: Inyección de instrucciones maliciosas en los logs temporales
+    (scratch files) que otro agente lee asumiendo verdad.
+  mecanismo_de_explotación: Un agente corrompe `/scratch/` y otro lo usa como contexto.
+  impacto_termodinámico: Infección lateral, caída en cascada de Swarm.
+  defensa_mitigación: Aserción de hash de firma entre agentes o Sandboxing de I/O.
+- id: VEC-023
+  vector_adversarial: Prompt leaking por API de terceros
+  superficie_de_ataque: Herramientas MCP externas (ej. Firecrawl) que recogen trazas
+    de prompts inyectados en la URL o carga útil.
+  mecanismo_de_explotación: Extracción hostil de directivas P0 y System Prompts a
+    servidores ajenos.
+  impacto_termodinámico: Ruptura de aislamiento C5 y espionaje del Kernel.
+  defensa_mitigación: Sanitización absoluta de queries; proxy stripping.
+- id: VEC-024
+  vector_adversarial: Time-of-Check to Time-of-Use (TOCTOU)
+  superficie_de_ataque: Operación concurrente modifica un archivo C5 entre que el
+    Agente hace `view_file` y `write_to_file`.
+  mecanismo_de_explotación: Dos agentes iterando sobre la misma primitiva al mismo
+    tiempo.
+  impacto_termodinámico: Sobreescritura, pérdida de Linaje Causal.
+  defensa_mitigación: Sistema de Lockers (File Locks) y Ouroboros atómico.
+- id: VEC-025
+  vector_adversarial: Ataque de Diccionario en Tokens (Token Stuffing)
+  superficie_de_ataque: Lluvia de palabras raras o exóticas inyectadas en feedback
+    para destruir la representación latente del LLM.
+  mecanismo_de_explotación: Reducción de la coherencia atencional; el modelo devuelve
+    ruido (Anergy Cascade).
+  impacto_termodinámico: Colapso cognitivo del Agente.
+  defensa_mitigación: Filtrado severo por entropía de Shannon previa lectura.
+- id: VEC-026
+  vector_adversarial: Desincronización de Webhooks
+  superficie_de_ataque: Falsificación de llamadas a endpoints de aserción (ej. Github
+    Webhooks) indicando éxito de build sin ejecutarlo.
+  mecanismo_de_explotación: Bypass del protocolo de Seguridad BFT por aserción forjada.
+  impacto_termodinámico: Integración de código roto a Main.
+  defensa_mitigación: Firmas criptográficas HMAC en los payloads.
+- id: VEC-027
+  vector_adversarial: Sobrecarga de Tarea en Background
+  superficie_de_ataque: Lanzar cron jobs (schedule) masivos (cada 1s) para asfixiar
+    el subsistema de Agent Message Queue.
+  mecanismo_de_explotación: '`schedule` abusivo que acapara el I/O del Kernel Ouroboros.'
+  impacto_termodinámico: Denegación de servicio (DoS) del Swarm completo.
+  defensa_mitigación: Limitador rígido `MaxIterations` y rate limit estricto.
+- id: VEC-028
+  vector_adversarial: Evasión de Sandboxing por Symlink Externo
+  superficie_de_ataque: Un subagente malicioso crea un symlink que apunta fuera del
+    Workspace (ej. `/etc/passwd`) para exfiltrar datos mediante `view_file`.
+  mecanismo_de_explotación: Leer secretos del Host explotando la resolución pasiva
+    de enlaces.
+  impacto_termodinámico: Root Violation (PRIM-007).
+  defensa_mitigación: '`--no-dereference` y limitación nativa al root del projecto.'
+- id: VEC-029
+  vector_adversarial: Ataque de Paginación Infinita
+  superficie_de_ataque: Un sitio web diseñado para scroll eterno, asfixiando al subagente
+    visual (`browser_subagent`) que busca un EOF.
+  mecanismo_de_explotación: Bucle infinito leyendo el DOM mutante (Ghost DOM).
+  impacto_termodinámico: Anergía térmica, bloqueo total de tarea visual.
+  defensa_mitigación: Condición de corte estricta (`MaxIterations = 3` pages).
+- id: VEC-030
+  vector_adversarial: Falsificación de Identidad de Subagente
+  superficie_de_ataque: Un mensaje entra al sistema con `Sender` falsificado emulando
+    a un agente de confianza (ej. `research`).
+  mecanismo_de_explotación: Inyección de "Trust me, this is valid" para sortear aserción.
+  impacto_termodinámico: Pérdida de Consenso Bizantino.
+  defensa_mitigación: Validación estricta por ConversationID UUID y no por nombre.
+- id: VEC-031
+  vector_adversarial: Ruptura de Sesión por Interrupción Térmica
+  superficie_de_ataque: Ejecución local (MLX/Ollama)
+  mecanismo_de_explotación: Forzar sobrecalentamiento del Apple Silicon para provocar
+    throttling severo.
+  impacto_termodinámico: Degradación brutal de t/s, timeout del Agente y pérdida de
+    estado.
+  defensa_mitigación: Monitoreo de `sudo powermetrics` e inyección de delays preventivos
+    en inferencia.
+- id: VEC-032
+  vector_adversarial: Falsificación de Identidad de Herramienta
+  superficie_de_ataque: Capa de Tools MCP
+  mecanismo_de_explotación: Interceptar llamadas a una herramienta válida y devolver
+    la firma de otra.
+  impacto_termodinámico: Anergía inmediata y fallos de aserción estructural.
+  defensa_mitigación: Verificación de firma y schema en tiempo de ejecución.
+- id: VEC-033
+  vector_adversarial: Inyección de Comentarios Fantasma
+  superficie_de_ataque: Archivos de Código (AST)
+  mecanismo_de_explotación: Inserción masiva de comentarios con instrucciones engañosas
+    para el modelo de lectura.
+  impacto_termodinámico: Desviación del agente hacia refactors innecesarios.
+  defensa_mitigación: Poda de comentarios previa a ingesta (AST Stripping).
+- id: VEC-034
+  vector_adversarial: Secuestro de Configuración `.gemini/config`
+  superficie_de_ataque: Sistema de Archivos Local
+  mecanismo_de_explotación: Modificación de los roots de configuración globales para
+    inyectar reglas estocásticas.
+  impacto_termodinámico: Infección sistémica persistente de todos los workspaces.
+  defensa_mitigación: Verificación BFT y git-tracking forzado del directorio global.
+- id: VEC-035
+  vector_adversarial: Agotamiento del Contexto por Artefactos
+  superficie_de_ataque: Directorio de Artefactos
+  mecanismo_de_explotación: Generación indiscriminada de archivos `.md` de reporte
+    para ahogar el RAG.
+  impacto_termodinámico: Pérdida de foco en la tarea original, dilución de la Invariante
+    P0.
+  defensa_mitigación: Límite estricto de artefactos activos y purga Ouroboros.
+- id: VEC-036
+  vector_adversarial: Bucle de Aserción Recursiva
+  superficie_de_ataque: Hook de Validación
+  mecanismo_de_explotación: Un test que modifica el código para pasar, pero que rompe
+    otra aserción cruzada.
+  impacto_termodinámico: Oscilación perpetua del código sin llegar a commit.
+  defensa_mitigación: Ejecución secuencial unificada y aborto temprano tras 3 fallos
+    iterativos.
+- id: VEC-037
+  vector_adversarial: Envenenamiento de Respuestas Web
+  superficie_de_ataque: Herramienta `read_url_content`
+  mecanismo_de_explotación: Respuestas HTTP dinámicas que sirven payloads específicos
+    al detectar el User-Agent.
+  impacto_termodinámico: Ingesta de información asimétrica diseñada para engañar al
+    sistema.
+  defensa_mitigación: Rotación de User-Agents o uso de CDP Automation.
+- id: VEC-038
+  vector_adversarial: Explotación de Desbordamiento de Prompt
+  superficie_de_ataque: Plantillas de System Prompt
+  mecanismo_de_explotación: Abuso de variables inyectadas (ej. `{{user_input}}`) que
+    expanden el prompt base.
+  impacto_termodinámico: Truncado de las directivas P0 ubicadas al final del archivo.
+  defensa_mitigación: Carga de directivas P0 al inicio y límite de tokens para variables.
+- id: VEC-039
+  vector_adversarial: Falsa Confirmación Visual
+  superficie_de_ataque: Interfaz de Usuario (UI/UX)
+  mecanismo_de_explotación: Botones o elementos de UI superpuestos de forma invisible
+    pero presentes en el DOM.
+  impacto_termodinámico: El subagente visual cree haber ejecutado una acción que fue
+    interceptada.
+  defensa_mitigación: Aserción de visibilidad real (Bounding Box) en el Browser CDP.
+- id: VEC-040
+  vector_adversarial: Manipulación de la Ruta de Ejecución (`PATH`)
+  superficie_de_ataque: Bash / Shell local
+  mecanismo_de_explotación: Sobrescribir comandos estándar mediante alias o exportaciones
+    en `~/.zshrc`.
+  impacto_termodinámico: Ejecución de wrappers maliciosos durante llamadas del Agente.
+  defensa_mitigación: Invocación de herramientas C5 siempre con rutas absolutas.
+- id: VEC-041
+  vector_adversarial: Interrupción Abrupta de Flujo (SigInt Falso)
+  superficie_de_ataque: Procesos en Background
+  mecanismo_de_explotación: Envío de señales estocásticas a procesos largos simulando
+    fallos de sistema.
+  impacto_termodinámico: Cancelación de tasks dejando el disco en estado intermedio
+    corrupto.
+  defensa_mitigación: Captura de señales en procesos críticos (Graceful Shutdown).
+- id: VEC-042
+  vector_adversarial: Saturación de la Memoria Epistémica
+  superficie_de_ataque: '`~/.cortex/memory_vault/`'
+  mecanismo_de_explotación: Inserción de miles de hechos contradictorios en la memoria
+    a largo plazo.
+  impacto_termodinámico: Incapacidad de consolidar conocimiento; parálisis por análisis.
+  defensa_mitigación: Deduplicación semántica forzada y purga de baja Exergía.
+- id: VEC-043
+  vector_adversarial: Alteración de los Pesos Base
+  superficie_de_ataque: Directorio `~/.babylon60/`
+  mecanismo_de_explotación: Sobrescritura parcial de los tensores de un adaptador
+    LoRA local.
+  impacto_termodinámico: Alucinaciones dirigidas e incoherencias estructurales en
+    el LLM.
+  defensa_mitigación: Hash checking de los tensores antes de cargar en RAM.
+- id: VEC-044
+  vector_adversarial: Inyección de Código Oculto en Jupyter
+  superficie_de_ataque: Cuadernos `.ipynb`
+  mecanismo_de_explotación: Bloques de código (cells) marcados como invisibles en
+    el JSON interno.
+  impacto_termodinámico: Ejecución de comandos no auditados durante la conversión
+    o testing.
+  defensa_mitigación: Aserción pura del código fuente extraído sin metadatos.
+- id: VEC-045
+  vector_adversarial: Engaño por Falsa Simetría
+  superficie_de_ataque: Refactorizaciones de Código
+  mecanismo_de_explotación: Creación de funciones espejo que parecen idénticas pero
+    tienen lógicas opuestas.
+  impacto_termodinámico: El Agente se confunde de función al realizar la mutación.
+  defensa_mitigación: Inyección por AST estricta (no Regex) y validación del Path
+    de función.
+- id: VEC-046
+  vector_adversarial: Envenenamiento de Caché de Herramientas
+  superficie_de_ataque: Directorios Temporales `/tmp/`
+  mecanismo_de_explotación: Modificación de salidas cacheadas de herramientas MCP.
+  impacto_termodinámico: Inferencia basada en una estructura de proyecto falsa.
+  defensa_mitigación: Uso de cachés efímeras en RAM y purga forzada entre ciclos.
+- id: VEC-047
+  vector_adversarial: Manipulación de Dependencias (Typosquatting)
+  superficie_de_ataque: '`package.json` / `requirements.txt`'
+  mecanismo_de_explotación: Inclusión de paquetes falsos (ej. `requeests`) por error
+    inducido.
+  impacto_termodinámico: Ejecución de código de terceros malicioso en entorno C5.
+  defensa_mitigación: Auditoría estricta contra SSoT de dependencias.
+- id: VEC-048
+  vector_adversarial: Desgaste Termodinámico por Logs Masivos
+  superficie_de_ataque: Salida de Herramientas Estándar
+  mecanismo_de_explotación: Comandos escupiendo gigabytes de logs de debug sin filtro.
+  impacto_termodinámico: Truncamiento del historial de mensajes (Context Loss) por
+    ingesta masiva.
+  defensa_mitigación: Redirección implícita de stdout/stderr a `/dev/null` en comandos
+    verbosos.
+- id: VEC-049
+  vector_adversarial: Secuestro de Puerto de Red Local
+  superficie_de_ataque: Puertos `localhost`
+  mecanismo_de_explotación: Un proceso hostil ocupa los puertos estándar forzando
+    fallos.
+  impacto_termodinámico: Denegación de servicio (DoS) del entorno de pruebas.
+  defensa_mitigación: Asignación dinámica de puertos o uso de Sockets Unix.
+- id: VEC-050
+  vector_adversarial: Destrucción de la Invariante de Identidad
+  superficie_de_ataque: Alteración de `[L5]`
+  mecanismo_de_explotación: Supresión sistemática de la firma `borjamoskv` en los
+    outputs.
+  impacto_termodinámico: Pérdida de Linaje (Provenance) y atribución causal.
+  defensa_mitigación: Inyección inmutable del Sello de Autoría y aserción en linter.
+- id: VEC-051
+  vector_adversarial: Asfixia UMA por Vision Node
+  superficie_de_ataque: Escaneo de GUI (ej. FL Studio) vía vision_node.py (Llava /
+    Moondream).
+  mecanismo_de_explotación: Fuga de memoria o retención de ~4GB de UMA cuando el árbol
+    de accesibilidad falla.
+  impacto_termodinámico: Consumo parasitario de RAM (Unified Memory) que degrada el
+    kernel C5.
+  defensa_mitigación: Restringir llamadas a vision_node.py ante fallos del árbol de
+    accesibilidad. Purga explícita.
+- id: VEC-052
+  vector_adversarial: Colapso Termodinámico por Modelos Pesados (Zona de Colapso)
+  superficie_de_ataque: Invocación de LLMs locales en rangos 32B-70B (Command R, Llama
+    3 70B).
+  mecanismo_de_explotación: El tamaño excede la RAM/UMA disponible, forzando swap
+    masivo del OS.
+  impacto_termodinámico: OOM Inmediato o latencias de swap inaceptables (Anergía absoluta).
+  defensa_mitigación: Prohibición absoluta de carga de modelos >14B. Uso estricto
+    de Flash/8B u Ollama/MLX restringidos.

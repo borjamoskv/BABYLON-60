@@ -1,0 +1,37 @@
+{
+  "receipt_id": "rec_autodidact_sha3_85730024",
+  "schema": "https://schema.babylon60.dev/v1.0/autodidact-complete-sha3-attestation",
+  "timestamp": "2026-07-13T17:15:56.641495+00:00",
+  "reality_level": "C5-REAL",
+  "verifier": "MOSKV-1 APEX Sovereign C5-REAL Kernel",
+  "operator": "borjamoskv",
+  "master_sha3_256": "sha3-256:857300240ad84ffe181ecc870fa5558fc0282aa6c13313996223087f3c1153e8",
+  "domains_processed": 5,
+  "domain_attestations": {
+    "PROJECT.md": {
+      "target": "BABYLON-60_Project_Root_SHA3",
+      "sha3_256": "a434a24301d5ccfd483addfbcaf4ac1a13bea43050b5ccd90350044073760754",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:a434a24301d5ccfd483addfbcaf4ac1a13bea43050b5ccd90350044073760754]"
+    },
+    "AGENTS.md": {
+      "target": "BABYLON-60_Agents_Rules_SHA3",
+      "sha3_256": "19a4ae73b7543de9071aada68d91271bfcdd9ffef382fda682a5001800ded3e9",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:19a4ae73b7543de9071aada68d91271bfcdd9ffef382fda682a5001800ded3e9]"
+    },
+    "cortex/agents/ontology/01_PRIMITIVAS_DE_COLAPSO.md": {
+      "target": "CORTEX_Ontology_Primitives_SHA3",
+      "sha3_256": "3fe0bfbf040c573febf9bada0cc6129c05c68f461cb3086b793a929885943525",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:3fe0bfbf040c573febf9bada0cc6129c05c68f461cb3086b793a929885943525]"
+    },
+    "cortex/agents/ontology/06_MATRIZ_1000.md": {
+      "target": "CORTEX_Ontology_Matrix1000_SHA3",
+      "sha3_256": "374ca8da85ddfa5d0da7285263d77ec98343a50c42f82368d41b0280e5a83a74",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:374ca8da85ddfa5d0da7285263d77ec98343a50c42f82368d41b0280e5a83a74]"
+    },
+    "bft/ledger_actor.py": {
+      "target": "BFT_Ledger_Actor_SHA3",
+      "sha3_256": "db6435dcdadfa12c566eb29185b18b456c638a772dc9d208c16d4165eaa0deb9",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:db6435dcdadfa12c566eb29185b18b456c638a772dc9d208c16d4165eaa0deb9]"
+    }
+  }
+}
