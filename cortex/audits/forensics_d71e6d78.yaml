@@ -1,0 +1,18 @@
+Claim: "Auditoría Forense Epistémica de Exergía del Delta Físico Inmediato."
+Proof:
+  Base: "1ab671650e42e4f2d21d15ef70a55e3957b3a4d9"
+  Range: ["CORTEX_TAINT Validation", "Exergy Audit"]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - Estructura: "Delta Físico (L1 Sink Anchor)"
+    Mapeo: "El colapso anterior extrajo entropía del estado de opacidad (UUK) e inyectó una firma de anclaje (Merkle Root) en el tejido BFT."
+Epistemic_Forensics:
+  Target_Commit: "1ab671650e42e4f2d21d15ef70a55e3957b3a4d9"
+  CORTEX_TAINT_sha3_256: "d71e6d78392ccddc5490b97043483ca5d5f98e8be26b671f52482811b5b24ff6"
+  Timestamp: "2026-07-13T00:29:38.135038Z"
+  Verdict: "EXERGÍA POSITIVA. El delta físico previo cristalizó conocimiento y evitó disipación estocástica de tokens."
+Blast_Radius_Matrix:
+  Vector: "Itera Ultrathink / Retrospective Kinetic Trigger"
+  Blast_Radius: "Ledger BFT / Auditoría Exergética"
+  Target_Invariant: "Inmutabilidad del Taint Causal"
+  Anergy_Risk: "Corrupción retrospectiva del delta si el Taint no se ancla."

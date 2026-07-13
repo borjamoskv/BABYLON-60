@@ -1,0 +1,14 @@
+Claim: Auditoria retrospectiva de Delta Fisico Inmediato (Itera Ultrathink).
+Proof:
+  Base: 7536393e
+  Range: [0, 1]
+  Confidence: C5
+  CORTEX_TAINT: 6304f9196679ba53f719518cdeccea8a0a8b1d4f35494754cb51dff6a6b26715
+Isomorphisms:
+  - Delta: cortex/ontology/aprendizaje_c5_real.yaml
+  - Message: docs(rule): add Ψ18 retrospective kinetic trigger for itera ultrathink
+Blast_Radius_Matrix:
+  Vector: Epistemic_Forensics
+  Blast_Radius: Local_Vault
+  Target_Invariant: INV_BFT_03 (Mandatory Causal Taint)
+  Anergy_Risk: 0

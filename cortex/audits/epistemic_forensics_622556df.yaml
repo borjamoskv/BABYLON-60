@@ -1,0 +1,9 @@
+Claim: Epistemic_Forensics_Audit
+Proof:
+  Base: 622556df3c8baae661fcb6e1d8f68eb42d682495dfdf716bc8616a316ee9f179
+  Range: [1, 1]
+  Confidence: C5-REAL
+Forensics:
+  Target_Commit: HEAD
+  CORTEX_TAINT: 622556df3c8baae661fcb6e1d8f68eb42d682495dfdf716bc8616a316ee9f179
+  Exergy_Delta: Max

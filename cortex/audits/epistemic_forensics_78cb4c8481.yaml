@@ -1,0 +1,15 @@
+cortex_taint: 9d6a5c3177af0a9cb88c6c442930d039139ce9115bae616c73e04ddd66a543ff
+last_commit_hash: 78cb4c8481c04f265051cbb1840b775b321c0dbf
+mutated_files:
+- L1_sink/op_return_3fd0b472ad5b9dd4c51e9a93f45fae6460f8dc39b886f4abf9f6b05b0d333249.json
+- scratch/bft_merkle_compressor.py
+Claim: "Delta F\xEDsico Inmediato (Commit: 78cb4c8481c04f265051cbb1840b775b321c0dbf)\
+  \ auditado con \xE9xito."
+Proof:
+  Base: 9d6a5c3177af0a9cb88c6c442930d039139ce9115bae616c73e04ddd66a543ff
+  Range: 78cb4c8481c04f265051cbb1840b775b321c0dbf
+  Confidence: C5
+exergy_evaluation:
+  efficiency_ratio: '1.0'
+  redundancy_detected: '0.0'
+  thermodynamic_anchor: BFT Ledger compression mapping to physical git commits
