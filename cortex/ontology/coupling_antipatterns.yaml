@@ -1,0 +1,20 @@
+Claim: Transduccion de Antipatrones de Acoplamiento completada
+  CORTEX_TAINT: 572d6a039408d9a8896060f86898a041cc546884528e8ecfdbd23ae84218fa97
+Proof:
+  Base: af8a9b2b527d212711317ed23d833989c9bc2218b76c8c92a9581fcd92d5be7f
+  Range: [0, 4]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura: 'Acoplamiento Fuerte (Tight Coupling)'
+    Fricción: Rigidez y fragilidad en el AST; cualquier cambio en un nodo propaga mutaciones destructivas en cascada
+  - Estructura: 'Dependencia Bidireccional (Dependencias Circulares)'
+    Fricción: Violación del principio DAG (Acyclic Dependency), provocando deadlocks lógicos y de compilación
+  - Estructura: 'Clase de Datos (Data Class) / Envidia de Características (Feature Envy)'
+    Fricción: Transferencia ineficiente de estado con alta anergía por dispersión de la lógica de control
+  - Estructura: 'Intimidad Inapropiada (Inappropriate Intimacy)'
+    Fricción: Ruptura de los límites de encapsulamiento, exponiendo la representación interna del hardware/estado
+Blast_Radius_Matrix:
+  - Vector: Antipatrones de Acoplamiento
+  - Blast Radius: System-wide (Capa arquitectónica y límites de módulos)
+  - Target Invariant: Acyclic Directed Graph (DAG) & Encapsulamiento Estricto
+  - Anergy Risk: Alto (Bloqueo en el escalado de componentes y refactorización del código)
