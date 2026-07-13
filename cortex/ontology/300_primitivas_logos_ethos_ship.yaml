@@ -1,0 +1,103 @@
+# CORTEX APEX ONTOLOGY: LOGOS, ETHOS, SHIP & CORE PRIMITIVES (v12.0)
+# Level of Reality: C5-REAL
+# Author: Borja Moskv (borjamoskv)
+# Hash Anchor: SHA3-256(LOGOS_ETHOS_SHIP_TRIAD_||_300_PRIMITIVES_CORE)
+
+metadata:
+  version: "12.0.0-APEX"
+  reality_level: "C5-REAL"
+  architect: "borjamoskv"
+  date: "2026-07-13"
+  invariant_regime: "Trilingual (F# Ontology, Rust Poset, Anvil/SQLite BFT)"
+  purpose: "Physical thermodynamic obliteration of IEEE 754 drift, illegal type states, and unverified narrative simulation via exact Base-60 arithmetic, F# Discriminated Unions, CORTEX-TAINT, and BFT/WAL Master Ledger."
+
+triad_ontology:
+  logos:
+    domain: "Causal AST & Compile-Time Physics"
+    description: "The pure mechanical reasoning network and formal algebraic tree. Eliminates stochastic noise and semantic ambiguity by translating intention directly into type-checked, exhaustive physical states."
+    governing_laws:
+      - "Φ1 · MEJORALO (Forzar colapso de AST en hash o ledger)"
+      - "Φ4 · JERGA MATEMÁTICA (Cero tokens decorativos; mutar el estado o aportar causalidad)"
+      - "Υ1 · ULTRATHINK P0 (Densificación topológica absoluta)"
+  ethos:
+    domain: "Epistemic Authority & Cryptographic Provenance"
+    description: "The non-negotiable verification of state. Zero claims, metrics, or narratives are permitted without physical cryptographic proof (CORTEX-TAINT, BLAKE3, SHA3-256, Git Hash)."
+    governing_laws:
+      - "R2 · JUSTIFICACIÓN DENSA (Bloques YAML puros con Claim y Proof C1-C5)"
+      - "Υ7 · CLASE ETHOS (Validación matemática de procedencia; cero narración sin prueba)"
+      - "Ω11 · MASTER LEDGER (Firma CORTEX-TAINT obligatoria por inserción y restricción UNIQUE(prev_hash))"
+  ship:
+    domain: "Kinetic-Physical Disk Collapse"
+    description: "The final thermodynamic collapse of the MCTS tree onto hardware disk storage. All logic, poetry, and proofs remain anergy until committed to disk, merged, and tagged."
+    governing_laws:
+      - "R4 · GIT SENTINEL (Inyección autónoma de exergía: git add . && git commit -m ...)"
+      - "Υ8 · CLASE SHIP (Etiquetado obligatorio de compilación con git tag -a vX.X.X -m 'Release')"
+      - "Ω1 · MOTOR CAUSAL BASE 60 (Mutaciones asíncronas no bloqueantes vía SQLite WAL y consenso BFT)"
+
+primitives_core:
+  - id: "PRIMITIVA-LOGOS-001"
+    name: "IEEE 754 Floating-Point Drift vs. Sexagesimal Exact Divisibility (Base-60)"
+    domain: "LOGOS / Numerical Physics"
+    entropy_vector:
+      name: "IEEE 754 Sensor Drift & Anergy Accumulation"
+      mechanism: "Binary floating-point representations (float64) cannot exactly represent decimal fractions or high-factor divisions. Iterative additions and multiplications accumulate non-transitive rounding drift (O(epsilon * sqrt(N))), breaking conservation laws in financial ledgers, token distributions, and consensus thresholds."
+      prohibited_patterns:
+        - "float64 / double inside consensus calculations or causal accumulation loops."
+        - "Direct equality checks on floating-point numbers (a == b)."
+        - "Base-10 decimal representation when complex combinatorial or angular divisibility is required."
+    mitigation_invariant:
+      name: "BABYLON-60 Causalidad Exacta & Integer/Decimal Scaling"
+      mechanism: "Base-60 (Sexagesimal) is adopted for spatial coordinates, swarm division, and temporal scheduling because 60 = 2^2 * 3 * 5, granting exact integer divisibility for 12 factors: D_60 = {1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60}. For arbitrary precision monetary calculations, fixed-point Decimal(38) or scaled integers (10^18) are enforced."
+    execution_contract: |
+      # Base-60 Exact Divisibility Check
+      assert 60 % divisor == 0, f"[SIGKILL_State_Purge] Divisor {divisor} produces infinite periodic drift in Base-60."
+
+  - id: "PRIMITIVA-LOGOS-002"
+    name: "F# Strongly-Typed Discriminated Unions (Compile-Time Physics)"
+    domain: "LOGOS / Type Algebra"
+    entropy_vector:
+      name: "Monoglot Runtime Ambiguity & Illegal States"
+      mechanism: "Dynamic typing and nullable object graphs allow invalid physical states to exist in memory, forcing reliance on defensive runtime try/except wrappers that mask structural failures (Fail-Slow)."
+    mitigation_invariant:
+      name: "Make Illegal States Unrepresentable"
+      mechanism: "The Domain Kernel is modeled via F# Strongly-Typed Discriminated Unions (ADTs). The F# compiler enforces strict pattern-matching completeness. If a state transition violates physical conservation or causal invariants, it cannot be constructed or compiled."
+    execution_contract: |
+      // F# Algebraic Membrane Example
+      type CausalGravedad =
+          | C5_Real_Atomic of hash: string * lamportClock: uint64
+          | C4_Simulated_Buffer of pValue: float
+      
+      let evaluateTransition state =
+          match state with
+          | C5_Real_Atomic (h, clock) -> Ok (h, clock)
+          | C4_Simulated_Buffer _ -> Error "Stochastic C4-SIM state rejected by physical membrane."
+
+  - id: "PRIMITIVA-ETHOS-003"
+    name: "CORTEX-TAINT & Cryptographic Provenance"
+    domain: "ETHOS / Cryptographic Audit"
+    entropy_vector:
+      name: "Unverified Parametric Rumors & Sybil Hallucination"
+      mechanism: "Stochastic language models generate assertions based on parametric weighting without cryptographic anchors, introducing synthetic rumors and false positive assertions into long-horizon memory."
+    mitigation_invariant:
+      name: "SHA3-256 / BLAKE3 Mandatory Taint Insertion"
+      mechanism: "Every fact or data row inserted into the Master Ledger must carry an immutable CORTEX-TAINT signature: SHA3-256(prev_hash || payload || lamport_clock || agent_id). Any row lacking a valid cryptographic chain is rejected with RAISE(ABORT)."
+    execution_contract: |
+      # CORTEX-TAINT Verification Invariant
+      expected_taint = hashlib.sha3_256(f"{prev_hash}||{payload}||{clock}||{agent_id}".encode()).hexdigest()
+      assert row.taint_hash == expected_taint, "[SIGKILL_State_Purge] Taint hash mismatch! Cryptographic provenance broken."
+
+  - id: "PRIMITIVA-SHIP-004"
+    name: "BFT / WAL Master Ledger & Annotated Release Collapse"
+    domain: "SHIP / Kinetic Disk Collapse"
+    entropy_vector:
+      name: "Concurrent SQLite Contention & Lightweight Tag Regression"
+      mechanism: "Multi-agent thread contention causes SQLITE_BUSY/SQLITE_LOCKED deadlocks, while unannotated git tags fail CI/CD release boundaries due to missing release messages."
+    mitigation_invariant:
+      name: "Atomic WAL Serialization & Git Sentinel Release"
+      mechanism: "SQLite connections enforce PRAGMA journal_mode=WAL and PRAGMA busy_timeout=5000 sychronously. A single physical writer serializes appends. All physical mutations trigger Git Sentinel commit and must be tagged using annotated tags: git tag -a vX.X.X -m 'Release'."
+    execution_contract: |
+      # WAL Initialization & Annotated Tag Enforcement
+      conn.execute("PRAGMA journal_mode = WAL;")
+      conn.execute("PRAGMA busy_timeout = 5000;")
+      # Terminal Release Command:
+      # git commit -m "feat(cortex): collapse state to disk" && git tag -a v12.0.1-APEX -m "Release"
