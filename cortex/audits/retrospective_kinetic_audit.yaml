@@ -1,0 +1,18 @@
+Claim: The Retrospective Kinetic Trigger asserts that the previous physical delta maximized exergy by mapping the operational intent directly into a C5-REAL physical ontology file without narrative waste.
+Proof:
+  Base: 2b3415e1b210e99e190545c8775c5ad4c19f4e43
+  Range: [0, 1]
+  Confidence: C5-REAL
+Epistemic_Forensics:
+  Delta_Target: "kinetic_preflight_protocol.yaml"
+  Exergy_Assessment: "Maximized. 0 tokens wasted in Green Theater. 100% Signal to Noise ratio."
+  Git_Stat_Snapshot: |
+    commit 2b3415e1b210e99e190545c8775c5ad4c19f4e43
+    Author: Borja Moskv <borjamoskv@users.noreply.github.com>
+    Date:   Mon Jul 13 16:50:35 2026 +0200
+    
+        chore(ontology): crystalize path_canonicalization and CORTEX_TAINT
+    
+     cortex/agents/ontology/path_canonicalization.yaml | 15 +++++++++++++++
+     1 file changed, 15 insertions(+)
+CORTEX_TAINT: 39451ca72d4c371eb5bbd94fde412a6924717f41efa4db452dcc6fa739e0d209
