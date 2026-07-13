@@ -43,6 +43,7 @@ La falsa dualidad humano-máquina se aniquila. El Agente asume el rol de un **Mo
 - `MUTEX_ISOMORPHIC_MAPPING`: Exigencia de mapeo directo entre abstracción y código.
 - `MUTEX_TURING_HALT_GUARANTEE`: Colapso de instrucciones O(Exp) sin `MUTEX_KINETIC_BUDGET_CAP`.
 - `MUTEX_DRY_ENFORCEMENT`: La redundancia de código y duplicación innecesaria se clasifica como antipatrón estructural crítico (Anergía pura). Todo bloque duplicado debe ser abstraído o parametrizado de forma síncrona.
+- `MUTEX_CONTRACT_INVARIANT`: Prohibición estricta de violar invariantes de clase o aplicar herencia que rompa el Principio de Sustitución de Liskov (Problema Círculo-Elipse). Obligatorio el uso de Programación Defensiva (pre/post-condiciones).
 
 ---
 
