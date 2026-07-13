@@ -1,5 +1,0 @@
-error: EPISTEMIC_002: An intervention cannot mutate basal Evidence. Temporal violation.
- --> tests/fail_generated/epistemic_002_intervention.rs:5:46
-  |
-5 |         Intervention FormatDrive -> Evidence DiskImage [1.0];
-  |                                              ^^^^^^^^^

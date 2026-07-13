@@ -1,52 +1,31 @@
-# ============================================
-# MOSKV ECOSYSTEM — Master .gitignore
-# Only track: antigravity/, borjamoskv_site/, game/
-# ============================================
-
-# === IGNORE EVERYTHING BY DEFAULT ===
-/*
-
-# === ALLOW ONLY PROJECT DIRECTORIES ===
-!/.gitignore
-!/borjamoskv/
-
-# === INSIDE PROJECTS: Standard ignores ===
-node_modules/
-.DS_Store
+# C5-REAL: Strict Ignore (Fable 5 Fix-Pack)
+# sqlite
+*.db
+*.db-shm
+*.db-wal
+# logs
 *.log
-*.tmp
-.env
-.env.*
+# local envs
+.venv/
 __pycache__/
-*.pyc
-.cache/
-dist/
-build/
-.next/
-.turbo/
-.vercel/
-.netlify/
+# dotnet leftovers
+src/ontology/bin/
+src/ontology/obj/
+*.dll
 
-# === Binary/Media (don't track in git) ===
-*.aif
-*.aiff
-*.wav
-*.mp3
-*.mp4
-*.mov
-*.webm
-*.flac
-*.ogg
-*.psd
-*.heic
-*.numbers
+# legacy build artifacts
+/target
+proof_artifact.json
+b60_kernel
+babylon60
+receipt.json
 
-# === OS files ===
-Thumbs.db
-.DS_Store
-*.swp
-*~
-.vercel
-full_transcript.txt
-scratch_rust/
-data/vectors/*.bin
+# Scratch directories
+scratch/
+
+# Local build / node / agent artifacts
+node_modules/
+.cortex/
+.agents/
+ORIGINAL_REQUEST.md
+

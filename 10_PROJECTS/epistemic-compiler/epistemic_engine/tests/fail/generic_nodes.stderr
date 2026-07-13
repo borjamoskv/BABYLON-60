@@ -1,5 +1,0 @@
-error: expected `->`
- --> tests/fail/generic_nodes.rs:5:13
-  |
-5 |         Node<T> -> Node<U>;
-  |             ^

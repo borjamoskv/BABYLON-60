@@ -1,7 +1,0 @@
-interface:
-  display_name: "Browser Hijack Guard"
-  short_description: "Audit and clean browser search hijacks"
-  default_prompt: "Use $browser-hijack-guard to audit my browsers for Yahoo redirects and clean suspicious search hijack remnants."
-
-policy:
-  allow_implicit_invocation: true

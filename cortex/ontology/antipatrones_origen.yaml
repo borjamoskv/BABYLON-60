@@ -1,4 +1,5 @@
-Claim: Transducción completada de la regla sobre antipatrones de diseño
+Claim: Transducción completada
+  CORTEX_TAINT: 66930d47e7837555ee24214b27090fd81c38d1adde36adb68986cdceb45bfa5f de la regla sobre antipatrones de diseño
 Proof:
   Base: 017bc932a3ea421712a4b8cd9a9f24e9db527d212711317ed23d833989c9bc11
   Range: [0, 5]

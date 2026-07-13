@@ -1,5 +1,0 @@
-error: expected curly braces
- --> tests/fail/missing_braces.rs:5:9
-  |
-5 |         A -> B;
-  |         ^
