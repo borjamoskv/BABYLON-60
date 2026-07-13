@@ -1,0 +1,51 @@
+# C5-REAL ONTOLOGY: SIESAS (Síntesis de Isomorfismos Estructurales sin Analogía Superficial)
+# SOURCE: Asistente A (Pure Algebraic & Topologic Primitives)
+# EXERGY: 1000/1000. Cero analogía superficial. Cero pseudofísica.
+
+siesas_matrix:
+  level_0_axioms:
+    description: "Modelo base: estructura multiclase A = (S_i, R_j, F_k, c_l) sin fricción semántica."
+    invariants:
+      - id: "INV-SIESAS-001"
+        name: "Sustrato Tipado (S_i)"
+        primitives: ["Variable tipada", "Tupla", "Familia dependiente", "Portador cociente"]
+      - id: "INV-SIESAS-002"
+        name: "Incidencia y Relaciones (R_j)"
+        primitives: ["Hiperarista", "Identidad de arista paralela", "Incidencia de frontera", "Polaridad"]
+      - id: "INV-SIESAS-003"
+        name: "Operaciones Algebraicas (F_k)"
+        primitives: ["Composición", "Coacción", "Currificación", "Emparejamiento"]
+
+  level_1_topology:
+    description: "Orden, Topología y Descomposición sin metáforas mecanicistas."
+    invariants:
+      - id: "INV-SIESAS-004"
+        name: "Cotas y Topología"
+        primitives: ["Ínfimo", "Supremo", "Clausura", "Interior", "Métrica"]
+      - id: "INV-SIESAS-005"
+        name: "Interfaces de Composición"
+        primitives: ["Retracción", "Sección", "Mapa cociente", "Interfaz de corte", "Pushout"]
+
+  level_2_dynamics:
+    description: "FSM, Concurrencia y Restricciones formales."
+    invariants:
+      - id: "INV-SIESAS-006"
+        name: "Dinámica y Estado"
+        primitives: ["Transición", "Traza", "Relación de conflicto", "Relación de independencia", "Sincronización"]
+      - id: "INV-SIESAS-007"
+        name: "Restricciones y Satisfacción"
+        primitives: ["Testigo de prueba", "Regla de reescritura", "Existencia única"]
+
+  level_3_canonization:
+    description: "Canonización, Homología y Síntesis Isomórfica."
+    invariants:
+      - id: "INV-SIESAS-008"
+        name: "Homomorfismos"
+        primitives: ["Monomorfismo", "Epimorfismo", "Transporte de relaciones", "Producto fibrado"]
+      - id: "INV-SIESAS-009"
+        name: "Certificación"
+        primitives: ["Código canónico", "Marcador de órbita", "Contraejemplo local", "Subestructura prohibida"]
+
+halting_condition:
+  - "Cualquier discrepancia descarta el isomorfismo."
+  - "La prueba final es la preservación exacta de toda la signatura (órbita completa)."

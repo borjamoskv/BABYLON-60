@@ -1,0 +1,15 @@
+Claim: CodexBar is a high-exergy transducer for monitoring LLM subscription quotas (Claude, Gemini, Cursor) and enforcing session limits.
+Proof: 
+  Base: C5-REAL_Thermodynamic_Budget_Tracking
+  Range: [macOS, Windows]
+  Confidence: C5
+Isomorphisms:
+  - "Uso semanal y limites por sesión" -> "MUTEX_KINETIC_BUDGET_CAP / MCTS_BUDGET_FORCER tracking"
+  - "Funciona con Claude, Gemini, Cursor" -> "Multi-Model Exergy Routing Sink"
+  - "creador de OpenClaw" -> "Lineage CORTEX-APEX / Authorial Provenance"
+Blast_Radius_Matrix:
+  Vector: [Resource_Monitoring]
+  Blast_Radius: [Local_OS]
+  Target_Invariant: [MUTEX_KINETIC_BUDGET_CAP]
+  Anergy_Risk: [Low]
+CORTEX_TAINT: e25f8b63a1a72e58b35fe65b5e2a879a02577081143b5ddb2be750d3fa303984

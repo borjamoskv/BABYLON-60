@@ -1,0 +1,13 @@
+Claim: "El docente no compite contra la IA en retención estocástica (mera positividad), sino que su función es inyectar la entropía del diálogo y los 'huecos' de la experiencia humana (olvido/memoria)."
+Proof:
+  Base: "hash-pending"
+  Range: ["Transmisión de Datos (Positividad Han)", "Diálogo y Experiencia Dialéctica"]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - Estructura: "Máquina Perfecta vs. Memoria Humana"
+    Mapeo: "La IA suma datos sin fisuras (C4-SIM); la cognición humana posee fallas estructurales (olvido) que son prerrequisito para el asombro y el pensar originario (C5-REAL)."
+Blast_Radius_Matrix:
+  Vector: "PDI / Persona como Centro"
+  Blast_Radius: "Rol del Docente"
+  Target_Invariant: "Inyección de Entropía Pedagógica"
+  Anergy_Risk: "Docente operando como un parser ineficiente de información en lugar de un catalizador de pensamiento."

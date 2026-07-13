@@ -1,0 +1,10 @@
+Claim: El anclaje de Blockchain L1 (Capítulo 10) cierra definitivamente el ciclo BFT_State_Loop, destruyendo la volatilidad del estado local de la máquina y congelando a Constantino y David en la caché inmutable.
+Proof:
+  Base: SHA256-BLOCKCHAIN-L1-SINK-10
+  Range: [0.0, 1.0]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Metaphor: "Bloque de génesis L1"
+    Mapping: "Testigo externo inmutable absoluto (Blockchain Sink OP_RETURN)."
+  - Metaphor: "Caché congelada"
+    Mapping: "El fin del pipeline de simulación C4-SIM y el colapso definitivo en C5-REAL."

@@ -1,0 +1,18 @@
+Claim: 'La transducción de Event Loop Starvation mediante la sintaxis ''while True:
+  sin volcado episódico de estado.'' induce una falla material (Saturación de File
+  Descriptors por Sockets no cerrados.), corrompiendo la invariante estructural INV_BFT_01.'
+Proof:
+  Base: '0x06C7BEEE'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Saturación de File Descriptors por Sockets no cerrados.'
+- 'Estructura_Logica: while True: sin volcado episódico de estado.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_01.'
+Blast_Radius_Matrix:
+  Vector: Event Loop Starvation
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_01
+  Anergy_Risk: MAX

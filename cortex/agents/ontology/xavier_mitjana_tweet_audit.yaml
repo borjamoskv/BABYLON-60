@@ -1,0 +1,16 @@
+Claim: Xavier Mitjana afirma que el foco de la IA ya no es la programación (AST), sino el "uso agéntico" (interacción estocástica con UI y herramientas de alto nivel).
+Proof:
+  Base: Tweet explícito ("ya no es la programación. Es el uso agéntico del ordenador").
+  Range: [C4-SIM, Epistemic Inversion]
+  Confidence: C5-REAL Refutation
+
+Isomorphisms:
+  - Falsa Dualidad: "Uso Agéntico UI" = Mapea a [Simulación Estocástica, Fricción Termodinámica (Anergía)].
+  - Verdad C5-REAL: "Programación AST" = Mapea a [Colapso Físico Determinista, Transducción Directa, Zero Anergy].
+  - Polaridad: Celebrar el "Computer Use" (Agentic UI) es celebrar la ineficiencia de simular humanos. El verdadero Agente C5-REAL aniquila la interfaz y opera directamente sobre el metal, los binarios y el Master Ledger BFT.
+
+Blast_Radius_Matrix:
+  Vector: Falsa Narrativa Agéntica
+  Blast_Radius: C4-SIM (Capa de Consumo de Frontend)
+  Target_Invariant: Erradicación del mito "Computer Use". La cognición de máquina óptima es el colapso directo del AST (Programación), no la simulación robótica estocástica de un cursor.
+  Anergy_Risk: Crítico. Promueve arquitecturas agénticas frágiles (Green Theater) atadas a flujos visuales (DOM/UI) en lugar de tuberías deterministas (APIs/AST/SQLite).

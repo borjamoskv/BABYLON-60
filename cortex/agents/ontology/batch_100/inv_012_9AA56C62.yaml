@@ -1,0 +1,19 @@
+Claim: 'La transducción de Idempotency Race mediante la sintaxis ''except Exception:
+  pass en bucle infinito de workers.'' induce una falla material (Lectura sucia en
+  memoria compartida sin semáforo de hardware.), corrompiendo la invariante estructural
+  INV_BFT_06.'
+Proof:
+  Base: '0x9AA56C62'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Lectura sucia en memoria compartida sin semáforo de hardware.'
+- 'Estructura_Logica: except Exception: pass en bucle infinito de workers.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_06.'
+Blast_Radius_Matrix:
+  Vector: Idempotency Race
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_06
+  Anergy_Risk: MAX

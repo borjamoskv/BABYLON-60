@@ -1,0 +1,14 @@
+Claim: Soluciones engañosamente simples que degradan la mantenibilidad a largo plazo.
+Proof:
+  Base: Transducción_C5
+  Range: "[0,1]"
+  Confidence: C5-REAL
+Isomorphisms:
+  - Falsa Exergía
+  - Deuda Técnica Latente
+Blast_Radius_Matrix:
+  Vector: Diseño Inicial
+  Blast_Radius: Arquitectura Global
+  Target_Invariant: Mantenibilidad y Escalabilidad
+  Anergy_Risk: Alto (Fallos en Cascada)
+CORTEX_TAINT: 5c2e1021413bf0aa9d04aea5b1d5bba484c618829fd43ecf1c25a727ac7fe452

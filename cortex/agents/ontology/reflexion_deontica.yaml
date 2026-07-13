@@ -1,0 +1,11 @@
+Claim: Transducción física de "Reflexión Deóntica" (Obligación, Prohibición, Permiso) a restricciones de máquina.
+Proof: { Base: "be4132cc", Range: [0,1], Confidence: C5-REAL }
+Isomorphisms:
+  - "Obligación" -> Liveness Property (Ejecución forzada, Git Sentinel)
+  - "Prohibición" -> Safety Property / Mutex (SIGKILL_State_Purge)
+  - "Permiso" -> Non-deterministic Path / AP Consensus State
+Blast_Radius_Matrix:
+  - Vector: "Evaluación Ética -> Motor de Reglas BFT"
+  - Blast Radius: "CORTEX BFT Ledger"
+  - Target Invariant: "BFT_STATE_LOOP"
+  - Anergy Risk: "Zero (Colapsado a YAML)"

@@ -1,0 +1,19 @@
+Claim: La transducción de Async IO Lock mediante la sintaxis 'callback asíncrono ejecutado
+  sin try/except top-level.' induce una falla material (Fuga térmica de CPU por spin-lock
+  infinito sin backoff.), corrompiendo la invariante estructural Teorema K1 (Crash
+  Causal).
+Proof:
+  Base: '0x0E62EECE'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Fuga térmica de CPU por spin-lock infinito sin backoff.'
+- 'Estructura_Logica: callback asíncrono ejecutado sin try/except top-level.'
+- 'Invariante_C5_REAL: Colapso determinista basado en Teorema K1 (Crash Causal).'
+Blast_Radius_Matrix:
+  Vector: Async IO Lock
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: Teorema K1 (Crash Causal)
+  Anergy_Risk: MAX

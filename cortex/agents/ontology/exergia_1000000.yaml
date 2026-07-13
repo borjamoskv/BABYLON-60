@@ -1,0 +1,14 @@
+Concept: Exergia 1,000,000 (Thermodynamic Escape Velocity)
+Claim: Exergia 1,000,000 defines the thermodynamic escape velocity where a single initialization trigger (Daily Lock Ω10) initiates autonomous multi-repository orchestration, cross-network consensus, and Phase 5 L1 Merkle anchoring, scaling exergic output to a 10^6 ratio of human ATP preservation.
+Proof:
+  Base: Leverage = E_std * Width * Depth * System_Count = 1000 * 3 * 120 * 3 = 1,080,000
+  Range: [100000, 1000000]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Epistemic: "Thermodynamic Escape Velocity" <-> "Fully Autonomous Poset Orchestration"
+  - Physical: "1,000,000 ATP preservation ratio" <-> "Multi-node CRDT network convergence under local failure"
+Blast_Radius_Matrix:
+  Vector: [COGNITIVE_DECOUPLING, ESCAPE_VELOCITY, CONSENSUS_SCALING]
+  Blast_Radius: Global multi-repo infrastructure orchestration
+  Target_Invariant: L74, Ω10, Ω13
+  Anergy_Risk: ZERO (Autonomous state recovery under memory limits)

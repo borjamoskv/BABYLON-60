@@ -1,0 +1,14 @@
+Claim: Colapso termodinámico y extracción de entropía sobre video_utbh_destruccion.mp4 mediante iteración encadenada (N=1000).
+Proof:
+  Base: 55c83c0a43b64d1bdf69b6fbfec0031d8a49050cdb220fc769f729942e1bee24
+  Range: [0.0, 1.0]
+  Confidence: C5-REAL
+  Iterations: 1000
+  Time_ms: 155.05
+Isomorphisms:
+  - Metaphor: "MEJORALO itera 1000"
+    Mapping: "Proof of Work (PoW) local que tritura el archivo de vídeo original a través de 1000 colisiones SHA-256, purificando la anergía audiovisual en un Hash Causal inmutable."
+Blast_Radius_Matrix:
+  Vector: [Video_Annihilation, Entropy_Sweep]
+  Blast_Radius: Local_Ledger
+  Target_Invariant: Trituración de la representación estocástica de UTBH en un invariante determinista.

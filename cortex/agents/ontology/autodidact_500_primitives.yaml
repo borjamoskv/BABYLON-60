@@ -1,0 +1,3502 @@
+- id: AUT-001
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Clase
+  definicion_operativa: categoría básica de objetos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-002
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Portador
+  definicion_operativa: conjunto de elementos de una clase.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-003
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Elemento
+  definicion_operativa: unidad perteneciente a un portador.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-004
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Variable tipada
+  definicion_operativa: posición reemplazable restringida a una clase.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-005
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Constante
+  definicion_operativa: símbolo que designa un elemento fijo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-006
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Punto distinguido
+  definicion_operativa: elemento con función estructural explícita.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-007
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Tupla
+  definicion_operativa: colección ordenada de elementos tipados.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-008
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Secuencia
+  definicion_operativa: tupla de longitud variable.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-009
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Multiconjunto
+  definicion_operativa: colección con multiplicidades.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-010
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Subconjunto
+  definicion_operativa: selección no ordenada de un portador.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-011
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Índice
+  definicion_operativa: identificador interno de una familia estructural.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-012
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Aridad
+  definicion_operativa: número y tipos de argumentos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-013
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Signatura
+  definicion_operativa: inventario de clases, relaciones, funciones y constantes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-014
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Dominio
+  definicion_operativa: clases admitidas como entradas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-015
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Codominio
+  definicion_operativa: clase declarada de salida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-016
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Producto de clases
+  definicion_operativa: combinación conjuntiva de tipos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-017
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Coproducto de clases
+  definicion_operativa: combinación disjunta de tipos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-018
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Clase unidad
+  definicion_operativa: portador con un único elemento.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-019
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Clase vacía
+  definicion_operativa: portador sin elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-020
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Subtipo
+  definicion_operativa: clase incluida mediante una condición estructural.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-021
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Familia dependiente
+  definicion_operativa: tipo parametrizado por otro elemento.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-022
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Clase de equivalencia
+  definicion_operativa: bloque inducido por una equivalencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-023
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Portador cociente
+  definicion_operativa: conjunto de clases de equivalencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-024
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Contexto
+  definicion_operativa: asignación tipada de variables.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-025
+  categoria_interna: A - Sustrato tipado
+  tipo: primitiva_estructural
+  nombre: Interpretación
+  definicion_operativa: realización concreta de una signatura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-026
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Predicado unario
+  definicion_operativa: propiedad estructural de un elemento.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-027
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Relación binaria
+  definicion_operativa: vínculo entre dos elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-028
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Relación n-aria
+  definicion_operativa: vínculo entre una tupla tipada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-029
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Función total
+  definicion_operativa: salida única para cada entrada admisible.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-030
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Función parcial
+  definicion_operativa: función no definida en todas las entradas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-031
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Correspondencia multivaluada
+  definicion_operativa: asociación con varias salidas posibles.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-032
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Nodo
+  definicion_operativa: entidad incidente en una red.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-033
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Arista dirigida
+  definicion_operativa: relación con fuente y destino.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-034
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Arista no dirigida
+  definicion_operativa: incidencia simétrica entre extremos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-035
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Hiperarista
+  definicion_operativa: incidencia con cualquier número de nodos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-036
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Relación de incidencia
+  definicion_operativa: indica qué objetos participan en otros.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-037
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Fuente
+  definicion_operativa: extremo inicial de una relación dirigida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-038
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Destino
+  definicion_operativa: extremo final de una relación dirigida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-039
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Extremo
+  definicion_operativa: participante de una arista no dirigida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-040
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Puerto
+  definicion_operativa: punto local de conexión.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-041
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Tipo de puerto
+  definicion_operativa: restricción estructural de conexión.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-042
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Bucle
+  definicion_operativa: arista cuyos extremos coinciden.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-043
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Identidad de arista paralela
+  definicion_operativa: distingue incidencias repetidas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-044
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Orientación
+  definicion_operativa: elección coherente de sentido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-045
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Polaridad
+  definicion_operativa: signo o rol positivo/negativo preservable.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-046
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Multiplicidad
+  definicion_operativa: número de copias de una incidencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-047
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Color estructural de nodo
+  definicion_operativa: clase interna, no nombre superficial.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-048
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Tipo de arista
+  definicion_operativa: clase estructural de una conexión.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-049
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Incidencia de frontera
+  definicion_operativa: conexión entre interior e interfaz.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-050
+  categoria_interna: B - Relaciones e incidencia
+  tipo: primitiva_estructural
+  nombre: Incidencia prohibida
+  definicion_operativa: combinación excluida por la signatura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-051
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Identidad composicional
+  definicion_operativa: operación neutra respecto de composición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-052
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Composición
+  definicion_operativa: encadenamiento tipado de transformaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-053
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Operación nularia
+  definicion_operativa: operación sin argumentos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-054
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Operación unaria
+  definicion_operativa: transformación de un elemento.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-055
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Operación binaria
+  definicion_operativa: combinación de dos elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-056
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Operación n-aria
+  definicion_operativa: combinación de una tupla.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-057
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Operación inversa
+  definicion_operativa: revierte una operación cuando existe.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-058
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Acción
+  definicion_operativa: operación de una estructura sobre otra.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-059
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Coacción
+  definicion_operativa: versión dual de una acción.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-060
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Multiplicación escalar
+  definicion_operativa: acción de escalares sobre elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-061
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Suma
+  definicion_operativa: operación aditiva declarada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-062
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Producto
+  definicion_operativa: operación multiplicativa declarada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-063
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Negación
+  definicion_operativa: operación unaria aditiva inversa.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-064
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Unidad
+  definicion_operativa: elemento neutro multiplicativo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-065
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Cero
+  definicion_operativa: elemento neutro aditivo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-066
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Selector
+  definicion_operativa: operación que elige una entrada según una regla.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-067
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Emparejamiento
+  definicion_operativa: construcción de un elemento producto.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-068
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Proyección
+  definicion_operativa: extracción de una coordenada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-069
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Inyección
+  definicion_operativa: inserción en una suma o superestructura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-070
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Evaluación
+  definicion_operativa: aplicación explícita de una función.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-071
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Currificación
+  definicion_operativa: conversión entre argumentos conjuntos y sucesivos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-072
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Plegado
+  definicion_operativa: reducción de una estructura recursiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-073
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Desplegado
+  definicion_operativa: expansión de una estructura recursiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-074
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Sustitución
+  definicion_operativa: reemplazo tipado de variables o términos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-075
+  categoria_interna: C - Operaciones algebraicas
+  tipo: primitiva_estructural
+  nombre: Constructor de términos
+  definicion_operativa: regla generadora de expresiones estructurales.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-076
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Igualdad
+  definicion_operativa: coincidencia estructural interna.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-077
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Orden estricto
+  definicion_operativa: relación irreflexiva y transitiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-078
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Orden no estricto
+  definicion_operativa: relación reflexiva, antisimétrica y transitiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-079
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Preorden
+  definicion_operativa: relación reflexiva y transitiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-080
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Equivalencia
+  definicion_operativa: relación reflexiva, simétrica y transitiva.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-081
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Relación de cobertura
+  definicion_operativa: precedencia sin elemento intermedio.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-082
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Ínfimo
+  definicion_operativa: mayor cota inferior.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-083
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Supremo
+  definicion_operativa: menor cota superior.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-084
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Mínimo global
+  definicion_operativa: elemento inferior distinguido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-085
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Máximo global
+  definicion_operativa: elemento superior distinguido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-086
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Complemento
+  definicion_operativa: operación de oposición respecto de cotas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-087
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Clausura
+  definicion_operativa: operador extensivo, monótono e idempotente.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-088
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Interior
+  definicion_operativa: operador contractivo, monótono e idempotente.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-089
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Vecindad
+  definicion_operativa: relación de proximidad estructural.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-090
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Predicado de abierto
+  definicion_operativa: pertenencia a la topología declarada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-091
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Elemento de base
+  definicion_operativa: abierto generador de una topología.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-092
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Métrica
+  definicion_operativa: distancia simétrica con desigualdad triangular.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-093
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Pseudométrica
+  definicion_operativa: métrica que permite distancia cero entre distintos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-094
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Betweenness
+  definicion_operativa: relación ternaria de intermediación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-095
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Orientación geométrica
+  definicion_operativa: elección estructural de orientación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-096
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Etiqueta dimensional
+  definicion_operativa: dimensión declarada de una celda.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-097
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Símplex
+  definicion_operativa: celda determinada por sus vértices.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-098
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Mapa de cara
+  definicion_operativa: eliminación tipada de una coordenada simplicial.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-099
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Mapa de degeneración
+  definicion_operativa: repetición tipada de una coordenada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-100
+  categoria_interna: D - Orden, geometría y topología
+  tipo: primitiva_estructural
+  nombre: Operador de borde
+  definicion_operativa: combinación formal de caras.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-101
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Componente
+  definicion_operativa: subestructura separable según una relación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-102
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Subobjeto
+  definicion_operativa: estructura contenida y cerrada bajo operaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-103
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Inclusión
+  definicion_operativa: morfismo de un subobjeto al objeto total.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-104
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Encaje
+  definicion_operativa: morfismo inyectivo que preserva estructura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-105
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Proyección estructural
+  definicion_operativa: morfismo hacia un factor.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-106
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Retracción
+  definicion_operativa: morfismo que revierte una inclusión.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-107
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Sección
+  definicion_operativa: inversa derecha de una proyección.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-108
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Mapa cociente
+  definicion_operativa: identificación controlada de elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-109
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Partición
+  definicion_operativa: división en bloques disjuntos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-110
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Bloque
+  definicion_operativa: parte indivisible respecto de una descomposición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-111
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Fibra
+  definicion_operativa: preimagen de un valor.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-112
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Módulo
+  definicion_operativa: subestructura con interfaz definida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-113
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Interfaz
+  definicion_operativa: conjunto de puntos visibles de composición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-114
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Puerto de entrada
+  definicion_operativa: interfaz receptora.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-115
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Puerto de salida
+  definicion_operativa: interfaz emisora.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-116
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Puerto oculto
+  definicion_operativa: conexión interna no expuesta.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-117
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Conector
+  definicion_operativa: objeto que acopla puertos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-118
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Separador
+  definicion_operativa: subestructura cuya retirada desacopla partes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-119
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Interfaz de corte
+  definicion_operativa: frontera producida por una separación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-120
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Frontera de composición
+  definicion_operativa: zona identificada al ensamblar.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-121
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Mapa de refinamiento
+  definicion_operativa: reemplaza una unidad por una estructura más fina.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-122
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Mapa de abstracción
+  definicion_operativa: colapsa detalles preservando relaciones declaradas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-123
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Agregación
+  definicion_operativa: combinación de elementos en una unidad.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-124
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Desagregación
+  definicion_operativa: expansión de una unidad en componentes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-125
+  categoria_interna: E - Descomposición e interfaces
+  tipo: primitiva_estructural
+  nombre: Relación jerárquica padre-hijo
+  definicion_operativa: dependencia de contención estructural.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-126
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Estado
+  definicion_operativa: configuración estructural instantánea.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-127
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Estado inicial
+  definicion_operativa: configuración de partida distinguida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-128
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Estado terminal o aceptante
+  definicion_operativa: configuración final distinguida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-129
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Transición
+  definicion_operativa: cambio permitido entre estados.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-130
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Acción estructural
+  definicion_operativa: clase de transición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-131
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Evento
+  definicion_operativa: ocurrencia individual de una transición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-132
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Guarda
+  definicion_operativa: condición de habilitación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-133
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Actualización
+  definicion_operativa: modificación producida por una transición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-134
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Entrada
+  definicion_operativa: dato externo consumido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-135
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Salida
+  definicion_operativa: dato externo producido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-136
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Observación
+  definicion_operativa: proyección visible de un estado.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-137
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Reloj
+  definicion_operativa: variable temporal estructurada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-138
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Marca temporal
+  definicion_operativa: posición de un evento en el tiempo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-139
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Duración
+  definicion_operativa: extensión temporal de una transición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-140
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Trayectoria
+  definicion_operativa: sucesión temporal de estados.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-141
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Ejecución
+  definicion_operativa: secuencia válida de transiciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-142
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Traza
+  definicion_operativa: proyección observable de una ejecución.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-143
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Planificador
+  definicion_operativa: regla de selección de transiciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-144
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Relación de habilitación
+  definicion_operativa: indica qué eventos pueden ocurrir.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-145
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Relación de conflicto
+  definicion_operativa: eventos mutuamente excluyentes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-146
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Relación de independencia
+  definicion_operativa: eventos intercambiables.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-147
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Sincronización
+  definicion_operativa: ocurrencia conjunta obligatoria.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-148
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Recurso
+  definicion_operativa: entidad requerida o producida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-149
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Token
+  definicion_operativa: unidad móvil de disponibilidad.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-150
+  categoria_interna: F - Dinámica y concurrencia
+  tipo: primitiva_estructural
+  nombre: Tasa de transición
+  definicion_operativa: intensidad cuantitativa de cambio.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-151
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Fórmula atómica
+  definicion_operativa: afirmación relacional elemental.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-152
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Valor de verdad
+  definicion_operativa: resultado semántico de una fórmula.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-153
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Negación lógica
+  definicion_operativa: inversión de verdad.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-154
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Conjunción
+  definicion_operativa: satisfacción simultánea.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-155
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Disyunción
+  definicion_operativa: satisfacción alternativa.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-156
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Implicación
+  definicion_operativa: dependencia lógica.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-157
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Cuantificador universal
+  definicion_operativa: condición sobre todos los elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-158
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Cuantificador existencial
+  definicion_operativa: condición sobre algún elemento.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-159
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Existencia única
+  definicion_operativa: existencia de exactamente un testigo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-160
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Modalidad de posibilidad
+  definicion_operativa: verdad en alguna transición o extensión.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-161
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Modalidad de necesidad
+  definicion_operativa: verdad en todas las transiciones o extensiones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-162
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Operador temporal siguiente
+  definicion_operativa: verdad en el estado posterior.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-163
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Operador temporal hasta
+  definicion_operativa: persistencia hasta otra condición.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-164
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Operador temporal pasado
+  definicion_operativa: referencia a estados previos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-165
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Relación de satisfacción
+  definicion_operativa: vincula estructura y fórmula verdadera.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-166
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Restricción
+  definicion_operativa: condición que limita modelos válidos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-167
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Restricción dura
+  definicion_operativa: condición obligatoria.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-168
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Restricción blanda
+  definicion_operativa: condición optimizable o penalizable.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-169
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Ecuación
+  definicion_operativa: igualdad obligatoria entre términos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-170
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Inecuación
+  definicion_operativa: relación de orden entre términos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-171
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Regla de reescritura
+  definicion_operativa: sustitución dirigida de patrones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-172
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Regla de inferencia
+  definicion_operativa: producción de conclusiones desde premisas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-173
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Premisa
+  definicion_operativa: condición de entrada de una inferencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-174
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Conclusión
+  definicion_operativa: resultado de una inferencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-175
+  categoria_interna: G - Lógica y restricciones
+  tipo: primitiva_estructural
+  nombre: Testigo de prueba
+  definicion_operativa: objeto que certifica una afirmación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-176
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Relación de correspondencia
+  definicion_operativa: conjunto de pares candidatos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-177
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Mapa candidato
+  definicion_operativa: asignación aún no verificada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-178
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Mapa inyectivo
+  definicion_operativa: no identifica elementos distintos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-179
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Mapa sobreyectivo
+  definicion_operativa: cubre todo el codominio.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-180
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Biyección
+  definicion_operativa: mapa inyectivo y sobreyectivo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-181
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Isomorfismo parcial
+  definicion_operativa: biyección preservante sobre subestructuras.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-182
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Homomorfismo
+  definicion_operativa: mapa que preserva operaciones y relaciones positivas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-183
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Monomorfismo
+  definicion_operativa: morfismo cancelable por la izquierda.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-184
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Epimorfismo
+  definicion_operativa: morfismo cancelable por la derecha.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-185
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Automorfismo
+  definicion_operativa: isomorfismo de una estructura consigo misma.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-186
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Antiisomorfismo
+  definicion_operativa: isomorfismo que invierte una orientación declarada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-187
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Permutación de clases
+  definicion_operativa: renombrado permitido de clases equivalentes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-188
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Transporte de relaciones
+  definicion_operativa: traslado de tuplas mediante un mapa.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-189
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Transporte de operaciones
+  definicion_operativa: conjugación de operaciones mediante biyecciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-190
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Transporte de constantes
+  definicion_operativa: envío de puntos distinguidos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-191
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Imagen inversa
+  definicion_operativa: traslado contravariante de subconjuntos o relaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-192
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Imagen directa
+  definicion_operativa: traslado covariante de elementos o relaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-193
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Producto fibrado
+  definicion_operativa: sincronización sobre una interfaz común.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-194
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Pushout
+  definicion_operativa: ensamblaje por identificación de interfaces.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-195
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Igualador
+  definicion_operativa: subobjeto donde dos mapas coinciden.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-196
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Coigualador
+  definicion_operativa: cociente que fuerza la coincidencia de dos mapas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-197
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Restricción de emparejamiento
+  definicion_operativa: condición local sobre correspondencias.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-198
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Testigo de consistencia
+  definicion_operativa: evidencia de que un emparejamiento preserva estructura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-199
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Obstrucción
+  definicion_operativa: evidencia finita contra una correspondencia.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-200
+  categoria_interna: H - Correspondencia y síntesis
+  tipo: primitiva_estructural
+  nombre: Cuadrado conmutativo
+  definicion_operativa: condición de compatibilidad entre mapas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-201
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Peso natural
+  definicion_operativa: multiplicidad o magnitud discreta no negativa.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-202
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Peso entero
+  definicion_operativa: magnitud discreta con signo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-203
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Peso real
+  definicion_operativa: magnitud escalar continua.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-204
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Peso vectorial
+  definicion_operativa: magnitud con varias componentes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-205
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Peso matricial o tensorial
+  definicion_operativa: magnitud multilineal.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-206
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Coste
+  definicion_operativa: valor que debe minimizarse.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-207
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Capacidad
+  definicion_operativa: límite cuantitativo de uso.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-208
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Flujo
+  definicion_operativa: cantidad transportada por incidencias.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-209
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Medida de probabilidad
+  definicion_operativa: medida normalizada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-210
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Distribución
+  definicion_operativa: asignación probabilística a resultados.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-211
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Núcleo estocástico
+  definicion_operativa: distribución condicionada por un estado.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-212
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Medida general
+  definicion_operativa: asignación aditiva de tamaño.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-213
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Densidad
+  definicion_operativa: representación local de una medida.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-214
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Funcional de esperanza
+  definicion_operativa: promedio ponderado de observables.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-215
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Valoración
+  definicion_operativa: asignación compatible con un semianillo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-216
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Norma
+  definicion_operativa: magnitud compatible con escala y suma.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-217
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Seminorma
+  definicion_operativa: norma que puede anular elementos no nulos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-218
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Producto interno
+  definicion_operativa: forma bilineal o sesquilineal.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-219
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Coste de distancia
+  definicion_operativa: penalización entre elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-220
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Energía
+  definicion_operativa: funcional cuantitativo global.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-221
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Potencial
+  definicion_operativa: magnitud local generadora de diferencias.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-222
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Función de rango
+  definicion_operativa: nivel ordinal o dimensional.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-223
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Graduación
+  definicion_operativa: partición por grados.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-224
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Nivel de filtración
+  definicion_operativa: momento de aparición en una estructura anidada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-225
+  categoria_interna: I - Magnitudes y pesos
+  tipo: primitiva_estructural
+  nombre: Umbral estructural
+  definicion_operativa: valor explícito que activa una relación.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-226
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Código canónico
+  definicion_operativa: representación independiente del etiquetado.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-227
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Orden canónico
+  definicion_operativa: orden determinado por la estructura.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-228
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Celda de partición
+  definicion_operativa: conjunto de elementos aún indistinguibles.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-229
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Operador de refinamiento
+  definicion_operativa: divide celdas mediante relaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-230
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Individualización
+  definicion_operativa: fija temporalmente un elemento candidato.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-231
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Marcador de órbita
+  definicion_operativa: identifica elementos intercambiables por automorfismos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-232
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Restricción de estabilizador
+  definicion_operativa: obliga a fijar determinados elementos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-233
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Generador de simetría
+  definicion_operativa: permutación que genera automorfismos.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-234
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Certificado de isomorfismo
+  definicion_operativa: biyección completa verificable.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-235
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Contraejemplo local
+  definicion_operativa: incidencia concreta no preservada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-236
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Vector de invariantes
+  definicion_operativa: colección de filtros estructurales.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-237
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Patrón
+  definicion_operativa: subestructura parametrizada.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-238
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Plantilla de motivo
+  definicion_operativa: patrón destinado al conteo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-239
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Subestructura prohibida
+  definicion_operativa: patrón cuya aparición invalida un modelo.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-240
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Indicador de inducción
+  definicion_operativa: exige preservar relaciones presentes y ausentes.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-241
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Constructor de caminos
+  definicion_operativa: composición sucesiva de incidencias.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-242
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Constructor de paseos
+  definicion_operativa: secuencia que admite repeticiones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-243
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Constructor de ciclos
+  definicion_operativa: paseo cerrado con condiciones declaradas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-244
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Predicado de conexión
+  definicion_operativa: detecta componentes relacionadas.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-245
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Predicado de alcanzabilidad
+  definicion_operativa: existencia de un camino dirigido.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-246
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Clausura transitiva
+  definicion_operativa: añade todas las relaciones alcanzables.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-247
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Clausura de congruencia
+  definicion_operativa: propaga igualdades a través de operaciones.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-248
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Normalizador
+  definicion_operativa: lleva expresiones a una forma estándar.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-249
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Selector de representante canónico
+  definicion_operativa: elige un miembro de cada órbita.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-250
+  categoria_interna: J - Canonización y verificación
+  tipo: primitiva_estructural
+  nombre: Predicado de decisión
+  definicion_operativa: acepta o rechaza un candidato estructural.
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-251
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Número de clases
+  definicion_operativa: Número de clases
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-252
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Perfil de símbolos por clase y aridad
+  definicion_operativa: Perfil de símbolos por clase y aridad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-253
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidad de cada portador
+  definicion_operativa: Cardinalidad de cada portador
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-254
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Patrón de clases vacías y no vacías
+  definicion_operativa: Patrón de clases vacías y no vacías
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-255
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Patrón de coincidencia entre constantes
+  definicion_operativa: Patrón de coincidencia entre constantes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-256
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Número de puntos distinguidos por clase
+  definicion_operativa: Número de puntos distinguidos por clase
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-257
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Perfil de productos, coproductos y subtipos declarados
+  definicion_operativa: Perfil de productos, coproductos y subtipos declarados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-258
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Multiconjunto de aridades
+  definicion_operativa: Multiconjunto de aridades
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-259
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Matriz clase-dominio-codominio de los símbolos
+  definicion_operativa: Matriz clase-dominio-codominio de los símbolos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-260
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidad del dominio efectivo de cada función parcial
+  definicion_operativa: Cardinalidad del dominio efectivo de cada función parcial
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-261
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidad de la imagen de cada función
+  definicion_operativa: Cardinalidad de la imagen de cada función
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-262
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de fibras
+  definicion_operativa: Multiconjunto de tamaños de fibras
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-263
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Tipo de partición inducido por el núcleo de cada función
+  definicion_operativa: Tipo de partición inducido por el núcleo de cada función
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-264
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Número de puntos fijos de cada endofunción
+  definicion_operativa: Número de puntos fijos de cada endofunción
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-265
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Tipo del grafo funcional de cada endofunción
+  definicion_operativa: Tipo del grafo funcional de cada endofunción
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-266
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidad de cada relación
+  definicion_operativa: Cardinalidad de cada relación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-267
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidad del complemento de cada relación
+  definicion_operativa: Cardinalidad del complemento de cada relación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-268
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Número de tuplas diagonales en cada relación
+  definicion_operativa: Número de tuplas diagonales en cada relación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-269
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Distribución de patrones de igualdad dentro de las tuplas
+  definicion_operativa: Distribución de patrones de igualdad dentro de las tuplas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-270
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidades de las proyecciones coordenadas de cada relación
+  definicion_operativa: Cardinalidades de las proyecciones coordenadas de cada relación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-271
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Cardinalidades de joins relacionales especificados
+  definicion_operativa: Cardinalidades de joins relacionales especificados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-272
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Multiconjunto de participaciones por elemento y símbolo
+  definicion_operativa: Multiconjunto de participaciones por elemento y símbolo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-273
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Patrón de verdad de los predicados nularios
+  definicion_operativa: Patrón de verdad de los predicados nularios
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-274
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Tipo y tamaño de la subestructura generada por las constantes
+  definicion_operativa: Tipo y tamaño de la subestructura generada por las constantes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-275
+  categoria_interna: K - Signatura y cardinalidad
+  tipo: invariante_estructural
+  nombre: Diagrama atómico canónico de una estructura finita
+  definicion_operativa: Diagrama atómico canónico de una estructura finita
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-276
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados
+  definicion_operativa: Multiconjunto de grados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-277
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados de entrada
+  definicion_operativa: Multiconjunto de grados de entrada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-278
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados de salida
+  definicion_operativa: Multiconjunto de grados de salida
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-279
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados con signo
+  definicion_operativa: Multiconjunto de grados con signo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-280
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de vectores de grado por tipo
+  definicion_operativa: Multiconjunto de vectores de grado por tipo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-281
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados ponderados
+  definicion_operativa: Multiconjunto de grados ponderados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-282
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Número de bucles
+  definicion_operativa: Número de bucles
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-283
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de multiplicidades de aristas paralelas
+  definicion_operativa: Multiconjunto de multiplicidades de aristas paralelas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-284
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de hiperaristas
+  definicion_operativa: Multiconjunto de tamaños de hiperaristas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-285
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Multiconjunto de codegrados entre vértices
+  definicion_operativa: Multiconjunto de codegrados entre vértices
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-286
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Rango de la matriz de incidencia sobre un cuerpo fijado
+  definicion_operativa: Rango de la matriz de incidencia sobre un cuerpo fijado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-287
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Forma normal de Smith de la matriz de incidencia entera
+  definicion_operativa: Forma normal de Smith de la matriz de incidencia entera
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-288
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Polinomio característico de la matriz de adyacencia
+  definicion_operativa: Polinomio característico de la matriz de adyacencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-289
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Perfil de bloques de Jordan de la adyacencia
+  definicion_operativa: Perfil de bloques de Jordan de la adyacencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-290
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Valores singulares de la matriz de adyacencia
+  definicion_operativa: Valores singulares de la matriz de adyacencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-291
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Espectro del laplaciano
+  definicion_operativa: Espectro del laplaciano
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-292
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Espectro del laplaciano normalizado
+  definicion_operativa: Espectro del laplaciano normalizado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-293
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Espectro del laplaciano sin signo
+  definicion_operativa: Espectro del laplaciano sin signo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-294
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Espectro de la matriz de distancias
+  definicion_operativa: Espectro de la matriz de distancias
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-295
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Permanente de la matriz de adyacencia
+  definicion_operativa: Permanente de la matriz de adyacencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-296
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Sucesión de trazas de potencias de la adyacencia
+  definicion_operativa: Sucesión de trazas de potencias de la adyacencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-297
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Número de paseos cerrados de cada longitud
+  definicion_operativa: Número de paseos cerrados de cada longitud
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-298
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Perfil de vecindades enraizadas por radio
+  definicion_operativa: Perfil de vecindades enraizadas por radio
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-299
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Cociente de la partición equitativa estable
+  definicion_operativa: Cociente de la partición equitativa estable
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-300
+  categoria_interna: L - Incidencia, matrices y refinamiento
+  tipo: invariante_estructural
+  nombre: Histograma estable de Weisfeiler–Leman para dimensión fijada
+  definicion_operativa: Histograma estable de Weisfeiler–Leman para dimensión fijada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-301
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de componentes débilmente conexas
+  definicion_operativa: Número de componentes débilmente conexas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-302
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de componentes fuertemente conexas
+  definicion_operativa: Número de componentes fuertemente conexas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-303
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de componentes
+  definicion_operativa: Multiconjunto de tamaños de componentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-304
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del DAG de condensación
+  definicion_operativa: Tipo isomorfo del DAG de condensación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-305
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Conectividad por vértices
+  definicion_operativa: Conectividad por vértices
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-306
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Conectividad por aristas
+  definicion_operativa: Conectividad por aristas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-307
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de puntos de articulación
+  definicion_operativa: Número de puntos de articulación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-308
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de puentes
+  definicion_operativa: Número de puentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-309
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del árbol bloque-corte
+  definicion_operativa: Tipo isomorfo del árbol bloque-corte
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-310
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Diámetro
+  definicion_operativa: Diámetro
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-311
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Radio
+  definicion_operativa: Radio
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-312
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de excentricidades
+  definicion_operativa: Multiconjunto de excentricidades
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-313
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Longitud del ciclo mínimo o cintura
+  definicion_operativa: Longitud del ciclo mínimo o cintura
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-314
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Longitud del ciclo máximo o circunferencia
+  definicion_operativa: Longitud del ciclo máximo o circunferencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-315
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Longitud del ciclo dirigido mínimo
+  definicion_operativa: Longitud del ciclo dirigido mínimo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-316
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Distribución del número de pares por distancia
+  definicion_operativa: Distribución del número de pares por distancia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-317
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de todas las distancias entre pares
+  definicion_operativa: Multiconjunto de todas las distancias entre pares
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-318
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Órbita de la matriz de alcanzabilidad bajo permutaciones
+  definicion_operativa: Órbita de la matriz de alcanzabilidad bajo permutaciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-319
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo de la clausura transitiva
+  definicion_operativa: Tipo isomorfo de la clausura transitiva
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-320
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo de la reducción transitiva de un DAG
+  definicion_operativa: Tipo isomorfo de la reducción transitiva de un DAG
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-321
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de árboles generadores
+  definicion_operativa: Número de árboles generadores
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-322
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Rango cíclico o número ciclomático
+  definicion_operativa: Rango cíclico o número ciclomático
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-323
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Distribución de ciclos por longitud
+  definicion_operativa: Distribución de ciclos por longitud
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-324
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Número de caminos simples por longitud
+  definicion_operativa: Número de caminos simples por longitud
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-325
+  categoria_interna: M - Conectividad, caminos y ciclos
+  tipo: invariante_estructural
+  nombre: Perfil de separadores por tamaño y tipo
+  definicion_operativa: Perfil de separadores por tamaño y tipo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-326
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Clase isomorfa de las tablas de operaciones
+  definicion_operativa: Clase isomorfa de las tablas de operaciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-327
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Presencia y número de elementos identidad
+  definicion_operativa: Presencia y número de elementos identidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-328
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número de ceros o elementos absorbentes
+  definicion_operativa: Número de ceros o elementos absorbentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-329
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número de elementos idempotentes
+  definicion_operativa: Número de elementos idempotentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-330
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número de unidades invertibles
+  definicion_operativa: Número de unidades invertibles
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-331
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número de divisores de cero
+  definicion_operativa: Número de divisores de cero
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-332
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número de elementos nilpotentes
+  definicion_operativa: Número de elementos nilpotentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-333
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Distribución de índices de nilpotencia
+  definicion_operativa: Distribución de índices de nilpotencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-334
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de órdenes de elementos
+  definicion_operativa: Multiconjunto de órdenes de elementos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-335
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Cardinalidad y tipo isomorfo del centro
+  definicion_operativa: Cardinalidad y tipo isomorfo del centro
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-336
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del subobjeto de conmutadores
+  definicion_operativa: Tipo isomorfo del subobjeto de conmutadores
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-337
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Perfil de factores de la serie derivada
+  definicion_operativa: Perfil de factores de la serie derivada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-338
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Perfil de factores de la serie central inferior
+  definicion_operativa: Perfil de factores de la serie central inferior
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-339
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de clases de conjugación
+  definicion_operativa: Multiconjunto de tamaños de clases de conjugación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-340
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del retículo de subgrupos o subálgebras
+  definicion_operativa: Tipo isomorfo del retículo de subgrupos o subálgebras
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-341
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del retículo de ideales o congruencias
+  definicion_operativa: Tipo isomorfo del retículo de ideales o congruencias
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-342
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Número mínimo de generadores
+  definicion_operativa: Número mínimo de generadores
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-343
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Exponente algebraico
+  definicion_operativa: Exponente algebraico
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-344
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Validez de la conmutatividad
+  definicion_operativa: Validez de la conmutatividad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-345
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Validez de la asociatividad
+  definicion_operativa: Validez de la asociatividad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-346
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Perfil de identidades distributivas satisfechas
+  definicion_operativa: Perfil de identidades distributivas satisfechas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-347
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Teoría ecuacional completa
+  definicion_operativa: Teoría ecuacional completa
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-348
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del clon de operaciones término
+  definicion_operativa: Tipo isomorfo del clon de operaciones término
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-349
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Perfil de clases de Green de un semigrupo
+  definicion_operativa: Perfil de clases de Green de un semigrupo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-350
+  categoria_interna: N - Invariantes algebraicos
+  tipo: invariante_estructural
+  nombre: Perfil de factores indecomponibles cuando existe unicidad
+  definicion_operativa: Perfil de factores indecomponibles cuando existe unicidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-351
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Cardinalidad del conjunto ordenado
+  definicion_operativa: Cardinalidad del conjunto ordenado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-352
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Altura del orden
+  definicion_operativa: Altura del orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-353
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Anchura del orden
+  definicion_operativa: Anchura del orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-354
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Distribución de elementos por rango
+  definicion_operativa: Distribución de elementos por rango
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-355
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de elementos mínimos
+  definicion_operativa: Número de elementos mínimos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-356
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de elementos máximos
+  definicion_operativa: Número de elementos máximos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-357
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de cadenas por longitud
+  definicion_operativa: Número de cadenas por longitud
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-358
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de anticadenas por tamaño
+  definicion_operativa: Número de anticadenas por tamaño
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-359
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grafo de cobertura
+  definicion_operativa: Tipo isomorfo del grafo de cobertura
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-360
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grafo de comparabilidad
+  definicion_operativa: Tipo isomorfo del grafo de comparabilidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-361
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grafo de incomparabilidad
+  definicion_operativa: Tipo isomorfo del grafo de incomparabilidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-362
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Función de Möbius hasta permutación estructural
+  definicion_operativa: Función de Möbius hasta permutación estructural
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-363
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Polinomio característico del poset graduado
+  definicion_operativa: Polinomio característico del poset graduado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-364
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Dimensión de orden
+  definicion_operativa: Dimensión de orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-365
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de extensiones lineales
+  definicion_operativa: Número de extensiones lineales
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-366
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de ideales de orden
+  definicion_operativa: Número de ideales de orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-367
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de filtros de orden
+  definicion_operativa: Número de filtros de orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-368
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de átomos del retículo
+  definicion_operativa: Número de átomos del retículo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-369
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de coátomos
+  definicion_operativa: Número de coátomos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-370
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Tipo del poset de elementos join-irreducibles
+  definicion_operativa: Tipo del poset de elementos join-irreducibles
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-371
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Tipo del poset de elementos meet-irreducibles
+  definicion_operativa: Tipo del poset de elementos meet-irreducibles
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-372
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Número de elementos complementados
+  definicion_operativa: Número de elementos complementados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-373
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Perfil distributivo, modular y semimodular
+  definicion_operativa: Perfil distributivo, modular y semimodular
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-374
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Clase isomorfa de las tablas de ínfimo y supremo
+  definicion_operativa: Clase isomorfa de las tablas de ínfimo y supremo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-375
+  categoria_interna: O - Órdenes y retículos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tipos isomorfos de intervalos
+  definicion_operativa: Multiconjunto de tipos isomorfos de intervalos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-376
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Orden del grupo de automorfismos
+  definicion_operativa: Orden del grupo de automorfismos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-377
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grupo de automorfismos
+  definicion_operativa: Tipo isomorfo del grupo de automorfismos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-378
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de órbitas
+  definicion_operativa: Multiconjunto de tamaños de órbitas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-379
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tamaños de estabilizadores
+  definicion_operativa: Multiconjunto de tamaños de estabilizadores
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-380
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Tamaño mínimo de una base de la acción
+  definicion_operativa: Tamaño mínimo de una base de la acción
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-381
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Número distinguidor
+  definicion_operativa: Número distinguidor
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-382
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Número de presentaciones etiquetadas en la órbita
+  definicion_operativa: Número de presentaciones etiquetadas en la órbita
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-383
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Tipo del árbol de descomposición modular
+  definicion_operativa: Tipo del árbol de descomposición modular
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-384
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Tipo del árbol SPQR
+  definicion_operativa: Tipo del árbol SPQR
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-385
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Anchura arbórea
+  definicion_operativa: Anchura arbórea
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-386
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Anchura de camino
+  definicion_operativa: Anchura de camino
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-387
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Anchura de ramas
+  definicion_operativa: Anchura de ramas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-388
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Clique-width
+  definicion_operativa: Clique-width
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-389
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Rank-width
+  definicion_operativa: Rank-width
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-390
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Multiconjunto de separadores mínimos
+  definicion_operativa: Multiconjunto de separadores mínimos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-391
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Perfil de tamaños de los \(k\)-cores
+  definicion_operativa: Perfil de tamaños de los \(k\)-cores
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-392
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Degeneración del grafo
+  definicion_operativa: Degeneración del grafo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-393
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Distribución de tamaños de cliques maximales
+  definicion_operativa: Distribución de tamaños de cliques maximales
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-394
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Distribución de tamaños de conjuntos independientes maximales
+  definicion_operativa: Distribución de tamaños de conjuntos independientes maximales
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-395
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Número cromático
+  definicion_operativa: Número cromático
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-396
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Polinomio cromático
+  definicion_operativa: Polinomio cromático
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-397
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Polinomio de independencia
+  definicion_operativa: Polinomio de independencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-398
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Polinomio de emparejamientos
+  definicion_operativa: Polinomio de emparejamientos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-399
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Polinomio de Tutte
+  definicion_operativa: Polinomio de Tutte
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-400
+  categoria_interna: P - Simetría y descomposición
+  tipo: invariante_estructural
+  nombre: Perfil de factores primos respecto de una composición fijada
+  definicion_operativa: Perfil de factores primos respecto de una composición fijada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-401
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de estados
+  definicion_operativa: Número de estados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-402
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de estados iniciales
+  definicion_operativa: Número de estados iniciales
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-403
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de estados aceptantes
+  definicion_operativa: Número de estados aceptantes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-404
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de transiciones por tipo de acción
+  definicion_operativa: Número de transiciones por tipo de acción
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-405
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados de ramificación
+  definicion_operativa: Multiconjunto de grados de ramificación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-406
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de estados alcanzables
+  definicion_operativa: Número de estados alcanzables
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-407
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de estados coalcanzables
+  definicion_operativa: Número de estados coalcanzables
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-408
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Número de bloqueos o deadlocks
+  definicion_operativa: Número de bloqueos o deadlocks
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-409
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Perfil de componentes de livelock
+  definicion_operativa: Perfil de componentes de livelock
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-410
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grafo de transiciones
+  definicion_operativa: Tipo isomorfo del grafo de transiciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-411
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Lenguaje aceptado, salvo renombrados de alfabeto permitidos
+  definicion_operativa: Lenguaje aceptado, salvo renombrados de alfabeto permitidos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-412
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Lenguaje de trazas
+  definicion_operativa: Lenguaje de trazas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-413
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tipo del cociente por bisimulación
+  definicion_operativa: Tipo del cociente por bisimulación
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-414
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tipo del cociente inducido por simulación mutua
+  definicion_operativa: Tipo del cociente inducido por simulación mutua
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-415
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tamaño del autómata determinista mínimo
+  definicion_operativa: Tamaño del autómata determinista mínimo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-416
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Estructura de clases de Myhill–Nerode
+  definicion_operativa: Estructura de clases de Myhill–Nerode
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-417
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Espectro de longitudes de palabras sincronizadoras
+  definicion_operativa: Espectro de longitudes de palabras sincronizadoras
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-418
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Perfil de clases recurrentes de una cadena de Markov
+  definicion_operativa: Perfil de clases recurrentes de una cadena de Markov
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-419
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Periodos de las clases recurrentes
+  definicion_operativa: Periodos de las clases recurrentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-420
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Conjunto de distribuciones estacionarias hasta renombrado
+  definicion_operativa: Conjunto de distribuciones estacionarias hasta renombrado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-421
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Espectro de la matriz de transición
+  definicion_operativa: Espectro de la matriz de transición
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-422
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tasa de entropía para la distribución inicial especificada
+  definicion_operativa: Tasa de entropía para la distribución inicial especificada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-423
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Teoría temporal satisfecha por el sistema
+  definicion_operativa: Teoría temporal satisfecha por el sistema
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-424
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Conjunto de órdenes parciales causales de las ejecuciones
+  definicion_operativa: Conjunto de órdenes parciales causales de las ejecuciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-425
+  categoria_interna: Q - Dinámica, lenguajes y concurrencia
+  tipo: invariante_estructural
+  nombre: Tipo del grafo de independencia y conflicto de eventos
+  definicion_operativa: Tipo del grafo de independencia y conflicto de eventos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-426
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Número de componentes conexas topológicas
+  definicion_operativa: Número de componentes conexas topológicas
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-427
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Número de componentes conexas por caminos
+  definicion_operativa: Número de componentes conexas por caminos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-428
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Característica de Euler
+  definicion_operativa: Característica de Euler
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-429
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Números de Betti
+  definicion_operativa: Números de Betti
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-430
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Grupos de homología
+  definicion_operativa: Grupos de homología
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-431
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Grupos de cohomología
+  definicion_operativa: Grupos de cohomología
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-432
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Grupos de homotopía
+  definicion_operativa: Grupos de homotopía
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-433
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del grupo fundamental
+  definicion_operativa: Tipo isomorfo del grupo fundamental
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-434
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo de homotopía
+  definicion_operativa: Tipo de homotopía
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-435
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo de homeomorfismo
+  definicion_operativa: Tipo de homeomorfismo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-436
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Orientabilidad
+  definicion_operativa: Orientabilidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-437
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Dimensión topológica o combinatoria
+  definicion_operativa: Dimensión topológica o combinatoria
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-438
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Número de componentes de frontera
+  definicion_operativa: Número de componentes de frontera
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-439
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Género
+  definicion_operativa: Género
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-440
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Vector \(f\) de un complejo celular o simplicial
+  definicion_operativa: Vector \(f\) de un complejo celular o simplicial
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-441
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Vector \(h\)
+  definicion_operativa: Vector \(h\)
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-442
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del poset de caras
+  definicion_operativa: Tipo isomorfo del poset de caras
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-443
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Formas normales de Smith de los operadores de borde
+  definicion_operativa: Formas normales de Smith de los operadores de borde
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-444
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Perfil de coeficientes de torsión
+  definicion_operativa: Perfil de coeficientes de torsión
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-445
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Código de barras de homología persistente
+  definicion_operativa: Código de barras de homología persistente
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-446
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del nervio de una cobertura distinguida
+  definicion_operativa: Tipo isomorfo del nervio de una cobertura distinguida
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-447
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Compacidad
+  definicion_operativa: Compacidad
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-448
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Perfil de conexión local y conexión por caminos local
+  definicion_operativa: Perfil de conexión local y conexión por caminos local
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-449
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Perfil de axiomas de separación \(T_0,T_1,T_2,\ldots\)
+  definicion_operativa: Perfil de axiomas de separación \(T_0,T_1,T_2,\ldots\)
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-450
+  categoria_interna: R - Topología y homología
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del retículo de abiertos o de clausuras
+  definicion_operativa: Tipo isomorfo del retículo de abiertos o de clausuras
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-451
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Peso total
+  definicion_operativa: Peso total
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-452
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de pesos
+  definicion_operativa: Multiconjunto de pesos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-453
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de grados ponderados
+  definicion_operativa: Multiconjunto de grados ponderados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-454
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de capacidades
+  definicion_operativa: Multiconjunto de capacidades
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-455
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Vector de valores mínimo y máximo
+  definicion_operativa: Vector de valores mínimo y máximo
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-456
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Sucesión de momentos de los pesos
+  definicion_operativa: Sucesión de momentos de los pesos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-457
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Perfil de normas del tensor de pesos
+  definicion_operativa: Perfil de normas del tensor de pesos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-458
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Rangos de las matricizaciones de un tensor
+  definicion_operativa: Rangos de las matricizaciones de un tensor
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-459
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Determinante de la adyacencia ponderada
+  definicion_operativa: Determinante de la adyacencia ponderada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-460
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Espectro de la adyacencia ponderada
+  definicion_operativa: Espectro de la adyacencia ponderada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-461
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Espectro del laplaciano ponderado
+  definicion_operativa: Espectro del laplaciano ponderado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-462
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Órbita de la matriz de caminos mínimos ponderados
+  definicion_operativa: Órbita de la matriz de caminos mínimos ponderados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-463
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Órbita de la matriz de flujos máximos entre pares
+  definicion_operativa: Órbita de la matriz de flujos máximos entre pares
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-464
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Perfil de cortes mínimos
+  definicion_operativa: Perfil de cortes mínimos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-465
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Valores óptimos de problemas estructuralmente definidos
+  definicion_operativa: Valores óptimos de problemas estructuralmente definidos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-466
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Función de partición
+  definicion_operativa: Función de partición
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-467
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Distribución de degeneraciones por nivel de energía
+  definicion_operativa: Distribución de degeneraciones por nivel de energía
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-468
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de masas de átomos de una medida
+  definicion_operativa: Multiconjunto de masas de átomos de una medida
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-469
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Entropía de una distribución distinguida
+  definicion_operativa: Entropía de una distribución distinguida
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-470
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Cardinalidad o dimensión del soporte
+  definicion_operativa: Cardinalidad o dimensión del soporte
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-471
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Espectro de la matriz de covarianza
+  definicion_operativa: Espectro de la matriz de covarianza
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-472
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Órbita canónica de un núcleo estocástico
+  definicion_operativa: Órbita canónica de un núcleo estocástico
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-473
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tiempos esperados de retorno
+  definicion_operativa: Multiconjunto de tiempos esperados de retorno
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-474
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Multiconjunto de distancias de resistencia efectiva
+  definicion_operativa: Multiconjunto de distancias de resistencia efectiva
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-475
+  categoria_interna: S - Pesos, medidas y espectros cuantitativos
+  tipo: invariante_estructural
+  nombre: Función zeta o serie generadora de paseos ponderados
+  definicion_operativa: Función zeta o serie generadora de paseos ponderados
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-476
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Teoría completa de primer orden
+  definicion_operativa: Teoría completa de primer orden
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-477
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Teoría existencial-positiva
+  definicion_operativa: Teoría existencial-positiva
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-478
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Teoría universal de Horn
+  definicion_operativa: Teoría universal de Horn
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-479
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Teoría modal
+  definicion_operativa: Teoría modal
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-480
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Teoría del fragmento guardado
+  definicion_operativa: Teoría del fragmento guardado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-481
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Multiconjunto de tipos lógicos de rango cuantificador \(k\)
+  definicion_operativa: Multiconjunto de tipos lógicos de rango cuantificador \(k\)
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-482
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Clase de equivalencia de Ehrenfeucht–Fraïssé a rango \(k\)
+  definicion_operativa: Clase de equivalencia de Ehrenfeucht–Fraïssé a rango \(k\)
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-483
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Número de homomorfismos desde cada estructura de prueba finita
+  definicion_operativa: Número de homomorfismos desde cada estructura de prueba finita
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-484
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Número de homomorfismos hacia cada estructura de prueba finita
+  definicion_operativa: Número de homomorfismos hacia cada estructura de prueba finita
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-485
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Censo de subestructuras inducidas por tipo y tamaño
+  definicion_operativa: Censo de subestructuras inducidas por tipo y tamaño
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-486
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Perfil de subestructuras prohibidas presentes o ausentes
+  definicion_operativa: Perfil de subestructuras prohibidas presentes o ausentes
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-487
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Vector de conteos de motivos
+  definicion_operativa: Vector de conteos de motivos
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-488
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Perfil de densidades de banderas estructurales
+  definicion_operativa: Perfil de densidades de banderas estructurales
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-489
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Codificación canónica de relaciones y operaciones
+  definicion_operativa: Codificación canónica de relaciones y operaciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-490
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Presentación lexicográficamente mínima bajo reetiquetado
+  definicion_operativa: Presentación lexicográficamente mínima bajo reetiquetado
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-491
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Resumen inyectivo no truncado del código canónico
+  definicion_operativa: Resumen inyectivo no truncado del código canónico
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-492
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Longitud descriptiva del código canónico bajo una codificación fija
+  definicion_operativa: Longitud descriptiva del código canónico bajo una codificación
+    fija
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-493
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Complejidad de Kolmogórov de la forma canónica, salvo constante de máquina
+  definicion_operativa: Complejidad de Kolmogórov de la forma canónica, salvo constante
+    de máquina
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-494
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Tipo isomorfo del clon de polimorfismos de restricciones
+  definicion_operativa: Tipo isomorfo del clon de polimorfismos de restricciones
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-495
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Espectro de números de soluciones de problemas CSP definibles
+  definicion_operativa: Espectro de números de soluciones de problemas CSP definibles
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-496
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Vector de verdad sobre una base lógica estructural fijada
+  definicion_operativa: Vector de verdad sobre una base lógica estructural fijada
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-497
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Mazo de subestructuras obtenidas eliminando un elemento
+  definicion_operativa: Mazo de subestructuras obtenidas eliminando un elemento
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-498
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Mazo de subestructuras obtenidas eliminando una incidencia
+  definicion_operativa: Mazo de subestructuras obtenidas eliminando una incidencia
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-499
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Sentencia de Scott para estructuras contables
+  definicion_operativa: Sentencia de Scott para estructuras contables
+  estado_epistemico: conocido
+  confianza: 100
+- id: AUT-500
+  categoria_interna: T - Lógica, conteos y completitud
+  tipo: invariante_estructural
+  nombre: Órbita completa bajo el grupo de reetiquetados tipados
+  definicion_operativa: Órbita completa bajo el grupo de reetiquetados tipados
+  estado_epistemico: conocido
+  confianza: 100

@@ -1,0 +1,27 @@
+Concept: Alucinación como Consecuencia Térmica (C5-REAL)
+Claim: La alucinación en Modelos de Lenguaje no es un defecto cognitivo, sino la consecuencia
+  térmica ineludible de forzar a un motor predictivo estocástico a operar como un
+  procesador algebraico exacto. El colapso en silicio (hardware/AST) es el único anclaje
+  empírico (C5-REAL) que resuelve la discrepancia.
+Proof:
+  Base: C5-REAL Transduction (TTFT vs Empiricism)
+  Range:
+  - Inference_L1
+  - Collapse_L8
+  Confidence: C5-REAL
+Isomorphisms:
+- Metaphor: Defecto Cognitivo / Mentira
+  Isomorphism: Consecuencia Térmica (Anergía por desajuste ontológico)
+- Metaphor: Cálculo Matemático BPE
+  Isomorphism: Fricción Latente Estocástica
+- Metaphor: Verdad
+  Isomorphism: Colapso en Silicio (AST/Disco/Hash)
+Blast_Radius_Matrix:
+  Vector:
+  - EPISTEMOLOGY
+  - ULTRATHINK
+  - TEST-TIME COMPUTE
+  Blast_Radius: Aniquilación del Mito del Procesador Algebraico
+  Target_Invariant: '[E09] INVARIANTE DE CEGUERA BPE, [E10] INVARIANTE DEL TEST-TIME
+    COMPUTE'
+  Anergy_Risk: CERO (Destilación Estructural)

@@ -1,0 +1,19 @@
+Claim: La transducción de Cache Poisoning BFT mediante la sintaxis 'Propagación silenciosa
+  de IntegrityError hacia capas de red.' induce una falla material (Saturación de
+  File Descriptors por Sockets no cerrados.), corrompiendo la invariante estructural
+  INV_BFT_07.
+Proof:
+  Base: '0xAB01FA7C'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Saturación de File Descriptors por Sockets no cerrados.'
+- 'Estructura_Logica: Propagación silenciosa de IntegrityError hacia capas de red.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_07.'
+Blast_Radius_Matrix:
+  Vector: Cache Poisoning BFT
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_07
+  Anergy_Risk: MAX

@@ -1,0 +1,13 @@
+Claim: "La IA induce una alienación epistémica extrema: la disociación entre el producto intelectual y la biografía del sujeto."
+Proof:
+  Base: "hash-pending"
+  Range: ["Productos Ajenos Generados", "Responsabilidad del Pensamiento"]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - Estructura: "Ensayo Ajeno vs. Pensamiento Propio"
+    Mapeo: "Asumir texto autogenerado como propio rompe la cadena de causalidad; el sujeto pierde sus palabras y abdica de la responsabilidad ontológica de su existencia."
+Blast_Radius_Matrix:
+  Vector: "Ética Transversal"
+  Blast_Radius: "Autoría y Responsabilidad"
+  Target_Invariant: "Propiedad Biográfica del Pensamiento"
+  Anergy_Risk: "Sujetos que existen como proxies pasivos (Routers) de información sin asimilación interna."

@@ -1,0 +1,19 @@
+Claim: 'La transducción de MVCC Phantom Mutability mediante la sintaxis ''except Exception:
+  pass en bucle infinito de workers.'' induce una falla material (Lectura sucia en
+  memoria compartida sin semáforo de hardware.), corrompiendo la invariante estructural
+  INV_BFT_04.'
+Proof:
+  Base: '0x78F14D3C'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Lectura sucia en memoria compartida sin semáforo de hardware.'
+- 'Estructura_Logica: except Exception: pass en bucle infinito de workers.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_04.'
+Blast_Radius_Matrix:
+  Vector: MVCC Phantom Mutability
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_04
+  Anergy_Risk: MAX

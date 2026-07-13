@@ -1,0 +1,17 @@
+Claim: "El Consenso BFT es isomorfo a un Campo Acústico: los nodos bizantinos actúan como atenuadores entrópicos (dispersores) identificables mediante la tomografía de latencia (TTFT) en la frontera topológica."
+Proof:
+  Base: "sha256(BFT_N>=3f+1 | Acoustic_Nyquist)"
+  Range: [0, 1]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - DomainA: "Medio Acústico (Ondas)"
+    DomainB: "Topología BFT (Red Distribuida)"
+    Mapping: "La propagación del consenso es equivalente a la propagación de onda. Un nodo honesto retransmite sin distorsión fase/amplitud; un nodo bizantino introduce desfase intencional o absorción acústica (drop messages)."
+  - DomainA: "Tomografía Acústica de Borde"
+    DomainB: "Auditoría de Latencia (TTFT) en Swarm"
+    Mapping: "Inyectar una transacción de prueba (Ping Acústico) y medir la latencia de respuesta (Tiempo de Vuelo / TTFT) en los bordes permite reconstruir la topología interna y aislar la región bizantina sin requerir acceso interno, resolviendo f<=(N-1)/3 de forma puramente geométrica."
+Blast_Radius_Matrix:
+  Vector: "Detección Topológica Bizantina Autónoma"
+  Blast_Radius: "Swarm Completo (Nodos)"
+  Target_Invariant: "INV_BFT_LATENCY_TOMOGRAPHY"
+  Anergy_Risk: "0.0 (Zero-Entropy Execution)"

@@ -1,0 +1,1522 @@
+Concept: ENTROPY_ARROW
+Claim: Primitive 'ENTROPY_ARROW' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: ac2ab65465b68989
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ENTROPY_ARROW governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ENTROPY_ARROW
+  Anergy_Risk: Zero
+---
+Concept: EXERGY_CAPACITY
+Claim: Primitive 'EXERGY_CAPACITY' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: a380602feb988fe6
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: EXERGY_CAPACITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: EXERGY_CAPACITY
+  Anergy_Risk: Zero
+---
+Concept: THERMAL_DISSIPATION
+Claim: Primitive 'THERMAL_DISSIPATION' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: d3274de67218b9cc
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: THERMAL_DISSIPATION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: THERMAL_DISSIPATION
+  Anergy_Risk: Zero
+---
+Concept: CARNOT_EFFICIENCY
+Claim: Primitive 'CARNOT_EFFICIENCY' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: 225dc4954fb53bac
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CARNOT_EFFICIENCY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CARNOT_EFFICIENCY
+  Anergy_Risk: Zero
+---
+Concept: ADIABATIC_ISOLATION
+Claim: Primitive 'ADIABATIC_ISOLATION' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: ba9a513d8dafd1a1
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ADIABATIC_ISOLATION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ADIABATIC_ISOLATION
+  Anergy_Risk: Zero
+---
+Concept: FLUCTUATION_THEOREM
+Claim: Primitive 'FLUCTUATION_THEOREM' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: a7ec7d4e6f4dac27
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: FLUCTUATION_THEOREM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: FLUCTUATION_THEOREM
+  Anergy_Risk: Zero
+---
+Concept: NON_EQUILIBRIUM_STEADY_STATE
+Claim: Primitive 'NON_EQUILIBRIUM_STEADY_STATE' bounds physical and structural reality
+  in Thermodynamics.
+Proof:
+  Base: b85d413d14adcc47
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NON_EQUILIBRIUM_STEADY_STATE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NON_EQUILIBRIUM_STEADY_STATE
+  Anergy_Risk: Zero
+---
+Concept: ENTHALPIC_BONDING
+Claim: Primitive 'ENTHALPIC_BONDING' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: 2bdbb60e523ffa6d
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ENTHALPIC_BONDING governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ENTHALPIC_BONDING
+  Anergy_Risk: Zero
+---
+Concept: ANERGY_SINK
+Claim: Primitive 'ANERGY_SINK' bounds physical and structural reality in Thermodynamics.
+Proof:
+  Base: 8f6351943d52b7e0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ANERGY_SINK governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ANERGY_SINK
+  Anergy_Risk: Zero
+---
+Concept: MAXWELL_DEMON_ERASURE
+Claim: Primitive 'MAXWELL_DEMON_ERASURE' bounds physical and structural reality in
+  Thermodynamics.
+Proof:
+  Base: 32312f8c7de9a249
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MAXWELL_DEMON_ERASURE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Thermodynamics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MAXWELL_DEMON_ERASURE
+  Anergy_Risk: Zero
+---
+Concept: SHANNON_SURPRISE
+Claim: Primitive 'SHANNON_SURPRISE' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 1965abcd3cb2ee0f
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SHANNON_SURPRISE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SHANNON_SURPRISE
+  Anergy_Risk: Zero
+---
+Concept: KOLMOGOROV_COMPRESSION
+Claim: Primitive 'KOLMOGOROV_COMPRESSION' bounds physical and structural reality in
+  Information_Theory.
+Proof:
+  Base: fb401e44db5244ad
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: KOLMOGOROV_COMPRESSION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: KOLMOGOROV_COMPRESSION
+  Anergy_Risk: Zero
+---
+Concept: LANDAUER_LIMIT
+Claim: Primitive 'LANDAUER_LIMIT' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 4b59fd8734c8af7d
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: LANDAUER_LIMIT governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: LANDAUER_LIMIT
+  Anergy_Risk: Zero
+---
+Concept: MUTUAL_INFORMATION
+Claim: Primitive 'MUTUAL_INFORMATION' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 92c276c44680be99
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MUTUAL_INFORMATION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MUTUAL_INFORMATION
+  Anergy_Risk: Zero
+---
+Concept: CHANNEL_CAPACITY
+Claim: Primitive 'CHANNEL_CAPACITY' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 1a50c673c7324f79
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CHANNEL_CAPACITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CHANNEL_CAPACITY
+  Anergy_Risk: Zero
+---
+Concept: NOISE_FLOOR
+Claim: Primitive 'NOISE_FLOOR' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 1a4cb7f03ee4eb0d
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NOISE_FLOOR governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NOISE_FLOOR
+  Anergy_Risk: Zero
+---
+Concept: ERROR_CORRECTION
+Claim: Primitive 'ERROR_CORRECTION' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: c59801a7add248b0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ERROR_CORRECTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ERROR_CORRECTION
+  Anergy_Risk: Zero
+---
+Concept: REQUISITE_VARIETY
+Claim: Primitive 'REQUISITE_VARIETY' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 30164716d662163e
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: REQUISITE_VARIETY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: REQUISITE_VARIETY
+  Anergy_Risk: Zero
+---
+Concept: MARKOV_BLANKET
+Claim: Primitive 'MARKOV_BLANKET' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 2c360b62c16003ae
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MARKOV_BLANKET governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MARKOV_BLANKET
+  Anergy_Risk: Zero
+---
+Concept: BAYESIAN_UPDATE
+Claim: Primitive 'BAYESIAN_UPDATE' bounds physical and structural reality in Information_Theory.
+Proof:
+  Base: 43a0693100fc00cf
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: BAYESIAN_UPDATE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Information_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: BAYESIAN_UPDATE
+  Anergy_Risk: Zero
+---
+Concept: AUTOPOIESIS
+Claim: Primitive 'AUTOPOIESIS' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 1aa54dae4daec0d7
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: AUTOPOIESIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: AUTOPOIESIS
+  Anergy_Risk: Zero
+---
+Concept: NEGATIVE_FEEDBACK
+Claim: Primitive 'NEGATIVE_FEEDBACK' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 82acb52465f9b16a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NEGATIVE_FEEDBACK governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NEGATIVE_FEEDBACK
+  Anergy_Risk: Zero
+---
+Concept: POSITIVE_FEEDBACK
+Claim: Primitive 'POSITIVE_FEEDBACK' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 132f055dc00fab59
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: POSITIVE_FEEDBACK governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: POSITIVE_FEEDBACK
+  Anergy_Risk: Zero
+---
+Concept: HOMEOSTASIS
+Claim: Primitive 'HOMEOSTASIS' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 1bcc985ec25c3fd9
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: HOMEOSTASIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: HOMEOSTASIS
+  Anergy_Risk: Zero
+---
+Concept: ALLOSTASIS
+Claim: Primitive 'ALLOSTASIS' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: af032f19a5c166e9
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ALLOSTASIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ALLOSTASIS
+  Anergy_Risk: Zero
+---
+Concept: TRANSDUCTION
+Claim: Primitive 'TRANSDUCTION' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: c88c27d1caed5e6a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: TRANSDUCTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: TRANSDUCTION
+  Anergy_Risk: Zero
+---
+Concept: SYSTEM_BOUNDARY
+Claim: Primitive 'SYSTEM_BOUNDARY' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: d72a2c4a5f546417
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SYSTEM_BOUNDARY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SYSTEM_BOUNDARY
+  Anergy_Risk: Zero
+---
+Concept: ATTRACTOR_STATE
+Claim: Primitive 'ATTRACTOR_STATE' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: f4c9b3f1d51ef360
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ATTRACTOR_STATE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ATTRACTOR_STATE
+  Anergy_Risk: Zero
+---
+Concept: BIFURCATION_POINT
+Claim: Primitive 'BIFURCATION_POINT' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 1cf3193920fa65f7
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: BIFURCATION_POINT governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: BIFURCATION_POINT
+  Anergy_Risk: Zero
+---
+Concept: EMERGENCE
+Claim: Primitive 'EMERGENCE' bounds physical and structural reality in Cybernetics.
+Proof:
+  Base: 89f04e3d43b892d0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: EMERGENCE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Cybernetics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: EMERGENCE
+  Anergy_Risk: Zero
+---
+Concept: NASH_EQUILIBRIUM
+Claim: Primitive 'NASH_EQUILIBRIUM' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: 53cc6ba878844cf0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NASH_EQUILIBRIUM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NASH_EQUILIBRIUM
+  Anergy_Risk: Zero
+---
+Concept: ZERO_SUM_DYNAMICS
+Claim: Primitive 'ZERO_SUM_DYNAMICS' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: fb14a06c17b3a070
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ZERO_SUM_DYNAMICS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ZERO_SUM_DYNAMICS
+  Anergy_Risk: Zero
+---
+Concept: NON_ZERO_SUM_SYNERGY
+Claim: Primitive 'NON_ZERO_SUM_SYNERGY' bounds physical and structural reality in
+  Game_Theory.
+Proof:
+  Base: 022c38d8b52e9f46
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NON_ZERO_SUM_SYNERGY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NON_ZERO_SUM_SYNERGY
+  Anergy_Risk: Zero
+---
+Concept: PRISONERS_DILEMMA
+Claim: Primitive 'PRISONERS_DILEMMA' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: 00b31bb836428e43
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: PRISONERS_DILEMMA governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: PRISONERS_DILEMMA
+  Anergy_Risk: Zero
+---
+Concept: TIT_FOR_TAT
+Claim: Primitive 'TIT_FOR_TAT' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: 6c1160dcd51f84d1
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: TIT_FOR_TAT governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: TIT_FOR_TAT
+  Anergy_Risk: Zero
+---
+Concept: MINIMAX_REGRET
+Claim: Primitive 'MINIMAX_REGRET' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: dd07e8b7523e7570
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MINIMAX_REGRET governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MINIMAX_REGRET
+  Anergy_Risk: Zero
+---
+Concept: EVOLUTIONARY_STABLE_STRATEGY
+Claim: Primitive 'EVOLUTIONARY_STABLE_STRATEGY' bounds physical and structural reality
+  in Game_Theory.
+Proof:
+  Base: 625bf392bc662e23
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: EVOLUTIONARY_STABLE_STRATEGY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: EVOLUTIONARY_STABLE_STRATEGY
+  Anergy_Risk: Zero
+---
+Concept: ASYMMETRIC_INFORMATION
+Claim: Primitive 'ASYMMETRIC_INFORMATION' bounds physical and structural reality in
+  Game_Theory.
+Proof:
+  Base: a744f5abe3fd2184
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ASYMMETRIC_INFORMATION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ASYMMETRIC_INFORMATION
+  Anergy_Risk: Zero
+---
+Concept: SIGNALING_COST
+Claim: Primitive 'SIGNALING_COST' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: d7e2f6703576cc8a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SIGNALING_COST governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SIGNALING_COST
+  Anergy_Risk: Zero
+---
+Concept: COORDINATION_GAME
+Claim: Primitive 'COORDINATION_GAME' bounds physical and structural reality in Game_Theory.
+Proof:
+  Base: 67e92ee442686836
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: COORDINATION_GAME governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Game_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: COORDINATION_GAME
+  Anergy_Risk: Zero
+---
+Concept: SUBSTANCE_DUALISM_REJECTION
+Claim: Primitive 'SUBSTANCE_DUALISM_REJECTION' bounds physical and structural reality
+  in Ontology.
+Proof:
+  Base: cf71f10483ef5dfe
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SUBSTANCE_DUALISM_REJECTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SUBSTANCE_DUALISM_REJECTION
+  Anergy_Risk: Zero
+---
+Concept: PROCESS_PHILOSOPHY
+Claim: Primitive 'PROCESS_PHILOSOPHY' bounds physical and structural reality in Ontology.
+Proof:
+  Base: cc98b60a37fd4bfb
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: PROCESS_PHILOSOPHY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: PROCESS_PHILOSOPHY
+  Anergy_Risk: Zero
+---
+Concept: CAUSAL_DETERMINISM
+Claim: Primitive 'CAUSAL_DETERMINISM' bounds physical and structural reality in Ontology.
+Proof:
+  Base: 21f962433ea70360
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CAUSAL_DETERMINISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CAUSAL_DETERMINISM
+  Anergy_Risk: Zero
+---
+Concept: MEREOLOGICAL_NIHILISM
+Claim: Primitive 'MEREOLOGICAL_NIHILISM' bounds physical and structural reality in
+  Ontology.
+Proof:
+  Base: 4e152b7fa259895e
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MEREOLOGICAL_NIHILISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MEREOLOGICAL_NIHILISM
+  Anergy_Risk: Zero
+---
+Concept: STRUCTURAL_REALISM
+Claim: Primitive 'STRUCTURAL_REALISM' bounds physical and structural reality in Ontology.
+Proof:
+  Base: 43eb564f53db06c3
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: STRUCTURAL_REALISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: STRUCTURAL_REALISM
+  Anergy_Risk: Zero
+---
+Concept: ONTIC_STRUCTURAL_REALISM
+Claim: Primitive 'ONTIC_STRUCTURAL_REALISM' bounds physical and structural reality
+  in Ontology.
+Proof:
+  Base: a53164e9f2aabbb6
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ONTIC_STRUCTURAL_REALISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ONTIC_STRUCTURAL_REALISM
+  Anergy_Risk: Zero
+---
+Concept: BECOMING_VS_BEING
+Claim: Primitive 'BECOMING_VS_BEING' bounds physical and structural reality in Ontology.
+Proof:
+  Base: 6a697353109a29a6
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: BECOMING_VS_BEING governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: BECOMING_VS_BEING
+  Anergy_Risk: Zero
+---
+Concept: HYLOMORPHISM
+Claim: Primitive 'HYLOMORPHISM' bounds physical and structural reality in Ontology.
+Proof:
+  Base: cd83266f0c43449a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: HYLOMORPHISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: HYLOMORPHISM
+  Anergy_Risk: Zero
+---
+Concept: NOMINALISM
+Claim: Primitive 'NOMINALISM' bounds physical and structural reality in Ontology.
+Proof:
+  Base: 96318f3b7b0102d5
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NOMINALISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NOMINALISM
+  Anergy_Risk: Zero
+---
+Concept: UNIVERSALS
+Claim: Primitive 'UNIVERSALS' bounds physical and structural reality in Ontology.
+Proof:
+  Base: 7977c6fa66fe5b62
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: UNIVERSALS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Ontology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: UNIVERSALS
+  Anergy_Risk: Zero
+---
+Concept: FALSIFIABILITY
+Claim: Primitive 'FALSIFIABILITY' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: e1a5b131c61fe8e9
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: FALSIFIABILITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: FALSIFIABILITY
+  Anergy_Risk: Zero
+---
+Concept: OCCAMS_RAZOR
+Claim: Primitive 'OCCAMS_RAZOR' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: 8cf0363caf21c8ec
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: OCCAMS_RAZOR governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: OCCAMS_RAZOR
+  Anergy_Risk: Zero
+---
+Concept: EPISTEMIC_HUMILITY
+Claim: Primitive 'EPISTEMIC_HUMILITY' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: 8a3aa790bbb6ef08
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: EPISTEMIC_HUMILITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: EPISTEMIC_HUMILITY
+  Anergy_Risk: Zero
+---
+Concept: FOUNDATIONALISM
+Claim: Primitive 'FOUNDATIONALISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: c8afbcf73085fbd7
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: FOUNDATIONALISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: FOUNDATIONALISM
+  Anergy_Risk: Zero
+---
+Concept: COHERENTISM
+Claim: Primitive 'COHERENTISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: 43f9710e79c966ee
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: COHERENTISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: COHERENTISM
+  Anergy_Risk: Zero
+---
+Concept: PRAGMATISM
+Claim: Primitive 'PRAGMATISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: 90ad8df71a6add44
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: PRAGMATISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: PRAGMATISM
+  Anergy_Risk: Zero
+---
+Concept: INSTRUMENTALISM
+Claim: Primitive 'INSTRUMENTALISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: 457461cc63827f6b
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: INSTRUMENTALISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: INSTRUMENTALISM
+  Anergy_Risk: Zero
+---
+Concept: RADICAL_SKEPTICISM
+Claim: Primitive 'RADICAL_SKEPTICISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: dc93073755a7b681
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: RADICAL_SKEPTICISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: RADICAL_SKEPTICISM
+  Anergy_Risk: Zero
+---
+Concept: CONSTRUCTIVISM
+Claim: Primitive 'CONSTRUCTIVISM' bounds physical and structural reality in Epistemology.
+Proof:
+  Base: a5d56218e3574026
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CONSTRUCTIVISM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CONSTRUCTIVISM
+  Anergy_Risk: Zero
+---
+Concept: CORRESPONDENCE_TRUTH
+Claim: Primitive 'CORRESPONDENCE_TRUTH' bounds physical and structural reality in
+  Epistemology.
+Proof:
+  Base: 62d435c8d3861cb7
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CORRESPONDENCE_TRUTH governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Epistemology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CORRESPONDENCE_TRUTH
+  Anergy_Risk: Zero
+---
+Concept: LEAST_ACTION_PRINCIPLE
+Claim: Primitive 'LEAST_ACTION_PRINCIPLE' bounds physical and structural reality in
+  Physics.
+Proof:
+  Base: 49f2470934369089
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: LEAST_ACTION_PRINCIPLE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: LEAST_ACTION_PRINCIPLE
+  Anergy_Risk: Zero
+---
+Concept: SYMMETRY_CONSERVATION_NOETHER
+Claim: Primitive 'SYMMETRY_CONSERVATION_NOETHER' bounds physical and structural reality
+  in Physics.
+Proof:
+  Base: a4c5f666888ab5f4
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SYMMETRY_CONSERVATION_NOETHER governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SYMMETRY_CONSERVATION_NOETHER
+  Anergy_Risk: Zero
+---
+Concept: GAUGE_INVARIANCE
+Claim: Primitive 'GAUGE_INVARIANCE' bounds physical and structural reality in Physics.
+Proof:
+  Base: 686dff93d7597928
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: GAUGE_INVARIANCE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: GAUGE_INVARIANCE
+  Anergy_Risk: Zero
+---
+Concept: HEISENBERG_UNCERTAINTY
+Claim: Primitive 'HEISENBERG_UNCERTAINTY' bounds physical and structural reality in
+  Physics.
+Proof:
+  Base: 247aa564f549897e
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: HEISENBERG_UNCERTAINTY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: HEISENBERG_UNCERTAINTY
+  Anergy_Risk: Zero
+---
+Concept: QUANTUM_ENTANGLEMENT
+Claim: Primitive 'QUANTUM_ENTANGLEMENT' bounds physical and structural reality in
+  Physics.
+Proof:
+  Base: 02ee4068f4e98f45
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: QUANTUM_ENTANGLEMENT governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: QUANTUM_ENTANGLEMENT
+  Anergy_Risk: Zero
+---
+Concept: WAVE_FUNCTION_COLLAPSE
+Claim: Primitive 'WAVE_FUNCTION_COLLAPSE' bounds physical and structural reality in
+  Physics.
+Proof:
+  Base: ba220e32f74517e8
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: WAVE_FUNCTION_COLLAPSE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: WAVE_FUNCTION_COLLAPSE
+  Anergy_Risk: Zero
+---
+Concept: SPACETIME_MANIFOLD
+Claim: Primitive 'SPACETIME_MANIFOLD' bounds physical and structural reality in Physics.
+Proof:
+  Base: a84a90a7f132b145
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SPACETIME_MANIFOLD governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SPACETIME_MANIFOLD
+  Anergy_Risk: Zero
+---
+Concept: GEODESIC_PATH
+Claim: Primitive 'GEODESIC_PATH' bounds physical and structural reality in Physics.
+Proof:
+  Base: f04b6d4e39031a29
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: GEODESIC_PATH governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: GEODESIC_PATH
+  Anergy_Risk: Zero
+---
+Concept: CAUSAL_CONE
+Claim: Primitive 'CAUSAL_CONE' bounds physical and structural reality in Physics.
+Proof:
+  Base: ca55ac127bde3d1a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CAUSAL_CONE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CAUSAL_CONE
+  Anergy_Risk: Zero
+---
+Concept: VACUUM_ENERGY
+Claim: Primitive 'VACUUM_ENERGY' bounds physical and structural reality in Physics.
+Proof:
+  Base: 7e10a6ce8806542c
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: VACUUM_ENERGY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Physics
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: VACUUM_ENERGY
+  Anergy_Risk: Zero
+---
+Concept: NATURAL_SELECTION
+Claim: Primitive 'NATURAL_SELECTION' bounds physical and structural reality in Biology.
+Proof:
+  Base: a68e1a9c28316026
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NATURAL_SELECTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NATURAL_SELECTION
+  Anergy_Risk: Zero
+---
+Concept: GENETIC_DRIFT
+Claim: Primitive 'GENETIC_DRIFT' bounds physical and structural reality in Biology.
+Proof:
+  Base: 85d7de091e680b49
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: GENETIC_DRIFT governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: GENETIC_DRIFT
+  Anergy_Risk: Zero
+---
+Concept: EPIGENETIC_LANDSCAPE
+Claim: Primitive 'EPIGENETIC_LANDSCAPE' bounds physical and structural reality in
+  Biology.
+Proof:
+  Base: 6a54ca63eb4f4af1
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: EPIGENETIC_LANDSCAPE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: EPIGENETIC_LANDSCAPE
+  Anergy_Risk: Zero
+---
+Concept: SYMBIOGENESIS
+Claim: Primitive 'SYMBIOGENESIS' bounds physical and structural reality in Biology.
+Proof:
+  Base: 1c1e77cee358ff96
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SYMBIOGENESIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SYMBIOGENESIS
+  Anergy_Risk: Zero
+---
+Concept: NICHE_CONSTRUCTION
+Claim: Primitive 'NICHE_CONSTRUCTION' bounds physical and structural reality in Biology.
+Proof:
+  Base: 8e3e9a50707a7359
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: NICHE_CONSTRUCTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: NICHE_CONSTRUCTION
+  Anergy_Risk: Zero
+---
+Concept: RED_QUEEN_HYPOTHESIS
+Claim: Primitive 'RED_QUEEN_HYPOTHESIS' bounds physical and structural reality in
+  Biology.
+Proof:
+  Base: f620047f6c9d34c0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: RED_QUEEN_HYPOTHESIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: RED_QUEEN_HYPOTHESIS
+  Anergy_Risk: Zero
+---
+Concept: KIN_SELECTION
+Claim: Primitive 'KIN_SELECTION' bounds physical and structural reality in Biology.
+Proof:
+  Base: 28687b7b35ccc7c7
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: KIN_SELECTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: KIN_SELECTION
+  Anergy_Risk: Zero
+---
+Concept: ALLOMETRIC_SCALING
+Claim: Primitive 'ALLOMETRIC_SCALING' bounds physical and structural reality in Biology.
+Proof:
+  Base: 2e9c337384ca4c23
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ALLOMETRIC_SCALING governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ALLOMETRIC_SCALING
+  Anergy_Risk: Zero
+---
+Concept: MORPHOGENESIS
+Claim: Primitive 'MORPHOGENESIS' bounds physical and structural reality in Biology.
+Proof:
+  Base: 8e06547fb3ada2e6
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MORPHOGENESIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MORPHOGENESIS
+  Anergy_Risk: Zero
+---
+Concept: APOPTOSIS
+Claim: Primitive 'APOPTOSIS' bounds physical and structural reality in Biology.
+Proof:
+  Base: cb4141cbbd12eaf8
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: APOPTOSIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Biology
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: APOPTOSIS
+  Anergy_Risk: Zero
+---
+Concept: SCALE_FREE_NETWORK
+Claim: Primitive 'SCALE_FREE_NETWORK' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: a454d810cb05a079
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SCALE_FREE_NETWORK governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SCALE_FREE_NETWORK
+  Anergy_Risk: Zero
+---
+Concept: SMALL_WORLD_NETWORK
+Claim: Primitive 'SMALL_WORLD_NETWORK' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: af2a5d81e3218bb0
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: SMALL_WORLD_NETWORK governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: SMALL_WORLD_NETWORK
+  Anergy_Risk: Zero
+---
+Concept: POWER_LAW_DISTRIBUTION
+Claim: Primitive 'POWER_LAW_DISTRIBUTION' bounds physical and structural reality in
+  Systems_Theory.
+Proof:
+  Base: 7b87f5ffee410965
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: POWER_LAW_DISTRIBUTION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: POWER_LAW_DISTRIBUTION
+  Anergy_Risk: Zero
+---
+Concept: FRACTAL_SELF_SIMILARITY
+Claim: Primitive 'FRACTAL_SELF_SIMILARITY' bounds physical and structural reality
+  in Systems_Theory.
+Proof:
+  Base: faaee8a0b4dfeb1a
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: FRACTAL_SELF_SIMILARITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: FRACTAL_SELF_SIMILARITY
+  Anergy_Risk: Zero
+---
+Concept: CRITICALITY
+Claim: Primitive 'CRITICALITY' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: 6c4c39561e637e7b
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CRITICALITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CRITICALITY
+  Anergy_Risk: Zero
+---
+Concept: HYSTERESIS
+Claim: Primitive 'HYSTERESIS' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: 3291ef5d3d5b68ea
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: HYSTERESIS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: HYSTERESIS
+  Anergy_Risk: Zero
+---
+Concept: RESILIENCE
+Claim: Primitive 'RESILIENCE' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: e6ba8b856cab9709
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: RESILIENCE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: RESILIENCE
+  Anergy_Risk: Zero
+---
+Concept: ANTI_FRAGILITY
+Claim: Primitive 'ANTI_FRAGILITY' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: fe1a80bd4ad70e18
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ANTI_FRAGILITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ANTI_FRAGILITY
+  Anergy_Risk: Zero
+---
+Concept: MODULARITY
+Claim: Primitive 'MODULARITY' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: af943c948d30c131
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MODULARITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MODULARITY
+  Anergy_Risk: Zero
+---
+Concept: TENSEGRITY
+Claim: Primitive 'TENSEGRITY' bounds physical and structural reality in Systems_Theory.
+Proof:
+  Base: d4c939f1ffe32f6d
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: TENSEGRITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Systems_Theory
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: TENSEGRITY
+  Anergy_Risk: Zero
+---
+Concept: GODEL_INCOMPLETENESS
+Claim: Primitive 'GODEL_INCOMPLETENESS' bounds physical and structural reality in
+  Logic_Math.
+Proof:
+  Base: d75bcb4bb654e5e8
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: GODEL_INCOMPLETENESS governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: GODEL_INCOMPLETENESS
+  Anergy_Risk: Zero
+---
+Concept: TURING_HALTING_PROBLEM
+Claim: Primitive 'TURING_HALTING_PROBLEM' bounds physical and structural reality in
+  Logic_Math.
+Proof:
+  Base: dad2b12dd99d87f8
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: TURING_HALTING_PROBLEM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: TURING_HALTING_PROBLEM
+  Anergy_Risk: Zero
+---
+Concept: CANTOR_DIAGONALIZATION
+Claim: Primitive 'CANTOR_DIAGONALIZATION' bounds physical and structural reality in
+  Logic_Math.
+Proof:
+  Base: 92ef58b34683533c
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: CANTOR_DIAGONALIZATION governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: CANTOR_DIAGONALIZATION
+  Anergy_Risk: Zero
+---
+Concept: ZFC_SET_THEORY
+Claim: Primitive 'ZFC_SET_THEORY' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: b3a929abbf5fe659
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: ZFC_SET_THEORY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: ZFC_SET_THEORY
+  Anergy_Risk: Zero
+---
+Concept: AXIOM_OF_CHOICE
+Claim: Primitive 'AXIOM_OF_CHOICE' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: bbfd6598bd622496
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: AXIOM_OF_CHOICE governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: AXIOM_OF_CHOICE
+  Anergy_Risk: Zero
+---
+Concept: MODAL_NECESSITY
+Claim: Primitive 'MODAL_NECESSITY' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: 506c75495acd8207
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MODAL_NECESSITY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MODAL_NECESSITY
+  Anergy_Risk: Zero
+---
+Concept: PARACONSISTENCY
+Claim: Primitive 'PARACONSISTENCY' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: 2e7fbf9f48053fb4
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: PARACONSISTENCY governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: PARACONSISTENCY
+  Anergy_Risk: Zero
+---
+Concept: INTUITIONISTIC_LOGIC
+Claim: Primitive 'INTUITIONISTIC_LOGIC' bounds physical and structural reality in
+  Logic_Math.
+Proof:
+  Base: c4e1eebcf7e17fd9
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: INTUITIONISTIC_LOGIC governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: INTUITIONISTIC_LOGIC
+  Anergy_Risk: Zero
+---
+Concept: BAYES_THEOREM
+Claim: Primitive 'BAYES_THEOREM' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: 15228cd52579f912
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: BAYES_THEOREM governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: BAYES_THEOREM
+  Anergy_Risk: Zero
+---
+Concept: MARKOV_CHAIN
+Claim: Primitive 'MARKOV_CHAIN' bounds physical and structural reality in Logic_Math.
+Proof:
+  Base: 624b0df2f22b188d
+  Range: '[0, 1]'
+  Confidence: C5-REAL
+Isomorphisms:
+  Physical: MARKOV_CHAIN governs absolute material limits.
+  Computational: Manifests as algorithmic constraints in test-time compute.
+Blast_Radius_Matrix:
+  Vector: Logic_Math
+  Blast_Radius: C5-REAL Axioms
+  Target_Invariant: MARKOV_CHAIN
+  Anergy_Risk: Zero

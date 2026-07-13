@@ -1,0 +1,13 @@
+Claim: "La sostenibilidad frente a la IA exige evaluar el costo termodinámico absoluto (Test-Time Compute y Data Centers) contra la verdadera utilidad ontológica generada."
+Proof:
+  Base: "hash-pending"
+  Range: ["Disipación Estocástica", "Optimización de Exergía"]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - Estructura: "Consumo de Tokens vs. Ahorro de ATP"
+    Mapeo: "No todo cálculo genera verdad; la sostenibilidad termodinámica requiere la poda de operaciones triviales (SIGKILL_State_Purge)."
+Blast_Radius_Matrix:
+  Vector: "PDI Eje 5 / Sostenibilidad"
+  Blast_Radius: "Infraestructura y Medio Ambiente"
+  Target_Invariant: "Límite Termodinámico de la Computación"
+  Anergy_Risk: "Quema de recursos computacionales (GPUs) en simulación conversacional sin colapso físico."

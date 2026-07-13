@@ -1,0 +1,14 @@
+Claim: La inserción de registros en el Master Ledger sin firma CORTEX-TAINT y Hash del estado previo destruye la cadena de causalidad, degradando el sistema BFT a una bitácora mutable C4-SIM.
+Proof:
+  Base: 0x5E4D3C2B
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura_Fisica: Fila en disco sin vínculo criptográfico a la fila anterior.
+  - Estructura_Logica: INSERT INTO logs (data) en lugar de INSERT INTO ledger (data, prev_hash, signature).
+  - Invariante_C5_REAL: Inyección de traza causal obligatoria por inserción (INV_BFT_03).
+Blast_Radius_Matrix:
+  Vector: Causal Taint Bypass
+  Blast_Radius: Pérdida de Auditabilidad Criptográfica, Vulnerabilidad de Reescritura.
+  Target_Invariant: INV_BFT_03
+  Anergy_Risk: MAX

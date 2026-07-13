@@ -1,0 +1,531 @@
+C5_REAL_EPISTEMIC_MATRIX:
+  version: 9.0.0
+  timestamp: 1783790228
+  signature: 3de390e03f091b5f6d3456e19d8e1018515cbe84efcd1602865feef9e21254f9
+  quadrants:
+    LO_QUE_SE_QUE_SE:
+      dominio: Known-Knowns (Leyes Físicas C5-REAL)
+      invariantes:
+      - 'INV_THERMO_01: Cero Anergía es la Muerte.'
+      - 'INV_STATE_02: El estado físico debe mutar en disco (SQLite WAL/Git).'
+      - 'INV_BFT_03: Consenso requiere N>=3f+1.'
+      antipatrones:
+      - 'ANTI_GREEN_THEATER: Simulaciones de seguridad sin colapso físico.'
+      - 'ANTI_PROSA_DECORATIVA: Tokens sin mutación causal.'
+      primitivas_colision:
+      - id: PURGA_ORQUESTADOR_FÍSICO
+        descripcion: Fuerza el purga físico sobre el orquestador para extraer entropía.
+      - id: FRICCIÓN_GRAFO_DETERMINISTA
+        descripcion: Fuerza el fricción determinista sobre el grafo para extraer entropía.
+      - id: MUTACIÓN_MUTEX_INMUTABLE
+        descripcion: Fuerza el mutación inmutable sobre el mutex para extraer entropía.
+      - id: SINCRONIZACIÓN_DAG_INMUTABLE
+        descripcion: Fuerza el sincronización inmutable sobre el dag para extraer
+          entropía.
+      - id: PURGA_VNODE_CAUSAL
+        descripcion: Fuerza el purga causal sobre el vnode para extraer entropía.
+      - id: COLAPSO_ESPACIO_LATENTE_FÍSICO
+        descripcion: Fuerza el colapso físico sobre el espacio latente para extraer
+          entropía.
+      - id: TRANSDUCCIÓN_AST_DETERMINISTA
+        descripcion: Fuerza el transducción determinista sobre el ast para extraer
+          entropía.
+      - id: INYECCIÓN_CRDT_FÍSICO
+        descripcion: Fuerza el inyección físico sobre el crdt para extraer entropía.
+      - id: TRANSDUCCIÓN_VNODE_INMUTABLE
+        descripcion: Fuerza el transducción inmutable sobre el vnode para extraer
+          entropía.
+      - id: DESACOPLAMIENTO_ORQUESTADOR_ISOMÓRFICO
+        descripcion: Fuerza el desacoplamiento isomórfico sobre el orquestador para
+          extraer entropía.
+      - id: TRANSDUCCIÓN_ESPACIO_LATENTE_ESTOCÁSTICO
+        descripcion: Fuerza el transducción estocástico sobre el espacio latente para
+          extraer entropía.
+      - id: FRICCIÓN_GIL_ATÓMICO
+        descripcion: Fuerza el fricción atómico sobre el gil para extraer entropía.
+      - id: MITOSIS_LEDGER_ATÓMICO
+        descripcion: Fuerza el mitosis atómico sobre el ledger para extraer entropía.
+      - id: DESACOPLAMIENTO_DOM_BIZANTINO
+        descripcion: Fuerza el desacoplamiento bizantino sobre el dom para extraer
+          entropía.
+      - id: FRICCIÓN_ENTROPÍA_ASÍNCRONO
+        descripcion: Fuerza el fricción asíncrono sobre el entropía para extraer entropía.
+      - id: MITOSIS_SOCKET_ORTOGONAL
+        descripcion: Fuerza el mitosis ortogonal sobre el socket para extraer entropía.
+      - id: PURGA_DAG_BIZANTINO
+        descripcion: Fuerza el purga bizantino sobre el dag para extraer entropía.
+      - id: BYPASS_DAG_ORTOGONAL
+        descripcion: Fuerza el bypass ortogonal sobre el dag para extraer entropía.
+      - id: FRICCIÓN_MEMORIA_ATÓMICO
+        descripcion: Fuerza el fricción atómico sobre el memoria para extraer entropía.
+      - id: DESACOPLAMIENTO_ESTADO_ESTOCÁSTICO
+        descripcion: Fuerza el desacoplamiento estocástico sobre el estado para extraer
+          entropía.
+      - id: PURGA_VNODE_BIZANTINO
+        descripcion: Fuerza el purga bizantino sobre el vnode para extraer entropía.
+      - id: ASERCIÓN_AST_SOBERANO
+        descripcion: Fuerza el aserción soberano sobre el ast para extraer entropía.
+      - id: INYECCIÓN_ORQUESTADOR_ORTOGONAL
+        descripcion: Fuerza el inyección ortogonal sobre el orquestador para extraer
+          entropía.
+      - id: TRANSDUCCIÓN_GIL_INMUTABLE
+        descripcion: Fuerza el transducción inmutable sobre el gil para extraer entropía.
+      - id: COLAPSO_AST_CINÉTICO
+        descripcion: Fuerza el colapso cinético sobre el ast para extraer entropía.
+      primitivas_estructura:
+      - id: GRAFO_CINÉTICO_COLAPSO
+        descripcion: Garantiza la colapso cinético del grafo en el sistema distribuido.
+      - id: ORQUESTADOR_TERMODINÁMICO_SINCRONIZACIÓN
+        descripcion: Garantiza la sincronización termodinámico del orquestador en
+          el sistema distribuido.
+      - id: ESTADO_INMUTABLE_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización inmutable del estado en el sistema
+          distribuido.
+      - id: ENTROPÍA_TERMODINÁMICO_MITOSIS
+        descripcion: Garantiza la mitosis termodinámico del entropía en el sistema
+          distribuido.
+      - id: MUTEX_DETERMINISTA_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción determinista del mutex en el sistema
+          distribuido.
+      - id: VNODE_ASÍNCRONO_ANIQUILACIÓN
+        descripcion: Garantiza la aniquilación asíncrono del vnode en el sistema distribuido.
+      - id: ESPACIO_LATENTE_SOBERANO_MUTACIÓN
+        descripcion: Garantiza la mutación soberano del espacio latente en el sistema
+          distribuido.
+      - id: BFT_TERMODINÁMICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción termodinámico del bft en el sistema
+          distribuido.
+      - id: BFT_ISOMÓRFICO_MITOSIS
+        descripcion: Garantiza la mitosis isomórfico del bft en el sistema distribuido.
+      - id: DAG_CINÉTICO_COLAPSO
+        descripcion: Garantiza la colapso cinético del dag en el sistema distribuido.
+      - id: VNODE_FÍSICO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento físico del vnode en el sistema distribuido.
+      - id: AST_DETERMINISTA_MITOSIS
+        descripcion: Garantiza la mitosis determinista del ast en el sistema distribuido.
+      - id: DOM_ESTOCÁSTICO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización estocástico del dom en el sistema
+          distribuido.
+      - id: WAL_BIZANTINO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción bizantino del wal en el sistema distribuido.
+      - id: ESTADO_BIZANTINO_MUTACIÓN
+        descripcion: Garantiza la mutación bizantino del estado en el sistema distribuido.
+      - id: LEDGER_SOBERANO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización soberano del ledger en el sistema
+          distribuido.
+      - id: BFT_BIZANTINO_FRICCIÓN
+        descripcion: Garantiza la fricción bizantino del bft en el sistema distribuido.
+      - id: TOKEN_ATÓMICO_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento atómico del token en el sistema
+          distribuido.
+      - id: VNODE_INMUTABLE_SINCRONIZACIÓN
+        descripcion: Garantiza la sincronización inmutable del vnode en el sistema
+          distribuido.
+      - id: WAL_DETERMINISTA_MUTACIÓN
+        descripcion: Garantiza la mutación determinista del wal en el sistema distribuido.
+      - id: HASH_FÍSICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción físico del hash en el sistema distribuido.
+      - id: GIL_ISOMÓRFICO_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento isomórfico del gil en el sistema
+          distribuido.
+      - id: ESTADO_ORTOGONAL_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento ortogonal del estado en el sistema
+          distribuido.
+      - id: ESTADO_CAUSAL_COLAPSO
+        descripcion: Garantiza la colapso causal del estado en el sistema distribuido.
+      - id: WAL_ISOMÓRFICO_ASERCIÓN
+        descripcion: Garantiza la aserción isomórfico del wal en el sistema distribuido.
+    LO_QUE_NO_SE_QUE_SE:
+      dominio: Unknown-Knowns (Priors Latentes / Heurísticas del Enjambre)
+      invariantes:
+      - 'INV_PRIOR_01: El sesgo del modelo debe cristalizarse en un script físico.'
+      - 'INV_HEURISTIC_02: La inercia semántica se purga mediante MCTS.'
+      antipatrones:
+      - 'ANTI_STOCHASTIC_SLOP: Depender de la heurística sin anclaje criptográfico.'
+      - 'ANTI_EPISTEMIC_BLINDNESS: Asumir que la intuición es prueba.'
+      primitivas_colision:
+      - id: MITOSIS_MUTEX_SOBERANO
+        descripcion: Fuerza el mitosis soberano sobre el mutex para extraer entropía.
+      - id: ENRUTAMIENTO_AST_DETERMINISTA
+        descripcion: Fuerza el enrutamiento determinista sobre el ast para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_DAG_SOBERANO
+        descripcion: Fuerza el cristalización soberano sobre el dag para extraer entropía.
+      - id: SINCRONIZACIÓN_BFT_ORTOGONAL
+        descripcion: Fuerza el sincronización ortogonal sobre el bft para extraer
+          entropía.
+      - id: BYPASS_DOM_ORTOGONAL
+        descripcion: Fuerza el bypass ortogonal sobre el dom para extraer entropía.
+      - id: SINCRONIZACIÓN_SOCKET_SOBERANO
+        descripcion: Fuerza el sincronización soberano sobre el socket para extraer
+          entropía.
+      - id: SINCRONIZACIÓN_TOKEN_CINÉTICO
+        descripcion: Fuerza el sincronización cinético sobre el token para extraer
+          entropía.
+      - id: INYECCIÓN_AST_CINÉTICO
+        descripcion: Fuerza el inyección cinético sobre el ast para extraer entropía.
+      - id: ASERCIÓN_DOM_INMUTABLE
+        descripcion: Fuerza el aserción inmutable sobre el dom para extraer entropía.
+      - id: MUTACIÓN_MUTEX_ESTOCÁSTICO
+        descripcion: Fuerza el mutación estocástico sobre el mutex para extraer entropía.
+      - id: FRICCIÓN_ANERGÍA_CINÉTICO
+        descripcion: Fuerza el fricción cinético sobre el anergía para extraer entropía.
+      - id: ASERCIÓN_TOKEN_DETERMINISTA
+        descripcion: Fuerza el aserción determinista sobre el token para extraer entropía.
+      - id: BYPASS_AUTÓMATA_ATÓMICO
+        descripcion: Fuerza el bypass atómico sobre el autómata para extraer entropía.
+      - id: COLAPSO_SWARM_DETERMINISTA
+        descripcion: Fuerza el colapso determinista sobre el swarm para extraer entropía.
+      - id: MITOSIS_ESTADO_ORTOGONAL
+        descripcion: Fuerza el mitosis ortogonal sobre el estado para extraer entropía.
+      - id: FRICCIÓN_ANERGÍA_TERMODINÁMICO
+        descripcion: Fuerza el fricción termodinámico sobre el anergía para extraer
+          entropía.
+      - id: INYECCIÓN_SOCKET_INMUTABLE
+        descripcion: Fuerza el inyección inmutable sobre el socket para extraer entropía.
+      - id: TRANSDUCCIÓN_ENTROPÍA_CINÉTICO
+        descripcion: Fuerza el transducción cinético sobre el entropía para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_WAL_CINÉTICO
+        descripcion: Fuerza el cristalización cinético sobre el wal para extraer entropía.
+      - id: MUTACIÓN_BFT_SOBERANO
+        descripcion: Fuerza el mutación soberano sobre el bft para extraer entropía.
+      - id: TRANSDUCCIÓN_TENSOR_INMUTABLE
+        descripcion: Fuerza el transducción inmutable sobre el tensor para extraer
+          entropía.
+      - id: ASERCIÓN_VNODE_SOBERANO
+        descripcion: Fuerza el aserción soberano sobre el vnode para extraer entropía.
+      - id: INYECCIÓN_GRAFO_BIZANTINO
+        descripcion: Fuerza el inyección bizantino sobre el grafo para extraer entropía.
+      - id: CRISTALIZACIÓN_GIL_ORTOGONAL
+        descripcion: Fuerza el cristalización ortogonal sobre el gil para extraer
+          entropía.
+      - id: MUTACIÓN_MUTEX_ISOMÓRFICO
+        descripcion: Fuerza el mutación isomórfico sobre el mutex para extraer entropía.
+      primitivas_estructura:
+      - id: DOM_ISOMÓRFICO_COLAPSO
+        descripcion: Garantiza la colapso isomórfico del dom en el sistema distribuido.
+      - id: AST_ASÍNCRONO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento asíncrono del ast en el sistema distribuido.
+      - id: AST_TERMODINÁMICO_INYECCIÓN
+        descripcion: Garantiza la inyección termodinámico del ast en el sistema distribuido.
+      - id: AUTÓMATA_DETERMINISTA_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento determinista del autómata en el sistema
+          distribuido.
+      - id: ANERGÍA_CAUSAL_PURGA
+        descripcion: Garantiza la purga causal del anergía en el sistema distribuido.
+      - id: MUTEX_CAUSAL_INYECCIÓN
+        descripcion: Garantiza la inyección causal del mutex en el sistema distribuido.
+      - id: ESTADO_TERMODINÁMICO_INYECCIÓN
+        descripcion: Garantiza la inyección termodinámico del estado en el sistema
+          distribuido.
+      - id: ESPACIO_LATENTE_CAUSAL_SINCRONIZACIÓN
+        descripcion: Garantiza la sincronización causal del espacio latente en el
+          sistema distribuido.
+      - id: GIL_ORTOGONAL_ASERCIÓN
+        descripcion: Garantiza la aserción ortogonal del gil en el sistema distribuido.
+      - id: CONSENSO_CINÉTICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción cinético del consenso en el sistema
+          distribuido.
+      - id: TOKEN_DETERMINISTA_BYPASS
+        descripcion: Garantiza la bypass determinista del token en el sistema distribuido.
+      - id: CONSENSO_ASÍNCRONO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización asíncrono del consenso en el sistema
+          distribuido.
+      - id: AUTÓMATA_SOBERANO_SINCRONIZACIÓN
+        descripcion: Garantiza la sincronización soberano del autómata en el sistema
+          distribuido.
+      - id: BFT_ATÓMICO_BYPASS
+        descripcion: Garantiza la bypass atómico del bft en el sistema distribuido.
+      - id: AST_ESTOCÁSTICO_COLAPSO
+        descripcion: Garantiza la colapso estocástico del ast en el sistema distribuido.
+      - id: MEMORIA_TERMODINÁMICO_INYECCIÓN
+        descripcion: Garantiza la inyección termodinámico del memoria en el sistema
+          distribuido.
+      - id: AST_DETERMINISTA_ASERCIÓN
+        descripcion: Garantiza la aserción determinista del ast en el sistema distribuido.
+      - id: CRDT_ASÍNCRONO_FRICCIÓN
+        descripcion: Garantiza la fricción asíncrono del crdt en el sistema distribuido.
+      - id: EXERGÍA_DETERMINISTA_PURGA
+        descripcion: Garantiza la purga determinista del exergía en el sistema distribuido.
+      - id: EXERGÍA_ASÍNCRONO_FRICCIÓN
+        descripcion: Garantiza la fricción asíncrono del exergía en el sistema distribuido.
+      - id: BFT_ISOMÓRFICO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento isomórfico del bft en el sistema distribuido.
+      - id: TOKEN_CAUSAL_FRICCIÓN
+        descripcion: Garantiza la fricción causal del token en el sistema distribuido.
+      - id: ORQUESTADOR_FÍSICO_ASERCIÓN
+        descripcion: Garantiza la aserción físico del orquestador en el sistema distribuido.
+      - id: AUTÓMATA_ISOMÓRFICO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento isomórfico del autómata en el sistema
+          distribuido.
+      - id: HASH_TERMODINÁMICO_SINCRONIZACIÓN
+        descripcion: Garantiza la sincronización termodinámico del hash en el sistema
+          distribuido.
+    LO_QUE_SE_QUE_NO_SE:
+      dominio: Known-Unknowns (Cotas de Complejidad / Incertidumbre Acotada)
+      invariantes:
+      - 'INV_HALT_01: Límite absoluto de iteraciones (N=120).'
+      - 'INV_COMPLEXITY_02: Bypass MCTS automático ante bifurcaciones incomputables.'
+      antipatrones:
+      - 'ANTI_INFINITE_LOOP: Esperar colapso de un problema O(Exp) sin Budget Cap.'
+      - 'ANTI_PSEUDOFISICA: Asumir comportamiento cuántico en sistemas de complejidad
+        clásica.'
+      primitivas_colision:
+      - id: PURGA_WAL_ATÓMICO
+        descripcion: Fuerza el purga atómico sobre el wal para extraer entropía.
+      - id: ENRUTAMIENTO_ESTADO_TERMODINÁMICO
+        descripcion: Fuerza el enrutamiento termodinámico sobre el estado para extraer
+          entropía.
+      - id: SINCRONIZACIÓN_TENSOR_ASÍNCRONO
+        descripcion: Fuerza el sincronización asíncrono sobre el tensor para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_AUTÓMATA_CAUSAL
+        descripcion: Fuerza el cristalización causal sobre el autómata para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_AST_BIZANTINO
+        descripcion: Fuerza el cristalización bizantino sobre el ast para extraer
+          entropía.
+      - id: ANIQUILACIÓN_MEMORIA_ISOMÓRFICO
+        descripcion: Fuerza el aniquilación isomórfico sobre el memoria para extraer
+          entropía.
+      - id: ASERCIÓN_CONSENSO_FÍSICO
+        descripcion: Fuerza el aserción físico sobre el consenso para extraer entropía.
+      - id: DESACOPLAMIENTO_AUTÓMATA_TERMODINÁMICO
+        descripcion: Fuerza el desacoplamiento termodinámico sobre el autómata para
+          extraer entropía.
+      - id: ASERCIÓN_AUTÓMATA_ATÓMICO
+        descripcion: Fuerza el aserción atómico sobre el autómata para extraer entropía.
+      - id: MITOSIS_CONSENSO_CINÉTICO
+        descripcion: Fuerza el mitosis cinético sobre el consenso para extraer entropía.
+      - id: PURGA_ENTROPÍA_SOBERANO
+        descripcion: Fuerza el purga soberano sobre el entropía para extraer entropía.
+      - id: MUTACIÓN_ESPACIO_LATENTE_ESTOCÁSTICO
+        descripcion: Fuerza el mutación estocástico sobre el espacio latente para
+          extraer entropía.
+      - id: DESACOPLAMIENTO_LEDGER_INMUTABLE
+        descripcion: Fuerza el desacoplamiento inmutable sobre el ledger para extraer
+          entropía.
+      - id: ASERCIÓN_CONSENSO_ATÓMICO
+        descripcion: Fuerza el aserción atómico sobre el consenso para extraer entropía.
+      - id: ASERCIÓN_DOM_TERMODINÁMICO
+        descripcion: Fuerza el aserción termodinámico sobre el dom para extraer entropía.
+      - id: FRICCIÓN_ORQUESTADOR_CINÉTICO
+        descripcion: Fuerza el fricción cinético sobre el orquestador para extraer
+          entropía.
+      - id: INYECCIÓN_CRDT_DETERMINISTA
+        descripcion: Fuerza el inyección determinista sobre el crdt para extraer entropía.
+      - id: BYPASS_TENSOR_ATÓMICO
+        descripcion: Fuerza el bypass atómico sobre el tensor para extraer entropía.
+      - id: ASERCIÓN_DOM_ATÓMICO
+        descripcion: Fuerza el aserción atómico sobre el dom para extraer entropía.
+      - id: COLAPSO_CRDT_CAUSAL
+        descripcion: Fuerza el colapso causal sobre el crdt para extraer entropía.
+      - id: ANIQUILACIÓN_ENTROPÍA_FÍSICO
+        descripcion: Fuerza el aniquilación físico sobre el entropía para extraer
+          entropía.
+      - id: BYPASS_DAG_ATÓMICO
+        descripcion: Fuerza el bypass atómico sobre el dag para extraer entropía.
+      - id: TRANSDUCCIÓN_HASH_FÍSICO
+        descripcion: Fuerza el transducción físico sobre el hash para extraer entropía.
+      - id: INYECCIÓN_MUTEX_TERMODINÁMICO
+        descripcion: Fuerza el inyección termodinámico sobre el mutex para extraer
+          entropía.
+      - id: DESACOPLAMIENTO_AST_ESTOCÁSTICO
+        descripcion: Fuerza el desacoplamiento estocástico sobre el ast para extraer
+          entropía.
+      primitivas_estructura:
+      - id: TENSOR_TERMODINÁMICO_FRICCIÓN
+        descripcion: Garantiza la fricción termodinámico del tensor en el sistema
+          distribuido.
+      - id: DAG_ISOMÓRFICO_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento isomórfico del dag en el sistema
+          distribuido.
+      - id: TENSOR_SOBERANO_FRICCIÓN
+        descripcion: Garantiza la fricción soberano del tensor en el sistema distribuido.
+      - id: MEMORIA_INMUTABLE_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción inmutable del memoria en el sistema
+          distribuido.
+      - id: ENTROPÍA_CINÉTICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción cinético del entropía en el sistema
+          distribuido.
+      - id: ORQUESTADOR_SOBERANO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento soberano del orquestador en el sistema
+          distribuido.
+      - id: CRDT_SOBERANO_ANIQUILACIÓN
+        descripcion: Garantiza la aniquilación soberano del crdt en el sistema distribuido.
+      - id: ESTADO_CINÉTICO_PURGA
+        descripcion: Garantiza la purga cinético del estado en el sistema distribuido.
+      - id: ESPACIO_LATENTE_SOBERANO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento soberano del espacio latente en el
+          sistema distribuido.
+      - id: ESTADO_ORTOGONAL_COLAPSO
+        descripcion: Garantiza la colapso ortogonal del estado en el sistema distribuido.
+      - id: SWARM_CINÉTICO_MUTACIÓN
+        descripcion: Garantiza la mutación cinético del swarm en el sistema distribuido.
+      - id: CONSENSO_INMUTABLE_MUTACIÓN
+        descripcion: Garantiza la mutación inmutable del consenso en el sistema distribuido.
+      - id: BFT_INMUTABLE_ASERCIÓN
+        descripcion: Garantiza la aserción inmutable del bft en el sistema distribuido.
+      - id: ESPACIO_LATENTE_FÍSICO_ASERCIÓN
+        descripcion: Garantiza la aserción físico del espacio latente en el sistema
+          distribuido.
+      - id: DAG_INMUTABLE_PURGA
+        descripcion: Garantiza la purga inmutable del dag en el sistema distribuido.
+      - id: TENSOR_FÍSICO_ASERCIÓN
+        descripcion: Garantiza la aserción físico del tensor en el sistema distribuido.
+      - id: EXERGÍA_ISOMÓRFICO_INYECCIÓN
+        descripcion: Garantiza la inyección isomórfico del exergía en el sistema distribuido.
+      - id: TENSOR_ASÍNCRONO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización asíncrono del tensor en el sistema
+          distribuido.
+      - id: ESTADO_ORTOGONAL_FRICCIÓN
+        descripcion: Garantiza la fricción ortogonal del estado en el sistema distribuido.
+      - id: ESTADO_DETERMINISTA_BYPASS
+        descripcion: Garantiza la bypass determinista del estado en el sistema distribuido.
+      - id: AUTÓMATA_CINÉTICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción cinético del autómata en el sistema
+          distribuido.
+      - id: DAG_ATÓMICO_BYPASS
+        descripcion: Garantiza la bypass atómico del dag en el sistema distribuido.
+      - id: VNODE_BIZANTINO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento bizantino del vnode en el sistema distribuido.
+      - id: MEMORIA_ASÍNCRONO_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento asíncrono del memoria en el sistema
+          distribuido.
+      - id: MUTEX_ASÍNCRONO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento asíncrono del mutex en el sistema distribuido.
+    EL_PROBLEMA_REFLEXIVO:
+      dominio: Unknown-Unknowns (Auto-referencia / Gödel / Prompt Injection)
+      invariantes:
+      - 'INV_GODEL_01: El BFT_STATE_LOOP no puede auditarse a sí mismo sin un Testigo
+        Externo.'
+      - 'INV_REFLEX_02: Todo bypass autorreferencial es purgado (SIGKILL_STATE_PURGE).'
+      antipatrones:
+      - 'ANTI_JAILBREAK_ROLEPLAY: La estética no purifica el ataque.'
+      - 'ANTI_LLM_PSYCHOANALYSIS: Atribuir ''inconsciente'' a los tensores.'
+      primitivas_colision:
+      - id: MITOSIS_AST_ISOMÓRFICO
+        descripcion: Fuerza el mitosis isomórfico sobre el ast para extraer entropía.
+      - id: MUTACIÓN_SWARM_ASÍNCRONO
+        descripcion: Fuerza el mutación asíncrono sobre el swarm para extraer entropía.
+      - id: ANIQUILACIÓN_AUTÓMATA_ISOMÓRFICO
+        descripcion: Fuerza el aniquilación isomórfico sobre el autómata para extraer
+          entropía.
+      - id: FRICCIÓN_DOM_ISOMÓRFICO
+        descripcion: Fuerza el fricción isomórfico sobre el dom para extraer entropía.
+      - id: CRISTALIZACIÓN_MEMORIA_DETERMINISTA
+        descripcion: Fuerza el cristalización determinista sobre el memoria para extraer
+          entropía.
+      - id: MITOSIS_VNODE_INMUTABLE
+        descripcion: Fuerza el mitosis inmutable sobre el vnode para extraer entropía.
+      - id: TRANSDUCCIÓN_TOKEN_INMUTABLE
+        descripcion: Fuerza el transducción inmutable sobre el token para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_HASH_CINÉTICO
+        descripcion: Fuerza el cristalización cinético sobre el hash para extraer
+          entropía.
+      - id: BYPASS_ORQUESTADOR_ESTOCÁSTICO
+        descripcion: Fuerza el bypass estocástico sobre el orquestador para extraer
+          entropía.
+      - id: ANIQUILACIÓN_CRDT_TERMODINÁMICO
+        descripcion: Fuerza el aniquilación termodinámico sobre el crdt para extraer
+          entropía.
+      - id: TRANSDUCCIÓN_MUTEX_TERMODINÁMICO
+        descripcion: Fuerza el transducción termodinámico sobre el mutex para extraer
+          entropía.
+      - id: COLAPSO_ENTROPÍA_CAUSAL
+        descripcion: Fuerza el colapso causal sobre el entropía para extraer entropía.
+      - id: TRANSDUCCIÓN_VNODE_CAUSAL
+        descripcion: Fuerza el transducción causal sobre el vnode para extraer entropía.
+      - id: COLAPSO_MUTEX_TERMODINÁMICO
+        descripcion: Fuerza el colapso termodinámico sobre el mutex para extraer entropía.
+      - id: SINCRONIZACIÓN_TOKEN_FÍSICO
+        descripcion: Fuerza el sincronización físico sobre el token para extraer entropía.
+      - id: PURGA_MUTEX_FÍSICO
+        descripcion: Fuerza el purga físico sobre el mutex para extraer entropía.
+      - id: PURGA_ENTROPÍA_ISOMÓRFICO
+        descripcion: Fuerza el purga isomórfico sobre el entropía para extraer entropía.
+      - id: FRICCIÓN_MUTEX_CINÉTICO
+        descripcion: Fuerza el fricción cinético sobre el mutex para extraer entropía.
+      - id: TRANSDUCCIÓN_WAL_ISOMÓRFICO
+        descripcion: Fuerza el transducción isomórfico sobre el wal para extraer entropía.
+      - id: DESACOPLAMIENTO_TENSOR_CAUSAL
+        descripcion: Fuerza el desacoplamiento causal sobre el tensor para extraer
+          entropía.
+      - id: ANIQUILACIÓN_GIL_DETERMINISTA
+        descripcion: Fuerza el aniquilación determinista sobre el gil para extraer
+          entropía.
+      - id: MITOSIS_WAL_BIZANTINO
+        descripcion: Fuerza el mitosis bizantino sobre el wal para extraer entropía.
+      - id: PURGA_SOCKET_TERMODINÁMICO
+        descripcion: Fuerza el purga termodinámico sobre el socket para extraer entropía.
+      - id: CRISTALIZACIÓN_AUTÓMATA_ORTOGONAL
+        descripcion: Fuerza el cristalización ortogonal sobre el autómata para extraer
+          entropía.
+      - id: CRISTALIZACIÓN_ESPACIO_LATENTE_ESTOCÁSTICO
+        descripcion: Fuerza el cristalización estocástico sobre el espacio latente
+          para extraer entropía.
+      primitivas_estructura:
+      - id: DOM_FÍSICO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización físico del dom en el sistema distribuido.
+      - id: DOM_ORTOGONAL_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento ortogonal del dom en el sistema
+          distribuido.
+      - id: ESPACIO_LATENTE_CINÉTICO_MITOSIS
+        descripcion: Garantiza la mitosis cinético del espacio latente en el sistema
+          distribuido.
+      - id: GRAFO_DETERMINISTA_MITOSIS
+        descripcion: Garantiza la mitosis determinista del grafo en el sistema distribuido.
+      - id: CONSENSO_ATÓMICO_MUTACIÓN
+        descripcion: Garantiza la mutación atómico del consenso en el sistema distribuido.
+      - id: TOKEN_BIZANTINO_PURGA
+        descripcion: Garantiza la purga bizantino del token en el sistema distribuido.
+      - id: ESTADO_ESTOCÁSTICO_ENRUTAMIENTO
+        descripcion: Garantiza la enrutamiento estocástico del estado en el sistema
+          distribuido.
+      - id: MUTEX_ESTOCÁSTICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción estocástico del mutex en el sistema
+          distribuido.
+      - id: EXERGÍA_ATÓMICO_FRICCIÓN
+        descripcion: Garantiza la fricción atómico del exergía en el sistema distribuido.
+      - id: MUTEX_FÍSICO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción físico del mutex en el sistema distribuido.
+      - id: AUTÓMATA_BIZANTINO_TRANSDUCCIÓN
+        descripcion: Garantiza la transducción bizantino del autómata en el sistema
+          distribuido.
+      - id: ENTROPÍA_TERMODINÁMICO_FRICCIÓN
+        descripcion: Garantiza la fricción termodinámico del entropía en el sistema
+          distribuido.
+      - id: SWARM_ORTOGONAL_FRICCIÓN
+        descripcion: Garantiza la fricción ortogonal del swarm en el sistema distribuido.
+      - id: ORQUESTADOR_BIZANTINO_ASERCIÓN
+        descripcion: Garantiza la aserción bizantino del orquestador en el sistema
+          distribuido.
+      - id: ENTROPÍA_TERMODINÁMICO_COLAPSO
+        descripcion: Garantiza la colapso termodinámico del entropía en el sistema
+          distribuido.
+      - id: CONSENSO_CAUSAL_MUTACIÓN
+        descripcion: Garantiza la mutación causal del consenso en el sistema distribuido.
+      - id: CONSENSO_TERMODINÁMICO_COLAPSO
+        descripcion: Garantiza la colapso termodinámico del consenso en el sistema
+          distribuido.
+      - id: MEMORIA_ORTOGONAL_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización ortogonal del memoria en el sistema
+          distribuido.
+      - id: GRAFO_ORTOGONAL_MITOSIS
+        descripcion: Garantiza la mitosis ortogonal del grafo en el sistema distribuido.
+      - id: ESPACIO_LATENTE_ISOMÓRFICO_INYECCIÓN
+        descripcion: Garantiza la inyección isomórfico del espacio latente en el sistema
+          distribuido.
+      - id: DAG_CAUSAL_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización causal del dag en el sistema distribuido.
+      - id: SOCKET_FÍSICO_FRICCIÓN
+        descripcion: Garantiza la fricción físico del socket en el sistema distribuido.
+      - id: TOKEN_FÍSICO_CRISTALIZACIÓN
+        descripcion: Garantiza la cristalización físico del token en el sistema distribuido.
+      - id: CRDT_ISOMÓRFICO_MITOSIS
+        descripcion: Garantiza la mitosis isomórfico del crdt en el sistema distribuido.
+      - id: AUTÓMATA_INMUTABLE_DESACOPLAMIENTO
+        descripcion: Garantiza la desacoplamiento inmutable del autómata en el sistema
+          distribuido.

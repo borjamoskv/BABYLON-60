@@ -1,0 +1,51 @@
+ontology_id: "OSINT_C5_TAXONOMY"
+description: "Clasificación canónica C5-REAL de vectores termodinámicos para recolección de inteligencia de fuentes públicas."
+last_update: "2026-07-11"
+vectors:
+  1_OSINT:
+    name: "Open-Source Intelligence"
+    domain: "Clear Web & Registros Públicos"
+    methods:
+      - "Búsqueda Dorking (Operadores booleanos estructurados)"
+      - "Scraping de registros mercantiles (BORME, BOE, SEC)"
+      - "Análisis de repositorios públicos (GitHub, GitLab, subdominios)"
+  2_SOCINT:
+    name: "Social Media Intelligence"
+    domain: "Grafos Sociales y Sesgo Algorítmico"
+    methods:
+      - "Mapeo topológico de conexiones interpersonales"
+      - "Extracción de huella algorítmica y correlación de identidades (Regla EPI_06)"
+      - "Monitorización de metadatos de medios subidos"
+  3_GEOINT:
+    name: "Geospatial Intelligence"
+    domain: "Topología Física Superficial"
+    methods:
+      - "Correlación de imágenes satelitales (OSM, Google Earth)"
+      - "Extracción de coordenadas físicas desde infraestructuras"
+      - "Análisis de sombras y geolocalización solar"
+  4_TECHINT_DNS:
+    name: "Technical OSINT / Infraestructura"
+    domain: "DNS, IP & Certificados"
+    methods:
+      - "Escaneo de espectro pasivo (Shodan, Censys)"
+      - "Resolución DNS histórica y mapeo de rutas BGP"
+      - "Análisis de colisiones en certificados TLS/SSL"
+  5_FININT_PUBLIC:
+    name: "Financial Intelligence (Capa Abierta)"
+    domain: "Flujos de Capital Público & Blockchain"
+    methods:
+      - "Taint tracking en ledgers distribuidos (EVM, UTXO)"
+      - "Cruce de direcciones criptográficas con foros públicos"
+      - "Ingeniería inversa de smart contracts"
+  6_IMINT_EXIF:
+    name: "Imagery Intelligence"
+    domain: "Multimedia y Esteganografía"
+    methods:
+      - "Búsqueda acústica inversa y visual"
+      - "Análisis de metadatos EXIF / XMP"
+  7_BREACHINT:
+    name: "Breach Intelligence"
+    domain: "Data Dumps Públicos"
+    methods:
+      - "Correlación de contraseñas expuestas y leaks (HIBP)"
+      - "Búsqueda en volcados de pastebins o trackers OSINT"

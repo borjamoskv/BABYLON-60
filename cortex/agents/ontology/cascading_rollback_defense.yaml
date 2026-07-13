@@ -1,0 +1,14 @@
+Claim: La propagación asíncrona de excepciones durante una instrucción ROLLBACK contamina irreparablemente la conexión SQLite en modo WAL, exigiendo un aborto físico total (SIGKILL).
+Proof:
+  Base: 0x7F2A9B1C
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura_Fisica: Corrupción de stack de transacción en motor DB.
+  - Estructura_Logica: try except envolvente sin reciclar la conexión db.close().
+  - Invariante_C5_REAL: Fail-Fast incondicional si ROLLBACK falla (INV_BFT_06).
+Blast_Radius_Matrix:
+  Vector: Cascading Rollback Failure
+  Blast_Radius: Transacciones huérfanas, Corrupción silenciosa del Master Ledger.
+  Target_Invariant: INV_BFT_06
+  Anergy_Risk: MAX

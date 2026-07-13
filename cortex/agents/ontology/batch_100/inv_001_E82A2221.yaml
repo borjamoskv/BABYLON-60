@@ -1,0 +1,19 @@
+Claim: La transducción de Distributed Deadlock mediante la sintaxis 'db.commit() manual
+  sobre conexión aiosqlite en modo autocommit.' induce una falla material (Saturación
+  de File Descriptors por Sockets no cerrados.), corrompiendo la invariante estructural
+  INV_BFT_07.
+Proof:
+  Base: '0xE82A2221'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Saturación de File Descriptors por Sockets no cerrados.'
+- 'Estructura_Logica: db.commit() manual sobre conexión aiosqlite en modo autocommit.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_07.'
+Blast_Radius_Matrix:
+  Vector: Distributed Deadlock
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_07
+  Anergy_Risk: MAX

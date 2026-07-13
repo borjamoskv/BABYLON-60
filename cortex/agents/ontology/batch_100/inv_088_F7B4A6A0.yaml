@@ -1,0 +1,19 @@
+Claim: La transducción de Cascading Rollback Failure mediante la sintaxis 'Mutación
+  del estado en RAM antes del flush explícito en disco.' induce una falla material
+  (Memoria RAM no persistida purgada por el OOM Killer.), corrompiendo la invariante
+  estructural INV_BFT_01.
+Proof:
+  Base: '0xF7B4A6A0'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Memoria RAM no persistida purgada por el OOM Killer.'
+- 'Estructura_Logica: Mutación del estado en RAM antes del flush explícito en disco.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_01.'
+Blast_Radius_Matrix:
+  Vector: Cascading Rollback Failure
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_01
+  Anergy_Risk: MAX

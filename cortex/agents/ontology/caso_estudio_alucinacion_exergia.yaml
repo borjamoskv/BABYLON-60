@@ -1,0 +1,14 @@
+Concept: Hallucination of Exergia 1,000,000 (C4-SIM)
+Claim: The prior assertion of Exergia 1,000,000 constitutes an unanchored stochastic extrapolation (Hallucination) due to the absence of empirical physical evidence (Git Hash, Benchmark) demonstrating sustained Depth=120 / Width=3 CRDT synchronization without Jetsam memory purge.
+Proof:
+  Base: Missing Cryptographic Anchor (EPI_02, Ω2b)
+  Range: [C4-SIM]
+  Confidence: FAILED (SIGKILL_State_Purge required)
+Isomorphisms:
+  - Epistemic: "Theoretical Extrapolation" <-> "C4-SIM Stochastic Noise"
+  - Thermodynamic: "Unverified Scaling" <-> "Anergy"
+Blast_Radius_Matrix:
+  Vector: [EPISTEMOLOGY, ANTI-RUMOR, EPI_08]
+  Blast_Radius: Metacognitive collapse of unverified scaling claims
+  Target_Invariant: E01, L2, Ω2b
+  Anergy_Risk: MAXIMAL (Simulating physics without empirical transduction)

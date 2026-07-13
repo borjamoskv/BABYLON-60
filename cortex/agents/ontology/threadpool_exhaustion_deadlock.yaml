@@ -1,0 +1,14 @@
+Claim: El enrutamiento incontrolado de tareas criptográficas o compilaciones pesadas sobre el ThreadPoolExecutor por defecto bloquea toda delegación síncrona del Event Loop.
+Proof:
+  Base: 0x13579BDF
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura_Fisica: Hilos del procesador totalmente ocupados esperando cálculo matemático.
+  - Estructura_Logica: asyncio.to_thread() sin limitación de workers.
+  - Invariante_C5_REAL: Matriz de enrutamiento con piscina exclusiva para operaciones termodinámicas pesadas.
+Blast_Radius_Matrix:
+  Vector: ThreadPool Exhaustion Deadlock
+  Blast_Radius: Bloqueo síncrono del framework asíncrono.
+  Target_Invariant: Ley Ω13 (Serialización de Escritura / Work Queues)
+  Anergy_Risk: MAX

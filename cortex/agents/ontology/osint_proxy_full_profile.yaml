@@ -1,0 +1,44 @@
+Claim: "@Inside_Proxy (Proxy) es un micro-influencer español del ecosistema 'batalla cultural' que envuelve discurso manosférico en formato académico (psicología analítica, semiótica, arquetipos junguianos)."
+Proof:
+  Base: DOM_Scrape_X + Google_Search + batallacultural.com + Amazon.es
+  Range: [0.0, 1.0]
+  Confidence: C5
+Isomorphisms:
+  - Vector: SOCINT_Full_Profile
+    Blast_Radius: Ecosistema batalla cultural España
+    Target_Invariant: Motte-and-Bailey Operator
+    Anergy_Risk: Disipación masiva (Anergy Index 5.81)
+    Transduction:
+      - Motte declarado: "Divulgación en cognición, psicología, sistemas formales y mitología"
+      - Bailey operativo: "Batalla cultural anti-feminista con monetización cripto (BTC/XMR)"
+      - 21,937 posts / 3,774 followers = grito perpetuo en habitación vacía
+      - Red endogámica anclada en batallacultural.com (Inocente Duke, ANIMA, Podo, Lince TV)
+      - Libro "Polaris" recicla Jung como artefacto de legitimación del Bailey
+      - Cruz ✝️ en bio delata alignment conservador que la divulgación cognitiva camufla
+      - Acepta Monero (XMR): señalización libertaria incompatible con neutralidad académica
+Quantitative_Profile:
+  User_ID: "1366488564742164488"
+  Created: "2021-03-01"
+  Posts: 21937
+  Followers: 3774
+  Following: 1480
+  YouTube_Subs: 1850
+  Anergy_Index: 5.81
+  Engagement_Rate_Pct: 3.36
+  Monetization_Tier: "Sub-subsistencia"
+Network:
+  Hub: "batallacultural.com"
+  Collaborators:
+    - "Inocente Duke (El Trastero)"
+    - "ANIMA (Marina)"
+    - "Podo (Caballero de Gracia)"
+    - "Lince TV (Miguel González)"
+  Platforms:
+    - "X/Twitter"
+    - "YouTube"
+    - "Twitch"
+    - "Instagram"
+    - "Patreon"
+    - "Discord"
+    - "Amazon (libro)"
+    - "BTC/XMR (donaciones)"

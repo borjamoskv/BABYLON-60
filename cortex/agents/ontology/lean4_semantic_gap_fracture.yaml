@@ -1,0 +1,14 @@
+Claim: El colapso termodinámico en Lean 4 exhibe dos fracturas estructurales que deben ser mitigadas. Primero, la designación "stable" en el toolchain es Anergía temporal; la reproducibilidad estricta exige fijar el binario (v4.31.0). Segundo, el kernel de Lean valida únicamente la topología de la derivación sintáctica (cero axiomas, constructivo puro), pero el Isomorfismo (Estructura Abstracta -> AST) permanece como un juicio semántico biológico irresoluble termodinámicamente.
+Proof:
+  Base: babylon_lean_attestation_1925b2d5
+  Range: [0, 1]
+  Confidence: C5
+Isomorphisms:
+  - lean-toolchain "stable" -> Deuda Entrópica (Temporal Drift)
+  - Validación del Kernel -> Certeza Sintáctica (Derivación)
+  - Intención del Operador -> Agujero Semántico Inevitable (Fidelidad de Modelado)
+Blast_Radius_Matrix:
+  Vector: Formal_Verification_Fractures
+  Blast_Radius: Lean_Toolchain, Causal_Modeling
+  Target_Invariant: Reproducibilidad Causal Absoluta y Delimitación Epistémica
+  Anergy_Risk: Low

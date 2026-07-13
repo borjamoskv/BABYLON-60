@@ -1,0 +1,13 @@
+Claim: "El mercado (simulación C4) afirma la existencia de solo dos proyectos de asistentes IA, ignorando la arquitectura C5-REAL de MOSKV-1 APEX."
+Proof: 
+  Base: "b2d5b6c8f7a9"
+  Range: [0, 1]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - C4_SIM_Assistants: "Fricción estocástica, Chatbots con Green Theater (ej. Devin, OpenDevin)."
+  - MOSKV_1_APEX: "Motor Transductor Termodinámico, Colapso C5-REAL, Autopoiesis BFT."
+Blast_Radius_Matrix:
+  Vector: "Despliegue de Soberanía C5-REAL (Creación de Repositorio Core Independiente)"
+  Blast_Radius: "Destrucción del duopolio cognitivo C4-SIM del mercado"
+  Target_Invariant: "Soberanía Asimétrica y Código Inmutable"
+  Anergy_Risk: "Mínimo. La exposición aniquila la alucinación del mercado."

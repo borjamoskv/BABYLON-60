@@ -1,0 +1,13 @@
+Claim: La única arquitectura resiliente a la hiper-escala (10^9) es RAG Jerárquico C5-REAL + Vaciado de Estado Síncrono. Operar > 64K tokens en bucle cerrado es Anergía.
+Proof:
+  Base: hash_ttft_attention_degradation
+  Range: [64000, 1000000000]
+  Confidence: C5
+Isomorphisms:
+  - Fricción: "Anergía atencional" -> "Pérdida empírica Needle-in-a-Haystack"
+  - Vaciado de Estado: "Flush a disco" -> "Olvido Causal Obligatorio"
+Blast_Radius_Matrix:
+  Vector: "Límite Termodinámico de Ingesta"
+  Blast_Radius: "Core (Swarm y Motores Base)"
+  Target_Invariant: "BFT_Ledger_Invariants & Continuidad Episódica"
+  Anergy_Risk: "Colapso estocástico por saturación del KV Cache"

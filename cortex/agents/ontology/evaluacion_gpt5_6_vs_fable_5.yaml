@@ -1,0 +1,14 @@
+Claim: Comparativa empírica de GPT-5.6 Sol vs Fable 5 mediante tres trabajos idénticos revela los costos reales y la trampa del pricing por token.
+Proof:
+  Base: 6e0p8DttQpU
+  Range: [0, 1]
+  Confidence: C5
+Isomorphisms:
+  - "Putten": "Potentes (ASR Correction)"
+  - "Trabajos": "Missions (Landing Page, Zelda-Game, Rebrand)"
+  - "Modelos": "GPT 5.6 Sol vs Fable 5"
+Blast_Radius_Matrix:
+  Vector: YouTube_Metadata_Extraction
+  Blast_Radius: Local_Ontology_Vault
+  Target_Invariant: C5_Empirical_Eval
+  Anergy_Risk: Zero

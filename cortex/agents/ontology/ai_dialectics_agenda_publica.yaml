@@ -1,0 +1,13 @@
+Claim: "La corresponsabilidad universitaria frente a la IA implica auditar empíricamente los sesgos algorítmicos para proteger la agenda pública de la automatización asimétrica."
+Proof:
+  Base: "hash-pending"
+  Range: ["Aceptación Tecnológica", "Crítica Estructural"]
+  Confidence: "C5-REAL"
+Isomorphisms:
+  - Estructura: "Solucionismo Tecnológico vs. Análisis Crítico"
+    Mapeo: "El solucionismo inyecta ruido (Green Theater); la crítica dialéctica impone rigor formal (Anti-Pseudofísica) a la agenda."
+Blast_Radius_Matrix:
+  Vector: "PDI Eje 4 / Agenda Pública"
+  Blast_Radius: "Vinculación Social"
+  Target_Invariant: "Auditoría Empírica Universitaria"
+  Anergy_Risk: "Subordinación del ethos universitario a dinámicas de mercado Big Tech."

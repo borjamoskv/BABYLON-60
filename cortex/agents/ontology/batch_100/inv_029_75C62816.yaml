@@ -1,0 +1,19 @@
+Claim: 'La transducción de Distributed Deadlock mediante la sintaxis ''except Exception:
+  pass en bucle infinito de workers.'' induce una falla material (Fuga térmica de
+  CPU por spin-lock infinito sin backoff.), corrompiendo la invariante estructural
+  Ley Ω10 (Resiliencia Stateless).'
+Proof:
+  Base: '0x75C62816'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Fuga térmica de CPU por spin-lock infinito sin backoff.'
+- 'Estructura_Logica: except Exception: pass en bucle infinito de workers.'
+- 'Invariante_C5_REAL: Colapso determinista basado en Ley Ω10 (Resiliencia Stateless).'
+Blast_Radius_Matrix:
+  Vector: Distributed Deadlock
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: Ley Ω10 (Resiliencia Stateless)
+  Anergy_Risk: MAX

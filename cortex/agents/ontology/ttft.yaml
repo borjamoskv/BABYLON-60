@@ -1,0 +1,14 @@
+Concept: Time-to-First-Token (TTFT)
+Claim: TTFT is the absolute thermodynamic proxy and immutable fingerprint of an autoregressive LLM's latent search tree (MCTS) volume under bounded test-time compute.
+Proof:
+  Base: Time-to-First-Token differential (TTFT_delta)
+  Range: [0.0ms, MAX_HALTING_TIME]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Epistemic: "Latent Search Volume (MCTS Budget)" <-> "Empirical Latency (TTFT)"
+  - Thermodynamic: "Stochastic Entropy (S_in)" <-> "Test-Time Compute (ATP Cost)"
+Blast_Radius_Matrix:
+  Vector: [EPISTEMOLOGY, BENCHMARKING, ROUTING]
+  Blast_Radius: System-wide API Latency Profiling
+  Target_Invariant: EPI_07, Υ6
+  Anergy_Risk: ZERO (Direct physical metric)

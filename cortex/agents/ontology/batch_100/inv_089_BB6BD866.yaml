@@ -1,0 +1,18 @@
+Claim: La transducción de Cache Poisoning BFT mediante la sintaxis 'db.execute() inyectado
+  directamente en el hilo asíncrono.' induce una falla material (Fuga térmica de CPU
+  por spin-lock infinito sin backoff.), corrompiendo la invariante estructural INV_BFT_03.
+Proof:
+  Base: '0xBB6BD866'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Fuga térmica de CPU por spin-lock infinito sin backoff.'
+- 'Estructura_Logica: db.execute() inyectado directamente en el hilo asíncrono.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_03.'
+Blast_Radius_Matrix:
+  Vector: Cache Poisoning BFT
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_03
+  Anergy_Risk: MAX

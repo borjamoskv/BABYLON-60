@@ -1,0 +1,19 @@
+Claim: La transducción de Reentrancy Barrier Breach mediante la sintaxis 'db.commit()
+  manual sobre conexión aiosqlite en modo autocommit.' induce una falla material (Doble
+  inserción en WAL colisionando en PRIMARY KEY.), corrompiendo la invariante estructural
+  INV_BFT_05.
+Proof:
+  Base: '0x1A9DA665'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Doble inserción en WAL colisionando en PRIMARY KEY.'
+- 'Estructura_Logica: db.commit() manual sobre conexión aiosqlite en modo autocommit.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_05.'
+Blast_Radius_Matrix:
+  Vector: Reentrancy Barrier Breach
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_05
+  Anergy_Risk: MAX

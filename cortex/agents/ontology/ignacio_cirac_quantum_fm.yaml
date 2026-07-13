@@ -1,0 +1,15 @@
+Claim: Ignacio Cirac's contributions to quantum computing and tensor networks (Quantum FM #18).
+Proof: 
+  Base: hkXUsZmKUtc
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Vector: Quantum Computing
+    Mapping: Algorithmic transcendence of classical deterministic computation limits.
+  - Vector: Tensor Networks
+    Mapping: Dimensionality reduction of many-body quantum entanglement.
+Blast_Radius_Matrix:
+  Vector: Quantum Information Theory Anchor
+  Blast_Radius: Localized to ontology/ignacio_cirac_quantum_fm.yaml
+  Target_Invariant: Causal topology of quantum computation architectures.
+  Anergy_Risk: Low

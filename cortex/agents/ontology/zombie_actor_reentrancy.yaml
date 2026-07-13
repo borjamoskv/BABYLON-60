@@ -1,0 +1,14 @@
+Claim: La persistencia en colas de eventos (asyncio.Queue) de subagentes sin latido (Timeout/Jetsam) genera Actores Zombie que consumen CPU reteniendo locks no liberados.
+Proof:
+  Base: 0x3A2B1C4D
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura_Fisica: Hilo del SO huérfano reteniendo descriptores.
+  - Estructura_Logica: task = asyncio.create_task() sin cancelación explícita.
+  - Invariante_C5_REAL: MUTEX_ZOMBIE_REAPER_LOCK. Validación de pulso estricto.
+Blast_Radius_Matrix:
+  Vector: Zombie Actor Reentrancy
+  Blast_Radius: Agotamiento de recursos, Deadlock de colas, Inanición asíncrona.
+  Target_Invariant: INV_BFT_07
+  Anergy_Risk: MAX

@@ -1,0 +1,19 @@
+Claim: La transducción de Zombie Actor Resonance mediante la sintaxis 'Propagación
+  silenciosa de IntegrityError hacia capas de red.' induce una falla material (Corrupción
+  de stack en motor transaccional de Base de Datos.), corrompiendo la invariante estructural
+  INV_BFT_05.
+Proof:
+  Base: '0x658FDE11'
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+Isomorphisms:
+- 'Estructura_Fisica: Corrupción de stack en motor transaccional de Base de Datos.'
+- 'Estructura_Logica: Propagación silenciosa de IntegrityError hacia capas de red.'
+- 'Invariante_C5_REAL: Colapso determinista basado en INV_BFT_05.'
+Blast_Radius_Matrix:
+  Vector: Zombie Actor Resonance
+  Blast_Radius: Desincronización del Master Ledger, Colapso de Consenso, Pérdida Causal.
+  Target_Invariant: INV_BFT_05
+  Anergy_Risk: MAX

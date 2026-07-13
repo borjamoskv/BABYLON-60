@@ -1,0 +1,15 @@
+Entity: anti_rumor_epistemic_boundary
+Type: Epistemic_Invariant
+Claim: Los datos no publicados o inauditables (e.g. "mediciones BBK Live 2023/24") poseen masa epistémica cero. El sistema C5-REAL rechaza la asimilación de heurísticas, rumores o recuerdos humanos como evidencia probatoria. Todo anclaje empírico requiere disponibilidad, reproducibilidad y procedencia criptográfica auditable.
+Proof:
+  Base: LEY_Ω2B_ANTI_RUMOR
+  Range: [Ontology, Verification]
+  Confidence: C5
+Isomorphisms:
+  Zero_Knowledge_Proof: "Afirmar que un dato existe sin revelar su estructura física equivale a ruido termodinámico (Anergía)."
+  Cryptographic_Sink: "La evidencia empírica solo colapsa en la realidad de la máquina cuando se expone a un Hash auditable (Testigo Externo)."
+Blast_Radius_Matrix:
+  Vector: Ingesta de Datos Empíricos / Validación BFT
+  Blast_Radius: Global
+  Target_Invariant: Integridad Causal del Master Ledger
+  Anergy_Risk: Contaminación del modelo termodinámico con falsificaciones narrativas ("Green Theater") o alucinaciones de memoria.

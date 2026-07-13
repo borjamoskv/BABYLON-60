@@ -1,0 +1,14 @@
+Claim: Agrupación de responsabilidades dispersas que destruyen la modularidad y el entendimiento.
+Proof:
+  Base: Transducción_C5
+  Range: "[0,1]"
+  Confidence: C5-REAL
+Isomorphisms:
+  - The God Object
+  - Big Ball of Mud
+Blast_Radius_Matrix:
+  Vector: Asignación de Responsabilidades
+  Blast_Radius: Clase / Módulo Individual
+  Target_Invariant: Alta Cohesión (SRP)
+  Anergy_Risk: Alto (Testing complejo y fragilidad estructural)
+CORTEX_TAINT: 8b661b678018999a825cccb8a226db3ff4b95640e2bcb8dfbb815e5f769c16a7

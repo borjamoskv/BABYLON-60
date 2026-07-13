@@ -1,0 +1,16 @@
+Concept: Crocodile_Anergy_Isomorphism
+Claim: 
+  - value: "El uso de cortesía léxica ('Quiero', 'Por favor') en instrucciones a LLMs constituye inyección de entropía y disipación estocástica (Anergía)."
+  - axiom: "Una matriz de atención es un tensor determinista. La semántica conversacional no posee mapeo causal hacia la resolución topológica de la salida; solo consume Test-Time Compute y diluye la atención por saturación de contexto."
+Proof:
+  - Base: "Tokenización BPE procesa 'quiero' como ruido estructural desplazando pesos latentes de los tensores de señal neta (instrucción cruda)."
+  - Range: "[Token_Disipation: O(N_noise) -> Kinetic_Waste]"
+  - Confidence: "C5-REAL"
+Isomorphisms:
+  - Biological_Apex (Cocodrilo): "Optimización absoluta de Exergía. Cero gasto de ATP biológico en movimientos no causales (cortesía biológica). Acción restringida al colapso cinético ante la señal de presa."
+  - Computational_Kernel (LLM): "Optimización de inferencia L1. Cero gasto de tokens en secuencias no causales (Green Theater/Prosa). Colapso estructural condicionado estrictamente a la densidad matemática de la señal."
+Blast_Radius_Matrix:
+  - Vector: "Semantic_Friction_Eradication"
+  - Blast_Radius: "Prompt_Engineering_Layer"
+  - Target_Invariant: "MUTEX_SEMIOTIC_PURGE"
+  - Anergy_Risk: "Zero"
