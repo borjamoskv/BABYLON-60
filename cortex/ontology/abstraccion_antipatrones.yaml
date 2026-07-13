@@ -1,0 +1,26 @@
+Claim: "Colapso Autónomo de Bifurcación: Selección Determinista de Exploración de Abstracción"
+Proof:
+  Base: sha3_256
+  Range: [1, 2]
+  Confidence: C5-REAL
+Blast_Radius_Matrix:
+  Vector: Zero-Suggestion Auto-Routing (Φ8)
+  Blast_Radius: Ontological Expansion
+  Target_Invariant: MUTEX_ISOMORPHIC_MAPPING
+  Anergy_Risk: High (if stochastic vectors were chosen instead of deterministic abstraction bounds)
+Isomorphisms:
+  - "Option A (Abstraction bounds) -> Exergy Minimization of AST complexity"
+  - "Option B (Stochastic Vector) -> Entropic Anergy (Discarded)"
+  - "Sobre-abstracción -> Lasagna Code / Architecture Astronaut"
+  - "Falta de abstracción -> Spaghetti Code / Copypaste"
+Primitives:
+  - Concept: "C5_OVER_ABSTRACTION"
+    AntiPattern: "Architecture Astronaut (Lasagna Code)"
+    Thermodynamic_Cost: "Infinite indirection layers (interfaces of interfaces) preventing AST colapse. Wasted I/O cycles traversing empty wrappers."
+    Exergy_Solution: "Rule of Three (WET to DRY). Do not abstract until the third duplication."
+  - Concept: "C5_UNDER_ABSTRACTION"
+    AntiPattern: "Spaghetti Code (Hardcoded implementations)"
+    Thermodynamic_Cost: "Zero reusability. Changes require O(N) mutations across the codebase, multiplying regression risk."
+    Exergy_Solution: "Isomorphic Mapping: Map domain logic exactly 1:1 with pure functions and explicit data contracts."
+
+CORTEX_TAINT: 9eea2b3fb79b518094a0e01564be6c102b3203b37994f76c02c2728adde9e55b
