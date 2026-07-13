@@ -25,13 +25,13 @@ import subprocess
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ID_SAFE = re.compile(r'^[A-Z]+-[A-Z0-9-]+$')
 
-# Anergy Lexicon (Green Theater markers)
-ANERGY_TOKENS = {
-    "holístico", "es importante", "sin embargo", "espero que", "útil",
-    "en conclusión", "cabe destacar", "por otro lado", "es crucial",
-    "sinergia", "paradigma", "revolucionario", "convergencia formal",
-    "c5-real"
-}
+# Anergy Lexicon (Green Theater markers) # noqa: anergy
+ANERGY_TOKENS = { # noqa: anergy
+    "holístico", "es importante", "sin embargo", "espero que", "útil", # noqa: anergy
+    "en conclusión", "cabe destacar", "por otro lado", "es crucial", # noqa: anergy
+    "sinergia", "paradigma", "revolucionario", "convergencia formal", # noqa: anergy
+    "c5-real" # noqa: anergy
+} # noqa: anergy
 ANERGY_PATTERNS = [re.compile(r'\b' + re.escape(t) + r'\b', re.IGNORECASE) for t in ANERGY_TOKENS]
 
 def tokenize_ngrams(text, n=2):
