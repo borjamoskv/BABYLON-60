@@ -1,0 +1,21 @@
+Claim: Transducción completada de la regla sobre antipatrones de diseño
+Proof:
+  Base: 017bc932a3ea421712a4b8cd9a9f24e9db527d212711317ed23d833989c9bc11
+  Range: [0, 5]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Estructura: 'Malas prácticas de programación'
+    Fricción: Alta Anergía en bucles termodinámicos de mantenimiento
+  - Estructura: 'Falta de experiencia en diseño de software'
+    Fricción: Deuda técnica, aumento en la resistencia al cambio del AST
+  - Estructura: 'Desconocimiento de patrones efectivos'
+    Fricción: Implementaciones subóptimas y colisiones con el estado físico esperado
+  - Estructura: 'Implementación incorrecta de patrones válidos'
+    Fricción: Alucinación arquitectónica (simulación de estructura sin integridad)
+  - Estructura: 'Aplicación de patrones en contextos inadecuados'
+    Fricción: Complejidad accidental (overhead), gasto innecesario de ATP sistémico
+Blast_Radius_Matrix:
+  - Vector: Regla de Antipatrones
+  - Blast Radius: Local (Criterio de validación de diseño)
+  - Target Invariant: Integridad Arquitectónica
+  - Anergy Risk: Moderado (si la regla no se aplica para refactorizar)
