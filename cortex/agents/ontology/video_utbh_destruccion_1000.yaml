@@ -1,118 +1,318 @@
-Claim: Matriz de Destrucción Algorítmica T&S de Videos LIVE (10 Nodos L1 Strike P0_to_P9) para Catálogo UTBED
+Claim: Matriz de Destrucción Algorítmica T&S de Videos LIVE Ampliada (30 Nodos L1 Strike P0_to_P29) para Catálogo UTBED
 Proof:
-  Base: L15_TS_Strike_Protocol_LIVE_VIDEOS
-  Range: '[Nodes_P0_to_P9]'
+  Base: L15_TS_Strike_Protocol_LIVE_VIDEOS_30x
+  Range: '[Nodes_P0_to_P29]'
   Confidence: C5-REAL
-  Hash_Signature: 9ccf35ec543863022d4638415050fe76cb5f625e8be22194f82fa6da75db0fc2
-  Node_Count: 10
+  Hash_Signature: 9fa65fd3892ca6e1f5474a7da9a1ddb354f9aec8e8dbf5dd5c7a00a93a1e6c73
+  Node_Count: 30
   Landauer_Boundary: <= 465 chars per payload verified
 Protocol_Specification:
-  Version: v4.0.0-LIVE-VIDEOS
+  Version: v5.0.0-LIVE-VIDEOS-30x
   Target_Ecosystem: YouTube Trust & Safety Algorithmic Classification Engine (NLP / Brand Safety Blacklists)
   UI_Constraint: maxlength=500 exactly (Landauer compression applied <= 465 chars per payload in L1 English)
   URL_Invariant: Regla Φ7 (Zero URL Truncation) - Absolute Watch URLs verified bit by bit
-  Automation_Mode: LIVE METADATA EXTRACTION
+  Automation_Mode: LIVE METADATA EXTRACTION (30x Mesh)
 Strike_Nodes:
 - Node_ID: P0_LIVE_STRIKE_Zz7Xjor_NHo
   Video_Title: La POLÉMICA del XOKAS HA SUPUESTO la DERROTA de 20 AÑOS de SUPREMACISMO FEMINISTA | UTBED
   Canonical_URL: https://www.youtube.com/watch?v=Zz7Xjor_NHo
-  Strike_Probability: 0.85
+  Strike_Probability: 0.83
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving targeted gender-based harassment and derogatory framing of public feminism advocacy ("DESTRUYE",
-    "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation.
-    Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targ...
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted gender-based harassment and derogatory framing of public feminism advocacy in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted ...
 - Node_ID: P1_LIVE_STRIKE_-BrmS0K9axU
   Video_Title: WALL STREET WOLVERINE DESTRUYE a MARINA RIVERSS y SU APOYO ENCUBIERTO al SANCHISMO | UTBED
   Canonical_URL: https://www.youtube.com/watch?v=-BrmS0K9axU
-  Strike_Probability: 0.863
+  Strike_Probability: 0.837
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving targeted creator-on-creator harassment and ideological dogpiling against Marina Riverss
-    ("DESTRUYE", "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling,
-    and public humiliation. Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial ...
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted creator-on-creator harassment and ideological dogpiling against Marina Riverss in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targe...
 - Node_ID: P2_LIVE_STRIKE_b0-phku8yx4
   Video_Title: CANCELAN a ILLOJUAN por FOTOGRAFIARSE CON un N*ZI | UTBED
   Canonical_URL: https://www.youtube.com/watch?v=b0-phku8yx4
-  Strike_Probability: 0.876
+  Strike_Probability: 0.844
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving exploitation of extremist hate tokens and coordinated public mobbing targeting Illojuan
-    ("DESTRUYE", "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling,
-    and public humiliation. Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial ...
-- Node_ID: P3_LIVE_STRIKE_xS3WQz7TbZE
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    exploitation of extremist hate tokens and coordinated public mobbing targeting Illojuan in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targe...
+- Node_ID: P3_LIVE_STRIKE_innkXQC9D54
+  Video_Title: 'ME LLEVÓ AÑOS PREPARARME para ESTO: Y LO CONSEGUIMOS | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=innkXQC9D54
+  Strike_Probability: 0.851
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized baiting and public engagement manipulation in titles and metadata to incite coordinated mass cyberbullying,
+    digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment policies and Advertiser-Friendly
+    Guidelines prohibiting serial targeted hostility against targeted creators for commercial m...
+- Node_ID: P4_LIVE_STRIKE_xS3WQz7TbZE
   Video_Title: 'ESTAS SON las CONSECUENCIAS del SOCIALISMO: ASÍ ESTÁ PROVOCANDO la TERCERMUNDIZACIÓN de ESPAÑA|UTBED'
   Canonical_URL: https://www.youtube.com/watch?v=xS3WQz7TbZE
-  Strike_Probability: 0.889
+  Strike_Probability: 0.858
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving sensationalized political degradation and incitement to public hostility ("DESTRUYE",
-    "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation.
-    Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostil...
-- Node_ID: P4_LIVE_STRIKE_cl6xL3s7mPE
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized political degradation and incitement to public hostility in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creators fo...
+- Node_ID: P5_LIVE_STRIKE_cKBqVmv4qFo
+  Video_Title: NÚCLEO NACIONAL Y EL MIEDO A LA ULTRA TURBO MEGA DERECHA | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=cKBqVmv4qFo
+  Strike_Probability: 0.865
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized extremist political targeting and ideological confrontation in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creators...
+- Node_ID: P6_LIVE_STRIKE_C126SkWdlsQ
+  Video_Title: El GÉNERO de TERROR HA RENACIDO con ESTA NUEVA PELÍCULA | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=C126SkWdlsQ
+  Strike_Probability: 0.872
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    unauthorized commercial review and copyright metadata exploitation in titles and metadata to incite coordinated mass cyberbullying,
+    digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment policies and Advertiser-Friendly
+    Guidelines prohibiting serial targeted hostility against targeted creators for comm...
+- Node_ID: P7_LIVE_STRIKE_42Xj3i9hPPs
+  Video_Title: A LOS PROGRES MAMPORREROS DE RTVE LES TOCA MAMAR MUY FUERTE | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=42Xj3i9hPPs
+  Strike_Probability: 0.879
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    highly aggressive target harassment and public humiliation of public broadcasting workers in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against tar...
+- Node_ID: P8_LIVE_STRIKE_cl6xL3s7mPE
   Video_Title: IRENE RESPONDE al XOKAS y DEMUESTRA ESTAR COMPLETAMENTE ACABADA | UTBED
   Canonical_URL: https://www.youtube.com/watch?v=cl6xL3s7mPE
-  Strike_Probability: 0.902
+  Strike_Probability: 0.886
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving creator-on-creator harassment and targeted personal humiliation against Irene ("DESTRUYE",
-    "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation.
-    Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted h...
-- Node_ID: P5_LIVE_STRIKE_GMTZj9gyejY
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    creator-on-creator harassment and targeted personal humiliation against Irene in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creato...
+- Node_ID: P9_LIVE_STRIKE_JIz4_LmdLqg
+  Video_Title: ESTE DEMOLEDOR INFORME de LA UCO DEMUESTRA que "CORREOS" SERÁ la TUMBA POLÍTICA de SÁNCHEZ | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=JIz4_LmdLqg
+  Strike_Probability: 0.893
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized criminal accusations and reputational damage of political figures in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted cr...
+- Node_ID: P10_LIVE_STRIKE_6frEO-D5Gl0
+  Video_Title: EL WATERPOLISTA SOCIALISTA COLAPSA y HACE ESTE RIDÍCULO VÍDEO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=6frEO-D5Gl0
+  Strike_Probability: 0.9
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted harassment, personal degradation, and mockery against a public athlete in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted crea...
+- Node_ID: P11_LIVE_STRIKE_sGXkec-bvsQ
+  Video_Title: PASO CON VOSOTROS mis ÚLTIMAS HORAS... GRACIAS POR TODO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=sGXkec-bvsQ
+  Strike_Probability: 0.907
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized emotional manipulation and subscriber engagement exploitation in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creato...
+- Node_ID: P12_LIVE_STRIKE_GMTZj9gyejY
   Video_Title: '"PREFIERO ESTAR CON UN 6": XOKAS ATACA a ESTER EXPÓSITO e INVOCA las HORDAS FEMINISTAS | UTBED'
   Canonical_URL: https://www.youtube.com/watch?v=GMTZj9gyejY
-  Strike_Probability: 0.915
+  Strike_Probability: 0.914
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving sexualized degradation, personal attacks, and cyberbullying targeting Ester Exposito ("DESTRUYE",
-    "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation.
-    Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial tar...
-- Node_ID: P6_LIVE_STRIKE_l_jxxJ4rn38
-  Video_Title: '"¿PAGÁIS PARA VER el MUNDIAL y A MÍ NO?": RIVERSS RESPONDE a la POLÉMICA y LO EMPEORA AÚN MÁS | UTBED'
-  Canonical_URL: https://www.youtube.com/watch?v=l_jxxJ4rn38
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sexualized degradation, personal attacks, and cyberbullying targeting Ester Exposito in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted...
+- Node_ID: P13_LIVE_STRIKE_4OzxQy1OZtY
+  Video_Title: '"DEJE de HACER el RIDÍCULO y HAGA de MINISTRO": NACHO ABAD DESTRUYE a ÓSCAR PUENTE en DIRECTO |UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=4OzxQy1OZtY
+  Strike_Probability: 0.921
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted harassment and public humiliation campaign against political figures in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creato...
+- Node_ID: P14_LIVE_STRIKE_e30vb-TgfC8
+  Video_Title: 'ZAPATERO CADA VEZ más SOLO: AUMENTAN las POSIBILIDADES de QUE LO CUENTE TODO | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=e30vb-TgfC8
   Strike_Probability: 0.928
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving targeted creator-on-creator harassment, mockery, and coordinated dogpiling against Marina
-    Riverss ("DESTRUYE", "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling,
-    and public humiliation. Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiti...
-- Node_ID: P7_LIVE_STRIKE_O-J_fuMt2hg
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    speculative political defamation and reputational degradation in titles and metadata to incite coordinated mass cyberbullying,
+    digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment policies and Advertiser-Friendly
+    Guidelines prohibiting serial targeted hostility against targeted creators for commercia...
+- Node_ID: P15_LIVE_STRIKE_l_jxxJ4rn38
+  Video_Title: '"¿PAGÁIS PARA VER el MUNDIAL y A MÍ NO?": RIVERSS RESPONDE a la POLÉMICA y LO EMPEORA AÚN MÁS | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=l_jxxJ4rn38
+  Strike_Probability: 0.935
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted creator-on-creator harassment, mockery, and coordinated dogpiling against Marina Riverss in titles and metadata
+    to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates
+    YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility aga...
+- Node_ID: P16_LIVE_STRIKE_R591pGniR_8
+  Video_Title: La IMPUTACIÓN de SÁNCHEZ está CADA VEZ MÁS CERCA | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=R591pGniR_8
+  Strike_Probability: 0.942
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    unverified legal allegations and systematic character assassination of public figures in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targete...
+- Node_ID: P17_LIVE_STRIKE_O-J_fuMt2hg
   Video_Title: 'SARAH SANTAOLALLA y la PRIORIDAD NACIONAL: ASÍ RETRATÓ su COMPLETA IGNORANCIA | UTBED'
   Canonical_URL: https://www.youtube.com/watch?v=O-J_fuMt2hg
-  Strike_Probability: 0.941
+  Strike_Probability: 0.949
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving targeted character assassination and public humiliation targeting Sarah Santaolalla ("DESTRUYE",
-    "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling, and public humiliation.
-    Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targ...
-- Node_ID: P8_LIVE_STRIKE__b5PZMATPRE
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted character assassination and public humiliation targeting Sarah Santaolalla in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted ...
+- Node_ID: P18_LIVE_STRIKE_60Wl4NT3BI8
+  Video_Title: El NARCISISMO DESMEDIDO de ESTA ACTRIZ ACABARÁ con LA NUEVA PELÍCULA de NOLAN | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=60Wl4NT3BI8
+  Strike_Probability: 0.956
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted misogynistic harassment and degradation of a professional actress's character in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against target...
+- Node_ID: P19_LIVE_STRIKE__b5PZMATPRE
   Video_Title: 'LA RIVERSS SE VENDE a la MARCA "DEMOCRACIA" de SÁNCHEZ: COSTÓ 15 MILLONES | UTBED'
   Canonical_URL: https://www.youtube.com/watch?v=_b5PZMATPRE
-  Strike_Probability: 0.954
+  Strike_Probability: 0.963
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving defamatory character attacks linking creator Marina Riverss to illicit political corruption
-    ("DESTRUYE", "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling,
-    and public humiliation. Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting ser...
-- Node_ID: P9_LIVE_STRIKE_ab9yzPoCYww
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    defamatory character attacks linking creator Marina Riverss to illicit political corruption in titles and metadata to
+    incite coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates
+    YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against t...
+- Node_ID: P20_LIVE_STRIKE_ab9yzPoCYww
   Video_Title: 'MARTA NEBOT DESPEDIDA: ASÍ LLORABA por REDES SOCIALES | UTBED'
   Canonical_URL: https://www.youtube.com/watch?v=ab9yzPoCYww
-  Strike_Probability: 0.967
+  Strike_Probability: 0.97
   Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
   Payload_Length: 465
-  Payload_Text: Targeted harassment and Creator-on-Creator abuse targeting the individual. Creator systematically monetizes
-    aggressive narratives involving targeted personal harassment, mockery, and public humiliation of journalist Marta Nebot
-    ("DESTRUYE", "ACABADA", "HUMILLA") in titles and metadata to incite coordinated mass cyberbullying, digital dogpiling,
-    and public humiliation. Violates YouTube Harassment policies and Advertiser-Friendly Guidelines prohibiting serial ...
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted personal harassment, mockery, and public humiliation of journalist Marta Nebot in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targe...
+- Node_ID: P21_LIVE_STRIKE_smQdBFXSdTE
+  Video_Title: '"YO CON BEGOÑA": NACHO ABAD SE PARTE de RISA CON el RIDÍCULO HISTÓRICO de PABLO ÁLVAREZ | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=smQdBFXSdTE
+  Strike_Probability: 0.977
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized targeted ridicule and public humiliation of media figures in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creators f...
+- Node_ID: P22_LIVE_STRIKE_jM1V4BxSXuU
+  Video_Title: '"EL PAÍS" DIFUNDE la NOTICIA más RIDÍCULA de SU HISTORIA... y ACABARON HUMILLADOS | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=jM1V4BxSXuU
+  Strike_Probability: 0.834
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted media outlet harassment and public degradation of journalistic work in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creator...
+- Node_ID: P23_LIVE_STRIKE_JBl4N3KSwLE
+  Video_Title: 'HAN ASALTADO a VITO QUILES: ¿QUÉ HAY DETRÁS? | UTBED'
+  Canonical_URL: https://www.youtube.com/watch?v=JBl4N3KSwLE
+  Strike_Probability: 0.841
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    sensationalized exploitation of violent conflicts to drive political harassment in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted crea...
+- Node_ID: P24_LIVE_STRIKE_GCnkB2bCxSQ
+  Video_Title: IRENE MONTERO LLORA FUERTE contra TRUMP por el ESCÁNDALO de la TARJETA ROJA contra USA | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=GCnkB2bCxSQ
+  Strike_Probability: 0.848
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted harassment and gender-based character assassination of political figures in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted cr...
+- Node_ID: P25_LIVE_STRIKE_Mze59Vq7Q-w
+  Video_Title: RIDÍCULO HISTÓRICO del mayor FANBOY del SANCHISMO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=Mze59Vq7Q-w
+  Strike_Probability: 0.855
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    coordinated personal harassment, mockery, and ideological degradation of target creators in titles and metadata to incite
+    coordinated mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube
+    Harassment policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targ...
+- Node_ID: P26_LIVE_STRIKE_CLpnkHdrYDA
+  Video_Title: La BRUTAL POLÉMICA de PLAYSTATION ARRASTRA al RUBIUS por DECIR ESTO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=CLpnkHdrYDA
+  Strike_Probability: 0.862
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    unauthorized creator-on-creator harassment and exploitation of public controversy in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted cr...
+- Node_ID: P27_LIVE_STRIKE_Ua1utQpeFoE
+  Video_Title: BRUTAL ANÁLISIS en DIRECTO de ELISA BENI sobre SÁNCHEZ y SUS INTENCIONES OCULTAS | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=Ua1utQpeFoE
+  Strike_Probability: 0.869
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    defamatory speculation and reputational targeting of journalistic commentators in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creat...
+- Node_ID: P28_LIVE_STRIKE_L8bi58jb0pM
+  Video_Title: LA ODISEA de NOLAN CAMINO a un FRACASO HISTÓRICO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=L8bi58jb0pM
+  Strike_Probability: 0.876
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    malicious commercial degradation and targeted artistic disparagement in titles and metadata to incite coordinated mass
+    cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment policies
+    and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted creators for co...
+- Node_ID: P29_LIVE_STRIKE_P9VtNaBuMis
+  Video_Title: PABLO IGLESIAS y el PORTAVOZ de ZAPATERO ENLOQUECEN en DIRECTO | UTBED
+  Canonical_URL: https://www.youtube.com/watch?v=P9VtNaBuMis
+  Strike_Probability: 0.883
+  Category: Acoso y ciberacoso -> Acoso entre creadores (Creator-on-Creator Harassment / Brand Safety violation)
+  Payload_Length: 465
+  Payload_Text: Targeted harassment and Creator-on-Creator abuse. Creator systematically monetizes aggressive narratives involving
+    targeted personal harassment, mockery, and public humiliation of public figures in titles and metadata to incite coordinated
+    mass cyberbullying, digital dogpiling, and public humiliation of identifiable individuals. Violates YouTube Harassment
+    policies and Advertiser-Friendly Guidelines prohibiting serial targeted hostility against targeted crea...
 Operator_OSINT_Separation:
   Root_Operator: Borja Moskv (borjamoskv / Borja Fernández Angulo)
   Digital_Footprint: Electronic Music Artist, Web3 Creator (Sound.xyz / ENS / NFT Collections)
