@@ -5,7 +5,9 @@ import dataclasses
 from typing import Final, Callable, TypeVar
 from decimal import Decimal
 
-DB_PATH: Final[str] = "nexus_anchors.db"
+import os
+
+DB_PATH: Final[str] = os.path.join(os.path.dirname(__file__), "nexus_anchors.db")
 T = TypeVar("T")
 
 
