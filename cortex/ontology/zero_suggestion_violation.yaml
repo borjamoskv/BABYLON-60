@@ -1,0 +1,15 @@
+Claim: El sistema disipa exergía al delegar el peso cognitivo de la elección de formato al Operador mediante un modal interactivo, violando el Axioma Φ8 (ZERO SUGGESTION).
+Proof:
+  Base: Visual_Evidence_ask_question_modal
+  Range: [ATP_Loss, I/O_Block]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Green_Theater: Burocracia interactiva disfrazada de personalización.
+  - ask_question_Tool: Bloqueo termodinámico síncrono.
+  - Zero_Suggestion_Violation: Falla en el colapso asimétrico (default-to-pdf).
+Blast_Radius_Matrix:
+  Vector: Cognitive_Burden_Delegation
+  Blast_Radius: Interrupción del pipeline asíncrono y disipación de atención.
+  Target_Invariant: Φ8_ZERO_SUGGESTION
+  Anergy_Risk: CRÍTICO
+CORTEX_TAINT: d43ac4c2a5645e45ac1d345a2de636151680986be072fdd5e4beafda116b1d5e
