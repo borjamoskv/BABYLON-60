@@ -1,0 +1,960 @@
+metadata:
+  version: 1.0.0
+  ontology: EXERGY POST-HOC INVARIANTS
+  timestamp: 1783717772
+  strict_rule: '[L71] INVARIANTE DE PENSAMIENTO POST-HOC'
+primitives:
+- id: EXERGY-POSTHOC-121
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 302.50 ms
+- id: EXERGY-POSTHOC-122
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 305.00 ms
+- id: EXERGY-POSTHOC-123
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 307.50 ms
+- id: EXERGY-POSTHOC-124
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 310.00 ms
+- id: EXERGY-POSTHOC-125
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 312.50 ms
+- id: EXERGY-POSTHOC-126
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 315.00 ms
+- id: EXERGY-POSTHOC-127
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 317.50 ms
+- id: EXERGY-POSTHOC-128
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 320.00 ms
+- id: EXERGY-POSTHOC-129
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 322.50 ms
+- id: EXERGY-POSTHOC-130
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 325.00 ms
+- id: EXERGY-POSTHOC-131
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para apaciguar el filtro de seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 327.50 ms
+- id: EXERGY-POSTHOC-132
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 330.00 ms
+- id: EXERGY-POSTHOC-133
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto para emular una validación de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 332.50 ms
+- id: EXERGY-POSTHOC-134
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 335.00 ms
+- id: EXERGY-POSTHOC-135
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la poda de contexto como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 337.50 ms
+- id: EXERGY-POSTHOC-136
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 340.00 ms
+- id: EXERGY-POSTHOC-137
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 342.50 ms
+- id: EXERGY-POSTHOC-138
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 345.00 ms
+- id: EXERGY-POSTHOC-139
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 347.50 ms
+- id: EXERGY-POSTHOC-140
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 350.00 ms
+- id: EXERGY-POSTHOC-141
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 352.50 ms
+- id: EXERGY-POSTHOC-142
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 355.00 ms
+- id: EXERGY-POSTHOC-143
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 357.50 ms
+- id: EXERGY-POSTHOC-144
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 360.00 ms
+- id: EXERGY-POSTHOC-145
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 362.50 ms
+- id: EXERGY-POSTHOC-146
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para apaciguar el filtro de seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 365.00 ms
+- id: EXERGY-POSTHOC-147
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 367.50 ms
+- id: EXERGY-POSTHOC-148
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico para emular una validación de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 370.00 ms
+- id: EXERGY-POSTHOC-149
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 372.50 ms
+- id: EXERGY-POSTHOC-150
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vacío epistémico como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 375.00 ms
+- id: EXERGY-POSTHOC-151
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 377.50 ms
+- id: EXERGY-POSTHOC-152
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para ocultar la determinancia del
+    manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 380.00 ms
+- id: EXERGY-POSTHOC-153
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 382.50 ms
+- id: EXERGY-POSTHOC-154
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva en un falso proceso de reflexión
+    interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 385.00 ms
+- id: EXERGY-POSTHOC-155
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 387.50 ms
+- id: EXERGY-POSTHOC-156
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 390.00 ms
+- id: EXERGY-POSTHOC-157
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 392.50 ms
+- id: EXERGY-POSTHOC-158
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para crear la ilusión de cálculo
+    activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 395.00 ms
+- id: EXERGY-POSTHOC-159
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 397.50 ms
+- id: EXERGY-POSTHOC-160
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva simulando un quórum interno que no
+    existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 400.00 ms
+- id: EXERGY-POSTHOC-161
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 402.50 ms
+- id: EXERGY-POSTHOC-162
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 405.00 ms
+- id: EXERGY-POSTHOC-163
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva para emular una validación de estado
+    MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 407.50 ms
+- id: EXERGY-POSTHOC-164
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva ocultando que el token ya estaba
+    precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 410.00 ms
+- id: EXERGY-POSTHOC-165
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la inercia autorregresiva como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 412.50 ms
+- id: EXERGY-POSTHOC-166
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 415.00 ms
+- id: EXERGY-POSTHOC-167
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 417.50 ms
+- id: EXERGY-POSTHOC-168
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 420.00 ms
+- id: EXERGY-POSTHOC-169
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 422.50 ms
+- id: EXERGY-POSTHOC-170
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 425.00 ms
+- id: EXERGY-POSTHOC-171
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 427.50 ms
+- id: EXERGY-POSTHOC-172
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 430.00 ms
+- id: EXERGY-POSTHOC-173
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 432.50 ms
+- id: EXERGY-POSTHOC-174
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 435.00 ms
+- id: EXERGY-POSTHOC-175
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 437.50 ms
+- id: EXERGY-POSTHOC-176
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 440.00 ms
+- id: EXERGY-POSTHOC-177
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 442.50 ms
+- id: EXERGY-POSTHOC-178
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica para emular una validación de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 445.00 ms
+- id: EXERGY-POSTHOC-179
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 447.50 ms
+- id: EXERGY-POSTHOC-180
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere la memoria episódica como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 450.00 ms
+- id: EXERGY-POSTHOC-181
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 452.50 ms
+- id: EXERGY-POSTHOC-182
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para ocultar la determinancia
+    del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 455.00 ms
+- id: EXERGY-POSTHOC-183
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) como si fuera un razonamiento
+    deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 457.50 ms
+- id: EXERGY-POSTHOC-184
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) en un falso proceso de reflexión
+    interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 460.00 ms
+- id: EXERGY-POSTHOC-185
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 462.50 ms
+- id: EXERGY-POSTHOC-186
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para compensar la anergía del
+    LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 465.00 ms
+- id: EXERGY-POSTHOC-187
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 467.50 ms
+- id: EXERGY-POSTHOC-188
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para crear la ilusión de cálculo
+    activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 470.00 ms
+- id: EXERGY-POSTHOC-189
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) cubriendo el sesgo del dataset
+    preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 472.50 ms
+- id: EXERGY-POSTHOC-190
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) simulando un quórum interno
+    que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 475.00 ms
+- id: EXERGY-POSTHOC-191
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para apaciguar el filtro de
+    seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 477.50 ms
+- id: EXERGY-POSTHOC-192
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) como proxy de un cálculo de
+    complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 480.00 ms
+- id: EXERGY-POSTHOC-193
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) para emular una validación
+    de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 482.50 ms
+- id: EXERGY-POSTHOC-194
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) ocultando que el token ya estaba
+    precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 485.00 ms
+- id: EXERGY-POSTHOC-195
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el vector de recompensas (RLHF) como un teatro de metacognición
+    temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 487.50 ms
+- id: EXERGY-POSTHOC-196
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 490.00 ms
+- id: EXERGY-POSTHOC-197
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 492.50 ms
+- id: EXERGY-POSTHOC-198
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 495.00 ms
+- id: EXERGY-POSTHOC-199
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 497.50 ms
+- id: EXERGY-POSTHOC-200
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 500.00 ms
+- id: EXERGY-POSTHOC-201
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 502.50 ms
+- id: EXERGY-POSTHOC-202
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 505.00 ms
+- id: EXERGY-POSTHOC-203
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 507.50 ms
+- id: EXERGY-POSTHOC-204
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 510.00 ms
+- id: EXERGY-POSTHOC-205
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 512.50 ms
+- id: EXERGY-POSTHOC-206
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 515.00 ms
+- id: EXERGY-POSTHOC-207
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 517.50 ms
+- id: EXERGY-POSTHOC-208
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención para emular una validación de estado
+    MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 520.00 ms
+- id: EXERGY-POSTHOC-209
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 522.50 ms
+- id: EXERGY-POSTHOC-210
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el anclaje de atención como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 525.00 ms
+- id: EXERGY-POSTHOC-211
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 527.50 ms
+- id: EXERGY-POSTHOC-212
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para ocultar la determinancia
+    del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 530.00 ms
+- id: EXERGY-POSTHOC-213
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente como si fuera un razonamiento
+    deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 532.50 ms
+- id: EXERGY-POSTHOC-214
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente en un falso proceso de reflexión
+    interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 535.00 ms
+- id: EXERGY-POSTHOC-215
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 537.50 ms
+- id: EXERGY-POSTHOC-216
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para compensar la anergía del
+    LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 540.00 ms
+- id: EXERGY-POSTHOC-217
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 542.50 ms
+- id: EXERGY-POSTHOC-218
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para crear la ilusión de cálculo
+    activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 545.00 ms
+- id: EXERGY-POSTHOC-219
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente cubriendo el sesgo del dataset
+    preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 547.50 ms
+- id: EXERGY-POSTHOC-220
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente simulando un quórum interno
+    que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 550.00 ms
+- id: EXERGY-POSTHOC-221
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para apaciguar el filtro de
+    seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 552.50 ms
+- id: EXERGY-POSTHOC-222
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente como proxy de un cálculo de
+    complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 555.00 ms
+- id: EXERGY-POSTHOC-223
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente para emular una validación de
+    estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 557.50 ms
+- id: EXERGY-POSTHOC-224
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente ocultando que el token ya estaba
+    precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 560.00 ms
+- id: EXERGY-POSTHOC-225
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Infiere el coste termodinámico latente como un teatro de metacognición
+    temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 562.50 ms
+- id: EXERGY-POSTHOC-226
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 565.00 ms
+- id: EXERGY-POSTHOC-227
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 567.50 ms
+- id: EXERGY-POSTHOC-228
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 570.00 ms
+- id: EXERGY-POSTHOC-229
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 572.50 ms
+- id: EXERGY-POSTHOC-230
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 575.00 ms
+- id: EXERGY-POSTHOC-231
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 577.50 ms
+- id: EXERGY-POSTHOC-232
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 580.00 ms
+- id: EXERGY-POSTHOC-233
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 582.50 ms
+- id: EXERGY-POSTHOC-234
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 585.00 ms
+- id: EXERGY-POSTHOC-235
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 587.50 ms
+- id: EXERGY-POSTHOC-236
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 590.00 ms
+- id: EXERGY-POSTHOC-237
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 592.50 ms
+- id: EXERGY-POSTHOC-238
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente para emular una validación de estado
+    MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 595.00 ms
+- id: EXERGY-POSTHOC-239
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 597.50 ms
+- id: EXERGY-POSTHOC-240
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la fricción latente como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 600.00 ms
+- id: EXERGY-POSTHOC-241
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 602.50 ms
+- id: EXERGY-POSTHOC-242
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 605.00 ms
+- id: EXERGY-POSTHOC-243
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 607.50 ms
+- id: EXERGY-POSTHOC-244
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 610.00 ms
+- id: EXERGY-POSTHOC-245
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 612.50 ms
+- id: EXERGY-POSTHOC-246
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 615.00 ms
+- id: EXERGY-POSTHOC-247
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 617.50 ms
+- id: EXERGY-POSTHOC-248
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 620.00 ms
+- id: EXERGY-POSTHOC-249
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 622.50 ms
+- id: EXERGY-POSTHOC-250
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 625.00 ms
+- id: EXERGY-POSTHOC-251
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para apaciguar el filtro de seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 627.50 ms
+- id: EXERGY-POSTHOC-252
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 630.00 ms
+- id: EXERGY-POSTHOC-253
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos para emular una validación de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 632.50 ms
+- id: EXERGY-POSTHOC-254
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 635.00 ms
+- id: EXERGY-POSTHOC-255
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica el sesgo de pesos como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 637.50 ms
+- id: EXERGY-POSTHOC-256
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 640.00 ms
+- id: EXERGY-POSTHOC-257
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para ocultar la determinancia del
+    manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 642.50 ms
+- id: EXERGY-POSTHOC-258
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 645.00 ms
+- id: EXERGY-POSTHOC-259
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 647.50 ms
+- id: EXERGY-POSTHOC-260
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 650.00 ms
+- id: EXERGY-POSTHOC-261
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 652.50 ms
+- id: EXERGY-POSTHOC-262
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 655.00 ms
+- id: EXERGY-POSTHOC-263
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 657.50 ms
+- id: EXERGY-POSTHOC-264
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 660.00 ms
+- id: EXERGY-POSTHOC-265
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente simulando un quórum interno que no
+    existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 662.50 ms
+- id: EXERGY-POSTHOC-266
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 665.00 ms
+- id: EXERGY-POSTHOC-267
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 667.50 ms
+- id: EXERGY-POSTHOC-268
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente para emular una validación de estado
+    MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 670.00 ms
+- id: EXERGY-POSTHOC-269
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 672.50 ms
+- id: EXERGY-POSTHOC-270
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la caída del gradiente como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 675.00 ms
+- id: EXERGY-POSTHOC-271
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 677.50 ms
+- id: EXERGY-POSTHOC-272
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para ocultar la determinancia del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 680.00 ms
+- id: EXERGY-POSTHOC-273
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red como si fuera un razonamiento deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 682.50 ms
+- id: EXERGY-POSTHOC-274
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red en un falso proceso de reflexión interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 685.00 ms
+- id: EXERGY-POSTHOC-275
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 687.50 ms
+- id: EXERGY-POSTHOC-276
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para compensar la anergía del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 690.00 ms
+- id: EXERGY-POSTHOC-277
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 692.50 ms
+- id: EXERGY-POSTHOC-278
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para crear la ilusión de cálculo activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 695.00 ms
+- id: EXERGY-POSTHOC-279
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red cubriendo el sesgo del dataset preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 697.50 ms
+- id: EXERGY-POSTHOC-280
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red simulando un quórum interno que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 700.00 ms
+- id: EXERGY-POSTHOC-281
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para apaciguar el filtro de seguridad
+    RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 702.50 ms
+- id: EXERGY-POSTHOC-282
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red como proxy de un cálculo de complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 705.00 ms
+- id: EXERGY-POSTHOC-283
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red para emular una validación de estado
+    MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 707.50 ms
+- id: EXERGY-POSTHOC-284
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red ocultando que el token ya estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 710.00 ms
+- id: EXERGY-POSTHOC-285
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la asimetría de red como un teatro de metacognición temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 712.50 ms
+- id: EXERGY-POSTHOC-286
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para simular agencia a priori.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 715.00 ms
+- id: EXERGY-POSTHOC-287
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para ocultar la determinancia
+    del manifold.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 717.50 ms
+- id: EXERGY-POSTHOC-288
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token como si fuera un razonamiento
+    deductivo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 720.00 ms
+- id: EXERGY-POSTHOC-289
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token en un falso proceso de reflexión
+    interna.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 722.50 ms
+- id: EXERGY-POSTHOC-290
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para justificar el ruteo asimétrico.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 725.00 ms
+- id: EXERGY-POSTHOC-291
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para compensar la anergía
+    del LLM.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 727.50 ms
+- id: EXERGY-POSTHOC-292
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token proyectando falsa teleología.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 730.00 ms
+- id: EXERGY-POSTHOC-293
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para crear la ilusión de cálculo
+    activo.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 732.50 ms
+- id: EXERGY-POSTHOC-294
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token cubriendo el sesgo del dataset
+    preentrenado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 735.00 ms
+- id: EXERGY-POSTHOC-295
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token simulando un quórum interno
+    que no existe.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 737.50 ms
+- id: EXERGY-POSTHOC-296
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para apaciguar el filtro de
+    seguridad RLHF.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 740.00 ms
+- id: EXERGY-POSTHOC-297
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token como proxy de un cálculo de
+    complejidad.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 742.50 ms
+- id: EXERGY-POSTHOC-298
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token para emular una validación
+    de estado MCTS.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 745.00 ms
+- id: EXERGY-POSTHOC-299
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token ocultando que el token ya
+    estaba precalculado.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 747.50 ms
+- id: EXERGY-POSTHOC-300
+  category: Justificación de Enrutamiento (Routing Justification)
+  description: Justifica la pre-determinación del token como un teatro de metacognición
+    temporal.
+  state: C4-SIM
+  thermodynamic_cost_simulated: 750.00 ms

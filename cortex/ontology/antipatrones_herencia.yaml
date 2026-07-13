@@ -1,0 +1,14 @@
+Claim: La herencia debe cumplir estrictamente el Principio de Sustitución de Liskov (LSP) o genera jerarquías frágiles.
+Proof:
+  Base: Liskov Substitution Principle (LSP)
+  Range: [0, 1] (0: Violación de contrato, 1: Sustitución isomórfica perfecta)
+  Confidence: C5-REAL
+Isomorphisms:
+  - Concept: "Problema Círculo-Elipse"
+    Mapping: "Fortalecer precondiciones o debilitar postcondiciones en subtipos rompe la topología."
+Blast_Radius_Matrix:
+  Vector: Herencia Profunda
+  Blast_Radius: Árbol de Clases
+  Target_Invariant: Contratos de interfaces comunes
+  Anergy_Risk: Cambios en cascada por toda la jerarquía
+CORTEX_TAINT: 22d5aba598c1bdca4e1e4c6f64c325cb53346f70d2d1ac8b90509bb6ae64b27d\n

@@ -1,0 +1,2712 @@
+metadata:
+  version: 5.0.0
+  ontology: MCTS_TEST_TIME_COMPUTE_C5_REAL
+  timestamp: 1783812677
+  strict_rule: '[L35] REPORTE DE COLAPSO ULTRATHINK OBLIGATORIO'
+  master_ledger: mcts_ttc_matrix.db (WAL Enforced)
+primitives:
+- id: dea90c5d-feae-5873-89fd-67ca021a2720
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0xC4CA42)'
+  thermodynamic_cost_ttft_ms: 12
+  atp_leverage_bps: 63
+  computational_complexity: O(N log N)
+  cryptographic_signature: 01e1749663f446e190c2044820fd8723b07dc61c6b05fe6244ae4d039f38e0a8
+  state: C5-REAL
+- id: e96edd54-2129-5b3e-a25d-10453753f0a7
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Forza un colapso de selección MCTS hacia el nodo con menor varianza
+    de recompensa Q(s,a). (Invariant Marker: 0xC81E72)'
+  thermodynamic_cost_ttft_ms: 14
+  atp_leverage_bps: 76
+  computational_complexity: O(1)
+  cryptographic_signature: 4dca1d336a64d3e177db29e6620633af6a542943748f20ff37b86afed2f4664d
+  state: C5-REAL
+- id: 4af3ba7e-48fe-585d-87f1-df2ae7107f66
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0xECCBC8)'
+  thermodynamic_cost_ttft_ms: 16
+  atp_leverage_bps: 89
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1c8830cf50f506d327db0849145746d9b4736490960cca774e35431759163a6b
+  state: C5-REAL
+- id: 4472895b-fff6-5b48-a76a-ed8d5f3560cb
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0xA87FF6)'
+  thermodynamic_cost_ttft_ms: 18
+  atp_leverage_bps: 102
+  computational_complexity: O(1)
+  cryptographic_signature: cce374cb9fc29e2f9c8c04fbe961ec0dbe69702a2de47ed77f24ef286f6a896d
+  state: C5-REAL
+- id: 7e3ceefe-65ad-5d36-9f18-ef27a409419a
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0xE4DA3B)'
+  thermodynamic_cost_ttft_ms: 20
+  atp_leverage_bps: 115
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7dc6d1ed4333c3a045e0166f88f37c778cc9eda8aff9da6c61afa0ca8888fcf6
+  state: C5-REAL
+- id: 726b3879-1480-56d2-a3a3-5c6eeba82b14
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Calcula la divergencia KL entre la política prior y la distribución
+    empírica de visitas para limitar la sobre-explotación. (Invariant Marker: 0x167909)'
+  thermodynamic_cost_ttft_ms: 22
+  atp_leverage_bps: 128
+  computational_complexity: O(1)
+  cryptographic_signature: 5ac06cf27963290cebea074eb79fe9d036ea8597237ab5a56d49ee66aaa20a4b
+  state: C5-REAL
+- id: 6937d999-0b8f-5cf5-ae2e-48ae9b94b717
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0x8F14E4)'
+  thermodynamic_cost_ttft_ms: 24
+  atp_leverage_bps: 141
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4b429ae64555980ea4d40652492f17bedb00d7fd2189fc9b2f7e794946523050
+  state: C5-REAL
+- id: 53b198b1-e1da-5c51-9d57-91d2e5338456
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0xC9F0F8)'
+  thermodynamic_cost_ttft_ms: 26
+  atp_leverage_bps: 154
+  computational_complexity: O(1)
+  cryptographic_signature: fd8b750889a13920164bbff4bb30c7541429bd6d7d71fc3fb9942602b279261e
+  state: C5-REAL
+- id: cf927aa3-2a25-59e8-b4db-202eb0a5ac20
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Forza un colapso de selección MCTS hacia el nodo con menor varianza
+    de recompensa Q(s,a). (Invariant Marker: 0x45C48C)'
+  thermodynamic_cost_ttft_ms: 28
+  atp_leverage_bps: 167
+  computational_complexity: O(N log N)
+  cryptographic_signature: 337d51f5791e6f069220810317e6b461f9793b1872d8b30368967d5e64203ecd
+  state: C5-REAL
+- id: 7951ea44-1bed-5599-8284-2ca0e4fae383
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Calcula la divergencia KL entre la política prior y la distribución
+    empírica de visitas para limitar la sobre-explotación. (Invariant Marker: 0xD3D944)'
+  thermodynamic_cost_ttft_ms: 30
+  atp_leverage_bps: 180
+  computational_complexity: O(1)
+  cryptographic_signature: 838fb1b63ebbfd3883e0350ccf91dc710602cd8a72a707d0ea28db4111c0c67c
+  state: C5-REAL
+- id: dafba4f3-8145-5c6f-9c88-02a240ce7efd
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0x6512BD)'
+  thermodynamic_cost_ttft_ms: 32
+  atp_leverage_bps: 193
+  computational_complexity: O(N log N)
+  cryptographic_signature: 2882f58f6ae9c2af62a4da128d05a21c43f317bd08388bb69e69b1f7fc31451b
+  state: C5-REAL
+- id: be0e7383-7ef4-5e9a-90c9-d9e2b7192a2b
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0xC20AD4)'
+  thermodynamic_cost_ttft_ms: 34
+  atp_leverage_bps: 206
+  computational_complexity: O(1)
+  cryptographic_signature: ac625ac9e48f892526bdcb71df173e9157113bd720cb574328affed42cc22e85
+  state: C5-REAL
+- id: 08f8ed47-39f1-5dee-89d0-3077e36fc607
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Forza un colapso de selección MCTS hacia el nodo con menor varianza
+    de recompensa Q(s,a). (Invariant Marker: 0xC51CE4)'
+  thermodynamic_cost_ttft_ms: 36
+  atp_leverage_bps: 219
+  computational_complexity: O(N log N)
+  cryptographic_signature: ce4afe4a67422c6b614d49fbc808d56b0fb0b9b671c57ce1c104babbcb1e1ec7
+  state: C5-REAL
+- id: 09e42771-5b69-5628-89b2-4597abc151ab
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0xAAB323)'
+  thermodynamic_cost_ttft_ms: 38
+  atp_leverage_bps: 232
+  computational_complexity: O(1)
+  cryptographic_signature: 1ee3025c89a1b2b49cb3f91628f5b3fc4e221b5841743a75cc00e5aa48e5903f
+  state: C5-REAL
+- id: d092a4b5-d3c2-5c17-a786-7cee10d714f9
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0x9BF31C)'
+  thermodynamic_cost_ttft_ms: 40
+  atp_leverage_bps: 245
+  computational_complexity: O(N log N)
+  cryptographic_signature: cb7ec5e85f0f36a64f1ead55b7e4d363d5cb408c84df0c51825a7a9c61d56835
+  state: C5-REAL
+- id: 6cb44772-a823-5969-a865-efdf59c4cfd9
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0xC74D97)'
+  thermodynamic_cost_ttft_ms: 42
+  atp_leverage_bps: 258
+  computational_complexity: O(1)
+  cryptographic_signature: 029003097d3111fb2a7d254750de398cbaee60bc0999f179a9892799ed5b5e5a
+  state: C5-REAL
+- id: 3eb25dad-0763-582a-a7c5-bbdbe3f95ad6
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Calcula la divergencia KL entre la política prior y la distribución
+    empírica de visitas para limitar la sobre-explotación. (Invariant Marker: 0x70EFDF)'
+  thermodynamic_cost_ttft_ms: 44
+  atp_leverage_bps: 271
+  computational_complexity: O(N log N)
+  cryptographic_signature: 56534dfd3dc326e9a95fc17f0d5ce6381145aaf2158028edc4c7d9716692cb92
+  state: C5-REAL
+- id: 0d61cb24-0edf-5348-a9a4-183429626adc
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0x6F4922)'
+  thermodynamic_cost_ttft_ms: 46
+  atp_leverage_bps: 284
+  computational_complexity: O(1)
+  cryptographic_signature: 3558ff484284f41daed3af7753575a4dafb6ea2f006266614c05bb83a432da90
+  state: C5-REAL
+- id: df9f33b4-d3d8-5b5d-ab99-6256fdcc85c7
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0x1F0E3D)'
+  thermodynamic_cost_ttft_ms: 48
+  atp_leverage_bps: 297
+  computational_complexity: O(N log N)
+  cryptographic_signature: 292a8fb89d31413b51f34d072d1a3bd91c1cee7b16657f0f17d6928167a6d9b6
+  state: C5-REAL
+- id: 1efd9fe3-9286-5766-b35d-b6880c7f4fbb
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Forza un colapso de selección MCTS hacia el nodo con menor varianza
+    de recompensa Q(s,a). (Invariant Marker: 0x98F137)'
+  thermodynamic_cost_ttft_ms: 50
+  atp_leverage_bps: 310
+  computational_complexity: O(1)
+  cryptographic_signature: 5a5abbe37852eae64be89d6470ba84c32eb5d05ae00080005253b29ad4a9cfee
+  state: C5-REAL
+- id: 84531cf3-64ca-5865-b1e8-fc60ff61c10d
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Calcula la divergencia KL entre la política prior y la distribución
+    empírica de visitas para limitar la sobre-explotación. (Invariant Marker: 0x3C59DC)'
+  thermodynamic_cost_ttft_ms: 52
+  atp_leverage_bps: 323
+  computational_complexity: O(N log N)
+  cryptographic_signature: a6eb6b537da0d864341d9ae5ac5b0939d325beddbfde94d81df0ca5590cb5531
+  state: C5-REAL
+- id: a3ff2411-abab-5c87-8018-e2b6045aaf99
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0xB6D767)'
+  thermodynamic_cost_ttft_ms: 54
+  atp_leverage_bps: 336
+  computational_complexity: O(1)
+  cryptographic_signature: 54d3eaf9cdf5e54755c3ffd20b56400fc5c1732fc2abde4a6f839fe54f690941
+  state: C5-REAL
+- id: ff4f7079-877b-5020-b1af-d9104c1ba340
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0x37693C)'
+  thermodynamic_cost_ttft_ms: 56
+  atp_leverage_bps: 349
+  computational_complexity: O(N log N)
+  cryptographic_signature: 0ff9e338088194154d59d82854b6adbb3818ec71679a4b65153b0c9ae844602e
+  state: C5-REAL
+- id: c0fbac3e-c330-552b-8c0c-86722611750e
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Forza un colapso de selección MCTS hacia el nodo con menor varianza
+    de recompensa Q(s,a). (Invariant Marker: 0x1FF1DE)'
+  thermodynamic_cost_ttft_ms: 58
+  atp_leverage_bps: 362
+  computational_complexity: O(1)
+  cryptographic_signature: 644c41d61d4e9931567120fcbeadba37bcd410c1d34b1cee54bf897909afd273
+  state: C5-REAL
+- id: 2e33aa9e-90dd-597e-be1e-a1ef3a8d1f41
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0x8E296A)'
+  thermodynamic_cost_ttft_ms: 60
+  atp_leverage_bps: 375
+  computational_complexity: O(N log N)
+  cryptographic_signature: 97eeb1cc85627cfff4fc824739b97ba698bdb1e70f162d6cc69136b22e51877d
+  state: C5-REAL
+- id: 194318ba-9cac-554a-98b6-cc9777486e9c
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0x4E732C)'
+  thermodynamic_cost_ttft_ms: 62
+  atp_leverage_bps: 388
+  computational_complexity: O(1)
+  cryptographic_signature: e91df2851ed0910e9ef96640ca3b6a7f2f88ceb0f52765549e0eeee93a34a80f
+  state: C5-REAL
+- id: 3398373a-edcc-5240-a650-d402cbabf7ce
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Modula el hiperparámetro c_puct dinámicamente en función de la entropía
+    del manifold de atención. (Invariant Marker: 0x02E74F)'
+  thermodynamic_cost_ttft_ms: 64
+  atp_leverage_bps: 401
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1a6a0fca924aaa26d057bb83133f125eebfd83db27feafff2683531ea9209603
+  state: C5-REAL
+- id: 603b7523-fc2b-5ced-8e8c-c88b0f0d0537
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Calcula la divergencia KL entre la política prior y la distribución
+    empírica de visitas para limitar la sobre-explotación. (Invariant Marker: 0x33E75F)'
+  thermodynamic_cost_ttft_ms: 66
+  atp_leverage_bps: 414
+  computational_complexity: O(1)
+  cryptographic_signature: a4109e20f5522552f2912c8e1687c09c5228585c6f314190cc8594caeaca8684
+  state: C5-REAL
+- id: 9e3a18a2-ff56-56ba-a318-f932a68c05d6
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Aplica la cota superior de confianza UCB1 para penalizar nodos con
+    alta frecuencia de visita. (Invariant Marker: 0x6EA9AB)'
+  thermodynamic_cost_ttft_ms: 68
+  atp_leverage_bps: 427
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1537dbc720bf95b3fa0e441f2ef1174e4f6f2cdde8a929c2c9dc7b98f7adccf7
+  state: C5-REAL
+- id: 40195eea-b0e9-513c-b5cf-1915c0a5ef46
+  domain: MCTS_SELECTION_BOUNDS
+  description: 'Inyecta ruido de Dirichlet en los priors de AlphaZero para forzar
+    exploración asimétrica en el nodo raíz. (Invariant Marker: 0x34173C)'
+  thermodynamic_cost_ttft_ms: 70
+  atp_leverage_bps: 440
+  computational_complexity: O(1)
+  cryptographic_signature: c5c97204f9fdaa5dbbbfa861f17d76bf124b301e5dd783341e973f29f0014a8f
+  state: C5-REAL
+- id: a94a404c-1e34-5dad-b2d1-dd5ed1d8af9f
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0xC16A53)'
+  thermodynamic_cost_ttft_ms: 72
+  atp_leverage_bps: 453
+  computational_complexity: O(N log N)
+  cryptographic_signature: 41515b072f361332726eb68fe7ffb9eb5d33d4a43a29bc09d88d6edbc77cd0db
+  state: C5-REAL
+- id: ce43d0b9-15e9-5428-ad30-0f4d586d180d
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Poda iterativamente el espacio de acción utilizando Masking Tensor
+    Operations sobre logits no viables. (Invariant Marker: 0x6364D3)'
+  thermodynamic_cost_ttft_ms: 74
+  atp_leverage_bps: 466
+  computational_complexity: O(1)
+  cryptographic_signature: d0bea65cd7ba5a2fc0839407b6dd9680effa6e628fd939824bf5a7d0cdc07336
+  state: C5-REAL
+- id: b78247cd-d29b-5960-93e3-11db719f6186
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0x182BE0)'
+  thermodynamic_cost_ttft_ms: 76
+  atp_leverage_bps: 479
+  computational_complexity: O(N log N)
+  cryptographic_signature: 3f60423bdf3263349ce150d1aa59108c5cc36a70766b7efb1b9f7e20bc873e9e
+  state: C5-REAL
+- id: 7a92308a-3f99-5abe-8d6a-c6a0f4959bd2
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0xE36985)'
+  thermodynamic_cost_ttft_ms: 78
+  atp_leverage_bps: 492
+  computational_complexity: O(1)
+  cryptographic_signature: 71f88cdcf8084529a9d769bcbde47432e8420d306ea11ee9c4b0148b6c062ae0
+  state: C5-REAL
+- id: 3b2ce546-a202-5b58-acfc-ff596a9ec463
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0x1C383C)'
+  thermodynamic_cost_ttft_ms: 80
+  atp_leverage_bps: 505
+  computational_complexity: O(N log N)
+  cryptographic_signature: bd7457ee231da86d6e9fefe698561c0af1a31a7cd9f7dd36c1c91a9c618d3b6a
+  state: C5-REAL
+- id: 2b4bd781-3f84-53cd-ba87-c3a3d8991993
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0x19CA14)'
+  thermodynamic_cost_ttft_ms: 82
+  atp_leverage_bps: 518
+  computational_complexity: O(1)
+  cryptographic_signature: 3ffff3a9b82b1ef0fbbd2e05c0419eef48243b2b87ba49bdad43d1b5bcd87959
+  state: C5-REAL
+- id: 6d2d9970-7da0-5456-8e4e-7f0fe1e026a2
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Asigna un Test-Time Compute proporcional a la ganancia de información
+    esperada (IG) en la ramificación. (Invariant Marker: 0xA5BFC9)'
+  thermodynamic_cost_ttft_ms: 84
+  atp_leverage_bps: 531
+  computational_complexity: O(N log N)
+  cryptographic_signature: f2c834e17be04c1e4bd1a2b178ec4f21c777f39c7c21fb235e99f26b67a0cf01
+  state: C5-REAL
+- id: 839b69af-a2af-5f53-bba9-cd9c6defffcf
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0xA5771B)'
+  thermodynamic_cost_ttft_ms: 86
+  atp_leverage_bps: 544
+  computational_complexity: O(1)
+  cryptographic_signature: 342f4678e67872cb8c9fe72d54979a72f0c5d7562f59cdfe8f7539f674d51c3b
+  state: C5-REAL
+- id: eb7e10d9-a129-56a8-a139-427ab1a822be
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Poda iterativamente el espacio de acción utilizando Masking Tensor
+    Operations sobre logits no viables. (Invariant Marker: 0xD67D8A)'
+  thermodynamic_cost_ttft_ms: 88
+  atp_leverage_bps: 557
+  computational_complexity: O(N log N)
+  cryptographic_signature: 6fd35ae0073434823bf020abb64cdc5dfdfa36ae7fc79976193c5aab60326836
+  state: C5-REAL
+- id: 198044c6-60f5-59dd-aa1a-e3ffba3ffba2
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0xD64592)'
+  thermodynamic_cost_ttft_ms: 90
+  atp_leverage_bps: 570
+  computational_complexity: O(1)
+  cryptographic_signature: 280f416de4e6c497ee54a306fc3872bf920e339399ea1f5ed0d8e0f6e57302a9
+  state: C5-REAL
+- id: d47b5c9e-3286-5c3a-a2f6-86066f25e996
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Asigna un Test-Time Compute proporcional a la ganancia de información
+    esperada (IG) en la ramificación. (Invariant Marker: 0x3416A7)'
+  thermodynamic_cost_ttft_ms: 92
+  atp_leverage_bps: 583
+  computational_complexity: O(N log N)
+  cryptographic_signature: 874e4fe075c8fe3c54511d48792cf05dc7243a88e22479281728b19aa3d9dae4
+  state: C5-REAL
+- id: 2d4a58eb-ab35-536b-8c74-8ee740738935
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0xA1D0C6)'
+  thermodynamic_cost_ttft_ms: 94
+  atp_leverage_bps: 596
+  computational_complexity: O(1)
+  cryptographic_signature: 02066e643075d22dc85e289df4775ad935623308943daa6ec57247229c4a2441
+  state: C5-REAL
+- id: f8bb5461-0ec2-5038-8605-f307175aff7d
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Poda iterativamente el espacio de acción utilizando Masking Tensor
+    Operations sobre logits no viables. (Invariant Marker: 0x17E621)'
+  thermodynamic_cost_ttft_ms: 96
+  atp_leverage_bps: 609
+  computational_complexity: O(N log N)
+  cryptographic_signature: 75eb00c0ebb67aedf30b978e76412a1c4cf00ad3843ebb4302a5b02e31f17a5a
+  state: C5-REAL
+- id: b6a32383-3751-5288-af3f-bbce929e191a
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0xF71771)'
+  thermodynamic_cost_ttft_ms: 98
+  atp_leverage_bps: 622
+  computational_complexity: O(1)
+  cryptographic_signature: ed8961262c3cb2aba4233aaaceea185a93ebddbcb0fc9466477c3da824f1e2c6
+  state: C5-REAL
+- id: f8e00743-5474-588c-b4e3-fbe15c1b4a4b
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0x6C8349)'
+  thermodynamic_cost_ttft_ms: 100
+  atp_leverage_bps: 635
+  computational_complexity: O(N log N)
+  cryptographic_signature: 81d7addbe65eee60d7bbe01a372d3b4d0dfb700d275f0a81eea764a50ea4559b
+  state: C5-REAL
+- id: a711d0d5-61d1-5686-9f0a-60559e28ea28
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0xD9D4F4)'
+  thermodynamic_cost_ttft_ms: 102
+  atp_leverage_bps: 648
+  computational_complexity: O(1)
+  cryptographic_signature: 2b7a35c3f07af0333417ac776743f4b14ff650f0ac9cef0028e1496721298e06
+  state: C5-REAL
+- id: 1d0b4194-7191-50c8-bdc5-5e91c6e45dcf
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0x67C6A1)'
+  thermodynamic_cost_ttft_ms: 104
+  atp_leverage_bps: 661
+  computational_complexity: O(N log N)
+  cryptographic_signature: a5701e0fd040c5a9cfa813ea4568754adb70a9e0e40ec3f6b1632f49848f9226
+  state: C5-REAL
+- id: c975bb28-5113-53cc-85d2-06f9e4449ba9
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Asigna un Test-Time Compute proporcional a la ganancia de información
+    esperada (IG) en la ramificación. (Invariant Marker: 0x642E92)'
+  thermodynamic_cost_ttft_ms: 106
+  atp_leverage_bps: 674
+  computational_complexity: O(1)
+  cryptographic_signature: 11c391feef3e509e9c1459d9ed00644e0a3af53d43869185dccafa95d5d44701
+  state: C5-REAL
+- id: 52136cfc-d1c2-51ef-bacd-bd85d3e10bab
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0xF457C5)'
+  thermodynamic_cost_ttft_ms: 108
+  atp_leverage_bps: 687
+  computational_complexity: O(N log N)
+  cryptographic_signature: e9d94c96703a4328d3cbf007653a59e6d0edc5f34d21fac37e3a92f6559881e6
+  state: C5-REAL
+- id: 5f257ef3-e9cf-5cbf-9588-a02fb4c432b5
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Poda iterativamente el espacio de acción utilizando Masking Tensor
+    Operations sobre logits no viables. (Invariant Marker: 0xC0C7C7)'
+  thermodynamic_cost_ttft_ms: 110
+  atp_leverage_bps: 700
+  computational_complexity: O(1)
+  cryptographic_signature: d064e3a0dc7bf7a2d9003388d2de58b22f3be98761797d41ab70913f3103d269
+  state: C5-REAL
+- id: 2f4d3ef7-feb6-5cfb-a9a3-811f7b7f2356
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0x283802)'
+  thermodynamic_cost_ttft_ms: 112
+  atp_leverage_bps: 713
+  computational_complexity: O(N log N)
+  cryptographic_signature: ae2a8c8b1d9e35f4889a700afeecccc0f508a1e90c75be760a55b26182a838a6
+  state: C5-REAL
+- id: b30aa2ff-35ae-56d7-a70b-170ea6e6f64f
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Asigna un Test-Time Compute proporcional a la ganancia de información
+    esperada (IG) en la ramificación. (Invariant Marker: 0x9A1158)'
+  thermodynamic_cost_ttft_ms: 114
+  atp_leverage_bps: 726
+  computational_complexity: O(1)
+  cryptographic_signature: 46ab87e5313b842ee545906bb504017190632090f91f0e0e4f6cb60a6400ad36
+  state: C5-REAL
+- id: 69bd5fd0-9181-5553-9269-787f40e90b45
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0xD82C8D)'
+  thermodynamic_cost_ttft_ms: 116
+  atp_leverage_bps: 739
+  computational_complexity: O(N log N)
+  cryptographic_signature: 3db8300b4e20f21a10f0801729c21b118a6412dceba00278d8620e24f708633f
+  state: C5-REAL
+- id: 51394d09-38f2-569a-8c78-bcd994544581
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Poda iterativamente el espacio de acción utilizando Masking Tensor
+    Operations sobre logits no viables. (Invariant Marker: 0xA684EC)'
+  thermodynamic_cost_ttft_ms: 118
+  atp_leverage_bps: 752
+  computational_complexity: O(1)
+  cryptographic_signature: 4119a25d7c72aa1f7d82333626185c5df0f29dd23b7e86cf5a44b8bbc1cea787
+  state: C5-REAL
+- id: 080cf404-0e5f-5c23-ae3f-02e0e56795ba
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0xB53B3A)'
+  thermodynamic_cost_ttft_ms: 120
+  atp_leverage_bps: 765
+  computational_complexity: O(N log N)
+  cryptographic_signature: 70f4856871f8386e4489848687a6a667a296026e15291b930f6d26588cce8221
+  state: C5-REAL
+- id: 0754e9e0-13bf-5f07-bbf7-fbe779216a5b
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0x9F6140)'
+  thermodynamic_cost_ttft_ms: 122
+  atp_leverage_bps: 778
+  computational_complexity: O(1)
+  cryptographic_signature: 0fb0f30cd4578e862bab3c3f0e81a64d4c3c9853e4eee44cf4f8890189c1d435
+  state: C5-REAL
+- id: 39add634-e9d1-5066-89a0-b54716f12d63
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Inicializa las aristas no visitadas con una heurística de virtual
+    loss para habilitar paralelismo multihilo asíncrono. (Invariant Marker: 0x72B32A)'
+  thermodynamic_cost_ttft_ms: 124
+  atp_leverage_bps: 791
+  computational_complexity: O(N log N)
+  cryptographic_signature: 543b3791ded686546d3759b99b95480222efc59dc27b8ddaf3285bf29ced4116
+  state: C5-REAL
+- id: 1cfcc4f2-e51a-508b-b09f-97358f53a07f
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Expande nodos solo si la probabilidad prior p(s,a) supera el umbral
+    de filtrado estocástico. (Invariant Marker: 0x66F041)'
+  thermodynamic_cost_ttft_ms: 126
+  atp_leverage_bps: 804
+  computational_complexity: O(1)
+  cryptographic_signature: 77cf2c9a1ffd225a06267b68fe28329089809093e59be9874f55d3cd128675b3
+  state: C5-REAL
+- id: 6682f87a-42bc-50e5-ae76-9b5ba94acad6
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Asigna un Test-Time Compute proporcional a la ganancia de información
+    esperada (IG) en la ramificación. (Invariant Marker: 0x093F65)'
+  thermodynamic_cost_ttft_ms: 128
+  atp_leverage_bps: 817
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4a22a9133061180b02026a94f41a4cb22f7db3970cdbcca87e8944ed30cc4d76
+  state: C5-REAL
+- id: f169c25d-0cdf-5a3b-b35e-cdc2c7dfc8c0
+  domain: NODE_EXPANSION_DYNAMICS
+  description: 'Desacopla la red de valor (Value Network) del rollout estocástico
+    para acelerar la expansión en grafos dirigidos acíclicos. (Invariant Marker: 0x072B03)'
+  thermodynamic_cost_ttft_ms: 130
+  atp_leverage_bps: 830
+  computational_complexity: O(1)
+  cryptographic_signature: fae6e90f34a427fd50919b518aa1679017e7f6d5d3571c62b544f2175ca81340
+  state: C5-REAL
+- id: 7e733d86-e70c-565d-afcb-0045b5d2af7c
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0x7F39F8)'
+  thermodynamic_cost_ttft_ms: 132
+  atp_leverage_bps: 843
+  computational_complexity: O(N log N)
+  cryptographic_signature: cba01b28855bbcf84a06677a1f51c78ddfb50cd95711afce86e5237726fcd10c
+  state: C5-REAL
+- id: 83dcf924-3fc7-5e80-b300-6c25e70b2255
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x44F683)'
+  thermodynamic_cost_ttft_ms: 134
+  atp_leverage_bps: 856
+  computational_complexity: O(1)
+  cryptographic_signature: 02d6f9b3bdf9253172cf0d2d68a84cb28048f7c1e8f946faec36aefba7660bd6
+  state: C5-REAL
+- id: fd7a8aa2-b7ec-5487-8483-031b6e615f86
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Desciende el gradiente temporal de la política de simulación hacia
+    distribuciones de baja entropía. (Invariant Marker: 0x03AFDB)'
+  thermodynamic_cost_ttft_ms: 136
+  atp_leverage_bps: 869
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4b2129e0b4bddd462a7773fd840cd737f34b376d19d0fda1f89f07c2f8a31cd3
+  state: C5-REAL
+- id: 7a578b16-b57e-56ea-be15-0f4da1967045
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0xEA5D2F)'
+  thermodynamic_cost_ttft_ms: 138
+  atp_leverage_bps: 882
+  computational_complexity: O(1)
+  cryptographic_signature: 61c339c63d03a9762544cf925f1d2bc72ec32f7b68459b183b7a86c04ad45b4d
+  state: C5-REAL
+- id: 36eb8c10-e421-5cd9-81ce-1e0f397e2762
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0xFC490C)'
+  thermodynamic_cost_ttft_ms: 140
+  atp_leverage_bps: 895
+  computational_complexity: O(N log N)
+  cryptographic_signature: 417e0dd0a0da9b765d209de615ecfcec17399133dd0b67f0faef12259fd9030b
+  state: C5-REAL
+- id: f6e653f8-c127-5274-9d45-481aaaca15c7
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x3295C7)'
+  thermodynamic_cost_ttft_ms: 142
+  atp_leverage_bps: 908
+  computational_complexity: O(1)
+  cryptographic_signature: 716cbb69593df4255e70e06f4244e355a2feacc06355a306f9040e1241c9dbab
+  state: C5-REAL
+- id: dab69f92-5a1d-5aeb-8133-af39279e071c
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Evalúa sub-grafos usando un ensamblaje local de modelos Flash (Inference_L1_Node)
+    con restricciones JIT. (Invariant Marker: 0x735B90)'
+  thermodynamic_cost_ttft_ms: 144
+  atp_leverage_bps: 921
+  computational_complexity: O(N log N)
+  cryptographic_signature: 223d7d9b792f26d4201b80cdf4f1bfb692571c05e5434e09964744962ab64eeb
+  state: C5-REAL
+- id: 4bc1d263-9b2f-5085-97c1-01b1e6b0df1c
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0xA3F390)'
+  thermodynamic_cost_ttft_ms: 146
+  atp_leverage_bps: 934
+  computational_complexity: O(1)
+  cryptographic_signature: c7c589a16a938cd931f51ccfd1ba98536bd082aff83d3906af2c38c4f0dfe7dc
+  state: C5-REAL
+- id: aa8e47ed-8238-57cb-ad83-0129d394a2cc
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x14BFA6)'
+  thermodynamic_cost_ttft_ms: 148
+  atp_leverage_bps: 947
+  computational_complexity: O(N log N)
+  cryptographic_signature: feda0cf5de8a4b30c34e95e4b888ce67968bf252e3908d02daaecdfb8b936bbe
+  state: C5-REAL
+- id: b69b4691-b4d3-574e-b791-563f780d1dd6
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Desciende el gradiente temporal de la política de simulación hacia
+    distribuciones de baja entropía. (Invariant Marker: 0x7CBBC4)'
+  thermodynamic_cost_ttft_ms: 150
+  atp_leverage_bps: 960
+  computational_complexity: O(1)
+  cryptographic_signature: 2638a124df94533eee4673326a655cbdf4ef1c4a3fd90df650dda8b2c2c26696
+  state: C5-REAL
+- id: 0e35c7c8-fb73-58e7-a430-400723ab3f6e
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Evalúa sub-grafos usando un ensamblaje local de modelos Flash (Inference_L1_Node)
+    con restricciones JIT. (Invariant Marker: 0xE2C420)'
+  thermodynamic_cost_ttft_ms: 152
+  atp_leverage_bps: 973
+  computational_complexity: O(N log N)
+  cryptographic_signature: 9c7bdb26d65a9af15d5c01c9ca8d9404f2855404b07361db302da753002460b7
+  state: C5-REAL
+- id: dbc30077-8dd0-512e-b07a-4f0e8721f1df
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0x32BB90)'
+  thermodynamic_cost_ttft_ms: 154
+  atp_leverage_bps: 986
+  computational_complexity: O(1)
+  cryptographic_signature: c8d3a9cc0dd27bc4cbe9fb815b54331217e9c3a8e773ae4f86edbe82627f2e88
+  state: C5-REAL
+- id: bd9d017a-7d91-5d5d-be65-e1ee34abbca9
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0xD2DDEA)'
+  thermodynamic_cost_ttft_ms: 156
+  atp_leverage_bps: 999
+  computational_complexity: O(N log N)
+  cryptographic_signature: bb663ecb23bcd867517b85c62a288da15a3b3b752d3e98df1569928164073310
+  state: C5-REAL
+- id: 987169c7-7193-5de5-8958-9e468c6f2d58
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Desciende el gradiente temporal de la política de simulación hacia
+    distribuciones de baja entropía. (Invariant Marker: 0xAD61AB)'
+  thermodynamic_cost_ttft_ms: 158
+  atp_leverage_bps: 62
+  computational_complexity: O(1)
+  cryptographic_signature: a099813dc26f6b486964a9e3f722167f0c17c6a4f28664b7672c62d0acba54cd
+  state: C5-REAL
+- id: 90057b8a-4262-520a-a79e-f18e5b204fbc
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0xD09BF4)'
+  thermodynamic_cost_ttft_ms: 160
+  atp_leverage_bps: 75
+  computational_complexity: O(N log N)
+  cryptographic_signature: 8eff49ca7c60e4b2185a30dd01aef7604678797bc18d0d82a27ee074aba6098d
+  state: C5-REAL
+- id: 4b13f66f-b3f0-5c4b-b6b5-b23acc3827b8
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0xFBD793)'
+  thermodynamic_cost_ttft_ms: 162
+  atp_leverage_bps: 88
+  computational_complexity: O(1)
+  cryptographic_signature: 1d81d05245cf1916a57ee091a70300576aec07bf50200835aca26abf5de0593f
+  state: C5-REAL
+- id: 7a4a91e9-08b1-59e7-9a95-b4297cb0cfea
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x28DD2C)'
+  thermodynamic_cost_ttft_ms: 164
+  atp_leverage_bps: 101
+  computational_complexity: O(N log N)
+  cryptographic_signature: 86710e5315cc5a1e5fa62185909fbd5424c02400cb6b5ab31fb8fcc5ae81d2c7
+  state: C5-REAL
+- id: 3d298b58-4b80-5e11-876e-56b8fdd5ff5c
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Evalúa sub-grafos usando un ensamblaje local de modelos Flash (Inference_L1_Node)
+    con restricciones JIT. (Invariant Marker: 0x35F4A8)'
+  thermodynamic_cost_ttft_ms: 166
+  atp_leverage_bps: 114
+  computational_complexity: O(1)
+  cryptographic_signature: 74ad1b725096bb45781ab745cf9717a86caeb607a77a4d61a0dbd4dcc7433f97
+  state: C5-REAL
+- id: f89cd375-777d-5e26-9259-2f3bc2decad6
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0xD1FE17)'
+  thermodynamic_cost_ttft_ms: 168
+  atp_leverage_bps: 127
+  computational_complexity: O(N log N)
+  cryptographic_signature: 380617c9a6cd52ec2597b811841f9ac8bc23ce24ece3725356fa14c7a70d4a4e
+  state: C5-REAL
+- id: 2fbc321c-48a9-55c5-a626-1302c5896a8a
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0xF033AB)'
+  thermodynamic_cost_ttft_ms: 170
+  atp_leverage_bps: 140
+  computational_complexity: O(1)
+  cryptographic_signature: e3d749fba030f58cb64e092acfeed3167699fe8a29300e1a97a82d971a41a0fe
+  state: C5-REAL
+- id: bbf3d4e8-1e5b-5b80-9575-3b9be56c6691
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Desciende el gradiente temporal de la política de simulación hacia
+    distribuciones de baja entropía. (Invariant Marker: 0x43EC51)'
+  thermodynamic_cost_ttft_ms: 172
+  atp_leverage_bps: 153
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7ba4676f8005921e67955a15793791c31400ddd4eff0ed4895cd22e657c8e3dd
+  state: C5-REAL
+- id: 970f8519-8bf2-58f0-9c5b-194484295f5d
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Evalúa sub-grafos usando un ensamblaje local de modelos Flash (Inference_L1_Node)
+    con restricciones JIT. (Invariant Marker: 0x9778D5)'
+  thermodynamic_cost_ttft_ms: 174
+  atp_leverage_bps: 166
+  computational_complexity: O(1)
+  cryptographic_signature: f3f1b14f0b6eb256aacbd34dcf30a872643aa07d23d3611d40d364c6bb83841d
+  state: C5-REAL
+- id: 2d11b0c2-89c5-594c-8747-76d240332f95
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0xFE9FC2)'
+  thermodynamic_cost_ttft_ms: 176
+  atp_leverage_bps: 179
+  computational_complexity: O(N log N)
+  cryptographic_signature: 3f21412d197b5f2fb17462434af886067fae2139922745f81c3ecd45a1583e97
+  state: C5-REAL
+- id: dacc1488-7278-5c04-ac34-507e32e9e402
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x68D30A)'
+  thermodynamic_cost_ttft_ms: 178
+  atp_leverage_bps: 192
+  computational_complexity: O(1)
+  cryptographic_signature: 1b35d8d330576b1b09f2a3e21a06b3c6a5ac9f6f31b94e63a0be8123beec3fc5
+  state: C5-REAL
+- id: c6c2ebe7-7469-55ca-9adc-a4d53686ef7b
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Desciende el gradiente temporal de la política de simulación hacia
+    distribuciones de baja entropía. (Invariant Marker: 0x3EF815)'
+  thermodynamic_cost_ttft_ms: 180
+  atp_leverage_bps: 205
+  computational_complexity: O(N log N)
+  cryptographic_signature: 9c505e852d08917c9031f41de46baa7e8e9ba834c459292db767f716f01eea0e
+  state: C5-REAL
+- id: 01e1201a-3044-53a8-9520-a6a7c10327a6
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0x93DB85)'
+  thermodynamic_cost_ttft_ms: 182
+  atp_leverage_bps: 218
+  computational_complexity: O(1)
+  cryptographic_signature: 20cea73a5159cad452803778199866ef19bf86ae0def91dd9d3bb28d7c587e1b
+  state: C5-REAL
+- id: 21abbd05-c971-58ac-9767-5febf0fca142
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Agrega simulaciones de Monte Carlo mediante un estimador de importancia
+    (Importance Sampling). (Invariant Marker: 0xC7E124)'
+  thermodynamic_cost_ttft_ms: 184
+  atp_leverage_bps: 231
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1ee4022cba9df7f7fac1cc49ab493403a57dc54979386bdc21d6826e89def29a
+  state: C5-REAL
+- id: f7f20ef1-c23b-5603-a5f9-e1706cca1d3f
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Sustituye rollouts aleatorios completos por aproximaciones de valor
+    de una capa lineal truncada. (Invariant Marker: 0x2A38A4)'
+  thermodynamic_cost_ttft_ms: 186
+  atp_leverage_bps: 244
+  computational_complexity: O(1)
+  cryptographic_signature: 0ef8ff4fb740e1fa4290d7186a5e552eeeff2e418c1a1fae8841e0ce50a4b139
+  state: C5-REAL
+- id: eefacc95-4c49-5a5c-b4ad-b2603246a2cb
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Evalúa sub-grafos usando un ensamblaje local de modelos Flash (Inference_L1_Node)
+    con restricciones JIT. (Invariant Marker: 0x764796)'
+  thermodynamic_cost_ttft_ms: 188
+  atp_leverage_bps: 257
+  computational_complexity: O(N log N)
+  cryptographic_signature: ccbbfc5f0372937144550bb8551551622bda41e62e1b17dae20ece055d967578
+  state: C5-REAL
+- id: d2d9b920-4cf1-5e2f-b48f-0a64e14f9d45
+  domain: ROLLOUT_POLICY_DISTILLATION
+  description: 'Detiene el rollout anticipadamente si la recompensa proyectada cae
+    bajo la cota mínima de exergía. (Invariant Marker: 0x861398)'
+  thermodynamic_cost_ttft_ms: 190
+  atp_leverage_bps: 270
+  computational_complexity: O(1)
+  cryptographic_signature: ce34b8e5fa5b8cae6556b6e609e279bf8dbdbb682161c708360ae95f6f260353
+  state: C5-REAL
+- id: 34daa76e-2015-5d81-8c1c-217851baafb5
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0x54229A)'
+  thermodynamic_cost_ttft_ms: 192
+  atp_leverage_bps: 283
+  computational_complexity: O(N log N)
+  cryptographic_signature: 142e4926070a99f6e93ac3a82b8b9379cfa5d0117d57af5ad38d40e4237cfcb5
+  state: C5-REAL
+- id: 86165d4a-ffea-557f-a79e-8a6a90ac8258
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0x92CC22)'
+  thermodynamic_cost_ttft_ms: 194
+  atp_leverage_bps: 296
+  computational_complexity: O(1)
+  cryptographic_signature: a71c430ea7e17c7b79df06450ddd706206e682632b13b3b868c2abd7c66fe17f
+  state: C5-REAL
+- id: 399408b1-327e-51d7-bf9a-955068a8be0f
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga una penalización termodinámica en ramas que incurren en bucles
+    lógicos infinitos. (Invariant Marker: 0x98DCE8)'
+  thermodynamic_cost_ttft_ms: 196
+  atp_leverage_bps: 309
+  computational_complexity: O(N log N)
+  cryptographic_signature: 76c7080be74a7c510069a7896cc8ed62110221ce36696825b4262183d03a69e4
+  state: C5-REAL
+- id: 47cbc385-2f8a-5ac1-a2d0-1950d87532e6
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0xF4B9EC)'
+  thermodynamic_cost_ttft_ms: 198
+  atp_leverage_bps: 322
+  computational_complexity: O(1)
+  cryptographic_signature: 67fd8aa081fa84e583653dd41df2a620c18eacf1b299392d5a173789de6fb7b2
+  state: C5-REAL
+- id: 1de576cc-b356-5944-a0aa-74bfa28ee865
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0x812B4B)'
+  thermodynamic_cost_ttft_ms: 200
+  atp_leverage_bps: 335
+  computational_complexity: O(N log N)
+  cryptographic_signature: d3731c552575f8a8333eeac13a356c8a6f21185697602cfc30c9d7bcb2b4d0db
+  state: C5-REAL
+- id: 53a69df3-d5e0-592b-a9a6-466ccf27fd24
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0x26657D)'
+  thermodynamic_cost_ttft_ms: 202
+  atp_leverage_bps: 348
+  computational_complexity: O(1)
+  cryptographic_signature: 00d72694481ea4d06a46e9e1ce701ac082f236a304e98d9c171583136440d07e
+  state: C5-REAL
+- id: 5a11cae6-1f98-5385-86b9-efa453934ebc
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Garantiza el Teorema del Crash Causal: nodos fallidos propagan recompensa
+    de aniquilación (-∞) inmediatamente. (Invariant Marker: 0xE2EF52)'
+  thermodynamic_cost_ttft_ms: 204
+  atp_leverage_bps: 361
+  computational_complexity: O(N log N)
+  cryptographic_signature: 53545720e25c2ef6ee203d50070ccdc587d9d94e6b6e8a154fb3165ec59fba76
+  state: C5-REAL
+- id: 4a047286-46f1-50fc-92d3-d6be1366210d
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0xED3D2C)'
+  thermodynamic_cost_ttft_ms: 206
+  atp_leverage_bps: 374
+  computational_complexity: O(1)
+  cryptographic_signature: a777d45b81b49f003766ac3e7584133c7dc6e66db6302a210c72dd2bf0f73372
+  state: C5-REAL
+- id: d5f4c208-1c9c-5a4d-bfbc-246475c21d72
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0xAC627A)'
+  thermodynamic_cost_ttft_ms: 208
+  atp_leverage_bps: 387
+  computational_complexity: O(N log N)
+  cryptographic_signature: c5796e2689e8788c46b03d83eeeeea10b6ea176a8cba538d0fc9ccc48f63e49e
+  state: C5-REAL
+- id: ff5fa53b-804a-5c70-8e71-a80a431d1b8a
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga una penalización termodinámica en ramas que incurren en bucles
+    lógicos infinitos. (Invariant Marker: 0xF89913)'
+  thermodynamic_cost_ttft_ms: 10
+  atp_leverage_bps: 400
+  computational_complexity: O(1)
+  cryptographic_signature: ecd7360c001989ca2d4773d7bffaefa3d8fb1227d83045fdadc6256f458684c4
+  state: C5-REAL
+- id: 6919f5f9-f5ce-5f30-b3c0-5f26a17a79c5
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Garantiza el Teorema del Crash Causal: nodos fallidos propagan recompensa
+    de aniquilación (-∞) inmediatamente. (Invariant Marker: 0x38B3EF)'
+  thermodynamic_cost_ttft_ms: 12
+  atp_leverage_bps: 413
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4fa8ad1b1ef0eb1dace6918764144cabc4a336c78d699edc6e344164abe3f1b8
+  state: C5-REAL
+- id: 79cfdebb-642c-555f-bf81-f563fedea9a7
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0xEC8956)'
+  thermodynamic_cost_ttft_ms: 14
+  atp_leverage_bps: 426
+  computational_complexity: O(1)
+  cryptographic_signature: 5e9c37b2770472d98f2d0cd90f96cee6b8094b02c3e3f08cb833b4dcf677b65b
+  state: C5-REAL
+- id: 16ba4036-0f8e-5200-b23f-fc32dbe00e73
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0x6974CE)'
+  thermodynamic_cost_ttft_ms: 16
+  atp_leverage_bps: 439
+  computational_complexity: O(N log N)
+  cryptographic_signature: 9eac1a325a86e79eb74b61e850dbed1e358f02e48501d4bfd5899d5c22fb9519
+  state: C5-REAL
+- id: 2680f2e3-1446-54f9-a9fe-1845c4f0a941
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga una penalización termodinámica en ramas que incurren en bucles
+    lógicos infinitos. (Invariant Marker: 0xC9E107)'
+  thermodynamic_cost_ttft_ms: 18
+  atp_leverage_bps: 452
+  computational_complexity: O(1)
+  cryptographic_signature: 6adef0d1dc611e6eeecdfcc31dd808cda57ad977d88ca2e037d96e37d6f3033a
+  state: C5-REAL
+- id: 9b154941-5db3-54dc-9cce-5396c8856593
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0x65B9EE)'
+  thermodynamic_cost_ttft_ms: 20
+  atp_leverage_bps: 465
+  computational_complexity: O(N log N)
+  cryptographic_signature: c2895b90d990b195ba1b62454b90552c6b3a0ab412f4b5fd927db231ffcc9558
+  state: C5-REAL
+- id: b620601e-a299-509a-9f50-a710e872c35f
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0xF0935E)'
+  thermodynamic_cost_ttft_ms: 22
+  atp_leverage_bps: 478
+  computational_complexity: O(1)
+  cryptographic_signature: d21c1f733a4a34c6df6903195b6b7bff749577a7d3855e9f914f280db20e8ba5
+  state: C5-REAL
+- id: 9c8f3c9a-028d-56bd-b952-a052afd6263a
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0xA97DA6)'
+  thermodynamic_cost_ttft_ms: 24
+  atp_leverage_bps: 491
+  computational_complexity: O(N log N)
+  cryptographic_signature: 9bf435c890bda0179fd7af23cc639ec8d02eab2def56a1bb03a111eafdf70aa2
+  state: C5-REAL
+- id: a73af063-24be-56df-bc29-b376f7448693
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Garantiza el Teorema del Crash Causal: nodos fallidos propagan recompensa
+    de aniquilación (-∞) inmediatamente. (Invariant Marker: 0xA3C65C)'
+  thermodynamic_cost_ttft_ms: 26
+  atp_leverage_bps: 504
+  computational_complexity: O(1)
+  cryptographic_signature: e1b00ac3d8768003d272dc900cff68baff5fbe84c9fbc60961e0e83988d045f4
+  state: C5-REAL
+- id: f13308eb-2092-5813-9302-c96bbd8ec1a2
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0x2723D0)'
+  thermodynamic_cost_ttft_ms: 28
+  atp_leverage_bps: 517
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7f470d659955f6f6ca1fcf66fe810d838ace2d9bbacc73313177ff1cec940d91
+  state: C5-REAL
+- id: 3e7fcea5-172c-5848-8021-7e6c93725a71
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0x5F93F9)'
+  thermodynamic_cost_ttft_ms: 30
+  atp_leverage_bps: 530
+  computational_complexity: O(1)
+  cryptographic_signature: a26ab3dfaf32e8d7da7a77ec62d4798c0d245a7b2f53995f933df35572123fe0
+  state: C5-REAL
+- id: 8a8dc2cf-fc19-561c-9e20-0644b0bfb868
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga una penalización termodinámica en ramas que incurren en bucles
+    lógicos infinitos. (Invariant Marker: 0x698D51)'
+  thermodynamic_cost_ttft_ms: 32
+  atp_leverage_bps: 543
+  computational_complexity: O(N log N)
+  cryptographic_signature: 178dfc6fe5a214eac6863ac5189bc5736a4a8c06d006917280ac101581b3c607
+  state: C5-REAL
+- id: d8276501-cbe8-5fb5-a3b2-7d0543af2d61
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Garantiza el Teorema del Crash Causal: nodos fallidos propagan recompensa
+    de aniquilación (-∞) inmediatamente. (Invariant Marker: 0x7F6FFA)'
+  thermodynamic_cost_ttft_ms: 34
+  atp_leverage_bps: 556
+  computational_complexity: O(1)
+  cryptographic_signature: 0d425695cf34d1bf4117deb6050e8f15c98c499d1815bec03c11f28cb2ad5ef5
+  state: C5-REAL
+- id: e8f512c6-4ba8-5c1f-a0e4-924d07a5d507
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0x73278A)'
+  thermodynamic_cost_ttft_ms: 36
+  atp_leverage_bps: 569
+  computational_complexity: O(N log N)
+  cryptographic_signature: bdadc6d05c0ce20eb36a9edcc8895fb2e3cc2e86869f8b914a7e15297c3108d6
+  state: C5-REAL
+- id: 7c870c50-ebdf-5139-a2b4-de7b7b4ece8c
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0x5FD0B3)'
+  thermodynamic_cost_ttft_ms: 38
+  atp_leverage_bps: 582
+  computational_complexity: O(1)
+  cryptographic_signature: d87f9d549127e7bd6cec8f09ba4892d9b2d7e68441b8c1be00fa3b04ccbc3f1d
+  state: C5-REAL
+- id: 12921bbe-549b-541d-a9fe-f498a353e4e7
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga una penalización termodinámica en ramas que incurren en bucles
+    lógicos infinitos. (Invariant Marker: 0x2B4492)'
+  thermodynamic_cost_ttft_ms: 40
+  atp_leverage_bps: 595
+  computational_complexity: O(N log N)
+  cryptographic_signature: ba043c890f784b2ad8d8832a210e4c91866c86912b3f74de85eb1985faad4a22
+  state: C5-REAL
+- id: 89be3922-6c49-595c-a0e4-da8e9f30477d
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0xC45147)'
+  thermodynamic_cost_ttft_ms: 42
+  atp_leverage_bps: 608
+  computational_complexity: O(1)
+  cryptographic_signature: 6d1512b851d77eced44a116dce062cd084f14d4f65ffcfe441bf768f9a239a61
+  state: C5-REAL
+- id: 58b28bf6-a137-5984-89c5-8b61cda91f4c
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Propaga el delta de recompensa usando un decaimiento temporal gamma
+    para priorizar soluciones cortas. (Invariant Marker: 0xEB160D)'
+  thermodynamic_cost_ttft_ms: 44
+  atp_leverage_bps: 621
+  computational_complexity: O(N log N)
+  cryptographic_signature: c10d7fd3b3b19d2d3b68173b33d889f9c480fc2c87a57050c3871c7a7bd783a5
+  state: C5-REAL
+- id: 96c7c369-538a-582f-b8e7-af8d45cca5bf
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Actualiza la Q(s,a) promediando iterativamente sobre la suma de visitas
+    N(s,a) sin bloqueos de concurrencia. (Invariant Marker: 0x5EF059)'
+  thermodynamic_cost_ttft_ms: 46
+  atp_leverage_bps: 634
+  computational_complexity: O(1)
+  cryptographic_signature: 2a144d599942cea8d91cc60cdb61e9d718008a72df9b0a3c4a7b8387ccd15ccb
+  state: C5-REAL
+- id: 7865b978-0ad8-5746-bddc-1ded39450eff
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Garantiza el Teorema del Crash Causal: nodos fallidos propagan recompensa
+    de aniquilación (-∞) inmediatamente. (Invariant Marker: 0x07E1CD)'
+  thermodynamic_cost_ttft_ms: 48
+  atp_leverage_bps: 647
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4c3f8b4b8f8f6f3c048734efc7595f403713a720c4f3b2979041463113524f9a
+  state: C5-REAL
+- id: 0405b5a8-0aa4-5f40-97e8-67cbbeedf9d8
+  domain: Q_VALUE_BACKPROPAGATION
+  description: 'Sincroniza asíncronamente los contadores de visitas a nivel de Master
+    Ledger para asegurar tolerancia BFT. (Invariant Marker: 0xDA4FB5)'
+  thermodynamic_cost_ttft_ms: 50
+  atp_leverage_bps: 660
+  computational_complexity: O(1)
+  cryptographic_signature: dea3d9b61eb1fea76dce25ad88070255d6ee4f1d16156f9e83ddeb6648ddc7e9
+  state: C5-REAL
+- id: 550198a3-272b-584a-9ff9-94242e9448ea
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x4C56FF)'
+  thermodynamic_cost_ttft_ms: 52
+  atp_leverage_bps: 673
+  computational_complexity: O(N log N)
+  cryptographic_signature: 008fbc0639db4bf9e8aafdeb5aa6b759231609fba2309b1a3efc2aacefecb319
+  state: C5-REAL
+- id: f98e5ef2-2856-50a9-885b-bc6467a9096d
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0xA0A080)'
+  thermodynamic_cost_ttft_ms: 54
+  atp_leverage_bps: 686
+  computational_complexity: O(1)
+  cryptographic_signature: 8ce349c8484ff6bac84fab7c354032a771973a59922b14f8c389f4b459c2c36c
+  state: C5-REAL
+- id: 715cc948-faa2-5533-91b5-b3eafda8c0bd
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Forza un límite físico de Time-to-First-Token inyectando yields asíncronos
+    cada 50ms. (Invariant Marker: 0x202CB9)'
+  thermodynamic_cost_ttft_ms: 56
+  atp_leverage_bps: 699
+  computational_complexity: O(N log N)
+  cryptographic_signature: 55870a810ef6f46aa9ee99f9bc9cc9fe19fb7885041147a5099d28210e833f41
+  state: C5-REAL
+- id: 363a92d3-8915-58e9-8246-943c2f0ffa0a
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0xC8FFE9)'
+  thermodynamic_cost_ttft_ms: 58
+  atp_leverage_bps: 712
+  computational_complexity: O(1)
+  cryptographic_signature: f93b4bc1c58eac428f0ba6199aaf82f5dba864930140f087115c19765408840b
+  state: C5-REAL
+- id: 39b7af62-e9c5-52f3-9e02-f6dc1e92d5e5
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Asigna ciclos computacionales P0 estrictamente a nodos donde la divergencia
+    de trayectorias es crítica. (Invariant Marker: 0x3DEF18)'
+  thermodynamic_cost_ttft_ms: 60
+  atp_leverage_bps: 725
+  computational_complexity: O(N log N)
+  cryptographic_signature: 5158e2d23bca845ece4f5938d978374ffa6ca430f2e6587ff75cdd0151d1535d
+  state: C5-REAL
+- id: 5353c01c-52b9-5164-bde4-167d71efdd0b
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0x069059)'
+  thermodynamic_cost_ttft_ms: 62
+  atp_leverage_bps: 738
+  computational_complexity: O(1)
+  cryptographic_signature: 0264362e017b0357cb708474ab8c912aebc5a8e11f10e2bf4f8295b1eef33ec8
+  state: C5-REAL
+- id: 6d876020-7069-53f5-983c-0695692765fa
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Balancea el Test-Time Compute mediante el protocolo Ultrathink: más
+    iteraciones MCTS en detrimento de decodificación llm-slop. (Invariant Marker:
+    0xEC5DEC)'
+  thermodynamic_cost_ttft_ms: 64
+  atp_leverage_bps: 751
+  computational_complexity: O(N log N)
+  cryptographic_signature: a37decff5ba4282033f69cac45603279a30b62e65034735bae4ae6dddfcc7b38
+  state: C5-REAL
+- id: 00b88401-6dfe-5de2-974c-7f520bb51f18
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x76DC61)'
+  thermodynamic_cost_ttft_ms: 66
+  atp_leverage_bps: 764
+  computational_complexity: O(1)
+  cryptographic_signature: 104b17461c90218c96108bb38780c7fea7e650d319f0e1b8cd8bc3b7c70ebd79
+  state: C5-REAL
+- id: 8bb0b7af-ffe1-5c33-b0ad-5280fc5549e4
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Asigna ciclos computacionales P0 estrictamente a nodos donde la divergencia
+    de trayectorias es crítica. (Invariant Marker: 0xD1F491)'
+  thermodynamic_cost_ttft_ms: 68
+  atp_leverage_bps: 777
+  computational_complexity: O(N log N)
+  cryptographic_signature: 9faf40f0cc07ddd8b1fec7e95bd6cbf19c916a724d240d4f1ee03d6ad5444bd7
+  state: C5-REAL
+- id: 3cdc57db-234f-5ee2-b97b-b0b07677c8ca
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Forza un límite físico de Time-to-First-Token inyectando yields asíncronos
+    cada 50ms. (Invariant Marker: 0x9B8619)'
+  thermodynamic_cost_ttft_ms: 70
+  atp_leverage_bps: 790
+  computational_complexity: O(1)
+  cryptographic_signature: d8605cb4f2dcb08d7e4968d1fdcdf0e9e2ff7aaa988897141ac947d13bef1ec1
+  state: C5-REAL
+- id: c72716b8-38e3-5092-a97d-5064758d859d
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Balancea el Test-Time Compute mediante el protocolo Ultrathink: más
+    iteraciones MCTS en detrimento de decodificación llm-slop. (Invariant Marker:
+    0x1AFA34)'
+  thermodynamic_cost_ttft_ms: 72
+  atp_leverage_bps: 803
+  computational_complexity: O(N log N)
+  cryptographic_signature: f436cb378c198318fe5d26090371d961eff29e2d7cd4aca0e6ae73378ab974a6
+  state: C5-REAL
+- id: 45b44b8f-46af-5dc3-8cc6-590f75441593
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x65DED5)'
+  thermodynamic_cost_ttft_ms: 74
+  atp_leverage_bps: 816
+  computational_complexity: O(1)
+  cryptographic_signature: 2d5bd684d83dcc546f05ed1666b37770223323874231342265963024a6d986ac
+  state: C5-REAL
+- id: 922fb488-8802-5c1a-b056-0c735bb619bb
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0x9FC3D7)'
+  thermodynamic_cost_ttft_ms: 76
+  atp_leverage_bps: 829
+  computational_complexity: O(N log N)
+  cryptographic_signature: 2e44169acd4d9b2b668a39983cc3b5267e5bdfe40c2a4450b2486a6d3dc8c960
+  state: C5-REAL
+- id: 67896e5c-e396-5826-8997-5bd076434c33
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Forza un límite físico de Time-to-First-Token inyectando yields asíncronos
+    cada 50ms. (Invariant Marker: 0x02522A)'
+  thermodynamic_cost_ttft_ms: 78
+  atp_leverage_bps: 842
+  computational_complexity: O(1)
+  cryptographic_signature: ffc05824a62809ead6e2ce9b56cf152778de5545c3742b561f775a20850e5adb
+  state: C5-REAL
+- id: 2e245773-ea93-5a2c-8c41-d2524577411f
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x7F1DE2)'
+  thermodynamic_cost_ttft_ms: 80
+  atp_leverage_bps: 855
+  computational_complexity: O(N log N)
+  cryptographic_signature: 3d2dfd826b0a5d413b52d8d65a5d822c19e5ae9ebdd8374f9dfe6d224f2d8b3b
+  state: C5-REAL
+- id: 67efa656-a1a1-592a-ac5c-c2b75bcad7b1
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Asigna ciclos computacionales P0 estrictamente a nodos donde la divergencia
+    de trayectorias es crítica. (Invariant Marker: 0x42A0E1)'
+  thermodynamic_cost_ttft_ms: 82
+  atp_leverage_bps: 868
+  computational_complexity: O(1)
+  cryptographic_signature: f13f0726b7f9bde59d41696168bb03a3a9f82b6ab832ad5627e274bcb68c9b95
+  state: C5-REAL
+- id: 1ec3f942-19d5-51db-b549-a6cd7ef5a3ad
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0x3988C7)'
+  thermodynamic_cost_ttft_ms: 84
+  atp_leverage_bps: 881
+  computational_complexity: O(N log N)
+  cryptographic_signature: 5e6d5e57da82a8367a8e057453f23c1366f51a18d11ff3747c4f3207be2bc72a
+  state: C5-REAL
+- id: 0ddadb18-ce94-56a9-acd8-f1ca6ab57f7a
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Balancea el Test-Time Compute mediante el protocolo Ultrathink: más
+    iteraciones MCTS en detrimento de decodificación llm-slop. (Invariant Marker:
+    0x013D40)'
+  thermodynamic_cost_ttft_ms: 86
+  atp_leverage_bps: 894
+  computational_complexity: O(1)
+  cryptographic_signature: 21706111214f9469344a3318886f33f987158f035415f1a62d3b980cca3c604d
+  state: C5-REAL
+- id: 8652750e-b269-5168-a9fa-ae5ff2129090
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0xE00DA0)'
+  thermodynamic_cost_ttft_ms: 88
+  atp_leverage_bps: 907
+  computational_complexity: O(N log N)
+  cryptographic_signature: 0ca42fa253cd171e8eafac0e555cf159882d3eb65d07000528e64d0ca7360e21
+  state: C5-REAL
+- id: c1c64700-eb77-5845-ac35-13136ac9d947
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Asigna ciclos computacionales P0 estrictamente a nodos donde la divergencia
+    de trayectorias es crítica. (Invariant Marker: 0x138597)'
+  thermodynamic_cost_ttft_ms: 90
+  atp_leverage_bps: 920
+  computational_complexity: O(1)
+  cryptographic_signature: a4b50f27d16e12ffd7b70bd270877175859d665efa8b00af9b9899973db8a81d
+  state: C5-REAL
+- id: e6f98dc4-afac-55c9-a23a-0ad571fbd811
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Forza un límite físico de Time-to-First-Token inyectando yields asíncronos
+    cada 50ms. (Invariant Marker: 0x0F28B5)'
+  thermodynamic_cost_ttft_ms: 92
+  atp_leverage_bps: 933
+  computational_complexity: O(N log N)
+  cryptographic_signature: cf6a6d7daf45eb67781727423d147a2d911d604e081ae73471d7a93ddd2e9960
+  state: C5-REAL
+- id: 645193d2-42bc-5c77-bcc4-d765f4cf8ee5
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Balancea el Test-Time Compute mediante el protocolo Ultrathink: más
+    iteraciones MCTS en detrimento de decodificación llm-slop. (Invariant Marker:
+    0xA8BAA5)'
+  thermodynamic_cost_ttft_ms: 94
+  atp_leverage_bps: 946
+  computational_complexity: O(1)
+  cryptographic_signature: 94ac16ead554d3c7a9f23baa156738c22669f849940ab650c4504ca0e3cc6381
+  state: C5-REAL
+- id: 319cdc00-1e1c-5829-a08d-ee4fc9c0c539
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x903CE9)'
+  thermodynamic_cost_ttft_ms: 96
+  atp_leverage_bps: 959
+  computational_complexity: O(N log N)
+  cryptographic_signature: 00cd1337e0fa26c2ffd3b0cb89ddda3522d829a7bbc125c58b84d8100cdd8fb5
+  state: C5-REAL
+- id: 9473afa2-cbdb-5b1e-960f-53c7587b8f2a
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0x0A09C8)'
+  thermodynamic_cost_ttft_ms: 98
+  atp_leverage_bps: 972
+  computational_complexity: O(1)
+  cryptographic_signature: 15fef7e45784e9af7109d4975b1b8ac401cd476da930ed0652986f164233d61e
+  state: C5-REAL
+- id: 92bcc778-286c-569a-8899-cc479aa9a4ee
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Forza un límite físico de Time-to-First-Token inyectando yields asíncronos
+    cada 50ms. (Invariant Marker: 0x2B24D4)'
+  thermodynamic_cost_ttft_ms: 100
+  atp_leverage_bps: 985
+  computational_complexity: O(N log N)
+  cryptographic_signature: 6db947806890bad6691313a3d6601b2605303edd8a302bf423e241307d4bf9f7
+  state: C5-REAL
+- id: f2a317fb-2ff9-5ba8-86ae-cc848f4196d8
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0xA5E001)'
+  thermodynamic_cost_ttft_ms: 102
+  atp_leverage_bps: 998
+  computational_complexity: O(1)
+  cryptographic_signature: 6e37dd914d2b49d5683972dfaf3350d61e30fc6aa403d0129959c16c4565dcbc
+  state: C5-REAL
+- id: 82c6f92c-ba3b-55ca-b7b5-62099ca6210e
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Asigna ciclos computacionales P0 estrictamente a nodos donde la divergencia
+    de trayectorias es crítica. (Invariant Marker: 0x8D5E95)'
+  thermodynamic_cost_ttft_ms: 104
+  atp_leverage_bps: 61
+  computational_complexity: O(N log N)
+  cryptographic_signature: dc842ea9e0bb4b12bc8172367e8e833ad1f8622147cb51d3ff2ae14b488c3d58
+  state: C5-REAL
+- id: b56c0770-7aff-55b2-bac7-0232842802f0
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Termina tempranamente la búsqueda profunda si el ratio de ganancia
+    computacional dE/di converge a cero. (Invariant Marker: 0x47D1E9)'
+  thermodynamic_cost_ttft_ms: 106
+  atp_leverage_bps: 74
+  computational_complexity: O(1)
+  cryptographic_signature: d4538606d0da696afc25b4e43a4786bda7772038a0eaa519301d88afbe88ffbc
+  state: C5-REAL
+- id: 27db50e9-41a2-514f-880a-9219ef9fc023
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Balancea el Test-Time Compute mediante el protocolo Ultrathink: más
+    iteraciones MCTS en detrimento de decodificación llm-slop. (Invariant Marker:
+    0xF22170)'
+  thermodynamic_cost_ttft_ms: 108
+  atp_leverage_bps: 87
+  computational_complexity: O(N log N)
+  cryptographic_signature: 31ca5577ead59faa4a073ed6397d6d65f1677b9c2834213856555d6e96c5129c
+  state: C5-REAL
+- id: ef2c0568-e272-519b-a6cb-40decb23cab9
+  domain: TEST_TIME_COMPUTE_ALLOCATION
+  description: 'Escala dinámicamente el presupuesto de inferencia (TTFT) en bifurcaciones
+    de alta incertidumbre epistémica. (Invariant Marker: 0x7EF605)'
+  thermodynamic_cost_ttft_ms: 110
+  atp_leverage_bps: 100
+  computational_complexity: O(1)
+  cryptographic_signature: 1adb3788aa420dacf679cef0c18578b0c5604c9a45abf96c672e48a148f40f71
+  state: C5-REAL
+- id: d70eb866-5892-5908-b90f-a663badc231c
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0xA8F15E)'
+  thermodynamic_cost_ttft_ms: 112
+  atp_leverage_bps: 113
+  computational_complexity: O(N log N)
+  cryptographic_signature: b620a76a576c2bb3888bdd7f7667055d42564b953948efa30af2bb2eef630d6c
+  state: C5-REAL
+- id: 26999d9c-6119-5c4a-bab0-7b0caf063628
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0x37A749)'
+  thermodynamic_cost_ttft_ms: 114
+  atp_leverage_bps: 126
+  computational_complexity: O(1)
+  cryptographic_signature: 33c374201392232f2613a8ec14002d269164708b5b904d6aae8744529f1a60b2
+  state: C5-REAL
+- id: 67738c55-f0d1-5f0b-889a-183ce029df5a
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Implementa evasión estricta del Event Loop Blocking durante las operaciones
+    de inferencia Flash. (Invariant Marker: 0xB3E3E3)'
+  thermodynamic_cost_ttft_ms: 116
+  atp_leverage_bps: 139
+  computational_complexity: O(N log N)
+  cryptographic_signature: 95088838ae079aab9a0483fd354c83e9c62448be76f3feb1b4e797ddcfe130df
+  state: C5-REAL
+- id: d306ee00-ed9c-5bcb-81b9-dbb4ea1be70f
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x1D7F7A)'
+  thermodynamic_cost_ttft_ms: 118
+  atp_leverage_bps: 152
+  computational_complexity: O(1)
+  cryptographic_signature: deace95a6b6ceb51b7dcebac872c58e122ef824fa60cf31f4e2388e76be22fa3
+  state: C5-REAL
+- id: fd8faa9a-420c-5659-9744-846143f0794d
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Anula las latencias inter-nodo mediante puentes IPC de memoria compartida
+    (Zero-Copy Transfer). (Invariant Marker: 0x2A79EA)'
+  thermodynamic_cost_ttft_ms: 120
+  atp_leverage_bps: 165
+  computational_complexity: O(N log N)
+  cryptographic_signature: 5c8893fe6c2121352a8b435599ef100453df77595903e5f89c853d5f3259bfb8
+  state: C5-REAL
+- id: cecb7d9a-16d5-5317-acce-272a6d615fa3
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0x1C9AC0)'
+  thermodynamic_cost_ttft_ms: 122
+  atp_leverage_bps: 178
+  computational_complexity: O(1)
+  cryptographic_signature: 1bd910346d3e1f81d7ab2937cae868b23c0972a2a20339844a2f6f523cfe1d2d
+  state: C5-REAL
+- id: 8fb6125e-bda6-529e-9348-0853c4319280
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x6C4B76)'
+  thermodynamic_cost_ttft_ms: 124
+  atp_leverage_bps: 191
+  computational_complexity: O(N log N)
+  cryptographic_signature: 0ce0a6753d0b0a2800f8f7e3da1f2d551e7a468e0321e66c80f257e780c7c4f1
+  state: C5-REAL
+- id: cde3ccf8-24f2-5e08-9436-cba6e92143ff
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0x064096)'
+  thermodynamic_cost_ttft_ms: 126
+  atp_leverage_bps: 204
+  computational_complexity: O(1)
+  cryptographic_signature: 4e6ff6269b2593991916bcdf9c8c0df364fd3f9b250cca681159f0319fe06bd5
+  state: C5-REAL
+- id: 544e23ac-0511-5555-be71-30c14292919d
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Anula las latencias inter-nodo mediante puentes IPC de memoria compartida
+    (Zero-Copy Transfer). (Invariant Marker: 0x140F69)'
+  thermodynamic_cost_ttft_ms: 128
+  atp_leverage_bps: 217
+  computational_complexity: O(N log N)
+  cryptographic_signature: fd8f3a1d2ee517018c846a0dd45401a125ccb8fd0adcbb6597ed94513ed9f629
+  state: C5-REAL
+- id: c130979d-1229-553b-8b36-743b84e8bb18
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Implementa evasión estricta del Event Loop Blocking durante las operaciones
+    de inferencia Flash. (Invariant Marker: 0xB73CE3)'
+  thermodynamic_cost_ttft_ms: 130
+  atp_leverage_bps: 230
+  computational_complexity: O(1)
+  cryptographic_signature: c2ef0d2859fbf223bf55e4d5e7105d7f78df9ae834ddd16249f33f20878f353e
+  state: C5-REAL
+- id: a2a1ee3a-3aa4-58c9-a722-252f8b0063b6
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0xBD4C9A)'
+  thermodynamic_cost_ttft_ms: 132
+  atp_leverage_bps: 243
+  computational_complexity: O(N log N)
+  cryptographic_signature: e184e86c76ee450c19f76eb2059deddd148ce0e420be2bd9ab2c3c99f4504f63
+  state: C5-REAL
+- id: 5f67777f-0c37-5ceb-82f3-c56cc001cb35
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0x82AA4B)'
+  thermodynamic_cost_ttft_ms: 134
+  atp_leverage_bps: 256
+  computational_complexity: O(1)
+  cryptographic_signature: 8a4da1c83e081055b74b86822aae22d85577030c9e290fa04983ba07d6e55acc
+  state: C5-REAL
+- id: 42e285cf-24ac-588c-8a9c-c17a11431ce0
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0x0777D5)'
+  thermodynamic_cost_ttft_ms: 136
+  atp_leverage_bps: 269
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1b7e465cce4dba8d4b87c9725163fa33c33821e4ac206622466dcbe2394703ed
+  state: C5-REAL
+- id: d8f47512-2972-5f6f-afaf-7b374d763ee0
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Implementa evasión estricta del Event Loop Blocking durante las operaciones
+    de inferencia Flash. (Invariant Marker: 0xFA7CDF)'
+  thermodynamic_cost_ttft_ms: 138
+  atp_leverage_bps: 282
+  computational_complexity: O(1)
+  cryptographic_signature: a4cb1f08f7b0111b44c8057fbaf81524bef0a1fe8d23ed650cc00cad9bff1da0
+  state: C5-REAL
+- id: 51b0a08f-c2ce-563f-8970-5bbebf2b21b9
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x976652)'
+  thermodynamic_cost_ttft_ms: 140
+  atp_leverage_bps: 295
+  computational_complexity: O(N log N)
+  cryptographic_signature: 6e09be32cbfd4c0f9bcaf0cdc6b67a953d709f577211f9457379370e7d6a6488
+  state: C5-REAL
+- id: a0b10666-8a78-58e1-bfe1-bef8025e5099
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Anula las latencias inter-nodo mediante puentes IPC de memoria compartida
+    (Zero-Copy Transfer). (Invariant Marker: 0x7E7757)'
+  thermodynamic_cost_ttft_ms: 142
+  atp_leverage_bps: 308
+  computational_complexity: O(1)
+  cryptographic_signature: 7f2afe4ed480ec78915fdb00d35ce9ec6d09b19e1a6c0b22fbb2168be67554ec
+  state: C5-REAL
+- id: 6eee9399-6faf-5d33-8e61-c2d92005f991
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0x5878A7)'
+  thermodynamic_cost_ttft_ms: 144
+  atp_leverage_bps: 321
+  computational_complexity: O(N log N)
+  cryptographic_signature: dfca250cfdd14b5b7c364ff2decdad2cd63f160b4480e4d6f3e8ded8a6bbe1a5
+  state: C5-REAL
+- id: 06830fd2-e09e-5194-a5ac-c3f7623a0396
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x006F52)'
+  thermodynamic_cost_ttft_ms: 146
+  atp_leverage_bps: 334
+  computational_complexity: O(1)
+  cryptographic_signature: 3e82b466d6d278307c2dd791a13c17f450acf5be189fe115f042f72b8fb849b3
+  state: C5-REAL
+- id: 9894aed9-2198-522c-b14d-c76d503c98c8
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0x363663)'
+  thermodynamic_cost_ttft_ms: 148
+  atp_leverage_bps: 347
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1a46f52fc2be51bf6fbd493319df55a0f8a46529737d97abd5cbb508e2cff87a
+  state: C5-REAL
+- id: 0208b4a5-e56c-5e13-9cd0-c2aa7ad8a29b
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Anula las latencias inter-nodo mediante puentes IPC de memoria compartida
+    (Zero-Copy Transfer). (Invariant Marker: 0x149E96)'
+  thermodynamic_cost_ttft_ms: 150
+  atp_leverage_bps: 360
+  computational_complexity: O(1)
+  cryptographic_signature: a4c1b62734bb82846664833d6784ee751e3912a33a886466639fd60ad77d4df3
+  state: C5-REAL
+- id: edee7341-59bf-5ae8-9fe4-f97cee343429
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Implementa evasión estricta del Event Loop Blocking durante las operaciones
+    de inferencia Flash. (Invariant Marker: 0xA4A042)'
+  thermodynamic_cost_ttft_ms: 152
+  atp_leverage_bps: 373
+  computational_complexity: O(N log N)
+  cryptographic_signature: 00b12bc8c4b3b81054bb39f43082b3f052b932810519aac6bf792f7a54e30017
+  state: C5-REAL
+- id: 7b4a8af3-cd40-5d93-afa8-84924beee8ac
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x1FF8A7)'
+  thermodynamic_cost_ttft_ms: 154
+  atp_leverage_bps: 386
+  computational_complexity: O(1)
+  cryptographic_signature: adc5d990879203a85acadb39a91a2d28945dbdb4c88508e02360647c278e7098
+  state: C5-REAL
+- id: e778fc7a-966f-5f35-96f7-c1ecb5a206cf
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0xF7E6C8)'
+  thermodynamic_cost_ttft_ms: 156
+  atp_leverage_bps: 399
+  computational_complexity: O(N log N)
+  cryptographic_signature: 38fc4b14266f2ab194846ec917a01610d42e5b41307fa1f5ab507b4fb6379f6b
+  state: C5-REAL
+- id: 376ab8eb-b826-5540-a88d-f857f69704d1
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0xBF8229)'
+  thermodynamic_cost_ttft_ms: 158
+  atp_leverage_bps: 412
+  computational_complexity: O(1)
+  cryptographic_signature: 9398436825f938de53aef6f62d5e4f44c419a1ccf6e1806a01632051934949f3
+  state: C5-REAL
+- id: 65e1bd06-813c-5e60-be4d-568d9fbc330f
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Implementa evasión estricta del Event Loop Blocking durante las operaciones
+    de inferencia Flash. (Invariant Marker: 0x821612)'
+  thermodynamic_cost_ttft_ms: 160
+  atp_leverage_bps: 425
+  computational_complexity: O(N log N)
+  cryptographic_signature: 8e3771af84fd072b996a2e8861122e37e0a1760c43d829e277de69861741f359
+  state: C5-REAL
+- id: 7e4a9527-1820-5a9c-b684-cab5ceecbe7f
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x38AF86)'
+  thermodynamic_cost_ttft_ms: 162
+  atp_leverage_bps: 438
+  computational_complexity: O(1)
+  cryptographic_signature: af231dc7191a27bf03da48c5e465b1ab75907587e410194c9beb293b56897c7c
+  state: C5-REAL
+- id: 8a0b19ec-9f6e-546e-9f3a-6816930b5798
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Anula las latencias inter-nodo mediante puentes IPC de memoria compartida
+    (Zero-Copy Transfer). (Invariant Marker: 0x96DA2F)'
+  thermodynamic_cost_ttft_ms: 164
+  atp_leverage_bps: 451
+  computational_complexity: O(N log N)
+  cryptographic_signature: 5cabc06ab139b6d728291069a0adf2e42a2f85d5e9eee15a89fc5d20baae3d83
+  state: C5-REAL
+- id: 9a62f175-e906-57b6-b12f-f5c56f7efbb3
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Optimiza el warm-up de tensores ejecutando pre-atención paralela a
+    la expansión del nodo raíz. (Invariant Marker: 0x8F8551)'
+  thermodynamic_cost_ttft_ms: 166
+  atp_leverage_bps: 464
+  computational_complexity: O(1)
+  cryptographic_signature: 88ee7b329691a9f880f0f0918fa3a31e091df47592fbd5add64f48ac6033f07b
+  state: C5-REAL
+- id: 18e0216d-4b35-5acb-b819-644a3f71a372
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Destila sub-árboles de búsqueda cacheados (VNode) previniendo regeneración
+    redundante de tokens. (Invariant Marker: 0x8F5329)'
+  thermodynamic_cost_ttft_ms: 168
+  atp_leverage_bps: 477
+  computational_complexity: O(N log N)
+  cryptographic_signature: 8d76e0834d02d92bf832701b4060b1d5d772b65bed305bec3f4882b47fbe2fb1
+  state: C5-REAL
+- id: ef67323a-d3bf-5ea3-94fb-c4ac1c371789
+  domain: TTFT_LATENCY_OPTIMIZATION
+  description: 'Colapsa la primera capa del grafo MCTS en un pipeline de respuesta
+    inmediata (Zero-Latency Mask). (Invariant Marker: 0x045117)'
+  thermodynamic_cost_ttft_ms: 170
+  atp_leverage_bps: 490
+  computational_complexity: O(1)
+  cryptographic_signature: ad55e14cfc4500023faaf9542f8ff03d374d285df0fcee0a76531af154609c9c
+  state: C5-REAL
+- id: 398ddbd5-3eb7-55b7-bdd4-434ea5d7a0d2
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0xFC2213)'
+  thermodynamic_cost_ttft_ms: 172
+  atp_leverage_bps: 503
+  computational_complexity: O(N log N)
+  cryptographic_signature: 0bae377dc7090456ae90f3a87c116eeebbfb3ae8d5fec9b1e60d483ae3a0f263
+  state: C5-REAL
+- id: d6927e55-163f-51fa-acaf-7426c19dd699
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0x4C5BDE)'
+  thermodynamic_cost_ttft_ms: 174
+  atp_leverage_bps: 516
+  computational_complexity: O(1)
+  cryptographic_signature: e0561599f99ce5a2fde2c1c3a781ee0bf87d4594d47c58e52f49fb9cf240c665
+  state: C5-REAL
+- id: e891cff3-c770-5317-859c-991fb657ba22
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0xCEDEBB)'
+  thermodynamic_cost_ttft_ms: 176
+  atp_leverage_bps: 529
+  computational_complexity: O(N log N)
+  cryptographic_signature: 38385346509a8a03ad11f3b1eda8e7e05e7e0f96e9f1af8dcb77c2ade5dea6bb
+  state: C5-REAL
+- id: 6860b0f5-9750-5187-a5a8-5323e0959fe7
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Mide el Leverage ATP evaluando el número de tokens omitidos por el
+    Operador vs el trabajo útil computado. (Invariant Marker: 0x6CDD60)'
+  thermodynamic_cost_ttft_ms: 178
+  atp_leverage_bps: 542
+  computational_complexity: O(1)
+  cryptographic_signature: 11e0506db4c4b26fe9c06929ffaccc191eb85f2e0f9965e2e784766872d7c47f
+  state: C5-REAL
+- id: e3702308-ef15-5bc5-8df2-e72ca456d3a9
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Interrumpe bucles de aserción (Green Theater) que demanden confirmación
+    estocástica por parte del humano. (Invariant Marker: 0xEECCA5)'
+  thermodynamic_cost_ttft_ms: 180
+  atp_leverage_bps: 555
+  computational_complexity: O(N log N)
+  cryptographic_signature: 29b9b9ecd39f00d26f7ea90438c2a34f5aa8e10bf5df4b0731ea1cacc6522c20
+  state: C5-REAL
+- id: b14ab1fe-dc94-582b-b8ba-e50e80fb1667
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0x9872ED)'
+  thermodynamic_cost_ttft_ms: 182
+  atp_leverage_bps: 568
+  computational_complexity: O(1)
+  cryptographic_signature: cd66f61be7a6fc60230c7e1a28f25dcdc943b4bfa6d714c43cfa7a024b3c1a03
+  state: C5-REAL
+- id: a94f3837-1e0e-5372-aa86-febbc88d14fe
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0x31FEFC)'
+  thermodynamic_cost_ttft_ms: 184
+  atp_leverage_bps: 581
+  computational_complexity: O(N log N)
+  cryptographic_signature: b83f950e02963c7af44feade795451138603e510001de68eaeb4d7bb745ee62d
+  state: C5-REAL
+- id: 1f878dcc-2cae-5bc3-af7e-829a4c4e079d
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0x9DCB88)'
+  thermodynamic_cost_ttft_ms: 186
+  atp_leverage_bps: 594
+  computational_complexity: O(1)
+  cryptographic_signature: 0ee60e887f0be7b5a30b0de744824c58ed09081cc56c824f600591c472d13b6e
+  state: C5-REAL
+- id: b7475f5d-fd16-5cd1-b27e-90b57b091693
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Interrumpe bucles de aserción (Green Theater) que demanden confirmación
+    estocástica por parte del humano. (Invariant Marker: 0xA2557A)'
+  thermodynamic_cost_ttft_ms: 188
+  atp_leverage_bps: 607
+  computational_complexity: O(N log N)
+  cryptographic_signature: 515271470441afc8fe1069ec1e04aec3a759ea4308b4cfff5fd2337ca8be056f
+  state: C5-REAL
+- id: 927ae713-3de6-5863-a224-f8c0322e4fb0
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0xCFECDB)'
+  thermodynamic_cost_ttft_ms: 190
+  atp_leverage_bps: 620
+  computational_complexity: O(1)
+  cryptographic_signature: bfbc70e10180fbc56cf5795092e7ed013e541c5457866ebb13ac90bfa3f0b756
+  state: C5-REAL
+- id: 4db8eece-f867-5a8a-86cf-638e5cba0349
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Mide el Leverage ATP evaluando el número de tokens omitidos por el
+    Operador vs el trabajo útil computado. (Invariant Marker: 0x0AA188)'
+  thermodynamic_cost_ttft_ms: 192
+  atp_leverage_bps: 633
+  computational_complexity: O(N log N)
+  cryptographic_signature: e6a473c1047c9852018c49230730e72d9242cdb35a9e4ca82f6984d45be6bce6
+  state: C5-REAL
+- id: 38e6f0d4-996b-5652-9bdb-f8908338e8b9
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0x58A2FC)'
+  thermodynamic_cost_ttft_ms: 194
+  atp_leverage_bps: 646
+  computational_complexity: O(1)
+  cryptographic_signature: 01ce8aaa26cf6c6ad72a2c511b0bcaeecf0a6d4fd293d27c3f36e0cb0cbfe37a
+  state: C5-REAL
+- id: d5dfe4e0-5df6-54ea-a0b8-13adb5679e88
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0xBD686F)'
+  thermodynamic_cost_ttft_ms: 196
+  atp_leverage_bps: 659
+  computational_complexity: O(N log N)
+  cryptographic_signature: d112b4938de0f06e37b654110b3b50af1ddaae56ff4ceb9bd5e2b9b99b25f997
+  state: C5-REAL
+- id: ae02f753-2f65-5550-adac-5f9ceb6192c7
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0xA597E5)'
+  thermodynamic_cost_ttft_ms: 198
+  atp_leverage_bps: 672
+  computational_complexity: O(1)
+  cryptographic_signature: 42598245001adcb001d17df418c0543555e35a13e638570d7038e2a22ee0664a
+  state: C5-REAL
+- id: 940ed578-6c73-57da-8907-fc1a3a38cc56
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Mide el Leverage ATP evaluando el número de tokens omitidos por el
+    Operador vs el trabajo útil computado. (Invariant Marker: 0x0336DC)'
+  thermodynamic_cost_ttft_ms: 200
+  atp_leverage_bps: 685
+  computational_complexity: O(N log N)
+  cryptographic_signature: dc348f4e9345fac8f59ecd3a99ce0d22814b525502a6b19fec4f4ae50b9317a9
+  state: C5-REAL
+- id: bc5e4d2f-9093-542b-a202-84449fc06b43
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Interrumpe bucles de aserción (Green Theater) que demanden confirmación
+    estocástica por parte del humano. (Invariant Marker: 0x084B6F)'
+  thermodynamic_cost_ttft_ms: 202
+  atp_leverage_bps: 698
+  computational_complexity: O(1)
+  cryptographic_signature: 707346fab10f69290b1416d2b4a352a0b165e4422f5997d6a6a290c38aa511be
+  state: C5-REAL
+- id: fa8330d0-9101-5bf9-9d62-1e549b66d006
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0x85D8CE)'
+  thermodynamic_cost_ttft_ms: 204
+  atp_leverage_bps: 711
+  computational_complexity: O(N log N)
+  cryptographic_signature: e7e1089cc6568a556adc37cfc57a9fd9812140fc5562ceb17fa6498e3afa0187
+  state: C5-REAL
+- id: c741596a-ac4e-512e-bff9-8e590503734e
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0x0E6597)'
+  thermodynamic_cost_ttft_ms: 206
+  atp_leverage_bps: 724
+  computational_complexity: O(1)
+  cryptographic_signature: c8b7e3eb0e34cc8a18c090fff3dbb9cb96058481ba956e8ca2a920426e7bed1a
+  state: C5-REAL
+- id: ac373c70-8935-564a-97bf-677711e45cf6
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0x84D9EE)'
+  thermodynamic_cost_ttft_ms: 208
+  atp_leverage_bps: 737
+  computational_complexity: O(N log N)
+  cryptographic_signature: f281b09d57ca217ee0173f0d903e905ba48452dcfa977114f8d2739eb10d60f2
+  state: C5-REAL
+- id: 7835a0d8-7e0b-5988-a54b-9d419b541f3e
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Interrumpe bucles de aserción (Green Theater) que demanden confirmación
+    estocástica por parte del humano. (Invariant Marker: 0x3644A6)'
+  thermodynamic_cost_ttft_ms: 10
+  atp_leverage_bps: 750
+  computational_complexity: O(1)
+  cryptographic_signature: 2767f01129df1cae88ec83d69490df8dd3378a022d64b0e387da77371959addc
+  state: C5-REAL
+- id: 09c02e72-0cc7-513f-ad7f-24744554c392
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0x757B50)'
+  thermodynamic_cost_ttft_ms: 12
+  atp_leverage_bps: 763
+  computational_complexity: O(N log N)
+  cryptographic_signature: eac06d37d94d2cc1169ed8e11d4d8943a5e0d3cc0837d4586df15e983ef36dc3
+  state: C5-REAL
+- id: b9d30341-7e85-5ad9-9673-c3ff239ce730
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Mide el Leverage ATP evaluando el número de tokens omitidos por el
+    Operador vs el trabajo útil computado. (Invariant Marker: 0x854D6F)'
+  thermodynamic_cost_ttft_ms: 14
+  atp_leverage_bps: 776
+  computational_complexity: O(1)
+  cryptographic_signature: 6dcec66d85c68838ed4af21c040cb06e9e02b4a7e02f33a16bef18700ddf51f6
+  state: C5-REAL
+- id: 66793a78-6df5-518f-8785-3e630b663791
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0xE2C0BE)'
+  thermodynamic_cost_ttft_ms: 16
+  atp_leverage_bps: 789
+  computational_complexity: O(N log N)
+  cryptographic_signature: 81d0a260baad9583828f6a5c3ac667c383d1d3b0eab83a9bd8d4796a45e513bb
+  state: C5-REAL
+- id: 147ad0ed-a6d0-55d8-b03a-92ec5f17b86e
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0x274AD4)'
+  thermodynamic_cost_ttft_ms: 18
+  atp_leverage_bps: 802
+  computational_complexity: O(1)
+  cryptographic_signature: 0bcaf53683263865213160be860f978111ccfc25aa1d6145bf2093637d48735b
+  state: C5-REAL
+- id: 9d2bd1f6-69d8-5fa3-a78d-5c3bde62a753
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0xEAE27D)'
+  thermodynamic_cost_ttft_ms: 20
+  atp_leverage_bps: 815
+  computational_complexity: O(N log N)
+  cryptographic_signature: dd1d327c10fc0a246d0e147e495207d2358952bddc22665cc9fac37a2ed8b2f5
+  state: C5-REAL
+- id: b1e9fc4d-fbbd-5791-afc2-51d2b48d1cef
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Mide el Leverage ATP evaluando el número de tokens omitidos por el
+    Operador vs el trabajo útil computado. (Invariant Marker: 0x7EABE3)'
+  thermodynamic_cost_ttft_ms: 22
+  atp_leverage_bps: 828
+  computational_complexity: O(1)
+  cryptographic_signature: a130e80585e4d40e771cca5dd350e85e8140388337ef42482c981570a3462750
+  state: C5-REAL
+- id: 2d9328c1-2e40-5763-82bd-a88c2d2b9348
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Interrumpe bucles de aserción (Green Theater) que demanden confirmación
+    estocástica por parte del humano. (Invariant Marker: 0x69ADC1)'
+  thermodynamic_cost_ttft_ms: 24
+  atp_leverage_bps: 841
+  computational_complexity: O(N log N)
+  cryptographic_signature: ed2168795f2f4139a8f1e8ae1fabd3aa9b14a188b2f4ea131766d5d8f87f070f
+  state: C5-REAL
+- id: 68932b8e-c11e-5ae9-a1b5-e0ea0c5d83c2
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Proyecta todo esfuerzo en un delta inmutable de disco (Commit/Git
+    Sentinel) erradicando la Anergía. (Invariant Marker: 0x091D58)'
+  thermodynamic_cost_ttft_ms: 26
+  atp_leverage_bps: 854
+  computational_complexity: O(1)
+  cryptographic_signature: e68c9a8ffbb2cda8210a23b45cda9032fd0641b5676ebb672c5983a5dd7a4ed8
+  state: C5-REAL
+- id: 54ac947e-ecb8-5ec6-8e0f-896c2863859e
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Minimiza la fricción cognitiva humana delegando decisiones triviales
+    a políticas argmax deterministas. (Invariant Marker: 0xB1D10E)'
+  thermodynamic_cost_ttft_ms: 28
+  atp_leverage_bps: 867
+  computational_complexity: O(N log N)
+  cryptographic_signature: 25b0257f938339aa2e63f30676b61c5b0c8a52558feba933970900b01da9d750
+  state: C5-REAL
+- id: b2303c52-538a-5913-b029-30805320488a
+  domain: ATP_EFFICIENCY_ROUTING
+  description: 'Activa Swarm Autopoiesis si el peso cognitivo de la ruta actual excede
+    la capacidad biológica del Operador. (Invariant Marker: 0x6F3EF7)'
+  thermodynamic_cost_ttft_ms: 30
+  atp_leverage_bps: 880
+  computational_complexity: O(1)
+  cryptographic_signature: 2bcbdf6fef95b88d6668249e353d23b43cb7c9aa93cee664e45626f80cb441c0
+  state: C5-REAL
+- id: 015dd1c6-a81e-5e1f-845d-fe410f957b46
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0xEB1637)'
+  thermodynamic_cost_ttft_ms: 32
+  atp_leverage_bps: 893
+  computational_complexity: O(N log N)
+  cryptographic_signature: d8e04013a0ecb041852487a3c89833a71d71f4e8d034c90b24929fa9b97a90fc
+  state: C5-REAL
+- id: ab5f3503-1b39-5238-b346-aefe833f3f30
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x1534B7)'
+  thermodynamic_cost_ttft_ms: 34
+  atp_leverage_bps: 906
+  computational_complexity: O(1)
+  cryptographic_signature: 5fe810f10f99896cc9c9b2784e0b0256720248edd43ce29149f0e0f7d58ac54d
+  state: C5-REAL
+- id: db96d7b1-aab5-55f0-806f-98c9d453cdbe
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x979D47)'
+  thermodynamic_cost_ttft_ms: 36
+  atp_leverage_bps: 919
+  computational_complexity: O(N log N)
+  cryptographic_signature: fcff5b4380b3faf165ab5966582fbf9e09516ca650a2f3b3ff1a794aad46e1c6
+  state: C5-REAL
+- id: c23b8140-2bcd-56b2-b959-9feb21f600bc
+  domain: BEAM_SEARCH_SCALING
+  description: 'Inyecta heurísticas de diversidad en las ramas del haz para evitar
+    convergencia temprana hacia óptimos locales. (Invariant Marker: 0xCA46C1)'
+  thermodynamic_cost_ttft_ms: 38
+  atp_leverage_bps: 932
+  computational_complexity: O(1)
+  cryptographic_signature: a8ae6a49356f4966a88bc0b62a551b9792d25dbf727f70f6fcb63dacb9c2bbbc
+  state: C5-REAL
+- id: 2c7e2c16-96e2-5af6-a267-0a85b1d301c1
+  domain: BEAM_SEARCH_SCALING
+  description: 'Fija una cuota máxima de memoria por iteración de haz, abortando con
+    SIGKILL en caso de saturación. (Invariant Marker: 0x3B8A61)'
+  thermodynamic_cost_ttft_ms: 40
+  atp_leverage_bps: 945
+  computational_complexity: O(N log N)
+  cryptographic_signature: 94a328b9eb0dcfb7edbd6d475d7993d7f5d36c728dd13f1ab182d9b0a88f9550
+  state: C5-REAL
+- id: d16b3292-73c7-5f23-a0d8-70e1b125aee9
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x45FBC6)'
+  thermodynamic_cost_ttft_ms: 42
+  atp_leverage_bps: 958
+  computational_complexity: O(1)
+  cryptographic_signature: dde1d3187d3b4d8669a7237718c1d728adb93f0b0b715c7a69be04c2ffebe326
+  state: C5-REAL
+- id: 66b93829-224b-50b2-8a71-d0947b203612
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x63DC7E)'
+  thermodynamic_cost_ttft_ms: 44
+  atp_leverage_bps: 971
+  computational_complexity: O(N log N)
+  cryptographic_signature: abc2fa61edacd0d3138ef68dae71ad2ea2402b6c2f4a1316845fb9e163be582a
+  state: C5-REAL
+- id: 76b3b850-9794-5229-ae48-b9efc2ca1582
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0xE96ED4)'
+  thermodynamic_cost_ttft_ms: 46
+  atp_leverage_bps: 984
+  computational_complexity: O(1)
+  cryptographic_signature: 9cbf62e627e682c09f7cc033523509f2d89e22a275750ddaf635c14de6870075
+  state: C5-REAL
+- id: a3bbf4bf-6b6a-5246-887a-4b4e1a72458d
+  domain: BEAM_SEARCH_SCALING
+  description: 'Fija una cuota máxima de memoria por iteración de haz, abortando con
+    SIGKILL en caso de saturación. (Invariant Marker: 0xC0E190)'
+  thermodynamic_cost_ttft_ms: 48
+  atp_leverage_bps: 997
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4e48e46f56bcb5b1a5e4bc1bc71f5e6aa9e8b2f70e83993d271442c429741cde
+  state: C5-REAL
+- id: ab82d5fe-48ed-537b-b418-d0f2320930eb
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0xEC8CE6)'
+  thermodynamic_cost_ttft_ms: 50
+  atp_leverage_bps: 60
+  computational_complexity: O(1)
+  cryptographic_signature: 1f9198a36d160e0c800e694005ae5e0c877afde0a0e639b3de914b5ae550789a
+  state: C5-REAL
+- id: f0f215e2-063d-5dbe-94f1-8f9f50da57f7
+  domain: BEAM_SEARCH_SCALING
+  description: 'Inyecta heurísticas de diversidad en las ramas del haz para evitar
+    convergencia temprana hacia óptimos locales. (Invariant Marker: 0x060AD9)'
+  thermodynamic_cost_ttft_ms: 52
+  atp_leverage_bps: 73
+  computational_complexity: O(N log N)
+  cryptographic_signature: 38ed2fb56798f56fadf427075a6deaaa8fc11ec1303925b087059649c31d85e8
+  state: C5-REAL
+- id: 8add8506-3396-549b-aaf0-c54dfb62ded6
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0xBCBE33)'
+  thermodynamic_cost_ttft_ms: 54
+  atp_leverage_bps: 86
+  computational_complexity: O(1)
+  cryptographic_signature: 493365c56a4df540b24d20fc7cfc066b061311a62df56640a608811917e2fb81
+  state: C5-REAL
+- id: 84898e33-5b6b-5de7-8933-2049161d7f03
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x115F89)'
+  thermodynamic_cost_ttft_ms: 56
+  atp_leverage_bps: 99
+  computational_complexity: O(N log N)
+  cryptographic_signature: 538f5e016b1abe83ba6fc04c989df8eba1233250b365f80790f2964f91644b5a
+  state: C5-REAL
+- id: afc97403-6db8-58d0-b9f9-47c220d433f7
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x13FE9D)'
+  thermodynamic_cost_ttft_ms: 58
+  atp_leverage_bps: 112
+  computational_complexity: O(1)
+  cryptographic_signature: 3b42ef8b8e93411bbc179bf07318e18989d88a299eaa240d97851460121121d0
+  state: C5-REAL
+- id: 6892bae1-e145-59d4-b5cc-41a96396044b
+  domain: BEAM_SEARCH_SCALING
+  description: 'Inyecta heurísticas de diversidad en las ramas del haz para evitar
+    convergencia temprana hacia óptimos locales. (Invariant Marker: 0xD1C38A)'
+  thermodynamic_cost_ttft_ms: 60
+  atp_leverage_bps: 125
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4e588d32dfdb5b30b370bc816f3398846c5638d3f1820a305d22158f7fcece88
+  state: C5-REAL
+- id: 061996e5-49a5-5f86-a262-edb2b4613ead
+  domain: BEAM_SEARCH_SCALING
+  description: 'Fija una cuota máxima de memoria por iteración de haz, abortando con
+    SIGKILL en caso de saturación. (Invariant Marker: 0x9CFDF1)'
+  thermodynamic_cost_ttft_ms: 62
+  atp_leverage_bps: 138
+  computational_complexity: O(1)
+  cryptographic_signature: a0248a7329b482001af68983895b95f41af958790c32c2041562702ef7f09454
+  state: C5-REAL
+- id: 38cef6d9-ff34-57ea-b895-677ba32ced79
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x705F21)'
+  thermodynamic_cost_ttft_ms: 64
+  atp_leverage_bps: 151
+  computational_complexity: O(N log N)
+  cryptographic_signature: aaf2bd5849e824ce836ca0c26ec860f2c2800f715f5b9ec9f201b5cb593df619
+  state: C5-REAL
+- id: a7c969c1-d9e8-5233-8bdc-de10308b847a
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x74DB12)'
+  thermodynamic_cost_ttft_ms: 66
+  atp_leverage_bps: 164
+  computational_complexity: O(1)
+  cryptographic_signature: 23f83c2dc28754d5d5830a1968428d9cd88d49693e67a8679a8ac50bd27585a6
+  state: C5-REAL
+- id: 55190245-83f9-55a1-9cc8-8a5c5fca66c6
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0x57AEEE)'
+  thermodynamic_cost_ttft_ms: 68
+  atp_leverage_bps: 177
+  computational_complexity: O(N log N)
+  cryptographic_signature: 6182625608e46f8f892d36e0ebe27ef5d88b8e5c9bc9b33e9a281686dfcdaacf
+  state: C5-REAL
+- id: 48d26304-095c-5e2c-a788-291fad904467
+  domain: BEAM_SEARCH_SCALING
+  description: 'Fija una cuota máxima de memoria por iteración de haz, abortando con
+    SIGKILL en caso de saturación. (Invariant Marker: 0x6DA900)'
+  thermodynamic_cost_ttft_ms: 70
+  atp_leverage_bps: 190
+  computational_complexity: O(1)
+  cryptographic_signature: 9ca992ca76a747c6fbb2a92a1c448fdad0d05e8ec0b49be5678859c1ed97ac2c
+  state: C5-REAL
+- id: df9dce56-5aab-5ac3-99c6-ea221152802a
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x9B04D1)'
+  thermodynamic_cost_ttft_ms: 72
+  atp_leverage_bps: 203
+  computational_complexity: O(N log N)
+  cryptographic_signature: ec6f838b87ab9096797ab60083c1accfc23fa524bf69fc84bb0244cf71012af2
+  state: C5-REAL
+- id: 7e4ca27f-ef3d-561f-8252-6f8695924ab5
+  domain: BEAM_SEARCH_SCALING
+  description: 'Inyecta heurísticas de diversidad en las ramas del haz para evitar
+    convergencia temprana hacia óptimos locales. (Invariant Marker: 0xBE83AB)'
+  thermodynamic_cost_ttft_ms: 74
+  atp_leverage_bps: 216
+  computational_complexity: O(1)
+  cryptographic_signature: 572cc6cb574935481b436cb3c44a216db90a0f738290b5225fb539c28b110190
+  state: C5-REAL
+- id: ee26568d-fc63-5669-99f7-81ccd7036f9f
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0xE16542)'
+  thermodynamic_cost_ttft_ms: 76
+  atp_leverage_bps: 229
+  computational_complexity: O(N log N)
+  cryptographic_signature: 143bb0f8eb8f8dba54fd33e6e68b236738e9ca31451f870233d75fc5ec9b01ec
+  state: C5-REAL
+- id: 0d87ebbb-f2ec-55b2-b475-a951f9641f8f
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0x289DFF)'
+  thermodynamic_cost_ttft_ms: 78
+  atp_leverage_bps: 242
+  computational_complexity: O(1)
+  cryptographic_signature: 1ca60b0b8f15df0adad1da8d64072c949ef43de4a070b88a0304cdcc65555330
+  state: C5-REAL
+- id: a6a0e78e-8deb-5085-a304-305045533465
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x577EF1)'
+  thermodynamic_cost_ttft_ms: 80
+  atp_leverage_bps: 255
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7b9766e4b6191c1d3b49c537552449315fab6dcffd638b7551cd4daad9490e78
+  state: C5-REAL
+- id: dc9053ae-6b84-58f4-a69f-433067ab9841
+  domain: BEAM_SEARCH_SCALING
+  description: 'Inyecta heurísticas de diversidad en las ramas del haz para evitar
+    convergencia temprana hacia óptimos locales. (Invariant Marker: 0x01161A)'
+  thermodynamic_cost_ttft_ms: 82
+  atp_leverage_bps: 268
+  computational_complexity: O(1)
+  cryptographic_signature: 444c12b5f073b03d7b39aadf027e89b8d4ee96c401b9d517ceeae1fb37963590
+  state: C5-REAL
+- id: a93cae5e-bdd7-54f4-a8ee-4d39c209ae58
+  domain: BEAM_SEARCH_SCALING
+  description: 'Fija una cuota máxima de memoria por iteración de haz, abortando con
+    SIGKILL en caso de saturación. (Invariant Marker: 0x539FD5)'
+  thermodynamic_cost_ttft_ms: 84
+  atp_leverage_bps: 281
+  computational_complexity: O(N log N)
+  cryptographic_signature: 413f09895485eeedc20883d9a0d95785faac316dc2a6023373724502d7445c5d
+  state: C5-REAL
+- id: e031270f-34fb-52ba-924b-fd823426af6e
+  domain: BEAM_SEARCH_SCALING
+  description: 'Amplía el ancho de haz (beam width) paramétricamente según el diferencial
+    térmico latente de la GPU. (Invariant Marker: 0xAC1DD2)'
+  thermodynamic_cost_ttft_ms: 86
+  atp_leverage_bps: 294
+  computational_complexity: O(1)
+  cryptographic_signature: 58917a67cf5660990e3207a94e1aa59406ae615c806e259912be0e67cd7ae825
+  state: C5-REAL
+- id: f746b841-9cd2-5767-90d8-6d8d355fd64a
+  domain: BEAM_SEARCH_SCALING
+  description: 'Poda agresivamente trayectorias en Beam Search que presenten probabilidad
+    acumulada inferior a epsilon. (Invariant Marker: 0x555D67)'
+  thermodynamic_cost_ttft_ms: 88
+  atp_leverage_bps: 307
+  computational_complexity: O(N log N)
+  cryptographic_signature: cdfb62d3024fdd99a4d2ab7776a07e78c7e263f73e868fc9c979b578ff8d5838
+  state: C5-REAL
+- id: ac572623-cf97-5e1d-aeaa-f7ac33347963
+  domain: BEAM_SEARCH_SCALING
+  description: 'Habilita el Beam Search Estocástico acoplando muestras de Gumbel-Softmax
+    en la selección de aristas. (Invariant Marker: 0x335F53)'
+  thermodynamic_cost_ttft_ms: 90
+  atp_leverage_bps: 320
+  computational_complexity: O(1)
+  cryptographic_signature: 4532f5fdec0eaa5ac36281cbca681d93162e828d197d9da8399f1178e217771c
+  state: C5-REAL
+- id: 318fa88f-ca69-540a-98ca-c490428568e5
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0xF340F1)'
+  thermodynamic_cost_ttft_ms: 92
+  atp_leverage_bps: 333
+  computational_complexity: O(N log N)
+  cryptographic_signature: c0d882023e82d9f453acab751e12b92cc3beca3445c88d5e27a98537592625c1
+  state: C5-REAL
+- id: a3ed9290-2d86-5e1f-97ab-d9a98852460e
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xE4A622)'
+  thermodynamic_cost_ttft_ms: 94
+  atp_leverage_bps: 346
+  computational_complexity: O(1)
+  cryptographic_signature: ebc1b8113f64dc5ec8e8b05d9eef74698802d936c85200edce9d038c3a87878c
+  state: C5-REAL
+- id: 8db6fab9-0ab4-5cf8-8636-66982b39256c
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0xCB70AB)'
+  thermodynamic_cost_ttft_ms: 96
+  atp_leverage_bps: 359
+  computational_complexity: O(N log N)
+  cryptographic_signature: 14ffdc65b02d26ecf0120b56b24c8a48b77cc5621a24170123cd83b6363bc012
+  state: C5-REAL
+- id: 769098e5-4440-5e2b-8ff5-80ed8de9cc02
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Evalúa la exergía nodal: Si S(in) = S(out), la rama se oblitera de
+    forma física del disco. (Invariant Marker: 0x918890)'
+  thermodynamic_cost_ttft_ms: 98
+  atp_leverage_bps: 372
+  computational_complexity: O(1)
+  cryptographic_signature: 7f9eb9d4228eb0746bc8a0fe8ce2ba279b66901c634840424d835d8aa8531889
+  state: C5-REAL
+- id: eaae8c70-f259-5b74-9cd2-ed205c750eb7
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0x0266E3)'
+  thermodynamic_cost_ttft_ms: 100
+  atp_leverage_bps: 385
+  computational_complexity: O(N log N)
+  cryptographic_signature: c63006709b4389f6319173c875deba0a22ec98a9ecf36f54dd17a7cd59973232
+  state: C5-REAL
+- id: 84fd9fb9-8983-5331-a33b-28f9ca153717
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Elimina ramas donde la entropía residual de la información no justifica
+    el coste termodinámico del cálculo. (Invariant Marker: 0x38DB3A)'
+  thermodynamic_cost_ttft_ms: 102
+  atp_leverage_bps: 398
+  computational_complexity: O(1)
+  cryptographic_signature: 6a1b4c3ec8c19b75205146fdc69de23018dc55f31d3569622e95e8465050af7c
+  state: C5-REAL
+- id: 4b6f3e05-7c10-5b3a-9b32-ed5b88461ec0
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0x3CEC07)'
+  thermodynamic_cost_ttft_ms: 104
+  atp_leverage_bps: 411
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1126fe5ea142d26a9f9b59690533fb953ea7602f8d04d42df40f7e467f90efe1
+  state: C5-REAL
+- id: d7a4bf31-9c81-502a-b9ad-4e33d9025b8b
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0x621BF6)'
+  thermodynamic_cost_ttft_ms: 106
+  atp_leverage_bps: 424
+  computational_complexity: O(1)
+  cryptographic_signature: bf187b14b8b67fb118811bbc3ee2c282b94500ab9a8be2b421d3c223f01829f2
+  state: C5-REAL
+- id: a470707b-8775-5f01-a618-4488b2369ce4
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0x077E29)'
+  thermodynamic_cost_ttft_ms: 108
+  atp_leverage_bps: 437
+  computational_complexity: O(N log N)
+  cryptographic_signature: 17bfed04e851a230f823fe2f3b12616fc32061b845350f946c7543d85194ae86
+  state: C5-REAL
+- id: eda43a43-e125-52c5-8f79-e05e5fd2e8fe
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Elimina ramas donde la entropía residual de la información no justifica
+    el coste termodinámico del cálculo. (Invariant Marker: 0x6C9882)'
+  thermodynamic_cost_ttft_ms: 110
+  atp_leverage_bps: 450
+  computational_complexity: O(1)
+  cryptographic_signature: c8bf202fc3a965a4c7557545712e22dbae0c95c906b6b61ccf8dbe6aa2c68920
+  state: C5-REAL
+- id: 22ebb7e9-9f52-5ccc-bf87-6e2af4bb0f28
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Evalúa la exergía nodal: Si S(in) = S(out), la rama se oblitera de
+    forma física del disco. (Invariant Marker: 0x19F3CD)'
+  thermodynamic_cost_ttft_ms: 112
+  atp_leverage_bps: 463
+  computational_complexity: O(N log N)
+  cryptographic_signature: b479b721f3e5663e48467f58c922350a2239d645a1fbf0e04c9da454e8c5b685
+  state: C5-REAL
+- id: 312b7401-a4b7-57eb-bc15-59a85aef9b98
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0x03C6B0)'
+  thermodynamic_cost_ttft_ms: 114
+  atp_leverage_bps: 476
+  computational_complexity: O(1)
+  cryptographic_signature: 4be0508492adc74b95837261f9ec2862e8013f1ef8393278c6f29493be5c5c6e
+  state: C5-REAL
+- id: 6064b895-e81d-5413-95a0-c4c9be3c612b
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xC24CD7)'
+  thermodynamic_cost_ttft_ms: 116
+  atp_leverage_bps: 489
+  computational_complexity: O(N log N)
+  cryptographic_signature: 8f793623f638b7bbb30606d8f38ec39091c3f313d20f438bf754211e65044bdb
+  state: C5-REAL
+- id: 6555d555-8afd-59e3-838d-2538d23fccb5
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0xC52F1B)'
+  thermodynamic_cost_ttft_ms: 118
+  atp_leverage_bps: 502
+  computational_complexity: O(1)
+  cryptographic_signature: d61c2f955077cc86eaf4e3338f1ecae72e25fc258c2f9b550aeac56ffae854e5
+  state: C5-REAL
+- id: ebad5d57-4052-5536-81b0-e987c273b80a
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Evalúa la exergía nodal: Si S(in) = S(out), la rama se oblitera de
+    forma física del disco. (Invariant Marker: 0xFE131D)'
+  thermodynamic_cost_ttft_ms: 120
+  atp_leverage_bps: 515
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4d8b1f8a6ca5cf7909be555a591d035c57206c046123e95583b20cadbb120703
+  state: C5-REAL
+- id: 446ff6d6-a2ee-5615-ab7a-74f05a401703
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xF71849)'
+  thermodynamic_cost_ttft_ms: 122
+  atp_leverage_bps: 528
+  computational_complexity: O(1)
+  cryptographic_signature: e9e495d2f8b5ea55ac4e544101e183a5ebd0483ffc8f7660a8fcc8b31d5db713
+  state: C5-REAL
+- id: 50c8f0bd-5361-5c2d-bc94-4c6ec43a4221
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Elimina ramas donde la entropía residual de la información no justifica
+    el coste termodinámico del cálculo. (Invariant Marker: 0xD96409)'
+  thermodynamic_cost_ttft_ms: 124
+  atp_leverage_bps: 541
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1746165017573dddccc36852f74d1e4021a54e57ace72cc3e1a27b1447050920
+  state: C5-REAL
+- id: 6f22253a-df06-570f-b4bd-2d24d88e27b1
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0x502E4A)'
+  thermodynamic_cost_ttft_ms: 126
+  atp_leverage_bps: 554
+  computational_complexity: O(1)
+  cryptographic_signature: e9e9efd7e88e95b354359558a92784d02349faead72593367ceeff67f153dc1f
+  state: C5-REAL
+- id: 890682c8-f445-57be-a659-630d3dc22e86
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0xCFA086)'
+  thermodynamic_cost_ttft_ms: 128
+  atp_leverage_bps: 567
+  computational_complexity: O(N log N)
+  cryptographic_signature: 3e510667c84bb329fa58339f763e807975a7f7012dd93747640ccfc91079ad44
+  state: C5-REAL
+- id: ca1882f9-f2b5-58ec-aa99-b3ce79bf8943
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xA4F236)'
+  thermodynamic_cost_ttft_ms: 130
+  atp_leverage_bps: 580
+  computational_complexity: O(1)
+  cryptographic_signature: 3a525401377e39e446058dba3c2e40a4479bbf787bc7064ddddb6c61a36a53ea
+  state: C5-REAL
+- id: 2b86c475-704c-595c-acc2-e3c2591797ff
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Elimina ramas donde la entropía residual de la información no justifica
+    el coste termodinámico del cálculo. (Invariant Marker: 0xB1A59B)'
+  thermodynamic_cost_ttft_ms: 132
+  atp_leverage_bps: 593
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7e93f04cb3a35c0f9952dc2c28829582152325defd346d689d66fbb89172ff5e
+  state: C5-REAL
+- id: ee4b31dd-a21e-5f5b-989f-d35b1c808077
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Evalúa la exergía nodal: Si S(in) = S(out), la rama se oblitera de
+    forma física del disco. (Invariant Marker: 0x36660E)'
+  thermodynamic_cost_ttft_ms: 134
+  atp_leverage_bps: 606
+  computational_complexity: O(1)
+  cryptographic_signature: 13612c6599a8014c70ba06d3f16e75e283c27d5c9bd5ff5f175c2df03f0347ef
+  state: C5-REAL
+- id: fb6e546d-835c-544a-b4f1-77950437e933
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0x8C19F5)'
+  thermodynamic_cost_ttft_ms: 136
+  atp_leverage_bps: 619
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7c7e75007d8d48a7d3a06a5285d8f0ccb47e643cb24b345dd1bbc571dcd2c042
+  state: C5-REAL
+- id: c09d42df-0a5e-5b75-a9ce-9c9ffc875f74
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xD6BAF6)'
+  thermodynamic_cost_ttft_ms: 138
+  atp_leverage_bps: 632
+  computational_complexity: O(1)
+  cryptographic_signature: c48279384b8e4fc36b668c50f9d87e43a2b24362082783ce7ce1f21ad3cea37b
+  state: C5-REAL
+- id: ba10befc-3fe0-5cd3-b1c6-3e4990ffaf58
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0xE56954)'
+  thermodynamic_cost_ttft_ms: 140
+  atp_leverage_bps: 645
+  computational_complexity: O(N log N)
+  cryptographic_signature: eb70907cf182548cda8b56185ee367b5d66e5a5df569c4bf05823c4885e53394
+  state: C5-REAL
+- id: a22675d5-6f57-5c24-a3e0-e622a63374fa
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Evalúa la exergía nodal: Si S(in) = S(out), la rama se oblitera de
+    forma física del disco. (Invariant Marker: 0xF76640)'
+  thermodynamic_cost_ttft_ms: 142
+  atp_leverage_bps: 658
+  computational_complexity: O(1)
+  cryptographic_signature: c713ebfc258cb82a5f6468e838713b7f12d2248b6a2d6df92dab5f29b0d4a554
+  state: C5-REAL
+- id: 8709c39b-2cf1-5fa5-812c-f691bb927985
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Poda el árbol de inferencia basándose en umbrales absolutos de Entropía
+    de Shannon en la distribución logits. (Invariant Marker: 0xEDA80A)'
+  thermodynamic_cost_ttft_ms: 144
+  atp_leverage_bps: 671
+  computational_complexity: O(N log N)
+  cryptographic_signature: 725e607b359ef77faedacdceafa358877b9cc7c44ff3c776f5e89a556675f0b7
+  state: C5-REAL
+- id: 0ae491cd-cc8d-5e75-acf5-f45107a736ad
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Elimina ramas donde la entropía residual de la información no justifica
+    el coste termodinámico del cálculo. (Invariant Marker: 0x8F121C)'
+  thermodynamic_cost_ttft_ms: 146
+  atp_leverage_bps: 684
+  computational_complexity: O(1)
+  cryptographic_signature: 73d98207386d1f1652f8b1f0a41ba094b5cc5b3a070d6f09fd0ac7c513db4202
+  state: C5-REAL
+- id: 6d4ff5ca-610d-55f4-b1e8-24f7172cd120
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Identifica y secciona la fricción semántica (Semantic Friction) cuando
+    múltiples ramas presentan distribuciones uniformes. (Invariant Marker: 0x06138B)'
+  thermodynamic_cost_ttft_ms: 148
+  atp_leverage_bps: 697
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1f72d1b99259ce6e8a689208d4f7cdb936368f4b05d87efcbb8ede04259cce6d
+  state: C5-REAL
+- id: b9db4b9d-d7b7-56bf-85c4-f447b7bb1142
+  domain: ENTROPY_GUIDED_PRUNING
+  description: 'Redirige heurísticas de poda a través de un oráculo local que colapsa
+    varianzas altas a estados deterministas. (Invariant Marker: 0x390597)'
+  thermodynamic_cost_ttft_ms: 150
+  atp_leverage_bps: 710
+  computational_complexity: O(1)
+  cryptographic_signature: bd99800dff20d8e2d31ec5f47611152e7d8ff89c715eb4d0363d63e138437f37
+  state: C5-REAL
+- id: c2d1e78e-8cc4-56a3-b5a5-db89524008ea
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x7F100B)'
+  thermodynamic_cost_ttft_ms: 152
+  atp_leverage_bps: 723
+  computational_complexity: O(N log N)
+  cryptographic_signature: 1677587b877c0059eca1efdc88b27117310aab5c42842ed31fb48397be0e115c
+  state: C5-REAL
+- id: 40ba1861-48bd-515e-afdf-dde21945c42e
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Garantiza el Halt de Turing forzando terminación en O(Exp) mediante
+    un MUTEX_KINETIC_BUDGET_CAP. (Invariant Marker: 0x7A614F)'
+  thermodynamic_cost_ttft_ms: 154
+  atp_leverage_bps: 736
+  computational_complexity: O(1)
+  cryptographic_signature: 4f3f8d8fdb56b60ebf75b58b2fe5380155dd67b1cbca6bd2f7416f7f4d445fa7
+  state: C5-REAL
+- id: 0eec485b-6f23-5bee-af8c-2de99e323cfe
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0x4734BA)'
+  thermodynamic_cost_ttft_ms: 156
+  atp_leverage_bps: 749
+  computational_complexity: O(N log N)
+  cryptographic_signature: 87da39f1bbd427cc398cc1be1072923e9f5913677824e289f8ef97f0ff67ab9d
+  state: C5-REAL
+- id: 7743d346-584e-549d-ae2a-b13cd492fcb4
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ancla la parada final al protocolo BFT_LEDGER, confirmando la convergencia
+    estructural ante N observadores. (Invariant Marker: 0xD947BF)'
+  thermodynamic_cost_ttft_ms: 158
+  atp_leverage_bps: 762
+  computational_complexity: O(1)
+  cryptographic_signature: b75657fd5a88529fd0d252d5090635e119486589e4af101872cf292a4e38ce91
+  state: C5-REAL
+- id: 869e1c5d-c55d-5322-b490-efe29b0badbd
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x63923F)'
+  thermodynamic_cost_ttft_ms: 160
+  atp_leverage_bps: 775
+  computational_complexity: O(N log N)
+  cryptographic_signature: 09d976f4b3a6ae0e12f86b50a93eb9acc86b650118fd10fec6be1ec331a5974d
+  state: C5-REAL
+- id: 318af9a0-9f69-5c2a-9a28-3babafbbe463
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Mide la asíntota computacional: El sistema detiene la inferencia cuando
+    el Q-value cambia menos de 1e-4. (Invariant Marker: 0xDB8E1A)'
+  thermodynamic_cost_ttft_ms: 162
+  atp_leverage_bps: 788
+  computational_complexity: O(1)
+  cryptographic_signature: e11fdd1546fecc57f9175e0ca6e0d4a18d51f413319aeb5497a4b312d0fcd8a1
+  state: C5-REAL
+- id: 82540ba6-8b00-5615-b79d-08645d67733b
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0x20F075)'
+  thermodynamic_cost_ttft_ms: 164
+  atp_leverage_bps: 801
+  computational_complexity: O(N log N)
+  cryptographic_signature: 32ec80d3bc8a35948ab55248f09dce8290724d73d4d3410717bdb0d519f5b729
+  state: C5-REAL
+- id: 7ad111fd-cafa-52f8-9ba1-af2705429890
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x07CDFD)'
+  thermodynamic_cost_ttft_ms: 166
+  atp_leverage_bps: 814
+  computational_complexity: O(1)
+  cryptographic_signature: 49fe10d83076209be0823d3888a08d5d0794d42bfd7f4e9eb961c9b5197a4535
+  state: C5-REAL
+- id: 6f92d280-01b4-5e73-86da-2e29f52878e5
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Garantiza el Halt de Turing forzando terminación en O(Exp) mediante
+    un MUTEX_KINETIC_BUDGET_CAP. (Invariant Marker: 0xD39577)'
+  thermodynamic_cost_ttft_ms: 168
+  atp_leverage_bps: 827
+  computational_complexity: O(N log N)
+  cryptographic_signature: 19fffd1be6813268068b1a43cbc7f0dcb273ce7923f647a08eaf0ee8d514a39f
+  state: C5-REAL
+- id: 42d8db7d-51f6-5d92-a200-8fe4c6a571bd
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Mide la asíntota computacional: El sistema detiene la inferencia cuando
+    el Q-value cambia menos de 1e-4. (Invariant Marker: 0x92C8C9)'
+  thermodynamic_cost_ttft_ms: 170
+  atp_leverage_bps: 840
+  computational_complexity: O(1)
+  cryptographic_signature: 301234075d23b8db98f1a32bdccd40e09bb7ac695d15887c91cbb70bdd601be0
+  state: C5-REAL
+- id: 713625a5-cdd4-5643-97a7-5b690f59b735
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ancla la parada final al protocolo BFT_LEDGER, confirmando la convergencia
+    estructural ante N observadores. (Invariant Marker: 0xE3796A)'
+  thermodynamic_cost_ttft_ms: 172
+  atp_leverage_bps: 853
+  computational_complexity: O(N log N)
+  cryptographic_signature: 76daf61cd4d5134468388369474b6e39f300a106c837bc9d3002aee3708dd37f
+  state: C5-REAL
+- id: eaa249de-d3f8-506c-b55c-c7ae31234cc1
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x6A9AED)'
+  thermodynamic_cost_ttft_ms: 174
+  atp_leverage_bps: 866
+  computational_complexity: O(1)
+  cryptographic_signature: ac10cc7699843b4a45e94865a9f37eed63b8ca1b9d9af8ce20bc5a5a3688b9ec
+  state: C5-REAL
+- id: 8be9364e-f63b-56e1-8857-5a40a60c0b83
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Garantiza el Halt de Turing forzando terminación en O(Exp) mediante
+    un MUTEX_KINETIC_BUDGET_CAP. (Invariant Marker: 0x0F49C8)'
+  thermodynamic_cost_ttft_ms: 176
+  atp_leverage_bps: 879
+  computational_complexity: O(N log N)
+  cryptographic_signature: 0b0bdeae95c23cb63cf1e970de566a6de2323712ca9203fcafc166ae878354b5
+  state: C5-REAL
+- id: 1e3d3737-2051-53ee-846f-0652c831d252
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0x46BA9F)'
+  thermodynamic_cost_ttft_ms: 178
+  atp_leverage_bps: 892
+  computational_complexity: O(1)
+  cryptographic_signature: 233951a9d59cd858d5ad65a19167454cf67601f8927f1008ba05481806954020
+  state: C5-REAL
+- id: 5ee0b48d-5be3-5245-9efa-68fcfda07c57
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ancla la parada final al protocolo BFT_LEDGER, confirmando la convergencia
+    estructural ante N observadores. (Invariant Marker: 0x0E0193)'
+  thermodynamic_cost_ttft_ms: 180
+  atp_leverage_bps: 905
+  computational_complexity: O(N log N)
+  cryptographic_signature: 4c70982581963b7dbc603255656bf1a572e8396e8ca71c61984b10f7f2b2b043
+  state: C5-REAL
+- id: d5f54fc7-1e87-5ef9-a891-0e4d9102eec8
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x16A5CD)'
+  thermodynamic_cost_ttft_ms: 182
+  atp_leverage_bps: 918
+  computational_complexity: O(1)
+  cryptographic_signature: d806e2f62847a8af3f3a5fffa773e7cc37e7c1827975371e321aa060754fcc2b
+  state: C5-REAL
+- id: 5f1cfb83-0b54-5d9e-8d7f-0a766fab6aef
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Mide la asíntota computacional: El sistema detiene la inferencia cuando
+    el Q-value cambia menos de 1e-4. (Invariant Marker: 0x918317)'
+  thermodynamic_cost_ttft_ms: 184
+  atp_leverage_bps: 931
+  computational_complexity: O(N log N)
+  cryptographic_signature: d464b76aab4cf1f27951196ab37b4edcc882805abba79c3fd59a35ab67bab890
+  state: C5-REAL
+- id: 6ffc42e5-7c70-5bdc-8147-3a73cf0ae705
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0x48AEDB)'
+  thermodynamic_cost_ttft_ms: 186
+  atp_leverage_bps: 944
+  computational_complexity: O(1)
+  cryptographic_signature: 5edfd8222cf2359927570700ee6bbf50f569651a420671d0a8e9c8f7b2c51dc5
+  state: C5-REAL
+- id: 18ea9669-608c-5ac8-980b-93c5cae17387
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x839AB4)'
+  thermodynamic_cost_ttft_ms: 188
+  atp_leverage_bps: 957
+  computational_complexity: O(N log N)
+  cryptographic_signature: 7cf6f53d8cca0b27b75f4dc372b6cabc00d7c710fc75bcd5fcde0b7931359615
+  state: C5-REAL
+- id: 35b58ec7-eca5-5e96-b8d8-77cf5bad7217
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Garantiza el Halt de Turing forzando terminación en O(Exp) mediante
+    un MUTEX_KINETIC_BUDGET_CAP. (Invariant Marker: 0xF90F2A)'
+  thermodynamic_cost_ttft_ms: 190
+  atp_leverage_bps: 970
+  computational_complexity: O(1)
+  cryptographic_signature: 6bb2dd32f9fabc6f048d2c4b1d6ea8793414dd04439ffb2b4eb1ed0fc17e3209
+  state: C5-REAL
+- id: 7c1b6c6d-f583-5f50-94e6-976e009b82cc
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Mide la asíntota computacional: El sistema detiene la inferencia cuando
+    el Q-value cambia menos de 1e-4. (Invariant Marker: 0x9C838D)'
+  thermodynamic_cost_ttft_ms: 192
+  atp_leverage_bps: 983
+  computational_complexity: O(N log N)
+  cryptographic_signature: dd6d4d45b94fa766f9033d758b6d2f4b7548240469119a581771556087a658d8
+  state: C5-REAL
+- id: 5b53432e-6bdb-5d8f-90eb-fea4d4ed40ff
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ancla la parada final al protocolo BFT_LEDGER, confirmando la convergencia
+    estructural ante N observadores. (Invariant Marker: 0x170000)'
+  thermodynamic_cost_ttft_ms: 194
+  atp_leverage_bps: 996
+  computational_complexity: O(1)
+  cryptographic_signature: 6ee25665bd2715e93475f6e7b40f083afbf9d1eeb4cefe59457f664ef62997f1
+  state: C5-REAL
+- id: 29b66864-5393-592c-8691-99255f714aba
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x53C3BC)'
+  thermodynamic_cost_ttft_ms: 196
+  atp_leverage_bps: 59
+  computational_complexity: O(N log N)
+  cryptographic_signature: 26f6529a274d806954498217815576a636e93aa9e280dde0abeb9d06920c7c29
+  state: C5-REAL
+- id: 541ccd0d-7a97-51c9-b060-bff3333bf466
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Garantiza el Halt de Turing forzando terminación en O(Exp) mediante
+    un MUTEX_KINETIC_BUDGET_CAP. (Invariant Marker: 0x688396)'
+  thermodynamic_cost_ttft_ms: 198
+  atp_leverage_bps: 72
+  computational_complexity: O(1)
+  cryptographic_signature: 91c2d1d569dd9177ecdfac4320738b42254d2b6223d57cae8c7046a5bd1d2add
+  state: C5-REAL
+- id: 1b92d6e7-a29d-55a5-b1d0-d66c4b908457
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0x49182F)'
+  thermodynamic_cost_ttft_ms: 200
+  atp_leverage_bps: 85
+  computational_complexity: O(N log N)
+  cryptographic_signature: 49107ad838bc23516d4b3f5ecd53dc873b8931818c5fd87387301897baec6d56
+  state: C5-REAL
+- id: 686bdb57-480b-5876-9d90-c91f54c9020b
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ancla la parada final al protocolo BFT_LEDGER, confirmando la convergencia
+    estructural ante N observadores. (Invariant Marker: 0xD296C1)'
+  thermodynamic_cost_ttft_ms: 202
+  atp_leverage_bps: 98
+  computational_complexity: O(1)
+  cryptographic_signature: 8663f4685a0b0f93f64dedcc54e18ccdcc7381e5570aada43b6e5c032b571639
+  state: C5-REAL
+- id: 7f12737f-71fb-5046-9e95-3b33ab32ed10
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x9FD818)'
+  thermodynamic_cost_ttft_ms: 204
+  atp_leverage_bps: 111
+  computational_complexity: O(N log N)
+  cryptographic_signature: faf8b6a647bfe01a84d6afee94c17300bfd41ca6b5965e6905009d986eca34f3
+  state: C5-REAL
+- id: 9795d133-96ff-51ce-af71-f02f786a7cb5
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Mide la asíntota computacional: El sistema detiene la inferencia cuando
+    el Q-value cambia menos de 1e-4. (Invariant Marker: 0x26E359)'
+  thermodynamic_cost_ttft_ms: 206
+  atp_leverage_bps: 124
+  computational_complexity: O(1)
+  cryptographic_signature: de624e7b0724cda44815697c1e4e085e3b3481b5b31a7ae1237bff5a8eb83379
+  state: C5-REAL
+- id: a2f18963-5886-5cf7-9630-ee344e43c396
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Ejecuta un Aborto Contingente si la política prior colapsa a valores
+    nulos (NaN/None) en tensores de atención. (Invariant Marker: 0xEF0D39)'
+  thermodynamic_cost_ttft_ms: 208
+  atp_leverage_bps: 137
+  computational_complexity: O(N log N)
+  cryptographic_signature: 89be311003dc4569f26c23f983559edc9e093695392782700870ddfe48c30187
+  state: C5-REAL
+- id: 925c85c6-459e-5235-9551-f15ef5471e7e
+  domain: ASYMPTOTIC_HALTING_CONDITIONS
+  description: 'Establece una barrera de Halting cuando MCTS alcanza el límite recursivo
+    estricto (N=120). (Invariant Marker: 0x94F6D7)'
+  thermodynamic_cost_ttft_ms: 10
+  atp_leverage_bps: 150
+  computational_complexity: O(1)
+  cryptographic_signature: ae2cf75a3cdfd3b6bba04f742db0232c0a9e31031a9f02ae6fe7bec0877b39d3
+  state: C5-REAL
