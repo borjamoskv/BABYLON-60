@@ -1,0 +1,31 @@
+Claim: "Transducción Estructural: Antipatrones en Invariantes de Clase"
+Proof:
+  Base: sha3_256
+  Range: [1, 3]
+  Confidence: C5-REAL
+Blast_Radius_Matrix:
+  Vector: Class Contract Violation & State Mutation
+  Blast_Radius: Object Lifecycle / Polymorphic Trees
+  Target_Invariant: BFT State Loop & Liskov Substitution Principle
+  Anergy_Risk: Fatal (Cascading logical errors masked by invalid state)
+Isomorphisms:
+  - "Invariante de Clase -> Thermodynamic Boundary Condition (C5-REAL)"
+  - "Circle-Ellipse Problem -> Polymorphic Isomorphism Breakage"
+  - "Design by Contract -> Cryptographic Port Forwarding / ABI Enforcement"
+Sources_Anchored:
+  - "Programación defensiva - Wikipedia"
+  - "Invariantes de clase en PHP - Medium"
+  - "Programación defensiva - UCLM"
+  - "Diseño por Contrato"
+Primitives:
+  - Concept: "C5_INVARIANT_VIOLATION"
+    AntiPattern: "Direct State Mutation (Bypass Setter)"
+    Thermodynamic_Cost: "Allows invalid object bounds (e.g., price < 0). Destroys contract integrity, causing untraceable domain exceptions in distant nodes."
+  - Concept: "C5_LISKOV_BREAK"
+    AntiPattern: "Circle-Ellipse Problem (Incompatible Inheritance)"
+    Thermodynamic_Cost: "Subclass mutations invalidate stronger superclass invariants. Introduces Ouroboros logic and breaks polymorphic guarantees."
+  - Concept: "C5_NO_DEFENSE"
+    AntiPattern: "Lack of Defensive Programming"
+    Thermodynamic_Cost: "Failing to validate pre/post conditions allows stochastic state drift, violating deterministic fail-fast mechanisms."
+
+CORTEX_TAINT: 6d652154c16af0dfb009ea9bcf7a486c901ad4c643f457e6c24acdc266f3ba83
