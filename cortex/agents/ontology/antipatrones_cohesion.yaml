@@ -1,14 +1,20 @@
-Claim: Agrupación de responsabilidades dispersas que destruyen la modularidad y el entendimiento.
+Claim: La dispersión de responsabilidades ("God Object", "Big Ball of Mud") destruye la mantenibilidad, impide la reutilización parcial y exponencialmente complica el testing.
 Proof:
-  Base: Transducción_C5
+  Base: Transducción_C5_V2
   Range: "[0,1]"
   Confidence: C5-REAL
 Isomorphisms:
   - The God Object
   - Big Ball of Mud
+  - Responsabilidades Dispersas
 Blast_Radius_Matrix:
   Vector: Asignación de Responsabilidades
-  Blast_Radius: Clase / Módulo Individual
-  Target_Invariant: Alta Cohesión (SRP)
-  Anergy_Risk: Alto (Testing complejo y fragilidad estructural)
-CORTEX_TAINT: 8b661b678018999a825cccb8a226db3ff4b95640e2bcb8dfbb815e5f769c16a7
+  Blast_Radius: Clase / Modulo Interno
+  Target_Invariant: Alta Cohesión (GRASP Especialista)
+  Anergy_Risk: Alto (Testing inabarcable y fragilidad de código)
+Sources:
+  - https://www.albertochamorro.dev/blog/patrones-grasp-parte-1/
+  - https://www.paradigmadigital.com/dev/bueno-feo-malo-diseno-software/
+  - https://jossjack.wordpress.com/2020/02/23/anti-patrones-ejemplos-bien-documentados-de-malas-soluciones-para-disenar-un-pesimo-sistema-de-software/
+  - https://www.studocu.com/latam/document/universidad-ort-uruguay/diseno-de-aplicaciones-1/grasp-diseno-de-software-con-responsabilidades/8717772
+CORTEX_TAINT: e9504c159ad9131c96a1b8f975d7a0fc033ace4081658a4546e04ad17006a7ff
