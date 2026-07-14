@@ -1,0 +1,15 @@
+Claim: Kinetic Trigger (Colapso Cinético)
+Proof: 
+  Base: 469b0af98 (Precondición de Matriz 300). Transducción atómica sin fricción latente.
+  Range: [O(1) Computación, Memoria Acotada]
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Decisión de Enrutamiento" -> "Causal_Ordering"
+  - "Timeout de Inferencia" -> "SIGKILL_Purge"
+  - "Bucle Generativo" -> "OOM_Killer_Invoke"
+Blast_Radius_Matrix:
+  Vector: Terminación de Procesos (Anergía)
+  Blast_Radius: Localización de Enjambre (Swarm)
+  Target_Invariant: Deterministic_Execution
+  Anergy_Risk: Low
+CORTEX_TAINT: 92c62c61dfef7bb666d4ebe3c047193df0f6b89f073122ba2b988eaf5d7a071c
