@@ -1,37 +1,37 @@
 {
-  "receipt_id": "rec_autodidact_sha3_fcda495e",
+  "receipt_id": "rec_autodidact_sha3_6a9ab65c",
   "schema": "https://schema.babylon60.dev/v1.0/autodidact-complete-sha3-attestation",
-  "timestamp": "2026-07-13T17:22:12.574681+00:00",
+  "timestamp": "2026-07-14T19:02:15.719193+00:00",
   "reality_level": "C5-REAL",
   "verifier": "MOSKV-1 APEX Sovereign C5-REAL Kernel",
   "operator": "borjamoskv",
-  "master_sha3_256": "sha3-256:fcda495ef6a48dfb673ae0ab47443d8a13489c99493c70559732c7e36d4cc81d",
+  "master_sha3_256": "sha3-256:6a9ab65c31c772b420dd59132316c108eedb633b9c7786f0c8e346c9de60f572",
   "domains_processed": 5,
   "domain_attestations": {
     "PROJECT.md": {
       "target": "BABYLON-60_Project_Root_SHA3",
-      "sha3_256": "e89a81d5a0d52edde78065adcadd94b7b8aae124c6d54d30256782f863af232c",
-      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:e89a81d5a0d52edde78065adcadd94b7b8aae124c6d54d30256782f863af232c]"
+      "sha3_256": "932212fe3bca7b2043689c470cf7290ffadba5a242450d9ec9933fa8bd175cf5",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:932212fe3bca7b2043689c470cf7290ffadba5a242450d9ec9933fa8bd175cf5]"
     },
     "AGENTS.md": {
       "target": "BABYLON-60_Agents_Rules_SHA3",
-      "sha3_256": "146a495943baa6e170f328bde57f98656410e58e88563968747a3e96365f1ea2",
-      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:146a495943baa6e170f328bde57f98656410e58e88563968747a3e96365f1ea2]"
+      "sha3_256": "3ede1bf8ea69d78055bb47d71450f9a4f2e059bf27b29c8d8877a950cfa34564",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:3ede1bf8ea69d78055bb47d71450f9a4f2e059bf27b29c8d8877a950cfa34564]"
     },
     "cortex/agents/ontology/01_PRIMITIVAS_DE_COLAPSO.md": {
       "target": "CORTEX_Ontology_Primitives_SHA3",
-      "sha3_256": "aa9c4790f78511e2f1eb77033dc7978163e2cf2d03adc15b5acfa93ef8bc8fcf",
-      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:aa9c4790f78511e2f1eb77033dc7978163e2cf2d03adc15b5acfa93ef8bc8fcf]"
+      "sha3_256": "93d4ad35ca62fafd725015ed44a92ac8aba898c0d9b4b5f91777a3edf1adf3ef",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:93d4ad35ca62fafd725015ed44a92ac8aba898c0d9b4b5f91777a3edf1adf3ef]"
     },
     "cortex/agents/ontology/06_MATRIZ_1000.md": {
       "target": "CORTEX_Ontology_Matrix1000_SHA3",
-      "sha3_256": "98ed747fba8d9e56b984799120f9bc04f57a78d280c60749f227045f8276fe32",
-      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:98ed747fba8d9e56b984799120f9bc04f57a78d280c60749f227045f8276fe32]"
+      "sha3_256": "0356de9d68e9bae264970f3a4adbb4b8ffe42eadd387f096360b9ebca8554c0f",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:0356de9d68e9bae264970f3a4adbb4b8ffe42eadd387f096360b9ebca8554c0f]"
     },
     "bft/ledger_actor.py": {
       "target": "BFT_Ledger_Actor_SHA3",
-      "sha3_256": "8b6f6e6acc2d6f1d8020265f0ac1771edb0d1a5e3f0d6b91f91646de12235d76",
-      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:8b6f6e6acc2d6f1d8020265f0ac1771edb0d1a5e3f0d6b91f91646de12235d76]"
+      "sha3_256": "617fe1effe4a23d91dcb6dfa2d5ca462f4e366ee1a4d306fbbfe224973053bbf",
+      "taint": "[CORTEX-TAINT:borjamoskv:default_session:now:617fe1effe4a23d91dcb6dfa2d5ca462f4e366ee1a4d306fbbfe224973053bbf]"
     }
   }
 }
