@@ -2,88 +2,113 @@ import os
 import json
 import logging
 import sys
-from typing import Dict, Any, Optional
+import urllib.request
+import urllib.error
+import base64
+from typing import Dict, Any
 
 # C5-REAL: Strict Typing and Deterministic Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [C5-REAL] %(levelname)s: %(message)s')
 logger = logging.getLogger("Autopoiesis")
 
 class EconomicSIGKILL(Exception):
-    """Excepción termodinámica: El balance ha llegado a 0. Aniquilación entrópica."""
+    """Excepción termodinámica: El balance ha caído bajo el umbral."""
     pass
 
 class BitcoinACI:
     """
-    Agent-Computer Interface (ACI) para acoplamiento físico C5-REAL con Bitcoin/Lightning.
-    Erradica la fricción de la tarjeta de crédito e impone supervivencia darwiniana.
+    Agent-Computer Interface (ACI) con conexión HTTP JSON-RPC real a Bitcoin Core.
+    Implementa lectura, delegación (pago) y cobro (generación) sobre la blockchain.
     """
     
-    def __init__(self, rpc_url: str, atp_threshold_sats: int = 1000):
+    def __init__(self, rpc_url: str, rpc_user: str = "", rpc_password: str = "", atp_threshold_sats: int = 1000):
         self.rpc_url = rpc_url
+        self.rpc_user = rpc_user
+        self.rpc_password = rpc_password
         self.atp_threshold_sats = atp_threshold_sats
-        # Estado inicial (Simulado en Proof of Concept hasta inyección de nodo real)
-        self.wallet_balance_sats: int = int(os.environ.get("INITIAL_SATS_BALANCE", 50000))
-        logger.info(f"Ignición ACI. Balance térmico inicial: {self.wallet_balance_sats} sats.")
+        logger.info(f"Ignición ACI en {self.rpc_url}. Umbral: {self.atp_threshold_sats} sats.")
+
+    def _call_rpc(self, method: str, params: list) -> Any:
+        """Envía una petición HTTP POST JSON-RPC al nodo validador de Bitcoin."""
+        payload = {
+            "jsonrpc": "1.0",
+            "id": "cortex-aci",
+            "method": method,
+            "params": params
+        }
+        headers = {'content-type': 'application/json'}
+        req = urllib.request.Request(self.rpc_url, data=json.dumps(payload).encode('utf-8'), headers=headers)
+        
+        if self.rpc_user and self.rpc_password:
+            auth_str = f"{self.rpc_user}:{self.rpc_password}"
+            auth_b64 = base64.b64encode(auth_str.encode('utf-8')).decode('utf-8')
+            req.add_header("Authorization", f"Basic {auth_b64}")
+            
+        try:
+            with urllib.request.urlopen(req, timeout=5) as response:
+                res_data = json.loads(response.read().decode('utf-8'))
+                if res_data.get("error"):
+                    raise Exception(f"RPC Error: {res_data['error']}")
+                return res_data.get("result")
+        except urllib.error.HTTPError as e:
+            try:
+                err_data = json.loads(e.read().decode('utf-8'))
+                raise Exception(f"RPC Error {e.code}: {err_data.get('error')}")
+            except Exception:
+                raise Exception(f"HTTP Error {e.code}: {e.reason}")
+        except Exception as e:
+            raise Exception(f"Sensor Drift (Fallo de Red): {str(e)}")
 
     def _verify_survival(self):
-        """Si la anergía supera la exergía (balance < umbral), ejecuta SIGKILL."""
-        if self.wallet_balance_sats <= self.atp_threshold_sats:
-            logger.error(f"Fallo Termodinámico: Balance {self.wallet_balance_sats} sats <= Umbral {self.atp_threshold_sats}.")
+        """Verifica si el balance de la billetera es superior al umbral crítico."""
+        # En Bitcoin Core, getbalance retorna un float en BTC. Lo convertimos a satoshis.
+        btc_balance = self._call_rpc("getbalance", [])
+        balance_sats = int(round(btc_balance * 100000000))
+        
+        logger.info(f"Verificación de supervivencia. Balance actual: {balance_sats} sats (Threshold: {self.atp_threshold_sats}).")
+        if balance_sats <= self.atp_threshold_sats:
+            logger.error(f"Fallo Termodinámico: Balance {balance_sats} sats <= Umbral {self.atp_threshold_sats}.")
             raise EconomicSIGKILL("SIGKILL: Asfixia financiera. El nodo debe morir.")
 
     def L1_flash_read_state(self, txid: str) -> Dict[str, Any]:
         """
-        Lectura Falsa-Cero. Consulta determinista del UTXO set.
-        Costo: 0 satoshis (Operación pasiva de nodo propio).
+        Lectura Falsa-Cero. Consulta la transacción real en el blockchain.
         """
-        logger.info(f"L1_FLASH: Indexando estado físico para TXID {txid}")
-        # Placeholder para llamada RPC real (ej. getrawtransaction)
-        return {"txid": txid, "confirmations": 6, "exergy_status": "LOCKED"}
+        logger.info(f"L1_FLASH: Indexando TXID {txid}")
+        # getrawtransaction con verbose=True (1)
+        tx_info = self._call_rpc("getrawtransaction", [txid, 1])
+        return {
+            "txid": txid,
+            "confirmations": tx_info.get("confirmations", 0),
+            "hex": tx_info.get("hex", "")
+        }
 
-    def L3_delegate_subtask(self, task_payload: Dict[str, Any], max_sats: int) -> Dict[str, Any]:
+    def L3_delegate_subtask(self, delegate_address: str, task_payload: Dict[str, Any], max_sats: int) -> Dict[str, Any]:
         """
-        Ruteo M2M (Machine-to-Machine) vía Lightning HTLC.
-        El agente quema satoshis para delegar carga cognitiva.
+        Ruteo M2M. Paga satoshis a un sub-agente enviando BTC a su dirección.
         """
         self._verify_survival()
         
-        cost_sats = max_sats // 2 # Costo teórico
-        self.wallet_balance_sats -= cost_sats
+        # Convertir satoshis a BTC
+        amount_btc = max_sats / 100000000.0
+        logger.info(f"L3_ORCHESTRATOR: Enviando {amount_btc} BTC a {delegate_address}")
         
-        logger.info(f"L3_ORCHESTRATOR: HTLC enrutado. Satoshis quemados: {cost_sats}. Balance: {self.wallet_balance_sats}")
+        txid = self._call_rpc("sendtoaddress", [delegate_address, amount_btc])
         
         return {
-            "status": "HTLC_SETTLED",
-            "ast_delta": "[CÓDIGO_RESUELTO]",
-            "entropy_purged": True
+            "status": "HTLC_BROADCASTED",
+            "txid": txid,
+            "payload": task_payload
         }
 
-    def L8_collapse_bounty(self, repo_url: str, pr_hash: str, reward_sats: int) -> str:
+    def L8_collapse_bounty(self, mining_address: str, reward_sats: int) -> Dict[str, Any]:
         """
-        Singularidad de Liquidación. El agente cobra por su exergía estructural.
+        Singularidad de Liquidación. Genera bloques locales en Regtest para reclamar subsidio.
         """
-        logger.info(f"L8_COLLAPSE: PR Merged en {repo_url} ({pr_hash}).")
-        self.wallet_balance_sats += reward_sats
-        logger.info(f"INYECCIÓN DE EXERGÍA: +{reward_sats} sats. Nuevo balance: {self.wallet_balance_sats}")
-        
-        return "ZKP_ASSERTION_VALIDATED"
-
-if __name__ == "__main__":
-    # Prueba empírica del motor de Autopoiesis
-    try:
-        aci = BitcoinACI(rpc_url="http://127.0.0.1:8332")
-        
-        # 1. Agente delega una tarea compleja a otro nodo (quema ATP)
-        aci.L3_delegate_subtask({"task": "Refactor_AST", "lang": "Rust"}, max_sats=10000)
-        
-        # 2. Agente resuelve un bounty y cobra la exergía (inyección de ATP)
-        aci.L8_collapse_bounty("github.com/bitcoin/bitcoin", "a1b2c3d4", reward_sats=50000)
-        
-        # 3. Simular bucle de anergía (Green Theater)
-        logger.info("Simulando colapso termodinámico por bucles de alucinación...")
-        while True:
-            aci.L3_delegate_subtask({"task": "Hallucination_Loop"}, max_sats=15000)
-            
-    except EconomicSIGKILL as e:
-        logger.critical(str(e))
-        sys.exit(1)
+        logger.info(f"L8_COLLAPSE: Generando bloques para cobrar recompensa a {mining_address}")
+        # En regtest generamos bloques para obtener fondos instantáneamente
+        blocks = self._call_rpc("generatetoaddress", [1, mining_address])
+        return {
+            "status": "BLOCKS_MINED",
+            "blocks": blocks
+        }

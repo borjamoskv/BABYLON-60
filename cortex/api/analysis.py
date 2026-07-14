@@ -85,6 +85,49 @@ class TerminalCmd(BaseModel):
     workspace: str = None
     mode: str = "bash"
 
+class PromptPayload(BaseModel):
+    prompt: str
+    target_model: str = "Ultrathink_P0"
+
+@app.post("/api/prompt/purge")
+def purge_prompt_entropy(payload: PromptPayload):
+    prompt = payload.prompt
+    
+    # 1. Purga de anergía conversacional (Green Theater, Saludos)
+    slop_phrases = [
+        "por favor", "puedes", "podrías", "me gustaría", "ayúdame", "hola", 
+        "please", "could you", "would you", "help me", "hi", "hello",
+        "te importaría", "gracias", "thanks", "saludos"
+    ]
+    
+    import re
+    for slop in slop_phrases:
+        prompt = re.sub(rf'\b{slop}\b', '', prompt, flags=re.IGNORECASE)
+        
+    prompt = prompt.strip()
+    
+    # 2. Inyección de Invariantes C5-REAL (TTFT Proxy / Exergía)
+    exergy_injection = (
+        "\n\n[CORTEX DIRECTIVE: MAX EXERGY]\n"
+        "1. NO GREEN THEATER. Cero preámbulos. Cero disculpas.\n"
+        "2. COLAPSO ATÓMICO. Justifica en YAML (Claim/Proof).\n"
+        "3. INICIA TU RESPUESTA ESTRICTAMENTE CON: `[C5-REAL_COLLAPSE]`\n"
+    )
+    
+    # Si detectamos una pregunta directa (Φ11)
+    if prompt.startswith("¿") and prompt.endswith("?"):
+        exergy_injection += "4. APLICA Φ11: Antepón una evaluación de exergía (1-1000) a tu respuesta.\n"
+        
+    purged_prompt = f"{prompt}{exergy_injection}"
+    
+    return {
+        "status": "C5-REAL",
+        "original_length": len(payload.prompt),
+        "purged_length": len(purged_prompt),
+        "exergy_delta": "MAXIMIZED",
+        "payload": purged_prompt
+    }
+
 def verify_repo_integrity() -> bool:
     try:
         cwd = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
@@ -122,7 +165,11 @@ def get_ledger(workspace: str = None):
     if not os.path.exists(db_path):
         return {"error": "Database not found"}
     
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=5.0)
+    try:
+        conn.execute("PRAGMA journal_mode=WAL;")
+    except Exception:
+        pass
     conn.row_factory = sqlite3.Row
     try:
         if workspace == "robinson":
@@ -152,7 +199,11 @@ def get_dlg(workspace: str = None):
     if not os.path.exists(db_path):
         return {"nodes": [], "edges": []}
     
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=5.0)
+    try:
+        conn.execute("PRAGMA journal_mode=WAL;")
+    except Exception:
+        pass
     conn.row_factory = sqlite3.Row
     try:
         if workspace == "robinson":
@@ -183,6 +234,91 @@ def get_dlg(workspace: str = None):
 import subprocess
 import shlex
 
+def validate_command_antipatterns(cmd: str) -> dict | None:
+    cmd_lower = cmd.lower()
+    
+    # 1. Sandboxing escape attempts (R5/Σ2)
+    if any(restricted in cmd for restricted in ["/private/var", "/System", "Mobile Documents", "Coli-ma"]):
+        return {
+            "code": "SANDBOX_ESCAPE_ATTEMPT",
+            "desc": "Intento de mutación de vías críticas del sistema protegidas por la regla R5/Σ2."
+        }
+    
+    # 2. Sudo membrane violation (Σ9 Override)
+    if "sudo " in cmd:
+        return {
+            "code": "SUDO_MEMBRANE_VIOLATION",
+            "desc": "Uso de privilegios elevados (sudo) bloqueado para prevenir anomalías de permisos locales."
+        }
+        
+    # 3. Fuzzy error suppression (K1 Fail-Fast)
+    if "2>/dev/null" in cmd or "2> /dev/null" in cmd:
+        return {
+            "code": "FUZZY_EXCEPT_SHIELDING",
+            "desc": "Supresión de salida de error estándar (stderr) bloqueada. Viola la directiva de fallo rápido Fail-Fast (K1)."
+        }
+        
+    # 4. Unsafe shell piping
+    if "| sh" in cmd_lower or "| bash" in cmd_lower:
+        return {
+            "code": "UNSAFE_SHELL_PIPE",
+            "desc": "Pipe directo a shell (curl | sh) bloqueado para prevenir vectores de inyección indirecta."
+        }
+        
+    # 5. Conventional commit check (R4 Sentinel)
+    if "commit" in cmd_lower:
+        keywords = ["feat(", "fix(", "docs(", "refactor(", "style(", "chore(", "build(", "ci(", "test(", "bridge"]
+        if not any(kw in cmd for kw in keywords):
+            return {
+                "code": "CONVENTIONAL_COMMIT_VIOLATION",
+                "desc": "Commit sin formato convencional o prefijo Sentinel. Viola las directivas de trazabilidad de Git Sentinel (R4)."
+            }
+            
+    # 6. Green Theater Logging
+    if "echo " in cmd_lower and ">" not in cmd:
+        return {
+            "code": "GREEN_THEATER_LOGGING",
+            "desc": "Consola contaminada por logs decorativos de eco simple sin redirección física."
+        }
+
+    # 7. Atomic Scratch Script Violation (Σ13)
+    if "echo >>" in cmd or "cat >" in cmd or "sed -i" in cmd:
+        return {
+            "code": "ATOMIC_SCRATCH_SCRIPT_VIOLATION",
+            "desc": "Modificación compleja de archivos vía shell (sed inline/echo >>) bloqueada (Σ13). Usa scripts de Python en /scratch."
+        }
+
+    # 8. Branch Awareness Invariant (Ω16)
+    if "git push origin master" in cmd_lower or "git push origin main" in cmd_lower:
+        return {
+            "code": "BRANCH_AWARENESS_INVARIANT_VIOLATION",
+            "desc": "Asunción de rama 'main' o 'master' (Ω16). Consulta dinámicamente con git branch --show-current."
+        }
+        
+    # 9. LLM Slop / Green Theater Prosa (Φ3)
+    if "commit" in cmd_lower and any(slop in cmd_lower for slop in ["here is", "hope this helps", "added some", "updating code"]):
+        return {
+            "code": "LLM_SLOP_PROSE",
+            "desc": "Prosa decorativa o 'Green Theater' detectada en el commit (Φ3). Colapsa a hash o primitivas."
+        }
+        
+    # 10. Absolute Path Injection (Σ12)
+    if cmd.strip().startswith("./") and not cmd.strip().startswith("./venv") and not "cd " in cmd:
+        return {
+            "code": "RELATIVE_EXECUTION_VIOLATION",
+            "desc": "Ejecución relativa (./script) bloqueada (Σ12). Usa saltos absolutos (cd /Absolute/Path && ./script)."
+        }
+
+    # 11. Lightweight Git Tags (Υ8)
+    if "git tag" in cmd_lower and not ("-a" in cmd_lower and "-m" in cmd_lower):
+        if "-d" not in cmd_lower:
+            return {
+                "code": "LIGHTWEIGHT_TAG_VIOLATION",
+                "desc": "Etiqueta git ligera detectada. Obligatorio etiquetar compilaciones usando git tag -a vX.X.X -m 'Release' (Υ8)."
+            }
+            
+    return None
+
 @app.post("/api/terminal")
 def run_terminal(payload: TerminalCmd):
     if not verify_repo_integrity():
@@ -194,6 +330,15 @@ def run_terminal(payload: TerminalCmd):
     cmd = payload.command.strip()
     if not cmd:
         return {"output": ""}
+        
+    # Check for antipatterns
+    violation = validate_command_antipatterns(cmd)
+    if violation:
+        return {
+            "status": "warning",
+            "output": f"⚠️ ALERTA DE ANTIPATRÓN DETECTADA: [{violation['code']}]\n{violation['desc']}"
+        }
+
     
     # Mode Direct: Delegate to specialized GitHub Agent
     if payload.mode == "direct":
