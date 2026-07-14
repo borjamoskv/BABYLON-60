@@ -3,6 +3,7 @@
 *.db
 *.db-shm
 *.db-wal
+*.db-journal
 # logs
 *.log
 # local envs
