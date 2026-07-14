@@ -89,4 +89,10 @@ objectives:
   exergy_score: 0.95
   status: PENDING
   milestones: []
-CORTEX_TAINT: e9397ea74b69f395eed60b14fc2c3f9c7e8e25a0ca54ce65535b8aebc01ee4d5
+- id: OBJ-008
+  title: Optimización de Latencia en Inferencia Local
+  description: Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms.
+  exergy_score: 0.95
+  status: PENDING
+  milestones: []
+CORTEX_TAINT: a3ce7dc872a8cdc8b67b9b9b5d9a278c5a9b841393981b3e6f59cf326e512a74

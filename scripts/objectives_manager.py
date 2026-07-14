@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List
 
-WORKSPACE_DIR = Path("/Users/borjafernandezangulo/30_BABYLON-60")
+WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / "cortex/ontology/babylon60_objectives.yaml"
 PROJECT_MD_PATH = WORKSPACE_DIR / "PROJECT.md"
 
@@ -29,7 +29,7 @@ def calculate_sha256(content: str) -> str:
 
 def get_git_commit_hash() -> str:
     try:
-        res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
+        res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
         return res.stdout.strip()
     except Exception:
         return "0" * 40
@@ -40,14 +40,20 @@ def run_git_sentinel(commit_msg: str) -> str:
         res = subprocess.run(["git", "commit", "-m", commit_msg], cwd=WORKSPACE_DIR, capture_output=True, text=True)
         if res.returncode != 0:
             # Reintentar con --no-verify según regla EPI_11 (Commit Hook Auto-Bypass)
-            res = subprocess.run(["git", "commit", "--no-verify", "-m", commit_msg], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
+            res = subprocess.run(["git", "commit", "--no-verify", "-m", commit_msg], cwd=WORKSPACE_DIR, capture_output=True, text=True)
+            if res.returncode != 0:
+                print(f"[!] Git commit falló. Stderr: {res.stderr} Stdout: {res.stdout}", file=sys.stderr)
+                sys.exit(res.returncode)
         # Parse commit hash
         hash_res = subprocess.run(["git", "rev-parse", "HEAD"], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
         return hash_res.stdout.strip()
     except subprocess.CalledProcessError as e:
         # Check if there was nothing to commit
-        if "nothing to commit" in e.stdout or "nothing to commit" in e.stderr:
+        stdout = getattr(e, "stdout", "") or ""
+        stderr = getattr(e, "stderr", "") or ""
+        if "nothing to commit" in stdout or "nothing to commit" in stderr:
             return get_git_commit_hash()
+        print(f"[!] CalledProcessError: {e}\nStdout: {stdout}\nStderr: {stderr}", file=sys.stderr)
         raise e
 
 def load_state() -> Dict[str, Any]:
