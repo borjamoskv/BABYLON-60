@@ -1,0 +1,66 @@
+# 14_SHIP_ALGEBRA_BABYLON60.yaml
+# C5-REAL Ontological Entry · CORTEX-PERSIST
+# Operador: borjamoskv (UID0)
+# Fecha: 2026-07-14T08:34:00Z
+# Nivel: C5-REAL (Invarianza Matemática y Topológica)
+# Marco Teórico: Régimen Trilingüe (F# / Rust / Anvil), Motor Base 60, SHIP-Ω
+
+meta:
+  id: "ONTO-14-SHIP-ALGEBRA-BABYLON60"
+  title: "Álgebra Causal Soberana (LOGOS → ETHOS → SHIP) en Babylon-60"
+  confidence: C5-REAL
+  rigor_nota: >
+    La ecuación causal S_APEX no admite simulación estocástica ni teatro de seguridad.
+    Cada fase impone un colapso físico, tipado o criptográfico.
+
+claim_id: "CLAIM-C5-SHIP-ALGEBRA-0014"
+
+hypergraph:
+  nodes:
+    - id: N_LOGOS
+      label: "Motor de Coherencia Termodinámica T(A, R, I)"
+      entropy_vector: "Delta_S_in -> 0 (Eliminación de ambigüedad de entrada por tipado F#)"
+    - id: N_ETHOS
+      label: "Causal Poset & Taint Assertion (strike-rs + BLAKE3)"
+      entropy_vector: "Delta_S_recon = 0 (Grafo acíclico verificado, cero asignación bloqueante)"
+    - id: N_SHIP
+      label: "Singularidad Cinético-Física (Colapse_L8 / Anvil Apoptosis)"
+      entropy_vector: "Delta_H_ledger in C5-REAL (Mutación inmutable en disco + Git Sentinel tag)"
+  edges:
+    - source: N_LOGOS
+      target: N_ETHOS
+      relation: "TRANSITION_COMPILE_TIME_PHYSICS"
+      operator: "CommitBoundary_C5Real(IRP_Automata)"
+    - source: N_ETHOS
+      target: N_SHIP
+      relation: "COLLAPSE_KINETIC_EVM_ANCHOR"
+      operator: "logApoptosis(BLAKE3_Taint_Vector)"
+
+regimen_trilingue_invariante:
+  fsharp_domain_kernel:
+    capa: "Membrana Causal & IRP Automata"
+    mecanica: "Discriminated Unions (C5, C4, C3, C2) y Pattern Matching exhaustivo sin estados ilegales"
+  rust_causal_poset:
+    capa: "Zero-Cost Fast-Loop Taint Engine"
+    mecanica: "Verificación DAG (INV-GCM-003) + Emisión CORTEX-TAINT mediante BLAKE3"
+  anvil_evM_anchor:
+    capa: "Yunque BFT Determinista"
+    mecanica: "Registro commitState() + anclaje forense logApoptosis()"
+
+primitivas_de_colapso_causal:
+  - prim: "LOGOS_TUPLE(A, R, I)"
+    desc: "Arquitectura matricial, Reglas algebraicas F# e Inmutabilidad de membrana WAL"
+  - prim: "ETHOS_ZKP_ASSERTION"
+    desc: "Aserción criptográfica del grafo causal en Rust erradicando el rumor C4-SIM"
+  - prim: "SHIP_OMEGA_KINETIC"
+    desc: "Colapso físico terminal: 8/8 Gates, fuzzing >= 10000 y Git Sentinel con tag canónico"
+
+invariantes_termodinamicas:
+  - invt: "INV-BASE60-BYZANTINE"
+    formula: "divisores(60) = {1,2,3,4,5,6,10,12,15,20,30,60} => P(deadlock_hilos) -> min"
+    proof: "Degeneración isomorfa al código genético en ONTO-13"
+  - invt: "INV-SHIP-COLLAPSE"
+    formula: "S_APEX = SHIP(ETHOS(LOGOS(psi_input))) => Delta_H_ledger in C5-REAL"
+    proof: "Falsación empírica en Git Sentinel y EVM Apoptosis"
+
+CORTEX_TAINT: taint:borjamoskv:session_apex:5bf1aace78d0e6df710d610d1681e5152cfa2c8e1a301f37f175b9f3effec206
