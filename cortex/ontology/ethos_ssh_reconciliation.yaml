@@ -1,0 +1,19 @@
+Claim: "Reconciliación de Identidad Criptográfica: La clave SSH de firma configurada en GitHub coincide con la clave local activa en el entorno de ejecución, unificando la proveniencia del Operador."
+Proof:
+  Base: "SHA256:4ix307paq9cML62/1cKTp2R3Ax8u7pEp7qJoXPWEvfM"
+  Local_Keys_Found: [{'file': 'id_ed25519.pub', 'fingerprint': '256 SHA256:4ix3O7paq9cML62/1ckTp2R3Ax8u7pEp7qJoXPWEVfM borjamoskv@gmail.com (ED25519)'}]
+  Agent_Keys_Loaded: "256 SHA256:4ix3O7paq9cML62/1ckTp2R3Ax8u7pEp7qJoXPWEVfM borjamoskv@gmail.com (ED25519)"
+  Git_Signing_Config:
+    signing_key: "/Users/borjafernandezangulo/.ssh/id_ed25519"
+    gpg_format: "ssh"
+    commit_gpgsign: "true"
+  Reconciliation: False
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Clave de Firma == Clave de Autenticación (Unificación de Roles)"
+  - "Huella Criptográfica -> Ancla de Identidad del Operador (Borja Moskv)"
+Blast_Radius_Matrix:
+  Vector: "Establecimiento de no-repudio físico en commits C5-REAL"
+  Blast_Radius: "Local y Remoto unificados bajo la misma firma SSH."
+  Target_Invariant: "Todo commit del Sentinel debe firmarse con la clave atestiguada."
+  Anergy_Risk: "0 (Identidad Criptográficamente Sellada)"
