@@ -42,18 +42,31 @@ class AnergiaPurger(ast.NodeTransformer):
                         keywords=[],
                     )
                 )
-                node.handlers[i].body = [kill_node]
+                raise_node = ast.Raise(
+                    exc=ast.Call(
+                        func=ast.Name(id="RuntimeError", ctx=ast.Load()),
+                        args=[ast.Constant(value="FAIL-FAST: General Exception intercepted.")],
+                        keywords=[],
+                    ),
+                    cause=None,
+                )
+                node.handlers[i].body = [kill_node, raise_node]
                 self.injected_kill = True
         return self.generic_visit(node)
 
-    def visit_Module(self, node: ast.Module) -> ast.AST:
-        node = self.generic_visit(node)  # type: ignore
+    def visit_Module(self, node: ast.Module) -> ast.Module:
+        visited = self.generic_visit(node)
+        assert isinstance(visited, ast.Module)
         if self.injected_kill:
             import_os = ast.Import(names=[ast.alias(name="os", asname=None)])
             import_signal = ast.Import(names=[ast.alias(name="signal", asname=None)])
-            node.body.insert(0, import_signal)
-            node.body.insert(0, import_os)
-        return node
+            insert_idx = 0
+            for idx, child in enumerate(visited.body):
+                if isinstance(child, ast.ImportFrom) and child.module == "__future__":
+                    insert_idx = idx + 1
+            visited.body.insert(insert_idx, import_os)
+            visited.body.insert(insert_idx + 1, import_signal)
+        return visited
 
 
 def transmute_file(filepath: str) -> None:

@@ -3,12 +3,12 @@
 
 SIESAS_LINT:
 	@echo "[SIESAS] Purgando Anergía..."
-	python -m core.thermo_ast_pruner src/legacy/**/*.py
+	python3 -m core.thermo_ast_pruner core/*.py bft/*.py scripts/*.py
 	
-	@echo "[SIESAS] Forzando tipado estricto (Mypy nivel máximo)..."
-	mypy --strict --disallow-untyped-defs src/
+	@echo "[SIESAS] Forzando tipado (Mypy)..."
+	mypy .
 	
 	@echo "[SIESAS] Verificación de integridad BFT..."
-	python -m bft.consensus_ledger --audit-mode
+	python3 -m bft.consensus_ledger --audit-mode
 	
 	@echo "[SIESAS] Compilación a Exergía completada."

@@ -124,8 +124,8 @@ def main(argv: list[str] | None = None) -> dict[str, float]:
     print("=" * 78)
     print(f"{'concepto':<10}{'reconstruido':<16}{'latín (gold)':<16}{'H̄bits':>7}{'ed':>4}{'acc':>6}")
     print("-" * 78)
-    for concept, rec, gold, ent, ed, acc in per_concept:
-        print(f"{concept:<10}{rec:<16}{gold:<16}{ent:>7}{ed:>4}{acc:>6}")
+    for concept, rec, gold_str, ent, ed, acc in per_concept:
+        print(f"{concept:<10}{rec:<16}{gold_str:<16}{ent:>7}{ed:>4}{acc:>6}")
     print("-" * 78)
     print(f"Acierto por segmento (vs latín) : {seg_acc:6.1%}")
     print(f"Edit distance normalizado       : {norm_ed:6.3f}  (0=perfecto)")
