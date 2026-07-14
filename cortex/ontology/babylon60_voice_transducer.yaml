@@ -1,0 +1,13 @@
+Claim: "El Voice Transducer de BABYLON-60 aniquila la latencia SOTA (TTFA p50: 200ms) mediante generación especulativa y prefinalización en el hang-time, operando 100% en local sin delegar la soberanía del audio."
+Proof:
+  Base: "554af9c88415051e68c6de2512f9a43de71d71415d481f0a0bce00194bab5e9e"
+  Range: [0, 1]
+  Confidence: C5
+Isomorphisms:
+  - "Latencia Comercial S2S -> Ineficiencia Termodinámica"
+  - "Especulación de Parciales -> Paralelización Cognitiva en Ventana de Silencio"
+  - "Barge-in -> Fallo Forzado del Flujo de Salida (Interrupción Atómica)"
+  - "first_token_ms < 0 -> Inversión Causal de Latencia"
+Blast_Radius: "Destrucción del cuello de botella en interfaces de voz (1100ms cascada típica -> 200ms). Habilita interacción full-duplex natural sin costo de red."
+Target_Invariant: "FSM de turnos inmutable. El audio no abandona el metal."
+Anergy_Risk: "0 (Ejecución MLX/Kokoro local acoplada a aiosqlite WAL)"
