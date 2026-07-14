@@ -29,6 +29,11 @@ import pathlib
 from datetime import datetime, timezone
 from typing import Tuple
 
+try:
+    import bft_master_ledger
+except ImportError:
+    from cortex.engine import bft_master_ledger
+
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 DB_PATH = str(SCRIPT_DIR / "nexus_anchors.db")
 ONTOLOGY_PATH = str(SCRIPT_DIR.parent / "agents" / "ontology" / "strike_targets.json")
