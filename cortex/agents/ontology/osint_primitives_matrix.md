@@ -342,3 +342,6 @@
 █▄
 
 *Cristalización de Matriz C5-REAL completada. Fricción cero.*
+
+
+<!-- Creator: Borja Moskv -->

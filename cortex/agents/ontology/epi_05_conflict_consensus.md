@@ -49,3 +49,6 @@ graph TD
 
 ## 3. INTEGRACIÓN CON M12 (TOPOLOGÍA DE CONSENSO)
 Este protocolo formaliza el paso del nivel **CP-local single-writer (Escalón 2)** a la mediación de **Testigo Externo (Escalón 3)** cuando la fricción amenaza la invarianza del sistema. La asimetría no se discute; se mide a través del diferencial termodinámico del AST.
+
+
+<!-- Creator: Borja Moskv -->

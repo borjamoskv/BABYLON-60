@@ -55,3 +55,6 @@ response = generate(
 ## 4. DIRECTIVAS DE AISLAMIENTO (Hardware Constraints)
 - **Bloqueo Absoluto**: AMD / NVIDIA CUDA / x86_64 Rosetta emulation.
 - **Requisito C5**: Entorno ARM nativo (`uname -p == arm`), Python 3.10+, macOS 14.0+ (15.0+ para optimización de wiring).
+
+
+<!-- Creator: Borja Moskv -->

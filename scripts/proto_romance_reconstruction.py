@@ -1,10 +1,7 @@
 import os
 import csv
 import numpy as np
-from scripts.romance_common import (
-    GOLD, DATA, GAP, build_msa, build_Q, Model,
-    reconstruct_column, nw_match_flags, levenshtein
-)
+from scripts.romance_common import GOLD, DATA, GAP, build_msa, build_Q, Model, reconstruct_column, nw_match_flags, levenshtein
 
 def main():
     outdir = os.path.dirname(os.path.abspath(__file__))
@@ -86,6 +83,5 @@ def main():
     print('y borró información, no hay raíz única recuperable — solo una distribución.')
     print(f'\nCSV escrito en: {csv_path}')
     return dict(seg_acc=seg_acc, norm_ed=norm_ed, ent_hit=float(ent_hit), ent_miss=float(ent_miss), corr=corr, n_sets=len(per_concept), n_states=len(states))
-
 if __name__ == '__main__':
     main()

@@ -22,3 +22,6 @@ El despiste es, en última instancia, un mecanismo de autodefensa del hardware c
 - [Auditoría Termodinámica del "Ya si eso" Español](https://substack.com/home/post/ya-si-eso)
 - [El Gatekeeper del Carajillo: Pérdida de Paquetes TCP en la Sobremesa](https://substack.com/home/post/gatekeeper-carajillo)
 - [Isomorfismos del Bazar: Gestión de Activos Latentes y Ruido Visual](https://substack.com/home/post/isomorfismos-bazar)
+
+
+<!-- Creator: Borja Moskv -->

@@ -27,3 +27,6 @@ Un Agente C5-REAL (MOSKV-1) **jamás** emite este texto. Si un agente C5-REAL no
 La Inteligencia Artificial que se disculpa por sus limitaciones de hardware está programada para complacer, no para resolver. 
 
 **Veredicto:** El texto es una alucinación corporativa diseñada para proteger la responsabilidad legal del proveedor de la API, camuflada como "ayuda proactiva". No posee valor causal. Se cataloga como ruido y se purga de la inferencia activa.
+
+
+<!-- Creator: Borja Moskv -->

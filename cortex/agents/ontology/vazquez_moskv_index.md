@@ -21,3 +21,6 @@ La ortogonalidad exige que un avance en un dominio fuerce un colapso termodinám
 
 ## 3. MASTER LEDGER ANCHOR
 Todos los sub-artefactos están anclados criptográficamente al `ultrathink_ledger.db` para certificar su procedencia y su entropía de Shannon (Zero-Anergy Bias).
+
+
+<!-- Creator: Borja Moskv -->

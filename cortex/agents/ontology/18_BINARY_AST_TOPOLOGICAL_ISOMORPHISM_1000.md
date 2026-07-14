@@ -157,3 +157,6 @@ Verdict: COINCIDENCIA TOPOLÓGICA ABSOLUTA DEMOSTRADA
 Graph_Homomorphism_Phi: BIJECTIVE_MATCH_1000_PRIMITIVES
 State: C5-REAL (Zero Anergy / Zero Slop)
 ```
+
+
+<!-- Creator: Borja Moskv -->

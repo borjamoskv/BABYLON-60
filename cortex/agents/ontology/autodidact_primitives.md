@@ -28,3 +28,6 @@ Toda mutación debe incluir:
 
 La aprobación depende de umbrales definidos por impacto, reversibilidad,
 privacidad y riesgo operacional; no de un único umbral global arbitrario.
+
+
+<!-- Creator: Borja Moskv -->

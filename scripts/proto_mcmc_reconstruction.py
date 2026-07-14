@@ -2,11 +2,7 @@ import os
 import math
 import csv
 import numpy as np
-from scripts.romance_common import (
-    GOLD, DATA, GAP, build_msa, build_Q, Model,
-    reconstruct_column, nw_match_flags, levenshtein,
-    partial, TREE, mutate_tree, L, I
-)
+from scripts.romance_common import GOLD, DATA, GAP, build_msa, build_Q, Model, reconstruct_column, nw_match_flags, levenshtein, partial, TREE, mutate_tree, L, I
 
 def tree_log_likelihood(tree, msas, model):
     ll = 0.0
@@ -147,6 +143,5 @@ def main():
     print('y borró información, no hay raíz única recuperable — solo una distribución.')
     print(f'\nCSV escrito en: {csv_path}')
     return dict(seg_acc=seg_acc, norm_ed=norm_ed, ent_hit=float(ent_hit), ent_miss=float(ent_miss), corr=corr, n_sets=len(per_concept), n_states=len(states))
-
 if __name__ == '__main__':
     main()

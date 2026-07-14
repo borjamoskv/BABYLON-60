@@ -7,3 +7,6 @@ El verdadero Alpha está en el metal y el AST, no en la interfaz.
 [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 
 #C5REAL #Anergia #TechHumo
+
+
+<!-- Creator: Borja Moskv -->

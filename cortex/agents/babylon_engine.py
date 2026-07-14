@@ -1,5 +1,5 @@
 import dataclasses
-from typing import Dict, Any, List
+from typing import Any
 
 # █ SYS_ID: BABYLON-60 ENGINE (C5-REAL)
 # █ INV-023: Erradicación del término "Instancia".
@@ -32,7 +32,7 @@ class AgentPersona:
     persona_id: str
     system_prompt: str
     temperature_override: float  # T=0 para operaciones M1/M4, T>0 para creatividad.
-    capabilities: List[str]
+    capabilities: list[str]
 
     def get_token_density(self) -> int:
         # Longitud determinista de la matriz
@@ -49,9 +49,9 @@ class ExecutionContext:
     context_id: str
     core_model_ref: CoreModel
     persona_ref: AgentPersona
-    conversation_history: List[Dict[str, Any]] = dataclasses.field(default_factory=list)
+    conversation_history: list[dict[str, Any]] = dataclasses.field(default_factory=list)
 
-    def ingest_stimulus(self, payload: str):
+    def ingest_stimulus(self, payload: str) -> None:
         """Inyecta un estímulo en el TokenStream sin tocar el CoreModel."""
         self.conversation_history.append({"role": "user", "content": payload})
 
@@ -60,6 +60,6 @@ class ExecutionContext:
         # SQLite Append-Only Logic
         return "SHA256_HASH_CRISTALIZADO"
 
-    def apoptosis(self):
+    def apoptosis(self) -> None:
         """INV-018: Purga de la memoria volátil."""
         self.conversation_history.clear()

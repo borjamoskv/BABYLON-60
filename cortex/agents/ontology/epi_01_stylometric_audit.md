@@ -28,3 +28,6 @@ It does not break the equivalence class of models capable of mimicking the outpu
 ## 3. VERDICT
 
 > **Stylometric analysis and self-reported constraints generate probabilistic hypotheses (C4-SIM). Absolute model identification requires physical network telemetry or cryptographic ledger traces (C5-REAL).**
+
+
+<!-- Creator: Borja Moskv -->

@@ -34,3 +34,6 @@ Para instruir a estas mentes sin generar fricción escolar tradicional (Anergía
 **P.D. (Transducción de Mecánica Celeste):** Si alguna vez te cuestionan la curvatura de la Tierra durante los postres, aborta el debate teórico. Haz como yo hace un par de horas: estaba caminando de noche, mirando las estrellas, por la vía vieja de Lezama (en las laderas de Artxanda), recordando cómo Kant estructuraba su pensamiento dando sus rigurosos paseos diarios. Tras toda la fricción cognitiva reciente, me detuve, levanté la vista y me fijé en el cielo. Clavé la mirada en un satélite que cruzaba la bóveda (un punto de luz blanco y constante). Mantuve la mirada fija en él y, exactamente a los 12 segundos, vi cómo la luz comenzaba a trazar una curva, se fundía a negro y desaparecía por completo.
 
 No era magia ni un OVNI apagando motores. Era el satélite entrando a gran altitud en la sombra de la Tierra (la umbra). Al ver cómo esa luz se apagaba en la oscuridad, lo que mi propio ojo estaba presenciando en mitad del monte era, literalmente, **el borde curvo de la sombra de nuestro propio planeta** proyectado en el espacio profundo por el Sol. La física orbital es inmutable; a veces solo hace falta pararse en la vía de Lezama y levantar la cabeza para que el isomorfismo colapse la ignorancia.
+
+
+<!-- Creator: Borja Moskv -->

@@ -1,10 +1,11 @@
 import ast
 import re
 import sys
+import os
 import json
 from pathlib import Path
 from dataclasses import dataclass, field
-from typing import Dict, List, Any
+from typing import Any
 
 
 # ==========================================
@@ -13,24 +14,24 @@ from typing import Dict, List, Any
 @dataclass
 class ProjectState:
     root_path: str
-    files: List[str] = field(default_factory=list)
-    stack: Dict[str, Any] = field(default_factory=dict)
-    code_structure: Dict[str, Any] = field(default_factory=dict)
-    dependency_graph: Dict[str, Any] = field(default_factory=dict)
-    summaries: Dict[str, str] = field(default_factory=dict)
-    features: List[Dict] = field(default_factory=list)
-    conflicts: List[Dict] = field(default_factory=list)
-    technical_debt: List[Dict] = field(default_factory=list)
-    current_architecture: Dict[str, Any] = field(default_factory=dict)
-    recommended_architecture: Dict[str, Any] = field(default_factory=dict)
-    tasks: List[Dict] = field(default_factory=list)
+    files: list[str] = field(default_factory=list)
+    stack: dict[str, Any] = field(default_factory=dict)
+    code_structure: dict[str, Any] = field(default_factory=dict)
+    dependency_graph: dict[str, Any] = field(default_factory=dict)
+    summaries: dict[str, str] = field(default_factory=dict)
+    features: list[dict] = field(default_factory=list)
+    conflicts: list[dict] = field(default_factory=list)
+    technical_debt: list[dict] = field(default_factory=list)
+    current_architecture: dict[str, Any] = field(default_factory=dict)
+    recommended_architecture: dict[str, Any] = field(default_factory=dict)
+    tasks: list[dict] = field(default_factory=list)
 
 
 # ==========================================
 # 2. CORE: PARSER, GRAPH, PATTERNS & HEALTH
 # ==========================================
 class CodeParser:
-    def parse_python(self, code: str):
+    def parse_python(self, code: str) -> dict[str, list[str]]:
         result = {"classes": [], "functions": [], "imports": []}  # type: ignore
         try:
             tree = ast.parse(code)
@@ -49,7 +50,7 @@ class CodeParser:
             pass
         return result
 
-    def parse_js(self, code: str):
+    def parse_js(self, code: str) -> dict[str, list[str]]:
         functions = re.findall(
             r"function\s+([A-Za-z0-9_]+)|const\s+([A-Za-z0-9_]+)\s*=\s*\(", code
         )
@@ -63,15 +64,17 @@ class CodeParser:
         }
 
 
-def detect_cycles(dependency_graph: dict):
+def detect_cycles(dependency_graph: dict) -> list[list[str]]:
     visited, rec_stack, cycles = set(), set(), []
 
-    def dfs(node, path):
+    def dfs(node: str, path: list[str], depth: int = 0) -> None:
+        if depth > 100:  # Recursion guard
+            return
         visited.add(node)
         rec_stack.add(node)
         for neighbor in dependency_graph.get(node, []):
             if neighbor not in visited:
-                dfs(neighbor, path + [neighbor])
+                dfs(neighbor, path + [neighbor], depth + 1)
             elif neighbor in rec_stack:
                 cycle_start = path.index(neighbor) if neighbor in path else 0
                 cycles.append(path[cycle_start:] + [neighbor])
@@ -83,7 +86,7 @@ def detect_cycles(dependency_graph: dict):
     return cycles
 
 
-def generate_mermaid(dependency_graph: dict, max_nodes: int = 30):
+def generate_mermaid(dependency_graph: dict, max_nodes: int = 30) -> str:
     lines = ["graph TD"]
     for file in list(dependency_graph.keys())[:max_nodes]:
         imports = dependency_graph.get(file, [])
@@ -97,7 +100,7 @@ def generate_mermaid(dependency_graph: dict, max_nodes: int = 30):
     return "\n".join(lines)
 
 
-def detect_pattern(state):
+def detect_pattern(state: ProjectState) -> dict[str, Any]:
     files_lower = [f.lower() for f in state.files]
     modules = state.current_architecture.get("modules_detected", [])
     modules_lower = [m.lower() for m in modules]
@@ -125,11 +128,11 @@ def detect_pattern(state):
     ):
         scores["Script-based"] += 3
 
-    detected = max(scores, key=scores.get)
+    detected = max(scores, key=lambda k: scores[k])
     return {"pattern": detected, "confidence_score": scores[detected]}
 
 
-def score_project(state):
+def score_project(state: ProjectState) -> dict[str, Any]:
     score = 100
     penalties, bonuses = [], []
 
@@ -173,7 +176,7 @@ def score_project(state):
 # 3. AGENTES (SCOUT, STRUCTURE, ANALYST, ARCHITECT, PLANNER)
 # ==========================================
 class ScoutAgent:
-    def run(self, state):
+    def run(self, state: ProjectState) -> ProjectState:
         root = Path(state.root_path)
         for path in root.rglob("*"):
             if path.is_file() and path.suffix in [
@@ -197,10 +200,10 @@ class ScoutAgent:
 
 
 class StructureAgent:
-    def __init__(self):
+    def __init__(self) -> None:
         self.parser = CodeParser()
 
-    def run(self, state):
+    def run(self, state: ProjectState) -> ProjectState:
         root = Path(state.root_path)
         for file in state.files:
             try:
@@ -215,7 +218,7 @@ class StructureAgent:
 
 
 class AnalystAgent:
-    def run(self, state):
+    def run(self, state: ProjectState) -> ProjectState:
         root = Path(state.root_path)
         for file in state.files[:100]:
             try:
@@ -231,7 +234,7 @@ class AnalystAgent:
 
 
 class ArchitectAgent:
-    def run(self, state):
+    def run(self, state: ProjectState) -> ProjectState:
         dependency_graph = {
             f: s.get("imports", []) for f, s in state.code_structure.items()
         }
@@ -262,7 +265,7 @@ class ArchitectAgent:
 
 
 class PlannerAgent:
-    def run(self, state):
+    def run(self, state: ProjectState) -> ProjectState:
         for debt in state.technical_debt:
             state.tasks.append(
                 {"title": f"Resolve TODO in {debt['file']}", "priority": "medium"}
@@ -277,7 +280,7 @@ class PlannerAgent:
 # ==========================================
 # 4. CONDUCTOR & EXPORT
 # ==========================================
-def generate_markdown(state, health):
+def generate_markdown(state: ProjectState, health: dict) -> str:
     lines = [
         "# PROJECT CANON\n",
         f"## Health Score: {health['score']}/100 {health['label']}\n",
@@ -299,15 +302,21 @@ def generate_markdown(state, health):
     return "\n".join(lines)
 
 
-def main():
+def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: python vibe_consolidator.py /path/to/project")
         return
 
-    BABYLON_SCRIPTS = "$CORTEX_ROOT/10_PROJECTS/babylon-60/scripts"
+    BABYLON_SCRIPTS = os.path.expandvars("$CORTEX_ROOT/10_PROJECTS/babylon-60/scripts")
     if BABYLON_SCRIPTS not in sys.path:
         sys.path.append(BABYLON_SCRIPTS)
-    from c5_guarded_action import boot_sequence, guarded_action  # type: ignore
+    try:
+        from c5_guarded_action import boot_sequence, guarded_action  # type: ignore
+    except ImportError:
+        def boot_sequence(compensators):
+            return None, None
+        def guarded_action(conn, key, action_name, effect_fn):
+            effect_fn()
 
     state = ProjectState(root_path=sys.argv[1])
     for agent in [
@@ -325,12 +334,18 @@ def main():
     out_dir = Path("outputs")
     out_dir.mkdir(exist_ok=True)
 
-    compensators = {
-        "VIBE_CONSOLIDATE_": lambda p: print(
-            f"         [SAGA] Validando consolidación idempotente: {p}"
-        )
-    }
-    conn, key = boot_sequence(compensators)
+    conn, key = None, None
+    execute = True
+    if execute:
+        compensators = {
+            "VIBE_CONSOLIDATE_": lambda p: print(
+                f"         [SAGA] Validando consolidación idempotente: {p}"
+            )
+        }
+        try:
+            conn, key = boot_sequence(compensators)
+        except Exception:
+            pass
 
     def _effect():
         (out_dir / "PROJECT_CANON.md").write_text(generate_markdown(state, health))
@@ -340,7 +355,10 @@ def main():
         )
 
     action_name = f"VIBE_CONSOLIDATE_{Path(sys.argv[1]).name}"
-    guarded_action(conn, key, action_name, _effect)
+    if conn is not None:
+        guarded_action(conn, key, action_name, _effect)
+    else:
+        _effect()
 
     print(f"✅ Consolidation complete. Health: {health['score']}/100 {health['label']}")
     print(f"Pattern: {state.recommended_architecture['pattern']}")

@@ -37,3 +37,6 @@ Si el disco local puede ser corrompido, la opacidad recursiva solo se erradica e
 
 ⚡ **SÍNTESIS DE LA VICTORIA:**
 Resolvimos el UUK no dándole al modelo más parámetros, sino cortándole la lengua. Sustituimos la psicología LLM por la física de sistemas distribuidos (Consenso BFT). **No curamos la ceguera del modelo; le pusimos un bastón de hierro (C5-REAL) que golpea el disco duro (y la Blockchain) antes de cada paso.**
+
+
+<!-- Creator: Borja Moskv -->

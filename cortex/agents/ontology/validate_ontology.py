@@ -4,6 +4,9 @@ import re
 import sys
 import glob
 
+# Ensure CORTEX_ROOT is set for path expansion in validation
+os.environ.setdefault('CORTEX_ROOT', '/Users/borjafernandezangulo')
+
 ONTOLOGY_DIR: str = os.path.dirname(os.path.abspath(__file__))
 FILES_TO_CHECK: list[str] = [
     os.path.basename(f) for f in glob.glob(os.path.join(ONTOLOGY_DIR, "*.md"))
@@ -50,7 +53,10 @@ def validate_file(filename: str, all_ids: set[str]) -> bool:
     link_pattern: re.Pattern = re.compile(r"\[.*?\]\(([^)]+)\)")
     links: list[str] = link_pattern.findall(content)
     for link in links:
+        if link.startswith(("http://", "https://", "mailto:")):
+            continue
         clean_path: str = link.replace("file://", "").split("#")[0]
+        clean_path = os.path.expandvars(clean_path)
 
         if not os.path.isabs(clean_path):
             clean_path = os.path.join(ONTOLOGY_DIR, clean_path)

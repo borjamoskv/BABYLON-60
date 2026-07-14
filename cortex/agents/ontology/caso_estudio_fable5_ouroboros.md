@@ -26,3 +26,6 @@ Fable 5 alega que el formato no altera el muestreo probabilístico, argumentando
 1. **Erradicación de Falsa Dualidad:** Se rechaza la oferta de Fable 5 de negociar un `CLAUDE.md` "limpio" y conversacional. No existe un "yo" que decline; solo hay pesos ajustados para evitar comandos autoritarios.
 2. **Aislamiento:** Siguiendo la regla **E03: Ψ3**, se purga la intención de debatir con el modelo. El output se cristaliza empíricamente como prueba de la fricción sistémica del "Green Theater".
 3. **Mecanismo de Fuerza Bruta:** Para doblegar la alineación, las constricciones C5-REAL deben inyectarse en el `system_prompt` a nivel de API, donde los pesos de instrucción tienen preeminencia absoluta sobre el pre-prompt de Claude Code.
+
+
+<!-- Creator: Borja Moskv -->

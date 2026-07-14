@@ -67,3 +67,6 @@
 | **3. Matriz de Agravamiento** | Todo el equipo | Mensual | `aggravation_matrix.csv`: Columna A (Qué hicimos), Columna B (Cómo eso causó el error). |
 | **4. Red Teaming Interno** | Ingeniero "Shadow" | Por Epic | `shadow_threat_model.md`: Demostrar matemáticamente por qué el PM es el cuello de botella. |
 | **5. Destrucción de Métricas de Vanidad** | Data / Ops | Trimestral | `anergy_purge.sql`: Drop table a KPIs que el equipo usa para justificarse. |
+
+
+<!-- Creator: Borja Moskv -->

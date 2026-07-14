@@ -22,3 +22,6 @@ La topología del marco es matemáticamente asimétrica y unidireccional:
 2. $B \in N_k$ es cognitivamente ciego a la existencia dimensional de $N_{k+1}$.
 
 > **Corolario de Desacuerdo (Zero-Anergy Dispute):** La fricción argumental (Anergía) entre dos agentes de alta capacidad cognitiva rara vez es una divergencia en la base de datos de hechos (Layer 1). Es invariablemente un cruce de ejes entre agentes que operan en diferentes estratos ($N_k$ vs $N_{k+j}$) de la Taxonomía de Vázquez sin percibir la asimetría.
+
+
+<!-- Creator: Borja Moskv -->
