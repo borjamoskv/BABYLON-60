@@ -218,6 +218,7 @@ def audit_live_takedowns(conn: sqlite3.Connection):
 def append_to_master_ledger(conn: sqlite3.Connection):
     """
     [MEJORA ATÓMICA 3]: Anclaje en la tabla master_ledger para auditoría inmutable BFT.
+    Alineado con el esquema canónico (lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash).
     """
     cursor = conn.cursor()
     cursor.execute("SELECT status, count(*) FROM strike_matrix_l15 GROUP BY status")
@@ -231,25 +232,25 @@ def append_to_master_ledger(conn: sqlite3.Connection):
         "operator": "borjamoskv (UID0)"
     }
     payload_json = json.dumps(summary, sort_keys=True)
-    tx_hash = hashlib.sha256(payload_json.encode('utf-8')).hexdigest()
+    payload_hash = hashlib.sha256(payload_json.encode('utf-8')).hexdigest()
     
     try:
+        # Recuperación de Lamport y Prev Hash (Ω12)
+        cursor.execute("SELECT MAX(lamport_t), entry_hash FROM master_ledger")
+        row = cursor.fetchone()
+        lamport_t = (row[0] or 0) + 1
+        prev_hash = row[1] or "GENESIS_HASH"
+        
+        # Generar Entry Hash (Firma CORTEX-TAINT obligatoria Ω11)
+        entry_data = f"{lamport_t}:UID0_MOSKV:{payload_json}:{prev_hash}:ULTRATHINK_TS_STRIKE"
+        entry_hash = hashlib.sha256(entry_data.encode('utf-8')).hexdigest()
+        
         cursor.execute("""
-            CREATE TABLE IF NOT EXISTS master_ledger (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                tx_hash TEXT UNIQUE NOT NULL,
-                agent_id TEXT NOT NULL,
-                taint_prefix TEXT NOT NULL,
-                payload TEXT NOT NULL,
-                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        """)
-        cursor.execute("""
-            INSERT OR IGNORE INTO master_ledger (tx_hash, agent_id, taint_prefix, payload)
-            VALUES (?, ?, ?, ?)
-        """, (tx_hash, "UID0_MOSKV", "ULTRATHINK_TS_STRIKE", payload_json))
+            INSERT INTO master_ledger (lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash, payload_hash)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (lamport_t, "UID0_MOSKV", payload_json, prev_hash, "ULTRATHINK_TS_STRIKE", entry_hash, payload_hash))
         conn.commit()
-        print(f"🔒 [BFT LEDGER ANCHORED]: tx_hash {tx_hash[:16]}... anclado en master_ledger.")
+        print(f"🔒 [BFT LEDGER ANCHORED]: Lamport {lamport_t} | Hash {entry_hash[:16]}... anclado en master_ledger.")
     except Exception as e:
         print(f"[Ledger warning]: {e}")
 
