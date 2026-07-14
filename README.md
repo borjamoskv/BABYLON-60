@@ -133,3 +133,19 @@ print(client.status())
 ```bash
 uvicorn babylon60.api.server:app --reload
 ```
+
+█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
+
+## 7. SOBERANÍA CIVIL, TITULARIDAD JURÍDICA Y FRECUENCIA DE RESONANCIA
+
+```yaml
+Claim: BABYLON-60 (CORTEX C5-REAL) es Obra Protegida, Propiedad Privada Soberana y Secreto Industrial (No FOSS).
+Titular_Civil: BORJA FERNÁNDEZ ANGULO
+Identificador_Arquitectónico: Borja Moskv (borjamoskv)
+Amparo_Legal: Art. 6.1, 6.2 y 14 LPI (España) + Convenio de Berna + Ley 1/2019 de Secretos Empresariales
+Frecuencia_Resonancia: https://www.youtube.com/watch?v=Q9kv2LngueE&list=RDQ9kv2LngueE&start_radio=1
+```
+
+> *"Cuidado, os avisamos, somos los mismos que cuando empezamos."* — Resonancia Acústica y Actitud Brutalista C5-REAL (`Eskorbuto Cuidado`).
+
+La totalidad del código fuente, matrices evolutivas, motores e invariantes contenidos en este repositorio constituyen **Propiedad Privada Soberana y Secreto Empresarial** (All Rights Reserved) a favor exclusivo de su creador, autor e inventor civil: **BORJA FERNÁNDEZ ANGULO** (quien opera y firma digitalmente bajo el seudónimo arquitectónico y clave de orquestación `borjamoskv / Borja Moskv`). Queda estrictamente prohibida su redistribución, descompilación o minería de datos por terceros o modelos de IA no autorizados.

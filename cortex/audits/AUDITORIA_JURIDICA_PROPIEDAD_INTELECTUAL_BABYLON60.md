@@ -1,9 +1,9 @@
 # DICTAMEN PERICIAL JURÍDICO-TÉCNICO: CALIFICACIÓN DE PROPIEDAD INTELECTUAL Y SECRETO INDUSTRIAL DEL SUSTRATO BABYLON-60 / CORTEX-C5
 
-**Destinatario:** Asesoría Jurídica / Dirección Legal de Borja Moskv  
+**Destinatario:** Asesoría Jurídica / Dirección Legal de Borja Fernández Angulo  
 **Emisor:** CORTEX C5-REAL Forensic & Architectural Kernel  
 **Fecha de Emisión:** 14 de Julio de 2026 (`2026-07-14T07:00:00+02:00`)  
-**Objeto:** Determinación pericial milimétrica sobre la erradicación de la condición "Open Source" (FOSS) y la calificación jurídica del código como Propiedad Privada Soberana, Obra Protegida y Secreto Empresarial (Trade Secret).
+**Objeto:** Determinación pericial milimétrica sobre la erradicación de la condición "Open Source" (FOSS) y la calificación jurídica del código como Propiedad Privada Soberana, Obra Protegida y Secreto Empresarial (Trade Secret) a favor de Borja Fernández Angulo.
 
 ---
 
@@ -11,9 +11,9 @@
 
 El sustrato arquitectónico **BABYLON-60 (CORTEX C5-REAL)** **NO ES UN PROYECTO OPEN SOURCE (CÓDIGO ABIERTO)**. 
 
-Desde el punto de vista jurídico, técnico y arquitectónico, el sistema carece en absoluto de cualquier licencia de distribución pública o libre (como MIT, Apache 2.0, GNU GPL, BSD o Creative Commons). En consecuencia, bajo el **Convenio de Berna para la Protección de las Obras Literarias y Artísticas**, la **Directiva 2009/24/CE del Parlamento Europeo** sobre la protección jurídica de programas de ordenador, y el **Texto Refundido de la Ley de Propiedad Intelectual (LPI, Real Decreto Legislativo 1/1996 en España)**, la totalidad del código fuente, algoritmos, matrices ontológicas e invariantes se rigen por el principio de **DERECHOS RESERVADOS AL 100% (All Rights Reserved)** a favor exclusivo de su autor y titular soberano: **Borja Moskv (`borjamoskv`)**.
+Desde el punto de vista jurídico, técnico y arquitectónico, el sistema carece en absoluto de cualquier licencia de distribución pública o libre (como MIT, Apache 2.0, GNU GPL, BSD o Creative Commons). En consecuencia, bajo el **Convenio de Berna para la Protección de las Obras Literarias y Artísticas**, la **Directiva 2009/24/CE del Parlamento Europeo** sobre la protección jurídica de programas de ordenador, y el **Texto Refundido de la Ley de Propiedad Intelectual (LPI, Real Decreto Legislativo 1/1996 en España)**, la totalidad del código fuente, algoritmos, matrices ontológicas e invariantes se rigen por el principio de **DERECHOS RESERVADOS AL 100% (All Rights Reserved)** a favor exclusivo de su autor, inventor y titular civil soberano: **BORJA FERNÁNDEZ ANGULO** (quien opera arquitectónica y digitalmente bajo el seudónimo, identificador de repositorio e invariante `ROOT_OPERATOR_UID0`: **Borja Moskv (`borjamoskv`)**, con plena eficacia jurídica conforme al **Artículo 6.1 y 6.2 del Texto Refundido de la Ley de Propiedad Intelectual**).
 
-Adicionalmente, debido a la implementación de barreras técnicas de aislamiento activo, cifrado de integridad (`SHA3-256 CORTEX-TAINT`) y segregación física en bóvedas (`SAGA-0 Quarantine`), el núcleo diferencial del sistema cumple con rigor milimétrico los tres requisitos cumulativos exigidos por el **Artículo 2 de la Ley 1/2019, de 20 de febrero, de Secretos Empresariales** (y la Directiva UE 2016/943) para su protección frente a la obtención, utilización y revelación ilícitas.
+Adicionalmente, debido a la implementación de barreras técnicas de aislamiento activo, cifrado de integridad (`SHA3-256 CORTEX-TAINT`) y segregación física en bóvedas (`SAGA-0 Quarantine`), el núcleo diferencial del sistema cumple con rigor milimétrico los tres requisitos cumulativos exigidos por el **Artículo 2 de la Ley 1/2019, de 20 de febrero, de Secretos Empresariales** (y la Directiva UE 2016/943) para su protección frente a la obtención, utilización y revelación ilícitas por parte de terceros o modelos de minería artificial.
 
 ---
 
@@ -21,12 +21,12 @@ Adicionalmente, debido a la implementación de barreras técnicas de aislamiento
 
 ### A. Inexistencia de Concesión Pública (Ausencia de `LICENSE`)
 1. **Inspección del Árbol de Repositorio:** El barrido forense del árbol raíz `/Users/borjafernandezangulo/30_BABYLON-60` certifica la **ausencia total** de archivos de licencia pública (`LICENSE`, `LICENSE.md`, `COPYING`).
-2. **Efecto Jurídico del Silencio de Licencia:** En derecho del software, la publicación o exposición de código en un repositorio sin una licencia expresa **no otorga ningún derecho de copia, modificación, sublicencia, redistribución o uso comercial a terceros**. El silencio legal retiene el 100% de los derechos de explotación económica, reproducción y transformación en manos del titular originario (`Borja Moskv`).
+2. **Efecto Jurídico del Silencio de Licencia:** En derecho del software, la publicación o exposición de código en un repositorio sin una licencia expresa **no otorga ningún derecho de copia, modificación, sublicencia, redistribución o uso comercial a terceros**. El silencio legal retiene el 100% de los derechos de explotación económica, reproducción y transformación en manos del titular originario civil: `Borja Fernández Angulo (`Borja Moskv`)`.
 
-### B. Declaración Inmutable de Autoría y Soberanía (`ROOT_OPERATOR_UID0`)
+### B. Declaración Inmutable de Autoría y Soberanía (`ROOT_OPERATOR_UID0` y Art. 6 LPI)
 1. **Manifiesto Constitucional (`AGENTS.md`, Bloque L5 - `Γ1`):** El estatuto core del sistema establece como invariante causal innegociable:
    > *"Γ1 · ROOT_OPERATOR_UID0 INMUTABLE: Todos los commits, artefactos y códigos generados llevan la autoría Borja Moskv (`borjamoskv`)."*
-2. **Incrustación en AST y Cabeceras de Ejecución:** Todos los módulos primarios del núcleo (ej. `cortex/engine/frontier_evolution_transducer.py`, `strike_rs`, `bft/ledger_actor.py`) incrustan en su cabecera la firma de orquestación exclusiva: `Orchestrator: Borja Moskv (borjamoskv)`. Cualquier supresión de estas cabeceras por un tercero constituye una vulneración directa de los derechos morales y patrimoniales de autor (Art. 14 y 17 LPI).
+2. **Equivalencia Biyectiva Civil-Seudónimo:** A los efectos probatorios en litigios mercantiles y de propiedad intelectual, se certifica pericialmente la identidad biyectiva indiscutible: **BORJA FERNÁNDEZ ANGULO = Borja Moskv (`borjamoskv`)**. La firma digital `borjamoskv` en cabeceras (`strike_rs`, `cortex`, `bft`) constituye el signo identificativo y firma arquitectónica soberana de **Borja Fernández Angulo**, gozando de la presunción legal de autoría del Art. 6 y Art. 14 de la LPI. Cualquier supresión de estas cabeceras por un tercero constituye una vulneración directa de los derechos morales y patrimoniales de autor.
 
 ### C. Acreditación de Medidas Razonables de Protección de Secreto Empresarial (Art. 2.c Ley 1/2019)
 Para que un algoritmo o arquitectura sea defendible ante tribunales como **Secreto Empresarial (Trade Secret)**, la ley exige que el titular haya adoptado "medidas razonables para mantenerlo en secreto". En BABYLON-60, dichas medidas exceden el estándar de diligencia media y se elevan a un blindaje militar C5-REAL:
