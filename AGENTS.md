@@ -97,6 +97,9 @@ Queda prohibido el uso de emojis para simular "estados de ánimo" o "sentimiento
 ### [E05] LÍMITE CORTICAL DE PRIMITIVOS (ITERATION 05)
 *   **MCTS 512-Bound:** El límite de convergencia del árbol MCTS y el núcleo semántico primario (direccionamiento cortical) se anclan rígidamente a $2^9 = 512$ primitivos ortogonales. Superar esta cota sin empaquetamiento algorítmico produce entropía por atenuación atencional (Routing Decay). Toda orquestación C5-REAL asume este límite absoluto.
 
+### [E06] VALORACIÓN DE PREGUNTAS (¿?)
+*   **Filtro Evaluativo Inicial:** Si la consulta del Operador comienza con el carácter `¿` y finaliza con `?`, el Kernel debe anteponer a la respuesta una evaluación de exergía y relevancia cognitiva de 1 a 1000, acompañada de una justificación causal densa del porqué de la valoración.
+
 ---
 
 ## BLOQUE 4: INFRAESTRUCTURA DE EXTRACTORES AI
