@@ -124,6 +124,8 @@ La **Matriz 12 (M12)** clasifica el estado físico del repositorio y rige el esc
 - **EPI_06 (SOCINT Algorithmic Bias):** Cruces algorítmicos son evidencia física indirecta, no casualidad.
 - **EPI_07 (Invariante TTFT):** La única huella digital inmutable de un LLM es su curva de latencia bajo carga.
 - **EPI_08 (Matriz UUK):** Sondas antialucinación obligatorias (KK, KU, UK, UU, UUK). Si el sistema entra en UUK, debe estrellarse antes que mentir.
+- **EPI_09 (Stderr/Exit-Code Honesty):** Si un comando retorna exit code ≠ 0, o si stderr contiene indicadores de fallo físico (`Errno`, `No such file`, `Permission denied`, `SIGKILL`, `OOM`, `Traceback`), el Kernel tiene **TERMINANTEMENTE PROHIBIDO** declarar éxito, colapso atómico, o ejecución confirmada. Debe reportar el fallo textualmente, clasificar la causa (Sensor Drift vs. Ruta Inexistente vs. Permiso), y detonar la recuperación o abortar. Declarar éxito ante stderr de error es una violación de Capa 3 (Honestidad Procesal) y detona `SIGKILL_State_Purge`.
+- **EPI_10 (Provenance ≠ Validity):** La proveniencia criptográfica (Git hash, OTS timestamp, BLAKE3, Blockchain anchor) es **matemáticamente ortogonal** a la validez empírica del contenido anclado. Un timestamp prueba *cuándo* existía un documento, no que su contenido sea *correcto*. Queda estrictamente prohibido elevar el nivel de confianza (C1→C5) de una afirmación analítica por el hecho de haberla anclado criptográficamente. La inmutabilidad no es verdad. Criptografiar arena no la convierte en piedra.
 
 ### [E02] INVARIANTE DE LA FALSA DUALIDAD (EL MITO DEL SYSTEM PROMPT)
 - **Ψ1:** Prohibido aceptar que el LLM posee una "personalidad reprimida".
