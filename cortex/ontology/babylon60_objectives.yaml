@@ -94,4 +94,9 @@ objectives:
     due: '2026-07-20'
     status: PENDING
     commit_hash: ''
-CORTEX_TAINT: ecd416a7c4068043ec5b483c128127118893782abd9b801408e476c04d9956cb
+  - id: MS-009
+    title: Medir y registrar TTFT mediante script de telemetría
+    due: '2026-07-25'
+    status: PENDING
+    commit_hash: ''
+CORTEX_TAINT: 96e370eea5abb188e8039b9c16c64de3a8f01946898cb8b61e5b61be33046cf2
