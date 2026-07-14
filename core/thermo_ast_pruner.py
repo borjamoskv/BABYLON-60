@@ -35,11 +35,21 @@ class AnergiaPurger(ast.NodeTransformer):
             import_os = ast.Import(names=[ast.alias(name='os', asname=None)])
             import_signal = ast.Import(names=[ast.alias(name='signal', asname=None)])
             insert_idx = 0
+            has_os = False
+            has_signal = False
             for idx, child in enumerate(visited.body):
                 if isinstance(child, ast.ImportFrom) and child.module == '__future__':
                     insert_idx = idx + 1
-            visited.body.insert(insert_idx, import_os)
-            visited.body.insert(insert_idx + 1, import_signal)
+                if isinstance(child, ast.Import):
+                    for name_alias in child.names:
+                        if name_alias.name == 'os':
+                            has_os = True
+                        if name_alias.name == 'signal':
+                            has_signal = True
+            if not has_signal:
+                visited.body.insert(insert_idx, import_signal)
+            if not has_os:
+                visited.body.insert(insert_idx, import_os)
         return visited
 
 def transmute_file(filepath: str) -> None:

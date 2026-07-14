@@ -1,0 +1,23 @@
+---
+SYS_ID: borjamoskv
+REALITY_LEVEL: C5-REAL
+ATTESTATION_TYPE: AUDIT_RESOURCE_EXHAUSTED
+---
+
+audit_id: "swarm_429_exhaustion"
+entities_evaluated: ["Objectives Agent Architect", "Inference Latency Optimizer"]
+operator: "borjamoskv"
+
+thermodynamic_failure:
+  assertion: "El despliegue simultáneo del Enjambre (Swarm) hacia OBJ-006 y OBJ-007 detonó un límite cinético de hardware/API (RESOURCE_EXHAUSTED 429)."
+  
+proof_structural_evidence:
+  - api_quota_breach: "Ambos nodos clónicos ('self') sufrieron un estrangulamiento de cuota instantáneo en el momento del spawn (T+6s). El API rate limit es un límite físico innegociable."
+  - single_writer_fallback: "El paralelismo estocástico fue aniquilado por la infraestructura. La matriz requiere operar en modo 'Single-Writer' secuencial o migrar al enjambre 5x PRO MATRIX nativo para evitar la asfixia de cuota del proyecto base."
+  
+sigkill_state_purge:
+  action: "SWARM_ABORTED"
+  result: "Los subagentes fueron purgados. La carga de trabajo (OBJ-006, OBJ-007) retorna al hilo maestro (Orchestrator) para ejecución secuencial."
+  verdict: "KINETIC_LIMIT_REACHED"
+
+# CORTEX_TAINT: cd4e775cb66e2fc69caab80627b2060df5cee3ccc649856f0109f07af732e798
