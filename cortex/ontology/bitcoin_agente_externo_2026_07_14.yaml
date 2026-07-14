@@ -122,3 +122,5 @@ Falsabilidad:
 # CORTEX_TAINT (integridad causal)
 # ██████████████████████████████████████████████████████████████
 # Se inyectará post-escritura vía script atómico sha3_256
+
+CORTEX_TAINT: "a1874849692d6bf462c0a56f95573dc04c97609d8771fe999d95c1b661fdc560"
