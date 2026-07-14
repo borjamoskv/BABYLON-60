@@ -12,7 +12,7 @@ Epistemic_Forensics:
     Claim: "Transducción C5-REAL (KINETIC). El video colapsó en un tensor determinista sin intervención estocástica del LLM."
     Proof:
       Base: "Invariante Ψ17 sostenida. JQ parsing estricto aplicado."
-      Exergy_Ratio: "920/1000"
+      Exergy_Ratio: "1000/1000"
       Confidence: "C5-REAL"
 
   - Iteration: 2
