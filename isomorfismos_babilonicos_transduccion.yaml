@@ -1,0 +1,220 @@
+# Transduccion estructural - Isomorfismos: Babilonia / organismos / sistemas
+# Fuente: documento de trabajo 2026-07-14. Salida: solo estructura.
+# Ejes por isomorfismo: state_tensor | physical_constraints | collapse_vector | rigor.
+
+meta:
+  frame: [general_systems_theory, cybernetics, scaling_laws]
+  morphism_ladder: "iso > homo > elem_equiv"   # isomorfia > homomorfia > equivalencia elemental
+  thesis: "estructura compartida => modo de fallo compartido"
+  strongest_case: I01_red_hidraulica   # unica cercana a biyeccion: comparte ecuaciones
+  invariant_generator: "sistema abierto lejos del equilibrio + flujo(materia,energia,info) + restriccion + seleccion => espacio de soluciones estrecho => convergencia"
+
+isomorphisms:
+
+  - id: I01
+    tag: red_hidraulica
+    babylon: "canales ramificados Tigris/Eufrates: troncal -> distributario -> acequia"
+    invariant: "arbol de transporte que llena el espacio; minima disipacion bajo servicio de area"
+    analog: "circulatorio / xilema-floema / traqueas de insectos"
+    state_tensor: [caudal_Q, radio_conducto_r, presion_head, razon_de_ramificacion, nivel_jerarquico]
+    physical_constraints:
+      - "minima disipacion energetica (West-Brown-Enquist 1997)"
+      - "fractal que llena el espacio; unidad terminal invariante"
+      - "ley de Murray: r0^3 = r1^3 + r2^3"
+      - "escala metabolica: B ~ M^(3/4)"
+    collapse_vector:
+      mode: esclerosis_obstruccion
+      babylon: "azolvamiento: sedimento estrecha la luz del canal"
+      analog: "arteriosclerosis: estrechamiento de la luz vascular"
+      math: "r baja => Q ~ r^4 (Poiseuille) => caudal colapsa"
+    rigor: near_iso   # comparte ecuaciones, no solo silueta
+
+  - id: I02
+    tag: base_60_redundancia
+    babylon: "sistema sexagesimal; 60 = 2^2 * 3 * 5 (altamente compuesto)"
+    invariant: "redundancia / degeneracion: muchos caminos -> un mismo resultado"
+    analog: "codigo genetico degenerado; rutas metabolicas redundantes; representacion distribuida"
+    state_tensor: [divisores_de_la_base, exactitud_de_particion, grados_de_libertad_redundantes]
+    physical_constraints:
+      - "alta divisibilidad => particion/fraccion exacta => tolerancia a fallos"
+      - "degeneracion = robustez frente a perturbacion"
+    collapse_vector:
+      mode: perdida_de_redundancia
+      babylon: "dependencia de un solo cultivo / un solo canal"
+      analog: "fragilidad por perdida de degeneracion; punto unico de fallo"
+      math: "D (degeneracion) -> 1 => robustez -> 0"
+    rigor: homo
+
+  - id: I03
+    tag: cuneiforme_codigo_replicable
+    babylon: "codigo discreto sobre arcilla durable, copiado a mano por generaciones"
+    invariant: "codigo combinatorio replicable con correccion de error"
+    analog: "ADN + polimerasa/ribosoma + reparacion"
+    mapping:
+      tablilla: cromosoma
+      inventario_de_signos: alfabeto_de_codones
+      escriba: polimerasa_ribosoma
+      edubba_escuela: maquinaria_de_correccion_de_errores
+      recension_canonica: genoma_de_consenso
+      desliz_de_copia: mutacion
+      stemma_textual: filogenia
+    state_tensor: [longitud_del_texto_L, fidelidad_de_copia_q, tasa_de_error_mu, tamano_del_inventario]
+    physical_constraints:
+      - "canal discreto => replicacion de alta fidelidad"
+      - "correccion de error (escuela/autoridad) acota la deriva"
+    collapse_vector:
+      mode: catastrofe_de_error
+      babylon: "corrupcion acumulada de copias del canon"
+      analog: "umbral de error de Eigen (cuasiespecies)"
+      math: "mu * L > ln(sigma) => deslocalizacion: la informacion se disuelve en ruido"
+    rigor: homo
+
+  - id: I04
+    tag: notacion_posicional
+    babylon: "valor por posicion: mismo signo = 1, 60, 3600 ..."
+    invariant: "significado = f(simbolo, posicion)"
+    analog: "informacion posicional; morfogenos (bandera francesa, Wolpert 1969)"
+    state_tensor: [simbolo, indice_de_posicion, gradiente_de_morfogeno, umbral]
+    physical_constraints:
+      - "el valor se lee del lugar dentro del gradiente"
+      - "interpretacion por umbrales sobre el gradiente"
+    collapse_vector:
+      mode: perdida_del_gradiente
+      babylon: "sin cero medial / sin cero terminal => casilla vacia ambigua"
+      analog: "senal de frontera ambigua: cero o borde? => desorganizacion morfologica"
+      math: "grad(morfogeno) -> 0 => posicion no decodificable"
+    rigor: homo
+
+  - id: I05
+    tag: omina_modelo_predictivo
+    babylon: "catalogos si-X-entonces-Y (Enuma Anu Enlil; extispicina hepatica)"
+    invariant: "modelo generativo aprendido; memoria asociativa de priores"
+    analog: "codificacion predictiva (Rao-Ballard 1999); memoria inmune adaptativa"
+    state_tensor: [prior_P, senal_entrante, error_de_prediccion, mapa_antigeno_respuesta]
+    physical_constraints:
+      - "acumular priores; contrastar senal entrante => anticipar"
+      - "percibir = minimizar sorpresa frente a modelo interno"
+    collapse_vector:
+      mode: sobreajuste_a_priores_obsoletos
+      babylon: "presagios que ya no predicen"
+      analog: "rigidez perceptiva ante lo nuevo"
+      math: "P fija, entorno deriva => error de prediccion sube monotono"
+    rigor: homo
+
+  - id: I06
+    tag: astronomia_periodica
+    babylon: "funciones zigzag y escalon (Sistemas A/B, Neugebauer); Saros ~ 18 anos 11 dias"
+    invariant: "descomposicion de un fenomeno complejo en periodicidades superpuestas"
+    analog: "osciladores biologicos acoplados (circadiano, ciclo celular); analisis de Fourier"
+    state_tensor: [conjunto_de_periodos, fases, amplitudes]
+    physical_constraints:
+      - "senal compleja = suma de componentes periodicos"
+      - "prediccion por recurrencia de ciclos (eclipses via Saros)"
+    collapse_vector:
+      mode: desincronizacion
+      babylon: "desajuste calendarico (deriva de fase)"
+      analog: "arritmia; perdida del ritmo circadiano"
+      math: "delta_fase acumulada entre osciladores => perdida de coherencia"
+    rigor: homo
+
+  - id: I07
+    tag: hammurabi_retroalimentacion
+    babylon: "base de reglas condicionales; talion escala la pena a la ofensa"
+    invariant: "control por retroalimentacion negativa proporcional al error"
+    analog: "homeostasis; discriminacion inmune propio/ajeno graduada"
+    state_tensor: [punto_de_consigna, desviacion_e, ganancia_de_correccion]
+    physical_constraints:
+      - "detectar desviacion vs setpoint; corregir de forma proporcional al error"
+      - "respuesta graduada a la magnitud de la transgresion"
+    collapse_vector:
+      mode: descontrol_u_oscilacion
+      babylon: "justicia desbordada o rigida"
+      analog: "tormenta inmune: homeostasis vuelta contra si; bucle fuera de control"
+      math: "ganancia G alta y/o retardo tau => inestabilidad (oscilacion divergente)"
+    rigor: homo
+
+  - id: I08
+    tag: templo_integrador_metabolico
+    babylon: "economia redistributiva; zigurat acumula grano y lo reasigna"
+    invariant: "integrador central que amortigua flujos frente a choques"
+    analog: "metabolismo del superorganismo (colonia de hormigas; cuerpo)"
+    state_tensor: [reserva_central, flujo_de_entrada, flujo_de_salida, capacidad_tampon]
+    physical_constraints:
+      - "buffer central estabiliza el suministro ante estacionalidad y choque"
+    collapse_vector:
+      mode: fallo_del_centro
+      babylon: "colapso redistributivo en hambruna"
+      analog: "fallo metabolico sistemico"
+      math: "salida > entrada + reserva => reserva -> 0 => colapso"
+    rigor: homo
+
+  - id: I09
+    tag: canon_herencia
+    babylon: "transmision escribal curada por autoridad (recension estandar)"
+    invariant: "herencia con variacion y seleccion"
+    analog: "filogenia; stemma textual"
+    state_tensor: [acervo_de_informacion, tasa_de_variacion, presion_de_seleccion]
+    physical_constraints:
+      - "informacion discreta, copiada con error, curada por seleccion"
+    deviation: "lamarckiana + horizontal + editable en 1 generacion (rompe la analogia darwiniana)"
+    collapse_vector:
+      mode: ruptura_de_transmision
+      babylon: "perdida del saber escribal"
+      analog: "extincion de linaje; perdida de informacion"
+      math: "transmision intergeneracional -> 0 => acervo no recuperable"
+    rigor: homo
+
+  - id: I10
+    tag: salinizacion_senescencia
+    babylon: "riego sin drenaje + evaporacion arida => sal en la zona radicular"
+    invariant: "acumulacion monotona de dano no reparado hasta cruzar umbral"
+    analog: "senescencia; sobrepaso ecologico; punto de no retorno"
+    state_tensor: ["concentracion_de_sal_S(t)", nivel_freatico, umbral_fisiologico]
+    physical_constraints:
+      - "desecho no excretable => dS/dt > 0 (monotona)"
+      - "evaporacion concentra sal sin drenaje suficiente"
+    evidence:
+      trigo_vs_cebada: "trigo (sensible) cae frente a cebada (tolerante); trigo casi desaparece ~1700 a.C."
+      texto: "menciones directas: la tierra se ha vuelto blanca"
+      rendimiento_L_por_ha: {"~2400_aC": 2500, "~2100_aC": 1460, "~1700_aC": "<900"}   # Girsu/Lagash
+      fuente: "Jacobsen & Adams 1958"
+      caveat: "magnitud y peso relativo (sal vs politica/militar/gestion hidrica) en debate; la FORMA del proceso no"
+    collapse_vector:
+      mode: punto_de_no_retorno
+      babylon: "salinizacion irreversible; centro de gravedad se desplaza al norte (Babilonia/Asiria)"
+      analog: "senescencia; colapso ecologico"
+      math: "S(t) sube monotona => cruce de umbral => rendimiento colapsa (irreversible)"
+    rigor: homo   # nota: isomorfismo de FORMA dinamica (dano acumulado), no de ecuaciones
+
+convergence:
+  cause: "3 condiciones concurrentes: (1) sistema abierto lejos del equilibrio; (2) throughput de materia/energia/informacion; (3) restriccion + seleccion"
+  consequence: "espacio de soluciones viables estrecho => las arquitecturas convergen"
+  recurring_architectures: [transporte_ramificado_que_llena_el_espacio, retroalimentacion_negativa, codigo_discreto_replicable, redundancia, dinamica_descompuesta_en_ciclos]
+  laws:
+    constructal_bejan: "para persistir, la configuracion de flujo evoluciona para facilitar acceso a sus corrientes (arbol: delta, pulmon, red de canales)"
+    urban_scaling_bettencourt_west: "propiedades urbanas escalan con la poblacion en leyes de potencia, tan regulares como el metabolismo animal"
+
+limits:
+  where_mapping_breaks:
+    - "agentes con intencion: ven el problema y cambian las reglas"
+    - "herencia lamarckiana, horizontal y editable casi en tiempo real"
+    - "sin cuello de botella reproductivo limpio que discipline la seleccion"
+    - "fronteras porosas: sin membrana que defina al organismo"
+  epistemic:
+    multiple_realizability: "misma funcion =/= mismo mecanismo (corta en ambos sentidos)"
+    honest_status: "casi todo = homomorfismo / equivalencia estructural; solo I01 (y la forma de I10) se acerca a isomorfismo pleno"
+    value: "no prueba identidad; la estructura compartida genera predicciones de colapso que de otro modo no se ven"
+
+refs:
+  bertalanffy_1968: "General System Theory"
+  wiener_1948: "Cybernetics"
+  hofstadter_1979: "Godel, Escher, Bach"
+  west_brown_enquist_1997: "Allometric scaling, Science 276:122"
+  murray_1926: "Principle of minimum work, PNAS 12:207"
+  bettencourt_west_2007: "Scaling in cities, PNAS 104:7301"
+  bejan_lorente_2008: "Design with Constructal Theory"
+  jacobsen_adams_1958: "Salt and Silt in Ancient Mesopotamian Agriculture, Science 128:1251"
+  neugebauer_1957: "The Exact Sciences in Antiquity"
+  wolpert_1969: "Positional Information, J Theor Biol 25:1"
+  rao_ballard_1999: "Predictive Coding in the Visual Cortex, Nat Neurosci 2:79"
+  eigen_1971: "Selforganization of Matter, Naturwissenschaften 58:465"
