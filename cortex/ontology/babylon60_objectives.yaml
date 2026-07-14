@@ -88,5 +88,10 @@ objectives:
   description: Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms.
   exergy_score: 0.95
   status: PENDING
-  milestones: []
-CORTEX_TAINT: e9397ea74b69f395eed60b14fc2c3f9c7e8e25a0ca54ce65535b8aebc01ee4d5
+  milestones:
+  - id: MS-008
+    title: Configurar socket local de Ollama/MLX para inferencia local
+    due: '2026-07-20'
+    status: PENDING
+    commit_hash: ''
+CORTEX_TAINT: ecd416a7c4068043ec5b483c128127118893782abd9b801408e476c04d9956cb
