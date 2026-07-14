@@ -290,35 +290,23 @@ def append_to_master_ledger(conn: sqlite3.Connection):
         "operator": "borjamoskv (UID0)",
         "timestamp_utc": ts_iso,
     }
-    payload_json = json.dumps(summary, sort_keys=True)
-    payload_hash = hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
 
     try:
-        cursor.execute("SELECT MAX(lamport_t), entry_hash FROM master_ledger")
-        row = cursor.fetchone()
-        prev_lamport = row[0] if row[0] is not None else 0
-        prev_hash = row[1] if row[1] is not None else "00000000000000000000000000000000"
-
-        lamport_t = prev_lamport + 1
-        agent_id = "MOSKV_AUTOMATA_L15"
-        cortex_taint = f"T={lamport_t}|H={payload_hash[:8]}|SYNC=True"
-
-        entry_raw = f"{lamport_t}{agent_id}{payload_json}{prev_hash}{cortex_taint}"
-        entry_hash = hashlib.sha256(entry_raw.encode("utf-8")).hexdigest()
-
-        cursor.execute(
-            """
-            INSERT INTO master_ledger (lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """,
-            (lamport_t, agent_id, payload_json, prev_hash, cortex_taint, entry_hash),
-        )
-        conn.commit()
-        print(
-            f"🔒 [BFT LEDGER ANCHORED]: Lamport {lamport_t} | Hash {entry_hash[:16]}... anclado en master_ledger."
-        )
-
+        # Check if master_ledger table exists and init it if not
+        bft_master_ledger.init_ledger()
+        
+        # Append via bft_master_ledger engine (idempotency, triggers and correct binary hashing applied)
+        entry_hash = bft_master_ledger.append_block(summary, "MOSKV_AUTOMATA_L15", "SYNC=True")
+        
         # Snapshot analítico persistente
+        # Re-fetch details for snapshot compatibility
+        cursor.execute("SELECT prev_hash, lamport_t FROM master_ledger WHERE entry_hash = ?", (entry_hash,))
+        row = cursor.fetchone()
+        if row:
+            prev_hash, lamport_t = row
+        else:
+            prev_hash, lamport_t = "0" * 64, 0
+
         with open(SNAPSHOT_PATH, "w") as f:
             json.dump({
                 "lamport_t": lamport_t,
@@ -327,47 +315,21 @@ def append_to_master_ledger(conn: sqlite3.Connection):
                 "homeostasis_state": stats,
                 "total_nodes": total,
                 "timestamp_utc": ts_iso,
-                "cortex_taint": cortex_taint,
+                "cortex_taint": f"CORTEX-TAINT:SYNC=True:{lamport_t}",
             }, f, indent=4)
+        
+        print(f"🔒 [BFT LEDGER ANCHORED]: Lamport {lamport_t} | Hash {entry_hash[:16]}... anclado en master_ledger.")
 
-    except sqlite3.OperationalError as e:
+    except Exception as e:
         print(f"⚠️ [BFT ERROR]: {e}")
 
 
 def verify_ledger_integrity(conn: sqlite3.Connection):
-    """Verifica la integridad de la cadena de hashes del master_ledger.
-    Recalcula cada entry_hash y compara contra el almacenado."""
-    cursor = conn.cursor()
-    cursor.execute(
-        "SELECT lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash "
-        "FROM master_ledger ORDER BY lamport_t ASC"
-    )
-    rows = cursor.fetchall()
-    if not rows:
-        print("⚠️ [VERIFY]: master_ledger vacío.")
-        return
-
-    broken = 0
-    prev_stored_hash = "00000000000000000000000000000000"
-    for lamport_t, agent_id, payload, prev_hash, cortex_taint, stored_hash in rows:
-        # Verificar enlace de cadena
-        if prev_hash != prev_stored_hash:
-            print(f"🔴 [CHAIN BREAK] Lamport {lamport_t}: prev_hash esperado {prev_stored_hash[:16]}... vs almacenado {prev_hash[:16]}...")
-            broken += 1
-
-        # Recalcular hash
-        entry_raw = f"{lamport_t}{agent_id}{payload}{prev_hash}{cortex_taint}"
-        recalc_hash = hashlib.sha256(entry_raw.encode("utf-8")).hexdigest()
-        if recalc_hash != stored_hash:
-            print(f"🔴 [HASH MISMATCH] Lamport {lamport_t}: recalc {recalc_hash[:16]}... vs stored {stored_hash[:16]}...")
-            broken += 1
-
-        prev_stored_hash = stored_hash
-
-    if broken == 0:
-        print(f"✅ [VERIFY PASS]: {len(rows)} entradas en master_ledger. Cadena de hashes íntegra.")
+    """Verifica la integridad de la cadena de hashes del master_ledger."""
+    if bft_master_ledger.verify_ledger():
+        print("✅ [VERIFY PASS]: Cadena de hashes del master_ledger íntegra.")
     else:
-        print(f"🔴 [VERIFY FAIL]: {broken} roturas detectadas en {len(rows)} entradas.")
+        print("🔴 [VERIFY FAIL]: Roturas/Desviación detectada en el master_ledger.")
 
 
 def emit_itera_block(conn: sqlite3.Connection, batch_size: int = 3):
