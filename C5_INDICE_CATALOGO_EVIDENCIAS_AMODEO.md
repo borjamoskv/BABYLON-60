@@ -32,7 +32,7 @@ Proof:
 | **`#08`** | `evidencias_capturas/evidencia_08_confirmacion_algebra_logos_ethos_ship_03h52m.png` | `2026-07-14 03:52:34 CEST` | `951.0 KB` | `5fe8bc0e8a6c0b7149292ff6a02760e65d5f7f70c3c697b210479bba570deef0` | **Evidencia de alta densidad (973 KB) verificando la simbiosis matemática del Álgebra Causal (LOGOS -> ETHOS -> SHIP).** |
 | **`#09`** | `evidencias_capturas/evidencia_09_cierre_trilingue_esperanto_04h01m.png` | `2026-07-14 04:01:23 CEST` | `39.5 KB` | `4057bafcb85165938cb69a7f2dd794bfc562b9878e524ca84b8a2028229b69d9` | **Cierre pericial de la secuencia en Esperanto corroborando la no-casualidad del intercambio técnico.** |
 | **`#10`** | `evidencias_capturas/evidencia_10_borrado_precipitado_intento_ocultacion_04h15m.png` | `2026-07-14 04:15:38 CEST` | `96.7 KB` | `f57f1a868c9dbf6df2ea329c81e12675391eeb307eee4bde27392b68e4c11b70` | **Constatación del borrado precipitado de las publicaciones y recomendaciones al advertir el peso legal de su validación.** |
-| **`#11`** | `evidencias_capturas/evidencia_11_bloqueo_unilateral_403_y_cierre_05h52m.png` | `2026-07-14 05:52:26 CEST` | `3.7 KB` | `c3e0cb94594578d6b712187435da025ac6de3c12c0d824114577fdd2dd6b4ebb` | **Bloqueo unilateral y fulminante (HTTP Error 403 / Account Suspended) como represalia e intento de cercenar el historial.** |
+| **`#11`** | `evidencia_11_bloqueo_unilateral_403_y_cierre_05h52m.png` | `2026-07-14 05:52:26 CEST` | `3.7 KB` | `fbf72ecacb802ecb721e9ecdb003184918e663a8a3ee2f5bfca08aeb92ee8efc` | **Represalia Personal del CEO (`Account Block`):** Bloqueo unilateral ejecutado por la cuenta personal del CEO Dario Amodeo tras borrar sus likes e interpelaciones, tratando de impedir el acceso y la trazabilidad pública. |
 
 ---
 
