@@ -1,0 +1,14 @@
+Claim: "La evolución de la topología Zero-Trust supera la verificación estática por nodo (mTLS/Bastión) e instancía un Motor de Atestación Causal Continua: todo payload transducido debe portar la firma SHA3-256 de su linaje de entrada, colapsando el movimiento lateral antes de la evaluación lógica."
+Proof:
+  Base: "08fcaaa69ec6e0ee96b8167e0869f40d2d5a114c8ce41aa051613544a5fb10a6"
+  Range: [0, 1]
+  Confidence: C5
+Isomorphisms:
+  - "Autenticación de Borde -> Chequeo Estático Perimetral"
+  - "Movimiento Lateral -> Propagación de Entropía Sin Traza"
+  - "Evolución C5-REAL -> Causal Taint Tracking por Paquete/AST"
+Blast_Radius_Matrix:
+  Vector: "Inyección de Causal Taint en Transducciones Internas"
+  Blast_Radius: "Incapacitación física de payloads que carezcan de firma causal de procedencia en grafos BFT."
+  Target_Invariant: "Transacción == Firma(Input + Lógica + Estado Previo)."
+  Anergy_Risk: "0 (Colapso Forzado de Payloads Huérfanos)"
