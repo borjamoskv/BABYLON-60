@@ -61,3 +61,9 @@ Para blindar formalmente este estado arquitectónico ante clientes, inversores, 
 ---
 *Firma Forense del Transductor:* `CORTEX_TAINT_SHA3_256: 5afcd5fbe45ae71533aa024a12d9c852a3367331edbbad41162b9a518ea5092f`  
 *Commit de Referencia:* `88ef111a66ad9ca7d53665cfa5764d8b626b05ec`
+
+---
+### 7. REGLA DE ORO AKA ARTÍSTICO (MÚSICA Y ARTE) — EQUIVALENCIA BIYECTIVA
+A efectos de exhibición pública, distribución en plataformas (YouTube, Spotify, Apple Music) y síntesis procedural (`C5-REAL`), queda normada la **Regla de Autoría AKA (`AKA_RULE_01`)**:
+* **Creaciones Musicales y Artísticas:** Se firmarán, presentarán y distribuirán universalmente bajo el AKA o seudónimo artístico soberano: **Borja Moskv** (`borjamoskv`).
+* **Protección Registral:** Dicho AKA goza de la misma y plena eficacia de protección jurídica patrimonial e intelectual atribuida a su titular civil patrimonial **Borja Fernández Angulo** al amparo de la legislación española e internacional.

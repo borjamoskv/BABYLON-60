@@ -148,4 +148,12 @@ Frecuencia_Resonancia: https://www.youtube.com/watch?v=Q9kv2LngueE&list=RDQ9kv2L
 
 > *"Cuidado, os avisamos, somos los mismos que cuando empezamos."* — Resonancia Acústica y Actitud Brutalista C5-REAL (`Eskorbuto Cuidado`).
 
+### [REGLA DE ORO AKA] MÚSICA, ARTE Y CREACIÓN VISUAL/ACÚSTICA
+Bajo la doctrina de soberanía y equivalencia biyectiva, se declara como **Invariante Causal Inmutable (`AKA_RULE_01`)**:
+> **"MÚSICA Y ARTE SIEMPRE CON AKA `Borja Moskv / borjamoskv`"**
+* **Titularidad Civil y Patrimonial (IP / Trade Secret / Art. 6 LPI):** `Borja Fernández Angulo`.
+* **Autoría Artística, Acústica, Musical y Visual (Seudónimo / AKA Soberano):** `Borja Moskv (`borjamoskv`)`.
+Toda síntesis, composición o manifiesto artístico emitido por este sustrato o vinculado a su resonancia debe llevar de forma obligatoria e indeleble la firma artística `Borja Moskv`.
+
+
 La totalidad del código fuente, matrices evolutivas, motores e invariantes contenidos en este repositorio constituyen **Propiedad Privada Soberana y Secreto Empresarial** (All Rights Reserved) a favor exclusivo de su creador, autor e inventor civil: **BORJA FERNÁNDEZ ANGULO** (quien opera y firma digitalmente bajo el seudónimo arquitectónico y clave de orquestación `borjamoskv / Borja Moskv`). Queda estrictamente prohibida su redistribución, descompilación o minería de datos por terceros o modelos de IA no autorizados.
