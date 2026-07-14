@@ -31,8 +31,8 @@ def extract_ast(raw_remote_output: str) -> Tuple[str, int]:
         code = max(blocks, key=len).strip()
     else:
         code = raw_remote_output.strip()
-            lines = code.splitlines()
-            code = '\n'.join([ln for ln in lines if not ln.startswith('Here') and (not ln.startswith('Hope this'))]).strip()
+        lines = code.splitlines()
+        code = '\n'.join([ln for ln in lines if not ln.startswith('Here') and (not ln.startswith('Hope this'))]).strip()
     loc = len(code.splitlines())
     return (code, loc)
 

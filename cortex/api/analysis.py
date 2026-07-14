@@ -1,3 +1,8 @@
+import subprocess
+import shlex
+import sqlite3
+from typing import Optional
+from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import HTMLResponse
@@ -77,12 +82,12 @@ def get_facts(query: str, payload: dict = Depends(verify_jwt)):
         ]
     }
 
-import sqlite3
-from pydantic import BaseModel
+
+
 
 class TerminalCmd(BaseModel):
     command: str
-    workspace: str = None
+    workspace: Optional[str] = None
     mode: str = "bash"
 
 class PromptPayload(BaseModel):
@@ -157,7 +162,7 @@ def get_repo_check():
     }
 
 @app.get("/api/ledger")
-def get_ledger(workspace: str = None):
+def get_ledger(workspace: Optional[str] = None):
     db_path = os.path.join(os.path.dirname(__file__), "..", "..", "cortex_memory.db")
     if not os.path.exists(db_path):
         return {"error": "Database not found"}
@@ -191,7 +196,7 @@ def get_ledger(workspace: str = None):
         conn.close()
 
 @app.get("/api/dlg")
-def get_dlg(workspace: str = None):
+def get_dlg(workspace: Optional[str] = None):
     db_path = os.path.join(os.path.dirname(__file__), "..", "..", "cortex_memory.db")
     if not os.path.exists(db_path):
         return {"nodes": [], "edges": []}
@@ -228,8 +233,7 @@ def get_dlg(workspace: str = None):
     finally:
         conn.close()
 
-import subprocess
-import shlex
+
 
 def validate_command_antipatterns(cmd: str) -> dict | None:
     cmd_lower = cmd.lower()
@@ -299,7 +303,7 @@ def validate_command_antipatterns(cmd: str) -> dict | None:
         }
         
     # 10. Absolute Path Injection (Σ12)
-    if cmd.strip().startswith("./") and not cmd.strip().startswith("./venv") and not "cd " in cmd:
+    if cmd.strip().startswith("./") and not cmd.strip().startswith("./venv") and "cd " not in cmd:
         return {
             "code": "RELATIVE_EXECUTION_VIOLATION",
             "desc": "Ejecución relativa (./script) bloqueada (Σ12). Usa saltos absolutos (cd /Absolute/Path && ./script)."

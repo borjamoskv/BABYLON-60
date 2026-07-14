@@ -38,7 +38,7 @@ def hijack_browser():
         req = urllib.request.Request("http://127.0.0.1:9222/json")
         with urllib.request.urlopen(req) as response:
             targets = json.loads(response.read().decode())
-    except Exception as e:
+    except Exception:
         print("[!] Error: No se pudo conectar al Socket CDP. ¿Está Chrome/Brave instalado?")
         process.kill()
         sys.exit(1)

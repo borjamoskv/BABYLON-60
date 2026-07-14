@@ -20,6 +20,7 @@ AUDIT_OUT_DIR = CORTEX_ROOT / "cortex" / "audits"
 
 # Empathy slop regex for ANTI-001
 LIMERENT_CONV_REGEX = re.compile(
+    r'\b(aquí tienes|espero que|lo siento|disculpa|sure|here is|hope this helps)\b'
 )
 
 # Absolute path detection for ANTI-025

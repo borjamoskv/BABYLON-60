@@ -5,7 +5,6 @@ Verificación física de los invariantes C5-REAL bajo ataque.
 """
 import sys
 import hashlib
-import traceback
 from centuria_transducer_core import (
     purge_green_theater,
     HardAttentionRouter,
@@ -19,7 +18,7 @@ def test_poda_latente():
     
     # Test valid
     try:
-        res = purge_green_theater(payload_clean)
+        purge_green_theater(payload_clean)
         print("    [PASS] Clean payload aceptado.")
     except SystemExit:
         print("    [FAIL] Clean payload detonó incorrectamente.")
@@ -27,6 +26,7 @@ def test_poda_latente():
         
     # Test violation
     try:
+        payload_violator = "Aquí tienes el código, espero que te sirva."
         purge_green_theater(payload_violator)
         print("    [FAIL] Violator payload evadió el filtro.")
         sys.exit(1)

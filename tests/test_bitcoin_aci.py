@@ -44,7 +44,7 @@ class MockBitcoinRPCHandler(BaseHTTPRequestHandler):
                 "hex": "01000000000000000000"
             }
         elif method == "sendtoaddress":
-            address = params[0]
+            _address = params[0]
             amount = params[1]
             if MockBitcoinRPCHandler.balance_btc >= amount:
                 MockBitcoinRPCHandler.balance_btc -= amount
@@ -52,8 +52,8 @@ class MockBitcoinRPCHandler(BaseHTTPRequestHandler):
             else:
                 error = {"code": -4, "message": "Insufficient funds"}
         elif method == "generatetoaddress":
-            nblocks = params[0]
-            address = params[1]
+            _nblocks = params[0]
+            _address = params[1]
             MockBitcoinRPCHandler.balance_btc += 50.0
             result = ["blockhash_mock_1"]
         else:

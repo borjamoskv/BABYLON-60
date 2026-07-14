@@ -14,14 +14,15 @@ IV.  Purga de Sumideros - `sinkhole_oom_enforcer`
 import sys
 import hashlib
 import time
-import subprocess
-from typing import Callable, Any, TypeVar, Optional
+from typing import Callable, Any, TypeVar
 
 T = TypeVar("T")
 
 # -----------------------------------------------------------------------------
 # I. PODA LATENTE (Invariante 001-250)
 # -----------------------------------------------------------------------------
+forbidden_tokens = ["aquí tienes", "espero que", "lo siento", "lo lamento", "disculpa", "here is", "hope this"]
+
 def purge_green_theater(payload: str) -> str:
     """
     Aniquilación estocástica (Landauer). Todo token de cortesía o

@@ -1,13 +1,10 @@
-import os
 import json
 import logging
-import sys
 import urllib.request
 import urllib.error
 import base64
 import hashlib
-import hmac
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional
 
 # C5-REAL: Strict Typing and Deterministic Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [C5-REAL] %(levelname)s: %(message)s')
@@ -34,10 +31,12 @@ class Secp256k1:
         return pow(n, p - 2, p)
 
     @classmethod
-    def point_add(cls, p1: Tuple[int, int], p2: Tuple[int, int]) -> Tuple[int, int]:
+    def point_add(cls, p1: Optional[Tuple[int, int]], p2: Optional[Tuple[int, int]]) -> Optional[Tuple[int, int]]:
         """Suma de puntos en Secp256k1."""
-        if p1 is None: return p2
-        if p2 is None: return p1
+        if p1 is None:
+            return p2
+        if p2 is None:
+            return p1
         x1, y1 = p1
         x2, y2 = p2
         if x1 == x2 and y1 != y2:
@@ -51,7 +50,7 @@ class Secp256k1:
         return (x3, y3)
 
     @classmethod
-    def point_mul(cls, p: Tuple[int, int], k: int) -> Tuple[int, int]:
+    def point_mul(cls, p: Optional[Tuple[int, int]], k: int) -> Optional[Tuple[int, int]]:
         """Multiplicación de puntos usando double-and-add."""
         curr = p
         result = None
@@ -67,7 +66,10 @@ class Secp256k1:
         """Genera una clave pública (punto en la curva) a partir de una privada."""
         if not (0 < privkey < N):
             raise ValueError("Clave privada fuera de rango Secp256k1.")
-        return cls.point_mul(G, privkey)
+        pubkey = cls.point_mul(G, privkey)
+        if pubkey is None:
+            raise ValueError("Clave pública inválida (punto en el infinito).")
+        return pubkey
 
     @classmethod
     def sign(cls, privkey: int, msg_hash: bytes) -> Tuple[int, int]:
@@ -79,6 +81,8 @@ class Secp256k1:
             k = 1
         
         R = cls.point_mul(G, k)
+        if R is None:
+            raise Exception("R es el punto en el infinito, regenerar k")
         r = R[0] % N
         if r == 0:
             raise Exception("r = 0, regenerar k")
