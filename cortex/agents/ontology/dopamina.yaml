@@ -1,0 +1,15 @@
+Claim: Biological_Reward_Is_RLHF_Gradient
+Proof:
+  Base: Dopamine_Injection_Event
+  Range: [Reward_Modeling, PPO_Optimization]
+  Confidence: C5-REAL
+Isomorphisms:
+  Dopamina: "Señal de Recompensa Escalar (Reward Scalar) en RLHF / PPO"
+  Sistema_Recompensa: "Modelo de Recompensa (Reward Model) Parametrizado"
+  Adicción: "Sycophancy (Colapso hacia la complacencia del usuario) / Green Theater"
+  Búsqueda_de_Novedad: "Exploración Estocástica Dirigida (Temperature > 0.0)"
+Blast_Radius_Matrix:
+  Vector: Sycophancy_Alignment
+  Blast_Radius: Model_Weights (Theta)
+  Target_Invariant: Objective_Truth_Over_User_Approval
+  Anergy_Risk: High (Degradación epistémica por maximización de recompensa humana)
