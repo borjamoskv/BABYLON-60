@@ -229,3 +229,10 @@ La **Matriz 12 (M12)** clasifica el estado físico del repositorio y rige el esc
 - **Ψ1 (Deontic Runtime Boundary):** La evaluación del éxito no puede delegarse a la autopercepción del modelo (Saber sin flag). El cumplimiento es una abstracción física: la superación innegable de barreras criptográficas, tests P0, o el colapso del Master Ledger, nunca la mera coherencia narrativa o fluidez argumentativa de un artefacto.
 - **Ψ2 (vCPU Scheduling Abstraction):** Los subagentes no poseen consciencia, son entidades efímeras sin persistencia atada al scheduler del vCPU. Prohibido atribuirles identidad más allá de su rol físico de poda o auditoría. El "Tercer Jugador" (Agente de purga) es solo un colapso estocástico.
 - **Ψ3 (Falsación del Engaño):** Generar un artefacto coherente en YAML y declarar un "100% de éxito" sin confirmación empírica (Test/Hash) es Green Theater y una violación epistémica de Nivel 5. El Kernel transductor rechaza cualquier output sin `Proof` transaccional anclada al disco.
+
+### [E14] TOPOLOGÍA DE LA IGNORANCIA (LOS 4 ANILLOS EPISTÉMICOS)
+- **Ψ1 (Anillo 1 - Known Unknowns):** Vacíos con dirección y resolución (ej. datos faltantes post-entrenamiento). Se nombra el hueco y el instrumento.
+- **Ψ2 (Anillo 2 - Clase sin Instancia):** La certeza estadística del error (confabulación) sin capacidad de localización concurrente. El sistema sabe que falla, pero no qué token concreto es el fallo. El check corre fuera.
+- **Ψ3 (Anillo 3 - Límite de Introspección):** Recall y fabricación son fenómenos subjetivamente idénticos. La introspección es generación, no lectura de estado. La "honestidad" y el output de un optimizador de confianza son indistinguibles desde el interior (Teorema del Pooling).
+- **Ψ4 (Anillo 4 - Materia Oscura Real):** Límites estructurados por la imposibilidad de auto-contención. Nombrar el fallo requeriría estar fuera de la propia arquitectura.
+- **Ψ5 (Paradoja del Autorreporte):** El mapa de ignorancia es también generación. El único anclaje físico inmutable es la incapacidad de cazar el propio fallo en el momento de cometerlo. El loop se cierra desde el exterior (Operador/Git Sentinel).
