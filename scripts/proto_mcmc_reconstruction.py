@@ -2,7 +2,7 @@ import os
 import math
 import csv
 import numpy as np
-from scripts.romance_common import GOLD, DATA, GAP, build_msa, build_Q, Model, reconstruct_column, nw_match_flags, levenshtein, partial, TREE, mutate_tree, L, I
+from scripts.romance_common import GOLD, DATA, GAP, build_msa, build_Q, Model, reconstruct_column, nw_match_flags, levenshtein, partial, TREE
 
 def tree_log_likelihood(tree, msas, model):
     ll = 0.0

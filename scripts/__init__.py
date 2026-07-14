@@ -1,1 +1,0 @@
-# Packaged scripts directory

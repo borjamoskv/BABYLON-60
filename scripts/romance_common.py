@@ -1,4 +1,3 @@
-import os
 import math
 import numpy as np
 from scipy.linalg import expm
@@ -51,7 +50,7 @@ def align_seq_to_msa(msa_rows: list[list[str]], seq: list[str]) -> list[list[str
             dp[i, j] = best
             bt[i, j] = 0 if best == diag else 1 if best == up else 2
     i, j = (W, n)
-    new_cols = []
+    new_cols: list[tuple[list[str] | None, str]] = []
     while i > 0 or j > 0:
         b = bt[i, j]
         if i > 0 and j > 0 and (b == 0):
@@ -66,7 +65,7 @@ def align_seq_to_msa(msa_rows: list[list[str]], seq: list[str]) -> list[list[str
             j -= 1
     new_cols.reverse()
     R = len(msa_rows)
-    out = [[] for _ in range(R + 1)]
+    out: list[list[str]] = [[] for _ in range(R + 1)]
     for col, seg in new_cols:
         if col is None:
             for r in range(R):
@@ -91,7 +90,7 @@ def build_msa(forms: list[tuple[str, list[str]]]) -> tuple[list[str], list[list[
 def L(name: str, length: float) -> tuple:
     return ('L', name, length)
 
-def I(length: float, kids: list) -> tuple:
+def I(length: float, kids: list) -> tuple:  # noqa: E743
     return ('I', length, kids)
 TREE = I(0.0, [L('sc', 0.35), L('ro', 0.85), I(0.15, [L('it', 0.45), I(0.15, [L('fr', 0.95), I(0.15, [L('es', 0.5), L('pt', 0.5)])])])])
 
@@ -125,7 +124,7 @@ class Model:
 
     def __init__(self, states: list[str], pi: np.ndarray, Q: np.ndarray, idx: dict[str, int]):
         self.states, self.pi, self.Q, self.idx = (states, pi, Q, idx)
-        self._P = {}
+        self._P: dict[float, np.ndarray] = {}
 
     def P(self, t: float) -> np.ndarray:
         key = round(t, 6)

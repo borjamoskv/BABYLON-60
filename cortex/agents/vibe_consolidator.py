@@ -319,13 +319,14 @@ def main() -> None:
             effect_fn()
 
     state = ProjectState(root_path=sys.argv[1])
-    for agent in [
+    agents: list[Any] = [
         ScoutAgent(),
         StructureAgent(),
         AnalystAgent(),
         ArchitectAgent(),
         PlannerAgent(),
-    ]:
+    ]
+    for agent in agents:
         state = agent.run(state)
 
     health = score_project(state)
