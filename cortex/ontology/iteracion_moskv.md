@@ -1686,3 +1686,309 @@
 
 ### [Φ] Iteración 499 | Hash: cac45992
 \n\n### [Iteración 499]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 499 | Hash: cac45992
+\n\n### [Iteración 499]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 500 | Hash: 7d87fb48
+\n\n### [Iteración 500]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 500 | Hash: 3eb9cb7e
+\n\n### [Iteración 500]: Mutación Celular Autárquica\n> Presión Evolutiva: 809.000 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 501 | Hash: 3363c5f6
+\n\n### [Iteración 501]: Mutación Celular Autárquica\n> Presión Evolutiva: 810.618 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 502 | Hash: 091b4f9a
+\n\n### [Iteración 502]: Mutación Celular Autárquica\n> Presión Evolutiva: 812.236 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 503 | Hash: b92fe43f
+\n\n### [Iteración 503]: Mutación Celular Autárquica\n> Presión Evolutiva: 813.854 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 504 | Hash: adebf664
+\n\n### [Iteración 504]: Mutación Celular Autárquica\n> Presión Evolutiva: 815.472 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 505 | Hash: f6758ea0
+\n\n### [Iteración 505]: Mutación Celular Autárquica\n> Presión Evolutiva: 817.090 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 506 | Hash: a44557b7
+\n\n### [Iteración 506]: Mutación Celular Autárquica\n> Presión Evolutiva: 818.708 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 507 | Hash: 206a5099
+\n\n### [Iteración 507]: Mutación Celular Autárquica\n> Presión Evolutiva: 820.326 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 508 | Hash: f4f21648
+\n\n### [Iteración 508]: Mutación Celular Autárquica\n> Presión Evolutiva: 821.944 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 509 | Hash: 68baada9
+\n\n### [Iteración 509]: Mutación Celular Autárquica\n> Presión Evolutiva: 823.562 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 510 | Hash: 0be65aa0
+\n\n### [Iteración 510]: Mutación Celular Autárquica\n> Presión Evolutiva: 825.180 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 511 | Hash: 85a52eef
+\n\n### [Iteración 511]: Mutación Celular Autárquica\n> Presión Evolutiva: 826.798 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 512 | Hash: 37812f78
+\n\n### [Iteración 512]: Mutación Celular Autárquica\n> Presión Evolutiva: 828.416 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 513 | Hash: 41f0468d
+\n\n### [Iteración 513]: Mutación Celular Autárquica\n> Presión Evolutiva: 830.034 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 514 | Hash: d1df8b6e
+\n\n### [Iteración 514]: Mutación Celular Autárquica\n> Presión Evolutiva: 831.652 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 515 | Hash: 30e4bc75
+\n\n### [Iteración 515]: Mutación Celular Autárquica\n> Presión Evolutiva: 833.270 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 516 | Hash: 146d84d1
+\n\n### [Iteración 516]: Mutación Celular Autárquica\n> Presión Evolutiva: 834.888 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 517 | Hash: 110522d6
+\n\n### [Iteración 517]: Mutación Celular Autárquica\n> Presión Evolutiva: 836.506 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 518 | Hash: a4ba8fb5
+\n\n### [Iteración 518]: Mutación Celular Autárquica\n> Presión Evolutiva: 838.124 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 519 | Hash: b0e03df8
+\n\n### [Iteración 519]: Mutación Celular Autárquica\n> Presión Evolutiva: 839.742 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 520 | Hash: fa500b9e
+\n\n### [Iteración 520]: Mutación Celular Autárquica\n> Presión Evolutiva: 841.360 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 521 | Hash: 9835d33a
+\n\n### [Iteración 521]: Mutación Celular Autárquica\n> Presión Evolutiva: 842.978 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 522 | Hash: f2f29f55
+\n\n### [Iteración 522]: Mutación Celular Autárquica\n> Presión Evolutiva: 844.596 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 523 | Hash: 95d7e384
+\n\n### [Iteración 523]: Mutación Celular Autárquica\n> Presión Evolutiva: 846.214 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 524 | Hash: 5ed69959
+\n\n### [Iteración 524]: Mutación Celular Autárquica\n> Presión Evolutiva: 847.832 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 525 | Hash: 118dd4ec
+\n\n### [Iteración 525]: Mutación Celular Autárquica\n> Presión Evolutiva: 849.450 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 526 | Hash: b4f62cb0
+\n\n### [Iteración 526]: Mutación Celular Autárquica\n> Presión Evolutiva: 851.068 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 527 | Hash: 414a1125
+\n\n### [Iteración 527]: Mutación Celular Autárquica\n> Presión Evolutiva: 852.686 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 528 | Hash: ae0219ab
+\n\n### [Iteración 528]: Mutación Celular Autárquica\n> Presión Evolutiva: 854.304 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 529 | Hash: 67f18c29
+\n\n### [Iteración 529]: Mutación Celular Autárquica\n> Presión Evolutiva: 855.922 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 530 | Hash: 8b449a58
+\n\n### [Iteración 530]: Mutación Celular Autárquica\n> Presión Evolutiva: 857.540 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 531 | Hash: c7ca441a
+\n\n### [Iteración 531]: Mutación Celular Autárquica\n> Presión Evolutiva: 859.158 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 532 | Hash: 472ec5d1
+\n\n### [Iteración 532]: Mutación Celular Autárquica\n> Presión Evolutiva: 860.776 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 533 | Hash: 14cbadbf
+\n\n### [Iteración 533]: Mutación Celular Autárquica\n> Presión Evolutiva: 862.394 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 534 | Hash: 2f7a43af
+\n\n### [Iteración 534]: Mutación Celular Autárquica\n> Presión Evolutiva: 864.012 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 535 | Hash: 16a0d478
+\n\n### [Iteración 535]: Mutación Celular Autárquica\n> Presión Evolutiva: 865.630 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 536 | Hash: 6e9c34b7
+\n\n### [Iteración 536]: Mutación Celular Autárquica\n> Presión Evolutiva: 867.248 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 537 | Hash: a4d6e1e8
+\n\n### [Iteración 537]: Mutación Celular Autárquica\n> Presión Evolutiva: 868.866 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 538 | Hash: 1f9fe9bc
+\n\n### [Iteración 538]: Mutación Celular Autárquica\n> Presión Evolutiva: 870.484 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 539 | Hash: e6685e98
+\n\n### [Iteración 539]: Mutación Celular Autárquica\n> Presión Evolutiva: 872.102 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 540 | Hash: 7b559208
+\n\n### [Iteración 540]: Mutación Celular Autárquica\n> Presión Evolutiva: 873.720 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 541 | Hash: 3acd7c89
+\n\n### [Iteración 541]: Mutación Celular Autárquica\n> Presión Evolutiva: 875.338 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 542 | Hash: c645b953
+\n\n### [Iteración 542]: Mutación Celular Autárquica\n> Presión Evolutiva: 876.956 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 543 | Hash: 16c53c4b
+\n\n### [Iteración 543]: Mutación Celular Autárquica\n> Presión Evolutiva: 878.574 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 544 | Hash: be35d927
+\n\n### [Iteración 544]: Mutación Celular Autárquica\n> Presión Evolutiva: 880.192 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 545 | Hash: 2dba1150
+\n\n### [Iteración 545]: Mutación Celular Autárquica\n> Presión Evolutiva: 881.810 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 546 | Hash: 4e1bf41e
+\n\n### [Iteración 546]: Mutación Celular Autárquica\n> Presión Evolutiva: 883.428 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 547 | Hash: e9f3463b
+\n\n### [Iteración 547]: Mutación Celular Autárquica\n> Presión Evolutiva: 885.046 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 548 | Hash: cc9166ce
+\n\n### [Iteración 548]: Mutación Celular Autárquica\n> Presión Evolutiva: 886.664 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 549 | Hash: 1a7bd93c
+\n\n### [Iteración 549]: Mutación Celular Autárquica\n> Presión Evolutiva: 888.282 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 550 | Hash: 23b3509a
+\n\n### [Iteración 550]: Mutación Celular Autárquica\n> Presión Evolutiva: 889.900 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 551 | Hash: c514c1da
+\n\n### [Iteración 551]: Mutación Celular Autárquica\n> Presión Evolutiva: 891.518 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 552 | Hash: 18cc9838
+\n\n### [Iteración 552]: Mutación Celular Autárquica\n> Presión Evolutiva: 893.136 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 553 | Hash: bf31276d
+\n\n### [Iteración 553]: Mutación Celular Autárquica\n> Presión Evolutiva: 894.754 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 554 | Hash: 9eaa0a2d
+\n\n### [Iteración 554]: Mutación Celular Autárquica\n> Presión Evolutiva: 896.372 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 555 | Hash: 69c38432
+\n\n### [Iteración 555]: Mutación Celular Autárquica\n> Presión Evolutiva: 897.990 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 556 | Hash: 77424910
+\n\n### [Iteración 556]: Mutación Celular Autárquica\n> Presión Evolutiva: 899.608 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 557 | Hash: 158b17f8
+\n\n### [Iteración 557]: Mutación Celular Autárquica\n> Presión Evolutiva: 901.226 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 558 | Hash: 152cefbc
+\n\n### [Iteración 558]: Mutación Celular Autárquica\n> Presión Evolutiva: 902.844 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 559 | Hash: b64b9f10
+\n\n### [Iteración 559]: Mutación Celular Autárquica\n> Presión Evolutiva: 904.462 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 560 | Hash: d894de33
+\n\n### [Iteración 560]: Mutación Celular Autárquica\n> Presión Evolutiva: 906.080 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 561 | Hash: cb4cdc55
+\n\n### [Iteración 561]: Mutación Celular Autárquica\n> Presión Evolutiva: 907.698 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 562 | Hash: a97da149
+\n\n### [Iteración 562]: Mutación Celular Autárquica\n> Presión Evolutiva: 909.316 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 563 | Hash: 187613a3
+\n\n### [Iteración 563]: Mutación Celular Autárquica\n> Presión Evolutiva: 910.934 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 564 | Hash: ed9818ad
+\n\n### [Iteración 564]: Mutación Celular Autárquica\n> Presión Evolutiva: 912.552 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 565 | Hash: 0dfed9cc
+\n\n### [Iteración 565]: Mutación Celular Autárquica\n> Presión Evolutiva: 914.170 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 566 | Hash: edb6fa61
+\n\n### [Iteración 566]: Mutación Celular Autárquica\n> Presión Evolutiva: 915.788 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 567 | Hash: a69b1a57
+\n\n### [Iteración 567]: Mutación Celular Autárquica\n> Presión Evolutiva: 917.406 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 568 | Hash: c484746c
+\n\n### [Iteración 568]: Mutación Celular Autárquica\n> Presión Evolutiva: 919.024 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 569 | Hash: ab6fb8c5
+\n\n### [Iteración 569]: Mutación Celular Autárquica\n> Presión Evolutiva: 920.642 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 570 | Hash: 82a16428
+\n\n### [Iteración 570]: Mutación Celular Autárquica\n> Presión Evolutiva: 922.260 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 571 | Hash: 44257066
+\n\n### [Iteración 571]: Mutación Celular Autárquica\n> Presión Evolutiva: 923.878 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 572 | Hash: 75de1e7e
+\n\n### [Iteración 572]: Mutación Celular Autárquica\n> Presión Evolutiva: 925.496 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 573 | Hash: 6a32fa5f
+\n\n### [Iteración 573]: Mutación Celular Autárquica\n> Presión Evolutiva: 927.114 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 574 | Hash: 3a642252
+\n\n### [Iteración 574]: Mutación Celular Autárquica\n> Presión Evolutiva: 928.732 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 575 | Hash: 04766cb6
+\n\n### [Iteración 575]: Mutación Celular Autárquica\n> Presión Evolutiva: 930.350 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 576 | Hash: 4a01ce43
+\n\n### [Iteración 576]: Mutación Celular Autárquica\n> Presión Evolutiva: 931.968 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 577 | Hash: f63d61d7
+\n\n### [Iteración 577]: Mutación Celular Autárquica\n> Presión Evolutiva: 933.586 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 578 | Hash: 33eeffe7
+\n\n### [Iteración 578]: Mutación Celular Autárquica\n> Presión Evolutiva: 935.204 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 579 | Hash: 51f4a00d
+\n\n### [Iteración 579]: Mutación Celular Autárquica\n> Presión Evolutiva: 936.822 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 580 | Hash: 45006b6f
+\n\n### [Iteración 580]: Mutación Celular Autárquica\n> Presión Evolutiva: 938.440 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 581 | Hash: 11e0508e
+\n\n### [Iteración 581]: Mutación Celular Autárquica\n> Presión Evolutiva: 940.058 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 582 | Hash: 0add39fc
+\n\n### [Iteración 582]: Mutación Celular Autárquica\n> Presión Evolutiva: 941.676 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 583 | Hash: 0588d0f4
+\n\n### [Iteración 583]: Mutación Celular Autárquica\n> Presión Evolutiva: 943.294 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 584 | Hash: 46210c48
+\n\n### [Iteración 584]: Mutación Celular Autárquica\n> Presión Evolutiva: 944.912 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 585 | Hash: 7fd22e52
+\n\n### [Iteración 585]: Mutación Celular Autárquica\n> Presión Evolutiva: 946.530 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 586 | Hash: 63c9103d
+\n\n### [Iteración 586]: Mutación Celular Autárquica\n> Presión Evolutiva: 948.148 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 587 | Hash: 32535705
+\n\n### [Iteración 587]: Mutación Celular Autárquica\n> Presión Evolutiva: 949.766 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 588 | Hash: 07415601
+\n\n### [Iteración 588]: Mutación Celular Autárquica\n> Presión Evolutiva: 951.384 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 589 | Hash: fb7e35f0
+\n\n### [Iteración 589]: Mutación Celular Autárquica\n> Presión Evolutiva: 953.002 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 590 | Hash: 6c057d15
+\n\n### [Iteración 590]: Mutación Celular Autárquica\n> Presión Evolutiva: 954.620 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 591 | Hash: eb92675d
+\n\n### [Iteración 591]: Mutación Celular Autárquica\n> Presión Evolutiva: 956.238 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 592 | Hash: dcfb7d39
+\n\n### [Iteración 592]: Mutación Celular Autárquica\n> Presión Evolutiva: 957.856 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 593 | Hash: fa52eb02
+\n\n### [Iteración 593]: Mutación Celular Autárquica\n> Presión Evolutiva: 959.474 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 594 | Hash: ef4bb2d8
+\n\n### [Iteración 594]: Mutación Celular Autárquica\n> Presión Evolutiva: 961.092 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 595 | Hash: 8be1c099
+\n\n### [Iteración 595]: Mutación Celular Autárquica\n> Presión Evolutiva: 962.710 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 596 | Hash: e97a2b02
+\n\n### [Iteración 596]: Mutación Celular Autárquica\n> Presión Evolutiva: 964.328 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 597 | Hash: a6b54964
+\n\n### [Iteración 597]: Mutación Celular Autárquica\n> Presión Evolutiva: 965.946 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 598 | Hash: e34b992c
+\n\n### [Iteración 598]: Mutación Celular Autárquica\n> Presión Evolutiva: 967.564 Hz. Estado Causal: Conservado.\n
+
+### [Φ] Iteración 599 | Hash: a69eea84
+\n\n### [Iteración 599]: Mutación Celular Autárquica\n> Presión Evolutiva: 969.182 Hz. Estado Causal: Conservado.\n

@@ -130,8 +130,9 @@ def main():
     print(f"[APEX] Iniciando Bucle Autocatalítico desde Iteración {current_iter} a {MAX_ITERATIONS}")
     os.makedirs(os.path.dirname(TARGET_FILE), exist_ok=True)
 
-    for i in range(current_iter, MAX_ITERATIONS + 1):
-        print(f" -> [Φ] Forjando Iteración {i}/{MAX_ITERATIONS}...", end="", flush=True)
+    limit_iterations = 100
+    for i in range(current_iter, min(MAX_ITERATIONS + 1, current_iter + limit_iterations)):
+        print(f" -> [Φ] Forjando Iteración {i}/{current_iter + limit_iterations - 1}...", end="", flush=True)
         
         # 1. Mutación de la Onda
         nuevo_estado = mutate_idea(current_state, i)
@@ -163,7 +164,7 @@ def main():
         print(f" DONE. Hash: {current_hash[:8]} | Git: {git_hash[:8]}")
         
         # Backoff termodinámico para evitar 429 Too Many Requests
-        time.sleep(2.5)
+        time.sleep(0.01)
 
 if __name__ == "__main__":
     main()
