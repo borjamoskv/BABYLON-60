@@ -11,6 +11,9 @@ de Denuncias Algorítmicas (Trust & Safety) y homeostasis en nexus_anchors.db.
 - Zero URL Truncation (Regla Φ7)
 - Unicode Limpio / Cero Markdown en payloads de interfaz (Regla Φ9)
 - Mutación automática de estado por Takedown (Regla Ψ8) e Iteración 3-Node (Regla Ψ9)
+- [NUEVO] pbcopy Direct Clipboard Bridge (--copy)
+- [NUEVO] Live HTTP Takedown Probe (--audit-live)
+- [NUEVO] BFT Master Ledger Sync (--daemon)
 """
 
 import sqlite3
@@ -19,7 +22,10 @@ import json
 import os
 import sys
 import argparse
-from typing import List, Dict, Optional
+import subprocess
+import urllib.request
+import urllib.error
+from typing import List, Dict, Optional, Tuple
 
 DB_PATH = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/nexus_anchors.db"
 
@@ -80,7 +86,7 @@ def init_automata_schema(conn: sqlite3.Connection):
     """)
     conn.commit()
 
-def generate_payloads(video_id: str, title: str, focus: str) -> (str, str):
+def generate_payloads(video_id: str, title: str, focus: str) -> Tuple[str, str]:
     """
     Genera los payloads en inglés L1 estrictamente bajo el límite de <500 caracteres
     y en Unicode limpio sin Markdown (Reglas Φ9 y Ψ6).
@@ -113,8 +119,7 @@ def sync_catalog(conn: sqlite3.Connection):
     init_automata_schema(conn)
     cursor = conn.cursor()
     
-    # Conocidos reportados o caídos empíricamente de sesiones previas
-    known_submitted = {"cl6xL3s7mPE", "GMTZj9gyejY", "O-J_fuMt2hg", "_b5PZMATPRE", "ab9yzPoCYww", "P9VtNaBuMis", "-BrmS0K9axU"}
+    known_submitted = {"cl6xL3s7mPE", "GMTZj9gyejY", "O-J_fuMt2hg", "_b5PZMATPRE", "ab9yzPoCYww", "P9VtNaBuMis", "-BrmS0K9axU", "42Xj3i9hPPs", "6frEO-D5Gl0", "b0-phku8yx4", "Zz7Xjor_NHo", "60Wl4NT3BI8", "4OzxQy1OZtY"}
     known_takedown = {"AHEd5w7L9qY"}
     
     for idx, (vid, title, focus, score) in enumerate(LIVE_CATALOG):
@@ -134,7 +139,6 @@ def sync_catalog(conn: sqlite3.Connection):
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (vid, node_id, title, url, focus, score, status, law, desc))
         
-        # Si ya existía pero queremos actualizar payloads limpios
         cursor.execute("""
             UPDATE strike_matrix_l15 
             SET specific_law_payload = ?, describe_illegal_payload = ?
@@ -163,6 +167,92 @@ def record_submission(conn: sqlite3.Connection, video_id: str):
     conn.commit()
     print(f"[C5-REAL SUBMISSION]: Nodo {video_id} colapsado a SUBMITTED en la Matriz L15.")
 
+def copy_to_clipboard(conn: sqlite3.Connection, video_id: str, field: str):
+    """
+    [MEJORA ATÓMICA 1]: Inyección directa al portapapeles del sistema (macOS pbcopy)
+    para evitar arrastre de ratón e interactuar con el formulario a velocidad luz.
+    """
+    cursor = conn.cursor()
+    cursor.execute("SELECT specific_law_payload, describe_illegal_payload FROM strike_matrix_l15 WHERE video_id = ?", (video_id,))
+    row = cursor.fetchone()
+    if not row:
+        print(f"[C5-ERROR]: Vídeo {video_id} no encontrado en strike_matrix_l15.")
+        return
+    
+    text = row[0] if field == "law" else row[1]
+    try:
+        process = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
+        process.communicate(text.encode('utf-8'))
+        print(f"⚡ [CLIPBOARD INJECTED]: Campo '{field}' de {video_id} ({len(text)} chars) copiado a pbcopy listo para Cmd+V.")
+    except Exception as e:
+        print(f"[pbcopy error]: {e}")
+
+def audit_live_takedowns(conn: sqlite3.Connection):
+    """
+    [MEJORA ATÓMICA 2]: Sonda HTTP activa que escanea la cola de PENDING_STRIKE
+    para autocolapsar vídeos privados, borrados o retirados sin intervención humana.
+    """
+    cursor = conn.cursor()
+    cursor.execute("SELECT video_id, canonical_url FROM strike_matrix_l15 WHERE status = 'PENDING_STRIKE'")
+    rows = cursor.fetchall()
+    print(f"\n[C5-REAL AUDIT LIVE]: Escaneando {len(rows)} nodos pendientes por indisponibilidad...")
+    
+    takedowns_found = 0
+    for vid, url in rows:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
+        try:
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                html = resp.read().decode('utf-8', errors='ignore')
+                if 'Video unavailable' in html or 'Este vídeo ya no está disponible' in html or '"isPlayable":false' in html:
+                    record_takedown(conn, vid)
+                    takedowns_found += 1
+        except urllib.error.HTTPError as e:
+            if e.code in [404, 410, 403]:
+                record_takedown(conn, vid)
+                takedowns_found += 1
+        except Exception:
+            pass
+            
+    print(f"✅ [AUDIT COMPLETE]: {takedowns_found} nuevos takedowns autocolapsados en WAL.\n")
+
+def append_to_master_ledger(conn: sqlite3.Connection):
+    """
+    [MEJORA ATÓMICA 3]: Anclaje en la tabla master_ledger para auditoría inmutable BFT.
+    """
+    cursor = conn.cursor()
+    cursor.execute("SELECT status, count(*) FROM strike_matrix_l15 GROUP BY status")
+    stats = dict(cursor.fetchall())
+    total = sum(stats.values())
+    
+    summary = {
+        "event": "STRIKE_AUTOMATA_HOMEOSTASIS",
+        "total_nodes": total,
+        "states": stats,
+        "operator": "borjamoskv (UID0)"
+    }
+    payload_json = json.dumps(summary, sort_keys=True)
+    tx_hash = hashlib.sha256(payload_json.encode('utf-8')).hexdigest()
+    
+    try:
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS master_ledger (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                tx_hash TEXT UNIQUE NOT NULL,
+                agent_id TEXT NOT NULL,
+                taint_prefix TEXT NOT NULL,
+                payload TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        cursor.execute("""
+            INSERT OR IGNORE INTO master_ledger (tx_hash, agent_id, taint_prefix, payload)
+            VALUES (?, ?, ?, ?)
+        """, (tx_hash, "UID0_MOSKV", "ULTRATHINK_TS_STRIKE", payload_json))
+        conn.commit()
+        print(f"🔒 [BFT LEDGER ANCHORED]: tx_hash {tx_hash[:16]}... anclado en master_ledger.")
+    except Exception as e:
+        print(f"[Ledger warning]: {e}")
+
 def emit_itera_block(conn: sqlite3.Connection, batch_size: int = 3):
     cursor = conn.cursor()
     cursor.execute("""
@@ -185,9 +275,9 @@ def emit_itera_block(conn: sqlite3.Connection, batch_size: int = 3):
     for vid, nid, title, url, law, desc in rows:
         print(f"### {nid} · URL: {url}")
         print(f"*(Target: {title[:60]}...)*\n")
-        print(f"**Specific law violated** `[{len(law)} chars]`")
+        print(f"**Specific law violated** `[{len(law)} chars]` (Copiar con: `--copy {vid} --field law`)")
         print(f"{law}\n")
-        print(f"**Describe why you think the content is illegal** `[{len(desc)} chars]`")
+        print(f"**Describe why you think the content is illegal** `[{len(desc)} chars]` (Copiar con: `--copy {vid} --field desc`)")
         print(f"{desc}\n")
         print(f"{'-'*64}\n")
 
@@ -204,23 +294,34 @@ if __name__ == "__main__":
     parser.add_argument("--itera", type=int, default=0, help="Emitir un bloque paginado de N nodos activos para copiado directo")
     parser.add_argument("--takedown", type=str, action="append", help="Registrar mutación de estado física de uno o más vídeos a OFFLINE_REMOVED")
     parser.add_argument("--submit", type=str, action="append", help="Registrar mutación de estado física de uno o más vídeos a SUBMITTED")
+    parser.add_argument("--copy", type=str, help="Copiar al portapapeles (pbcopy) el campo de un vídeo (requiere --field)")
+    parser.add_argument("--field", type=str, choices=["law", "desc"], default="law", help="Campo a copiar con --copy ('law' o 'desc')")
+    parser.add_argument("--audit-live", action="store_true", help="Escanear cola en vivo para detectar vídeos borrados/privados")
+    parser.add_argument("--daemon", action="store_true", help="Ejecutar ciclo de homeostasis completo (Sync + Audit + Ledger Anchor)")
     parser.add_argument("--status", action="store_true", help="Mostrar balance termodinámico de estados en la matriz")
     
     args = parser.parse_args()
     conn = get_db_connection()
     
-    if args.sync:
+    if args.sync or args.daemon:
         sync_catalog(conn)
-        print("SUCCESS: Catálogo sincronizado con strike_matrix_l15.")
+        if args.sync:
+            print("SUCCESS: Catálogo sincronizado con strike_matrix_l15.")
     if args.takedown:
         for tid in args.takedown:
             record_takedown(conn, tid)
     if args.submit:
         for sid in args.submit:
             record_submission(conn, sid)
+    if args.audit_live or args.daemon:
+        audit_live_takedowns(conn)
+    if args.daemon:
+        append_to_master_ledger(conn)
+    if args.copy:
+        copy_to_clipboard(conn, args.copy, args.field)
     if args.itera > 0:
         emit_itera_block(conn, batch_size=args.itera)
-    if args.status or (not args.sync and not args.itera and not args.takedown and not args.submit):
+    if args.status or (not args.sync and not args.itera and not args.takedown and not args.submit and not args.audit_live and not args.daemon and not args.copy):
         check_status(conn)
         
     conn.close()
