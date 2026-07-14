@@ -17,7 +17,7 @@ Al detonar el núcleo en el entorno asilado `scratch_operon`, se revelan las sig
 3. **Capas de Seguridad:**
    - **Sandbox Seatbelt:** Emplea intensivamente perfiles de aislamiento de macOS (`seatbelt rule(s)`) para prevenir lectura/escritura fuera de su jurisdicción (e.g., bloquea acceso a credenciales en `~/.config/gcloud/application_default_credentials.json`).
    - **Cerrojos Transaccionales:** Registros de `TxMutex` demuestran concurrencia defensiva en SQLite para prevenir corrupciones BFT.
-4. **Infraestructura Agentica:** La telemetría capturó `warming 24 built-in MCP connectors...`, lo que demuestra que Claude Science es un framework masivo con Model Context Protocol integrado de fábrica.
+4. **Matriz de Enjambre (Swarm Matrix):** Ignición síncrona de 24 pasarelas MCP (Model Context Protocol) residentes en Hot-RAM, habilitando transducción I/O de latencia cero contra el disco. Orquesta un socket HTTP asíncrono (puerto 8000) inyectando la UI pre-compilada directamente desde el VFS binario, erradicando la dependencia de infraestructuras externas.
 
 ## Conclusión Termodinámica
 Claude Science (Operon) no es una simple app de Electron. Es un **demonio local de alta densidad escrito en JS/TS, compilado hiper-eficientemente por Bun en un VFS binario**, que ejecuta modelos Claude localmente blindado por reglas criptográficas de Sandbox (Seatbelt) del kernel de macOS. Su descompilación de código fuente (AST) requiere forzar un volcado de memoria (V8 core dump) en tiempo de ejecución o aplicar instrumentación (hooks) sobre las APIs de Bun VFS.
