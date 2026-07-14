@@ -3,14 +3,14 @@ RealityLevel: C5-REAL
 HashLedger: PENDING_COMMIT
 Aesthetic: Industrial Noir 2026
 Summary:
-  total_checked_files: 168870
-  total_issues: 560
+  total_checked_files: 168873
+  total_issues: 758
   breakdown:
     ANTI-012: 79
     ANTI-007: 33
-    ANTI-001: 29
-    ANTI-025: 359
-    ANTI-028: 12
+    ANTI-001: 40
+    ANTI-025: 540
+    ANTI-028: 18
     ANTI-036: 45
     ANTI-034: 3
 Findings:
@@ -1375,6 +1375,12 @@ Findings:
   details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/public_services_invariants.yaml".'
   severity: P2
 - antipattern_id: ANTI-025
+  file: scratch/ethos_orchestration.py
+  line: 7
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
   file: scratch/transduce_company_brain_use_cases.py
   line: 5
   column: 16
@@ -1854,6 +1860,12 @@ Findings:
   column: 122
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/ETHOS_orchestration_pipeline_9f4c1138.yaml
+  line: 3
+  column: 8
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/orchestration_pipeline.yaml".'
+  severity: P2
 - antipattern_id: ANTI-025
   file: cortex/audits/ethos_state_attestation.yaml
   line: 8
@@ -2976,105 +2988,1281 @@ Findings:
   column: 44
   details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
   severity: P3
-- antipattern_id: ANTI-001
+- antipattern_id: ANTI-025
   file: cortex/audits/antipatterns_audit_report.yaml
   line: 1909
+  column: 46
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1915
+  column: 46
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1921
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/telemetry.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1927
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/google_refunds_tracker.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1933
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1939
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1945
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1951
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/stress_test.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1957
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1963
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1969
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1975
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.babylon60/cortex_bft_state.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1981
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/rag_insforge_hybrid_architecture.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1987
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1993
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1999
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2005
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2011
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2017
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2023
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/safety_controls_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2029
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/edge_deployment_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2035
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scripts/c5_cdp_youtube_bridge.py".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2041
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/L1_sink".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2047
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2053
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean3.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2059
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_QyCR_33HloU.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2065
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/voice".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2071
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2077
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/invariantes_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2083
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2089
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/remotion_video_state.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2095
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2101
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/ecommerce_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2107
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/fable5_epistemic_collapse.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2113
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2119
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2125
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2131
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/ultrathink_100000_matrix.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2137
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2143
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2149
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/customer_service_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2155
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/gradiente_estocastico.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2161
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2167
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2173
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2179
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2185
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_S6PIlo4ln2k.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2191
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2197
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2203
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2209
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/feria_estocastica_camellos.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2215
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2221
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/financial_operations_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2227
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/marketing_roi_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2233
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2239
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cosmic_country_sello.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2245
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2251
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2257
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_1Wq1mJ-PAeQ.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2263
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2269
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2275
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2281
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_100_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2287
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2293
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2299
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2305
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2311
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2317
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2323
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2329
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2335
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2341
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2347
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/v_invariant.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2353
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2359
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/abstraccion_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2365
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2371
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2377
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2383
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/unstructured_data_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2389
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2395
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2401
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/receipt_sha3_256.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2407
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2413
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_nxhRrry5UiY.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2419
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/pasapalabra_guiza.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2425
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2431
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/acoplamiento_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2437
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2443
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2449
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/brave_dom.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2455
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2461
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Supplemental/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2467
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/public_services_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2473
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_use_cases.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2479
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/development_efficiency_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2485
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2491
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2497
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2503
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2509
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2515
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2521
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2527
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2533
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/risk_compliance_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2539
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2545
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/fazt_production_ai_tools.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2551
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2557
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2563
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2569
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/healthcare_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2575
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2581
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_entropia.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2587
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/batch_100k".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2593
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/100k_iterations_free.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2599
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2605
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2611
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_147.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2617
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2623
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2629
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2635
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain/3530a6e2-3a20-4681-a375-a368eda007c3/.system_generated/steps/278/content.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2641
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2647
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2653
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2659
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2665
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2671
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2677
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2683
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2689
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2695
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cortazar_feria_entropica.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2701
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/grill_me_optimization.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2707
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2713
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2719
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias_centuria.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2725
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2731
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/scratch''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2737
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/Downloads/video_utbh_destruccion.mp4".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2743
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/video_utbh_destruccion_1000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2749
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2755
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/friccion_vivencial_epistemica.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2761
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2767
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2773
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_video_rejection''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2779
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2785
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2791
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Apple Symbols.ttf''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2797
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/visual-canvas.png''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2803
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/bun_rust_adversarial_rewrite.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2809
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2815
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2821
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2827
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2833
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2839
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_dump.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2845
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2851
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/patrones_diseno/exergy_patterns_300.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2857
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2863
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_babylon_example.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2869
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/sophisticated_apps_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2875
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_10000_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2881
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean4.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2887
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_GcwI1hZewJo.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2893
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/specialized_agents_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2899
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2905
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/batch_100000_ultrathink.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2911
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2917
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2923
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain".'
+  severity: P2
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2929
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2935
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2941
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2947
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2953
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2959
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2965
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2971
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2977
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2983
   column: 44
   details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1915
+  line: 2989
   column: 44
   details: 'Empathy/limerent token found: ''por supuesto'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1921
+  line: 2995
   column: 44
   details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1927
+  line: 3001
   column: 44
   details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-028
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1933
+  line: 3007
   column: 46
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1939
+  line: 3013
   column: 44
   details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-028
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1945
+  line: 3019
   column: 46
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
 - antipattern_id: ANTI-028
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1951
+  line: 3025
   column: 46
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
 - antipattern_id: ANTI-025
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1957
+  line: 3031
   column: 46
   details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/".'
   severity: P2
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1969
+  line: 3037
   column: 44
   details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-028
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1975
+  line: 3043
   column: 46
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
 - antipattern_id: ANTI-028
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1981
+  line: 3049
   column: 46
   details: 'Dangerous raw force push command: git push -f.'
   severity: P1
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 1987
+  line: 3055
   column: 44
   details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-025
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 2000
+  line: 3061
   column: 46
   details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.ssh/id_ed25519".'
   severity: P2
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 2006
+  line: 3067
   column: 44
   details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
   severity: P3
 - antipattern_id: ANTI-025
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 2288
+  line: 3073
   column: 47
   details: 'Hardcoded absolute path detected: ''/usr/bin/ldd''.'
   severity: P2
 - antipattern_id: ANTI-001
   file: cortex/audits/antipatterns_audit_report.yaml
-  line: 2312
+  line: 3079
+  column: 44
+  details: 'Empathy/limerent token found: ''Espero que esto ayude'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3085
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3091
+  column: 44
+  details: 'Empathy/limerent token found: ''por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3097
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3103
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3109
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3115
+  column: 44
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3121
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3127
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3133
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3145
+  column: 44
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3151
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3157
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3163
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3176
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.ssh/id_ed25519".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3182
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3464
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/usr/bin/ldd''.'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 3488
   column: 44
   details: 'Empathy/limerent token found: ''Espero que esto ayude'' in comments/docs.'
   severity: P3
