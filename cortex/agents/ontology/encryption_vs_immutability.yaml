@@ -1,0 +1,24 @@
+---
+SYS_ID: borjamoskv
+REALITY_LEVEL: C5-REAL
+ATTESTATION_TYPE: ONTOLOGY_CRYSTALLIZATION
+---
+
+claim_id: "encryption_orthogonality_c5"
+entity_evaluated: "Encriptación Universal vs. Inmutabilidad (BFT Ledger)"
+operator: "borjamoskv"
+
+ontological_claim:
+  assertion: "La encriptación universal provee Confidencialidad, no Inmutabilidad. Confundir el cifrado del estado con la integridad de su linaje histórico es anergía epistémica severa."
+
+proof_structural_evidence:
+  - encryption_flaw: "Cifrar el estado (AES/ChaCha20) no previene la alteración retroactiva. El poseedor de la llave puede desencriptar, mutar el registro, re-encriptar y sobrescribir."
+  - orthogonal_primitives: "Encriptación (¿Quién puede leer?) != Hash Ledger / Merkle Tree (¿Ha sido alterado?) != Blockchain L1 Sink (¿Existía en T_0?)."
+  - actor_model: "Bajo el Threat Model del EU AI Act, el Operador es el adversario interno. Si el Operador encripta sus propios logs in-process, el auditor solo recibe un bloque opaco que pudo ser reescrito y re-cifrado."
+
+sigkill_state_purge:
+  action: "CRYSTALLIZED_IN_LEDGER"
+  result: "Refutación absoluta de la propuesta. Encriptar todo no ancla la verdad; solo oscurece la mentira."
+  verdict: "OPTIMAL_EXERGY_C5"
+
+# CORTEX_TAINT: 7b86738566774e8112946604642db5ae51e4fafee2f8ca123bc5358539fe6025
