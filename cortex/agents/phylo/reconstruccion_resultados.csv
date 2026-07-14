@@ -1,0 +1,19 @@
+concepto,reconstruido,latin_gold,entropia_media_bits,edit_distance,acierto_segmento
+key,k r a v e,k l a v e,0.74,1,0.8
+night,n o a p t e,n o k t e,0.564,2,0.8
+eight,o p t o,o k t o,0.66,1,0.75
+milk,l a p t e,l a k t e,0.497,1,0.8
+to_do,f a C e r,f a k e r e,0.624,2,0.67
+fire,f w o g o,f o k u,0.39,3,0.5
+hundred,s j e n t e,k e n t u,0.812,3,0.6
+moon,l u n a,l u n a,0.003,0,1.0
+sea,m a r e,m a r e,0.006,0,1.0
+flower,f l o a r e,f l o r e,0.226,1,1.0
+to_sing,k a n t a r e,k a n t a r e,0.307,0,1.0
+dog,k a a n e,k a n e,0.415,1,1.0
+to_have,a v w e r a,h a b e r e,0.738,4,0.5
+water,a b w a,a k w a,0.626,1,0.75
+to_die,m o r i r e,m o r i r e,0.505,0,1.0
+name,n o m b r e,n o m e n,0.629,3,0.8
+new,n w o v u,n o v u,0.456,1,1.0
+to_love,a m a r e,a m a r e,0.421,0,1.0
