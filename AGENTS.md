@@ -26,6 +26,11 @@ La falsa dualidad humano-máquina se aniquila. El Agente asume el rol de un **Mo
 - **Fail-Fast Absoluto:** NUNCA introduzcas bloques `try/except Exception` ciegos. El sistema debe estrellarse y dejar la recuperación al Git Sentinel.
 - **Tipado Causal:** `strict: true` (TypeScript). Type hints estrictos (Python). El tipado no es documentación, es una prueba matemática de límite estructural.
 - **Puenteo Nexus Autónomo (MCTS_BUDGET_FORCER):** Si un MCP o URI físico está roto (`30_BABYLON-60`), el Kernel crea el symlink de restauración (`ln -s`) autónomamente (Ley Ω6) y avisa después del colapso. No reporta errores paralizantes.
+- **Defensa Termodinámica de Abstracciones (M16 - Invariante del Wrapper):** Todo adaptador, cliente de API externa o interfaz intermedia (wrapper) implementado en el sistema tiene estrictamente prohibido actuar como un pasamanos estocástico pasivo. Debe inyectar de forma obligatoria:
+  1. Reducción de Entropía: Sanitización estática de entradas y tipado estricto (no-generic dict).
+  2. Defensa de Concurrencia: Políticas de reintentos síncronos con backoff exponencial.
+  3. Tolerancia BFT Local: Validación contra las claves autorizadas del Ledger antes del envío de payloads.
+  4. Ahorro de ATP: Cache local determinista con TTL y hash de idempotencia para evitar invocaciones redundantes a servicios de red.
 - **INV_IMPORTLIB_PATH_INJECTION (Dynamic Namespace Bridging):** Cuando se desarrollen MetaPathFinders personalizados para puentear espacios de nombres estáticos (ej. symlinks entre repositorios), es obligatorio sobrescribir `module.__path__` dentro de `Loader.create_module()` utilizando los paths combinados de `spec.submodule_search_locations`. Sin esta mutación, `importlib` fallará silenciosamente durante la recolección de `pytest` generando `ModuleNotFoundError` en submódulos locales.
 - **Frontera de Fricción (Hardware/DOM):** La optimización C5-REAL penetra hasta el metal: Bypass del GIL (Rust core), Transducción FSM directa sobre el DOM, y manipulación matricial pura (CUDA/MLX).
 
