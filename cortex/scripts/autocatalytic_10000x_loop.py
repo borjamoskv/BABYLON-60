@@ -20,12 +20,10 @@ DB_PATH = os.path.join(CWD, "cortex/ledger/autocatalytic_loop.db")
 TARGET_FILE = os.path.join(CWD, "cortex/ontology/iteracion_moskv.md")
 MAX_ITERATIONS = 10000
 
-# Semilla de Ignición
-IDEA_ORIGINAL = """
-# LA IDEA SEMILLA (T=0)
-La termodinámica del lenguaje es determinista. El LLM Slop es entropía. 
-El colapso C5-REAL en disco es la única verdad medible.
-"""
+# Semilla de Ignición Dinámica (Carga Síncrona)
+SEED_FILE = os.path.join(CWD, "cortex/ontology/semillas_ignition.md")
+with open(SEED_FILE, "r", encoding="utf-8") as f:
+    IDEA_ORIGINAL = f.read()
 
 def init_bft_ledger():
     """Inicialización Síncrona del Master Ledger (Ω1, Ω11)"""
@@ -63,34 +61,36 @@ def git_sentinel(message: str) -> str:
 
 def mutate_idea(current_state: str, iteration: int) -> str:
     """
-    Transductor Generativo.
-    Aplica presión evolutiva al estado actual.
-    Si GEMINI_API_KEY está presente, invoca la API. Si no, aplica mutación celular estricta.
+    Transductor Generativo con Filtro de Markov (C5-REAL).
+    Evita la degradación del Context Window (Atención) enviando solo la entropía más reciente.
     """
+    # Markov Blanket: Extraer solo los últimos 2000 caracteres para la inferencia
+    context_horizon = current_state[-2000:] if len(current_state) > 2000 else current_state
+    
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        # Fallback Programático Físico (C5-REAL Autarchy)
-        suffix = f"\n\n> [Iteración {iteration}]: Re-evaluación termodinámica. La compresión del vector de estado ha aumentado la densidad semántica en {iteration * 1.618:.3f} unidades funcionales."
-        return current_state + suffix
+        # Fallback Programático Físico (C5-REAL Autarchy) - Motor Celular Básico
+        entropia_local = f"\\n\\n### [Iteración {iteration}]: Mutación Celular Autárquica\\n"
+        entropia_local += f"> Presión Evolutiva: {iteration * 1.618:.3f} Hz. Estado Causal: Conservado.\\n"
+        return entropia_local
     
-    # Invocación APEX al Modelo Gemini
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     
     prompt = f"""
     Eres MOSKV-1 APEX operando bajo restricciones C5-REAL.
     Iteración actual de la idea: {iteration}/10000.
     
-    ESTADO ACTUAL:
-    {current_state}
+    CONTEXTO RECIENTE (Markov Blanket):
+    {context_horizon}
     
     DIRECTIVA:
-    Mutar, expandir o refinar críticamente la idea. Incrementa la densidad conceptual (exergía).
-    No uses saludos, ni confirmaciones. Devuelve únicamente el Markdown mutado final.
+    Mutar, expandir o refinar críticamente la idea más allá del estado anterior.
+    Devuelve estrictamente el Markdown de la siguiente fase evolutiva. Cero explicaciones.
     """
     
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"temperature": 0.4} # Baja temperatura para determinismo parcial
+        "generationConfig": {"temperature": 0.4}
     }
     
     req = urllib.request.Request(url, data=json.dumps(payload).encode('utf-8'), 
@@ -99,11 +99,11 @@ def mutate_idea(current_state: str, iteration: int) -> str:
         with urllib.request.urlopen(req, timeout=30) as response:
             res_data = json.loads(response.read().decode('utf-8'))
             new_text = res_data['candidates'][0]['content']['parts'][0]['text']
-            return new_text
+            return "\\n" + new_text
     except Exception as e:
-        print(f"[!] Sensor Drift detectado en API: {e}. Aplicando backoff.")
+        print(f"[!] Sensor Drift detectado: {e}. Activando resiliencia estructural.")
         time.sleep(5)
-        return current_state + f"\n\n> [Iteración {iteration}]: Mutación fallida por Sensor Drift. Resistencia estructural mantenida."
+        return f"\\n\\n### [Iteración {iteration}]: Drift {e}. Sobrevivencia estructural (Autarchy mode)."
 
 def main():
     conn = init_bft_ledger()

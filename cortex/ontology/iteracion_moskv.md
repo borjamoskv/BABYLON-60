@@ -396,3 +396,336 @@
 
 ### [Φ] Iteración 69 | Hash: e5f1bb89
 \n\n### [Iteración 69]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 70 | Hash: ac56fa19
+\n\n### [Iteración 70]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 71 | Hash: b9f24e5f
+\n\n### [Iteración 71]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 72 | Hash: 097a81e5
+\n\n### [Iteración 72]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 73 | Hash: a276a068
+\n\n### [Iteración 73]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 74 | Hash: c0e259d2
+\n\n### [Iteración 74]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 75 | Hash: 7115e935
+\n\n### [Iteración 75]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 76 | Hash: 46edcfd4
+\n\n### [Iteración 76]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 77 | Hash: 5d272a09
+\n\n### [Iteración 77]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 78 | Hash: 72cfee71
+\n\n### [Iteración 78]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 79 | Hash: 1aa7ce54
+\n\n### [Iteración 79]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 80 | Hash: c61645fc
+\n\n### [Iteración 80]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 81 | Hash: 6621d661
+\n\n### [Iteración 81]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 82 | Hash: 1c9190ab
+\n\n### [Iteración 82]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 83 | Hash: 605be13e
+\n\n### [Iteración 83]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 84 | Hash: 072cdbda
+\n\n### [Iteración 84]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 85 | Hash: 4894e1ed
+\n\n### [Iteración 85]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 86 | Hash: 6c3aecac
+\n\n### [Iteración 86]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 87 | Hash: ff72b8d1
+\n\n### [Iteración 87]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 88 | Hash: ab0db811
+\n\n### [Iteración 88]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 89 | Hash: 8b167ddf
+\n\n### [Iteración 89]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 90 | Hash: aee077b2
+\n\n### [Iteración 90]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 91 | Hash: 0d3dab5a
+\n\n### [Iteración 91]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 92 | Hash: 1f78b37b
+\n\n### [Iteración 92]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 93 | Hash: 87747df7
+\n\n### [Iteración 93]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 94 | Hash: fc7e80df
+\n\n### [Iteración 94]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 95 | Hash: a77fa276
+\n\n### [Iteración 95]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 96 | Hash: cb7a7cf9
+\n\n### [Iteración 96]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 97 | Hash: 3ee7c21f
+\n\n### [Iteración 97]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 98 | Hash: c4ea39ad
+\n\n### [Iteración 98]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 99 | Hash: 6587c19e
+\n\n### [Iteración 99]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 100 | Hash: 6465e728
+\n\n### [Iteración 100]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 101 | Hash: 4be5b1fd
+\n\n### [Iteración 101]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 102 | Hash: 52c7b8b1
+\n\n### [Iteración 102]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 103 | Hash: 13b2370e
+\n\n### [Iteración 103]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 104 | Hash: 1a88d5b6
+\n\n### [Iteración 104]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 105 | Hash: f75d107c
+\n\n### [Iteración 105]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 106 | Hash: 4fb20208
+\n\n### [Iteración 106]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 107 | Hash: 22caa0e3
+\n\n### [Iteración 107]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 108 | Hash: 311ea138
+\n\n### [Iteración 108]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 109 | Hash: ee90c232
+\n\n### [Iteración 109]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 110 | Hash: 61a479e5
+\n\n### [Iteración 110]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 111 | Hash: 9120399f
+\n\n### [Iteración 111]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 112 | Hash: 788c9189
+\n\n### [Iteración 112]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 113 | Hash: 98fe6cf6
+\n\n### [Iteración 113]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 114 | Hash: 2f9bbdbf
+\n\n### [Iteración 114]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 115 | Hash: d3510e03
+\n\n### [Iteración 115]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 116 | Hash: 734a602a
+\n\n### [Iteración 116]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 117 | Hash: 2bb9f4bb
+\n\n### [Iteración 117]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 118 | Hash: 33b86a06
+\n\n### [Iteración 118]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 119 | Hash: effc1144
+\n\n### [Iteración 119]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 120 | Hash: 5b422e5e
+\n\n### [Iteración 120]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 121 | Hash: 66283d4c
+\n\n### [Iteración 121]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 122 | Hash: 143061cb
+\n\n### [Iteración 122]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 123 | Hash: 9dc64165
+\n\n### [Iteración 123]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 124 | Hash: f76a5268
+\n\n### [Iteración 124]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 125 | Hash: 8f7e7d06
+\n\n### [Iteración 125]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 126 | Hash: 397e408c
+\n\n### [Iteración 126]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 127 | Hash: 3f9ead3c
+\n\n### [Iteración 127]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 128 | Hash: 2d966468
+\n\n### [Iteración 128]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 129 | Hash: 6032ab3d
+\n\n### [Iteración 129]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 130 | Hash: 1377e0b5
+\n\n### [Iteración 130]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 131 | Hash: cd597903
+\n\n### [Iteración 131]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 132 | Hash: f2046994
+\n\n### [Iteración 132]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 133 | Hash: d0d43804
+\n\n### [Iteración 133]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 134 | Hash: 86acf08f
+\n\n### [Iteración 134]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 135 | Hash: 4c8cb3ed
+\n\n### [Iteración 135]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 136 | Hash: 3d418a9e
+\n\n### [Iteración 136]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 137 | Hash: bd0f5d70
+\n\n### [Iteración 137]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 138 | Hash: c29036b0
+\n\n### [Iteración 138]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 139 | Hash: 5ed61e13
+\n\n### [Iteración 139]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 140 | Hash: ff628156
+\n\n### [Iteración 140]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 141 | Hash: 82e98bc8
+\n\n### [Iteración 141]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 142 | Hash: 7b5aa25e
+\n\n### [Iteración 142]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 143 | Hash: d12ad6c3
+\n\n### [Iteración 143]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 144 | Hash: 3afbef11
+\n\n### [Iteración 144]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 145 | Hash: 06acf6de
+\n\n### [Iteración 145]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 146 | Hash: 54a2cf1d
+\n\n### [Iteración 146]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 147 | Hash: 13c9fafe
+\n\n### [Iteración 147]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 148 | Hash: c735fee3
+\n\n### [Iteración 148]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 149 | Hash: 9a3d20ef
+\n\n### [Iteración 149]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 150 | Hash: b71f7839
+\n\n### [Iteración 150]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 151 | Hash: 54501ea3
+\n\n### [Iteración 151]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 152 | Hash: 30d5ed51
+\n\n### [Iteración 152]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 153 | Hash: dd28c4c1
+\n\n### [Iteración 153]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 154 | Hash: c74352f9
+\n\n### [Iteración 154]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 155 | Hash: 3f4935b2
+\n\n### [Iteración 155]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 156 | Hash: c675aade
+\n\n### [Iteración 156]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 157 | Hash: 6208b0d8
+\n\n### [Iteración 157]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 158 | Hash: 0d61d413
+\n\n### [Iteración 158]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 159 | Hash: 5240e634
+\n\n### [Iteración 159]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 160 | Hash: 95a0b0ba
+\n\n### [Iteración 160]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 161 | Hash: 66dc88bb
+\n\n### [Iteración 161]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 162 | Hash: 658da467
+\n\n### [Iteración 162]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 163 | Hash: 044160ef
+\n\n### [Iteración 163]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 164 | Hash: 6d593b1a
+\n\n### [Iteración 164]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 165 | Hash: aae04f0a
+\n\n### [Iteración 165]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 166 | Hash: f789f385
+\n\n### [Iteración 166]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 167 | Hash: c9700019
+\n\n### [Iteración 167]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 168 | Hash: 94b21735
+\n\n### [Iteración 168]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 169 | Hash: 9bb02d4a
+\n\n### [Iteración 169]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 170 | Hash: 55f8d923
+\n\n### [Iteración 170]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 171 | Hash: dfabf9d0
+\n\n### [Iteración 171]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 172 | Hash: 8e6088c7
+\n\n### [Iteración 172]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 173 | Hash: 8fa39ec9
+\n\n### [Iteración 173]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 174 | Hash: cbd3b6a2
+\n\n### [Iteración 174]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 175 | Hash: 25a3b5a9
+\n\n### [Iteración 175]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 176 | Hash: ad723687
+\n\n### [Iteración 176]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 177 | Hash: b14585e0
+\n\n### [Iteración 177]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 178 | Hash: ebe4d9e3
+\n\n### [Iteración 178]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 179 | Hash: d2dc276f
+\n\n### [Iteración 179]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
+
+### [Φ] Iteración 180 | Hash: dfe18886
+\n\n### [Iteración 180]: Drift HTTP Error 429: Too Many Requests. Sobrevivencia estructural (Autarchy mode).
