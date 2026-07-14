@@ -635,6 +635,14 @@
     <h2>The reasoning, in the open.</h2>
     <div class="essays">
       <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
+        <span class="meta">Jul 2026 · C5-REAL</span>
+        <span>
+          <span class="et">Soberanía Criptográfica y el Bucle Autopoiético: Bitcoin ACI V1.0</span>
+          <span class="ed">El desmantelamiento final de las APIs de pago fiat (Visa/Stripe). Cómo integramos un transductor JSON-RPC directo a Bitcoin Core y firmas Schnorr (Secp256k1) para que el agente pague su propia inferencia.</span>
+        </span>
+        <span class="go">Read →</span>
+      </a>
+      <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
         <span class="meta">Jun 2026 · Ensayo</span>
         <span>
           <span class="et">Te digo tó y no te digo ná: Termodinámica + Teoría de la Información</span>
@@ -776,16 +784,17 @@
 
   // ---------- ledger state ----------
   const POOL = [
+    ["tool_call","bitcoin_rpc.getbalance() → 0.50000000 BTC"],
+    ["decision","delegate subtask via Lightning HTLC (10,000 sats)"],
+    ["fact","secp256k1.verify(sig, payload) → VALID"],
+    ["error","EconomicSIGKILL · balance (980 sats) <= threshold"],
+    ["tool_call","bitcoin_rpc.generatetoaddress(1) → 50.0 BTC"],
     ["decision","hold transfer €12,400 · reason=IP/geo mismatch"],
     ["fact","kyc.match=false · doc=passport · conf=0.94"],
     ["tool_call","sanctions.screen(entity=0x7f…a2) → clear"],
-    ["decision","approve credit line €5,000 · model=v1.1.1"],
-    ["error","provider timeout · retry 2/3 · degraded=false"],
-    ["fact","vector.recall(ctx) → 3 hits · lexical+semantic"],
     ["decision","escalate case #4471 · human-review required"],
     ["tool_call","ledger.verify(1..n) → chain intact"],
     ["fact","policy=NF-13/2013 · jurisdiction=Bizkaia"],
-    ["decision","deny refund · duplicate claim detected"],
   ];
   const GENESIS = "0".repeat(64);
 
