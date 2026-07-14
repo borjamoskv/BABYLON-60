@@ -70,6 +70,7 @@ class VoiceAgentPipeline:
         self._respond_task: asyncio.Task | None = None
         self._preroll = PrerollRing(cfg.audio.preroll_frames)
         self._gap: list = []
+        self._shutdown = False
 
     def _emit(self, name: str, payload: Any = None) -> None:
         if self._on_event is not None:
@@ -82,6 +83,8 @@ class VoiceAgentPipeline:
         self._emit("state", self.fsm.state)
         try:
             async for frame in self.audio.frames():
+                if getattr(self, "_shutdown", False):
+                    break
                 await self._on_frame(frame)
             if self._respond_task is not None and not self._respond_task.done():
                 await self._respond_task
@@ -173,6 +176,9 @@ class VoiceAgentPipeline:
         clock.t_stt_final = time.monotonic()
         self._turn_final = final
         self._emit("final", final)
+        if final.strip().lower().strip(".!?") in ("fin", "end"):
+            self._shutdown = True
+            return
         if not final.strip():
             await self.spec.cancel()
             self.fsm.fire(TurnEvent.PLAYBACK_DONE)
