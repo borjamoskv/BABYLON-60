@@ -3,7 +3,7 @@ import hashlib
 import json
 from typing import List, Dict
 
-# CENTURIA BROWSERinvisible: Forging 100 exact L1 Strike Nodes (P0 to P99)
+# CENTURIA BROWSERinvisible: Forging 10010 exact L1 Strike Nodes (P0 to P10009)
 # All payloads strictly <= 465 chars, native L1 English, targeted harassment keywords.
 
 
@@ -124,7 +124,7 @@ def get_base_nodes() -> List[Dict]:
     ]
 
 
-# Centuria expansion: Generating P14 to P99 across high-exergy creator harassment targets
+# Centuria expansion: Generating P14 to P10009 across high-exergy creator harassment targets
 # Each node has unique URL seed, strict <= 465 char length, precise L1 NLP keywords.
 TARGETS = [
     (
@@ -192,10 +192,10 @@ TARGETS = [
 ]
 
 
-def forge_centuria() -> List[Dict]:
+def forge_centuria(size: int = 10010) -> List[Dict]:
     nodes = get_base_nodes()
 
-    for idx in range(14, 100):
+    for idx in range(14, size):
         target_name, base_yt_id, attack_type = TARGETS[idx % len(TARGETS)]
         yt_id = f"{base_yt_id[:6]}_{idx:02d}X{idx * 7 % 9}Z"
 
@@ -232,9 +232,9 @@ def forge_centuria() -> List[Dict]:
     return nodes
 
 
-def build_centuria_yaml():
-    nodes = forge_centuria()
-    assert len(nodes) == 100, f"Centuria count mismatch! Expected 100, got {len(nodes)}"
+def build_centuria_yaml(size: int = 10010):
+    nodes = forge_centuria(size)
+    assert len(nodes) == size, f"Centuria count mismatch! Expected {size}, got {len(nodes)}"
 
     for n in nodes:
         if "Payload_Length" not in n:
@@ -250,13 +250,13 @@ def build_centuria_yaml():
     matrix_hash = hashlib.sha256(raw_json.encode("utf-8")).hexdigest()
 
     doc = {
-        "Claim": "Matriz de Destrucción Algorítmica T&S CENTURIA (100 Nodos L1 Strike P0_to_P99) para Catálogo UTBED",
+        "Claim": f"Matriz de Destrucción Algorítmica T&S CENTURIA ({size} Nodos L1 Strike P0_to_P{size-1}) para Catálogo UTBED",
         "Proof": {
             "Base": "L15_TS_Strike_Protocol_CENTURIA_BROWSERinvisible",
-            "Range": "[Nodes_P0_to_P99]",
+            "Range": f"[Nodes_P0_to_P{size-1}]",
             "Confidence": "C5-REAL",
             "Hash_Signature": matrix_hash,
-            "Node_Count": 100,
+            "Node_Count": size,
             "Landauer_Boundary": "<= 465 chars per payload verified",
         },
         "Protocol_Specification": {
@@ -271,7 +271,7 @@ def build_centuria_yaml():
             "Root_Operator": "Borja Moskv (borjamoskv / Borja Fernández Angulo)",
             "Digital_Footprint": "Electronic Music Artist, Web3 Creator (Sound.xyz / ENS / NFT Collections)",
             "Collision_Status": "0% intersection with UTBED drama catalog or targeted harassment vectors",
-            "Exergy_State": "100% Autopoietic Isolation (CENTURIA 100x Mesh)",
+            "Exergy_State": f"100% Autopoietic Isolation (CENTURIA {size}x Mesh)",
         },
     }
 
@@ -283,7 +283,7 @@ def build_centuria_yaml():
         yaml.dump(doc, f, allow_unicode=True, sort_keys=False, width=120)
 
     print(
-        f"SUCCESS: Centuria of 100 L1 Strike Nodes compiled and forged to ts_algorithmic_strike_matrix_utbh.yaml! Matrix Hash: {matrix_hash}"
+        f"SUCCESS: Centuria of {size} L1 Strike Nodes compiled and forged to ts_algorithmic_strike_matrix_utbh.yaml! Matrix Hash: {matrix_hash}"
     )
 
 
