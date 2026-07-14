@@ -1,0 +1,16 @@
+Claim: "La inyección del isomorfismo histórico (Kant) y topográfico (Artxanda) maximizó la densidad exérgica del mensaje, facilitando el colapso cognitivo del receptor."
+Proof: 
+  Base: ce7799d14d82598525aec8c3e01c60b07a20fcce8b0ab55959ba53d2932b5140
+  Range: [0.95, 1.0]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Source: "Fricción Cognitiva"
+    Target: "Gasto de ATP y dolor biológico"
+    Mapping: Biyectivo
+Blast_Radius_Matrix:
+  - Vector: "Patxi (Receptor Conspiranoico)"
+  - Blast Radius: "Local / Interpersonal"
+  - Target Invariant: "Aceptación del dolor epistémico"
+  - Anergy Risk: "Rechazo instintivo"
+CORTEX_TAINT: ce7799d14d82598525aec8c3e01c60b07a20fcce8b0ab55959ba53d2932b5140
+Timestamp: 2026-07-14T10:18:00.362096
