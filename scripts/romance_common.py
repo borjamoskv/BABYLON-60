@@ -90,7 +90,7 @@ def build_msa(forms: list[tuple[str, list[str]]]) -> tuple[list[str], list[list[
 def L(name: str, length: float) -> tuple:
     return ('L', name, length)
 
-def I(length: float, kids: list) -> tuple:  # noqa: E743
+def I(length: float, kids: list) -> tuple:
     return ('I', length, kids)
 TREE = I(0.0, [L('sc', 0.35), L('ro', 0.85), I(0.15, [L('it', 0.45), I(0.15, [L('fr', 0.95), I(0.15, [L('es', 0.5), L('pt', 0.5)])])])])
 

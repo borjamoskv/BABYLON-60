@@ -60,7 +60,7 @@ def main():
     
     # Try with a common local model alias. 
     # Can fallback if needed but we test base connection and inference.
-    model = "llama3"
+    model = sys.argv[1] if len(sys.argv) > 1 else "qwen2.5:0.5b"
     
     print(f"🔍 [DEBUG / TRACE / PARSING] Pinging {OLLAMA_URL} for TTFT measurement...")
     ttft_ms, status, err = measure_ttft(model)

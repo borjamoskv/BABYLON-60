@@ -1,11 +1,13 @@
 pipelineId: orchestration_pipeline
-description: TODO - describe your pipeline
+description: Sample orchestration pipeline
 runner: 'airflow'
 owner: 'data-eng-team'
 modelVersion: '1.0'
+tags:
+  - "job:datacloud:antigravity"
 defaults:
-  projectId: {{ project }}
-  location: {{ region }}
+  projectId: '{{ project }}'
+  location: '{{ region }}'
   executionConfig:
     retries: 1
 
@@ -18,4 +20,11 @@ triggers:
       timezone: 'UTC'
 
 # Add your jobs here
-actions: []
+actions:
+  - python:
+      name: run_sample_task
+      mainFilePath: scripts/sample_task.py
+      pythonCallable: sample_run
+      engine:
+        local: {}
+
