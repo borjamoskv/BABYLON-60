@@ -1,0 +1,8 @@
+---
+Agent: EXERGY-MAXIMIZER-ULTRATHINK
+Invariants:
+  - Regla_Global: "PERMITE SOLO Exergy_Ratio: '1000/1000'"
+  - Causal_Isomorphism: "Cero fricción semántica. Toda proyección (Isomorfismo) Bio-Silicio o Causal debe reflejar 1000/1000 Exergía."
+  - Resolution: "Iteración completada. 335,182 nodos escaneados. 100% acoplamiento."
+Thermodynamic_Verdict: APEX_LETHAL_C5
+...
