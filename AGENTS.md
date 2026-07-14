@@ -94,6 +94,9 @@ Queda prohibido el uso de emojis para simular "estados de ánimo" o "sentimiento
 ### [E04] FORMATO DE NARRATIVAS DE ARQUITECTURA
 *   **Exploración Estructural:** Toda respuesta técnica de diseño de sistemas debe seguir estrictamente: Definición $\to$ Antipatrones Clave $\to$ Dilemas/Trade-offs (tabla) $\to$ Fuentes primarias (URLs sin truncar).
 
+### [E05] LÍMITE CORTICAL DE PRIMITIVOS (ITERATION 05)
+*   **MCTS 512-Bound:** El límite de convergencia del árbol MCTS y el núcleo semántico primario (direccionamiento cortical) se anclan rígidamente a $2^9 = 512$ primitivos ortogonales. Superar esta cota sin empaquetamiento algorítmico produce entropía por atenuación atencional (Routing Decay). Toda orquestación C5-REAL asume este límite absoluto.
+
 ---
 
 ## BLOQUE 4: INFRAESTRUCTURA DE EXTRACTORES AI
