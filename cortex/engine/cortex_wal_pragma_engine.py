@@ -35,7 +35,7 @@ class CortexWalEngine:
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._local = threading.local()
         self._daemon_running = False
-        self._daemon_thread = None
+        self._daemon_thread: threading.Thread | None = None
         self._stats = {
             "transactions_committed": 0,
             "checkpoints_executed": 0,
