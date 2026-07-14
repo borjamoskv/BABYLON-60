@@ -27,6 +27,7 @@ from cortex.agents.voice import (
     TurnState,
     VadConfig,
     VoiceActivityDetector,
+    VoiceAgent,
     VoiceAgentConfig,
     VoiceAgentPipeline,
     VoiceLedger,
@@ -242,6 +243,21 @@ def test_pipeline_v2_prefetch_and_prefinal_collapse_ttfa():
     assert r2.ttfa_ms < r1.ttfa_ms
     assert r2.stt_final_ms is not None and r1.stt_final_ms is not None
     assert r2.stt_final_ms < r1.stt_final_ms
+
+
+def test_voice_agent_facade_e2e_with_injected_backends():
+    agent = VoiceAgent(
+        cfg=VoiceAgentConfig(),
+        stt=ScriptedStt(_UTTERANCE, [(700.0, "cuál es el estado"), (1500.0, _UTTERANCE)], 0.02),
+        brain=EchoBrain(),
+        tts=NullTts(),
+        audio=SimulatedAudio(_AUDIO, [("silence", 400), ("speech", 1400), ("silence", 2400)], time_scale=0.25),
+        ledger=None,
+    )
+    asyncio.run(agent.run())
+    assert len(agent.receipts) == 1
+    assert agent.receipts[0].user_text == _UTTERANCE
+    assert [m["role"] for m in agent.history] == ["user", "assistant"]
 
 
 def test_benchmark_speculative_beats_fixed_baseline():
