@@ -1,7 +1,8 @@
-# Transduccion estructural v3 - Isomorfismos: Babilonia / organismos / sistemas
-# Fuente: documento de trabajo 2026-07-14. Salida: solo estructura.
+# Transduccion estructural vOMEGA (consolidada) - Isomorfismos: Babilonia / organismos / sistemas
+# Fuente: documento de trabajo 2026-07-14. Salida: solo estructura. Este archivo es el canon (supersede v1/v2/v3).
 # Cada isomorfismo => order_parameter (colapsa) gobernado por control_parameter (cruza umbral),
 # clasificado por tipo de bifurcacion y con senal de alarma temprana (EWS) generica + proxy babilonico.
+# Lectura rapida: bloque 'omega' (matriz irreducible + ledger). Detalle: bloque 'isomorphisms'.
 
 meta:
   frame: [general_systems_theory, cybernetics, scaling_laws, dynamical_systems, bifurcation_theory]
@@ -31,6 +32,34 @@ meta:
     absorbing_state_boundary: [I08, I09]
     structural_degeneration: [I04]
   ews_note: "critical slowing down (autocorrelacion y varianza crecientes) aplica a codim-1 con autovalor -> eje: I10 (fold), I07 (Hopf), I03 (umbral de error). NO aplica limpio a percolacion (I01,I02: fluctuaciones de tamano de cluster), a estado absorbente (I08,I09: tendencia/conteo, no ruido critico), ni a perdida de seguimiento (I05: sesgo sistematico, no ruido)."
+
+omega:
+  version: "OMEGA (consolidada, 2026-07-14)"
+  supersedes: [v1, v2, v3]
+  irreducible: "sistema abierto lejos del equilibrio + flujo(materia,energia,info) + restriccion + seleccion => espacio de soluciones estrecho => convergencia de arquitecturas => mismos modos de fallo => mismas bifurcaciones y alarmas tempranas"
+  matrix:  # fila por isomorfismo: order_parameter | control_parameter | bifurcacion | reversible | rigor
+    - {id: I01, order: fraccion_perfundida,   control: "r/r0 (azolvamiento)",   bifurcation: percolacion,            reversible: "si", rigor: near_iso}
+    - {id: I02, order: D_caminos_indep,        control: monocultivo,             bifurcation: percolacion_conect,     reversible: "si", rigor: homo}
+    - {id: I03, order: phi_master,             control: "mu*L",                  bifurcation: umbral_error,           reversible: "si", rigor: homo}
+    - {id: I04, order: "I(pos;destino)",       control: "|grad M|",              bifurcation: degeneracion_estruct,   reversible: "si", rigor: homo}
+    - {id: I05, order: evidencia_del_modelo,   control: deriva_vs_aprendizaje,   bifurcation: perdida_seguimiento,    reversible: "si", rigor: homo}
+    - {id: I06, order: r_coherencia_fase,      control: "K vs detuning",         bifurcation: kuramoto,               reversible: "si", rigor: homo}
+    - {id: I07, order: "1/var(error)",         control: "G*tau",                 bifurcation: hopf,                   reversible: "si", rigor: homo}
+    - {id: I08, order: R_reserva_central,      control: flujo_neto,              bifurcation: colision_frontera,      reversible: "si", rigor: homo}
+    - {id: I09, order: info_retenida,          control: fidelidad_intergen,      bifurcation: estado_absorbente,      reversible: "no", rigor: homo}
+    - {id: I10, order: rendimiento_y,          control: "S(t)_sal_lenta",        bifurcation: saddle_node_fold,       reversible: "no", rigor: homo}
+  cascade: "I10 -> {I08, I01, I02} -> {I09, I07} ;  I02 -> I10 (amplifica) ;  I03, I06 -> I05"
+  driver: I10        # variable lenta: fija el reloj del colapso
+  amplifier: I02     # perdida de redundancia: amplifica el resto
+  confidence_ledger:
+    rigor_near_iso: [I01]                                  # comparte ecuaciones
+    rigor_homo: [I02, I03, I04, I05, I06, I07, I08, I09, I10]
+    dynamics_modelo_real: [I01, I03, I06, I07, I08, I10]   # modelo cientifico reconocido
+    dynamics_esquematico: [I02, I04, I05, I09]             # caricatura honesta, no ecuacion
+    ews_evidenciado: [I10]                                 # proxy trigo/cebada en archivos
+    ews_proxy_plausible: [I01, I02, I03, I04, I05, I06, I07, I08, I09]
+    irreversibles: [I09, I10]                              # estado absorbente / histeresis
+  companions: ["cascada_acoplamiento.mermaid", "consolidacion_omega.html"]
 
 isomorphisms:
 
