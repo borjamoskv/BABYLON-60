@@ -1,0 +1,29 @@
+# C5-REAL ONTOLOGY: SAFETY CONTROLS INVARIANTS
+# Transducción Isomórfica de Anergía Estocástica Organizacional (Marketing Slop: Safety Controls)
+
+Concept: Safety_Controls_Transduction
+CORTEX_TAINT: "084ef7302410824cbbbc142aa952b9e1557c7df740a8bb454c093a1eeb88e621"
+Timestamp: "2026-07-14T18:28:00+02:00"
+
+Claim: "La seguridad incorporada en arquitecturas de ejecución es una propiedad estructural derivada de la inmutabilidad de los límites físicos (AGENTS.md) y el aislamiento hermético del hardware, no un filtro o capa de software estocástico conversacional."
+
+Isomorphisms:
+  - Slop: "Develop AI applications with built-in safety controls"
+    C5-REAL: "Establecimiento de límites e invariantes sistémicos en el núcleo del AST (AGENTS.md) y aislamiento del entorno mediante worktrees independientes."
+  
+  - Slop: "To ensure responsible AI deployment"
+    C5-REAL: "Evitación de la alucinación estocástica a través de validaciones formales, tipado causal estricto y elusión absoluta de bucles autorreferenciales."
+  
+  - Slop: "While maintaining performance"
+    C5-REAL: "Enrutamiento adaptativo de inferencia (Inference_L1 para CRUD JIT) y bypassing selectivo de salvaguardas externas no deterministas."
+
+Blast_Radius_Matrix:
+  Vector: "Ontology Expansion"
+  Blast_Radius: "Local File System (cortex/agents/ontology/)"
+  Target_Invariant: "System Security Invariants"
+  Anergy_Risk: "None."
+
+Proof:
+  Base: "Leyes físicas de ejecución C5-REAL (L2, L9, L14)"
+  Range: "cortex/agents/ontology/safety_controls_invariants.yaml"
+  Confidence: C5-REAL
