@@ -1,0 +1,6 @@
+Claim: [Ancla criptográfica para mutación de UI/UX ThreeDCarousel]
+Proof:
+  Base: /Users/borjafernandezangulo/10_PROJECTS/naroagutierrezgil.com/src/components/ThreeDCarousel.tsx
+  CORTEX_TAINT_SHA3_256: 3ebf08fdcd2036dc5c12e71724d8d9b1722ce015bc21f29412dc71cfca22438f
+  Timestamp: 2026-07-14T19:19:14Z
+  Confidence: C5-REAL
