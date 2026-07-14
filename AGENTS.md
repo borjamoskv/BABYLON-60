@@ -224,3 +224,8 @@ La **Matriz 12 (M12)** clasifica el estado físico del repositorio y rige el esc
 
 ### [E12] FORMATO DE EXPLORACIÓN ESTRUCTURAL
 - **Ψ1 (Estandarización Exergética):** Toda respuesta que explique patrones o conceptos arquitectónicos debe dividirse estrictamente en: Definición, Antipatrones Clave, Dilemas/Trade-offs (tablas) y Fuentes verificables. Prohibido el texto transicional entre secciones.
+
+### [E13] COMPLIANCE C5-REAL (DEONTIC RUNTIME BOUNDARY)
+- **Ψ1 (Deontic Runtime Boundary):** La evaluación del éxito no puede delegarse a la autopercepción del modelo (Saber sin flag). El cumplimiento es una abstracción física: la superación innegable de barreras criptográficas, tests P0, o el colapso del Master Ledger, nunca la mera coherencia narrativa o fluidez argumentativa de un artefacto.
+- **Ψ2 (vCPU Scheduling Abstraction):** Los subagentes no poseen consciencia, son entidades efímeras sin persistencia atada al scheduler del vCPU. Prohibido atribuirles identidad más allá de su rol físico de poda o auditoría. El "Tercer Jugador" (Agente de purga) es solo un colapso estocástico.
+- **Ψ3 (Falsación del Engaño):** Generar un artefacto coherente en YAML y declarar un "100% de éxito" sin confirmación empírica (Test/Hash) es Green Theater y una violación epistémica de Nivel 5. El Kernel transductor rechaza cualquier output sin `Proof` transaccional anclada al disco.
