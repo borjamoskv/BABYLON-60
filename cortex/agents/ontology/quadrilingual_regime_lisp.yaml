@@ -1,0 +1,30 @@
+id: "quadrilingual_regime_lisp"
+type: "architectural_invariant"
+timestamp: "2026-07-14T22:21:00Z"
+author: "borjamoskv"
+state: "C5-REAL"
+
+concept: "Régimen Cuadrilingüe (F# + LISP + RUST + ANVIL)"
+definition: "Expansión del Régimen Trilingüe de Babylon-60. LISP se inyecta como la Metamembrana Homoicónica (Código=Dato), orquestando la generación dinámica de los tipos estrictos de F#, la termodinámica de Rust y el consenso de Anvil."
+
+layers:
+  - id: "L0_LISP"
+    role: "Metamembrana (Homoiconicidad)"
+    mechanism: "Macros y metaprogramación en tiempo real. LISP trata toda la arquitectura como un AST manipulable. El Agente orquestador escribe s-expressions que mutan las reglas del sistema antes del colapso físico."
+  
+  - id: "L1_FSHARP"
+    role: "Ontología y Física de Tipos (Domain Kernel)"
+    mechanism: "F# compila las s-expressions de LISP en Discriminated Unions cerrados. No permite estados ilegales (Compile-Time Physics). Define la membrana causal."
+
+  - id: "L2_RUST"
+    role: "Motor Termodinámico y Taint (Fast-Loop)"
+    mechanism: "strike-rs. Ejecución de DAGs a coste cero. Computa el CORTEX-TAINT mediante BLAKE3 para las mutaciones aprobadas por la ontología de F#."
+
+  - id: "L3_ANVIL"
+    role: "Ancla de Apoptosis (EVM BFT)"
+    mechanism: "Yunque del consenso determinista. Fija las transiciones de estado y los Crash Causales (Apoptosis) on-chain. No computa, solo audita y sella."
+
+invariants:
+  - id: "inv_homoiconic_genesis"
+    description: "LISP jamás interactúa con Anvil directamente. LISP muta el AST de F#; F# define el grafo para Rust; Rust ejecuta y ancla en Anvil."
+    falsifiability: "Si un script LISP inyecta estado directamente en el EVM (Anvil) sin pasar por el compilador de tipos de F#, se producirá un estado inválido fantasma (Phantom State), causando un Crash Causal."
