@@ -23,6 +23,7 @@ import argparse
 import subprocess
 import urllib.request
 import urllib.error
+import concurrent.futures
 from typing import Tuple
 
 DB_PATH = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/nexus_anchors.db"
@@ -388,20 +389,23 @@ def copy_to_clipboard(conn: sqlite3.Connection, video_id: str, field: str):
 
 def audit_live_takedowns(conn: sqlite3.Connection):
     """
-    [MEJORA ATÓMICA 2]: Sonda HTTP activa que escanea la cola de PENDING_STRIKE
-    para autocolapsar vídeos privados, borrados o retirados sin intervención humana.
+    [MEJORA ATÓMICA 2 - ASYNC]: Sonda HTTP activa concurrente que escanea la cola PENDING_STRIKE
+    para autocolapsar vídeos privados, borrados o retirados en paralelo (O(1) latency).
     """
     cursor = conn.cursor()
     cursor.execute(
         "SELECT video_id, canonical_url FROM strike_matrix_l15 WHERE status = 'PENDING_STRIKE'"
     )
     rows = cursor.fetchall()
+    if not rows:
+        return
+
     print(
-        f"\n[C5-REAL AUDIT LIVE]: Escaneando {len(rows)} nodos pendientes por indisponibilidad..."
+        f"\n[C5-REAL AUDIT LIVE]: Escaneando {len(rows)} nodos pendientes de forma concurrente..."
     )
 
-    takedowns_found = 0
-    for vid, url in rows:
+    def probe_node(node) -> tuple[str, bool]:
+        vid, url = node
         req = urllib.request.Request(
             url,
             headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"},
@@ -409,19 +413,36 @@ def audit_live_takedowns(conn: sqlite3.Connection):
         try:
             with urllib.request.urlopen(req, timeout=5) as resp:
                 html = resp.read().decode("utf-8", errors="ignore")
-                if (
-                    "Video unavailable" in html
-                    or "Este vídeo ya no está disponible" in html
-                    or '"isPlayable":false' in html
-                ):
-                    record_takedown(conn, vid)
-                    takedowns_found += 1
+                # Firmas extendidas de Takedown (Privado, Borrado, Cuenta Terminada)
+                signatures = [
+                    "Video unavailable",
+                    "Este vídeo ya no está disponible",
+                    '"isPlayable":false',
+                    "Video private",
+                    "Vídeo privado",
+                    "Account terminated"
+                ]
+                if any(sig in html for sig in signatures):
+                    return vid, True
         except urllib.error.HTTPError as e:
             if e.code in [404, 410, 403]:
-                record_takedown(conn, vid)
-                takedowns_found += 1
+                return vid, True
         except Exception:
             pass
+        return vid, False
+
+    takedowns_found = 0
+    collapsed_vids = []
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        results = executor.map(probe_node, rows)
+        for vid, is_down in results:
+            if is_down:
+                collapsed_vids.append(vid)
+                
+    for vid in collapsed_vids:
+        record_takedown(conn, vid)
+        takedowns_found += 1
 
     print(
         f"✅ [AUDIT COMPLETE]: {takedowns_found} nuevos takedowns autocolapsados en WAL.\n"
