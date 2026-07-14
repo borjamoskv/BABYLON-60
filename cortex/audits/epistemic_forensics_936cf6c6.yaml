@@ -9,7 +9,7 @@ Delta_Summary:
     Author: Borja Moskv <borjamoskv@users.noreply.github.com>
     Date:   Mon Jul 13 16:46:55 2026 +0200
         chore(ontology): transducción C5-REAL de diseño por contrato, cohesión y acoplamiento
-     cortex/ontology/design_by_contract_coupling.yaml | 18 ++++++++++++++++++
+     cortex/ontology/acoplamiento_diseno_por_contrato.yaml | 18 ++++++++++++++++++
      1 file changed, 18 insertions(+)
 Exergy_Audit:
   Action: "Batch Transduction V2"

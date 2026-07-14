@@ -59,7 +59,7 @@ omega:
     ews_evidenciado: [I10]                                 # proxy trigo/cebada en archivos
     ews_proxy_plausible: [I01, I02, I03, I04, I05, I06, I07, I08, I09]
     irreversibles: [I09, I10]                              # estado absorbente / histeresis
-  companions: ["cascada_acoplamiento.mermaid", "consolidacion_omega.html"]
+  companions: ["docs/diagrams/colapso_mesopotamico_cascada_causal.mermaid", "consolidacion_omega.html"]
 
 isomorphisms:
 
