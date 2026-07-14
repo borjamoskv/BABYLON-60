@@ -155,7 +155,7 @@ class CortexWalEngine:
 
 if __name__ == "__main__":
     print("\033[38;2;176;38;255m[CYCLE 1: TARGET-01]\033[0m Iniciando estrés de concurrencia sobre CortexWalEngine...")
-    test_db = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/C5_REAL_Binary_Pool/test_wal_pragma.db"
+    test_db = str(Path(__file__).resolve().parent / "C5_REAL_Binary_Pool" / "test_wal_pragma.db")
     if os.path.exists(test_db):
         os.remove(test_db)
     if os.path.exists(test_db + "-wal"):

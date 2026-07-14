@@ -221,7 +221,7 @@ def L(name, length):
     return ("L", name, length)
 
 
-def I(length, kids):
+def I(length, kids):  # noqa: E743
     return ("I", length, kids)
 
 
@@ -460,7 +460,7 @@ def main():
     print("\n[C5-REAL] Iniciando Inferencia MCMC (Simulated Annealing + Priors)...")
     global TREE
     TREE = run_mcmc(TREE, msas, model, iters=500)
-    print(f"[C5-REAL] Colapso MAP alcanzado. Procediendo a decodificación entrópica.\n")
+    print("[C5-REAL] Colapso MAP alcanzado. Procediendo a decodificación entrópica.\n")
 
     # (b) Reconstrucción por columna + validación
     rows_csv = []

@@ -45,3 +45,7 @@ proof/lean/.lake/
 # Python packaging leftovers
 *.egg-info/
 c5_remotion_video/node_modules/
+
+# Sandbox stress leftovers
+cortex/scripts/sandbox_stress/operon_core
+cortex/scripts/sandbox_stress/claude-science-data/

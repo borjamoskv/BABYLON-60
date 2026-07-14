@@ -16,8 +16,8 @@ import shutil
 import hashlib
 from pathlib import Path
 
-REPO_ROOT = Path("/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv")
-SOURCE_CLAUDE_DIR = Path("/Users/borjafernandezangulo/.claude/projects")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+SOURCE_CLAUDE_DIR = Path.home() / ".claude" / "projects"
 TARGET_LOGS_DIR = REPO_ROOT / "cortex/legal_dossier/claude_code_local_logs"
 INDEX_FILE = TARGET_LOGS_DIR / "C5_CATALOGO_LOGS_LOCALES_CLAUDE_CODE.md"
 

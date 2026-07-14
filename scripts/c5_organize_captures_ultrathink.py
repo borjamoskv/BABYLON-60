@@ -15,7 +15,7 @@ import shutil
 import hashlib
 from pathlib import Path
 
-REPO_ROOT = Path("/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv")
+REPO_ROOT = Path(__file__).resolve().parent.parent
 EVIDENCE_DIR = REPO_ROOT / "cortex" / "legal_dossier" / "evidencias_capturas"
 SESSION_SUBDIR = EVIDENCE_DIR / "anexos_capturas_sesion"
 INDEX_FILE = EVIDENCE_DIR / "C5_INDICE_CATALOGO_EVIDENCIAS_AMODEO.md"

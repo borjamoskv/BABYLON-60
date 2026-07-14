@@ -1,7 +1,7 @@
 import os
 import shutil
 
-ROOT_DIR = "/Users/borjafernandezangulo/30_BABYLON-60"
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCRATCH_DIR = os.path.join(ROOT_DIR, "scratch")
 
 def sweep():

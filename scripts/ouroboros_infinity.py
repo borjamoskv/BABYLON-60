@@ -105,7 +105,7 @@ def execute_crystallize(target_md_path: Optional[str] = None) -> Dict[str, Any]:
             targets.append(p)
     else:
         # Search for SKILL.md or AGENTS.md files with Auto-Injections
-        for root_dir in [PROJECT_ROOT, Path("/Users/borjafernandezangulo/.gemini/config/skills")]:
+        for root_dir in [PROJECT_ROOT, Path.home() / ".gemini" / "config" / "skills"]:
             if root_dir.exists():
                 for md in root_dir.rglob("*.md"):
                     try:

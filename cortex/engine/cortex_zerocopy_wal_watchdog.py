@@ -119,7 +119,7 @@ class CortexZeroCopyWalWatchdog:
 if __name__ == "__main__":
     print("\033[38;2;176;38;255m[CYCLE 3: TARGET-03]\033[0m Verificando Zero-Copy CPython-SQLite WAL Watchdog...")
     # Crear una BD temporal WAL y meterle datos para inspeccionar su cabecera en vivo via mmap
-    test_db = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/C5_REAL_Binary_Pool/test_zerocopy_wal.db"
+    test_db = str(Path(__file__).resolve().parent / "C5_REAL_Binary_Pool" / "test_zerocopy_wal.db")
     if os.path.exists(test_db):
         os.remove(test_db)
     if os.path.exists(test_db + "-wal"):

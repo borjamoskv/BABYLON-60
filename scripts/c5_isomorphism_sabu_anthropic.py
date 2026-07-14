@@ -194,7 +194,8 @@ class IsomorphismAuditorC5:
 
 
 def main() -> None:
-    db_path = Path("/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/L1_sink/isomorphism_audit.db")
+    repo_root = Path(__file__).resolve().parent.parent
+    db_path = repo_root / "cortex" / "L1_sink" / "isomorphism_audit.db"
     auditor = IsomorphismAuditorC5(db_path)
     report = auditor.verify_isomorphism()
     print(json.dumps(report, indent=2, ensure_ascii=False))

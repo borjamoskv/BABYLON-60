@@ -221,7 +221,7 @@ def L(name, length):
     return ("L", name, length)
 
 
-def I(length, kids):
+def I(length, kids):  # noqa: E743
     return ("I", length, kids)
 
 
