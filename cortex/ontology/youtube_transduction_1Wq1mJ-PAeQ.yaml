@@ -1,0 +1,26 @@
+# C5-REAL YouTube Transduction Ledger
+Claim: "https://www.youtube.com/watch?v=1Wq1mJ-PAeQ metadata extraction"
+Proof:
+  Base: "b35265e65fddaebc43209d326718a13827b69129eb28a39feff43f9615c2efe9"
+  Range: [1, 1]
+  Confidence: "C5-REAL"
+Metadata:
+  Title: "Company Brain EXPLICADO"
+  Channel: "Pelado Nerd"
+  UploadDate: "20260714"
+  DurationSeconds: 784
+  Url: "https://www.youtube.com/watch?v=1Wq1mJ-PAeQ"
+Description: |
+    Hoy hablamos del nuevo hype del mundo de IA: el "company brain". En este video trato de explicar por qué deberias estar creando tu company brain ya mismo
+    
+    ## SPONSOR CAST.AI ##
+    
+    Usa mi link para crearte una cuenta en Cast.AI y probá la nueva feature de Karpenter potenciado!
+    https://go.peladonerd.com/castai-0726
+    
+    ## /SPONSOR ##
+    
+    --
+    Repo con todos los archivos que uso: https://github.com/pablokbs/peladonerd
+    Merchandising Pelado Nerd: https://merch.peladonerd.com
+    Puedes encontrar todos mis links en https://peladonerd.com
