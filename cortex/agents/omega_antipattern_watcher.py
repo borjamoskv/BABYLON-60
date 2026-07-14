@@ -11,7 +11,7 @@ import ast
 import yaml
 import argparse
 from pathlib import Path
-from typing import Dict, List, Set, Tuple, Any, Optional
+from typing import Dict, List, Set, Any, Optional
 
 # --- CONFIGURATION & PATH RESOLUTION ---
 CORTEX_ROOT = Path("/Users/borjafernandezangulo/30_BABYLON-60").resolve()
@@ -217,7 +217,7 @@ def scan_file_text_rules(file_path: Path) -> List[Dict[str, Any]]:
     
     try:
         content = file_path.read_text(encoding="utf-8")
-    except Exception as e:
+    except Exception:
         # Skip binary files/errors
         return findings
         
