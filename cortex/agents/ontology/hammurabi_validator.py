@@ -8,7 +8,7 @@ ONTOLOGY_PATH = os.path.join(
 )
 
 
-def load_ontology() -> "Any":
+def load_ontology() -> dict:
     try:
         with open(ONTOLOGY_PATH, "r") as f:
             return yaml.safe_load(f)
@@ -16,7 +16,7 @@ def load_ontology() -> "Any":
         return {}
 
 
-def check_h5_violation(filepath) -> "Any":
+def check_h5_violation(filepath) -> list:
     violations = []
     with open(filepath, "r", encoding="utf-8") as f:
         try:
@@ -39,7 +39,7 @@ def check_h5_violation(filepath) -> "Any":
     return violations
 
 
-def main() -> "Any":
+def main() -> None:
     workspace = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
     found_violations = False
     print("[*] Compilando validación contra Hammurabi Lex Talionis Matrix...")

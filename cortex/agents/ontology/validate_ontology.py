@@ -5,7 +5,10 @@ import sys
 import glob
 
 ONTOLOGY_DIR: str = os.path.dirname(os.path.abspath(__file__))
-FILES_TO_CHECK: list[str] = [os.path.basename(f) for f in glob.glob(os.path.join(ONTOLOGY_DIR, "*.md"))]
+FILES_TO_CHECK: list[str] = [
+    os.path.basename(f) for f in glob.glob(os.path.join(ONTOLOGY_DIR, "*.md"))
+]
+
 
 def validate_file(filename: str, all_ids: set[str]) -> bool:
     filepath: str = os.path.join(ONTOLOGY_DIR, filename)
@@ -27,8 +30,12 @@ def validate_file(filename: str, all_ids: set[str]) -> bool:
         sys.stdout.write("  [ERROR] Missing creator signature (Rule Γ1).\n")
         errors += 1
 
-    table_declarations: list[str] = re.findall(r"\|\s*([A-Z]+(?:-CAT)?-\d{3})\s*\|", content)
-    list_declarations: list[str] = re.findall(r"\*\s*\*\*\[([A-Z]+(?:-CAT)?-\d{3})\]\*\*", content)
+    table_declarations: list[str] = re.findall(
+        r"\|\s*([A-Z]+(?:-CAT)?-\d{3})\s*\|", content
+    )
+    list_declarations: list[str] = re.findall(
+        r"\*\s*\*\*\[([A-Z]+(?:-CAT)?-\d{3})\]\*\*", content
+    )
     declarations: list[str] = table_declarations + list_declarations
 
     declarations = [d for d in declarations if d != "ID"]
@@ -44,15 +51,16 @@ def validate_file(filename: str, all_ids: set[str]) -> bool:
     links: list[str] = link_pattern.findall(content)
     for link in links:
         clean_path: str = link.replace("file://", "").split("#")[0]
-        
+
         if not os.path.isabs(clean_path):
             clean_path = os.path.join(ONTOLOGY_DIR, clean_path)
-            
+
         if not os.path.exists(clean_path):
             sys.stdout.write(f"  [ERROR] Link path does not exist: {clean_path}\n")
             errors += 1
 
     return errors == 0
+
 
 def main() -> None:
     success: bool = True
@@ -61,12 +69,15 @@ def main() -> None:
         success_file: bool = validate_file(f, all_ids)
         if not success_file:
             success = False
-    
+
     if not success:
         sys.stdout.write("[-] Ontology audit failed.\n")
         sys.exit(1)
-    
-    sys.stdout.write(f"[+] All core ontology documents successfully verified. Integrity = 1.0 (Checked {len(all_ids)} declared IDs)\n")
+
+    sys.stdout.write(
+        f"[+] All core ontology documents successfully verified. Integrity = 1.0 (Checked {len(all_ids)} declared IDs)\n"
+    )
+
 
 if __name__ == "__main__":
     main()

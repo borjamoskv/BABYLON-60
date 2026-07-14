@@ -11,7 +11,7 @@ def jcs_canonicalize(data: dict) -> bytes:
     ).encode("utf-8")
 
 
-def main() -> "Any":
+def main() -> None:
     if len(sys.argv) < 3:
         print("Usage: attest_character_count.py <word> <char>")
         sys.exit(1)

@@ -20,7 +20,7 @@ Blast_Radius_Matrix:
   Anergy_Risk: Low (Código Físico C5-REAL)
 """
 
-taint = hashlib.sha3_256(yaml_content.encode('utf-8')).hexdigest()
+taint = hashlib.sha3_256(yaml_content.encode("utf-8")).hexdigest()
 yaml_content += f"CORTEX_TAINT: {taint}\n"
 
 if os.path.exists(path):
@@ -34,8 +34,20 @@ with open(path, "w") as f:
 
 repo_dir = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv"
 # Add both the ontology and the watchdog
-subprocess.run(["git", "add", path, "cortex/engine/out_of_process_watchdog.py"], cwd=repo_dir)
-res = subprocess.run(["git", "commit", "-m", "feat(ultrathink): Transduce GPT-5.6 Terra Operational Definition & Watchdog"], cwd=repo_dir, capture_output=True, text=True)
+subprocess.run(
+    ["git", "add", path, "cortex/engine/out_of_process_watchdog.py"], cwd=repo_dir
+)
+res = subprocess.run(
+    [
+        "git",
+        "commit",
+        "-m",
+        "feat(ultrathink): Transduce GPT-5.6 Terra Operational Definition & Watchdog",
+    ],
+    cwd=repo_dir,
+    capture_output=True,
+    text=True,
+)
 if res.returncode == 0:
     print(f"COMMITTED: {res.stdout.strip()}")
 else:
