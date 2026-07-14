@@ -1,0 +1,21 @@
+Metadata-Version: 2.4
+Name: babylon60-cortex
+Version: 0.1.0
+Summary: CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines
+Author: Borja Moskv (borjamoskv)
+Requires-Python: >=3.10
+License-File: LICENSE.md
+Requires-Dist: networkx>=3.0
+Requires-Dist: numpy>=1.24
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: aiosqlite>=0.19
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+Provides-Extra: crypto
+Requires-Dist: cryptography>=42.0; extra == "crypto"
+Requires-Dist: pynacl>=1.5; extra == "crypto"
+Provides-Extra: data
+Requires-Dist: pandas>=2.0; extra == "data"
+Dynamic: license-file

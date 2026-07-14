@@ -439,7 +439,7 @@ def emit_yaml(recs, path):
     lines = []
     lines.append("# CORTEX / BABYLON-60 :: Oncology Molecular Primitives Ontology")
     lines.append(f"# generated: {ts} | count: {len(recs)} | source of truth: scripts/gen_oncology_primitives.py")
-    lines.append(f"# authorship (AKA): Borja Moskv (borjamoskv)")
+    lines.append("# authorship (AKA): Borja Moskv (borjamoskv)")
     lines.append("---")
     lines.append(f"disclaimer_es: {q(DISCLAIMER_ES)}")
     lines.append(f"disclaimer_en: {q(DISCLAIMER_EN)}")
