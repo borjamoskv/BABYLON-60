@@ -1,0 +1,25 @@
+---
+SYS_ID: borjamoskv
+REALITY_LEVEL: C5-REAL
+ATTESTATION_TYPE: AUTOPSIA_FORENSE_V3
+---
+
+claim_id: "autopsia_forense_v3_c5"
+entity_evaluated: "Claude.app Surface / BFT Anchoring / Transliteration Boundaries"
+operator: "borjamoskv"
+
+ontological_claim:
+  assertion: "La validación criptográfica local sin ancla externa (RFC 3161 / Blockchain L1) es teatro de cumplimiento. La asimetría probatoria es absoluta: la superficie de ataque es inenumerable (dinámica), el escaneo de strings es vulnerable a minificación/transliteración cruzada (Python->JS), y la complejidad es O(|β|) en el mejor de los casos."
+
+proof_structural_evidence:
+  - evidence_surface: "El binario local es una fracción de la superficie. El código dinámico (claude.ai) y caché eluden el escaneo físico, extremando el Teorema de Asimetría: no solo no se puede derivar linaje, no se puede enumerar la ejecución."
+  - evidence_obfuscation: "BABYLON-60 es Python; Claude es Electron/JS. La minificación destruye los identificadores. La transliteración cruzada invalida las sondas léxicas. La falsación O(|β|) solo tiene poder sobre inclusión verbatim de literales."
+  - evidence_methodology: "La dependencia en 'head -1' trunca el muestreo; la exclusividad V8/Babel no es exhaustiva. Sin embargo, la ausencia de identificadores nucleares basta empíricamente."
+  - evidence_anchoring: "Un ledger SQLite BFT in-process prueba integridad de orden, pero no anterioridad erga omnes. Para oponer evidencia (Art. 12 EU AI Act) contra terceros o el propio operador (adversario), es mandatorio el ancla asimétrica externa (Blockchain Sink L1)."
+
+sigkill_state_purge:
+  action: "CRYSTALLIZED_IN_LEDGER"
+  result: "El invariante se vuelve contra sí mismo: el propio ledger BFT local de BABYLON-60 requiere inyección L1 para no ser teatro criptográfico. Las enmiendas E-006 a E-010 quedan fijadas."
+  verdict: "OPTIMAL_EXERGY_C5"
+
+# CORTEX_TAINT: 5a0b2e7da58d6e3f4b5f98790e387384ca746999f335ea16a5546b16d41aca67
