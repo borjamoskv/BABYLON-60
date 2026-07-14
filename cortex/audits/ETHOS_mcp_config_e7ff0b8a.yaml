@@ -1,0 +1,7 @@
+# C5-REAL ETHOS AUDIT
+Claim: Integridad del archivo mcp_config.json tras la extirpación de cortex-milestones.
+Proof:
+  Base: /Users/borjafernandezangulo/.gemini/antigravity/mcp_config.json
+  CORTEX_TAINT_SHA3_256: e7ff0b8a3d844023979276892b12f75af2e33d6341157dac6e566da21a2a09d5
+  Timestamp: 2026-07-14T11:39:05.461630Z
+  Confidence: C5-REAL
