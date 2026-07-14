@@ -46,9 +46,12 @@ proof/lean/.lake/
 *.egg-info/
 c5_remotion_video/node_modules/
 
-# Sandbox stress leftovers
-cortex/scripts/sandbox_stress/operon_core
-cortex/scripts/sandbox_stress/claude-science-data/
+# Sandbox stress leftovers (entire directory)
+cortex/scripts/sandbox_stress/
+
+# Batch-generated ontology artifacts (CONSOLIDATIN-Ω purge)
+cortex/agents/ontology/batch_*/
+cortex/ontology/batch_*/
 
 # Data artifacts and generated outputs
 apoptosis_target.yaml
