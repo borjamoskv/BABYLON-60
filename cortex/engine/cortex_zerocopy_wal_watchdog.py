@@ -11,7 +11,6 @@ ni contención del GIL en sqlite3_step.
 import ctypes
 import mmap
 import os
-import struct
 import time
 from pathlib import Path
 

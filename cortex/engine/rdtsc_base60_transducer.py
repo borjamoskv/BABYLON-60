@@ -7,8 +7,6 @@ sin pasar por float64 ni llamadas pesadas de time.time().
 """
 
 import ctypes
-import os
-import time
 from pathlib import Path
 
 # Carga de la librería dinámica residente
@@ -81,6 +79,6 @@ if __name__ == "__main__":
     print(f"[CYCLE 2 RESULT] Latencia media por tick sexagesimal en silicio puro ARM64 (ASM CNTVCT_EL0): {avg_c_ns:.2f} ns.")
     print(f"[CYCLE 2 RESULT] Ticks Base-60 absolutos acumulados: {base60_ticks}")
     print(f"[CYCLE 2 RESULT] Tupla Sexagesimal actual: época={sex_tuple[0]}, min={sex_tuple[1]}, sec={sex_tuple[2]}, residuo_ns={sex_tuple[3]}")
-    print(f"[CYCLE 2 RESULT] Exergía alcanzada: 1000/1000. Cero conversiones de punto flotante float64.")
+    print("[CYCLE 2 RESULT] Exergía alcanzada: 1000/1000. Cero conversiones de punto flotante float64.")
     assert avg_c_ns < 60.0, f"Latencia en silicio superior a 60ns: {avg_c_ns:.2f} ns"
 

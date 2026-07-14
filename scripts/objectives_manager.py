@@ -10,7 +10,6 @@ Enfuerza las directivas:
 - Ψ10 (Batch Ontological Crystallization)
 """
 
-import os
 import sys
 import yaml
 import hashlib
@@ -18,7 +17,7 @@ import argparse
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / "cortex/ontology/babylon60_objectives.yaml"
@@ -263,15 +262,7 @@ def cmd_iter(args):
     """
     state = load_state()
     
-    # 1. Obtener todos los tags de git
-    try:
-        git_tags_res = subprocess.run(["git", "tag"], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
-        tags = set(git_tags_res.stdout.strip().split("\n"))
-    except Exception:
-        tags = set()
-        
     # 2. Iterar y calcular exergía y estado de hitos
-    mutated = False
     for o in state.get("objectives", []):
         total_ms = len(o.get("milestones", []))
         done_ms = 0
@@ -284,7 +275,6 @@ def cmd_iter(args):
                     res = subprocess.run(["git", "cat-file", "-t", h], cwd=WORKSPACE_DIR, capture_output=True, text=True)
                     if res.returncode == 0 and res.stdout.strip() == "commit":
                         m["status"] = "DONE"
-                        mutated = True
                 except Exception:
                     pass
             
@@ -298,15 +288,12 @@ def cmd_iter(args):
             new_exergy = round(new_exergy, 2)
             if o.get("exergy_score") != new_exergy:
                 o["exergy_score"] = new_exergy
-                mutated = True
                 
             # Si todos los milestones están hechos, marcar el objetivo como DONE
             if done_ms == total_ms and o.get("status") != "DONE":
                 o["status"] = "DONE"
-                mutated = True
             elif done_ms < total_ms and o.get("status") == "DONE":
                 o["status"] = "IN_PROGRESS"
-                mutated = True
 
     # 3. Sincronizar PROJECT.md
     project_mutated = update_project_md(state)

@@ -80,7 +80,6 @@ class CortexWalEngine:
         """
         conn = self._get_conn()
         cursor = conn.cursor()
-        t0 = time.perf_counter()
         try:
             cursor.execute("BEGIN IMMEDIATE;")
             cursor.execute(sql, params)
@@ -132,7 +131,7 @@ class CortexWalEngine:
                 try:
                     # Chequeo pasivo para no interrumpir workers de inferencia P0
                     self.run_passive_checkpoint("PASSIVE")
-                except Exception as e:
+                except Exception:
                     pass
 
         self._daemon_thread = threading.Thread(target=_daemon_loop, name="CortexWALDaemon", daemon=True)
@@ -203,6 +202,6 @@ if __name__ == "__main__":
     print(f"[CYCLE 1 RESULT] 6 Workers concurrentes x 50 inserciones = {rows} filas P0.")
     print(f"[CYCLE 1 RESULT] Tiempo total de enjambre: {t_total:.2f}ms | Errores SQLITE_BUSY: {len(errors)}")
     print(f"[CYCLE 1 RESULT] Checkpoint final WAL frames trasladados: {chk_f}/{log_f} en {dt_chk:.2f}ms (busy={busy}).")
-    print(f"[CYCLE 1 RESULT] Exergía alcanzada: 1000/1000. Ningún hilo P0 bloqueado por autocheckpoint.")
+    print("[CYCLE 1 RESULT] Exergía alcanzada: 1000/1000. Ningún hilo P0 bloqueado por autocheckpoint.")
     assert len(errors) == 0, f"Fallo transaccional detectado en CYCLE 1: {errors}"
     assert rows == 300, f"Fila perdida en concurrencia WAL: {rows} != 300"
