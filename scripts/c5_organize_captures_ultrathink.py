@@ -11,10 +11,8 @@ Reality Level: C5-REAL
 Exergy: 1000/1000
 """
 
-import os
 import shutil
 import hashlib
-import json
 from pathlib import Path
 
 REPO_ROOT = Path("/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv")
