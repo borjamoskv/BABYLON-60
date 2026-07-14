@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 import subprocess
 import os
-import hashlib
-import sqlite3
 import json
-from datetime import datetime
+from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
 
 # [C5-REAL] MASS ISOLATION DAEMON
 # Iterates over all public GitHub repositories and forcefully applies the EXPORT_ISOLATION_MANDATE.
@@ -55,26 +53,12 @@ def enforce_mass_isolation():
         f"Action: Switched to PRIVATE to prevent neural scraper exergy theft."
     )
     
-    if os.path.exists(DB_FILE):
-        conn = sqlite3.connect(DB_FILE)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        
-        try:
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-            
-        ts = datetime.utcnow().isoformat() + "Z"
-        new_hash = hashlib.sha3_256((report + prev_hash).encode('utf-8')).hexdigest()
-        
-        cursor.execute("INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-                       (new_hash, prev_hash, report, ts, "MASS_ISOLATION_DAEMON"))
-        conn.commit()
-        conn.close()
+    resolved_db = resolve_db_path(DB_FILE)
+    if os.path.exists(resolved_db):
+        new_hash = append_anchor(DB_FILE, report, "MASS_ISOLATION_DAEMON")
         print(f"[✓] Ledger updated. Anchor Hash: {new_hash[:16]}")
+    else:
+        print("[!] BFT Ledger not accessible at $CORTEX_ROOT path.")
         
 if __name__ == "__main__":
     enforce_mass_isolation()

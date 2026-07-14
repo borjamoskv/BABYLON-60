@@ -49,3 +49,22 @@ c5_remotion_video/node_modules/
 # Sandbox stress leftovers
 cortex/scripts/sandbox_stress/operon_core
 cortex/scripts/sandbox_stress/claude-science-data/
+
+# Data artifacts and generated outputs
+apoptosis_target.yaml
+shards.json
+*.npz
+reconstruccion_resultados.csv
+replacements.txt
+consolidacion_omega.html
+index.html
+iteration_05_ledger.jsonl
+antigravity_memory_schema.yaml
+C5_12_lyapunov_ns2d.png
+C5_12_resultados.json
+receipt_sha3_256.json
+AGENTS.md.ots
+
+# Large YouTube JSON dumps
+scratch/yt_*.json
+scratch/yt_dump.json

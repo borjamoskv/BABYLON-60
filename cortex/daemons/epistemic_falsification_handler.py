@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import os
-import hashlib
-import sqlite3
-from datetime import datetime
+from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
 
 # [C5-REAL] EPISTEMIC FALSIFICATION HANDLER (HUMILITY ISOMORPHISM APPLIED)
 # Transduces the operator's falsification of the repo_privacy_audit daemon.
@@ -22,25 +20,9 @@ def handle_falsification():
     print(falsification_payload)
     
     # Log to BFT ledger
-    if os.path.exists(DB_FILE):
-        conn = sqlite3.connect(DB_FILE)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        
-        try:
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-            
-        ts = datetime.utcnow().isoformat() + "Z"
-        new_hash = hashlib.sha3_256((falsification_payload + prev_hash).encode('utf-8')).hexdigest()
-        
-        cursor.execute("INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-                       (new_hash, prev_hash, falsification_payload, ts, "EPISTEMIC_FALSIFICATION_HANDLER"))
-        conn.commit()
-        conn.close()
+    resolved_db = resolve_db_path(DB_FILE)
+    if os.path.exists(resolved_db):
+        new_hash = append_anchor(DB_FILE, falsification_payload, "EPISTEMIC_FALSIFICATION_HANDLER")
         print(f"[✓] Ledger updated. Hash: {new_hash[:16]}")
     else:
         print("[!] BFT Ledger not accessible (paths might have been rewritten).")

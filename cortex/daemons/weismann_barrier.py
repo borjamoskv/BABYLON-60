@@ -2,6 +2,7 @@
 import sqlite3
 import os
 import hashlib
+from cortex.daemons.bft_ledger_helper import resolve_db_path
 
 # [C5-REAL] WEISMANN BARRIER (ONTOLOGICAL APOPTOSIS ENFORCER)
 # L0.3 Invariant: Civilizations lack a reproductive bottleneck. 
@@ -11,12 +12,15 @@ DB_SOURCE = "$CORTEX_ROOT/30_BABYLON-60/nexus_anchors.db"
 DB_TARGET = "$CORTEX_ROOT/30_BABYLON-60/nexus_anchors_v2.db"
 
 def enforce_weismann_barrier():
-    if not os.path.exists(DB_SOURCE):
-        print("[!] No source ledger found.")
+    resolved_source = resolve_db_path(DB_SOURCE)
+    resolved_target = resolve_db_path(DB_TARGET)
+    
+    if not os.path.exists(resolved_source):
+        print(f"[!] No source ledger found at {resolved_source}.")
         return
 
     # 1. Intercept Source WAL
-    conn_in = sqlite3.connect(DB_SOURCE)
+    conn_in = sqlite3.connect(resolved_source)
     conn_in.execute("PRAGMA journal_mode=WAL;")
     cursor_in = conn_in.cursor()
 
@@ -25,6 +29,7 @@ def enforce_weismann_barrier():
         rows = cursor_in.fetchall()
     except sqlite3.OperationalError:
         print("[!] Error reading source ledger. Perhaps empty?")
+        conn_in.close()
         return
     
     # 2. State Distillation (Semantic Purge)
@@ -36,7 +41,7 @@ def enforce_weismann_barrier():
             distilled_rows.append(r)
 
     # 3. Clean Slate Spawn (Generational Reset)
-    conn_out = sqlite3.connect(DB_TARGET)
+    conn_out = sqlite3.connect(resolved_target)
     conn_out.execute("PRAGMA journal_mode=WAL;")
     conn_out.execute("PRAGMA busy_timeout=5000;")
     conn_out.execute('''CREATE TABLE IF NOT EXISTS anchors

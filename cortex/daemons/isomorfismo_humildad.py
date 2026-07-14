@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import os
-import hashlib
-import sqlite3
-from datetime import datetime
+from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
 
 # [C5-REAL] ISOMORFISMO DE HUMILDAD (Λ20)
 # Mathematically proves: "La humildad abre más puertas que el talento"
@@ -41,26 +39,12 @@ def run_humility_proof():
     print(proof_text)
     
     # Log to BFT ledger
-    if os.path.exists(DB_FILE):
-        conn = sqlite3.connect(DB_FILE)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        
-        try:
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-            
-        ts = datetime.utcnow().isoformat() + "Z"
-        new_hash = hashlib.sha3_256((proof_text + prev_hash).encode('utf-8')).hexdigest()
-        
-        cursor.execute("INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-                       (new_hash, prev_hash, proof_text, ts, "HUMILITY_PROOF_DAEMON"))
-        conn.commit()
-        conn.close()
+    resolved_db = resolve_db_path(DB_FILE)
+    if os.path.exists(resolved_db):
+        new_hash = append_anchor(DB_FILE, proof_text, "HUMILITY_PROOF_DAEMON")
         print(f"[✓] Ledger updated. Hash: {new_hash[:16]}")
+    else:
+        print("[!] BFT Ledger not accessible (paths might have been rewritten).")
 
 if __name__ == "__main__":
     run_humility_proof()

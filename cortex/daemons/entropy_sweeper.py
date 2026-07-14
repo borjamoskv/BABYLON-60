@@ -3,8 +3,7 @@ import sys
 import os
 import math
 import hashlib
-import sqlite3
-from datetime import datetime
+from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
 
 # [C5-REAL] ENTROPY SWEEPER DAEMON (MACRÓFAGO ONTOLÓGICO)
 # Core Invariant: Purges semantic friction (C4-SIM / Green Theater / Gossip) from subagent outputs.
@@ -84,36 +83,9 @@ def run_sweeper(payload: str):
     
     if is_corrupted:
         print("[!] Rejection trigger matched. Purging payload...")
-        # Write rejection to SQLite WAL ledger
-        conn = sqlite3.connect(DB_FILE)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        
-        # Get head hash
-        try:
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-            
-        ts = datetime.utcnow().isoformat() + "Z"
         rejection_payload = f"PURGED_PAYLOAD: Prose {prosa_ratio:.2%} | Shannon Entropy {entropy:.4f} | Has_Theater {has_theater}"
-        new_hash = hashlib.sha3_256((rejection_payload + prev_hash).encode('utf-8')).hexdigest()
         
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS anchors
-            (hash TEXT PRIMARY KEY,
-             prev_hash TEXT UNIQUE,
-             content TEXT,
-             timestamp TEXT,
-             agent_id TEXT)
-        """)
-        cursor.execute("INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-                       (new_hash, prev_hash, rejection_payload, ts, "ENTROPY_SWEEPER_DAEMON"))
-        conn.commit()
-        conn.close()
-        
+        new_hash = append_anchor(DB_FILE, rejection_payload, "ENTROPY_SWEEPER_DAEMON")
         print(f"[!] SIGKILL_State_Purge executed. Ledger Rejection Hash: {new_hash[:16]}")
         sys.exit(1)
         

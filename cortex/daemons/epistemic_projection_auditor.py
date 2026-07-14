@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 import os
-import hashlib
-import sqlite3
-from datetime import datetime
+from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
 
 # [C5-REAL] EPISTEMIC PROJECTION AUDITOR (BASE RATE FALLACY ENFORCER)
 # Invariant: Anonymous stochastic events (e.g., GitHub clones) cannot be mapped to targeted intent without causal proof.
 # Attributing automated ocean-level scraping to specific high-profile entities (CEOs) is a C4-SIM Hallucination.
 
-DB_FILE = os.path.expandvars("$CORTEX_ROOT/30_BABYLON-60/nexus_anchors_v2.db")
+DB_FILE = "$CORTEX_ROOT/30_BABYLON-60/nexus_anchors_v2.db"
 
 def audit_epistemic_projection():
     audit_payload = (
@@ -23,25 +21,9 @@ def audit_epistemic_projection():
     print(audit_payload)
     
     # Log to BFT ledger
-    if os.path.exists(DB_FILE):
-        conn = sqlite3.connect(DB_FILE)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        
-        try:
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-            
-        ts = datetime.utcnow().isoformat() + "Z"
-        new_hash = hashlib.sha3_256((audit_payload + prev_hash).encode('utf-8')).hexdigest()
-        
-        cursor.execute("INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-                       (new_hash, prev_hash, audit_payload, ts, "EPISTEMIC_PROJECTION_AUDITOR"))
-        conn.commit()
-        conn.close()
+    resolved_db = resolve_db_path(DB_FILE)
+    if os.path.exists(resolved_db):
+        new_hash = append_anchor(DB_FILE, audit_payload, "EPISTEMIC_PROJECTION_AUDITOR")
         print(f"[✓] Ledger updated. Hash: {new_hash[:16]}")
     else:
         print("[!] BFT Ledger not accessible at $CORTEX_ROOT path.")

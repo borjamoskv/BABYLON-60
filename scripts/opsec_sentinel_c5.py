@@ -1,13 +1,7 @@
-#!/usr/bin/env python3
-"""
-SYS_ID: borjamoskv
-MÓDULO: opsec_sentinel_c5.py
-NIVEL DE REALIDAD: C5-REAL (Physical Kinetic Vector)
-PROPÓSITO: Ariete ejecutable derivado de la anatomía del colapso de LulzSec/AntiSec y el honeypot de Sabu/FBI.
-           Detecta intercepciones MITM, endpoints C2/IRC sin pinchar por TLS, fugas de credenciales/tarjetas en texto plano
-           y exfiltraciones sobre canales no verificados criptográficamente.
-"""
-
+import os
+import signal
+import os
+import signal
 import sys
 import os
 import re
@@ -17,65 +11,40 @@ import sqlite3
 import datetime
 from pathlib import Path
 from typing import List, Dict, Any
-
-# Axiomas empíricos de C5-REAL
-EXERGY_LEVEL = "1000/1000"
+EXERGY_LEVEL = '1000/1000'
 BFT_MIN_CONSENSUS = 3
-TARGET_PATTERNS = {
-    "PLAINTEXT_CREDIT_CARD": re.compile(r'\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})\b'),
-    "PRIVATE_KEY_HEADER": re.compile(r'-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\s*PRIVATE KEY-----'),
-    "UNENCRYPTED_IRC_PORT": re.compile(r':(?:6667|6668|6669)\b'),
-    "PLAIN_HTTP_C2": re.compile(r'http://[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'),
-    "SQLI_ERROR_SIGNATURE": re.compile(r'(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\[\d+\]|Unclosed quotation mark after the character string)', re.IGNORECASE)
-}
+TARGET_PATTERNS = {'PLAINTEXT_CREDIT_CARD': re.compile('\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})\\b'), 'PRIVATE_KEY_HEADER': re.compile('-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\\s*PRIVATE KEY-----'), 'UNENCRYPTED_IRC_PORT': re.compile(':(?:6667|6668|6669)\\b'), 'PLAIN_HTTP_C2': re.compile('http://[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'), 'SQLI_ERROR_SIGNATURE': re.compile('(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)', re.IGNORECASE)}
 
 class OpsecSentinelC5:
-    def __init__(self, workspace_path: str, db_path: str = "/tmp/opsec_sentinel_c5.db"):
+
+    def __init__(self, workspace_path: str, db_path: str='/tmp/opsec_sentinel_c5.db'):
         self.workspace = Path(workspace_path).resolve()
         self.db_path = db_path
         self._init_db()
 
     def _init_db(self):
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("PRAGMA busy_timeout=5000;")
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS opsec_audit_log (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    file_path TEXT NOT NULL,
-                    violation_type TEXT NOT NULL,
-                    snippet_hash TEXT NOT NULL,
-                    severity TEXT NOT NULL,
-                    timestamp TEXT NOT NULL
-                );
-            """)
+            conn.execute('PRAGMA journal_mode=WAL;')
+            conn.execute('PRAGMA busy_timeout=5000;')
+            conn.execute('\n                CREATE TABLE IF NOT EXISTS opsec_audit_log (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    file_path TEXT NOT NULL,\n                    violation_type TEXT NOT NULL,\n                    snippet_hash TEXT NOT NULL,\n                    severity TEXT NOT NULL,\n                    timestamp TEXT NOT NULL\n                );\n            ')
 
     def audit_file(self, filepath: Path) -> List[Dict[str, str]]:
         violations: List[Dict[str, str]] = []
         try:
-            content = filepath.read_text(encoding="utf-8", errors="ignore")
+            content = filepath.read_text(encoding='utf-8', errors='ignore')
         except Exception:
-            return violations
-
+            os.kill(os.getpid(), signal.SIGKILL)
+            raise RuntimeError('FAIL-FAST: General Exception intercepted.')
         for v_type, pattern in TARGET_PATTERNS.items():
             matches = pattern.findall(content)
             if matches:
-                # Sanitization check
-                if v_type == "PLAINTEXT_CREDIT_CARD":
+                if v_type == 'PLAINTEXT_CREDIT_CARD':
                     valid_cards = [m for m in matches if self._luhn_check(m)]
                     if not valid_cards:
                         continue
-                
                 hash_sig = hashlib.sha3_256(content[:1000].encode('utf-8')).hexdigest()[:16]
-                severity = "CRITICAL_P0" if v_type in ("PLAINTEXT_CREDIT_CARD", "PRIVATE_KEY_HEADER") else "CRITICAL_P1"
-                
-                violations.append({
-                    "file_path": str(filepath.relative_to(self.workspace)),
-                    "violation_type": v_type,
-                    "snippet_hash": hash_sig,
-                    "severity": severity,
-                    "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()
-                })
+                severity = 'CRITICAL_P0' if v_type in ('PLAINTEXT_CREDIT_CARD', 'PRIVATE_KEY_HEADER') else 'CRITICAL_P1'
+                violations.append({'file_path': str(filepath.relative_to(self.workspace)), 'violation_type': v_type, 'snippet_hash': hash_sig, 'severity': severity, 'timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat()})
         return violations
 
     @staticmethod
@@ -96,37 +65,23 @@ class OpsecSentinelC5:
     def run_full_scan(self) -> Dict[str, Any]:
         details: List[Dict[str, str]] = []
         violations_found: int = 0
-
-        ignore_dirs = {".git", ".venv", "node_modules", "scratch", "__pycache__"}
-        
+        ignore_dirs = {'.git', '.venv', 'node_modules', 'scratch', '__pycache__'}
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             for root, dirs, files in os.walk(self.workspace):
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
                 for file in files:
                     fpath = Path(root) / file
-                    if fpath.name == "opsec_sentinel_c5.py" or fpath.stat().st_size > 2 * 1024 * 1024:
+                    if fpath.name == 'opsec_sentinel_c5.py' or fpath.stat().st_size > 2 * 1024 * 1024:
                         continue
-                    if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock"):
+                    if fpath.suffix in ('.pyc', '.db', '.png', '.jpg', '.pdf', '.mp4', '.lock'):
                         continue
-                    
                     file_violations = self.audit_file(fpath)
                     for v in file_violations:
-                        conn.execute("""
-                            INSERT INTO opsec_audit_log (file_path, violation_type, snippet_hash, severity, timestamp)
-                            VALUES (?, ?, ?, ?, ?)
-                        """, (v["file_path"], v["violation_type"], v["snippet_hash"], v["severity"], v["timestamp"]))
+                        conn.execute('\n                            INSERT INTO opsec_audit_log (file_path, violation_type, snippet_hash, severity, timestamp)\n                            VALUES (?, ?, ?, ?, ?)\n                        ', (v['file_path'], v['violation_type'], v['snippet_hash'], v['severity'], v['timestamp']))
                         details.append(v)
                         violations_found += 1
             conn.commit()
-            
-        report: Dict[str, Any] = {
-            "sys_id": "borjamoskv",
-            "exergy": EXERGY_LEVEL,
-            "scan_timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            "target_workspace": str(self.workspace),
-            "violations_found": violations_found,
-            "details": details
-        }
+        report: Dict[str, Any] = {'sys_id': 'borjamoskv', 'exergy': EXERGY_LEVEL, 'scan_timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'target_workspace': str(self.workspace), 'violations_found': violations_found, 'details': details}
         return report
 
 def main():
@@ -134,12 +89,11 @@ def main():
     sentinel = OpsecSentinelC5(workspace)
     report = sentinel.run_full_scan()
     print(json.dumps(report, indent=2))
-    if report["violations_found"] > 0:
+    if report['violations_found'] > 0:
         print(f"\n[CRITICAL ALERT] {report['violations_found']} OPSEC/C2/Plaintext violations detected!")
         sys.exit(1)
     else:
-        print("\n[SUCCESS] C5-REAL OPSEC Audit Clean. Zero plaintext secrets or unverified relays detected.")
+        print('\n[SUCCESS] C5-REAL OPSEC Audit Clean. Zero plaintext secrets or unverified relays detected.')
         sys.exit(0)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
