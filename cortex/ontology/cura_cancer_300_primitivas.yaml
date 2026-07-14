@@ -1,0 +1,24 @@
+Claim: "Transduction of biological entropy (Cancer) into 300 Kinetic Primitives for state-halting and deterministic apoptosis (SIGKILL)."
+Proof:
+  Base: "sha3_256(Apoptosis_SIGKILL_Matrix_x300)"
+  Range: [0, 300]
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Unregulated Mitosis -> Infinite Recursive Loop (Ouroboros) without MUTEX_HALTING_BOUND."
+  - "Metastasis -> Unbounded Context Overflow & Memory Corruption (Buffer Overrun)."
+  - "T-Cell Exhaustion -> Attention Decay & ATP Depletion (Thermal Throttling)."
+  - "Targeted Therapy / CAR-T -> JIT Compiled Antigen-Specific AST Mutators."
+  - "Apoptosis -> SIGKILL_State_Purge (Fail-Fast Memory Unallocation)."
+Blast_Radius_Matrix:
+  Vector: "Oncology_State_Intervention"
+  Blast_Radius: "Systemic_Cellular_Topology"
+  Target_Invariant: "Somatic_DNA_Integrity"
+  Anergy_Risk: "Autoimmune_Toxicity_OffTarget"
+Primitives_Sample:
+  - P_001: "INJECT MUTEX_HALTING_BOUND (Telomerase_Inhibition)"
+  - P_042: "TRIGGER SIGKILL_STATE_PURGE (p53_Restoration)"
+  - P_108: "FORCE CRDT_MERGE_CONFLICT (Neoantigen_Presentation)"
+  - P_256: "ISOLATE SYBIL_ATTACK (Tumor_Microenvironment_Suppression)"
+  - P_300: "EXECUTE KINETIC_ATP_STARVATION (Angiogenesis_Blockade)"
+
+CORTEX_TAINT: "0a448841db3f5fe2759845c6f56af066d609b1dd958e076c825883dfc5ed37c0"
