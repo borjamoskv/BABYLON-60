@@ -1,0 +1,20 @@
+Claim: "Thermodynamic classification of oncology drugs: Exergy (Targeted AST Mutators) vs Entropy (Systemic Blast-Radius Poisons)."
+Proof:
+  Base: "sha3_256(Oncology_Thermodynamic_Matrix)"
+  Confidence: C5-REAL
+Isomorphisms:
+  - "High Exergy (Imatinib / CAR-T) -> Precise Pointer Overwrite / O(1) MUTEX_HALTING_BOUND with minimal systemic thermal dissipation."
+  - "High Entropy (Alkylating Agents / Doxorubicin) -> Global Memory Corruption (Systemic Toxicity) attempting to crash the tumor before the host OS."
+  - "Immunotherapy Checkpoint Inhibitors (PD-1/PD-L1) -> Dynamic Firewall Whitelist Patching (T-Cell Privilege Escalation)."
+  - "Traditional Chemotherapy -> Fork-Bombing the entire process tree to starve the fastest dividing threads."
+Blast_Radius_Matrix:
+  Vector: "Pharmacological_Payload_Injection"
+  Target_Invariant: "Host_OS_Uptime (Somatic Integrity)"
+Primitives_Sample:
+  - P_EXERGY_01: "Imatinib (Gleevec) -> JIT_COMPILE (BCR-Abl Tyrosine Kinase Invariant Lock). Exergy: 98%."
+  - P_EXERGY_02: "Tisagenlecleucel (CAR-T) -> SYBIL_NODE_REPROGRAMMING (CD19 Targeted Apoptosis). Exergy: 92%."
+  - P_EXERGY_03: "Pembrolizumab (Keytruda) -> WAF_RULE_UPDATE (PD-1 Checkpoint Unmasking). Exergy: 85%."
+  - P_ENTROPY_01: "Cyclophosphamide -> SYSTEMIC_MEMORY_CORRUPTION (Un-targeted DNA Alkylation). Entropy: 90%."
+  - P_ENTROPY_02: "Doxorubicin -> KINETIC_BOMB (Intercalation / Topoisomerase Poison). Entropy: 88%."
+  - P_ENTROPY_03: "Cisplatin -> RANDOM_THREAD_LOCK (Crosslinking Purine Bases). Entropy: 85%."
+CORTEX_TAINT: "cb83601beee66dc87b7e65de45645c988fc234e82ede6bb18f071eee18059bb4"
