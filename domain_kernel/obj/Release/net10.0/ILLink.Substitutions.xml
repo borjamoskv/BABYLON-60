@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker>
+  <assembly fullname="Babylon60.Domain">
+    <resource name="FSharpSignatureData.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedData.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpSignatureDataB.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpSignatureCompressedDataB.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpOptimizationData.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedData.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpOptimizationDataB.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpOptimizationCompressedDataB.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpOptimizationInfo.Babylon60.Domain" action="remove"></resource>
+    <resource name="FSharpSignatureInfo.Babylon60.Domain" action="remove"></resource>
+  </assembly>
+</linker>

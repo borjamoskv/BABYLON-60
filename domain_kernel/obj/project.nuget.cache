@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Aws81gmTEwM=",
+  "success": true,
+  "projectFilePath": "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/Babylon60.Domain.fsproj",
+  "expectedPackageFiles": [
+    "$CORTEX_ROOT/.nuget/packages/fsharp.core/10.0.105/fsharp.core.10.0.105.nupkg.sha512"
+  ],
+  "logs": []
+}
