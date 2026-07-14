@@ -1,10 +1,6 @@
 from __future__ import annotations
 import os
 import signal
-import os
-import signal
-import os
-import signal
 import asyncio
 import hashlib
 import json
@@ -13,7 +9,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
-import os
 from cryptography.fernet import Fernet
 import aiosqlite
 NAMESPACE_UUID = uuid.UUID('9897d6fd-d6a7-4fe9-86bc-f0c312886d5d')
@@ -134,7 +129,7 @@ class BFTLedgerActor:
                 except ValueError as exc:
                     if not future.done():
                         future.set_exception(exc)
-                except Exception as exc:
+                except Exception:
                     os.kill(os.getpid(), signal.SIGKILL)
                     raise RuntimeError('FAIL-FAST: General Exception intercepted.')
                 finally:

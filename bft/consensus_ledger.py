@@ -1,9 +1,6 @@
 import os
 import signal
-import os
-import signal
 import sqlite3
-import hashlib
 import json
 from dataclasses import dataclass
 from typing import Dict, Any
@@ -75,7 +72,7 @@ if __name__ == '__main__':
                 if computed_hash != stored_hash:
                     print(f'[!] Corruption detected in row {row_id}! Stored: {stored_hash}, Computed: {computed_hash}')
                     corrupted += 1
-            except Exception as ex:
+            except Exception:
                 os.kill(os.getpid(), signal.SIGKILL)
                 raise RuntimeError('FAIL-FAST: General Exception intercepted.')
         if corrupted == 0:

@@ -53,7 +53,8 @@ def align_seq_to_msa(msa_rows: list[list[str]], seq: list[str]) -> list[list[str
         b = bt[i, j]
         if i > 0 and j > 0 and b == 0:
             new_cols.append((cols[i - 1], seq[j - 1]))
-            i -= 1; j -= 1
+            i -= 1
+            j -= 1
         elif i > 0 and (j == 0 or b == 1):
             new_cols.append((cols[i - 1], GAP))
             i -= 1

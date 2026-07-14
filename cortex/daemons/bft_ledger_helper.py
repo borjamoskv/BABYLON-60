@@ -1,7 +1,7 @@
 import os
 import hashlib
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime
 
 def resolve_db_path(raw_path: str) -> str:
     """Expands environment variables like $CORTEX_ROOT and creates parent folders."""

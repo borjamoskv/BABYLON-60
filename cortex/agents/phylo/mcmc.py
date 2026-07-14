@@ -10,7 +10,6 @@ from cortex.agents.phylo.alignment import GAP
 from cortex.agents.phylo.model import (
     TreeNode,
     SubstitutionModel,
-    branch_length,
     felsenstein_partial,
 )
 

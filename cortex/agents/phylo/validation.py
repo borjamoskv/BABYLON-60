@@ -58,7 +58,8 @@ def nw_match_flags(recon: list[str], gold: list[str]) -> list[bool]:
         b = bt[i, j]
         if i > 0 and j > 0 and b == 0:
             flags[i - 1] = recon[i - 1] == gold[j - 1]
-            i -= 1; j -= 1
+            i -= 1
+            j -= 1
         elif i > 0 and (j == 0 or b == 1):
             i -= 1
         else:

@@ -2,8 +2,7 @@
 import sys
 import os
 import math
-import hashlib
-from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
+from cortex.daemons.bft_ledger_helper import append_anchor
 
 # [C5-REAL] ENTROPY SWEEPER DAEMON (MACRÓFAGO ONTOLÓGICO)
 # Core Invariant: Purges semantic friction (C4-SIM / Green Theater / Gossip) from subagent outputs.

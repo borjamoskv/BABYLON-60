@@ -77,7 +77,7 @@ def main():
         if ttft_ms > 500:
             print(f"🟡 [WARNING / ANERGY RISK] TTFT > 500ms ({ttft_ms:.2f}ms). Execution not optimal.")
         else:
-            print(f"🟢 [STATUS_OK / EXERGY] TTFT under threshold (< 500ms).")
+            print("🟢 [STATUS_OK / EXERGY] TTFT under threshold (< 500ms).")
     else:
         print(f"🔴 [FATAL / SIGKILL / DESTRUCTION] TTFT Measurement Failed: {err}")
         sys.exit(1)

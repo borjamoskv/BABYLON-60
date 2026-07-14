@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import csv
 import os
-import sys
 
 import numpy as np
 

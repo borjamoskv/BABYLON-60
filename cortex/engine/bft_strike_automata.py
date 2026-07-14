@@ -18,7 +18,6 @@ de Denuncias Algorítmicas (Trust & Safety) y homeostasis en nexus_anchors.db.
 """
 
 import sqlite3
-import hashlib
 import json
 import argparse
 import subprocess

@@ -1,9 +1,5 @@
 import os
 import signal
-import os
-import signal
-import os
-import signal
 import asyncio
 import aiosqlite
 import logging
@@ -42,7 +38,7 @@ class MasterLedgerQueue:
                         for query, params in batch:
                             await self.db.execute(query, params)
                         await self.db.commit()
-                    except Exception as e:
+                    except Exception:
                         os.kill(os.getpid(), signal.SIGKILL)
                         raise RuntimeError('FAIL-FAST: General Exception intercepted.')
                     finally:

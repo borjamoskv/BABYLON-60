@@ -1,12 +1,7 @@
 import os
 import signal
-import os
-import signal
-import os
-import signal
 import ast
 from typing import Optional
-import sys
 import argparse
 
 class AnergiaPurger(ast.NodeTransformer):
@@ -67,7 +62,7 @@ if __name__ == '__main__':
     for f in args.files:
         try:
             transmute_file(f)
-        except Exception as e:
+        except Exception:
             os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError('FAIL-FAST: General Exception intercepted.')
     print(f'Successfully pruned {len(args.files)} files.')

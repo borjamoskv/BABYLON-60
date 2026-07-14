@@ -1,9 +1,5 @@
 import os
 import signal
-import os
-import signal
-import os
-import signal
 import urllib.request
 import json
 
@@ -19,7 +15,7 @@ def check_wayback(url):
                     print(f'  - Timestamp: {row[1]}, URL: {row[2]}, Status: {row[4]}')
             else:
                 print(f'[✓] No captures found for {url} via Wayback Machine.')
-    except Exception as e:
+    except Exception:
         os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError('FAIL-FAST: General Exception intercepted.')
 if __name__ == '__main__':

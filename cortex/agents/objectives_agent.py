@@ -87,7 +87,7 @@ def format_row(row: Dict[str, Any]) -> str:
     return f"| {row['id']} | {row['type']} | {row['title']} | {row['desc_due']} | {row['status']} | {row['info']} |"
 
 def main() -> None:
-    project_path = Path(__file__).resolve().parent.parent / "PROJECT.md"
+    project_path = Path(__file__).resolve().parent.parent.parent / "PROJECT.md"
     if not project_path.exists():
         print("Error: PROJECT.md not found.")
         sys.exit(1)
