@@ -202,8 +202,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="C5-REAL Strike Automata CLI")
     parser.add_argument("--sync", action="store_true", help="Sincronizar e inicializar catálogo en SQLite WAL")
     parser.add_argument("--itera", type=int, default=0, help="Emitir un bloque paginado de N nodos activos para copiado directo")
-    parser.add_argument("--takedown", type=str, help="Registrar mutación de estado física de un vídeo a OFFLINE_REMOVED")
-    parser.add_argument("--submit", type=str, help="Registrar mutación de estado física de un vídeo a SUBMITTED")
+    parser.add_argument("--takedown", type=str, action="append", help="Registrar mutación de estado física de uno o más vídeos a OFFLINE_REMOVED")
+    parser.add_argument("--submit", type=str, action="append", help="Registrar mutación de estado física de uno o más vídeos a SUBMITTED")
     parser.add_argument("--status", action="store_true", help="Mostrar balance termodinámico de estados en la matriz")
     
     args = parser.parse_args()
@@ -213,9 +213,11 @@ if __name__ == "__main__":
         sync_catalog(conn)
         print("SUCCESS: Catálogo sincronizado con strike_matrix_l15.")
     if args.takedown:
-        record_takedown(conn, args.takedown)
+        for tid in args.takedown:
+            record_takedown(conn, tid)
     if args.submit:
-        record_submission(conn, args.submit)
+        for sid in args.submit:
+            record_submission(conn, sid)
     if args.itera > 0:
         emit_itera_block(conn, batch_size=args.itera)
     if args.status or (not args.sync and not args.itera and not args.takedown and not args.submit):
