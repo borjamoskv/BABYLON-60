@@ -1,0 +1,46 @@
+# ██████████████████████████████████████████████████████████████
+# ONTOLOGÍA CAUSAL: EJEMPLO DE INTEGRACIÓN CON BABYLON-60
+# Nivel: C5-REAL
+# ██████████████████████████████████████████████████████████████
+
+Claim: "Execution trace of Company Brain decisions sealed in BABYLON-60"
+Proof:
+  Base: "Simulated execution trail for agent memory persistence and verification"
+  Range: [1, 1]
+  Confidence: C5-REAL
+
+Execution_Trace:
+  Step_1_Retrieve_Fact:
+    Type: "fact"
+    Record_Id: 1047
+    Payload: "query='risk threshold for entity 0x3f…b4' -> limit=10000.00 EUR · conf=0.99"
+    State: "intact"
+
+  Step_2_Verify_Constraints:
+    Type: "tool_call"
+    Record_Id: 1048
+    Payload: "limits.check(entity=0x3f…b4, amount=12400.00) -> returns OVER_LIMIT"
+    State: "intact"
+
+  Step_3_Enact_Decision:
+    Type: "decision"
+    Record_Id: 1049
+    Payload: "hold transfer 12400.00 EUR for entity 0x3f…b4 · reason=limit exceeded"
+    State: "intact"
+
+  Step_4_Integrity_Failure_Simulation:
+    Type: "error"
+    Record_Id: 1050
+    Payload: "provider timeout or database mutation check triggered"
+    State: "halted"
+
+Cryptographic_Lineage:
+  Genesis_Prev_Hash: "0000000000000000000000000000000000000000000000000000000000000000"
+  Record_1047_Hash: "8b7e23a8f15d2a93c834927fde9241b12b5912c019d67b36f7881bd3ab2ef11c"
+  Record_1048_Hash: "a1a8c3d9ef923f77bd83731a54041b32b0c3912a201bcfdf12b4898deff3ab2e"
+  Record_1049_Hash: "6c91a32ffdb921cecd3290de26718a1a3827b69129eb28a39feff43f9615c2efe"
+  External_Anchor:
+    TSA_RFC_3161: "2026-07-14T19:14:00Z · Signature verified by independent CA"
+    OpenTimestamps: "Merkle Root committed to Bitcoin Block 942180"
+
+CORTEX_TAINT: "3d46f6511e29b5f17495a076bc9ecd42fd8a1a3da46cc3fc859fbf6b00c291d8"
