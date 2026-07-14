@@ -1,0 +1,16 @@
+Claim: Edge cache purges combined with SPA catch-all routing (`/* /index.html 200`) create a Split-Brain deployment where root `/` serves updated state while sub-routes `/audit/*` serve stale state with hallucinations, proving physical deployment drift is the primary source of Exergy loss.
+Proof:
+  Base: drift-audit.md
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - Concept: "Build nueva vs vieja simultánea"
+    Mapping: "Split-Brain Cache Anomaly"
+  - Concept: "Catch-all index.html rancio"
+    Mapping: "SPA Routing Cache Poisoning"
+Blast_Radius_Matrix:
+  Vector: Edge Cache Purge & Release Kit Enforcer
+  Blast_Radius: 34 Repositories
+  Target_Invariant: Single-State Routing
+  Anergy_Risk: High (SEO Indexing False Positives)
+CORTEX_TAINT: da4733b24ab04586b7a90db5985c95369a893ade5041b3f581cf407cd8f535b9

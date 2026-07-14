@@ -25,7 +25,9 @@ y redondeadas anteriores están simplificadas — es una muestra ilustrativa; el
 método escala a Lexibank / ASJP / IE-CoR sin cambios estructurales.
 """
 
-import os, math, csv
+import os
+import math
+import csv
 import numpy as np
 from scipy.linalg import expm
 
@@ -35,32 +37,44 @@ from scipy.linalg import expm
 #    S=ʃ  Z=ʒ  C=tʃ  G=dʒ  J=ɲ  L=ʎ ; j,w = glides ; y = vocal ant. redondeada
 # ----------------------------------------------------------------------------
 GOLD = {
-    "key":     "k l a v e",     "night":   "n o k t e",   "eight":  "o k t o",
-    "milk":    "l a k t e",     "to_do":   "f a k e r e", "fire":   "f o k u",
-    "hundred": "k e n t u",     "moon":    "l u n a",     "sea":    "m a r e",
-    "flower":  "f l o r e",     "to_sing": "k a n t a r e","dog":   "k a n e",
-    "to_have": "h a b e r e",   "water":   "a k w a",     "to_die": "m o r i r e",
-    "name":    "n o m e n",     "new":     "n o v u",     "to_love":"a m a r e",
+    "key": "k l a v e",
+    "night": "n o k t e",
+    "eight": "o k t o",
+    "milk": "l a k t e",
+    "to_do": "f a k e r e",
+    "fire": "f o k u",
+    "hundred": "k e n t u",
+    "moon": "l u n a",
+    "sea": "m a r e",
+    "flower": "f l o r e",
+    "to_sing": "k a n t a r e",
+    "dog": "k a n e",
+    "to_have": "h a b e r e",
+    "water": "a k w a",
+    "to_die": "m o r i r e",
+    "name": "n o m e n",
+    "new": "n o v u",
+    "to_love": "a m a r e",
 }
 DATA = {
-    "key":     {"es":"L a v e","pt":"S a v e","fr":"k l e","it":"k j a v e","ro":"k e j e","sc":"k r a e"},
-    "night":   {"es":"n o C e","pt":"n o j t e","fr":"n w i","it":"n o t e","ro":"n o a p t e","sc":"n o t e"},
-    "eight":   {"es":"o C o","pt":"o j t o","fr":"w i t","it":"o t o","ro":"o p t","sc":"o t o"},
-    "milk":    {"es":"l e C e","pt":"l e j t e","fr":"l e","it":"l a t e","ro":"l a p t e","sc":"l a t e"},
-    "to_do":   {"es":"a s e r","pt":"f a z e r","fr":"f e r","it":"f a r e","ro":"f a C e"},
-    "fire":    {"es":"f w e g o","pt":"f o g o","it":"f w o k o","ro":"f o k","sc":"f o g u"},
-    "hundred": {"es":"s j e n","fr":"s a n","it":"C e n t o","ro":"s u t e"},
-    "moon":    {"es":"l u n a","pt":"l u a","fr":"l y n","it":"l u n a","ro":"l u n a","sc":"l u n a"},
-    "sea":     {"es":"m a r","pt":"m a r","fr":"m e r","it":"m a r e","ro":"m a r e","sc":"m a r e"},
-    "flower":  {"es":"f l o r","pt":"f l o r","it":"f j o r e","ro":"f l o a r e"},
-    "to_sing": {"es":"k a n t a r","pt":"k a n t a r","fr":"S a n t e","it":"k a n t a r e","ro":"k a n t a"},
-    "dog":     {"es":"k a n","fr":"S j e n","it":"k a n e","ro":"k a i n e","sc":"k a n e"},
-    "to_have": {"es":"a b e r","pt":"a v e r","fr":"a v w a r","it":"a v e r e","ro":"a v e a"},
-    "water":   {"es":"a g w a","pt":"a g w a","it":"a k w a","ro":"a p e","sc":"a b a"},
-    "to_die":  {"es":"m o r i r","pt":"m o r e r","fr":"m u r i r","it":"m o r i r e","ro":"m u r i"},
-    "name":    {"es":"n o m b r e","pt":"n o m e","fr":"n o n","it":"n o m e","ro":"n u m e"},
-    "new":     {"es":"n w e v o","pt":"n o v o","it":"n w o v o","ro":"n o u","sc":"n o b u"},
-    "to_love": {"es":"a m a r","pt":"a m a r","fr":"e m e","it":"a m a r e","ro":"a m a"},
+    "key": {"es": "L a v e", "pt": "S a v e", "fr": "k l e", "it": "k j a v e", "ro": "k e j e", "sc": "k r a e"},
+    "night": {"es": "n o C e", "pt": "n o j t e", "fr": "n w i", "it": "n o t e", "ro": "n o a p t e", "sc": "n o t e"},
+    "eight": {"es": "o C o", "pt": "o j t o", "fr": "w i t", "it": "o t o", "ro": "o p t", "sc": "o t o"},
+    "milk": {"es": "l e C e", "pt": "l e j t e", "fr": "l e", "it": "l a t e", "ro": "l a p t e", "sc": "l a t e"},
+    "to_do": {"es": "a s e r", "pt": "f a z e r", "fr": "f e r", "it": "f a r e", "ro": "f a C e"},
+    "fire": {"es": "f w e g o", "pt": "f o g o", "it": "f w o k o", "ro": "f o k", "sc": "f o g u"},
+    "hundred": {"es": "s j e n", "fr": "s a n", "it": "C e n t o", "ro": "s u t e"},
+    "moon": {"es": "l u n a", "pt": "l u a", "fr": "l y n", "it": "l u n a", "ro": "l u n a", "sc": "l u n a"},
+    "sea": {"es": "m a r", "pt": "m a r", "fr": "m e r", "it": "m a r e", "ro": "m a r e", "sc": "m a r e"},
+    "flower": {"es": "f l o r", "pt": "f l o r", "it": "f j o r e", "ro": "f l o a r e"},
+    "to_sing": {"es": "k a n t a r", "pt": "k a n t a r", "fr": "S a n t e", "it": "k a n t a r e", "ro": "k a n t a"},
+    "dog": {"es": "k a n", "fr": "S j e n", "it": "k a n e", "ro": "k a i n e", "sc": "k a n e"},
+    "to_have": {"es": "a b e r", "pt": "a v e r", "fr": "a v w a r", "it": "a v e r e", "ro": "a v e a"},
+    "water": {"es": "a g w a", "pt": "a g w a", "it": "a k w a", "ro": "a p e", "sc": "a b a"},
+    "to_die": {"es": "m o r i r", "pt": "m o r e r", "fr": "m u r i r", "it": "m o r i r e", "ro": "m u r i"},
+    "name": {"es": "n o m b r e", "pt": "n o m e", "fr": "n o n", "it": "n o m e", "ro": "n u m e"},
+    "new": {"es": "n w e v o", "pt": "n o v o", "it": "n w o v o", "ro": "n o u", "sc": "n o b u"},
+    "to_love": {"es": "a m a r", "pt": "a m a r", "fr": "e m e", "it": "a m a r e", "ro": "a m a"},
 }
 
 GAP = "-"
@@ -70,16 +84,37 @@ GAP = "-"
 # ----------------------------------------------------------------------------
 # Consonante: ('C', place, manner, voice) ; Vocal: ('V', height, back, round)
 FEAT = {
-    "p":("C",0,0,0),"b":("C",0,0,1),"f":("C",0,1,0),"v":("C",0,1,1),
-    "m":("C",0,3,1),"w":("C",0,6,1),
-    "t":("C",1,0,0),"d":("C",1,0,1),"s":("C",1,1,0),"z":("C",1,1,1),
-    "n":("C",1,3,1),"l":("C",1,4,1),"r":("C",1,5,1),
-    "S":("C",2,1,0),"Z":("C",2,1,1),"C":("C",2,2,0),"G":("C",2,2,1),
-    "J":("C",3,3,1),"L":("C",3,4,1),"j":("C",3,6,1),
-    "k":("C",4,0,0),"g":("C",4,0,1),"h":("C",5,1,0),
-    "a":("V",2,1,0),"e":("V",1,0,0),"i":("V",0,0,0),
-    "o":("V",1,2,1),"u":("V",0,2,1),"y":("V",0,0,1),
+    "p": ("C", 0, 0, 0),
+    "b": ("C", 0, 0, 1),
+    "f": ("C", 0, 1, 0),
+    "v": ("C", 0, 1, 1),
+    "m": ("C", 0, 3, 1),
+    "w": ("C", 0, 6, 1),
+    "t": ("C", 1, 0, 0),
+    "d": ("C", 1, 0, 1),
+    "s": ("C", 1, 1, 0),
+    "z": ("C", 1, 1, 1),
+    "n": ("C", 1, 3, 1),
+    "l": ("C", 1, 4, 1),
+    "r": ("C", 1, 5, 1),
+    "S": ("C", 2, 1, 0),
+    "Z": ("C", 2, 1, 1),
+    "C": ("C", 2, 2, 0),
+    "G": ("C", 2, 2, 1),
+    "J": ("C", 3, 3, 1),
+    "L": ("C", 3, 4, 1),
+    "j": ("C", 3, 6, 1),
+    "k": ("C", 4, 0, 0),
+    "g": ("C", 4, 0, 1),
+    "h": ("C", 5, 1, 0),
+    "a": ("V", 2, 1, 0),
+    "e": ("V", 1, 0, 0),
+    "i": ("V", 0, 0, 0),
+    "o": ("V", 1, 2, 1),
+    "u": ("V", 0, 2, 1),
+    "y": ("V", 0, 0, 1),
 }
+
 
 def phon_dist(a, b):
     """Distancia fonética 0..~3 entre dos segmentos (no gaps)."""
@@ -89,28 +124,28 @@ def phon_dist(a, b):
     if fa[0] != fb[0]:
         return 3.0  # vocal vs consonante
     if fa[0] == "C":
-        return (1.0*min(abs(fa[1]-fb[1]),3)/3.0
-                + 1.5*(0 if fa[2]==fb[2] else 1)
-                + 0.5*abs(fa[3]-fb[3]))
+        return 1.0 * min(abs(fa[1] - fb[1]), 3) / 3.0 + 1.5 * (0 if fa[2] == fb[2] else 1) + 0.5 * abs(fa[3] - fb[3])
     else:  # vocales
-        return (1.0*abs(fa[1]-fb[1])/2.0
-                + 1.0*abs(fa[2]-fb[2])/2.0
-                + 0.5*abs(fa[3]-fb[3]))
+        return 1.0 * abs(fa[1] - fb[1]) / 2.0 + 1.0 * abs(fa[2] - fb[2]) / 2.0 + 0.5 * abs(fa[3] - fb[3])
+
 
 # ----------------------------------------------------------------------------
 # 3) ALINEAMIENTO: Needleman-Wunsch por perfil -> MSA progresivo
 # ----------------------------------------------------------------------------
 GAP_PEN = -1.0
 
+
 def sub_score(a, b):
     if a == GAP or b == GAP:
         return GAP_PEN
-    return 2.0 - phon_dist(a, b)          # idéntico=2, similar>0, dispar<0
+    return 2.0 - phon_dist(a, b)  # idéntico=2, similar>0, dispar<0
+
 
 def col_score(column, seg):
     """Score de una columna del MSA (lista de segmentos, con gaps) contra un seg."""
     vals = [sub_score(x, seg) if x != GAP else GAP_PEN for x in column]
     return sum(vals) / len(vals)
+
 
 def align_seq_to_msa(msa_rows, seq):
     """Alinea `seq` (lista) contra un MSA existente (lista de filas). Devuelve nuevo MSA."""
@@ -118,43 +153,52 @@ def align_seq_to_msa(msa_rows, seq):
     n = len(seq)
     cols = [[row[c] for row in msa_rows] for c in range(W)]  # columnas
     NEG = -1e9
-    dp = np.full((W+1, n+1), NEG)
-    bt = np.zeros((W+1, n+1), dtype=int)  # 0 diag, 1 up(consume col), 2 left(consume seg)
-    dp[0,0] = 0.0
-    for i in range(1, W+1):
-        dp[i,0] = dp[i-1,0] + GAP_PEN; bt[i,0] = 1
-    for j in range(1, n+1):
-        dp[0,j] = dp[0,j-1] + GAP_PEN; bt[0,j] = 2
-    for i in range(1, W+1):
-        for j in range(1, n+1):
-            diag = dp[i-1,j-1] + col_score(cols[i-1], seq[j-1])
-            up   = dp[i-1,j]   + GAP_PEN
-            left = dp[i,j-1]   + GAP_PEN
+    dp = np.full((W + 1, n + 1), NEG)
+    bt = np.zeros((W + 1, n + 1), dtype=int)  # 0 diag, 1 up(consume col), 2 left(consume seg)
+    dp[0, 0] = 0.0
+    for i in range(1, W + 1):
+        dp[i, 0] = dp[i - 1, 0] + GAP_PEN
+        bt[i, 0] = 1
+    for j in range(1, n + 1):
+        dp[0, j] = dp[0, j - 1] + GAP_PEN
+        bt[0, j] = 2
+    for i in range(1, W + 1):
+        for j in range(1, n + 1):
+            diag = dp[i - 1, j - 1] + col_score(cols[i - 1], seq[j - 1])
+            up = dp[i - 1, j] + GAP_PEN
+            left = dp[i, j - 1] + GAP_PEN
             best = max(diag, up, left)
-            dp[i,j] = best
-            bt[i,j] = 0 if best == diag else (1 if best == up else 2)
+            dp[i, j] = best
+            bt[i, j] = 0 if best == diag else (1 if best == up else 2)
     # traceback
     i, j = W, n
-    new_cols = []      # cada elemento: (col_de_msa_o_None, seg_nuevo_o_GAP)
+    new_cols = []  # cada elemento: (col_de_msa_o_None, seg_nuevo_o_GAP)
     while i > 0 or j > 0:
-        b = bt[i,j]
+        b = bt[i, j]
         if i > 0 and j > 0 and b == 0:
-            new_cols.append((cols[i-1], seq[j-1])); i -= 1; j -= 1
+            new_cols.append((cols[i - 1], seq[j - 1]))
+            i -= 1
+            j -= 1
         elif i > 0 and (j == 0 or b == 1):
-            new_cols.append((cols[i-1], GAP)); i -= 1
+            new_cols.append((cols[i - 1], GAP))
+            i -= 1
         else:
-            new_cols.append((None, seq[j-1])); j -= 1
+            new_cols.append((None, seq[j - 1]))
+            j -= 1
     new_cols.reverse()
     R = len(msa_rows)
-    out = [[] for _ in range(R+1)]
+    out = [[] for _ in range(R + 1)]
     for col, seg in new_cols:
-        if col is None:                      # inserción: nueva columna
-            for r in range(R): out[r].append(GAP)
+        if col is None:  # inserción: nueva columna
+            for r in range(R):
+                out[r].append(GAP)
             out[R].append(seg)
         else:
-            for r in range(R): out[r].append(col[r])
+            for r in range(R):
+                out[r].append(col[r])
             out[R].append(seg)
     return out
+
 
 def build_msa(forms):
     """forms: lista de (lang, seglist). Devuelve (langs, msa_rows). Progresivo por longitud desc."""
@@ -167,35 +211,58 @@ def build_msa(forms):
         langs.append(lang)
     return langs, msa
 
+
 # ----------------------------------------------------------------------------
 # 4) MODELO DE SUSTITUCIÓN + PODA DE FELSENSTEIN sobre árbol romance fijo
 # ----------------------------------------------------------------------------
 # Árbol (proto-romance en la raíz). Longitudes ~ cantidad relativa de cambio.
 # Sardo conservador (rama corta); francés el más divergente (rama larga).
-def L(name, length): return ("L", name, length)
-def I(length, kids):  return ("I", length, kids)
-TREE = I(0.0, [
-    L("sc", 0.35),
-    L("ro", 0.85),
-    I(0.15, [
-        L("it", 0.45),
-        I(0.15, [
-            L("fr", 0.95),
-            I(0.15, [ L("es", 0.50), L("pt", 0.50) ]),
-        ]),
-    ]),
-])
-def node_len(node): return node[2] if node[0] == "L" else node[1]
+def L(name, length):
+    return ("L", name, length)
 
-LAMBDA   = 1.4     # dist fonética -> intercambiabilidad
-GAP_EXCH = 0.05    # tasa base de indel (gap <-> segmento)
+
+def I(length, kids):
+    return ("I", length, kids)
+
+
+TREE = I(
+    0.0,
+    [
+        L("sc", 0.35),
+        L("ro", 0.85),
+        I(
+            0.15,
+            [
+                L("it", 0.45),
+                I(
+                    0.15,
+                    [
+                        L("fr", 0.95),
+                        I(0.15, [L("es", 0.50), L("pt", 0.50)]),
+                    ],
+                ),
+            ],
+        ),
+    ],
+)
+
+
+def node_len(node):
+    return node[2] if node[0] == "L" else node[1]
+
+
+LAMBDA = 1.4  # dist fonética -> intercambiabilidad
+GAP_EXCH = 0.05  # tasa base de indel (gap <-> segmento)
+
 
 def build_Q(states, pi):
-    S = len(states); idx = {s:i for i,s in enumerate(states)}
+    S = len(states)
+    idx = {s: i for i, s in enumerate(states)}
     R = np.zeros((S, S))
     for a in states:
         for b in states:
-            if a == b: continue
+            if a == b:
+                continue
             if a == GAP or b == GAP:
                 R[idx[a], idx[b]] = GAP_EXCH
             else:
@@ -210,25 +277,29 @@ def build_Q(states, pi):
     scale = -np.sum(pi * np.diag(Q))
     return Q / scale, idx
 
+
 class Model:
     def __init__(self, states, pi, Q, idx):
         self.states, self.pi, self.Q, self.idx = states, pi, Q, idx
         self._P = {}
+
     def P(self, t):
         key = round(t, 6)
         if key not in self._P:
             self._P[key] = expm(self.Q * t)
         return self._P[key]
 
+
 def partial(node, column, model):
     """Felsenstein: L_node[i] = P(datos bajo el nodo | estado i)."""
     S = len(model.states)
     if node[0] == "L":
         _, name, _ = node
-        seg = column.get(name)                 # None = lengua ausente (no informativa)
+        seg = column.get(name)  # None = lengua ausente (no informativa)
         v = np.ones(S)
         if seg is not None:
-            v = np.zeros(S); v[model.idx[seg]] = 1.0
+            v = np.zeros(S)
+            v[model.idx[seg]] = 1.0
         return v
     _, _, kids = node
     Ln = np.ones(S)
@@ -237,49 +308,68 @@ def partial(node, column, model):
         Ln *= model.P(node_len(ch)).dot(Lc)
     return Ln
 
+
 def reconstruct_column(column, model):
     Lroot = partial(TREE, column, model)
     post = model.pi * Lroot
     tot = post.sum()
-    post = post / tot if tot > 0 else np.ones(len(post))/len(post)
-    ent = -np.sum([p*math.log2(p) for p in post if p > 0])   # bits
+    post = post / tot if tot > 0 else np.ones(len(post)) / len(post)
+    ent = -np.sum([p * math.log2(p) for p in post if p > 0])  # bits
     top = int(np.argmax(post))
     return model.states[top], ent, post
+
 
 # ----------------------------------------------------------------------------
 # 5) VALIDACIÓN contra el latín (edit distance a nivel de segmento + acierto)
 # ----------------------------------------------------------------------------
 def levenshtein(a, b):
     n, m = len(a), len(b)
-    d = np.zeros((n+1, m+1))
-    for i in range(n+1): d[i,0] = i
-    for j in range(m+1): d[0,j] = j
-    for i in range(1, n+1):
-        for j in range(1, m+1):
-            d[i,j] = min(d[i-1,j]+1, d[i,j-1]+1, d[i-1,j-1]+(0 if a[i-1]==b[j-1] else 1))
-    return int(d[n,m])
+    d = np.zeros((n + 1, m + 1))
+    for i in range(n + 1):
+        d[i, 0] = i
+    for j in range(m + 1):
+        d[0, j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            d[i, j] = min(d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + (0 if a[i - 1] == b[j - 1] else 1))
+    return int(d[n, m])
+
 
 def nw_match_flags(recon, gold):
     """Alinea recon vs gold; devuelve, por posición de recon, si casó (diag e igual)."""
-    n, m = len(recon), len(gold); NEG = -1e9
-    dp = np.full((n+1, m+1), NEG); bt = np.zeros((n+1, m+1), dtype=int)
-    dp[0,0] = 0
-    for i in range(1, n+1): dp[i,0] = dp[i-1,0]+GAP_PEN; bt[i,0]=1
-    for j in range(1, m+1): dp[0,j] = dp[0,j-1]+GAP_PEN; bt[0,j]=2
-    for i in range(1, n+1):
-        for j in range(1, m+1):
-            diag = dp[i-1,j-1] + sub_score(recon[i-1], gold[j-1])
-            up   = dp[i-1,j] + GAP_PEN; left = dp[i,j-1] + GAP_PEN
-            best = max(diag, up, left); dp[i,j]=best
-            bt[i,j] = 0 if best==diag else (1 if best==up else 2)
-    i, j = n, m; flags = [False]*n
+    n, m = len(recon), len(gold)
+    NEG = -1e9
+    dp = np.full((n + 1, m + 1), NEG)
+    bt = np.zeros((n + 1, m + 1), dtype=int)
+    dp[0, 0] = 0
+    for i in range(1, n + 1):
+        dp[i, 0] = dp[i - 1, 0] + GAP_PEN
+        bt[i, 0] = 1
+    for j in range(1, m + 1):
+        dp[0, j] = dp[0, j - 1] + GAP_PEN
+        bt[0, j] = 2
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            diag = dp[i - 1, j - 1] + sub_score(recon[i - 1], gold[j - 1])
+            up = dp[i - 1, j] + GAP_PEN
+            left = dp[i, j - 1] + GAP_PEN
+            best = max(diag, up, left)
+            dp[i, j] = best
+            bt[i, j] = 0 if best == diag else (1 if best == up else 2)
+    i, j = n, m
+    flags = [False] * n
     while i > 0 or j > 0:
-        b = bt[i,j]
-        if i>0 and j>0 and b==0:
-            flags[i-1] = (recon[i-1] == gold[j-1]); i-=1; j-=1
-        elif i>0 and (j==0 or b==1): i-=1
-        else: j-=1
+        b = bt[i, j]
+        if i > 0 and j > 0 and b == 0:
+            flags[i - 1] = recon[i - 1] == gold[j - 1]
+            i -= 1
+            j -= 1
+        elif i > 0 and (j == 0 or b == 1):
+            i -= 1
+        else:
+            j -= 1
     return flags
+
 
 # ----------------------------------------------------------------------------
 # 6) PIPELINE
@@ -299,24 +389,28 @@ def main():
                 counts[seg] = counts.get(seg, 0) + 1
 
     states = sorted(counts.keys())
-    if GAP not in states: states.append(GAP); counts[GAP] = counts.get(GAP, 1)
+    if GAP not in states:
+        states.append(GAP)
+        counts[GAP] = counts.get(GAP, 1)
     total = sum(counts.values())
-    pi = np.array([counts[s]/total for s in states])
+    pi = np.array([counts[s] / total for s in states])
     Q, idx = build_Q(states, pi)
     model = Model(states, pi, Q, idx)
 
     # (b) Reconstrucción por columna + validación
     rows_csv = []
-    all_ent_match = []   # (entropia, caso?) por posición reconstruida no-gap
+    all_ent_match = []  # (entropia, caso?) por posición reconstruida no-gap
     tot_gold = tot_editdist = tot_pos = tot_hit = 0
     per_concept = []
     for concept, (langs, msa) in msas.items():
-        W = len(msa[0]); ncol = len(langs)
+        W = len(msa[0])
+        ncol = len(langs)
         recon_full, ent_full = [], []
         for c in range(W):
             column = {langs[r]: msa[r][c] for r in range(ncol) if msa[r][c] != GAP}
             seg, ent, post = reconstruct_column(column, model)
-            recon_full.append(seg); ent_full.append(ent)
+            recon_full.append(seg)
+            ent_full.append(ent)
         recon = [(s, e) for s, e in zip(recon_full, ent_full) if s != GAP]
         recon_seq = [s for s, _ in recon]
         recon_ent = [e for _, e in recon]
@@ -326,19 +420,24 @@ def main():
         hit = sum(flags)
         for s, e, fl in zip(recon_seq, recon_ent, flags):
             all_ent_match.append((e, fl))
-        tot_gold += len(gold); tot_editdist += ed
-        tot_pos += len(recon_seq); tot_hit += hit
-        acc = hit/len(gold) if gold else 0.0
-        per_concept.append((concept, " ".join(recon_seq), " ".join(gold),
-                            round(np.mean(recon_ent), 3), ed, round(acc, 2)))
-        rows_csv.append({
-            "concepto": concept,
-            "reconstruido": " ".join(recon_seq),
-            "latin_gold": " ".join(gold),
-            "entropia_media_bits": round(float(np.mean(recon_ent)), 3),
-            "edit_distance": ed,
-            "acierto_segmento": round(acc, 2),
-        })
+        tot_gold += len(gold)
+        tot_editdist += ed
+        tot_pos += len(recon_seq)
+        tot_hit += hit
+        acc = hit / len(gold) if gold else 0.0
+        per_concept.append(
+            (concept, " ".join(recon_seq), " ".join(gold), round(np.mean(recon_ent), 3), ed, round(acc, 2))
+        )
+        rows_csv.append(
+            {
+                "concepto": concept,
+                "reconstruido": " ".join(recon_seq),
+                "latin_gold": " ".join(gold),
+                "entropia_media_bits": round(float(np.mean(recon_ent)), 3),
+                "edit_distance": ed,
+                "acierto_segmento": round(acc, 2),
+            }
+        )
 
     seg_acc = tot_hit / tot_pos
     norm_ed = tot_editdist / tot_gold
@@ -353,17 +452,18 @@ def main():
     csv_path = os.path.join(outdir, "reconstruccion_resultados.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows_csv[0].keys()))
-        w.writeheader(); w.writerows(rows_csv)
+        w.writeheader()
+        w.writerows(rows_csv)
 
     # (d) Reporte por consola
-    print("="*78)
+    print("=" * 78)
     print("RECONSTRUCCIÓN PROTO-ROMANCE PROBABILÍSTICA — validación vs latín")
-    print("="*78)
+    print("=" * 78)
     print(f"{'concepto':<10}{'reconstruido':<16}{'latín (gold)':<16}{'H̄bits':>7}{'ed':>4}{'acc':>6}")
-    print("-"*78)
+    print("-" * 78)
     for concept, rec, gold, ent, ed, acc in per_concept:
         print(f"{concept:<10}{rec:<16}{gold:<16}{ent:>7}{ed:>4}{acc:>6}")
-    print("-"*78)
+    print("-" * 78)
     print(f"Acierto por segmento (vs latín) : {seg_acc:6.1%}")
     print(f"Edit distance normalizado       : {norm_ed:6.3f}  (0=perfecto)")
     print(f"Entropía media, aciertos        : {ent_hit:6.3f} bits")
@@ -375,9 +475,16 @@ def main():
     print("el modelo 'sabe lo que no sabe': donde el cambio fonético fusionó sonidos")
     print("y borró información, no hay raíz única recuperable — solo una distribución.")
     print(f"\nCSV escrito en: {csv_path}")
-    return dict(seg_acc=seg_acc, norm_ed=norm_ed, ent_hit=float(ent_hit),
-                ent_miss=float(ent_miss), corr=corr, n_sets=len(per_concept),
-                n_states=len(states))
+    return dict(
+        seg_acc=seg_acc,
+        norm_ed=norm_ed,
+        ent_hit=float(ent_hit),
+        ent_miss=float(ent_miss),
+        corr=corr,
+        n_sets=len(per_concept),
+        n_states=len(states),
+    )
+
 
 if __name__ == "__main__":
     main()
