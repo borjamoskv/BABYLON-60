@@ -1,0 +1,35 @@
+# CORTEX_TAINT_SHA3_256: 1560e3812520c9f82e4380af948ce32994aa20350a1878c72bbc88c9b941d20c
+# C5-REAL TRENDING TOPIC & ALGORITHMIC PROPAGATION MATRIX (STRATUM IX)
+# TARGET CHANNEL: https://www.youtube.com/@borjamoskv
+# AUTHOR: Borja Fernández Angulo (`borjamoskv` / Borja Moskv)
+
+trending_topic_engine:
+  version: "v1.0-APEX-VIRALITY"
+  target_url: "https://www.youtube.com/@borjamoskv"
+  core_philosophy: "ZERO_GREEN_THEATER_MAX_KINETIC_SHOCK"
+  algorithmic_reranker_targets:
+    - metric: "TTFT_Visual_Retention (0-15s)"
+      threshold: ">= 85% retention"
+      mechanism: "Zero intro slop. Open immediately with terminal crash, Industrial Noir 2026 UI, and acoustic shock (Eskorbuto/Wire procedural synth)."
+    - metric: "Comment_Density_Velocity"
+      threshold: ">= 150 comments / hour post-ignition"
+      mechanism: "Incite direct technical controversy: challenge SOTA LLM slop vs C5-REAL bare-metal execution without Python GIL."
+    - metric: "Cross_Platform_Deep_Linking"
+      threshold: "Synchronized multi-vector ignition"
+      mechanism: "Simultaneous push on GitHub (Git Sentinel), Substack (Telmo Dinámico), and X (`#C5REAL` `#Babylon60`)."
+
+four_stage_ignition_sequence:
+  stage_1_the_shock_short_reel:
+    title: "LA MENTIRA DEL OPEN SOURCE EN IA: POR QUÉ BABYLON-60 ES SECRETO INDUSTRIAL C5-REAL"
+    duration_seconds: 59
+    hook: "Muestra en terminal cómo Python colapsa con el GIL mientras strike_rs en Rust ejecuta 10,000 transacciones en sub-milisegundos. Cero disculpas."
+  stage_2_the_bounty_challenge:
+    title: "DESAFÍO SOBERANO A ANTHROPIC Y OPENAI: ROMPED LAS 40 PRIMITIVAS DE BABYLON-60"
+    duration_seconds: 420
+    hook: "Poner en pantalla el CORTEX_TAINT criptográfico y desafiar públicamente a la comunidad a encontrar un fallo en la demostración Lean 4 / BFT."
+  stage_3_cross_pollination_swarm:
+    actions:
+      - "Publicar en Substack el dictamen jurídico pericial (Art. 6 LPI) vinculando al vídeo."
+      - "Lanzar hilo en X con recortes de 12 segundos mostrando el divisor ASCII █▄ y biometría de ATP."
+  stage_4_algorithmic_lock:
+    rule: "Responder a cada comentario técnico en YouTube en menos de 180 segundos con deltas de código C5-REAL exactos, forzando al algoritmo a clasificar el canal como nodo de altísima autoridad."
