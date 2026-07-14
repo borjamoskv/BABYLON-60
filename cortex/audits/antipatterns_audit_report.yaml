@@ -1,0 +1,3489 @@
+SYS_ID: borjamoskv
+RealityLevel: C5-REAL
+HashLedger: PENDING_COMMIT
+Aesthetic: Industrial Noir 2026
+Summary:
+  total_checked_files: 168870
+  total_issues: 560
+  breakdown:
+    ANTI-012: 79
+    ANTI-007: 33
+    ANTI-001: 29
+    ANTI-025: 359
+    ANTI-028: 12
+    ANTI-036: 45
+    ANTI-034: 3
+Findings:
+- antipattern_id: ANTI-012
+  file: cortex/daemons/repo_privacy_audit.py
+  line: 18
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/vibe_consolidator.py
+  line: 215
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/vibe_consolidator.py
+  line: 231
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/vibe_consolidator.py
+  line: 348
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/omega_antipattern_watcher.py
+  line: 314
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/omega_antipattern_watcher.py
+  line: 345
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/omega_antipattern_watcher.py
+  line: 450
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/omega_antipattern_watcher.py
+  line: 500
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/apoptosis_engine.py
+  line: 121
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/apoptosis_engine.py
+  line: 154
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/agents/ontology/macrofago_ontologico.py
+  line: 277
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/agents/voice/chunker.py
+  line: 30
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 165
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 378
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 376
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 393
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 844
+  column: 4
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 1026
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 921
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 956
+  column: 20
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 961
+  column: 24
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py
+  line: 1235
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 266
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 284
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 289
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 421
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 441
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 508
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 526
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 668
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 691
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 767
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 831
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 829
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 881
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/compute/operon_compute_provider/__init__.py
+  line: 981
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/figure-composer/kernel.py
+  line: 130
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/pdf-explore/kernel.py
+  line: 588
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/pdf-explore/kernel.py
+  line: 593
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/pdf-explore/kernel.py
+  line: 650
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/pdf-explore/kernel.py
+  line: 645
+  column: 20
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/remote-compute-modal/provider.py
+  line: 325
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/remote-compute-modal/provider.py
+  line: 405
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/skill-creator/scripts/run_eval.py
+  line: 246
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/figure-style/kernel.py
+  line: 28
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/pride_projects/proteins.py
+  line: 52
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_cellguide/client.py
+  line: 136
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_cellguide/client.py
+  line: 276
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_cellguide/client.py
+  line: 288
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/ols_terms/api.py
+  line: 65
+  column: 4
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/gtex_expression/tool.py
+  line: 75
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/encode_search/tool.py
+  line: 47
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/pubmed_search/client.py
+  line: 239
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/complexportal_fetch/fetch.py
+  line: 77
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/clinicaltrials_fetch/client.py
+  line: 114
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/geo_meta/client.py
+  line: 95
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/eqtl_catalogue/client.py
+  line: 130
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/ols_ontologies/api.py
+  line: 48
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/civic_evidence/tool.py
+  line: 58
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/arrayexpress_experiments/search.py
+  line: 163
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/pdb_structures/search.py
+  line: 135
+  column: 4
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/chembl_drug_search/client.py
+  line: 155
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/biorxiv_fetch/tool.py
+  line: 140
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/grants_gov_search/client.py
+  line: 111
+  column: 12
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/metabolights_meta/client.py
+  line: 115
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/clinicaltrials_essie/client.py
+  line: 121
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/biomart_query/introspect.py
+  line: 54
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/intact_interactions/core.py
+  line: 151
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/intact_interactions/core.py
+  line: 216
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/intact_interactions/details.py
+  line: 142
+  column: 12
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_zinc/client.py
+  line: 246
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/chembl_targets/client.py
+  line: 144
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/gwas_catalog/tool.py
+  line: 192
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/uniprot_fetch/client.py
+  line: 64
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/uniprot_fetch/http.py
+  line: 125
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/antibody_registry/client.py
+  line: 150
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/openfda_drugsfda/retrieve.py
+  line: 164
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/openfda_labels/client.py
+  line: 117
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_servers_common/tier1.py
+  line: 94
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/figure-composer/kernel.py
+  line: 130
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/pdf-explore/kernel.py
+  line: 588
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/pdf-explore/kernel.py
+  line: 593
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/pdf-explore/kernel.py
+  line: 650
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/pdf-explore/kernel.py
+  line: 645
+  column: 20
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/remote-compute-modal/provider.py
+  line: 325
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/remote-compute-modal/provider.py
+  line: 405
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/skill-creator/scripts/run_eval.py
+  line: 246
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/figure-style/kernel.py
+  line: 28
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/bft_strike_automata.py
+  line: 211
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/bft_strike_automata.py
+  line: 255
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/bft_strike_automata.py
+  line: 322
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/bft_strike_automata.py
+  line: 427
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/bft_strike_automata.py
+  line: 438
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/cortex_wal_pragma_engine.py
+  line: 134
+  column: 16
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: cortex/engine/cortex_wal_pragma_engine.py
+  line: 178
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_contacts_deep_search.py
+  line: 50
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_contacts_deep_search.py
+  line: 87
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_contacts_deep_search.py
+  line: 124
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/calculate_totals.py
+  line: 33
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/audit_all_ultrathink.py
+  line: 55
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_contacts_search.py
+  line: 60
+  column: 8
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_contacts_search.py
+  line: 95
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/scratch_vault_projects_contacts.py
+  line: 40
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/inspect_npz.py
+  line: 12
+  column: 0
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: scratch/audit_c5_12.py
+  line: 9
+  column: 8
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/transduce_youtube.py
+  line: 31
+  column: 0
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/entropy_sweeper_daemon.py
+  line: 41
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/entropy_sweeper_daemon.py
+  line: 52
+  column: 12
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/search_brain.py
+  line: 32
+  column: 4
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-012
+  file: scratch/search_brain.py
+  line: 29
+  column: 20
+  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
+    exit. Silences system failures.'
+  severity: P1
+- antipattern_id: ANTI-007
+  file: bft/master_ledger_queue.py
+  line: 28
+  column: 12
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-007
+  file: bft/ledger_actor.py
+  line: 122
+  column: 12
+  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
+    yield. Risk of CPU starvation.
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/daemons/entropy_sweeper.py
+  line: 65
+  column: 9
+  details: "Empathy/limerent token found: 'aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/remote-compute-modal/envs/proteomics_boltz_gpu.py
+  line: 47
+  column: 20
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/remote-compute-modal/envs/proteomics_boltz_gpu.py
+  line: 47
+  column: 20
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/telemetry/ttft_measurement.py
+  line: 9
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/telemetry.db".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/engine/out_of_process_watchdog.py
+  line: 32
+  column: 39
+  details: "Empathy/limerent token found: 'Aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-025
+  file: scratch/generate_tracker.py
+  line: 3
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/google_refunds_tracker.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_transducer_O1.py
+  line: 6
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/auditoria_atomica.py
+  line: 7
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/bft_sqlite_stress.py
+  line: 8
+  column: 19
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/bft_sqlite_stress.py
+  line: 12
+  column: 20
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/stress_test.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_autopsia_v3.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/commit_learning.py
+  line: 5
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/commit_learning.py
+  line: 15
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/bft_sanedrin_vote.py
+  line: 9
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.babylon60/cortex_bft_state.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_rag_insforge.py
+  line: 24
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/rag_insforge_hybrid_architecture.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_rag_insforge.py
+  line: 32
+  column: 60
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_rag_insforge.py
+  line: 33
+  column: 141
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_rag_insforge.py
+  line: 34
+  column: 102
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/consolidate_convos.py
+  line: 5
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/consolidate_convos.py
+  line: 56
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/consolidate_convos.py
+  line: 57
+  column: 125
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_safety_controls.py
+  line: 38
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/safety_controls_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_edge_deployment.py
+  line: 35
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/edge_deployment_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/iterador_entropico_10000.py
+  line: 6
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scripts/c5_cdp_youtube_bridge.py".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/iterador_entropico_10000.py
+  line: 7
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/L1_sink".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_company_brain.py
+  line: 5
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube3.py
+  line: 4
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean3.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube3.py
+  line: 49
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_QyCR_33HloU.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_voice_transducer.py
+  line: 79
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/voice".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_voice_transducer.py
+  line: 103
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_invariantes.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/invariantes_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_invariantes.py
+  line: 49
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_remotion.py
+  line: 18
+  column: 7
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/remotion_video_state.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_remotion.py
+  line: 23
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_ecommerce.py
+  line: 37
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/ecommerce_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition_fable5.py
+  line: 5
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/fable5_epistemic_collapse.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition_fable5.py
+  line: 26
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ast_purger.py
+  line: 48
+  column: 16
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_transducer_batch_diseases.py
+  line: 5
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_100000_ultrathink.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/ultrathink_100000_matrix.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_100000_ultrathink.py
+  line: 6
+  column: 6
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/maximize_security.py
+  line: 5
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_customer_service.py
+  line: 41
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/customer_service_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/gen_sgd_300.py
+  line: 4
+  column: 7
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/gradiente_estocastico.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/gen_sgd_300.py
+  line: 28
+  column: 41
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/gen_sgd_300.py
+  line: 29
+  column: 124
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_S6PIlo4ln2k.py
+  line: 8
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_S6PIlo4ln2k.py
+  line: 9
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_S6PIlo4ln2k.py
+  line: 10
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_S6PIlo4ln2k.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_ssh_check.py
+  line: 56
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_ssh_check.py
+  line: 62
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_autopsia_v2.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_feria_estocastica.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/feria_estocastica_camellos.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_asimetria.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_financial_operations.py
+  line: 41
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/financial_operations_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_marketing_roi.py
+  line: 41
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/marketing_roi_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/audit_delta.py
+  line: 7
+  column: 21
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_cosmic_country.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cosmic_country_sello.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_1Wq1mJ-PAeQ.py
+  line: 8
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_1Wq1mJ-PAeQ.py
+  line: 9
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube_1Wq1mJ-PAeQ.py
+  line: 10
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_1Wq1mJ-PAeQ.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_redundancias.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_redundancias.py
+  line: 47
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_ttft_limit.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_batch_100_iterations.py
+  line: 4
+  column: 11
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_100_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/audit_all_ultrathink.py
+  line: 11
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 16
+  column: 27
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 17
+  column: 24
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 18
+  column: 22
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 19
+  column: 23
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 20
+  column: 27
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 21
+  column: 36
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 33
+  column: 33
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 70
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ethos_audit.py
+  line: 77
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_v.py
+  line: 32
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/v_invariant.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_transducer_cancer.py
+  line: 6
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_abstraccion.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/abstraccion_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_abstraccion.py
+  line: 44
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition.py
+  line: 5
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition.py
+  line: 18
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_unstructured_data.py
+  line: 35
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/unstructured_data_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_babylon_cortex.py
+  line: 34
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_thermodynamic_audit.py
+  line: 5
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/calculate_sha3_receipt.py
+  line: 70
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/receipt_sha3_256.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube.py
+  line: 4
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube.py
+  line: 46
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_nxhRrry5UiY.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_pasapalabra_guiza.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/pasapalabra_guiza.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/iterate_ontology.py
+  line: 4
+  column: 13
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_acoplamiento.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/acoplamiento_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_acoplamiento.py
+  line: 46
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/dump_brave_dom.py
+  line: 6
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/dump_brave_dom.py
+  line: 22
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/brave_dom.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/find_fonts.py
+  line: 4
+  column: 4
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/find_fonts.py
+  line: 5
+  column: 4
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Supplemental/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_public_services.py
+  line: 35
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/public_services_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_company_brain_use_cases.py
+  line: 5
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_use_cases.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_development_efficiency.py
+  line: 41
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/development_efficiency_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_david_dominguez_mojo_picon.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/execute_complete_autodidact.py
+  line: 21
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_oncology_thermodynamics.py
+  line: 6
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_lm_api.py
+  line: 73
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ultrathink_grill_me.py
+  line: 24
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/ultrathink_grill_me.py
+  line: 31
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/fix_ontology_signatures.py
+  line: 4
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_ui_ttft_audit.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_risk_compliance.py
+  line: 43
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/risk_compliance_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/audit_itera.py
+  line: 35
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_fazt_production.py
+  line: 24
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/fazt_production_ai_tools.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_fazt_production.py
+  line: 32
+  column: 60
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_fazt_production.py
+  line: 33
+  column: 121
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_fazt_production.py
+  line: 34
+  column: 102
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_healthcare.py
+  line: 41
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/healthcare_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_david_dominguez_entropia.py
+  line: 4
+  column: 13
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_david_dominguez_entropia.py
+  line: 11
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_entropia.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/generate_100k_free_anchors.py
+  line: 19
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/batch_100k".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/generate_100k_free_anchors.py
+  line: 61
+  column: 19
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/100k_iterations_free.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_perimeter_illusion.py
+  line: 24
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_perimeter_illusion.py
+  line: 31
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_david_dominguez_147.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_147.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/audit_sgd_300.py
+  line: 5
+  column: 6
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/itera_audit.py
+  line: 20
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/itera_audit.py
+  line: 27
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_github_docs.py
+  line: 8
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain/3530a6e2-3a20-4681-a375-a368eda007c3/.system_generated/steps/278/content.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_github_docs.py
+  line: 34
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_encrypt_audit_deep.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_itera.py
+  line: 11
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/verify_fonts_existence.py
+  line: 9
+  column: 21
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/verify_fonts_existence.py
+  line: 10
+  column: 17
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/evolve_perimeter_illusion.py
+  line: 25
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/evolve_perimeter_illusion.py
+  line: 45
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/evolve_perimeter_illusion.py
+  line: 52
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_swarm_audit.py
+  line: 11
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_cortazar_feria.py
+  line: 7
+  column: 7
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cortazar_feria_entropica.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/mejoralo_grill_me.py
+  line: 25
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/grill_me_optimization.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/mejoralo_grill_me.py
+  line: 41
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/mejoralo_grill_me.py
+  line: 48
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_centuria.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias_centuria.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_centuria.py
+  line: 50
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/run_all_crystallization.py
+  line: 4
+  column: 14
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/scratch''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/iterador_entropico_1000.py
+  line: 5
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/Downloads/video_utbh_destruccion.mp4".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/iterador_entropico_1000.py
+  line: 6
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/video_utbh_destruccion_1000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/audit_itera_causal.py
+  line: 37
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_friccion_vivencial.py
+  line: 4
+  column: 11
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/friccion_vivencial_epistemica.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_friccion_vivencial.py
+  line: 25
+  column: 45
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_friccion_vivencial.py
+  line: 26
+  column: 120
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_batch_10_video_rejection.py
+  line: 7
+  column: 11
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_video_rejection''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/compile_canvas.py
+  line: 9
+  column: 17
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/compile_canvas.py
+  line: 10
+  column: 13
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/compile_canvas.py
+  line: 11
+  column: 21
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Apple Symbols.ttf''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/compile_canvas.py
+  line: 127
+  column: 14
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/visual-canvas.png''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_bun_rust.py
+  line: 24
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/bun_rust_adversarial_rewrite.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_bun_rust.py
+  line: 32
+  column: 60
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_bun_rust.py
+  line: 33
+  column: 134
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_bun_rust.py
+  line: 34
+  column: 102
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition_2.py
+  line: 5
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/apex_ignition_2.py
+  line: 20
+  column: 9
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube.py
+  line: 13
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_dump.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_youtube.py
+  line: 53
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/generate_300_patterns.py
+  line: 5
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/patrones_diseno/exergy_patterns_300.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/generate_300_patterns.py
+  line: 103
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/transduce_company_brain_babylon_example.py
+  line: 5
+  column: 16
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_babylon_example.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_sophisticated_apps.py
+  line: 38
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/sophisticated_apps_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/write_batch_10000_iterations.py
+  line: 3
+  column: 11
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_10000_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube4.py
+  line: 4
+  column: 10
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean4.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_youtube4.py
+  line: 49
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_GcwI1hZewJo.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/crystallize_specialized_agents.py
+  line: 38
+  column: 14
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/specialized_agents_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/atomic_encrypt_audit.py
+  line: 11
+  column: 15
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/batch_ontology_generator.py
+  line: 5
+  column: 18
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/batch_100000_ultrathink.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/entropy_sweeper_daemon.py
+  line: 6
+  column: 13
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/scratch_epistemic_forensics.py
+  line: 6
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: scratch/search_brain.py
+  line: 5
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: scratch/scratch_epistemic_forensics_iteration.py
+  line: 37
+  column: 75
+  details: "Empathy/limerent token found: 'aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/artifacts/substack_kant_fugazi_unc.md
+  line: 29
+  column: 42
+  details: "Empathy/limerent token found: 'Aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/LA_GUERRA_CON_ANTHROPIC_CRONICA_TOTAL.md
+  line: 21
+  column: 137
+  details: "Empathy/limerent token found: 'Aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/github_sota_eval.md
+  line: 24
+  column: 122
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 8
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 11
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 14
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 17
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 20
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/ethos_state_attestation.yaml
+  line: 23
+  column: 12
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md
+  line: 82
+  column: 350
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/reporte_anthropic_hermana.md
+  line: 3
+  column: 25
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 811
+  column: 46
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 817
+  column: 46
+  details: 'Hardcoded absolute path detected: "/usr/local/lib/python3.11/site-packages/nvidia/cu13/lib".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 823
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/telemetry.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 835
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/google_refunds_tracker.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 841
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 847
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 853
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 859
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/stress_test.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 865
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 871
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 877
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 883
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.babylon60/cortex_bft_state.db".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 889
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/rag_insforge_hybrid_architecture.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 895
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 901
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 907
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 913
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 919
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 925
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 931
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/safety_controls_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 937
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/edge_deployment_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 943
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scripts/c5_cdp_youtube_bridge.py".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 949
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/L1_sink".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 955
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 961
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean3.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 967
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_QyCR_33HloU.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 973
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/voice".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 979
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 985
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/invariantes_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 991
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 997
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/remotion_video_state.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1003
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1009
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/ecommerce_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1015
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/fable5_epistemic_collapse.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1021
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1027
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1033
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1039
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/ultrathink_100000_matrix.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1045
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1051
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1057
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/customer_service_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1063
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/gradiente_estocastico.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1069
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1075
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1081
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1087
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_S6PIlo4ln2k.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1093
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_S6PIlo4ln2k.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1099
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1105
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1111
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1117
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/feria_estocastica_camellos.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1123
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1129
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/financial_operations_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1135
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/marketing_roi_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1141
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1147
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cosmic_country_sello.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1153
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_raw_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1159
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean_1Wq1mJ-PAeQ.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1165
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/youtube_transduction_1Wq1mJ-PAeQ.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1171
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1177
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1183
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1189
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_100_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1195
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1201
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1207
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1213
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1219
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1225
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1231
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1237
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1243
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1249
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1255
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/v_invariant.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1261
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1267
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/abstraccion_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1273
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1279
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1285
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1291
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/unstructured_data_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1297
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1303
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1309
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/receipt_sha3_256.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1315
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1321
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_nxhRrry5UiY.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1327
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/pasapalabra_guiza.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1333
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1339
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/acoplamiento_antipatrones.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1345
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1351
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/skills/Darwin_CGEvent_Injector/scripts".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1357
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/brave_dom.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1363
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1369
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Supplemental/''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1375
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/public_services_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1381
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_use_cases.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1387
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/development_efficiency_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1393
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1399
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1405
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1411
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1417
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1423
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1429
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1435
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1441
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/risk_compliance_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1447
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1453
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/fazt_production_ai_tools.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1459
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1465
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1471
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1477
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/healthcare_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1483
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_mojo_picon.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1489
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_entropia.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1495
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/batch_100k".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1501
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/100k_iterations_free.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1507
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1513
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1519
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/david_dominguez_147.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1525
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1531
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1537
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1543
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain/3530a6e2-3a20-4681-a375-a368eda007c3/.system_generated/steps/278/content.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1549
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1555
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1561
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1567
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1573
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1579
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1585
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1591
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1597
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1603
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/cortazar_feria_entropica.yaml''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1609
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/grill_me_optimization.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1615
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1621
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1627
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/redundancias_centuria.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1633
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1639
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/scratch''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1645
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/Downloads/video_utbh_destruccion.mp4".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1651
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/video_utbh_destruccion_1000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1657
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/audits".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1663
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/friccion_vivencial_epistemica.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1669
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1675
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1681
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_video_rejection''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1687
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Helvetica.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1693
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Menlo.ttc''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1699
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/System/Library/Fonts/Apple Symbols.ttf''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1705
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/visual-canvas.png''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1711
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/bun_rust_adversarial_rewrite.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1717
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1723
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1729
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1735
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1741
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1747
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_dump.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1753
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1759
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/patrones_diseno/exergy_patterns_300.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1765
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1771
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/company_brain_babylon_example.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1777
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/sophisticated_apps_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1783
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/batch_10000_iterations''.'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1789
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/scratch/yt_clean4.json".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1795
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/youtube_transduction_GcwI1hZewJo.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1801
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology/specialized_agents_invariants.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1807
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/agents/ontology".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1813
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/batch_100000_ultrathink.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1819
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1825
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1831
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/antigravity/brain".'
+  severity: P2
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1855
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1861
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1867
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/AGENTS.md".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1873
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/eval_a_b_10000.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1879
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.gemini/config/cortex/ontology/predicciones_t1.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1885
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/audit_secrets_sweep.yaml".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1891
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/perimeter_interior_evolution.yaml".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1897
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1903
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1909
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1915
+  column: 44
+  details: 'Empathy/limerent token found: ''por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1921
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1927
+  column: 44
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1933
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1939
+  column: 44
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1945
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1951
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1957
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1969
+  column: 44
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1975
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1981
+  column: 46
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 1987
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2000
+  column: 46
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.ssh/id_ed25519".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2006
+  column: 44
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2288
+  column: 47
+  details: 'Hardcoded absolute path detected: ''/usr/bin/ldd''.'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/audits/antipatterns_audit_report.yaml
+  line: 2312
+  column: 44
+  details: 'Empathy/limerent token found: ''Espero que esto ayude'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/02_INVARIANTES_TERMODINAMICAS.yaml
+  line: 119
+  column: 37
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/PRIM-1001-INYECCION-NEXO.md
+  line: 26
+  column: 95
+  details: 'Empathy/limerent token found: ''por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/invariantes_limerencia_memoria.yaml
+  line: 13
+  column: 31
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/02_INVARIANTES_TERMODINAMICAS.md
+  line: 21
+  column: 248
+  details: 'Empathy/limerent token found: ''Por supuesto'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/agents/ontology/01_PRIMITIVAS_DE_COLAPSO.yaml
+  line: 468
+  column: 24
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/03_ANTIPATRONES_ESTOCASTICOS.yaml
+  line: 6
+  column: 31
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/agents/ontology/03_ANTIPATRONES_ESTOCASTICOS.yaml
+  line: 205
+  column: 24
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/agents/ontology/01_PRIMITIVAS_DE_COLAPSO.md
+  line: 58
+  column: 180
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-025
+  file: cortex/agents/ontology/18_BINARY_AST_TOPOLOGICAL_ISOMORPHISM_1000.yaml
+  line: 214
+  column: 29
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/leyes_ouroboros_agents.yaml
+  line: 177
+  column: 57
+  details: "Empathy/limerent token found: 'Aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/03_ANTIPATRONES_ESTOCASTICOS.md
+  line: 7
+  column: 132
+  details: 'Empathy/limerent token found: ''Claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-028
+  file: cortex/agents/ontology/03_ANTIPATRONES_ESTOCASTICOS.md
+  line: 34
+  column: 153
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-028
+  file: cortex/agents/ontology/blockchain_sink_witness.yaml
+  line: 1
+  column: 438
+  details: 'Dangerous raw force push command: git push -f.'
+  severity: P1
+- antipattern_id: ANTI-001
+  file: cortex/agents/ontology/osint_primitives_matrix.md
+  line: 337
+  column: 94
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-025
+  file: cortex/agents/ontology/20_BABYLON60_EXERGY_BINARY_TARGETS.yaml
+  line: 31
+  column: 13
+  details: 'Hardcoded absolute path detected: "/usr/lib/system/libsystem_kernel.dylib
+    (Commpage 0x00007fffffe00000)".'
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/ontology/ethos_ssh_reconciliation.yaml
+  line: 7
+  column: 17
+  details: 'Hardcoded absolute path detected: "/Users/borjafernandezangulo/.ssh/id_ed25519".'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/ontology/auditoria_mythos_completa_2026_07_12.yaml
+  line: 38
+  column: 17
+  details: 'Empathy/limerent token found: ''claro'' in comments/docs.'
+  severity: P3
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/HostMcpAppTile-BSEzv4Vp.js
+  line: 2
+  column: 1750
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/3Dmol-C9mHLgHc.js
+  line: 15
+  column: 36785
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/3Dmol-C9mHLgHc.js
+  line: 16
+  column: 12672
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/3Dmol-C9mHLgHc.js
+  line: 18
+  column: 6375
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/PdfPreview-CQH1IKTv.js
+  line: 2
+  column: 43056
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/PermissionsWidgetCard-rhro6BRm.js
+  line: 1
+  column: 8992
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/StructurePreview-BCPIR6tB.js
+  line: 1
+  column: 1163
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/OnboardingFlow-C0ipypo4.js
+  line: 2
+  column: 13617
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/vendor-BPWtllH_.js
+  line: 36
+  column: 13697
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/ProjectControlPlane-DyoHP0x3.js
+  line: 64
+  column: 19197
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/ProjectControlPlane-DyoHP0x3.js
+  line: 68
+  column: 20733
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/SpreadsheetPreview-0H7eXPqz.js
+  line: 1
+  column: 66393
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/SpreadsheetPreview-0H7eXPqz.js
+  line: 2
+  column: 154264
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/SpreadsheetPreview-0H7eXPqz.js
+  line: 20
+  column: 5516
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/asideModel-DlNzfV5s.js
+  line: 11
+  column: 33
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/LatexContent-D9rKW3Hc.js
+  line: 177
+  column: 4789
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/withTimeout-qs1YqYeP.js
+  line: 4
+  column: 3171
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/ConversationView-CNsvlsYs.js
+  line: 69
+  column: 13703
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 28
+  column: 37476
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 88
+  column: 15732
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 215
+  column: 90311
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 303
+  column: 7505
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 326
+  column: 743
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 364
+  column: 21388
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 429
+  column: 854
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 434
+  column: 57577
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/index-faGPXfWw.js
+  line: 439
+  column: 21547
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/web-dist/assets/HtmlPreview-yTeYvEkc.js
+  line: 5
+  column: 18425
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9103
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-034
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9325
+  column: 12
+  details: TypeScript 'as any' blind type bypass detected.
+  severity: P2
+- antipattern_id: ANTI-034
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9385
+  column: 10
+  details: TypeScript 'as any' blind type bypass detected.
+  severity: P2
+- antipattern_id: ANTI-034
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9409
+  column: 10
+  details: TypeScript 'as any' blind type bypass detected.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9537
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 9841
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 10040
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 11296
+  column: 9
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13181
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13337
+  column: 28
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13367
+  column: 11
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13423
+  column: 11
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13500
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13630
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13728
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13752
+  column: 19
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13760
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/ketcher-chemistry/server.js
+  line: 13817
+  column: 13
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-025
+  file: cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/sharp-runtime/node_modules/detect-libc/lib/filesystem.js
+  line: 8
+  column: 17
+  details: 'Hardcoded absolute path detected: ''/usr/bin/ldd''.'
+  severity: P2
+- antipattern_id: ANTI-001
+  file: cortex/legal_dossier/LA_GUERRA_CON_ANTHROPIC_CRONICA_TOTAL.md
+  line: 23
+  column: 137
+  details: "Empathy/limerent token found: 'Aqu\xED tienes' in comments/docs."
+  severity: P3
+- antipattern_id: ANTI-036
+  file: domain_kernel/fable_modules/fable-library-js.5.8.0/Async.js
+  line: 115
+  column: 47
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-036
+  file: domain_kernel/node_modules/fable-compiler/bin/fable-library/Async.js
+  line: 78
+  column: 24
+  details: Unbounded Promise.all() detected. Possible concurrency exhaust hazard.
+  severity: P2
+- antipattern_id: ANTI-001
+  file: scratch/test_payload_invalid.yaml
+  line: 2
+  column: 0
+  details: 'Empathy/limerent token found: ''Espero que esto ayude'' in comments/docs.'
+  severity: P3
