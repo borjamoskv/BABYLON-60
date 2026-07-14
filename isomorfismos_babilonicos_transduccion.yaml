@@ -1,12 +1,12 @@
-# Transduccion estructural v2 - Isomorfismos: Babilonia / organismos / sistemas
+# Transduccion estructural v3 - Isomorfismos: Babilonia / organismos / sistemas
 # Fuente: documento de trabajo 2026-07-14. Salida: solo estructura.
-# Cada isomorfismo => order_parameter (colapsa a 0/estado bajo) gobernado por control_parameter (cruza umbral).
-# Ejes: class | state_tensor | physical_constraints | collapse_vector(failure_class, order/control, condition, dynamics).
+# Cada isomorfismo => order_parameter (colapsa) gobernado por control_parameter (cruza umbral),
+# clasificado por tipo de bifurcacion y con senal de alarma temprana (EWS) generica + proxy babilonico.
 
 meta:
-  frame: [general_systems_theory, cybernetics, scaling_laws, dynamical_systems]
+  frame: [general_systems_theory, cybernetics, scaling_laws, dynamical_systems, bifurcation_theory]
   morphism_ladder: "iso > homo > elem_equiv"   # isomorfia > homomorfia > equivalencia elemental
-  thesis: "estructura compartida => modo de fallo compartido => misma bifurcacion"
+  thesis: "estructura compartida => modo de fallo compartido => misma bifurcacion => mismas alarmas tempranas"
   strongest_case: I01_red_hidraulica   # unica cercana a biyeccion: comparte ecuaciones
   invariant_generator: "sistema abierto lejos del equilibrio + flujo(materia,energia,info) + restriccion + seleccion => espacio de soluciones estrecho => convergencia"
   dynamical_axes: "colapso = order_parameter -> 0 (o salto a estado bajo) cuando control_parameter cruza umbral"
@@ -21,6 +21,16 @@ meta:
     reservoir_depletion: "vaciado del integrador central"
     transmission_break: "estado absorbente en 0"
     slow_variable_tipping: "pliegue (saddle-node) con histeresis; irreversible"
+  bifurcation_taxonomy:
+    saddle_node_fold: [I10]
+    hopf: [I07]
+    error_threshold_transcritical: [I03]
+    kuramoto_sync: [I06]
+    percolation: [I01, I02]
+    tracking_loss_nonautonomous: [I05]
+    absorbing_state_boundary: [I08, I09]
+    structural_degeneration: [I04]
+  ews_note: "critical slowing down (autocorrelacion y varianza crecientes) aplica a codim-1 con autovalor -> eje: I10 (fold), I07 (Hopf), I03 (umbral de error). NO aplica limpio a percolacion (I01,I02: fluctuaciones de tamano de cluster), a estado absorbente (I08,I09: tendencia/conteo, no ruido critico), ni a perdida de seguimiento (I05: sesgo sistematico, no ruido)."
 
 isomorphisms:
 
@@ -41,9 +51,18 @@ isomorphisms:
       order_parameter: "fraccion_perfundida (area servida con caudal suficiente)"
       control_parameter: "tasa de azolvamiento -> r/r0"
       collapse_condition: "r/r0 < r_crit  =>  g < g_crit(demanda)"
-      dynamics: "g ~ r^4 (Poiseuille); Q_deliv = g*deltaP; percolacion cuando la red efectiva se fragmenta"
-      babylon: "azolvamiento: sedimento estrecha la luz del canal"
-      analog: "arteriosclerosis: estrechamiento de la luz vascular"
+      dynamics: "g ~ r^4 (Poiseuille); Q_deliv = g*deltaP"
+      bifurcation:
+        type: percolacion
+        normal_form: "P_inf ~ (p - p_c)^beta   [p = fraccion de conductos abiertos]"
+        critical_condition: "p < p_c  =>  desaparece el componente perfundido gigante"
+        eigenvalue_at_threshold: "n/a (transicion geometrica, no espectral)"
+        reversible: "si (el dragado restaura p)"
+      early_warning:
+        generic: "fluctuaciones crecientes del tamano de cluster; conductancia efectiva a la baja"
+        babylon: "tramos de canal que dejan de recibir agua; frecuencia de dragado en aumento"
+      babylon_pathology: "azolvamiento: sedimento estrecha la luz del canal"
+      analog_pathology: "arteriosclerosis: estrechamiento de la luz vascular"
     rigor: near_iso   # comparte ecuaciones, no solo silueta
 
   - id: I02
@@ -60,10 +79,19 @@ isomorphisms:
       failure_class: redundancy_loss
       order_parameter: "D = numero de caminos viables independientes"
       control_parameter: "poda / monocultivo (eliminacion de caminos)"
-      collapse_condition: "D -> 1  (por debajo del umbral de percolacion de caminos)"
+      collapse_condition: "D -> 1  (por debajo del umbral de conectividad/percolacion)"
       dynamics: "robustez(D) monotona creciente; D=1 => punto unico de fallo"
-      babylon: "dependencia de un solo cultivo / un solo canal"
-      analog: "fragilidad por perdida de degeneracion; punto unico de fallo"
+      bifurcation:
+        type: percolacion_conectividad
+        normal_form: "robustez ~ (D - D_c)   [esquematico; k-core / conectividad]"
+        critical_condition: "caminos independientes < umbral de conectividad"
+        eigenvalue_at_threshold: "n/a (transicion de conectividad)"
+        reversible: "si (rediversificar cultivos/canales)"
+      early_warning:
+        generic: "sensibilidad creciente a una perturbacion unica"
+        babylon: "proporcion de cebada -> 1 (monocultivo); cae la diversidad de cultivos"
+      babylon_pathology: "dependencia de un solo cultivo / un solo canal"
+      analog_pathology: "fragilidad por perdida de degeneracion; punto unico de fallo"
     rigor: homo
 
   - id: I03
@@ -86,12 +114,21 @@ isomorphisms:
       - "correccion de error (escuela/autoridad) acota la deriva"
     collapse_vector:
       failure_class: error_catastrophe
-      order_parameter: "phi_master (fraccion de la secuencia/version maestra)"
+      order_parameter: "phi_master (fraccion de la version/secuencia maestra)"
       control_parameter: "mu*L (tasa de error x longitud)"
       collapse_condition: "mu*L > ln(sigma)  =>  phi_master -> 0"
       dynamics: "d(phi)/dt = phi[(q^L)*sigma - phibar], q = 1 - mu  (cuasiespecies de Eigen)"
-      babylon: "corrupcion acumulada de copias del canon"
-      analog: "umbral de error de Eigen: la informacion se disuelve en ruido"
+      bifurcation:
+        type: umbral_de_error_transcritico
+        normal_form: "phi' = phi[(q^L)sigma - phibar]"
+        critical_condition: "mu*L = ln(sigma)  <=>  L_max = ln(sigma)/mu"
+        eigenvalue_at_threshold: "autovalor de la secuencia maestra cruza 0 en el umbral"
+        reversible: "si, si mu*L baja del umbral (reforzar correccion)"
+      early_warning:
+        generic: "varianza de secuencias en aumento; deriva de la version de consenso"
+        babylon: "proliferacion de variantes textuales; recensiones divergentes antes de fijar/perder canon"
+      babylon_pathology: "corrupcion acumulada de copias del canon"
+      analog_pathology: "umbral de error de Eigen: la informacion se disuelve en ruido"
     rigor: homo
 
   - id: I04
@@ -110,8 +147,17 @@ isomorphisms:
       control_parameter: "|grad M| (pendiente del gradiente)"
       collapse_condition: "|grad M| -> 0  =>  I(posicion;destino) -> 0"
       dynamics: "destino = umbral(M(x)); si M plano o sin cero de referencia => decodificacion ambigua"
-      babylon: "sin cero medial / sin cero terminal => casilla vacia ambigua"
-      analog: "senal de frontera ambigua (cero o borde?) => desorganizacion morfologica"
+      bifurcation:
+        type: degeneracion_estructural
+        normal_form: "I(pos;destino) ~ |grad M|"
+        critical_condition: "|grad M| -> 0  (informacion posicional se anula)"
+        eigenvalue_at_threshold: "n/a (perdida de informacion, no bifurcacion local)"
+        reversible: "si (restablecer referencia / cero posicional)"
+      early_warning:
+        generic: "error de asignacion posicional en aumento"
+        babylon: "ambiguedad creciente en numeros sin cero: dependencia del contexto para desambiguar"
+      babylon_pathology: "sin cero medial / sin cero terminal => casilla vacia ambigua"
+      analog_pathology: "senal de frontera ambigua (cero o borde?) => desorganizacion morfologica"
     rigor: homo
 
   - id: I05
@@ -130,8 +176,17 @@ isomorphisms:
       control_parameter: "deriva_ambiental / tasa_de_aprendizaje"
       collapse_condition: "deriva > adaptacion  =>  error de prediccion no acotado"
       dynamics: "P fija mientras el entorno deriva => KL(mundo || P) crece monotono"
-      babylon: "presagios que ya no predicen"
-      analog: "rigidez perceptiva ante lo nuevo (sobreajuste a prior obsoleto)"
+      bifurcation:
+        type: perdida_de_seguimiento_no_autonoma
+        normal_form: "KL(mundo || P) crece si deriva > aprendizaje"
+        critical_condition: "tasa de deriva > tasa de aprendizaje"
+        eigenvalue_at_threshold: "n/a (sistema forzado no autonomo; sin punto fijo que bifurque)"
+        reversible: "si (reaprender priores)"
+      early_warning:
+        generic: "sesgo sistematico creciente del error de prediccion (deriva, no ruido)"
+        babylon: "presagios con tasa de acierto decreciente; glosas y adiciones correctivas"
+      babylon_pathology: "presagios que ya no predicen"
+      analog_pathology: "rigidez perceptiva ante lo nuevo (sobreajuste a prior obsoleto)"
     rigor: homo
 
   - id: I06
@@ -150,8 +205,17 @@ isomorphisms:
       control_parameter: "acoplamiento K frente a dispersion de frecuencias (detuning)"
       collapse_condition: "K < K_c  =>  r -> 0"
       dynamics: "Kuramoto: d(theta_i)/dt = w_i + (K/N)*sum_j sin(theta_j - theta_i)"
-      babylon: "desajuste calendarico (deriva de fase)"
-      analog: "arritmia; perdida del ritmo circadiano"
+      bifurcation:
+        type: transicion_de_sincronizacion_kuramoto
+        normal_form: "r = |promedio(e^{i theta})|; r>0 sii K>K_c"
+        critical_condition: "K_c = 2 / (pi * g(0))   [g = densidad de frecuencias, unimodal]"
+        eigenvalue_at_threshold: "el modo coherente pierde estabilidad en K_c"
+        reversible: "si (reacoplar; reforma calendarica)"
+      early_warning:
+        generic: "fluctuaciones de fase crecientes; r decreciente"
+        babylon: "desviacion creciente calendario civil vs estacional; intercalacion mas frecuente y erratica"
+      babylon_pathology: "desajuste calendarico (deriva de fase)"
+      analog_pathology: "arritmia; perdida del ritmo circadiano"
     rigor: homo
 
   - id: I07
@@ -169,9 +233,18 @@ isomorphisms:
       order_parameter: "1 / var(error de regulacion)"
       control_parameter: "G*tau (ganancia de lazo x retardo)"
       collapse_condition: "G*tau supera el margen de estabilidad  =>  bifurcacion de Hopf"
-      dynamics: "linealizado: x' = -G*x(t - tau); oscilacion divergente si G*tau ~ pi/2"
-      babylon: "justicia desbordada o rigida"
-      analog: "tormenta inmune: homeostasis vuelta contra si; bucle fuera de control"
+      dynamics: "linealizado: x' = -G*x(t - tau)"
+      bifurcation:
+        type: hopf
+        normal_form: "x' = -G*x(t - tau);  caracteristica: lambda = -G*exp(-lambda*tau)"
+        critical_condition: "G*tau = pi/2 ;  omega_c = pi/(2*tau)"
+        eigenvalue_at_threshold: "par conjugado cruza el eje imaginario: lambda = +/- i*omega_c"
+        reversible: "si (bajar ganancia o retardo)"
+      early_warning:
+        generic: "oscilaciones amortiguadas cada vez mas lentas (parte real -> 0); varianza creciente"
+        babylon: "ciclos de castigo/represalia de amplitud creciente; respuesta legal sobre-reactiva"
+      babylon_pathology: "justicia desbordada o rigida"
+      analog_pathology: "tormenta inmune: homeostasis vuelta contra si; bucle fuera de control"
     rigor: homo
 
   - id: I08
@@ -189,8 +262,17 @@ isomorphisms:
       control_parameter: "flujo neto = salida - entrada"
       collapse_condition: "salida > entrada + R  =>  R -> 0"
       dynamics: "dR/dt = entrada - salida; agotamiento si dR/dt < 0 sostenido"
-      babylon: "colapso redistributivo en hambruna"
-      analog: "fallo metabolico sistemico"
+      bifurcation:
+        type: colision_con_frontera
+        normal_form: "R' = entrada - salida  (integrador lineal)"
+        critical_condition: "integral(salida - entrada) > R0  =>  R = 0"
+        eigenvalue_at_threshold: "0 (integrador puro; marginalmente estable, no bifurcacion local)"
+        reversible: "si (reponer reserva)"
+      early_warning:
+        generic: "tendencia negativa sostenida de la reserva; tampon efectivo decreciente"
+        babylon: "cae el grano almacenado; racionamiento; prestamos de grano en aumento"
+      babylon_pathology: "colapso redistributivo en hambruna"
+      analog_pathology: "fallo metabolico sistemico"
     rigor: homo
 
   - id: I09
@@ -208,9 +290,18 @@ isomorphisms:
       order_parameter: "informacion retenida / continuidad de linaje"
       control_parameter: "fidelidad de transmision intergeneracional"
       collapse_condition: "fidelidad_intergen -> 0  =>  estado absorbente en 0"
-      dynamics: "cadena de copia; una generacion sin transmisor => acervo no recuperable"
-      babylon: "perdida del saber escribal"
-      analog: "extincion de linaje; perdida de informacion"
+      dynamics: "N_{t+1} = f_transmision * N_t; f<1 => N -> 0"
+      bifurcation:
+        type: estado_absorbente
+        normal_form: "N_{t+1} = f*N_t"
+        critical_condition: "f (razon de transmision) < 1 sostenida, o corte total en 1 generacion"
+        eigenvalue_at_threshold: "autovalor de la recurrencia f cruza 1 por debajo"
+        reversible: "no localmente (absorbente); solo por reintroduccion externa"
+      early_warning:
+        generic: "numero de portadores/copias decreciente; tasa de reproduccion del corpus < 1"
+        babylon: "menos tablillas y aprendices por generacion; cierre de edubbas"
+      babylon_pathology: "perdida del saber escribal"
+      analog_pathology: "extincion de linaje; perdida de informacion"
     rigor: homo
 
   - id: I10
@@ -235,8 +326,17 @@ isomorphisms:
       control_parameter: "S(t) = sal acumulada (variable lenta, monotona)"
       collapse_condition: "S(t) > S_crit  =>  salto de pliegue (fold) al estado bajo; histeresis"
       dynamics: "fold: dy/dt = f(y, S), S sube lento; en S_c el estado alto desaparece (irreversible)"
-      babylon: "salinizacion irreversible; centro de gravedad se desplaza al norte (Babilonia/Asiria)"
-      analog: "senescencia; colapso ecologico"
+      bifurcation:
+        type: saddle_node_fold
+        normal_form: "y' = S - y^2   [forma normal de pliegue, esquematica]"
+        critical_condition: "S = S_c donde f=0 y df/dy=0 (los equilibrios chocan)"
+        eigenvalue_at_threshold: "autovalor real -> 0 por el lado estable (critical slowing down)"
+        reversible: "no (histeresis; recuperar exige S << S_c: drenaje/lavado costoso)"
+      early_warning:
+        generic: "critical slowing down: autocorrelacion y varianza del rendimiento crecen antes del salto"
+        babylon: "PROXY archivistico observable: proporcion trigo/cebada cae (senal lenta y monotona)"
+      babylon_pathology: "salinizacion irreversible; centro de gravedad se desplaza al norte (Babilonia/Asiria)"
+      analog_pathology: "senescencia; colapso ecologico"
     rigor: homo   # nota: isomorfismo de FORMA dinamica (dano acumulado), no de ecuaciones
 
 coupling:
@@ -272,7 +372,8 @@ limits:
   epistemic:
     multiple_realizability: "misma funcion =/= mismo mecanismo (corta en ambos sentidos)"
     honest_status: "casi todo = homomorfismo / equivalencia estructural; solo I01 (y la forma de I10) se acerca a isomorfismo pleno"
-    dynamics_status: "los bloques 'dynamics' son modelos cientificos reconocidos (I01,I03,I06,I07,I08,I10) o esquematicos (I02,I04,I05,I09); no ecuaciones ajustadas a datos babilonicos"
+    dynamics_status: "bloques 'dynamics'/'bifurcation' son modelos cientificos reconocidos (I01,I03,I06,I07,I08,I10) o esquematicos (I02,I04,I05,I09); no ecuaciones ajustadas a datos babilonicos"
+    ews_status: "las alarmas tempranas 'babylon' son proxies plausibles, no series medidas; la mejor evidenciada es trigo/cebada (I10)"
     value: "no prueba identidad; la estructura compartida genera predicciones de colapso que de otro modo no se ven"
 
 refs:
@@ -289,4 +390,5 @@ refs:
   rao_ballard_1999: "Predictive Coding in the Visual Cortex, Nat Neurosci 2:79"
   eigen_1971: "Selforganization of Matter, Naturwissenschaften 58:465"
   kuramoto_1975: "Self-entrainment of coupled nonlinear oscillators"
-  strogatz_1994: "Nonlinear Dynamics and Chaos (bifurcaciones: Hopf, saddle-node)"
+  strogatz_1994: "Nonlinear Dynamics and Chaos (Hopf, saddle-node, hysteresis)"
+  scheffer_2009: "Early-warning signals for critical transitions, Nature 461:53"
