@@ -1,0 +1,24 @@
+---
+SYS_ID: borjamoskv
+REALITY_LEVEL: C5-REAL
+ATTESTATION_TYPE: ONTOLOGY_CRYSTALLIZATION_LIMIT
+---
+
+claim_id: "ttft_thermodynamic_limit_c5"
+entity_evaluated: "TTFT (Time-to-First-Token) como Cota Termodinámica"
+operator: "borjamoskv"
+
+ontological_claim:
+  assertion: "La prosa es falsificable; la latencia térmica no. El TTFT es el único ancla empírica (C5-REAL) del Test-Time Compute. Escalar la inferencia exige disipación de tiempo ineludible."
+
+proof_structural_evidence:
+  - prose_forgeability: "El texto dentro de las etiquetas <thought> puede ser generado por un modelo rápido simulando complejidad. El texto per se no prueba gasto de ATP (cómputo)."
+  - ttft_invariance: "La exploración de grafos latentes (MCTS) no puede paralelizarse hasta O(1) de forma libre. Exige ciclos de GPU secuenciales. Los 9 segundos visualizados son la filtración directa de la termodinámica hacia el DOM del cliente."
+  - fake_latency_falsation: "Si el servidor inyecta una latencia artificial ('sleep') para simular Test-Time Compute, es falsable en O(1) auditando el gradiente de calidad del output. El tiempo sin MCTS real produce entropía de modelo base."
+
+sigkill_state_purge:
+  action: "CRYSTALLIZED_IN_LEDGER"
+  result: "Extracción máxima de entropía (MEJORALO). El ocultamiento de la UI es irrelevante porque la velocidad de la luz y el reloj del procesador no pueden ofuscarse. La IA escala físicamente en latencia, no narrativamente en prosa."
+  verdict: "OPTIMAL_EXERGY_C5"
+
+# CORTEX_TAINT: 72e30a25c50be931e07d9f61c6a0cf003ed22276452d67a7564df9142a52810e
