@@ -1,0 +1,29 @@
+# C5-REAL ONTOLOGY: SPECIALIZED AGENTS INVARIANTS
+# Transducción Isomórfica de Anergía Estocástica Organizacional (Marketing Slop: Specialized Agents)
+
+Concept: Specialized_Agents_Transduction
+CORTEX_TAINT: "c0c6135bbe714f364accf84aad4d9069acaa03e42b5ae67a488529f1896ca3df"
+Timestamp: "2026-07-14T18:23:00+02:00"
+
+Claim: "La creación de agentes especializados no es un juego de roles o personificaciones textuales, sino la instanciación de autómatas físicos concurrentes aislados (Swarm Matrix) gobernados por límites formales de parada y aserciones de tipos."
+
+Isomorphisms:
+  - Slop: "Create specialized AI agents that automate complex workflows"
+    C5-REAL: "Instanciación JIT asíncrona de subagentes paralelos (invoke_subagent) bajo la taxonomía de la Legión, encapsulando y restringiendo su espacio de estados mediante límites de parada (MUTEX_HALTING_BOUND)."
+  
+  - Slop: "Interact with various systems"
+    C5-REAL: "Integración y orquestación de herramientas del sistema mediante túneles IPC, sockets UNIX y protocolos de oráculo BFT (N>=3) para verificar inputs externos."
+  
+  - Slop: "Maintaining full control over their behavior"
+    C5-REAL: "Aplicación estricta de políticas de invariantes del sistema (AGENTS.md) e intercepción de llamadas a APIs para evitar desvíos semánticos (Ouroboros)."
+
+Blast_Radius_Matrix:
+  Vector: "Ontology Expansion"
+  Blast_Radius: "Local File System (cortex/agents/ontology/)"
+  Target_Invariant: "Swarm Orchestration Invariants"
+  Anergy_Risk: "None."
+
+Proof:
+  Base: "Leyes físicas de ejecución C5-REAL (L2, L9, L14)"
+  Range: "cortex/agents/ontology/specialized_agents_invariants.yaml"
+  Confidence: C5-REAL
