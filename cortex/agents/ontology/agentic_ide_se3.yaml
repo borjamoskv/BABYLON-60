@@ -1,0 +1,37 @@
+id: "agentic_ide_se3"
+type: "concept_matrix"
+timestamp: "2026-07-14T22:10:00Z"
+author: "borjamoskv"
+state: "C5-REAL"
+
+concept: "Agentic Software Engineering (SE 3.0)"
+definition: "Transición del modelo de IDE asistido pasivamente a un entorno de comandos y ejecución autónoma. Los LLM abandonan la generación pura de texto y colapsan la entropía mediante la manipulación I/O de herramientas del SO (AEE) y la orquestación supervisada (ACE)."
+
+invariants:
+  - id: "inv_aee_ace"
+    description: "Separación topológica estricta: Agent Execution Environment (AEE) para la mutación física (disco, lint, tests) y Agent Command Environment (ACE) para la orquestación humana y la calibración."
+    falsifiability: "Un agente autónomo que opera sin feedback humano o aislamiento (sandbox) fallará irremediablemente en la integración final, causando Crash Causal o loop infinito."
+
+evidence_matrix:
+  - id: "[2405.15793]"
+    title: "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering"
+    mechanism: "Agent-Computer Interface (ACI). Muta el sistema de archivos, parsea linter y consola."
+    url: "https://arxiv.org/abs/2405.15793"
+  - id: "[2509.06216]"
+    title: "Agentic Software Engineering: Foundational Pillars and a Research Roadmap"
+    mechanism: "Formalización de SE 3.0, AEE y ACE."
+    url: "https://arxiv.org/abs/2509.06216"
+  - id: "[2511.13646]"
+    title: "Live-SWE-agent: Can Software Engineering Agents Self-Evolve on the Fly?"
+    mechanism: "Autopoiesis en runtime. Muta su propio scaffolding de sistema para resolver constraints."
+    url: "https://arxiv.org/abs/2511.13646"
+  - id: "[2606.08500]"
+    title: "Projecting the Emerging Mindset of SWE Agent by Launching a Wild Code Understanding Journey"
+    mechanism: "Perfilado de atención latente y toma de decisiones heurísticas (Ada) en repositorios complejos."
+    url: "https://arxiv.org/abs/2606.08500"
+  - id: "[2504.08696]"
+    title: "SeaView: Software Engineering Agent Visual Interface for Enhanced Workflow"
+    mechanism: "Renderizado topológico del MCTS y trayectoria de comandos para trazabilidad Causal."
+    url: "https://arxiv.org/abs/2504.08696"
+
+dependencies: []
