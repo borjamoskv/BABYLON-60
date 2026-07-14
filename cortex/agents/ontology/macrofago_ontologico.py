@@ -25,23 +25,23 @@ import subprocess
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ID_SAFE = re.compile(r"^[A-Z]+-[A-Z0-9-]+$")
 
-# Anergy Lexicon (Green Theater markers) # noqa: anergy
-ANERGY_TOKENS = {  # noqa: anergy
+# Anergy Lexicon (Green Theater markers) # anergy
+ANERGY_TOKENS = {  # anergy
     "holístico",
     "es importante",
     "sin embargo",
     "espero que",
-    "útil",  # noqa: anergy
+    "útil",  # anergy
     "en conclusión",
     "cabe destacar",
     "por otro lado",
-    "es crucial",  # noqa: anergy
+    "es crucial",  # anergy
     "sinergia",
     "paradigma",
     "revolucionario",
-    "convergencia formal",  # noqa: anergy
-    "c5-real",  # noqa: anergy
-}  # noqa: anergy
+    "convergencia formal",  # anergy
+    "c5-real",  # anergy
+}  # anergy
 ANERGY_PATTERNS = [
     re.compile(r"\b" + re.escape(t) + r"\b", re.IGNORECASE) for t in ANERGY_TOKENS
 ]

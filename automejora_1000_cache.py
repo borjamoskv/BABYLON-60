@@ -3,7 +3,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cortex_inference import CortexInferenceEngine, CACHE_DB_PATH
+from cortex_inference import CortexInferenceEngine, CACHE_DB_PATH  # type: ignore
 
 VOCAB = [
     "causar",

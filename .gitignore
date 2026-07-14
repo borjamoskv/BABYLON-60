@@ -15,6 +15,7 @@ src/ontology/obj/
 
 # legacy build artifacts
 /target
+strike_rs/target/
 proof_artifact.json
 b60_kernel
 babylon60

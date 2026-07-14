@@ -307,7 +307,7 @@ def main():
     BABYLON_SCRIPTS = "$CORTEX_ROOT/10_PROJECTS/babylon-60/scripts"
     if BABYLON_SCRIPTS not in sys.path:
         sys.path.append(BABYLON_SCRIPTS)
-    from c5_guarded_action import boot_sequence, guarded_action
+    from c5_guarded_action import boot_sequence, guarded_action  # type: ignore
 
     state = ProjectState(root_path=sys.argv[1])
     for agent in [

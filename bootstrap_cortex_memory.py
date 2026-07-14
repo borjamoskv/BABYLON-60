@@ -6,7 +6,7 @@ from cryptography.fernet import Fernet
 
 _BASE = os.path.dirname(os.path.abspath(__file__))
 try:
-    from dotenv import load_dotenv
+    from dotenv import load_dotenv  # type: ignore
 
     load_dotenv(os.path.join(_BASE, ".env.vault"))
 except ImportError:
