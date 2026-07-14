@@ -28,6 +28,16 @@ crypto = [
 data = [
     "pandas>=2.0",
 ]
+voice = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+]
+voice-full = [
+    "sounddevice>=0.4.6",
+    "faster-whisper>=1.1",
+    "mlx-lm>=0.21; platform_machine=='arm64' and sys_platform=='darwin'",
+    "kokoro>=0.9",
+]
 
 [tool.setuptools]
 packages = ["cli", "core", "bft", "analysis", "adapters", "compiler"]
