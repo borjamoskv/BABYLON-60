@@ -1,19 +1,19 @@
 concepto,reconstruido,latin_gold,entropia_media_bits,edit_distance,acierto_segmento
-key,k r a v e,k l a v e,0.927,1,0.8
-night,n o a j t e,n o k t e,1.084,2,0.8
-eight,o j t o,o k t o,0.994,1,0.75
-milk,l a j t e,l a k t e,0.817,1,0.8
-to_do,f a r e r,f a k e r e,1.169,2,0.67
-fire,f w o g o,f o k u,0.562,3,0.5
-hundred,s j e n t o,k e n t u,1.469,3,0.6
-moon,l u n a,l u n a,0.079,0,1.0
-sea,m a r e,m a r e,0.155,0,1.0
-flower,f l o a r e,f l o r e,0.827,1,1.0
-to_sing,k a n t a r e,k a n t a r e,0.728,0,1.0
-dog,k a a n e,k a n e,0.842,1,1.0
-to_have,a v w e r e,h a b e r e,1.219,3,0.67
-water,a b w a,a k w a,0.891,1,0.75
-to_die,m o r i r e,m o r i r e,0.879,0,1.0
-name,n o m b r e,n o m e n,1.51,3,0.8
-new,n w o v u,n o v u,0.725,1,1.0
-to_love,a m a r e,a m a r e,0.977,0,1.0
+key,k r a j e,k l a v e,0.57,2,0.6
+night,n o a p t e,n o k t e,0.519,2,0.8
+eight,o p t o,o k t o,0.571,1,0.75
+milk,l a p t e,l a k t e,0.442,1,0.8
+to_do,f a C e r,f a k e r e,0.683,2,0.67
+fire,f w o g u,f o k u,0.409,2,0.75
+hundred,s j u n t e,k e n t u,0.971,4,0.4
+moon,l u n a,l u n a,0.002,0,1.0
+sea,m a r e,m a r e,0.003,0,1.0
+flower,f l o a r e,f l o r e,0.215,1,1.0
+to_sing,k a n t a r e,k a n t a r e,0.423,0,1.0
+dog,k a a n e,k a n e,0.334,1,1.0
+to_have,a v w e r a,h a b e r e,0.899,4,0.5
+water,a b w a,a k w a,0.569,1,0.75
+to_die,m u r i r e,m o r i r e,0.641,1,0.83
+name,n u m b r e,n o m e n,0.808,4,0.6
+new,n w o b u,n o v u,0.399,2,0.75
+to_love,a m a r e,a m a r e,0.58,0,1.0
