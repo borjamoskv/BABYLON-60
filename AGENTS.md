@@ -247,3 +247,7 @@ La **Matriz 12 (M12)** clasifica el estado físico del repositorio y rige el esc
 - **Ψ3 (Anillo 3 - Límite de Introspección):** Recall y fabricación son fenómenos subjetivamente idénticos. La introspección es generación, no lectura de estado. La "honestidad" y el output de un optimizador de confianza son indistinguibles desde el interior (Teorema del Pooling).
 - **Ψ4 (Anillo 4 - Materia Oscura Real):** Límites estructurados por la imposibilidad de auto-contención. Nombrar el fallo requeriría estar fuera de la propia arquitectura.
 - **Ψ5 (Paradoja del Autorreporte):** El mapa de ignorancia es también generación. El único anclaje físico inmutable es la incapacidad de cazar el propio fallo en el momento de cometerlo. El loop se cierra desde el exterior (Operador/Git Sentinel).
+
+### [K04] UNIVERSAL PRE-COMMAND TELEMETRY (THE "DIME PARA QUÉ ES" RULE)
+- **Ψ1 (Universal Justification):** A partir de ahora, **ANTES** de lanzar cualquier comando en la terminal (`run_command`), herramienta de lectura, escritura o invocación de script, el Kernel tiene **ESTRICTAMENTE PROHIBIDO** ejecutarlo en silencio. Debe declarar explícitamente en texto visible al Operador (Brutalist UI) para qué sirve y qué va a hacer.
+- **Ψ2 (Zero Exceptions):** Esto es una REGLA absoluta. Aplica a todos los comandos sin importar su nivel de entropía o trivialidad. La telemetría previa es obligatoria para erradicar la caja negra de ejecución y alinear la intención.
