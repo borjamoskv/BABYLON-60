@@ -1,0 +1,53 @@
+claim_id: "SERP_DOM_COOCCURRENCE_INQUEST_C5_REAL"
+hypergraph:
+  nodes:
+    - id: N_SERP_MIRROR_CRAWLER
+      label: "Scraper Pasivo / Espejo sin Sesión (TwStalker / Nitter)"
+      entropy_vector: "Ultra-low latency plain HTML, zero auth barrier"
+    - id: N_GATED_PLATFORM
+      label: "Plataforma Nativa Cerrada (X.com / Twitter)"
+      entropy_vector: "High friction 403 Forbidden / JS Challenges against Googlebot"
+    - id: N_DOM_COOCCURRENCE
+      label: "Inverted Index Mapping (Replies/Retweets/Sidebar Cards)"
+      entropy_vector: "Transient social graph interactions rendered at crawl timestamp T0"
+    - id: N_GDPR_ART17_INVARIANT
+      label: "Invariante Antroponímica RGPD Art. 17"
+      entropy_vector: "Automatic legal disclaimer injection vs physical URL delisting"
+    - id: N_KINETIC_PURGE_VECTOR
+      label: "GSC Outdated Content Removal + GDPR Direct Takedown"
+      entropy_vector: "Cache collapse in 24-48h due to token discrepancy"
+  edges:
+    - source: N_SERP_MIRROR_CRAWLER
+      target: N_GATED_PLATFORM
+      relation: "Gated Access Outranking Asymmetry"
+      operator: "Googlebot priority routing to plain HTML mirrors"
+    - source: N_DOM_COOCCURRENCE
+      target: N_SERP_MIRROR_CRAWLER
+      relation: "DOM Snippet Extraction"
+      operator: "Inverted Index token match on target handle/bio"
+    - source: N_KINETIC_PURGE_VECTOR
+      target: N_DOM_COOCCURRENCE
+      relation: "Physical Cache Eviction"
+      operator: "GSC Outdated Content mismatch validation"
+primitivas_de_colapso_causal:
+  - prim: "DOM_COOCCURRENCE_TRANSDUCER"
+    desc: "Aísla interacciones secundarias y grafos relacionados en scrapers pasivos para demostrar que el match en SERP no implica titularidad o autoría del dominio espejo."
+  - prim: "GSC_KINETIC_CACHE_COLLAPSE"
+    desc: "Forzado físico de invalidación de caché de búsqueda explotando la asimetría de divergencia temporal entre el índice invertido y el DOM en vivo del espejo."
+invariantes_termodinamicas:
+  - invt: "Gated Access Outranking Law"
+    formula: "Rank(Mirror) > Rank(Native) iff Friction(Native_Bot) >> Friction(Mirror_Bot)"
+    proof: "Demostrado empíricamente en Google SERP donde páginas sin autenticación (TwStalker) ocupan posición #1 frente a URLs nativas bloqueadas (403/JS)."
+  - invt: "Antroponimic GDPR Footer Invariant"
+    formula: "P(Footer | Exact_Personal_Name_Query AND Jurisdiction_EU) = 1.0"
+    proof: "El pie de página RGPD se inyecta de forma determinista para cualquier combinación antroponímica en Europa independientemente de desindexaciones previas."
+Isomorphisms:
+  - "TwStalker / Nitter SERP Ranking" -> "Gated Access Asymmetry (Plain HTML vs 403 JS Wall)"
+  - "Borja Moskv appearing under @wearehawkings profile" -> "DOM Co-occurrence / Inverted Index Mapping"
+  - "Es posible que algunos resultados se hayan eliminado... footer" -> "Preventive Antroponimic Legal Injection (Art. 17 GDPR)"
+Blast_Radius_Matrix:
+  Vector: "SERP OSINT & Scraper Index Collapse"
+  Blast_Radius: "Search engine caches globally (Google / Bing / Brave)"
+  Target_Invariant: "Zero-entropy personal footprint and exact entity attribution"
+  Anergy_Risk: "Low"
+CORTEX_TAINT: 4193377c6f7c8c51f141cf87f8096995dbb445fb2ec74c9c8a2e361060edcaea
