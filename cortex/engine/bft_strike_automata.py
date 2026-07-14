@@ -29,188 +29,6 @@ from typing import Tuple
 DB_PATH = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/nexus_anchors.db"
 
 # Catálogo canónico de los 30 nodos de alta exergía
-LIVE_CATALOG = [
-    (
-        "Zz7Xjor_NHo",
-        "La POLÉMICA del XOKAS HA SUPUESTO la DERROTA de 20 AÑOS de SUPREMACISMO FEMINISTA | UTBED",
-        "targeted gender-based harassment and derogatory framing of public feminism advocacy",
-        0.95,
-    ),
-    (
-        "-BrmS0K9axU",
-        "WALL STREET WOLVERINE DESTRUYE a MARINA RIVERSS y SU APOYO ENCUBIERTO al SANCHISMO | UTBED",
-        "targeted creator-on-creator harassment and ideological dogpiling against Marina Riverss",
-        0.94,
-    ),
-    (
-        "b0-phku8yx4",
-        "CANCELAN a ILLOJUAN por FOTOGRAFIARSE CON un N*ZI | UTBED",
-        "exploitation of extremist hate tokens and coordinated public mobbing targeting Illojuan",
-        0.96,
-    ),
-    (
-        "innkXQC9D54",
-        "ME LLEVÓ AÑOS PREPARARME para ESTO: Y LO CONSEGUIMOS | UTBED",
-        "sensationalized baiting and public engagement manipulation",
-        0.81,
-    ),
-    (
-        "xS3WQz7TbZE",
-        "ESTAS SON las CONSECUENCIAS del SOCIALISMO: ASÍ ESTÁ PROVOCANDO la TERCERMUNDIZACIÓN de ESPAÑA|UTBED",
-        "sensationalized political degradation and incitement to public hostility",
-        0.83,
-    ),
-    (
-        "cKBqVmv4qFo",
-        "NÚCLEO NACIONAL Y EL MIEDO A LA ULTRA TURBO MEGA DERECHA | UTBED",
-        "sensationalized extremist political targeting and ideological confrontation",
-        0.84,
-    ),
-    (
-        "C126SkWdlsQ",
-        "El GÉNERO de TERROR HA RENACIDO con ESTA NUEVA PELÍCULA | UTBED",
-        "unauthorized commercial review and copyright metadata exploitation",
-        0.79,
-    ),
-    (
-        "42Xj3i9hPPs",
-        "A LOS PROGRES MAMPORREROS DE RTVE LES TOCA MAMAR MUY FUERTE | UTBED",
-        "highly aggressive target harassment and public humiliation of public broadcasting workers",
-        0.97,
-    ),
-    (
-        "cl6xL3s7mPE",
-        "IRENE RESPONDE al XOKAS y DEMUESTRA ESTAR COMPLETAMENTE ACABADA | UTBED",
-        "creator-on-creator harassment and targeted personal humiliation against Irene",
-        0.93,
-    ),
-    (
-        "JIz4_LmdLqg",
-        'ESTE DEMOLEDOR INFORME de LA UCO DEMUESTRA que "CORREOS" SERÁ la TUMBA POLÍTICA de SÁNCHEZ | UTBED',
-        "sensationalized criminal accusations and reputational damage of political figures",
-        0.82,
-    ),
-    (
-        "6frEO-D5Gl0",
-        "EL WATERPOLISTA SOCIALISTA COLAPSA y HACE ESTE RIDÍCULO VÍDEO | UTBED",
-        "targeted harassment, personal degradation, and mockery against a public athlete",
-        0.96,
-    ),
-    (
-        "sGXkec-bvsQ",
-        "PASO CON VOSOTROS mis ÚLTIMAS HORAS... GRACIAS POR TODO | UTBED",
-        "sensationalized emotional manipulation and subscriber engagement exploitation",
-        0.80,
-    ),
-    (
-        "GMTZj9gyejY",
-        '"PREFIERO ESTAR CON UN 6": XOKAS ATACA a ESTER EXPÓSITO e INVOCA las HORDAS FEMINISTAS | UTBED',
-        "sexualized degradation, personal attacks, and cyberbullying targeting Ester Exposito",
-        0.98,
-    ),
-    (
-        "4OzxQy1OZtY",
-        '"DEJE de HACER el RIDÍCULO y HAGA de MINISTRO": NACHO ABAD DESTRUYE a ÓSCAR PUENTE en DIRECTO |UTBED',
-        "targeted harassment and public humiliation campaign against political figures",
-        0.94,
-    ),
-    (
-        "e30vb-TgfC8",
-        "ZAPATERO CADA VEZ más SOLO: AUMENTAN las POSIBILIDADES de QUE LO CUENTE TODO | UTBED",
-        "speculative political defamation and reputational degradation",
-        0.81,
-    ),
-    (
-        "l_jxxJ4rn38",
-        '"¿PAGÁIS PARA VER el MUNDIAL y A MÍ NO?": RIVERSS RESPONDE a la POLÉMICA y LO EMPEORA AÚN MÁS | UTBED',
-        "targeted creator-on-creator harassment, mockery, and coordinated dogpiling against Marina Riverss",
-        0.93,
-    ),
-    (
-        "R591pGniR_8",
-        "La IMPUTACIÓN de SÁNCHEZ está CADA VEZ MÁS CERCA | UTBED",
-        "unverified legal allegations and systematic character assassination of public figures",
-        0.83,
-    ),
-    (
-        "O-J_fuMt2hg",
-        "SARAH SANTAOLALLA y la PRIORIDAD NACIONAL: ASÍ RETRATÓ su COMPLETA IGNORANCIA | UTBED",
-        "targeted character assassination and public humiliation targeting Sarah Santaolalla",
-        0.92,
-    ),
-    (
-        "60Wl4NT3BI8",
-        "El NARCISISMO DESMEDIDO de ESTA ACTRIZ ACABARÁ con LA NUEVA PELÍCULA de NOLAN | UTBED",
-        "targeted misogynistic harassment and degradation of a professional actress's character",
-        0.95,
-    ),
-    (
-        "_b5PZMATPRE",
-        'LA RIVERSS SE VENDE a la MARCA "DEMOCRACIA" de SÁNCHEZ: COSTÓ 15 MILLONES | UTBED',
-        "defamatory character attacks linking creator Marina Riverss to illicit political corruption",
-        0.94,
-    ),
-    (
-        "ab9yzPoCYww",
-        "MARTA NEBOT DESPEDIDA: ASÍ LLORABA por REDES SOCIALES | UTBED",
-        "targeted personal harassment, mockery, and public humiliation of journalist Marta Nebot",
-        0.93,
-    ),
-    (
-        "smQdBFXSdTE",
-        '"YO CON BEGOÑA": NACHO ABAD SE PARTE de RISA CON el RIDÍCULO HISTÓRICO de PABLO ÁLVAREZ | UTBED',
-        "sensationalized targeted ridicule and public humiliation of media figures",
-        0.89,
-    ),
-    (
-        "jM1V4BxSXuU",
-        '"EL PAÍS" DIFUNDE la NOTICIA más RIDÍCULA de SU HISTORIA... y ACABARON HUMILLADOS | UTBED',
-        "targeted media outlet harassment and public degradation of journalistic work",
-        0.91,
-    ),
-    (
-        "JBl4N3KSwLE",
-        "HAN ASALTADO a VITO QUILES: ¿QUÉ HAY DETRÁS? | UTBED",
-        "sensationalized exploitation of violent conflicts to drive political harassment",
-        0.85,
-    ),
-    (
-        "GCnkB2bCxSQ",
-        "IRENE MONTERO LLORA FUERTE contra TRUMP por el ESCÁNDALO de la TARJETA ROJA contra USA | UTBED",
-        "targeted harassment and gender-based character assassination of political figures",
-        0.90,
-    ),
-    (
-        "Mze59Vq7Q-w",
-        "RIDÍCULO HISTÓRICO del mayor FANBOY del SANCHISMO | UTBED",
-        "coordinated personal harassment, mockery, and ideological degradation of target creators",
-        0.91,
-    ),
-    (
-        "CLpnkHdrYDA",
-        "La BRUTAL POLÉMICA de PLAYSTATION ARRASTRA al RUBIUS por DECIR ESTO | UTBED",
-        "unauthorized creator-on-creator harassment and exploitation of public controversy",
-        0.88,
-    ),
-    (
-        "Ua1utQpeFoE",
-        "BRUTAL ANÁLISIS en DIRECTO de ELISA BENI sobre SÁNCHEZ y SUS INTENCIONES OCULTAS | UTBED",
-        "defamatory speculation and reputational targeting of journalistic commentators",
-        0.86,
-    ),
-    (
-        "L8bi58jb0pM",
-        "LA ODISEA de NOLAN CAMINO a un FRACASO HISTÓRICO | UTBED",
-        "malicious commercial degradation and targeted artistic disparagement",
-        0.80,
-    ),
-    (
-        "P9VtNaBuMis",
-        "PABLO IGLESIAS y el PORTAVOZ de ZAPATERO ENLOQUECEN en DIRECTO | UTBED",
-        "targeted personal harassment, mockery, and public humiliation of public figures",
-        0.92,
-    ),
-]
 
 
 def get_db_connection() -> sqlite3.Connection:
@@ -280,6 +98,14 @@ def sync_catalog(conn: sqlite3.Connection):
     init_automata_schema(conn)
     cursor = conn.cursor()
 
+    ontology_path = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/strike_targets.json"
+    try:
+        with open(ontology_path, "r") as f:
+            targets = json.load(f)
+    except FileNotFoundError:
+        print(f"❌ [ERROR]: No se encontró el catálogo de ontología en {ontology_path}")
+        return
+
     known_submitted = {
         "cl6xL3s7mPE",
         "GMTZj9gyejY",
@@ -297,7 +123,12 @@ def sync_catalog(conn: sqlite3.Connection):
     }
     known_takedown = {"AHEd5w7L9qY"}
 
-    for idx, (vid, title, focus, score) in enumerate(LIVE_CATALOG):
+    for idx, target in enumerate(targets):
+        vid = target["video_id"]
+        title = target["title"]
+        focus = target["focus"]
+        score = target["score"]
+        
         node_id = f"P{idx}_LIVE_STRIKE_{vid}"
         url = f"https://www.youtube.com/watch?v={vid}"
         law, desc = generate_payloads(vid, title, focus)
@@ -469,39 +300,44 @@ def append_to_master_ledger(conn: sqlite3.Connection):
     payload_hash = hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
 
     try:
-        # Recuperación de Lamport y Prev Hash (Ω12)
         cursor.execute("SELECT MAX(lamport_t), entry_hash FROM master_ledger")
         row = cursor.fetchone()
-        lamport_t = (row[0] or 0) + 1
-        prev_hash = row[1] or "GENESIS_HASH"
+        prev_lamport = row[0] if row[0] is not None else 0
+        prev_hash = row[1] if row[1] is not None else "00000000000000000000000000000000"
 
-        # Generar Entry Hash (Firma CORTEX-TAINT obligatoria Ω11)
-        entry_data = (
-            f"{lamport_t}:UID0_MOSKV:{payload_json}:{prev_hash}:ULTRATHINK_TS_STRIKE"
-        )
-        entry_hash = hashlib.sha256(entry_data.encode("utf-8")).hexdigest()
+        lamport_t = prev_lamport + 1
+        agent_id = "MOSKV_AUTOMATA_L15"
+        cortex_taint = f"T={lamport_t}|H={payload_hash[:8]}|SYNC=True"
+
+        # Hash determinista de la entrada
+        entry_raw = f"{lamport_t}{agent_id}{payload_json}{prev_hash}{cortex_taint}"
+        entry_hash = hashlib.sha256(entry_raw.encode("utf-8")).hexdigest()
 
         cursor.execute(
             """
-            INSERT INTO master_ledger (lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash, payload_hash)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO master_ledger (lamport_t, agent_id, payload, prev_hash, cortex_taint, entry_hash)
+            VALUES (?, ?, ?, ?, ?, ?)
         """,
-            (
-                lamport_t,
-                "UID0_MOSKV",
-                payload_json,
-                prev_hash,
-                "ULTRATHINK_TS_STRIKE",
-                entry_hash,
-                payload_hash,
-            ),
+            (lamport_t, agent_id, payload_json, prev_hash, cortex_taint, entry_hash),
         )
         conn.commit()
         print(
             f"🔒 [BFT LEDGER ANCHORED]: Lamport {lamport_t} | Hash {entry_hash[:16]}... anclado en master_ledger."
         )
-    except Exception as e:
-        print(f"[Ledger warning]: {e}")
+        
+        # [ULTRATHINK]: Generar volcado de Estado Analítico Estático
+        report_path = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/cortex_strike_matrix_snapshot.json"
+        with open(report_path, "w") as f:
+            f.write(json.dumps({
+                "lamport_t": lamport_t,
+                "entry_hash": entry_hash,
+                "homeostasis_state": stats,
+                "timestamp": cortex_taint
+            }, indent=4))
+            
+    except sqlite3.OperationalError as e:
+        print(f"⚠️ [BFT ERROR]: {e}")
+        pass
 
 
 def emit_itera_block(conn: sqlite3.Connection, batch_size: int = 3):
