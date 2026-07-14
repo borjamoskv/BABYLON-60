@@ -11,7 +11,6 @@ Enforces exact SHA3-256 CORTEX-TAINT across the multi-agent Swarm boundary.
 """
 
 import os
-import sys
 import hashlib
 import json
 
@@ -104,7 +103,7 @@ def generate_evolution_matrix(nodes: list) -> tuple:
             f"    parent_id: \"{n['id']}\"",
             f"    classification: \"{n['classification']}\"",
             f"    cortex_taint: \"0x{node_taint}\"",
-            f"    execution_guard: \"FAIL_FAST_CRASH_OVERRIDE\"",
+            "    execution_guard: \"FAIL_FAST_CRASH_OVERRIDE\"",
             f"    invariant_rule: \"Assert({n['id']} in ExecutionAST.active_nodes)\"",
             f"    evolution_vector: \"Active enforcement of {n['name']} across multi-agent Swarm boundaries.\"",
             ""

@@ -29,3 +29,10 @@ node_modules/
 .agents/
 ORIGINAL_REQUEST.md
 
+
+# caches y artefactos de sistema
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+.fuse_hidden*
+*.py[cod]

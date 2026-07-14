@@ -7,7 +7,6 @@ Executes continuous thermodynamic self-healing, WAL checkpoints, and Merkle anch
 
 import os
 import sys
-import time
 import sqlite3
 import hashlib
 

@@ -2,7 +2,6 @@
 import sqlite3
 import os
 import hashlib
-from datetime import datetime
 
 # [C5-REAL] WEISMANN BARRIER (ONTOLOGICAL APOPTOSIS ENFORCER)
 # L0.3 Invariant: Civilizations lack a reproductive bottleneck. 

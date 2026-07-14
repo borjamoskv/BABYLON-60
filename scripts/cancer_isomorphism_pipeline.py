@@ -10,7 +10,6 @@
 # %%
 import numpy as np
 import networkx as nx
-import time
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -133,4 +132,4 @@ print(f"\n[FALSABILIDAD] Caída del Atractor Tumoral (Exergía residual post-inh
 UMBRAL_FALSACION = 40.0
 assert caida_atractor > UMBRAL_FALSACION, f"[ERROR C5-REAL] La intervención teórica solo alcanzó {caida_atractor:.1f}% de colapso. No supera el umbral crítico ({UMBRAL_FALSACION}%). Hipótesis REFUTADA. No derivar a ensayo In-Vitro."
 
-print(f"[ÉXITO C5-REAL] Hipótesis topológica VALIDAD. La intervención supera el umbral termodinámico requerido para someterse a ensayo In-Vitro (CRISPR/Cas9).")
+print("[ÉXITO C5-REAL] Hipótesis topológica VALIDAD. La intervención supera el umbral termodinámico requerido para someterse a ensayo In-Vitro (CRISPR/Cas9).")

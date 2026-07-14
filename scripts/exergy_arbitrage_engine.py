@@ -9,14 +9,11 @@ verifies AST integrity, and anchors directly into the local BFT Ledger.
 import argparse
 import hashlib
 import json
-import os
 import re
 import sqlite3
-import subprocess
-import sys
 import time
 from pathlib import Path
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
@@ -67,7 +64,7 @@ def extract_ast(raw_remote_output: str) -> Tuple[str, int]:
         if "Here is" in code[:100] or "Sure," in code[:100]:
             lines = code.splitlines()
             # Drop top and bottom chatty lines
-            code = "\n".join([l for l in lines if not l.startswith("Here") and not l.startswith("Hope this")]).strip()
+            code = "\n".join([ln for ln in lines if not ln.startswith("Here") and not ln.startswith("Hope this")]).strip()
             
     loc = len(code.splitlines())
     return code, loc

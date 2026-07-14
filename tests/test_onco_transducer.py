@@ -1,4 +1,3 @@
-import pytest
 import numpy as np
 import networkx as nx
 from cli.onco_transducer import construct_wgcna_graph, get_structural_driver_nodes, simulate_boolean_network

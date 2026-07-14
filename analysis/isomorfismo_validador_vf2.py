@@ -29,7 +29,7 @@ if __name__ == "__main__":
     
     result = evaluate_c5_isomorphism(G1, G2)
     
-    print(f"Claim: Transducción Topológica Bi-direccional Verificada.")
+    print("Claim: Transducción Topológica Bi-direccional Verificada.")
     print(f"Proof: {{ Base: 'VF2_GraphMatcher', Range: [0, 1], Confidence: 'C5-REAL', Result: {result['isomorphic']} }}")
     if result['isomorphic']:
         print(f"Mapeo de Nodos: {result['mapping']}")

@@ -417,7 +417,7 @@ def check_status(conn: sqlite3.Connection):
     lamport = cursor.fetchone()[0] or 0
 
     print(f"\n{'━' * 52}")
-    print(f" C5-REAL STRIKE MATRIX · HOMEOSTASIS")
+    print(" C5-REAL STRIKE MATRIX · HOMEOSTASIS")
     print(f"{'━' * 52}")
     print(f" Total Nodos:      {total}")
     print(f" SUBMITTED:        {submitted}")

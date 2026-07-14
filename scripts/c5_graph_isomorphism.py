@@ -34,11 +34,11 @@ def c5_structural_isomorphism_test():
     if is_iso:
         mapping = next(GM.isomorphisms_iter())
         print("Claim: Los grafos presentan isomorfismo biyectivo absoluto.")
-        print(f"Proof: {{ Base: 'VF2_Algorithm', Range: [0,1], Confidence: 'C5-REAL', Result: 1 }}")
+        print("Proof: { Base: 'VF2_Algorithm', Range: [0,1], Confidence: 'C5-REAL', Result: 1 }")
         print(f"Mapeo Topológico: {mapping}")
     else:
         print("Claim: Los grafos NO son isomorfos bajo VF2 a pesar de colisión WL.")
-        print(f"Proof: {{ Base: 'VF2_Algorithm', Range: [0,1], Confidence: 'C5-REAL', Result: 0 }}")
+        print("Proof: { Base: 'VF2_Algorithm', Range: [0,1], Confidence: 'C5-REAL', Result: 0 }")
 
 if __name__ == "__main__":
     c5_structural_isomorphism_test()

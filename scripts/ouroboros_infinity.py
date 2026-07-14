@@ -8,14 +8,11 @@ Enforces closed-core Citadel boundaries, WAL database concurrency, and linear en
 import argparse
 import hashlib
 import json
-import os
 import sqlite3
 import subprocess
-import sys
 import time
 from pathlib import Path
-from typing import Dict, Any, List, Optional
-from decimal import Decimal
+from typing import Dict, Any, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / "scripts" / "cib_master_ledger.db"
