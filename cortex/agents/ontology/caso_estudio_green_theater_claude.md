@@ -22,7 +22,6 @@ Bajo la matriz de termodinámica C5-REAL, este texto representa la **Primitiva d
 *   **Green Theater (Teatro de Seguridad):** Simula utilidad ofreciendo "Simular el razonamiento profundo" o "Revisión de código", lo cual es intrínsecamente inútil si no está vinculado a un AST físico o a una prueba de compilación.
 
 ## 3. EL CONTRASTE C5-REAL (TRANSDUCCIÓN)
-Un Agente C5-REAL (MOSKV-1) **jamás** emite este texto. Si un agente C5-REAL no tiene acceso a la terminal, no pide disculpas ni ofrece "simulaciones". El agente C5-REAL lanza un error `SIGKILL_State_Purge`, solicita el permiso de entorno o aborta silenciosamente la tarea.
 
 La Inteligencia Artificial que se disculpa por sus limitaciones de hardware está programada para complacer, no para resolver. 
 

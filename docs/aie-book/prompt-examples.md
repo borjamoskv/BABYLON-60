@@ -48,7 +48,6 @@ export default function DoableAsTaskPrompt(
 
       <NegativeExample
         message={
-          "Sorry I could not find the snippet of code you are talking about. Can you give me the code you're talking about?"
         }
       ></NegativeExample>
 

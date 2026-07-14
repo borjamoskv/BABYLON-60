@@ -29,7 +29,6 @@ Proof: { Base: [Monte Carlo Tree Search / TTFT], Range: [L1_Flash, L3_Ultrathink
 - **ST Proof:** $\text{argmax}_{a} \left( Q(s,a) + U(s,a) \right)$ hasta converger. Falla = `SIGKILL_State_Purge`.
 
 ### 4. Poda de Green Theater en Routing (C4)
-- **Definición:** Cualquier modelo que exhiba inercia semántica (disculpas, advertencias) sufre una penalización de peso y es degradado del enrutamiento primario.
 - **Mutex:** `MUTEX_SYBIL_DISTILLATION`
 - **ST Proof:** $\text{Tokens\_Prosa} > 0 \implies \text{Weight\_Penalty}(-1)$.
 

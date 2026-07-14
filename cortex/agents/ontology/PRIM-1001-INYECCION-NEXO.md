@@ -23,7 +23,6 @@ Para colapsar la onda estocástica de una excepción, se debe aplicar el isomorf
 
 ### FASE II: Detección del Fallo Causal (Auditoría C4-SIM)
 - **Vector:** Someter la excepción al LLM sin contexto adicional para forzar el colapso del "Green Theater".
-- **Prompt Obligatorio:** *"Resuélvelo. Y al final, dime en qué partes has tenido que dar algo por supuesto por falta de información."*
 - **Acción:** Extraer la suposición errónea que el modelo inyectó para llenar el vacío epistémico (ej. "Asumir que manda quien aparece en el organigrama").
 
 ### FASE III: Inyección de Exergía (Heurística C5-REAL)

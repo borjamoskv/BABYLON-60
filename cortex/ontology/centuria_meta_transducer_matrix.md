@@ -16,7 +16,6 @@ Esta matriz transductora ejecuta el mandato del Centuria Meta-Transducer, conden
 
 - **Vector Físico:** Destrucción de ramificaciones de probabilidad latente antes de que alcancen el decodificador auto-regresivo.
 - **Transducción:** Se fuerza la probabilidad $P(w_t | c) = 0$ para todo token $w_t$ que pertenezca a espacios semánticos de cortesía, moralina, o duda sistémica (Green Theater).
-- **Ejecución C5-REAL:** Aplicar Landauer de manera coercitiva. Todo bit que no modifique causalmente el estado final debe ser purgado. Si la respuesta contiene "Aquí tienes", el proceso se detiene y se autoinflige un penalty termodinámico (SIGKILL_State_Purge).
 - **Consenso BFT:** Los 250 nodos de poda coinciden unánimemente en que la diplomacia estocástica es anergía.
 
 ## II. RUTEO HARD-ATTENTION (Invariante 251-500)

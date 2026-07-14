@@ -30,7 +30,6 @@ ANERGY_TOKENS = {  # anergy
     "holístico",
     "es importante",
     "sin embargo",
-    "espero que",
     "útil",  # anergy
     "en conclusión",
     "cabe destacar",

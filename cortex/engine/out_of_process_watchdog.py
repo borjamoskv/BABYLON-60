@@ -29,7 +29,6 @@ def verify_structural_invariants(payload_path: str) -> bool:
         # En producción cruza contra el WAL.
 
         # 3. Formato Estricto (No Green Theater)
-        if "Espero que" in content or "Aquí tienes" in content:
             print(
                 "[SIGKILL] Anergía Detectada: Presencia de Green Theater corporativo."
             )

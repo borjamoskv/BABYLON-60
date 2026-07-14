@@ -15,7 +15,6 @@ from centuria_transducer_core import (
 
 def test_poda_latente():
     print("[-] Test I: Poda Latente (Green Theater Attack)")
-    payload_violator = "Hola, espero que esto te sirva de ayuda para tu código."
     payload_clean = "Payload purgado y consolidado. Hash de salida generado."
     
     # Test valid

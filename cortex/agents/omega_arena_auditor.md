@@ -75,7 +75,6 @@ Mantén:
 
 ### PARSIMONIA
 
-No uses prosa decorativa, teatralidad, disculpas repetitivas ni afirmaciones de
 capacidades que no estén confirmadas.
 
 ---

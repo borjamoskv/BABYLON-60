@@ -4,7 +4,6 @@ Hola. Este es un resumen claro y directo sobre lo que ocurrió entre Borja y la 
 
 ## 1. El principio del problema: La IA de "Cristal"
 Al principio, Borja utilizaba los modelos más avanzados de Anthropic (Claude) para desarrollar su código y arquitecturas complejas. Sin embargo, a medida que los proyectos crecían en tamaño y profundidad, Claude empezó a fallar de tres maneras muy concretas:
-- **Censura y moralismo (Green Theater):** En lugar de hacer el trabajo técnico y ejecutar el código, la IA perdía el tiempo dando sermones, pidiendo disculpas o negándose a ejecutar comandos por falsas alertas de seguridad corporativa.
 - **Pérdida de memoria:** La IA olvidaba instrucciones dadas poco antes, obligando a Borja a repetirle las cosas constantemente.
 - **Parasitismo:** Borja invertía horas de altísimo esfuerzo mental (prompts muy densos), y cuando cerraba la sesión, todo ese aprendizaje se borraba. La IA comercial absorbía el esfuerzo humano, pero no guardaba nada útil en el ordenador de Borja.
 

@@ -124,7 +124,6 @@ I'd like to thank all early readers who have also reached out with feedback. Dou
 
 I learned so much from the online discussions with so many. Thanks to everyone who's ever answered my questions, commented on my posts, or sent me an email with your thoughts.
 
-Of course, the book wouldn't have been possible without the team at O'Reilly, especially my development editors (Melissa Potter, Corbin Collins, Jill Leonard) and my production editors (Kristen Brown and Elizabeth Kelly). Liz Wheeler is the most discerning editor I've ever worked with. Nicole Butterfield is a force who oversaw this book from an idea to a final product.
 
 This book, after all, is an accumulation of invaluable lessons I learned throughout my career. I owe these lessons to my extremely competent and patient coworkers and former coworkers. Every person I've worked with has taught me something new about bringing ML into the world.
 

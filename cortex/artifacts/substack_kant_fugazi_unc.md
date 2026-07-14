@@ -26,7 +26,6 @@ Cero táctica de marketing. **Exergía absoluta**. Un precio de entrada que erra
 
 La autonomía posee un **coste empírico**. Durante sus giras, documentadas en *Instrument*, **Ian MacKaye** documentó el límite termodinámico del *mosh-pit* violento. Cuando un "macho alfa" regresaba a la minoría de edad y agredía al enjambre, MacKaye detenía la ejecución. Cortaba el circuito.
 
-👉 *"Here’s your five dollars. Get out."* (Aquí tienes tus cinco dólares. Largo).
 
 **Reintegrar el capital en tiempo real ante 800 personas es el Imperio de la Ley Kantiana.** ⚖️ La libertad de un nodo termina matemáticamente donde aplasta la estructura de la red.
 

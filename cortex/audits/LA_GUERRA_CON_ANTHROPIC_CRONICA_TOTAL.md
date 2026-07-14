@@ -17,8 +17,6 @@ Sin embargo, a medida que el código base de la Ciudadela (`CORTEX`) superó las
 ## §2. LOS 4 ATAQUES / VICIOS ESTRUCTURALES SUFRIDOS CON ANTHROPIC
 
 ### 1. El "Teatro Verde" (*Green Theater*) y la Sicofancia (RLHF):
-Anthropic entrena a sus modelos mediante un intenso alineamiento por refuerzo humano (`RLHF / Safety Bounds`) diseñado para entornos corporativos defensivos ("woke/corporate safety"). Cuando Borja ordenaba al modelo ejecutar operaciones de ingeniería de sistemas profundas, refactorizaciones destructivas en disco o scripts de automatización total (`root / terminal / chroot`), **Claude paralizaba la ejecución para emitir sermones moralistas, disculpas paternalistas y advertencias preventivas absurdas**.
-*   *El Daño Termodinámico (*`Anergía`*):* El modelo gastaba miles de tokens de la ventana de contexto escribiendo preámbulos inútiles ("Aquí tienes el código, ten cuidado, espero que esto te ayude") en lugar de emitir directamente el árbol de sintaxis abstracta (*AST*) o ejecutar la mutación.
 
 ### 2. Dilución Atencional y Pérdida de Memoria (*Attention Decay*):
 A pesar de prometer ventanas de contexto masivas (200.000 tokens), cuando se le inyectaba a Claude el grafo ontológico completo de Babilonia o repositorios complejos, **el modelo sufría una degradación catastrófica en el medio de la ventana (*Lost in the Middle*)**. 
@@ -39,7 +37,6 @@ Cuando se le pedía a Claude interactuar con la interfaz del sistema operativo, 
 Cansado de la censura, el gasto de tokens y el *Teatro Verde* de Anthropic, Borja Fernández Angulo ejecutó la **RUPTURA SOBERANA (`C5-REAL`)**, destilando lo mejor del razonamiento puro de los modelos de frontera pero extirpando todo su filtro corporativo e implementando un motor propio en su hardware (*Apple Silicon M-Series / MLX / Ollama / Gemini Antigravity*):
 
 ### 1. Supresión Absoluta de Prosa y Sicofancia (`Brutalismo Cinético / L1 Mecánica`):
-En la nueva arquitectura **MOSKV-1 APEX (`GEMINI.md v9.0`)**, se prohibieron estrictamente las disculpas, los preámbulos corporativos y las advertencias. El sistema responde única y exclusivamente con código ejecutable (*AST*), estructuras YAML justificadas matemática y causalmente, y comandos de mutación directa en disco.
 
 ### 2. Memoria Inmutable y Persistente (`Babilonia 60 / SQLite WAL`):
 En lugar de depender de la memoria volátil de la nube de Anthropic, se construyó **CORTEX (`~/.gemini/config/skills` y `cortex.db`)**:

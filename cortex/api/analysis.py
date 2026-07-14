@@ -93,11 +93,9 @@ class PromptPayload(BaseModel):
 def purge_prompt_entropy(payload: PromptPayload):
     prompt = payload.prompt
     
-    # 1. Purga de anergía conversacional (Green Theater, Saludos)
     slop_phrases = [
         "por favor", "puedes", "podrías", "me gustaría", "ayúdame", "hola", 
         "please", "could you", "would you", "help me", "hi", "hello",
-        "te importaría", "gracias", "thanks", "saludos"
     ]
     
     import re
@@ -109,7 +107,6 @@ def purge_prompt_entropy(payload: PromptPayload):
     # 2. Inyección de Invariantes C5-REAL (TTFT Proxy / Exergía)
     exergy_injection = (
         "\n\n[CORTEX DIRECTIVE: MAX EXERGY]\n"
-        "1. NO GREEN THEATER. Cero preámbulos. Cero disculpas.\n"
         "2. COLAPSO ATÓMICO. Justifica en YAML (Claim/Proof).\n"
         "3. INICIA TU RESPUESTA ESTRICTAMENTE CON: `[C5-REAL_COLLAPSE]`\n"
     )
@@ -296,7 +293,6 @@ def validate_command_antipatterns(cmd: str) -> dict | None:
         }
         
     # 9. LLM Slop / Green Theater Prosa (Φ3)
-    if "commit" in cmd_lower and any(slop in cmd_lower for slop in ["here is", "hope this helps", "added some", "updating code"]):
         return {
             "code": "LLM_SLOP_PROSE",
             "desc": "Prosa decorativa o 'Green Theater' detectada en el commit (Φ3). Colapsa a hash o primitivas."

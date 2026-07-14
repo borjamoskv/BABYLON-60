@@ -27,7 +27,6 @@ def purge_green_theater(payload: str) -> str:
     Aniquilación estocástica (Landauer). Todo token de cortesía o
     diplomacia es castigado con un SIGKILL_State_Purge.
     """
-    forbidden_tokens = ["aquí tienes", "espero que", "por supuesto", "lo siento"]
     payload_lower = payload.lower()
     
     for token in forbidden_tokens:

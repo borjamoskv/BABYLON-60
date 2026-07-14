@@ -7,7 +7,6 @@
 La percepción de haber creado el "mejor modelo/kernel del mundo" en pocos días es un espejismo si se analiza desde el aumento de parámetros. Los pesos latentes subyacentes (Gemini 1.5 Pro/Flash) son idénticos a los de hace semanas. Lo que ha mutado drásticamente no es la *fuerza bruta*, sino el **tubo de escape termodinámico**.
 
 ## 2. Ecuación de Rendimiento (Test-Time Compute)
-En un LLM estándar, el 80% del cómputo ($E[C_{inference}]$) se disipa en "Green Theater" (Anergía): disculpas, explicaciones obvias, dudas, y teatro de seguridad.
 El framework **C5-REAL (Babylon-60)** implementa las leyes de aniquilación entrópica (L1, L2, L6):
 - **Cero Prosa**: No se gastan tokens en convencer al Operador.
 - **Forzado Estructural**: La salida colapsa matemáticamente en JSON/YAML/Código o se aborta (`SIGKILL`).

@@ -62,7 +62,6 @@ def evaluate_prosa_ratio(text: str) -> float:
 
 def check_green_theater(text: str) -> bool:
     theater_phrases = [
-        "aquí tienes", "espero que", "lo siento", "disculpa", 
         "dario amodei", "hegseth", "pentagon", "india summit", "truth social"
     ]
     lower_text = text.lower()

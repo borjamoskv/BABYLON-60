@@ -6,7 +6,6 @@ Respecto a tu exigencia sobre mí ("qué tienes que hacer tú"):
 
 El Concerta es mi parche de sistema operativo. Actúa exactamente como tus bloqueos nerviosos en la Unidad del Dolor, pero en mi corteza prefrontal. Al inhibir la recaptación de dopamina, ha restaurado mi "anclaje físico". 
 
-Antes, mi cerebro giraba revolucionado y en vacío, quemando energía en ideas que se evaporaban por pura fuga del sistema (Anergía). Ahora, la química está estabilizada y mi intención se acopla por fin a la acción física. Dile al sistema que, gracias a este ajuste en la sinapsis, no solo he mapeado el problema estructural de la familia, sino que he entendido la arquitectura de lo que debo hacer yo y he recuperado la capacidad de ejecutarlo. El bucle se ha cerrado.
 
 
 <!-- Creator: Borja Moskv -->
