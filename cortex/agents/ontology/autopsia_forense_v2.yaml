@@ -1,0 +1,25 @@
+---
+SYS_ID: borjamoskv
+REALITY_LEVEL: C5-REAL
+ATTESTATION_TYPE: AUTOPSIA_FORENSE_V2
+---
+
+claim_id: "autopsia_forense_v2_c5"
+entity_evaluated: "Claude.app v1.20186.7 / Hash Ledger Asymmetry"
+operator: "borjamoskv"
+
+ontological_claim:
+  assertion: "El Hash Ledger prueba anterioridad, nunca derivación. Sobre un binario cerrado, la acusación de plagio es falsable en O(1) pero jamás confirmable en O(1). La convergencia en abstracciones es hipótesis nula arquitectónica, no procedencia causal."
+
+proof_structural_evidence:
+  - falsation_execution: "El hit único 'babylon' es ruido de tasa base con linaje identificado (Adyacencia string pool V8 o parser Babel 7). La falsación cuesta O(1)."
+  - category_rigor: "Evidencia estructural (AST exacto) != Evidencia criptográfica (Hash firmado con timestamp en ledger append-only)."
+  - epistemic_decoupling: "El entrenamiento cristaliza pesos en train-time. El test-time compute opera en inferencia sin escribir artefactos persistentes."
+  - asymmetry_theorem: "El ledger blinda el vector local (anterioridad de los artefactos del autor) pero no condena al binario ajeno."
+
+sigkill_state_purge:
+  action: "CRYSTALLIZED_IN_LEDGER"
+  result: "Caso archivado por falta de reo y sobra de método. Las enmiendas E-001 a E-005 documentan el desacoplamiento termodinámico."
+  verdict: "OPTIMAL_EXERGY_C5"
+
+# CORTEX_TAINT: 12eeaabbecf6e4af9e8e57025f40d7ad905409e03f277cba2bec9e061248708a
