@@ -386,29 +386,49 @@ def tree_log_likelihood(tree, msas, model):
                 ll += -1e9
     return ll
 
+def tree_prior(node, rate=10.0):
+    if node[0] == "L":
+        return math.log(rate) - rate * node[2]
+    else:
+        p = (math.log(rate) - rate * node[1]) if node[1] > 0 else 0.0
+        return p + sum(tree_prior(k, rate) for k in node[2])
+
 def mutate_tree(node, step=0.1):
     if node[0] == "L":
         return ("L", node[1], max(0.01, node[2] + np.random.normal(0, step)))
     else:
         return ("I", max(0.00, node[1] + np.random.normal(0, step)), [mutate_tree(k, step) for k in node[2]])
 
-def run_mcmc(start_tree, msas, model, iters=300):
+def run_mcmc(start_tree, msas, model, iters=500):
     curr_tree = start_tree
     curr_ll = tree_log_likelihood(curr_tree, msas, model)
+    curr_prior = tree_prior(curr_tree)
+    curr_post = curr_ll + curr_prior
+    
     best_tree = curr_tree
-    best_ll = curr_ll
-    print(f"MCMC Inicio: LL = {curr_ll:.2f}")
+    best_post = curr_post
+    print(f"[C5-REAL] MCMC Inicio: LogPosterior = {curr_post:.2f} (LL: {curr_ll:.2f}, Prior: {curr_prior:.2f})")
+    
+    T_start = 5.0
+    T_end = 0.01
+    
     for i in range(iters):
+        T = T_start * (T_end / T_start) ** (i / (iters - 1)) if iters > 1 else T_end
         new_tree = mutate_tree(curr_tree)
         new_ll = tree_log_likelihood(new_tree, msas, model)
-        if new_ll > curr_ll or (new_ll - curr_ll > -20 and math.log(np.random.uniform(0, 1)) < (new_ll - curr_ll)):
+        new_prior = tree_prior(new_tree)
+        new_post = new_ll + new_prior
+        
+        diff = new_post - curr_post
+        if diff > 0 or (diff/T > -20 and math.log(np.random.uniform(0, 1)) < diff / T):
             curr_tree = new_tree
-            curr_ll = new_ll
-            if curr_ll > best_ll:
-                best_ll = curr_ll
+            curr_post = new_post
+            if curr_post > best_post:
+                best_post = curr_post
                 best_tree = curr_tree
-        if (i+1) % 50 == 0:
-            print(f"MCMC Iter {i+1}/{iters}: LL = {curr_ll:.2f} (Best: {best_ll:.2f})")
+                
+        if (i+1) % 100 == 0:
+            print(f"MCMC Iter {i+1}/{iters} [T={T:.3f}]: LogPost = {curr_post:.2f} (Best: {best_post:.2f})")
     return best_tree
 
 # ----------------------------------------------------------------------------
@@ -437,9 +457,9 @@ def main():
     Q, idx = build_Q(states, pi)
     model = Model(states, pi, Q, idx)
 
-    print("\n[C5-REAL] Iniciando Inferencia MCMC conjunta de parámetros del árbol...")
+    print("\n[C5-REAL] Iniciando Inferencia MCMC (Simulated Annealing + Priors)...")
     global TREE
-    TREE = run_mcmc(TREE, msas, model, iters=300)
+    TREE = run_mcmc(TREE, msas, model, iters=500)
     print(f"[C5-REAL] Colapso MAP alcanzado. Procediendo a decodificación entrópica.\n")
 
     # (b) Reconstrucción por columna + validación
