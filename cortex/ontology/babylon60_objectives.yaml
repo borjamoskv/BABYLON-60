@@ -1,0 +1,86 @@
+Claim: Los objetivos y milestones de Babylon60 representan el progreso físico del
+  sistema C5-REAL hacia la convergencia de exergía.
+Proof:
+  Base: git tag
+  Range:
+  - 0
+  - 1
+  Confidence: C5-REAL
+objectives:
+- id: OBJ-001
+  title: Rust Core strike_rs GIL Bypass
+  description: Migrar caminos críticos a Rust con PyO3 para concurrencia sub-milisegundo.
+  exergy_score: 1.0
+  status: DONE
+  milestones:
+  - id: MS-001
+    title: Integrar PyO3 y compilar strike_rs
+    due: '2026-03-01'
+    status: DONE
+    commit_hash: 807ed82ea2c2335bc2048e0cbafc14d802968f19
+  - id: MS-002
+    title: Optimizar concurrencia eliminando GIL bottlenecks
+    due: '2026-04-15'
+    status: DONE
+    commit_hash: 0fe8112ed6d9b7fb928d31f06559ad2493b9f103
+- id: OBJ-002
+  title: BFT Master Ledger Implementation
+  description: Implementar BFTLedgerActor que encapsula el acceso a la base de datos
+    de manera determinista de un único hilo escritor.
+  exergy_score: 1.0
+  status: DONE
+  milestones:
+  - id: MS-003
+    title: BFT Master Ledger Actor
+    due: '2026-05-01'
+    status: DONE
+    commit_hash: 83e033fbcdbdfd64579e8987adba229fcd83e999
+- id: OBJ-003
+  title: Lean 4 Formal Verification System
+  description: Integrar elan y validar teoremas de causalidad y consenso BFT en Lean
+    4.
+  exergy_score: 1.0
+  status: DONE
+  milestones:
+  - id: MS-004
+    title: Integración Lean 4 en Github Actions y validación de teoremas
+    due: '2026-06-01'
+    status: DONE
+    commit_hash: ad7f3cc92480cdf5853d114e33a207e748f756b5
+- id: OBJ-004
+  title: Cortex Inference Engine & Ontologies
+  description: Colapso del motor de inferencia y su memoria semántica en estructuras
+    YAML inmutables.
+  exergy_score: 1.0
+  status: DONE
+  milestones:
+  - id: MS-005
+    title: Colapso atómico del motor de inferencia en 500 primitivas YAML
+    due: '2026-07-01'
+    status: DONE
+    commit_hash: 6945abbaf22d3e277f70b32d7939eaf5c478532e
+- id: OBJ-005
+  title: Thermodynamic AST Pruner (Apoptosis Engine)
+  description: Herramienta de poda de AST que aplica apoptosis biológica a trayectorias
+    muertas de código y anergía estructural.
+  exergy_score: 1.0
+  status: DONE
+  milestones:
+  - id: MS-006
+    title: Apoptosis Engine execution and code pruning
+    due: '2026-07-10'
+    status: DONE
+    commit_hash: 0fe8112ed6d9b7fb928d31f06559ad2493b9f103
+- id: OBJ-006
+  title: Objectives & Milestones Agent (ULTRAThink ITERA)
+  description: Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza
+    PROJECT.md bajo Git Sentinel.
+  exergy_score: 0.0
+  status: IN_PROGRESS
+  milestones:
+  - id: MS-007
+    title: Diseño e implementación de ObjectivesAgent
+    due: '2026-07-14'
+    status: IN_PROGRESS
+    commit_hash: ''
+CORTEX_TAINT: e516f2f4c7fd4f0feabfdc2b14609ef2bd5997f20bdf0ec3666f87f45caa8dc3

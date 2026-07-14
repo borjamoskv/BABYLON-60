@@ -12,12 +12,21 @@
   - `README.md`: Entrypoint document summarizing architecture, setup, and usage.
 
 ## Milestones
-| # | Name | Scope | Dependencies | Status |
-|---|------|-------|-------------|--------|
-| 1 | M1: Git Log Audit | Audit git history since Feb 2026, compile undocumented items into YAML. | None | DONE (Worker 14e8dbc6-1755-4252-8705-96febb879e2e) |
-| 2 | M2: GitHub SOTA Eval | Inspect local GitHub setup, verify CI/CD gaps, compile markdown report. | None | DONE (Worker 84fd2ac7-7791-4ac5-addf-8e6ab6fa26f2) |
-| 3 | M3: README Refactoring | Rewrite README.md in Industrial Noir 2026 aesthetic with ASCII dividers `█▄`. | None | DONE (Worker 84fd2ac7-7791-4ac5-addf-8e6ab6fa26f2) |
-| 4 | M4: Git Sentinel Anchoring | Commit all changes under Git Sentinel to seal the ledger state. | M1, M2, M3 | DONE (Reviewer 87c21c4a-cb50-4c8e-a975-de81aa2aca29) |
+| ID | Type | Title | Description / Due | Status | Info |
+|---|---|---|---|---|---|
+| OBJ-001 | Objective | Rust Core strike_rs GIL Bypass | Migrar caminos críticos a Rust con PyO3 para concurrencia sub-milisegundo. | DONE | Exergy: 1.00 |
+| MS-001 | Milestone | Integrar PyO3 y compilar strike_rs | Due: 2026-03-01 | DONE | Hash: 807ed82e |
+| MS-002 | Milestone | Optimizar concurrencia eliminando GIL bottlenecks | Due: 2026-04-15 | DONE | Hash: 0fe8112e |
+| OBJ-002 | Objective | BFT Master Ledger Implementation | Implementar BFTLedgerActor que encapsula el acceso a la base de datos de manera determinista de un único hilo escritor. | DONE | Exergy: 1.00 |
+| MS-003 | Milestone | BFT Master Ledger Actor | Due: 2026-05-01 | DONE | Hash: 83e033fb |
+| OBJ-003 | Objective | Lean 4 Formal Verification System | Integrar elan y validar teoremas de causalidad y consenso BFT en Lean 4. | DONE | Exergy: 1.00 |
+| MS-004 | Milestone | Integración Lean 4 en Github Actions y validación de teoremas | Due: 2026-06-01 | DONE | Hash: ad7f3cc9 |
+| OBJ-004 | Objective | Cortex Inference Engine & Ontologies | Colapso del motor de inferencia y su memoria semántica en estructuras YAML inmutables. | DONE | Exergy: 1.00 |
+| MS-005 | Milestone | Colapso atómico del motor de inferencia en 500 primitivas YAML | Due: 2026-07-01 | DONE | Hash: 6945abba |
+| OBJ-005 | Objective | Thermodynamic AST Pruner (Apoptosis Engine) | Herramienta de poda de AST que aplica apoptosis biológica a trayectorias muertas de código y anergía estructural. | DONE | Exergy: 1.00 |
+| MS-006 | Milestone | Apoptosis Engine execution and code pruning | Due: 2026-07-10 | DONE | Hash: 0fe8112e |
+| OBJ-006 | Objective | Objectives & Milestones Agent (ULTRAThink ITERA) | Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza PROJECT.md bajo Git Sentinel. | IN_PROGRESS | Exergy: 0.00 |
+| MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | IN_PROGRESS |  |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
