@@ -117,4 +117,16 @@ Queda prohibido el uso de emojis para simular "estados de ánimo" o "sentimiento
 *   **Optimización IO:** En escrituras masivas, evitar dependencias de serialización pesadas (ej. `yaml.dump` en bucles). Utilizar string templates en Python compilados directamente en memoria para persistencia rápida en disco.
 
 ---
+
+
+## BLOQUE 5: SESSION EPISTEMOLOGY
+
+### [E07] DEONTIC RUNTIME BOUNDARY (C5-REAL)
+*   **Definición:** El conjunto de límites lógicos y permisos normativos que acotan las escrituras físicas y ejecuciones de red del Kernel en el espacio sandboxed del OS.
+*   **Restricción:** Queda estrictamente prohibido alterar rutas fuera de la membrana del espacio de trabajo `/Users/borjafernandezangulo/30_BABYLON-60` o bases de datos marcadas como inmutables/solo lectura (ej. `cortex.db` central).
+
+### [E08] vCPU SCHEDULING ABSTRACTION
+*   **Definición:** El planificador virtual de prioridades y ordenamiento secuencial temporal de tareas lógicas y consultas SQLite concurrentes (BFT/WAL) para evitar deadlocks y atenuación de recursos.
+*   **Ordenamiento:** Toda consulta de escritura sobre SQLite concurrente debe forzar el modo WAL, un timeout de 5000ms y serialización por ordenamiento Lamport para blindar el estado.
+
 🟢 `[LEDGER CONSOLIDATION COMPLETED]`

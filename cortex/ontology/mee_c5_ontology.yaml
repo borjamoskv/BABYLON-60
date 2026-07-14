@@ -1,0 +1,16 @@
+Claim: "Extraction of Session Epistemology invariants into the persistent CORTEX ontology."
+Timestamp: "2026-07-14T20:44:39.477228Z"
+Framework: "BABYLON-60"
+Confidence: "C5-REAL"
+Ontology_Entries:
+  - Concept: "Deontic_Runtime_Boundary"
+    Definition: "Logical normative limits bounding physical filesystem writes and network executions inside the sandboxed runtime membrane."
+    Rules:
+      - "Alterations outside /Users/borjafernandezangulo/30_BABYLON-60 are prohibited."
+      - "SQLite transactions on immutable databases must raise exceptions."
+  - Concept: "vCPU_Scheduling_Abstraction"
+    Definition: "Virtual task priority queue and SQLite WAL concurrency control layer to prevent deadlocks and CPU context thrashing."
+    Rules:
+      - "Sort concurrent write transactions using Lamport timestamp sequence."
+      - "Enforce WAL mode and 5000ms busy_timeout limits."
+CORTEX_TAINT: "ef24e4a64de6cc41b332da030daa1c20f99b8e051cdfd7b750621d753de374c2"
