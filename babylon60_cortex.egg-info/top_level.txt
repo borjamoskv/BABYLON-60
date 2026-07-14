@@ -1,6 +1,0 @@
-adapters
-analysis
-bft
-cli
-compiler
-core

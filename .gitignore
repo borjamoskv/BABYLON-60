@@ -36,3 +36,9 @@ ORIGINAL_REQUEST.md
 .DS_Store
 .fuse_hidden*
 *.py[cod]
+
+# Lean 4 build artifacts
+proof/lean/.lake/
+
+# Python packaging leftovers
+*.egg-info/
