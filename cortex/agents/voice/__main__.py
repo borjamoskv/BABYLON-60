@@ -15,7 +15,7 @@ from .config import SpeculativeConfig, VoiceAgentConfig
 from .ledger import TurnReceipt, VoiceLedger
 from .pipeline import VoiceAgentPipeline
 from .stt import FasterWhisperStt
-from .tts import KokoroTts, NullTts, SayTts
+from .tts import KokoroTts, NullTts, SayTts, TtsBackend
 
 _GLYPHS = {"listening": "👁️", "thinking": "🧠", "speaking": "⚡"}
 
@@ -61,6 +61,7 @@ def _build_pipeline(args: argparse.Namespace) -> VoiceAgentPipeline:
     )
     stt = FasterWhisperStt(model_size=args.whisper_model)
     brain = MlxBrain(model_id=args.brain_model) if args.brain == "mlx" else EchoBrain()
+    tts: TtsBackend
     if args.tts == "kokoro":
         tts = KokoroTts(voice=args.voice or "ef_dora")
     elif args.tts == "say":

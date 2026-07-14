@@ -35,7 +35,7 @@ class MasterLedgerQueue:
             
         try:
             while True:
-                batch = []
+                batch: list[tuple[str, tuple]] = []
                 while not self.queue.empty() and len(batch) < 500:
                     payload = await self.queue.get()
                     if payload is None:  # Poison pill

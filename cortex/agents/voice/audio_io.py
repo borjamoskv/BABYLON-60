@@ -8,7 +8,7 @@ import asyncio
 import time
 from collections import deque
 from collections.abc import AsyncIterator
-from typing import Protocol
+from typing import Protocol, Any
 
 import numpy as np
 
@@ -45,7 +45,7 @@ class SoundDeviceAudio:
         self._frame_queue: asyncio.Queue[AudioFrame] = asyncio.Queue(maxsize=256)
         self._playback: deque[np.ndarray] = deque()
         self._loop: asyncio.AbstractEventLoop | None = None
-        self._streams = None
+        self._streams: tuple[Any, Any] | None = None
 
     def _ensure_sd(self):
         try:

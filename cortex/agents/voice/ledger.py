@@ -125,4 +125,4 @@ class VoiceLedger:
             (n,),
         )
         rows = await cursor.fetchall()
-        return list(rows)
+        return [tuple(row) for row in rows]
