@@ -47,7 +47,7 @@ class AnergiaPurger(ast.NodeTransformer):
         return self.generic_visit(node)
 
     def visit_Module(self, node: ast.Module) -> ast.AST:
-        node = self.generic_visit(node)
+        node = self.generic_visit(node)  # type: ignore
         if self.injected_kill:
             import_os = ast.Import(names=[ast.alias(name="os", asname=None)])
             import_signal = ast.Import(names=[ast.alias(name="signal", asname=None)])

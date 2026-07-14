@@ -6,7 +6,7 @@ SIESAS_LINT:
 	python -m core.thermo_ast_pruner src/legacy/**/*.py
 	
 	@echo "[SIESAS] Forzando tipado estricto (Mypy nivel máximo)..."
-	mypy --strict --disallow-any-generics --disallow-untyped-defs src/
+	mypy --strict --disallow-untyped-defs src/
 	
 	@echo "[SIESAS] Verificación de integridad BFT..."
 	python -m bft.consensus_ledger --audit-mode

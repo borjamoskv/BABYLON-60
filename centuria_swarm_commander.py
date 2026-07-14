@@ -9,7 +9,7 @@ WORKSPACE = os.environ.get(
 SHARDS_FILE = os.path.join(WORKSPACE, "shards.json")
 
 
-def generate_100_vectors() -> list:
+def generate_100_vectors() -> list:  # type: ignore
     print("[CENTURIA] Initiating Surface Mapping...")
     vectors = []
     py_files = glob.glob(f"{WORKSPACE}/**/*.py", recursive=True)

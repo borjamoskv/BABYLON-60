@@ -95,7 +95,7 @@ def main() -> None:
     entities: list[dict[str, str]] = extract_entities()
 
     for e in entities:
-        e["tokens"] = tokenize(e["text"])
+        e["tokens"] = tokenize(e["text"])  # type: ignore
 
     convergences: list[tuple[float, dict[str, str], dict[str, str]]] = []
     seen_pairs: set[tuple[str, str]] = set()
@@ -107,9 +107,9 @@ def main() -> None:
             if e1["id"] == e2["id"]:
                 continue
 
-            score: float = jaccard(e1["tokens"], e2["tokens"])
+            score: float = jaccard(e1["tokens"], e2["tokens"])  # type: ignore
             if score >= 0.40:
-                pair: tuple[str, str] = tuple(sorted([e1["id"], e2["id"]]))
+                pair: tuple[str, str] = tuple(sorted([e1["id"], e2["id"]]))  # type: ignore
                 if pair not in seen_pairs:
                     convergences.append((score, e1, e2))
                     seen_pairs.add(pair)

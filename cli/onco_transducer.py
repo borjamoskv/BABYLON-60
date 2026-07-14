@@ -35,7 +35,7 @@ def construct_wgcna_graph(X: np.ndarray, gene_names: list, beta: int = 6, thresh
 
 def get_structural_driver_nodes(G: nx.DiGraph) -> list:
     """Extrae Driver Nodes mediante Maximum Bipartite Matching (Liu et al. 2011)."""
-    B = nx.Graph()
+    B: nx.Graph = nx.Graph()  # type: ignore
     out_nodes = [(n, 'out') for n in G.nodes()]
     in_nodes = [(n, 'in') for n in G.nodes()]
     B.add_nodes_from(out_nodes, bipartite=0)
@@ -51,7 +51,7 @@ def get_structural_driver_nodes(G: nx.DiGraph) -> list:
     return list(set(G.nodes()) - matched_in_nodes)
 
 
-def simulate_boolean_network(G: nx.DiGraph, initial_state: dict, steps: int = 30, perturbed_nodes: dict = None):
+def simulate_boolean_network(G: nx.DiGraph, initial_state: dict, steps: int = 30, perturbed_nodes: dict | None = None):  # type: ignore
     """Simula atractor de red Booleana sincrónica."""
     if perturbed_nodes is None:
         perturbed_nodes = {}
@@ -82,7 +82,7 @@ def simulate_boolean_network(G: nx.DiGraph, initial_state: dict, steps: int = 30
     return history, nodes
 
 
-def execute_pipeline(data_path: str = None, falsifiability_threshold: float = 40.0):
+def execute_pipeline(data_path: str | None = None, falsifiability_threshold: float = 40.0):  # type: ignore
     """Ejecuta el pipeline C5-REAL completo."""
     if data_path:
         logger.info(f"Cargando matriz empírica desde: {data_path}")

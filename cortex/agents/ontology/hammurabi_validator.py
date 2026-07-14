@@ -17,7 +17,7 @@ def load_ontology() -> dict:
 
 
 def check_h5_violation(filepath) -> list:
-    violations = []
+    violations: list = []
     with open(filepath, "r", encoding="utf-8") as f:
         try:
             tree = ast.parse(f.read(), filename=filepath)

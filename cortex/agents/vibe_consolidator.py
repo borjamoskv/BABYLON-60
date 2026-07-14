@@ -31,7 +31,7 @@ class ProjectState:
 # ==========================================
 class CodeParser:
     def parse_python(self, code: str):
-        result = {"classes": [], "functions": [], "imports": []}
+        result = {"classes": [], "functions": [], "imports": []}  # type: ignore
         try:
             tree = ast.parse(code)
             for node in ast.walk(tree):

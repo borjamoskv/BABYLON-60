@@ -54,7 +54,7 @@ def log_event(protocol: str, target: str, exergy_delta: float) -> str:
 def execute_pulse() -> Dict[str, Any]:
     """Check system entropy and report top alarms."""
     print("[OUROBOROS-∞] Executing Pulse (Entropy & Citadel Audit)...")
-    alarms = []
+    alarms: list = []
     
     # Check large files (>400 LOC)
     large_files = 0

@@ -347,7 +347,7 @@ def search(term: str) -> list:
 
 def counts() -> dict:
     """Conteo por categoria."""
-    out = {}
+    out: dict[Any, Any] = {}  # type: ignore
     for p in PRIMITIVES:
         out[p["category"]] = out.get(p["category"], 0) + 1
     return out

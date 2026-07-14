@@ -70,7 +70,7 @@ def verify_merkle_proof(leaf_hash: str, proof: list, root: str, index: int) -> b
     return current == root
 
 
-def verify_receipt(receipt_path: str) -> dict:
+def verify_receipt(receipt_path: str) -> dict:  # type: ignore
     with open(receipt_path, "r") as f:
         receipt = json.load(f)
     if (

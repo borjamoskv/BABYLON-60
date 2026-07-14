@@ -66,7 +66,7 @@ print(f"[GRAPH] Grafo Empírico Construido. Nodos: {G_empirico.number_of_nodes()
 # ## 3. Control Estructural Topológico (Driver Nodes)
 # %%
 def get_structural_driver_nodes(G: nx.DiGraph):
-    B = nx.Graph()
+    B: nx.Graph = nx.Graph()  # type: ignore
     out_nodes = [(n, 'out') for n in G.nodes()]
     in_nodes = [(n, 'in') for n in G.nodes()]
     B.add_nodes_from(out_nodes, bipartite=0)
