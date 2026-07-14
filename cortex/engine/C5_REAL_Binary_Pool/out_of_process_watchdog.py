@@ -15,15 +15,12 @@ hilo primario y restaurando el estado BFT seguro.
 
 import sqlite3
 import time
-import os
-import signal
-import sys
 from pathlib import Path
 
 DB_PATH = "$CORTEX_ROOT/.babylon60/runtime.db"
 
 def monitor_llm_wal():
-    print(f"\033[38;2;176;38;255m[WATCHDOG]\033[0m Iniciando External Restart-Time Compensation. Observando WAL...")
+    print("\033[38;2;176;38;255m[WATCHDOG]\033[0m Iniciando External Restart-Time Compensation. Observando WAL...")
     
     if not Path(DB_PATH).exists():
         print("[WATCHDOG] runtime.db no encontrado. Esperando ignición...")
@@ -64,7 +61,7 @@ def monitor_llm_wal():
                             # Compensación: Eliminación física de la mutación corrupta del Ledger
                             conn.execute("DELETE FROM ultrathink_ledger WHERE hash = ?", (m_hash,))
                             conn.commit()
-                            print(f"\033[38;2;180;230;176m[COMPENSATION SUCCESS]\033[0m Estado BFT restaurado. Anergía purgada.")
+                            print("\033[38;2;180;230;176m[COMPENSATION SUCCESS]\033[0m Estado BFT restaurado. Anergía purgada.")
                             
                     last_lamport = current_lamport
             except sqlite3.Error as e:

@@ -14,7 +14,7 @@ import hashlib
 import time
 import sys
 import os
-from decimal import Decimal, getcontext
+from decimal import getcontext
 
 # Set precision to EVM/ISO standard
 getcontext().prec = 38

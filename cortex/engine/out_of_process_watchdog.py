@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
 import sys
-import json
-import hashlib
-import sqlite3
-from typing import Dict, Any
 
 def verify_structural_invariants(payload_path: str) -> bool:
     """

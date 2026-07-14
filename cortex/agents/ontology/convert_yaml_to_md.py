@@ -1,6 +1,5 @@
 import yaml
 import sys
-import os
 
 def main():
     yaml_path = "$CORTEX_ROOT/Downloads/matriz_1000_primitivas.yaml"

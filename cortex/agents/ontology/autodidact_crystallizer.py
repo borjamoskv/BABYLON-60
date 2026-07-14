@@ -28,7 +28,7 @@ def parse_catalogo():
     out_path = os.path.join(ONTOLOGY_DIR, "CATALOGO_ENTIDADES_CORTEX.yaml")
     with open(out_path, 'w', encoding='utf-8') as yf:
         yaml.dump(data, yf, allow_unicode=True, sort_keys=False)
-    print(f"[*] Cristalizado CATALOGO_ENTIDADES_CORTEX.md")
+    print("[*] Cristalizado CATALOGO_ENTIDADES_CORTEX.md")
 
 def parse_ouroboros():
     path = os.path.join(ONTOLOGY_DIR, "ouroboros_category_apex.md")
@@ -54,7 +54,7 @@ def parse_ouroboros():
     out_path = os.path.join(ONTOLOGY_DIR, "ouroboros_category_apex.yaml")
     with open(out_path, 'w', encoding='utf-8') as yf:
         yaml.dump(data, yf, allow_unicode=True, sort_keys=False)
-    print(f"[*] Cristalizado ouroboros_category_apex.md")
+    print("[*] Cristalizado ouroboros_category_apex.md")
 
 def parse_sinergia():
     path = os.path.join(ONTOLOGY_DIR, "sinergia_exergetica.md")
@@ -82,7 +82,7 @@ def parse_sinergia():
     out_path = os.path.join(ONTOLOGY_DIR, "sinergia_exergetica.yaml")
     with open(out_path, 'w', encoding='utf-8') as yf:
         yaml.dump(data, yf, allow_unicode=True, sort_keys=False)
-    print(f"[*] Cristalizado sinergia_exergetica.md")
+    print("[*] Cristalizado sinergia_exergetica.md")
 
 def parse_vanguard_agents():
     path = VANGUARD_AGENTS
@@ -110,7 +110,7 @@ def parse_vanguard_agents():
     if rules:
         with open(out_yaml, 'w', encoding='utf-8') as yf:
             yaml.dump({"leyes_vanguard": rules}, yf, allow_unicode=True, sort_keys=False)
-        print(f"[*] Cristalizado vanguard-reserve/AGENTS.md")
+        print("[*] Cristalizado vanguard-reserve/AGENTS.md")
 
 def main():
     print("[*] Ejecutando Autodidact-Omega: Cristalización Absoluta...")

@@ -42,7 +42,7 @@ def check_h5_violation(filepath) -> "Any":
 def main() -> "Any":
     workspace = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
     found_violations = False
-    print(f"[*] Compilando validación contra Hammurabi Lex Talionis Matrix...")
+    print("[*] Compilando validación contra Hammurabi Lex Talionis Matrix...")
     for root, dirs, files in os.walk(workspace):
         if ".venv" in root or ".git" in root or "node_modules" in root:
             continue

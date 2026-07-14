@@ -19,13 +19,11 @@ de Denuncias Algorítmicas (Trust & Safety) y homeostasis en nexus_anchors.db.
 import sqlite3
 import hashlib
 import json
-import os
-import sys
 import argparse
 import subprocess
 import urllib.request
 import urllib.error
-from typing import List, Dict, Optional, Tuple
+from typing import Tuple
 
 DB_PATH = "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/nexus_anchors.db"
 
