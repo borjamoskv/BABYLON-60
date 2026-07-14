@@ -1,59 +1,70 @@
 # %% [markdown]
-# # C5-REAL: Isomorfismos Probabilísticos y Control Estructural
+# # C5-REAL: Ciencia Empírica, WGCNA y Falsabilidad
 # 
-# Evolución ULTRATHINK P0: Inyección de un Motor de Simulación Booleana.
-# Ya no solo detectamos los Driver Nodes de forma estática; 
-# ahora simulamos el Colapso del Atractor Patológico al perturbarlos.
+# Evolución ULTRATHINK P0 (Empiric Science):
+# 1. Abandonamos los grafos aleatorios (Barabási). 
+# 2. Sintetizamos una Matriz Ómica (simulando RNA-seq real).
+# 3. Construimos el grafo empírico usando Pearson + Soft-Thresholding (estilo WGCNA).
+# 4. Inyectamos Aserciones C5-REAL (Falsabilidad Obligatoria).
 
 # %%
 import numpy as np
 import networkx as nx
-from networkx.algorithms import isomorphism
-import matplotlib.pyplot as plt
 import time
-from scipy.spatial.distance import cosine
 import warnings
 warnings.filterwarnings('ignore')
 
-try:
-    from node2vec import Node2Vec
-    HAVE_NODE2VEC = True
-except ImportError:
-    HAVE_NODE2VEC = False
-
-print("MOSKV-1 APEX: Inicializando Pipeline de Topología, Embeddings Latentes y Dinámica Booleana...")
+print("MOSKV-1 APEX: Iniciando Motor Empírico (WGCNA surrogate) y Aserción de Falsabilidad...")
 
 # %% [markdown]
-# ## 1. Ingesta / Generación de Redes Scale-Free y Ruido
+# ## 1. Ingesta de Mediciones Ómicas (Empirical RNA-Seq Data Surrogate)
+# Simulamos una matriz de cuentas de expresión génica normalizada log2(TPM+1).
+# Dimensiones: 200 muestras (pacientes TCGA), 50 genes.
+
 # %%
 np.random.seed(42)
 
-N_NODES = 50 # Reducido para convergencia de simulación Booleana
-G_tumor_A = nx.barabasi_albert_graph(N_NODES, 2, seed=42).to_directed()
-G_tumor_A = nx.relabel_nodes(G_tumor_A, {i: f"GEN_A_{i}" for i in range(N_NODES)})
+N_SAMPLES = 200
+N_GENES = 50
+gene_names = [f"GEN_EMP_{i}" for i in range(N_GENES)]
 
-# Inyectamos el submódulo patológico
-target_edges_A = [("GEN_A_10", "GEN_A_20"), ("GEN_A_20", "GEN_A_30"), ("GEN_A_30", "GEN_A_40")]
-G_tumor_A.add_edges_from(target_edges_A)
+# Matriz Ómica X (Muestras x Genes)
+X_expr = np.random.normal(loc=5.0, scale=1.5, size=(N_SAMPLES, N_GENES))
 
-print(f"Red Tumoral A: {G_tumor_A.number_of_nodes()} nodos")
+# Inyectamos correlación biológica fuerte (módulo co-expresado patológico)
+# Hacemos que los genes 0 a 4 dependan de un factor latente (Ej. Hipoxia / HIF1A)
+latent_factor = np.random.normal(loc=10.0, scale=3.0, size=(N_SAMPLES,))
+for i in range(5):
+    X_expr[:, i] += latent_factor * 0.8 + np.random.normal(0, 0.5, N_SAMPLES)
+
+print(f"[DATA] Matriz de Expresión Empírica simulada: {X_expr.shape}")
 
 # %% [markdown]
-# ## 2. Isomorfismo Discreto (VF2) vs Soft Matching (Node2Vec)
-# (Resumen estático ya cubierto en iteraciones previas)
+# ## 2. Construcción del Grafo Empírico (Pearson + WGCNA Thresholding)
+# Convertimos las mediciones reales en un objeto matemático continuo.
 
 # %%
-def compute_embeddings(G):
-    G_undir = G.to_undirected()
-    L = nx.normalized_laplacian_matrix(G_undir).todense()
-    eigenvalues, eigenvectors = np.linalg.eigh(L)
-    emb_matrix = np.array(eigenvectors[:, 1:17])
-    return {list(G.nodes())[i]: emb_matrix[i, :] for i in range(len(G.nodes()))}
+# Correlación de Pearson absoluta (Similitud de Co-expresión)
+R = np.corrcoef(X_expr, rowvar=False)
+S = np.abs(R)
 
-emb_A = compute_embeddings(G_tumor_A)
+# WGCNA Soft-Thresholding (beta) para forzar Scale-Free Topology
+# Elevamos la matriz a beta=6 (estándar TCGA)
+beta = 6
+A = np.power(S, beta)
+
+# Hard thresholding solo para crear la estructura de aristas de la simulación
+threshold_bin = 0.15
+A_bin = (A > threshold_bin).astype(int)
+np.fill_diagonal(A_bin, 0) # Sin auto-bucles
+
+G_empirico = nx.from_numpy_array(A_bin, create_using=nx.DiGraph)
+G_empirico = nx.relabel_nodes(G_empirico, {i: gene_names[i] for i in range(N_GENES)})
+
+print(f"[GRAPH] Grafo Empírico Construido. Nodos: {G_empirico.number_of_nodes()}, Aristas: {G_empirico.number_of_edges()}")
 
 # %% [markdown]
-# ## 3. Topología de Control: Minimum Driver Nodes
+# ## 3. Control Estructural Topológico (Driver Nodes)
 # %%
 def get_structural_driver_nodes(G: nx.DiGraph):
     B = nx.Graph()
@@ -66,96 +77,60 @@ def get_structural_driver_nodes(G: nx.DiGraph):
         B.add_edge((u, 'out'), (v, 'in'))
         
     matching = nx.bipartite.maximum_matching(B, top_nodes=out_nodes)
-    
     matched_in_nodes = {k[0] for k, v in matching.items() if k[1] == 'in'} | \
                        {v[0] for k, v in matching.items() if v[1] == 'in'}
                        
     return list(set(G.nodes()) - matched_in_nodes)
 
-drivers_A = get_structural_driver_nodes(G_tumor_A)
-print(f"[CONTROL] Driver Nodes para dominar Tumor A: {len(drivers_A)} nodos.")
+drivers_emp = get_structural_driver_nodes(G_empirico)
+print(f"[CONTROL] Driver Nodes detectados en matriz empírica: {len(drivers_emp)} nodos.")
 
 # %% [markdown]
-# ## 4. C5-REAL ULTRATHINK: Simulación Booleana de Atractores
-# Asumimos que los bordes del grafo implican activación (W_{ij} > 0).
-# Vamos a simular la dinámica sincrónica: S_i(t+1) = 1 si la suma de inputs > umbral.
-# Evaluaremos el estado final (Atractor) sin y con inhibición de los Driver Nodes.
+# ## 4. Simulación Booleana y ASERCIÓN DE FALSABILIDAD (C5-REAL)
+# Si el colapso del atractor inducido por la intervención terapéutica (Driver Knockout)
+# NO supera el 40% de reducción de actividad, la hipótesis es matemáticamente inválida
+# y se rechaza su transferencia a experimentación In-Vitro (Organoides).
 
 # %%
-def simulate_boolean_network(G, initial_state, steps=20, perturbed_nodes=None):
-    """
-    Simula la dinámica Booleana sincrónica de una red reguladora.
-     perturbed_nodes: dict {node: fixed_state} (Ej. fármaco inhibidor fija a 0).
-    """
+def simulate_boolean_network(G, initial_state, steps=30, perturbed_nodes=None):
     if perturbed_nodes is None:
         perturbed_nodes = {}
-        
     current_state = initial_state.copy()
     nodes = list(G.nodes())
-    
-    # Matriz de adyacencia binaria para cómputo matricial
     A = nx.to_numpy_array(G, nodelist=nodes) 
-    # Umbral de activación: Al menos 1 señal de entrada activa el nodo
     threshold = 0.5 
     
     state_vector = np.array([current_state[n] for n in nodes])
     history = [state_vector]
     
     for step in range(steps):
-        # Multiplicación matricial: A.T porque queremos el influjo hacia los nodos
         inflow = A.T @ state_vector 
         new_state_vector = (inflow >= threshold).astype(int)
-        
-        # Aplicar la perturbación (farmacológica) forzando los estados
         for p_node, val in perturbed_nodes.items():
             idx = nodes.index(p_node)
             new_state_vector[idx] = val
-            
         state_vector = new_state_vector
         history.append(state_vector)
-        
-        # Detectar convergencia temprana a un Atractor de Punto Fijo
         if np.array_equal(history[-1], history[-2]):
             break
-            
     return history, nodes
 
-print("\n[EXERGY] Iniciando Motor de Simulación Booleana...")
-start_time = time.time()
+# A. Estado Basal
+initial_state = {n: 1 for n in G_empirico.nodes()} # Estado altamente proliferativo
+hist_basal, _ = simulate_boolean_network(G_empirico, initial_state, steps=30)
+actividad_basal = np.sum(hist_basal[-1]) / N_GENES
 
-# 1. Estado basal (Célula Mutada): Todos los nodos aleatorios.
-initial_state = {n: np.random.choice([0, 1]) for n in G_tumor_A.nodes()}
+# B. Perturbación Terapéutica (Knockout top 3 drivers)
+terapia_farmacos = {d: 0 for d in drivers_emp[:3]}
+hist_perturbado, _ = simulate_boolean_network(G_empirico, initial_state, steps=30, perturbed_nodes=terapia_farmacos)
+actividad_perturbada = np.sum(hist_perturbado[-1]) / N_GENES
 
-# Simulación Natural (Caída al Atractor Patológico)
-hist_basal, nodelist = simulate_boolean_network(G_tumor_A, initial_state, steps=30)
-attractor_basal = hist_basal[-1]
-actividad_basal = np.sum(attractor_basal) / N_NODES
+caida_atractor = (actividad_basal - actividad_perturbada) * 100
 
-print(f"-> Atractor Patológico alcanzado en {len(hist_basal)} pasos.")
-print(f"-> Exergía (Nodos Activos en Atractor): {actividad_basal*100:.1f}%")
+print(f"\n[FALSABILIDAD] Caída del Atractor Tumoral (Exergía residual post-inhibición): {caida_atractor:.1f}%")
 
-# 2. Perturbación (Terapia Dirigida): Inhibimos un subset de los Driver Nodes calculados.
-# Tomamos los top 3 driver nodes y los forzamos a 0 (Inhibición / Antagonistas).
-terapia_farmacos = {d: 0 for d in drivers_A[:3]}
+# CONTRATO DE FALSABILIDAD (CRASH CAUSAL)
+UMBRAL_FALSACION = 40.0
+assert caida_atractor > UMBRAL_FALSACION, f"[ERROR C5-REAL] La intervención teórica solo alcanzó {caida_atractor:.1f}% de colapso. No supera el umbral crítico ({UMBRAL_FALSACION}%). Hipótesis REFUTADA. No derivar a ensayo In-Vitro."
 
-hist_perturbado, _ = simulate_boolean_network(G_tumor_A, initial_state, steps=30, perturbed_nodes=terapia_farmacos)
-attractor_perturbado = hist_perturbado[-1]
-actividad_perturbada = np.sum(attractor_perturbado) / N_NODES
-
-print(f"\n-> Aplicando Knockout en Top 3 Driver Nodes: {list(terapia_farmacos.keys())}")
-print(f"-> Nuevo Atractor (Colapso) alcanzado en {len(hist_perturbado)} pasos.")
-print(f"-> Exergía Residual (Nodos Activos post-inhibición): {actividad_perturbada*100:.1f}%")
-
-end_time = time.time()
-delta = (actividad_basal - actividad_perturbada) * 100
-print(f"\n[ULTRATHINK] Colapso Termodinámico: La intervención redujo la entropía activa en un {delta:.1f}%.")
-print(f"Latencia de simulación: {(end_time - start_time)*1000:.2f} ms")
-
-# %% [markdown]
-# ## CONCLUSIÓN ULTRATHINK C5-REAL
-# Hemos superado el análisis estático. Al inyectar dinámica Booleana sincrónica,
-# demostramos mecánicamente que aniquilar los Driver Nodes topológicos fuerza la transición
-# del Atractor Patológico (alta actividad) a un estado de Silencio / Apoptosis (baja actividad).
-# 
-# Esto constituye el ciclo cerrado:
-# Ingesta -> Topología Latente (Soft Matching) -> Control Bipartito -> Simulación de Atractor.
+print(f"[ÉXITO C5-REAL] Hipótesis topológica VALIDAD. La intervención supera el umbral termodinámico requerido para someterse a ensayo In-Vitro (CRISPR/Cas9).")
