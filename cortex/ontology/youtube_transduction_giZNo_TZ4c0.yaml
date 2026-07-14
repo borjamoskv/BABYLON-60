@@ -1,0 +1,16 @@
+# C5-REAL YouTube Transduction Ledger
+Claim: "https://www.youtube.com/watch?v=giZNo_TZ4c0 metadata extraction"
+Proof:
+  Base: "3c92bb0b175b50a1ad697e50efe2be4a66fb11c6c88afee39185b1daaff4a8f1"
+  Range: [1, 1]
+  Confidence: "C5-REAL"
+Metadata:
+  Title: "Diagrama de flujo y ALGORITMOS - for (Ejercicio 4)"
+  Channel: "LogicShip"
+  UploadDate: "20260714"
+  DurationSeconds: 384
+  Url: "https://www.youtube.com/watch?v=giZNo_TZ4c0"
+Description: |
+    Hola, estamos en ruta :)
+    
+    #aprenderaprogramar #visualstudiocode #programming #programacion #csharp
