@@ -27,6 +27,8 @@
 | MS-006 | Milestone | Apoptosis Engine execution and code pruning | Due: 2026-07-10 | DONE | Hash: 0fe8112e |
 | OBJ-006 | Objective | Objectives & Milestones Agent (ULTRAThink ITERA) | Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza PROJECT.md bajo Git Sentinel. | IN_PROGRESS | Exergy: 0.00 |
 | MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | IN_PROGRESS |  |
+| OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | PENDING | Exergy: 0.95 |
+| OBJ-008 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | PENDING | Exergy: 0.95 |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
