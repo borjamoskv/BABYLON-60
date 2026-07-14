@@ -43,3 +43,4 @@ proof/lean/.lake/
 
 # Python packaging leftovers
 *.egg-info/
+c5_remotion_video/node_modules/

@@ -2,7 +2,6 @@ from fastapi import FastAPI, Depends, HTTPException, Security
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.responses import HTMLResponse
 import jwt
-import httpx
 import os
 from datetime import datetime
 
