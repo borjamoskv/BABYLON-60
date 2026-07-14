@@ -5,7 +5,7 @@ Orchestrator: Borja Moskv (borjamoskv)
 Aesthetic: Industrial Noir 2026 (#0A0A0A / #2B3BE5 / Humanist Sans)
 
 EVOLVE COMMAND EXECUTED (ULTRATHINK):
-Transduces the 40-node Frontier Delta from static conceptual quarantine directly
+Transduces the 41-node Frontier Delta from static conceptual quarantine directly
 into an active, self-healing Causal Evolution Matrix (`cortex/ontology/frontier_evolution_matrix.yaml`).
 Enforces exact SHA3-256 CORTEX-TAINT across the multi-agent Swarm boundary.
 """
@@ -19,7 +19,7 @@ CORTEX_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_MATRIX_PATH = os.path.join(CORTEX_ROOT, "ontology/frontier_evolution_matrix.yaml")
 AUDIT_LOG_PATH = os.path.join(CORTEX_ROOT, "audits/frontier_evolution_taint.json")
 
-# CANONICAL INVARIANT POOL (FROZEN 40 NODES - STRATA I to VII)
+# CANONICAL INVARIANT POOL (FROZEN 41 NODES - STRATA I to VIII)
 FROZEN_FRONTIER_NODES = [
     # Stratum I & II: SOTA Bypass & Core Persistence
     {"id": "ULTRATHINK_MCTS_TTFT", "name": "Epistemología TTFT en Caja Negra", "classification": "SOTA-BYPASS"},
@@ -69,7 +69,9 @@ FROZEN_FRONTIER_NODES = [
     {"id": "DATA_LOSS_PREVENTION_OMEGA", "name": "Invarianza de Infraestructura (DLP)", "classification": "AUTOPOIETIC-INFRASTRUCTURE"},
     {"id": "DIRECTIONAL_INVARIANCE_APOPTOSIS", "name": "Invarianza Direccional (Λ4)", "classification": "THERMODYNAMIC-GOVERNOR"},
     {"id": "ORTHOGONAL_ARITHMETIC_RNS", "name": "Ortogonalidad Aritmética (L28)", "classification": "DATA-INTEGRITY"},
-    {"id": "STRUCTURAL_PROMPTING_MODULES", "name": "Patrón de Invocación (L31)", "classification": "SWARM-ORCHESTRATION"}
+    {"id": "STRUCTURAL_PROMPTING_MODULES", "name": "Patrón de Invocación (L31)", "classification": "SWARM-ORCHESTRATION"},
+    # Stratum VIII: Conversational Coherence & Anti-Divergence
+    {"id": "CONVERSATIONAL_COHERENCE_ANTI_DIVERGENCE", "name": "Continuidad Conversacional (Anti-Divergencia)", "classification": "THERMODYNAMIC-GOVERNOR"}
 ]
 
 def sha3_256_hash(data: bytes) -> str:

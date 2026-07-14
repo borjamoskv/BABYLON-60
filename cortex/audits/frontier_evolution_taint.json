@@ -2,8 +2,8 @@
   "status": "EVOLVED_ACTIVE",
   "stratum": "VIII",
   "timestamp": "2026-07-14T06:58:00+02:00",
-  "node_count": 40,
-  "global_cortex_taint": "5afcd5fbe45ae71533aa024a12d9c852a3367331edbbad41162b9a518ea5092f",
+  "node_count": 41,
+  "global_cortex_taint": "2fcd560f108518f72edb50a9374e01b9d075d16ea6f7bf74240061a38219d43c",
   "evolution_matrix": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/frontier_evolution_matrix.yaml",
   "enforcer_script": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/frontier_evolution_transducer.py"
 }
