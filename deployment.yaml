@@ -1,0 +1,24 @@
+environments:
+  dev:
+    # TODO: Replace with your GCP project
+    project: "YOUR_PROJECT_ID"
+
+    # TODO: Replace with your region
+    region: "YOUR_REGION"
+
+    # TODO: Replace with your Composer environment
+    composer_environment: "YOUR_COMPOSER"
+
+    # TODO: Replace with your artifacts bucket
+    artifact_storage:
+      bucket: "YOUR_BUCKET"
+      path_prefix: pipelines
+
+    variables:
+      # TODO: Replace with your service account
+      service_account: "YOUR_SERVICE_ACCOUNT"
+      # TODO: Replace with your network URI
+      network_uri: projects/YOUR_PROJECT_ID/global/networks/default
+
+    pipelines:
+      - source: orchestration_pipeline.yaml
