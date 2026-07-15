@@ -273,7 +273,7 @@ def main():
                 try:
                     entities = parse_markdown_tables(filepath)
                     all_entities.extend(entities)
-                except Exception as e:
+                except (OSError, UnicodeDecodeError) as e:
                     print(f"[-] Omitiendo {filepath}: {e}")
 
     print(f"[*] Ingestadas {len(all_entities)} entidades ontológicas en memoria.")

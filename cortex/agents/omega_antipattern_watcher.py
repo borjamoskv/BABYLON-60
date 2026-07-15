@@ -311,7 +311,7 @@ def check_circular_imports(python_files: List[Path]) -> List[Dict[str, Any]]:
             mod_name = ".".join(parts)
             path_to_mod[filepath] = mod_name
             mod_to_path[mod_name] = filepath
-        except Exception:
+        except ValueError:
             continue
 
     # Parse imports
@@ -342,7 +342,7 @@ def check_circular_imports(python_files: List[Path]) -> List[Dict[str, Any]]:
                         if imp.startswith(local_mod + "."):
                             resolved_imports.add(local_mod)
             import_graph[m_name] = resolved_imports
-        except Exception:
+        except (SyntaxError, ValueError, OSError):
             continue
 
     # Simple DFS cycle detection
@@ -447,7 +447,7 @@ def main() -> None:
                 "details": f"SyntaxError blocking AST analysis: {se.msg}",
                 "severity": "P1"
             })
-        except Exception as e:
+        except (SyntaxError, ValueError, OSError) as e:
             print(f"[!] Error parsing {py_file}: {e}")
 
     # 2. Check all files with Text Rules (Regex)
@@ -497,7 +497,7 @@ def main() -> None:
             with open(report_file, "w", encoding="utf-8") as rf:
                 yaml.dump(report_data, rf, default_flow_style=False, sort_keys=False)
             print(f"[🟢] Structural report compiled and written to: {report_file}")
-        except Exception as e:
+        except OSError as e:
             print(f"[!] Failed to write YAML audit report: {e}")
             
         # Check fail-fast conditions

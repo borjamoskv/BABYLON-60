@@ -212,7 +212,7 @@ class StructureAgent:
                     state.code_structure[file] = self.parser.parse_python(content)
                 elif file.endswith((".js", ".ts", ".tsx", ".jsx")):
                     state.code_structure[file] = self.parser.parse_js(content)
-            except Exception:
+            except OSError:
                 continue
         return state
 
@@ -228,7 +228,7 @@ class AnalystAgent:
                     state.features.append({"feature": "authentication", "source": file})
                 if "todo" in lc:
                     state.technical_debt.append({"type": "TODO_found", "file": file})
-            except Exception:
+            except OSError:
                 continue
         return state
 
@@ -345,7 +345,7 @@ def main() -> None:
         }
         try:
             conn, key = boot_sequence(compensators)
-        except Exception:
+        except (sqlite3.Error, NameError, ImportError, AttributeError, ValueError):
             pass
 
     def _effect():

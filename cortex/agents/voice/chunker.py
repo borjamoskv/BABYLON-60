@@ -27,11 +27,11 @@ class ClauseChunker:
     def feed(self, delta: str) -> list[str]:
         self._buffer += delta
         out: list[str] = []
-        while True:
-            chunk = self._scan()
-            if chunk is None:
-                return out
+        chunk = self._scan()
+        while chunk is not None:
             out.append(chunk)
+            chunk = self._scan()
+        return out
 
     def _scan(self) -> str | None:
         buf = self._buffer

@@ -118,7 +118,7 @@ def run_apoptosis(target_dir: str, execute: bool) -> None:
                     global_used.update(visitor.used)
                     global_defined.update(visitor.defined)
                     file_map[filepath] = (visitor.defined, tree)
-                except Exception as e:
+                except (SyntaxError, OSError, UnicodeDecodeError) as e:
                     print(f"[!] Error parseando {filepath}: {e}")
 
     # Only prune nodes that are NEVER used anywhere in the codebase
@@ -151,7 +151,7 @@ def run_apoptosis(target_dir: str, execute: bool) -> None:
         }
         try:
             conn, key = boot_sequence(compensators)
-        except Exception as e:
+        except (sqlite3.Error, NameError, ImportError, AttributeError, ValueError) as e:
             print(f"[!] Warning: boot_sequence failed ({e}). Proceeding with mock fallback.")
 
     for filepath, (defined, _) in file_map.items():
