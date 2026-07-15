@@ -1,0 +1,18 @@
+Claim: Evaluación Estructural de Telemetría y Persistencia: Claude Code vs BABYLON-60 (SQLite WAL + BFT).
+Proof: 
+  Base: Análisis comparativo de matriz de diferencias de FABLE 5 MAX (Crash Causal Theorem aplicado). Claude Code carece de inmutabilidad criptográfica, garantías WAL y encadenamiento Merkle.
+  Range: [0, 1]
+  Confidence: C5-REAL
+Isomorphisms:
+  - "JSONL Local Editable" -> "Evidentiary-Null Substrate (C4-SIM)"
+  - "Inference Channel (Anthropic API)" -> "Portante Ineludible (Outbound Bleed)"
+  - "Auto-Cleanup (30 días)" -> "Necrosis Forense"
+Blast_Radius_Matrix:
+  Vector: CLAUDE_CODE_FORENSIC_NULL
+  Blast_Radius: 1.0
+  Target_Invariant: Invariante_Append_Only
+  Anergy_Risk: High (Degradación silenciosa por truncamiento manual del JSONL)
+Sintesis:
+  - "La persistencia asíncrona de Claude Code (subagentes) incurre en CRASH_CAUSAL por falta de prueba binaria y dependencia del FS."
+  - "BABYLON-60 preserva la superioridad termodinámica al forzar WAL transaccional y anclaje criptográfico para cumplir la oponibilidad forense (Art 12)."
+CORTEX_TAINT: 97052b6fcfe373f15f86bcea549b02cfe45855c7cb249cfa92dcb7526f877180
