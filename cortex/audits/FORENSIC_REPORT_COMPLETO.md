@@ -3,32 +3,33 @@
 ### Lines of Code (LOC) by Extension
 | Extension | Count | Total LOC |
 |---|---|---|
-| .yaml | 67652 | 2962361 |
+| .yaml | 67655 | 2957865 |
 | .patch | 41 | 2774502 |
-| no_ext | 160 | 1130721 |
+| no_ext | 190 | 1140821 |
 | .txt | 33 | 638596 |
 | .safetensors | 2 | 557528 |
 | .dll | 24 | 327832 |
 | .html | 10 | 269179 |
-| .db | 19 | 188894 |
-| .rmeta | 35 | 166535 |
+| .rmeta | 49 | 244217 |
+| .rlib | 33 | 215488 |
+| .db | 19 | 188928 |
 | .mp4 | 1 | 166271 |
 | .dylib | 3 | 165978 |
 | .wasm | 1 | 148047 |
-| .rlib | 20 | 121138 |
 | .png | 70 | 111584 |
+| .bin | 15 | 81072 |
 | .ttf | 76 | 75529 |
-| .py | 510 | 71816 |
+| .py | 516 | 72477 |
 | .js | 276 | 70426 |
 | .csv | 27 | 61129 |
 | .gz | 4 | 60567 |
-| .md | 263 | 51559 |
+| .md | 265 | 53032 |
 | .jpg | 19 | 39549 |
-| .bin | 9 | 38774 |
 | .xml | 5 | 33230 |
 | .br | 102 | 32293 |
 | .sol | 58 | 28201 |
-| .json | 159 | 13172 |
+| .o | 199 | 24305 |
+| .json | 173 | 13186 |
 | .pdb | 6 | 10640 |
 | .fs | 6 | 10102 |
 | .mp3 | 17 | 9530 |
@@ -37,10 +38,9 @@
 | .sh | 4 | 7563 |
 | .pem | 1 | 6265 |
 | .mjs | 14 | 6177 |
-| .lock | 11 | 5936 |
+| .lock | 13 | 5936 |
 | .woff | 20 | 2145 |
 | .a | 2 | 1897 |
-| .o | 2 | 1891 |
 | .jpeg | 1 | 1756 |
 | .pdf | 1 | 1541 |
 | .jsonl | 6 | 1367 |
@@ -48,15 +48,15 @@
 | .sql | 101 | 1196 |
 | .fasta | 5 | 1079 |
 | .node | 2 | 1073 |
+| .d | 49 | 712 |
 | .webp | 2 | 602 |
 | .iqtree | 2 | 562 |
-| .d | 35 | 491 |
 | .yml | 11 | 480 |
 | .ts | 5 | 473 |
+| .db-wal | 2 | 453 |
 | .ipynb | 1 | 439 |
 | .tsx | 3 | 380 |
 | .docx | 2 | 342 |
-| .db-wal | 3 | 258 |
 | .npy | 2 | 222 |
 | .h | 1 | 218 |
 | .npz | 2 | 208 |
@@ -69,7 +69,7 @@
 | .rs | 1 | 102 |
 | .olean | 1 | 82 |
 | .lean | 1 | 52 |
-| .timestamp | 37 | 37 |
+| .timestamp | 51 | 51 |
 | .trace | 1 | 32 |
 | .v | 1 | 31 |
 | .cache | 8 | 31 |
@@ -82,7 +82,7 @@
 | .bnf | 1 | 17 |
 | .fsproj | 1 | 12 |
 | .ots | 1 | 10 |
-| .db-shm | 3 | 5 |
+| .db-shm | 2 | 6 |
 | .hash | 3 | 3 |
 | .sha256 | 1 | 2 |
 | .treefile | 2 | 2 |
@@ -137,7 +137,7 @@
 | [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/skills/literature-review/kernel.py) | 480 | 1 | 22 |
 | [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/literature-review/kernel.py) | 480 | 1 | 22 |
 | [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_clinical_genomics/server.py) | 461 | 0 | 25 |
-| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py) | 369 | 7 | 18 |
+| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py) | 370 | 7 | 18 |
 | [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/pheweb_portals/client.py) | 294 | 6 | 15 |
 | [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/mcp-servers/bio-tools/lib/mcp_biorxiv/server.py) | 290 | 0 | 22 |
 | [stt.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/voice/stt.py) | 205 | 3 | 21 |
@@ -148,16 +148,16 @@
 | Module | References |
 |---|---|
 | __future__ | 253 |
-| json | 137 |
+| json | 138 |
 | .client | 132 |
-| typing | 117 |
-| time | 102 |
-| sys | 82 |
-| os | 80 |
-| re | 59 |
+| typing | 120 |
+| time | 105 |
+| sys | 85 |
+| os | 83 |
+| re | 60 |
 | dataclasses | 57 |
+| pathlib | 51 |
 | requests | 51 |
-| pathlib | 48 |
 | argparse | 47 |
 | urllib.parse | 45 |
 | .records | 45 |
@@ -166,6 +166,9 @@
 ### Dimension 3: Technical Debt Alarms (TODO / FIXME / HACK)
 | File Path | Alarms | Snippet |
 |---|---|---|
+| [PROJECT.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/PROJECT.md#L38) | Line 38 | `| MS-013 | Milestone | Implementar Autonomic Swarm Daemon con monitorización de procesos y telemetrí` |
+| [PROJECT.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/PROJECT.md#L39) | Line 39 | `| MS-014 | Milestone | Configurar planificador en segundo plano (schedule/cron) para la orquestación` |
+| [PROJECT.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/PROJECT.md#L40) | Line 40 | `| MS-015 | Milestone | Generar reportes periódicos en overnight_swarm_report.yaml | Due: 2026-07-16` |
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L10984) | Line 10984 | `{"step_index":13,"source":"MODEL","type":"PLANNER_RESPONSE","status":"DONE","created_at":"2026-07-10` |
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L12386) | Line 12386 | `{"step_index":66,"source":"MODEL","type":"PLANNER_RESPONSE","status":"DONE","created_at":"2026-07-10` |
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L13273) | Line 13273 | `{"step_index":23,"source":"MODEL","type":"VIEW_FILE","status":"DONE","created_at":"2026-07-10T12:30:` |
@@ -185,10 +188,122 @@
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L52100) | Line 52100 | `{"step_index":21,"source":"MODEL","type":"VIEW_FILE","status":"DONE","created_at":"2026-07-09T17:32:` |
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L89761) | Line 89761 | `{"step_index":814,"source":"SYSTEM","type":"CHECKPOINT","status":"DONE","created_at":"2026-07-08T22:` |
 | [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_memory.db#L102528) | Line 102528 | `### [ULTRATHINK P0] INVARIANTE: LA FALACIA DEL "PROBAR TODOS"` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L166) | Line 166 | `### Dimension 3: Technical Debt Alarms (TODO / FIXME / HACK)` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L182) | Line 182 | `| [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_me` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L190) | Line 190 | `| [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_me` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L191) | Line 191 | `| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Mosk` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L304) | Line 304 | `| [C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Ro` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L305) | Line 305 | `| [C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Ro` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L306) | Line 306 | `| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/corte` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L307) | Line 307 | `| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/corte` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L308) | Line 308 | `| [18_BINARY_AST_TOPOLOGICAL_ISOMORPHISM_1000.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teo` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L309) | Line 309 | `| [migue_baena_audit.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cor` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L310) | Line 310 | `| [migue_baena_audit.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cor` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L311) | Line 311 | `| [ts_algorithmic_strike_matrix_utbh.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Ro` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L312) | Line 312 | `| [ts_algorithmic_strike_matrix_utbh.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Ro` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L313) | Line 313 | `| [video_utbh_destruccion_1000.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L314) | Line 314 | `| [video_utbh_destruccion_1000.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L315) | Line 315 | `| [strike_targets.json](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L316) | Line 316 | `| [strike_targets.json](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L317) | Line 317 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L318) | Line 318 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L319) | Line 319 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L320) | Line 320 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L321) | Line 321 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L322) | Line 322 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L323) | Line 323 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L324) | Line 324 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L326) | Line 326 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L327) | Line 327 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L331) | Line 331 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L334) | Line 334 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L335) | Line 335 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L338) | Line 338 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L339) | Line 339 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L340) | Line 340 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L341) | Line 341 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L342) | Line 342 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L345) | Line 345 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L346) | Line 346 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L357) | Line 357 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L366) | Line 366 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L367) | Line 367 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L368) | Line 368 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L369) | Line 369 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L370) | Line 370 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L371) | Line 371 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L372) | Line 372 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L373) | Line 373 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L375) | Line 375 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L376) | Line 376 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L377) | Line 377 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L378) | Line 378 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L379) | Line 379 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L381) | Line 381 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L382) | Line 382 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L383) | Line 383 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L384) | Line 384 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L385) | Line 385 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L388) | Line 388 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L389) | Line 389 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L390) | Line 390 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L391) | Line 391 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L392) | Line 392 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L393) | Line 393 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L394) | Line 394 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L395) | Line 395 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L396) | Line 396 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L397) | Line 397 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L401) | Line 401 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L402) | Line 402 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L403) | Line 403 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L404) | Line 404 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L405) | Line 405 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L406) | Line 406 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L407) | Line 407 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L408) | Line 408 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L410) | Line 410 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L411) | Line 411 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L412) | Line 412 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L413) | Line 413 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L414) | Line 414 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L415) | Line 415 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L416) | Line 416 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L417) | Line 417 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L418) | Line 418 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L419) | Line 419 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L420) | Line 420 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L421) | Line 421 | `| [micromamba](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L423) | Line 423 | `| [server.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L424) | Line 424 | `| [server.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L425) | Line 425 | `| [server.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L426) | Line 426 | `| [index.html](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L427) | Line 427 | `| [index.html](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L428) | Line 428 | `| [range.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L429) | Line 429 | `| [libvips-cpp.8.18.3.dylib](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/c` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L430) | Line 430 | `| [libvips-cpp.8.18.3.dylib](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/c` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L432) | Line 432 | `| [forge_strike_centuria.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/c` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L435) | Line 435 | `| [nexus_anchors.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/en` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L437) | Line 437 | `| [forge_live_strike_matrix.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Mosk` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L438) | Line 438 | `| [forge_live_strike_matrix.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Mosk` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L439) | Line 439 | `| [MEMORANDUM_INVESTIGACION_ARENA_Y_REVENG.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorem` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L440) | Line 440 | `| [ESCUDO_DEFENSA_INSPECCION_NFT_2021_2024.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorem` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L442) | Line 442 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L443) | Line 443 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L444) | Line 444 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L445) | Line 445 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L446) | Line 446 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L447) | Line 447 | `| [CollectionUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_k` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L448) | Line 448 | `| [Reflection.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kerne` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L449) | Line 449 | `| [Reflection.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kerne` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L450) | Line 450 | `| [Util.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fabl` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L451) | Line 451 | `| [Types.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fab` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L452) | Line 452 | `| [MapUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/f` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L453) | Line 453 | `| [Double.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fa` |
 | [C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md#L70) | Line 70 | `### 3.2 `invt` — TODOS los Invariantes Físicos & Matemáticos` |
 | [C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/C5_AUTODIDACT_SABU_ANONYMOUS_EXERGY.md#L75) | Line 75 | `### 3.3 `antip` — TODOS los Antipatrones Estocásticos & Entrópicos` |
-| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py#L230) | Line 230 | `state.technical_debt.append({"type": "TODO_found", "file": file})` |
-| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py#L271) | Line 271 | `{"title": f"Resolve TODO in {debt['file']}", "priority": "medium"}` |
+| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py#L231) | Line 231 | `state.technical_debt.append({"type": "TODO_found", "file": file})` |
+| [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py#L272) | Line 272 | `{"title": f"Resolve TODO in {debt['file']}", "priority": "medium"}` |
 | [18_BINARY_AST_TOPOLOGICAL_ISOMORPHISM_1000.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/18_BINARY_AST_TOPOLOGICAL_ISOMORPHISM_1000.md#L13) | Line 13 | `## 0. MARCO TERMODINÁMICO Y METODOLOGÍA DE INGENIERÍA INVERSA` |
 | [migue_baena_audit.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/migue_baena_audit.yaml#L3) | Line 3 | `Base: Estructura del video ("Domina TODO", "Crea tu web con IA en minutos") y modelo de afiliación.` |
 | [migue_baena_audit.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/migue_baena_audit.yaml#L8) | Line 8 | `- Promesa: "Domina TODO el ecosistema" = Mapea a [Ilusión de Maestría, Consumo de Frontend, Reducció` |
@@ -335,8 +450,6 @@
 | [Types.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fable_modules/fable-library-js.5.8.0/Types.js#L34) | Line 34 | `else { // TODO: Date?` |
 | [MapUtil.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fable_modules/fable-library-js.5.8.0/MapUtil.js#L79) | Line 79 | `// TODO: Move these methods to Map and Set modules` |
 | [Double.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fable_modules/fable-library-js.5.8.0/Double.js#L4) | Line 4 | `// TODO: test if value is valid and in range` |
-| [Numeric.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fable_modules/fable-library-js.5.8.0/Numeric.js#L69) | Line 69 | `// TODO: properly handle other bit sizes` |
-| [DateOnly.js](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/fable_modules/fable-library-js.5.8.0/DateOnly.js#L63) | Line 63 | `// TODO whitespace alone as the separator` |
 
 ### Dimension 4: Copy-Paste/Duplicity (>10 consecutive lines)
 | Duplicate Block | Occurrences | Locations |
@@ -395,6 +508,134 @@
 | [cortex_surface_map.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_surface_map.db#L329) | 329 | `/1//Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/scripts/c5_exec.py.py@%Sd[]["` |
 | [bitcoin_aci.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/daemons/autopoiesis/bitcoin_aci.py#L131) | 131 | `def __init__(self, rpc_url: str, rpc_user: str = "", rpc_password: str = "", atp_threshold_sats: int` |
 | [bitcoin_aci.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/daemons/autopoiesis/bitcoin_aci.py#L152) | 152 | `auth_str = f"{self.rpc_user}:{self.rpc_password}"` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L484) | 484 | `| [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_me` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L506) | 506 | `| [cortex_memory.db](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex_me` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L510) | 510 | `| [bitcoin_aci.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/daem` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L511) | 511 | `| [bitcoin_aci.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/daem` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L640) | 640 | `| [auditoria_mythos_completa_2026_07_12.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L641) | 641 | `| [autocatalytic_10000x_loop.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Mos` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L643) | 643 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L644) | 644 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L649) | 649 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L688) | 688 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L689) | 689 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L690) | 690 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L691) | 691 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L692) | 692 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L693) | 693 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L694) | 694 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L695) | 695 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L707) | 707 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L734) | 734 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L773) | 773 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L800) | 800 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L804) | 804 | `| [operon_core](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L821) | 821 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L822) | 822 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L827) | 827 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L849) | 849 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L850) | 850 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L851) | 851 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L852) | 852 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L853) | 853 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L854) | 854 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L855) | 855 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L856) | 856 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L868) | 868 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L895) | 895 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L934) | 934 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L961) | 961 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L965) | 965 | `| [strings.txt](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1031) | 1031 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1032) | 1032 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1033) | 1033 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1034) | 1034 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1035) | 1035 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1036) | 1036 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1037) | 1037 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1038) | 1038 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1039) | 1039 | `| [env-setup.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/script` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1040) | 1040 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1041) | 1041 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1042) | 1042 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1043) | 1043 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1044) | 1044 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1045) | 1045 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1046) | 1046 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1047) | 1047 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1051) | 1051 | `| [fetch.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1052) | 1052 | `| [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1053) | 1053 | `| [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1054) | 1054 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1055) | 1055 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1056) | 1056 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1057) | 1057 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1058) | 1058 | `| [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1059) | 1059 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1060) | 1060 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1061) | 1061 | `| [server.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1062) | 1062 | `| [retrieve.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1063) | 1063 | `| [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1064) | 1064 | `| [ua.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandb` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1065) | 1065 | `| [client.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1074) | 1074 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1075) | 1075 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1076) | 1076 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1077) | 1077 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1078) | 1078 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1079) | 1079 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1080) | 1080 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1081) | 1081 | `| [provider.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1082) | 1082 | `| [env-setup.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/script` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1083) | 1083 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1084) | 1084 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1085) | 1085 | `| [SKILL.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sa` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1086) | 1086 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1087) | 1087 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1088) | 1088 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1089) | 1089 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1090) | 1090 | `| [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/s` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1091) | 1091 | `| [analysis.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/api/ana` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1092) | 1092 | `| [analysis.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/api/ana` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1097) | 1097 | `| [shadow_router.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/core/shad` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1098) | 1098 | `| [shadow_router.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/core/shad` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1099) | 1099 | `| [shadow_router.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/core/shad` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1100) | 1100 | `| [shadow_router.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/core/shad` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1101) | 1101 | `| [evaluation_engine.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/core/` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1103) | 1103 | `| [FSharp.Compiler.Service.xml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Mosk` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1104) | 1104 | `| [0004-refactor-guards-fuente-nica-de-verdad-para-los-patro.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1105) | 1105 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1106) | 1106 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1107) | 1107 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1108) | 1108 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1109) | 1109 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1110) | 1110 | `| [0019-chore-eliminar-redundancias-_archived-y-duplicados-d.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1118) | 1118 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1119) | 1119 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1120) | 1120 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1121) | 1121 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1122) | 1122 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1123) | 1123 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1124) | 1124 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1125) | 1125 | `| [0012-fix-deps-eliminar-chromadb-vulnerabilidad-cr-tica-si.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1127) | 1127 | `| [0004-refactor-guards-fuente-nica-de-verdad-para-los-patro.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1142) | 1142 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1143) | 1143 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1144) | 1144 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1145) | 1145 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1146) | 1146 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1147) | 1147 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1148) | 1148 | `| [0006-ci-workflows-27-6-fuera-los-crons-de-telemetr-a-lore.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1149) | 1149 | `| [0004-refactor-guards-single-source-of-truth-for-secret-pa.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1150) | 1150 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1151) | 1151 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1152) | 1152 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1153) | 1153 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1154) | 1154 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1155) | 1155 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1156) | 1156 | `| [0006-ci-reduce-workflows-27-6-drop-scheduled-telemetry-lo.patch](file:///Users/borjafernandezangu` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1157) | 1157 | `| [llm-attest.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cli/llm-atte` |
+| [FORENSIC_REPORT_COMPLETO.md](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/FORENSIC_REPORT_COMPLETO.md#L1162) | 1162 | `| [opsec_sentinel_c5.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/scrip` |
 | [auditoria_mythos_completa_2026_07_12.yaml](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/auditoria_mythos_completa_2026_07_12.yaml#L36) | 36 | `API_SECRET = b'CASSANDRA_SECRET_KEY_2026' hardcoded en tres archivos.` |
 | [autocatalytic_10000x_loop.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/autocatalytic_10000x_loop.py#L70) | 70 | `api_key = os.environ.get("GEMINI_API_KEY")` |
 | [autocatalytic_10000x_loop.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/autocatalytic_10000x_loop.py#L77) | 77 | `url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key` |
@@ -920,7 +1161,9 @@
 | [opsec_sentinel_c5.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/scripts/opsec_sentinel_c5.py#L43) | 43 | `severity = 'CRITICAL_P0' if v_type in ('PLAINTEXT_CREDIT_CARD', 'PRIVATE_KEY_HEADER') else 'CRITICAL` |
 | [libblake3-fcc9a08bd2345990.rlib](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/target/release/deps/libblake3-fcc9a08bd2345990.rlib#L1491) | 1491 | `  9Ɔ ],ۆ <ц         RF         The key derivation function.         N  K Given` |
 | [libblake3-fcc9a08bd2345990.rmeta](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/target/release/deps/libblake3-fcc9a08bd2345990.rmeta#L1477) | 1477 | `  9Ɔ ],ۆ <ц         RF         The key derivation function.         N  K Given` |
+| [libblake3-1fe8ae5aae4f108f.rlib](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/target/debug/deps/libblake3-1fe8ae5aae4f108f.rlib#L1831) | 1831 | `  9Ɔ X,ۆ <ц         WF         The key derivation function.         N  K Given` |
 | [libblake3-11a023e862530591.rmeta](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/target/debug/deps/libblake3-11a023e862530591.rmeta#L960) | 960 | `  9Ɔ ,ۆ <ц         QF         The key derivation function.         N  K Given` |
+| [libblake3-1fe8ae5aae4f108f.rmeta](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/target/debug/deps/libblake3-1fe8ae5aae4f108f.rmeta#L1631) | 1631 | `  9Ɔ X,ۆ <ц         WF         The key derivation function.         N  K Given` |
 
 ### Dimension 6: Silenced Errors (Empty exceptions)
 | File Path | Count |
@@ -932,6 +1175,7 @@
 | [bitcoin_aci.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/daemons/autopoiesis/bitcoin_aci.py) | 3 |
 | [vibe_consolidator.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/vibe_consolidator.py) | 7 |
 | [omega_antipattern_watcher.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/omega_antipattern_watcher.py) | 7 |
+| [autonomic_daemon.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/autonomic_daemon.py) | 5 |
 | [apoptosis_engine.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/apoptosis_engine.py) | 3 |
 | [objectives_agent.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/objectives_agent.py) | 1 |
 | [update_swarm.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/update_swarm.py) | 2 |
@@ -948,6 +1192,7 @@
 | [stt.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/voice/stt.py) | 3 |
 | [mac_browser_cdp_hijack.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/mac_browser_cdp_hijack.py) | 2 |
 | [autocatalytic_10000x_loop.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/autocatalytic_10000x_loop.py) | 2 |
+| [sanitize_ipi_payloads.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sanitize_ipi_payloads.py) | 3 |
 | [darwin_ax_transducer.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/darwin_ax_transducer.py) | 1 |
 | [stress_operon.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/stress_operon.py) | 3 |
 | [kernel_worker.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/runtime/0.1.18-dev.20260709.t211149.shab3f5130-release/kernels/kernel_worker.py) | 41 |
@@ -1067,6 +1312,7 @@
 | [kernel.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025/skills/figure-style/kernel.py) | 2 |
 | [analysis.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/api/analysis.py) | 11 |
 | [ttft_measurement.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/telemetry/ttft_measurement.py) | 1 |
+| [throughput_measurement.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/telemetry/throughput_measurement.py) | 1 |
 | [out_of_process_watchdog.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/out_of_process_watchdog.py) | 1 |
 | [cortex_autopilot_daemon.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/cortex_autopilot_daemon.py) | 1 |
 | [test_centuria_transducer.py](file:///Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/test_centuria_transducer.py) | 4 |
