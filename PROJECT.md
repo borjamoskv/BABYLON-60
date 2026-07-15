@@ -30,6 +30,10 @@
 | OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | DONE | Exergy: 1.00 |
 | MS-008 | Milestone | Configurar socket local de Ollama/MLX para inferencia local | Due: 2026-07-20 | DONE | Hash: 6bfa38f8 |
 | MS-009 | Milestone | Medir y registrar TTFT mediante script de telemetría | Due: 2026-07-25 | DONE | Hash: 6bfa38f8 |
+| OBJ-008 | Objective | Prototipo de Inferencia Secuencial (Layer-Wise Swap Simulator) | Diseñar un cargador de bloques de pesos latentes capa por capa para simular el cuello de botella de transferencia disco/VRAM. | IN_PROGRESS | Exergy: 0.00 |
+| MS-010 | Milestone | Implementar simulación de carga secuencial de tensores y prefetching asíncrono | Due: 2026-08-05 | TODO | Hash: TBD |
+| MS-011 | Milestone | Registrar telemetría de I/O swap overhead en telemetry.db | Due: 2026-08-10 | TODO | Hash: TBD |
+| MS-012 | Milestone | Validar la lógica y consistencia de los tiempos de decodificación en tests/ | Due: 2026-08-15 | TODO | Hash: TBD |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
