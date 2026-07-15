@@ -1,27 +1,97 @@
-use blake3::Hasher;
-use notify::{Config, Event, RecommendedWatcher, RecursiveMode, Watcher};
+use inotify::{Inotify, WatchMask};
+use ring::hmac;
 use rusqlite::{params, Connection};
+use signal_hook::consts::signal::{SIGINT, SIGTERM};
+use signal_hook::iterator::Signals;
 use std::env;
 use std::path::Path;
 use std::process::{Command, Stdio};
-use std::sync::mpsc::channel;
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
+use std::time::{SystemTime, UNIX_EPOCH};
 
-/// C5-REAL Interceptor for Claude Code
-/// Master Ledger BFT (SQLite WAL) con HMAC-SHA256 encadenado.
+/// Serialización Canónica (Length-Prefixed)
+fn canonical_serialize(timestamp: u64, event: &str, payload: &str) -> Vec<u8> {
+    let mut buf = Vec::new();
+    buf.extend_from_slice(&timestamp.to_be_bytes());
+    buf.extend_from_slice(&(event.len() as u32).to_be_bytes());
+    buf.extend_from_slice(event.as_bytes());
+    buf.extend_from_slice(&(payload.len() as u32).to_be_bytes());
+    buf.extend_from_slice(payload.as_bytes());
+    buf
+}
+
+/// Hashea un nodo hoja (Domain Separation 0x00)
+fn hash_leaf(key: &hmac::Key, prev_hash: &[u8], payload_bytes: &[u8]) -> Vec<u8> {
+    let mut ctx = hmac::Context::with_key(key);
+    ctx.update(&[0x00]); // Leaf domain prefix
+    ctx.update(prev_hash);
+    ctx.update(payload_bytes);
+    ctx.sign().as_ref().to_vec()
+}
+
+/// Estructura compartida para el Ledger
+struct BftLedger {
+    conn: Connection,
+    last_hash: Vec<u8>,
+    key: hmac::Key,
+    all_hashes: Vec<Vec<u8>>,
+}
+
+impl BftLedger {
+    fn insert(&mut self, event_type: &str, payload: &str) -> Result<(), Box<dyn std::error::Error>> {
+        let ts = SystemTime::now().duration_since(UNIX_EPOCH)?.as_nanos() as u64;
+        let canon = canonical_serialize(ts, event_type, payload);
+        
+        let new_hash = hash_leaf(&self.key, &self.last_hash, &canon);
+        let prev_hex = hex::encode(&self.last_hash);
+        let curr_hex = hex::encode(&new_hash);
+
+        // Escritura Síncrona WAL
+        self.conn.execute(
+            "INSERT INTO transactions (timestamp, event_type, payload, prev_hash, curr_hash) VALUES (?1, ?2, ?3, ?4, ?5)",
+            params![ts, event_type, payload, prev_hex, curr_hex],
+        )?;
+
+        self.last_hash = new_hash.clone();
+        self.all_hashes.push(new_hash);
+        Ok(())
+    }
+
+    fn compute_merkle_root(&self) -> String {
+        if self.all_hashes.is_empty() {
+            return "EMPTY_LEDGER".to_string();
+        }
+        let mut level = self.all_hashes.clone();
+        while level.len() > 1 {
+            let mut next_level = Vec::new();
+            for chunk in level.chunks(2) {
+                let left = &chunk[0];
+                let right = if chunk.len() > 1 { &chunk[1] } else { left };
+                let mut ctx = hmac::Context::with_key(&self.key);
+                ctx.update(&[0x01]); // Internal node domain prefix
+                ctx.update(left);
+                ctx.update(right);
+                next_level.push(ctx.sign().as_ref().to_vec());
+            }
+            level = next_level;
+        }
+        hex::encode(&level[0])
+    }
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("█▄ [C5-REAL] CLAUDE CODE BFT INTERCEPTOR ACTIVATED");
+    println!("█▄ [C5-REAL] CLAUDE CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
-    // Initialize Master Ledger
     let ledger_path = "claude_bft_ledger.db";
     let conn = Connection::open(ledger_path)?;
     conn.execute_batch(
         "PRAGMA journal_mode = WAL;
-         PRAGMA synchronous = NORMAL;
+         PRAGMA synchronous = FULL;
          CREATE TABLE IF NOT EXISTS transactions (
              id INTEGER PRIMARY KEY AUTOINCREMENT,
-             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+             timestamp INTEGER NOT NULL,
              event_type TEXT NOT NULL,
              payload TEXT NOT NULL,
              prev_hash TEXT NOT NULL,
@@ -29,73 +99,97 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
          );",
     )?;
 
-    // Recuperar último hash (o Génesis)
-    let mut last_hash = "GENESIS_HASH_0000000000000000".to_string();
-    if let Ok(hash) = conn.query_row(
-        "SELECT curr_hash FROM transactions ORDER BY id DESC LIMIT 1",
-        [],
-        |row| row.get::<_, String>(0),
-    ) {
-        last_hash = hash;
-    }
+    // Recuperar estado previo (simulado como Genesis para esta corrida)
+    let genesis = vec![0u8; 32];
+    
+    // Generar clave HMAC estática para demo (en prod vendría de HSM o env)
+    let key = hmac::Key::new(hmac::HMAC_SHA256, b"CORTEX_BFT_KEY_2026_MASTER_LEDGER");
 
-    let conn = Arc::new(Mutex::new(conn));
-    let last_hash = Arc::new(Mutex::new(last_hash));
+    let ledger = Arc::new(Mutex::new(BftLedger {
+        conn,
+        last_hash: genesis,
+        key,
+        all_hashes: Vec::new(),
+    }));
 
-    // Monitoreo del FS ~/.claude/
+    let shutdown_flag = Arc::new(AtomicBool::new(false));
+
+    // 1. Manejador de señales (Graceful SIGTERM/SIGINT)
+    let mut signals = Signals::new(&[SIGINT, SIGTERM])?;
+    let sf = Arc::clone(&shutdown_flag);
+    thread::spawn(move || {
+        for _sig in signals.forever() {
+            sf.store(true, Ordering::SeqCst);
+            break;
+        }
+    });
+
+    // 2. Monitoreo inotify de ~/.claude
     let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
     let claude_dir = format!("{}/.claude", home);
     
+    let l_fs = Arc::clone(&ledger);
+    let s_fs = Arc::clone(&shutdown_flag);
+    
     if Path::new(&claude_dir).exists() {
-        let (tx, rx) = channel();
-        let mut watcher = RecommendedWatcher::new(tx, Config::default())?;
-        watcher.watch(Path::new(&claude_dir), RecursiveMode::Recursive)?;
-
-        let conn_clone = Arc::clone(&conn);
-        let hash_clone = Arc::clone(&last_hash);
-
         thread::spawn(move || {
-            for res in rx {
-                if let Ok(Event { kind, paths, .. }) = res {
-                    if kind.is_modify() || kind.is_create() {
-                        for path in paths {
-                            let payload = format!("MODIFIED: {:?}", path);
-                            // Transducción síncrona
-                            let mut lh = hash_clone.lock().unwrap();
-                            let mut hasher = Hasher::new();
-                            hasher.update(lh.as_bytes());
-                            hasher.update(payload.as_bytes());
-                            let curr_hash = hasher.finalize().to_hex().to_string();
-
-                            if let Ok(c) = conn_clone.lock() {
-                                let _ = c.execute(
-                                    "INSERT INTO transactions (event_type, payload, prev_hash, curr_hash) VALUES (?1, ?2, ?3, ?4)",
-                                    params!["FS_MUTATION", payload, *lh, curr_hash],
-                                );
+            if let Ok(mut inotify) = Inotify::init() {
+                let _ = inotify.watches().add(
+                    Path::new(&claude_dir),
+                    WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
+                );
+                
+                let mut buffer = [0; 1024];
+                while !s_fs.load(Ordering::SeqCst) {
+                    if let Ok(events) = inotify.read_events(&mut buffer) {
+                        for event in events {
+                            if let Some(name) = event.name {
+                                let payload = name.to_string_lossy().to_string();
+                                if let Ok(mut l) = l_fs.lock() {
+                                    let _ = l.insert("FS_EVENT", &payload);
+                                }
                             }
-                            *lh = curr_hash;
                         }
                     }
+                    thread::sleep(std::time::Duration::from_millis(50));
                 }
             }
         });
     }
 
-    // Hijacking del proceso original (dummy execution para demostración C5-REAL)
-    // En producción, esto invocaría el binario de nodejs de claude-code real
+    // 3. Subproceso CLI (Dummy echo para pruebas)
     let mut child = Command::new("echo")
-        .arg("[*] Interceptor BFT envolviendo Claude Code...")
+        .arg("[*] CLI Wrapping executing...")
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .spawn()?;
 
-    let status = child.wait()?;
-    
-    // Cierre Causal (Merkle Root proxy = last_hash)
-    let final_root = last_hash.lock().unwrap();
-    println!("█▄ [C5-REAL] CIERRE CAUSAL");
-    println!("STATUS: {}", status);
-    println!("MERKLE ROOT (Final Hash): {}", final_root);
+    // Espera activa controlada para manejar shutdown
+    while !shutdown_flag.load(Ordering::SeqCst) {
+        if let Ok(Some(_status)) = child.try_wait() {
+            shutdown_flag.store(true, Ordering::SeqCst);
+            break;
+        }
+        thread::sleep(std::time::Duration::from_millis(100));
+    }
+
+    // Cierre Causal
+    if let Ok(mut l) = ledger.lock() {
+        let root = l.compute_merkle_root();
+        let _ = l.insert("CLOSURE_SEAL", &format!("ROOT:{}", root));
+        println!("█▄ [C5-REAL] CIERRE CAUSAL EJECUTADO");
+        println!("MERKLE ROOT: {}", root);
+    }
 
     Ok(())
+}
+
+fn hex_encode(data: &[u8]) -> String {
+    data.iter().map(|b| format!("{:02x}", b)).collect()
+}
+// Stub para evitar dependencias extra si no usamos el crate hex
+mod hex {
+    pub fn encode(data: &[u8]) -> String {
+        data.iter().map(|b| format!("{:02x}", b)).collect()
+    }
 }
