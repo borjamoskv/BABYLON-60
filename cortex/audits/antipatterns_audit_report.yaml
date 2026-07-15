@@ -3,92 +3,13 @@ RealityLevel: C5-REAL
 HashLedger: PENDING_COMMIT
 Aesthetic: Industrial Noir 2026
 Summary:
-  total_checked_files: 10523
-  total_issues: 20
+  total_checked_files: 10524
+  total_issues: 9
   breakdown:
-    ANTI-012: 10
-    ANTI-007: 1
     ANTI-001: 2
     ANTI-028: 5
     ANTI-025: 2
 Findings:
-- antipattern_id: ANTI-012
-  file: cortex/agents/vibe_consolidator.py
-  line: 215
-  column: 12
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/vibe_consolidator.py
-  line: 231
-  column: 12
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/vibe_consolidator.py
-  line: 348
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/omega_antipattern_watcher.py
-  line: 314
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/omega_antipattern_watcher.py
-  line: 345
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/omega_antipattern_watcher.py
-  line: 450
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/omega_antipattern_watcher.py
-  line: 500
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/apoptosis_engine.py
-  line: 121
-  column: 16
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/apoptosis_engine.py
-  line: 154
-  column: 8
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-012
-  file: cortex/agents/ontology/macrofago_ontologico.py
-  line: 276
-  column: 16
-  details: 'Blind error catch found: ''except Exception'' with no raise, return, or
-    exit. Silences system failures.'
-  severity: P1
-- antipattern_id: ANTI-007
-  file: cortex/agents/voice/chunker.py
-  line: 30
-  column: 8
-  details: Infinite while loop (while True) without time.sleep, asyncio.sleep, or
-    yield. Risk of CPU starvation.
-  severity: P1
 - antipattern_id: ANTI-001
   file: cortex/agents/ontology/caso_estudio_green_theater_claude.md
   line: 26
