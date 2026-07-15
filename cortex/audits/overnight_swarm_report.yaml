@@ -1,64 +1,65 @@
 Claim: Autonomic Swarm Daemon overnight state consolidation.
-Timestamp: '2026-07-15T22:30:02.341675+00:00'
+Timestamp: '2026-07-15T23:00:02.184383+00:00'
 Creator: Borja Moskv (borjamoskv)
 Environment: C5-REAL
 Metrics:
   processes:
-    current_pid: 1138
+    current_pid: 10079
     zombies_count: 12
     zombies_list:
     - pid: 873
-      elapsed_sec: 123297.80027008057
-      memory_mb: 6.984375
+      elapsed_sec: 125097.64216589928
+      memory_mb: 7.046875
     - pid: 20010
-      elapsed_sec: 85523.85712194443
-      memory_mb: 8.34375
+      elapsed_sec: 87323.70108890533
+      memory_mb: 3.71875
     - pid: 20569
-      elapsed_sec: 102422.17976903915
-      memory_mb: 4.90625
+      elapsed_sec: 104222.02372193336
+      memory_mb: 3.734375
     - pid: 20572
-      elapsed_sec: 102421.94533014297
-      memory_mb: 4.90625
+      elapsed_sec: 104221.78928112984
+      memory_mb: 3.734375
     - pid: 82831
-      elapsed_sec: 91797.5886900425
-      memory_mb: 7.296875
+      elapsed_sec: 93597.43240904808
+      memory_mb: 6.6875
     - pid: 82864
-      elapsed_sec: 91797.45494890213
-      memory_mb: 7.28125
+      elapsed_sec: 93597.2986600399
+      memory_mb: 6.671875
     - pid: 83261
-      elapsed_sec: 91761.26781582832
-      memory_mb: 3.734375
-    - pid: 84163
-      elapsed_sec: 91759.93996405602
-      memory_mb: 3.734375
-    - pid: 84357
-      elapsed_sec: 91758.26610088348
-      memory_mb: 3.703125
-    - pid: 84371
-      elapsed_sec: 91758.12646102905
-      memory_mb: 3.703125
-    - pid: 99886
-      elapsed_sec: 90540.06865692139
-      memory_mb: 8.015625
-    - pid: 99887
-      elapsed_sec: 90539.98818898201
+      elapsed_sec: 93561.111495018
       memory_mb: 3.765625
+    - pid: 84163
+      elapsed_sec: 93559.78363013268
+      memory_mb: 3.671875
+    - pid: 84357
+      elapsed_sec: 93558.10975813866
+      memory_mb: 3.671875
+    - pid: 84371
+      elapsed_sec: 93557.97009897232
+      memory_mb: 3.671875
+    - pid: 99886
+      elapsed_sec: 92339.90679907799
+      memory_mb: 12.203125
+    - pid: 99887
+      elapsed_sec: 92339.82632994652
+      memory_mb: 3.734375
   telemetry:
     qwen2.5:
       status: SUCCESS
-      tps: 174.6003514355715
-      latency_ms: 1382.9826659930404
+      tps: 172.17677383200805
+      latency_ms: 1444.829583997489
       error: null
     layer_swap:
-      disk_speed_mb_s: 6365.372371468842
-      seq_time_ms: 662.7200002223253
-      pipe_time_ms: 587.5161300646141
-      efficiency_gain_pct: 11.347759254659927
+      disk_speed_mb_s: 5896.155161559013
+      seq_time_ms: 702.7265586331487
+      pipe_time_ms: 643.9105819299584
+      efficiency_gain_pct: 8.36968177459969
   workspace:
     git_dirty: true
-    dirty_files_count: 1
+    dirty_files_count: 2
     dirty_files:
-    - ?? cortex/payloads/BUN_C5_REAL_ADAPTER.ts
+    - M cortex/training/baby-long/data/train.jsonl
+    - M cortex/training/baby-long/data/valid.jsonl
     ast_ok: true
     ast_failures: []
-  exergy_saved_ms: 75.20387015771121
+  exergy_saved_ms: 58.815976703190245
