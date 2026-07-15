@@ -58,3 +58,5 @@
 | INV-102 | Sacrificio de Conexión Emocional | El diseño 'invisible' sacrifica la conexión emocional y la fricción creativa. | UI Invisible | Emocional | N/A |
 | INV-103 | Isomorfismo de Identidad y Retención | La máxima retención se logra cuando el usuario puede mutar la herramienta misma (Isomorfismo de identidad). | Hiper-Customización | Estructural | N/A |
 | INV-105 | Entropía Ineludible de la Abstracción | Toda capa de abstracción de caja negra concentra la entropía en los edge cases, haciendo que su resolución requiera O(N) esfuerzo cognitivo. | Las dependencias no comprendidas generan deuda técnica fatal inmanejable. | Fallos en producción fuera del "Happy Path" del framework. | Tiempo de resolución epistémica > 48h sin causa raíz. |
+| INV-106 | Invariante de Segmentación Espacial de Pesos | La capacidad física de memoria no limita el tamaño del espacio latente computable, sino la tasa de decodificación. | Inferencia de modelos masivos (70B+) secuenciando bloques individuales desde persistencia a la ALU de cómputo. | VRAM < VRAM_Model. | Inferencia de 70B+ en hardware de consumo local. |
+
