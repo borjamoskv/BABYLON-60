@@ -28,12 +28,22 @@ class VadFrame:
     silence_ms: float
     energy_dbfs: float
     noise_floor_dbfs: float
+    prosody_terminal: bool = False
 
 
 def frame_dbfs(pcm: np.ndarray) -> float:
     x = pcm.astype(np.float32) / 32768.0
     rms = float(np.sqrt(np.mean(x * x))) if x.size else 0.0
     return 20.0 * math.log10(rms + _EPS)
+
+
+def frame_zcr(pcm: np.ndarray) -> float:
+    if pcm.size < 2:
+        return 0.0
+    x = pcm.astype(np.float32)
+    x = x - np.mean(x)
+    crossings = np.sum(np.abs(np.diff(np.signbit(x))))
+    return float(crossings) / len(x)
 
 
 class VoiceActivityDetector:
@@ -55,6 +65,9 @@ class VoiceActivityDetector:
         self._in_run = False
         self._speech_ms = 0.0
         self._silence_ms = 0.0
+        self._speech_energy_buf: list[float] = []
+        self._speech_zcr_buf: list[float] = []
+        self._latched_prosody_terminal = False
 
     @property
     def in_run(self) -> bool:
@@ -71,6 +84,9 @@ class VoiceActivityDetector:
         self._silence_ms = 0.0
         self._attack_count = 0
         self._gate_active = False
+        self._latched_prosody_terminal = False
+        self._speech_energy_buf.clear()
+        self._speech_zcr_buf.clear()
 
     def _margins(self) -> tuple[float, float, int]:
         boost = self._cfg.barge_margin_boost_db if self._barge else 0.0
@@ -79,6 +95,7 @@ class VoiceActivityDetector:
 
     def process(self, pcm: np.ndarray) -> VadFrame:
         energy = frame_dbfs(pcm)
+        zcr = frame_zcr(pcm)
         margin_on, margin_off, attack = self._margins()
 
         if energy < self._floor:
@@ -86,11 +103,19 @@ class VoiceActivityDetector:
         elif not self._gate_active:
             self._floor += self._cfg.floor_alpha_up * (energy - self._floor)
 
+        prev_gate = self._gate_active
         threshold = self._floor + (margin_off if self._gate_active else margin_on)
         self._gate_active = energy > threshold
 
         event = VadEvent.NONE
         if self._gate_active:
+            self._latched_prosody_terminal = False
+            self._speech_energy_buf.append(energy)
+            self._speech_zcr_buf.append(zcr)
+            if len(self._speech_energy_buf) > self._cfg.prosody_window_frames:
+                self._speech_energy_buf.pop(0)
+                self._speech_zcr_buf.pop(0)
+
             self._attack_count += 1
             if not self._in_run and self._attack_count >= attack:
                 self._in_run = True
@@ -100,6 +125,19 @@ class VoiceActivityDetector:
                 self._speech_ms += self._frame_ms
             self._silence_ms = 0.0
         else:
+            if prev_gate and self._in_run and len(self._speech_energy_buf) >= 10:
+                peak_energy = max(self._speech_energy_buf[:-3])
+                current_energy = np.mean(self._speech_energy_buf[-3:])
+                energy_drop = current_energy - peak_energy
+
+                peak_zcr = max(self._speech_zcr_buf[:-3])
+                current_zcr = np.mean(self._speech_zcr_buf[-3:])
+                zcr_ratio = current_zcr / (peak_zcr + 1e-9)
+
+                if (energy_drop < self._cfg.prosody_energy_gradient_db and 
+                    zcr_ratio < self._cfg.prosody_zcr_gradient_ratio):
+                    self._latched_prosody_terminal = True
+
             self._attack_count = 0
             if self._in_run:
                 self._silence_ms += self._frame_ms
@@ -112,4 +150,5 @@ class VoiceActivityDetector:
             silence_ms=self._silence_ms,
             energy_dbfs=energy,
             noise_floor_dbfs=self._floor,
+            prosody_terminal=self._latched_prosody_terminal,
         )

@@ -32,12 +32,16 @@ class VadConfig:
     floor_alpha_up: float = 0.01
     barge_margin_boost_db: float = 12.0
     barge_attack_frames: int = 6
+    prosody_window_frames: int = 15
+    prosody_energy_gradient_db: float = -3.0
+    prosody_zcr_gradient_ratio: float = 0.7
 
 
 @dataclasses.dataclass(frozen=True)
 class EndpointConfig:
     base_hang_ms: float = 480.0
     fast_hang_ms: float = 200.0
+    prosody_hang_ms: float = 90.0
     slow_hang_ms: float = 900.0
     min_speech_ms: float = 200.0
     max_utterance_ms: float = 30_000.0

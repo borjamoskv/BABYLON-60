@@ -61,6 +61,11 @@ class SemanticEndpointer:
             return EndpointDecision.COMMIT
         if frame.speech_ms < self._cfg.min_speech_ms:
             return EndpointDecision.WAIT
-        if frame.silence_ms >= self.hang_ms():
+            
+        hang = self.hang_ms()
+        if frame.prosody_terminal:
+            hang = min(hang, self._cfg.prosody_hang_ms)
+
+        if frame.silence_ms >= hang:
             return EndpointDecision.COMMIT
         return EndpointDecision.WAIT
