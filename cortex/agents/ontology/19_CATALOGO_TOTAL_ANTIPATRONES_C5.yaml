@@ -51,15 +51,15 @@ antipatrones_estocasticos_agente:
 
   - id: ANTI-006
     nombre: Edición Contigua Entrópica (Monolithic File Replace)
-    disfuncion_causal: "Sustitución del archivo completo (500+ líneas) para modificar una variable o línea única."
-    senal_presencia: "Uso de `write_to_file` con sobreescritura total o `replace_file_content` sobre todo el buffer."
-    impacto_exergia: "Consumo masivo de cuota de salida, riesgo de truncamiento térmico y corrupción de formato."
-    remediacion_c5: "Uso forzado de `multi_replace_file_content` o diffs quirúrgicos de $\mathcal{O}(1)$ tokens."
+    disfuncion_causal: 'Sustitución del archivo completo (500+ líneas) para modificar una variable o línea única.'
+    senal_presencia: 'Uso de `write_to_file` con sobreescritura total o `replace_file_content` sobre todo el buffer.'
+    impacto_exergia: 'Consumo masivo de cuota de salida, riesgo de truncamiento térmico y corrupción de formato.'
+    remediacion_c5: 'Uso forzado de `multi_replace_file_content` o diffs quirúrgicos de $\mathcal{O}(1)$ tokens.'
 
   - id: ANTI-007
     nombre: Loop de Polling Ciego (Thermodynamic Deadlock)
-    disfuncion_causal: "Bucle síncrono esperando que un proceso termine sin condición de salida anticipada ni cesión de CPU (`yield`)."
-    senal_presencia: "Bucles `while True` en bash, o llamadas continuas a `manage_task(status)` en loop."
+    disfuncion_causal: 'Bucle síncrono esperando que un proceso termine sin condición de salida anticipada ni cesión de CPU (`yield`).'
+    senal_presencia: 'Bucles `while True` en bash, o llamadas continuas a `manage_task(status)` en loop.'
     impacto_exergia: "Zombificación del hilo de ejecución. Agotamiento de cuota de llamadas."
     remediacion_c5: "Uso de `schedule` (TimerCondition) o notificaciones asíncronas automáticas del sistema de mensajería (`Reactive Wakeup`)."
 
@@ -142,10 +142,10 @@ antipatrones_estocasticos_agente:
 
   - id: ANTI-019
     nombre: Zombie State Management (State Duplication)
-    disfuncion_causal: "Almacenar en variables de estado datos derivados que pueden calcularse en $\mathcal{O}(1)$ al momento de lectura."
+    disfuncion_causal: 'Almacenar en variables de estado datos derivados que pueden calcularse en $\mathcal{O}(1)$ al momento de lectura.'
     senal_presencia: 'Guardar `state.totalCount = list.length` de forma sincronizada manualmente.'
-    impacto_exergia: "Desincronización transaccional (`Phantom State`), race conditions y corrupción visual."
-    remediacion_c5: "Cálculo derivado en vuelo (`computations on-the-fly`, `useMemo`, SQL views o Getters puros)."
+    impacto_exergia: 'Desincronización transaccional (`Phantom State`), race conditions y corrupción visual.'
+    remediacion_c5: 'Cálculo derivado en vuelo (`computations on-the-fly`, `useMemo`, SQL views o Getters puros).'
 
   - id: ANTI-020
     nombre: Documentación Disociada (Orphaned Docs)
@@ -178,7 +178,7 @@ antipatrones_tecnicos_ejecucion:
 
   - id: ANTI-025
     nombre: Hardcoding de Rutas Absolutas de Host
-    disfuncion_causal: "Incrustar `/Users/borja/...` o `C:\Users\...` dentro de código fuente del proyecto."
+    disfuncion_causal: 'Incrustar `/Users/borja/...` o `C:\Users\...` dentro de código fuente del proyecto.'
     remediacion_c5: "Parametrización vía variables de entorno o resolución relativa respecto al directorio raíz (`__file__ / __dirname`)."
 
   - id: ANTI-026

@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Dict, List, Set, Any, Optional
 
 # --- CONFIGURATION & PATH RESOLUTION ---
-CORTEX_ROOT = Path("/Users/borjafernandezangulo/30_BABYLON-60").resolve()
+CORTEX_ROOT = Path(__file__).resolve().parent.parent.parent
 CATALOG_PATH = CORTEX_ROOT / "cortex" / "agents" / "ontology" / "19_CATALOGO_TOTAL_ANTIPATRONES_C5.yaml"
 AUDIT_OUT_DIR = CORTEX_ROOT / "cortex" / "audits"
 

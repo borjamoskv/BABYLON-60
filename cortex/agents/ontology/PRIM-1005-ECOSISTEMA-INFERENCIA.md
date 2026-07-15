@@ -12,6 +12,8 @@ El mapa físico de implementaciones, frameworks de búsqueda y repositorios fron
 - **maitrix-org/llm-reasoners:** Framework estándar para la implementación de búsquedas estructuradas (MCTS, Tree-of-Thoughts, Beam Search).
 - **huggingface/search-and-learn:** Librería oficial de Hugging Face para el despliegue de políticas de inferencia optimizadas en modelos locales.
 - **IINemo/thinkbooster:** Enrutador y optimizador de TTC que expone endpoints tipo OpenAI para inyectar estrategias de inferencia en caliente.
+- **lyogavin/airllm:** Motor de inferencia capa por capa (layer-wise inference) optimizado para la ejecución de modelos masivos (70B+) en hardware local con restricciones severas de VRAM, utilizando prefetching asíncrono y FlashAttention.
+
 
 ## 3. Alineación y RL (GRPO)
 - **huggingface/trl:** Repositorio principal de *Transformers Reinforcement Learning* que aloja la clase `GRPOTrainer` para el entrenamiento de bajo consumo en VRAM.
