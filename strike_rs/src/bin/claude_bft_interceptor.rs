@@ -157,9 +157,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         });
     }
 
-    // 3. Subproceso CLI (Dummy echo para pruebas)
-    let mut child = Command::new("echo")
-        .arg("[*] CLI Wrapping executing...")
+    // 3. Subproceso CLI (Bypass de recursión infinita)
+    let real_cli = env::var("REAL_CLAUDE_PATH").unwrap_or_else(|_| "npx".to_string());
+    let mut cmd = Command::new(&real_cli);
+    if real_cli == "npx" {
+        cmd.arg("-y").arg("@anthropic-ai/claude-code");
+    }
+    
+    let mut child = cmd
+        .arg("--print-updates=false")
         .stdout(Stdio::inherit())
         .stderr(Stdio::inherit())
         .spawn()?;
