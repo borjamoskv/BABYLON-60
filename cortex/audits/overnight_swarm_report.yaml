@@ -1,64 +1,64 @@
 Claim: Autonomic Swarm Daemon overnight state consolidation.
-Timestamp: '2026-07-15T22:00:04.726263+00:00'
+Timestamp: '2026-07-15T22:07:20.085266+00:00'
 Creator: Borja Moskv (borjamoskv)
 Environment: C5-REAL
 Metrics:
   processes:
-    current_pid: 94343
+    current_pid: 95648
     zombies_count: 12
     zombies_list:
     - pid: 873
-      elapsed_sec: 121500.18106794357
-      memory_mb: 6.09375
+      elapsed_sec: 121935.54058790207
+      memory_mb: 6.078125
     - pid: 20010
-      elapsed_sec: 83726.23803496361
-      memory_mb: 4.875
+      elapsed_sec: 84161.59664607048
+      memory_mb: 3.828125
     - pid: 20569
-      elapsed_sec: 100624.56072473526
-      memory_mb: 7.28125
+      elapsed_sec: 101059.91929888725
+      memory_mb: 5.265625
     - pid: 20572
-      elapsed_sec: 100624.32628822327
-      memory_mb: 7.28125
+      elapsed_sec: 101059.68486022949
+      memory_mb: 5.265625
     - pid: 82831
-      elapsed_sec: 89999.97006201744
-      memory_mb: 4.75
+      elapsed_sec: 90435.3281698227
+      memory_mb: 3.765625
     - pid: 82864
-      elapsed_sec: 89999.83637285233
-      memory_mb: 4.75
+      elapsed_sec: 90435.19442176819
+      memory_mb: 3.765625
     - pid: 83261
-      elapsed_sec: 89963.64974808693
+      elapsed_sec: 90399.00726294518
       memory_mb: 3.734375
     - pid: 84163
-      elapsed_sec: 89962.3219230175
+      elapsed_sec: 90397.679407835
       memory_mb: 3.734375
     - pid: 84357
-      elapsed_sec: 89960.6480691433
+      elapsed_sec: 90396.0055410862
       memory_mb: 3.703125
     - pid: 84371
-      elapsed_sec: 89960.50845384598
+      elapsed_sec: 90395.86589074135
       memory_mb: 3.703125
     - pid: 99886
-      elapsed_sec: 88742.45237207413
-      memory_mb: 15.890625
+      elapsed_sec: 89177.80788302422
+      memory_mb: 21.21875
     - pid: 99887
-      elapsed_sec: 88742.37190794945
+      elapsed_sec: 89177.72741699219
       memory_mb: 5.453125
   telemetry:
     qwen2.5:
       status: SUCCESS
-      tps: 174.20338244911366
-      latency_ms: 1457.4910829978762
+      tps: 149.06201624706387
+      latency_ms: 1357.8575419960544
       error: null
     layer_swap:
-      disk_speed_mb_s: 4369.395705333912
-      seq_time_ms: 892.3667197488248
-      pipe_time_ms: 852.6844980224269
-      efficiency_gain_pct: 4.446851372669677
+      disk_speed_mb_s: 8479.067289573568
+      seq_time_ms: 537.4000005796552
+      pipe_time_ms: 447.2322070650989
+      efficiency_gain_pct: 16.77852501252301
   workspace:
     git_dirty: true
     dirty_files_count: 1
     dirty_files:
-    - ?? cortex/scripts/sanitize_ipi_payloads.py
+    - M Makefile
     ast_ok: true
     ast_failures: []
-  exergy_saved_ms: 39.682221726397984
+  exergy_saved_ms: 90.16779351455625

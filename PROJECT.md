@@ -34,10 +34,10 @@
 | MS-010 | Milestone | Implementar simulación de carga secuencial de tensores y prefetching asíncrono | Due: 2026-08-05 | DONE | Hash: 6feac10e |
 | MS-011 | Milestone | Registrar telemetría de I/O swap overhead en telemetry.db | Due: 2026-08-10 | DONE | Hash: 6feac10e |
 | MS-012 | Milestone | Validar la lógica y consistencia de los tiempos de decodificación en tests/ | Due: 2026-08-15 | DONE | Hash: 6feac10e |
-| OBJ-009 | Objective | Daemon de Higiene y Telemetría del Swarm (Autonomic Swarm Daemon) | Implementar un daemon persistente para monitorizar la homeostasis del sistema y ejecutar telemetría cíclica. | IN_PROGRESS | Exergy: 0.00 |
-| MS-013 | Milestone | Implementar Autonomic Swarm Daemon con monitorización de procesos y telemetría | Due: 2026-07-16 | TODO | Hash: TBD |
-| MS-014 | Milestone | Configurar planificador en segundo plano (schedule/cron) para la orquestación cíclica | Due: 2026-07-16 | TODO | Hash: TBD |
-| MS-015 | Milestone | Generar reportes periódicos en overnight_swarm_report.yaml | Due: 2026-07-16 | TODO | Hash: TBD |
+| OBJ-009 | Objective | Daemon de Higiene y Telemetría del Swarm (Autonomic Swarm Daemon) | Implementar un daemon persistente para monitorizar la homeostasis del sistema y ejecutar telemetría cíclica. | DONE | Exergy: 1.00 |
+| MS-013 | Milestone | Implementar Autonomic Swarm Daemon con monitorización de procesos y telemetría | Due: 2026-07-16 | DONE | Hash: 6bfa38f8 |
+| MS-014 | Milestone | Configurar planificador en segundo plano (schedule/cron) para la orquestación cíclica | Due: 2026-07-16 | DONE | Task: task-234 |
+| MS-015 | Milestone | Generar reportes periódicos en overnight_swarm_report.yaml | Due: 2026-07-16 | DONE | File: overnight_swarm_report.yaml |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
