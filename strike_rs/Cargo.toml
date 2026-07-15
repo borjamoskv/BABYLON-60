@@ -6,3 +6,7 @@ edition = "2024"
 [dependencies]
 blake3 = "1.8.5"
 petgraph = "0.8.3"
+rusqlite = { version = "0.31.0", features = ["bundled"] }
+hmac = "0.12.1"
+sha2 = "0.10.8"
+notify = "6.1.1"
