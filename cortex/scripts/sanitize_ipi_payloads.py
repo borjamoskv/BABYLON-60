@@ -72,7 +72,7 @@ def scan_file(file_path: str) -> list[dict[str, Any]]:
                             "content": line.strip(),
                             "pattern": pattern.pattern
                         })
-    except Exception as e:
+    except Exception:
         # Pasa en silencio bajo directrices de resiliencia del OS
         pass
     return detections
