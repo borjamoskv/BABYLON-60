@@ -26,7 +26,7 @@
 | OBJ-005 | Objective | Thermodynamic AST Pruner (Apoptosis Engine) | Herramienta de poda de AST que aplica apoptosis biológica a trayectorias muertas de código y anergía estructural. | DONE | Exergy: 1.00 |
 | MS-006 | Milestone | Apoptosis Engine execution and code pruning | Due: 2026-07-10 | DONE | Hash: 0fe8112e |
 | OBJ-006 | Objective | Objectives & Milestones Agent (ULTRAThink ITERA) | Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza PROJECT.md bajo Git Sentinel. | DONE | Exergy: 1.00 |
-| MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | DONE | Hash: 323242bf |
+| MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | DONE | Hash: TBD |
 | OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | DONE | Exergy: 1.00 |
 | MS-008 | Milestone | Configurar socket local de Ollama/MLX para inferencia local | Due: 2026-07-20 | DONE | Hash: 6bfa38f8 |
 | MS-009 | Milestone | Medir y registrar TTFT mediante script de telemetría | Due: 2026-07-25 | DONE | Hash: 6bfa38f8 |

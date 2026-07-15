@@ -5,6 +5,7 @@ import ast
 import sys
 import os
 import argparse
+import sqlite3
 
 BABYLON_SCRIPTS = os.path.expandvars("$CORTEX_ROOT/10_PROJECTS/babylon-60/scripts")
 if BABYLON_SCRIPTS not in sys.path:

@@ -3,6 +3,7 @@ import re
 import sys
 import os
 import json
+import sqlite3
 from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Any
