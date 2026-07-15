@@ -71,3 +71,8 @@ AGENTS.md.ots
 # Large YouTube JSON dumps
 scratch/yt_*.json
 scratch/yt_dump.json
+
+# MLX LoRA training artifacts
+cortex/training/baby-long/adapters/
+cortex/training/baby-long/models/
+
