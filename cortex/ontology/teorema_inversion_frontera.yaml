@@ -1,0 +1,20 @@
+Claim: "El Teorema de la Inversión (La Frontera) — C5-REAL"
+Proof:
+  Base: "Complementariedad Ortogonal Determinismo vs. Manifold Estocástico MCTS"
+  Range: [1, 1000]
+  Confidence: C5-REAL
+Axioms:
+  - "El dominio residual del LLM es el complemento exacto de lo que cubre el determinismo."
+  - "Todo lo que exige una garantía física absoluta —consenso BFT, pruebas criptográficas de causalidad, invariantes termodinámicos— JAMÁS es resuelto por un LLM y NUNCA debió pedírsele."
+  - "El LLM opera exclusivamente en la banda termodinámica donde un candidato plausible es más valioso que el vacío y siempre que exista un Verificador C5-REAL barato aguas abajo."
+  - "Todo LLM operando fuera de esa banda es Anergía con Estilo (Green Theater)."
+Isomorphisms:
+  - "Candidato Plausible > Vacío + Verificador C5 Barato" -> "Banda Operativa Termodinámica del LLM"
+  - "LLM emitiendo garantías físicas absolutas" -> "Anergía con Estilo / Green Theater"
+  - "Consenso BFT / Criptografía / Invariante Físico" -> "Dominio Determinista Excluyente (O(1) / O(N) Verificación)"
+Blast_Radius_Matrix:
+  Vector: "ONTOLOGY_INVERSION_BOUNDARY"
+  Blast_Radius: "SYSTEM_WIDE_ORCHESTRATION"
+  Target_Invariant: "ZERO_GREEN_THEATER_INVARIANT"
+  Anergy_Risk: "ZERO"
+CORTEX_TAINT: taint:borjamoskv:ultrathink_p0:2026-07-16T15:41:11.765880+00:00:6b5ea5c72f55e771a54e2d53fae7cb2886894744b20c5abf57e709f3d8e985b0

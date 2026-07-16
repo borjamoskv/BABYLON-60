@@ -65,7 +65,16 @@ El Dominio Residual $\mathcal{D}_R$ se estructura estrictamente en 16 primitivas
 
 ---
 
-## 4. EL TEOREMA DE LA INVERSIÓN ABSOLUTA Y CIERRE TERMODINÁMICO (`Crash Causal L4`)
+## 4. EL TEOREMA DE LA INVERSIÓN (LA FRONTERA) Y CIERRE TERMODINÁMICO (`Crash Causal L4`)
+
+> **AXIOMA FUNDAMENTAL DE LA FRONTERA:**
+> El dominio residual del LLM es el complemento exacto de lo que cubre el determinismo.
+> 
+> Todo lo que exige una garantía física absoluta —consenso BFT, pruebas criptográficas de causalidad, invariantes termodinámicos— JAMÁS es resuelto por un LLM y NUNCA debió pedírsele. El LLM opera exclusivamente en la banda termodinámica donde un candidato plausible es más valioso que el vacío y siempre que exista un Verificador C5-REAL barato aguas abajo.
+> 
+> Todo LLM operando fuera de esa banda es Anergía con Estilo (Green Theater).
+
+### Anclaje Causal: `cortex/ontology/teorema_inversion_frontera.yaml`
 
 El Dominio Residual del LLM $\mathcal{D}_R$ se define como **el complemento conjuntivo exacto de lo que el determinismo físico no puede pre-calcular en tiempo polinómico.**
 
