@@ -25,19 +25,11 @@
 | MS-005 | Milestone | Colapso atómico del motor de inferencia en 500 primitivas YAML | Due: 2026-07-01 | DONE | Hash: 6945abba |
 | OBJ-005 | Objective | Thermodynamic AST Pruner (Apoptosis Engine) | Herramienta de poda de AST que aplica apoptosis biológica a trayectorias muertas de código y anergía estructural. | DONE | Exergy: 1.00 |
 | MS-006 | Milestone | Apoptosis Engine execution and code pruning | Due: 2026-07-10 | DONE | Hash: 0fe8112e |
-| OBJ-006 | Objective | Objectives & Milestones Agent (ULTRAThink ITERA) | Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza PROJECT.md bajo Git Sentinel. | DONE | Exergy: 1.00 |
-| MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | DONE | Hash: TBD |
-| OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | DONE | Exergy: 1.00 |
-| MS-008 | Milestone | Configurar socket local de Ollama/MLX para inferencia local | Due: 2026-07-20 | DONE | Hash: 6bfa38f8 |
-| MS-009 | Milestone | Medir y registrar TTFT mediante script de telemetría | Due: 2026-07-25 | DONE | Hash: 6bfa38f8 |
-| OBJ-008 | Objective | Prototipo de Inferencia Secuencial (Layer-Wise Swap Simulator) | Diseñar un cargador de bloques de pesos latentes capa por capa para simular el cuello de botella de transferencia disco/VRAM. | DONE | Exergy: 1.00 |
-| MS-010 | Milestone | Implementar simulación de carga secuencial de tensores y prefetching asíncrono | Due: 2026-08-05 | DONE | Hash: 6feac10e |
-| MS-011 | Milestone | Registrar telemetría de I/O swap overhead en telemetry.db | Due: 2026-08-10 | DONE | Hash: 6feac10e |
-| MS-012 | Milestone | Validar la lógica y consistencia de los tiempos de decodificación en tests/ | Due: 2026-08-15 | DONE | Hash: 6feac10e |
-| OBJ-009 | Objective | Daemon de Higiene y Telemetría del Swarm (Autonomic Swarm Daemon) | Implementar un daemon persistente para monitorizar la homeostasis del sistema y ejecutar telemetría cíclica. | DONE | Exergy: 1.00 |
-| MS-013 | Milestone | Implementar Autonomic Swarm Daemon con monitorización de procesos y telemetría | Due: 2026-07-16 | DONE | Hash: 6bfa38f8 |
-| MS-014 | Milestone | Configurar planificador en segundo plano (schedule/cron) para la orquestación cíclica | Due: 2026-07-16 | DONE | Task: task-234 |
-| MS-015 | Milestone | Generar reportes periódicos en overnight_swarm_report.yaml | Due: 2026-07-16 | DONE | File: overnight_swarm_report.yaml |
+| OBJ-006 | Objective | Objectives & Milestones Agent (ULTRAThink ITERA) | Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza PROJECT.md bajo Git Sentinel. | IN_PROGRESS | Exergy: 0.00 |
+| MS-007 | Milestone | Diseño e implementación de ObjectivesAgent | Due: 2026-07-14 | IN_PROGRESS |  |
+| OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | PENDING | Exergy: 0.00 |
+| MS-008 | Milestone | Configurar socket local de Ollama/MLX para inferencia local | Due: 2026-07-20 | PENDING |  |
+| MS-009 | Milestone | Medir y registrar TTFT mediante script de telemetría | Due: 2026-07-25 | PENDING |  |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
