@@ -1,8 +1,0 @@
-Claim: "Iteración C5-REAL 16383"
-Proof:
-  Base: "8c6270cf08c3a5ba6a18454dd488a51075c27ac1c98404f677762c4ab766c256"
-  Range: [16383, 16383]
-  Confidence: "C5-REAL"
-Isomorphisms:
-  - Vector: "Kinetic Compression"
-    Mapping: "Coste 100% Gratis. Cero disipación."
