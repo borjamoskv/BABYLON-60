@@ -5,7 +5,8 @@ import re
 import sqlite3
 import time
 from pathlib import Path
-from typing import Dict, Any, Tuple
+from typing import Any
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / 'cortex' / 'engine' / 'nexus_anchors.db'
 INCOMING_DIR = PROJECT_ROOT / 'cortex' / 'outbox' / '_incoming_forge'
@@ -25,8 +26,8 @@ def init_ledger() -> None:
 def wrap_prompt(spec: str) -> str:
     return APEX_SINGULARITY_WRAPPER.format(spec=spec)
 
-def extract_ast(raw_remote_output: str) -> Tuple[str, int]:
-    blocks = re.findall('```[a-zA-Z]*\\n(.*?)```', raw_remote_output, re.DOTALL)
+def extract_ast(raw_remote_output: str) -> tuple[str, int]:
+    blocks = re.findall('```[a-zA-Z]*\\\\n(.*?)```', raw_remote_output, re.DOTALL)
     if blocks:
         code = max(blocks, key=len).strip()
     else:
@@ -52,7 +53,7 @@ def verify_ast_syntax(code: str, filename: str) -> bool:
             return False
     return len(code.strip()) > 0
 
-def assimilate_payload(spec: str, raw_output: str, target_filename: str) -> Dict[str, Any]:
+def assimilate_payload(spec: str, raw_output: str, target_filename: str) -> dict[str, Any]:
     init_ledger()
     print(f'[EXERGY-ARBITRAGE] Assimilating payload for target: {target_filename}...')
     code, loc = extract_ast(raw_output)
@@ -72,7 +73,7 @@ def assimilate_payload(spec: str, raw_output: str, target_filename: str) -> Dict
     print(f'  -> Assimilation SUCCESS: {target_filename} ({loc} LOC) [BLAKE3: {causal_hash}]')
     return {'status': 'ASSIMILATED', 'causal_hash': causal_hash, 'target_path': str(target_path), 'loc': loc, 'verified_ast': is_verified}
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description='EXERGY ARBITRAGE ENGINE — Cloud ALU Transducer')
     subparsers = parser.add_subparsers(dest='command', help='Command to run')
     wrap_p = subparsers.add_parser('wrap', help='Wrap a specification in APEX_SINGULARITY prompt')

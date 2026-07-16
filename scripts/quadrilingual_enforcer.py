@@ -2,7 +2,7 @@ import signal
 import os
 import sys
 
-def check_lisp_bypass():
+def check_lisp_bypass() -> None:
     lisp_dir = 'lisp_metamembrane'
     if not os.path.exists(lisp_dir):
         return
@@ -14,7 +14,7 @@ def check_lisp_bypass():
                     if 'web3' in content or 'ethers' in content or 'jsonrpc' in content:
                         raise Exception('CRASH CAUSAL (Antipatrón 1): LISP inyectando directo en Anvil. Bypass de F# detectado.')
 
-def check_rust_ontology():
+def check_rust_ontology() -> None:
     rust_dir = 'strike_rs'
     if not os.path.exists(rust_dir):
         return
@@ -26,7 +26,7 @@ def check_rust_ontology():
                     if 'enum Domain' in content or 'Ontology' in content:
                         raise Exception('CRASH CAUSAL (Antipatrón 2): Rust procesando ADTs ontológicos. Dilución del Fast-Loop detectada.')
 
-def check_solidity_physics():
+def check_solidity_physics() -> None:
     anvil_dir = 'anvil_yung'
     if not os.path.exists(anvil_dir):
         return
@@ -42,7 +42,7 @@ def check_solidity_physics():
                     if 'while (' in content or 'graph' in content.lower():
                         raise Exception('CRASH CAUSAL (Antipatrón 3): Solidity intentando computar ciclos/física de grafos. Exhaustión ATP detectada.')
 
-def check_rust_anvil_bypass():
+def check_rust_anvil_bypass() -> None:
     rust_dir = 'strike_rs'
     if not os.path.exists(rust_dir):
         return
@@ -54,7 +54,7 @@ def check_rust_anvil_bypass():
                     if 'cast send' in content or 'ethers::' in content:
                         raise Exception('CRASH CAUSAL (Antipatrón 4): Rust enviando transacciones a Anvil sin pasar por F#. Split-Brain Causal.')
 
-def enforce():
+def enforce() -> None:
     print('⚡ [C5-REAL] Ignición de Auditoría Cuadrilingüe (Enforcer BFT)...')
     try:
         check_lisp_bypass()
@@ -66,5 +66,9 @@ def enforce():
     except Exception:
         os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError('FAIL-FAST: General Exception intercepted.')
-if __name__ == '__main__':
+
+def main() -> None:
     enforce()
+
+if __name__ == '__main__':
+    main()

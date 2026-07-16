@@ -7,7 +7,8 @@ import argparse
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
+
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / 'cortex/ontology/babylon60_objectives.yaml'
 PROJECT_MD_PATH = WORKSPACE_DIR / 'PROJECT.md'
@@ -42,29 +43,30 @@ def run_git_sentinel(commit_msg: str) -> str:
         print(f'[!] CalledProcessError: {e}\nStdout: {stdout}\nStderr: {stderr}', file=sys.stderr)
         raise e
 
-def load_state() -> Dict[str, Any]:
+def load_state() -> dict[str, Any]:
     if not YAML_STATE_PATH.exists():
         raise FileNotFoundError(f'State file not found at {YAML_STATE_PATH}')
     with open(YAML_STATE_PATH, 'r', encoding='utf-8') as f:
-        return yaml.safe_load(f)
+        result: dict[str, Any] = yaml.safe_load(f)
+        return result
 
-def save_state(state: Dict[str, Any]) -> bool:
+def save_state(state: dict[str, Any]) -> bool:
     state.pop('CORTEX_TAINT', None)
-    content_str = yaml.safe_dump(state, allow_unicode=True, sort_keys=False)
+    content_str: str = yaml.safe_dump(state, allow_unicode=True, sort_keys=False)
     existing_content = ''
     if YAML_STATE_PATH.exists():
         with open(YAML_STATE_PATH, 'r', encoding='utf-8') as f:
             existing_content = f.read()
     taint_hash = calculate_sha256(content_str)
     state['CORTEX_TAINT'] = taint_hash
-    final_content_str = yaml.safe_dump(state, allow_unicode=True, sort_keys=False)
+    final_content_str: str = yaml.safe_dump(state, allow_unicode=True, sort_keys=False)
     if existing_content == final_content_str:
         return False
     with open(YAML_STATE_PATH, 'w', encoding='utf-8') as f:
         f.write(final_content_str)
     return True
 
-def generate_milestones_table(state: Dict[str, Any]) -> str:
+def generate_milestones_table(state: dict[str, Any]) -> str:
     lines = ['## Milestones', '| ID | Type | Title | Description / Due | Status | Info |', '|---|---|---|---|---|---|']
     for obj in state.get('objectives', []):
         obj_id = obj.get('id', 'OBJ-UNK')
@@ -83,7 +85,7 @@ def generate_milestones_table(state: Dict[str, Any]) -> str:
             lines.append(f'| {ms_id} | Milestone | {ms_title} | Due: {due} | {ms_status} | {h_info} |')
     return '\n'.join(lines) + '\n'
 
-def update_project_md(state: Dict[str, Any]) -> bool:
+def update_project_md(state: dict[str, Any]) -> bool:
     if not PROJECT_MD_PATH.exists():
         return False
     with open(PROJECT_MD_PATH, 'r', encoding='utf-8') as f:
@@ -105,23 +107,23 @@ def update_project_md(state: Dict[str, Any]) -> bool:
         f.write(new_content)
     return True
 
-def cmd_list(args):
+def cmd_list(args: argparse.Namespace) -> None:
     state = load_state()
     print('Claim: Listado actual de objetivos y milestones extraído con éxito de la ontología.')
     print(f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get('objectives', []))}]\n  Confidence: C5-REAL''')
     print('\n---')
     print(yaml.safe_dump(state, allow_unicode=True, sort_keys=False))
 
-def cmd_add_objective(args):
+def cmd_add_objective(args: argparse.Namespace) -> None:
     state = load_state()
-    objs = state.setdefault('objectives', [])
+    objs: list[Any] = state.setdefault('objectives', [])
     next_id = 1
     if objs:
         ids = [int(o['id'].split('-')[1]) for o in objs if o['id'].startswith('OBJ-')]
         if ids:
             next_id = max(ids) + 1
     obj_id = f'OBJ-{next_id:03d}'
-    new_obj = {'id': obj_id, 'title': args.title, 'description': args.description, 'exergy_score': args.exergy, 'status': 'PENDING', 'milestones': []}
+    new_obj: dict[str, Any] = {'id': obj_id, 'title': args.title, 'description': args.description, 'exergy_score': args.exergy, 'status': 'PENDING', 'milestones': []}
     objs.append(new_obj)
     mutated = save_state(state)
     if mutated:
@@ -132,10 +134,10 @@ def cmd_add_objective(args):
         print('Claim: Idempotencia detectada. No se modificó el estado.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
-def cmd_add_milestone(args):
+def cmd_add_milestone(args: argparse.Namespace) -> None:
     state = load_state()
-    objs = state.get('objectives', [])
-    target_obj = None
+    objs: list[Any] = state.get('objectives', [])
+    target_obj: dict[str, Any] | None = None
     for o in objs:
         if o['id'] == args.obj_id:
             target_obj = o
@@ -143,15 +145,15 @@ def cmd_add_milestone(args):
     if not target_obj:
         print(f'Error: Objective {args.obj_id} not found.', file=sys.stderr)
         sys.exit(1)
-    milestones = target_obj.setdefault('milestones', [])
-    all_ms_ids = []
+    milestones: list[Any] = target_obj.setdefault('milestones', [])
+    all_ms_ids: list[int] = []
     for o in objs:
         for m in o.get('milestones', []):
             if m['id'].startswith('MS-'):
                 all_ms_ids.append(int(m['id'].split('-')[1]))
     next_ms_id = max(all_ms_ids) + 1 if all_ms_ids else 1
     ms_id = f'MS-{next_ms_id:03d}'
-    new_ms = {'id': ms_id, 'title': args.title, 'due': args.due or datetime.now(timezone.utc).date().isoformat(), 'status': 'PENDING', 'commit_hash': args.hash or ''}
+    new_ms: dict[str, Any] = {'id': ms_id, 'title': args.title, 'due': args.due or datetime.now(timezone.utc).date().isoformat(), 'status': 'PENDING', 'commit_hash': args.hash or ''}
     milestones.append(new_ms)
     mutated = save_state(state)
     if mutated:
@@ -162,7 +164,7 @@ def cmd_add_milestone(args):
         print('Claim: Idempotencia detectada. No se requirieron mutaciones físicas.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
-def cmd_update_status(args):
+def cmd_update_status(args: argparse.Namespace) -> None:
     state = load_state()
     found = False
     if args.type == 'objective':
@@ -190,7 +192,7 @@ def cmd_update_status(args):
         print('Claim: Idempotencia detectada. El estado solicitado ya coincide con la ontología física.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
-def cmd_iter(args):
+def cmd_iter(args: argparse.Namespace) -> None:
     state = load_state()
     for o in state.get('objectives', []):
         total_ms = len(o.get('milestones', []))
@@ -226,7 +228,7 @@ def cmd_iter(args):
         print('Claim: Idempotencia absoluta. El estado actual representa la máxima exergía del sistema.')
         print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description='MOSKV-1 Objectives & Milestones Agent')
     subparsers = parser.add_subparsers(dest='command', required=True)
     subparsers.add_parser('list')
