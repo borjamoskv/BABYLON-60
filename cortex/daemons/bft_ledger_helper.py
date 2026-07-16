@@ -26,15 +26,24 @@ _INSERT_SQL = (
 
 
 def resolve_db_path(raw_path: str) -> str:
-    """Expands environment variables. Fails hard if unresolved."""
+    """Expands environment variables. Fails hard if unresolved or relative."""
     expanded = os.path.expandvars(raw_path)
-    if "$" in expanded:
-        raise RuntimeError(f"[C5-REAL] FATAL: Unresolved environment variable in path -> {expanded}")
-        
-    dir_name = os.path.dirname(expanded)
+    if "$" in expanded or not os.path.isabs(expanded):
+        raise RuntimeError(f"[C5-REAL] FATAL: Unresolved variable or relative path -> {expanded}")
+    return expanded
+
+def init_ledger(db_file_raw: str) -> None:
+    """Explicitly provisions the ledger directory and schema. Never auto-creates in runtime."""
+    db_file = resolve_db_path(db_file_raw)
+    dir_name = os.path.dirname(db_file)
     if dir_name:
         os.makedirs(dir_name, exist_ok=True)
-    return expanded
+    
+    conn = sqlite3.connect(db_file, timeout=5.0)
+    try:
+        conn.execute(_DDL_ANCHORS)
+    finally:
+        conn.close()
 
 
 def ensure_bft_table(conn: sqlite3.Connection) -> None:
@@ -68,8 +77,7 @@ def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
                     ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f') + 'Z'
                     
                     # 3. Domain Separation & Full Metadata Seal (Anti-Tampering P0)
-                    # payload = len(content):content:prev_hash:timestamp:agent_id
-                    sealed_payload = f"{len(content)}:{content}:{prev_hash}:{ts}:{agent_id}"
+                    sealed_payload = f"{len(content)}:{content}:{len(prev_hash)}:{prev_hash}:{len(ts)}:{ts}:{len(agent_id)}:{agent_id}"
                     new_hash = hashlib.sha3_256(sealed_payload.encode('utf-8')).hexdigest()
                     
                     # 4. Insert (Hot Path)
@@ -86,11 +94,8 @@ def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
             except sqlite3.OperationalError as e:
                 err_msg = str(e).lower()
                 if "no such table" in err_msg:
-                    # Cold path: Table absent. Safe to CREATE outside txn, then retry.
-                    conn.execute(_DDL_ANCHORS)
-                    continue
+                    raise RuntimeError("[C5-REAL] LedgerAbsentError: BFT Ledger table missing. Explicit initialization required.") from e
                 else:
-                    # Schema drift, SQLITE_BUSY, locked DB -> Propagate (Fail-Fast)
                     raise
     finally:
         conn.close()
