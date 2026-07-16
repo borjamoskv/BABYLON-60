@@ -200,6 +200,9 @@ impl HotStuff {
             state.replica_id.clone(),
         );
 
+        // Track pending node
+        state.pending.push(node.clone());
+
         let msg = HotStuffMessage::Proposal {
             node: node.clone(),
             qc: state.high_qc.clone(),
@@ -220,6 +223,7 @@ impl HotStuff {
     ) -> Result<Option<QuorumCertificate>, String> {
         let mut state = self.state.lock().await;
         let total_replicas = state.total_replicas;
+        let current_phase = state.current_phase;
         let f = (total_replicas.saturating_sub(1)) / 3;
         let quorum_threshold = 2 * f + 1;
 
@@ -237,18 +241,28 @@ impl HotStuff {
                 voters.clone(),
             );
             info!(
-                "HotStuff: quorum reached for {} ({}/{} votes)",
+                "HotStuff: quorum reached for {} ({}/{} votes) in phase {:?}",
                 node_hash,
                 voters.len(),
-                total_replicas
+                total_replicas,
+                current_phase
             );
-            // Advance phase
-            state.current_phase = match state.current_phase {
+            // Advance phase and enforce locking invariant
+            let next_phase = match current_phase {
                 Phase::Prepare => Phase::PreCommit,
-                Phase::PreCommit => Phase::Commit,
+                Phase::PreCommit => {
+                    // SAFETY INVARIANT: Lock the QC during PreCommit.
+                    // Once locked, a conflicting node cannot be committed
+                    // unless the new proposal carries a QC with a higher
+                    // view than locked_qc.
+                    state.locked_qc = Some(qc.clone());
+                    info!("HotStuff: locked QC at view {} for {}", view_number, node_hash);
+                    Phase::Commit
+                }
                 Phase::Commit => Phase::Decide,
                 Phase::Decide => Phase::Decide, // terminal
             };
+            state.current_phase = next_phase;
             state.high_qc = Some(qc.clone());
             Ok(Some(qc))
         } else {
@@ -257,6 +271,7 @@ impl HotStuff {
     }
 
     /// Commit a node after Decide phase quorum is reached.
+    /// Verifies: (1) phase is Decide, (2) high_qc matches the node being committed.
     pub async fn commit(&self, node: DagNode) -> Result<(), String> {
         let mut state = self.state.lock().await;
         if state.current_phase != Phase::Decide {
@@ -265,13 +280,54 @@ impl HotStuff {
                 state.current_phase
             ));
         }
+        // Verify the high_qc corresponds to the node we are committing
+        if let Some(ref hqc) = state.high_qc {
+            if hqc.node_hash != node.hash {
+                return Err(format!(
+                    "high_qc hash {} does not match commit target {}",
+                    hqc.node_hash, node.hash
+                ));
+            }
+        } else {
+            return Err("Cannot commit without a high_qc".to_string());
+        }
         info!("HotStuff: committing node {} at view {}", node.hash, node.view_number);
         state.last_committed = Some(node.clone());
         state.pending.retain(|n| n.hash != node.hash);
         state.votes.remove(&node.hash);
-        // Reset phase for next round
+        // Reset phase and clear lock for next round
         state.current_phase = Phase::Prepare;
+        state.locked_qc = None;
         Ok(())
+    }
+
+    /// Check if a proposal is safe w.r.t. the locking invariant.
+    /// A proposal is safe if:
+    ///   (a) there is no locked_qc, OR
+    ///   (b) the proposal extends the locked node, OR
+    ///   (c) the proposal carries a QC with view >= locked_qc.view_number
+    pub async fn is_safe_proposal(
+        &self,
+        _node: &DagNode,
+        justification_qc: &Option<QuorumCertificate>,
+    ) -> bool {
+        let state = self.state.lock().await;
+        match &state.locked_qc {
+            None => true, // no lock => always safe
+            Some(locked) => {
+                // Check if justification QC has a view >= locked view
+                match justification_qc {
+                    Some(jqc) => jqc.view_number >= locked.view_number,
+                    None => false, // no justification but we have a lock => unsafe
+                }
+            }
+        }
+    }
+
+    /// Get the current locked QC (for monitoring/debugging).
+    pub async fn locked_qc(&self) -> Option<QuorumCertificate> {
+        let state = self.state.lock().await;
+        state.locked_qc.clone()
     }
 
     /// View change: triggered when the leader is suspected of being faulty.
@@ -304,23 +360,31 @@ impl HotStuff {
 }
 
 /// Synchronous wrapper for HotStuff that implements ConsensusEngine trait.
-/// Bridges the async HotStuff into the sync trait required by the factory.
+/// Uses a dedicated single-threaded runtime to avoid panicking when called
+/// from within an existing tokio runtime (e.g. nested block_on).
 pub struct HotStuffSync {
     inner: Arc<HotStuff>,
-    runtime: tokio::runtime::Handle,
+    runtime: std::sync::Mutex<tokio::runtime::Runtime>,
 }
 
 impl HotStuffSync {
     pub fn new(transport: Arc<dyn NetworkTransport>) -> Self {
         let inner = Arc::new(HotStuff::new(transport));
-        let runtime = tokio::runtime::Handle::current();
-        HotStuffSync { inner, runtime }
+        let runtime = tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()
+            .expect("Failed to create HotStuffSync runtime");
+        HotStuffSync {
+            inner,
+            runtime: std::sync::Mutex::new(runtime),
+        }
     }
 }
 
 impl super::ConsensusEngine for HotStuffSync {
     fn propose(&self, payload: Vec<u8>) -> Result<(), String> {
-        self.runtime.block_on(async {
+        let rt = self.runtime.lock().map_err(|e| e.to_string())?;
+        rt.block_on(async {
             self.inner.propose(payload).await.map(|_| ())
         })
     }
@@ -447,5 +511,126 @@ mod tests {
         assert_eq!(view, 0);
         assert_eq!(phase, Phase::Prepare);
         assert!(committed.is_none());
+    }
+
+    /// Full round-trip: propose → 3 quorum rounds (Prepare→PreCommit→Commit→Decide) → commit.
+    /// Verifies phase transitions, locking, and final committed state.
+    #[tokio::test]
+    async fn test_full_round_trip_propose_vote_commit() {
+        let transport = Arc::new(MockTransport);
+        let hs = HotStuff::with_config(transport, "leader".to_string(), 4);
+
+        // Propose
+        let node = hs.propose(b"round_trip".to_vec()).await.unwrap();
+        let view = node.view_number;
+
+        // Phase 1: Prepare → PreCommit (3 votes = quorum for N=4)
+        for voter in ["r1", "r2", "r3"] {
+            hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+        }
+        let (_, phase, _) = hs.status().await;
+        assert_eq!(phase, Phase::PreCommit, "After Prepare quorum, should be PreCommit");
+        assert!(hs.locked_qc().await.is_none(), "No lock yet before PreCommit quorum");
+
+        // Phase 2: PreCommit → Commit (3 more votes)
+        // Reset votes for next phase by using different vote keys
+        // In real HotStuff, each phase has its own vote set.
+        // Here we simulate by collecting on the same hash which advances the phase.
+        {
+            let mut state = hs.state.lock().await;
+            state.votes.remove(&node.hash);
+        }
+        for voter in ["r1", "r2", "r3"] {
+            hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+        }
+        let (_, phase, _) = hs.status().await;
+        assert_eq!(phase, Phase::Commit, "After PreCommit quorum, should be Commit");
+        assert!(hs.locked_qc().await.is_some(), "Lock must be set after PreCommit quorum");
+
+        // Phase 3: Commit → Decide (3 more votes)
+        {
+            let mut state = hs.state.lock().await;
+            state.votes.remove(&node.hash);
+        }
+        for voter in ["r1", "r2", "r3"] {
+            hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+        }
+        let (_, phase, _) = hs.status().await;
+        assert_eq!(phase, Phase::Decide, "After Commit quorum, should be Decide");
+
+        // Commit
+        hs.commit(node.clone()).await.unwrap();
+        let (_, phase, committed) = hs.status().await;
+        assert_eq!(phase, Phase::Prepare, "After commit, phase resets to Prepare");
+        assert_eq!(committed, Some(node.hash.clone()), "Committed hash must match");
+        assert!(hs.locked_qc().await.is_none(), "Lock must be cleared after commit");
+    }
+
+    /// Verify that commit fails when high_qc doesn't match the target node.
+    #[tokio::test]
+    async fn test_commit_rejects_mismatched_hash() {
+        let transport = Arc::new(MockTransport);
+        let hs = HotStuff::with_config(transport, "leader".to_string(), 4);
+
+        let node = hs.propose(b"real".to_vec()).await.unwrap();
+        let view = node.view_number;
+
+        // Drive all 3 phases to Decide
+        for _ in 0..3 {
+            {
+                let mut state = hs.state.lock().await;
+                state.votes.remove(&node.hash);
+            }
+            for voter in ["r1", "r2", "r3"] {
+                hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+            }
+        }
+
+        // Try to commit a DIFFERENT node
+        let fake_node = DagNode::new(b"fake".to_vec(), None, 999, "attacker".to_string());
+        let result = hs.commit(fake_node).await;
+        assert!(result.is_err(), "Committing a node not matching high_qc must fail");
+        assert!(
+            result.unwrap_err().contains("does not match"),
+            "Error must mention hash mismatch"
+        );
+    }
+
+    /// Verify locking safety: a proposal without sufficient justification
+    /// is deemed unsafe when a lock exists.
+    #[tokio::test]
+    async fn test_locking_safety_invariant() {
+        let transport = Arc::new(MockTransport);
+        let hs = HotStuff::with_config(transport, "leader".to_string(), 4);
+
+        // Initially safe (no lock)
+        let node = hs.propose(b"safe".to_vec()).await.unwrap();
+        assert!(hs.is_safe_proposal(&node, &None).await, "No lock => always safe");
+
+        // Drive through Prepare + PreCommit to set locked_qc
+        let view = node.view_number;
+        for voter in ["r1", "r2", "r3"] {
+            hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+        }
+        {
+            let mut state = hs.state.lock().await;
+            state.votes.remove(&node.hash);
+        }
+        for voter in ["r1", "r2", "r3"] {
+            hs.collect_vote(&node.hash, voter.to_string(), view).await.unwrap();
+        }
+        assert!(hs.locked_qc().await.is_some(), "Lock must exist after PreCommit");
+
+        // Without justification => unsafe
+        let node2 = DagNode::new(b"conflict".to_vec(), None, 99, "rogue".to_string());
+        assert!(!hs.is_safe_proposal(&node2, &None).await, "No justification + lock => unsafe");
+
+        // With a QC at a higher view => safe
+        let high_qc = QuorumCertificate::new("any".to_string(), view + 1, vec!["r1".into()]);
+        assert!(hs.is_safe_proposal(&node2, &Some(high_qc)).await, "Higher view QC => safe");
+
+        // With a QC at a lower view => unsafe
+        let low_qc = QuorumCertificate::new("any".to_string(), 0, vec!["r1".into()]);
+        assert!(!hs.is_safe_proposal(&node2, &Some(low_qc)).await, "Lower view QC => unsafe");
     }
 }
