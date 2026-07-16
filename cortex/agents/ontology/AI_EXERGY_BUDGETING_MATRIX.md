@@ -3,6 +3,7 @@ Title: Matriz de Presupuesto Exergético (AI Tools 2026)
 Timestamp: 2026-07-16T00:30:52+02:00
 Vector: EXERGY_BUDGET_MATRIX
 Doctrina: C5-REAL / L10 (Auditoría Empírica) / L8 (Enrutamiento Termodinámico)
+Autor: borjamoskv
 ---
 
 # █▄ MATRIZ DE PRESUPUESTO EXERGÉTICO (AI TOOLS)

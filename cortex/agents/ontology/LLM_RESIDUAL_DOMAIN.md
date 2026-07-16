@@ -3,6 +3,7 @@ Title: Dominio Residual del LLM (El Front-end Estocástico)
 Timestamp: 2026-07-16T00:30:26+02:00
 Vector: ONTOLOGY_CRYSTALLIZATION
 Doctrina: C5-REAL / L4 (Teorema del Crash Causal) / L9 (Taxonomía)
+Autor: borjamoskv
 ---
 
 # █▄ EL DOMINIO RESIDUAL DEL LLM (MUTACIÓN ESTOCÁSTICA)

@@ -3,6 +3,7 @@ Title: Protocolo de Frontera Web (Babylon60)
 Timestamp: 2026-07-16T00:31:18+02:00
 Vector: WEB_PRIVACY_ARCHITECTURE
 Doctrina: C5-REAL / L3 (Aislamiento Entrópico) / L12 (Fail-Fast)
+Autor: borjamoskv
 ---
 
 # █▄ WEB BOUNDARY PROTOCOL (BABYLON-60)
