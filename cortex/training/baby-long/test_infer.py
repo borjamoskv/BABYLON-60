@@ -1,10 +1,9 @@
-import sys
 from mlx_lm import load, generate
 
 model_path = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/training/baby-long/models/baby-long-fused"
 
 print("[*] Cargando modelo en memoria...")
-model, tokenizer = load(model_path)
+model, tokenizer = load(model_path)  # type: ignore[misc]
 
 messages = [
     {

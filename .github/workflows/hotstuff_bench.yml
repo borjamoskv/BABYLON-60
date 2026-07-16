@@ -1,0 +1,36 @@
+name: HotStuff Benchmark
+on:
+  push:
+    paths:
+      - 'cortex/consensus/**'
+      - 'ultrathink/**'
+      - 'tests/**'
+  pull_request:
+    paths:
+      - 'cortex/consensus/**'
+      - 'ultrathink/**'
+
+jobs:
+  rust-tests:
+    name: Rust Unit Tests (HotStuff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build HotStuff crate
+        run: cargo build --release --manifest-path cortex/consensus/Cargo.toml --features use_hotstuff
+      - name: Run Rust tests
+        run: cargo test --release --manifest-path cortex/consensus/Cargo.toml --features use_hotstuff -- --test-threads=1
+
+  python-tests:
+    name: Python Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install pytest pytest-asyncio
+      - name: Run scheduler tests
+        run: PYTHONPATH=. pytest tests/test_hotstuff_consensus.py -v
