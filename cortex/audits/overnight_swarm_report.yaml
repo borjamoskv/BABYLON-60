@@ -1,64 +1,63 @@
 Claim: Autonomic Swarm Daemon overnight state consolidation.
-Timestamp: '2026-07-16T00:30:02.399480+00:00'
+Timestamp: '2026-07-16T01:00:02.495388+00:00'
 Creator: Borja Moskv (borjamoskv)
 Environment: C5-REAL
 Metrics:
   processes:
-    current_pid: 37134
+    current_pid: 45424
     zombies_count: 12
     zombies_list:
     - pid: 873
-      elapsed_sec: 130497.85393881798
-      memory_mb: 6.625
+      elapsed_sec: 132297.9509139061
+      memory_mb: 5.8125
     - pid: 20010
-      elapsed_sec: 92723.91002893448
-      memory_mb: 5.609375
+      elapsed_sec: 94524.00735402107
+      memory_mb: 4.0625
     - pid: 20569
-      elapsed_sec: 109622.23265767097
-      memory_mb: 5.0
+      elapsed_sec: 111422.32999897003
+      memory_mb: 5.921875
     - pid: 20572
-      elapsed_sec: 109621.99821805954
-      memory_mb: 5.0
+      elapsed_sec: 111422.09555912018
+      memory_mb: 5.921875
     - pid: 82831
-      elapsed_sec: 98997.64529490471
+      elapsed_sec: 100797.74642181396
       memory_mb: 7.0
     - pid: 82864
-      elapsed_sec: 98997.51154589653
-      memory_mb: 6.984375
+      elapsed_sec: 100797.6126768589
+      memory_mb: 7.0
     - pid: 83261
-      elapsed_sec: 98961.32438707352
-      memory_mb: 3.40625
+      elapsed_sec: 100761.42585802078
+      memory_mb: 3.390625
     - pid: 84163
-      elapsed_sec: 98959.99652504921
-      memory_mb: 3.40625
+      elapsed_sec: 100760.09801912308
+      memory_mb: 3.390625
     - pid: 84357
-      elapsed_sec: 98958.32265305519
-      memory_mb: 3.40625
+      elapsed_sec: 100758.42414903641
+      memory_mb: 3.390625
     - pid: 84371
-      elapsed_sec: 98958.18299078941
-      memory_mb: 3.40625
+      elapsed_sec: 100758.28450107574
+      memory_mb: 3.390625
     - pid: 99886
-      elapsed_sec: 97740.11884498596
-      memory_mb: 8.328125
+      elapsed_sec: 99540.22116303444
+      memory_mb: 8.265625
     - pid: 99887
-      elapsed_sec: 97740.03837704659
-      memory_mb: 4.21875
+      elapsed_sec: 99540.1406929493
+      memory_mb: 3.734375
   telemetry:
     qwen2.5:
       status: SUCCESS
-      tps: 170.72673608175234
-      latency_ms: 1881.5618750086287
+      tps: 169.79608562760936
+      latency_ms: 1418.3682080038125
       error: null
     layer_swap:
-      disk_speed_mb_s: 5486.3407884493
-      seq_time_ms: 743.2667206414044
-      pipe_time_ms: 693.4924150118604
-      efficiency_gain_pct: 6.696695041934753
+      disk_speed_mb_s: 5160.403409197811
+      seq_time_ms: 780.1065587811172
+      pipe_time_ms: 741.4943320327438
+      efficiency_gain_pct: 4.949609295517692
   workspace:
-    git_dirty: true
-    dirty_files_count: 1
-    dirty_files:
-    - M cortex/audits/overnight_swarm_report.yaml
+    git_dirty: false
+    dirty_files_count: 0
+    dirty_files: []
     ast_ok: true
     ast_failures: []
-  exergy_saved_ms: 49.77430562954396
+  exergy_saved_ms: 38.61222674837336
