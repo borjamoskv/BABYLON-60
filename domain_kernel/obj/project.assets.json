@@ -107,19 +107,19 @@
     ]
   },
   "packageFolders": {
-    "$CORTEX_ROOT/.nuget/packages/": {}
+    "/Users/borjafernandezangulo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/Babylon60.Domain.fsproj",
+      "projectUniqueName": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/Babylon60.Domain.fsproj",
       "projectName": "Babylon60.Domain",
-      "projectPath": "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/Babylon60.Domain.fsproj",
-      "packagesPath": "$CORTEX_ROOT/.nuget/packages/",
-      "outputPath": "$CORTEX_ROOT/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/obj/",
+      "projectPath": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/Babylon60.Domain.fsproj",
+      "packagesPath": "/Users/borjafernandezangulo/.nuget/packages/",
+      "outputPath": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "$CORTEX_ROOT/.nuget/NuGet/NuGet.Config"
+        "/Users/borjafernandezangulo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
@@ -134,10 +134,6 @@
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
-      },
-      "restoreLockProperties": {
-        "restorePackagesWithLockFile": "false",
-        "nuGetLockFilePath": "Fable.lock"
       },
       "restoreAuditProperties": {
         "enableAudit": "true",

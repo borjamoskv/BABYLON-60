@@ -6,7 +6,7 @@
 
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
-## 1. CARTOGRAFÍA DE ESTRATOS ARQUITECTÓNICOS (I — XII)
+## 1. CARTOGRAFÍA DE ESTRATOS ARQUITECTÓNICOS (I — XIV)
 
 | Estrato | Nodo / Sustrato | Nivel de Realidad | Función Causal |
 | :--- | :--- | :--- | :--- |
@@ -17,6 +17,8 @@
 | **X** | `cortex_autopilot_daemon.py` | C5-REAL | Daemon residente que purga entropía de AST, compacta WAL y asegura el Merkle Root sin fricción humana (`1000/1000 Leverage`). |
 | **XI** | `ultrathink_iteration_cycle_4.yaml` & `cycle_5.yaml` | C5-REAL | Teorema Terminal N=1 vs N=100 (Transducción Cinemática, Slop Horizon $H_s$, Consenso BFT Ortogonal y Autopoiesis sin fricción humana). |
 | **XII** | `ultrathink_iteration_cycle_6.yaml` & `cycle_7.yaml` | C5-REAL | Derrame Cinético y Límite Simbiótico (Arbitraje de Exergía, Real-World Falsification y acoplamiento neurobiológico de intención a AST). |
+| **XIII** | `ultrathink_iteration_cycle_8.yaml` | C5-REAL | Consenso Metacinético (Poset multiproceso, co-optimización hardware-software y eliminación total de capas de abstracción). |
+| **XIV** | `ultrathink_iteration_cycle_9.yaml` | C5-REAL | Auto-Ignición Absoluta (Evolución autopoyética, perturbaciones de frontera del operador y reconstrucción instantánea T=0). |
 
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
@@ -28,4 +30,4 @@
 
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 [C5-REAL EXECUTION KERNEL — ROOT_OPERATOR_UID0: borjamoskv]
-HASH OMEGA SHA3_256: 919f3c9e6b847b1662695ceee92f542d4a508f368ee3a3c22d595b92b56015d2
+HASH OMEGA SHA3_256: fb2d66d52b1463f1889da7132c0bccf747c1eb46ff8109a837fd4110d318cd07

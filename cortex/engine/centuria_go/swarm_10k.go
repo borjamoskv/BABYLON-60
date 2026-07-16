@@ -181,7 +181,7 @@ func InitSwarmTable(db *sql.DB) error {
 // PersistSwarmConsensus saves the swarm consensus result into SQLite WAL.
 func PersistSwarmConsensus(db *sql.DB, res SwarmConsensus) error {
 	_, err := db.Exec(`
-		INSERT OR REPLACE INTO swarm_10k_bft_ledger
+		INSERT OR IGNORE INTO swarm_10k_bft_ledger
 		(primitive_id, domain_id, total_agents, honest_votes, byzantine_votes, consensus_hash, status_verdict, execution_ms, timestamp_unix)
 		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`, res.PrimitiveID, res.DomainID, res.TotalAgents, res.HonestVotes, res.ByzantineVotes, res.ConsensusHash, res.StatusVerdict, res.ExecutionTime, float64(time.Now().UnixNano())/1e9)
@@ -221,13 +221,16 @@ func RunSwarm10kSweep(dbPath string, injectByzantine bool) error {
 		byz := injectByzantine && ((i % 10) == 0)
 		res := ExecuteSwarm10k(i, domainIdx, domainName, byz)
 
+		// Transducir vía Socket UNIX al Master Writer IPC Barrier (si está activo)
+		_ = SendBFTConsensusToIPC(res.PrimitiveID, res.HonestVotes, res.ByzantineVotes, res.ConsensusHash, res.ExecutionTime)
+
 		if res.HonestVotes >= HonestQuorum {
 			successCount++
 		}
 
 		// Insertar en transacción en memoria
 		_, err := tx.Exec(`
-			INSERT OR REPLACE INTO swarm_10k_bft_ledger
+			INSERT OR IGNORE INTO swarm_10k_bft_ledger
 			(primitive_id, domain_id, total_agents, honest_votes, byzantine_votes, consensus_hash, status_verdict, execution_ms, timestamp_unix)
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 		`, res.PrimitiveID, res.DomainID, res.TotalAgents, res.HonestVotes, res.ByzantineVotes, res.ConsensusHash, res.StatusVerdict, res.ExecutionTime, float64(time.Now().UnixNano())/1e9)

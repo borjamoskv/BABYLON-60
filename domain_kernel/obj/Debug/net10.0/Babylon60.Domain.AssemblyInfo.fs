@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("Babylon60.Domain")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ad9c8853aa58aa73ab8699e5e79cfbcea3bad1c")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f503bd3a99c3671ebc235b4fa388ba0bca27ad92")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("Babylon60.Domain")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("Babylon60.Domain")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]
