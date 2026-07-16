@@ -15,7 +15,7 @@ def calculate_shannon_entropy(text: str) -> float:
         return 0.0
     entropy = 0.0
     length = len(text)
-    frequencies: dict = {}
+    frequencies: dict[str, int] = {}
     for char in text:
         frequencies[char] = frequencies.get(char, 0) + 1
     for count in frequencies.values():

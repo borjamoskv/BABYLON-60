@@ -2,7 +2,7 @@
 import sqlite3
 import os
 import hashlib
-from cortex.daemons.bft_ledger_helper import resolve_db_path
+from cortex.daemons.bft_ledger_helper import resolve_db_path, _ensure_table
 
 # [C5-REAL] WEISMANN BARRIER (ONTOLOGICAL APOPTOSIS ENFORCER)
 # L0.3 Invariant: Civilizations lack a reproductive bottleneck. 
@@ -21,59 +21,52 @@ def enforce_weismann_barrier():
 
     # 1. Intercept Source WAL
     conn_in = sqlite3.connect(resolved_source)
-    conn_in.execute("PRAGMA journal_mode=WAL;")
-    cursor_in = conn_in.cursor()
-
     try:
-        cursor_in.execute("SELECT hash, prev_hash, content, timestamp, agent_id FROM anchors ORDER BY timestamp ASC")
-        rows = cursor_in.fetchall()
-    except sqlite3.OperationalError:
-        print("[!] Error reading source ledger. Perhaps empty?")
+        conn_in.execute("PRAGMA journal_mode=WAL;")
+        cursor_in = conn_in.cursor()
+
+        try:
+            cursor_in.execute("SELECT hash, prev_hash, content, timestamp, agent_id FROM anchors ORDER BY timestamp ASC")
+            rows = cursor_in.fetchall()
+        except sqlite3.OperationalError:
+            print("[!] Error reading source ledger. Perhaps empty?")
+            return
+    finally:
         conn_in.close()
-        return
     
     # 2. State Distillation (Semantic Purge)
-    # Filter out any payloads flagged as "C4-SIM" or "Semantic_Friction"
-    distilled_rows = []
-    for r in rows:
-        content = r[2]
-        if "C4-SIM" not in content and "Green Theater" not in content:
-            distilled_rows.append(r)
+    distilled_rows = [r for r in rows if "C4-SIM" not in r[2] and "Green Theater" not in r[2]]
 
     # 3. Clean Slate Spawn (Generational Reset)
     conn_out = sqlite3.connect(resolved_target)
-    conn_out.execute("PRAGMA journal_mode=WAL;")
-    conn_out.execute("PRAGMA busy_timeout=5000;")
-    conn_out.execute('''CREATE TABLE IF NOT EXISTS anchors
-                 (hash TEXT PRIMARY KEY,
-                  prev_hash TEXT UNIQUE,
-                  content TEXT,
-                  timestamp TEXT,
-                  agent_id TEXT)''')
-    
-    cursor_out = conn_out.cursor()
-    cursor_out.execute("DELETE FROM anchors") # Hard reset
-
-    # Re-chain the canonical subgraph
-    canonical_hash_acc = hashlib.sha3_256(b"GENESIS_V2").hexdigest()
-    
-    for r in distilled_rows:
-        orig_hash, _, content, ts, agent = r
-        new_prev = canonical_hash_acc
+    try:
+        conn_out.execute("PRAGMA journal_mode=WAL;")
+        conn_out.execute("PRAGMA busy_timeout=5000;")
+        _ensure_table(conn_out, resolved_target)
         
-        # CORTEX-TAINT injection
-        tainted_content = f"{content} [WEISMANN_PURGED]"
-        new_hash = hashlib.sha3_256((tainted_content + new_prev).encode('utf-8')).hexdigest()
-        
-        cursor_out.execute(
-            "INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-            (new_hash, new_prev, tainted_content, ts, agent + "_APOPTOSIS")
-        )
-        canonical_hash_acc = new_hash
+        cursor_out = conn_out.cursor()
+        cursor_out.execute("DELETE FROM anchors")  # Hard reset
 
-    conn_out.commit()
-    conn_in.close()
-    conn_out.close()
+        # Re-chain the canonical subgraph
+        canonical_hash_acc = hashlib.sha3_256(b"GENESIS_V2").hexdigest()
+        
+        for r in distilled_rows:
+            orig_hash, _, content, ts, agent = r
+            new_prev = canonical_hash_acc
+            
+            # CORTEX-TAINT injection
+            tainted_content = f"{content} [WEISMANN_PURGED]"
+            new_hash = hashlib.sha3_256((tainted_content + new_prev).encode('utf-8')).hexdigest()
+            
+            cursor_out.execute(
+                "INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
+                (new_hash, new_prev, tainted_content, ts, agent + "_APOPTOSIS")
+            )
+            canonical_hash_acc = new_hash
+
+        conn_out.commit()
+    finally:
+        conn_out.close()
 
     print(f"WEISMANN_BARRIER_ENFORCED. Canonical Subgraph Taint Hash: {canonical_hash_acc[:16]}")
 
