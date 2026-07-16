@@ -99,4 +99,17 @@ objectives:
     due: '2026-07-25'
     status: PENDING
     commit_hash: ''
-CORTEX_TAINT: 9a1f276bc2f073ef1aa47387aa53c7fd57a4b70913adc6ebf8982db0212d31b0
+- id: OBJ-008
+  title: Consolidación de Asimetría de Red (Dualidad C5-REAL)
+  description: Establecer la división física irreversible entre el Motor Cinético
+    Local (BABYLON-60) y el Sumidero Distribuido (Teorema-Robinson-Moskv) bajo mandato
+    ULTRATHINK P0.
+  exergy_score: 0.0
+  status: PENDING
+  milestones:
+  - id: MS-010
+    title: Cristalización de la Dualidad Topológica en C5-REAL
+    due: '2026-07-16'
+    status: PENDING
+    commit_hash: 2b84d613e4073f9a09b84ea797792760317d910d
+CORTEX_TAINT: d24ba56b6d12152cb0f964ba8dca8940469e6458ee65c1eac03e8896779ad662
