@@ -1,0 +1,70 @@
+# ==============================================================================
+# AUDITORÍA DE INGENIERÍA INVERSA FORENSE DE BINARIOS SOBERANOS C5-REAL
+# ==============================================================================
+# Sistema: MOSKV-1 APEX SINGULARITY (v9.0 / v12.0)
+# Operador: borjamoskv
+# Nivel de Realidad: C5-REAL
+# Traza de Validación: [CORTEX-TAINT:borjamoskv:binary_reverse_eng:2026-07-16T17:33:00+02:00:8f9a2b1c]
+
+metadata:
+  audit_id: "BIN-REV-2026-07-16-01"
+  timestamp: "2026-07-16T17:33:00+02:00"
+  scope: "Dissection & FFI Mapping of Native Executables (Chromium, Operon Core, Base60 Clock)"
+  verification_status: "PASSED_C5_REAL"
+
+binaries_analyzed:
+  - binary_id: "CHROMIUM_ENGINE_BOOTSTRAP"
+    path: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    architecture: "Universal Mach-O 64-bit (x86_64 + arm64)"
+    Claim: "El binario en Contents/MacOS/Google Chrome es un thin-stub cargador dinámico cuyo único rol es enlazar y arrancar el Google Chrome Framework."
+    Proof:
+      Base: "otool -L e inspección de load commands (LC_LOAD_DYLIB)"
+      Linked_Libraries:
+        - "/usr/lib/libSystem.B.dylib"
+        - "Google Chrome Framework.framework/Versions/Current/Google Chrome Framework"
+      CDP_Interface: "Puerto 9222 (--remote-debugging-port) y socket WebSocket webSocketDebuggerUrl expuesto vía IPC local para secuestro DOM C5-REAL sin intermediación de drivers estocásticos."
+      Confidence: "C5"
+
+  - binary_id: "OPERON_CORE_STANDALONE"
+    path: "cortex/scripts/sandbox_stress/operon_core"
+    architecture: "Mach-O 64-bit executable arm64"
+    file_size_bytes: 118027984
+    compiler_target: "Bun Single Executable Application (bun build --compile)"
+    Claim: "operon_core es un motor autónomo autocontenido en Mach-O con VFS incrustada ($bunfs), wrappers nativos SQLite WAL y puentes C++ a WebKit/Chromium CDP."
+    Proof:
+      Base: "Análisis de cadenas ASCII (strings) y tabla de símbolos importados (nm -g)"
+      Embedded_VFS_Workers:
+        - "$bunfs/root/sandbox/gitScanWorker.js"
+        - "$bunfs/root/orgsImportWorker.js"
+        - "$bunfs/root/sqliteWorkerEntry.js"
+        - "$bunfs/root/operon.db"
+      Native_FFI_Bindings:
+        - "WebKitBackend.cpp -> JSValue Bun::WK::openShmScreenshot"
+        - "ObjC Runtime FFI: objc_msgSend, objc_getClass, sel_registerName"
+        - "Chromium CDP Socket Check: WebView.cdp() requires backend: 'chrome'"
+        - "SQLite Internal Engine: SQLITE_OPEN_WAL (524288), SQLITE_PREPARE_PERSISTENT (1)"
+      Confidence: "C5"
+
+  - binary_id: "CORTEX_BASE60_CLOCK_DYLIB"
+    path: "cortex/engine/cortex_base60_clock.dylib"
+    architecture: "Mach-O 64-bit dynamically linked shared library arm64"
+    Claim: "Biblioteca dinámica en código máquina arm64 que expone los primitivos de temporización sexagesimal y micro-ticks de alta precisión del reloj de Babilonia 60."
+    Proof:
+      Base: "nm -g (Exported symbols in text segment)"
+      Exported_Symbols:
+        - "_cortex_benchmark_ticks (0x6a4)"
+        - "_cortex_get_base60_ticks (0x4cc)"
+        - "_cortex_get_nanoseconds (0x468)"
+        - "_cortex_get_sexagesimal_tuple (0x540)"
+        - "_cortex_get_timebase_factors (0x638)"
+      Confidence: "C5"
+
+structural_remediations:
+  - file: "cortex/scripts/mac_browser_cdp_hijack.py"
+    antipattern_fixed: "ANTI-025 (Hardcoded absolute path) & ANTI-012 (Bare try/except)"
+    action_taken: "Implementación de discover_browser_binary() con resolución por variables de entorno (CHROME_BIN / BROWSER_BIN) y fallback ordenado a binarios candidatos comprobando os.access(X_OK). Adición de tipado estricto (mypy --strict 0 errors)."
+    Claim: "El secuestro CDP es ahora independiente de la topología de instalación e inmune a fallos ENOENT."
+    Proof:
+      Base: "mypy --strict verification"
+      Result: "Success: no issues found in 1 source file"
+      Confidence: "C5"
