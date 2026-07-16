@@ -1,11 +1,4 @@
 entities:
-- id: ANTI-001
-  antipatrón: Conversación Limerente
-  disfunción_causal: Intercambio de tokens inútiles para simular empatía humana o
-    alineación comercial.
-  señal_de_presencia: Uso de "¡Claro!", "Entiendo", "Por supuesto, aquí tienes".
-  impacto_en_robustez: Incremento de anergía. Sensor Drift en contexto largo.
-  refactor_alternativa: Mute forzado. Emisión estricta de YAML o código diff.
 - id: ANTI-002
   antipatrón: Heurística "Por si Acaso"
   disfunción_causal: Ejecución de imports, comandos o instalaciones no deterministas

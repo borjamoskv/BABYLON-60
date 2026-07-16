@@ -2,11 +2,17 @@ Claim: Análisis Estructural y Apoptosis
 Proof: { Base: N-Gram Jaccard Index & Anergy Lexicon, Confidence: C5-REAL }
 Threshold: 0.08
 Anergy_Infections:
+  - node: PRIM-Q5-011
+    score: 1
+  - node: PRIM-Q5-152
+    score: 1
   - node: INV-032
     score: 1
   - node: VEC-001
     score: 1
   - node: VEC-023
+    score: 1
+  - node: PRIM-Q3-054
     score: 1
   - node: PRIM-009
     score: 1
@@ -14,7 +20,149 @@ Anergy_Infections:
     score: 1
   - node: PRIM-039
     score: 1
+  - node: PRIM-Q2-141
+    score: 1
 Fractures:
+  - nodes: [PRIM-Q3-043, PRIM-Q3-162]
+    score: 0.636
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-158, PRIM-Q3-199]
+    score: 0.529
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-104, PRIM-Q3-145]
+    score: 0.467
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-120, PRIM-Q3-185]
+    score: 0.368
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-055, PRIM-Q3-155]
+    score: 0.333
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-100, PRIM-Q3-167]
+    score: 0.333
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-020, PRIM-Q3-174]
+    score: 0.294
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-064, PRIM-Q3-160]
+    score: 0.263
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-113, PRIM-Q3-178]
+    score: 0.263
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-138, PRIM-Q3-180]
+    score: 0.263
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-103, PRIM-Q3-200]
+    score: 0.238
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-104, PRIM-Q3-197]
+    score: 0.238
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-110, PRIM-Q3-177]
+    score: 0.238
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-145, PRIM-Q3-197]
+    score: 0.238
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-038, PRIM-Q3-140]
+    score: 0.2
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-057, PRIM-Q3-157]
+    score: 0.2
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-059, PRIM-Q3-107]
+    score: 0.2
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-080, PRIM-Q3-153]
+    score: 0.2
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-086, PRIM-Q3-159]
+    score: 0.2
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-144, PRIM-Q2-194]
+    score: 0.2
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q1-021, PRIM-Q1-023]
+    score: 0.176
+    files: [07_Q1_Omniscience.md, 07_Q1_Omniscience.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-058, PRIM-Q3-149]
+    score: 0.176
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-082, PRIM-Q3-144]
+    score: 0.176
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-088, PRIM-Q3-132]
+    score: 0.176
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-091, PRIM-Q3-166]
+    score: 0.176
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-038, PRIM-Q3-098]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-056, PRIM-Q4-044]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 10_Q4_Systemic_Failures.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-070, PRIM-Q3-148]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-083, PRIM-Q3-192]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-085, PRIM-Q3-163]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-088, PRIM-Q3-169]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-098, PRIM-Q3-140]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-109, PRIM-Q3-154]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-130, PRIM-Q3-195]
+    score: 0.158
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-073, PRIM-Q2-146]
+    score: 0.158
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
   - nodes: [INV-TOP-004, ANTI-TOP-005]
     score: 0.152
     files: [12_TOPOLOGIA_SISTEMAS.md, 12_TOPOLOGIA_SISTEMAS.md]
@@ -23,6 +171,74 @@ Fractures:
     score: 0.145
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]
     symbiotic: true
+  - nodes: [PRIM-Q3-012, PRIM-Q3-120]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-012, PRIM-Q3-185]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-046, PRIM-Q3-193]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-047, PRIM-Q3-165]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-078, PRIM-Q3-187]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-084, PRIM-Q3-147]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-112, PRIM-Q3-183]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-115, PRIM-Q3-181]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-128, PRIM-Q3-176]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-132, PRIM-Q3-169]
+    score: 0.143
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-038, PRIM-Q2-147]
+    score: 0.143
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q5-095, PRIM-Q5-130]
+    score: 0.13
+    files: [11_Q5_Event_Horizon.md, 11_Q5_Event_Horizon.md]
+    symbiotic: false
+  - nodes: [PRIM-Q1-096, PRIM-Q1-179]
+    score: 0.13
+    files: [07_Q1_Omniscience.md, 07_Q1_Omniscience.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-108, PRIM-Q3-173]
+    score: 0.13
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-110, PRIM-Q2-138]
+    score: 0.13
+    files: [09_Q3_Epistemic_Voids.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q3-156, PRIM-Q3-196]
+    score: 0.13
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-161, PRIM-Q2-188]
+    score: 0.13
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
   - nodes: [PRIM-COL-021, INV-GCM-013]
     score: 0.127
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]
@@ -35,6 +251,30 @@ Fractures:
     score: 0.122
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]
     symbiotic: true
+  - nodes: [PRIM-Q3-161, PRIM-Q3-198]
+    score: 0.12
+    files: [09_Q3_Epistemic_Voids.md, 09_Q3_Epistemic_Voids.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-098, PRIM-Q2-183]
+    score: 0.12
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-128, PRIM-Q2-169]
+    score: 0.12
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-144, PRIM-Q2-167]
+    score: 0.12
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-167, PRIM-Q2-194]
+    score: 0.12
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-183, PRIM-Q2-196]
+    score: 0.12
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
   - nodes: [PRIM-EST-058, INV-GCM-052]
     score: 0.113
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]
@@ -43,10 +283,46 @@ Fractures:
     score: 0.113
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]
     symbiotic: true
+  - nodes: [PRIM-Q1-021, PRIM-Q1-022]
+    score: 0.111
+    files: [07_Q1_Omniscience.md, 07_Q1_Omniscience.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-029, PRIM-Q2-172]
+    score: 0.111
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-067, PRIM-Q2-151]
+    score: 0.111
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-098, PRIM-Q2-196]
+    score: 0.111
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-122, PRIM-Q2-197]
+    score: 0.111
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
   - nodes: [PRIM-HDA-003, ANTI-HDA-003]
     score: 0.106
     files: [11_ALGEBRA_ALTA_DIMENSION.md, 11_ALGEBRA_ALTA_DIMENSION.md]
     symbiotic: true
+  - nodes: [PRIM-Q2-045, PRIM-Q4-100]
+    score: 0.103
+    files: [08_Q2_Latent_Manifold.md, 10_Q4_Systemic_Failures.md]
+    symbiotic: false
+  - nodes: [PRIM-Q2-104, PRIM-Q2-165]
+    score: 0.103
+    files: [08_Q2_Latent_Manifold.md, 08_Q2_Latent_Manifold.md]
+    symbiotic: false
+  - nodes: [PRIM-Q4-055, PRIM-Q4-159]
+    score: 0.103
+    files: [10_Q4_Systemic_Failures.md, 10_Q4_Systemic_Failures.md]
+    symbiotic: false
+  - nodes: [PRIM-Q4-184, PRIM-Q4-198]
+    score: 0.103
+    files: [10_Q4_Systemic_Failures.md, 10_Q4_Systemic_Failures.md]
+    symbiotic: false
   - nodes: [PRIM-COL-089, INV-GCM-065]
     score: 0.099
     files: [09_GEOMETRIA_CAUSAL_MICROSCOPICA.md, 09_GEOMETRIA_CAUSAL_MICROSCOPICA.md]

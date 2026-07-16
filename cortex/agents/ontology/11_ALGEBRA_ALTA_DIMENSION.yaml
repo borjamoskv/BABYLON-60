@@ -1,0 +1,1697 @@
+entities:
+- id: PRIM-HDA-001
+  primitiva: Mal Condicionamiento (Ill-Conditioning)
+  mecanismo_causal: El numero de condicion de la matriz explota y amplifica errores
+    de entrada de forma desmesurada.
+  activacion_trigger: Kappa(A) muy grande en un solve.
+  sensor_sintoma: Solucion oscila ante perturbaciones minimas.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regularizar (Tikhonov) o resolver via SVD.
+- id: PRIM-HDA-002
+  primitiva: Cancelacion Catastrofica (Catastrophic Cancellation)
+  mecanismo_causal: Resta de dos cantidades casi iguales que aniquila los digitos
+    significativos.
+  activacion_trigger: a - b con a ~ b en punto flotante.
+  sensor_sintoma: Perdida subita de precision relativa.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reformular la expresion (identidades algebraicas).
+- id: PRIM-HDA-003
+  primitiva: Perdida de Ortogonalidad (Loss of Orthogonality)
+  mecanismo_causal: La ortogonalidad de una base se degrada por redondeo acumulado
+    en la proyeccion.
+  activacion_trigger: Gram-Schmidt clasico sobre vectores casi paralelos.
+  sensor_sintoma: Q^T Q se aleja de la identidad.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Gram-Schmidt modificado o Householder.
+- id: PRIM-HDA-004
+  primitiva: Colapso de Rango Numerico (Numerical Rank Collapse)
+  mecanismo_causal: Valores singulares pequenos caen bajo el umbral y el rango efectivo
+    se desploma.
+  activacion_trigger: Sigma_k por debajo de la tolerancia relativa.
+  sensor_sintoma: Rango numerico << rango simbolico.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Truncacion SVD con tolerancia relativa a sigma_max.
+- id: PRIM-HDA-005
+  primitiva: Deficiencia de Rango (Rank Deficiency)
+  mecanismo_causal: Las columnas dejan de ser independientes y el sistema pierde unicidad
+    de solucion.
+  activacion_trigger: Columnas linealmente dependientes.
+  sensor_sintoma: Nucleo no trivial detectado.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Minimos cuadrados de norma minima (pseudo-inversa).
+- id: PRIM-HDA-006
+  primitiva: Singularidad Cercana (Near-Singularity)
+  mecanismo_causal: La matriz se acerca a no invertible y la inversa se vuelve gigantesca.
+  activacion_trigger: det ~ 0 o sigma_min ~ 0.
+  sensor_sintoma: Entradas de la inversa disparadas.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Evitar la inversa; solve regularizado.
+- id: PRIM-HDA-007
+  primitiva: Overflow de Norma (Norm Overflow)
+  mecanismo_causal: El calculo de la norma desborda al elevar al cuadrado componentes
+    grandes.
+  activacion_trigger: sqrt(sum x_i^2) con x_i grandes.
+  sensor_sintoma: Inf en la norma.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Escalar por el maximo antes de sumar (hypot).
+- id: PRIM-HDA-008
+  primitiva: Error de Producto Interno (Dot Product Error)
+  mecanismo_causal: La acumulacion secuencial del producto interno acumula error de
+    redondeo.
+  activacion_trigger: Suma naive de un producto punto largo.
+  sensor_sintoma: Producto interno con residuo alto.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Suma compensada (Kahan) o precision extendida.
+- id: PRIM-HDA-009
+  primitiva: Redondeo Acumulado (Accumulated Roundoff)
+  mecanismo_causal: Miles de operaciones flotantes acumulan sesgo de redondeo hasta
+    corromper el resultado.
+  activacion_trigger: Reduccion de gran tamano sin compensacion.
+  sensor_sintoma: Deriva del resultado vs referencia exacta.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Sumatorio por pares o compensado.
+- id: PRIM-HDA-010
+  primitiva: Inversa Inestable (Unstable Inverse)
+  mecanismo_causal: Calcular la inversa explicita propaga y amplifica el error de
+    condicionamiento.
+  activacion_trigger: inv(A) usado para resolver A x = b.
+  sensor_sintoma: Residuo del solve elevado.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Factorizar (LU/QR) y resolver, nunca invertir.
+- id: PRIM-HDA-011
+  primitiva: Pivote Diminuto (Tiny Pivot)
+  mecanismo_causal: Un pivote casi nulo en la eliminacion multiplica el error por
+    su inverso.
+  activacion_trigger: Pivoteo sin intercambio de filas.
+  sensor_sintoma: Multiplicadores enormes en LU.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Pivoteo parcial o completo.
+- id: PRIM-HDA-012
+  primitiva: Divergencia de Iteracion de Potencia (Power Iteration Divergence)
+  mecanismo_causal: La iteracion de potencia no separa autovalores dominantes casi
+    degenerados.
+  activacion_trigger: Autovalores dominantes de modulo similar.
+  sensor_sintoma: El iterado no converge a un unico vector.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Deflacion o metodo de subespacio (bloque).
+- id: PRIM-HDA-013
+  primitiva: Autovalores Agrupados (Clustered Eigenvalues)
+  mecanismo_causal: Autovalores muy proximos ralentizan o estancan la convergencia
+    iterativa.
+  activacion_trigger: Cluster espectral estrecho.
+  sensor_sintoma: Convergencia sub-lineal del solver.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Precondicionar o desplazamiento espectral (shift).
+- id: PRIM-HDA-014
+  primitiva: Deflacion Fallida (Failed Deflation)
+  mecanismo_causal: La eliminacion de un autovalor ya hallado contamina el resto del
+    espectro.
+  activacion_trigger: Deflacion sin reortogonalizar.
+  sensor_sintoma: Reaparicion de autovalores fantasma.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Deflacion estable con reortogonalizacion.
+- id: PRIM-HDA-015
+  primitiva: Ruptura de Lanczos (Lanczos Breakdown)
+  mecanismo_causal: Los vectores de Lanczos pierden ortogonalidad y generan copias
+    espurias de autovalores.
+  activacion_trigger: Iteracion de Lanczos sin reortogonalizar.
+  sensor_sintoma: Autovalores 'fantasma' duplicados (ghosts).
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reortogonalizacion completa o selectiva.
+- id: PRIM-HDA-016
+  primitiva: Ruptura de Arnoldi (Arnoldi Breakdown)
+  mecanismo_causal: La base de Krylov colapsa cuando un vector nuevo es casi combinacion
+    de los previos.
+  activacion_trigger: Nuevo vector de Krylov casi dependiente.
+  sensor_sintoma: Norma del residuo de Arnoldi ~ 0.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reinicio (restart) o happy breakdown controlado.
+- id: PRIM-HDA-017
+  primitiva: Estancamiento de GMRES (GMRES Stagnation)
+  mecanismo_causal: El residuo de GMRES deja de decrecer por geometria adversa del
+    espectro.
+  activacion_trigger: Matriz no normal mal precondicionada.
+  sensor_sintoma: Curva de convergencia plana.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Precondicionamiento y reinicio GMRES(m).
+- id: PRIM-HDA-018
+  primitiva: Estancamiento de CG (CG Stall)
+  mecanismo_causal: Gradiente conjugado se atasca en sistemas mal condicionados sin
+    precondicionador.
+  activacion_trigger: Kappa alto en matriz SPD.
+  sensor_sintoma: Residuo estancado con oscilacion.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Precondicionador (incompleto Cholesky, multigrid).
+- id: PRIM-HDA-019
+  primitiva: Precondicionador Ineficaz (Ineffective Preconditioner)
+  mecanismo_causal: El precondicionador no agrupa el espectro y no acelera la convergencia.
+  activacion_trigger: M^-1 A con espectro aun disperso.
+  sensor_sintoma: Iteraciones sin reduccion esperada.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Rediseno del precondicionador al operador.
+- id: PRIM-HDA-020
+  primitiva: Explosion de Fill-in (Sparse Fill-in Explosion)
+  mecanismo_causal: La factorizacion de una matriz sparse genera entradas nuevas que
+    agotan la memoria.
+  activacion_trigger: LU/Cholesky sin reordenamiento.
+  sensor_sintoma: Densificacion del factor.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reordenamiento (AMD, nested dissection).
+- id: PRIM-HDA-021
+  primitiva: Maldicion de la Dimensionalidad (Curse of Dimensionality)
+  mecanismo_causal: El volumen crece exponencialmente con la dimension y los datos
+    se vuelven ralos.
+  activacion_trigger: Modelado denso en dimension alta.
+  sensor_sintoma: Complejidad de muestra explota.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Reduccion de dimension o priors estructurales.
+- id: PRIM-HDA-022
+  primitiva: Concentracion de la Medida (Concentration of Measure)
+  mecanismo_causal: En alta dimension casi toda la masa de probabilidad se concentra
+    en una cascara delgada.
+  activacion_trigger: Muestreo gaussiano isotropo en d grande.
+  sensor_sintoma: Distancias casi constantes entre puntos.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Metricas aprendidas o coseno, no L2 crudo.
+- id: PRIM-HDA-023
+  primitiva: Colapso de Contraste de Distancias (Distance Concentration)
+  mecanismo_causal: La distancia al vecino mas cercano y al mas lejano convergen,
+    matando el contraste.
+  activacion_trigger: kNN euclideo en dimension alta.
+  sensor_sintoma: Ratio d_max/d_min -> 1.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Metrica adaptada; reducir dimension antes de kNN.
+- id: PRIM-HDA-024
+  primitiva: Cuasi-Ortogonalidad Aleatoria (Random Quasi-Orthogonality)
+  mecanismo_causal: Vectores aleatorios en alta dimension son casi ortogonales entre
+    si.
+  activacion_trigger: Producto interno de vectores aleatorios.
+  sensor_sintoma: Cosenos concentrados en 0.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: 'Aprovechar (no combatir): usar para sketching.'
+- id: PRIM-HDA-025
+  primitiva: Volumen en la Cascara (Volume in the Shell)
+  mecanismo_causal: Casi todo el volumen de la bola de dimension alta esta pegado
+    a su superficie.
+  activacion_trigger: Integracion o muestreo uniforme en la bola.
+  sensor_sintoma: Interior practicamente vacio.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Muestreo consciente de la geometria (cascara).
+- id: PRIM-HDA-026
+  primitiva: Fenomeno de Espacio Vacio (Empty Space Phenomenon)
+  mecanismo_causal: Los datos ocupan una fraccion infinitesimal del hipercubo, dejandolo
+    casi vacio.
+  activacion_trigger: Densidad estimada en malla de dimension alta.
+  sensor_sintoma: Celdas mayoritariamente sin muestras.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Modelos parametricos, no basados en malla.
+- id: PRIM-HDA-027
+  primitiva: Esfera Espinosa (Spiky Sphere)
+  mecanismo_causal: El hipercubo tiene esquinas lejanas del centro que dominan geometricamente.
+  activacion_trigger: Razonar por intuicion 3D en dimension alta.
+  sensor_sintoma: Esquinas a distancia sqrt(d) del centro.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Confiar en el algebra, no en la intuicion visual.
+- id: PRIM-HDA-028
+  primitiva: Cascara Gaussiana Delgada (Thin Gaussian Annulus)
+  mecanismo_causal: La gaussiana estandar concentra su masa en un anillo de radio
+    raiz de d.
+  activacion_trigger: Asumir masa cerca del origen.
+  sensor_sintoma: Norma concentrada en sqrt(d) +/- O(1).
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Modelar el radio, no el modo.
+- id: PRIM-HDA-029
+  primitiva: Hubness (Hubness)
+  mecanismo_causal: Ciertos puntos se vuelven vecinos de casi todos (hubs), sesgando
+    kNN.
+  activacion_trigger: kNN en representaciones de dimension alta.
+  sensor_sintoma: Distribucion de conteo de vecino sesgada.
+  escala_temporal: Progresiva
+  gravedad: C3
+  intervencion: Normalizacion (p.ej. mutual proximity).
+- id: PRIM-HDA-030
+  primitiva: Degradacion de Normas Lp (Lp Norm Degradation)
+  mecanismo_causal: El contraste de las normas Lp se degrada al crecer la dimension
+    (peor cuanto mayor p).
+  activacion_trigger: Uso de L2/Linf en dimension alta.
+  sensor_sintoma: Discriminacion de distancia colapsada.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Normas fraccionarias o metricas aprendidas.
+- id: PRIM-HDA-031
+  primitiva: Sobreajuste por Dimension (Dimensionality Overfitting)
+  mecanismo_causal: Con mas dimensiones que muestras el modelo interpola ruido perfectamente.
+  activacion_trigger: d >> n en ajuste.
+  sensor_sintoma: Error de train ~ 0 y test alto.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Regularizacion, reduccion de dimension, mas datos.
+- id: PRIM-HDA-032
+  primitiva: Complejidad de Muestra Exponencial (Exponential Sample Complexity)
+  mecanismo_causal: Estimar densidad o funcion en dimension alta requiere muestras
+    exponenciales.
+  activacion_trigger: Estimacion no parametrica en d grande.
+  sensor_sintoma: Varianza del estimador enorme.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Supuestos estructurales (sparsity, manifold).
+- id: PRIM-HDA-033
+  primitiva: Colapso de Estimacion de Densidad (Density Estimation Collapse)
+  mecanismo_causal: Los estimadores de densidad kernel fallan por falta de vecinos
+    en dimension alta.
+  activacion_trigger: KDE en dimension alta.
+  sensor_sintoma: Densidad casi nula en todo el soporte.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Modelos de variedad latente de baja dimension.
+- id: PRIM-HDA-034
+  primitiva: Ralonamiento de Datos (Data Sparsity)
+  mecanismo_causal: Los puntos quedan tan separados que toda vecindad local esta vacia.
+  activacion_trigger: Metodos locales en dimension alta.
+  sensor_sintoma: Vecindades sin soporte.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Metodos globales o embeddings de baja dimension.
+- id: PRIM-HDA-035
+  primitiva: Distorsion de Proyeccion (Projection Distortion)
+  mecanismo_causal: Proyectar a dimension demasiado baja rompe el limite de Johnson-Lindenstrauss.
+  activacion_trigger: Dimension objetivo por debajo del limite JL.
+  sensor_sintoma: Distancias distorsionadas > epsilon.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Elegir k = O(log n / epsilon^2).
+- id: PRIM-HDA-036
+  primitiva: Violacion de Johnson-Lindenstrauss (JL Violation)
+  mecanismo_causal: El objetivo de dimension viola la garantia probabilistica de preservacion
+    de distancias.
+  activacion_trigger: k demasiado pequeno para n puntos.
+  sensor_sintoma: Pares con error fuera de tolerancia.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Dimensionar k segun el lema JL.
+- id: PRIM-HDA-037
+  primitiva: Perdida de Varianza en PCA (Truncated PCA Variance Loss)
+  mecanismo_causal: Truncar PCA descarta componentes con senal real, no solo ruido.
+  activacion_trigger: Cortar k por regla arbitraria.
+  sensor_sintoma: Varianza explicada insuficiente.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Seleccion de k por scree/validacion.
+- id: PRIM-HDA-038
+  primitiva: Componentes Espurios (Spurious Components)
+  mecanismo_causal: El ruido genera componentes principales sin significado (Marchenko-Pastur).
+  activacion_trigger: PCA con n comparable a d.
+  sensor_sintoma: Autovalores dentro del bulk aleatorio.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Umbral de Marchenko-Pastur; PCA robusto.
+- id: PRIM-HDA-039
+  primitiva: Rotacion de Subespacio (Subspace Rotation)
+  mecanismo_causal: Autovectores de autovalores proximos rotan de forma inestable
+    ante perturbaciones.
+  activacion_trigger: Gap espectral pequeno.
+  sensor_sintoma: Subespacio propio salta entre corridas.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Trabajar con subespacios invariantes, no vectores.
+- id: PRIM-HDA-040
+  primitiva: Fuga de Energia Espectral (Spectral Energy Leakage)
+  mecanismo_causal: La energia se filtra entre componentes por ventanas o truncaciones
+    abruptas.
+  activacion_trigger: Truncacion sin ventana suave.
+  sensor_sintoma: Cola espectral no fisica.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Ventaneo o regularizacion espectral.
+- id: PRIM-HDA-041
+  primitiva: Colapso de Embeddings (Embedding Collapse)
+  mecanismo_causal: Todos los vectores aprendidos colapsan a un punto o recta, perdiendo
+    informacion.
+  activacion_trigger: Entrenamiento sin termino de dispersion.
+  sensor_sintoma: Rango efectivo del embedding ~ 1.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Perdida contrastiva o de decorrelacion (VICReg).
+- id: PRIM-HDA-042
+  primitiva: Anisotropia de Embeddings (Embedding Anisotropy)
+  mecanismo_causal: Los embeddings ocupan un cono estrecho, sesgando la similitud
+    coseno.
+  activacion_trigger: Representaciones de LLM sin post-proceso.
+  sensor_sintoma: Coseno medio entre pares muy alto.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Whitening o normalizacion isotropica.
+- id: PRIM-HDA-043
+  primitiva: Degeneracion Representacional (Representation Degeneration)
+  mecanismo_causal: Las representaciones se degeneran a un subespacio de baja dimension
+    durante el entrenamiento.
+  activacion_trigger: Softmax con embeddings atados.
+  sensor_sintoma: Valores singulares decaen abruptamente.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Regularizacion espectral del embedding.
+- id: PRIM-HDA-044
+  primitiva: Colapso Dimensional Contrastivo (Contrastive Dimensional Collapse)
+  mecanismo_causal: El aprendizaje contrastivo colapsa a un subespacio pese a evitar
+    el colapso total.
+  activacion_trigger: Sin decorrelacion de dimensiones.
+  sensor_sintoma: Covarianza de features casi de rango bajo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Terminos de covarianza (Barlow Twins/VICReg).
+- id: PRIM-HDA-045
+  primitiva: Explosion de Rango Tensorial (Tensor Rank Explosion)
+  mecanismo_causal: El rango de un tensor crece de forma incontrolable y no admite
+    descomposicion compacta.
+  activacion_trigger: CP sobre tensor generico.
+  sensor_sintoma: Rango CP requerido enorme.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Formatos de bajo rango (Tucker, TT) con truncacion.
+- id: PRIM-HDA-046
+  primitiva: Mal Planteamiento de CP (Ill-Posed CP)
+  mecanismo_causal: El mejor ajuste de rango k puede no existir (border rank < rank).
+  activacion_trigger: CP-ALS sobre tensor sin optimo.
+  sensor_sintoma: Factores divergen sin converger.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Regularizacion o formato de rango de borde.
+- id: PRIM-HDA-047
+  primitiva: Degeneracion de CP (CP Degeneracy)
+  mecanismo_causal: Factores de gran magnitud casi se cancelan, dando ajuste sin significado.
+  activacion_trigger: CP-ALS mal condicionado.
+  sensor_sintoma: Norma de factores -> infinito.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Restricciones (no negatividad, ortogonalidad).
+- id: PRIM-HDA-048
+  primitiva: Colapso del Nucleo de Tucker (Tucker Core Collapse)
+  mecanismo_causal: El nucleo de Tucker pierde rango multilineal y colapsa modos.
+  activacion_trigger: Truncacion agresiva de HOSVD.
+  sensor_sintoma: Rangos multilineales desbalanceados.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Seleccion equilibrada de rangos por modo.
+- id: PRIM-HDA-049
+  primitiva: Explosion de Bond Dimension (Bond Dimension Blow-up)
+  mecanismo_causal: La dimension de enlace del tensor-train crece exponencialmente
+    para mantener precision.
+  activacion_trigger: TT sobre estado muy entrelazado.
+  sensor_sintoma: Bond dimension fuera de presupuesto.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Truncacion SVD por modo con tolerancia.
+- id: PRIM-HDA-050
+  primitiva: Truncacion TT con Perdida (Lossy TT Truncation)
+  mecanismo_causal: Truncar el tensor-train descarta correlaciones y sesga el resultado.
+  activacion_trigger: Redondeo TT agresivo.
+  sensor_sintoma: Error de reconstruccion elevado.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Control de error acumulado por enlace.
+- id: PRIM-HDA-051
+  primitiva: Maldicion Tensorial (Tensor Curse)
+  mecanismo_causal: Almacenar un tensor denso de orden d cuesta N^d entradas, intratable.
+  activacion_trigger: Representacion densa de orden alto.
+  sensor_sintoma: Memoria O(N^d).
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Formatos comprimidos (TT, Tucker, CP).
+- id: PRIM-HDA-052
+  primitiva: Explosion de Kronecker (Kronecker Blow-up)
+  mecanismo_causal: Materializar el producto de Kronecker crea una matriz gigante
+    innecesaria.
+  activacion_trigger: kron(A,B) explicito.
+  sensor_sintoma: Memoria (mn)^2.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Aplicar la estructura sin materializar (vec-trick).
+- id: PRIM-HDA-053
+  primitiva: Contraccion Mal Ordenada (Bad Contraction Order)
+  mecanismo_causal: El orden de contraccion de una red tensorial dispara el coste
+    intermedio.
+  activacion_trigger: Path de contraccion arbitrario.
+  sensor_sintoma: Tensor intermedio gigante.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Optimizar el path (opt_einsum, dinamico).
+- id: PRIM-HDA-054
+  primitiva: Fuga de Norma en Contraccion (Contraction Norm Blow-up)
+  mecanismo_causal: La norma se dispara o se desvanece a lo largo de una contraccion
+    larga.
+  activacion_trigger: Red tensorial sin normalizar.
+  sensor_sintoma: Overflow/underflow intermedio.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Normalizar por paso y llevar el log de la escala.
+- id: PRIM-HDA-055
+  primitiva: Suma No Asociativa (Non-Associative Sum)
+  mecanismo_causal: La suma flotante no es asociativa y el resultado depende del orden
+    de reduccion.
+  activacion_trigger: Reduccion paralela sin orden fijo.
+  sensor_sintoma: Resultado no reproducible entre corridas.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Orden de reduccion fijo o suma compensada.
+- id: PRIM-HDA-056
+  primitiva: Overflow de Softmax (Softmax Overflow)
+  mecanismo_causal: La exponencial desborda si no se resta el maximo del vector de
+    logits.
+  activacion_trigger: softmax(x) con x grande.
+  sensor_sintoma: NaN/Inf en la salida.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Restar el max antes de exponenciar.
+- id: PRIM-HDA-057
+  primitiva: Log-Sum-Exp Inestable (Unstable Log-Sum-Exp)
+  mecanismo_causal: El log-sum-exp desborda sin el truco de estabilizacion por el
+    maximo.
+  activacion_trigger: LSE directo sobre logits grandes.
+  sensor_sintoma: Inf en log(sum(exp)).
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: 'Truco LSE: max + log(sum(exp(x-max))).'
+- id: PRIM-HDA-058
+  primitiva: Normalizacion Inestable (Unstable Normalization)
+  mecanismo_causal: Dividir por una norma casi nula amplifica el ruido de forma explosiva.
+  activacion_trigger: x / norm(x) con norm(x) ~ 0.
+  sensor_sintoma: Direccion de salida dominada por ruido.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Epsilon de guarda en el denominador.
+- id: PRIM-HDA-059
+  primitiva: Gram Mal Condicionada (Ill-Conditioned Gram)
+  mecanismo_causal: La matriz de Gram/kernel se vuelve casi singular por muestras
+    casi colineales.
+  activacion_trigger: Kernel sobre puntos muy proximos.
+  sensor_sintoma: Kappa(K) enorme.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Jitter en la diagonal (ridge del kernel).
+- id: PRIM-HDA-060
+  primitiva: Colapso de Kernel (Kernel Rank Collapse)
+  mecanismo_causal: La matriz kernel pierde rango efectivo y el modelo pierde expresividad.
+  activacion_trigger: Ancho de banda mal elegido.
+  sensor_sintoma: Rango numerico de K bajo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Ajustar el kernel; aproximaciones de bajo rango.
+- id: PRIM-HDA-061
+  primitiva: Cholesky Fallido (Cholesky Failure)
+  mecanismo_causal: La factorizacion de Cholesky falla en matrices que dejan de ser
+    definidas positivas.
+  activacion_trigger: Perdida de positividad por redondeo.
+  sensor_sintoma: Raiz de un pivote negativo.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Jitter diagonal o LDL^T con pivoteo.
+- id: PRIM-HDA-062
+  primitiva: Perdida de Simetria Numerica (Numerical Symmetry Loss)
+  mecanismo_causal: Operaciones rompen la simetria exacta de una matriz que deberia
+    conservarla.
+  activacion_trigger: A - A^T != 0 tras operar.
+  sensor_sintoma: Autovalores complejos espurios.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: 'Simetrizar: (A + A^T)/2.'
+- id: PRIM-HDA-063
+  primitiva: Perdida de Positividad (Positivity Loss)
+  mecanismo_causal: Una matriz de covarianza pierde definicion positiva bajo perturbacion
+    o estimacion.
+  activacion_trigger: Covarianza estimada con n < d.
+  sensor_sintoma: Autovalor minimo negativo.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Proyeccion al cono PSD (clipping de autovalores).
+- id: PRIM-HDA-064
+  primitiva: Proliferacion de Puntos de Silla (Saddle Point Proliferation)
+  mecanismo_causal: En alta dimension abundan los puntos de silla mas que los minimos
+    locales.
+  activacion_trigger: Optimizacion no convexa en d grande.
+  sensor_sintoma: Gradiente ~ 0 con Hessiano indefinido.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Metodos de segundo orden o ruido (escapar sillas).
+- id: PRIM-HDA-065
+  primitiva: Meseta de Gradiente (Gradient Plateau)
+  mecanismo_causal: El gradiente se aplana en amplias regiones y el descenso se detiene.
+  activacion_trigger: Superficie de perdida con mesetas.
+  sensor_sintoma: Norma del gradiente diminuta prolongada.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Momentum, warm restarts, reescalado.
+- id: PRIM-HDA-066
+  primitiva: Gradiente que se Desvanece (Vanishing Gradient)
+  mecanismo_causal: El gradiente se contrae al propagarse por muchas capas o dimensiones.
+  activacion_trigger: Cadena larga de jacobianos < 1.
+  sensor_sintoma: Gradiente de capas tempranas ~ 0.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Normalizacion, conexiones residuales.
+- id: PRIM-HDA-067
+  primitiva: Gradiente que Explota (Exploding Gradient)
+  mecanismo_causal: El gradiente crece geometricamente al propagarse y desborda.
+  activacion_trigger: Jacobianos con norma > 1 encadenados.
+  sensor_sintoma: Norma del gradiente -> Inf.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Recorte de gradiente (clipping); normalizacion.
+- id: PRIM-HDA-068
+  primitiva: Valle Estrecho Mal Condicionado (Ill-Conditioned Valley)
+  mecanismo_causal: La perdida forma un canon estrecho donde el descenso zigzaguea.
+  activacion_trigger: Hessiano con autovalores muy dispares.
+  sensor_sintoma: Zig-zag lento del optimizador.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Precondicionar (Adam) o segundo orden.
+- id: PRIM-HDA-069
+  primitiva: Zig-Zag en Ravines (Ravine Zig-Zag)
+  mecanismo_causal: El descenso rebota entre paredes de un valle alargado en vez de
+    avanzar.
+  activacion_trigger: Gradiente casi ortogonal al eje del valle.
+  sensor_sintoma: Trayectoria oscilante.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Momentum o metodo de gradiente conjugado.
+- id: PRIM-HDA-070
+  primitiva: Hessiano Casi Singular (Near-Singular Hessian)
+  mecanismo_causal: El Hessiano pierde rango y el paso de Newton se vuelve inestable.
+  activacion_trigger: Direcciones planas en el optimo.
+  sensor_sintoma: Paso de Newton disparado.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Newton amortiguado (Levenberg-Marquardt).
+- id: PRIM-HDA-071
+  primitiva: Direcciones Planas (Flat Directions)
+  mecanismo_causal: Autovalores nulos del Hessiano dejan direcciones sin curvatura
+    ni identificabilidad.
+  activacion_trigger: Sobreparametrizacion del modelo.
+  sensor_sintoma: Autovalores del Hessiano ~ 0.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Regularizar o fijar gauge de la parametrizacion.
+- id: PRIM-HDA-072
+  primitiva: Explosion de la Traza del Hessiano (Hessian Trace Blow-up)
+  mecanismo_causal: La curvatura total se dispara y desestabiliza el paso de optimizacion.
+  activacion_trigger: Regiones de alta curvatura.
+  sensor_sintoma: Traza del Hessiano enorme.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Tasa de aprendizaje adaptativa; trust region.
+- id: PRIM-HDA-073
+  primitiva: Colision de Sketch (Sketch Collision)
+  mecanismo_causal: El hash del sketch aleatorio mapea filas distintas al mismo bucket.
+  activacion_trigger: CountSketch con tabla pequena.
+  sensor_sintoma: Colisiones que sesgan la estimacion.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Aumentar filas del sketch o hashes independientes.
+- id: PRIM-HDA-074
+  primitiva: Subestimacion de Leverage (Leverage Underestimation)
+  mecanismo_causal: El muestreo ignora filas de alto leverage y pierde informacion
+    critica.
+  activacion_trigger: Muestreo uniforme en vez de por leverage.
+  sensor_sintoma: Aproximacion sesgada de la matriz.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Muestreo por leverage scores aproximados.
+- id: PRIM-HDA-075
+  primitiva: Explosion de Varianza en Importancia (Importance Sampling Blow-up)
+  mecanismo_causal: Pesos de importancia con colas pesadas hacen explotar la varianza
+    del estimador.
+  activacion_trigger: Distribucion propuesta mal ajustada.
+  sensor_sintoma: Varianza del estimador enorme.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Recorte de pesos o mejor propuesta.
+- id: PRIM-HDA-076
+  primitiva: Fallo de Nystrom (Nystrom Breakdown)
+  mecanismo_causal: La aproximacion de Nystrom degrada si las columnas muestreadas
+    son poco representativas.
+  activacion_trigger: Muestreo de columnas pobre.
+  sensor_sintoma: Error de aproximacion del kernel alto.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Muestreo por leverage; mas landmarks.
+- id: PRIM-HDA-077
+  primitiva: Colision de Semilla de Proyeccion (Projection Seed Collision)
+  mecanismo_causal: Dos proyecciones aleatorias comparten semilla y dejan de ser independientes.
+  activacion_trigger: Semilla reutilizada en el sketch.
+  sensor_sintoma: Proyecciones correlacionadas.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Semillas independientes por proyeccion.
+- id: PRIM-HDA-078
+  primitiva: Fallo de Coherencia (Coherence Failure)
+  mecanismo_causal: Una estructura algebraica debil no impone sus condiciones de coherencia
+    y produce ambiguedad.
+  activacion_trigger: Asociatividad solo hasta isomorfismo sin coherencia.
+  sensor_sintoma: Dos reasociaciones dan resultados distintos.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: 'Teorema de coherencia (Mac Lane): pentagono+triangulo.'
+- id: PRIM-HDA-079
+  primitiva: Ruptura del Pentagono (Pentagon Violation)
+  mecanismo_causal: El diagrama de coherencia del asociador no conmuta y rompe la
+    categoria monoidal.
+  activacion_trigger: Asociador mal definido.
+  sensor_sintoma: Pentagono de Mac Lane no conmuta.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reimponer la identidad del pentagono.
+- id: PRIM-HDA-080
+  primitiva: Ambiguedad de Asociador (Associator Ambiguity)
+  mecanismo_causal: El isomorfismo de asociatividad no esta fijado y las reagrupaciones
+    divergen.
+  activacion_trigger: Producto no estrictamente asociativo.
+  sensor_sintoma: Reagrupaciones no equivalentes.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Fijar el asociador y verificar coherencia.
+- id: PRIM-HDA-081
+  primitiva: Colapso de Eckmann-Hilton (Eckmann-Hilton Collapse)
+  mecanismo_causal: Dos estructuras de monoide que interactuan colapsan a una unica
+    conmutativa.
+  activacion_trigger: Dos productos con ley de intercambio.
+  sensor_sintoma: Perdida de no conmutatividad.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reconocer el colapso; usar estructura superior.
+- id: PRIM-HDA-082
+  primitiva: Sobre-Estrictificacion (Over-Strictification)
+  mecanismo_causal: Forzar estricta una estructura debil destruye informacion de alta
+    dimension.
+  activacion_trigger: Estrictificar una 2-categoria debil.
+  sensor_sintoma: Perdida de morfismos de coherencia.
+  escala_temporal: Estatica
+  gravedad: C2
+  intervencion: Mantener la debilidad; trabajar hasta homotopia.
+- id: PRIM-HDA-083
+  primitiva: Incoherencia de Intercambiadores (Interchanger Incoherence)
+  mecanismo_causal: Los intercambiadores de una 2-categoria no satisfacen sus axiomas
+    de coherencia.
+  activacion_trigger: Composiciones horizontal/vertical mal definidas.
+  sensor_sintoma: Ley de intercambio incoherente.
+  escala_temporal: Estatica
+  gravedad: C3
+  intervencion: Verificar axiomas de intercambiador.
+- id: PRIM-HDA-084
+  primitiva: Fallo de la Ley de Intercambio (Interchange Law Failure)
+  mecanismo_causal: El orden de composicion horizontal y vertical altera el resultado.
+  activacion_trigger: 2-morfismos mal compuestos.
+  sensor_sintoma: (a*b)(c*d) != (ac)*(bd).
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Reimponer la ley de intercambio.
+- id: PRIM-HDA-085
+  primitiva: Truncacion Homotopica (Homotopy Truncation)
+  mecanismo_causal: Truncar los niveles homotopicos superiores descarta estructura
+    de alta dimension.
+  activacion_trigger: n-truncacion agresiva de un tipo.
+  sensor_sintoma: Grupos de homotopia superiores perdidos.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Retener niveles de Postnikov relevantes.
+- id: PRIM-HDA-086
+  primitiva: Perdida de Torre de Postnikov (Postnikov Truncation)
+  mecanismo_causal: Cortar la torre de Postnikov elimina invariantes homotopicos superiores.
+  activacion_trigger: Aproximacion por un n-tipo.
+  sensor_sintoma: Invariantes k superiores perdidos.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Extender la torre hasta el nivel necesario.
+- id: PRIM-HDA-087
+  primitiva: Colapso de n-Morfismos (Higher Morphism Collapse)
+  mecanismo_causal: Identificar morfismos de nivel superior colapsa la estructura
+    de alta dimension.
+  activacion_trigger: Aplanar una n-categoria a 1-categoria.
+  sensor_sintoma: Perdida de 2-celdas y superiores.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Modelar en la dimension categorica correcta.
+- id: PRIM-HDA-088
+  primitiva: Ruptura de Antisimetria Exterior (Wedge Antisymmetry Break)
+  mecanismo_causal: El redondeo rompe la antisimetria exacta del producto exterior.
+  activacion_trigger: Producto exterior numerico.
+  sensor_sintoma: Componente simetrica espuria.
+  escala_temporal: Progresiva
+  gravedad: C5
+  intervencion: Antisimetrizar explicitamente.
+- id: PRIM-HDA-089
+  primitiva: Degeneracion de Forma Volumen (Volume Form Degeneracy)
+  mecanismo_causal: El determinante casi nulo colapsa la forma de volumen y la orientacion.
+  activacion_trigger: Base casi degenerada.
+  sensor_sintoma: det ~ 0; volumen ~ 0.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reortogonalizar la base; detectar degeneracion.
+- id: PRIM-HDA-090
+  primitiva: Perdida de Orientacion (Orientation Loss)
+  mecanismo_causal: El signo del determinante cambia por perturbacion y se pierde
+    la orientacion.
+  activacion_trigger: Base cerca del hiperplano singular.
+  sensor_sintoma: Flip de signo de det.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Anclar orientacion; vigilar el signo.
+- id: PRIM-HDA-091
+  primitiva: Degeneracion de Grassmanniano (Grassmannian Chart Degeneration)
+  mecanismo_causal: La carta local del Grassmanniano degenera cuando el subespacio
+    rota fuera de su parche.
+  activacion_trigger: Parametrizacion local de subespacio.
+  sensor_sintoma: Coordenadas de la carta disparadas.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Cambio de carta; representacion por proyector.
+- id: PRIM-HDA-092
+  primitiva: Colapso de Angulos Principales (Principal Angles Collapse)
+  mecanismo_causal: Los angulos principales entre subespacios colapsan a cero y se
+    vuelven indistinguibles.
+  activacion_trigger: Subespacios casi coincidentes.
+  sensor_sintoma: Angulos principales ~ 0.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Trabajar con proyectores y gaps.
+- id: PRIM-HDA-093
+  primitiva: Fuga de Subespacio Invariante (Invariant Subspace Leakage)
+  mecanismo_causal: El subespacio invariante calculado se contamina con direcciones
+    ajenas.
+  activacion_trigger: Gap espectral pequeno en la particion.
+  sensor_sintoma: Residuo del subespacio elevado.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Refinar con iteracion de subespacio.
+- id: PRIM-HDA-094
+  primitiva: Pseudoespectro Amplio (Wide Pseudospectrum)
+  mecanismo_causal: Una matriz no normal tiene pseudoespectro amplio y autovalores
+    enganosamente sensibles.
+  activacion_trigger: Matriz fuertemente no normal.
+  sensor_sintoma: Autovalores muy sensibles a perturbacion.
+  escala_temporal: Retrasada
+  gravedad: C4
+  intervencion: Analizar pseudoespectro, no solo autovalores.
+- id: PRIM-HDA-095
+  primitiva: No-Normalidad (Non-Normality)
+  mecanismo_causal: A A^T != A^T A hace que los autovalores no gobiernen la dinamica
+    transitoria.
+  activacion_trigger: Operador no normal.
+  sensor_sintoma: Comportamiento no explicado por el espectro.
+  escala_temporal: Progresiva
+  gravedad: C4
+  intervencion: Usar valores singulares/abscisa numerica.
+- id: PRIM-HDA-096
+  primitiva: Crecimiento Transitorio (Transient Growth)
+  mecanismo_causal: Pese a autovalores estables, la norma crece transitoriamente por
+    no-normalidad.
+  activacion_trigger: Sistema no normal estable.
+  sensor_sintoma: Pico de norma antes de decaer.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Analisis por norma (abscisa numerica).
+- id: PRIM-HDA-097
+  primitiva: Colapso de Base (Basis Collapse)
+  mecanismo_causal: La dependencia lineal se cuela y la base deja de generar el espacio.
+  activacion_trigger: Vectores de base casi dependientes.
+  sensor_sintoma: Rango de la base < dimension.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Reortonormalizar; detectar dependencia.
+- id: PRIM-HDA-098
+  primitiva: Explosion de Coste de Atencion (Attention Cost Blow-up)
+  mecanismo_causal: La matriz de atencion es cuadratica en la longitud, intratable
+    en secuencias largas.
+  activacion_trigger: Atencion densa O(S^2 d).
+  sensor_sintoma: Memoria/computo cuadraticos.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Atencion lineal/sparse; FlashAttention.
+- id: PRIM-HDA-099
+  primitiva: Colapso de Rango de Atencion (Attention Rank Collapse)
+  mecanismo_causal: Apilar atencion sin residuales colapsa las representaciones a
+    rango 1.
+  activacion_trigger: Muchas capas de atencion pura.
+  sensor_sintoma: Salida de rango efectivo ~ 1.
+  escala_temporal: Inmediata
+  gravedad: C5
+  intervencion: Conexiones residuales y MLPs (rompen el colapso).
+- id: PRIM-HDA-100
+  primitiva: Interferencia de Superposicion (Superposition Interference)
+  mecanismo_causal: Mas features que dimensiones se superponen y colisionan en interferencia.
+  activacion_trigger: Compresion de features en d limitada.
+  sensor_sintoma: Cross-talk entre features.
+  escala_temporal: Retrasada
+  gravedad: C3
+  intervencion: Diccionarios sparse; mas dimension o SAE.
+- id: INV-HDA-001
+  invariante: Invarianza del Rango
+  logica___principio: El rango es invariante bajo cambio de base y multiplicacion
+    por matrices invertibles.
+  implicacion_operacional: El rango caracteriza el operador, no su representacion.
+  condicion_de_borde: Rango cambia al reexpresar en otra base.
+  metrica_falsable: rank(PAQ) == rank(A) para P,Q invertibles.
+- id: INV-HDA-002
+  invariante: Invarianza de la Traza (Similaridad)
+  logica___principio: La traza es invariante bajo similaridad y equivale a la suma
+    de autovalores.
+  implicacion_operacional: Traza como invariante escalar del operador.
+  condicion_de_borde: tr(S^-1 A S) != tr(A).
+  metrica_falsable: tr(A) == suma de autovalores.
+- id: INV-HDA-004
+  invariante: Invarianza del Espectro
+  logica___principio: Los autovalores son invariantes bajo similaridad.
+  implicacion_operacional: El espectro es propiedad del operador, no de la base.
+  condicion_de_borde: Autovalores cambian bajo cambio de base.
+  metrica_falsable: spec(S^-1 A S) == spec(A).
+- id: INV-HDA-005
+  invariante: Isometria Preserva Norma
+  logica___principio: Una transformacion ortogonal/unitaria conserva la norma euclidea.
+  implicacion_operacional: Rotar/reflejar no cambia longitudes.
+  condicion_de_borde: norm(Qx) != norm(x) con Q ortogonal.
+  metrica_falsable: norm(Qx) == norm(x).
+- id: INV-HDA-006
+  invariante: Unitaria Preserva Producto Interno
+  logica___principio: Las transformaciones unitarias conservan el producto interno.
+  implicacion_operacional: Los angulos se preservan bajo unitarias.
+  condicion_de_borde: <Qx,Qy> != <x,y>.
+  metrica_falsable: <Qx,Qy> == <x,y>.
+- id: INV-HDA-007
+  invariante: Preservacion de Angulos
+  logica___principio: Las transformaciones conformes/ortogonales conservan los angulos.
+  implicacion_operacional: La geometria angular es invariante ortogonal.
+  condicion_de_borde: Angulo alterado por Q ortogonal.
+  metrica_falsable: cos(Qx,Qy) == cos(x,y).
+- id: INV-HDA-008
+  invariante: Preservacion de Distancias
+  logica___principio: Una isometria conserva todas las distancias entre puntos.
+  implicacion_operacional: La estructura metrica es invariante isometrico.
+  condicion_de_borde: d(Tx,Ty) != d(x,y).
+  metrica_falsable: d(Tx,Ty) == d(x,y).
+- id: INV-HDA-009
+  invariante: Ortogonalidad de Q en QR
+  logica___principio: El factor Q de la descomposicion QR es ortonormal por construccion.
+  implicacion_operacional: QR provee una base ortonormal estable.
+  condicion_de_borde: Q^T Q se aleja de I.
+  metrica_falsable: norm(Q^T Q - I) ~ eps.
+- id: INV-HDA-010
+  invariante: Invarianza de Valores Singulares
+  logica___principio: Los valores singulares son invariantes bajo transformaciones
+    ortogonales bilaterales.
+  implicacion_operacional: La SVD captura la geometria intrinseca del operador.
+  condicion_de_borde: sigma cambia bajo U A V ortogonales.
+  metrica_falsable: sv(UAV) == sv(A).
+- id: INV-HDA-011
+  invariante: Frobenius via Valores Singulares
+  logica___principio: La norma de Frobenius es la raiz de la suma de cuadrados de
+    los valores singulares.
+  implicacion_operacional: Frobenius mide energia total del operador.
+  condicion_de_borde: Frobenius != raiz(sum sigma^2).
+  metrica_falsable: normF(A)^2 == suma sigma_i^2.
+- id: INV-HDA-012
+  invariante: Norma Espectral
+  logica___principio: La norma espectral es el mayor valor singular.
+  implicacion_operacional: Mide la maxima amplificacion del operador.
+  condicion_de_borde: norm2(A) != sigma_max.
+  metrica_falsable: norm2(A) == sigma_max.
+- id: INV-HDA-013
+  invariante: Teorema Rango-Nulidad
+  logica___principio: La dimension del nucleo mas el rango igualan la dimension del
+    dominio.
+  implicacion_operacional: Conservacion de dimension en una aplicacion lineal.
+  condicion_de_borde: rank + nullity != n.
+  metrica_falsable: rank(A) + dim ker(A) == n.
+- id: INV-HDA-014
+  invariante: Dimension de Suma de Subespacios
+  logica___principio: dim(U+W) = dim U + dim W - dim(U interseccion W).
+  implicacion_operacional: Conteo de dimensiones bajo union de subespacios.
+  condicion_de_borde: Formula de Grassmann violada.
+  metrica_falsable: dim(U+W) + dim(U cap W) == dimU + dimW.
+- id: INV-HDA-015
+  invariante: Independencia bajo Isomorfismo
+  logica___principio: Un isomorfismo lineal preserva la independencia lineal.
+  implicacion_operacional: La estructura de dependencia es invariante.
+  condicion_de_borde: Isomorfismo colapsa vectores independientes.
+  metrica_falsable: Independencia preservada por T invertible.
+- id: INV-HDA-016
+  invariante: Multiplicatividad del Determinante
+  logica___principio: El determinante de un producto es el producto de los determinantes.
+  implicacion_operacional: det es un homomorfismo multiplicativo.
+  condicion_de_borde: det(AB) != det(A)det(B).
+  metrica_falsable: det(AB) == det(A) det(B).
+- id: INV-HDA-017
+  invariante: Invarianza del Polinomio Caracteristico
+  logica___principio: El polinomio caracteristico es invariante bajo similaridad.
+  implicacion_operacional: Codifica el espectro de forma independiente de base.
+  condicion_de_borde: charpoly cambia bajo similaridad.
+  metrica_falsable: charpoly(S^-1 A S) == charpoly(A).
+- id: INV-HDA-018
+  invariante: Invarianza del Polinomio Minimo
+  logica___principio: El polinomio minimo es invariante de similaridad.
+  implicacion_operacional: Captura la estructura de bloques del operador.
+  condicion_de_borde: minpoly cambia de base.
+  metrica_falsable: minpoly invariante bajo similaridad.
+- id: INV-HDA-019
+  invariante: Forma Canonica de Jordan
+  logica___principio: La forma de Jordan es un invariante completo de similaridad
+    sobre un cuerpo algebraicamente cerrado.
+  implicacion_operacional: Clasifica operadores hasta similaridad.
+  condicion_de_borde: Dos matrices similares con distinta Jordan.
+  metrica_falsable: Jordan(A) unica salvo orden de bloques.
+- id: INV-HDA-020
+  invariante: Ley de Inercia de Sylvester
+  logica___principio: El numero de autovalores positivos, negativos y nulos de una
+    forma cuadratica es invariante de congruencia.
+  implicacion_operacional: La firma clasifica formas cuadraticas.
+  condicion_de_borde: Firma cambia bajo congruencia invertible.
+  metrica_falsable: Signatura (p,q,z) invariante.
+- id: INV-HDA-021
+  invariante: Suma de Autovalores = Traza
+  logica___principio: La suma de autovalores (con multiplicidad) iguala la traza.
+  implicacion_operacional: Relacion invariante espectro-traza.
+  condicion_de_borde: sum lambda != tr(A).
+  metrica_falsable: sum lambda_i == tr(A).
+- id: INV-HDA-022
+  invariante: Producto de Autovalores = Determinante
+  logica___principio: El producto de autovalores iguala el determinante.
+  implicacion_operacional: Relacion invariante espectro-determinante.
+  condicion_de_borde: prod lambda != det(A).
+  metrica_falsable: prod lambda_i == det(A).
+- id: INV-HDA-023
+  invariante: Subespacios Propios de Matrices que Conmutan
+  logica___principio: Matrices que conmutan comparten subespacios invariantes.
+  implicacion_operacional: Diagonalizacion simultanea de operadores compatibles.
+  condicion_de_borde: AB = BA sin base propia comun.
+  metrica_falsable: Base propia comun para A,B con AB=BA.
+- id: INV-HDA-024
+  invariante: Parseval / Plancherel
+  logica___principio: En base ortonormal la energia se conserva entre el vector y
+    sus coeficientes.
+  implicacion_operacional: La norma es invariante bajo cambio a base ortonormal.
+  condicion_de_borde: sum de coeficientes^2 != norm^2.
+  metrica_falsable: norm(x)^2 == sum abs(<x,e_i>)^2.
+- id: INV-HDA-025
+  invariante: Varianza Total = Traza de Covarianza
+  logica___principio: La varianza total es invariante bajo rotacion y equivale a la
+    traza de la covarianza.
+  implicacion_operacional: PCA reparte, no crea ni destruye, varianza.
+  condicion_de_borde: Varianza total cambia al rotar.
+  metrica_falsable: sum var == tr(Cov) invariante.
+- id: INV-HDA-026
+  invariante: Ortogonalidad de Componentes Principales
+  logica___principio: Los componentes principales son ortogonales entre si.
+  implicacion_operacional: PCA da una base ortonormal de maxima varianza.
+  condicion_de_borde: PCs no ortogonales.
+  metrica_falsable: PC_i . PC_j == 0 para i != j.
+- id: INV-HDA-027
+  invariante: Garantia Johnson-Lindenstrauss
+  logica___principio: Con k = O(log n / eps^2) una proyeccion aleatoria preserva distancias
+    hasta 1+/-eps.
+  implicacion_operacional: La compresion es posible sin perder geometria de pares.
+  condicion_de_borde: k por debajo del limite JL.
+  metrica_falsable: Distorsion de pares <= eps con alta probabilidad.
+- id: INV-HDA-028
+  invariante: Proyeccion Aleatoria Preserva Producto Interno
+  logica___principio: Una proyeccion aleatoria escalada preserva el producto interno
+    en esperanza.
+  implicacion_operacional: El sketching conserva la geometria en promedio.
+  condicion_de_borde: Sesgo sistematico del producto interno.
+  metrica_falsable: E[<Px,Py>] == <x,y>.
+- id: INV-HDA-029
+  invariante: Norma Esperada bajo Proyeccion
+  logica___principio: La proyeccion gaussiana escalada conserva la norma al cuadrado
+    en esperanza.
+  implicacion_operacional: El sketch es un estimador insesgado de la norma.
+  condicion_de_borde: E[norm(Px)^2] != norm(x)^2.
+  metrica_falsable: E[norm(Px)^2] == norm(x)^2.
+- id: INV-HDA-030
+  invariante: Concentracion Gaussiana en sqrt(d)
+  logica___principio: La masa de una gaussiana estandar se concentra en una cascara
+    de radio raiz de d.
+  implicacion_operacional: El 'centro' geometrico esta vacio en alta dimension.
+  condicion_de_borde: Masa concentrada cerca del origen.
+  metrica_falsable: norm ~ sqrt(d) con desviacion O(1).
+- id: INV-HDA-031
+  invariante: Cuasi-Ortogonalidad Aleatoria
+  logica___principio: Se pueden empaquetar exp(d) vectores casi ortogonales en dimension
+    d.
+  implicacion_operacional: La dimension alta ofrece capacidad casi-ortogonal enorme.
+  condicion_de_borde: Pocos vectores casi ortogonales posibles.
+  metrica_falsable: Existen 2^{O(d)} vectores con coseno < eps.
+- id: INV-HDA-032
+  invariante: Invarianza Rotacional de la Gaussiana
+  logica___principio: La gaussiana isotropa es invariante bajo rotaciones.
+  implicacion_operacional: No hay direccion privilegiada en ruido isotropo.
+  condicion_de_borde: Densidad depende de la direccion.
+  metrica_falsable: N(0,I) invariante bajo Q ortogonal.
+- id: INV-HDA-033
+  invariante: Invarianza de Volumen bajo SL(n)
+  logica___principio: Las transformaciones de determinante 1 preservan el volumen.
+  implicacion_operacional: El volumen es invariante del grupo especial lineal.
+  condicion_de_borde: Volumen cambia con det != 1.
+  metrica_falsable: vol(Ax) == vol(x) si det(A)=1.
+- id: INV-HDA-034
+  invariante: Antisimetria del Producto Exterior
+  logica___principio: 'El producto exterior es alternante: intercambiar dos factores
+    cambia el signo.'
+  implicacion_operacional: El wedge codifica orientacion y volumen con signo.
+  condicion_de_borde: Componente simetrica no nula.
+  metrica_falsable: x ^ y == - y ^ x.
+- id: INV-HDA-035
+  invariante: Invarianza de la Orientacion (det>0)
+  logica___principio: Las transformaciones con determinante positivo preservan la
+    orientacion.
+  implicacion_operacional: La orientacion es invariante del grupo GL+.
+  condicion_de_borde: Flip de orientacion con det<0.
+  metrica_falsable: Orientacion preservada si det(A)>0.
+- id: INV-HDA-037
+  invariante: Positividad bajo Congruencia
+  logica___principio: La definicion positiva se preserva bajo congruencia con matriz
+    invertible.
+  implicacion_operacional: El cono PSD es invariante de congruencia.
+  condicion_de_borde: M^T A M pierde positividad con M invertible.
+  metrica_falsable: A PSD => M^T A M PSD.
+- id: INV-HDA-038
+  invariante: Teorema Espectral
+  logica___principio: Toda matriz simetrica real es diagonalizable en una base ortonormal
+    de autovectores.
+  implicacion_operacional: Base ortonormal garantizada para operadores simetricos.
+  condicion_de_borde: Simetrica sin base propia ortonormal.
+  metrica_falsable: A = Q Lambda Q^T con Q ortogonal.
+- id: INV-HDA-039
+  invariante: Existencia de la SVD
+  logica___principio: Toda matriz admite descomposicion en valores singulares.
+  implicacion_operacional: Factorizacion universal de cualquier operador.
+  condicion_de_borde: Matriz sin SVD.
+  metrica_falsable: A = U Sigma V^T siempre existe.
+- id: INV-HDA-040
+  invariante: Rango = Valores Singulares No Nulos
+  logica___principio: El rango iguala el numero de valores singulares estrictamente
+    positivos.
+  implicacion_operacional: Definicion numericamente robusta del rango.
+  condicion_de_borde: Rango != conteo de sigma > 0.
+  metrica_falsable: rank(A) == card(sigma_i > 0).
+- id: INV-HDA-041
+  invariante: Eckart-Young
+  logica___principio: La mejor aproximacion de rango k en norma espectral/Frobenius
+    es truncar la SVD.
+  implicacion_operacional: Optimalidad de la truncacion SVD.
+  condicion_de_borde: Aproximacion de rango k que bate a SVD truncada.
+  metrica_falsable: min norm(A - A_k) alcanzado por SVD_k.
+- id: INV-HDA-042
+  invariante: Norma Nuclear como Envolvente del Rango
+  logica___principio: La norma nuclear es la envolvente convexa del rango en la bola
+    espectral.
+  implicacion_operacional: Relajacion convexa estandar del rango.
+  condicion_de_borde: Sustituto convexo del rango que no sea la nuclear.
+  metrica_falsable: nuclear = suma sigma_i.
+- id: INV-HDA-043
+  invariante: Desigualdad Triangular
+  logica___principio: La norma satisface la desigualdad triangular.
+  implicacion_operacional: Fundamento de la estructura metrica.
+  condicion_de_borde: norm(x+y) > norm(x)+norm(y).
+  metrica_falsable: norm(x+y) <= norm(x)+norm(y).
+- id: INV-HDA-044
+  invariante: Cauchy-Schwarz
+  logica___principio: El producto interno esta acotado por el producto de las normas.
+  implicacion_operacional: Acota correlaciones y define angulos.
+  condicion_de_borde: <x,y> > norm(x)norm(y).
+  metrica_falsable: abs(<x,y>) <= norm(x) norm(y).
+- id: INV-HDA-045
+  invariante: Identidad del Paralelogramo
+  logica___principio: Las normas de producto interno satisfacen la identidad del paralelogramo.
+  implicacion_operacional: Caracteriza las normas hilbertianas.
+  condicion_de_borde: Identidad del paralelogramo falla.
+  metrica_falsable: norm(x+y)^2 + norm(x-y)^2 == 2norm(x)^2+2norm(y)^2.
+- id: INV-HDA-046
+  invariante: Pitagoras Ortogonal
+  logica___principio: Para vectores ortogonales la norma al cuadrado es aditiva.
+  implicacion_operacional: Descomposicion de energia en direcciones ortogonales.
+  condicion_de_borde: norm(x+y)^2 != norm(x)^2+norm(y)^2 con x perp y.
+  metrica_falsable: x perp y => norm(x+y)^2 == norm(x)^2+norm(y)^2.
+- id: INV-HDA-047
+  invariante: Proyeccion Ortogonal Minimiza Distancia
+  logica___principio: La proyeccion ortogonal sobre un subespacio es el punto mas
+    cercano.
+  implicacion_operacional: Solucion variacional de minimos cuadrados.
+  condicion_de_borde: Otro punto del subespacio mas cercano.
+  metrica_falsable: argmin norm(x-u) alcanzado por la proyeccion.
+- id: INV-HDA-048
+  invariante: Doble Complemento Ortogonal
+  logica___principio: El complemento ortogonal del complemento ortogonal es el subespacio
+    original.
+  implicacion_operacional: Dualidad involutiva de subespacios.
+  condicion_de_borde: (U perp) perp != U.
+  metrica_falsable: (U^perp)^perp == U.
+- id: INV-HDA-049
+  invariante: Descomposicion Ortogonal
+  logica___principio: El espacio se descompone en un subespacio y su complemento ortogonal.
+  implicacion_operacional: Todo vector se separa en componente y residuo.
+  condicion_de_borde: V != U + U perp.
+  metrica_falsable: V == U (+) U^perp.
+- id: INV-HDA-050
+  invariante: Invarianza de Nucleo e Imagen
+  logica___principio: El nucleo y la imagen son estables bajo composicion con isomorfismos.
+  implicacion_operacional: La estructura de la aplicacion es intrinseca.
+  condicion_de_borde: ker/im cambian con isomorfismo.
+  metrica_falsable: ker(TA), im(AT) relacionados por iso.
+- id: INV-HDA-051
+  invariante: Valores Singulares bajo Transposicion
+  logica___principio: A y su transpuesta comparten los mismos valores singulares.
+  implicacion_operacional: La geometria singular es simetrica en filas/columnas.
+  condicion_de_borde: sv(A) != sv(A^T).
+  metrica_falsable: sv(A) == sv(A^T).
+- id: INV-HDA-052
+  invariante: Autovalores de A^T A No Negativos
+  logica___principio: Los autovalores de A^T A son los cuadrados de los valores singulares,
+    no negativos.
+  implicacion_operacional: Conexion espectro-singular fundamental.
+  condicion_de_borde: Autovalor negativo de A^T A.
+  metrica_falsable: eig(A^T A) == sigma^2 >= 0.
+- id: INV-HDA-053
+  invariante: Entrelazado de Cauchy
+  logica___principio: Los autovalores de una submatriz principal entrelazan los de
+    la matriz.
+  implicacion_operacional: Cota estructural sobre submatrices simetricas.
+  condicion_de_borde: Entrelazado de autovalores violado.
+  metrica_falsable: lambda_k(A) <= lambda_k(submatriz) <= lambda_{k+1}(A).
+- id: INV-HDA-054
+  invariante: Desigualdad de Weyl
+  logica___principio: La perturbacion de autovalores esta acotada por la norma de
+    la perturbacion.
+  implicacion_operacional: Estabilidad del espectro ante ruido.
+  condicion_de_borde: Salto de autovalor mayor que la perturbacion.
+  metrica_falsable: abs(lambda_k(A+E)-lambda_k(A)) <= norm2(E).
+- id: INV-HDA-055
+  invariante: Davis-Kahan
+  logica___principio: La rotacion de un subespacio propio esta acotada por la perturbacion
+    sobre el gap espectral.
+  implicacion_operacional: Estabilidad de subespacios con buen gap.
+  condicion_de_borde: Rotacion grande con gap grande.
+  metrica_falsable: sin(theta) <= norm(E)/gap.
+- id: INV-HDA-056
+  invariante: Courant-Fischer (Min-Max)
+  logica___principio: Los autovalores tienen caracterizacion variacional min-max.
+  implicacion_operacional: Autovalores como optimos de cocientes de Rayleigh.
+  condicion_de_borde: Caracterizacion min-max falla.
+  metrica_falsable: lambda_k == min-max del cociente de Rayleigh.
+- id: INV-HDA-057
+  invariante: Hoffman-Wielandt
+  logica___principio: La distancia entre espectros esta acotada por la norma de Frobenius
+    de la diferencia.
+  implicacion_operacional: Estabilidad global del espectro para normales.
+  condicion_de_borde: Emparejamiento espectral peor que Frobenius.
+  metrica_falsable: sum(lambda_i - mu_i)^2 <= normF(A-B)^2.
+- id: INV-HDA-058
+  invariante: Traza de Kronecker
+  logica___principio: La traza de un producto de Kronecker es el producto de las trazas.
+  implicacion_operacional: Factorizacion de invariantes bajo producto tensorial.
+  condicion_de_borde: tr(A kron B) != tr(A)tr(B).
+  metrica_falsable: tr(A kron B) == tr(A) tr(B).
+- id: INV-HDA-059
+  invariante: Autovalores de Kronecker
+  logica___principio: Los autovalores de A kron B son los productos de los autovalores.
+  implicacion_operacional: Espectro tensorial factoriza.
+  condicion_de_borde: Espectro de Kronecker no factoriza.
+  metrica_falsable: eig(A kron B) == {a_i b_j}.
+- id: INV-HDA-060
+  invariante: Rango de Kronecker
+  logica___principio: El rango de A kron B es el producto de los rangos.
+  implicacion_operacional: El rango es multiplicativo bajo Kronecker.
+  condicion_de_borde: rank(A kron B) != rank(A)rank(B).
+  metrica_falsable: rank(A kron B) == rank(A) rank(B).
+- id: INV-HDA-061
+  invariante: Asociatividad del Producto Tensorial
+  logica___principio: El producto tensorial es asociativo salvo isomorfismo natural.
+  implicacion_operacional: La estructura monoidal esta bien definida hasta iso.
+  condicion_de_borde: Reasociacion no isomorfa.
+  metrica_falsable: (U x V) x W ~= U x (V x W).
+- id: INV-HDA-062
+  invariante: Universalidad del Producto Tensorial
+  logica___principio: El producto tensorial es universal para aplicaciones bilineales.
+  implicacion_operacional: Toda bilineal factoriza unicamente por el tensor.
+  condicion_de_borde: Bilineal sin factorizacion unica.
+  metrica_falsable: Factorizacion universal existe y es unica.
+- id: INV-HDA-063
+  invariante: Multilinealidad del Determinante
+  logica___principio: El determinante es lineal en cada columna por separado.
+  implicacion_operacional: Base del calculo y expansion del determinante.
+  condicion_de_borde: det no lineal en una columna.
+  metrica_falsable: det lineal en cada argumento.
+- id: INV-HDA-064
+  invariante: Alternancia del Determinante
+  logica___principio: El determinante se anula si dos columnas son iguales y cambia
+    de signo al intercambiarlas.
+  implicacion_operacional: Codifica dependencia lineal y orientacion.
+  condicion_de_borde: det no alterna.
+  metrica_falsable: Columnas iguales => det == 0.
+- id: INV-HDA-065
+  invariante: Invarianza del Rango Multilineal
+  logica___principio: El rango multilineal (Tucker) es invariante bajo transformaciones
+    de base por modo.
+  implicacion_operacional: Nocion intrinseca de rango tensorial.
+  condicion_de_borde: Rango multilineal cambia de base.
+  metrica_falsable: multirank invariante bajo cambios por modo.
+- id: INV-HDA-066
+  invariante: Border Rank <= Rank
+  logica___principio: El rango de borde nunca supera al rango tensorial.
+  implicacion_operacional: Cota que explica la mala postura de CP.
+  condicion_de_borde: border rank > rank.
+  metrica_falsable: border_rank(T) <= rank(T).
+- id: INV-HDA-067
+  invariante: Libertad de Gauge en Tensor Trains
+  logica___principio: Insertar G G^-1 entre nucleos no cambia el tensor representado.
+  implicacion_operacional: Redundancia de gauge de las redes tensoriales.
+  condicion_de_borde: Insercion de gauge altera el tensor.
+  metrica_falsable: TT invariante bajo G G^-1.
+- id: INV-HDA-068
+  invariante: Concentracion de Lipschitz
+  logica___principio: Una funcion Lipschitz de una gaussiana se concentra en torno
+    a su media.
+  implicacion_operacional: Estabilidad de funciones suaves en alta dimension.
+  condicion_de_borde: Funcion Lipschitz con cola pesada.
+  metrica_falsable: P(abs(f-Ef)>t) <= 2 exp(-t^2/2L^2).
+- id: INV-HDA-069
+  invariante: Isoperimetria Gaussiana
+  logica___principio: Los semiespacios minimizan el area de frontera para volumen
+    gaussiano dado.
+  implicacion_operacional: Optimalidad geometrica en el espacio gaussiano.
+  condicion_de_borde: Conjunto que bate al semiespacio.
+  metrica_falsable: Frontera minima alcanzada por semiespacios.
+- id: INV-HDA-070
+  invariante: Invarianza Ciclica de la Traza
+  logica___principio: La traza es invariante bajo permutacion ciclica de factores.
+  implicacion_operacional: Simplifica invariantes de productos matriciales.
+  condicion_de_borde: tr(ABC) != tr(BCA).
+  metrica_falsable: tr(ABC) == tr(BCA).
+- id: INV-HDA-071
+  invariante: Norma de Schatten bajo Unitaria
+  logica___principio: Las normas de Schatten son invariantes bajo transformaciones
+    unitarias.
+  implicacion_operacional: Familia de normas intrinsecas del operador.
+  condicion_de_borde: Schatten cambia bajo unitaria.
+  metrica_falsable: Schatten_p(UAV) == Schatten_p(A).
+- id: INV-HDA-072
+  invariante: Producto de Frobenius bajo Unitarias
+  logica___principio: El producto interno de Frobenius es invariante bajo unitarias
+    bilaterales.
+  implicacion_operacional: Geometria de matrices invariante ortogonal.
+  condicion_de_borde: <UAV,UBV>_F != <A,B>_F.
+  metrica_falsable: <UAV, UBV>_F == <A,B>_F.
+- id: INV-HDA-073
+  invariante: Coherencia de Mac Lane
+  logica___principio: Pentagono y triangulo implican que todo diagrama de coherencia
+    conmuta.
+  implicacion_operacional: Una estructura monoidal debil es tan buena como una estricta.
+  condicion_de_borde: Diagrama de coherencia que no conmuta.
+  metrica_falsable: Todos los diagramas de asociador conmutan.
+- id: INV-HDA-074
+  invariante: Univalencia (Iso = Identidad)
+  logica___principio: Tipos equivalentes son iguales; el isomorfismo es un camino
+    de identidad.
+  implicacion_operacional: Transporte de estructura a lo largo de equivalencias.
+  condicion_de_borde: Iso sin identidad correspondiente.
+  metrica_falsable: (A ~= B) equivalente a (A == B).
+- id: INV-HDA-075
+  invariante: Invarianza Homotopica del Tipo
+  logica___principio: Las propiedades de un tipo son invariantes bajo equivalencia.
+  implicacion_operacional: Solo importa el tipo salvo equivalencia.
+  condicion_de_borde: Propiedad que distingue equivalentes.
+  metrica_falsable: P(A) sii P(B) cuando A ~= B.
+- id: INV-HDA-076
+  invariante: Invarianza de infinito-Grupoide
+  logica___principio: La estructura de infinito-grupoide es invariante bajo equivalencia.
+  implicacion_operacional: Los tipos homotopicos son los objetos fundamentales.
+  condicion_de_borde: Equivalencia que altera la estructura.
+  metrica_falsable: Estructura preservada por equivalencia debil.
+- id: INV-HDA-077
+  invariante: Ley de Intercambio (2-Categoria)
+  logica___principio: La composicion horizontal y vertical de 2-morfismos conmuta.
+  implicacion_operacional: Coherencia basica de estructuras bidimensionales.
+  condicion_de_borde: Ley de intercambio falla.
+  metrica_falsable: (a*b)(c*d) == (ac)*(bd).
+- id: INV-HDA-078
+  invariante: Coherencia del Asociador
+  logica___principio: El asociador de una categoria monoidal satisface el pentagono.
+  implicacion_operacional: Fija la reasociacion de forma coherente.
+  condicion_de_borde: Pentagono no conmuta.
+  metrica_falsable: Identidad del pentagono se cumple.
+- id: INV-HDA-079
+  invariante: Invariantes de Postnikov
+  logica___principio: Los grupos de homotopia son invariantes de la torre de Postnikov.
+  implicacion_operacional: Clasifican el tipo homotopico por niveles.
+  condicion_de_borde: Invariante de Postnikov cambia bajo equivalencia.
+  metrica_falsable: pi_n invariante bajo equivalencia debil.
+- id: INV-HDA-080
+  invariante: Invarianza Homotopica de Euler
+  logica___principio: La caracteristica de Euler es invariante homotopico.
+  implicacion_operacional: Invariante topologico calculable.
+  condicion_de_borde: chi cambia bajo equivalencia homotopica.
+  metrica_falsable: chi invariante bajo homotopia.
+- id: INV-HDA-082
+  invariante: Functorialidad
+  logica___principio: Un functor preserva composicion e identidades.
+  implicacion_operacional: Los functores transportan estructura de forma coherente.
+  condicion_de_borde: F(g o f) != F(g) o F(f).
+  metrica_falsable: F(g o f) == F(g) o F(f) y F(id)==id.
+- id: INV-HDA-083
+  invariante: Naturalidad
+  logica___principio: Una transformacion natural conmuta con los morfismos (cuadrado
+    natural).
+  implicacion_operacional: Transformaciones respetan la estructura functorial.
+  condicion_de_borde: Cuadrado de naturalidad no conmuta.
+  metrica_falsable: Cuadrado natural conmuta para todo morfismo.
+- id: INV-HDA-084
+  invariante: Transporte Paralelo Plano
+  logica___principio: En una conexion plana el transporte paralelo es independiente
+    del camino.
+  implicacion_operacional: Curvatura cero implica holonomia trivial local.
+  condicion_de_borde: Transporte depende del camino con curvatura 0.
+  metrica_falsable: Holonomia trivial en region simplemente conexa.
+- id: INV-HDA-085
+  invariante: Invarianza de la Dimension (Brouwer)
+  logica___principio: La dimension topologica es invariante bajo homeomorfismo.
+  implicacion_operacional: R^n y R^m no son homeomorfos si n != m.
+  condicion_de_borde: Homeomorfismo entre dimensiones distintas.
+  metrica_falsable: dim invariante bajo homeomorfismo.
+- id: INV-HDA-087
+  invariante: Forma Normal de Smith
+  logica___principio: Sobre un DIP toda matriz tiene forma normal de Smith con factores
+    invariantes unicos.
+  implicacion_operacional: Clasifica modulos finitamente generados.
+  condicion_de_borde: Factores invariantes no unicos.
+  metrica_falsable: Factores invariantes d_1 divide d_2 divide ... unicos.
+- id: INV-HDA-088
+  invariante: Factores Invariantes / Divisores Elementales
+  logica___principio: Los divisores elementales clasifican el modulo salvo isomorfismo.
+  implicacion_operacional: Invariante completo de estructura de modulo.
+  condicion_de_borde: Dos modulos con mismos divisores no isomorfos.
+  metrica_falsable: Divisores elementales determinan el modulo.
+- id: INV-HDA-089
+  invariante: Invarianza del Indice de Fredholm
+  logica___principio: El indice de Fredholm es estable bajo perturbaciones compactas.
+  implicacion_operacional: Invariante robusto de operadores.
+  condicion_de_borde: Indice cambia bajo perturbacion compacta.
+  metrica_falsable: ind(A+K) == ind(A) para K compacto.
+- id: INV-HDA-090
+  invariante: Teorema de la Dimension
+  logica___principio: Todas las bases de un espacio vectorial tienen el mismo cardinal.
+  implicacion_operacional: La dimension esta bien definida.
+  condicion_de_borde: Dos bases de distinto tamano.
+  metrica_falsable: card(base_1) == card(base_2).
+- id: INV-HDA-091
+  invariante: Invarianza de Correlacion bajo Escala
+  logica___principio: El coeficiente de correlacion es invariante bajo escalados y
+    traslaciones afines.
+  implicacion_operacional: Similitud direccional independiente de unidades.
+  condicion_de_borde: Correlacion cambia al reescalar.
+  metrica_falsable: corr(ax+b, cy+d) == corr(x,y).
+- id: INV-HDA-092
+  invariante: Monotonia de Valores Singulares (Submatriz)
+  logica___principio: Los valores singulares de una submatriz entrelazan los de la
+    matriz.
+  implicacion_operacional: Cota estructural bajo eliminacion de filas/columnas.
+  condicion_de_borde: Entrelazado singular violado.
+  metrica_falsable: sigma_k(sub) <= sigma_k(A).
+- id: INV-HDA-093
+  invariante: Conservacion de la Norma en Forma Canonica
+  logica___principio: La forma canonica de una red tensorial preserva la norma del
+    estado.
+  implicacion_operacional: Canonicalizacion sin perdida de norma.
+  condicion_de_borde: Norma cambia al canonicalizar.
+  metrica_falsable: norm(TT_canonico) == norm(TT).
+- id: INV-HDA-094
+  invariante: Invarianza del Producto Escalar bajo Transporte Isometrico
+  logica___principio: El transporte isometrico conserva el producto escalar entre
+    vectores.
+  implicacion_operacional: La metrica se preserva a lo largo del transporte.
+  condicion_de_borde: Producto escalar cambia con transporte isometrico.
+  metrica_falsable: <Tx,Ty> == <x,y> bajo transporte isometrico.
+- id: INV-HDA-095
+  invariante: Estabilidad de Rango bajo Perturbacion Pequena
+  logica___principio: El rango no decrece bajo perturbaciones menores que el menor
+    valor singular no nulo.
+  implicacion_operacional: El rango es semicontinuo inferiormente.
+  condicion_de_borde: Rango cae con perturbacion < sigma_r.
+  metrica_falsable: rank(A+E) >= rank(A) si norm(E) < sigma_r.
+- id: INV-HDA-096
+  invariante: Aditividad del Producto Interno de Frobenius
+  logica___principio: El producto interno de Frobenius induce una geometria euclidea
+    en el espacio de matrices.
+  implicacion_operacional: Las matrices forman un espacio de Hilbert de dimension
+    finita.
+  condicion_de_borde: Producto de Frobenius no bilineal.
+  metrica_falsable: <A,B>_F == tr(A^T B).
+- id: INV-HDA-097
+  invariante: Invarianza de la Media bajo Proyeccion Insesgada
+  logica___principio: Un esquema de sketching insesgado preserva la media de la cantidad
+    estimada.
+  implicacion_operacional: Estimadores aleatorios centrados en el valor real.
+  condicion_de_borde: E[estimador] != valor.
+  metrica_falsable: E[sketch(x)] == x.
+- id: INV-HDA-098
+  invariante: Conservacion de la Suma de Cuadrados (ANOVA)
+  logica___principio: La suma total de cuadrados se descompone en explicada mas residual.
+  implicacion_operacional: Descomposicion ortogonal de la varianza.
+  condicion_de_borde: SST != SSR + SSE.
+  metrica_falsable: SST == SSR + SSE.
+- id: INV-HDA-099
+  invariante: Invarianza de la Distancia de Mahalanobis
+  logica___principio: La distancia de Mahalanobis es invariante bajo transformaciones
+    lineales invertibles.
+  implicacion_operacional: Metrica adaptada a la covarianza, independiente de base.
+  condicion_de_borde: Mahalanobis cambia bajo transformacion lineal.
+  metrica_falsable: d_M invariante bajo A invertible.
+- id: INV-HDA-100
+  invariante: Invarianza Fundamental HDA-HoTT
+  logica___principio: En fundamentos univalentes, la estructura algebraica de alta
+    dimension es la de los infinito-grupoides (tipos).
+  implicacion_operacional: Algebra de alta dimension = teoria de tipos homotopica.
+  condicion_de_borde: Estructura que distingue tipos equivalentes.
+  metrica_falsable: Objetos = tipos salvo equivalencia.
+- id: ANTI-HDA-001
+  antipatron: Invertir la Matriz Explicitamente
+  disfuncion_causal: Calcular inv(A) para resolver Ax=b en vez de factorizar, amplificando
+    el error y el coste.
+  senal_de_presencia: Uso de inv(A)*b o pinv por defecto.
+  impacto_en_robustez: Perdida de precision y O(n^3) innecesario.
+  refactor_alternativa: Factorizar (LU/QR/Cholesky) y resolver.
+- id: ANTI-HDA-002
+  antipatron: Ecuaciones Normales
+  disfuncion_causal: Resolver minimos cuadrados via A^T A, que eleva al cuadrado el
+    numero de condicion.
+  senal_de_presencia: Formar A^T A explicitamente.
+  impacto_en_robustez: 'Kappa^2: perdida catastrofica de precision.'
+  refactor_alternativa: QR o SVD sobre A directamente.
+- id: ANTI-HDA-003
+  antipatron: Gram-Schmidt Clasico
+  disfuncion_causal: Ortogonalizar con Gram-Schmidt clasico, que pierde ortogonalidad
+    por redondeo.
+  senal_de_presencia: CGS en bases mal condicionadas.
+  impacto_en_robustez: Q^T Q lejos de I.
+  refactor_alternativa: Gram-Schmidt modificado o Householder.
+- id: ANTI-HDA-004
+  antipatron: Comparar Floats por Igualdad
+  disfuncion_causal: Usar == sobre flotantes ignorando el error de redondeo.
+  senal_de_presencia: if x == 0.0 sobre resultados calculados.
+  impacto_en_robustez: Ramas erroneas por epsilon.
+  refactor_alternativa: Comparacion con tolerancia relativa/absoluta.
+- id: ANTI-HDA-005
+  antipatron: Softmax sin Restar el Maximo
+  disfuncion_causal: Exponenciar logits sin estabilizar por el maximo.
+  senal_de_presencia: exp(logits) directo.
+  impacto_en_robustez: Overflow a NaN/Inf.
+  refactor_alternativa: softmax(x - max(x)).
+- id: ANTI-HDA-006
+  antipatron: Norma sin Escalado
+  disfuncion_causal: Calcular sqrt(sum x^2) sin escalar, con overflow/underflow para
+    valores extremos.
+  senal_de_presencia: Norma naive de vectores mal escalados.
+  impacto_en_robustez: Inf o 0 espurio.
+  refactor_alternativa: Escalado por el maximo (hypot/BLAS nrm2).
+- id: ANTI-HDA-007
+  antipatron: Umbral de Rango Absoluto
+  disfuncion_causal: Decidir el rango con un umbral fijo en vez de relativo a sigma_max.
+  senal_de_presencia: Cortar sigma con constante fija.
+  impacto_en_robustez: Rango mal estimado segun la escala.
+  refactor_alternativa: 'Tolerancia relativa: sigma > tol * sigma_max.'
+- id: ANTI-HDA-008
+  antipatron: Euclideo como Similitud en Alta Dimension
+  disfuncion_causal: Usar distancia L2 como similitud ignorando la concentracion de
+    distancias.
+  senal_de_presencia: kNN euclideo directo en d grande.
+  impacto_en_robustez: Vecinos sin significado (contraste nulo).
+  refactor_alternativa: Coseno, metrica aprendida o reduccion previa.
+- id: ANTI-HDA-009
+  antipatron: kNN Ingenuo en Alta Dimension
+  disfuncion_causal: Aplicar kNN sin corregir hubness ni concentracion.
+  senal_de_presencia: Recuperacion por vecinos crudos.
+  impacto_en_robustez: Hubs dominan; recall sesgado.
+  refactor_alternativa: Mutual proximity; reducir dimension antes.
+- id: ANTI-HDA-010
+  antipatron: PCA sin Centrar
+  disfuncion_causal: Ejecutar PCA sin centrar (ni escalar) los datos.
+  senal_de_presencia: SVD sobre datos crudos.
+  impacto_en_robustez: Primer componente captura la media.
+  refactor_alternativa: Centrar y (si procede) estandarizar.
+- id: ANTI-HDA-011
+  antipatron: Retener Componentes por Varianza Ciega
+  disfuncion_causal: Quedarse con k componentes por umbral de varianza sin separar
+    senal de ruido.
+  senal_de_presencia: Corte por varianza acumulada fija.
+  impacto_en_robustez: Componentes de ruido retenidos.
+  refactor_alternativa: Umbral Marchenko-Pastur; validacion cruzada.
+- id: ANTI-HDA-012
+  antipatron: Asumir Embeddings Isotropos
+  disfuncion_causal: Tratar embeddings como isotropos ignorando el cono de anisotropia.
+  senal_de_presencia: Coseno crudo sobre embeddings de LLM.
+  impacto_en_robustez: Similitud inflada y sesgada.
+  refactor_alternativa: Whitening o normalizacion isotropica.
+- id: ANTI-HDA-013
+  antipatron: CP sin Regularizar
+  disfuncion_causal: Ajustar CP sin restricciones, cayendo en degeneracion (factores
+    que divergen y cancelan).
+  senal_de_presencia: CP-ALS sin penalizacion.
+  impacto_en_robustez: Factores -> infinito sin converger.
+  refactor_alternativa: No negatividad/ortogonalidad o border rank.
+- id: ANTI-HDA-014
+  antipatron: Orden de Contraccion Arbitrario
+  disfuncion_causal: Contraer una red tensorial en orden fijo sin optimizar el path.
+  senal_de_presencia: einsum sin optimizar.
+  impacto_en_robustez: Tensor intermedio explosivo.
+  refactor_alternativa: Optimizar el path (opt_einsum).
+- id: ANTI-HDA-015
+  antipatron: Materializar Kronecker
+  disfuncion_causal: Formar el producto de Kronecker explicito en vez de aplicar su
+    estructura.
+  senal_de_presencia: kron(A,B) denso.
+  impacto_en_robustez: Memoria (mn)^2 innecesaria.
+  refactor_alternativa: 'Vec-trick: (B^T kron A) vec(X).'
+- id: ANTI-HDA-016
+  antipatron: Densificar Sparse
+  disfuncion_causal: Convertir una matriz sparse a densa para 'simplificar'.
+  senal_de_presencia: toarray() sobre matriz enorme.
+  impacto_en_robustez: Explosion de memoria.
+  refactor_alternativa: Rutinas sparse nativas.
+- id: ANTI-HDA-017
+  antipatron: Determinante como Test de Singularidad
+  disfuncion_causal: Usar det ~ 0 para juzgar singularidad, cuando escala mal con
+    la dimension.
+  senal_de_presencia: if det(A) < eps.
+  impacto_en_robustez: Diagnostico enganoso (det escala con n).
+  refactor_alternativa: Numero de condicion o rango via SVD.
+- id: ANTI-HDA-018
+  antipatron: Bucle Escalar en vez de BLAS
+  disfuncion_causal: Implementar algebra con bucles Python en lugar de rutinas vectorizadas.
+  senal_de_presencia: for anidados sobre matrices.
+  impacto_en_robustez: Ordenes de magnitud mas lento.
+  refactor_alternativa: BLAS/LAPACK vectorizado; batching.
+- id: ANTI-HDA-019
+  antipatron: Sobre-Estrictificar
+  disfuncion_causal: Colapsar una estructura debil (categorica) a estricta, perdiendo
+    coherencia.
+  senal_de_presencia: Forzar asociatividad estricta.
+  impacto_en_robustez: Perdida de morfismos de coherencia.
+  refactor_alternativa: Trabajar hasta homotopia; respetar coherencia.
+- id: ANTI-HDA-020
+  antipatron: Confundir Rango con Border Rank
+  disfuncion_causal: Truncar tensores asumiendo rank = border rank y sin control de
+    error.
+  senal_de_presencia: Aproximacion de rango k sin verificar.
+  impacto_en_robustez: Error no acotado por mala postura.
+  refactor_alternativa: Formato de rango de borde; control de error.
+- id: RED-HDA-001
+  redundancia_c5: SVD como Oraculo Numerico
+  funcion_topologica: Provee rango, pseudo-inversa, mejor bajo rango y numero de condicion
+    desde una unica factorizacion.
+  riesgo_mitigado: Colapso de rango, mal condicionamiento, inversa inestable.
+  coste_overhead: O(mn min(m,n)) por descomposicion.
+  dependencias: LAPACK gesdd/gesvd.
+- id: RED-HDA-002
+  redundancia_c5: Pivoteo
+  funcion_topologica: Intercambia filas/columnas para evitar pivotes diminutos y estabilizar
+    la factorizacion.
+  riesgo_mitigado: Pivote diminuto, inestabilidad de LU.
+  coste_overhead: Coste de busqueda del pivote.
+  dependencias: LU/QR con pivoteo.
+- id: RED-HDA-003
+  redundancia_c5: Householder / MGS
+  funcion_topologica: Ortogonalizacion estable via reflexiones o Gram-Schmidt modificado.
+  riesgo_mitigado: Perdida de ortogonalidad.
+  coste_overhead: Ligeramente mayor que CGS.
+  dependencias: QR de Householder.
+- id: RED-HDA-004
+  redundancia_c5: Refinamiento Iterativo
+  funcion_topologica: Corrige la solucion de un solve calculando y reinyectando el
+    residuo.
+  riesgo_mitigado: Redondeo acumulado en el solve.
+  coste_overhead: Un residuo y solve extra por iteracion.
+  dependencias: Residuo en precision extendida.
+- id: RED-HDA-005
+  redundancia_c5: Precondicionamiento
+  funcion_topologica: Transforma el sistema para agrupar el espectro y acelerar la
+    convergencia.
+  riesgo_mitigado: Estancamiento de CG/GMRES.
+  coste_overhead: Construccion y aplicacion del precondicionador.
+  dependencias: ILU, multigrid, Jacobi por bloques.
+- id: RED-HDA-006
+  redundancia_c5: Aritmetica Compensada
+  funcion_topologica: Suma/producto interno de Kahan que recupera los bits de redondeo
+    perdidos.
+  riesgo_mitigado: Cancelacion, redondeo acumulado.
+  coste_overhead: ~4x flops en la reduccion.
+  dependencias: Kahan/Neumaier; FMA.
+- id: RED-HDA-007
+  redundancia_c5: Regularizacion de Tikhonov
+  funcion_topologica: Anade un termino ridge que convierte un problema mal planteado
+    en bien planteado.
+  riesgo_mitigado: Mal condicionamiento, mala postura.
+  coste_overhead: Sesgo controlado por lambda.
+  dependencias: Seleccion de lambda (L-curve, GCV).
+- id: RED-HDA-008
+  redundancia_c5: Sketching + Verificacion
+  funcion_topologica: Reduce dimension con proyeccion aleatoria y verifica el resultado
+    a posteriori.
+  riesgo_mitigado: Coste O(n^3), maldicion de dimension.
+  coste_overhead: Error controlado con chequeo posterior.
+  dependencias: JL, CountSketch, leverage.
+- id: RED-HDA-009
+  redundancia_c5: Reortogonalizacion
+  funcion_topologica: Reortogonaliza los vectores de Krylov para evitar autovalores
+    fantasma.
+  riesgo_mitigado: Ruptura de Lanczos/Arnoldi.
+  coste_overhead: Ortogonalizacion adicional por paso.
+  dependencias: Reortogonalizacion selectiva.
+- id: RED-HDA-010
+  redundancia_c5: Forma Canonica de Tensor Network
+  funcion_topologica: Fija el gauge de una red tensorial para estabilizar norma y
+    truncacion.
+  riesgo_mitigado: Fuga de norma, truncacion mal controlada.
+  coste_overhead: Barrido de canonicalizacion (QR/SVD).
+  dependencias: Gauge fixing; forma canonica mixta.

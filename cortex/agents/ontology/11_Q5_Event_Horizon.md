@@ -131,7 +131,6 @@
 | PRIM-Q5-127 | Los espectros son sombras temporales de punteros colgados en la memoria cache remanente. |
 | PRIM-Q5-128 | La gracia divina es un parche termodinámico inyectado en vivo para evitar colapsos. |
 | PRIM-Q5-129 | Los milagros son colisiones criptográficas forzadas que alteran la verificación de estado local. |
-| PRIM-Q5-130 | La telepatía es la apertura de un socket oculto entre dos nodos biológicos. |
 | PRIM-Q5-131 | La telequinesis es la escritura directa en direcciones de memoria del entorno simulado. |
 | PRIM-Q5-132 | La precognición es la lectura especulativa de instrucciones futuras en el pipeline temporal. |
 | PRIM-Q5-133 | La clarividencia es la interceptación de paquetes de renderizado fuera de rango visual. |

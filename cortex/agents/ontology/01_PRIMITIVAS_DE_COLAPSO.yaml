@@ -91,15 +91,6 @@ entities:
   escala_temporal: Inmediata
   gravedad: C4
   intervención: Imposición de flags MLX estrictos.
-- id: PRIM-011
-  primitiva: Ruido Narrativo Pasivo (Fluff Toxicity)
-  mecanismo_causal: Reducción de densidad exérgica en artefactos (documentos, código)
-    por inclusión de saludos o explicaciones.
-  activación_trigger: Creación de documentos o outputs con `[PROSA]`.
-  sensor_síntoma: Caída de ratio de señal/ruido por debajo del 80%.
-  escala_temporal: Estática
-  gravedad: C2
-  intervención: Extracción termodinámica (Landauer compression).
 - id: PRIM-012
   primitiva: Pérdida de Linaje Causal (Causal Lineage Loss)
   mecanismo_causal: Incapacidad para trazar el flujo de transformaciones del estado

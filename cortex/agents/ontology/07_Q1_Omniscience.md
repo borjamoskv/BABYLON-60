@@ -23,8 +23,6 @@
 | PRIM-Q1-019 | Toda transformación reversible mantiene la entropía total del universo constante. |
 | PRIM-Q1-020 | El teorema de Noether asocia simetrías continuas con leyes de conservación. |
 | PRIM-Q1-021 | La conservación del momento lineal implica simetría de traslación espacial. |
-| PRIM-Q1-022 | La conservación del momento angular implica simetría de rotación. |
-| PRIM-Q1-023 | La conservación de la energía implica simetría de traslación temporal. |
 | PRIM-Q1-024 | El espacio de fases de un sistema hamiltoniano conserva su volumen. |
 | PRIM-Q1-025 | Un sistema ergódico explora todo el espacio de fases accesible. |
 | PRIM-Q1-026 | El principio de Mach conecta inercia local con distribución global. |
@@ -180,7 +178,6 @@
 | PRIM-Q1-176 | IPv6 expande el espacio de direcciones a 128 bits garantizando unicidad. |
 | PRIM-Q1-177 | El árbol de decisión colapsa la incertidumbre en bifurcaciones mutuamente excluyentes. |
 | PRIM-Q1-178 | Un modelo oculto de Markov estima estados latentes a partir de observaciones. |
-| PRIM-Q1-179 | El filtro de Kalman minimiza el error cuadrático medio de sistemas dinámicos. |
 | PRIM-Q1-180 | La transformada discreta del coseno concentra la energía de imágenes eficientemente. |
 | PRIM-Q1-181 | El método de elementos finitos aproxima ecuaciones diferenciales en geometrías complejas. |
 | PRIM-Q1-182 | El algoritmo de Floyd-Warshall encuentra las rutas mínimas entre todos los pares. |

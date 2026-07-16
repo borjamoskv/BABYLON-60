@@ -1,0 +1,468 @@
+entities:
+- id: PRIM-Q1-001
+  contenido: La entropía de un sistema aislado nunca decrece.
+- id: PRIM-Q1-002
+  contenido: La energía libre determina la capacidad de trabajo computacional.
+- id: PRIM-Q1-003
+  contenido: El límite de Landauer fija el costo de borrar un bit.
+- id: PRIM-Q1-004
+  contenido: El colapso del estado cuántico es termodinámicamente irreversible.
+- id: PRIM-Q1-005
+  contenido: La información mutua acota la dependencia entre dos variables.
+- id: PRIM-Q1-006
+  contenido: El teorema de Shannon define el límite de capacidad del canal.
+- id: PRIM-Q1-007
+  contenido: Un autómata finito determinista posee un único estado siguiente.
+- id: PRIM-Q1-008
+  contenido: La complejidad de Kolmogorov mide la entropía algorítmica absoluta.
+- id: PRIM-Q1-009
+  contenido: El estado estacionario minimiza la producción de entropía local.
+- id: PRIM-Q1-010
+  contenido: La integral de acción se minimiza en trayectorias clásicas.
+- id: PRIM-Q1-011
+  contenido: La energía total de un sistema hamiltoniano cerrado se conserva.
+- id: PRIM-Q1-012
+  contenido: La divergencia del campo magnético es siempre estrictamente cero.
+- id: PRIM-Q1-013
+  contenido: El trabajo mecánico equivale a la integral de fuerza por desplazamiento.
+- id: PRIM-Q1-014
+  contenido: La exergía destruida es proporcional a la entropía generada.
+- id: PRIM-Q1-015
+  contenido: El equilibrio termodinámico carece de gradientes de potencial macroscópicos.
+- id: PRIM-Q1-016
+  contenido: Un ciclo de Carnot define la máxima eficiencia térmica teórica.
+- id: PRIM-Q1-017
+  contenido: La ley de Gauss relaciona flujo eléctrico y carga interior.
+- id: PRIM-Q1-018
+  contenido: La asimetría temporal es consecuencia de la segunda ley termodinámica.
+- id: PRIM-Q1-019
+  contenido: Toda transformación reversible mantiene la entropía total del universo
+    constante.
+- id: PRIM-Q1-020
+  contenido: El teorema de Noether asocia simetrías continuas con leyes de conservación.
+- id: PRIM-Q1-021
+  contenido: La conservación del momento lineal implica simetría de traslación espacial.
+- id: PRIM-Q1-022
+  contenido: La conservación del momento angular implica simetría de rotación.
+- id: PRIM-Q1-023
+  contenido: La conservación de la energía implica simetría de traslación temporal.
+- id: PRIM-Q1-024
+  contenido: El espacio de fases de un sistema hamiltoniano conserva su volumen.
+- id: PRIM-Q1-025
+  contenido: Un sistema ergódico explora todo el espacio de fases accesible.
+- id: PRIM-Q1-026
+  contenido: El principio de Mach conecta inercia local con distribución global.
+- id: PRIM-Q1-027
+  contenido: La velocidad de propagación de información está limitada por c.
+- id: PRIM-Q1-028
+  contenido: El espectro de radiación de cuerpo negro depende solo de T.
+- id: PRIM-Q1-029
+  contenido: La mecánica clásica es el límite macroscópico de la mecánica cuántica.
+- id: PRIM-Q1-030
+  contenido: La carga eléctrica está estrictamente cuantizada en múltiplos elementales.
+- id: PRIM-Q1-031
+  contenido: La masa inercial y la masa gravitacional son estrictamente equivalentes.
+- id: PRIM-Q1-032
+  contenido: La ecuación de continuidad garantiza la conservación local de masa.
+- id: PRIM-Q1-033
+  contenido: La dinámica de fluidos incompresibles conserva el volumen del flujo.
+- id: PRIM-Q1-034
+  contenido: El teorema de Bernoulli relaciona presión, velocidad y altura gravitacional.
+- id: PRIM-Q1-035
+  contenido: La entropía de von Neumann mide la pureza del estado cuántico.
+- id: PRIM-Q1-036
+  contenido: El límite de Bekenstein acota la entropía máxima de una región.
+- id: PRIM-Q1-037
+  contenido: La entropía de un agujero negro es proporcional a su área.
+- id: PRIM-Q1-038
+  contenido: Toda métrica de espacio-tiempo plano tiene curvatura de Riemann nula.
+- id: PRIM-Q1-039
+  contenido: La geodésica maximiza el tiempo propio entre dos eventos espacio-temporales.
+- id: PRIM-Q1-040
+  contenido: El tensor de energía-impulso describe la densidad y flujo de energía.
+- id: PRIM-Q1-041
+  contenido: Una máquina de Turing universal puede simular cualquier cómputo algorítmico.
+- id: PRIM-Q1-042
+  contenido: El problema de la parada es indecidible para máquinas de Turing.
+- id: PRIM-Q1-043
+  contenido: Toda función computable es calculable mediante cálculo lambda.
+- id: PRIM-Q1-044
+  contenido: P es el conjunto de problemas de decisión resolubles en tiempo polinómico.
+- id: PRIM-Q1-045
+  contenido: NP incluye problemas cuyas soluciones son verificables en tiempo polinómico.
+- id: PRIM-Q1-046
+  contenido: El teorema de Cook-Levin prueba que SAT es NP-completo.
+- id: PRIM-Q1-047
+  contenido: Un grafo bipartito carece de ciclos de longitud impar.
+- id: PRIM-Q1-048
+  contenido: El teorema de Euler requiere vértices de grado par para ciclos.
+- id: PRIM-Q1-049
+  contenido: Todo árbol con n vértices tiene exactamente n-1 aristas.
+- id: PRIM-Q1-050
+  contenido: La complejidad de tiempo de búsqueda binaria es logarítmica.
+- id: PRIM-Q1-051
+  contenido: El ordenamiento por mezcla garantiza tiempo O(n log n) en el peor caso.
+- id: PRIM-Q1-052
+  contenido: Una tabla hash amortiza el costo de búsqueda a tiempo constante.
+- id: PRIM-Q1-053
+  contenido: El teorema del límite central describe la convergencia a distribuciones
+    normales.
+- id: PRIM-Q1-054
+  contenido: La varianza de una suma de variables independientes es aditiva.
+- id: PRIM-Q1-055
+  contenido: La esperanza matemática es un operador estrictamente lineal.
+- id: PRIM-Q1-056
+  contenido: La desigualdad de Markov acota la probabilidad de valores extremos.
+- id: PRIM-Q1-057
+  contenido: La desigualdad de Chebyshev limita la varianza de distribuciones aleatorias.
+- id: PRIM-Q1-058
+  contenido: Un proceso de Markov depende exclusivamente de su estado inmediatamente
+    anterior.
+- id: PRIM-Q1-059
+  contenido: La matriz de transición de una cadena de Markov estocástica suma uno.
+- id: PRIM-Q1-060
+  contenido: Toda función booleana puede implementarse con compuertas NAND o NOR.
+- id: PRIM-Q1-061
+  contenido: El teorema de De Morgan relaciona conjunciones y disyunciones lógicas.
+- id: PRIM-Q1-062
+  contenido: Un sistema deductivo consistente no puede derivar una contradicción.
+- id: PRIM-Q1-063
+  contenido: El primer teorema de Gödel prueba la incompletitud de sistemas aritméticos.
+- id: PRIM-Q1-064
+  contenido: El axioma de elección equivale al principio del buen orden.
+- id: PRIM-Q1-065
+  contenido: Toda matriz simétrica real tiene autovalores estrictamente reales.
+- id: PRIM-Q1-066
+  contenido: El determinante de una matriz ortogonal es uno o menos uno.
+- id: PRIM-Q1-067
+  contenido: El rango de una matriz equivale al número de filas linealmente independientes.
+- id: PRIM-Q1-068
+  contenido: El teorema fundamental del álgebra garantiza n raíces en los complejos.
+- id: PRIM-Q1-069
+  contenido: La derivada de una constante es invariablemente igual a cero.
+- id: PRIM-Q1-070
+  contenido: La integral de la derivada de una función recupera la función original.
+- id: PRIM-Q1-071
+  contenido: Una función analítica es infinitamente derivable en su dominio abierto.
+- id: PRIM-Q1-072
+  contenido: La fórmula de Euler conecta exponenciales complejas con funciones trigonométricas.
+- id: PRIM-Q1-073
+  contenido: Los números primos son los átomos multiplicativos de los números enteros.
+- id: PRIM-Q1-074
+  contenido: El teorema fundamental de la aritmética garantiza factorización prima
+    única.
+- id: PRIM-Q1-075
+  contenido: El máximo común divisor divide cualquier combinación lineal de dos enteros.
+- id: PRIM-Q1-076
+  contenido: El pequeño teorema de Fermat describe la congruencia de potencias primas.
+- id: PRIM-Q1-077
+  contenido: Un grupo abeliano requiere que su operación binaria sea conmutativa.
+- id: PRIM-Q1-078
+  contenido: El teorema de Lagrange acota el orden de subgrupos finitos.
+- id: PRIM-Q1-079
+  contenido: Un espacio topológico compacto requiere que todo recubrimiento tenga
+    subrecubrimiento finito.
+- id: PRIM-Q1-080
+  contenido: La característica de Euler es un invariante topológico de superficies.
+- id: PRIM-Q1-081
+  contenido: Un sistema dinámico lineal es asintóticamente estable si sus polos son
+    negativos.
+- id: PRIM-Q1-082
+  contenido: La transformada de Fourier mapea el tiempo al dominio de la frecuencia.
+- id: PRIM-Q1-083
+  contenido: El teorema de Nyquist-Shannon define la frecuencia de muestreo crítica
+    mínima.
+- id: PRIM-Q1-084
+  contenido: Un filtro causal no puede responder a entradas futuras.
+- id: PRIM-Q1-085
+  contenido: La convolución en el dominio del tiempo equivale a multiplicación en
+    frecuencia.
+- id: PRIM-Q1-086
+  contenido: El principio de superposición aplica estrictamente a sistemas lineales.
+- id: PRIM-Q1-087
+  contenido: La realimentación negativa reduce la ganancia y estabiliza el sistema
+    de control.
+- id: PRIM-Q1-088
+  contenido: La realimentación positiva incrementa la inestabilidad y empuja el sistema
+    a los límites.
+- id: PRIM-Q1-089
+  contenido: El diagrama de Bode representa la respuesta en frecuencia en escala logarítmica.
+- id: PRIM-Q1-090
+  contenido: Un margen de fase positivo indica estabilidad en sistemas de lazo cerrado.
+- id: PRIM-Q1-091
+  contenido: La transformada de Laplace resuelve ecuaciones diferenciales como sistemas
+    algebraicos.
+- id: PRIM-Q1-092
+  contenido: Toda matriz definida positiva tiene una factorización de Cholesky única.
+- id: PRIM-Q1-093
+  contenido: El método de Newton-Raphson ofrece convergencia cuadrática cerca de la
+    raíz.
+- id: PRIM-Q1-094
+  contenido: La interpolación polinómica de Lagrange de grado n requiere n+1 puntos
+    distintos.
+- id: PRIM-Q1-095
+  contenido: La cuadratura de Gauss optimiza la precisión de la integración numérica.
+- id: PRIM-Q1-096
+  contenido: Un sistema sobre-determinado se resuelve óptimamente minimizando el error
+    cuadrático medio.
+- id: PRIM-Q1-097
+  contenido: La descomposición en valores singulares diagonaliza cualquier matriz
+    rectangular.
+- id: PRIM-Q1-098
+  contenido: Un modelo lineal de mínimos cuadrados proyecta datos ortogonalmente.
+- id: PRIM-Q1-099
+  contenido: La regresión de Ridge penaliza la norma L2 de los coeficientes.
+- id: PRIM-Q1-100
+  contenido: La regresión Lasso induce esparsidad penalizando la norma L1.
+- id: PRIM-Q1-101
+  contenido: Una red neuronal feedforward carece de ciclos de retroalimentación interna.
+- id: PRIM-Q1-102
+  contenido: La retropropagación computa el gradiente usando la regla de la cadena.
+- id: PRIM-Q1-103
+  contenido: Una función de activación no lineal permite aprender fronteras de decisión
+    complejas.
+- id: PRIM-Q1-104
+  contenido: El descenso de gradiente estocástico aproxima la dirección de máximo
+    descenso.
+- id: PRIM-Q1-105
+  contenido: El problema del desvanecimiento del gradiente impide aprender dependencias
+    a largo plazo.
+- id: PRIM-Q1-106
+  contenido: Una red recurrente mantiene memoria interna a través de ciclos retroalimentados.
+- id: PRIM-Q1-107
+  contenido: Las capas convolucionales explotan la invariancia de traslación espacial.
+- id: PRIM-Q1-108
+  contenido: El teorema de aproximación universal aplica a redes neuronales con capas
+    ocultas.
+- id: PRIM-Q1-109
+  contenido: El sobreajuste memoriza el ruido en lugar de la señal subyacente.
+- id: PRIM-Q1-110
+  contenido: La validación cruzada estima el error de generalización en datos invisibles.
+- id: PRIM-Q1-111
+  contenido: Un clasificador de Bayes ingenuo asume independencia condicional entre
+    características.
+- id: PRIM-Q1-112
+  contenido: Las máquinas de soporte vectorial maximizan el margen de separación inter-clase.
+- id: PRIM-Q1-113
+  contenido: El kernel trick proyecta datos a espacios de mayor dimensión implícitamente.
+- id: PRIM-Q1-114
+  contenido: Un bosque aleatorio reduce la varianza promediando árboles de decisión
+    descorrelacionados.
+- id: PRIM-Q1-115
+  contenido: El algoritmo K-means minimiza la varianza intra-cluster de las asignaciones.
+- id: PRIM-Q1-116
+  contenido: El análisis de componentes principales maximiza la varianza de proyecciones
+    ortogonales.
+- id: PRIM-Q1-117
+  contenido: El equilibrio de Nash ocurre cuando ningún jugador puede mejorar unilateralmente.
+- id: PRIM-Q1-118
+  contenido: Un juego de suma cero implica conflicto de intereses estrictamente opuesto.
+- id: PRIM-Q1-119
+  contenido: El teorema de Minimax de von Neumann resuelve juegos finitos de suma
+    cero.
+- id: PRIM-Q1-120
+  contenido: El dilema del prisionero demuestra que la racionalidad local no asegura
+    óptimos globales.
+- id: PRIM-Q1-121
+  contenido: La tragedia de los comunes ocurre por sobreexplotación de recursos compartidos.
+- id: PRIM-Q1-122
+  contenido: Las subastas de Vickrey incentivan revelar el valor verdadero de los
+    participantes.
+- id: PRIM-Q1-123
+  contenido: El mecanismo de Clarke-Groves internaliza externalidades para alinear
+    incentivos.
+- id: PRIM-Q1-124
+  contenido: El lema de Itô es la regla de la cadena para procesos estocásticos.
+- id: PRIM-Q1-125
+  contenido: La fórmula de Black-Scholes evalúa opciones europeas sin riesgo de arbitraje.
+- id: PRIM-Q1-126
+  contenido: La hipótesis de mercados eficientes asume que los precios reflejan toda
+    información.
+- id: PRIM-Q1-127
+  contenido: El modelo de Markowitz optimiza portafolios maximizando retorno para
+    riesgo dado.
+- id: PRIM-Q1-128
+  contenido: Un mercado en equilibrio equilibra oferta y demanda agregada exactamente.
+- id: PRIM-Q1-129
+  contenido: La ventaja comparativa impulsa el comercio incluso con superioridad absoluta
+    asimétrica.
+- id: PRIM-Q1-130
+  contenido: La ley de retornos decrecientes acota la producción con insumos limitados.
+- id: PRIM-Q1-131
+  contenido: El PIB mide la producción económica total dentro de fronteras nacionales.
+- id: PRIM-Q1-132
+  contenido: La inflación erosiona el poder adquisitivo de la moneda fiduciaria sostenidamente.
+- id: PRIM-Q1-133
+  contenido: La oferta monetaria y la velocidad de circulación determinan el nivel
+    general de precios.
+- id: PRIM-Q1-134
+  contenido: La curva de Phillips muestra un compromiso a corto plazo entre inflación
+    y desempleo.
+- id: PRIM-Q1-135
+  contenido: Un monopsonio es una estructura de mercado con un único comprador dominante.
+- id: PRIM-Q1-136
+  contenido: El costo de oportunidad es el valor de la mejor alternativa sacrificada.
+- id: PRIM-Q1-137
+  contenido: La externalidad de red aumenta el valor del bien al aumentar usuarios.
+- id: PRIM-Q1-138
+  contenido: Los bienes públicos puros son no excluibles y no rivales en consumo.
+- id: PRIM-Q1-139
+  contenido: La tasa de interés regula la preferencia temporal del consumo presente
+    versus futuro.
+- id: PRIM-Q1-140
+  contenido: La equivalencia ricardiana sugiere que la deuda gubernamental anticipa
+    impuestos futuros.
+- id: PRIM-Q1-141
+  contenido: Un bit de paridad detecta errores simples pero no puede corregirlos.
+- id: PRIM-Q1-142
+  contenido: El código de Hamming permite corrección de errores de un solo bit.
+- id: PRIM-Q1-143
+  contenido: Un canal sin ruido transmite información sin pérdida de entropía.
+- id: PRIM-Q1-144
+  contenido: La encriptación RSA depende de la dureza de factorizar productos primos.
+- id: PRIM-Q1-145
+  contenido: La criptografía de curva elíptica requiere claves más pequeñas para igual
+    seguridad.
+- id: PRIM-Q1-146
+  contenido: Un hash criptográfico es determinista, rápido e irreduciblemente irreversible.
+- id: PRIM-Q1-147
+  contenido: Las pruebas de conocimiento cero verifican proposiciones sin revelar
+    información subyacente.
+- id: PRIM-Q1-148
+  contenido: Una firma digital garantiza autenticidad y no repudio del mensaje firmado.
+- id: PRIM-Q1-149
+  contenido: La distribución de claves cuánticas es segura por la perturbación de
+    medición.
+- id: PRIM-Q1-150
+  contenido: AES es un cifrado de bloque simétrico sin vulnerabilidades polinomiales
+    conocidas.
+- id: PRIM-Q1-151
+  contenido: Un protocolo de consenso bizantino requiere dos tercios de nodos honestos.
+- id: PRIM-Q1-152
+  contenido: Proof of Work impone un costo termodinámico al ataque Sybil en redes.
+- id: PRIM-Q1-153
+  contenido: Una cadena de bloques es un libro de registro estructurado y solo de
+    adición.
+- id: PRIM-Q1-154
+  contenido: Los contratos inteligentes son autómatas deterministas ejecutados sobre
+    registros distribuidos inmutables.
+- id: PRIM-Q1-155
+  contenido: Un ataque del 51% reescribe el historial reciente del árbol de bloques.
+- id: PRIM-Q1-156
+  contenido: El problema de los generales bizantinos modela consenso bajo fallos maliciosos.
+- id: PRIM-Q1-157
+  contenido: La ley de Amdahl acota la aceleración de la computación paralela asimétrica.
+- id: PRIM-Q1-158
+  contenido: La ley de Gustafson ajusta la escalabilidad paralela para tamaños de
+    problema variables.
+- id: PRIM-Q1-159
+  contenido: Un semáforo binario funciona como bloqueo de exclusión mutua para concurrencia.
+- id: PRIM-Q1-160
+  contenido: Un interbloqueo requiere retención de recursos, exclusión mutua y espera
+    circular.
+- id: PRIM-Q1-161
+  contenido: El paginamiento de memoria evita la fragmentación externa en sistemas
+    operativos.
+- id: PRIM-Q1-162
+  contenido: La jerarquía de memoria oculta la latencia de almacenamiento de gran
+    capacidad.
+- id: PRIM-Q1-163
+  contenido: Un fallo de caché obliga al procesador a esperar memoria principal.
+- id: PRIM-Q1-164
+  contenido: El protocolo MESI mantiene la coherencia de caché en multiprocesadores
+    de memoria compartida.
+- id: PRIM-Q1-165
+  contenido: Un ciclo de instrucción consta de búsqueda, decodificación y ejecución
+    ordenada.
+- id: PRIM-Q1-166
+  contenido: La ejecución fuera de orden explota paralelismo a nivel de instrucción
+    oculto.
+- id: PRIM-Q1-167
+  contenido: El predictor de saltos mitiga el costo de ruteos condicionales en pipelines.
+- id: PRIM-Q1-168
+  contenido: La arquitectura de Von Neumann unifica datos y código en la misma memoria.
+- id: PRIM-Q1-169
+  contenido: Un hipervisor abstrae recursos físicos permitiendo máquinas virtuales
+    independientes operativas.
+- id: PRIM-Q1-170
+  contenido: Los contenedores comparten núcleo pero aíslan el espacio de usuario completamente.
+- id: PRIM-Q1-171
+  contenido: REST es una arquitectura sin estado basada en métodos HTTP estándar.
+- id: PRIM-Q1-172
+  contenido: El protocolo TCP asegura entrega ordenada y detección de paquetes perdidos.
+- id: PRIM-Q1-173
+  contenido: El protocolo UDP sacrifica la fiabilidad por mínima latencia de red.
+- id: PRIM-Q1-174
+  contenido: El DNS mapea jerárquicamente nombres legibles a direcciones IP numéricas.
+- id: PRIM-Q1-175
+  contenido: BGP enruta paquetes a través de sistemas autónomos en la infraestructura
+    global.
+- id: PRIM-Q1-176
+  contenido: IPv6 expande el espacio de direcciones a 128 bits garantizando unicidad.
+- id: PRIM-Q1-177
+  contenido: El árbol de decisión colapsa la incertidumbre en bifurcaciones mutuamente
+    excluyentes.
+- id: PRIM-Q1-178
+  contenido: Un modelo oculto de Markov estima estados latentes a partir de observaciones.
+- id: PRIM-Q1-179
+  contenido: El filtro de Kalman minimiza el error cuadrático medio de sistemas dinámicos.
+- id: PRIM-Q1-180
+  contenido: La transformada discreta del coseno concentra la energía de imágenes
+    eficientemente.
+- id: PRIM-Q1-181
+  contenido: El método de elementos finitos aproxima ecuaciones diferenciales en geometrías
+    complejas.
+- id: PRIM-Q1-182
+  contenido: El algoritmo de Floyd-Warshall encuentra las rutas mínimas entre todos
+    los pares.
+- id: PRIM-Q1-183
+  contenido: La búsqueda en profundidad explora sistemáticamente las ramas hasta agotar
+    posibilidades.
+- id: PRIM-Q1-184
+  contenido: Una gramática libre de contexto puede ser analizada en tiempo cúbico.
+- id: PRIM-Q1-185
+  contenido: El lema de bombeo descarta regularidad en lenguajes formalmente infinitos
+    estructurados.
+- id: PRIM-Q1-186
+  contenido: Un autómata con pila reconoce exactamente los lenguajes libres de contexto.
+- id: PRIM-Q1-187
+  contenido: La herencia permite reusabilidad jerárquica en programación orientada
+    a objetos.
+- id: PRIM-Q1-188
+  contenido: El polimorfismo permite a interfaces únicas operar sobre distintos tipos
+    subyacentes.
+- id: PRIM-Q1-189
+  contenido: El encapsulamiento restringe el acceso directo a estados internos del
+    objeto.
+- id: PRIM-Q1-190
+  contenido: Un diseño Singleton garantiza una única instancia global de una clase
+    dada.
+- id: PRIM-Q1-191
+  contenido: El recolector de basura automatiza la liberación de memoria previamente
+    inalcanzable.
+- id: PRIM-Q1-192
+  contenido: Los cierres capturan referencias léxicas del entorno donde fueron creados.
+- id: PRIM-Q1-193
+  contenido: Un monad encapsula estado y cómputo secuencial en lenguajes puramente
+    funcionales.
+- id: PRIM-Q1-194
+  contenido: El currying descompone funciones multivariables en secuencias de funciones
+    univariables.
+- id: PRIM-Q1-195
+  contenido: La recursión de cola previene el desbordamiento de pila en evaluaciones
+    secuenciales.
+- id: PRIM-Q1-196
+  contenido: Un árbol balanceado garantiza operaciones de búsqueda y mutación en tiempo
+    logarítmico.
+- id: PRIM-Q1-197
+  contenido: Un grafo acíclico dirigido define estrictamente dependencias jerárquicas
+    irresolubles mutuamente.
+- id: PRIM-Q1-198
+  contenido: El modelo relacional organiza datos en tablas unificadas bajo restricciones
+    de integridad.
+- id: PRIM-Q1-199
+  contenido: La normalización de bases de datos minimiza anomalías de inserción, actualización
+    y borrado.
+- id: PRIM-Q1-200
+  contenido: Las transacciones ACID garantizan integridad atómica incluso ante fallos
+    catastróficos.

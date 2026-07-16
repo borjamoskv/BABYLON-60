@@ -1,0 +1,207 @@
+entities:
+- id: INV-TOP-001
+  invariante: Aciclicidad Global
+  logica___principio: El grafo de dependencias es un DAG.
+  implicacion_operacional: Un ciclo de control es un interbloqueo latente.
+  condicion_de_borde: Ciclo detectado en el grafo.
+  metrica_falsable: Nro. de ciclos == 0.
+- id: INV-TOP-002
+  invariante: Escritor Unico por Log
+  logica___principio: Cada log tiene exactamente un escritor.
+  implicacion_operacional: Sin contencion de escritura ni historias rivales.
+  condicion_de_borde: Dos escritores sobre el mismo log.
+  metrica_falsable: Escritores por log == 1.
+- id: INV-TOP-003
+  invariante: Profundidad de Delegacion Acotada
+  logica___principio: La cadena de delegacion no supera 2 niveles.
+  implicacion_operacional: Evita el efecto telefono roto causal (INV-026).
+  condicion_de_borde: Delegacion de nivel > 2.
+  metrica_falsable: Profundidad maxima <= 2.
+- id: INV-TOP-004
+  invariante: Cero Estado Compartido entre Celdas
+  logica___principio: Las celdas no comparten estado mutable.
+  implicacion_operacional: Un fallo no cruza la frontera de celda.
+  condicion_de_borde: Estado escrito por dos celdas.
+  metrica_falsable: Punteros cross-celda == 0.
+- id: INV-TOP-005
+  invariante: Minimalidad de BFT
+  logica___principio: El orden total se reserva al estado critico.
+  implicacion_operacional: El consenso es caro; no se usa por defecto.
+  condicion_de_borde: Consenso sobre estado no critico.
+  metrica_falsable: Fraccion de estado en BFT minimizada.
+- id: INV-TOP-006
+  invariante: Cota Bizantina 3f+1
+  logica___principio: Tolerar f nodos maliciosos exige N >= 3f+1.
+  implicacion_operacional: N=3 solo tolera 1 caida, no 1 nodo mentiroso.
+  condicion_de_borde: N < 3f+1 con modelo bizantino.
+  metrica_falsable: N >= 3f+1 verificado.
+- id: INV-TOP-007
+  invariante: Espina Unica de Verdad
+  logica___principio: Una fuente de verdad; el resto son proyecciones.
+  implicacion_operacional: La RAM lee el log, no lo posee (INV-002).
+  condicion_de_borde: Dos fuentes autoritativas.
+  metrica_falsable: Fuentes de verdad == 1.
+- id: INV-TOP-008
+  invariante: Contencion de Blast Radius
+  logica___principio: Un fallo se queda en su dominio.
+  implicacion_operacional: El aislamiento acota el dano maximo.
+  condicion_de_borde: Fallo que se propaga entre celdas.
+  metrica_falsable: Celdas afectadas por fallo == 1.
+- id: INV-TOP-009
+  invariante: Idempotencia de Mensajes
+  logica___principio: Reprocesar un mensaje no altera el estado.
+  implicacion_operacional: Reintentos seguros; entrega at-least-once viable.
+  condicion_de_borde: Efecto distinto al reprocesar.
+  metrica_falsable: Delta de segundo proceso == 0.
+- id: INV-TOP-010
+  invariante: Backpressure Obligatorio
+  logica___principio: Todo canal tiene limite y contrapresion.
+  implicacion_operacional: Sin colas ilimitadas que revienten la memoria.
+  condicion_de_borde: Cola sin cota superior.
+  metrica_falsable: Longitud de cola acotada siempre.
+- id: INV-TOP-011
+  invariante: Localidad de Consistencia Fuerte
+  logica___principio: CP local siempre disponible; coordinacion solo si el orden cruza
+    nodos.
+  implicacion_operacional: Escritura local sin bloqueo global.
+  condicion_de_borde: Coordinacion global para estado local.
+  metrica_falsable: Latencia de escritura local sin quorum.
+- id: INV-TOP-012
+  invariante: Simetria de Conway
+  logica___principio: La topologia del sistema refleja la de los agentes.
+  implicacion_operacional: Fronteras de modulo = fronteras de equipo/agente (INV-030).
+  condicion_de_borde: Modulo transversal a varios equipos.
+  metrica_falsable: Modularidad del grafo de dependencia.
+- id: ANTI-TOP-001
+  antipatron: Hub en la Via Critica
+  disfuncion_causal: Todo el trafico critico pasa por un nodo central.
+  senal_de_presencia: Estrella pura sobre el camino principal.
+  impacto_en_robustez: SPOF y cuello de botella (pinch causal).
+  refactor_alternativa: Replicar el hub o pasar a DAG/celdas.
+- id: ANTI-TOP-002
+  antipatron: Dependencias Ciclicas
+  disfuncion_causal: El grafo de dependencias contiene ciclos.
+  senal_de_presencia: A depende de B que depende de A.
+  impacto_en_robustez: Interbloqueo y arranque imposible.
+  refactor_alternativa: Romper el ciclo; inyeccion de dependencias DAG.
+- id: ANTI-TOP-003
+  antipatron: BFT en Todas Partes
+  disfuncion_causal: Consenso de orden total donde no hace falta.
+  senal_de_presencia: Quorum para cachear o para estado local.
+  impacto_en_robustez: Latencia y coste x N sin beneficio.
+  refactor_alternativa: Acotar BFT al estado critico.
+- id: ANTI-TOP-004
+  antipatron: N=3 para Bizantino
+  disfuncion_causal: Quorum insuficiente para un adversario malicioso.
+  senal_de_presencia: Se llama BFT a un cluster de 3 nodos.
+  impacto_en_robustez: Un nodo mentiroso rompe el consenso.
+  refactor_alternativa: N >= 3f+1 (4 para f=1).
+- id: ANTI-TOP-005
+  antipatron: Estado Compartido entre Celdas
+  disfuncion_causal: Celdas que comparten una base de datos mutable.
+  senal_de_presencia: Acoplamiento oculto por estado comun.
+  impacto_en_robustez: Un fallo cruza el bulkhead (cascada).
+  refactor_alternativa: Estado por celda; comunicacion por mensajes.
+- id: ANTI-TOP-006
+  antipatron: Delegacion Profunda
+  disfuncion_causal: Cadenas de delegacion de mas de 2 niveles.
+  senal_de_presencia: Subagente que delega que delega.
+  impacto_en_robustez: Telefono roto causal; latencia y perdida.
+  refactor_alternativa: Aplanar a profundidad <= 2.
+- id: ANTI-TOP-007
+  antipatron: Monolito Distribuido
+  disfuncion_causal: Microservicios acoplados sincronicamente en todo.
+  senal_de_presencia: Un cambio obliga a desplegar varios servicios.
+  impacto_en_robustez: 'Peor que el monolito: fragil y lento.'
+  refactor_alternativa: Limites por Conway; acoplamiento asincrono.
+- id: ANTI-TOP-008
+  antipatron: Malla Chismosa
+  disfuncion_causal: Servicios que se llaman en O(n^2) sincronicamente.
+  senal_de_presencia: Cascadas de llamadas sincronas entre pares.
+  impacto_en_robustez: Amplificacion de latencia y de fallos.
+  refactor_alternativa: Event-driven; agregacion; backpressure.
+- id: ANTI-TOP-009
+  antipatron: Fuente de Verdad Dual
+  disfuncion_causal: Dos logs o BDs autoritativos del mismo estado.
+  senal_de_presencia: Sincronizacion bidireccional ad-hoc.
+  impacto_en_robustez: Split-Brain garantizado bajo particion.
+  refactor_alternativa: Una espina de log; el resto proyecciones.
+- id: ANTI-TOP-010
+  antipatron: Sin Backpressure
+  disfuncion_causal: Canales y colas sin limite superior.
+  senal_de_presencia: Productor mas rapido que el consumidor.
+  impacto_en_robustez: OOM en cascada bajo carga.
+  refactor_alternativa: Colas acotadas; control de flujo; drop/limit.
+- id: ANTI-TOP-011
+  antipatron: Reintento Ciego
+  disfuncion_causal: Reintentos sin backoff ni circuit breaker.
+  senal_de_presencia: Bucle de retry inmediato ante fallo.
+  impacto_en_robustez: Tormenta de reintentos (DDoS accidental).
+  refactor_alternativa: Backoff exponencial + circuit breaker (PRIM-049).
+- id: ANTI-TOP-012
+  antipatron: Consistencia Uniforme
+  disfuncion_causal: Tratar todo el estado con una sola clase (todo CP o todo AP).
+  senal_de_presencia: Misma politica para cache y para dinero.
+  impacto_en_robustez: O lento de mas, o inconsistente de mas.
+  refactor_alternativa: Clases de consistencia por pieza de estado.
+- id: RED-TOP-001
+  redundancia_c5: Espina de Event Sourcing
+  funcion_topologica: Log append-only como unica fuente de verdad; todo se reconstruye
+    por replay.
+  riesgo_mitigado: Perdida de linaje, Split-Brain, estado divergente.
+  coste_overhead: Almacenamiento del log; snapshots periodicos.
+  dependencias: Log store append-only.
+- id: RED-TOP-002
+  redundancia_c5: Arbol de Supervision + Apoptosis
+  funcion_topologica: Supervisores que detectan, reinician o matan hijos podridos.
+  riesgo_mitigado: Zombificacion, Interbloqueo Recursivo.
+  coste_overhead: Un thread de monitoreo por supervisor.
+  dependencias: Runtime de actores/OTP.
+- id: RED-TOP-003
+  redundancia_c5: Bulkheads por Celda
+  funcion_topologica: Aisla dominios de fallo autosuficientes.
+  riesgo_mitigado: Cascada de fallos; blast radius amplio.
+  coste_overhead: Duplicacion de recursos por celda.
+  dependencias: Particion de estado y despliegue.
+- id: RED-TOP-004
+  redundancia_c5: BFT Acotado
+  funcion_topologica: Orden total por quorum solo para el estado critico.
+  riesgo_mitigado: Colapso de Consenso Bizantino (PRIM-005).
+  coste_overhead: Latencia de quorum; N >= 3f+1 nodos.
+  dependencias: Protocolo BFT (PBFT/HotStuff).
+- id: RED-TOP-005
+  redundancia_c5: Merge CRDT
+  funcion_topologica: Convergencia de replicas sin coordinacion.
+  riesgo_mitigado: Bloqueo por particion; conflictos de escritura.
+  coste_overhead: Metadatos de version por objeto.
+  dependencias: Tipos de datos convergentes.
+- id: RED-TOP-006
+  redundancia_c5: Anti-Entropia por Gossip
+  funcion_topologica: Reconciliacion periodica del estado entre pares.
+  riesgo_mitigado: Deriva de estado; SPOF de diseminacion.
+  coste_overhead: Trafico de fondo constante.
+  dependencias: Protocolo de gossip.
+- id: RED-TOP-007
+  redundancia_c5: Circuit Breaker
+  funcion_topologica: Corta las llamadas a una dependencia caida.
+  riesgo_mitigado: Cascada de timeouts; agotamiento de hilos.
+  coste_overhead: Estado del breaker; ventana de prueba.
+  dependencias: Cliente con estado de fallo.
+- id: RED-TOP-008
+  redundancia_c5: Backpressure / Control de Flujo
+  funcion_topologica: Propaga la saturacion hacia atras para frenar al productor.
+  riesgo_mitigado: OOM por colas ilimitadas.
+  coste_overhead: Reduccion de throughput bajo carga.
+  dependencias: Canales acotados.
+- id: RED-TOP-009
+  redundancia_c5: Quorum de Lectura/Escritura
+  funcion_topologica: R + W > N garantiza solape de lecturas y escrituras.
+  riesgo_mitigado: Lecturas estales; escritura perdida.
+  coste_overhead: Latencia proporcional al quorum.
+  dependencias: Almacen replicado con versiones.
+- id: RED-TOP-010
+  redundancia_c5: Health-Check + Failover
+  funcion_topologica: Detecta nodos caidos y transfiere su rol.
+  riesgo_mitigado: Indisponibilidad por fallo de nodo.
+  coste_overhead: Heartbeats; posible flapping.
+  dependencias: Monitor de salud, election de lider.

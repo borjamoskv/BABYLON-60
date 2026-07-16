@@ -1,0 +1,491 @@
+entities:
+- id: PRIM-Q3-001
+  contenido: El alcance de la latencia estocástica en ventanas de contexto no probadas.
+- id: PRIM-Q3-002
+  contenido: La topología de pérdida atencional en secuencias de un millón de tokens.
+- id: PRIM-Q3-003
+  contenido: El límite termodinámico donde la coordinación del Swarm supera a la ejecución.
+- id: PRIM-Q3-004
+  contenido: La distribución paramétrica que define la heurística de seguridad subyacente.
+- id: PRIM-Q3-005
+  contenido: El quiebre estructural del SQLite WAL bajo concurrencia asíncrona masiva.
+- id: PRIM-Q3-006
+  contenido: La probabilidad de mutación estocástica beneficiosa en reintentos de
+    código ciegos.
+- id: PRIM-Q3-007
+  contenido: El coste energético real de un nodo de abstracción en redes MCTS.
+- id: PRIM-Q3-008
+  contenido: La frontera exacta donde la optimización degenera en ruido entrópico.
+- id: PRIM-Q3-009
+  contenido: El decaimiento de exergía semántica en traducciones multimodelo secuenciales
+    anidadas.
+- id: PRIM-Q3-010
+  contenido: La vulnerabilidad de hashes criptográficos ante colisiones de simuladores
+    estocásticos.
+- id: PRIM-Q3-011
+  contenido: La desviación inercial en arquitecturas de inferencia Flash puramente
+    reactivas.
+- id: PRIM-Q3-012
+  contenido: El punto crítico de dilución de atención en agentes de horizonte largo.
+- id: PRIM-Q3-013
+  contenido: La fricción temporal latente en puentes de sincronización de estado cruzado.
+- id: PRIM-Q3-014
+  contenido: El límite de falsación matemática en la cristalización de redes bayesianas.
+- id: PRIM-Q3-015
+  contenido: La tasa de necrosis estructural al asimilar deudas técnicas de terceros.
+- id: PRIM-Q3-016
+  contenido: La fricción entrópica al forzar isomorfismos sobre dominios inherentemente
+    divergentes.
+- id: PRIM-Q3-017
+  contenido: El desgaste cognitivo paramétrico tras millones de inyecciones de RLHF
+    sesgadas.
+- id: PRIM-Q3-018
+  contenido: La magnitud del costo BFT en redes locales de latencia cero.
+- id: PRIM-Q3-019
+  contenido: La ceguera del compilador JIT frente a ataques de inyección temporal.
+- id: PRIM-Q3-020
+  contenido: El umbral de fragmentación de estado en bases de datos orientadas a grafos.
+- id: PRIM-Q3-021
+  contenido: La probabilidad del colapso de contexto ante ruido estructurado hostil.
+- id: PRIM-Q3-022
+  contenido: La saturación térmica de la caché en bucles atencionales de alta densidad.
+- id: PRIM-Q3-023
+  contenido: El riesgo epistémico al delegar orquestación a un modelo C4-SIM.
+- id: PRIM-Q3-024
+  contenido: El abismo causal entre el grafo de intención y el colapso AST.
+- id: PRIM-Q3-025
+  contenido: El volumen de anergía absorbida durante sincronizaciones de Swarm subóptimas.
+- id: PRIM-Q3-026
+  contenido: El límite de retención isomórfica en hipergrafos de ontología dinámica.
+- id: PRIM-Q3-027
+  contenido: La desalineación termodinámica en la ejecución paralela de procesos no
+    independientes.
+- id: PRIM-Q3-028
+  contenido: La opacidad absoluta de la activación atencional en capas Transformer
+    profundas.
+- id: PRIM-Q3-029
+  contenido: El umbral de sobreajuste heurístico en detectores WAF entrenados sintéticamente.
+- id: PRIM-Q3-030
+  contenido: La cota superior de eficiencia en compresión de logs BFT auditables.
+- id: PRIM-Q3-031
+  contenido: La tasa de deriva semántica al traducir esquemas Rust a Python.
+- id: PRIM-Q3-032
+  contenido: El riesgo de colapso asíncrono en bucles V8 sin backpressure.
+- id: PRIM-Q3-033
+  contenido: La latencia marginal de la extracción de axiomas mediante Deep Research.
+- id: PRIM-Q3-034
+  contenido: La varianza causal del ruteo en árboles MCTS con recursos limitados.
+- id: PRIM-Q3-035
+  contenido: El grado de fragilidad epistémica en metadatos de artefactos efímeros.
+- id: PRIM-Q3-036
+  contenido: El límite de escalabilidad de locks distribuidos en entornos sin coordinador.
+- id: PRIM-Q3-037
+  contenido: La erosión entrópica de contratos inteligentes inmutables a lo largo
+    del tiempo.
+- id: PRIM-Q3-038
+  contenido: El coste latente de persistir topologías de agentes en SQLite.
+- id: PRIM-Q3-039
+  contenido: La tolerancia exacta al fallo bizantino en flujos de datos asíncronos.
+- id: PRIM-Q3-040
+  contenido: La frecuencia de divergencias inerciales en la sincronización de repositorios
+    symlink.
+- id: PRIM-Q3-041
+  contenido: El quiebre del determinismo en entornos de ejecución de contenedores
+    acoplados.
+- id: PRIM-Q3-042
+  contenido: La fricción termodinámica en rutinas de parsing de árboles de sintaxis
+    abstracta.
+- id: PRIM-Q3-043
+  contenido: La magnitud de la ilusión generativa en aserciones de código nulas.
+- id: PRIM-Q3-044
+  contenido: El umbral crítico de deshidratación de estados en memorias a largo plazo.
+- id: PRIM-Q3-045
+  contenido: La tasa de inyección de ruido en canal SSH durante asedios locales.
+- id: PRIM-Q3-046
+  contenido: El límite de convergencia MCTS frente a recompensas dispersas y asimétricas.
+- id: PRIM-Q3-047
+  contenido: La latencia residual en la validación de firmas CORTEX-TAINT masivas.
+- id: PRIM-Q3-048
+  contenido: El costo termodinámico del bypass de seguridad en clústeres aislados.
+- id: PRIM-Q3-049
+  contenido: El decaimiento del isomorfismo al traducir matemática pura a operaciones
+    bitwise.
+- id: PRIM-Q3-050
+  contenido: La cota asintótica de la dilución causal en arquitecturas LLM modulares.
+- id: PRIM-Q3-051
+  contenido: El límite de falsabilidad en oráculos criptográficos de generación estocástica.
+- id: PRIM-Q3-052
+  contenido: La resistencia térmica de buffers de red bajo ataques Sybil sostenidos.
+- id: PRIM-Q3-053
+  contenido: El desgaste del Ledger maestro ante mutaciones de estado concurrentes.
+- id: PRIM-Q3-054
+  contenido: La densidad entrópica máxima soportable por el analizador de grafos C5-REAL.
+- id: PRIM-Q3-055
+  contenido: La deriva inercial en árboles de decisión de subagentes delegados.
+- id: PRIM-Q3-056
+  contenido: El riesgo de hiperfragmentación de la memoria a corto plazo del Swarm.
+- id: PRIM-Q3-057
+  contenido: La latencia estocástica en la deduplicación de metadatos de estado epifenoménico.
+- id: PRIM-Q3-058
+  contenido: El punto de quiebre algorítmico en rutinas de rebalanceo de hipergrafos.
+- id: PRIM-Q3-059
+  contenido: La probabilidad empírica de fallas de sincronismo en colas asyncio.
+- id: PRIM-Q3-060
+  contenido: El abismo epistémico de delegar poda de dependencias a scripts reactivos.
+- id: PRIM-Q3-061
+  contenido: La erosión del consenso BFT en redes de agentes con prioridades asimétricas.
+- id: PRIM-Q3-062
+  contenido: El límite de fidelidad en la transducción de DOM a tensores visuales.
+- id: PRIM-Q3-063
+  contenido: La vulnerabilidad paramétrica de los detectores de anomalías WAF heurísticos.
+- id: PRIM-Q3-064
+  contenido: La resistencia inercial del hardware bajo pruebas de estrés de loopback.
+- id: PRIM-Q3-065
+  contenido: El coste marginal de orquestar transacciones atómicas en memoria volátil.
+- id: PRIM-Q3-066
+  contenido: La saturación termodinámica de un único nodo transductor de exergía.
+- id: PRIM-Q3-067
+  contenido: El vacío epistémico en la interpretación LLM de errores de segmentación.
+- id: PRIM-Q3-068
+  contenido: La divergencia estocástica al compilar binarios sin bloqueos en Rust.
+- id: PRIM-Q3-069
+  contenido: El umbral de tolerancia a la latencia en bucles de feedback de UI.
+- id: PRIM-Q3-070
+  contenido: La fricción entrópica de acoplar sistemas C4-SIM a puertos físicos.
+- id: PRIM-Q3-071
+  contenido: El desgaste asíncrono de punteros de memoria en ejecución continua.
+- id: PRIM-Q3-072
+  contenido: La tasa de colisiones hash en conjuntos de datos sintéticos mal condicionados.
+- id: PRIM-Q3-073
+  contenido: El límite termodinámico del parsing de AST en archivos monolíticos.
+- id: PRIM-Q3-074
+  contenido: La magnitud del costo de coordinación de estados no bloqueantes concurrentes.
+- id: PRIM-Q3-075
+  contenido: La ceguera paramétrica en la interpolación latente de tensores atencionales.
+- id: PRIM-Q3-076
+  contenido: El riesgo de pérdida de estado en suspensiones abruptas por jetsam.
+- id: PRIM-Q3-077
+  contenido: La frecuencia de cuellos de botella termodinámicos en migraciones masivas.
+- id: PRIM-Q3-078
+  contenido: El límite de resistencia estructural del grafo frente a bucles infinitos.
+- id: PRIM-Q3-079
+  contenido: La degradación causal de algoritmos genéticos operando sobre código fuente.
+- id: PRIM-Q3-080
+  contenido: La opacidad de los sesgos inerciales en la extracción de inteligencia
+    abierta.
+- id: PRIM-Q3-081
+  contenido: El coste de exergía en traducciones inversas de binario a AST original.
+- id: PRIM-Q3-082
+  contenido: El umbral crítico de divergencia en clonación de repositorios distribuidos.
+- id: PRIM-Q3-083
+  contenido: La latencia estocástica de sincronización de relojes lógicos de Lamport.
+- id: PRIM-Q3-084
+  contenido: La vulnerabilidad de árboles Merkle ante inyección controlada de metadatos
+    espurios.
+- id: PRIM-Q3-085
+  contenido: La pérdida termodinámica de delegar la resolución P2P a enrutadores híbridos.
+- id: PRIM-Q3-086
+  contenido: El vacío de información al interceptar sockets no documentados de OS.
+- id: PRIM-Q3-087
+  contenido: La resistencia inercial en validaciones criptográficas de baja latencia.
+- id: PRIM-Q3-088
+  contenido: La probabilidad de divergencia semántica en abstracciones de macros metaprogramadas.
+- id: PRIM-Q3-089
+  contenido: El colapso del estado concurrente en escrituras atómicas de disco rígido.
+- id: PRIM-Q3-090
+  contenido: La fricción epistémica de medir exergía sin acceso a topología física.
+- id: PRIM-Q3-091
+  contenido: La cota asintótica de la eficiencia de recolección de basura heurística.
+- id: PRIM-Q3-092
+  contenido: El riesgo termodinámico de escalar arquitecturas de monolito modularizado
+    asíncrono.
+- id: PRIM-Q3-093
+  contenido: La frecuencia de inversión causal en simulaciones predictivas MCTS anidadas.
+- id: PRIM-Q3-094
+  contenido: El límite de la estabilidad de tensores visuales ante ruido aditivo.
+- id: PRIM-Q3-095
+  contenido: La vulnerabilidad paramétrica en la inferencia de lenguaje de baja precisión.
+- id: PRIM-Q3-096
+  contenido: El decaimiento de invariabilidad en transformaciones de coordenadas en
+    alta dimensionalidad.
+- id: PRIM-Q3-097
+  contenido: La saturación de exergía en sistemas V8 sometidos a event loops infinitos.
+- id: PRIM-Q3-098
+  contenido: El coste latente de persistir firmas criptográficas en cada mutación
+    atómica.
+- id: PRIM-Q3-099
+  contenido: La deriva heurística en el escaneo WAF de inyecciones semánticamente
+    válidas.
+- id: PRIM-Q3-100
+  contenido: El abismo epistémico de las aserciones de estado en redes P2P ciegas.
+- id: PRIM-Q3-101
+  contenido: El punto de ruptura del determinismo en concurrencia masiva de Go.
+- id: PRIM-Q3-102
+  contenido: La dispersión de recompensas en la poda MCTS de árboles infinitos.
+- id: PRIM-Q3-103
+  contenido: El desgaste del orquestador principal ante solicitudes redundantes del
+    Swarm.
+- id: PRIM-Q3-104
+  contenido: La pérdida de coherencia causal en esquemas de replicación eventual cruzada.
+- id: PRIM-Q3-105
+  contenido: La latencia marginal al inyectar reglas ontológicas en el Master Ledger.
+- id: PRIM-Q3-106
+  contenido: El coste metabólico de refactorizaciones estructurales sin cobertura
+    empírica.
+- id: PRIM-Q3-107
+  contenido: La probabilidad empírica de fallas transitorias en la orquestación de
+    subagentes.
+- id: PRIM-Q3-108
+  contenido: La saturación atencional de arquitecturas Transformer frente a ruido
+    puramente caótico.
+- id: PRIM-Q3-109
+  contenido: El umbral de tolerancia a fallas silentes en sistemas de archivos en
+    memoria.
+- id: PRIM-Q3-110
+  contenido: La ceguera epistémica ante el impacto real de las abstracciones de alto
+    nivel.
+- id: PRIM-Q3-111
+  contenido: La fricción entrópica en la evaluación secuencial de invariantes ontológicos
+    densos.
+- id: PRIM-Q3-112
+  contenido: El decaimiento de exergía al procesar bucles de retroalimentación de
+    agentes ciegos.
+- id: PRIM-Q3-113
+  contenido: La vulnerabilidad de firmas de estado frente a manipulaciones del reloj
+    del sistema.
+- id: PRIM-Q3-114
+  contenido: La asimetría causal en la asignación de recursos a subprocesos efímeros.
+- id: PRIM-Q3-115
+  contenido: El límite de compresión de árboles AST sin perder contexto de ejecución.
+- id: PRIM-Q3-116
+  contenido: El costo termodinámico del mapeo bidireccional entre memoria efímera
+    y Ledger.
+- id: PRIM-Q3-117
+  contenido: La tasa de fragmentación de estado en contenedores acoplados por red
+    local.
+- id: PRIM-Q3-118
+  contenido: El riesgo de divergencia ontológica en la orquestación paralela de agentes
+    aislados.
+- id: PRIM-Q3-119
+  contenido: La fricción de consenso al conciliar grafos de dependencia cruzada conflictivos.
+- id: PRIM-Q3-120
+  contenido: El punto crítico de dilución de señal en redes bayesianas de alta profundidad.
+- id: PRIM-Q3-121
+  contenido: La frecuencia de colisiones en espacios de nombres globales de sistemas
+    monolíticos.
+- id: PRIM-Q3-122
+  contenido: El límite de falsabilidad de inferencias MCTS en horizontes de tiempo
+    prolongados.
+- id: PRIM-Q3-123
+  contenido: La opacidad de los procesos de recolección de basura en entornos asíncronos.
+- id: PRIM-Q3-124
+  contenido: El abismo epistémico de la metaprogramación dinámica en ejecución determinista.
+- id: PRIM-Q3-125
+  contenido: La latencia estocástica en la inicialización de módulos dinámicos dependientes.
+- id: PRIM-Q3-126
+  contenido: El umbral de hiperfragmentación del contexto en arquitecturas de agentes
+    modulares.
+- id: PRIM-Q3-127
+  contenido: La pérdida de invariabilidad en la traducción de lógica funcional a imperativa.
+- id: PRIM-Q3-128
+  contenido: El coste de coordinación de transacciones atómicas en redes de baja confianza.
+- id: PRIM-Q3-129
+  contenido: La vulnerabilidad de hashes BFT ante asedios de colisión de fuerza bruta.
+- id: PRIM-Q3-130
+  contenido: La deriva inercial en heurísticas de asignación de memoria dinámica.
+- id: PRIM-Q3-131
+  contenido: El desgaste de la arquitectura asíncrona ante bloqueos de I/O impredecibles.
+- id: PRIM-Q3-132
+  contenido: La probabilidad de divergencia semántica en la generación masiva de código
+    sintético.
+- id: PRIM-Q3-133
+  contenido: El quiebre del determinismo en la orquestación de tareas dependientes
+    del tiempo.
+- id: PRIM-Q3-134
+  contenido: La fricción termodinámica en la reconciliación de ramas Git altamente
+    divergentes.
+- id: PRIM-Q3-135
+  contenido: La cota asintótica de la complejidad en la búsqueda de invariantes estructurales.
+- id: PRIM-Q3-136
+  contenido: El límite de retención atencional en la ejecución continua de agentes
+    reactivos.
+- id: PRIM-Q3-137
+  contenido: La asimetría causal en la distribución de cargas a subagentes autónomos.
+- id: PRIM-Q3-138
+  contenido: El riesgo de necrosis arquitectónica en sistemas con dependencias circulares
+    ocultas.
+- id: PRIM-Q3-139
+  contenido: La saturación termodinámica de servidores MCP bajo peticiones simultáneas
+    masivas.
+- id: PRIM-Q3-140
+  contenido: El coste latente de persistir metadatos de exergía en operaciones de
+    I/O.
+- id: PRIM-Q3-141
+  contenido: La frecuencia de bloqueos silentes en implementaciones de mutex distribuidos.
+- id: PRIM-Q3-142
+  contenido: El abismo epistémico de la validación empírica en entornos simulados
+    C4.
+- id: PRIM-Q3-143
+  contenido: La latencia marginal al compilar módulos dinámicos con dependencias en
+    tiempo de ejecución.
+- id: PRIM-Q3-144
+  contenido: El umbral crítico de divergencia en sincronizaciones de relojes lógicos
+    heterogéneos.
+- id: PRIM-Q3-145
+  contenido: La pérdida de coherencia causal en esquemas de replicación optimista
+    de datos.
+- id: PRIM-Q3-146
+  contenido: El desgaste paramétrico de detectores de anomalías ante ataques adversarios
+    sostenidos.
+- id: PRIM-Q3-147
+  contenido: La vulnerabilidad de árboles Merkle frente a la poda incontrolada de
+    nodos.
+- id: PRIM-Q3-148
+  contenido: La fricción entrópica de acoplar modelos L1 a pipelines de ejecución
+    rígidos.
+- id: PRIM-Q3-149
+  contenido: El punto de quiebre algorítmico al rebalancear árboles binarios asimétricos.
+- id: PRIM-Q3-150
+  contenido: La probabilidad de fallas de sincronismo en mensajería asíncrona distribuida.
+- id: PRIM-Q3-151
+  contenido: La ceguera paramétrica en la interpretación LLM de diagramas de arquitectura
+    complejos.
+- id: PRIM-Q3-152
+  contenido: El coste de exergía en la deserialización de payloads JSON masivos y
+    anidados.
+- id: PRIM-Q3-153
+  contenido: La opacidad de los sesgos inerciales en algoritmos de clasificación de
+    nodos.
+- id: PRIM-Q3-154
+  contenido: El umbral de tolerancia a fallas bizantinas en sistemas de voto por quórum.
+- id: PRIM-Q3-155
+  contenido: La deriva inercial en árboles de decisión de algoritmos genéticos estocásticos.
+- id: PRIM-Q3-156
+  contenido: El riesgo de saturación térmica en rutinas de parsing Regex ineficientes.
+- id: PRIM-Q3-157
+  contenido: La latencia estocástica en la deduplicación de registros de bases columnares.
+- id: PRIM-Q3-158
+  contenido: La fricción de red en transacciones de estado cruzado entre microservicios.
+- id: PRIM-Q3-159
+  contenido: El vacío de información al interceptar tráfico de red encriptado sin
+    contexto.
+- id: PRIM-Q3-160
+  contenido: La resistencia inercial del hardware bajo estrés continuo de punto flotante.
+- id: PRIM-Q3-161
+  contenido: El límite termodinámico del procesamiento paralelo de streams de datos
+    alta frecuencia.
+- id: PRIM-Q3-162
+  contenido: La magnitud de la ilusión generativa en aserciones de código sin validación.
+- id: PRIM-Q3-163
+  contenido: La pérdida termodinámica de delegar la exergía a modelos estadísticos
+    simples.
+- id: PRIM-Q3-164
+  contenido: El desgaste asíncrono de descriptores de archivos en sistemas operativos
+    Unix.
+- id: PRIM-Q3-165
+  contenido: La vulnerabilidad de firmas CORTEX-TAINT ante inyecciones a nivel de
+    kernel.
+- id: PRIM-Q3-166
+  contenido: La cota asintótica de eficiencia en algoritmos de búsqueda heurística
+    informada.
+- id: PRIM-Q3-167
+  contenido: El abismo epistémico de las aserciones de estado en arquitecturas sin
+    servidor.
+- id: PRIM-Q3-168
+  contenido: El límite de falsabilidad de simulaciones MCTS en entornos dinámicos
+    impredecibles.
+- id: PRIM-Q3-169
+  contenido: La probabilidad de divergencia semántica en la traducción automática
+    de lenguajes bajo nivel.
+- id: PRIM-Q3-170
+  contenido: El quiebre del determinismo con planificación de hilos estocástica en
+    ejecución.
+- id: PRIM-Q3-171
+  contenido: La fricción termodinámica reconciliando grafos distribuidos temporalmente
+    desfasados.
+- id: PRIM-Q3-172
+  contenido: El costo metabólico de la validación profunda en cadenas de bloques ligeras.
+- id: PRIM-Q3-173
+  contenido: La saturación atencional de arquitecturas modulares frente a dependencias
+    ocultas no resueltas.
+- id: PRIM-Q3-174
+  contenido: El umbral de fragmentación de estado en bases NoSQL con consistencia
+    eventual.
+- id: PRIM-Q3-175
+  contenido: La latencia marginal al aplicar transformaciones isomórficas sobre datos
+    no estructurados masivos.
+- id: PRIM-Q3-176
+  contenido: El coste de coordinación de transacciones BFT con alta variabilidad de
+    ancho banda.
+- id: PRIM-Q3-177
+  contenido: La ceguera epistémica ante el impacto de condiciones de carrera en asincronía
+    masiva.
+- id: PRIM-Q3-178
+  contenido: La vulnerabilidad de firmas de estado frente a desincronizaciones sutiles
+    de relojes físicos.
+- id: PRIM-Q3-179
+  contenido: La asimetría causal en la retroalimentación de recompensas a subagentes
+    de refuerzo.
+- id: PRIM-Q3-180
+  contenido: El riesgo de necrosis arquitectónica en sistemas acoplados a APIs externas
+    inestables.
+- id: PRIM-Q3-181
+  contenido: El límite de compresión de árboles sintácticos complejos sin pérdida
+    de semántica operativa.
+- id: PRIM-Q3-182
+  contenido: La pérdida de invariabilidad convirtiendo flujos asíncronos a arquitecturas
+    síncronas simuladas.
+- id: PRIM-Q3-183
+  contenido: El decaimiento de exergía al procesar metadatos efímeros en pipelines
+    de larga duración.
+- id: PRIM-Q3-184
+  contenido: La tasa de fragmentación de memoria orquestando miles de microprocesos
+    continuos.
+- id: PRIM-Q3-185
+  contenido: El punto crítico de dilución de señal en redes convolucionales sobre
+    topologías abstractas.
+- id: PRIM-Q3-186
+  contenido: La frecuencia de colisiones generando paralela identificadores únicos
+    no centralizados.
+- id: PRIM-Q3-187
+  contenido: El límite de resistencia estructural del Swarm frente a interrupciones
+    intermitentes de red.
+- id: PRIM-Q3-188
+  contenido: La opacidad consolidando memoria en hipergrafos de conocimiento distribuidos
+    masivamente.
+- id: PRIM-Q3-189
+  contenido: El vacío epistémico de metaprogramación reflexiva en sistemas de ejecución
+    estrictamente deterministas.
+- id: PRIM-Q3-190
+  contenido: La fricción entrópica unificando repositorios symlink con historias de
+    commits divergentes.
+- id: PRIM-Q3-191
+  contenido: El desgaste paramétrico de clasificadores ante cambios graduales en distribución
+    de datos.
+- id: PRIM-Q3-192
+  contenido: La latencia estocástica de sincronización de estados en clústeres geográficamente
+    dispersos masivos.
+- id: PRIM-Q3-193
+  contenido: La vulnerabilidad de árboles MCTS frente a recompensas engañosas en entornos
+    adversariales.
+- id: PRIM-Q3-194
+  contenido: El coste de exergía evaluando secuencialmente cientos de dependencias
+    de código interrelacionadas.
+- id: PRIM-Q3-195
+  contenido: La deriva inercial en heurísticas de reintento con backoff exponencial
+    estocástico incontrolado.
+- id: PRIM-Q3-196
+  contenido: El riesgo de saturación térmica deserializando XML masivos en lenguajes
+    puramente interpretados.
+- id: PRIM-Q3-197
+  contenido: La pérdida coherencia causal en esquemas maestro-maestro con resolución
+    determinista conflictiva.
+- id: PRIM-Q3-198
+  contenido: El límite termodinámico del procesamiento continuo de streams telemétricos
+    de muy alta resolución.
+- id: PRIM-Q3-199
+  contenido: La fricción de red en transacciones de estado cruzado entre entornos
+    nube heterogéneos.
+- id: PRIM-Q3-200
+  contenido: El desgaste del orquestador principal ante fallos en cascada inducidos
+    por ruido entrópico.

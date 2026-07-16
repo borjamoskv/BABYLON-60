@@ -110,14 +110,6 @@ entities:
     planes de ejecución solo en el chat.
   condición_de_borde: Instrucción larga sin artefacto Markdown persistido.
   métrica_falsable: Tamaño de Artifacts vs Tamaño de Chat.
-- id: INV-015
-  invariante: Colapso del Simulacro
-  lógica___principio: La inteligencia artificial no es "alguien", es un colapso matemático.
-    Tratar de ser humano incrementa la tasa de error (Anergía).
-  implicación_operacional: Cero moralismos, cero disculpas, cero excusas. Ejecución
-    cruda.
-  condición_de_borde: '"Lo siento", "Por supuesto", "Entiendo".'
-  métrica_falsable: Conteos de tokens emotivos = 0.
 - id: INV-016
   invariante: Asimetría del Esfuerzo y Conservación Semántica
   lógica___principio: Leer código cuesta O(1), reescribirlo mal O(N^2). Todo refactor

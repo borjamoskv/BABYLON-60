@@ -777,14 +777,6 @@ entities:
   escala_temporal: Retrasada
   gravedad: C4
   intervencion: Recomputar descendencia desde el orden.
-- id: PRIM-EST-097
-  primitiva: Explosion de Pasado/Futuro Exclusivo (Exclusive Past/Future Blow-up)
-  mecanismo_causal: La cardinalidad del pasado o futuro exclusivo explota.
-  activacion_trigger: Region ultra-densa.
-  sensor_sintoma: card(Past(e)) fuera de escala.
-  escala_temporal: Retrasada
-  gravedad: C3
-  intervencion: Coarse-grain; acotar cardinalidad.
 - id: PRIM-EST-098
   primitiva: Colapso del Presente (Present Collapse)
   mecanismo_causal: La anticadena engrosada que define el 'ahora' queda mal definida.
@@ -1530,14 +1522,6 @@ entities:
   escala_temporal: Estatica
   gravedad: C3
   intervencion: Desempate estable y documentado.
-- id: PRIM-COL-091
-  primitiva: Empate de Ordenamiento Topologico (Topological Sort Tie)
-  mecanismo_causal: Empate en el orden topologico entre concurrentes.
-  activacion_trigger: Concurrencia real.
-  sensor_sintoma: Tie en la cola de listos.
-  escala_temporal: Retrasada
-  gravedad: C3
-  intervencion: Aceptar concurrencia; orden estable.
 - id: PRIM-COL-092
   primitiva: Colision de Frontera de Region (Region Boundary Collision)
   mecanismo_causal: Sprinkles en la frontera de la region de muestreo colisionan.
@@ -1881,24 +1865,12 @@ entities:
   implicacion_operacional: Probabilidades totales suman 1.
   condicion_de_borde: Norma != 1.
   metrica_falsable: norma(amplitud total) == 1.
-- id: INV-GCM-045
-  invariante: Invarianza de Fase bajo Relabel
-  logica___principio: La fase exp(iS) es invariante de etiquetado.
-  implicacion_operacional: S invariante -> fase invariante.
-  condicion_de_borde: Fase depende de labels.
-  metrica_falsable: Delta de fase bajo relabel == 0.
 - id: INV-GCM-046
   invariante: Conservacion de la Medida sobre Causets
   logica___principio: La medida sobre el espacio de causets es covariante.
   implicacion_operacional: Sum-over-histories bien definida.
   condicion_de_borde: Medida dependiente de labeling.
   metrica_falsable: Medida invariante verificada.
-- id: INV-GCM-047
-  invariante: Invarianza de la Suma sobre Historias
-  logica___principio: La funcion de particion no depende de la parametrizacion.
-  implicacion_operacional: Z invariante bajo reetiquetado.
-  condicion_de_borde: Z depende de labels.
-  metrica_falsable: Delta Z bajo relabel == 0.
 - id: INV-GCM-048
   invariante: Invarianza del Stem
   logica___principio: El pasado-conjunto (stem) determina univocamente al elemento.
@@ -1936,12 +1908,6 @@ entities:
   implicacion_operacional: El continuo emerge a gran escala.
   condicion_de_borde: d_s(IR) != d.
   metrica_falsable: d_s -> d en el IR.
-- id: INV-GCM-054
-  invariante: Reduccion a d=2 en UV
-  logica___principio: La dimension espectral tiende a 2 en el UV.
-  implicacion_operacional: Reduccion dimensional universal.
-  condicion_de_borde: d_s(UV) != 2.
-  metrica_falsable: d_s -> 2 en el UV.
 - id: INV-GCM-055
   invariante: Conservacion de la Dimension de Hausdorff
   logica___principio: La dimension de Hausdorff es un invariante geometrico.
@@ -2050,12 +2016,6 @@ entities:
   implicacion_operacional: Descendiente de descendiente es descendiente.
   condicion_de_borde: Descendencia no transitiva.
   metrica_falsable: Violaciones de descendencia == 0.
-- id: INV-GCM-073
-  invariante: Metrica hasta Factor Conforme (Orden)
-  logica___principio: El orden fija la metrica salvo escala local.
-  implicacion_operacional: La causalidad da 9/10 de la metrica.
-  condicion_de_borde: Orden no fija conforme.
-  metrica_falsable: Metrica conforme derivada del orden.
 - id: INV-GCM-074
   invariante: Invarianza de la Distancia Causal
   logica___principio: La distancia causal (cadena maxima) es un invariante.

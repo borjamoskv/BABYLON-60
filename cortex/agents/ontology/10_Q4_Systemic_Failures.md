@@ -45,7 +45,6 @@
 | PRIM-Q4-041 | Degradación de la matriz de atención al procesar lenganzas con entropía cruzada alta. |
 | PRIM-Q4-042 | Pérdida de coherencia temporal en secuencias lógicas de más de cincuenta pasos. |
 | PRIM-Q4-043 | El enmascaramiento causal defectuoso permite que ruido futuro contamine la predicción actual. |
-| PRIM-Q4-044 | La saturación de memoria a corto plazo fuerza el abandono de la heurística óptima. |
 | PRIM-Q4-045 | Inconsistencia de tipos inducida por la pérdida del contexto de declaración original. |
 | PRIM-Q4-046 | Fallo de seguimiento de estado en máquinas de estado finito simuladas latentemente. |
 | PRIM-Q4-047 | Desintegración de la lógica booleana profunda bajo la presión del ruido lingüístico. |
@@ -101,7 +100,6 @@
 | PRIM-Q4-097 | Sesgo de convergencia prematura detiene abruptamente la búsqueda mucho antes del óptimo global. |
 | PRIM-Q4-098 | Colapso de identidad de entidad al procesar múltiples pronombres ambiguos sin resolución anafórica. |
 | PRIM-Q4-099 | Disipación de la restricción rígida de formato al anidar estructuras de datos profundamente. |
-| PRIM-Q4-100 | Fallo asimilando conocimiento inyectado por choque destructivo con los pesos pre-entrenados del modelo. |
 | PRIM-Q4-101 | Secuestro total del contexto por un prompt secundario aniquila la directiva raíz original. |
 | PRIM-Q4-102 | Pérdida atencional de la semántica de variables al reasignar nombres en ámbitos anidados. |
 | PRIM-Q4-103 | Colapso de resolución temporal narrativa al mezclar caóticamente eventos pasados y futuros. |
@@ -160,7 +158,6 @@
 | PRIM-Q4-156 | Deterioro de lógica de middleware encadenado por el olvido repetido de llamar al siguiente paso. |
 | PRIM-Q4-157 | Ruptura de cadena del iterador lógico por amnesia del estado interno del generador yield. |
 | PRIM-Q4-158 | Fallo alineando correctamente buffers de memoria contigua en la manipulación de arrays fuertemente tipados. |
-| PRIM-Q4-159 | Erosión del contexto estricto de serialización de datos ignora silenciosamente instancias de clases personalizadas. |
 | PRIM-Q4-160 | Colapso lógico de la máquina de estados estocástica por la pérdida atencional de transición válida. |
 | PRIM-Q4-161 | Desincronización catastrófica de canales de comunicación concurrentes en la simulación estricta CSP algorítmica. |
 | PRIM-Q4-162 | Fallo rastreando complejidad ciclomática del código induciendo subrepticiamente a la creación de funciones monolíticas. |
@@ -199,6 +196,5 @@
 | PRIM-Q4-195 | Colapso de la semántica aislada del Shadow DOM permitiendo el sangrado global de estilos CSS contaminantes. |
 | PRIM-Q4-196 | Disipación atencional de la garantía de entrega exacta en arquitecturas de colas de mensajes pub/sub. |
 | PRIM-Q4-197 | Fallo manteniendo topología de descubrimiento de microservicios en la malla de servicios de red simulada. |
-| PRIM-Q4-198 | Deterioro atencional de la lógica de enrutamiento web del lado del cliente por olvido del historial. |
 | PRIM-Q4-199 | Ruptura de sincronización estricta entre el estado local en cliente y la hidratación asincrónica remota. |
 | PRIM-Q4-200 | Fallo terminal: colapso atencional total asevera estocásticamente que el estado físico roto es absolutamente correcto. |
