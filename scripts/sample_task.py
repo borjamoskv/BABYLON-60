@@ -1,2 +1,2 @@
-def sample_run():
+def sample_run() -> None:
     print('Execution C5-REAL successful.')
