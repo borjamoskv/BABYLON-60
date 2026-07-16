@@ -14,8 +14,9 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 
-DB_PATH = Path("/Users/borjafernandezangulo/30_BABYLON-60/telemetry.db")
-REPORT_PATH = Path("/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/audits/overnight_swarm_report.yaml")
+BABYLON_ROOT = Path(os.environ.get("BABYLON_ROOT", str(Path.home() / "30_BABYLON-60")))
+DB_PATH = BABYLON_ROOT / "telemetry.db"
+REPORT_PATH = Path(PROJECT_ROOT) / "cortex" / "audits" / "overnight_swarm_report.yaml"
 
 class AutonomicSwarmDaemon:
     def __init__(self) -> None:
@@ -56,33 +57,27 @@ class AutonomicSwarmDaemon:
         telemetry_results = {}
         
         # Measure local model TTFT & Throughput (qwen2.5:0.5b)
-        try:
-            from cortex.telemetry.throughput_measurement import measure_throughput
-            prompt, token_count, total_time_ms, tps, status, err = measure_throughput("qwen2.5:0.5b")
-            telemetry_results["qwen2.5"] = {
-                "status": status,
-                "tps": tps if status == "SUCCESS" else 0.0,
-                "latency_ms": total_time_ms if status == "SUCCESS" else 0.0,
-                "error": err
-            }
-        except Exception as e:
-            telemetry_results["qwen2.5"] = {"status": "FAILED", "error": str(e)}
+        from cortex.telemetry.throughput_measurement import measure_throughput
+        prompt, token_count, total_time_ms, tps, status, err = measure_throughput("qwen2.5:0.5b")
+        telemetry_results["qwen2.5"] = {
+            "status": status,
+            "tps": tps if status == "SUCCESS" else 0.0,
+            "latency_ms": total_time_ms if status == "SUCCESS" else 0.0,
+            "error": err
+        }
 
         # Run Layer Swap Simulator (simulate Llama-3-70B sequential load)
-        try:
-            from cortex.engine.layer_swap_simulator import LayerSwapSimulator
-            sim = LayerSwapSimulator(num_layers=32, layer_size_mb=100.0)
-            speed = sim.calibrate_disk_speed()
-            seq_time, _ = sim.run_sequential_benchmark()
-            pipe_time, _ = sim.run_pipelined_benchmark()
-            telemetry_results["layer_swap"] = {
-                "disk_speed_mb_s": speed,
-                "seq_time_ms": seq_time,
-                "pipe_time_ms": pipe_time,
-                "efficiency_gain_pct": ((seq_time - pipe_time) / seq_time) * 100.0 if seq_time > 0 else 0.0
-            }
-        except Exception as e:
-            telemetry_results["layer_swap"] = {"status": "FAILED", "error": str(e)}
+        from cortex.engine.layer_swap_simulator import LayerSwapSimulator
+        sim = LayerSwapSimulator(num_layers=32, layer_size_mb=100.0)
+        speed = sim.calibrate_disk_speed()
+        seq_time, _ = sim.run_sequential_benchmark()
+        pipe_time, _ = sim.run_pipelined_benchmark()
+        telemetry_results["layer_swap"] = {
+            "disk_speed_mb_s": speed,
+            "seq_time_ms": seq_time,
+            "pipe_time_ms": pipe_time,
+            "efficiency_gain_pct": ((seq_time - pipe_time) / seq_time) * 100.0 if seq_time > 0 else 0.0
+        }
 
         return telemetry_results
 
@@ -93,17 +88,11 @@ class AutonomicSwarmDaemon:
         dirty_files = [line.strip() for line in git_status_res.stdout.split('\n') if line.strip()]
         
         # AST check
-        ast_failures = []
-        try:
-            import py_compile
-            from tests.test_syntax_integrity import _tracked_python_files
-            for path in _tracked_python_files():
-                try:
-                    py_compile.compile(str(path), doraise=True)
-                except Exception as e:
-                    ast_failures.append({"file": str(path), "error": str(e)})
-        except Exception as e:
-            ast_failures.append({"file": "general_syntax_test", "error": str(e)})
+        import py_compile
+        from tests.test_syntax_integrity import _tracked_python_files
+        for path in _tracked_python_files():
+            py_compile.compile(str(path), doraise=True)
+        ast_failures: list[Dict[str, Any]] = []
 
         return {
             "git_dirty": len(dirty_files) > 0,
