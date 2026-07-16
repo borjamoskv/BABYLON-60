@@ -3,8 +3,9 @@ import os
 import hashlib
 import subprocess
 
-SOURCE_YAML = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/centuria_matrix_1000.yaml"
-TARGET_DIR = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/arsenal_1000"
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+SOURCE_YAML = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/centuria_matrix_1000.yaml")
+TARGET_DIR = os.path.join(PROJECT_ROOT, "cortex/agents/arsenal_1000")
 
 def compile_arsenal():
     if not os.path.exists(TARGET_DIR):
@@ -62,8 +63,8 @@ if __name__ == "__main__":
     print(f"Generated {generated} physical binaries in {TARGET_DIR}")
 
     # Git Sentinel
-    subprocess.run(["git", "add", "cortex/agents/arsenal_1000/"], cwd="/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv", check=True)
-    subprocess.run(["git", "commit", "-m", "feat(arsenal): physical crystallization of 1000 Centuria APEX primitives [skip ci]"], cwd="/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv", check=False)
+    subprocess.run(["git", "add", "cortex/agents/arsenal_1000/"], cwd=PROJECT_ROOT, check=True)
+    subprocess.run(["git", "commit", "-m", "feat(arsenal): physical crystallization of 1000 Centuria APEX primitives [skip ci]"], cwd=PROJECT_ROOT, check=False)
 
 if __name__ == "__main__":
     compile_arsenal()

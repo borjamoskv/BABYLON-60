@@ -3,7 +3,7 @@
 ```yaml
 Operator: borjamoskv
 System_Level: C5-REAL
-Workspace: /Users/borjafernandezangulo/30_BABYLON-60
+Workspace: $CORTEX_WORKSPACE
 Context: Basecamp Ignition & Workflow Optimization
 Status: ACTIVE
 ```
@@ -21,24 +21,24 @@ Agent Intent ──► Validation (UUID v5) ──► Single-Writer asyncio.Queu
 ### Core Architecture Components
 
 1. **API & REST Surface (`babylon60/api/`)**
-   - [client.py](file:///Users/borjafernandezangulo/30_BABYLON-60/babylon60/api/client.py): Main SDK client (`CortexClient`) used to connect to the ledger, write entries, and check chain validity.
-   - [server.py](file:///Users/borjafernandezangulo/30_BABYLON-60/babylon60/api/server.py): FastAPI server providing local REST and WebSocket interfaces (defaulting to port `8000`).
+   - [client.py](file://babylon60/api/client.py): Main SDK client (`CortexClient`) used to connect to the ledger, write entries, and check chain validity.
+   - [server.py](file://babylon60/api/server.py): FastAPI server providing local REST and WebSocket interfaces (defaulting to port `8000`).
 
 2. **Ledger & Consensus Core (`babylon60/bft/`)**
-   - [ledger_actor.py](file:///Users/borjafernandezangulo/30_BABYLON-60/babylon60/bft/ledger_actor.py): The single-writer actor that processes all writes sequentially via an `asyncio.Queue` to avoid database locking in high-concurrency environments.
+   - [ledger_actor.py](file://babylon60/bft/ledger_actor.py): The single-writer actor that processes all writes sequentially via an `asyncio.Queue` to avoid database locking in high-concurrency environments.
    - `master_ledger_queue.py`: In-memory staging queues before committing to SQLite.
    - `consensus_ledger.py`: Handles state synchronization.
    - **Hash-Chain Invariant**: Every ledger entry contains a cryptographic link to the previous hash (`prev_hash`) computed via BLAKE3/SHA-256. Altering past entries breaks the chain.
    - **Lamport Logical Clocks**: Logical timestamps are checked dynamically on read/write to enforce monotonic causal ordering.
 
 3. **Database Access (`babylon60/database/`)**
-   - [core.py](file:///Users/borjafernandezangulo/30_BABYLON-60/babylon60/database/core.py): Database connection wrapper enforcing WAL mode, a rigid `busy_timeout=5000ms`, and single-writer concurrency limits.
+   - [core.py](file://babylon60/database/core.py): Database connection wrapper enforcing WAL mode, a rigid `busy_timeout=5000ms`, and single-writer concurrency limits.
 
 4. **Thermodynamic AST Pruner / Apoptosis Engine (`babylon60/core/`)**
-   - [thermo_ast_pruner.py](file:///Users/borjafernandezangulo/30_BABYLON-60/babylon60/core/thermo_ast_pruner.py): Inspects Python code, strips dead code/redundant strings, and replaces broad `except Exception:` catches with a fail-fast payload that forces `os.kill(os.getpid(), signal.SIGKILL)` to prevent silent error propagation.
+   - [thermo_ast_pruner.py](file://babylon60/core/thermo_ast_pruner.py): Inspects Python code, strips dead code/redundant strings, and replaces broad `except Exception:` catches with a fail-fast payload that forces `os.kill(os.getpid(), signal.SIGKILL)` to prevent silent error propagation.
 
 5. **Formal Verification (`proof/lean/`)**
-   - [Babylon.lean](file:///Users/borjafernandezangulo/30_BABYLON-60/proof/lean/Babylon.lean): Formal model verifying partial ordering, reflexivity, and non-equivocation constraints.
+   - [Babylon.lean](file://proof/lean/Babylon.lean): Formal model verifying partial ordering, reflexivity, and non-equivocation constraints.
 
 ---
 

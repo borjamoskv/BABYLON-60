@@ -102,7 +102,8 @@ GENERATORS = [
 ]
 
 def write_quadrant(filename, generator_func):
-    path = os.path.join('/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ontology/primitives', filename)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(PROJECT_ROOT, 'cortex/ontology/primitives', filename)
     data = generator_func(200)
     with open(path, 'w') as f:
         yaml.dump(data, f, sort_keys=False, allow_unicode=True)

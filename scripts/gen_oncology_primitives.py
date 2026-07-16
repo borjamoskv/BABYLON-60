@@ -123,7 +123,7 @@ def main():
     ids = [r['id'] for r in recs]
     assert len(set(ids)) == len(ids), 'IDs duplicados detectados'
     yaml_path = os.path.join(root, 'cortex', 'ontologies', 'oncology_300_primitives.yaml')
-    py_path = os.path.join(root, 'domain_kernel', 'oncology_primitives.py')
+    py_path = os.path.join(root, 'babylon60', 'oncology_primitives.py')
     md_path = os.path.join(root, 'docs', 'ONCOLOGIA_300_PRIMITIVAS.md')
     for p in (yaml_path, py_path, md_path):
         os.makedirs(os.path.dirname(p), exist_ok=True)

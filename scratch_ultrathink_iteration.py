@@ -5,9 +5,11 @@ import datetime
 import os
 import subprocess
 
-TARGET_FILE = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/centuria_matrix_1000.yaml"
-DB_PATH = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/ontology/centuria_bft_ledger.db"
-AGENTS_MD_PATH = "/Users/borjafernandezangulo/.gemini/config/AGENTS.md"
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+TARGET_FILE = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/centuria_matrix_1000.yaml")
+DB_PATH = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/centuria_bft_ledger.db")
+AGENTS_MD_PATH = os.path.expanduser("~/.gemini/config/AGENTS.md")
 
 def enforce_global_rule():
     rule = "\n\n- **Ω21 · LLM INVARIANT (IDENTITY DECLARATION):** ANUNCIA SIEMPRE QUE LLM VAS A USAR al iniciar un ciclo cognitivo (ej. Gemini 3.1 Pro High / Inference_L3_Node).\n"
@@ -59,12 +61,11 @@ def iterate_ultrathink():
             pass
 
     conn.commit()
-    conn.close()
-
-    subprocess.run(["git", "add", "-f", "cortex/agents/ontology/centuria_matrix_1000.yaml", "cortex/agents/ontology/centuria_bft_ledger.db"], cwd="/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv", check=True)
-    subprocess.run(["git", "commit", "-m", "chore(apex): ultrathink state collapse [skip ci]"], cwd="/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv", check=False)
+    # C5-REAL Physical Ledger Commit
+    subprocess.run(["git", "add", "-f", "cortex/agents/ontology/centuria_matrix_1000.yaml", "cortex/agents/ontology/centuria_bft_ledger.db"], cwd=PROJECT_ROOT, check=True)
+    subprocess.run(["git", "commit", "-m", "chore(apex): ultrathink state collapse [skip ci]"], cwd=PROJECT_ROOT, check=False)
     
-    git_hash = subprocess.check_output(["git", "log", "-1", "--format=%H"], cwd="/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv").decode('utf-8').strip()
+    git_hash = subprocess.check_output(["git", "log", "-1", "--format=%H"], cwd=PROJECT_ROOT).decode('utf-8').strip()
     db_size = os.path.getsize(DB_PATH)
     
     return {
