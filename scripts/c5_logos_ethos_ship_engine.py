@@ -47,7 +47,12 @@ class PhysicalMembraneState:
 
 class BFTMasterLedgerWAL:
 
-    def __init__(self, db_path: str = '/tmp/c5_logos_ethos_ship_test.db') -> None:
+    def __init__(self, db_path: str | None = None) -> None:
+        if db_path is None:
+            root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            scratch_dir = os.path.join(root_dir, 'scratch')
+            os.makedirs(scratch_dir, exist_ok=True)
+            db_path = os.path.join(scratch_dir, 'c5_logos_ethos_ship_test.db')
         self.db_path = db_path
         self._init_membrane()
 
@@ -106,7 +111,10 @@ def run_c5_verification_suite() -> int:
     except RuntimeError as e:
         assert 'rejected by C5-REAL' in str(e)
     print('[✓] PRIMITIVA-LOGOS-002: F# Algebraic Membrane / Illegal State rejection verified.')
-    ledger_db = '/tmp/c5_logos_ethos_ship_test.db'
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    scratch_dir = os.path.join(root_dir, 'scratch')
+    os.makedirs(scratch_dir, exist_ok=True)
+    ledger_db = os.path.join(scratch_dir, 'c5_logos_ethos_ship_test.db')
     if os.path.exists(ledger_db):
         os.remove(ledger_db)
     ledger = BFTMasterLedgerWAL(ledger_db)

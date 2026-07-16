@@ -39,7 +39,7 @@ async def propose_with_backoff(
             engine.propose(payload)
             log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
             return True
-        except Exception as exc:
+        except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
             wait = BASE_BACKOFF_S * (2 ** (attempt - 1))
             log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait:.3f}s")
             await asyncio.sleep(wait)

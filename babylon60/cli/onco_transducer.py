@@ -156,6 +156,6 @@ if __name__ == "__main__":
     except AssertionError as e:
         logger.error(str(e))
         sys.exit(1)
-    except Exception as e:
+    except (OSError, ValueError, RuntimeError, MemoryError) as e:
         logger.error(f"Error estructural fatal: {str(e)}")
         sys.exit(1)
