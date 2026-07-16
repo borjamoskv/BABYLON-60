@@ -3,9 +3,12 @@ import hashlib
 import sqlite3
 from datetime import datetime, timezone
 
-
-# [C5-REAL] BFT LEDGER HELPER — EAFP pattern, zero DDL in hot path
-# SQLite is the sole source of truth. No process-local cache, no locks.
+# [C5-REAL] BFT LEDGER HELPER — STRICT ATOMICITY & DOMAIN SEPARATION
+# P0: BEGIN IMMEDIATE explicit transactions prevent TOCTOU on read-head/insert.
+# P0: Length-framing and full metadata inclusion in SHA3 prevents collisions and metadata tampering.
+# P0: Strict Environment Variable expansion prevents phantom ledgers.
+# P0: No blind OperationalError catching (prevents SQLITE_BUSY from resetting chain).
+# P1: Fixed-length ISO timestamps guarantee lexicographic sort.
 
 _DDL_ANCHORS = """
     CREATE TABLE IF NOT EXISTS anchors
@@ -23,8 +26,11 @@ _INSERT_SQL = (
 
 
 def resolve_db_path(raw_path: str) -> str:
-    """Expands environment variables like $CORTEX_ROOT and creates parent folders."""
+    """Expands environment variables. Fails hard if unresolved."""
     expanded = os.path.expandvars(raw_path)
+    if "$" in expanded:
+        raise RuntimeError(f"[C5-REAL] FATAL: Unresolved environment variable in path -> {expanded}")
+        
     dir_name = os.path.dirname(expanded)
     if dir_name:
         os.makedirs(dir_name, exist_ok=True)
@@ -37,41 +43,56 @@ def ensure_bft_table(conn: sqlite3.Connection) -> None:
 
 
 def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
-    """Centralized method for writing to the daemons' anchors hash chain.
-    
-    EAFP: INSERT first (hot path, zero DDL). On 'no such table',
-    create schema and retry (cold path, first call only).
-    """
+    """Centralized method for writing to the daemons' anchors hash chain."""
     db_file = resolve_db_path(db_file_raw)
     conn = sqlite3.connect(db_file, timeout=5.0)
+    conn.isolation_level = None  # Autocommit disabled, manual transaction control
+    
     try:
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("PRAGMA synchronous=NORMAL;")
         conn.execute("PRAGMA busy_timeout=5000;")
 
-        # Resolve prev_hash (EAFP: table might not exist yet)
-        try:
-            cursor = conn.cursor()
-            cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
-            row = cursor.fetchone()
-            prev_hash = row[0] if row else "GENESIS_V2"
-        except sqlite3.OperationalError:
-            prev_hash = "GENESIS_V2"
-
-        ts = datetime.now(timezone.utc).isoformat()
-        new_hash = hashlib.sha3_256((content + prev_hash).encode('utf-8')).hexdigest()
-        params = (new_hash, prev_hash, content, ts, agent_id)
-
-        # Hot path: pure INSERT, zero DDL
-        try:
-            conn.execute(_INSERT_SQL, params)
-        except sqlite3.OperationalError as e:
-            if "no such table" not in str(e).lower():
-                raise  # schema drift, lock, corruption → propagate
-            conn.execute(_DDL_ANCHORS)  # cold branch: table absent
-            conn.execute(_INSERT_SQL, params)
-
-        conn.commit()
+        while True:
+            try:
+                # 1. Acquire exclusive write lock upfront (Anti-TOCTOU)
+                conn.execute("BEGIN IMMEDIATE")
+                try:
+                    cursor = conn.cursor()
+                    # We rely on timestamp DESC, but strictly formatted, and protected by BEGIN IMMEDIATE
+                    cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
+                    row = cursor.fetchone()
+                    prev_hash = row[0] if row else "GENESIS_V2"
+                    
+                    # 2. Fixed-length timestamp (Anti-Truncation P1)
+                    ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f') + 'Z'
+                    
+                    # 3. Domain Separation & Full Metadata Seal (Anti-Tampering P0)
+                    # payload = len(content):content:prev_hash:timestamp:agent_id
+                    sealed_payload = f"{len(content)}:{content}:{prev_hash}:{ts}:{agent_id}"
+                    new_hash = hashlib.sha3_256(sealed_payload.encode('utf-8')).hexdigest()
+                    
+                    # 4. Insert (Hot Path)
+                    params = (new_hash, prev_hash, content, ts, agent_id)
+                    conn.execute(_INSERT_SQL, params)
+                    
+                    conn.execute("COMMIT")
+                    break  # Success, exit loop
+                
+                except Exception as inner_e:
+                    conn.execute("ROLLBACK")
+                    raise inner_e
+                    
+            except sqlite3.OperationalError as e:
+                err_msg = str(e).lower()
+                if "no such table" in err_msg:
+                    # Cold path: Table absent. Safe to CREATE outside txn, then retry.
+                    conn.execute(_DDL_ANCHORS)
+                    continue
+                else:
+                    # Schema drift, SQLITE_BUSY, locked DB -> Propagate (Fail-Fast)
+                    raise
     finally:
         conn.close()
+        
     return new_hash
