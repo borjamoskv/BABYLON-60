@@ -102,8 +102,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Recuperar estado previo (simulado como Genesis para esta corrida)
     let genesis = vec![0u8; 32];
     
-    // Generar clave HMAC estática para demo (en prod vendría de HSM o env)
-    let env_key = std::env::var("CORTEX_BFT_KEY").unwrap_or_else(|_| "CORTEX_BFT_KEY_2026_MASTER_LEDGER_FALLBACK".to_string());
+    // Generar clave HMAC desde entorno (en prod/c5-real vendría de HSM o env obligatorio)
+    let env_key = std::env::var("CORTEX_BFT_KEY")
+        .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
+        .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
     let key = hmac::Key::new(hmac::HMAC_SHA256, env_key.as_bytes());
 
     let ledger = Arc::new(Mutex::new(BftLedger {
