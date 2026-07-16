@@ -64,7 +64,7 @@ class BFT_Ledger:
                     import cbor2
 
                     payload_data = cbor2.loads(payload_bytes)
-                except Exception:
+                except (ValueError, TypeError, AttributeError, ImportError):
                     if isinstance(payload_bytes, bytes):
                         payload_data = json.loads(payload_bytes.decode("utf-8"))
                     else:
@@ -73,7 +73,7 @@ class BFT_Ledger:
                 if computed_hash != stored_hash:
                     print(f"[!] Corruption detected in row {row_id}! Stored: {stored_hash}, Computed: {computed_hash}")
                     corrupted += 1
-            except Exception:
+            except (ValueError, TypeError, AttributeError, KeyError, sqlite3.Error, json.JSONDecodeError):
                 import signal
 
                 os.kill(os.getpid(), signal.SIGKILL)
