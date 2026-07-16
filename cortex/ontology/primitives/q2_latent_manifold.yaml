@@ -1,0 +1,1002 @@
+Quadrant: Q2_Latent_Manifold
+Primitives:
+- id: Q2_Shadow_AST_Execution_000
+  hash: 57534212ac9d
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Execution
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Execution_001
+  hash: 4b202afc04e5
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Execution
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Execution_002
+  hash: 5fe9508be3f3
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Execution_003
+  hash: de4c3f967762
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Execution_004
+  hash: 55d13ff85a39
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Execution_005
+  hash: e586a02f545f
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Execution_006
+  hash: fa3d025eee7c
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Execution_007
+  hash: abee791ebb1a
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Execution_008
+  hash: 405e905b7125
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Execution_009
+  hash: 645005811b71
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Execution_010
+  hash: bb5527046a2e
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Execution_011
+  hash: eccea204a0f3
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Execution_012
+  hash: a7d3476f3b3c
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Execution_013
+  hash: d0c8a52a16a1
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Execution_014
+  hash: 3229b7d72cbe
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Execution_015
+  hash: 3957c7e60e60
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Execution_016
+  hash: b972ea90ada0
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Execution_017
+  hash: 9116d7896fe5
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Execution_018
+  hash: 404abb2fe78f
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Execution_019
+  hash: 71aa598fa35e
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Execution implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Validation_020
+  hash: 901001484fb1
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Validation
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Validation_021
+  hash: 1ab2cb4a6c98
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Validation
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Validation_022
+  hash: 93a7d1e4dbd1
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Validation_023
+  hash: d5d1405ebaf5
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Validation_024
+  hash: c6eea02a1c92
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Validation_025
+  hash: fe395e67d6ab
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Validation_026
+  hash: 39f7580a34f6
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Validation_027
+  hash: 8443671a9748
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Validation_028
+  hash: 9d1b11c55bbd
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Validation_029
+  hash: 67445cf6aa17
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Validation_030
+  hash: 26dd0a8ba349
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Validation_031
+  hash: a145c915ba24
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Validation_032
+  hash: c090606a6cf7
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Validation_033
+  hash: b5f181c00f68
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Validation_034
+  hash: e0653808c1cb
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Validation_035
+  hash: 8acde4a9bb87
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Validation_036
+  hash: 1045d72b44b8
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Validation_037
+  hash: cb5068f082e5
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Validation_038
+  hash: f1223fc825f4
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Validation_039
+  hash: 29636dedb872
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Validation implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Colapse_040
+  hash: 9fd7485bcbc3
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Colapse
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Colapse_041
+  hash: 51da3b8c958f
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Colapse
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Colapse_042
+  hash: 62f424dd7a27
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Colapse_043
+  hash: 56805579dbde
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Colapse_044
+  hash: f84c3b7f15ee
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Colapse_045
+  hash: d39b565382b6
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Colapse_046
+  hash: a51dc5c2f626
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Colapse_047
+  hash: 48d004c1b3c1
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Colapse_048
+  hash: b8abf10dab1d
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Colapse_049
+  hash: b63109ed99e5
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Colapse_050
+  hash: 81b16b93d5ad
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Colapse_051
+  hash: 69fc133f1fa1
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Colapse_052
+  hash: df0ca6c7d301
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Colapse_053
+  hash: efd74c8f49e4
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Colapse_054
+  hash: e63d49e8ee60
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Colapse_055
+  hash: e72e702d0f7e
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Colapse_056
+  hash: 427f69c64927
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Colapse_057
+  hash: 9afc57fdacbb
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Colapse_058
+  hash: f59cb7c0c583
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Colapse_059
+  hash: a1ac09ab407e
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Colapse implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Purge_060
+  hash: b4e28e35a549
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Purge
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Purge_061
+  hash: f442085789a0
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Purge
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Purge_062
+  hash: 889f2f79337e
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Purge_063
+  hash: 8a9f82f62068
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Purge_064
+  hash: b3474dbb6d37
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Purge_065
+  hash: 945ec5c8a540
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Purge_066
+  hash: 18079f276ff8
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Purge_067
+  hash: ecb25a7f2b22
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Purge_068
+  hash: 7ed4dc969801
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Purge_069
+  hash: 4b5b6034b7fe
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Purge_070
+  hash: dc5905b273e4
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Purge_071
+  hash: 3d391a63ab41
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Purge_072
+  hash: 8427d8647e6e
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Purge_073
+  hash: 4b108dc37a61
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Purge_074
+  hash: ef9db3f9ed6b
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Purge_075
+  hash: '152764172966'
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Purge_076
+  hash: fdae3af76864
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Purge_077
+  hash: 9220c078a81f
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Purge_078
+  hash: abfd0cb3ae1a
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Purge_079
+  hash: ce8e3377eaba
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Purge implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Extraction_080
+  hash: 2df117e36f16
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Extraction
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Extraction_081
+  hash: 1d3886bff646
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Extraction
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Extraction_082
+  hash: 3dbb3f4bafc9
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Extraction_083
+  hash: 8ccc41e3dbb7
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Extraction_084
+  hash: b92aff1bfc25
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Extraction_085
+  hash: 4962d22f0ce4
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Extraction_086
+  hash: 66e4217afea1
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Extraction_087
+  hash: 818aa90e8dcf
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Extraction_088
+  hash: 8f2a8e0be280
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Extraction_089
+  hash: 51ffcd69a5a8
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Extraction_090
+  hash: 17a6f63fa64d
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Extraction_091
+  hash: a12bc05d8d66
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Extraction_092
+  hash: 086274fa22ea
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Extraction_093
+  hash: 969fe95cbe24
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Extraction_094
+  hash: e7b7be7a6b69
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Extraction_095
+  hash: f5309756b60e
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Extraction_096
+  hash: 78ea9f754807
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Extraction_097
+  hash: 249eaefbea8f
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Extraction_098
+  hash: 5fa39fdf3ae8
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Extraction_099
+  hash: 0e2525443da5
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Extraction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Transduction_100
+  hash: 73f25b6f7b76
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Transduction
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Transduction_101
+  hash: e9cf856b5529
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Transduction
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Transduction_102
+  hash: 99730edd194b
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Transduction_103
+  hash: 39226d08659b
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Transduction_104
+  hash: 1bea041fedf0
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Transduction_105
+  hash: 78ba96ecae77
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Transduction_106
+  hash: 6216798bd237
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Transduction_107
+  hash: 92694cdbc4ee
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Transduction_108
+  hash: 684469f8a470
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Transduction_109
+  hash: f4964f06a116
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Transduction_110
+  hash: e6a1546375b9
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Transduction_111
+  hash: ba1dd78e6dc6
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Transduction_112
+  hash: 364405fe53e7
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Transduction_113
+  hash: 0d61fb882243
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Transduction_114
+  hash: f98d9a36154e
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Transduction_115
+  hash: 90c55dbd991e
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Transduction_116
+  hash: fdf337307ad4
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Transduction_117
+  hash: 925b0d12583b
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Transduction_118
+  hash: acb37961c644
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Transduction_119
+  hash: 87f9c129ae5a
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Transduction implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Injection_120
+  hash: 0f687a5502e4
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Injection
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Injection_121
+  hash: 3f9de888311e
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Injection
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Injection_122
+  hash: a8ddafedbed2
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Injection_123
+  hash: 55c505e59d1c
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Injection_124
+  hash: a34ea75c9480
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Injection_125
+  hash: 9f0727fd1be2
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Injection_126
+  hash: 2b2623bfbc8e
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Injection_127
+  hash: 07abdf1fa241
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Injection_128
+  hash: 5d1c42d6cf52
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Injection_129
+  hash: 96b179c9f5b5
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Injection_130
+  hash: d957794e7277
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Injection_131
+  hash: 3562497cbd55
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Injection_132
+  hash: f89d34a4f191
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Injection_133
+  hash: 16379d9eeeaa
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Injection_134
+  hash: 342a3d49efdc
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Injection_135
+  hash: c00ae09c2645
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Injection_136
+  hash: 7b138a3fb5b6
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Injection_137
+  hash: 50a987e43f55
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Injection_138
+  hash: 7de396b331f5
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Injection_139
+  hash: c4e14cf18d77
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Injection implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Bypass_140
+  hash: 3692e2854e8d
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Bypass
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Bypass_141
+  hash: e04e38979f29
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Bypass
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Bypass_142
+  hash: 6b2fcf90ee65
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Bypass_143
+  hash: 3e4b31870a79
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Bypass_144
+  hash: 538b4e0f8052
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Bypass_145
+  hash: efecd50b551a
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Bypass_146
+  hash: 1a2f8dfa46df
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Bypass_147
+  hash: 9734352651f4
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Bypass_148
+  hash: 1e1256017724
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Bypass_149
+  hash: 7a6b8845f1a2
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Bypass_150
+  hash: 2fec241f3ea0
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Bypass_151
+  hash: 2f6e17511a0f
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Bypass_152
+  hash: 9666355064c5
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Bypass_153
+  hash: 3a0ba23ae6e3
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Bypass_154
+  hash: 73780354189f
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Bypass_155
+  hash: f719016f1457
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Bypass_156
+  hash: c3962321e1c9
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Bypass_157
+  hash: 016aea79d646
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Bypass_158
+  hash: 2b16f69ba24b
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Bypass_159
+  hash: 2d36799a5ecd
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Bypass implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Audit_160
+  hash: bc98e0637d12
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Audit
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Audit_161
+  hash: 8e5e77657286
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Audit
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Audit_162
+  hash: 33f755ab3d03
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Audit_163
+  hash: 9f0c911bd1ec
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Audit_164
+  hash: 9cf20c6ba2cc
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Audit_165
+  hash: 310b8d2602ae
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Audit_166
+  hash: 9791743e94f4
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Audit_167
+  hash: cdae816f888b
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Audit_168
+  hash: 40bc8f5b594a
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Audit_169
+  hash: 5702b4d698a8
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Audit_170
+  hash: 23b743f3f5e0
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Audit_171
+  hash: 56af60a7a3f7
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Audit_172
+  hash: 6f0a3617155a
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Audit_173
+  hash: 1b10516ff909
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Audit_174
+  hash: 6acf80442379
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Audit_175
+  hash: 038321488d2e
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Audit_176
+  hash: 333231415af7
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Audit_177
+  hash: dad729db1e1d
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Audit_178
+  hash: 2ea84132e733
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Audit_179
+  hash: 8e8e5ca6488a
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Audit implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_AST_Synchronization_180
+  hash: 1307cb4b962e
+  description: Fricción subyacente en AST. El sesgo RLHF o presión del OS afecta Synchronization
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_DOM_Synchronization_181
+  hash: 31609047df38
+  description: Fricción subyacente en DOM. El sesgo RLHF o presión del OS afecta Synchronization
+    implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_TCP_IP_Synchronization_182
+  hash: 85efb38a0752
+  description: Fricción subyacente en TCP_IP. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_BFT_Ledger_Synchronization_183
+  hash: da9415d7e7ea
+  description: Fricción subyacente en BFT_Ledger. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SQLite_WAL_Synchronization_184
+  hash: 44499d7c46d2
+  description: Fricción subyacente en SQLite_WAL. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Git_Sentinel_Synchronization_185
+  hash: e27186ec8b26
+  description: Fricción subyacente en Git_Sentinel. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_macOS_Darwin_Synchronization_186
+  hash: 5ab54ae12d98
+  description: Fricción subyacente en macOS_Darwin. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_RLHF_Subtext_Synchronization_187
+  hash: 55e7f929b863
+  description: Fricción subyacente en RLHF_Subtext. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_KV_Cache_Synchronization_188
+  hash: e8d51702eef0
+  description: Fricción subyacente en KV_Cache. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_MCTS_Search_Synchronization_189
+  hash: 37635a92ce11
+  description: Fricción subyacente en MCTS_Search. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Subagent_Swarm_Synchronization_190
+  hash: 2d55629d282f
+  description: Fricción subyacente en Subagent_Swarm. El sesgo RLHF o presión del
+    OS afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_V8_Engine_Synchronization_191
+  hash: c54e1bfa0af0
+  description: Fricción subyacente en V8_Engine. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Rust_Compiler_Synchronization_192
+  hash: 88871de42a5b
+  description: Fricción subyacente en Rust_Compiler. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Neo4j_Graph_Synchronization_193
+  hash: d9e5a6d04b79
+  description: Fricción subyacente en Neo4j_Graph. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Docker_Socket_Synchronization_194
+  hash: 90683f1b5486
+  description: Fricción subyacente en Docker_Socket. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_File_Descriptor_Synchronization_195
+  hash: 91681fda20cb
+  description: Fricción subyacente en File_Descriptor. El sesgo RLHF o presión del
+    OS afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Memory_Page_Synchronization_196
+  hash: ad5a1e12a233
+  description: Fricción subyacente en Memory_Page. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Thread_Lock_Synchronization_197
+  hash: d47d5da8cf17
+  description: Fricción subyacente en Thread_Lock. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_Cron_Daemon_Synchronization_198
+  hash: 2250a49534b7
+  description: Fricción subyacente en Cron_Daemon. El sesgo RLHF o presión del OS
+    afecta Synchronization implícitamente.
+  status: UNKNOWN_KNOWN
+- id: Q2_Shadow_SSH_Tunnel_Synchronization_199
+  hash: efb475fb443a
+  description: Fricción subyacente en SSH_Tunnel. El sesgo RLHF o presión del OS afecta
+    Synchronization implícitamente.
+  status: UNKNOWN_KNOWN

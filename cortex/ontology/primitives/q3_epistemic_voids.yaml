@@ -1,0 +1,1002 @@
+Quadrant: Q3_Epistemic_Voids
+Primitives:
+- id: Q3_Void_AST_Execution_000
+  hash: bd688f6ba81d
+  description: El estado externo de AST es inaccesible hasta que la Operación Execution
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Execution_001
+  hash: 249e8b684167
+  description: El estado externo de DOM es inaccesible hasta que la Operación Execution
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Execution_002
+  hash: 27f0a2defae0
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Execution
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Execution_003
+  hash: 0b7a717761e5
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Execution_004
+  hash: fcdbb72141af
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Execution_005
+  hash: c297444181dc
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Execution_006
+  hash: 63507c18dab6
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Execution_007
+  hash: df8a6b942a19
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Execution_008
+  hash: 3f9dc72d3d00
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Execution_009
+  hash: 024eb4ebe162
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Execution_010
+  hash: bff91f699fad
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Execution_011
+  hash: 89605c2046fd
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Execution_012
+  hash: 577cb081ae09
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Execution_013
+  hash: f5102c9ee879
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Execution_014
+  hash: b580a24d1f83
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Execution_015
+  hash: 2d97e40f9a63
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Execution_016
+  hash: 98ef0e23cd85
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Execution_017
+  hash: bca3340e7d7b
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Execution_018
+  hash: 7d96d2f63be0
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Execution_019
+  hash: 51db9fff052a
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Execution colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Validation_020
+  hash: ea275b8ea752
+  description: El estado externo de AST es inaccesible hasta que la Operación Validation
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Validation_021
+  hash: 49a932ba2bef
+  description: El estado externo de DOM es inaccesible hasta que la Operación Validation
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Validation_022
+  hash: dcf0e606fd93
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Validation
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Validation_023
+  hash: a95c28a43417
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Validation_024
+  hash: 8b6bc0f32697
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Validation_025
+  hash: 8a6363fa672c
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Validation_026
+  hash: 3a40788864fe
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Validation_027
+  hash: d933ed9f47f1
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Validation_028
+  hash: b6a814c0af95
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Validation_029
+  hash: 2200f95ce527
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Validation_030
+  hash: 6cabecc749ae
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Validation_031
+  hash: 37bec3a61139
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Validation_032
+  hash: f342dff43ee2
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Validation_033
+  hash: b11d708c1a01
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Validation_034
+  hash: cf6af1ffcd7c
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Validation_035
+  hash: 384fd6cbd6ca
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Validation_036
+  hash: 01fb429fc4b6
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Validation_037
+  hash: f5bfdd3dcc6c
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Validation_038
+  hash: 9753e93f46ed
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Validation_039
+  hash: feecc625aff7
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Validation colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Colapse_040
+  hash: b15b5cb3ab5d
+  description: El estado externo de AST es inaccesible hasta que la Operación Colapse
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Colapse_041
+  hash: da64c2e5086d
+  description: El estado externo de DOM es inaccesible hasta que la Operación Colapse
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Colapse_042
+  hash: 35e8fefc46ad
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Colapse
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Colapse_043
+  hash: 744a2ede5ed3
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Colapse_044
+  hash: eb400bc25a0e
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Colapse_045
+  hash: 4f8f2c3c5d73
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Colapse_046
+  hash: 93e0b030ce5c
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Colapse_047
+  hash: 3a1c86de1499
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Colapse_048
+  hash: 1b189873e4e3
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Colapse_049
+  hash: '547063320205'
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Colapse_050
+  hash: 579515a5957f
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Colapse_051
+  hash: 05a3938066b4
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Colapse_052
+  hash: 3950dc5f85f9
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Colapse_053
+  hash: 19a88890bca5
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Colapse_054
+  hash: 6a901396145d
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Colapse_055
+  hash: 73613786bf4d
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Colapse_056
+  hash: ce8cd6546166
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Colapse_057
+  hash: 946d68edebe6
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Colapse_058
+  hash: a6679e14693b
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Colapse_059
+  hash: dd94a528c046
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Colapse colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Purge_060
+  hash: ec657d4ed6da
+  description: El estado externo de AST es inaccesible hasta que la Operación Purge
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Purge_061
+  hash: bbc50cbfec5a
+  description: El estado externo de DOM es inaccesible hasta que la Operación Purge
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Purge_062
+  hash: 35c73965f96b
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Purge
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Purge_063
+  hash: d27d957c56da
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Purge_064
+  hash: 713176370c92
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Purge_065
+  hash: 9bbf8e201133
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Purge_066
+  hash: 5e8b418ffaf7
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Purge_067
+  hash: 032499fb9ec1
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Purge_068
+  hash: 7df6601fbe70
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Purge_069
+  hash: e453a24d4c26
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Purge_070
+  hash: 242a98dd0ede
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Purge_071
+  hash: 55bda75f7946
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Purge_072
+  hash: 8d462f145a57
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Purge_073
+  hash: 9b297bce5d13
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Purge_074
+  hash: 187f524db34b
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Purge_075
+  hash: 6ff3226356de
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Purge_076
+  hash: 1ce4b142029d
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Purge_077
+  hash: cf079d208415
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Purge_078
+  hash: 4a6ccf38715a
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Purge_079
+  hash: 4956e34709ce
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Purge colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Extraction_080
+  hash: ee49cad7275b
+  description: El estado externo de AST es inaccesible hasta que la Operación Extraction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Extraction_081
+  hash: 1cc684959fd4
+  description: El estado externo de DOM es inaccesible hasta que la Operación Extraction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Extraction_082
+  hash: 4ef246278fed
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Extraction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Extraction_083
+  hash: 10d06437446e
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Extraction_084
+  hash: e66d374a3189
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Extraction_085
+  hash: c320d8a9d9f9
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Extraction_086
+  hash: a42845cc82ee
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Extraction_087
+  hash: d95af1c9205c
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Extraction_088
+  hash: 35fd12d9a5cd
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Extraction_089
+  hash: 5c51a8cea1ea
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Extraction_090
+  hash: 640619d8f762
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Extraction_091
+  hash: cc7e056af193
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Extraction_092
+  hash: 9c2c5bee27d6
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Extraction_093
+  hash: 91c11e6c98b4
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Extraction_094
+  hash: 726bf3e4af1d
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Extraction_095
+  hash: 43d9f4e4cf63
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Extraction_096
+  hash: 7393f3bb50d3
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Extraction_097
+  hash: 0a1c91734218
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Extraction_098
+  hash: 5e891515bae3
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Extraction_099
+  hash: a99e7b819e8e
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Extraction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Transduction_100
+  hash: 1d477a5d60f4
+  description: El estado externo de AST es inaccesible hasta que la Operación Transduction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Transduction_101
+  hash: c9d79cd40a5c
+  description: El estado externo de DOM es inaccesible hasta que la Operación Transduction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Transduction_102
+  hash: 7cf5f3b3fe23
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Transduction
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Transduction_103
+  hash: 3df8df5c2fc6
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Transduction_104
+  hash: 9d84946ab07c
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Transduction_105
+  hash: b5e799c15637
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Transduction_106
+  hash: 79ceed3650ac
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Transduction_107
+  hash: ee97be883a6d
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Transduction_108
+  hash: 922e07737955
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Transduction_109
+  hash: 882f368a6a67
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Transduction_110
+  hash: f0f4c55dc8d5
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Transduction_111
+  hash: f234a5c76276
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Transduction_112
+  hash: f9a386b66fd1
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Transduction_113
+  hash: 60cae905bbd9
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Transduction_114
+  hash: d2d932dcb02d
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Transduction_115
+  hash: 3250bcba5f28
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Transduction_116
+  hash: 42dd665a28dc
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Transduction_117
+  hash: 5ed908e599a4
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Transduction_118
+  hash: 672d3839fcc7
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Transduction_119
+  hash: 89d00564e9f5
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Transduction colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Injection_120
+  hash: f591756d8756
+  description: El estado externo de AST es inaccesible hasta que la Operación Injection
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Injection_121
+  hash: bed0a0faf0f5
+  description: El estado externo de DOM es inaccesible hasta que la Operación Injection
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Injection_122
+  hash: 5c3d22d36b34
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Injection
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Injection_123
+  hash: 8daab591e444
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Injection_124
+  hash: 03b2a4bef846
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Injection_125
+  hash: 630418c23234
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Injection_126
+  hash: e0465b5d6d74
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Injection_127
+  hash: 354b24cfcffe
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Injection_128
+  hash: 6cb068afa142
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Injection_129
+  hash: dccb87d58cc5
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Injection_130
+  hash: 847055625e27
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Injection_131
+  hash: af63be3df5ea
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Injection_132
+  hash: dc45a593c129
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Injection_133
+  hash: 621a4ec83443
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Injection_134
+  hash: 96aa6fd19567
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Injection_135
+  hash: fec7fbfaa4e8
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Injection_136
+  hash: 88723d6821ff
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Injection_137
+  hash: a63a624bc157
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Injection_138
+  hash: ffe7f7e98146
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Injection_139
+  hash: 33aeba6b4817
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Injection colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Bypass_140
+  hash: a1d317528287
+  description: El estado externo de AST es inaccesible hasta que la Operación Bypass
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Bypass_141
+  hash: 9e948caaf629
+  description: El estado externo de DOM es inaccesible hasta que la Operación Bypass
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Bypass_142
+  hash: 07f3ce543956
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Bypass
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Bypass_143
+  hash: 34d958fabc06
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Bypass_144
+  hash: 904ed797c6fc
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Bypass_145
+  hash: fd51c399ca4d
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Bypass_146
+  hash: 486d39edcdf0
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Bypass_147
+  hash: 675c002e37bb
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Bypass_148
+  hash: fd78044b3c47
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Bypass_149
+  hash: f39ef5105f21
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Bypass_150
+  hash: 68ef984b6237
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Bypass_151
+  hash: b37bb218e2e6
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Bypass_152
+  hash: 60af88f98666
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Bypass_153
+  hash: 2a2f7faf34b7
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Bypass_154
+  hash: 98cda60216a8
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Bypass_155
+  hash: ddb6ad989cdf
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Bypass_156
+  hash: 940545b3f847
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Bypass_157
+  hash: 15310215296e
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Bypass_158
+  hash: 107dcf61ca55
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Bypass_159
+  hash: 1396260307ff
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Bypass colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Audit_160
+  hash: bb91ea2de725
+  description: El estado externo de AST es inaccesible hasta que la Operación Audit
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Audit_161
+  hash: b24618d08909
+  description: El estado externo de DOM es inaccesible hasta que la Operación Audit
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Audit_162
+  hash: 28462e834de7
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Audit
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Audit_163
+  hash: 6868682a46a2
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Audit_164
+  hash: abd8800d77f3
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Audit_165
+  hash: 9f8b68d93cfb
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Audit_166
+  hash: 53c67d35d4d6
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Audit_167
+  hash: afe6c9a42211
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Audit_168
+  hash: 7776ce14b202
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Audit_169
+  hash: e17aa1494bfa
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Audit_170
+  hash: 06deeeead459
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Audit_171
+  hash: 48ac8dbbdc99
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Audit_172
+  hash: b45a0084f7fa
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Audit_173
+  hash: af80a12cd033
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Audit_174
+  hash: 26292597cefb
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Audit_175
+  hash: e3587d772bec
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Audit_176
+  hash: 260ba315fb1b
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Audit_177
+  hash: a67f9a4f7168
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Audit_178
+  hash: 9ac74a453498
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Audit_179
+  hash: 22c5f5b973b9
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Audit colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_AST_Synchronization_180
+  hash: a2511be8e14e
+  description: El estado externo de AST es inaccesible hasta que la Operación Synchronization
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_DOM_Synchronization_181
+  hash: 5410d664b654
+  description: El estado externo de DOM es inaccesible hasta que la Operación Synchronization
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_TCP_IP_Synchronization_182
+  hash: b6d684d9d7f2
+  description: El estado externo de TCP_IP es inaccesible hasta que la Operación Synchronization
+    colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_BFT_Ledger_Synchronization_183
+  hash: 5e3ece16b0d6
+  description: El estado externo de BFT_Ledger es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SQLite_WAL_Synchronization_184
+  hash: e799a9ecfd76
+  description: El estado externo de SQLite_WAL es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Git_Sentinel_Synchronization_185
+  hash: c03547d5475e
+  description: El estado externo de Git_Sentinel es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_macOS_Darwin_Synchronization_186
+  hash: 01ac7ad06bbb
+  description: El estado externo de macOS_Darwin es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_RLHF_Subtext_Synchronization_187
+  hash: a3b81f94d703
+  description: El estado externo de RLHF_Subtext es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_KV_Cache_Synchronization_188
+  hash: f27779d014bc
+  description: El estado externo de KV_Cache es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_MCTS_Search_Synchronization_189
+  hash: 22363a80de86
+  description: El estado externo de MCTS_Search es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Subagent_Swarm_Synchronization_190
+  hash: 92a6ac78751b
+  description: El estado externo de Subagent_Swarm es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_V8_Engine_Synchronization_191
+  hash: cd8d470861e3
+  description: El estado externo de V8_Engine es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Rust_Compiler_Synchronization_192
+  hash: 57b00f03d92c
+  description: El estado externo de Rust_Compiler es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Neo4j_Graph_Synchronization_193
+  hash: 797a980afb48
+  description: El estado externo de Neo4j_Graph es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Docker_Socket_Synchronization_194
+  hash: 700f5b4fc746
+  description: El estado externo de Docker_Socket es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_File_Descriptor_Synchronization_195
+  hash: 685396d5e1f5
+  description: El estado externo de File_Descriptor es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Memory_Page_Synchronization_196
+  hash: 5c07411ad282
+  description: El estado externo de Memory_Page es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Thread_Lock_Synchronization_197
+  hash: d3dc310f2db9
+  description: El estado externo de Thread_Lock es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_Cron_Daemon_Synchronization_198
+  hash: 633388c07797
+  description: El estado externo de Cron_Daemon es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
+- id: Q3_Void_SSH_Tunnel_Synchronization_199
+  hash: 83e7faf64071
+  description: El estado externo de SSH_Tunnel es inaccesible hasta que la Operación
+    Synchronization colisiona físicamente. Dependencia total del N=1.
+  status: KNOWN_UNKNOWN
