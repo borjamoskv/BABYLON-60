@@ -4,7 +4,6 @@ CORTEX / BABYLON-60 :: oncology_primitives
 Modulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.
 
 GENERADO por scripts/gen_oncology_primitives.py -- NO editar a mano.
-generado: 2026-07-14
 Autoria artistica/arquitectonica (AKA): Borja Moskv (borjamoskv).
 
 AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios.
@@ -321,33 +320,33 @@ PRIMITIVES = [
 
 assert len(PRIMITIVES) == 300, "La ontologia debe contener exactamente 300 primitivas"
 
-_BY_ID = {p["id"]: p for p in PRIMITIVES}
+_BY_ID: dict[str, dict[str, Any]] = {p["id"]: p for p in PRIMITIVES}
 
 
-def get(primitive_id: str) -> Optional[dict]:
+def get(primitive_id: str) -> Optional[dict[str, Any]]:
     """Devuelve la primitiva por id (p.ej. 'ONC-001') o None."""
     return _BY_ID.get(primitive_id)
 
 
-def by_category(category: str) -> list:
+def by_category(category: str) -> list[dict[str, Any]]:
     """Todas las primitivas de una categoria (clave de CATEGORIES)."""
     return [p for p in PRIMITIVES if p["category"] == category]
 
 
-def by_role(role: str) -> list:
+def by_role(role: str) -> list[dict[str, Any]]:
     """Filtra por rol: process, oncogene, suppressor, target, biomarker, modality, mechanism, drug-target."""
     return [p for p in PRIMITIVES if p["role"] == role]
 
 
-def search(term: str) -> list:
+def search(term: str) -> list[dict[str, Any]]:
     """Busqueda de subcadena (case-insensitive) en nombre y descripcion."""
     t = term.lower()
     return [p for p in PRIMITIVES if t in p["name"].lower() or t in p["description"].lower()]
 
 
-def counts() -> dict:
+def counts() -> dict[str, int]:
     """Conteo por categoria."""
-    out: dict[Any, Any] = {}  # type: ignore
+    out: dict[str, int] = {}
     for p in PRIMITIVES:
         out[p["category"]] = out.get(p["category"], 0) + 1
     return out
