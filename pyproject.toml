@@ -24,6 +24,8 @@ dev = [
     "pytest-asyncio>=0.23",
     "ruff>=0.4",
     "mypy>=1.8",
+    "networkx>=3.0",
+    "pandas>=2.0",
 ]
 embeddings = [
     "numpy>=1.24",
