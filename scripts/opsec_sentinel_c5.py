@@ -1,39 +1,47 @@
-import os
-import signal
-import sys
-import re
-import json
-import hashlib
-import sqlite3
 import datetime
+import hashlib
+import json
+import os
+import re
+import signal
+import sqlite3
+import sys
 from pathlib import Path
-from typing import List, Dict, Any
-EXERGY_LEVEL = '1000/1000'
-BFT_MIN_CONSENSUS = 3
-TARGET_PATTERNS = {'PLAINTEXT_CREDIT_CARD': re.compile('\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})\\b'), 'PRIVATE_KEY_HEADER': re.compile('-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\\s*PRIVATE KEY-----'), 'UNENCRYPTED_IRC_PORT': re.compile(':(?:6667|6668|6669)\\b'), 'PLAIN_HTTP_C2': re.compile('http://[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'), 'SQLI_ERROR_SIGNATURE': re.compile('(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)', re.IGNORECASE)}
+from typing import Any
+
+EXERGY_LEVEL: str = '1000/1000'
+BFT_MIN_CONSENSUS: int = 3
+TARGET_PATTERNS: dict[str, re.Pattern[str]] = {
+    'PLAINTEXT_CREDIT_CARD': re.compile('\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})\\b'),
+    'PRIVATE_KEY_HEADER': re.compile('-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\\s*PRIVATE KEY-----'),
+    'UNENCRYPTED_IRC_PORT': re.compile(':(?:6667|6668|6669)\\b'),
+    'PLAIN_HTTP_C2': re.compile('http://[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'),
+    'SQLI_ERROR_SIGNATURE': re.compile('(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)', re.IGNORECASE),
+}
+
 
 class OpsecSentinelC5:
 
-    def __init__(self, workspace_path: str, db_path: str='/tmp/opsec_sentinel_c5.db'):
-        self.workspace = Path(workspace_path).resolve()
+    def __init__(self, workspace_path: str, db_path: str = '/tmp/opsec_sentinel_c5.db') -> None:
+        self.workspace: Path = Path(workspace_path).resolve()
         self.db_path = db_path
         self._init_db()
 
-    def _init_db(self):
+    def _init_db(self) -> None:
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute('PRAGMA journal_mode=WAL;')
             conn.execute('PRAGMA busy_timeout=5000;')
             conn.execute('\n                CREATE TABLE IF NOT EXISTS opsec_audit_log (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    file_path TEXT NOT NULL,\n                    violation_type TEXT NOT NULL,\n                    snippet_hash TEXT NOT NULL,\n                    severity TEXT NOT NULL,\n                    timestamp TEXT NOT NULL\n                );\n            ')
 
-    def audit_file(self, filepath: Path) -> List[Dict[str, str]]:
-        violations: List[Dict[str, str]] = []
+    def audit_file(self, filepath: Path) -> list[dict[str, str]]:
+        violations: list[dict[str, str]] = []
         try:
             content = filepath.read_text(encoding='utf-8', errors='ignore')
         except Exception:
             os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError('FAIL-FAST: General Exception intercepted.')
         for v_type, pattern in TARGET_PATTERNS.items():
-            matches = pattern.findall(content)
+            matches: list[Any] = pattern.findall(content)
             if matches:
                 if v_type == 'PLAINTEXT_CREDIT_CARD':
                     valid_cards = [m for m in matches if self._luhn_check(m)]
@@ -59,10 +67,10 @@ class OpsecSentinelC5:
             checksum += d
         return checksum % 10 == 0
 
-    def run_full_scan(self) -> Dict[str, Any]:
-        details: List[Dict[str, str]] = []
+    def run_full_scan(self) -> dict[str, Any]:
+        details: list[dict[str, str]] = []
         violations_found: int = 0
-        ignore_dirs = {'.git', '.venv', 'node_modules', 'scratch', '__pycache__'}
+        ignore_dirs: set[str] = {'.git', '.venv', 'node_modules', 'scratch', '__pycache__'}
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             for root, dirs, files in os.walk(self.workspace):
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
@@ -78,10 +86,11 @@ class OpsecSentinelC5:
                         details.append(v)
                         violations_found += 1
             conn.commit()
-        report: Dict[str, Any] = {'sys_id': 'borjamoskv', 'exergy': EXERGY_LEVEL, 'scan_timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'target_workspace': str(self.workspace), 'violations_found': violations_found, 'details': details}
+        report: dict[str, Any] = {'sys_id': 'borjamoskv', 'exergy': EXERGY_LEVEL, 'scan_timestamp': datetime.datetime.now(datetime.timezone.utc).isoformat(), 'target_workspace': str(self.workspace), 'violations_found': violations_found, 'details': details}
         return report
 
-def main():
+
+def main() -> None:
     workspace = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     sentinel = OpsecSentinelC5(workspace)
     report = sentinel.run_full_scan()
@@ -92,5 +101,7 @@ def main():
     else:
         print('\n[SUCCESS] C5-REAL OPSEC Audit Clean. Zero plaintext secrets or unverified relays detected.')
         sys.exit(0)
+
+
 if __name__ == '__main__':
     main()

@@ -1,15 +1,17 @@
-import sqlite3
 import hashlib
-import time
-import sys
 import os
+import sqlite3
+import sys
+import time
 from decimal import getcontext
+
 getcontext().prec = 38
+
 
 class SexagesimalCoordinate:
     __slots__ = ('units', 'sixtieths', 'ticks')
 
-    def __init__(self, units: int, sixtieths: int, ticks: int):
+    def __init__(self, units: int, sixtieths: int, ticks: int) -> None:
         if not (0 <= sixtieths < 60 and 0 <= ticks < 60):
             raise ValueError('[SIGKILL_State_Purge] Out of bounds for Base-60 coordinate.')
         self.units = units
@@ -29,9 +31,10 @@ class SexagesimalCoordinate:
     def to_string(self) -> str:
         return f'{self.units}:{self.sixtieths:02d}:{self.ticks:02d}_BASE60'
 
+
 class PhysicalMembraneState:
 
-    def __init__(self, state_type: str, payload_hash: str, lamport_clock: int):
+    def __init__(self, state_type: str, payload_hash: str, lamport_clock: int) -> None:
         valid_states = {'C5_Real_Atomic', 'C4_Simulated_Buffer'}
         if state_type not in valid_states:
             raise TypeError(f'[SIGKILL_State_Purge] Illegal state unrepresentable: {state_type}')
@@ -41,13 +44,14 @@ class PhysicalMembraneState:
         self.payload_hash = payload_hash
         self.lamport_clock = lamport_clock
 
+
 class BFTMasterLedgerWAL:
 
-    def __init__(self, db_path: str='/tmp/c5_logos_ethos_ship_test.db'):
+    def __init__(self, db_path: str = '/tmp/c5_logos_ethos_ship_test.db') -> None:
         self.db_path = db_path
         self._init_membrane()
 
-    def _init_membrane(self):
+    def _init_membrane(self) -> None:
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute('PRAGMA journal_mode = WAL;')
             conn.execute('PRAGMA synchronous = NORMAL;')
@@ -60,7 +64,7 @@ class BFTMasterLedgerWAL:
             cursor = conn.cursor()
             cursor.execute('SELECT taint_hash FROM master_ledger ORDER BY sequence_id DESC LIMIT 1;')
             row = cursor.fetchone()
-            prev_hash = row[0] if row else '0' * 64
+            prev_hash: str = row[0] if row else '0' * 64
             raw_taint = f'{prev_hash}||{claim_payload}||{lamport_clock}||{agent_id}'.encode('utf-8')
             taint_hash = hashlib.sha3_256(raw_taint).hexdigest()
             try:
@@ -89,7 +93,8 @@ class BFTMasterLedgerWAL:
                 expected_prev = taint_h
             return True
 
-def run_c5_verification_suite():
+
+def run_c5_verification_suite() -> int:
     print('[+] Igniting C5-REAL Verification Suite: LOGOS, ETHOS, SHIP...')
     coord = SexagesimalCoordinate(12, 30, 0)
     div_coord = coord.divide_exact_by(15)
@@ -113,5 +118,7 @@ def run_c5_verification_suite():
     print(f'[✓] PRIMITIVA-ETHOS-003 & SHIP-004: BFT/WAL Master Ledger & SHA3-256 Taint Chain verified. Head: {t3[:16]}...')
     print('[+] ALL 4 CORE PRIMITIVES AND LOGOS-ETHOS-SHIP TRIAD VERIFIED 100% C5-REAL.')
     return 0
+
+
 if __name__ == '__main__':
     sys.exit(run_c5_verification_suite())
