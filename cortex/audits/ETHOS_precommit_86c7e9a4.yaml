@@ -1,0 +1,6 @@
+Claim: "Inyectar verificaciones del Sentinel contra binarios y bases de datos en pre-commit hook"
+Proof:
+  Base: "/Users/borjafernandezangulo/30_BABYLON-60/.git/hooks/pre-commit"
+  CORTEX_TAINT_SHA3_256: "86c7e9a449df047fa93fc58e9bdda8a482ea3cf8431150c9cbb2364ab3d78fc5"
+  Timestamp: "2026-07-16T22:14:20Z"
+  Confidence: C5-REAL
