@@ -68,3 +68,53 @@ structural_remediations:
       Base: "mypy --strict verification"
       Result: "Success: no issues found in 1 source file"
       Confidence: "C5"
+
+  - binary_id: "ANTIGRAVITY_LANGUAGE_SERVER_MONOLITH"
+    path: "/Applications/Antigravity 2.app/Contents/Resources/bin/language_server"
+    architecture: "Mach-O 64-bit executable arm64"
+    file_size_bytes: 248842752
+    compiler_target: "Go 1.27 Monolith (Internal Google Toolchain build cl/932742892)"
+    Claim: "El corazón de Antigravity 2 es un microkernel monolítico en Go 1.27 que orquesta agentes gRPC/uRPC/Mojom con aislamiento nativo Darwin Seatbelt y FIPS 140-2 crypto."
+    Proof:
+      Base: "strings e inspección de tabla de símbolos Go (__go_buildinfo)"
+      Core_Subsystems:
+        - "RPC/IPC Transport: google.golang.org/grpc, uRPC/Mojom socket multiplexing"
+        - "Sandboxing: command/sandbox_darwin.go (Apple Seatbelt OS profiles)"
+        - "Security/Crypto: crypto/internal/boring (BoringSSL FIPS 140-2 compliance)"
+        - "Agent Core: google3/cloud/ai/platform/antigravity/agent_kernel"
+        - "MCP Hub: google3/cloud/ai/platform/antigravity/mcp_server_registry"
+      Confidence: "C5"
+
+  - binary_id: "OPENAI_CODEX_DESKTOP_ENGINE"
+    path: "ChatGPT.app/Contents/Resources/codex (from ChatGPT.dmg / Codex.dmg)"
+    architecture: "Mach-O 64-bit executable arm64"
+    file_size_bytes: 260456864
+    compiler_target: "Rust (tokio-1.52.3 async runtime, rustls, aws-runtime)"
+    Claim: "ChatGPT.dmg y Codex.dmg son bit-a-bit idénticos (SHA256: 5a2ab9689f4ba38fcb135565246d5ca2f124d539336a0a32afcdb72040d21466). Su motor no es una webview simple, sino un framework Chromium cef v150.0.7871.115 ('Codex Framework.framework') que ejecuta en segundo plano un binario nativo en Rust de 260MB ('codex') y un runtime Node ('cua_node') dedicado a Computer Use y Realtime Voice."
+    Proof:
+      Base: "otool -L, shasum -a 256 e inspección de crates Rust (strings)"
+      Internal_Crates_Identified:
+        - "codex_tui/src/lib.rs -> Terminal UI interactiva para Codex"
+        - "codex-mcp/src/tools.rs & mcp-server/src/lib.rs -> Servidor y cliente MCP nativo integrado"
+        - "terminal-detection/src/lib.rs & codex_file_watcher -> Monitoreo de terminal y archivos"
+        - "codex_lmstudio & codex_ollama -> Conectores FFI nativos para inferencia local offline"
+        - "agents_mdremaining_bytescore/src/agents_md.rs -> Parseador e intérprete nativo de instrucciones AGENTS.md"
+        - "codex-api/src/endpoint/realtime_websocket/protocol_v2.rs -> Protocolo WebSocket v2 de voz bidireccional en tiempo real"
+      Embedded_Workers:
+        - "cua_node -> Node.js Runtime para CUA (Computer Use Agent host)"
+        - "rg -> ripgrep nativo embebido (4.0 MB) para búsquedas de código ultrarrápidas"
+      Confidence: "C5"
+
+  - binary_id: "ANTHROPIC_CLAUDE_DESKTOP_MICROVM"
+    path: "Claude.app/Contents/Resources/smol-bin.arm64.img (from Claude.dmg)"
+    architecture: "Linux ext4 / DOS MBR virtual disk image (23.0 MB) & Electron Framework"
+    Claim: "Claude Desktop bifurca la ejecución entre un frontend Electron/AppKit e integra un runtime aislado en un micro-contenedor/disco virtual Linux ('smol-bin.arm64.img') y puentes nativos FFI ('@ant/claude-native')."
+    Proof:
+      Base: "file, strings e inspección del bundle app.asar.unpacked/node_modules/@ant"
+      Native_Addons:
+        - "@ant/claude-native -> Módulo C++/Node para llamadas POSIX y control de sistema"
+        - "@ant/claude-swift -> Bridge Swift/AppKit para atajos globales de macOS y capturas en caliente"
+        - "node-pty -> Emulador de pseudoterminal para ejecución de shell en local"
+      Sandboxed_MicroVM:
+        - "smol-bin.arm64.img -> Imagen de sistema de archivos ext4 con kernel init stub (*fuse.InitIn, ContainerID, UserAgent) para aislamiento seguro de ejecución de código CUA/MCP"
+      Confidence: "C5"
