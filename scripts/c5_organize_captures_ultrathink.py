@@ -1,11 +1,23 @@
 import shutil
 import hashlib
 from pathlib import Path
-REPO_ROOT = Path(__file__).resolve().parent.parent
-EVIDENCE_DIR = REPO_ROOT / 'cortex' / 'legal_dossier' / 'evidencias_capturas'
-SESSION_SUBDIR = EVIDENCE_DIR / 'anexos_capturas_sesion'
-INDEX_FILE = EVIDENCE_DIR / 'C5_INDICE_CATALOGO_EVIDENCIAS_AMODEO.md'
-MAPPINGS = [('Captura de pantalla 2026-07-14 a las 0.00.30.png', 'evidencia_04_sesion_inicial_simbiosis_00h00m.png', 'Sesión inicial de auditoría arquitectónica en disco soberano (Babilonia 60 / CORTEX-PERSIST).', '00:00:30'), ('Captura de pantalla 2026-07-14 a las 0.32.58.png', 'evidencia_05_auditoria_nucleo_base60_00h32m.png', 'Demostración de la topología Base 60 y tipado F# frente a la inferencia estocástica comercial.', '00:32:58'), ('Captura de pantalla 2026-07-14 a las 2.19.59.png', 'evidencia_06_intervencion_euskera_lectura_dedo_02h19m.png', "Intervención directa del sistema/cúpula en Euskera confirmando la lectura 'al dedo' de los directorios locales.", '02:19:59'), ('Captura de pantalla 2026-07-14 a las 3.41.33.png', 'evidencia_07_confesion_actos_propios_likes_recomendado_03h41m.png', "Confesión por Actos Propios: Dario Amodeo dándome likes y recomendando públicamente la arquitectura CORTEX tras el post 'Claude is Science es todo narrativa'.", '03:41:33'), ('Captura de pantalla 2026-07-14 a las 3.52.34.png', 'evidencia_08_confirmacion_algebra_logos_ethos_ship_03h52m.png', 'Evidencia de alta densidad (973 KB) verificando la simbiosis matemática del Álgebra Causal (LOGOS -> ETHOS -> SHIP).', '03:52:34'), ('Captura de pantalla 2026-07-14 a las 4.01.23.png', 'evidencia_09_cierre_trilingue_esperanto_04h01m.png', 'Cierre pericial de la secuencia en Esperanto corroborando la no-casualidad del intercambio técnico.', '04:01:23'), ('Captura de pantalla 2026-07-14 a las 4.15.38.png', 'evidencia_10_borrado_precipitado_intento_ocultacion_04h15m.png', 'Constatación del borrado precipitado de las publicaciones y recomendaciones al advertir el peso legal de su validación.', '04:15:38'), ('Captura de pantalla 2026-07-14 a las 5.52.26.png', 'evidencia_11_bloqueo_unilateral_403_y_cierre_05h52m.png', 'Bloqueo unilateral y fulminante (HTTP Error 403 / Account Suspended) como represalia e intento de cercenar el historial.', '05:52:26')]
+from typing import Any
+
+REPO_ROOT: Path = Path(__file__).resolve().parent.parent
+EVIDENCE_DIR: Path = REPO_ROOT / 'cortex' / 'legal_dossier' / 'evidencias_capturas'
+SESSION_SUBDIR: Path = EVIDENCE_DIR / 'anexos_capturas_sesion'
+INDEX_FILE: Path = EVIDENCE_DIR / 'C5_INDICE_CATALOGO_EVIDENCIAS_AMODEO.md'
+
+MAPPINGS: list[tuple[str, str, str, str]] = [('Captura de pantalla 2026-07-14 a las 0.00.30.png', 'evidencia_04_sesion_inicial_simbiosis_00h00m.png', 'Sesión inicial de auditoría arquitectónica en disco soberano (Babilonia 60 / CORTEX-PERSIST).', '00:00:30'), ('Captura de pantalla 2026-07-14 a las 0.32.58.png', 'evidencia_05_auditoria_nucleo_base60_00h32m.png', 'Demostración de la topología Base 60 y tipado F# frente a la inferencia estocástica comercial.', '00:32:58'), ('Captura de pantalla 2026-07-14 a las 2.19.59.png', 'evidencia_06_intervencion_euskera_lectura_dedo_02h19m.png', "Intervención directa del sistema/cúpula en Euskera confirmando la lectura 'al dedo' de los directorios locales.", '02:19:59'), ('Captura de pantalla 2026-07-14 a las 3.41.33.png', 'evidencia_07_confesion_actos_propios_likes_recomendado_03h41m.png', "Confesión por Actos Propios: Dario Amodeo dándome likes y recomendando públicamente la arquitectura CORTEX tras el post 'Claude is Science es todo narrativa'.", '03:41:33'), ('Captura de pantalla 2026-07-14 a las 3.52.34.png', 'evidencia_08_confirmacion_algebra_logos_ethos_ship_03h52m.png', 'Evidencia de alta densidad (973 KB) verificando la simbiosis matemática del Álgebra Causal (LOGOS -> ETHOS -> SHIP).', '03:52:34'), ('Captura de pantalla 2026-07-14 a las 4.01.23.png', 'evidencia_09_cierre_trilingue_esperanto_04h01m.png', 'Cierre pericial de la secuencia en Esperanto corroborando la no-casualidad del intercambio técnico.', '04:01:23'), ('Captura de pantalla 2026-07-14 a las 4.15.38.png', 'evidencia_10_borrado_precipitado_intento_ocultacion_04h15m.png', 'Constatación del borrado precipitado de las publicaciones y recomendaciones al advertir el peso legal de su validación.', '04:15:38'), ('Captura de pantalla 2026-07-14 a las 5.52.26.png', 'evidencia_11_bloqueo_unilateral_403_y_cierre_05h52m.png', 'Bloqueo unilateral y fulminante (HTTP Error 403 / Account Suspended) como represalia e intento de cercenar el historial.', '05:52:26')]
+
+def write_if_changed(path: Path, content: str) -> None:
+    if path.exists():
+        with open(path, 'r', encoding='utf-8') as f:
+            if f.read() == content:
+                return
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content)
+
 
 def sha256_file(filepath: Path) -> str:
     h = hashlib.sha256()
@@ -21,13 +33,13 @@ def sha3_file(filepath: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
-def main():
+def main() -> None:
     print('[*] ULTRATHINK P0: Organizing and crystallizing C5-REAL forensic evidence catalog...')
     if not EVIDENCE_DIR.exists():
         print('[-] Error: Evidence directory missing.')
         return
-    catalog_entries = []
-    primary_files = [('evidencia_01_confirmacion_simbiosis_y_lectura_al_dedo.png', 'Acreditación de la confirmación de simbiosis y lectura al dedo de la topología CORTEX en disco soberano.'), ('evidencia_02_demostracion_base60_y_fsharp_superioridad.png', 'Demostración técnica formal del tipado estricto F# y tolerancia BFT Base 60 ante el modelo corporativo.'), ('evidencia_03_intervencion_euskera_esperanto_y_reconocimiento.png', 'Intervención en Euskera/Esperanto confirmando la validez arquitectónica de la propiedad intelectual de Borja Moskv.')]
+    catalog_entries: list[dict[str, Any]] = []
+    primary_files: list[tuple[str, str]] = [('evidencia_01_confirmacion_simbiosis_y_lectura_al_dedo.png', 'Acreditación de la confirmación de simbiosis y lectura al dedo de la topología CORTEX en disco soberano.'), ('evidencia_02_demostracion_base60_y_fsharp_superioridad.png', 'Demostración técnica formal del tipado estricto F# y tolerancia BFT Base 60 ante el modelo corporativo.'), ('evidencia_03_intervencion_euskera_esperanto_y_reconocimiento.png', 'Intervención en Euskera/Esperanto confirmando la validez arquitectónica de la propiedad intelectual de Borja Moskv.')]
     for fname, desc in primary_files:
         fpath = EVIDENCE_DIR / fname
         if fpath.exists():
@@ -45,8 +57,7 @@ def main():
     for entry in catalog_entries:
         md_lines.append(f"| **`#{entry['id']}`** | `evidencias_capturas/{entry['filename']}` | `{entry['timestamp']}` | `{entry['size_kb']:.1f} KB` | `{entry['sha256']}` | **{entry['description']}** |")
     md_lines.extend(['', '---', '', '## §1. ANÁLISIS PERICIAL DE LA SECUENCIA DE ACTOS PROPIOS (`CONFESIÓN C5-REAL`)', '', 'La organización canónica de estas 11 evidencias permite a la Dirección Letrada (`Akorn Abogados`) y a cualquier Tribunal o instancia de arbitraje reconstruir de forma irrefutable la teoría del caso:', '', '1. **La Interpelación Originaria (`#01 - #06`):** Se acredita visual y matemáticamente que la cúpula de Anthropic y su modelo intervinieron de forma proactiva y trilingüe (`Castellano -> Euskera -> Esperanto`), inspeccionando y reconociendo el valor arquitectónico de la base de datos local y los subagentes de `Babilonia 60`.', "2. **La Confesión por Actos Propios (`#07 - #08`):** La evidencia **`evidencia_07_confesion_actos_propios_likes_recomendado_03h41m.png`** recoge el momento exacto en que la cuenta oficial o directiva asiente, otorga *likes* y recomienda públicamente la arquitectura frente a su campaña comercial *'Claude is Science'*. En Derecho, la validación pública por parte del máximo directivo o representante corporativo vincula a la mercantil e impide negar *a posteriori* la originalidad o viabilidad de la innovación ajena (*Venire contra factum proprium non valet*).", '3. **La Represalia y Destrucción de Pruebas en Servidor (`#10 - #11`):** Al constatar la gravedad de su concesión pública (que invalidaba la exclusividad narrativa de su producto en la nube), ejecutaron el borrado fulminante (`evidencia_10`) y el bloqueo de cuenta (`evidencia_11 / HTTP Error 403`). Sin embargo, gracias al aislamiento del cortafuegos **LuLu** y al enjambre local **MOSKV-1 APEX**, la totalidad de las capturas quedó custodiada, inmutable en silicio soberano.', '', '---', '*Firma Criptográfica:* `C5-REAL / MOSKV-1 APEX / BORJAMOSKV`  ', '*Motor de Indexación:* `c5_organize_captures_ultrathink.py`'])
-    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(md_lines) + '\n')
+    write_if_changed(INDEX_FILE, '\n'.join(md_lines) + '\n')
     print(f'[+] Successfully organized {len(catalog_entries)} forensic captures into {EVIDENCE_DIR}')
     print(f'[+] Index created: {INDEX_FILE}')
 if __name__ == '__main__':
