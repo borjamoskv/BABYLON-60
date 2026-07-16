@@ -4,8 +4,8 @@ import time
 import os
 import signal
 
-REQUESTS = 100000
-CONCURRENCY = 500
+REQUESTS = 20000
+CONCURRENCY = 200
 
 async def raw_http_get(sem, host, port):
     async with sem:

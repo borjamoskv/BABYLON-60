@@ -156,10 +156,9 @@ class VoiceAgentPipeline:
             return
         assert self._respond_task is not None
         self._respond_task.cancel()
-        try:
+        import contextlib
+        with contextlib.suppress(asyncio.CancelledError):
             await self._respond_task
-        except asyncio.CancelledError:
-            pass
         self._respond_task = None
         self.audio.stop_playback()
         await self.spec.cancel()

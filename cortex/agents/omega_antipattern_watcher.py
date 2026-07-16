@@ -106,6 +106,26 @@ class OmegaAntipatternWatcher(ast.NodeVisitor):
         self.current_class = previous_class
 
     def visit_Try(self, node: ast.Try) -> None:
+        # Check ANTI-042: Await inside Try block (Violates K4 Jetsam Resilience)
+        if node.handlers:
+            has_await = False
+            for stmt in node.body:
+                for sub_node in ast.walk(stmt):
+                    if isinstance(sub_node, ast.Await):
+                        has_await = True
+                        break
+                if has_await:
+                    break
+                    
+            if has_await:
+                self.add_finding(
+                    "ANTI-042",
+                    node.lineno,
+                    node.col_offset,
+                    "Async 'await' wrapped in try/except block violates K4 (Jetsam Stateless Resilience). Do not catch Jetsam SIGKILL.",
+                    severity="P0"
+                )
+
         # Check ANTI-012: Captura de Excepciones Ciega (Blind Catch)
         for handler in node.handlers:
             is_blind = False
@@ -126,15 +146,15 @@ class OmegaAntipatternWatcher(ast.NodeVisitor):
                 has_return = False
                 has_exit = False
                 
-                for stmt in ast.walk(handler):
-                    if isinstance(stmt, ast.Raise):
+                for h_node in ast.walk(handler):
+                    if isinstance(h_node, ast.Raise):
                         has_raise = True
-                    elif isinstance(stmt, (ast.Return, ast.Yield)):
+                    elif isinstance(h_node, (ast.Return, ast.Yield)):
                         has_return = True
-                    elif isinstance(stmt, ast.Call) and isinstance(stmt.func, ast.Name) and stmt.func.id in ("exit", "quit"):
+                    elif isinstance(h_node, ast.Call) and isinstance(h_node.func, ast.Name) and h_node.func.id in ("exit", "quit"):
                         has_exit = True
-                    elif isinstance(stmt, ast.Call) and isinstance(stmt.func, ast.Attribute) and \
-                            isinstance(stmt.func.value, ast.Name) and stmt.func.value.id == "sys" and stmt.func.attr == "exit":
+                    elif isinstance(h_node, ast.Call) and isinstance(h_node.func, ast.Attribute) and \
+                            isinstance(h_node.func.value, ast.Name) and h_node.func.value.id == "sys" and h_node.func.attr == "exit":
                         has_exit = True
                         
                 if not (has_raise or has_return or has_exit):

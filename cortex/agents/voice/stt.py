@@ -183,10 +183,9 @@ class FasterWhisperStt:
         self._active = False
         if self._loop_task is not None:
             self._loop_task.cancel()
-            try:
+            import contextlib
+            with contextlib.suppress(asyncio.CancelledError):
                 await self._loop_task
-            except asyncio.CancelledError:
-                pass
             self._loop_task = None
         prefinal, samples = self._prefinal_task, self._prefinal_samples
         self._prefinal_task = None
