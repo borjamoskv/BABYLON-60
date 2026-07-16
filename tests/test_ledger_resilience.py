@@ -86,8 +86,9 @@ async def test_hash_chain_corruption_detection(ephemeral_ledger: BFTLedgerActor)
         await db.commit()
 
     # Verification should now fail
-    chain_valid_after_tamper = await ephemeral_ledger.verify_chain()
-    assert chain_valid_after_tamper is False
+    from babylon60.bft.ledger_actor import BFTCausalInvariantError
+    with pytest.raises(BFTCausalInvariantError, match="INV_BFT_LEAN_04"):
+        await ephemeral_ledger.verify_chain()
 
 
 @pytest.mark.asyncio
