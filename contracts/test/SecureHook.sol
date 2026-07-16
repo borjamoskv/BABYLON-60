@@ -32,7 +32,7 @@ contract SecureHook {
     // Secure implementation of afterSwap: enforces both onlyPoolManager and authorizedPools validations
     function afterSwap(address, bytes32 poolId, int256) external onlyPoolManager returns (bytes4) {
         if (!authorizedPools[poolId]) revert UnauthorizedPool();
-        balances[tx.origin] += 50; 
+        balances[msg.sender] += 50; 
         return this.afterSwap.selector;
     }
 

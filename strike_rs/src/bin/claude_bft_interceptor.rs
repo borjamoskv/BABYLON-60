@@ -103,7 +103,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let genesis = vec![0u8; 32];
     
     // Generar clave HMAC estática para demo (en prod vendría de HSM o env)
-    let key = hmac::Key::new(hmac::HMAC_SHA256, b"CORTEX_BFT_KEY_2026_MASTER_LEDGER");
+    let env_key = env::var("CORTEX_BFT_KEY").unwrap_or_else(|_| "CORTEX_BFT_KEY_2026_MASTER_LEDGER_ROTATED".to_string());
+    let key = hmac::Key::new(hmac::HMAC_SHA256, env_key.as_bytes());
 
     let ledger = Arc::new(Mutex::new(BftLedger {
         conn,

@@ -34,7 +34,7 @@ def main() -> None:
     signature_bytes = signing_key.sign(payload_hash.encode("utf-8")).signature
     sig_b64 = base64.urlsafe_b64encode(signature_bytes).decode("utf-8").rstrip("=")
     receipt = {
-        "receipt_id": f"rec_{hashlib.md5(canonical_payload).hexdigest()[:8]}",
+        "receipt_id": f"rec_{hashlib.sha3_256(canonical_payload).hexdigest()[:8]}",
         "schema": "https://schema.babylon60.dev/v0.2/character-attestation",
         "payload": payload,
         "payload_hash": payload_hash,

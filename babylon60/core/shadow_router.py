@@ -3,6 +3,8 @@ import asyncio
 import time
 import json
 import secrets
+import hmac
+import hashlib
 from typing import Dict, Any, Tuple
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
@@ -40,7 +42,7 @@ class ShadowRouter:
             "output_tokens": 50,
             "cost_microusd": 4200,
             "fallback_used": False,
-            "response_commitment": f"hmac-sha256:{secrets.token_hex(32)}",
+            "response_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
             "provider_receipt_hash": f"sha256:{secrets.token_hex(32)}",
         }
 
@@ -49,7 +51,7 @@ class ShadowRouter:
         primary_model = "provider-x/gemini-2.0-flash-2026-07-01"
         shadow_models = ["provider-y/claude-3.5-sonnet-2026-06"]
         decision_payload = {
-            "request_commitment": f"hmac-sha256:{secrets.token_hex(32)}",
+            "request_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
             "policy_id": "arcstride-v4.2.1",
             "policy_hash": f"sha256:{secrets.token_hex(32)}",
             "candidate_set_hash": f"sha256:{secrets.token_hex(32)}",

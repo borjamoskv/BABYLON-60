@@ -16,7 +16,8 @@ class StateMutation:
 
 class BFT_Ledger:
     def __init__(self, db_path: str = "master_ledger.db") -> None:
-        self.conn = sqlite3.connect(db_path, isolation_level=None, timeout=5.0)
+        self.conn = sqlite3.connect(db_path, isolation_level=None, timeout=5.0, check_same_thread=False)
+        self.conn.execute("PRAGMA busy_timeout=5000;")
         self.conn.execute("PRAGMA journal_mode=WAL;")
         self.conn.execute("PRAGMA synchronous=NORMAL;")
         self._init_tables()
