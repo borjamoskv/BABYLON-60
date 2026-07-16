@@ -1,0 +1,4002 @@
+# C5-REAL ONTOLOGY: 1000 AEROSPACE & EPISTEMIC PRIMITIVES
+primitives:
+  - id: APEX-AERO-0000
+    hash: 02466e51e8a8e215
+    description: "Validación MCTS de Estructuras Compuestas de Carbono durante maniobras de inserción orbital."
+    exergy_score: 960
+  - id: APEX-AERO-0001
+    hash: 73990af642f0c5a5
+    description: "Restricción de Exergía en Sistemas de Acoplamiento Autónomo evitando el acoplamiento pogo."
+    exergy_score: 998
+  - id: APEX-AERO-0002
+    hash: 57559cbcd6e71d76
+    description: "Control de Lazo Cerrado para Mapeadores LIDAR Topográficos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 997
+  - id: APEX-AERO-0003
+    hash: 042850eae4a5acb8
+    description: "Colapso Termodinámico en Actuadores Electromecánicos de Control de Vector de Empuje con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 990
+  - id: APEX-AERO-0004
+    hash: c5d3122a503bbc1b
+    description: "Consenso de Actitud para Ruedas de Reacción Térmicamente Aisladas con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 987
+  - id: APEX-AERO-0005
+    hash: 0d5b11532891e0d3
+    description: "Sincronización de Telemetría en Navegación Autónoma de Reentrada en presencia de perturbaciones magnéticas."
+    exergy_score: 955
+  - id: APEX-AERO-0006
+    hash: 726dc1c2879b5689
+    description: "Restricción de Exergía en Navegación Autónoma de Reentrada durante maniobras de inserción orbital."
+    exergy_score: 955
+  - id: APEX-AERO-0007
+    hash: 85fca00125e79d3a
+    description: "Mapeo Isomórfico de Tanques de Propelente Presurizados optimizando la fracción de masa de propelente."
+    exergy_score: 994
+  - id: APEX-AERO-0008
+    hash: 0ed0d5b3cbfa159a
+    description: "Auditoría Estructural en Mecanismos de Separación Pirolítica optimizando la fracción de masa de propelente."
+    exergy_score: 962
+  - id: APEX-AERO-0009
+    hash: 34e2822b2175d79a
+    description: "Redundancia de Nivel 5 en Sistemas de Escape de Lanzamiento (LES) en ambiente de microgravedad."
+    exergy_score: 980
+  - id: APEX-AERO-0010
+    hash: c365135a08fe0a9d
+    description: "Mapeo Isomórfico de Buses de Datos MIL-STD-1553 en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 956
+  - id: APEX-AERO-0011
+    hash: 7f0cf11cfd3aab5a
+    description: "Mapeo Isomórfico de Escudos de Ablación Térmica bajo régimen de flujo transónico."
+    exergy_score: 978
+  - id: APEX-AERO-0012
+    hash: 99c9c8243a928e9c
+    description: "Auditoría Estructural en Cámaras Térmicas Infrarrojas en ambiente de microgravedad."
+    exergy_score: 1000
+  - id: APEX-AERO-0013
+    hash: cbc660a84295f53f
+    description: "Colapso Termodinámico en Dinámica de Fluidos Hipersónica con radiación de cinturones de Van Allen."
+    exergy_score: 984
+  - id: APEX-AERO-0014
+    hash: 2e8e7327d27caf7a
+    description: "Supresión de Ruido Estocástico en Tanques de Propelente Presurizados con presupuestos de masa estrictos."
+    exergy_score: 991
+  - id: APEX-AERO-0015
+    hash: 4d07a852c52aa48b
+    description: "Redundancia de Nivel 5 en Cámaras de Combustión de Presión Supercrítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 973
+  - id: APEX-AERO-0016
+    hash: 96e5056ed2f1b4cd
+    description: "Redundancia de Nivel 5 en Espectrómetros de Masas con presupuestos de masa estrictos."
+    exergy_score: 953
+  - id: APEX-AERO-0017
+    hash: 6f9d15c1635bf90d
+    description: "Restricción de Exergía en Acelerómetros MEMS durante maniobras de inserción orbital."
+    exergy_score: 1000
+  - id: APEX-AERO-0018
+    hash: 3eb80f83e5bd8715
+    description: "Acotación Termomecánica de Intercambiadores de Calor Regenerativos optimizando la fracción de masa de propelente."
+    exergy_score: 990
+  - id: APEX-AERO-0019
+    hash: 84e685385ebdf4d7
+    description: "Aislamiento Cinemático de Sistemas de Acoplamiento Autónomo bajo bombardeo de micrometeoritos."
+    exergy_score: 997
+  - id: APEX-AERO-0020
+    hash: 0f06d8b11666fb39
+    description: "Minimización Entrópica en Aislantes de Aerogel requiriendo consenso mayoritario (N=3)."
+    exergy_score: 988
+  - id: APEX-AERO-0021
+    hash: da99fd9b4034835a
+    description: "Acotación Termomecánica de Actuadores Electromecánicos de Control de Vector de Empuje optimizando la fracción de masa de propelente."
+    exergy_score: 951
+  - id: APEX-AERO-0022
+    hash: 985796459ac49a9e
+    description: "Supresión de Ruido Estocástico en Estructuras Isogrid de Aluminio bajo bombardeo de micrometeoritos."
+    exergy_score: 996
+  - id: APEX-AERO-0023
+    hash: 64d66dd36e8d83ed
+    description: "Acotación Termomecánica de Materiales Ablativos Fenólicos optimizando la fracción de masa de propelente."
+    exergy_score: 959
+  - id: APEX-AERO-0024
+    hash: 47e35f42c6af59e4
+    description: "Falsación Empírica de Radiadores Térmicos de Piel requiriendo consenso mayoritario (N=3)."
+    exergy_score: 972
+  - id: APEX-AERO-0025
+    hash: c1b3cdcdc8779db8
+    description: "Redundancia de Nivel 5 en Sensores de Estrellas (Star Trackers) en ambiente de microgravedad."
+    exergy_score: 970
+  - id: APEX-AERO-0026
+    hash: 0814735030b2765e
+    description: "Evaluación de Estrés Cortante en Sensores de Estrellas (Star Trackers) con presupuestos de masa estrictos."
+    exergy_score: 974
+  - id: APEX-AERO-0027
+    hash: 9ad1c1db578f26f2
+    description: "Control de Lazo Cerrado para Navegación Autónoma de Reentrada con interferencia de plasma de reentrada."
+    exergy_score: 993
+  - id: APEX-AERO-0028
+    hash: 935f7ffbbc7f44a1
+    description: "Consenso de Actitud para Cámaras de Combustión de Presión Supercrítica en órbitas altamente elípticas."
+    exergy_score: 957
+  - id: APEX-AERO-0029
+    hash: 4a7a473020f9375d
+    description: "Cálculo de Tensor de Inercia de Válvulas de Purga Pirolítica maximizando el impulso específico (Isp)."
+    exergy_score: 1000
+  - id: APEX-AERO-0030
+    hash: 957a2ecfcc700990
+    description: "Control de Lazo Cerrado para Materiales Ablativos Fenólicos en órbitas altamente elípticas."
+    exergy_score: 982
+  - id: APEX-AERO-0031
+    hash: b7cc255b7caf2424
+    description: "Control de Lazo Cerrado para Mecánica Orbital No Kepleriana con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 991
+  - id: APEX-AERO-0032
+    hash: 8d62d3e0f8f9ca9b
+    description: "Acotación Termomecánica de Mapeadores LIDAR Topográficos en presencia de perturbaciones magnéticas."
+    exergy_score: 968
+  - id: APEX-AERO-0033
+    hash: ce5f420e32ca90cf
+    description: "Sincronización de Telemetría en Intercambiadores de Calor Regenerativos en presencia de perturbaciones magnéticas."
+    exergy_score: 998
+  - id: APEX-AERO-0034
+    hash: 094c0e6f89edfbf5
+    description: "Colapso Termodinámico en Turbobombas de Ciclo Cerrado bajo bombardeo de micrometeoritos."
+    exergy_score: 968
+  - id: APEX-AERO-0035
+    hash: cf63827089c3b157
+    description: "Colapso Termodinámico en Turbobombas de Ciclo Cerrado con latencia de telemetría asimétrica."
+    exergy_score: 966
+  - id: APEX-AERO-0036
+    hash: fed42998363fb279
+    description: "Supresión de Ruido Estocástico en Turbobombas de Ciclo Cerrado con presupuestos de masa estrictos."
+    exergy_score: 960
+  - id: APEX-AERO-0037
+    hash: fdd3f3a8fb7d803e
+    description: "Minimización Entrópica en Ruedas de Reacción Térmicamente Aisladas evitando el acoplamiento pogo."
+    exergy_score: 955
+  - id: APEX-AERO-0038
+    hash: b4dba60e7b8504d1
+    description: "Prueba de Integridad de Actuadores Electromecánicos de Control de Vector de Empuje durante maniobras de inserción orbital."
+    exergy_score: 984
+  - id: APEX-AERO-0039
+    hash: 8890f0518a794fe7
+    description: "Derivación Causal de Estructuras Compuestas de Carbono optimizando la fracción de masa de propelente."
+    exergy_score: 959
+  - id: APEX-AERO-0040
+    hash: 2ab9e037184c1d5b
+    description: "Sincronización de Telemetría en Sistemas de Escape de Lanzamiento (LES) en ambiente de microgravedad."
+    exergy_score: 988
+  - id: APEX-AERO-0041
+    hash: 0265396f11617907
+    description: "Supresión de Ruido Estocástico en Intercambiadores de Calor Regenerativos garantizando invarianza topológica."
+    exergy_score: 992
+  - id: APEX-AERO-0042
+    hash: 7c65c71f661f5bc2
+    description: "Cálculo de Tensor de Inercia de Estructuras Compuestas de Carbono con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 986
+  - id: APEX-AERO-0043
+    hash: d8609a8e456cb31f
+    description: "Acotación Termomecánica de Navegación Autónoma de Reentrada evitando el acoplamiento pogo."
+    exergy_score: 984
+  - id: APEX-AERO-0044
+    hash: ba41c5ee6c593972
+    description: "Acotación Termomecánica de Amortiguadores de Oscilación de Propelente (Baffles) maximizando el impulso específico (Isp)."
+    exergy_score: 980
+  - id: APEX-AERO-0045
+    hash: 1fb2264ccd9f8499
+    description: "Control de Lazo Cerrado para Materiales Ablativos Fenólicos en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 968
+  - id: APEX-AERO-0046
+    hash: f2b995b77699daa9
+    description: "Minimización Entrópica en Mecanismos de Separación Pirolítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 981
+  - id: APEX-AERO-0047
+    hash: f0fd07bf282e7762
+    description: "Supresión de Ruido Estocástico en Giroscopios de Fibra Óptica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 983
+  - id: APEX-AERO-0048
+    hash: 9f987365429b54eb
+    description: "Acotación Termomecánica de Espectrómetros de Masas con interferencia de plasma de reentrada."
+    exergy_score: 999
+  - id: APEX-AERO-0049
+    hash: d9af8e32365de918
+    description: "Evaluación de Estrés Cortante en Ignitores Láser sometido a choque térmico de 2000K."
+    exergy_score: 954
+  - id: APEX-AERO-0050
+    hash: ec733e24cc2cae0a
+    description: "Mapeo Isomórfico de Sistemas de Escape de Lanzamiento (LES) en presencia de perturbaciones magnéticas."
+    exergy_score: 959
+  - id: APEX-AERO-0051
+    hash: 511ddb0a707e5c2b
+    description: "Control de Lazo Cerrado para Celdas de Combustible de Membrana de Intercambio Protónico minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 961
+  - id: APEX-AERO-0052
+    hash: ba91e45e40f03c08
+    description: "Control de Lazo Cerrado para Sistemas de Acoplamiento Autónomo optimizando la fracción de masa de propelente."
+    exergy_score: 998
+  - id: APEX-AERO-0053
+    hash: a1718e0eed99657b
+    description: "Evaluación de Estrés Cortante en Válvulas de Purga Pirolítica en órbitas altamente elípticas."
+    exergy_score: 968
+  - id: APEX-AERO-0054
+    hash: 39bc9e630cdef990
+    description: "Aislamiento Cinemático de Aislantes de Aerogel bajo régimen de flujo transónico."
+    exergy_score: 982
+  - id: APEX-AERO-0055
+    hash: 5dac8e456016ef62
+    description: "Sincronización de Telemetría en Sistemas de Escape de Lanzamiento (LES) con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 989
+  - id: APEX-AERO-0056
+    hash: b0a78a2c21641f1c
+    description: "Acotación Termomecánica de Sistemas de Detección de Fugas de Helio con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 1000
+  - id: APEX-AERO-0057
+    hash: 1ab94a2bc19ebb00
+    description: "Acotación Termomecánica de Turbobombas de Ciclo Cerrado durante maniobras de inserción orbital."
+    exergy_score: 952
+  - id: APEX-AERO-0058
+    hash: 4241c74f903dda3d
+    description: "Redundancia de Nivel 5 en Válvulas de Purga Pirolítica con radiación de cinturones de Van Allen."
+    exergy_score: 970
+  - id: APEX-AERO-0059
+    hash: 363a6cb7b8ce21fa
+    description: "Auditoría Estructural en Cámaras de Combustión de Presión Supercrítica sometido a choque térmico de 2000K."
+    exergy_score: 974
+  - id: APEX-AERO-0060
+    hash: 64ce6399dc7288a3
+    description: "Aislamiento Cinemático de Estructuras Isogrid de Aluminio minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 980
+  - id: APEX-AERO-0061
+    hash: cddbe090c3e2e0dc
+    description: "Prueba de Integridad de Sistemas de Control a Reacción (RCS) con presupuestos de masa estrictos."
+    exergy_score: 952
+  - id: APEX-AERO-0062
+    hash: 3067dfdb1a51f283
+    description: "Restricción de Exergía en Dinámica de Fluidos Hipersónica requiriendo consenso mayoritario (N=3)."
+    exergy_score: 982
+  - id: APEX-AERO-0063
+    hash: e2d68bd6bdcafcc1
+    description: "Falsación Empírica de Tanques de Propelente Presurizados evitando el acoplamiento pogo."
+    exergy_score: 977
+  - id: APEX-AERO-0064
+    hash: ce0a9c031b1991c4
+    description: "Derivación Causal de Inyectores Coaxiales bajo bombardeo de micrometeoritos."
+    exergy_score: 979
+  - id: APEX-AERO-0065
+    hash: 2b23c7eb62a515c6
+    description: "Redundancia de Nivel 5 en Ignitores Láser con interferencia de plasma de reentrada."
+    exergy_score: 951
+  - id: APEX-AERO-0066
+    hash: b8c6e252ea9c9556
+    description: "Supresión de Ruido Estocástico en Sistemas de Detección de Fugas de Helio en presencia de perturbaciones magnéticas."
+    exergy_score: 952
+  - id: APEX-AERO-0067
+    hash: 657ab2285e38acde
+    description: "Mitigación de Resonancia en Tanques de Propelente Presurizados requiriendo consenso mayoritario (N=3)."
+    exergy_score: 988
+  - id: APEX-AERO-0068
+    hash: e0d48c5fe3b1add4
+    description: "Sincronización de Telemetría en Tubos de Calor de Amoníaco con latencia de telemetría asimétrica."
+    exergy_score: 953
+  - id: APEX-AERO-0069
+    hash: 70fc24a52d3deb5c
+    description: "Minimización Entrópica en Amortiguadores de Oscilación de Propelente (Baffles) maximizando el impulso específico (Isp)."
+    exergy_score: 950
+  - id: APEX-AERO-0070
+    hash: c2654caf29db8659
+    description: "Auditoría Estructural en Torres de Servicio Umbilicales durante maniobras de inserción orbital."
+    exergy_score: 992
+  - id: APEX-AERO-0071
+    hash: 46ce11c2c119c42c
+    description: "Aislamiento Cinemático de Computadoras de Vuelo Tolerantes a Radiación durante maniobras de inserción orbital."
+    exergy_score: 966
+  - id: APEX-AERO-0072
+    hash: 12d2f4d7205ef384
+    description: "Mapeo Isomórfico de Sistemas de Recuperación por Paracaídas Supersónicos sometido a choque térmico de 2000K."
+    exergy_score: 965
+  - id: APEX-AERO-0073
+    hash: 6cd5d174145fb866
+    description: "Acotación Termomecánica de Sistemas de Soporte Vital de Circuito Cerrado en ambiente de microgravedad."
+    exergy_score: 974
+  - id: APEX-AERO-0074
+    hash: 727465d2be9ff8fe
+    description: "Control de Lazo Cerrado para Dinámica de Fluidos Hipersónica bajo régimen de flujo transónico."
+    exergy_score: 972
+  - id: APEX-AERO-0075
+    hash: 0d49dc8cac3b6c1f
+    description: "Mitigación de Resonancia en Reguladores de Presión Bang-Bang en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 990
+  - id: APEX-AERO-0076
+    hash: e5ab208cc1735f90
+    description: "Consenso de Actitud para Dinámica de Fluidos Hipersónica con interferencia de plasma de reentrada."
+    exergy_score: 971
+  - id: APEX-AERO-0077
+    hash: e530c7d60a759cde
+    description: "Mitigación de Resonancia en Velas Solares de Grafeno con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 955
+  - id: APEX-AERO-0078
+    hash: aa463af7e8ed6973
+    description: "Colapso Termodinámico en Antenas de Alta Ganancia (Banda Ka) con presupuestos de masa estrictos."
+    exergy_score: 973
+  - id: APEX-AERO-0079
+    hash: dfd25056b4555e56
+    description: "Auditoría Estructural en Tubos de Calor de Amoníaco con radiación de cinturones de Van Allen."
+    exergy_score: 996
+  - id: APEX-AERO-0080
+    hash: 58488b9a9f490a99
+    description: "Derivación Causal de Espectrómetros de Masas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 983
+  - id: APEX-AERO-0081
+    hash: 905b5152eb74307c
+    description: "Evaluación de Estrés Cortante en Cámaras Térmicas Infrarrojas garantizando invarianza topológica."
+    exergy_score: 967
+  - id: APEX-AERO-0082
+    hash: 55483b3554d7949d
+    description: "Falsación Empírica de Espectrómetros de Masas con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 983
+  - id: APEX-AERO-0083
+    hash: 56e3268e9d853b2b
+    description: "Prueba de Integridad de Cámaras Térmicas Infrarrojas maximizando el impulso específico (Isp)."
+    exergy_score: 959
+  - id: APEX-AERO-0084
+    hash: 1e6d3b3b2dd28282
+    description: "Falsación Empírica de Radiadores Térmicos de Piel en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 975
+  - id: APEX-AERO-0085
+    hash: 6fa0c5128f030808
+    description: "Validación MCTS de Turbobombas de Ciclo Cerrado con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 974
+  - id: APEX-AERO-0086
+    hash: b896206448f059d7
+    description: "Auditoría Estructural en Algoritmos de Filtro de Kalman Extendido optimizando la fracción de masa de propelente."
+    exergy_score: 986
+  - id: APEX-AERO-0087
+    hash: e6c2dadd0bd78bff
+    description: "Supresión de Ruido Estocástico en Mapeadores LIDAR Topográficos en órbitas altamente elípticas."
+    exergy_score: 957
+  - id: APEX-AERO-0088
+    hash: 55925e175590f211
+    description: "Derivación Causal de Sistemas de Escape de Lanzamiento (LES) con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 965
+  - id: APEX-AERO-0089
+    hash: caeca2c834867369
+    description: "Control de Lazo Cerrado para Tanques de Propelente Presurizados bajo bombardeo de micrometeoritos."
+    exergy_score: 976
+  - id: APEX-AERO-0090
+    hash: bbc6960f1b939d35
+    description: "Acotación Termomecánica de Velas Solares de Grafeno evitando el acoplamiento pogo."
+    exergy_score: 959
+  - id: APEX-AERO-0091
+    hash: 64d04db280d6be0a
+    description: "Colapso Termodinámico en Ignitores Láser evitando el acoplamiento pogo."
+    exergy_score: 967
+  - id: APEX-AERO-0092
+    hash: fc9487e3b480661e
+    description: "Prueba de Integridad de Inyectores Coaxiales en presencia de perturbaciones magnéticas."
+    exergy_score: 982
+  - id: APEX-AERO-0093
+    hash: 2e6f4b862166f65a
+    description: "Evaluación de Estrés Cortante en Propulsores de Efecto Hall minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 964
+  - id: APEX-AERO-0094
+    hash: e96e248c4b04ba8a
+    description: "Colapso Termodinámico en Sistemas de Acoplamiento Autónomo requiriendo consenso mayoritario (N=3)."
+    exergy_score: 970
+  - id: APEX-AERO-0095
+    hash: 294a2110696319f1
+    description: "Supresión de Ruido Estocástico en Cápsulas de Recuperación Balística minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 973
+  - id: APEX-AERO-0096
+    hash: 1297e36103c3973f
+    description: "Minimización Entrópica en Navegación Autónoma de Reentrada con latencia de telemetría asimétrica."
+    exergy_score: 992
+  - id: APEX-AERO-0097
+    hash: bee038670f8aa50d
+    description: "Supresión de Ruido Estocástico en Torres de Servicio Umbilicales con latencia de telemetría asimétrica."
+    exergy_score: 953
+  - id: APEX-AERO-0098
+    hash: bbaa5e3e6e9f8edc
+    description: "Derivación Causal de Inyectores Coaxiales en presencia de perturbaciones magnéticas."
+    exergy_score: 973
+  - id: APEX-AERO-0099
+    hash: 607d93a46eeddc65
+    description: "Restricción de Exergía en Mapeadores LIDAR Topográficos en ambiente de microgravedad."
+    exergy_score: 969
+  - id: APEX-AERO-0100
+    hash: f7fa522944286e38
+    description: "Mitigación de Resonancia en Estructuras Isogrid de Aluminio maximizando el impulso específico (Isp)."
+    exergy_score: 960
+  - id: APEX-AERO-0101
+    hash: 23a18795abc473bd
+    description: "Supresión de Ruido Estocástico en Materiales Ablativos Fenólicos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 1000
+  - id: APEX-AERO-0102
+    hash: fee358191b6676e4
+    description: "Aislamiento Cinemático de Amortiguadores de Oscilación de Propelente (Baffles) sometido a choque térmico de 2000K."
+    exergy_score: 986
+  - id: APEX-AERO-0103
+    hash: 07682e3ca956694b
+    description: "Mitigación de Resonancia en Paneles Solares Desplegables requiriendo consenso mayoritario (N=3)."
+    exergy_score: 974
+  - id: APEX-AERO-0104
+    hash: fc6d572edb421109
+    description: "Mapeo Isomórfico de Radiadores Térmicos de Piel garantizando invarianza topológica."
+    exergy_score: 996
+  - id: APEX-AERO-0105
+    hash: 902fcebf9a0e0d1f
+    description: "Mapeo Isomórfico de Cámaras de Combustión de Presión Supercrítica durante maniobras de inserción orbital."
+    exergy_score: 952
+  - id: APEX-AERO-0106
+    hash: a0447f2c3bb04b73
+    description: "Control de Lazo Cerrado para Paneles Solares Desplegables garantizando invarianza topológica."
+    exergy_score: 985
+  - id: APEX-AERO-0107
+    hash: f2af3cd8007cf027
+    description: "Restricción de Exergía en Ruedas de Reacción Térmicamente Aisladas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 995
+  - id: APEX-AERO-0108
+    hash: f7afd6f92f865c1f
+    description: "Validación MCTS de Radiadores Térmicos de Piel con radiación de cinturones de Van Allen."
+    exergy_score: 952
+  - id: APEX-AERO-0109
+    hash: fc25976eb385ffb9
+    description: "Mitigación de Resonancia en Algoritmos de Filtro de Kalman Extendido en ambiente de microgravedad."
+    exergy_score: 990
+  - id: APEX-AERO-0110
+    hash: ceb8eed756c31a6b
+    description: "Supresión de Ruido Estocástico en Tanques de Propelente Presurizados optimizando la fracción de masa de propelente."
+    exergy_score: 980
+  - id: APEX-AERO-0111
+    hash: 89d281742d8004dc
+    description: "Mapeo Isomórfico de Sistemas de Acoplamiento Autónomo con interferencia de plasma de reentrada."
+    exergy_score: 953
+  - id: APEX-AERO-0112
+    hash: 7c157b94feeec426
+    description: "Supresión de Ruido Estocástico en Cámaras de Combustión de Presión Supercrítica durante maniobras de inserción orbital."
+    exergy_score: 976
+  - id: APEX-AERO-0113
+    hash: 555456931b6b93f2
+    description: "Auditoría Estructural en Sistemas de Alerta de Colisión Orbital en ambiente de microgravedad."
+    exergy_score: 963
+  - id: APEX-AERO-0114
+    hash: c6340c079b0efaf2
+    description: "Prueba de Integridad de Sistemas de Acoplamiento Autónomo con latencia de telemetría asimétrica."
+    exergy_score: 965
+  - id: APEX-AERO-0115
+    hash: 94fda027c1dfb8bf
+    description: "Auditoría Estructural en Radiadores Térmicos de Piel bajo régimen de flujo transónico."
+    exergy_score: 976
+  - id: APEX-AERO-0116
+    hash: 35cb0e9b8f98885c
+    description: "Minimización Entrópica en Sistemas de Detección de Fugas de Helio con interferencia de plasma de reentrada."
+    exergy_score: 988
+  - id: APEX-AERO-0117
+    hash: 7b3a3f8de2ce0efc
+    description: "Restricción de Exergía en Giroscopios de Fibra Óptica con radiación de cinturones de Van Allen."
+    exergy_score: 989
+  - id: APEX-AERO-0118
+    hash: df2f09633206857d
+    description: "Cálculo de Tensor de Inercia de Buses de Datos MIL-STD-1553 con presión dinámica máxima (Max-Q)."
+    exergy_score: 985
+  - id: APEX-AERO-0119
+    hash: 0f0d29630a8cac48
+    description: "Derivación Causal de Cápsulas de Recuperación Balística durante maniobras de inserción orbital."
+    exergy_score: 979
+  - id: APEX-AERO-0120
+    hash: 85c845fe06ce1cc7
+    description: "Falsación Empírica de Sistemas de Detección de Fugas de Helio con presión dinámica máxima (Max-Q)."
+    exergy_score: 989
+  - id: APEX-AERO-0121
+    hash: 9d6106dbad569645
+    description: "Colapso Termodinámico en Mapeadores LIDAR Topográficos con radiación de cinturones de Van Allen."
+    exergy_score: 972
+  - id: APEX-AERO-0122
+    hash: 91f34171b990d4da
+    description: "Redundancia de Nivel 5 en Algoritmos de Filtro de Kalman Extendido bajo régimen de flujo transónico."
+    exergy_score: 1000
+  - id: APEX-AERO-0123
+    hash: 797fa1e24e4329aa
+    description: "Cálculo de Tensor de Inercia de Navegación Autónoma de Reentrada en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 951
+  - id: APEX-AERO-0124
+    hash: 04db66cce7d73afb
+    description: "Aserción BFT para Giroscopios de Fibra Óptica sometido a choque térmico de 2000K."
+    exergy_score: 999
+  - id: APEX-AERO-0125
+    hash: 4384997e04612cba
+    description: "Auditoría Estructural en Tanques de Propelente Presurizados en presencia de perturbaciones magnéticas."
+    exergy_score: 989
+  - id: APEX-AERO-0126
+    hash: 6704e331f0f45aaf
+    description: "Aislamiento Cinemático de Estructuras Isogrid de Aluminio en ambiente de microgravedad."
+    exergy_score: 999
+  - id: APEX-AERO-0127
+    hash: 03d15faa08c43915
+    description: "Acotación Termomecánica de Válvulas de Purga Pirolítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 990
+  - id: APEX-AERO-0128
+    hash: 42f8e192c26c4317
+    description: "Sincronización de Telemetría en Ignitores Láser en órbitas altamente elípticas."
+    exergy_score: 983
+  - id: APEX-AERO-0129
+    hash: d5f78136e6787ac9
+    description: "Consenso de Actitud para Computadoras de Vuelo Tolerantes a Radiación durante maniobras de inserción orbital."
+    exergy_score: 961
+  - id: APEX-AERO-0130
+    hash: 92c75131bfdc0c5a
+    description: "Aislamiento Cinemático de Radiadores Térmicos de Piel con presión dinámica máxima (Max-Q)."
+    exergy_score: 958
+  - id: APEX-AERO-0131
+    hash: cd7648aa048aa7d5
+    description: "Aislamiento Cinemático de Aislantes de Aerogel sometido a choque térmico de 2000K."
+    exergy_score: 954
+  - id: APEX-AERO-0132
+    hash: 427d002a6a72a76d
+    description: "Consenso de Actitud para Cápsulas de Recuperación Balística optimizando la fracción de masa de propelente."
+    exergy_score: 953
+  - id: APEX-AERO-0133
+    hash: 0bc9e9da019d372f
+    description: "Supresión de Ruido Estocástico en Espectrómetros de Masas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 967
+  - id: APEX-AERO-0134
+    hash: bcf91bcd8b8ed699
+    description: "Falsación Empírica de Sistemas de Acoplamiento Autónomo durante maniobras de inserción orbital."
+    exergy_score: 953
+  - id: APEX-AERO-0135
+    hash: d027fb04f783044c
+    description: "Redundancia de Nivel 5 en Sistemas de Control a Reacción (RCS) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 957
+  - id: APEX-AERO-0136
+    hash: 6ab577c5729000a7
+    description: "Falsación Empírica de Buses de Datos MIL-STD-1553 durante maniobras de inserción orbital."
+    exergy_score: 975
+  - id: APEX-AERO-0137
+    hash: d7ba58170f3415eb
+    description: "Validación MCTS de Cámaras de Combustión de Presión Supercrítica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 966
+  - id: APEX-AERO-0138
+    hash: 42f7def040b2bea9
+    description: "Supresión de Ruido Estocástico en Estructuras Compuestas de Carbono garantizando invarianza topológica."
+    exergy_score: 983
+  - id: APEX-AERO-0139
+    hash: f7f34dacf3406b61
+    description: "Mapeo Isomórfico de Navegación Autónoma de Reentrada con presupuestos de masa estrictos."
+    exergy_score: 957
+  - id: APEX-AERO-0140
+    hash: b44737d0fe1cf06d
+    description: "Falsación Empírica de Sistemas de Acoplamiento Autónomo en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 985
+  - id: APEX-AERO-0141
+    hash: 508a9d97dba1a565
+    description: "Minimización Entrópica en Velas Solares de Grafeno con latencia de telemetría asimétrica."
+    exergy_score: 983
+  - id: APEX-AERO-0142
+    hash: 6514ca0d9b47ccc5
+    description: "Falsación Empírica de Tubos de Calor de Amoníaco con interferencia de plasma de reentrada."
+    exergy_score: 997
+  - id: APEX-AERO-0143
+    hash: 13e80afe265660e6
+    description: "Mitigación de Resonancia en Propulsores de Efecto Hall minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 950
+  - id: APEX-AERO-0144
+    hash: a17b9817a5770d93
+    description: "Aserción BFT para Mecanismos de Separación Pirolítica bajo bombardeo de micrometeoritos."
+    exergy_score: 966
+  - id: APEX-AERO-0145
+    hash: 5a3cc5d42d0ca3ce
+    description: "Acotación Termomecánica de Torres de Servicio Umbilicales con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 990
+  - id: APEX-AERO-0146
+    hash: e27f07953b0aa551
+    description: "Prueba de Integridad de Acelerómetros MEMS con radiación de cinturones de Van Allen."
+    exergy_score: 996
+  - id: APEX-AERO-0147
+    hash: 15ddf49b92b44413
+    description: "Auditoría Estructural en Tanques de Propelente Presurizados con radiación de cinturones de Van Allen."
+    exergy_score: 966
+  - id: APEX-AERO-0148
+    hash: 1244ce58313c5191
+    description: "Consenso de Actitud para Escudos de Ablación Térmica durante maniobras de inserción orbital."
+    exergy_score: 991
+  - id: APEX-AERO-0149
+    hash: a9c8ed951804b793
+    description: "Control de Lazo Cerrado para Mecanismos de Separación Pirolítica con interferencia de plasma de reentrada."
+    exergy_score: 961
+  - id: APEX-AERO-0150
+    hash: cf0fa6234b99d4e4
+    description: "Aislamiento Cinemático de Ignitores Láser en presencia de perturbaciones magnéticas."
+    exergy_score: 985
+  - id: APEX-AERO-0151
+    hash: 6616f6adc216b417
+    description: "Validación MCTS de Mecanismos de Separación Pirolítica con latencia de telemetría asimétrica."
+    exergy_score: 980
+  - id: APEX-AERO-0152
+    hash: e1eda0f81d114479
+    description: "Restricción de Exergía en Espectrómetros de Masas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 981
+  - id: APEX-AERO-0153
+    hash: 13524e83b31c1437
+    description: "Control de Lazo Cerrado para Sensores de Estrellas (Star Trackers) sometido a choque térmico de 2000K."
+    exergy_score: 965
+  - id: APEX-AERO-0154
+    hash: 2f3ba7dfc885dc88
+    description: "Consenso de Actitud para Sistemas de Soporte Vital de Circuito Cerrado con interferencia de plasma de reentrada."
+    exergy_score: 983
+  - id: APEX-AERO-0155
+    hash: 9c1664680f7e07a1
+    description: "Colapso Termodinámico en Sistemas de Detección de Fugas de Helio optimizando la fracción de masa de propelente."
+    exergy_score: 962
+  - id: APEX-AERO-0156
+    hash: a2f092de69072cf6
+    description: "Auditoría Estructural en Acelerómetros MEMS requiriendo consenso mayoritario (N=3)."
+    exergy_score: 974
+  - id: APEX-AERO-0157
+    hash: 36a293ce17dc7394
+    description: "Minimización Entrópica en Navegación Autónoma de Reentrada garantizando invarianza topológica."
+    exergy_score: 995
+  - id: APEX-AERO-0158
+    hash: f736dddcf848e94d
+    description: "Cálculo de Tensor de Inercia de Buses de Datos MIL-STD-1553 sometido a choque térmico de 2000K."
+    exergy_score: 998
+  - id: APEX-AERO-0159
+    hash: 75da1393a31a21fb
+    description: "Mitigación de Resonancia en Blindaje contra Radiación Ionizante evitando el acoplamiento pogo."
+    exergy_score: 962
+  - id: APEX-AERO-0160
+    hash: d82ecfa9bac7fa9d
+    description: "Prueba de Integridad de Acelerómetros MEMS en presencia de perturbaciones magnéticas."
+    exergy_score: 983
+  - id: APEX-AERO-0161
+    hash: 9ca472253fea2ecf
+    description: "Cálculo de Tensor de Inercia de Espectrómetros de Masas durante maniobras de inserción orbital."
+    exergy_score: 991
+  - id: APEX-AERO-0162
+    hash: ec3ba45357d131f1
+    description: "Validación MCTS de Mapeadores LIDAR Topográficos sometido a choque térmico de 2000K."
+    exergy_score: 954
+  - id: APEX-AERO-0163
+    hash: 008e598a2fd16ce9
+    description: "Supresión de Ruido Estocástico en Sensores de Estrellas (Star Trackers) bajo régimen de flujo transónico."
+    exergy_score: 975
+  - id: APEX-AERO-0164
+    hash: 178d8f876f684df0
+    description: "Restricción de Exergía en Ignitores Láser con latencia de telemetría asimétrica."
+    exergy_score: 967
+  - id: APEX-AERO-0165
+    hash: 7d4d87619d6198aa
+    description: "Aserción BFT para Torres de Servicio Umbilicales minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 965
+  - id: APEX-AERO-0166
+    hash: e5b56e9f8fdac8df
+    description: "Supresión de Ruido Estocástico en Estructuras Isogrid de Aluminio requiriendo consenso mayoritario (N=3)."
+    exergy_score: 959
+  - id: APEX-AERO-0167
+    hash: 9a0249be7b3beb6e
+    description: "Falsación Empírica de Sistemas de Escape de Lanzamiento (LES) con presión dinámica máxima (Max-Q)."
+    exergy_score: 993
+  - id: APEX-AERO-0168
+    hash: ebed78bcdc2f2e78
+    description: "Sincronización de Telemetría en Sistemas de Soporte Vital de Circuito Cerrado maximizando el impulso específico (Isp)."
+    exergy_score: 954
+  - id: APEX-AERO-0169
+    hash: ec00b0ed3c606c43
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono con latencia de telemetría asimétrica."
+    exergy_score: 959
+  - id: APEX-AERO-0170
+    hash: e00e4b0917936a65
+    description: "Auditoría Estructural en Sistemas de Control a Reacción (RCS) con radiación de cinturones de Van Allen."
+    exergy_score: 994
+  - id: APEX-AERO-0171
+    hash: 116a3f2f094d0268
+    description: "Cálculo de Tensor de Inercia de Estructuras Compuestas de Carbono minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 975
+  - id: APEX-AERO-0172
+    hash: 9e92192f3824d1bd
+    description: "Consenso de Actitud para Tubos de Calor de Amoníaco evitando el acoplamiento pogo."
+    exergy_score: 989
+  - id: APEX-AERO-0173
+    hash: 266ee9aced3d92f7
+    description: "Control de Lazo Cerrado para Cámaras de Combustión de Presión Supercrítica con radiación de cinturones de Van Allen."
+    exergy_score: 993
+  - id: APEX-AERO-0174
+    hash: d65f0818428c5c57
+    description: "Auditoría Estructural en Sistemas de Escape de Lanzamiento (LES) en ambiente de microgravedad."
+    exergy_score: 968
+  - id: APEX-AERO-0175
+    hash: ff71e646cc3f87ef
+    description: "Restricción de Exergía en Aislantes de Aerogel en órbitas altamente elípticas."
+    exergy_score: 996
+  - id: APEX-AERO-0176
+    hash: 037f43db66c7f2cd
+    description: "Supresión de Ruido Estocástico en Sensores de Estrellas (Star Trackers) en ambiente de microgravedad."
+    exergy_score: 960
+  - id: APEX-AERO-0177
+    hash: 04aa3894d8c88af3
+    description: "Derivación Causal de Turbobombas de Ciclo Cerrado con interferencia de plasma de reentrada."
+    exergy_score: 983
+  - id: APEX-AERO-0178
+    hash: 08f6c94c4b5d210b
+    description: "Supresión de Ruido Estocástico en Válvulas de Purga Pirolítica en presencia de perturbaciones magnéticas."
+    exergy_score: 986
+  - id: APEX-AERO-0179
+    hash: ddc4e629b1d9130e
+    description: "Prueba de Integridad de Ruedas de Reacción Térmicamente Aisladas en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 991
+  - id: APEX-AERO-0180
+    hash: fe3b84af9ae74612
+    description: "Mapeo Isomórfico de Mecanismos de Separación Pirolítica bajo bombardeo de micrometeoritos."
+    exergy_score: 992
+  - id: APEX-AERO-0181
+    hash: 7f616d35b1fd7913
+    description: "Consenso de Actitud para Computadoras de Vuelo Tolerantes a Radiación con presupuestos de masa estrictos."
+    exergy_score: 992
+  - id: APEX-AERO-0182
+    hash: f765b030cbe24bc3
+    description: "Mapeo Isomórfico de Sistemas de Recuperación por Paracaídas Supersónicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 996
+  - id: APEX-AERO-0183
+    hash: 602c4e9843e24b67
+    description: "Aserción BFT para Sistemas de Alerta de Colisión Orbital en órbitas altamente elípticas."
+    exergy_score: 969
+  - id: APEX-AERO-0184
+    hash: 21e0567e8c0c852e
+    description: "Falsación Empírica de Propulsores de Efecto Hall con interferencia de plasma de reentrada."
+    exergy_score: 976
+  - id: APEX-AERO-0185
+    hash: e881dfe3f9f61ccf
+    description: "Derivación Causal de Dinámica de Fluidos Hipersónica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 969
+  - id: APEX-AERO-0186
+    hash: e5c3e9351fcabd66
+    description: "Supresión de Ruido Estocástico en Mecánica Orbital No Kepleriana en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 960
+  - id: APEX-AERO-0187
+    hash: 557627cb6ec359e2
+    description: "Prueba de Integridad de Ruedas de Reacción Térmicamente Aisladas en ambiente de microgravedad."
+    exergy_score: 951
+  - id: APEX-AERO-0188
+    hash: 4d5377272c183233
+    description: "Redundancia de Nivel 5 en Materiales Ablativos Fenólicos garantizando invarianza topológica."
+    exergy_score: 965
+  - id: APEX-AERO-0189
+    hash: f29d3b5d85cabccf
+    description: "Minimización Entrópica en Blindaje contra Radiación Ionizante con presupuestos de masa estrictos."
+    exergy_score: 976
+  - id: APEX-AERO-0190
+    hash: 5fa1352023f556bc
+    description: "Acotación Termomecánica de Ignitores Láser bajo régimen de flujo transónico."
+    exergy_score: 998
+  - id: APEX-AERO-0191
+    hash: 0f3698707af39747
+    description: "Cálculo de Tensor de Inercia de Tubos de Calor de Amoníaco evitando el acoplamiento pogo."
+    exergy_score: 995
+  - id: APEX-AERO-0192
+    hash: e2828e81d9daa9bf
+    description: "Aislamiento Cinemático de Blindaje contra Radiación Ionizante minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 958
+  - id: APEX-AERO-0193
+    hash: 00ab9470a3d0fdda
+    description: "Acotación Termomecánica de Sistemas de Recuperación por Paracaídas Supersónicos optimizando la fracción de masa de propelente."
+    exergy_score: 973
+  - id: APEX-AERO-0194
+    hash: 758e2b2abf50de89
+    description: "Acotación Termomecánica de Sistemas de Soporte Vital de Circuito Cerrado con radiación de cinturones de Van Allen."
+    exergy_score: 996
+  - id: APEX-AERO-0195
+    hash: 9faa518caffec922
+    description: "Aserción BFT para Escudos de Ablación Térmica bajo bombardeo de micrometeoritos."
+    exergy_score: 996
+  - id: APEX-AERO-0196
+    hash: 975d6936f9e2fd84
+    description: "Derivación Causal de Antenas de Alta Ganancia (Banda Ka) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 983
+  - id: APEX-AERO-0197
+    hash: e0e2c6e3e5cfc695
+    description: "Validación MCTS de Dinámica de Fluidos Hipersónica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 977
+  - id: APEX-AERO-0198
+    hash: 7b9d47e0965a315a
+    description: "Redundancia de Nivel 5 en Giroscopios de Fibra Óptica maximizando el impulso específico (Isp)."
+    exergy_score: 963
+  - id: APEX-AERO-0199
+    hash: 5e1d5263cbd57636
+    description: "Sincronización de Telemetría en Baterías de Litio de Grado Espacial en ambiente de microgravedad."
+    exergy_score: 956
+  - id: APEX-AERO-0200
+    hash: ba4fe3fde63a4371
+    description: "Evaluación de Estrés Cortante en Amortiguadores de Oscilación de Propelente (Baffles) con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 969
+  - id: APEX-AERO-0201
+    hash: b503ce5d653a137a
+    description: "Aserción BFT para Navegación Autónoma de Reentrada en ambiente de microgravedad."
+    exergy_score: 999
+  - id: APEX-AERO-0202
+    hash: d46c020ee8dec9d4
+    description: "Cálculo de Tensor de Inercia de Aislantes de Aerogel con radiación de cinturones de Van Allen."
+    exergy_score: 966
+  - id: APEX-AERO-0203
+    hash: c80472ae8d3d2154
+    description: "Cálculo de Tensor de Inercia de Actuadores Electromecánicos de Control de Vector de Empuje evitando el acoplamiento pogo."
+    exergy_score: 955
+  - id: APEX-AERO-0204
+    hash: 32c1599146cbdb89
+    description: "Acotación Termomecánica de Escudos de Ablación Térmica en órbitas altamente elípticas."
+    exergy_score: 979
+  - id: APEX-AERO-0205
+    hash: 2c44191ffec1899b
+    description: "Consenso de Actitud para Baterías de Litio de Grado Espacial requiriendo consenso mayoritario (N=3)."
+    exergy_score: 952
+  - id: APEX-AERO-0206
+    hash: 166d6234f01577d6
+    description: "Sincronización de Telemetría en Estructuras Isogrid de Aluminio en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 974
+  - id: APEX-AERO-0207
+    hash: 7612e9d3fcbcf8ea
+    description: "Evaluación de Estrés Cortante en Reguladores de Presión Bang-Bang requiriendo consenso mayoritario (N=3)."
+    exergy_score: 968
+  - id: APEX-AERO-0208
+    hash: d5361e18fa08673f
+    description: "Validación MCTS de Velas Solares de Grafeno en ambiente de microgravedad."
+    exergy_score: 990
+  - id: APEX-AERO-0209
+    hash: 771072074a484f95
+    description: "Consenso de Actitud para Inyectores Coaxiales en ambiente de microgravedad."
+    exergy_score: 974
+  - id: APEX-AERO-0210
+    hash: 36049fa9fa812aee
+    description: "Aserción BFT para Cámaras Térmicas Infrarrojas en presencia de perturbaciones magnéticas."
+    exergy_score: 960
+  - id: APEX-AERO-0211
+    hash: 3beeb1213b2355ca
+    description: "Cálculo de Tensor de Inercia de Amortiguadores de Oscilación de Propelente (Baffles) durante maniobras de inserción orbital."
+    exergy_score: 972
+  - id: APEX-AERO-0212
+    hash: 147a6812630c997a
+    description: "Colapso Termodinámico en Ruedas de Reacción Térmicamente Aisladas con radiación de cinturones de Van Allen."
+    exergy_score: 998
+  - id: APEX-AERO-0213
+    hash: 5ba6a89fde87281b
+    description: "Minimización Entrópica en Propulsores de Efecto Hall con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 973
+  - id: APEX-AERO-0214
+    hash: 7ebd944191db6220
+    description: "Cálculo de Tensor de Inercia de Turbobombas de Ciclo Cerrado sometido a choque térmico de 2000K."
+    exergy_score: 998
+  - id: APEX-AERO-0215
+    hash: 1a1f120ef4d20b41
+    description: "Control de Lazo Cerrado para Sistemas de Alerta de Colisión Orbital en ambiente de microgravedad."
+    exergy_score: 968
+  - id: APEX-AERO-0216
+    hash: 80476d47998d84c0
+    description: "Aislamiento Cinemático de Antenas de Alta Ganancia (Banda Ka) garantizando invarianza topológica."
+    exergy_score: 952
+  - id: APEX-AERO-0217
+    hash: 3b78ded72cd4b257
+    description: "Acotación Termomecánica de Estructuras Isogrid de Aluminio en ambiente de microgravedad."
+    exergy_score: 961
+  - id: APEX-AERO-0218
+    hash: 16665ce16edf9f75
+    description: "Aislamiento Cinemático de Aislantes de Aerogel con interferencia de plasma de reentrada."
+    exergy_score: 975
+  - id: APEX-AERO-0219
+    hash: 684fe9f4178ab24f
+    description: "Auditoría Estructural en Espectrómetros de Masas garantizando invarianza topológica."
+    exergy_score: 1000
+  - id: APEX-AERO-0220
+    hash: e1a515f4473553d2
+    description: "Validación MCTS de Baterías de Litio de Grado Espacial sometido a choque térmico de 2000K."
+    exergy_score: 964
+  - id: APEX-AERO-0221
+    hash: da90c58e3e6573df
+    description: "Colapso Termodinámico en Sistemas de Control a Reacción (RCS) en ambiente de microgravedad."
+    exergy_score: 996
+  - id: APEX-AERO-0222
+    hash: 7e2580c2fce7bc37
+    description: "Auditoría Estructural en Intercambiadores de Calor Regenerativos durante maniobras de inserción orbital."
+    exergy_score: 993
+  - id: APEX-AERO-0223
+    hash: db558d5cb12dc59a
+    description: "Sincronización de Telemetría en Mecánica Orbital No Kepleriana en ambiente de microgravedad."
+    exergy_score: 973
+  - id: APEX-AERO-0224
+    hash: 42a2fc8e99944e06
+    description: "Sincronización de Telemetría en Algoritmos de Filtro de Kalman Extendido durante maniobras de inserción orbital."
+    exergy_score: 971
+  - id: APEX-AERO-0225
+    hash: 7ec1747d6d451f89
+    description: "Acotación Termomecánica de Reguladores de Presión Bang-Bang optimizando la fracción de masa de propelente."
+    exergy_score: 984
+  - id: APEX-AERO-0226
+    hash: 6cbc5beb02d90fdd
+    description: "Aislamiento Cinemático de Actuadores Electromecánicos de Control de Vector de Empuje bajo bombardeo de micrometeoritos."
+    exergy_score: 993
+  - id: APEX-AERO-0227
+    hash: 37ff8587d994894f
+    description: "Supresión de Ruido Estocástico en Ruedas de Reacción Térmicamente Aisladas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 961
+  - id: APEX-AERO-0228
+    hash: 40215cf0faf1801f
+    description: "Control de Lazo Cerrado para Celdas de Combustible de Membrana de Intercambio Protónico maximizando el impulso específico (Isp)."
+    exergy_score: 968
+  - id: APEX-AERO-0229
+    hash: 573473aa3729d98c
+    description: "Auditoría Estructural en Blindaje contra Radiación Ionizante en ambiente de microgravedad."
+    exergy_score: 962
+  - id: APEX-AERO-0230
+    hash: 130569aa589161e1
+    description: "Validación MCTS de Propelentes Hipergólicos con presión dinámica máxima (Max-Q)."
+    exergy_score: 996
+  - id: APEX-AERO-0231
+    hash: b825c9b43435e37d
+    description: "Falsación Empírica de Blindaje contra Radiación Ionizante en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 951
+  - id: APEX-AERO-0232
+    hash: 34fe69278349da21
+    description: "Mapeo Isomórfico de Cámaras Térmicas Infrarrojas sometido a choque térmico de 2000K."
+    exergy_score: 992
+  - id: APEX-AERO-0233
+    hash: a4a8011fb05f5c13
+    description: "Validación MCTS de Antenas de Alta Ganancia (Banda Ka) en presencia de perturbaciones magnéticas."
+    exergy_score: 955
+  - id: APEX-AERO-0234
+    hash: ac9e37f7c57aacd0
+    description: "Mitigación de Resonancia en Materiales Ablativos Fenólicos sometido a choque térmico de 2000K."
+    exergy_score: 980
+  - id: APEX-AERO-0235
+    hash: 59ed7b885be72756
+    description: "Mapeo Isomórfico de Amortiguadores de Oscilación de Propelente (Baffles) con radiación de cinturones de Van Allen."
+    exergy_score: 974
+  - id: APEX-AERO-0236
+    hash: 43d61724f0f7f38a
+    description: "Restricción de Exergía en Sistemas de Acoplamiento Autónomo con radiación de cinturones de Van Allen."
+    exergy_score: 969
+  - id: APEX-AERO-0237
+    hash: 9595ba65b8dd0475
+    description: "Redundancia de Nivel 5 en Sistemas de Recuperación por Paracaídas Supersónicos bajo régimen de flujo transónico."
+    exergy_score: 976
+  - id: APEX-AERO-0238
+    hash: d98a63a62d206f4c
+    description: "Prueba de Integridad de Propelentes Hipergólicos bajo régimen de flujo transónico."
+    exergy_score: 1000
+  - id: APEX-AERO-0239
+    hash: fdc0c3e547cac385
+    description: "Evaluación de Estrés Cortante en Mapeadores LIDAR Topográficos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 967
+  - id: APEX-AERO-0240
+    hash: c3f38b5acbb6ca26
+    description: "Validación MCTS de Sistemas de Acoplamiento Autónomo en presencia de perturbaciones magnéticas."
+    exergy_score: 968
+  - id: APEX-AERO-0241
+    hash: 168c7bfba637969b
+    description: "Aserción BFT para Antenas de Alta Ganancia (Banda Ka) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 982
+  - id: APEX-AERO-0242
+    hash: feab5fad9d770b7e
+    description: "Mapeo Isomórfico de Sistemas de Recuperación por Paracaídas Supersónicos garantizando invarianza topológica."
+    exergy_score: 986
+  - id: APEX-AERO-0243
+    hash: e04521379360712c
+    description: "Minimización Entrópica en Radiadores Térmicos de Piel en ambiente de microgravedad."
+    exergy_score: 983
+  - id: APEX-AERO-0244
+    hash: fc689ea6bc83aa8f
+    description: "Aserción BFT para Antenas de Alta Ganancia (Banda Ka) optimizando la fracción de masa de propelente."
+    exergy_score: 982
+  - id: APEX-AERO-0245
+    hash: 9d4dbab63a8bf94b
+    description: "Restricción de Exergía en Algoritmos de Filtro de Kalman Extendido garantizando invarianza topológica."
+    exergy_score: 951
+  - id: APEX-AERO-0246
+    hash: 4ae3b70b69cbb449
+    description: "Derivación Causal de Paneles Solares Desplegables requiriendo consenso mayoritario (N=3)."
+    exergy_score: 999
+  - id: APEX-AERO-0247
+    hash: 4ab663e87d18f2a2
+    description: "Colapso Termodinámico en Sistemas de Alerta de Colisión Orbital requiriendo consenso mayoritario (N=3)."
+    exergy_score: 964
+  - id: APEX-AERO-0248
+    hash: 3d556876340c10ac
+    description: "Restricción de Exergía en Sistemas de Alerta de Colisión Orbital con latencia de telemetría asimétrica."
+    exergy_score: 996
+  - id: APEX-AERO-0249
+    hash: 29590ae94870edf7
+    description: "Evaluación de Estrés Cortante en Generadores Termoeléctricos de Radioisótopos (RTG) en ambiente de microgravedad."
+    exergy_score: 956
+  - id: APEX-AERO-0250
+    hash: 1e9773084600edb5
+    description: "Supresión de Ruido Estocástico en Generadores Termoeléctricos de Radioisótopos (RTG) con radiación de cinturones de Van Allen."
+    exergy_score: 973
+  - id: APEX-AERO-0251
+    hash: 7744161b625a9e8d
+    description: "Minimización Entrópica en Algoritmos de Filtro de Kalman Extendido bajo régimen de flujo transónico."
+    exergy_score: 965
+  - id: APEX-AERO-0252
+    hash: ac6beee9c8f89dd8
+    description: "Derivación Causal de Espectrómetros de Masas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 985
+  - id: APEX-AERO-0253
+    hash: d5d4ff055d67bb01
+    description: "Derivación Causal de Sistemas de Detección de Fugas de Helio bajo bombardeo de micrometeoritos."
+    exergy_score: 994
+  - id: APEX-AERO-0254
+    hash: 46a3972e65fc4f0f
+    description: "Aislamiento Cinemático de Algoritmos de Filtro de Kalman Extendido optimizando la fracción de masa de propelente."
+    exergy_score: 982
+  - id: APEX-AERO-0255
+    hash: e9936c68e09f9c39
+    description: "Mitigación de Resonancia en Sistemas de Detección de Fugas de Helio en presencia de perturbaciones magnéticas."
+    exergy_score: 983
+  - id: APEX-AERO-0256
+    hash: 1c1a9c5cfab18137
+    description: "Mitigación de Resonancia en Tanques de Propelente Presurizados garantizando invarianza topológica."
+    exergy_score: 961
+  - id: APEX-AERO-0257
+    hash: b6f5026f8eaba0c8
+    description: "Prueba de Integridad de Válvulas de Purga Pirolítica requiriendo consenso mayoritario (N=3)."
+    exergy_score: 967
+  - id: APEX-AERO-0258
+    hash: c86a41343ddb60f0
+    description: "Acotación Termomecánica de Estructuras Isogrid de Aluminio en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 971
+  - id: APEX-AERO-0259
+    hash: a64158b3eba6e283
+    description: "Cálculo de Tensor de Inercia de Estructuras Isogrid de Aluminio con presupuestos de masa estrictos."
+    exergy_score: 996
+  - id: APEX-AERO-0260
+    hash: 34b7dbcec1f250d0
+    description: "Colapso Termodinámico en Válvulas de Purga Pirolítica en ambiente de microgravedad."
+    exergy_score: 958
+  - id: APEX-AERO-0261
+    hash: 9ccc305cee8cda2a
+    description: "Supresión de Ruido Estocástico en Tubos de Calor de Amoníaco en presencia de perturbaciones magnéticas."
+    exergy_score: 979
+  - id: APEX-AERO-0262
+    hash: 0198145caefa47be
+    description: "Colapso Termodinámico en Materiales Ablativos Fenólicos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 989
+  - id: APEX-AERO-0263
+    hash: bc1a4430d011f093
+    description: "Validación MCTS de Válvulas de Purga Pirolítica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 994
+  - id: APEX-AERO-0264
+    hash: 859cd827a0c512f4
+    description: "Restricción de Exergía en Torres de Servicio Umbilicales con latencia de telemetría asimétrica."
+    exergy_score: 953
+  - id: APEX-AERO-0265
+    hash: f35a2ebac326dd94
+    description: "Acotación Termomecánica de Torres de Servicio Umbilicales en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 993
+  - id: APEX-AERO-0266
+    hash: 9f1014983c62adb1
+    description: "Auditoría Estructural en Aislantes de Aerogel optimizando la fracción de masa de propelente."
+    exergy_score: 994
+  - id: APEX-AERO-0267
+    hash: 76bbf354c3c1f376
+    description: "Cálculo de Tensor de Inercia de Torres de Servicio Umbilicales con radiación de cinturones de Van Allen."
+    exergy_score: 971
+  - id: APEX-AERO-0268
+    hash: c53a6641d5e755fb
+    description: "Aislamiento Cinemático de Mecánica Orbital No Kepleriana bajo régimen de flujo transónico."
+    exergy_score: 952
+  - id: APEX-AERO-0269
+    hash: 44c30a59bbcac866
+    description: "Auditoría Estructural en Propulsores de Efecto Hall con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 968
+  - id: APEX-AERO-0270
+    hash: d8acb822ffd55e00
+    description: "Sincronización de Telemetría en Navegación Autónoma de Reentrada sometido a choque térmico de 2000K."
+    exergy_score: 993
+  - id: APEX-AERO-0271
+    hash: adc193a0306f28d5
+    description: "Auditoría Estructural en Sistemas de Soporte Vital de Circuito Cerrado sometido a choque térmico de 2000K."
+    exergy_score: 990
+  - id: APEX-AERO-0272
+    hash: d762b51e639a7237
+    description: "Evaluación de Estrés Cortante en Tanques de Propelente Presurizados garantizando invarianza topológica."
+    exergy_score: 953
+  - id: APEX-AERO-0273
+    hash: 15ec410fb1598133
+    description: "Derivación Causal de Cápsulas de Recuperación Balística requiriendo consenso mayoritario (N=3)."
+    exergy_score: 968
+  - id: APEX-AERO-0274
+    hash: 42f3559dca91aad0
+    description: "Control de Lazo Cerrado para Algoritmos de Filtro de Kalman Extendido con presión dinámica máxima (Max-Q)."
+    exergy_score: 965
+  - id: APEX-AERO-0275
+    hash: 4b4419ad1ccd9e96
+    description: "Cálculo de Tensor de Inercia de Intercambiadores de Calor Regenerativos con presupuestos de masa estrictos."
+    exergy_score: 963
+  - id: APEX-AERO-0276
+    hash: 6e8cc905e2a68e8d
+    description: "Colapso Termodinámico en Dinámica de Fluidos Hipersónica garantizando invarianza topológica."
+    exergy_score: 963
+  - id: APEX-AERO-0277
+    hash: 2e185f6ac86cdae4
+    description: "Consenso de Actitud para Ignitores Láser bajo régimen de flujo transónico."
+    exergy_score: 963
+  - id: APEX-AERO-0278
+    hash: c11320f5f0394502
+    description: "Aislamiento Cinemático de Materiales Ablativos Fenólicos con radiación de cinturones de Van Allen."
+    exergy_score: 998
+  - id: APEX-AERO-0279
+    hash: efffdd5709c2928b
+    description: "Aislamiento Cinemático de Reguladores de Presión Bang-Bang con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 972
+  - id: APEX-AERO-0280
+    hash: a7784cce1fd4564d
+    description: "Colapso Termodinámico en Propelentes Hipergólicos bajo régimen de flujo transónico."
+    exergy_score: 962
+  - id: APEX-AERO-0281
+    hash: 7332a37cb3d93081
+    description: "Falsación Empírica de Dinámica de Fluidos Hipersónica evitando el acoplamiento pogo."
+    exergy_score: 983
+  - id: APEX-AERO-0282
+    hash: e521548ce3f2ea68
+    description: "Sincronización de Telemetría en Aislantes de Aerogel con presupuestos de masa estrictos."
+    exergy_score: 966
+  - id: APEX-AERO-0283
+    hash: 23e4b587aaf66b30
+    description: "Minimización Entrópica en Sistemas de Acoplamiento Autónomo requiriendo consenso mayoritario (N=3)."
+    exergy_score: 987
+  - id: APEX-AERO-0284
+    hash: 2dadf28ee466dd66
+    description: "Derivación Causal de Velas Solares de Grafeno maximizando el impulso específico (Isp)."
+    exergy_score: 970
+  - id: APEX-AERO-0285
+    hash: b450e3735f8844b2
+    description: "Sincronización de Telemetría en Amortiguadores de Oscilación de Propelente (Baffles) con presupuestos de masa estrictos."
+    exergy_score: 995
+  - id: APEX-AERO-0286
+    hash: 49313f47f3f0f0e1
+    description: "Falsación Empírica de Turbobombas de Ciclo Cerrado sometido a choque térmico de 2000K."
+    exergy_score: 957
+  - id: APEX-AERO-0287
+    hash: aefa05ae7b2d987c
+    description: "Colapso Termodinámico en Antenas de Alta Ganancia (Banda Ka) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 975
+  - id: APEX-AERO-0288
+    hash: a1a1f48c3c7f9568
+    description: "Supresión de Ruido Estocástico en Antenas de Alta Ganancia (Banda Ka) optimizando la fracción de masa de propelente."
+    exergy_score: 996
+  - id: APEX-AERO-0289
+    hash: d3edb452b85670cd
+    description: "Falsación Empírica de Sistemas de Propulsión Criogénica con interferencia de plasma de reentrada."
+    exergy_score: 964
+  - id: APEX-AERO-0290
+    hash: ceac764992e890e7
+    description: "Minimización Entrópica en Amortiguadores de Oscilación de Propelente (Baffles) en presencia de perturbaciones magnéticas."
+    exergy_score: 959
+  - id: APEX-AERO-0291
+    hash: bf4b9156c04ff06e
+    description: "Minimización Entrópica en Sistemas de Acoplamiento Autónomo bajo bombardeo de micrometeoritos."
+    exergy_score: 956
+  - id: APEX-AERO-0292
+    hash: badc2efc2b0d9d9f
+    description: "Control de Lazo Cerrado para Turbobombas de Ciclo Cerrado con radiación de cinturones de Van Allen."
+    exergy_score: 955
+  - id: APEX-AERO-0293
+    hash: af390490f0c9e48f
+    description: "Redundancia de Nivel 5 en Acelerómetros MEMS en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 956
+  - id: APEX-AERO-0294
+    hash: 9179fae157ec52d4
+    description: "Prueba de Integridad de Sistemas de Recuperación por Paracaídas Supersónicos maximizando el impulso específico (Isp)."
+    exergy_score: 995
+  - id: APEX-AERO-0295
+    hash: 5d6e3e646a975f3f
+    description: "Validación MCTS de Baterías de Litio de Grado Espacial requiriendo consenso mayoritario (N=3)."
+    exergy_score: 988
+  - id: APEX-AERO-0296
+    hash: e4f39e0a99a6addc
+    description: "Sincronización de Telemetría en Espectrómetros de Masas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 979
+  - id: APEX-AERO-0297
+    hash: 9cdb2e61493d3a5e
+    description: "Colapso Termodinámico en Materiales Ablativos Fenólicos con interferencia de plasma de reentrada."
+    exergy_score: 983
+  - id: APEX-AERO-0298
+    hash: ab87024b26a2ac33
+    description: "Auditoría Estructural en Aislantes de Aerogel con latencia de telemetría asimétrica."
+    exergy_score: 979
+  - id: APEX-AERO-0299
+    hash: f93ea0a90c9ede13
+    description: "Minimización Entrópica en Intercambiadores de Calor Regenerativos en presencia de perturbaciones magnéticas."
+    exergy_score: 996
+  - id: APEX-AERO-0300
+    hash: c3193951f5193284
+    description: "Supresión de Ruido Estocástico en Espectrómetros de Masas con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 1000
+  - id: APEX-AERO-0301
+    hash: b47e47d0d1946e3a
+    description: "Prueba de Integridad de Antenas de Alta Ganancia (Banda Ka) minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 957
+  - id: APEX-AERO-0302
+    hash: 95e3f69929df9a97
+    description: "Minimización Entrópica en Sistemas de Propulsión Criogénica maximizando el impulso específico (Isp)."
+    exergy_score: 984
+  - id: APEX-AERO-0303
+    hash: 6e01d579c6780c89
+    description: "Minimización Entrópica en Sistemas de Control a Reacción (RCS) minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 953
+  - id: APEX-AERO-0304
+    hash: 4c904393b3276c5b
+    description: "Prueba de Integridad de Computadoras de Vuelo Tolerantes a Radiación con interferencia de plasma de reentrada."
+    exergy_score: 988
+  - id: APEX-AERO-0305
+    hash: d6bf21a2b05bbf48
+    description: "Restricción de Exergía en Celdas de Combustible de Membrana de Intercambio Protónico en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 962
+  - id: APEX-AERO-0306
+    hash: a26cabc3c62785d0
+    description: "Aislamiento Cinemático de Sistemas de Recuperación por Paracaídas Supersónicos con interferencia de plasma de reentrada."
+    exergy_score: 965
+  - id: APEX-AERO-0307
+    hash: 89abedc04815cf83
+    description: "Restricción de Exergía en Tanques de Propelente Presurizados evitando el acoplamiento pogo."
+    exergy_score: 987
+  - id: APEX-AERO-0308
+    hash: 395f9ce9d7f0d29a
+    description: "Minimización Entrópica en Paneles Solares Desplegables con presión dinámica máxima (Max-Q)."
+    exergy_score: 955
+  - id: APEX-AERO-0309
+    hash: b7de075f36814ff2
+    description: "Cálculo de Tensor de Inercia de Inyectores Coaxiales requiriendo consenso mayoritario (N=3)."
+    exergy_score: 990
+  - id: APEX-AERO-0310
+    hash: 59f63b42fe8e5107
+    description: "Aislamiento Cinemático de Sistemas de Control a Reacción (RCS) con interferencia de plasma de reentrada."
+    exergy_score: 993
+  - id: APEX-AERO-0311
+    hash: 2af05a2e56a298c5
+    description: "Aislamiento Cinemático de Sistemas de Acoplamiento Autónomo con presupuestos de masa estrictos."
+    exergy_score: 962
+  - id: APEX-AERO-0312
+    hash: 6d5c2ead49211f3b
+    description: "Control de Lazo Cerrado para Sistemas de Acoplamiento Autónomo evitando el acoplamiento pogo."
+    exergy_score: 981
+  - id: APEX-AERO-0313
+    hash: 4aec89b6eaf33874
+    description: "Restricción de Exergía en Escudos de Ablación Térmica bajo régimen de flujo transónico."
+    exergy_score: 963
+  - id: APEX-AERO-0314
+    hash: 1753ed50f25d9f25
+    description: "Acotación Termomecánica de Inyectores Coaxiales maximizando el impulso específico (Isp)."
+    exergy_score: 958
+  - id: APEX-AERO-0315
+    hash: 0a4a882c51b85020
+    description: "Mitigación de Resonancia en Sistemas de Propulsión Criogénica con presión dinámica máxima (Max-Q)."
+    exergy_score: 975
+  - id: APEX-AERO-0316
+    hash: d58a3232f9941079
+    description: "Control de Lazo Cerrado para Sistemas de Alerta de Colisión Orbital con radiación de cinturones de Van Allen."
+    exergy_score: 991
+  - id: APEX-AERO-0317
+    hash: 30c4f1781db9ed3e
+    description: "Cálculo de Tensor de Inercia de Aislantes de Aerogel en presencia de perturbaciones magnéticas."
+    exergy_score: 970
+  - id: APEX-AERO-0318
+    hash: 5e3250d8efbec074
+    description: "Derivación Causal de Amortiguadores de Oscilación de Propelente (Baffles) garantizando invarianza topológica."
+    exergy_score: 964
+  - id: APEX-AERO-0319
+    hash: e622974cb1b02b11
+    description: "Supresión de Ruido Estocástico en Mapeadores LIDAR Topográficos con latencia de telemetría asimétrica."
+    exergy_score: 952
+  - id: APEX-AERO-0320
+    hash: e8d1a5aa12524a44
+    description: "Auditoría Estructural en Dinámica de Fluidos Hipersónica optimizando la fracción de masa de propelente."
+    exergy_score: 976
+  - id: APEX-AERO-0321
+    hash: e7b05be6020648a3
+    description: "Redundancia de Nivel 5 en Intercambiadores de Calor Regenerativos con presupuestos de masa estrictos."
+    exergy_score: 952
+  - id: APEX-AERO-0322
+    hash: 303c5dde08be2ba9
+    description: "Falsación Empírica de Propulsores de Efecto Hall con presión dinámica máxima (Max-Q)."
+    exergy_score: 996
+  - id: APEX-AERO-0323
+    hash: adfad79f4b3a6cbe
+    description: "Validación MCTS de Buses de Datos MIL-STD-1553 evitando el acoplamiento pogo."
+    exergy_score: 954
+  - id: APEX-AERO-0324
+    hash: 89eb2091a2dc1b06
+    description: "Supresión de Ruido Estocástico en Sistemas de Alerta de Colisión Orbital maximizando el impulso específico (Isp)."
+    exergy_score: 955
+  - id: APEX-AERO-0325
+    hash: 0f16cf38c95f97bc
+    description: "Acotación Termomecánica de Reguladores de Presión Bang-Bang en órbitas altamente elípticas."
+    exergy_score: 998
+  - id: APEX-AERO-0326
+    hash: d02c06163a9b9076
+    description: "Derivación Causal de Aislantes de Aerogel garantizando invarianza topológica."
+    exergy_score: 989
+  - id: APEX-AERO-0327
+    hash: e6a397d818e15100
+    description: "Redundancia de Nivel 5 en Paneles Solares Desplegables con presión dinámica máxima (Max-Q)."
+    exergy_score: 998
+  - id: APEX-AERO-0328
+    hash: a7898ea0ceebf92f
+    description: "Aserción BFT para Cámaras de Combustión de Presión Supercrítica con interferencia de plasma de reentrada."
+    exergy_score: 982
+  - id: APEX-AERO-0329
+    hash: 33791027ddb25ba8
+    description: "Mapeo Isomórfico de Sistemas de Soporte Vital de Circuito Cerrado con radiación de cinturones de Van Allen."
+    exergy_score: 981
+  - id: APEX-AERO-0330
+    hash: 4c67897da5117e1d
+    description: "Colapso Termodinámico en Navegación Autónoma de Reentrada requiriendo consenso mayoritario (N=3)."
+    exergy_score: 998
+  - id: APEX-AERO-0331
+    hash: 207246f59a470143
+    description: "Validación MCTS de Inyectores Coaxiales optimizando la fracción de masa de propelente."
+    exergy_score: 970
+  - id: APEX-AERO-0332
+    hash: 5dd65f5d1814c8a0
+    description: "Cálculo de Tensor de Inercia de Algoritmos de Filtro de Kalman Extendido bajo bombardeo de micrometeoritos."
+    exergy_score: 974
+  - id: APEX-AERO-0333
+    hash: 474cf70c947bf233
+    description: "Redundancia de Nivel 5 en Giroscopios de Fibra Óptica con interferencia de plasma de reentrada."
+    exergy_score: 956
+  - id: APEX-AERO-0334
+    hash: 09775464dc0fd9a3
+    description: "Falsación Empírica de Tubos de Calor de Amoníaco maximizando el impulso específico (Isp)."
+    exergy_score: 979
+  - id: APEX-AERO-0335
+    hash: dc0244d6751e0fe1
+    description: "Redundancia de Nivel 5 en Paneles Solares Desplegables evitando el acoplamiento pogo."
+    exergy_score: 982
+  - id: APEX-AERO-0336
+    hash: 35bd2e74326979ee
+    description: "Evaluación de Estrés Cortante en Escudos de Ablación Térmica bajo bombardeo de micrometeoritos."
+    exergy_score: 976
+  - id: APEX-AERO-0337
+    hash: fb8709cba213979f
+    description: "Aserción BFT para Estructuras Compuestas de Carbono en órbitas altamente elípticas."
+    exergy_score: 999
+  - id: APEX-AERO-0338
+    hash: 1b94ad0af7328f1a
+    description: "Mitigación de Resonancia en Tanques de Propelente Presurizados en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 985
+  - id: APEX-AERO-0339
+    hash: 50dddaaea75a2cd4
+    description: "Restricción de Exergía en Dinámica de Fluidos Hipersónica bajo régimen de flujo transónico."
+    exergy_score: 996
+  - id: APEX-AERO-0340
+    hash: 5deec6fa31cc487d
+    description: "Auditoría Estructural en Torres de Servicio Umbilicales garantizando invarianza topológica."
+    exergy_score: 983
+  - id: APEX-AERO-0341
+    hash: 59523c75984787b1
+    description: "Falsación Empírica de Mecánica Orbital No Kepleriana requiriendo consenso mayoritario (N=3)."
+    exergy_score: 950
+  - id: APEX-AERO-0342
+    hash: 8641a7073b4d3135
+    description: "Sincronización de Telemetría en Amortiguadores de Oscilación de Propelente (Baffles) maximizando el impulso específico (Isp)."
+    exergy_score: 950
+  - id: APEX-AERO-0343
+    hash: 3c2cf536f3802cc2
+    description: "Derivación Causal de Cámaras Térmicas Infrarrojas con radiación de cinturones de Van Allen."
+    exergy_score: 961
+  - id: APEX-AERO-0344
+    hash: b6c8c26873f8f282
+    description: "Aserción BFT para Buses de Datos MIL-STD-1553 en presencia de perturbaciones magnéticas."
+    exergy_score: 963
+  - id: APEX-AERO-0345
+    hash: 5af97893b83176da
+    description: "Colapso Termodinámico en Sistemas de Control a Reacción (RCS) con presión dinámica máxima (Max-Q)."
+    exergy_score: 951
+  - id: APEX-AERO-0346
+    hash: 4bbcebb3a633f66c
+    description: "Mitigación de Resonancia en Sistemas de Escape de Lanzamiento (LES) con interferencia de plasma de reentrada."
+    exergy_score: 951
+  - id: APEX-AERO-0347
+    hash: 33a1e1258867e0dc
+    description: "Mitigación de Resonancia en Sistemas de Alerta de Colisión Orbital bajo bombardeo de micrometeoritos."
+    exergy_score: 987
+  - id: APEX-AERO-0348
+    hash: ab3c6dbb08d7762b
+    description: "Sincronización de Telemetría en Torres de Servicio Umbilicales con presión dinámica máxima (Max-Q)."
+    exergy_score: 956
+  - id: APEX-AERO-0349
+    hash: 045f0baaef03fb9b
+    description: "Minimización Entrópica en Generadores Termoeléctricos de Radioisótopos (RTG) con radiación de cinturones de Van Allen."
+    exergy_score: 971
+  - id: APEX-AERO-0350
+    hash: 41496e545bcba330
+    description: "Consenso de Actitud para Radiadores Térmicos de Piel evitando el acoplamiento pogo."
+    exergy_score: 999
+  - id: APEX-AERO-0351
+    hash: 945da12bfd153ed1
+    description: "Supresión de Ruido Estocástico en Válvulas de Purga Pirolítica en ambiente de microgravedad."
+    exergy_score: 976
+  - id: APEX-AERO-0352
+    hash: a533dd72c653cf63
+    description: "Restricción de Exergía en Mecanismos de Separación Pirolítica con presupuestos de masa estrictos."
+    exergy_score: 957
+  - id: APEX-AERO-0353
+    hash: ed0278390013da20
+    description: "Mapeo Isomórfico de Torres de Servicio Umbilicales bajo bombardeo de micrometeoritos."
+    exergy_score: 985
+  - id: APEX-AERO-0354
+    hash: c342139b9673bead
+    description: "Falsación Empírica de Torres de Servicio Umbilicales garantizando invarianza topológica."
+    exergy_score: 958
+  - id: APEX-AERO-0355
+    hash: 3f54357a88607050
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono con interferencia de plasma de reentrada."
+    exergy_score: 988
+  - id: APEX-AERO-0356
+    hash: 61328d0a13ba48eb
+    description: "Auditoría Estructural en Inyectores Coaxiales en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 983
+  - id: APEX-AERO-0357
+    hash: c03ecdd168358e59
+    description: "Derivación Causal de Generadores Termoeléctricos de Radioisótopos (RTG) bajo régimen de flujo transónico."
+    exergy_score: 950
+  - id: APEX-AERO-0358
+    hash: 25e756b90ae44a5a
+    description: "Mapeo Isomórfico de Mecánica Orbital No Kepleriana en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 965
+  - id: APEX-AERO-0359
+    hash: c3d7d29bfefdc49e
+    description: "Redundancia de Nivel 5 en Espectrómetros de Masas en presencia de perturbaciones magnéticas."
+    exergy_score: 994
+  - id: APEX-AERO-0360
+    hash: 5bd114cd895168a6
+    description: "Prueba de Integridad de Torres de Servicio Umbilicales con radiación de cinturones de Van Allen."
+    exergy_score: 974
+  - id: APEX-AERO-0361
+    hash: 0458a88e489a5e82
+    description: "Supresión de Ruido Estocástico en Inyectores Coaxiales bajo bombardeo de micrometeoritos."
+    exergy_score: 971
+  - id: APEX-AERO-0362
+    hash: cb92edf781a0b7e1
+    description: "Evaluación de Estrés Cortante en Estructuras Isogrid de Aluminio en órbitas altamente elípticas."
+    exergy_score: 980
+  - id: APEX-AERO-0363
+    hash: 98e83b21ab6e66b7
+    description: "Control de Lazo Cerrado para Mapeadores LIDAR Topográficos con presupuestos de masa estrictos."
+    exergy_score: 990
+  - id: APEX-AERO-0364
+    hash: 56b9853d7423d5ac
+    description: "Auditoría Estructural en Materiales Ablativos Fenólicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 994
+  - id: APEX-AERO-0365
+    hash: ff5e674492dcf542
+    description: "Evaluación de Estrés Cortante en Propelentes Hipergólicos con radiación de cinturones de Van Allen."
+    exergy_score: 981
+  - id: APEX-AERO-0366
+    hash: 1020ba415415c00f
+    description: "Auditoría Estructural en Estructuras Compuestas de Carbono sometido a choque térmico de 2000K."
+    exergy_score: 966
+  - id: APEX-AERO-0367
+    hash: 95d46dbaf40c15af
+    description: "Control de Lazo Cerrado para Ignitores Láser evitando el acoplamiento pogo."
+    exergy_score: 996
+  - id: APEX-AERO-0368
+    hash: 578fada20fbd9231
+    description: "Mitigación de Resonancia en Inyectores Coaxiales maximizando el impulso específico (Isp)."
+    exergy_score: 968
+  - id: APEX-AERO-0369
+    hash: 8df0f72545047ec7
+    description: "Aserción BFT para Propulsores de Efecto Hall maximizando el impulso específico (Isp)."
+    exergy_score: 988
+  - id: APEX-AERO-0370
+    hash: 1af0a615a81301ca
+    description: "Mitigación de Resonancia en Mecanismos de Separación Pirolítica en órbitas altamente elípticas."
+    exergy_score: 957
+  - id: APEX-AERO-0371
+    hash: a3b1346729aae106
+    description: "Acotación Termomecánica de Sistemas de Propulsión Criogénica con presupuestos de masa estrictos."
+    exergy_score: 996
+  - id: APEX-AERO-0372
+    hash: 10d24a980735c798
+    description: "Auditoría Estructural en Celdas de Combustible de Membrana de Intercambio Protónico en ambiente de microgravedad."
+    exergy_score: 976
+  - id: APEX-AERO-0373
+    hash: 5b80e53b23b5bfaa
+    description: "Colapso Termodinámico en Actuadores Electromecánicos de Control de Vector de Empuje en órbitas altamente elípticas."
+    exergy_score: 950
+  - id: APEX-AERO-0374
+    hash: 8dfb8f03dcad7d06
+    description: "Falsación Empírica de Sistemas de Recuperación por Paracaídas Supersónicos con interferencia de plasma de reentrada."
+    exergy_score: 989
+  - id: APEX-AERO-0375
+    hash: dde4379d367190df
+    description: "Redundancia de Nivel 5 en Estructuras Isogrid de Aluminio maximizando el impulso específico (Isp)."
+    exergy_score: 993
+  - id: APEX-AERO-0376
+    hash: f9faa1fe1d93e76f
+    description: "Restricción de Exergía en Propulsores de Efecto Hall con interferencia de plasma de reentrada."
+    exergy_score: 963
+  - id: APEX-AERO-0377
+    hash: 393f1720cd4ab04b
+    description: "Mapeo Isomórfico de Buses de Datos MIL-STD-1553 con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 975
+  - id: APEX-AERO-0378
+    hash: 4371caa2995900bb
+    description: "Restricción de Exergía en Actuadores Electromecánicos de Control de Vector de Empuje con presupuestos de masa estrictos."
+    exergy_score: 973
+  - id: APEX-AERO-0379
+    hash: ed9792883ea5dc66
+    description: "Colapso Termodinámico en Celdas de Combustible de Membrana de Intercambio Protónico en órbitas altamente elípticas."
+    exergy_score: 989
+  - id: APEX-AERO-0380
+    hash: ab6d1989e5dca2eb
+    description: "Cálculo de Tensor de Inercia de Amortiguadores de Oscilación de Propelente (Baffles) garantizando invarianza topológica."
+    exergy_score: 1000
+  - id: APEX-AERO-0381
+    hash: 124aa74eaf1907b2
+    description: "Control de Lazo Cerrado para Turbobombas de Ciclo Cerrado con interferencia de plasma de reentrada."
+    exergy_score: 972
+  - id: APEX-AERO-0382
+    hash: 505ba9b37c5fa6f7
+    description: "Auditoría Estructural en Velas Solares de Grafeno en presencia de perturbaciones magnéticas."
+    exergy_score: 958
+  - id: APEX-AERO-0383
+    hash: d9880da02d9fc40d
+    description: "Minimización Entrópica en Propelentes Hipergólicos evitando el acoplamiento pogo."
+    exergy_score: 953
+  - id: APEX-AERO-0384
+    hash: 0fd962e17d0d928d
+    description: "Redundancia de Nivel 5 en Velas Solares de Grafeno garantizando invarianza topológica."
+    exergy_score: 954
+  - id: APEX-AERO-0385
+    hash: f329e5ee4edbe145
+    description: "Aislamiento Cinemático de Propelentes Hipergólicos bajo bombardeo de micrometeoritos."
+    exergy_score: 969
+  - id: APEX-AERO-0386
+    hash: 58260e798a1e034d
+    description: "Supresión de Ruido Estocástico en Sistemas de Alerta de Colisión Orbital bajo bombardeo de micrometeoritos."
+    exergy_score: 988
+  - id: APEX-AERO-0387
+    hash: 594282bbf89d9ff0
+    description: "Aislamiento Cinemático de Ruedas de Reacción Térmicamente Aisladas garantizando invarianza topológica."
+    exergy_score: 954
+  - id: APEX-AERO-0388
+    hash: 3863de59f0da966c
+    description: "Supresión de Ruido Estocástico en Amortiguadores de Oscilación de Propelente (Baffles) garantizando invarianza topológica."
+    exergy_score: 957
+  - id: APEX-AERO-0389
+    hash: de929f31b6ea30c3
+    description: "Control de Lazo Cerrado para Cámaras Térmicas Infrarrojas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 983
+  - id: APEX-AERO-0390
+    hash: 09df6dfdfda1d43c
+    description: "Colapso Termodinámico en Cámaras Térmicas Infrarrojas bajo bombardeo de micrometeoritos."
+    exergy_score: 990
+  - id: APEX-AERO-0391
+    hash: 20fee161fdc3fa82
+    description: "Aislamiento Cinemático de Giroscopios de Fibra Óptica con presupuestos de masa estrictos."
+    exergy_score: 999
+  - id: APEX-AERO-0392
+    hash: adec3647d275b47b
+    description: "Restricción de Exergía en Cámaras de Combustión de Presión Supercrítica en órbitas altamente elípticas."
+    exergy_score: 986
+  - id: APEX-AERO-0393
+    hash: 6fd06de11c0b1d9e
+    description: "Aislamiento Cinemático de Cámaras de Combustión de Presión Supercrítica con interferencia de plasma de reentrada."
+    exergy_score: 968
+  - id: APEX-AERO-0394
+    hash: d906e1dfe8649827
+    description: "Colapso Termodinámico en Sistemas de Detección de Fugas de Helio minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 956
+  - id: APEX-AERO-0395
+    hash: 63534e651697ccae
+    description: "Redundancia de Nivel 5 en Velas Solares de Grafeno maximizando el impulso específico (Isp)."
+    exergy_score: 984
+  - id: APEX-AERO-0396
+    hash: a12d93fa60cd97aa
+    description: "Auditoría Estructural en Espectrómetros de Masas con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 968
+  - id: APEX-AERO-0397
+    hash: 4f645e00bc4382cb
+    description: "Colapso Termodinámico en Materiales Ablativos Fenólicos con radiación de cinturones de Van Allen."
+    exergy_score: 964
+  - id: APEX-AERO-0398
+    hash: 851cab65cd469d3a
+    description: "Cálculo de Tensor de Inercia de Aislantes de Aerogel en órbitas altamente elípticas."
+    exergy_score: 964
+  - id: APEX-AERO-0399
+    hash: 5051d3cc0a4dd299
+    description: "Falsación Empírica de Mecanismos de Separación Pirolítica optimizando la fracción de masa de propelente."
+    exergy_score: 975
+  - id: APEX-AERO-0400
+    hash: 003acd63f66799b6
+    description: "Cálculo de Tensor de Inercia de Cápsulas de Recuperación Balística minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 983
+  - id: APEX-AERO-0401
+    hash: 1ff0e82b79dfb5b3
+    description: "Supresión de Ruido Estocástico en Sistemas de Propulsión Criogénica bajo régimen de flujo transónico."
+    exergy_score: 980
+  - id: APEX-AERO-0402
+    hash: 72635dae5eccd18c
+    description: "Mitigación de Resonancia en Velas Solares de Grafeno requiriendo consenso mayoritario (N=3)."
+    exergy_score: 971
+  - id: APEX-AERO-0403
+    hash: 0db49262a2c557b2
+    description: "Prueba de Integridad de Sensores de Estrellas (Star Trackers) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 951
+  - id: APEX-AERO-0404
+    hash: af2239636acb1835
+    description: "Mapeo Isomórfico de Velas Solares de Grafeno bajo régimen de flujo transónico."
+    exergy_score: 987
+  - id: APEX-AERO-0405
+    hash: 85bb809b58b41231
+    description: "Aislamiento Cinemático de Radiadores Térmicos de Piel bajo bombardeo de micrometeoritos."
+    exergy_score: 958
+  - id: APEX-AERO-0406
+    hash: 62a85714613ec969
+    description: "Auditoría Estructural en Amortiguadores de Oscilación de Propelente (Baffles) minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 998
+  - id: APEX-AERO-0407
+    hash: 9c383cf70bd89310
+    description: "Supresión de Ruido Estocástico en Amortiguadores de Oscilación de Propelente (Baffles) con interferencia de plasma de reentrada."
+    exergy_score: 976
+  - id: APEX-AERO-0408
+    hash: acac3362df7be042
+    description: "Restricción de Exergía en Paneles Solares Desplegables con presión dinámica máxima (Max-Q)."
+    exergy_score: 962
+  - id: APEX-AERO-0409
+    hash: a8c79be03860875f
+    description: "Minimización Entrópica en Buses de Datos MIL-STD-1553 con presupuestos de masa estrictos."
+    exergy_score: 960
+  - id: APEX-AERO-0410
+    hash: 20429f63a1fb18ac
+    description: "Supresión de Ruido Estocástico en Tanques de Propelente Presurizados bajo régimen de flujo transónico."
+    exergy_score: 996
+  - id: APEX-AERO-0411
+    hash: aa800d24f5e740cf
+    description: "Evaluación de Estrés Cortante en Tubos de Calor de Amoníaco con interferencia de plasma de reentrada."
+    exergy_score: 960
+  - id: APEX-AERO-0412
+    hash: 6cae5638cb783376
+    description: "Auditoría Estructural en Sistemas de Alerta de Colisión Orbital sometido a choque térmico de 2000K."
+    exergy_score: 963
+  - id: APEX-AERO-0413
+    hash: e47005a00e5edc5c
+    description: "Acotación Termomecánica de Torres de Servicio Umbilicales con presupuestos de masa estrictos."
+    exergy_score: 988
+  - id: APEX-AERO-0414
+    hash: 3bfc475398ae965b
+    description: "Validación MCTS de Estructuras Isogrid de Aluminio requiriendo consenso mayoritario (N=3)."
+    exergy_score: 988
+  - id: APEX-AERO-0415
+    hash: b49b7b4fdc03f06e
+    description: "Validación MCTS de Mapeadores LIDAR Topográficos con latencia de telemetría asimétrica."
+    exergy_score: 982
+  - id: APEX-AERO-0416
+    hash: b61b79d673cbe572
+    description: "Falsación Empírica de Materiales Ablativos Fenólicos en órbitas altamente elípticas."
+    exergy_score: 959
+  - id: APEX-AERO-0417
+    hash: 01a18297c8553ee1
+    description: "Consenso de Actitud para Propulsores de Efecto Hall en órbitas altamente elípticas."
+    exergy_score: 954
+  - id: APEX-AERO-0418
+    hash: 0ac56bb02d3f835c
+    description: "Restricción de Exergía en Aislantes de Aerogel optimizando la fracción de masa de propelente."
+    exergy_score: 965
+  - id: APEX-AERO-0419
+    hash: 9118cf0395b03ace
+    description: "Restricción de Exergía en Paneles Solares Desplegables sometido a choque térmico de 2000K."
+    exergy_score: 978
+  - id: APEX-AERO-0420
+    hash: 5ad72b4f884c725f
+    description: "Aislamiento Cinemático de Cámaras de Combustión de Presión Supercrítica con radiación de cinturones de Van Allen."
+    exergy_score: 967
+  - id: APEX-AERO-0421
+    hash: 265e2686879bdc0b
+    description: "Control de Lazo Cerrado para Espectrómetros de Masas en presencia de perturbaciones magnéticas."
+    exergy_score: 971
+  - id: APEX-AERO-0422
+    hash: 304bb1d0cc2197f9
+    description: "Colapso Termodinámico en Espectrómetros de Masas evitando el acoplamiento pogo."
+    exergy_score: 971
+  - id: APEX-AERO-0423
+    hash: 25da15f682604523
+    description: "Sincronización de Telemetría en Mecánica Orbital No Kepleriana garantizando invarianza topológica."
+    exergy_score: 976
+  - id: APEX-AERO-0424
+    hash: 66f963e83bcbba17
+    description: "Falsación Empírica de Turbobombas de Ciclo Cerrado con interferencia de plasma de reentrada."
+    exergy_score: 954
+  - id: APEX-AERO-0425
+    hash: ddb679792c7793ed
+    description: "Mapeo Isomórfico de Turbobombas de Ciclo Cerrado durante maniobras de inserción orbital."
+    exergy_score: 955
+  - id: APEX-AERO-0426
+    hash: 349685fcc0731f41
+    description: "Derivación Causal de Actuadores Electromecánicos de Control de Vector de Empuje con interferencia de plasma de reentrada."
+    exergy_score: 966
+  - id: APEX-AERO-0427
+    hash: 8e308f98f733dd30
+    description: "Control de Lazo Cerrado para Sistemas de Recuperación por Paracaídas Supersónicos con latencia de telemetría asimétrica."
+    exergy_score: 952
+  - id: APEX-AERO-0428
+    hash: 5d9252244899789c
+    description: "Cálculo de Tensor de Inercia de Amortiguadores de Oscilación de Propelente (Baffles) con presupuestos de masa estrictos."
+    exergy_score: 994
+  - id: APEX-AERO-0429
+    hash: b40b10074882add2
+    description: "Consenso de Actitud para Mecánica Orbital No Kepleriana sometido a choque térmico de 2000K."
+    exergy_score: 997
+  - id: APEX-AERO-0430
+    hash: b5764fe84ba7d9d4
+    description: "Mitigación de Resonancia en Sistemas de Propulsión Criogénica sometido a choque térmico de 2000K."
+    exergy_score: 996
+  - id: APEX-AERO-0431
+    hash: 140cf3e4459ef575
+    description: "Control de Lazo Cerrado para Sistemas de Control a Reacción (RCS) en ambiente de microgravedad."
+    exergy_score: 968
+  - id: APEX-AERO-0432
+    hash: 8be4ee58ad510bbe
+    description: "Falsación Empírica de Baterías de Litio de Grado Espacial en órbitas altamente elípticas."
+    exergy_score: 958
+  - id: APEX-AERO-0433
+    hash: f9927574a207c8cd
+    description: "Prueba de Integridad de Materiales Ablativos Fenólicos bajo régimen de flujo transónico."
+    exergy_score: 983
+  - id: APEX-AERO-0434
+    hash: b0fa29a0368f360f
+    description: "Mapeo Isomórfico de Generadores Termoeléctricos de Radioisótopos (RTG) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 984
+  - id: APEX-AERO-0435
+    hash: 955f417c93cb7814
+    description: "Consenso de Actitud para Espectrómetros de Masas en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 976
+  - id: APEX-AERO-0436
+    hash: 3edfaaab6b683d6d
+    description: "Auditoría Estructural en Dinámica de Fluidos Hipersónica sometido a choque térmico de 2000K."
+    exergy_score: 997
+  - id: APEX-AERO-0437
+    hash: 7679e65bc155b7d2
+    description: "Acotación Termomecánica de Tubos de Calor de Amoníaco bajo régimen de flujo transónico."
+    exergy_score: 952
+  - id: APEX-AERO-0438
+    hash: abd48a8574e42e86
+    description: "Sincronización de Telemetría en Mecanismos de Separación Pirolítica con radiación de cinturones de Van Allen."
+    exergy_score: 973
+  - id: APEX-AERO-0439
+    hash: 8d91e0d188175808
+    description: "Restricción de Exergía en Ignitores Láser maximizando el impulso específico (Isp)."
+    exergy_score: 990
+  - id: APEX-AERO-0440
+    hash: ecaa10b31e4fcc2e
+    description: "Aislamiento Cinemático de Tanques de Propelente Presurizados con interferencia de plasma de reentrada."
+    exergy_score: 951
+  - id: APEX-AERO-0441
+    hash: 8e70d72463d2bd9d
+    description: "Aserción BFT para Actuadores Electromecánicos de Control de Vector de Empuje con radiación de cinturones de Van Allen."
+    exergy_score: 999
+  - id: APEX-AERO-0442
+    hash: 8019b697dcc07029
+    description: "Falsación Empírica de Velas Solares de Grafeno maximizando el impulso específico (Isp)."
+    exergy_score: 1000
+  - id: APEX-AERO-0443
+    hash: 8bfeb8e9f2ce1f18
+    description: "Derivación Causal de Espectrómetros de Masas evitando el acoplamiento pogo."
+    exergy_score: 971
+  - id: APEX-AERO-0444
+    hash: fed18adb5ca47293
+    description: "Supresión de Ruido Estocástico en Mecánica Orbital No Kepleriana bajo bombardeo de micrometeoritos."
+    exergy_score: 965
+  - id: APEX-AERO-0445
+    hash: e7af0e3d1b27c9ec
+    description: "Aserción BFT para Antenas de Alta Ganancia (Banda Ka) sometido a choque térmico de 2000K."
+    exergy_score: 981
+  - id: APEX-AERO-0446
+    hash: f0293c4402eacab3
+    description: "Mapeo Isomórfico de Mecanismos de Separación Pirolítica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 975
+  - id: APEX-AERO-0447
+    hash: 28e13fe66d88379c
+    description: "Derivación Causal de Intercambiadores de Calor Regenerativos con presión dinámica máxima (Max-Q)."
+    exergy_score: 977
+  - id: APEX-AERO-0448
+    hash: 0f69f22c86f9acc2
+    description: "Control de Lazo Cerrado para Antenas de Alta Ganancia (Banda Ka) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 977
+  - id: APEX-AERO-0449
+    hash: 22b98b57801f8e6c
+    description: "Colapso Termodinámico en Baterías de Litio de Grado Espacial con radiación de cinturones de Van Allen."
+    exergy_score: 1000
+  - id: APEX-AERO-0450
+    hash: b142f25a8f788c28
+    description: "Mitigación de Resonancia en Sistemas de Soporte Vital de Circuito Cerrado garantizando invarianza topológica."
+    exergy_score: 997
+  - id: APEX-AERO-0451
+    hash: 3e166eee8ba28840
+    description: "Minimización Entrópica en Ruedas de Reacción Térmicamente Aisladas en presencia de perturbaciones magnéticas."
+    exergy_score: 952
+  - id: APEX-AERO-0452
+    hash: 44b6d1f91afede09
+    description: "Aislamiento Cinemático de Actuadores Electromecánicos de Control de Vector de Empuje minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 983
+  - id: APEX-AERO-0453
+    hash: e5efb77a256d0b36
+    description: "Prueba de Integridad de Sistemas de Acoplamiento Autónomo con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 994
+  - id: APEX-AERO-0454
+    hash: 644cf241fe5e586b
+    description: "Evaluación de Estrés Cortante en Espectrómetros de Masas bajo régimen de flujo transónico."
+    exergy_score: 956
+  - id: APEX-AERO-0455
+    hash: e0c512054b3d6a97
+    description: "Sincronización de Telemetría en Sistemas de Alerta de Colisión Orbital en ambiente de microgravedad."
+    exergy_score: 957
+  - id: APEX-AERO-0456
+    hash: 7ef5863433fb3121
+    description: "Control de Lazo Cerrado para Acelerómetros MEMS garantizando invarianza topológica."
+    exergy_score: 997
+  - id: APEX-AERO-0457
+    hash: cf8882d3769fb341
+    description: "Prueba de Integridad de Dinámica de Fluidos Hipersónica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 958
+  - id: APEX-AERO-0458
+    hash: 5d7e410d4e0c5496
+    description: "Acotación Termomecánica de Escudos de Ablación Térmica bajo régimen de flujo transónico."
+    exergy_score: 977
+  - id: APEX-AERO-0459
+    hash: f850c0b034432381
+    description: "Mitigación de Resonancia en Estructuras Compuestas de Carbono en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 999
+  - id: APEX-AERO-0460
+    hash: 371c7524eec10fab
+    description: "Minimización Entrópica en Escudos de Ablación Térmica con interferencia de plasma de reentrada."
+    exergy_score: 951
+  - id: APEX-AERO-0461
+    hash: 19196b107913bc9d
+    description: "Auditoría Estructural en Aislantes de Aerogel sometido a choque térmico de 2000K."
+    exergy_score: 952
+  - id: APEX-AERO-0462
+    hash: 8e94e0d7ce235e63
+    description: "Aislamiento Cinemático de Estructuras Isogrid de Aluminio durante maniobras de inserción orbital."
+    exergy_score: 962
+  - id: APEX-AERO-0463
+    hash: d167f734c0308785
+    description: "Supresión de Ruido Estocástico en Cámaras Térmicas Infrarrojas en órbitas altamente elípticas."
+    exergy_score: 953
+  - id: APEX-AERO-0464
+    hash: 8a0c77731662a554
+    description: "Mitigación de Resonancia en Generadores Termoeléctricos de Radioisótopos (RTG) con latencia de telemetría asimétrica."
+    exergy_score: 983
+  - id: APEX-AERO-0465
+    hash: 1723c1f600924b32
+    description: "Restricción de Exergía en Materiales Ablativos Fenólicos con interferencia de plasma de reentrada."
+    exergy_score: 963
+  - id: APEX-AERO-0466
+    hash: 40353c0947fc1c6f
+    description: "Acotación Termomecánica de Sistemas de Propulsión Criogénica con latencia de telemetría asimétrica."
+    exergy_score: 973
+  - id: APEX-AERO-0467
+    hash: 1c97b43a6a2ab7cb
+    description: "Validación MCTS de Sistemas de Alerta de Colisión Orbital en ambiente de microgravedad."
+    exergy_score: 974
+  - id: APEX-AERO-0468
+    hash: c15d927fffdb0b4e
+    description: "Derivación Causal de Ruedas de Reacción Térmicamente Aisladas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 975
+  - id: APEX-AERO-0469
+    hash: b299821089d602cb
+    description: "Falsación Empírica de Generadores Termoeléctricos de Radioisótopos (RTG) durante maniobras de inserción orbital."
+    exergy_score: 988
+  - id: APEX-AERO-0470
+    hash: c6835db5b797503f
+    description: "Supresión de Ruido Estocástico en Dinámica de Fluidos Hipersónica con interferencia de plasma de reentrada."
+    exergy_score: 955
+  - id: APEX-AERO-0471
+    hash: 3cab81d748f0d404
+    description: "Evaluación de Estrés Cortante en Sistemas de Control a Reacción (RCS) minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 998
+  - id: APEX-AERO-0472
+    hash: 6c8b05bd81b41d6d
+    description: "Consenso de Actitud para Sistemas de Acoplamiento Autónomo con presión dinámica máxima (Max-Q)."
+    exergy_score: 951
+  - id: APEX-AERO-0473
+    hash: 68702c6b042199e7
+    description: "Acotación Termomecánica de Ruedas de Reacción Térmicamente Aisladas con latencia de telemetría asimétrica."
+    exergy_score: 974
+  - id: APEX-AERO-0474
+    hash: 5e7fbcbaa236a92a
+    description: "Minimización Entrópica en Turbobombas de Ciclo Cerrado con presión dinámica máxima (Max-Q)."
+    exergy_score: 959
+  - id: APEX-AERO-0475
+    hash: c093748f4eefccf1
+    description: "Colapso Termodinámico en Navegación Autónoma de Reentrada maximizando el impulso específico (Isp)."
+    exergy_score: 993
+  - id: APEX-AERO-0476
+    hash: 49f51820a1263d5b
+    description: "Validación MCTS de Sistemas de Escape de Lanzamiento (LES) en órbitas altamente elípticas."
+    exergy_score: 979
+  - id: APEX-AERO-0477
+    hash: af6a0756ddb0ae2c
+    description: "Colapso Termodinámico en Cámaras de Combustión de Presión Supercrítica con radiación de cinturones de Van Allen."
+    exergy_score: 954
+  - id: APEX-AERO-0478
+    hash: 641af8a8241ae9a9
+    description: "Supresión de Ruido Estocástico en Válvulas de Purga Pirolítica bajo bombardeo de micrometeoritos."
+    exergy_score: 970
+  - id: APEX-AERO-0479
+    hash: 30f1bf3bb1a8df4f
+    description: "Prueba de Integridad de Mecanismos de Separación Pirolítica con interferencia de plasma de reentrada."
+    exergy_score: 997
+  - id: APEX-AERO-0480
+    hash: 50054b14a0b147e3
+    description: "Supresión de Ruido Estocástico en Generadores Termoeléctricos de Radioisótopos (RTG) bajo régimen de flujo transónico."
+    exergy_score: 963
+  - id: APEX-AERO-0481
+    hash: 87ffc6ee765d9e85
+    description: "Validación MCTS de Intercambiadores de Calor Regenerativos bajo bombardeo de micrometeoritos."
+    exergy_score: 956
+  - id: APEX-AERO-0482
+    hash: bff5741c94da4ae0
+    description: "Falsación Empírica de Computadoras de Vuelo Tolerantes a Radiación con interferencia de plasma de reentrada."
+    exergy_score: 961
+  - id: APEX-AERO-0483
+    hash: dae58f143ed9d010
+    description: "Validación MCTS de Radiadores Térmicos de Piel bajo bombardeo de micrometeoritos."
+    exergy_score: 999
+  - id: APEX-AERO-0484
+    hash: 49c0d3d4f4c043e1
+    description: "Consenso de Actitud para Giroscopios de Fibra Óptica en presencia de perturbaciones magnéticas."
+    exergy_score: 963
+  - id: APEX-AERO-0485
+    hash: 57ed91502df8a534
+    description: "Restricción de Exergía en Sistemas de Detección de Fugas de Helio en órbitas altamente elípticas."
+    exergy_score: 966
+  - id: APEX-AERO-0486
+    hash: 5dea3f950ce9a6db
+    description: "Validación MCTS de Generadores Termoeléctricos de Radioisótopos (RTG) con presupuestos de masa estrictos."
+    exergy_score: 971
+  - id: APEX-AERO-0487
+    hash: d89cd238d0da0cd1
+    description: "Restricción de Exergía en Sistemas de Acoplamiento Autónomo requiriendo consenso mayoritario (N=3)."
+    exergy_score: 972
+  - id: APEX-AERO-0488
+    hash: 2a3d182923da0820
+    description: "Control de Lazo Cerrado para Acelerómetros MEMS bajo régimen de flujo transónico."
+    exergy_score: 953
+  - id: APEX-AERO-0489
+    hash: 93cedc485828c38a
+    description: "Validación MCTS de Torres de Servicio Umbilicales con presión dinámica máxima (Max-Q)."
+    exergy_score: 977
+  - id: APEX-AERO-0490
+    hash: 73d6e28f7ac61a65
+    description: "Control de Lazo Cerrado para Mecánica Orbital No Kepleriana bajo bombardeo de micrometeoritos."
+    exergy_score: 982
+  - id: APEX-AERO-0491
+    hash: 01befae768cabb18
+    description: "Evaluación de Estrés Cortante en Acelerómetros MEMS con latencia de telemetría asimétrica."
+    exergy_score: 985
+  - id: APEX-AERO-0492
+    hash: 588cc4e679474cf4
+    description: "Derivación Causal de Radiadores Térmicos de Piel maximizando el impulso específico (Isp)."
+    exergy_score: 961
+  - id: APEX-AERO-0493
+    hash: dfb2d3b85cae4b63
+    description: "Consenso de Actitud para Antenas de Alta Ganancia (Banda Ka) con presión dinámica máxima (Max-Q)."
+    exergy_score: 977
+  - id: APEX-AERO-0494
+    hash: fc5c2f01d5df38eb
+    description: "Aserción BFT para Intercambiadores de Calor Regenerativos en presencia de perturbaciones magnéticas."
+    exergy_score: 986
+  - id: APEX-AERO-0495
+    hash: fc1fe8745ba6b220
+    description: "Auditoría Estructural en Propelentes Hipergólicos con presupuestos de masa estrictos."
+    exergy_score: 956
+  - id: APEX-AERO-0496
+    hash: 31ffb5199faa60f1
+    description: "Redundancia de Nivel 5 en Propelentes Hipergólicos minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 981
+  - id: APEX-AERO-0497
+    hash: d68129b408862353
+    description: "Control de Lazo Cerrado para Válvulas de Purga Pirolítica sometido a choque térmico de 2000K."
+    exergy_score: 990
+  - id: APEX-AERO-0498
+    hash: b66ec2caa1198671
+    description: "Supresión de Ruido Estocástico en Radiadores Térmicos de Piel garantizando invarianza topológica."
+    exergy_score: 981
+  - id: APEX-AERO-0499
+    hash: 752007198ff6ee5b
+    description: "Minimización Entrópica en Sistemas de Escape de Lanzamiento (LES) con radiación de cinturones de Van Allen."
+    exergy_score: 977
+  - id: APEX-AERO-0500
+    hash: 58f6e3a5c55e9122
+    description: "Prueba de Integridad de Cámaras Térmicas Infrarrojas en ambiente de microgravedad."
+    exergy_score: 998
+  - id: APEX-AERO-0501
+    hash: 815f63b99853bdcf
+    description: "Prueba de Integridad de Generadores Termoeléctricos de Radioisótopos (RTG) en presencia de perturbaciones magnéticas."
+    exergy_score: 985
+  - id: APEX-AERO-0502
+    hash: f0c7f9efe1294876
+    description: "Evaluación de Estrés Cortante en Estructuras Compuestas de Carbono con radiación de cinturones de Van Allen."
+    exergy_score: 991
+  - id: APEX-AERO-0503
+    hash: 8c56a2b3f1620e1d
+    description: "Control de Lazo Cerrado para Radiadores Térmicos de Piel maximizando el impulso específico (Isp)."
+    exergy_score: 959
+  - id: APEX-AERO-0504
+    hash: 6f953378486ae9cd
+    description: "Minimización Entrópica en Navegación Autónoma de Reentrada en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 989
+  - id: APEX-AERO-0505
+    hash: aa25ff7baf9f16aa
+    description: "Aserción BFT para Estructuras Compuestas de Carbono bajo bombardeo de micrometeoritos."
+    exergy_score: 963
+  - id: APEX-AERO-0506
+    hash: 96d3731ac2551fc5
+    description: "Control de Lazo Cerrado para Tubos de Calor de Amoníaco requiriendo consenso mayoritario (N=3)."
+    exergy_score: 983
+  - id: APEX-AERO-0507
+    hash: adff3d74bf2130c6
+    description: "Control de Lazo Cerrado para Propulsores de Efecto Hall con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 966
+  - id: APEX-AERO-0508
+    hash: b5fb10b3980ca1d7
+    description: "Mapeo Isomórfico de Intercambiadores de Calor Regenerativos durante maniobras de inserción orbital."
+    exergy_score: 968
+  - id: APEX-AERO-0509
+    hash: d2dd3fdef297c9af
+    description: "Control de Lazo Cerrado para Estructuras Isogrid de Aluminio con radiación de cinturones de Van Allen."
+    exergy_score: 997
+  - id: APEX-AERO-0510
+    hash: 1184edb2522d0fb4
+    description: "Minimización Entrópica en Velas Solares de Grafeno garantizando invarianza topológica."
+    exergy_score: 952
+  - id: APEX-AERO-0511
+    hash: 1ed5a94fd5edf738
+    description: "Validación MCTS de Computadoras de Vuelo Tolerantes a Radiación con interferencia de plasma de reentrada."
+    exergy_score: 957
+  - id: APEX-AERO-0512
+    hash: e444e3c710a3ba60
+    description: "Colapso Termodinámico en Inyectores Coaxiales maximizando el impulso específico (Isp)."
+    exergy_score: 965
+  - id: APEX-AERO-0513
+    hash: 1b904fa93af6fe7b
+    description: "Aserción BFT para Blindaje contra Radiación Ionizante con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 969
+  - id: APEX-AERO-0514
+    hash: ebdd52bf10f9790f
+    description: "Falsación Empírica de Paneles Solares Desplegables con presupuestos de masa estrictos."
+    exergy_score: 985
+  - id: APEX-AERO-0515
+    hash: 59f4790f65a28586
+    description: "Control de Lazo Cerrado para Sistemas de Alerta de Colisión Orbital con presupuestos de masa estrictos."
+    exergy_score: 950
+  - id: APEX-AERO-0516
+    hash: 1d67eebe738928ac
+    description: "Aserción BFT para Acelerómetros MEMS en ambiente de microgravedad."
+    exergy_score: 1000
+  - id: APEX-AERO-0517
+    hash: 39dd40915835b9f3
+    description: "Evaluación de Estrés Cortante en Sistemas de Control a Reacción (RCS) optimizando la fracción de masa de propelente."
+    exergy_score: 983
+  - id: APEX-AERO-0518
+    hash: 2d26bde78855aae4
+    description: "Minimización Entrópica en Antenas de Alta Ganancia (Banda Ka) con latencia de telemetría asimétrica."
+    exergy_score: 978
+  - id: APEX-AERO-0519
+    hash: dd2dc491df1cbb83
+    description: "Aislamiento Cinemático de Velas Solares de Grafeno con presión dinámica máxima (Max-Q)."
+    exergy_score: 999
+  - id: APEX-AERO-0520
+    hash: c4bdb0bcbce64182
+    description: "Falsación Empírica de Radiadores Térmicos de Piel evitando el acoplamiento pogo."
+    exergy_score: 962
+  - id: APEX-AERO-0521
+    hash: ea8b84a14d0a9d74
+    description: "Minimización Entrópica en Sistemas de Propulsión Criogénica con presión dinámica máxima (Max-Q)."
+    exergy_score: 971
+  - id: APEX-AERO-0522
+    hash: af408346b657eefd
+    description: "Restricción de Exergía en Navegación Autónoma de Reentrada con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 969
+  - id: APEX-AERO-0523
+    hash: e055aa0a551c0791
+    description: "Aserción BFT para Velas Solares de Grafeno maximizando el impulso específico (Isp)."
+    exergy_score: 965
+  - id: APEX-AERO-0524
+    hash: f97ad82717b99f92
+    description: "Supresión de Ruido Estocástico en Velas Solares de Grafeno requiriendo consenso mayoritario (N=3)."
+    exergy_score: 980
+  - id: APEX-AERO-0525
+    hash: 15daa92a329a7cba
+    description: "Sincronización de Telemetría en Sistemas de Detección de Fugas de Helio requiriendo consenso mayoritario (N=3)."
+    exergy_score: 992
+  - id: APEX-AERO-0526
+    hash: 5010e2e976106c1d
+    description: "Falsación Empírica de Baterías de Litio de Grado Espacial sometido a choque térmico de 2000K."
+    exergy_score: 985
+  - id: APEX-AERO-0527
+    hash: 9b6c51cbef504005
+    description: "Mapeo Isomórfico de Dinámica de Fluidos Hipersónica sometido a choque térmico de 2000K."
+    exergy_score: 997
+  - id: APEX-AERO-0528
+    hash: 4fe3cff827393ede
+    description: "Control de Lazo Cerrado para Radiadores Térmicos de Piel con presión dinámica máxima (Max-Q)."
+    exergy_score: 983
+  - id: APEX-AERO-0529
+    hash: 2c74d200499756e3
+    description: "Validación MCTS de Ruedas de Reacción Térmicamente Aisladas durante maniobras de inserción orbital."
+    exergy_score: 958
+  - id: APEX-AERO-0530
+    hash: a2131613c918dc22
+    description: "Derivación Causal de Propulsores de Efecto Hall con presión dinámica máxima (Max-Q)."
+    exergy_score: 976
+  - id: APEX-AERO-0531
+    hash: 28405cab6ff72b42
+    description: "Mapeo Isomórfico de Giroscopios de Fibra Óptica bajo bombardeo de micrometeoritos."
+    exergy_score: 952
+  - id: APEX-AERO-0532
+    hash: f9dfff8f59844b42
+    description: "Falsación Empírica de Turbobombas de Ciclo Cerrado en presencia de perturbaciones magnéticas."
+    exergy_score: 963
+  - id: APEX-AERO-0533
+    hash: 26ceccc79322c8dd
+    description: "Control de Lazo Cerrado para Computadoras de Vuelo Tolerantes a Radiación con latencia de telemetría asimétrica."
+    exergy_score: 964
+  - id: APEX-AERO-0534
+    hash: f7b91d98f9a9f7fc
+    description: "Supresión de Ruido Estocástico en Inyectores Coaxiales minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 991
+  - id: APEX-AERO-0535
+    hash: c596ad1d88b4f2bc
+    description: "Minimización Entrópica en Sistemas de Alerta de Colisión Orbital bajo régimen de flujo transónico."
+    exergy_score: 973
+  - id: APEX-AERO-0536
+    hash: 3c71cb5f6f3e1c2d
+    description: "Auditoría Estructural en Escudos de Ablación Térmica bajo bombardeo de micrometeoritos."
+    exergy_score: 989
+  - id: APEX-AERO-0537
+    hash: b24c2b30527deca1
+    description: "Falsación Empírica de Sistemas de Recuperación por Paracaídas Supersónicos maximizando el impulso específico (Isp)."
+    exergy_score: 996
+  - id: APEX-AERO-0538
+    hash: d511dfbb7746950f
+    description: "Cálculo de Tensor de Inercia de Sistemas de Acoplamiento Autónomo en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 957
+  - id: APEX-AERO-0539
+    hash: 5a5105271a51b7ce
+    description: "Aislamiento Cinemático de Algoritmos de Filtro de Kalman Extendido requiriendo consenso mayoritario (N=3)."
+    exergy_score: 953
+  - id: APEX-AERO-0540
+    hash: 007757129d431316
+    description: "Derivación Causal de Baterías de Litio de Grado Espacial con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 956
+  - id: APEX-AERO-0541
+    hash: d3cac992f3dd1759
+    description: "Mapeo Isomórfico de Válvulas de Purga Pirolítica con radiación de cinturones de Van Allen."
+    exergy_score: 992
+  - id: APEX-AERO-0542
+    hash: 953705edd44ac4fb
+    description: "Aserción BFT para Materiales Ablativos Fenólicos en ambiente de microgravedad."
+    exergy_score: 973
+  - id: APEX-AERO-0543
+    hash: 980e7e721ce16d3b
+    description: "Supresión de Ruido Estocástico en Sistemas de Acoplamiento Autónomo en ambiente de microgravedad."
+    exergy_score: 978
+  - id: APEX-AERO-0544
+    hash: 45e1855d6720d9db
+    description: "Consenso de Actitud para Cámaras de Combustión de Presión Supercrítica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 994
+  - id: APEX-AERO-0545
+    hash: c69e7b8f766d1a68
+    description: "Aislamiento Cinemático de Materiales Ablativos Fenólicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 994
+  - id: APEX-AERO-0546
+    hash: 8e75518bfb2c8a8e
+    description: "Acotación Termomecánica de Generadores Termoeléctricos de Radioisótopos (RTG) maximizando el impulso específico (Isp)."
+    exergy_score: 951
+  - id: APEX-AERO-0547
+    hash: 9a68de5ab6d01afb
+    description: "Falsación Empírica de Mecánica Orbital No Kepleriana sometido a choque térmico de 2000K."
+    exergy_score: 988
+  - id: APEX-AERO-0548
+    hash: 516f1c5ca58a01c1
+    description: "Redundancia de Nivel 5 en Sistemas de Propulsión Criogénica en presencia de perturbaciones magnéticas."
+    exergy_score: 953
+  - id: APEX-AERO-0549
+    hash: 710b255438d21585
+    description: "Validación MCTS de Mecánica Orbital No Kepleriana con latencia de telemetría asimétrica."
+    exergy_score: 982
+  - id: APEX-AERO-0550
+    hash: c57b57ae189297dc
+    description: "Prueba de Integridad de Turbobombas de Ciclo Cerrado con presupuestos de masa estrictos."
+    exergy_score: 973
+  - id: APEX-AERO-0551
+    hash: 1c1dae0eeb067777
+    description: "Prueba de Integridad de Mecánica Orbital No Kepleriana en presencia de perturbaciones magnéticas."
+    exergy_score: 986
+  - id: APEX-AERO-0552
+    hash: 646eabebf0046e51
+    description: "Minimización Entrópica en Espectrómetros de Masas durante maniobras de inserción orbital."
+    exergy_score: 987
+  - id: APEX-AERO-0553
+    hash: 9748166e07db8e39
+    description: "Mapeo Isomórfico de Ignitores Láser con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 995
+  - id: APEX-AERO-0554
+    hash: a4baf6ba8aa81927
+    description: "Restricción de Exergía en Dinámica de Fluidos Hipersónica sometido a choque térmico de 2000K."
+    exergy_score: 954
+  - id: APEX-AERO-0555
+    hash: 82fe2f95fb4e33ea
+    description: "Redundancia de Nivel 5 en Espectrómetros de Masas con radiación de cinturones de Van Allen."
+    exergy_score: 968
+  - id: APEX-AERO-0556
+    hash: d188ed2ee5c16aa6
+    description: "Aislamiento Cinemático de Ruedas de Reacción Térmicamente Aisladas maximizando el impulso específico (Isp)."
+    exergy_score: 968
+  - id: APEX-AERO-0557
+    hash: d7952e5cb21f4fde
+    description: "Minimización Entrópica en Sistemas de Soporte Vital de Circuito Cerrado con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 986
+  - id: APEX-AERO-0558
+    hash: a40a451c88e1fb31
+    description: "Derivación Causal de Tanques de Propelente Presurizados minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 961
+  - id: APEX-AERO-0559
+    hash: 44ae5df973a57da8
+    description: "Supresión de Ruido Estocástico en Antenas de Alta Ganancia (Banda Ka) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 951
+  - id: APEX-AERO-0560
+    hash: 8c62e698f8a87731
+    description: "Validación MCTS de Paneles Solares Desplegables requiriendo consenso mayoritario (N=3)."
+    exergy_score: 995
+  - id: APEX-AERO-0561
+    hash: 4e968699cfec0017
+    description: "Consenso de Actitud para Sistemas de Detección de Fugas de Helio con presión dinámica máxima (Max-Q)."
+    exergy_score: 978
+  - id: APEX-AERO-0562
+    hash: 82b627b8004ef814
+    description: "Aislamiento Cinemático de Torres de Servicio Umbilicales con radiación de cinturones de Van Allen."
+    exergy_score: 966
+  - id: APEX-AERO-0563
+    hash: b25b4a005a639a1d
+    description: "Derivación Causal de Celdas de Combustible de Membrana de Intercambio Protónico con latencia de telemetría asimétrica."
+    exergy_score: 987
+  - id: APEX-AERO-0564
+    hash: 5a1f3b1e942a33c9
+    description: "Aserción BFT para Giroscopios de Fibra Óptica bajo bombardeo de micrometeoritos."
+    exergy_score: 960
+  - id: APEX-AERO-0565
+    hash: 5531bda1608c0f57
+    description: "Falsación Empírica de Estructuras Compuestas de Carbono en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 975
+  - id: APEX-AERO-0566
+    hash: 212496de9d81c464
+    description: "Aislamiento Cinemático de Cámaras de Combustión de Presión Supercrítica durante maniobras de inserción orbital."
+    exergy_score: 998
+  - id: APEX-AERO-0567
+    hash: b3a04140d136ea8b
+    description: "Acotación Termomecánica de Celdas de Combustible de Membrana de Intercambio Protónico con presión dinámica máxima (Max-Q)."
+    exergy_score: 988
+  - id: APEX-AERO-0568
+    hash: 4645a63e9d758eee
+    description: "Redundancia de Nivel 5 en Amortiguadores de Oscilación de Propelente (Baffles) optimizando la fracción de masa de propelente."
+    exergy_score: 995
+  - id: APEX-AERO-0569
+    hash: c23a0938418e00a5
+    description: "Colapso Termodinámico en Cápsulas de Recuperación Balística en presencia de perturbaciones magnéticas."
+    exergy_score: 986
+  - id: APEX-AERO-0570
+    hash: 6f678586a14e0aa3
+    description: "Sincronización de Telemetría en Sistemas de Recuperación por Paracaídas Supersónicos bajo bombardeo de micrometeoritos."
+    exergy_score: 989
+  - id: APEX-AERO-0571
+    hash: 1f41b4df5c65c7af
+    description: "Mitigación de Resonancia en Propelentes Hipergólicos con radiación de cinturones de Van Allen."
+    exergy_score: 990
+  - id: APEX-AERO-0572
+    hash: 548345485f3516b1
+    description: "Derivación Causal de Sistemas de Recuperación por Paracaídas Supersónicos en órbitas altamente elípticas."
+    exergy_score: 976
+  - id: APEX-AERO-0573
+    hash: 91b775a4edd03a27
+    description: "Prueba de Integridad de Sistemas de Control a Reacción (RCS) sometido a choque térmico de 2000K."
+    exergy_score: 999
+  - id: APEX-AERO-0574
+    hash: 266321a893705501
+    description: "Minimización Entrópica en Turbobombas de Ciclo Cerrado requiriendo consenso mayoritario (N=3)."
+    exergy_score: 989
+  - id: APEX-AERO-0575
+    hash: 5c9948c0b5f4804a
+    description: "Minimización Entrópica en Cámaras Térmicas Infrarrojas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 986
+  - id: APEX-AERO-0576
+    hash: cc24d6af5d047c4c
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono optimizando la fracción de masa de propelente."
+    exergy_score: 974
+  - id: APEX-AERO-0577
+    hash: ce332e6ef9eb1928
+    description: "Falsación Empírica de Sistemas de Acoplamiento Autónomo en presencia de perturbaciones magnéticas."
+    exergy_score: 999
+  - id: APEX-AERO-0578
+    hash: a996f903e084c61d
+    description: "Auditoría Estructural en Navegación Autónoma de Reentrada bajo régimen de flujo transónico."
+    exergy_score: 992
+  - id: APEX-AERO-0579
+    hash: 5499a365bd671987
+    description: "Consenso de Actitud para Sistemas de Soporte Vital de Circuito Cerrado con radiación de cinturones de Van Allen."
+    exergy_score: 968
+  - id: APEX-AERO-0580
+    hash: 6183c54ce8af588a
+    description: "Cálculo de Tensor de Inercia de Amortiguadores de Oscilación de Propelente (Baffles) en presencia de perturbaciones magnéticas."
+    exergy_score: 985
+  - id: APEX-AERO-0581
+    hash: 85a1f03ff228ff29
+    description: "Mapeo Isomórfico de Inyectores Coaxiales requiriendo consenso mayoritario (N=3)."
+    exergy_score: 991
+  - id: APEX-AERO-0582
+    hash: 3f84b2ad1ae5f080
+    description: "Mitigación de Resonancia en Sistemas de Acoplamiento Autónomo con interferencia de plasma de reentrada."
+    exergy_score: 988
+  - id: APEX-AERO-0583
+    hash: 25babe7a51e54824
+    description: "Sincronización de Telemetría en Acelerómetros MEMS bajo régimen de flujo transónico."
+    exergy_score: 998
+  - id: APEX-AERO-0584
+    hash: 9f0130a890841c75
+    description: "Evaluación de Estrés Cortante en Estructuras Compuestas de Carbono con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 988
+  - id: APEX-AERO-0585
+    hash: 904d756d7c5c2a6c
+    description: "Control de Lazo Cerrado para Escudos de Ablación Térmica durante maniobras de inserción orbital."
+    exergy_score: 997
+  - id: APEX-AERO-0586
+    hash: 70a906f2d95f2ffa
+    description: "Mapeo Isomórfico de Tubos de Calor de Amoníaco minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 996
+  - id: APEX-AERO-0587
+    hash: 9e82b83493468133
+    description: "Aislamiento Cinemático de Ignitores Láser maximizando el impulso específico (Isp)."
+    exergy_score: 993
+  - id: APEX-AERO-0588
+    hash: f838ee9c841721ea
+    description: "Restricción de Exergía en Estructuras Isogrid de Aluminio con presupuestos de masa estrictos."
+    exergy_score: 993
+  - id: APEX-AERO-0589
+    hash: 673291f2d490cad9
+    description: "Mitigación de Resonancia en Dinámica de Fluidos Hipersónica sometido a choque térmico de 2000K."
+    exergy_score: 998
+  - id: APEX-AERO-0590
+    hash: 252e534d1cd2a999
+    description: "Falsación Empírica de Sistemas de Recuperación por Paracaídas Supersónicos con presupuestos de masa estrictos."
+    exergy_score: 979
+  - id: APEX-AERO-0591
+    hash: 190ea004e9dd350a
+    description: "Acotación Termomecánica de Radiadores Térmicos de Piel con presión dinámica máxima (Max-Q)."
+    exergy_score: 955
+  - id: APEX-AERO-0592
+    hash: 479ab65b0452b339
+    description: "Cálculo de Tensor de Inercia de Materiales Ablativos Fenólicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 983
+  - id: APEX-AERO-0593
+    hash: 38a0f202acd41b8a
+    description: "Aserción BFT para Amortiguadores de Oscilación de Propelente (Baffles) durante maniobras de inserción orbital."
+    exergy_score: 968
+  - id: APEX-AERO-0594
+    hash: b19af3b4e61d36cd
+    description: "Mitigación de Resonancia en Navegación Autónoma de Reentrada con radiación de cinturones de Van Allen."
+    exergy_score: 959
+  - id: APEX-AERO-0595
+    hash: feaa2f6d075dc947
+    description: "Prueba de Integridad de Sistemas de Recuperación por Paracaídas Supersónicos en órbitas altamente elípticas."
+    exergy_score: 984
+  - id: APEX-AERO-0596
+    hash: 7d2764f081144699
+    description: "Acotación Termomecánica de Aislantes de Aerogel requiriendo consenso mayoritario (N=3)."
+    exergy_score: 1000
+  - id: APEX-AERO-0597
+    hash: ad53aaf0b1ecc876
+    description: "Validación MCTS de Computadoras de Vuelo Tolerantes a Radiación en presencia de perturbaciones magnéticas."
+    exergy_score: 973
+  - id: APEX-AERO-0598
+    hash: b20542e7a1295c71
+    description: "Prueba de Integridad de Torres de Servicio Umbilicales maximizando el impulso específico (Isp)."
+    exergy_score: 987
+  - id: APEX-AERO-0599
+    hash: 749c7953bed6ae51
+    description: "Aislamiento Cinemático de Mecanismos de Separación Pirolítica en ambiente de microgravedad."
+    exergy_score: 974
+  - id: APEX-AERO-0600
+    hash: b9f8add1ff26430c
+    description: "Evaluación de Estrés Cortante en Aislantes de Aerogel bajo bombardeo de micrometeoritos."
+    exergy_score: 990
+  - id: APEX-AERO-0601
+    hash: 54fdcd5f845e3166
+    description: "Restricción de Exergía en Sistemas de Acoplamiento Autónomo bajo régimen de flujo transónico."
+    exergy_score: 986
+  - id: APEX-AERO-0602
+    hash: 00a12236600a1a0e
+    description: "Derivación Causal de Giroscopios de Fibra Óptica en presencia de perturbaciones magnéticas."
+    exergy_score: 965
+  - id: APEX-AERO-0603
+    hash: 25ea7c728b214dea
+    description: "Supresión de Ruido Estocástico en Actuadores Electromecánicos de Control de Vector de Empuje en presencia de perturbaciones magnéticas."
+    exergy_score: 959
+  - id: APEX-AERO-0604
+    hash: d7b4125e9d122e32
+    description: "Cálculo de Tensor de Inercia de Espectrómetros de Masas evitando el acoplamiento pogo."
+    exergy_score: 971
+  - id: APEX-AERO-0605
+    hash: 6fed1100c8eb01d8
+    description: "Validación MCTS de Ruedas de Reacción Térmicamente Aisladas con presión dinámica máxima (Max-Q)."
+    exergy_score: 986
+  - id: APEX-AERO-0606
+    hash: ddf80e33b125c459
+    description: "Evaluación de Estrés Cortante en Sistemas de Soporte Vital de Circuito Cerrado con presupuestos de masa estrictos."
+    exergy_score: 956
+  - id: APEX-AERO-0607
+    hash: d39ffacdc5fbfbea
+    description: "Falsación Empírica de Algoritmos de Filtro de Kalman Extendido en presencia de perturbaciones magnéticas."
+    exergy_score: 968
+  - id: APEX-AERO-0608
+    hash: f9c7dc2f4ca7cbae
+    description: "Evaluación de Estrés Cortante en Computadoras de Vuelo Tolerantes a Radiación maximizando el impulso específico (Isp)."
+    exergy_score: 951
+  - id: APEX-AERO-0609
+    hash: f280654ecfce3269
+    description: "Validación MCTS de Amortiguadores de Oscilación de Propelente (Baffles) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 999
+  - id: APEX-AERO-0610
+    hash: d0136ad78eb8835c
+    description: "Derivación Causal de Computadoras de Vuelo Tolerantes a Radiación garantizando invarianza topológica."
+    exergy_score: 982
+  - id: APEX-AERO-0611
+    hash: 3704166fd6ebb018
+    description: "Mapeo Isomórfico de Sistemas de Recuperación por Paracaídas Supersónicos evitando el acoplamiento pogo."
+    exergy_score: 969
+  - id: APEX-AERO-0612
+    hash: 510ce80e8ffa8cd0
+    description: "Evaluación de Estrés Cortante en Tubos de Calor de Amoníaco garantizando invarianza topológica."
+    exergy_score: 986
+  - id: APEX-AERO-0613
+    hash: 8c72cf56110df4c3
+    description: "Supresión de Ruido Estocástico en Sensores de Estrellas (Star Trackers) con interferencia de plasma de reentrada."
+    exergy_score: 989
+  - id: APEX-AERO-0614
+    hash: dfdfd535a6f68428
+    description: "Aislamiento Cinemático de Tubos de Calor de Amoníaco optimizando la fracción de masa de propelente."
+    exergy_score: 1000
+  - id: APEX-AERO-0615
+    hash: 8986e9cbc5ca8ee4
+    description: "Falsación Empírica de Radiadores Térmicos de Piel optimizando la fracción de masa de propelente."
+    exergy_score: 962
+  - id: APEX-AERO-0616
+    hash: 39ca4e14f2d969c5
+    description: "Consenso de Actitud para Sensores de Estrellas (Star Trackers) en órbitas altamente elípticas."
+    exergy_score: 961
+  - id: APEX-AERO-0617
+    hash: 29c6fd792581331b
+    description: "Colapso Termodinámico en Baterías de Litio de Grado Espacial garantizando invarianza topológica."
+    exergy_score: 962
+  - id: APEX-AERO-0618
+    hash: 07f78bb85670cdf2
+    description: "Mitigación de Resonancia en Blindaje contra Radiación Ionizante con latencia de telemetría asimétrica."
+    exergy_score: 956
+  - id: APEX-AERO-0619
+    hash: 8394e0520df60e2b
+    description: "Falsación Empírica de Espectrómetros de Masas durante maniobras de inserción orbital."
+    exergy_score: 961
+  - id: APEX-AERO-0620
+    hash: 457ace8e45ddb7d6
+    description: "Redundancia de Nivel 5 en Sistemas de Control a Reacción (RCS) en órbitas altamente elípticas."
+    exergy_score: 999
+  - id: APEX-AERO-0621
+    hash: 08b0de608c7549ca
+    description: "Redundancia de Nivel 5 en Cámaras Térmicas Infrarrojas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 964
+  - id: APEX-AERO-0622
+    hash: 09426258d0d1a000
+    description: "Prueba de Integridad de Generadores Termoeléctricos de Radioisótopos (RTG) sometido a choque térmico de 2000K."
+    exergy_score: 968
+  - id: APEX-AERO-0623
+    hash: 2534ec5aa59e01a1
+    description: "Colapso Termodinámico en Aislantes de Aerogel evitando el acoplamiento pogo."
+    exergy_score: 999
+  - id: APEX-AERO-0624
+    hash: b8be886e6d7b67d1
+    description: "Validación MCTS de Materiales Ablativos Fenólicos optimizando la fracción de masa de propelente."
+    exergy_score: 959
+  - id: APEX-AERO-0625
+    hash: 282efdb592ee8540
+    description: "Aserción BFT para Amortiguadores de Oscilación de Propelente (Baffles) garantizando invarianza topológica."
+    exergy_score: 999
+  - id: APEX-AERO-0626
+    hash: bf7e945b7fb39179
+    description: "Evaluación de Estrés Cortante en Torres de Servicio Umbilicales con presión dinámica máxima (Max-Q)."
+    exergy_score: 977
+  - id: APEX-AERO-0627
+    hash: 1291e9cb761276a7
+    description: "Auditoría Estructural en Mapeadores LIDAR Topográficos con presión dinámica máxima (Max-Q)."
+    exergy_score: 975
+  - id: APEX-AERO-0628
+    hash: f5d8f1b9a0cee47b
+    description: "Falsación Empírica de Ruedas de Reacción Térmicamente Aisladas con interferencia de plasma de reentrada."
+    exergy_score: 986
+  - id: APEX-AERO-0629
+    hash: 9f41a4346c6e3790
+    description: "Auditoría Estructural en Estructuras Isogrid de Aluminio en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 985
+  - id: APEX-AERO-0630
+    hash: b224d3aeeacc7acb
+    description: "Evaluación de Estrés Cortante en Ruedas de Reacción Térmicamente Aisladas con interferencia de plasma de reentrada."
+    exergy_score: 953
+  - id: APEX-AERO-0631
+    hash: 7a4b0025dffa95fc
+    description: "Acotación Termomecánica de Espectrómetros de Masas en órbitas altamente elípticas."
+    exergy_score: 976
+  - id: APEX-AERO-0632
+    hash: 9f4ee338ac06f077
+    description: "Mapeo Isomórfico de Reguladores de Presión Bang-Bang garantizando invarianza topológica."
+    exergy_score: 989
+  - id: APEX-AERO-0633
+    hash: 5839e4f0a88908c2
+    description: "Colapso Termodinámico en Radiadores Térmicos de Piel sometido a choque térmico de 2000K."
+    exergy_score: 994
+  - id: APEX-AERO-0634
+    hash: 3adeddd4d167abbf
+    description: "Consenso de Actitud para Torres de Servicio Umbilicales con latencia de telemetría asimétrica."
+    exergy_score: 951
+  - id: APEX-AERO-0635
+    hash: b1bb6156351c436d
+    description: "Redundancia de Nivel 5 en Torres de Servicio Umbilicales con latencia de telemetría asimétrica."
+    exergy_score: 985
+  - id: APEX-AERO-0636
+    hash: 825e4f992819c77d
+    description: "Redundancia de Nivel 5 en Sistemas de Alerta de Colisión Orbital bajo régimen de flujo transónico."
+    exergy_score: 980
+  - id: APEX-AERO-0637
+    hash: 254cce7b33222956
+    description: "Aislamiento Cinemático de Espectrómetros de Masas garantizando invarianza topológica."
+    exergy_score: 959
+  - id: APEX-AERO-0638
+    hash: 419124066162d0e4
+    description: "Derivación Causal de Sistemas de Control a Reacción (RCS) con radiación de cinturones de Van Allen."
+    exergy_score: 975
+  - id: APEX-AERO-0639
+    hash: 9697181ddb0e125f
+    description: "Aserción BFT para Materiales Ablativos Fenólicos con interferencia de plasma de reentrada."
+    exergy_score: 990
+  - id: APEX-AERO-0640
+    hash: 744503197ffb1f2f
+    description: "Control de Lazo Cerrado para Turbobombas de Ciclo Cerrado evitando el acoplamiento pogo."
+    exergy_score: 957
+  - id: APEX-AERO-0641
+    hash: e4d472f81787f9c5
+    description: "Consenso de Actitud para Estructuras Compuestas de Carbono con radiación de cinturones de Van Allen."
+    exergy_score: 979
+  - id: APEX-AERO-0642
+    hash: a796c2990d3689c0
+    description: "Redundancia de Nivel 5 en Aislantes de Aerogel en órbitas altamente elípticas."
+    exergy_score: 998
+  - id: APEX-AERO-0643
+    hash: 3487db94ac31c314
+    description: "Prueba de Integridad de Tanques de Propelente Presurizados con presión dinámica máxima (Max-Q)."
+    exergy_score: 976
+  - id: APEX-AERO-0644
+    hash: 9d8216c2e92c4f98
+    description: "Aserción BFT para Intercambiadores de Calor Regenerativos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 951
+  - id: APEX-AERO-0645
+    hash: 7bfe68fc802b845a
+    description: "Minimización Entrópica en Espectrómetros de Masas optimizando la fracción de masa de propelente."
+    exergy_score: 991
+  - id: APEX-AERO-0646
+    hash: f97c9ad2aa80a42f
+    description: "Minimización Entrópica en Algoritmos de Filtro de Kalman Extendido sometido a choque térmico de 2000K."
+    exergy_score: 978
+  - id: APEX-AERO-0647
+    hash: 1b91d01dc07abf2a
+    description: "Colapso Termodinámico en Aislantes de Aerogel durante maniobras de inserción orbital."
+    exergy_score: 961
+  - id: APEX-AERO-0648
+    hash: 9347cf752e100b6f
+    description: "Consenso de Actitud para Celdas de Combustible de Membrana de Intercambio Protónico optimizando la fracción de masa de propelente."
+    exergy_score: 997
+  - id: APEX-AERO-0649
+    hash: 574a83312463c9cd
+    description: "Evaluación de Estrés Cortante en Inyectores Coaxiales con presupuestos de masa estrictos."
+    exergy_score: 963
+  - id: APEX-AERO-0650
+    hash: 1c879b5fc6d9bd21
+    description: "Derivación Causal de Sistemas de Propulsión Criogénica con presupuestos de masa estrictos."
+    exergy_score: 969
+  - id: APEX-AERO-0651
+    hash: c8c4c98926bf2707
+    description: "Minimización Entrópica en Válvulas de Purga Pirolítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 985
+  - id: APEX-AERO-0652
+    hash: 4648b6a38deb7605
+    description: "Aserción BFT para Generadores Termoeléctricos de Radioisótopos (RTG) con radiación de cinturones de Van Allen."
+    exergy_score: 996
+  - id: APEX-AERO-0653
+    hash: ed3cd0661f930e1b
+    description: "Cálculo de Tensor de Inercia de Generadores Termoeléctricos de Radioisótopos (RTG) bajo bombardeo de micrometeoritos."
+    exergy_score: 964
+  - id: APEX-AERO-0654
+    hash: b07db3578d220634
+    description: "Mitigación de Resonancia en Aislantes de Aerogel en presencia de perturbaciones magnéticas."
+    exergy_score: 983
+  - id: APEX-AERO-0655
+    hash: 8bdeb628f7ea34bb
+    description: "Colapso Termodinámico en Ruedas de Reacción Térmicamente Aisladas con presión dinámica máxima (Max-Q)."
+    exergy_score: 988
+  - id: APEX-AERO-0656
+    hash: e42c2e9fa9ce5e21
+    description: "Mapeo Isomórfico de Sistemas de Soporte Vital de Circuito Cerrado maximizando el impulso específico (Isp)."
+    exergy_score: 964
+  - id: APEX-AERO-0657
+    hash: 284557d783483067
+    description: "Colapso Termodinámico en Navegación Autónoma de Reentrada con latencia de telemetría asimétrica."
+    exergy_score: 970
+  - id: APEX-AERO-0658
+    hash: 345d4c1c5ed997e6
+    description: "Mapeo Isomórfico de Algoritmos de Filtro de Kalman Extendido con latencia de telemetría asimétrica."
+    exergy_score: 992
+  - id: APEX-AERO-0659
+    hash: 3f419ff351eee2a2
+    description: "Acotación Termomecánica de Cámaras Térmicas Infrarrojas con radiación de cinturones de Van Allen."
+    exergy_score: 992
+  - id: APEX-AERO-0660
+    hash: 55fb52caa9dff63a
+    description: "Aserción BFT para Turbobombas de Ciclo Cerrado garantizando invarianza topológica."
+    exergy_score: 988
+  - id: APEX-AERO-0661
+    hash: eab8bebcc7a066ac
+    description: "Redundancia de Nivel 5 en Navegación Autónoma de Reentrada con presión dinámica máxima (Max-Q)."
+    exergy_score: 973
+  - id: APEX-AERO-0662
+    hash: b3931e1ccdacea15
+    description: "Prueba de Integridad de Actuadores Electromecánicos de Control de Vector de Empuje en presencia de perturbaciones magnéticas."
+    exergy_score: 991
+  - id: APEX-AERO-0663
+    hash: 08d5f36f1859857d
+    description: "Colapso Termodinámico en Propelentes Hipergólicos evitando el acoplamiento pogo."
+    exergy_score: 965
+  - id: APEX-AERO-0664
+    hash: f676b8ab8ee84311
+    description: "Aserción BFT para Buses de Datos MIL-STD-1553 evitando el acoplamiento pogo."
+    exergy_score: 983
+  - id: APEX-AERO-0665
+    hash: aa2d7ffc8cd605ab
+    description: "Colapso Termodinámico en Sistemas de Control a Reacción (RCS) optimizando la fracción de masa de propelente."
+    exergy_score: 958
+  - id: APEX-AERO-0666
+    hash: d24b096398596178
+    description: "Mapeo Isomórfico de Sistemas de Alerta de Colisión Orbital con interferencia de plasma de reentrada."
+    exergy_score: 992
+  - id: APEX-AERO-0667
+    hash: 9a486dfa8099d5a3
+    description: "Aislamiento Cinemático de Propulsores de Efecto Hall con radiación de cinturones de Van Allen."
+    exergy_score: 985
+  - id: APEX-AERO-0668
+    hash: 7c27d3d120818aac
+    description: "Derivación Causal de Sistemas de Acoplamiento Autónomo evitando el acoplamiento pogo."
+    exergy_score: 998
+  - id: APEX-AERO-0669
+    hash: 132fd0658ee71967
+    description: "Auditoría Estructural en Actuadores Electromecánicos de Control de Vector de Empuje bajo bombardeo de micrometeoritos."
+    exergy_score: 951
+  - id: APEX-AERO-0670
+    hash: 4c6a7ad748eb65a3
+    description: "Restricción de Exergía en Ignitores Láser en ambiente de microgravedad."
+    exergy_score: 968
+  - id: APEX-AERO-0671
+    hash: 1387bd986d1a74b0
+    description: "Sincronización de Telemetría en Propulsores de Efecto Hall con radiación de cinturones de Van Allen."
+    exergy_score: 950
+  - id: APEX-AERO-0672
+    hash: b962ae53415fb15a
+    description: "Aserción BFT para Sistemas de Alerta de Colisión Orbital durante maniobras de inserción orbital."
+    exergy_score: 972
+  - id: APEX-AERO-0673
+    hash: 16a74e00f7599c16
+    description: "Consenso de Actitud para Giroscopios de Fibra Óptica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 976
+  - id: APEX-AERO-0674
+    hash: 530d5b22f9a17a17
+    description: "Sincronización de Telemetría en Intercambiadores de Calor Regenerativos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 992
+  - id: APEX-AERO-0675
+    hash: d2eb303c9eccd740
+    description: "Validación MCTS de Intercambiadores de Calor Regenerativos con presupuestos de masa estrictos."
+    exergy_score: 957
+  - id: APEX-AERO-0676
+    hash: ea6c36647222e006
+    description: "Restricción de Exergía en Reguladores de Presión Bang-Bang minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 959
+  - id: APEX-AERO-0677
+    hash: e9aa528483529495
+    description: "Evaluación de Estrés Cortante en Cápsulas de Recuperación Balística con presión dinámica máxima (Max-Q)."
+    exergy_score: 994
+  - id: APEX-AERO-0678
+    hash: 2c00fd786a99af08
+    description: "Mapeo Isomórfico de Estructuras Isogrid de Aluminio con interferencia de plasma de reentrada."
+    exergy_score: 986
+  - id: APEX-AERO-0679
+    hash: 684f2d49d324212b
+    description: "Acotación Termomecánica de Antenas de Alta Ganancia (Banda Ka) optimizando la fracción de masa de propelente."
+    exergy_score: 989
+  - id: APEX-AERO-0680
+    hash: 29a6b695625cc200
+    description: "Redundancia de Nivel 5 en Blindaje contra Radiación Ionizante bajo bombardeo de micrometeoritos."
+    exergy_score: 977
+  - id: APEX-AERO-0681
+    hash: a6bfc613b9adb10b
+    description: "Cálculo de Tensor de Inercia de Celdas de Combustible de Membrana de Intercambio Protónico bajo bombardeo de micrometeoritos."
+    exergy_score: 971
+  - id: APEX-AERO-0682
+    hash: e41c60f10275442b
+    description: "Restricción de Exergía en Mapeadores LIDAR Topográficos con presión dinámica máxima (Max-Q)."
+    exergy_score: 951
+  - id: APEX-AERO-0683
+    hash: 0c23bcaa96afd524
+    description: "Colapso Termodinámico en Propelentes Hipergólicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 985
+  - id: APEX-AERO-0684
+    hash: 8246fc217964b9fa
+    description: "Control de Lazo Cerrado para Propelentes Hipergólicos garantizando invarianza topológica."
+    exergy_score: 1000
+  - id: APEX-AERO-0685
+    hash: ebb8b8942cdb9690
+    description: "Acotación Termomecánica de Navegación Autónoma de Reentrada bajo bombardeo de micrometeoritos."
+    exergy_score: 959
+  - id: APEX-AERO-0686
+    hash: 257a4ae476623cc6
+    description: "Mapeo Isomórfico de Celdas de Combustible de Membrana de Intercambio Protónico con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 975
+  - id: APEX-AERO-0687
+    hash: 7d0cc8842d3e4936
+    description: "Cálculo de Tensor de Inercia de Sistemas de Detección de Fugas de Helio durante maniobras de inserción orbital."
+    exergy_score: 987
+  - id: APEX-AERO-0688
+    hash: 6f712630069a46e1
+    description: "Evaluación de Estrés Cortante en Estructuras Compuestas de Carbono con presión dinámica máxima (Max-Q)."
+    exergy_score: 998
+  - id: APEX-AERO-0689
+    hash: 64673b942fc3da34
+    description: "Mitigación de Resonancia en Radiadores Térmicos de Piel en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 972
+  - id: APEX-AERO-0690
+    hash: 47ed3bfa53928679
+    description: "Auditoría Estructural en Antenas de Alta Ganancia (Banda Ka) en ambiente de microgravedad."
+    exergy_score: 984
+  - id: APEX-AERO-0691
+    hash: 720a8e5f525223cd
+    description: "Minimización Entrópica en Sistemas de Alerta de Colisión Orbital con presupuestos de masa estrictos."
+    exergy_score: 993
+  - id: APEX-AERO-0692
+    hash: 9f5a1318a5ce0932
+    description: "Sincronización de Telemetría en Blindaje contra Radiación Ionizante en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 959
+  - id: APEX-AERO-0693
+    hash: 2da548e1f001db68
+    description: "Restricción de Exergía en Buses de Datos MIL-STD-1553 evitando el acoplamiento pogo."
+    exergy_score: 977
+  - id: APEX-AERO-0694
+    hash: e0fcaefef2b810e2
+    description: "Redundancia de Nivel 5 en Paneles Solares Desplegables en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 992
+  - id: APEX-AERO-0695
+    hash: 73d8457b3695c027
+    description: "Aserción BFT para Tanques de Propelente Presurizados bajo régimen de flujo transónico."
+    exergy_score: 967
+  - id: APEX-AERO-0696
+    hash: ab6d38399ce9d643
+    description: "Evaluación de Estrés Cortante en Buses de Datos MIL-STD-1553 garantizando invarianza topológica."
+    exergy_score: 955
+  - id: APEX-AERO-0697
+    hash: ac42c28aaa902380
+    description: "Minimización Entrópica en Cápsulas de Recuperación Balística en ambiente de microgravedad."
+    exergy_score: 1000
+  - id: APEX-AERO-0698
+    hash: 761a6a9fbcdf9369
+    description: "Redundancia de Nivel 5 en Aislantes de Aerogel bajo régimen de flujo transónico."
+    exergy_score: 985
+  - id: APEX-AERO-0699
+    hash: 733ce93364f9f043
+    description: "Mitigación de Resonancia en Antenas de Alta Ganancia (Banda Ka) garantizando invarianza topológica."
+    exergy_score: 974
+  - id: APEX-AERO-0700
+    hash: f6ee5a1b51eee071
+    description: "Sincronización de Telemetría en Mapeadores LIDAR Topográficos sometido a choque térmico de 2000K."
+    exergy_score: 986
+  - id: APEX-AERO-0701
+    hash: 863192ea73c7440d
+    description: "Auditoría Estructural en Aislantes de Aerogel durante maniobras de inserción orbital."
+    exergy_score: 974
+  - id: APEX-AERO-0702
+    hash: d562346244769ca2
+    description: "Aislamiento Cinemático de Reguladores de Presión Bang-Bang con latencia de telemetría asimétrica."
+    exergy_score: 972
+  - id: APEX-AERO-0703
+    hash: d211a33abd65e6fc
+    description: "Evaluación de Estrés Cortante en Sistemas de Recuperación por Paracaídas Supersónicos minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 976
+  - id: APEX-AERO-0704
+    hash: 36b4b432df7a82c2
+    description: "Minimización Entrópica en Navegación Autónoma de Reentrada evitando el acoplamiento pogo."
+    exergy_score: 990
+  - id: APEX-AERO-0705
+    hash: ae0b15a2940a601c
+    description: "Control de Lazo Cerrado para Navegación Autónoma de Reentrada en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 954
+  - id: APEX-AERO-0706
+    hash: fdcae6313de647a2
+    description: "Redundancia de Nivel 5 en Cápsulas de Recuperación Balística durante maniobras de inserción orbital."
+    exergy_score: 963
+  - id: APEX-AERO-0707
+    hash: b9cc7d55593690f1
+    description: "Acotación Termomecánica de Propelentes Hipergólicos en presencia de perturbaciones magnéticas."
+    exergy_score: 950
+  - id: APEX-AERO-0708
+    hash: b8a650d6a4e350c1
+    description: "Prueba de Integridad de Computadoras de Vuelo Tolerantes a Radiación durante maniobras de inserción orbital."
+    exergy_score: 985
+  - id: APEX-AERO-0709
+    hash: fe24a42b2773c261
+    description: "Derivación Causal de Tanques de Propelente Presurizados requiriendo consenso mayoritario (N=3)."
+    exergy_score: 980
+  - id: APEX-AERO-0710
+    hash: bc420610a41b2de4
+    description: "Evaluación de Estrés Cortante en Válvulas de Purga Pirolítica optimizando la fracción de masa de propelente."
+    exergy_score: 977
+  - id: APEX-AERO-0711
+    hash: 4fa8f1daaad14f1c
+    description: "Cálculo de Tensor de Inercia de Sistemas de Alerta de Colisión Orbital bajo régimen de flujo transónico."
+    exergy_score: 956
+  - id: APEX-AERO-0712
+    hash: 59d3fa6d78041ef8
+    description: "Sincronización de Telemetría en Buses de Datos MIL-STD-1553 optimizando la fracción de masa de propelente."
+    exergy_score: 993
+  - id: APEX-AERO-0713
+    hash: 46249ec20c93ecd7
+    description: "Evaluación de Estrés Cortante en Paneles Solares Desplegables con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 993
+  - id: APEX-AERO-0714
+    hash: cb610b95606d22ed
+    description: "Auditoría Estructural en Algoritmos de Filtro de Kalman Extendido garantizando invarianza topológica."
+    exergy_score: 959
+  - id: APEX-AERO-0715
+    hash: bf16888f9ac9292c
+    description: "Falsación Empírica de Cápsulas de Recuperación Balística garantizando invarianza topológica."
+    exergy_score: 999
+  - id: APEX-AERO-0716
+    hash: 79c596794f65d9fa
+    description: "Control de Lazo Cerrado para Mapeadores LIDAR Topográficos sometido a choque térmico de 2000K."
+    exergy_score: 962
+  - id: APEX-AERO-0717
+    hash: c2ecee60b4f7be04
+    description: "Aserción BFT para Sistemas de Acoplamiento Autónomo sometido a choque térmico de 2000K."
+    exergy_score: 983
+  - id: APEX-AERO-0718
+    hash: 3e57580df18011e9
+    description: "Cálculo de Tensor de Inercia de Sensores de Estrellas (Star Trackers) en ambiente de microgravedad."
+    exergy_score: 970
+  - id: APEX-AERO-0719
+    hash: 789919d6dd5d56ff
+    description: "Prueba de Integridad de Escudos de Ablación Térmica en ambiente de microgravedad."
+    exergy_score: 986
+  - id: APEX-AERO-0720
+    hash: cc565f92d43148d6
+    description: "Consenso de Actitud para Sistemas de Control a Reacción (RCS) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 971
+  - id: APEX-AERO-0721
+    hash: f19069abf55e7b73
+    description: "Supresión de Ruido Estocástico en Sistemas de Recuperación por Paracaídas Supersónicos maximizando el impulso específico (Isp)."
+    exergy_score: 998
+  - id: APEX-AERO-0722
+    hash: 36b37c9de1759e88
+    description: "Validación MCTS de Celdas de Combustible de Membrana de Intercambio Protónico con interferencia de plasma de reentrada."
+    exergy_score: 957
+  - id: APEX-AERO-0723
+    hash: 27d953af7e118a49
+    description: "Minimización Entrópica en Celdas de Combustible de Membrana de Intercambio Protónico con presupuestos de masa estrictos."
+    exergy_score: 966
+  - id: APEX-AERO-0724
+    hash: 5dbfff1efc613a00
+    description: "Restricción de Exergía en Acelerómetros MEMS con interferencia de plasma de reentrada."
+    exergy_score: 962
+  - id: APEX-AERO-0725
+    hash: 5ffc4d65670f172f
+    description: "Acotación Termomecánica de Sistemas de Soporte Vital de Circuito Cerrado con presupuestos de masa estrictos."
+    exergy_score: 999
+  - id: APEX-AERO-0726
+    hash: 4adec8854a123ab9
+    description: "Falsación Empírica de Sistemas de Escape de Lanzamiento (LES) minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 967
+  - id: APEX-AERO-0727
+    hash: cbfcdb3d0571c13c
+    description: "Cálculo de Tensor de Inercia de Ignitores Láser en órbitas altamente elípticas."
+    exergy_score: 975
+  - id: APEX-AERO-0728
+    hash: 1225ffda16e9354d
+    description: "Evaluación de Estrés Cortante en Radiadores Térmicos de Piel minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 984
+  - id: APEX-AERO-0729
+    hash: 862f7825944ffe62
+    description: "Minimización Entrópica en Amortiguadores de Oscilación de Propelente (Baffles) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 959
+  - id: APEX-AERO-0730
+    hash: 6e421a6e1f308c03
+    description: "Validación MCTS de Sistemas de Acoplamiento Autónomo con presión dinámica máxima (Max-Q)."
+    exergy_score: 965
+  - id: APEX-AERO-0731
+    hash: 6748f4cbb12e7cb2
+    description: "Mitigación de Resonancia en Cámaras Térmicas Infrarrojas evitando el acoplamiento pogo."
+    exergy_score: 987
+  - id: APEX-AERO-0732
+    hash: 7d50ae227de36c06
+    description: "Restricción de Exergía en Cámaras de Combustión de Presión Supercrítica maximizando el impulso específico (Isp)."
+    exergy_score: 1000
+  - id: APEX-AERO-0733
+    hash: 5365e61d81762d01
+    description: "Supresión de Ruido Estocástico en Ruedas de Reacción Térmicamente Aisladas bajo bombardeo de micrometeoritos."
+    exergy_score: 999
+  - id: APEX-AERO-0734
+    hash: 78a84287202d2607
+    description: "Sincronización de Telemetría en Sistemas de Control a Reacción (RCS) en ambiente de microgravedad."
+    exergy_score: 969
+  - id: APEX-AERO-0735
+    hash: 21a885d6370b8c26
+    description: "Acotación Termomecánica de Generadores Termoeléctricos de Radioisótopos (RTG) con presupuestos de masa estrictos."
+    exergy_score: 982
+  - id: APEX-AERO-0736
+    hash: 3a472b1a9888079c
+    description: "Supresión de Ruido Estocástico en Computadoras de Vuelo Tolerantes a Radiación con presupuestos de masa estrictos."
+    exergy_score: 967
+  - id: APEX-AERO-0737
+    hash: a6cfd113fdd01212
+    description: "Acotación Termomecánica de Reguladores de Presión Bang-Bang bajo bombardeo de micrometeoritos."
+    exergy_score: 990
+  - id: APEX-AERO-0738
+    hash: 1da2ab464a514071
+    description: "Aislamiento Cinemático de Acelerómetros MEMS evitando el acoplamiento pogo."
+    exergy_score: 952
+  - id: APEX-AERO-0739
+    hash: a0907090dc34b02f
+    description: "Derivación Causal de Giroscopios de Fibra Óptica maximizando el impulso específico (Isp)."
+    exergy_score: 951
+  - id: APEX-AERO-0740
+    hash: 9c9bb9683638685b
+    description: "Mitigación de Resonancia en Cápsulas de Recuperación Balística optimizando la fracción de masa de propelente."
+    exergy_score: 960
+  - id: APEX-AERO-0741
+    hash: 556e9dbb44e347a5
+    description: "Supresión de Ruido Estocástico en Sistemas de Propulsión Criogénica garantizando invarianza topológica."
+    exergy_score: 980
+  - id: APEX-AERO-0742
+    hash: 7f6fbf8f7e3754df
+    description: "Control de Lazo Cerrado para Tubos de Calor de Amoníaco optimizando la fracción de masa de propelente."
+    exergy_score: 998
+  - id: APEX-AERO-0743
+    hash: 30a74f075bfe3672
+    description: "Acotación Termomecánica de Dinámica de Fluidos Hipersónica sometido a choque térmico de 2000K."
+    exergy_score: 964
+  - id: APEX-AERO-0744
+    hash: 31f14402f20b6ba4
+    description: "Sincronización de Telemetría en Computadoras de Vuelo Tolerantes a Radiación garantizando invarianza topológica."
+    exergy_score: 950
+  - id: APEX-AERO-0745
+    hash: 08fe45edd5083fc7
+    description: "Sincronización de Telemetría en Propulsores de Efecto Hall con presión dinámica máxima (Max-Q)."
+    exergy_score: 950
+  - id: APEX-AERO-0746
+    hash: 6f9266d3e9cc2d12
+    description: "Derivación Causal de Giroscopios de Fibra Óptica durante maniobras de inserción orbital."
+    exergy_score: 992
+  - id: APEX-AERO-0747
+    hash: 9220e8c23b911725
+    description: "Prueba de Integridad de Cámaras de Combustión de Presión Supercrítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 982
+  - id: APEX-AERO-0748
+    hash: e60150a5ef00e631
+    description: "Falsación Empírica de Celdas de Combustible de Membrana de Intercambio Protónico garantizando invarianza topológica."
+    exergy_score: 977
+  - id: APEX-AERO-0749
+    hash: afe4a0cda6c2be7c
+    description: "Aserción BFT para Reguladores de Presión Bang-Bang en presencia de perturbaciones magnéticas."
+    exergy_score: 988
+  - id: APEX-AERO-0750
+    hash: 66ea037cf14ed4d5
+    description: "Mitigación de Resonancia en Espectrómetros de Masas bajo bombardeo de micrometeoritos."
+    exergy_score: 975
+  - id: APEX-AERO-0751
+    hash: a7e8cab22f4939bf
+    description: "Supresión de Ruido Estocástico en Aislantes de Aerogel evitando el acoplamiento pogo."
+    exergy_score: 974
+  - id: APEX-AERO-0752
+    hash: 5cddfef1223d5028
+    description: "Falsación Empírica de Propulsores de Efecto Hall sometido a choque térmico de 2000K."
+    exergy_score: 954
+  - id: APEX-AERO-0753
+    hash: 2e391ac0eb5fedab
+    description: "Falsación Empírica de Radiadores Térmicos de Piel durante maniobras de inserción orbital."
+    exergy_score: 953
+  - id: APEX-AERO-0754
+    hash: 14a1afbdeb58f8cd
+    description: "Supresión de Ruido Estocástico en Sistemas de Recuperación por Paracaídas Supersónicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 957
+  - id: APEX-AERO-0755
+    hash: ea53b715803f4599
+    description: "Aislamiento Cinemático de Mecanismos de Separación Pirolítica con radiación de cinturones de Van Allen."
+    exergy_score: 998
+  - id: APEX-AERO-0756
+    hash: 9027cdbfe12c130b
+    description: "Validación MCTS de Cámaras de Combustión de Presión Supercrítica garantizando invarianza topológica."
+    exergy_score: 974
+  - id: APEX-AERO-0757
+    hash: 6f78882e6ab47eb6
+    description: "Mapeo Isomórfico de Sensores de Estrellas (Star Trackers) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 982
+  - id: APEX-AERO-0758
+    hash: 1ac7dee2caeafca1
+    description: "Sincronización de Telemetría en Tubos de Calor de Amoníaco en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 962
+  - id: APEX-AERO-0759
+    hash: 5aaf4e02bff6cbcb
+    description: "Auditoría Estructural en Baterías de Litio de Grado Espacial evitando el acoplamiento pogo."
+    exergy_score: 954
+  - id: APEX-AERO-0760
+    hash: 658116d6d934ae04
+    description: "Mapeo Isomórfico de Dinámica de Fluidos Hipersónica maximizando el impulso específico (Isp)."
+    exergy_score: 955
+  - id: APEX-AERO-0761
+    hash: bb5a99ba35369345
+    description: "Falsación Empírica de Sistemas de Acoplamiento Autónomo bajo régimen de flujo transónico."
+    exergy_score: 992
+  - id: APEX-AERO-0762
+    hash: 0ec75ecb74ec6d24
+    description: "Evaluación de Estrés Cortante en Paneles Solares Desplegables maximizando el impulso específico (Isp)."
+    exergy_score: 962
+  - id: APEX-AERO-0763
+    hash: 2f70e676604531d5
+    description: "Acotación Termomecánica de Aislantes de Aerogel optimizando la fracción de masa de propelente."
+    exergy_score: 989
+  - id: APEX-AERO-0764
+    hash: 4e280e8b7e6d3d05
+    description: "Derivación Causal de Celdas de Combustible de Membrana de Intercambio Protónico con presión dinámica máxima (Max-Q)."
+    exergy_score: 971
+  - id: APEX-AERO-0765
+    hash: ac74a9c15d31f9dd
+    description: "Evaluación de Estrés Cortante en Mecanismos de Separación Pirolítica requiriendo consenso mayoritario (N=3)."
+    exergy_score: 951
+  - id: APEX-AERO-0766
+    hash: 751c48ff61d86f9e
+    description: "Prueba de Integridad de Mapeadores LIDAR Topográficos bajo bombardeo de micrometeoritos."
+    exergy_score: 953
+  - id: APEX-AERO-0767
+    hash: 00fa1736228e773d
+    description: "Cálculo de Tensor de Inercia de Escudos de Ablación Térmica en órbitas altamente elípticas."
+    exergy_score: 954
+  - id: APEX-AERO-0768
+    hash: 05e1dcfc81e6debe
+    description: "Sincronización de Telemetría en Celdas de Combustible de Membrana de Intercambio Protónico bajo régimen de flujo transónico."
+    exergy_score: 974
+  - id: APEX-AERO-0769
+    hash: da751ff8ada453c5
+    description: "Minimización Entrópica en Sistemas de Alerta de Colisión Orbital optimizando la fracción de masa de propelente."
+    exergy_score: 983
+  - id: APEX-AERO-0770
+    hash: dd7d780b2cef97fa
+    description: "Cálculo de Tensor de Inercia de Propelentes Hipergólicos con radiación de cinturones de Van Allen."
+    exergy_score: 953
+  - id: APEX-AERO-0771
+    hash: 3a0e79e6b46fa505
+    description: "Mapeo Isomórfico de Estructuras Isogrid de Aluminio en ambiente de microgravedad."
+    exergy_score: 989
+  - id: APEX-AERO-0772
+    hash: 8c701e33cd07362c
+    description: "Falsación Empírica de Cápsulas de Recuperación Balística con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 991
+  - id: APEX-AERO-0773
+    hash: b1d939e1ae9e5097
+    description: "Evaluación de Estrés Cortante en Intercambiadores de Calor Regenerativos en órbitas altamente elípticas."
+    exergy_score: 967
+  - id: APEX-AERO-0774
+    hash: e619e72f6dac143a
+    description: "Redundancia de Nivel 5 en Velas Solares de Grafeno optimizando la fracción de masa de propelente."
+    exergy_score: 955
+  - id: APEX-AERO-0775
+    hash: e37d5e10a7a59617
+    description: "Auditoría Estructural en Actuadores Electromecánicos de Control de Vector de Empuje en presencia de perturbaciones magnéticas."
+    exergy_score: 968
+  - id: APEX-AERO-0776
+    hash: c7d50c7931b383a8
+    description: "Validación MCTS de Algoritmos de Filtro de Kalman Extendido en presencia de perturbaciones magnéticas."
+    exergy_score: 990
+  - id: APEX-AERO-0777
+    hash: fc48459b74b1317a
+    description: "Supresión de Ruido Estocástico en Generadores Termoeléctricos de Radioisótopos (RTG) en presencia de perturbaciones magnéticas."
+    exergy_score: 988
+  - id: APEX-AERO-0778
+    hash: fdee937c6b80f612
+    description: "Sincronización de Telemetría en Celdas de Combustible de Membrana de Intercambio Protónico en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 954
+  - id: APEX-AERO-0779
+    hash: 9eefcc53910013d1
+    description: "Prueba de Integridad de Blindaje contra Radiación Ionizante requiriendo consenso mayoritario (N=3)."
+    exergy_score: 997
+  - id: APEX-AERO-0780
+    hash: 0bf048324c697e47
+    description: "Validación MCTS de Cápsulas de Recuperación Balística con interferencia de plasma de reentrada."
+    exergy_score: 970
+  - id: APEX-AERO-0781
+    hash: c286241d4e86286f
+    description: "Mitigación de Resonancia en Baterías de Litio de Grado Espacial en ambiente de microgravedad."
+    exergy_score: 953
+  - id: APEX-AERO-0782
+    hash: 198423f4b45f5ecb
+    description: "Consenso de Actitud para Blindaje contra Radiación Ionizante en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 979
+  - id: APEX-AERO-0783
+    hash: 490e5adb133ee437
+    description: "Mapeo Isomórfico de Actuadores Electromecánicos de Control de Vector de Empuje optimizando la fracción de masa de propelente."
+    exergy_score: 976
+  - id: APEX-AERO-0784
+    hash: 62ae25ad43645567
+    description: "Sincronización de Telemetría en Cámaras de Combustión de Presión Supercrítica con radiación de cinturones de Van Allen."
+    exergy_score: 999
+  - id: APEX-AERO-0785
+    hash: 7fd57054e8f993a7
+    description: "Evaluación de Estrés Cortante en Materiales Ablativos Fenólicos en presencia de perturbaciones magnéticas."
+    exergy_score: 961
+  - id: APEX-AERO-0786
+    hash: 398b2e74ff7201a4
+    description: "Auditoría Estructural en Materiales Ablativos Fenólicos sometido a choque térmico de 2000K."
+    exergy_score: 990
+  - id: APEX-AERO-0787
+    hash: b55cb74f02cd0c12
+    description: "Auditoría Estructural en Sistemas de Soporte Vital de Circuito Cerrado maximizando el impulso específico (Isp)."
+    exergy_score: 983
+  - id: APEX-AERO-0788
+    hash: 797826991a1f23f2
+    description: "Supresión de Ruido Estocástico en Torres de Servicio Umbilicales durante maniobras de inserción orbital."
+    exergy_score: 962
+  - id: APEX-AERO-0789
+    hash: fe09a2af69081183
+    description: "Mitigación de Resonancia en Cápsulas de Recuperación Balística evitando el acoplamiento pogo."
+    exergy_score: 987
+  - id: APEX-AERO-0790
+    hash: 10cf61b971ad9989
+    description: "Mapeo Isomórfico de Cámaras de Combustión de Presión Supercrítica con presupuestos de masa estrictos."
+    exergy_score: 978
+  - id: APEX-AERO-0791
+    hash: 793dac2a1d721f74
+    description: "Aislamiento Cinemático de Espectrómetros de Masas optimizando la fracción de masa de propelente."
+    exergy_score: 991
+  - id: APEX-AERO-0792
+    hash: d5392162c3521cbc
+    description: "Aserción BFT para Tanques de Propelente Presurizados en ambiente de microgravedad."
+    exergy_score: 976
+  - id: APEX-AERO-0793
+    hash: 080c75fa0906d038
+    description: "Aislamiento Cinemático de Propelentes Hipergólicos en ambiente de microgravedad."
+    exergy_score: 990
+  - id: APEX-AERO-0794
+    hash: aef147eaa7690c3f
+    description: "Control de Lazo Cerrado para Actuadores Electromecánicos de Control de Vector de Empuje sometido a choque térmico de 2000K."
+    exergy_score: 959
+  - id: APEX-AERO-0795
+    hash: b97f88fa505adff9
+    description: "Cálculo de Tensor de Inercia de Mecánica Orbital No Kepleriana con interferencia de plasma de reentrada."
+    exergy_score: 953
+  - id: APEX-AERO-0796
+    hash: b5c00162e6422791
+    description: "Falsación Empírica de Sistemas de Propulsión Criogénica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 996
+  - id: APEX-AERO-0797
+    hash: 1aea165d154fb879
+    description: "Mapeo Isomórfico de Intercambiadores de Calor Regenerativos con presión dinámica máxima (Max-Q)."
+    exergy_score: 973
+  - id: APEX-AERO-0798
+    hash: 957241e4c7e8b856
+    description: "Redundancia de Nivel 5 en Navegación Autónoma de Reentrada en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 964
+  - id: APEX-AERO-0799
+    hash: 6822f96188beb9aa
+    description: "Derivación Causal de Ruedas de Reacción Térmicamente Aisladas maximizando el impulso específico (Isp)."
+    exergy_score: 990
+  - id: APEX-AERO-0800
+    hash: 96ba47f85e0eac4d
+    description: "Colapso Termodinámico en Sensores de Estrellas (Star Trackers) con latencia de telemetría asimétrica."
+    exergy_score: 967
+  - id: APEX-AERO-0801
+    hash: d9aab0678810b677
+    description: "Aislamiento Cinemático de Radiadores Térmicos de Piel evitando el acoplamiento pogo."
+    exergy_score: 967
+  - id: APEX-AERO-0802
+    hash: aede1ca21e45a8e1
+    description: "Aislamiento Cinemático de Sistemas de Escape de Lanzamiento (LES) bajo régimen de flujo transónico."
+    exergy_score: 951
+  - id: APEX-AERO-0803
+    hash: 9a0d136e3e4acf4a
+    description: "Prueba de Integridad de Algoritmos de Filtro de Kalman Extendido con presión dinámica máxima (Max-Q)."
+    exergy_score: 981
+  - id: APEX-AERO-0804
+    hash: 2e8888ae77fe1283
+    description: "Prueba de Integridad de Paneles Solares Desplegables en órbitas altamente elípticas."
+    exergy_score: 978
+  - id: APEX-AERO-0805
+    hash: 5b0d9aeae7280e8e
+    description: "Restricción de Exergía en Reguladores de Presión Bang-Bang con presión dinámica máxima (Max-Q)."
+    exergy_score: 978
+  - id: APEX-AERO-0806
+    hash: d950907cbb834c32
+    description: "Minimización Entrópica en Giroscopios de Fibra Óptica sometido a choque térmico de 2000K."
+    exergy_score: 988
+  - id: APEX-AERO-0807
+    hash: ee237fc27a0f6a1b
+    description: "Minimización Entrópica en Sistemas de Recuperación por Paracaídas Supersónicos garantizando invarianza topológica."
+    exergy_score: 968
+  - id: APEX-AERO-0808
+    hash: 7fcb4bc55758013d
+    description: "Minimización Entrópica en Propelentes Hipergólicos optimizando la fracción de masa de propelente."
+    exergy_score: 975
+  - id: APEX-AERO-0809
+    hash: aecbd4d3cc6931c6
+    description: "Mitigación de Resonancia en Inyectores Coaxiales con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 960
+  - id: APEX-AERO-0810
+    hash: 71f3cd997147948d
+    description: "Aserción BFT para Válvulas de Purga Pirolítica en órbitas altamente elípticas."
+    exergy_score: 953
+  - id: APEX-AERO-0811
+    hash: 641fa1ec364e1240
+    description: "Cálculo de Tensor de Inercia de Mecanismos de Separación Pirolítica maximizando el impulso específico (Isp)."
+    exergy_score: 995
+  - id: APEX-AERO-0812
+    hash: 9c525d298a7785ac
+    description: "Derivación Causal de Generadores Termoeléctricos de Radioisótopos (RTG) bajo bombardeo de micrometeoritos."
+    exergy_score: 978
+  - id: APEX-AERO-0813
+    hash: e8833c77b8c002b6
+    description: "Sincronización de Telemetría en Radiadores Térmicos de Piel con presupuestos de masa estrictos."
+    exergy_score: 958
+  - id: APEX-AERO-0814
+    hash: a2d04452c97a6842
+    description: "Restricción de Exergía en Blindaje contra Radiación Ionizante en ambiente de microgravedad."
+    exergy_score: 996
+  - id: APEX-AERO-0815
+    hash: 0b85d610a6c9b702
+    description: "Restricción de Exergía en Turbobombas de Ciclo Cerrado minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 975
+  - id: APEX-AERO-0816
+    hash: d9ba7dbc0535522b
+    description: "Auditoría Estructural en Actuadores Electromecánicos de Control de Vector de Empuje con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 998
+  - id: APEX-AERO-0817
+    hash: 51a4ce04c81f9ef1
+    description: "Restricción de Exergía en Mapeadores LIDAR Topográficos bajo régimen de flujo transónico."
+    exergy_score: 976
+  - id: APEX-AERO-0818
+    hash: d7f3f26570f72551
+    description: "Mapeo Isomórfico de Mecánica Orbital No Kepleriana con radiación de cinturones de Van Allen."
+    exergy_score: 992
+  - id: APEX-AERO-0819
+    hash: e2a82af2b6490ff9
+    description: "Colapso Termodinámico en Generadores Termoeléctricos de Radioisótopos (RTG) con presión dinámica máxima (Max-Q)."
+    exergy_score: 958
+  - id: APEX-AERO-0820
+    hash: c157074784e69f1b
+    description: "Consenso de Actitud para Intercambiadores de Calor Regenerativos con presión dinámica máxima (Max-Q)."
+    exergy_score: 988
+  - id: APEX-AERO-0821
+    hash: dca61b3faf3a2b90
+    description: "Evaluación de Estrés Cortante en Generadores Termoeléctricos de Radioisótopos (RTG) con radiación de cinturones de Van Allen."
+    exergy_score: 958
+  - id: APEX-AERO-0822
+    hash: c98ad6255d6aba9b
+    description: "Colapso Termodinámico en Actuadores Electromecánicos de Control de Vector de Empuje en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 972
+  - id: APEX-AERO-0823
+    hash: 395e7b96cc451484
+    description: "Sincronización de Telemetría en Estructuras Isogrid de Aluminio maximizando el impulso específico (Isp)."
+    exergy_score: 951
+  - id: APEX-AERO-0824
+    hash: 729fd0e5f1b4e1e5
+    description: "Mitigación de Resonancia en Navegación Autónoma de Reentrada evitando el acoplamiento pogo."
+    exergy_score: 985
+  - id: APEX-AERO-0825
+    hash: f21be4d1068f9f36
+    description: "Falsación Empírica de Amortiguadores de Oscilación de Propelente (Baffles) optimizando la fracción de masa de propelente."
+    exergy_score: 955
+  - id: APEX-AERO-0826
+    hash: 76205d93f25f2905
+    description: "Evaluación de Estrés Cortante en Blindaje contra Radiación Ionizante con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 997
+  - id: APEX-AERO-0827
+    hash: 98308f4d7718ecd6
+    description: "Cálculo de Tensor de Inercia de Estructuras Isogrid de Aluminio durante maniobras de inserción orbital."
+    exergy_score: 981
+  - id: APEX-AERO-0828
+    hash: efc9581283797977
+    description: "Auditoría Estructural en Sistemas de Acoplamiento Autónomo con presión dinámica máxima (Max-Q)."
+    exergy_score: 996
+  - id: APEX-AERO-0829
+    hash: c0330813d5e7c2dc
+    description: "Aserción BFT para Navegación Autónoma de Reentrada garantizando invarianza topológica."
+    exergy_score: 990
+  - id: APEX-AERO-0830
+    hash: 4504acc9c6b754ff
+    description: "Acotación Termomecánica de Reguladores de Presión Bang-Bang durante maniobras de inserción orbital."
+    exergy_score: 980
+  - id: APEX-AERO-0831
+    hash: 0d275d87a55fc324
+    description: "Redundancia de Nivel 5 en Espectrómetros de Masas en ambiente de microgravedad."
+    exergy_score: 974
+  - id: APEX-AERO-0832
+    hash: 08b1080d5fec17ff
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 953
+  - id: APEX-AERO-0833
+    hash: fd244b7f9d361a16
+    description: "Mitigación de Resonancia en Tubos de Calor de Amoníaco con interferencia de plasma de reentrada."
+    exergy_score: 960
+  - id: APEX-AERO-0834
+    hash: fa2e8602643e6320
+    description: "Consenso de Actitud para Tubos de Calor de Amoníaco optimizando la fracción de masa de propelente."
+    exergy_score: 986
+  - id: APEX-AERO-0835
+    hash: fcabbd984397ce2d
+    description: "Sincronización de Telemetría en Mecanismos de Separación Pirolítica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 994
+  - id: APEX-AERO-0836
+    hash: c0200316b8ae53d8
+    description: "Aserción BFT para Sistemas de Escape de Lanzamiento (LES) bajo bombardeo de micrometeoritos."
+    exergy_score: 988
+  - id: APEX-AERO-0837
+    hash: c1febee288af8b53
+    description: "Aislamiento Cinemático de Paneles Solares Desplegables evitando el acoplamiento pogo."
+    exergy_score: 954
+  - id: APEX-AERO-0838
+    hash: 57e5988de115510c
+    description: "Colapso Termodinámico en Amortiguadores de Oscilación de Propelente (Baffles) optimizando la fracción de masa de propelente."
+    exergy_score: 999
+  - id: APEX-AERO-0839
+    hash: f0daa91a3a3f7cd1
+    description: "Minimización Entrópica en Sistemas de Detección de Fugas de Helio en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 999
+  - id: APEX-AERO-0840
+    hash: 3c66d76e508c536c
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono maximizando el impulso específico (Isp)."
+    exergy_score: 966
+  - id: APEX-AERO-0841
+    hash: ee13dfa3c8c5d4fc
+    description: "Derivación Causal de Actuadores Electromecánicos de Control de Vector de Empuje evitando el acoplamiento pogo."
+    exergy_score: 951
+  - id: APEX-AERO-0842
+    hash: 8bc424d579d611cd
+    description: "Control de Lazo Cerrado para Generadores Termoeléctricos de Radioisótopos (RTG) sometido a choque térmico de 2000K."
+    exergy_score: 975
+  - id: APEX-AERO-0843
+    hash: b372bb1c3205478c
+    description: "Consenso de Actitud para Baterías de Litio de Grado Espacial con presupuestos de masa estrictos."
+    exergy_score: 983
+  - id: APEX-AERO-0844
+    hash: 95640fc9f651828a
+    description: "Acotación Termomecánica de Mecanismos de Separación Pirolítica en órbitas altamente elípticas."
+    exergy_score: 993
+  - id: APEX-AERO-0845
+    hash: 63bfff7bb95d7e8e
+    description: "Supresión de Ruido Estocástico en Blindaje contra Radiación Ionizante optimizando la fracción de masa de propelente."
+    exergy_score: 984
+  - id: APEX-AERO-0846
+    hash: 9a9b5d5248d94eab
+    description: "Mapeo Isomórfico de Cápsulas de Recuperación Balística en presencia de perturbaciones magnéticas."
+    exergy_score: 966
+  - id: APEX-AERO-0847
+    hash: e6b109ce330ee164
+    description: "Validación MCTS de Generadores Termoeléctricos de Radioisótopos (RTG) en órbitas altamente elípticas."
+    exergy_score: 954
+  - id: APEX-AERO-0848
+    hash: 9b15b79bcbfd388c
+    description: "Supresión de Ruido Estocástico en Tubos de Calor de Amoníaco con presupuestos de masa estrictos."
+    exergy_score: 962
+  - id: APEX-AERO-0849
+    hash: 2f58d512238ddd43
+    description: "Falsación Empírica de Navegación Autónoma de Reentrada bajo régimen de flujo transónico."
+    exergy_score: 962
+  - id: APEX-AERO-0850
+    hash: e8dcb1bb43d18afa
+    description: "Redundancia de Nivel 5 en Tubos de Calor de Amoníaco durante maniobras de inserción orbital."
+    exergy_score: 962
+  - id: APEX-AERO-0851
+    hash: acdce62b972d5503
+    description: "Prueba de Integridad de Mecanismos de Separación Pirolítica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 979
+  - id: APEX-AERO-0852
+    hash: c2c6ffcf0118514b
+    description: "Cálculo de Tensor de Inercia de Amortiguadores de Oscilación de Propelente (Baffles) sometido a choque térmico de 2000K."
+    exergy_score: 964
+  - id: APEX-AERO-0853
+    hash: 58665e5cbf1641b9
+    description: "Falsación Empírica de Ignitores Láser requiriendo consenso mayoritario (N=3)."
+    exergy_score: 955
+  - id: APEX-AERO-0854
+    hash: fbc79bad4aa71306
+    description: "Sincronización de Telemetría en Sistemas de Propulsión Criogénica durante maniobras de inserción orbital."
+    exergy_score: 958
+  - id: APEX-AERO-0855
+    hash: 641e0a37df02b50d
+    description: "Auditoría Estructural en Cápsulas de Recuperación Balística bajo bombardeo de micrometeoritos."
+    exergy_score: 970
+  - id: APEX-AERO-0856
+    hash: f7fe2f62cd480dfd
+    description: "Evaluación de Estrés Cortante en Cápsulas de Recuperación Balística con latencia de telemetría asimétrica."
+    exergy_score: 972
+  - id: APEX-AERO-0857
+    hash: 5563549effe4835a
+    description: "Cálculo de Tensor de Inercia de Paneles Solares Desplegables minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 995
+  - id: APEX-AERO-0858
+    hash: 908cfbfa4455fdd4
+    description: "Validación MCTS de Cápsulas de Recuperación Balística con presupuestos de masa estrictos."
+    exergy_score: 960
+  - id: APEX-AERO-0859
+    hash: 7163ca26ad88d2a2
+    description: "Mitigación de Resonancia en Cámaras de Combustión de Presión Supercrítica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 962
+  - id: APEX-AERO-0860
+    hash: 933c36b65fc7367c
+    description: "Validación MCTS de Válvulas de Purga Pirolítica en órbitas altamente elípticas."
+    exergy_score: 972
+  - id: APEX-AERO-0861
+    hash: e4371510679afa44
+    description: "Control de Lazo Cerrado para Sensores de Estrellas (Star Trackers) en presencia de perturbaciones magnéticas."
+    exergy_score: 975
+  - id: APEX-AERO-0862
+    hash: 8fc3c5efd9808afa
+    description: "Cálculo de Tensor de Inercia de Sistemas de Acoplamiento Autónomo con radiación de cinturones de Van Allen."
+    exergy_score: 956
+  - id: APEX-AERO-0863
+    hash: 307da0832ce332af
+    description: "Cálculo de Tensor de Inercia de Velas Solares de Grafeno en ambiente de microgravedad."
+    exergy_score: 979
+  - id: APEX-AERO-0864
+    hash: 8488f85d37d36891
+    description: "Colapso Termodinámico en Sistemas de Soporte Vital de Circuito Cerrado sometido a choque térmico de 2000K."
+    exergy_score: 984
+  - id: APEX-AERO-0865
+    hash: de147c85af2558c8
+    description: "Aislamiento Cinemático de Mecánica Orbital No Kepleriana bajo bombardeo de micrometeoritos."
+    exergy_score: 955
+  - id: APEX-AERO-0866
+    hash: cee6a7cad2851d67
+    description: "Derivación Causal de Dinámica de Fluidos Hipersónica requiriendo consenso mayoritario (N=3)."
+    exergy_score: 979
+  - id: APEX-AERO-0867
+    hash: cdf56e88f0a7d75a
+    description: "Evaluación de Estrés Cortante en Aislantes de Aerogel en órbitas altamente elípticas."
+    exergy_score: 950
+  - id: APEX-AERO-0868
+    hash: f576f8cc28af5ce4
+    description: "Sincronización de Telemetría en Baterías de Litio de Grado Espacial bajo régimen de flujo transónico."
+    exergy_score: 963
+  - id: APEX-AERO-0869
+    hash: 2143486221fe7df2
+    description: "Falsación Empírica de Mecanismos de Separación Pirolítica evitando el acoplamiento pogo."
+    exergy_score: 960
+  - id: APEX-AERO-0870
+    hash: ff0c50673ecef932
+    description: "Auditoría Estructural en Ruedas de Reacción Térmicamente Aisladas bajo régimen de flujo transónico."
+    exergy_score: 993
+  - id: APEX-AERO-0871
+    hash: 4b6ba75a4523688b
+    description: "Aislamiento Cinemático de Ignitores Láser bajo bombardeo de micrometeoritos."
+    exergy_score: 956
+  - id: APEX-AERO-0872
+    hash: c67209be576f8d74
+    description: "Aserción BFT para Espectrómetros de Masas en órbitas altamente elípticas."
+    exergy_score: 955
+  - id: APEX-AERO-0873
+    hash: 6dd768a82d7b434e
+    description: "Restricción de Exergía en Radiadores Térmicos de Piel en ambiente de microgravedad."
+    exergy_score: 988
+  - id: APEX-AERO-0874
+    hash: b35a257d930fc64c
+    description: "Mitigación de Resonancia en Materiales Ablativos Fenólicos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 960
+  - id: APEX-AERO-0875
+    hash: 6b0a57d98551364a
+    description: "Evaluación de Estrés Cortante en Sistemas de Alerta de Colisión Orbital optimizando la fracción de masa de propelente."
+    exergy_score: 950
+  - id: APEX-AERO-0876
+    hash: 24da45122bc2e4e2
+    description: "Supresión de Ruido Estocástico en Sistemas de Control a Reacción (RCS) optimizando la fracción de masa de propelente."
+    exergy_score: 974
+  - id: APEX-AERO-0877
+    hash: 0e279c4e6c9fe92f
+    description: "Mitigación de Resonancia en Mecanismos de Separación Pirolítica sometido a choque térmico de 2000K."
+    exergy_score: 957
+  - id: APEX-AERO-0878
+    hash: 9aefb38348f3c1cb
+    description: "Mitigación de Resonancia en Algoritmos de Filtro de Kalman Extendido en presencia de perturbaciones magnéticas."
+    exergy_score: 964
+  - id: APEX-AERO-0879
+    hash: 9d3b40ec394db2db
+    description: "Sincronización de Telemetría en Estructuras Compuestas de Carbono sometido a choque térmico de 2000K."
+    exergy_score: 998
+  - id: APEX-AERO-0880
+    hash: 0f7b1e3d1b0b9d3e
+    description: "Derivación Causal de Intercambiadores de Calor Regenerativos durante maniobras de inserción orbital."
+    exergy_score: 977
+  - id: APEX-AERO-0881
+    hash: 12afbbc3b344deb0
+    description: "Falsación Empírica de Válvulas de Purga Pirolítica requiriendo consenso mayoritario (N=3)."
+    exergy_score: 965
+  - id: APEX-AERO-0882
+    hash: 9a5c8eac9eddb900
+    description: "Aislamiento Cinemático de Antenas de Alta Ganancia (Banda Ka) durante maniobras de inserción orbital."
+    exergy_score: 982
+  - id: APEX-AERO-0883
+    hash: c0cdf5495ca8316e
+    description: "Acotación Termomecánica de Mecánica Orbital No Kepleriana con presupuestos de masa estrictos."
+    exergy_score: 992
+  - id: APEX-AERO-0884
+    hash: b5012ea10131ec92
+    description: "Redundancia de Nivel 5 en Ignitores Láser con presupuestos de masa estrictos."
+    exergy_score: 970
+  - id: APEX-AERO-0885
+    hash: d01879c24613c88b
+    description: "Consenso de Actitud para Reguladores de Presión Bang-Bang con presupuestos de masa estrictos."
+    exergy_score: 958
+  - id: APEX-AERO-0886
+    hash: 615ccc47998f6268
+    description: "Redundancia de Nivel 5 en Estructuras Compuestas de Carbono bajo régimen de flujo transónico."
+    exergy_score: 979
+  - id: APEX-AERO-0887
+    hash: 3c0d15bbf6d85d21
+    description: "Derivación Causal de Cámaras de Combustión de Presión Supercrítica evitando el acoplamiento pogo."
+    exergy_score: 981
+  - id: APEX-AERO-0888
+    hash: 9c1c2e0ffb905832
+    description: "Control de Lazo Cerrado para Ignitores Láser en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 984
+  - id: APEX-AERO-0889
+    hash: 40b5b7caa89a1d77
+    description: "Mapeo Isomórfico de Cápsulas de Recuperación Balística con presupuestos de masa estrictos."
+    exergy_score: 986
+  - id: APEX-AERO-0890
+    hash: 9e635cf35c6e0aa6
+    description: "Auditoría Estructural en Blindaje contra Radiación Ionizante minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 972
+  - id: APEX-AERO-0891
+    hash: 3bf7b094c40dda35
+    description: "Sincronización de Telemetría en Sistemas de Soporte Vital de Circuito Cerrado requiriendo consenso mayoritario (N=3)."
+    exergy_score: 974
+  - id: APEX-AERO-0892
+    hash: 7d255556099545c0
+    description: "Restricción de Exergía en Paneles Solares Desplegables con presupuestos de masa estrictos."
+    exergy_score: 957
+  - id: APEX-AERO-0893
+    hash: 7292a855ce2ade96
+    description: "Sincronización de Telemetría en Reguladores de Presión Bang-Bang con radiación de cinturones de Van Allen."
+    exergy_score: 962
+  - id: APEX-AERO-0894
+    hash: b4fd43964231522c
+    description: "Cálculo de Tensor de Inercia de Sensores de Estrellas (Star Trackers) con presión dinámica máxima (Max-Q)."
+    exergy_score: 963
+  - id: APEX-AERO-0895
+    hash: 6733b09632650eea
+    description: "Evaluación de Estrés Cortante en Algoritmos de Filtro de Kalman Extendido en órbitas altamente elípticas."
+    exergy_score: 978
+  - id: APEX-AERO-0896
+    hash: ca27375fa77c8485
+    description: "Falsación Empírica de Cámaras Térmicas Infrarrojas minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 954
+  - id: APEX-AERO-0897
+    hash: 7985cb5e16ed3a50
+    description: "Acotación Termomecánica de Buses de Datos MIL-STD-1553 sometido a choque térmico de 2000K."
+    exergy_score: 992
+  - id: APEX-AERO-0898
+    hash: f6da6a6b923a44b3
+    description: "Auditoría Estructural en Amortiguadores de Oscilación de Propelente (Baffles) bajo bombardeo de micrometeoritos."
+    exergy_score: 984
+  - id: APEX-AERO-0899
+    hash: 736c86648491a4a5
+    description: "Control de Lazo Cerrado para Acelerómetros MEMS maximizando el impulso específico (Isp)."
+    exergy_score: 968
+  - id: APEX-AERO-0900
+    hash: f67080cfa432bd00
+    description: "Acotación Termomecánica de Acelerómetros MEMS con presión dinámica máxima (Max-Q)."
+    exergy_score: 969
+  - id: APEX-AERO-0901
+    hash: feaa20e207f06fb7
+    description: "Validación MCTS de Amortiguadores de Oscilación de Propelente (Baffles) con interferencia de plasma de reentrada."
+    exergy_score: 966
+  - id: APEX-AERO-0902
+    hash: 993e916f08c93cf7
+    description: "Evaluación de Estrés Cortante en Ignitores Láser en ambiente de microgravedad."
+    exergy_score: 987
+  - id: APEX-AERO-0903
+    hash: aa5ebf8cf60c2193
+    description: "Acotación Termomecánica de Generadores Termoeléctricos de Radioisótopos (RTG) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 953
+  - id: APEX-AERO-0904
+    hash: d0a128aa1c35340e
+    description: "Aserción BFT para Antenas de Alta Ganancia (Banda Ka) con interferencia de plasma de reentrada."
+    exergy_score: 996
+  - id: APEX-AERO-0905
+    hash: da99916d3da29337
+    description: "Derivación Causal de Actuadores Electromecánicos de Control de Vector de Empuje garantizando invarianza topológica."
+    exergy_score: 960
+  - id: APEX-AERO-0906
+    hash: 5b7412fa728cf69c
+    description: "Cálculo de Tensor de Inercia de Ignitores Láser optimizando la fracción de masa de propelente."
+    exergy_score: 987
+  - id: APEX-AERO-0907
+    hash: aa8788b7262d8b52
+    description: "Validación MCTS de Sistemas de Detección de Fugas de Helio con interferencia de plasma de reentrada."
+    exergy_score: 970
+  - id: APEX-AERO-0908
+    hash: c93912e1d59411af
+    description: "Derivación Causal de Sistemas de Propulsión Criogénica minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 953
+  - id: APEX-AERO-0909
+    hash: 0b7e3ba2fed6bfba
+    description: "Redundancia de Nivel 5 en Mecanismos de Separación Pirolítica con interferencia de plasma de reentrada."
+    exergy_score: 959
+  - id: APEX-AERO-0910
+    hash: db5efb04d6f2cef8
+    description: "Colapso Termodinámico en Cámaras de Combustión de Presión Supercrítica con latencia de telemetría asimétrica."
+    exergy_score: 975
+  - id: APEX-AERO-0911
+    hash: 8ca0e684d342a49d
+    description: "Evaluación de Estrés Cortante en Ignitores Láser durante maniobras de inserción orbital."
+    exergy_score: 968
+  - id: APEX-AERO-0912
+    hash: bec5ecc095c3fe73
+    description: "Validación MCTS de Tanques de Propelente Presurizados en presencia de perturbaciones magnéticas."
+    exergy_score: 982
+  - id: APEX-AERO-0913
+    hash: e80891e7157c5cf0
+    description: "Control de Lazo Cerrado para Generadores Termoeléctricos de Radioisótopos (RTG) con latencia de telemetría asimétrica."
+    exergy_score: 952
+  - id: APEX-AERO-0914
+    hash: 43e66b894245c457
+    description: "Prueba de Integridad de Sistemas de Detección de Fugas de Helio con interferencia de plasma de reentrada."
+    exergy_score: 956
+  - id: APEX-AERO-0915
+    hash: ef514cf8b4fb3d36
+    description: "Consenso de Actitud para Sistemas de Soporte Vital de Circuito Cerrado optimizando la fracción de masa de propelente."
+    exergy_score: 977
+  - id: APEX-AERO-0916
+    hash: b476570049f1e8fd
+    description: "Control de Lazo Cerrado para Generadores Termoeléctricos de Radioisótopos (RTG) requiriendo consenso mayoritario (N=3)."
+    exergy_score: 967
+  - id: APEX-AERO-0917
+    hash: f4c9c691995553dd
+    description: "Colapso Termodinámico en Estructuras Compuestas de Carbono con presupuestos de masa estrictos."
+    exergy_score: 968
+  - id: APEX-AERO-0918
+    hash: 3bd745e19ddefc1b
+    description: "Mapeo Isomórfico de Mecanismos de Separación Pirolítica con presión dinámica máxima (Max-Q)."
+    exergy_score: 953
+  - id: APEX-AERO-0919
+    hash: e447cb17abcc810a
+    description: "Mitigación de Resonancia en Materiales Ablativos Fenólicos maximizando el impulso específico (Isp)."
+    exergy_score: 965
+  - id: APEX-AERO-0920
+    hash: c5f5046254b6cabd
+    description: "Aserción BFT para Sistemas de Alerta de Colisión Orbital bajo régimen de flujo transónico."
+    exergy_score: 978
+  - id: APEX-AERO-0921
+    hash: 45d9a277915777bf
+    description: "Supresión de Ruido Estocástico en Estructuras Compuestas de Carbono con presión dinámica máxima (Max-Q)."
+    exergy_score: 963
+  - id: APEX-AERO-0922
+    hash: f11e674a80d084ce
+    description: "Acotación Termomecánica de Sistemas de Alerta de Colisión Orbital con interferencia de plasma de reentrada."
+    exergy_score: 993
+  - id: APEX-AERO-0923
+    hash: 81d15b005659ec7a
+    description: "Control de Lazo Cerrado para Mecánica Orbital No Kepleriana en órbitas altamente elípticas."
+    exergy_score: 966
+  - id: APEX-AERO-0924
+    hash: cdbd819dafbc099b
+    description: "Aislamiento Cinemático de Propelentes Hipergólicos sometido a choque térmico de 2000K."
+    exergy_score: 956
+  - id: APEX-AERO-0925
+    hash: ca9b489dfecff194
+    description: "Control de Lazo Cerrado para Tanques de Propelente Presurizados con presupuestos de masa estrictos."
+    exergy_score: 975
+  - id: APEX-AERO-0926
+    hash: 2446cb8e7cb836fa
+    description: "Control de Lazo Cerrado para Válvulas de Purga Pirolítica con presupuestos de masa estrictos."
+    exergy_score: 980
+  - id: APEX-AERO-0927
+    hash: 341e815b864d67c5
+    description: "Mapeo Isomórfico de Velas Solares de Grafeno requiriendo consenso mayoritario (N=3)."
+    exergy_score: 984
+  - id: APEX-AERO-0928
+    hash: 6dace4ccc2f77ce4
+    description: "Restricción de Exergía en Paneles Solares Desplegables optimizando la fracción de masa de propelente."
+    exergy_score: 956
+  - id: APEX-AERO-0929
+    hash: 9d38450ecf45efd0
+    description: "Auditoría Estructural en Mapeadores LIDAR Topográficos minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 959
+  - id: APEX-AERO-0930
+    hash: 6093b5bd475678ef
+    description: "Sincronización de Telemetría en Ruedas de Reacción Térmicamente Aisladas sometido a choque térmico de 2000K."
+    exergy_score: 979
+  - id: APEX-AERO-0931
+    hash: 8cc2b57e5dce4e1a
+    description: "Restricción de Exergía en Dinámica de Fluidos Hipersónica en ambiente de microgravedad."
+    exergy_score: 997
+  - id: APEX-AERO-0932
+    hash: 8dec9e0858bcd9f8
+    description: "Restricción de Exergía en Materiales Ablativos Fenólicos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 1000
+  - id: APEX-AERO-0933
+    hash: d049952ee44911c3
+    description: "Supresión de Ruido Estocástico en Materiales Ablativos Fenólicos con radiación de cinturones de Van Allen."
+    exergy_score: 981
+  - id: APEX-AERO-0934
+    hash: 3f292374ba4559e6
+    description: "Falsación Empírica de Giroscopios de Fibra Óptica en presencia de perturbaciones magnéticas."
+    exergy_score: 992
+  - id: APEX-AERO-0935
+    hash: 02c73e183fb60bc2
+    description: "Supresión de Ruido Estocástico en Intercambiadores de Calor Regenerativos requiriendo consenso mayoritario (N=3)."
+    exergy_score: 982
+  - id: APEX-AERO-0936
+    hash: 45d65cd1740f86c3
+    description: "Aislamiento Cinemático de Escudos de Ablación Térmica con presupuestos de masa estrictos."
+    exergy_score: 960
+  - id: APEX-AERO-0937
+    hash: 497d8f7888d105aa
+    description: "Evaluación de Estrés Cortante en Reguladores de Presión Bang-Bang minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 961
+  - id: APEX-AERO-0938
+    hash: 4630f828f11cbd98
+    description: "Evaluación de Estrés Cortante en Turbobombas de Ciclo Cerrado con radiación de cinturones de Van Allen."
+    exergy_score: 954
+  - id: APEX-AERO-0939
+    hash: dfbedca34ea10ac9
+    description: "Falsación Empírica de Giroscopios de Fibra Óptica evitando el acoplamiento pogo."
+    exergy_score: 950
+  - id: APEX-AERO-0940
+    hash: 8eddb17daf711a97
+    description: "Consenso de Actitud para Materiales Ablativos Fenólicos con radiación de cinturones de Van Allen."
+    exergy_score: 960
+  - id: APEX-AERO-0941
+    hash: 695fb8fb288ea7d5
+    description: "Restricción de Exergía en Antenas de Alta Ganancia (Banda Ka) en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 990
+  - id: APEX-AERO-0942
+    hash: 461ca336f1067b56
+    description: "Derivación Causal de Propulsores de Efecto Hall evitando el acoplamiento pogo."
+    exergy_score: 955
+  - id: APEX-AERO-0943
+    hash: 5cad695b71ef12c1
+    description: "Restricción de Exergía en Tubos de Calor de Amoníaco bajo régimen de flujo transónico."
+    exergy_score: 981
+  - id: APEX-AERO-0944
+    hash: 534266f98b2db359
+    description: "Mitigación de Resonancia en Navegación Autónoma de Reentrada garantizando invarianza topológica."
+    exergy_score: 987
+  - id: APEX-AERO-0945
+    hash: a47b8b6b45bb7baf
+    description: "Evaluación de Estrés Cortante en Blindaje contra Radiación Ionizante bajo régimen de flujo transónico."
+    exergy_score: 984
+  - id: APEX-AERO-0946
+    hash: 187b16f3211cf114
+    description: "Supresión de Ruido Estocástico en Escudos de Ablación Térmica con presión dinámica máxima (Max-Q)."
+    exergy_score: 961
+  - id: APEX-AERO-0947
+    hash: 9425893706992463
+    description: "Aserción BFT para Radiadores Térmicos de Piel optimizando la fracción de masa de propelente."
+    exergy_score: 956
+  - id: APEX-AERO-0948
+    hash: 9dc922cab4354895
+    description: "Mitigación de Resonancia en Antenas de Alta Ganancia (Banda Ka) con radiación de cinturones de Van Allen."
+    exergy_score: 990
+  - id: APEX-AERO-0949
+    hash: b3b21dda27f9c999
+    description: "Colapso Termodinámico en Baterías de Litio de Grado Espacial en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 962
+  - id: APEX-AERO-0950
+    hash: 32cb9d2e84bde876
+    description: "Redundancia de Nivel 5 en Sistemas de Recuperación por Paracaídas Supersónicos en presencia de perturbaciones magnéticas."
+    exergy_score: 966
+  - id: APEX-AERO-0951
+    hash: 19d14dabd09ce864
+    description: "Aserción BFT para Algoritmos de Filtro de Kalman Extendido en presencia de perturbaciones magnéticas."
+    exergy_score: 983
+  - id: APEX-AERO-0952
+    hash: e4f98c6d03111884
+    description: "Cálculo de Tensor de Inercia de Estructuras Compuestas de Carbono con interferencia de plasma de reentrada."
+    exergy_score: 976
+  - id: APEX-AERO-0953
+    hash: 0d233a401e1af5dc
+    description: "Cálculo de Tensor de Inercia de Cápsulas de Recuperación Balística bajo bombardeo de micrometeoritos."
+    exergy_score: 960
+  - id: APEX-AERO-0954
+    hash: d3ef9ca6ecfb2974
+    description: "Redundancia de Nivel 5 en Propulsores de Efecto Hall con presión dinámica máxima (Max-Q)."
+    exergy_score: 986
+  - id: APEX-AERO-0955
+    hash: d84aefac7861603c
+    description: "Prueba de Integridad de Sistemas de Soporte Vital de Circuito Cerrado en ambiente de microgravedad."
+    exergy_score: 984
+  - id: APEX-AERO-0956
+    hash: 02bb5c6ffe5e8ae8
+    description: "Control de Lazo Cerrado para Radiadores Térmicos de Piel garantizando invarianza topológica."
+    exergy_score: 971
+  - id: APEX-AERO-0957
+    hash: 339e4fe4e4d86669
+    description: "Redundancia de Nivel 5 en Navegación Autónoma de Reentrada en presencia de perturbaciones magnéticas."
+    exergy_score: 997
+  - id: APEX-AERO-0958
+    hash: 7cf616da7eff93cb
+    description: "Cálculo de Tensor de Inercia de Mecánica Orbital No Kepleriana bajo régimen de flujo transónico."
+    exergy_score: 981
+  - id: APEX-AERO-0959
+    hash: d90c9317bdc6337b
+    description: "Derivación Causal de Aislantes de Aerogel con presión dinámica máxima (Max-Q)."
+    exergy_score: 1000
+  - id: APEX-AERO-0960
+    hash: 14c7a82c0b8391db
+    description: "Aislamiento Cinemático de Sistemas de Propulsión Criogénica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 996
+  - id: APEX-AERO-0961
+    hash: ecceb15247be6ce0
+    description: "Prueba de Integridad de Turbobombas de Ciclo Cerrado bajo bombardeo de micrometeoritos."
+    exergy_score: 993
+  - id: APEX-AERO-0962
+    hash: ffc77a721b18a871
+    description: "Supresión de Ruido Estocástico en Válvulas de Purga Pirolítica optimizando la fracción de masa de propelente."
+    exergy_score: 988
+  - id: APEX-AERO-0963
+    hash: a3963d19b9083f65
+    description: "Falsación Empírica de Sensores de Estrellas (Star Trackers) con radiación de cinturones de Van Allen."
+    exergy_score: 978
+  - id: APEX-AERO-0964
+    hash: f944522317564a83
+    description: "Minimización Entrópica en Sistemas de Control a Reacción (RCS) maximizando el impulso específico (Isp)."
+    exergy_score: 964
+  - id: APEX-AERO-0965
+    hash: 3581872c17e7f41d
+    description: "Restricción de Exergía en Mecánica Orbital No Kepleriana en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 998
+  - id: APEX-AERO-0966
+    hash: 5d06440ff5d052e7
+    description: "Validación MCTS de Algoritmos de Filtro de Kalman Extendido en ambiente de microgravedad."
+    exergy_score: 977
+  - id: APEX-AERO-0967
+    hash: b293adbd79091588
+    description: "Minimización Entrópica en Torres de Servicio Umbilicales sometido a choque térmico de 2000K."
+    exergy_score: 964
+  - id: APEX-AERO-0968
+    hash: c0206a3ae70126c2
+    description: "Aislamiento Cinemático de Cámaras de Combustión de Presión Supercrítica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 984
+  - id: APEX-AERO-0969
+    hash: 4f8d984154d3163c
+    description: "Supresión de Ruido Estocástico en Tubos de Calor de Amoníaco con latencia de telemetría asimétrica."
+    exergy_score: 965
+  - id: APEX-AERO-0970
+    hash: e75d8324aae5498b
+    description: "Falsación Empírica de Espectrómetros de Masas en ambiente de microgravedad."
+    exergy_score: 957
+  - id: APEX-AERO-0971
+    hash: 198a764a926b0ae4
+    description: "Restricción de Exergía en Válvulas de Purga Pirolítica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 982
+  - id: APEX-AERO-0972
+    hash: 1f093f779ddd7929
+    description: "Validación MCTS de Giroscopios de Fibra Óptica en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 961
+  - id: APEX-AERO-0973
+    hash: f4863075fb1c3137
+    description: "Redundancia de Nivel 5 en Cámaras de Combustión de Presión Supercrítica con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 984
+  - id: APEX-AERO-0974
+    hash: f1cc402be3393784
+    description: "Aserción BFT para Dinámica de Fluidos Hipersónica con presión dinámica máxima (Max-Q)."
+    exergy_score: 993
+  - id: APEX-AERO-0975
+    hash: 5b1a6405ca2d221e
+    description: "Cálculo de Tensor de Inercia de Propelentes Hipergólicos en ambiente de microgravedad."
+    exergy_score: 970
+  - id: APEX-AERO-0976
+    hash: a898a47cf338c211
+    description: "Evaluación de Estrés Cortante en Estructuras Compuestas de Carbono en ambiente de microgravedad."
+    exergy_score: 976
+  - id: APEX-AERO-0977
+    hash: 13c62d46f222eca3
+    description: "Supresión de Ruido Estocástico en Actuadores Electromecánicos de Control de Vector de Empuje con presión dinámica máxima (Max-Q)."
+    exergy_score: 951
+  - id: APEX-AERO-0978
+    hash: 04b5092b0f7cf566
+    description: "Auditoría Estructural en Propelentes Hipergólicos con interferencia de plasma de reentrada."
+    exergy_score: 971
+  - id: APEX-AERO-0979
+    hash: f68d74371a6cee6e
+    description: "Redundancia de Nivel 5 en Radiadores Térmicos de Piel con interferencia de plasma de reentrada."
+    exergy_score: 964
+  - id: APEX-AERO-0980
+    hash: 44ec6119dee31a75
+    description: "Minimización Entrópica en Espectrómetros de Masas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 986
+  - id: APEX-AERO-0981
+    hash: ccb4d4e82af154c5
+    description: "Aserción BFT para Espectrómetros de Masas requiriendo consenso mayoritario (N=3)."
+    exergy_score: 998
+  - id: APEX-AERO-0982
+    hash: 42965e5849334151
+    description: "Redundancia de Nivel 5 en Buses de Datos MIL-STD-1553 minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 978
+  - id: APEX-AERO-0983
+    hash: f32686c7e59a6807
+    description: "Minimización Entrópica en Sistemas de Acoplamiento Autónomo minimizando la fatiga por ciclo de bajo esfuerzo."
+    exergy_score: 997
+  - id: APEX-AERO-0984
+    hash: 0f59346d14c1af78
+    description: "Minimización Entrópica en Giroscopios de Fibra Óptica con interferencia de plasma de reentrada."
+    exergy_score: 951
+  - id: APEX-AERO-0985
+    hash: f2904b181505744f
+    description: "Supresión de Ruido Estocástico en Inyectores Coaxiales evitando el acoplamiento pogo."
+    exergy_score: 981
+  - id: APEX-AERO-0986
+    hash: 27d22c21ff6a27e0
+    description: "Redundancia de Nivel 5 en Intercambiadores de Calor Regenerativos con latencia de telemetría asimétrica."
+    exergy_score: 1000
+  - id: APEX-AERO-0987
+    hash: d1027fac99f3ea8b
+    description: "Redundancia de Nivel 5 en Propelentes Hipergólicos con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 994
+  - id: APEX-AERO-0988
+    hash: 0faebae14b150349
+    description: "Prueba de Integridad de Espectrómetros de Masas en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 987
+  - id: APEX-AERO-0989
+    hash: e6a5e3e903bac009
+    description: "Sincronización de Telemetría en Buses de Datos MIL-STD-1553 garantizando invarianza topológica."
+    exergy_score: 984
+  - id: APEX-AERO-0990
+    hash: 1cf1ac345d71e26f
+    description: "Supresión de Ruido Estocástico en Intercambiadores de Calor Regenerativos bajo bombardeo de micrometeoritos."
+    exergy_score: 996
+  - id: APEX-AERO-0991
+    hash: cf5687221f7e3dd3
+    description: "Validación MCTS de Actuadores Electromecánicos de Control de Vector de Empuje garantizando invarianza topológica."
+    exergy_score: 990
+  - id: APEX-AERO-0992
+    hash: 7b8670ed924d1d9c
+    description: "Aserción BFT para Velas Solares de Grafeno con presión dinámica máxima (Max-Q)."
+    exergy_score: 977
+  - id: APEX-AERO-0993
+    hash: 5c48105ae50e3fd5
+    description: "Validación MCTS de Sistemas de Recuperación por Paracaídas Supersónicos evitando el acoplamiento pogo."
+    exergy_score: 975
+  - id: APEX-AERO-0994
+    hash: 6edecdb69f12436d
+    description: "Consenso de Actitud para Sensores de Estrellas (Star Trackers) con tolerancia a fallos bizantinos (BFT)."
+    exergy_score: 993
+  - id: APEX-AERO-0995
+    hash: eefe749a44ace2a2
+    description: "Mitigación de Resonancia en Radiadores Térmicos de Piel con radiación de cinturones de Van Allen."
+    exergy_score: 957
+  - id: APEX-AERO-0996
+    hash: a9a7df1208f4526e
+    description: "Restricción de Exergía en Computadoras de Vuelo Tolerantes a Radiación en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 979
+  - id: APEX-AERO-0997
+    hash: a8e44faaa5b85654
+    description: "Sincronización de Telemetría en Estructuras Isogrid de Aluminio optimizando la fracción de masa de propelente."
+    exergy_score: 980
+  - id: APEX-AERO-0998
+    hash: 43e9c5b58e48c48c
+    description: "Mapeo Isomórfico de Sistemas de Recuperación por Paracaídas Supersónicos en condiciones de vacío ultra alto (UHV)."
+    exergy_score: 994
+  - id: APEX-AERO-0999
+    hash: ffaa6a442f481be3
+    description: "Mapeo Isomórfico de Baterías de Litio de Grado Espacial con radiación de cinturones de Van Allen."
+    exergy_score: 953
