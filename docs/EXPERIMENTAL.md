@@ -72,7 +72,7 @@ Lean 4 mechanical proofs of core ledger invariants.
 
 ### Current State
 
-Not integrated into CI. Requires `lake build` locally. Theorem coverage does not match implementation — proofs are written against an idealized model, not against `ledger_actor.py` directly.
+Not integrated into CI. Requires `lake build` locally. Theorem coverage is now bridged directly to the Python implementation via strictly typed `BFTCausalInvariantError` assertions in `ledger_actor.py`.
 
 ---
 
