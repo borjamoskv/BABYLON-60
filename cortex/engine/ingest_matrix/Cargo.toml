@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 hex = "0.4.3"
+rayon = "1.12.0"
 sha2 = "0.11.0"
 
 [lib]

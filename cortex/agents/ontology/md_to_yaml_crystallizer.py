@@ -3,8 +3,8 @@ import glob
 import yaml
 import re
 
-ONTOLOGY_DIR = "$CORTEX_ROOT/borjamoskv/Teorema-Robinson-Moskv/cortex/agents/ontology"
-CONFIG_DIR = "$CORTEX_ROOT/.gemini/config"
+ONTOLOGY_DIR = os.path.expandvars("$CORTEX_ROOT/borjamoskv/Teorema-Robinson-Moskv/cortex/agents/ontology")
+CONFIG_DIR = os.path.expandvars("$CORTEX_ROOT/.gemini/config")
 
 
 def parse_markdown_table(filepath):

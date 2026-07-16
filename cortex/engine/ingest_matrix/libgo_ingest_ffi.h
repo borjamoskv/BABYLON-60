@@ -21,6 +21,12 @@ extern const char *_GoStringPtr(_GoString_ s);
 /* Start of preamble from import "C" comments.  */
 
 
+#line 3 "go_bft_ffi.go"
+
+#include <stdlib.h>
+#include <stdint.h>
+
+#line 1 "cgo-generated-wrapper"
 
 
 /* End of preamble from import "C" comments.  */
@@ -84,6 +90,7 @@ extern "C" {
 
 extern char* process_payload_go(char* payload);
 extern void free_string_go(char* s);
+extern void process_mmap_go(void* inPtr, void* outPtr, size_t numRecords, size_t recordSize, size_t hashSize);
 
 #ifdef __cplusplus
 }

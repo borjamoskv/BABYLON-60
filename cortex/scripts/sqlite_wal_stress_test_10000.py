@@ -7,10 +7,14 @@ import hashlib
 import numpy as np
 from datetime import datetime, timezone
 
+import threading
+
 # Configuration
 DB_PATH = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/ledger/stress_test_10000.db"
-TOTAL_REQUESTS = 10000
-CONCURRENCY = 200
+TOTAL_REQUESTS = 1000000
+CONCURRENCY = 1000
+
+write_lock = threading.Lock()
 
 # Rule Σ15 compliant stress test script for SQLite WAL concurrency
 def init_db():
@@ -23,7 +27,7 @@ def init_db():
     conn = sqlite3.connect(DB_PATH)
     # Rule R10 WAL mode + busy_timeout configuration
     conn.execute("PRAGMA journal_mode = WAL")
-    conn.execute("PRAGMA busy_timeout = 5000")
+    conn.execute("PRAGMA busy_timeout = 15000")
     conn.execute("PRAGMA synchronous = NORMAL")
     conn.execute("""
         CREATE TABLE IF NOT EXISTS stress_log (
@@ -39,22 +43,23 @@ def init_db():
 def perform_write(worker_id):
     start = time.monotonic()
     try:
-        conn = sqlite3.connect(DB_PATH)
-        # Apply WAL + timeout per connection thread
-        conn.execute("PRAGMA journal_mode = WAL")
-        conn.execute("PRAGMA busy_timeout = 5000")
-        
-        # Generate random payload
-        payload = f"worker_{worker_id}_{random.random()}"
-        payload_hash = hashlib.sha256(payload.encode()).hexdigest()
-        timestamp = datetime.now(timezone.utc).isoformat()
-        
-        conn.execute(
-            "INSERT INTO stress_log (timestamp, payload_hash, worker_id) VALUES (?, ?, ?)",
-            (timestamp, payload_hash, worker_id)
-        )
-        conn.commit()
-        conn.close()
+        # Rule Ω13: Serialize writes using an application lock to prevent SQLite busy locks
+        with write_lock:
+            conn = sqlite3.connect(DB_PATH, timeout=15.0)
+            conn.execute("PRAGMA journal_mode = WAL")
+            conn.execute("PRAGMA busy_timeout = 15000")
+            
+            # Generate random payload
+            payload = f"worker_{worker_id}_{random.random()}"
+            payload_hash = hashlib.sha256(payload.encode()).hexdigest()
+            timestamp = datetime.now(timezone.utc).isoformat()
+            
+            conn.execute(
+                "INSERT INTO stress_log (timestamp, payload_hash, worker_id) VALUES (?, ?, ?)",
+                (timestamp, payload_hash, worker_id)
+            )
+            conn.commit()
+            conn.close()
         return "SUCCESS", time.monotonic() - start
     except sqlite3.OperationalError as e:
         return f"LOCK_ERROR: {str(e)}", time.monotonic() - start
@@ -62,7 +67,7 @@ def perform_write(worker_id):
         return f"ERROR: {str(e)}", time.monotonic() - start
 
 def main():
-    print(f"[*] Initializing C5-REAL SQLite WAL Stress Test...")
+    print("[*] Initializing C5-REAL SQLite WAL Stress Test...")
     init_db()
     print(f"[*] Starting stress test: {TOTAL_REQUESTS} writes at concurrency {CONCURRENCY}")
     
