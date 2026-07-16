@@ -87,3 +87,8 @@ rust_siege/target/
 
 # autonomic_daemon internal DB — H1 fix
 .babylon60/
+
+# dotnet build artifacts for domain_kernel
+domain_kernel/bin/
+domain_kernel/obj/
+
