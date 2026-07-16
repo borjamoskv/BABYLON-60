@@ -1,6 +1,17 @@
-import numpy as np
-import networkx as nx
-from babylon60.cli.onco_transducer import construct_wgcna_graph, get_structural_driver_nodes, simulate_boolean_network
+import pytest
+
+# [C5-REAL] Optional-dependency gate: onco stack (numpy/networkx/pandas) is an
+# extra ([project.optional-dependencies].onco). Skip cleanly instead of breaking
+# collection when the extra is absent. INV: pytest --collect-only must never error.
+np = pytest.importorskip("numpy")
+nx = pytest.importorskip("networkx")
+pytest.importorskip("pandas")
+
+from babylon60.cli.onco_transducer import (  # noqa: E402
+    construct_wgcna_graph,
+    get_structural_driver_nodes,
+    simulate_boolean_network,
+)
 
 
 def test_exergy_extraction() -> None:
