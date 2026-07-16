@@ -30,6 +30,8 @@
 | OBJ-007 | Objective | Optimización de Latencia en Inferencia Local | Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms. | PENDING | Exergy: 0.00 |
 | MS-008 | Milestone | Configurar socket local de Ollama/MLX para inferencia local | Due: 2026-07-20 | PENDING |  |
 | MS-009 | Milestone | Medir y registrar TTFT mediante script de telemetría | Due: 2026-07-25 | PENDING |  |
+| OBJ-008 | Objective | Consolidación de Asimetría de Red (Dualidad C5-REAL) | Establecer la división física irreversible entre el Motor Cinético Local (BABYLON-60) y el Sumidero Distribuido (Teorema-Robinson-Moskv) bajo mandato ULTRATHINK P0. | DONE | Exergy: 1.00 |
+| MS-010 | Milestone | Cristalización de la Dualidad Topológica en C5-REAL | Due: 2026-07-16 | DONE | Hash: 2b84d613 |
 
 ## Interface Contracts
 - **Git Log format** ↔ **YAML parser**: Extract commit hashes, authors, dates, and message bodies. Output to `cortex/audits/hitos_no_remarcados.yaml` in YAML format.
