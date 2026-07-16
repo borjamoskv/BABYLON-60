@@ -1,0 +1,69 @@
+Claim: Autonomic Swarm Daemon overnight state consolidation.
+Timestamp: '2026-07-16T14:59:53.246222+00:00'
+Creator: Borja Moskv (borjamoskv)
+Environment: C5-REAL
+Metrics:
+  processes:
+    current_pid: 1873
+    zombies_count: 12
+    zombies_list:
+    - pid: 873
+      elapsed_sec: 182688.7009677887
+      memory_mb: 5.921875
+    - pid: 20010
+      elapsed_sec: 144914.75639986992
+      memory_mb: 5.53125
+    - pid: 20569
+      elapsed_sec: 161813.07905602455
+      memory_mb: 5.90625
+    - pid: 20572
+      elapsed_sec: 161812.84461688995
+      memory_mb: 5.90625
+    - pid: 82831
+      elapsed_sec: 151188.49150514603
+      memory_mb: 18.875
+    - pid: 82864
+      elapsed_sec: 151188.3577618599
+      memory_mb: 19.078125
+    - pid: 83261
+      elapsed_sec: 151152.1706199646
+      memory_mb: 4.125
+    - pid: 84163
+      elapsed_sec: 151150.842826128
+      memory_mb: 3.40625
+    - pid: 84357
+      elapsed_sec: 151149.16896009445
+      memory_mb: 3.40625
+    - pid: 84371
+      elapsed_sec: 151149.02933573723
+      memory_mb: 3.40625
+    - pid: 99886
+      elapsed_sec: 149930.96725010872
+      memory_mb: 9.25
+    - pid: 99887
+      elapsed_sec: 149930.88680505753
+      memory_mb: 3.71875
+  telemetry:
+    qwen2.5:
+      status: SUCCESS
+      tps: 164.0620008992502
+      latency_ms: 569.5461670111399
+      error: null
+    layer_swap:
+      disk_speed_mb_s: 5468.277263980111
+      seq_time_ms: 745.1934431120753
+      pipe_time_ms: 681.9141711166594
+      efficiency_gain_pct: 8.491657110018192
+  workspace:
+    git_dirty: true
+    dirty_files_count: 4
+    dirty_files:
+    - M cortex/audits/overnight_swarm_report.yaml
+    - M pyproject.toml
+    - M uv.lock
+    - ?? main
+    ast_ok: false
+    ast_failures:
+    - file: general_syntax_test
+      error: No module named 'pytest'
+  exergy_saved_ms: 63.27927199541591

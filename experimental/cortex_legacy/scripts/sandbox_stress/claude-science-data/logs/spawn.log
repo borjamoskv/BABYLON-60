@@ -1,0 +1,38 @@
+[claude-science] adopted 10 legacy data entries into /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/orgs/3b928780-21e0-4624-a69a-1c70ca566025
+[claude-science] data dir: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data
+[claude-science] --here: this instance is separate from the global ~/.claude-science one. Manage it from this directory: 'claude-science url --here', 'claude-science stop --here'.
+[claude-science] note: existing data at /Users/borjafernandezangulo/.claude-science is NOT used by this instance (--here runs a fresh, separate one).
+[migrate] 0ms total · 0 stmts · 0 slow (≥100ms)
+[claude-science] port 8000 is busy (predecessor still shutting down?) — retrying for up to 600s more
+[sandbox] "sandbox: dropped write grant \"/dev/tty\" — the grant cannot be canonicalized (ENXIO) — a landing inside frame-scoped daemon territory cannot be ruled out; the grant is dropped fail-closed for this spawn. If this is a deliberate static symlink, grant the canonical path directly instead."
+[sandbox] 570 seatbelt rule(s) hit the SBPL string budget (ci-twin-fold-degrade x216, deny-read*-glob-member-fold-degrade-home-exact x2, deny-read*-glob-member-fold-degrade-partial-fold x2, deny-write*-glob-member-fold-degrade-home-exact x2, deny-write*-glob-member-fold-degrade-partial-fold x34, deny-write-unlink-glob-member-fold-degrade-partial-fold x53, move-blocking-ancestor-ci-twin-fold-degrade x247, deny-write-unlink-glob-member-fold-degrade-home-exact x2, deny-link-glob-member-fold-degrade-partial-fold x2, deny-clone-glob-member-fold-degrade-partial-fold x2, clone-node-ci-twin-fold-degrade x8). *-fold-degrade = case-fold class narrowed to byte-exact spelling (deny still emitted); bare channel names = that row dropped (byte-exact base rules where applicable remain). Sample: ci-twin-fold-degrade: /Users/borjafernandezangulo/.config/gcloud/application_default_credentials.json (337B + 25B budget overhead > 250B SBPL string budget)
+[perf] db_lock_wait: 364ms queued behind TxMutex — op=select "name", "enabled", "app_name", "prior_app_names", "mo
+[daemon] sandbox origin: http://localhost:8001/mcp_apps
+[daemon] WARNING: pidIsOperonDaemon(self) is false — the stale-lock kill-guard no longer recognizes this daemon's command line, so 'operon stop' and wedged-daemon recovery will refuse to signal it. Update pidIsOperonDaemon() in server/lockfile.ts (argv: bun /$bunfs/root/claude-science serve --here --port 8000 --_restart-parent-pid 50388 --_daemon-child --no-browser)
+[daemon] warming 24 built-in MCP connectors...
+[daemon] listening on 127.0.0.1:8000 (pid 50668, version 0.1.18-dev.20260709.t211149.shab3f5130)
+
+  Web UI → http://localhost:8000/?nonce=97e997adfe70071a06a85fbddf67338b25cd6d869f03808a97f285d993965c43
+
+  Remote? Forward both ports: 8000 (app) and 8001 (sandbox content)
+
+  This link is a one-time password, not a bookmark: it logs one
+  browser tab in, then expires (3 min). The tab stays logged in
+  until the daemon restarts.
+
+  Seeing "session expired", or need a fresh link?  claude-science url --here (from the directory you launched in)
+
+[perf] db_lock_hold: stmt held TxMutex 422ms [unrouted-read?] — op=select "id", "name", "description", "context", "created_at",
+[sandbox] 567 seatbelt rule(s) hit the SBPL string budget (ci-twin-fold-degrade x218, deny-read*-glob-member-fold-degrade-home-exact x2, deny-read*-glob-member-fold-degrade-partial-fold x2, deny-write*-glob-member-fold-degrade-home-exact x2, deny-write*-glob-member-fold-degrade-partial-fold x34, deny-write-unlink-glob-member-fold-degrade-partial-fold x53, move-blocking-ancestor-ci-twin-fold-degrade x242, deny-write-unlink-glob-member-fold-degrade-home-exact x2, deny-link-glob-member-fold-degrade-partial-fold x2, deny-clone-glob-member-fold-degrade-partial-fold x2, clone-node-ci-twin-fold-degrade x8). *-fold-degrade = case-fold class narrowed to byte-exact spelling (deny still emitted); bare channel names = that row dropped (byte-exact base rules where applicable remain). Sample: ci-twin-fold-degrade: /Users/borjafernandezangulo/.config/gcloud/application_default_credentials.json (337B + 25B budget overhead > 250B SBPL string budget)
+[perf][ro] db_lock_hold: stmt held TxMutex 419ms — op=select "id", "user_id", "name", "display_name", "description
+[perf] db_lock_hold: stmt held TxMutex 420ms — op=insert into "directory_attachments" ("server_uuid", "agent_n
+[perf][ro] db_lock_hold: stmt held TxMutex 420ms — op=select "id", "user_id", "name", "display_name", "description
+[perf] db_lock_hold: stmt held TxMutex 425ms — op=insert into "directory_attachments" ("server_uuid", "agent_n
+[perf] db_lock_wait: 425ms queued behind TxMutex — op=insert into "directory_attachments" ("server_uuid", "agent_n
+[perf] db_lock_hold: tx held TxMutex 582ms — caller=H (/$bunfs/root/claude-science:17516:21315) ← e (/$bunfs/root/claude-science:17517:9582) ← z_ (/$bunfs/root/claude-science:17517:15970) ← <anonymous> (/$bunfs/root/claude-science:17517:16141)
+[mcpCatalog] bundled 'ketcher-chemistry' load failed (skipped): MCP conda install failed (rc=1) for nodejs: critical libmamba filesystem error: in current_path: call to getcwd failed: Operation not permitted
+
+[daemon] MCP warmup complete (16076ms)
+withTokenFileLock: timed out after 5000ms waiting for /Users/borjafernandezangulo/.claude-science/.oauth-tokens/5cdc5213-a4de-4d04-a39d-f5b944d87f3c.enc.lock; proceeding without cross-process lock
+[perf] db_lock_hold: tx held TxMutex 260ms — caller=H (/$bunfs/root/claude-science:17516:21315) ← e (/$bunfs/root/claude-science:17517:9582) ← z_ (/$bunfs/root/claude-science:17517:15970) ← <anonymous> (/$bunfs/root/claude-science:17517:16141)
+[daemon] gracefulExit(0) via SIGTERM

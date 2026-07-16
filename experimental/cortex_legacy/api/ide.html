@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BABYLON·60 — IDE C5-REAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0A0A0A;
+            --panel-bg: #111111;
+            --accent-color: #2B3BE5; /* Dynamic */
+            --accent-glow: rgba(43, 59, 229, 0.4); /* Dynamic */
+            --border-color: #222222;
+            --text-color: #E0E0E0;
+            --text-dim: #888888;
+            --success-color: #00E676;
+            --error-color: #FF1744;
+            --warning-color: #FF9100;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sans);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* WORKSPACE SWITCHER */
+        .workspace-selector-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .workspace-select {
+            background: transparent;
+            border: none;
+            color: #FFFFFF;
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .workspace-select option {
+            background-color: var(--bg-color);
+            color: #FFFFFF;
+        }
+
+        .popout-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .popout-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .status-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            background-color: rgba(0, 230, 118, 0.1);
+            color: var(--success-color);
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--success-color);
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ADHD PANEL TOGGLES */
+        .adhd-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .adhd-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-dim);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .adhd-toggle:hover {
+            color: #FFFFFF;
+            border-color: var(--accent-color);
+        }
+
+        .adhd-toggle.active {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            background: rgba(43, 59, 229, 0.05);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .adhd-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--text-dim);
+        }
+
+        .adhd-toggle.active .adhd-dot {
+            background-color: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-color);
+            animation: pulse-dot 1s infinite alternate;
+        }
+
+        /* BINAURAL BEATS */
+        .binaural-btn {
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .binaural-btn.visible {
+            display: flex;
+        }
+
+        .binaural-btn.playing {
+            color: var(--success-color);
+            border-color: var(--success-color);
+            background: rgba(0, 230, 118, 0.05);
+        }
+
+        /* FOCUS ANCHOR */
+        .focus-anchor {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: #FFFFFF;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .focus-anchor.visible {
+            display: flex;
+            border-color: var(--accent-color);
+            background-color: rgba(43, 59, 229, 0.05);
+        }
+
+        /* SPEEDRUN TIMER */
+        .speedrun-timer {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background: #151515;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .speedrun-timer.visible {
+            display: flex;
+        }
+
+        .speedrun-time {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .speedrun-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .speedrun-btn:hover {
+            color: #FFFFFF;
+        }
+
+        /* WORKSPACE LAYOUT */
+        .workspace {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 320px 320px 1fr;
+            grid-template-rows: 1fr 280px;
+            height: calc(100vh - 60px);
+        }
+
+        /* PANELS */
+        .panel {
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .panel-header {
+            padding: 0.75rem 1rem;
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        /* LEDGER ACTIVITY (Col 1) */
+        .ledger-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ledger-item {
+            border-left: 2px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.5rem 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            transition: background 0.2s;
+        }
+
+        .ledger-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .ledger-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+            font-size: 0.7rem;
+        }
+
+        .hash-code {
+            color: var(--accent-color);
+        }
+
+        /* TRANSACTION TIMELINE (Col 2) */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--border-color);
+        }
+
+        .timeline-event {
+            position: relative;
+        }
+
+        .timeline-event::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            border: 2px solid var(--panel-bg);
+            box-shadow: 0 0 5px var(--accent-color);
+        }
+
+        .timeline-time {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        /* GRAPH PANEL (Col 3) */
+        .graph-panel {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .graph-container {
+            width: 100%;
+            height: 100%;
+            background-color: #0d0d0d;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            cursor: pointer;
+        }
+
+        .node circle {
+            fill: #151515;
+            stroke: var(--accent-color);
+            stroke-width: 2px;
+            transition: all 0.2s;
+        }
+
+        .node:hover circle {
+            fill: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .node-text {
+            fill: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 9px;
+            pointer-events: none;
+        }
+
+        .node-dim-text {
+            fill: var(--text-dim);
+            font-size: 7px;
+            pointer-events: none;
+        }
+
+        .edge {
+            stroke: #222222;
+            stroke-width: 1px;
+            fill: none;
+        }
+
+        /* TERMINAL PANEL (Bottom Span) */
+        .terminal-panel {
+            grid-column: 1 / span 3;
+            grid-row: 2;
+            background-color: #080808;
+            border-right: none;
+            position: relative;
+        }
+
+        .terminal-output {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #A0A0A0;
+            padding: 1rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .terminal-output .system { color: #888888; }
+        .terminal-output .info { color: var(--accent-color); }
+        .terminal-output .error { color: var(--error-color); }
+        .terminal-output .warning { color: var(--warning-color); }
+        .terminal-output .success { color: var(--success-color); }
+
+        .terminal-input-bar {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            gap: 0.5rem;
+        }
+
+        /* DIRECT MODE TOGGLE */
+        .direct-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
+            padding: 0.35rem 0.65rem;
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+            margin-right: 0.25rem;
+            white-space: nowrap;
+        }
+
+        .direct-btn:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .direct-btn.active {
+            color: #FFFFFF;
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .terminal-prompt {
+            font-family: var(--font-mono);
+            color: var(--accent-color);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #FFFFFF;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+
+        /* COMBO STREAK WIDGET */
+        .combo-streak-container {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 40px;
+            background: rgba(0, 0, 0, 0.85);
+            border: 2px solid var(--accent-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--accent-glow);
+            z-index: 100;
+        }
+
+        .combo-streak-container.visible {
+            display: block;
+            animation: bounce-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes bounce-in {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .streak-count {
+            color: var(--success-color);
+        }
+
+        /* CONFETTI PARTICLES */
+        .confetti-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.8;
+        }
+
+        /* SCREEN SHAKE */
+        .shake {
+            animation: shake 0.2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+            40%, 60% { transform: translate3d(3px, 0, 0); }
+        }
+
+        /* VOICE DICTATION */
+        .voice-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .voice-btn:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .voice-btn.recording {
+            color: var(--error-color);
+            border-color: var(--error-color);
+            animation: pulse-red 1.5s infinite;
+        }
+
+        /* SAFETY MEMBRANE BARRIER OVERLAY */
+        .barrier-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(10, 10, 10, 0.98);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            gap: 1.5rem;
+            font-family: var(--font-sans);
+        }
+
+        .barrier-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .barrier-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--error-color);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
+        }
+
+        .barrier-message {
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+            background: #151515;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">BABYLON<span>60</span> IDE</div>
+        
+        <div class="header-actions">
+            <!-- Workspace Selector -->
+            <div class="workspace-selector-container">
+                <select id="workspace-select" class="workspace-select">
+                    <option value="default">Workspace: Default (Verde)</option>
+                    <option value="robinson">Workspace: Robinson (Azul)</option>
+                    <option value="babylon">Workspace: Babylon (Rojo)</option>
+                    <option value="core">Workspace: Core (Oro)</option>
+                </select>
+                <button id="popout-btn" class="popout-btn" title="Independizar en nueva ventana">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Focus Anchor & Speedrun Widget -->
+            <div id="focus-anchor" class="focus-anchor">
+                <span style="color: var(--accent-color)">FOCUS:</span>
+                <span id="focus-task-text">Escribe un comando</span>
+            </div>
+
+            <div id="speedrun-timer" class="speedrun-timer">
+                <span>⏱️</span>
+                <span id="speedrun-time" class="speedrun-time">05:00</span>
+                <button id="speedrun-play-btn" class="speedrun-btn">▶</button>
+                <button id="speedrun-reset-btn" class="speedrun-btn">🔄</button>
+            </div>
+
+            <!-- ADHD Controls -->
+            <div class="adhd-controls">
+                <button id="binaural-btn" class="binaural-btn" title="Activar sonido binaural 40Hz (Foco Gamma)">
+                    <span>🎧 BINAURAL</span>
+                </button>
+                <div id="adhd-toggle" class="adhd-toggle" title="Activa sonidos mecánicos, screen shake y recordatorio de foco constante.">
+                    <div class="adhd-dot"></div>
+                    <span>MODO TDAH</span>
+                </div>
+            </div>
+
+            <div id="voice-status" class="voice-status">Dictado por Voz: Listo</div>
+            <div class="status-badge">C5-REAL ONLINE</div>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <!-- LEDGER ACTIVITY -->
+        <div class="panel" id="ledger-panel">
+            <div class="panel-header">Ledger Activity</div>
+            <div class="panel-content">
+                <div class="ledger-list" id="ledger-list">
+                    <div style="color: var(--text-dim); text-align: center; padding: 2rem;">Cargando ledger...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANSACTION TIMELINE -->
+        <div class="panel" id="timeline-panel">
+            <div class="panel-header">Transaction Timeline</div>
+            <div class="panel-content">
+                <div class="timeline" id="timeline">
+                    <div style="color: var(--text-dim); text-align: center; padding: 2rem;">Cargando línea temporal...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DECISION LINEAGE GRAPH -->
+        <div class="panel graph-panel" id="graph-panel">
+            <div class="panel-header">Decision Lineage Graph</div>
+            <div class="graph-container">
+                <svg id="dlg-svg">
+                    <g id="edges-group"></g>
+                    <g id="nodes-group"></g>
+                </svg>
+            </div>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="panel terminal-panel" id="terminal-panel">
+            <div class="panel-header">Terminal Console</div>
+            
+            <!-- Streak Counter Widget -->
+            <div id="combo-streak" class="combo-streak-container">
+                COMBO: <span id="streak-count" class="streak-count">0</span> 🔥
+            </div>
+
+            <div class="terminal-output" id="terminal-output">
+                <div class="system">[14:02:45] SYSTEM Init... (White)</div>
+                <div class="info">[14:02:46] INF BABYLON60 IDE Loaded</div>
+                <div class="success">[14:02:47] C5-REAL Membrane Online. Escribe comandos o pulsa el icono de micrófono para dictado por voz.</div>
+            </div>
+            <div class="terminal-input-bar">
+                <button id="direct-btn" class="direct-btn" title="Modo Directo: Delega a un agente especialista en GitHub">
+                    <span>🤖 BASH</span>
+                </button>
+                <span id="terminal-prompt" class="terminal-prompt">> bash:</span>
+                <input type="text" id="terminal-input" class="terminal-input" placeholder="Escribe un comando aquí..." autocomplete="off">
+                <button id="voice-btn" class="voice-btn" title="Activar dictado por voz">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                        <path d="M19 10v1a7 7 0 0 1-14 0v-1"></path>
+                        <line x1="12" y1="19" x2="12" y2="22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Repository Safety Membrane Overlay -->
+    <div id="repo-barrier" class="barrier-overlay">
+        <div class="barrier-title">🔴 MEMBRANA DE SEGURIDAD VIOLADA</div>
+        <div class="barrier-message">
+            <p style="margin-bottom:1rem; font-weight: bold;">CRITICAL ERROR: El IDE de BABYLON60 se está ejecutando fuera del repositorio designado.</p>
+            <p id="barrier-path-info" style="color:var(--text-dim); margin-bottom:1.5rem;"></p>
+            <p style="color:var(--error-color)">Deteniendo terminales y persistencia para evitar anergía.</p>
+        </div>
+    </div>
+
+    <script>
+        // Core HTML elements
+        const termInput = document.getElementById('terminal-input');
+        const termOutput = document.getElementById('terminal-output');
+        const voiceBtn = document.getElementById('voice-btn');
+        const voiceStatus = document.getElementById('voice-status');
+        const adhdToggle = document.getElementById('adhd-toggle');
+        const focusAnchor = document.getElementById('focus-anchor');
+        const focusTaskText = document.getElementById('focus-task-text');
+        const workspaceSelect = document.getElementById('workspace-select');
+        const popoutBtn = document.getElementById('popout-btn');
+        const binauralBtn = document.getElementById('binaural-btn');
+        const comboStreak = document.getElementById('combo-streak');
+        const streakCountText = document.getElementById('streak-count');
+        const speedrunWidget = document.getElementById('speedrun-timer');
+        const speedrunTimeText = document.getElementById('speedrun-time');
+        const speedrunPlayBtn = document.getElementById('speedrun-play-btn');
+        const speedrunResetBtn = document.getElementById('speedrun-reset-btn');
+        const repoBarrier = document.getElementById('repo-barrier');
+        const barrierPathInfo = document.getElementById('barrier-path-info');
+        const directBtn = document.getElementById('direct-btn');
+        const terminalPrompt = document.getElementById('terminal-prompt');
+
+        // State variables
+        let currentWorkspace = 'default';
+        let adhdActive = false;
+        let streakCount = 0;
+        let executionMode = 'bash'; // 'bash' or 'direct'
+        
+        // Workspace colors
+        const workspaceThemes = {
+            default: { color: '#00E676', glow: 'rgba(0, 230, 118, 0.4)' },
+            robinson: { color: '#2B3BE5', glow: 'rgba(43, 59, 229, 0.4)' },
+            babylon: { color: '#E52B2B', glow: 'rgba(229, 43, 43, 0.4)' },
+            core: { color: '#FFB300', glow: 'rgba(255, 179, 0, 0.4)' }
+        };
+
+        // Initialize from URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        const wsParam = urlParams.get('workspace');
+        if (wsParam && workspaceThemes[wsParam]) {
+            currentWorkspace = wsParam;
+            workspaceSelect.value = wsParam;
+        }
+        updateWorkspaceColors();
+
+        // Update Theme Colors dynamically in DOM
+        function updateWorkspaceColors() {
+            const theme = workspaceThemes[currentWorkspace];
+            document.documentElement.style.setProperty('--accent-color', theme.color);
+            document.documentElement.style.setProperty('--accent-glow', theme.glow);
+            refreshData();
+        }
+
+        // Dropdown Switcher handler
+        workspaceSelect.addEventListener('change', (e) => {
+            currentWorkspace = e.target.value;
+            const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?workspace=' + currentWorkspace;
+            window.history.pushState({ path: newUrl }, '', newUrl);
+            updateWorkspaceColors();
+        });
+
+        // Pop Out button handler (independent window)
+        popoutBtn.addEventListener('click', () => {
+            const url = window.location.protocol + "//" + window.location.host + window.location.pathname + '?workspace=' + currentWorkspace;
+            window.open(url, `BABYLON60_${currentWorkspace}`, 'width=1200,height=800,menubar=no,toolbar=no,location=no');
+        });
+
+        // Direct Mode Switcher handler
+        directBtn.addEventListener('click', () => {
+            if (executionMode === 'bash') {
+                executionMode = 'direct';
+                directBtn.classList.add('active');
+                directBtn.innerHTML = '<span>🤖 DIRECTO</span>';
+                terminalPrompt.innerText = '🤖 agent:';
+                termInput.placeholder = "Indica una instrucción abstracta al agente de GitHub...";
+                logToTerminal("Modo Directo activado. El operador abstrae la meta; el agente de GitHub resuelve.", "info");
+                if (adhdActive) playSuccessSound();
+            } else {
+                executionMode = 'bash';
+                directBtn.classList.remove('active');
+                directBtn.innerHTML = '<span>🤖 BASH</span>';
+                terminalPrompt.innerText = '> bash:';
+                termInput.placeholder = "Escribe un comando aquí...";
+                logToTerminal("Modo Directo desactivado. Retornando a consola Bash.", "system");
+            }
+        });
+
+        // Audio Context (Lazy initialize)
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        // Sound Synthesis
+        function playClickSound() {
+            if (!adhdActive) return;
+            const ctx = getAudioContext();
+            if (ctx.state === 'suspended') ctx.resume();
+
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            const pitch = 850 + Math.random() * 300;
+            
+            osc.frequency.setValueAtTime(pitch, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(350, ctx.currentTime + 0.02);
+            
+            gain.gain.setValueAtTime(0.012, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.02);
+        }
+
+        function playSuccessSound() {
+            if (!adhdActive) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const osc1 = ctx.createOscillator();
+            const gain1 = ctx.createGain();
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(523.25, now); // C5
+            gain1.gain.setValueAtTime(0.03, now);
+            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+            osc1.connect(gain1);
+            gain1.connect(ctx.destination);
+            osc1.start();
+            osc1.stop(now + 0.12);
+
+            const osc2 = ctx.createOscillator();
+            const gain2 = ctx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(659.25, now + 0.06); // E5
+            gain2.gain.setValueAtTime(0.03, now + 0.06);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+            osc2.connect(gain2);
+            gain2.connect(ctx.destination);
+            osc2.start();
+            osc2.stop(now + 0.22);
+        }
+
+        function playWarningSound() {
+            if (!adhdActive) return;
+            const ctx = getAudioContext();
+            if (ctx.state === 'suspended') ctx.resume();
+            const now = ctx.currentTime;
+
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(440, now);
+            osc.frequency.setValueAtTime(330, now + 0.1);
+            osc.frequency.setValueAtTime(440, now + 0.2);
+            
+            gain.gain.setValueAtTime(0.04, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(now + 0.3);
+        }
+
+        function playFailureSound() {
+            if (!adhdActive) return;
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(130, now);
+            osc.frequency.linearRampToValueAtTime(60, now + 0.22);
+            
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(now + 0.22);
+        }
+
+        // Binaural beats generators (OscL @ 200Hz, OscR @ 240Hz for 40Hz Gamma Focus)
+        let binOscL = null;
+        let binOscR = null;
+        let binGain = null;
+        let isBinauralPlaying = false;
+
+        function startBinauralBeats() {
+            const ctx = getAudioContext();
+            const now = ctx.currentTime;
+
+            binGain = ctx.createGain();
+            binGain.gain.setValueAtTime(0.08, now); // low volume for background
+
+            // Left Ear
+            binOscL = ctx.createOscillator();
+            binOscL.frequency.setValueAtTime(200, now); // 200 Hz
+            const pannerL = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+            if (pannerL) {
+                pannerL.pan.setValueAtTime(-1, now);
+                binOscL.connect(pannerL);
+                pannerL.connect(binGain);
+            } else {
+                binOscL.connect(binGain);
+            }
+
+            // Right Ear
+            binOscR = ctx.createOscillator();
+            binOscR.frequency.setValueAtTime(240, now); // 240 Hz
+            const pannerR = ctx.createStereoPanner ? ctx.createStereoPanner() : null;
+            if (pannerR) {
+                pannerR.pan.setValueAtTime(1, now);
+                binOscR.connect(pannerR);
+                pannerR.connect(binGain);
+            } else {
+                binOscR.connect(binGain);
+            }
+
+            binGain.connect(ctx.destination);
+            binOscL.start();
+            binOscR.start();
+            isBinauralPlaying = true;
+            binauralBtn.classList.add('playing');
+            logToTerminal("Binaural beats de 40Hz (Foco Gamma) iniciados.", "info");
+        }
+
+        function stopBinauralBeats() {
+            if (binOscL) { binOscL.stop(); binOscL.disconnect(); }
+            if (binOscR) { binOscR.stop(); binOscR.disconnect(); }
+            if (binGain) { binGain.disconnect(); }
+            isBinauralPlaying = false;
+            binauralBtn.classList.remove('playing');
+            logToTerminal("Binaural beats detenidos.", "system");
+        }
+
+        binauralBtn.addEventListener('click', () => {
+            if (isBinauralPlaying) {
+                stopBinauralBeats();
+            } else {
+                startBinauralBeats();
+            }
+        });
+
+        // Toggle ADHD Mode
+        adhdToggle.addEventListener('click', () => {
+            adhdActive = !adhdActive;
+            if (adhdActive) {
+                adhdToggle.classList.add('active');
+                focusAnchor.classList.add('visible');
+                binauralBtn.classList.add('visible');
+                speedrunWidget.classList.add('visible');
+                getAudioContext();
+                logToTerminal("Modo TDAH activado: chimes de racha, binaural beats y speedrun timer habilitados.", "info");
+                playSuccessSound();
+            } else {
+                adhdToggle.classList.remove('active');
+                focusAnchor.classList.remove('visible');
+                binauralBtn.classList.remove('visible');
+                speedrunWidget.classList.remove('visible');
+                stopBinauralBeats();
+                stopSpeedrunTimer();
+                comboStreak.classList.remove('visible');
+                adhdActive = false;
+                logToTerminal("Modo TDAH desactivado.", "system");
+            }
+        });
+
+        termInput.addEventListener('input', playClickSound);
+
+        function triggerScreenShake() {
+            if (!adhdActive) return;
+            const terminal = document.getElementById('terminal-panel');
+            terminal.classList.add('shake');
+            setTimeout(() => terminal.classList.remove('shake'), 200);
+        }
+
+        function updateFocusTask(cmd) {
+            if (!adhdActive) return;
+            focusTaskText.innerText = cmd.length > 20 ? cmd.substring(0, 17) + "..." : cmd;
+        }
+
+        // Particle Confetti Explosion
+        function triggerConfetti() {
+            if (!adhdActive) return;
+            const panel = document.getElementById('terminal-panel');
+            const color = workspaceThemes[currentWorkspace].color;
+            for (let i = 0; i < 60; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'confetti-particle';
+                particle.style.background = color;
+                particle.style.left = `${50 + (Math.random() - 0.5) * 20}%`;
+                particle.style.top = `${50 + (Math.random() - 0.5) * 20}%`;
+                
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 40 + Math.random() * 120;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                panel.appendChild(particle);
+
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) scale(0)', opacity: 0 }
+                ], {
+                    duration: 800 + Math.random() * 400,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.3, 1)'
+                }).onfinish = () => particle.remove();
+            }
+        }
+
+        // Speedrun focus timer (Pomodoro 5m countdown)
+        let speedrunInterval = null;
+        let speedrunTimeRemaining = 300; // 5 min
+        let isSpeedrunRunning = false;
+
+        function updateSpeedrunDisplay() {
+            const minutes = Math.floor(speedrunTimeRemaining / 60).toString().padStart(2, '0');
+            const seconds = (speedrunTimeRemaining % 60).toString().padStart(2, '0');
+            speedrunTimeText.innerText = `${minutes}:${seconds}`;
+        }
+
+        function tickSpeedrun() {
+            if (speedrunTimeRemaining > 0) {
+                speedrunTimeRemaining--;
+                updateSpeedrunDisplay();
+                if (adhdActive && speedrunTimeRemaining % 60 === 0) {
+                    playSuccessSound();
+                }
+                if (adhdActive && speedrunTimeRemaining <= 10 && speedrunTimeRemaining > 0) {
+                    const ctx = getAudioContext();
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.frequency.setValueAtTime(1000, ctx.currentTime);
+                    gain.gain.setValueAtTime(0.015, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+                    osc.connect(gain); gain.connect(ctx.destination);
+                    osc.start(); osc.stop(ctx.currentTime + 0.05);
+                }
+            } else {
+                stopSpeedrunTimer();
+                logToTerminal("🔥 SPEEDRUN COMPLETADO: ¡Mantén la inercia!", "success");
+                triggerConfetti();
+                playSuccessSound();
+            }
+        }
+
+        function startSpeedrunTimer() {
+            if (isSpeedrunRunning) return;
+            speedrunInterval = setInterval(tickSpeedrun, 1000);
+            isSpeedrunRunning = true;
+            speedrunPlayBtn.innerText = '⏸';
+        }
+
+        function stopSpeedrunTimer() {
+            if (!isSpeedrunRunning) return;
+            clearInterval(speedrunInterval);
+            isSpeedrunRunning = false;
+            speedrunPlayBtn.innerText = '▶';
+        }
+
+        speedrunPlayBtn.addEventListener('click', () => {
+            if (isSpeedrunRunning) {
+                stopSpeedrunTimer();
+            } else {
+                startSpeedrunTimer();
+            }
+        });
+
+        speedrunResetBtn.addEventListener('click', () => {
+            stopSpeedrunTimer();
+            speedrunTimeRemaining = 300;
+            updateSpeedrunDisplay();
+        });
+
+        // Repository CWD verification
+        async function checkRepositoryIntegrity() {
+            try {
+                const res = await fetch('/api/repo-check');
+                const data = await res.json();
+                if (!data.correct) {
+                    repoBarrier.classList.add('active');
+                    barrierPathInfo.innerHTML = `Directorio Actual: <strong>${data.path}</strong><br>Esperado: <strong>${data.expected}</strong>`;
+                    termInput.disabled = true;
+                    if (isBinauralPlaying) stopBinauralBeats();
+                    stopSpeedrunTimer();
+                    playFailureSound();
+                } else {
+                    repoBarrier.classList.remove('active');
+                    termInput.disabled = false;
+                }
+            } catch (err) {
+                console.error("Failed repository verification check:", err);
+            }
+        }
+
+        // Log formatter
+        function logToTerminal(text, type = 'system') {
+            const time = new Date().toTimeString().split(' ')[0];
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerText = `[${time}] ${text}`;
+            termOutput.appendChild(div);
+            termOutput.scrollTop = termOutput.scrollHeight;
+        }
+
+        // Exec command
+        async function runCommand(cmd) {
+            logToTerminal(`Executing: ${cmd}`, 'info');
+            updateFocusTask(cmd);
+            triggerScreenShake();
+            try {
+                let finalCmd = cmd;
+                if (executionMode === 'direct') {
+                    logToTerminal('Iniciando purga de entropía (CORTEX Purger)...', 'system');
+                    const pRes = await fetch('/api/prompt/purge', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ prompt: cmd })
+                    });
+                    const pData = await pRes.json();
+                    if (pData.status === 'C5-REAL') {
+                        finalCmd = pData.payload;
+                        logToTerminal(`Exergía Maximizada. Longitud: ${pData.original_length} -> ${pData.purged_length}`, 'success');
+                    }
+                }
+
+                const res = await fetch('/api/terminal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ command: finalCmd, workspace: currentWorkspace, mode: executionMode })
+                });
+                const data = await res.json();
+                
+                if (data.status === 'success') {
+                    logToTerminal(data.output, 'success');
+                    playSuccessSound();
+                    
+                    // Streak progression
+                    streakCount++;
+                    streakCountText.innerText = streakCount;
+                    if (streakCount >= 3) {
+                        comboStreak.classList.add('visible');
+                    }
+                    if (streakCount % 5 === 0) {
+                        logToTerminal(`🔥 ¡RACHA DE ${streakCount} COMBO ACTIVADO!`, 'success');
+                        triggerConfetti();
+                    }
+                } else if (data.status === 'warning') {
+                    logToTerminal(data.output, 'warning');
+                    playWarningSound();
+                    
+                    // Reset streak on warning
+                    streakCount = 0;
+                    comboStreak.classList.remove('visible');
+                } else {
+                    logToTerminal(data.output || 'Unknown error', 'error');
+                    playFailureSound();
+                    
+                    // Reset streak on error
+                    streakCount = 0;
+                    comboStreak.classList.remove('visible');
+                }
+            } catch (err) {
+                logToTerminal(`Failed to connect to backend: ${err.message}`, 'error');
+                playFailureSound();
+                streakCount = 0;
+                comboStreak.classList.remove('visible');
+            }
+            refreshData();
+        }
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = termInput.value.trim();
+                if (cmd) {
+                    runCommand(cmd);
+                    termInput.value = '';
+                }
+            }
+        });
+
+        // Speech Recognition Setup
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        let recognition = null;
+        let isRecording = false;
+
+        if (SpeechRecognition) {
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'es-ES';
+
+            recognition.onstart = () => {
+                isRecording = true;
+                voiceBtn.classList.add('recording');
+                voiceStatus.innerText = 'Dictado por Voz: Escuchando...';
+                logToTerminal('Dictado por voz iniciado. Habla ahora.', 'info');
+            };
+
+            recognition.onend = () => {
+                isRecording = false;
+                voiceBtn.classList.remove('recording');
+                voiceStatus.innerText = 'Dictado por Voz: Listo';
+            };
+
+            recognition.onerror = (e) => {
+                logToTerminal(`Error en dictado por voz: ${e.error}`, 'error');
+                playFailureSound();
+            };
+
+            recognition.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                termInput.value = transcript;
+                logToTerminal(`Dictado recibido: "${transcript}"`, 'success');
+                playSuccessSound();
+                termInput.focus();
+            };
+        } else {
+            voiceBtn.style.display = 'none';
+            voiceStatus.innerText = 'Dictado por Voz: No soportado en este navegador';
+        }
+
+        voiceBtn.addEventListener('click', () => {
+            if (!recognition) return;
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        });
+
+        // Fetch updates
+        async function refreshData() {
+            checkRepositoryIntegrity();
+
+            try {
+                // Fetch Ledger
+                const lRes = await fetch(`/api/ledger?workspace=${currentWorkspace}`);
+                const lData = await lRes.json();
+                const lContainer = document.getElementById('ledger-list');
+                
+                if (lData.entries && lData.entries.length > 0) {
+                    lContainer.innerHTML = lData.entries.map(e => `
+                        <div class="ledger-item">
+                            <div><span class="hash-code">${e.id.substring(0, 15)}</span></div>
+                            <div style="font-size:0.75rem; color: #fff;">${e.name}</div>
+                            <div class="ledger-meta">
+                                <span>${e.dimension}</span>
+                                <span>${e.last_accessed}</span>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    lContainer.innerHTML = '<div style="color: var(--text-dim); text-align: center; padding: 2rem;">No entries found.</div>';
+                }
+
+                // Fetch Timeline
+                const timelineContainer = document.getElementById('timeline');
+                if (lData.entries && lData.entries.length > 0) {
+                    timelineContainer.innerHTML = lData.entries.slice(0, 10).map(e => `
+                        <div class="timeline-event">
+                            <div class="timeline-time">${e.last_accessed.split(' ')[1] || e.last_accessed}</div>
+                            <div class="timeline-title">${e.theory}::${e.dimension}</div>
+                            <div class="timeline-desc">Node updated with Lamport T=${e.lamport_t}</div>
+                        </div>
+                    `).join('');
+                } else {
+                    timelineContainer.innerHTML = '<div style="color: var(--text-dim); text-align: center; padding: 2rem;">No timeline updates.</div>';
+                }
+
+                // Fetch DLG Graph
+                const gRes = await fetch(`/api/dlg?workspace=${currentWorkspace}`);
+                const gData = await gRes.json();
+                renderGraph(gData);
+
+            } catch (err) {
+                console.error("Refresh failed:", err);
+            }
+        }
+
+        // Render decision graph in SVG
+        function renderGraph(data) {
+            const svg = document.getElementById('dlg-svg');
+            const nodesGroup = document.getElementById('nodes-group');
+            const edgesGroup = document.getElementById('edges-group');
+
+            nodesGroup.innerHTML = '';
+            edgesGroup.innerHTML = '';
+
+            if (!data.nodes || data.nodes.length === 0) return;
+
+            const width = svg.clientWidth || 600;
+            const height = svg.clientHeight || 400;
+
+            const nodeMap = {};
+            const nodes = data.nodes.slice(0, 15);
+
+            nodes.forEach((node, i) => {
+                const angle = (i / nodes.length) * 2 * Math.PI;
+                const x = width / 2 + Math.cos(angle) * (Math.min(width, height) * 0.35);
+                const y = height / 2 + Math.sin(angle) * (Math.min(width, height) * 0.35);
+                nodeMap[node.id] = { ...node, x, y };
+            });
+
+            // Draw Edges
+            const edges = data.edges.filter(e => nodeMap[e.source] && nodeMap[e.target]);
+            edges.forEach(edge => {
+                const sourceNode = nodeMap[edge.source];
+                const targetNode = nodeMap[edge.target];
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                line.setAttribute('d', `M ${sourceNode.x} ${sourceNode.y} L ${targetNode.x} ${targetNode.y}`);
+                line.setAttribute('class', 'edge');
+                edgesGroup.appendChild(line);
+            });
+
+            // Draw Nodes
+            nodes.forEach(node => {
+                const coords = nodeMap[node.id];
+                const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                g.setAttribute('class', 'node');
+                g.setAttribute('transform', `translate(${coords.x}, ${coords.y})`);
+
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('r', '8');
+                g.appendChild(circle);
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('class', 'node-text');
+                text.setAttribute('dx', '12');
+                text.setAttribute('dy', '3');
+                text.textContent = node.name;
+                g.appendChild(text);
+
+                const textDim = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                textDim.setAttribute('class', 'node-dim-text');
+                textDim.setAttribute('dx', '12');
+                textDim.setAttribute('dy', '11');
+                textDim.textContent = `${node.theory} | ${node.dimension}`;
+                g.appendChild(textDim);
+
+                g.addEventListener('click', () => {
+                    logToTerminal(`Nodo inspeccionado: ${node.id} (${node.theory})`, 'info');
+                    if (adhdActive) {
+                        playSuccessSound();
+                    }
+                });
+
+                nodesGroup.appendChild(g);
+            });
+        }
+
+        // Init
+        checkRepositoryIntegrity();
+        refreshData();
+        setInterval(refreshData, 10000); // refresh every 10s
+    </script>
+</body>
+</html>

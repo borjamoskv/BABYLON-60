@@ -1,4 +1,5 @@
 """test_hotstuff_consensus.py — Standalone tests for the ULTRATHINK scheduler."""
+
 import pytest
 
 from ultrathink.ultrathink_scheduler import (

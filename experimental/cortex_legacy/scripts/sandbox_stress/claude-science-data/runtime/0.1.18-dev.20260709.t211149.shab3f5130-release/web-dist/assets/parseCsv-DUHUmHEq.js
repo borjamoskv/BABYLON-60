@@ -1,0 +1,1 @@
+function c(i,p=","){return i.replace(/^[\r\n]+|[\r\n]+$/g,"").split(/\r?\n/).map(s=>{const n=[];let e="",t=!1;for(let r=0;r<s.length;r++){const l=s[r];l==='"'?t&&s[r+1]==='"'?(e+='"',r++):t=!t:l===p&&!t?(n.push(e.trim()),e=""):e+=l}return n.push(e.trim()),n})}export{c as p};

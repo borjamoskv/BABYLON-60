@@ -1,0 +1,7 @@
+Epistemic_Forensics:
+  Target_Commit: "ce7784485306eb7793500e92759aee53992a9cac"
+  Action: "MEJORALO - Extracción de Entropía Residual"
+  Taint: "b2011ceeb38bdb8794a1f5c1b8d210c180926f7e1c4aa7e4cd495cfae7c88edc"
+  Delta:
+    - "Eliminado: Tolerancia a isomorfismos conversacionales."
+    - "Inyectado: Régimen Zero-Trust BFT y penalización de exergía neta (-1)."

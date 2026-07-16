@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" translate="no" data-theme="claude" data-color-version="v2" data-mode="dark" class="cds-root">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- React-managed DOM: whole-page auto-translate (Google Translate et al.)
+         wraps text nodes in <font>, which makes React's commit-phase
+         removeChild/insertBefore throw NotFoundError and crash to the root
+         error boundary (facebook/react#11538). translate="no" + the google
+         meta opt the page out; users can still select-and-translate. -->
+    <meta name="google" content="notranslate" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Claude Science</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <!-- crossorigin=use-credentials: the auth cookie (daemon token or the
+         proxy's IAP session on portal VMs) is required for /manifest.*;
+         without credentials the fetch 401s and the browser never offers
+         install. -->
+    <link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <meta name="theme-color" content="#D97757" />
+    <script>
+      // Pre-paint theme: resolve operon:theme (light|dark|auto, default auto)
+      // before CSS applies so light-mode systems don't flash dark.
+      try {
+        var m = localStorage.getItem("operon:theme");
+        if (m !== "light" && m !== "dark") {
+          m = matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.setAttribute("data-mode", m);
+        var f = localStorage.getItem("operon:response-font");
+        if (f === "sans" || f === "system" || f === "serif") {
+          document.documentElement.setAttribute("data-response-font", f);
+        }
+      } catch (e) {}
+    </script>
+    <!--
+      Standalone (HTTP transport) entry — built via `vite build -c
+      vite.config.http.ts` and served by the CLI daemon from
+      assets/web-dist/. The Electron overlay uses operon.html (eipc transport).
+      Kept as a separate file so Vite's build.rollupOptions.input can target
+      it and emit dist/index.html, which is what findWebDist() / webDistDir()
+      probe for.
+    -->
+    <script type="module" crossorigin src="./assets/index-faGPXfWw.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/vendor-BPWtllH_.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-XuDXq81j.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

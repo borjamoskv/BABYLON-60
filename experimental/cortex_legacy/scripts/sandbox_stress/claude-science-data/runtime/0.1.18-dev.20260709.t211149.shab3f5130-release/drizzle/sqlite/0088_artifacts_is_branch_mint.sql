@@ -1,0 +1,1 @@
+ALTER TABLE `artifacts` ADD `is_branch_mint` integer DEFAULT false NOT NULL;

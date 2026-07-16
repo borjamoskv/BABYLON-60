@@ -1,0 +1,19 @@
+Claim: Auditoría retrospectiva del Delta Físico Inmediato completada.
+Proof:
+  Base: Epistemic_Forensics
+  Range: "[0,1]"
+  Confidence: C5-REAL
+Delta_Summary:
+  Raw_Stat: |
+    commit 2906e1e94a956f3ca169d8b68368d4965a84e315
+    Author: Borja Moskv <borjamoskv@users.noreply.github.com>
+    Date:   Mon Jul 13 16:46:55 2026 +0200
+        chore(ontology): transducción C5-REAL de diseño por contrato, cohesión y acoplamiento
+     cortex/ontology/acoplamiento_diseno_por_contrato.yaml | 18 ++++++++++++++++++
+     1 file changed, 18 insertions(+)
+Exergy_Audit:
+  Action: "Batch Transduction V2"
+  ATP_Efficiency: "High (Zero Prompt Conversational Loss)"
+  Anergy_Purged: "Green Theater, Conversational Slop"
+
+CORTEX_TAINT: 936cf6c69f2114764550cd135596cacab75805c6d58a51041d96020aa56568dc

@@ -1,0 +1,15 @@
+CausalVerdict: "FALSADA (Spec planetaria inejecutable por limitaciones de RAM/Throughput/Resoluci\xF3\
+  n y Piso T\xE9rmico, con horizonte logar\xEDtmico e irreversibilidad termodin\xE1\
+  mica verificada)"
+Evidence:
+  C5_12_INVARIANTE_CLIMA_NAVIER_STOKES_md_hash: f51da5335adad56bb9891f73e69337afa01b4ed8612aaf70929d9ef9a85f450b
+  C5_12_divergencia_npz_hash: dcebbf07bd4c1117c962ec3e018f4dbf36c75056710474a299e248c7aaea2f3c
+  C5_12_lyapunov_ns2d_png_hash: 6a4567019f75a167acbbf7865916455e229c1c823b3bd6cb741b1050c6ccd2ed
+  C5_12_resultados_json_hash: 7416c05d72942fc635ca5ab339d80d55f2321b22d3b66adb82e9bc81db7acfb8
+ModelFitVerification:
+  LyapunovExponent: 0.17596474515588656
+  LyapunovExponentErr: 0.0002505306652534844
+  R2: 0.9993436578062043
+  Size: 326
+  StartIndex: 194
+RealityLevel: C5-REAL

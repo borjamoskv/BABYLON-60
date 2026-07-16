@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS `mem_subj_frame_idx` ON `memories` (`subject_frame_id`);

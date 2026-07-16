@@ -1,0 +1,1 @@
+ALTER TABLE `transcript_annotations` ADD `anchor_prefix` text;

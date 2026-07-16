@@ -1,0 +1,1 @@
+ALTER TABLE `user_agents` ADD COLUMN `excluded_tools` text DEFAULT '[]' NOT NULL;

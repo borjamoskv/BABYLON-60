@@ -1,0 +1,1 @@
+ALTER TABLE `custom_mcp_servers` ADD `resource_identifier` text(2048);

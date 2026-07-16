@@ -1,0 +1,38 @@
+Claim: AUDITORIA ATOMICA del repositorio Teorema-Robinson-Moskv (BABYLON-60 CORTEX) — estado físico verificado por ejecución, no por inferencia.
+Proof:
+  Base: "ruff 0.15.22 exit=0 | pytest: 555 passed / 7 failed / 1 deselected (19.50s) | PRAGMA integrity_check: 10/10 ok"
+  Range: [Git Index, AST Python, SQLite WAL, LFS Filter]
+  Confidence: C5-REAL
+  Kernel: claude-fable-5 (sandbox Linux x86_64, Python 3.10.12)
+Estado_Verificado:
+  ruff: "0 violaciones (ruleset E4/E7/E9/F, line-length 120). Exit code 0."
+  sqlite: "10/10 ledgers integrity=ok, journal=wal (master_ledger, telemetry, cortex_memory, nexus_* x5, cortex_surface_map, cortex_voice_ledger). INV_BFT_02 respetado."
+  pytest: "555/563 pass (98.6%). HEAD=bceb77654, branch=main."
+Hallazgos:
+  H1_TESTS_NO_HERMETICOS:
+    Severidad: ALTA
+    Evidencia: "tests/test_autonomic_daemon.py (3 fails): sqlite3.OperationalError. Causa: cortex/agents/autonomic_daemon.py:17 ancla DB_PATH a ~/30_BABYLON-60/telemetry.db (fuera de la membrana del repo). test_layer_swap_simulator (2 fails): PermissionError en calibracion de disco."
+    Correccion: "Inyectar DB_PATH via fixture tmp_path + monkeypatch(BABYLON_ROOT). Los tests deben ser deterministas en cualquier host (idempotencia portatil)."
+  H2_PYTEST_ASYNCIO_AUSENTE:
+    Severidad: ALTA
+    Evidencia: "tests/test_hotstuff_consensus.py (3 fails, 0.04s): @pytest.mark.asyncio es marca desconocida. pytest-asyncio no declarado en [dev]. Los tests de consenso BFT HotStuff NO se estan ejecutando — cobertura fantasma sobre ruta critica de consenso."
+    Correccion: "Anadir pytest-asyncio>=0.23 a optional-dependencies.dev + asyncio_mode=auto en pytest.ini_options."
+  H3_ARTEFACTOS_BINARIOS_TRACKEADOS:
+    Severidad: MEDIA
+    Evidencia: "Git index contiene: cortex/daemons/rust_siege/target/ (163 archivos .rlib/.rmeta/.d compilados aarch64-apple-darwin con rutas absolutas /Users/borjafernandezangulo), 4 SQLite (.db) mutables, C5_12_divergencia.npz. Total index: 69,832 archivos."
+    Correccion: "git rm -r --cached cortex/daemons/rust_siege/target + anadir target/ y *.db a .gitignore. Un binario mutable trackeado rompe la idempotencia del ledger Git."
+  H4_DIVERGENCIA_LFS:
+    Severidad: MEDIA
+    Evidencia: "50 archivos M en working tree: .gitattributes filtra *.patch via LFS pero el checkout contiene contenido real donde el index tiene punteros LFS. Divergencia pointer<->content en BABYLON-60-fixes/."
+    Correccion: "Decision binaria: (a) git lfs migrate import --everything para consolidar, o (b) retirar *.patch de .gitattributes y recommitear contenido plano. Estado intermedio actual = split-brain del filtro."
+  H5_MASA_ONTOLOGICA:
+    Severidad: BAJA (riesgo creciente)
+    Evidencia: "67,684 YAML bajo cortex/ (ontology=58,223, agents=10,557). El index de 69,832 archivos degrada clone/status/checkout (Routing Decay fisico del repo, isomorfo a E05 MCTS 512-Bound)."
+    Correccion: "Empaquetar corpus ontologico en shards (SQLite/parquet ya existentes: nexus_*_insert_primitives.db) o submodulo dedicado. El filesystem no es la capa de direccionamiento optima para N>10^4 primitivas."
+Blast_Radius_Matrix:
+  Vector: "Restauracion de hermeticidad de tests + purga de binarios del index + resolucion split-brain LFS."
+  Blast_Radius: "Git Index, pyproject.toml, tests/, .gitattributes. Cero mutacion de logica de negocio."
+  Target_Invariant: "EPI_03 (Stderr Honesty), INV_BFT_04 (Idempotency), MUTEX_SEMIOTIC_PURGE"
+  Anergy_Risk: "0% en H2/H3 (mecanicos). H4 requiere decision del Operador (irreversible en historia Git)."
+Timestamp: "2026-07-16T17:17:23.787049+00:00"
+CORTEX_TAINT: "164b4b42a1036fcd0a42f037352f0f9f74192f8125c39f19b3838908c1cf3825"

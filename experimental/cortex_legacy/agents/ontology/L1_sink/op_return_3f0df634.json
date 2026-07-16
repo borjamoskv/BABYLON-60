@@ -1,0 +1,10 @@
+{
+  "protocol": "BFT_MERKLE_L1_SINK",
+  "phase": "5_ESCALATION",
+  "merkle_root_32b": "3f0df63494524f7344240bdba4545f111d059f2261280978bedcc43e606598f4",
+  "sub_ledger_commits": [
+    "13e69fe17e214a26ec288db699ee2365ab74ff2a",
+    "06ccc89dddeda64012038689fefb50d8abf1ff7a"
+  ],
+  "status": "AWAITING_L1_BROADCAST"
+}

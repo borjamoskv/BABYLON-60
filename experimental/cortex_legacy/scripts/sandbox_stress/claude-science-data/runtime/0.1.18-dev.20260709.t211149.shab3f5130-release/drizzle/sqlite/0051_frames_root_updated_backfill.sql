@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS `ix_frames_root_updated` ON `frames` (`root_frame_id`,`updated_at`);

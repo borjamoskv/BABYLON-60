@@ -3,6 +3,7 @@
 Fail-fast invariant: a single SyntaxError anywhere in the tracked tree
 is a structural failure. Compilation only — no imports, no side effects.
 """
+
 import py_compile
 from pathlib import Path
 

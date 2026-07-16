@@ -1,0 +1,1 @@
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/ingest_matrix/target/release/librust_ingest_ffi.dylib: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/engine/ingest_matrix/src/lib.rs

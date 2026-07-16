@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+set -uo pipefail
+cd "$(dirname "$0")"
+rm -rf out stdout.log stderr.log .phase .deadline_fired .deadline_termed .job_timeout_fired out.tar.gz out.tar.gz.tmp
+mkdir out
+
+OPW_JOB_TIMEOUT=${OPERON_JOB_TIMEOUT_S:-259200}
+OPW_MARGIN=${OPERON_HARVEST_MARGIN_S:-600}
+OPW_GRACE=${OPERON_TERM_GRACE_S:-60}
+OPW_REMAINING=${OPERON_SANDBOX_REMAINING_S:-0}
+OPW_EPOCH=${OPERON_SANDBOX_DEADLINE_EPOCH:-0}
+if [ "$OPW_REMAINING" -gt 0 ] 2>/dev/null; then
+  OPW_DEADLINE=$(( ${EPOCHSECONDS:-$(date +%s)} + OPW_REMAINING ))
+  if [ "$OPW_EPOCH" -gt 0 ] 2>/dev/null && [ "$OPW_EPOCH" -lt "$OPW_DEADLINE" ]; then
+    OPW_DEADLINE=$OPW_EPOCH
+  fi
+else
+  OPW_DEADLINE=$OPW_EPOCH
+fi
+readonly OPW_JOB_TIMEOUT OPW_DEADLINE OPW_MARGIN OPW_GRACE
+set -a; source .job_env 2>/dev/null || true; set +a
+wpid=
+trap '[ -n "$wpid" ] && kill -TERM -- -"$wpid" 2>/dev/null' TERM
+
+t0=${EPOCHSECONDS:-$(date +%s)}
+setsid timeout --foreground --kill-after="$OPW_GRACE" "$OPW_JOB_TIMEOUT" bash run.sh \
+  > stdout.log 2> stderr.log &
+wpid=$!
+
+wd_pid=
+if [ "$OPW_DEADLINE" -gt 0 ] 2>/dev/null; then
+  (
+    wd_cancelled=
+    sleep 0 & wait $!
+    trap 'wd_cancelled=1; kill $! 2>/dev/null' TERM
+    while [ -z "$wd_cancelled" ]; do
+      now=${EPOCHSECONDS:-$(date +%s)}
+      left=$(( OPW_DEADLINE - OPW_MARGIN - now ))
+      [ "$left" -le 0 ] && break
+      sleep $(( left < 30 ? left : 30 )) &
+      [ -n "$wd_cancelled" ] && { kill $! 2>/dev/null; break; }
+      wait $!
+    done
+    [ -n "$wd_cancelled" ] && exit 0
+    : > .deadline_fired
+    kill -TERM -- -"$wpid" 2>/dev/null
+    : > .deadline_termed
+    wd_i=0
+    while [ "$wd_i" -lt "$OPW_GRACE" ]; do
+      [ -n "$wd_cancelled" ] && exit 0
+      kill -0 -- -"$wpid" 2>/dev/null || exit 0
+      sleep 1 &
+      [ -n "$wd_cancelled" ] && { kill $! 2>/dev/null; exit 0; }
+      wait $!
+      wd_i=$(( wd_i + 1 ))
+    done
+    [ -n "$wd_cancelled" ] && exit 0
+    kill -KILL -- -"$wpid" 2>/dev/null
+  ) >/dev/null 2>&1 &
+  wd_pid=$!
+fi
+
+wait "$wpid"
+rc=$?
+if [ "$rc" -gt 128 ] && kill -0 "$wpid" 2>/dev/null; then
+  wait "$wpid"
+  rc=$?
+fi
+if [ -n "$wd_pid" ]; then
+  kill "$wd_pid" 2>/dev/null
+  wd_join=0
+  while kill -0 "$wd_pid" 2>/dev/null; do
+    wd_state=
+    read -r _ _ wd_state _ < "/proc/$wd_pid/stat" 2>/dev/null || wd_state=
+    case "$wd_state" in Z|"") break ;; esac
+    if [ "$wd_join" -ge $(( OPW_GRACE * 10 )) ]; then
+      kill -KILL "$wd_pid" 2>/dev/null
+    fi
+    sleep 0.2 & wait $! 2>/dev/null
+    wd_join=$(( wd_join + 1 ))
+  done
+  wait "$wd_pid" 2>/dev/null
+fi
+job_wall=$(( ${EPOCHSECONDS:-$(date +%s)} - t0 ))
+if [ -f .deadline_fired ]; then
+  if kill -0 -- -"$wpid" 2>/dev/null; then
+    if [ ! -f .deadline_termed ]; then
+      kill -TERM -- -"$wpid" 2>/dev/null
+    fi
+    sleep "$OPW_GRACE"
+  fi
+elif { [ "$rc" -eq 124 ] || [ "$rc" -eq 137 ]; } \
+  && [ "$job_wall" -ge $(( OPW_JOB_TIMEOUT - 1 )) ]; then
+  if kill -0 -- -"$wpid" 2>/dev/null; then
+    kill -TERM -- -"$wpid" 2>/dev/null
+    sleep "$OPW_GRACE"
+  fi
+fi
+kill -KILL -- -"$wpid" 2>/dev/null
+if [ "$rc" -eq 0 ] && [ -z "$(ls -A out 2>/dev/null)" ]; then
+  echo "operon: WARN out/ is empty — nothing will be harvested back (write results under ./out/)" >> stderr.log
+fi
+
+now_end=${EPOCHSECONDS:-$(date +%s)}
+if env -u TAR_OPTIONS -u GZIP tar -czf out.tar.gz.tmp out stdout.log stderr.log \
+  && mv -f out.tar.gz.tmp out.tar.gz; then
+  staged=0
+else
+  staged=1
+fi
+if { [ "$rc" -eq 137 ] || [ "$rc" -eq 124 ]; } \
+  && [ "$job_wall" -ge $(( OPW_JOB_TIMEOUT - 1 )) ]; then
+  : > .job_timeout_fired
+else
+  rm -f .job_timeout_fired
+fi
+if [ -f .deadline_fired ]; then
+  if [ "$OPW_DEADLINE" -le 0 ] 2>/dev/null \
+    || [ "$now_end" -lt $(( OPW_DEADLINE - OPW_MARGIN - 1 )) ]; then
+    rm -f .deadline_fired
+  fi
+fi
+if [ "$staged" -eq 0 ]; then
+  echo "done:$rc:$job_wall" > .phase
+else
+  echo "harvest_failed:$rc:$job_wall" > .phase
+fi
+exit $rc

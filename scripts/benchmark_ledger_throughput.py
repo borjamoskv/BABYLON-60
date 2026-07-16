@@ -1,7 +1,5 @@
 import asyncio
 import time
-import uuid
-import shutil
 from pathlib import Path
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
 
@@ -48,8 +46,10 @@ async def run_benchmark(iterations: int = 10000):
         db_path.unlink()
     shm = Path("benchmark_temp.db-shm")
     wal = Path("benchmark_temp.db-wal")
-    if shm.exists(): shm.unlink()
-    if wal.exists(): wal.unlink()
+    if shm.exists():
+        shm.unlink()
+    if wal.exists():
+        wal.unlink()
     
     # Métricas
     success = sum(1 for r in results if not isinstance(r, BaseException))

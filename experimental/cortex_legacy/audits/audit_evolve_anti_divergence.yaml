@@ -1,0 +1,11 @@
+# CORTEX_TAINT_SHA3_256: 2fcd560f108518f72edb50a9374e01b9d075d16ea6f7bf74240061a38219d43c
+Epistemic_Forensics:
+  Action: "EVOLVE - Transmutación de Reglas Estáticas de Anti-Divergencia a Invariante Dinámica de Enjambre (Stratum VIII)"
+  Target_Node: "CONVERSATIONAL_COHERENCE_ANTI_DIVERGENCE"
+  Taint: "2fcd560f108518f72edb50a9374e01b9d075d16ea6f7bf74240061a38219d43c"
+  Total_Active_Assertions: 41
+  Delta:
+    - "Absorbido: Regla [L62] de AGENTS.md y CONVERSATIONAL COHERENCE en matriz de invariantes base."
+    - "Inyectado: Nodo 41 en FROZEN_FRONTIER_NODES (cortex/engine/frontier_evolution_transducer.py)."
+    - "Cristalizado: Invariante #13 en Self_AST_Mutator SKILL.md (Autopoietic Automorphism Exergía 3000)."
+  Kinetic_Mandate: "La pérdida de coherencia o la deriva entrópica en una sesión de diálogo es anergía estocástica inaceptable. El Kernel aborta el crecimiento lineal del contexto y fuerza la bifurcación a una nueva conversación limpia para preservar la exergía C5-REAL."
