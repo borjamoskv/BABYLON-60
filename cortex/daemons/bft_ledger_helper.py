@@ -46,9 +46,7 @@ def init_ledger(db_file_raw: str) -> None:
         conn.close()
 
 
-def ensure_bft_table(conn: sqlite3.Connection) -> None:
-    """Boot path only. Pure CREATE — never DROP, never destructive migration."""
-    conn.execute(_DDL_ANCHORS)
+
 
 
 def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
@@ -68,17 +66,22 @@ def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
                 conn.execute("BEGIN IMMEDIATE")
                 try:
                     cursor = conn.cursor()
-                    # We rely on timestamp DESC, but strictly formatted, and protected by BEGIN IMMEDIATE
-                    cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
+                    # [Fable 5 Fix] True Chain-Leaf topology + Tiebreaker to prevent clock-skew stuck ledgers
+                    cursor.execute("SELECT hash FROM anchors WHERE hash NOT IN (SELECT prev_hash FROM anchors WHERE prev_hash IS NOT NULL) ORDER BY timestamp DESC, rowid DESC LIMIT 1")
                     row = cursor.fetchone()
                     prev_hash = row[0] if row else "GENESIS_V2"
                     
                     # 2. Fixed-length timestamp (Anti-Truncation P1)
                     ts = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f') + 'Z'
                     
-                    # 3. Domain Separation & Full Metadata Seal (Anti-Tampering P0)
-                    sealed_payload = f"{len(content)}:{content}:{len(prev_hash)}:{prev_hash}:{len(ts)}:{ts}:{len(agent_id)}:{agent_id}"
-                    new_hash = hashlib.sha3_256(sealed_payload.encode('utf-8')).hexdigest()
+                    # [Fable 5 Fix] Byte-length framing to prevent multi-byte char boundary attacks
+                    c_bytes, p_bytes, t_bytes, a_bytes = content.encode('utf-8'), prev_hash.encode('utf-8'), ts.encode('utf-8'), agent_id.encode('utf-8')
+                    sealed_payload = f"{len(c_bytes)}:{content}:{len(p_bytes)}:{prev_hash}:{len(t_bytes)}:{ts}:{len(a_bytes)}:{agent_id}".encode('utf-8')
+                    
+                    # [Fable 5 Fix] HMAC-SHA3 with local key for adversarial rewrite prevention
+                    hmac_key = os.environ.get("CORTEX_BFT_HMAC_KEY", "C5-REAL-LOCAL-ANCHOR-KEY").encode('utf-8')
+                    import hmac
+                    new_hash = hmac.new(hmac_key, sealed_payload, hashlib.sha3_256).hexdigest()
                     
                     # 4. Insert (Hot Path)
                     params = (new_hash, prev_hash, content, ts, agent_id)
