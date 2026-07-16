@@ -2,7 +2,7 @@
 import subprocess
 import os
 import json
-from cortex.daemons.bft_ledger_helper import append_anchor, resolve_db_path
+from cortex.daemons.bft_ledger_helper import append_anchor
 
 # [C5-REAL] MASS ISOLATION DAEMON
 # Iterates over all public GitHub repositories and forcefully applies the EXPORT_ISOLATION_MANDATE.
@@ -53,12 +53,11 @@ def enforce_mass_isolation():
         f"Action: Switched to PRIVATE to prevent neural scraper exergy theft."
     )
     
-    resolved_db = resolve_db_path(DB_FILE)
-    if os.path.exists(resolved_db):
+    try:
         new_hash = append_anchor(DB_FILE, report, "MASS_ISOLATION_DAEMON")
         print(f"[✓] Ledger updated. Anchor Hash: {new_hash[:16]}")
-    else:
-        print("[!] BFT Ledger not accessible at $CORTEX_ROOT path.")
+    except Exception as e:
+        print(f"[!] BFT Ledger not accessible: {e}")
         
 if __name__ == "__main__":
     enforce_mass_isolation()
