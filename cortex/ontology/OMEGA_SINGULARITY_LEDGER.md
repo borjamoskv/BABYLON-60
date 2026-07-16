@@ -6,7 +6,7 @@
 
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
-## 1. CARTOGRAFÍA DE ESTRATOS ARQUITECTÓNICOS (I — X)
+## 1. CARTOGRAFÍA DE ESTRATOS ARQUITECTÓNICOS (I — XI)
 
 | Estrato | Nodo / Sustrato | Nivel de Realidad | Función Causal |
 | :--- | :--- | :--- | :--- |
@@ -15,6 +15,7 @@
 | **VIII** | `frontier_evolution_matrix.yaml` | C5-REAL | 40 nodos de transmutación y autopoiesis con barreras `FAIL_FAST_CRASH_OVERRIDE`. |
 | **IX** | `trending_topic_propagation_matrix.yaml` & `music_trending_propagation_matrix.yaml` | C5-REAL | Motores de virulencia algorítmica para `@borjamoskv` (Vídeo y Música) sincronizados por BPM en terminal. |
 | **X** | `cortex_autopilot_daemon.py` | C5-REAL | Daemon residente que purga entropía de AST, compacta WAL y asegura el Merkle Root sin fricción humana (`1000/1000 Leverage`). |
+| **XI** | `ultrathink_iteration_cycle_4.yaml` & `cycle_5.yaml` | C5-REAL | Teorema Terminal N=1 vs N=100 (Transducción Cinemática, Slop Horizon $H_s$, Consenso BFT Ortogonal y Autopoiesis sin fricción humana). |
 
 █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
