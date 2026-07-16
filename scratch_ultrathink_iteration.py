@@ -22,7 +22,7 @@ def iterate_ultrathink():
     with open(TARGET_FILE, "r") as f:
         data = yaml.safe_load(f)
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
     

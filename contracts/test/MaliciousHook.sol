@@ -26,7 +26,7 @@ contract MaliciousHook {
         // Access control onlyPoolManager is present, but lacks PoolKey validation
         require(msg.sender == poolManager, "OnlyPoolManager");
         // State mutation occurs without verifying pool validity
-        balances[tx.origin] += 50; 
+        balances[msg.sender] += 50; 
         return this.afterSwap.selector;
     }
 

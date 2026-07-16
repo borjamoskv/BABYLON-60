@@ -43,7 +43,7 @@ class ShadowRouter:
             "cost_microusd": 4200,
             "fallback_used": False,
             "response_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
-            "provider_receipt_hash": f"sha256:{secrets.token_hex(32)}",
+            "provider_receipt_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
         }
 
     async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
@@ -53,8 +53,8 @@ class ShadowRouter:
         decision_payload = {
             "request_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
             "policy_id": "arcstride-v4.2.1",
-            "policy_hash": f"sha256:{secrets.token_hex(32)}",
-            "candidate_set_hash": f"sha256:{secrets.token_hex(32)}",
+            "policy_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
+            "candidate_set_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
             "selected_route": {
                 "provider": "provider-x",
                 "model_alias": "gemini-2.0-flash",
