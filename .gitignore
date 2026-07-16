@@ -92,3 +92,6 @@ rust_siege/target/
 *.db-wal
 *.db-shm
 *.patch
+
+# autonomic_daemon internal DB — H1 fix
+.babylon60/

@@ -46,6 +46,7 @@ packages = ["cli", "core", "bft", "analysis", "adapters", "compiler"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-x --tb=short"
+asyncio_mode = "auto"
 
 [tool.ruff]
 target-version = "py310"

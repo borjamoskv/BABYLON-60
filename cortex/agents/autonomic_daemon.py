@@ -14,13 +14,14 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 
-BABYLON_ROOT = Path(os.environ.get("BABYLON_ROOT", str(Path.home() / "30_BABYLON-60")))
+BABYLON_ROOT = Path(os.environ.get("BABYLON_ROOT", str(Path(PROJECT_ROOT) / ".babylon60")))
 DB_PATH = BABYLON_ROOT / "telemetry.db"
 REPORT_PATH = Path(PROJECT_ROOT) / "cortex" / "audits" / "overnight_swarm_report.yaml"
 
 class AutonomicSwarmDaemon:
     def __init__(self) -> None:
         self.timestamp = datetime.now(timezone.utc).isoformat()
+        os.makedirs(BABYLON_ROOT, exist_ok=True)
         self.db_conn = sqlite3.connect(DB_PATH, timeout=5.0)
         self.db_conn.execute("PRAGMA journal_mode=WAL;")
         self.db_conn.execute("PRAGMA synchronous=NORMAL;")
