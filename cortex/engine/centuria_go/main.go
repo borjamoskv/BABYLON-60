@@ -13,6 +13,7 @@ import (
 	"database/sql"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -212,10 +213,21 @@ func InitDB(dbPath string) (*sql.DB, error) {
 }
 
 func main() {
+	swarm10k := flag.Bool("swarm10k", false, "Run 10,000 Agents Swarm BFT sweep over 1,000 Primitives")
+	flag.Parse()
+
+	dbPath := filepath.Join("..", "nexus_anchors.db")
+
+	if *swarm10k {
+		if err := RunSwarm10kSweep(dbPath, true); err != nil {
+			log.Fatalf("[C5-REAL] FATAL en Swarm 10k: %v", err)
+		}
+		os.Exit(0)
+	}
+
 	fmt.Println("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Go sobre 1000 Primitivas...")
 	startT := time.Now()
 
-	dbPath := filepath.Join("..", "nexus_anchors.db")
 	db, err := InitDB(dbPath)
 	if err != nil {
 		log.Fatalf("[C5-REAL] FATAL: Error abriendo Master Ledger SQLite WAL: %v", err)

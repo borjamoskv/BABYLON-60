@@ -21,7 +21,8 @@ import json
 import time
 import os
 import sys
-from typing import Dict, Tuple, Any
+import ctypes
+from typing import Dict, Tuple, Any, Optional
 
 # Attempt BLAKE3, fallback to SHA-256
 try:
@@ -31,6 +32,21 @@ try:
 except ImportError:
     def compute_hash(data: bytes) -> str:
         return hashlib.sha256(data).hexdigest()
+
+# Hardware Base-60 Sexagesimal Clock FFI Binding
+try:
+    _dylib_path = os.path.join(os.path.dirname(__file__), "cortex_base60_clock.dylib")
+    if os.path.exists(_dylib_path):
+        _clock_lib = ctypes.CDLL(_dylib_path)
+        _clock_lib.cortex_get_base60_ticks.restype = ctypes.c_uint64
+        def get_base60_ticks() -> int:
+            return int(_clock_lib.cortex_get_base60_ticks())
+    else:
+        def get_base60_ticks() -> int:
+            return int(time.time() * 60)
+except Exception:
+    def get_base60_ticks() -> int:
+        return int(time.time() * 60)
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "nexus_anchors.db")
 
@@ -53,15 +69,17 @@ class PeerNode:
         self.node_id = node_id
         self.seed_bias = seed_bias
 
-    def execute_primitive(self, primitive_id: str, domain_name: str, input_payload: Dict[str, Any]) -> Tuple[Dict[str, Any], str]:
+    def execute_primitive(self, primitive_id: str, domain_name: str, input_payload: Dict[str, Any], block_epoch: Optional[int] = None) -> Tuple[Dict[str, Any], str]:
         """Ejecuta empíricamente la primitiva y genera el estado resultante y su hash."""
+        if block_epoch is None:
+            block_epoch = get_base60_ticks()
         # Si seed_bias != 0, simula una deriva bizantina/sensor drift para poner a prueba el BFT
         if self.seed_bias != 0:
             mutated_state = {
                 "primitive_id": primitive_id,
                 "domain": domain_name,
                 "execution_node": self.node_id,
-                "timestamp_base60": int(time.time() * 60) + self.seed_bias,
+                "timestamp_base60": block_epoch + self.seed_bias,
                 "status": "BIZANTINE_DRIFT",
                 "result_ast": f"AST_Node({domain_name}::{primitive_id}_CORRUPTED)"
             }
@@ -71,6 +89,7 @@ class PeerNode:
                 "domain": domain_name,
                 "execution_node": "CONSENSUS_PEER", # Invariante entre nodos honestos
                 "input_hash": compute_hash(json.dumps(input_payload, sort_keys=True).encode("utf-8"))[:16],
+                "timestamp_base60": block_epoch,
                 "status": "VERIFIED_EMPIRICAL_C5",
                 "result_ast": f"AST_Node({domain_name}::{primitive_id}_STABLE)",
                 "exergy_ratio": "1000/1000"
@@ -121,9 +140,10 @@ class PeerToPeerVerificationEngine:
         # Si se solicita prueba bizantina de resiliencia (ej. en 1 de cada 200 primitivas para demostrar fallo y recuperación)
         node_gamma = PeerNode("NODE_GAMMA_03", seed_bias=(999 if inject_byzantine else 0))
 
-        _, hash_alpha = node_alpha.execute_primitive(primitive_id, domain_name, input_payload)
-        _, hash_beta = node_beta.execute_primitive(primitive_id, domain_name, input_payload)
-        _, hash_gamma = node_gamma.execute_primitive(primitive_id, domain_name, input_payload)
+        current_epoch = get_base60_ticks()
+        _, hash_alpha = node_alpha.execute_primitive(primitive_id, domain_name, input_payload, current_epoch)
+        _, hash_beta = node_beta.execute_primitive(primitive_id, domain_name, input_payload, current_epoch)
+        _, hash_gamma = node_gamma.execute_primitive(primitive_id, domain_name, input_payload, current_epoch)
 
         # Aserción Par-Par (Quorum BFT 2/3 o 3/3)
         if hash_alpha == hash_beta == hash_gamma:
