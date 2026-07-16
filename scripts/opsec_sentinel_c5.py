@@ -37,7 +37,7 @@ class OpsecSentinelC5:
         violations: list[dict[str, str]] = []
         try:
             content = filepath.read_text(encoding='utf-8', errors='ignore')
-        except Exception:
+        except OSError:
             os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError('FAIL-FAST: General Exception intercepted.')
         for v_type, pattern in TARGET_PATTERNS.items():
