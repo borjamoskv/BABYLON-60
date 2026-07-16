@@ -78,3 +78,17 @@ cortex/training/baby-long/models/
 
 cortex/consensus/target/
 cortex/engine/ingest_matrix/target/
+
+# C5-REAL: H3/H4 Purga Entrópica
+rust_siege/target/
+*.db
+*.db-wal
+*.db-shm
+*.patch
+
+# C5-REAL: H3/H4 Purga Entrópica
+rust_siege/target/
+*.db
+*.db-wal
+*.db-shm
+*.patch
