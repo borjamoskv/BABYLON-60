@@ -77,3 +77,4 @@ cortex/training/baby-long/adapters/
 cortex/training/baby-long/models/
 
 cortex/consensus/target/
+cortex/engine/ingest_matrix/target/
