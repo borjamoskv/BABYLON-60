@@ -72,8 +72,8 @@ def scan_file(file_path: str) -> list[dict[str, Any]]:
                             "content": line.strip(),
                             "pattern": pattern.pattern
                         })
-    except Exception:
-        # Pasa en silencio bajo directrices de resiliencia del OS
+    except (OSError, UnicodeDecodeError):
+        # Pasa en silencio ante errores I/O esperados
         pass
     return detections
 

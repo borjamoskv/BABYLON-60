@@ -15,7 +15,7 @@ def run_privacy_audit():
             ["git", "config", "--get", "remote.origin.url"], 
             stderr=subprocess.DEVNULL
         ).decode("utf-8").strip()
-    except Exception:
+    except (subprocess.CalledProcessError, FileNotFoundError):
         remote_url = "NO_REMOTE"
 
     # 2. Risk Assessment Matrix (PPI)

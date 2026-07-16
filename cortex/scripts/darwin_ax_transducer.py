@@ -49,10 +49,12 @@ def extract_system_root_node():
     return system_wide_element
 
 if __name__ == "__main__":
+    import sys
     print("=== MOSKV-1 APEX: DARWIN DOM TRANSDUCER ===")
     try:
         root_node = extract_system_root_node()
         print(f"[!] ID de Puntero en Memoria: {hex(root_node)}")
         print("[!] Estado: Cero Anergía. El DOM estructural está listo para la matriz de 1000 primitivas.")
-    except Exception as e:
+    except (RuntimeError, OSError, AttributeError) as e:
         print(f"Error Físico: {e}")
+        sys.exit(1)
