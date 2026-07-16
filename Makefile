@@ -1,17 +1,19 @@
-# SIESAS_TRANSMUTATION_PROTOCOL
-# Fricción cognitiva máxima. Sin advertencias, solo errores fatales.
+.PHONY: all check test lint typecheck format
 
-SIESAS_LINT:
-	@echo "[SIESAS] Purgando Anergía..."
-	python3 -m core.thermo_ast_pruner core/*.py bft/*.py scripts/*.py
-	
-	@echo "[SIESAS] Forzando tipado (Mypy)..."
-	mypy .
-	
-	@echo "[SIESAS] Verificación de integridad BFT..."
-	python3 -m bft.consensus_ledger --audit-mode
-	
-	@echo "[SIESAS] Verificación de inyección de prompts indirecta (IPI)..."
-	python3 cortex/scripts/sanitize_ipi_payloads.py
-	
-	@echo "[SIESAS] Compilación a Exergía completada."
+all: format lint typecheck test
+
+check: lint typecheck
+
+lint:
+	ruff check babylon60 tests
+	ruff format --check babylon60 tests
+
+format:
+	ruff check --fix babylon60 tests
+	ruff format babylon60 tests
+
+typecheck:
+	mypy babylon60 tests --strict --ignore-missing-imports
+
+test:
+	pytest tests/ -v

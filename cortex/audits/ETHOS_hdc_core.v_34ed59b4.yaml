@@ -1,6 +1,0 @@
-Claim: Colapso cinético del CORTEX AXIOM (e59bb4e4d77186d987451d68df72f30b68a646800fa7edbd57aa9e2084844843) en matriz de silicio Verilog.
-Proof:
-  Base: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/hardware/hdc_core.v
-  CORTEX_TAINT_SHA3_256: 34ed59b4e2fac6d62543026f8b9cff97639a69b9bc8d659636defe9a98eaac9c
-  Timestamp: 2026-07-14T22:45:12.509596Z
-  Confidence: C5-REAL

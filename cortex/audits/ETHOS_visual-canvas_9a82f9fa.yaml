@@ -1,6 +1,0 @@
-Claim: Anclaje criptográfico C5-REAL de la mutación física del archivo visual-canvas.
-Proof:
-  Base: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/visual-canvas.png
-  CORTEX_TAINT_SHA3_256: 9a82f9fa7ce835f61a73ce7956253067138045bf052c0110a99a567467cc7763
-  Timestamp: 2026-07-14T22:45:01.603242Z
-  Confidence: C5-REAL

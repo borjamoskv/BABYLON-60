@@ -1,9 +1,0 @@
-Epistemic_Forensics:
-  Action: "ITERA - Auditoría de Exergía sobre el Barrido de Secretos"
-  Target_Commit: "24572c10d07c058d7e8668df9c3f0fc2cd9923ee"
-  Taint: "1b481a6d153f58ab2677f87c1dca8fa063737813f8051c050cce60c78729cd08"
-  Delta:
-    - "Capa 1 (Física): Colapso del .git/index.lock resuelto empíricamente."
-    - "Capa 2 (Semántica): Cristalización de la brecha Deploy/Repo como fricción principal."
-    - "Exergía Extraída: Eliminación de la incertidumbre sobre fugas de API keys vivas."
-  Kinetic_Mandate: "La discrepancia Deploy/Repo requiere orquestación síncrona. La habilitación de GitHub Secret Scanning anula la clase de entropía desde el pre-commit."

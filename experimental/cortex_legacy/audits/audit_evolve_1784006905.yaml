@@ -1,8 +1,0 @@
-Epistemic_Forensics:
-  Action: "EVOLVE - Transmutación de Zero-Trust Estático a Atestación Causal Continua"
-  Target_Commit: "c29706dec45bcf5266f4e64afe9cce209dafa044"
-  Taint: "334ac7eeb7f43104904d67a9c2142fde422a53541ef3d6cc0bbffb53d870158f"
-  Delta:
-    - "Eliminado: Dependencia de la identidad estática del nodo o certificado mTLS aislado."
-    - "Inyectado: Requisito de Causal Taint (Firma SHA3-256 de linaje) en cada mutación de AST o DB."
-  Kinetic_Mandate: "Un nodo comprometido no puede falsificar la traza causal sin poseer la clave privada de los nodos ascendentes, aniquilando el movimiento lateral (Zero-Trust Dinámico)."

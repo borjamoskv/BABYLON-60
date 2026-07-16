@@ -1,1 +1,0 @@
-ALTER TABLE compute_usage ADD COLUMN submit_cell_id text(36);

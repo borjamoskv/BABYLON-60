@@ -1,1 +1,0 @@
-import{j as a}from"./vendor-BPWtllH_.js";import{I as o}from"./index-faGPXfWw.js";const t=s=>a.jsx(o,{...s,children:a.jsx("path",{d:"M10 2.5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15m0 1a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13m2.61 3.688a.5.5 0 0 1 .78.625l-4 5a.5.5 0 0 1-.661.107l-.083-.066-2-2-.064-.079a.5.5 0 0 1 .693-.693l.079.064 1.604 1.605z"})});export{t as C};

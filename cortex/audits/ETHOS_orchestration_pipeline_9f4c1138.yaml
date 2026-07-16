@@ -1,6 +1,0 @@
-Claim: "Update Google Cloud Composer orchestration pipeline definition with tags and sample python action"
-Proof:
-  Base: "/Users/borjafernandezangulo/30_BABYLON-60/orchestration_pipeline.yaml"
-  CORTEX_TAINT_SHA3_256: "9f4c113886919374d5b12e052fd41d20177e9b38a5eddfee8bc8022aa7a6bd3a"
-  Timestamp: "2026-07-14T20:49:43Z"
-  Confidence: C5-REAL

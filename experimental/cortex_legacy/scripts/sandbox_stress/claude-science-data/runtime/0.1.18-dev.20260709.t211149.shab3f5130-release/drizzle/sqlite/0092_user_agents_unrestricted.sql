@@ -1,1 +1,0 @@
-ALTER TABLE user_agents ADD COLUMN unrestricted INTEGER NOT NULL DEFAULT 0;

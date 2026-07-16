@@ -1,6 +1,0 @@
-Claim: Inyectar predictor prosódico ZCR (TTFA 90ms)
-Proof:
-  Base: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/agents/voice/vad.py
-  CORTEX_TAINT_SHA3_256: b07bd5e0208159f1d8845ec42607d1da2cb3e582f8ef0d90020b45b8a6f5129a
-  Timestamp: 2026-07-15T22:48:52.747107Z
-  Confidence: C5-REAL

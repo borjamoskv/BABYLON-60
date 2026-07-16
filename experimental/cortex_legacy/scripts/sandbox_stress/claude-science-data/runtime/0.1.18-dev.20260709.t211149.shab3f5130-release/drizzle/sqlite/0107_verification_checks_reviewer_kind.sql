@@ -1,1 +1,0 @@
-ALTER TABLE `verification_checks` ADD `reviewer_kind` text;

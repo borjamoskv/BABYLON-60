@@ -1,7 +1,0 @@
-Epistemic_Forensics:
-  Target: "Immediate Physical Delta (Previous Interaction)"
-  Delta_Size: 0
-  Event: "C5-FATAL ABORT_CRYSTALLIZATION (Empty /learn payload)"
-  Exergy_Assessment: "Zero exergy expended on null payload. Perfect thermodynamic conservation."
-  Action_Taken: "Aborted crystallization."
-  CORTEX_TAINT: "6963c32ea1069d8ab0af25ebaf2c601b29bc92439a03330bca2912fd7d3d38c4"

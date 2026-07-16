@@ -1,1 +1,0 @@
-ALTER TABLE compute_providers ADD COLUMN infer_config text;

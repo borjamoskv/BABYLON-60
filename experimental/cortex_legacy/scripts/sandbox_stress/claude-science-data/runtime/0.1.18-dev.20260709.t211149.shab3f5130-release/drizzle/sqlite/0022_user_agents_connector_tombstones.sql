@@ -1,1 +1,0 @@
-ALTER TABLE `user_agents` ADD `connector_tombstones` text DEFAULT '[]' NOT NULL;

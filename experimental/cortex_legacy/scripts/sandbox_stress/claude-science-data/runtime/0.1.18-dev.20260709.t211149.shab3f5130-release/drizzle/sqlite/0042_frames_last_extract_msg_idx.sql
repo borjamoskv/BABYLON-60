@@ -1,1 +1,0 @@
-ALTER TABLE frames ADD COLUMN last_extract_msg_idx integer;

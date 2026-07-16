@@ -1,1 +1,0 @@
-ALTER TABLE `execution_log` ADD `user_intervention` text;

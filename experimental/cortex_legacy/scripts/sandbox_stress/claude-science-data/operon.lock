@@ -1,9 +1,0 @@
-{
-  "pid": 6626,
-  "version": "0.1.18-dev.20260709.t211149.shab3f5130",
-  "port": 8000,
-  "sandbox_port": 8001,
-  "require_token": true,
-  "sock": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/scripts/sandbox_stress/claude-science-data/daemon.sock",
-  "started_at": "2026-07-16T15:10:36.490Z"
-}

@@ -1,1 +1,0 @@
-ALTER TABLE frames ADD COLUMN compute_enabled TEXT;
