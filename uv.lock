@@ -644,6 +644,10 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "mypy" },
+    { name = "networkx", version = "3.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "networkx", version = "3.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "pandas", version = "2.3.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
+    { name = "pandas", version = "3.0.3", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "ruff" },
@@ -692,10 +696,12 @@ requires-dist = [
     { name = "kokoro", marker = "extra == 'voice-full'", specifier = ">=0.9" },
     { name = "mlx-lm", marker = "platform_machine == 'arm64' and sys_platform == 'darwin' and extra == 'voice-full'", specifier = ">=0.21" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
+    { name = "networkx", marker = "extra == 'dev'", specifier = ">=3.0" },
     { name = "networkx", marker = "extra == 'graph'", specifier = ">=3.0" },
     { name = "networkx", marker = "extra == 'onco'", specifier = ">=3.0" },
     { name = "numpy", marker = "extra == 'embeddings'", specifier = ">=1.24" },
     { name = "numpy", marker = "extra == 'onco'", specifier = ">=1.24" },
+    { name = "pandas", marker = "extra == 'dev'", specifier = ">=2.0" },
     { name = "pandas", marker = "extra == 'onco'", specifier = ">=2.0" },
     { name = "psutil", marker = "extra == 'telemetry'", specifier = ">=7.2.2" },
     { name = "pydantic", specifier = ">=2.0" },
