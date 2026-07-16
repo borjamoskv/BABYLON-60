@@ -31,7 +31,7 @@ Autonomous agents lack a reliable way to persist decisions with causal traceabil
 Validation → Single-Writer Queue → Hash-Chain Ledger → Git Sentinel
 ```
 
-Every entry is linked to the previous via **BLAKE3** hash. Every write carries a **causal taint** (who / when / why). Duplicates are rejected via **UUID v5** idempotency keys. The chain is **verified on read** — not assumed correct.
+Every entry is linked to the previous via **SHA3-256** hash. Every write carries a **causal taint** (who / when / why). Duplicates are rejected via **UUID v5** idempotency keys. The chain is **verified on read** — not assumed correct.
 
 > [!IMPORTANT]
 > **tamper-evident ≠ tamper-proof.** Hash-chains detect modifications _after the fact_. They do not prevent an attacker with filesystem access from replacing the entire database. See [SECURITY_MODEL.md](docs/SECURITY_MODEL.md) for the full threat model.
@@ -106,7 +106,7 @@ flowchart TD
     B --> C[asyncio.Queue\nsingle writer]
     C --> D[BFTLedgerActor]
     D --> E[(SQLite WAL\nmaster_ledger.db)]
-    D --> F[BLAKE3 Hash-Chain\nprev_hash linkage]
+    D --> F[SHA3-256 Hash-Chain\nprev_hash linkage]
     F --> G[Git Sentinel\nauto-commit + causal taint]
     E --> H[Read / Verify\nchain integrity check]
 
@@ -124,7 +124,7 @@ Every write must satisfy this schema. Violations are rejected at the validation 
 ```python
 {
     "id":           "uuid-v5",       # Idempotency key — rejects duplicates
-    "prev_hash":    "blake3-hex",    # Chain link — breaks chain on mismatch
+    "prev_hash":    "sha3_256-hex",  # Chain link — breaks chain on mismatch
     "payload":      {...},           # Structured content
     "causal_taint": "agent:reason",  # Creation trace — mandatory
     "lamport_t":    int,             # Logical clock — total ordering
@@ -158,7 +158,7 @@ Every write must satisfy this schema. Violations are rejected at the validation 
 <th>Property</th><th>Mechanism</th><th>What It Proves</th>
 </tr>
 <tr>
-<td><strong>Integrity</strong></td><td>BLAKE3 hash-chain</td><td>Entry not modified after write</td>
+<td><strong>Integrity</strong></td><td>SHA3-256 hash-chain</td><td>Entry not modified after write</td>
 </tr>
 <tr>
 <td><strong>Provenance</strong></td><td>Causal taint + timestamp</td><td>Who wrote it and when</td>
