@@ -2,7 +2,7 @@
 import sqlite3
 import os
 import hashlib
-from cortex.daemons.bft_ledger_helper import resolve_db_path, _ensure_table
+from cortex.daemons.bft_ledger_helper import resolve_db_path, ensure_bft_table
 
 # [C5-REAL] WEISMANN BARRIER (ONTOLOGICAL APOPTOSIS ENFORCER)
 # L0.3 Invariant: Civilizations lack a reproductive bottleneck. 
@@ -42,7 +42,7 @@ def enforce_weismann_barrier():
     try:
         conn_out.execute("PRAGMA journal_mode=WAL;")
         conn_out.execute("PRAGMA busy_timeout=5000;")
-        _ensure_table(conn_out, resolved_target)
+        ensure_bft_table(conn_out)
         
         cursor_out = conn_out.cursor()
         cursor_out.execute("DELETE FROM anchors")  # Hard reset

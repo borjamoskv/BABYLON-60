@@ -1,15 +1,25 @@
 import os
 import hashlib
 import sqlite3
-import threading
 from datetime import datetime, timezone
 
 
-# [C5-REAL] BFT LEDGER HELPER — DDL extracted from hot path (P0 fix)
-# Thread-local cache prevents redundant CREATE TABLE per-connection.
+# [C5-REAL] BFT LEDGER HELPER — EAFP pattern, zero DDL in hot path
+# SQLite is the sole source of truth. No process-local cache, no locks.
 
-_table_ensured: set[str] = set()
-_table_lock = threading.Lock()
+_DDL_ANCHORS = """
+    CREATE TABLE IF NOT EXISTS anchors
+    (hash TEXT PRIMARY KEY,
+     prev_hash TEXT UNIQUE,
+     content TEXT,
+     timestamp TEXT,
+     agent_id TEXT)
+"""
+
+_INSERT_SQL = (
+    "INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) "
+    "VALUES (?, ?, ?, ?, ?)"
+)
 
 
 def resolve_db_path(raw_path: str) -> str:
@@ -21,24 +31,17 @@ def resolve_db_path(raw_path: str) -> str:
     return expanded
 
 
-def _ensure_table(conn: sqlite3.Connection, db_path: str) -> None:
-    """DDL execution — cached per db_path per process lifetime."""
-    with _table_lock:
-        if db_path in _table_ensured:
-            return
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS anchors
-            (hash TEXT PRIMARY KEY,
-             prev_hash TEXT UNIQUE,
-             content TEXT,
-             timestamp TEXT,
-             agent_id TEXT)
-        """)
-        _table_ensured.add(db_path)
+def ensure_bft_table(conn: sqlite3.Connection) -> None:
+    """Boot path only. Pure CREATE — never DROP, never destructive migration."""
+    conn.execute(_DDL_ANCHORS)
 
 
 def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
-    """Centralized method for writing to the daemons' anchors hash chain."""
+    """Centralized method for writing to the daemons' anchors hash chain.
+    
+    EAFP: INSERT first (hot path, zero DDL). On 'no such table',
+    create schema and retry (cold path, first call only).
+    """
     db_file = resolve_db_path(db_file_raw)
     conn = sqlite3.connect(db_file, timeout=5.0)
     try:
@@ -46,10 +49,9 @@ def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
         conn.execute("PRAGMA synchronous=NORMAL;")
         conn.execute("PRAGMA busy_timeout=5000;")
 
-        _ensure_table(conn, db_file)
-
-        cursor = conn.cursor()
+        # Resolve prev_hash (EAFP: table might not exist yet)
         try:
+            cursor = conn.cursor()
             cursor.execute("SELECT hash FROM anchors ORDER BY timestamp DESC LIMIT 1")
             row = cursor.fetchone()
             prev_hash = row[0] if row else "GENESIS_V2"
@@ -58,11 +60,17 @@ def append_anchor(db_file_raw: str, content: str, agent_id: str) -> str:
 
         ts = datetime.now(timezone.utc).isoformat()
         new_hash = hashlib.sha3_256((content + prev_hash).encode('utf-8')).hexdigest()
+        params = (new_hash, prev_hash, content, ts, agent_id)
 
-        cursor.execute(
-            "INSERT INTO anchors (hash, prev_hash, content, timestamp, agent_id) VALUES (?, ?, ?, ?, ?)",
-            (new_hash, prev_hash, content, ts, agent_id)
-        )
+        # Hot path: pure INSERT, zero DDL
+        try:
+            conn.execute(_INSERT_SQL, params)
+        except sqlite3.OperationalError as e:
+            if "no such table" not in str(e).lower():
+                raise  # schema drift, lock, corruption → propagate
+            conn.execute(_DDL_ANCHORS)  # cold branch: table absent
+            conn.execute(_INSERT_SQL, params)
+
         conn.commit()
     finally:
         conn.close()
