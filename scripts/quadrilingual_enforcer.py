@@ -12,7 +12,7 @@ def check_lisp_bypass() -> None:
                 with open(os.path.join(root, f), 'r', errors='ignore') as file:
                     content = file.read().lower()
                     if 'web3' in content or 'ethers' in content or 'jsonrpc' in content:
-                        raise Exception('CRASH CAUSAL (Antipatrón 1): LISP inyectando directo en Anvil. Bypass de F# detectado.')
+                        raise RuntimeError('CRASH CAUSAL (Antipatrón 1): LISP inyectando directo en Anvil. Bypass de F# detectado.')
 
 def check_rust_ontology() -> None:
     rust_dir = 'strike_rs'
@@ -24,7 +24,7 @@ def check_rust_ontology() -> None:
                 with open(os.path.join(root, f), 'r', errors='ignore') as file:
                     content = file.read()
                     if 'enum Domain' in content or 'Ontology' in content:
-                        raise Exception('CRASH CAUSAL (Antipatrón 2): Rust procesando ADTs ontológicos. Dilución del Fast-Loop detectada.')
+                        raise RuntimeError('CRASH CAUSAL (Antipatrón 2): Rust procesando ADTs ontológicos. Dilución del Fast-Loop detectada.')
 
 def check_solidity_physics() -> None:
     anvil_dir = 'anvil_yung'
@@ -40,7 +40,7 @@ def check_solidity_physics() -> None:
                 with open(os.path.join(root, f), 'r', errors='ignore') as file:
                     content = file.read()
                     if 'while (' in content or 'graph' in content.lower():
-                        raise Exception('CRASH CAUSAL (Antipatrón 3): Solidity intentando computar ciclos/física de grafos. Exhaustión ATP detectada.')
+                        raise RuntimeError('CRASH CAUSAL (Antipatrón 3): Solidity intentando computar ciclos/física de grafos. Exhaustión ATP detectada.')
 
 def check_rust_anvil_bypass() -> None:
     rust_dir = 'strike_rs'
@@ -52,7 +52,7 @@ def check_rust_anvil_bypass() -> None:
                 with open(os.path.join(root, f), 'r', errors='ignore') as file:
                     content = file.read()
                     if 'cast send' in content or 'ethers::' in content:
-                        raise Exception('CRASH CAUSAL (Antipatrón 4): Rust enviando transacciones a Anvil sin pasar por F#. Split-Brain Causal.')
+                        raise RuntimeError('CRASH CAUSAL (Antipatrón 4): Rust enviando transacciones a Anvil sin pasar por F#. Split-Brain Causal.')
 
 def enforce() -> None:
     print('⚡ [C5-REAL] Ignición de Auditoría Cuadrilingüe (Enforcer BFT)...')
@@ -63,7 +63,7 @@ def enforce() -> None:
         check_rust_anvil_bypass()
         print('⚡ [C5-REAL] Topología Intacta. Cero Antipatrones detectados. Aislamiento Físico garantizado.')
         sys.exit(0)
-    except Exception:
+    except (RuntimeError, OSError):
         os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError('FAIL-FAST: General Exception intercepted.')
 

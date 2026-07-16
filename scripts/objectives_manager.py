@@ -20,7 +20,7 @@ def get_git_commit_hash() -> str:
     try:
         res = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
         return res.stdout.strip()
-    except Exception:
+    except (subprocess.SubprocessError, OSError):
         os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError('FAIL-FAST: General Exception intercepted.')
 
@@ -204,7 +204,7 @@ def cmd_iter(args: argparse.Namespace) -> None:
                     res = subprocess.run(['git', 'cat-file', '-t', h], cwd=WORKSPACE_DIR, capture_output=True, text=True)
                     if res.returncode == 0 and res.stdout.strip() == 'commit':
                         m['status'] = 'DONE'
-                except Exception:
+                except (subprocess.SubprocessError, OSError):
                     os.kill(os.getpid(), signal.SIGKILL)
                     raise RuntimeError('FAIL-FAST: General Exception intercepted.')
             if m.get('status') == 'DONE':
