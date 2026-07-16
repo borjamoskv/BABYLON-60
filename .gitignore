@@ -86,12 +86,5 @@ rust_siege/target/
 *.db-shm
 *.patch
 
-# C5-REAL: H3/H4 Purga Entrópica
-rust_siege/target/
-*.db
-*.db-wal
-*.db-shm
-*.patch
-
 # autonomic_daemon internal DB — H1 fix
 .babylon60/
