@@ -3,17 +3,19 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "babylon60-cortex"
-version = "0.1.0"
+name = "cortex-persist"
+version = "1.0.2"
 description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines"
 authors = [{ name = "Borja Moskv (borjamoskv)" }]
 requires-python = ">=3.10"
 dependencies = [
-    "networkx>=3.0",
-    "numpy>=1.24",
-    "pyyaml>=6.0",
     "aiosqlite>=0.19",
-    "psutil>=7.2.2",
+    "cbor2>=5.6.0",
+    "pydantic>=2.0",
+    "cryptography>=42.0",
+    "argon2-cffi>=23.0",
+    "click>=8.0",
+    "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -22,12 +24,14 @@ dev = [
     "ruff>=0.4",
     "mypy>=1.8",
 ]
-crypto = [
-    "cryptography>=42.0",
-    "pynacl>=1.5",
+embeddings = [
+    "numpy>=1.24",
 ]
-data = [
-    "pandas>=2.0",
+graph = [
+    "networkx>=3.0",
+]
+telemetry = [
+    "psutil>=7.2.2",
 ]
 voice = [
     "sounddevice>=0.4.6",
@@ -41,7 +45,7 @@ voice-full = [
 ]
 
 [tool.setuptools]
-packages = ["cli", "core", "bft", "analysis", "adapters", "compiler"]
+packages = ["babylon60"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
