@@ -75,30 +75,30 @@ objectives:
   title: Objectives & Milestones Agent (ULTRAThink ITERA)
   description: Agente autónomo que monitoriza objetivos, calcula exergía y sincroniza
     PROJECT.md bajo Git Sentinel.
-  exergy_score: 0.0
-  status: IN_PROGRESS
+  exergy_score: 1.0
+  status: DONE
   milestones:
   - id: MS-007
     title: Diseño e implementación de ObjectivesAgent
     due: '2026-07-14'
-    status: IN_PROGRESS
-    commit_hash: ''
+    status: DONE
+    commit_hash: 323242bf413093e3a5505ad9be97f06c027d37ab
 - id: OBJ-007
   title: Optimización de Latencia en Inferencia Local
   description: Medir e inyectar el bypass de MLX para reducir el TTFT a menos de 500ms.
-  exergy_score: 0.0
-  status: PENDING
+  exergy_score: 1.0
+  status: DONE
   milestones:
   - id: MS-008
     title: Configurar socket local de Ollama/MLX para inferencia local
     due: '2026-07-20'
-    status: PENDING
-    commit_hash: ''
+    status: DONE
+    commit_hash: 602086ad9e0a2bda098393166f176c2beee68103
   - id: MS-009
     title: Medir y registrar TTFT mediante script de telemetría
     due: '2026-07-25'
-    status: PENDING
-    commit_hash: ''
+    status: DONE
+    commit_hash: 602086ad9e0a2bda098393166f176c2beee68103
 - id: OBJ-008
   title: Consolidación de Asimetría de Red (Dualidad C5-REAL)
   description: Establecer la división física irreversible entre el Motor Cinético
@@ -112,4 +112,4 @@ objectives:
     due: '2026-07-16'
     status: DONE
     commit_hash: 2b84d613e4073f9a09b84ea797792760317d910d
-CORTEX_TAINT: 445d2f7874b73a2b647f33e479783da516c535f407f73cc9daa3368bed8a5600
+CORTEX_TAINT: efbaad099fb0a8043ef782984c94549c745ad7dce41f45fa5ef9343e45c30af4
