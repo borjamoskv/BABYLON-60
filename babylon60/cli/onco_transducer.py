@@ -1,4 +1,3 @@
-from typing import Any, Dict, List, Tuple
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # MOSKV-1 APEX: CLI ONCO TRANSDUCER (C5-REAL)
@@ -13,6 +12,7 @@ import numpy as np
 import networkx as nx
 import pandas as pd
 import logging
+from typing import Any, Dict, List, Tuple
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [C5-REAL] %(levelname)s - %(message)s")
 logger = logging.getLogger("OncoTransducer")

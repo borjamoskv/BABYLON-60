@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict
 import networkx as nx
 from networkx.algorithms import isomorphism as iso
 import time
