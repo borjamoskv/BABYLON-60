@@ -7,6 +7,6 @@ edition = "2024"
 hex = "0.4.3"
 sha2 = "0.11.0"
 
-[[bin]]
-name = "rust_bft_ingest"
-path = "src/main.rs"
+[lib]
+name = "rust_ingest_ffi"
+crate-type = ["cdylib"]
