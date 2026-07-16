@@ -52,7 +52,7 @@ def _compute_entry_hash(
         "prev_hash": prev_hash,
         "created_at": created_at,
     }
-    return hashlib.sha256(_canonical_json(envelope).encode("utf-8")).hexdigest()
+    return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
 
 
 @dataclass(frozen=True)
