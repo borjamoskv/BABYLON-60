@@ -71,9 +71,12 @@ class MockBitcoinRPCHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(response).encode('utf-8'))
 
+class ReusableHTTPServer(HTTPServer):
+    allow_reuse_address = True
+
 @pytest.fixture(scope="module", autouse=True)
 def rpc_server():
-    server = HTTPServer(('127.0.0.1', PORT), MockBitcoinRPCHandler)
+    server = ReusableHTTPServer(('127.0.0.1', PORT), MockBitcoinRPCHandler)
     thread = threading.Thread(target=server.serve_forever)
     thread.daemon = True
     thread.start()

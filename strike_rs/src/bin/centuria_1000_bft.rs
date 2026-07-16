@@ -7,13 +7,14 @@
 // Ontológicas de la Matriz Centuria.
 
 use blake3;
-use rusqlite::{Connection, Transaction};
+use rusqlite::Connection;
 use std::fs;
 use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct Theory {
     code: &'static str,
@@ -60,20 +61,26 @@ fn blake3_hash(data: &[u8]) -> String {
 
 impl PeerNode {
     fn execute_primitive(&self, primitive_id: &str, domain_name: &str, p_num: usize) -> (String, String) {
-        let timestamp = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_nanos() as i64;
         let status;
         let ast_repr;
+        let execution_node;
+        let drift_offset;
+
         if self.seed_bias != 0 {
             status = "BIZANTINE_DRIFT_RUST";
             ast_repr = format!("AST_Node({}::{}_CORRUPTED_BLAKE3)", domain_name, primitive_id);
+            execution_node = self.node_id;
+            drift_offset = self.seed_bias;
         } else {
             status = "VERIFIED_EMPIRICAL_RUST_C5";
             ast_repr = format!("AST_Node({}::{}_STABLE_RUST)", domain_name, primitive_id);
+            execution_node = "CONSENSUS_PEER_RUST"; // Invariant across honest peers
+            drift_offset = 0;
         }
 
         let canonical_str = format!(
             "{}|{}|{}|{}|{}|{}|{}",
-            primitive_id, domain_name, self.node_id, p_num, timestamp + self.seed_bias, status, ast_repr
+            primitive_id, domain_name, execution_node, p_num, drift_offset, status, ast_repr
         );
         let hash = blake3_hash(canonical_str.as_bytes());
         (canonical_str, hash)
@@ -144,7 +151,7 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
     if let Some(parent) = db_path.parent() {
         fs::create_dir_all(parent).ok();
     }
-    let mut conn = Connection::open(db_path)?;
+    let conn = Connection::open(db_path)?;
     conn.pragma_update(None, "journal_mode", "WAL")?;
     conn.pragma_update(None, "synchronous", "NORMAL")?;
     conn.pragma_update(None, "busy_timeout", 5000)?;
