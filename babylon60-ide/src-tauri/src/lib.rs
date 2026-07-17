@@ -40,7 +40,7 @@ fn list_ontology_vectors() -> Vec<VectorEntry> {
 
 #[tauri::command]
 fn dispatch_vector(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
-    kernel::dispatch(domain, primitive, modifier)
+    kernel::dispatch_3d(domain, primitive, modifier)
 }
 
 // ═══════════════════════════════════════════════════════
@@ -52,8 +52,8 @@ pub fn run() {
     let db_path = "cortex.db";
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
 
-    // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ]
-    kernel::build_ontology();
+    // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
+    kernel::init_kernel();
 
     tauri::Builder::default()
         .plugin(tauri_plugin_log::Builder::new().build())
@@ -64,7 +64,9 @@ pub fn run() {
             get_ledger_events,
             append_ledger_event,
             list_ontology_vectors,
-            dispatch_vector
+            dispatch_vector,
+            kernel::dispatch,
+            kernel::list_vectors
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

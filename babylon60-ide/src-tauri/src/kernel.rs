@@ -1,71 +1,107 @@
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 use serde::{Deserialize, Serialize};
-use crate::lexicon::{Domain, Primitive, Modifier, VectorPath};
+use crate::lexicon::{Domain, Primitive, Modifier, Target, VectorPath, VectorPath4D};
 
+// ═══════════════════════════════════════════════════════
+//  KERNEL — Dual-space dispatcher
+//  3D ontology (VectorPath)  → semantic HashMap registry
+//  4D tensor  (VectorPath4D) → static [Action; 10000]
+// ═══════════════════════════════════════════════════════
+
+/// 3D semantic dispatch: fn() -> String (rich output)
 type KernelLogic = fn() -> String;
+/// 4D tensor dispatch: fn(&VectorPath4D) (side-effecting)
+type Action4D = fn(&VectorPath4D);
 
-/// Thread-safe ontology registry. Initialized once at boot.
-static ONTOLOGY: OnceLock<Mutex<HashMap<VectorPath, VectorEntry>>> = OnceLock::new();
+// ─── 3D Ontology Registry ────────────────────────────────
+
+static ONTOLOGY:    OnceLock<Mutex<HashMap<VectorPath, VectorEntry>>>   = OnceLock::new();
+static LOGIC_TABLE: OnceLock<Mutex<HashMap<VectorPath, KernelLogic>>>  = OnceLock::new();
+
+fn registry()       -> &'static Mutex<HashMap<VectorPath, VectorEntry>>  { ONTOLOGY.get_or_init(|| Mutex::new(HashMap::new())) }
+fn logic_registry() -> &'static Mutex<HashMap<VectorPath, KernelLogic>> { LOGIC_TABLE.get_or_init(|| Mutex::new(HashMap::new())) }
+
+// ─── 4D Static Table (10,000-space) ─────────────────────
+
+static KERNEL_TABLE_4D: OnceLock<[Action4D; 10_000]> = OnceLock::new();
+
+fn default_4d_handler(v: &VectorPath4D) {
+    println!(
+        "⚡ [{:04}] {} — base transductor (unbound).",
+        v.index(), v
+    );
+}
+
+// ─── Shared types ────────────────────────────────────────
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VectorEntry {
-    pub path: VectorPath,
-    pub index: usize,
+    pub path:        VectorPath,
+    pub index:       usize,
     pub description: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DispatchResult {
     pub vector: String,
-    pub index: usize,
+    pub index:  usize,
     pub output: String,
 }
 
-fn registry() -> &'static Mutex<HashMap<VectorPath, VectorEntry>> {
-    ONTOLOGY.get_or_init(|| Mutex::new(HashMap::new()))
-}
-
-/// Map of vector paths to their executable logic (kept separate from serializable entries)
-static LOGIC_TABLE: OnceLock<Mutex<HashMap<VectorPath, KernelLogic>>> = OnceLock::new();
-
-fn logic_registry() -> &'static Mutex<HashMap<VectorPath, KernelLogic>> {
-    LOGIC_TABLE.get_or_init(|| Mutex::new(HashMap::new()))
-}
+// ─── 3D bind / dispatch / list ───────────────────────────
 
 fn bind(domain: Domain, primitive: Primitive, modifier: Modifier, description: &str, logic: KernelLogic) {
-    let path = VectorPath::new(domain, primitive, modifier);
-    let entry = VectorEntry {
-        path,
-        index: path.index(),
-        description: description.to_string(),
-    };
-
+    let path  = VectorPath::new(domain, primitive, modifier);
+    let entry = VectorEntry { path, index: path.index(), description: description.to_string() };
     registry().lock().unwrap().insert(path, entry);
     logic_registry().lock().unwrap().insert(path, logic);
-    println!("✅ [REGISTERED] {} (idx:{}) — {}", path, path.index(), description);
+    println!("✅ [REGISTERED 3D] {} (idx:{}) — {}", path, path.index(), description);
 }
 
-/// Dispatch a vector by its semantic path. Returns structured result or error.
-pub fn dispatch(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
-    let path = VectorPath::new(domain, primitive, modifier);
+/// Semantic 3D dispatch: returns structured result.
+pub fn dispatch_3d(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
+    let path  = VectorPath::new(domain, primitive, modifier);
     let logic = logic_registry()
-        .lock()
-        .unwrap()
-        .get(&path)
-        .copied()
+        .lock().unwrap()
+        .get(&path).copied()
         .ok_or_else(|| format!("VECTOR {} NOT BOUND", path))?;
 
-    let output = logic();
-
-    Ok(DispatchResult {
-        vector: path.to_string(),
-        index: path.index(),
-        output,
-    })
+    Ok(DispatchResult { vector: path.to_string(), index: path.index(), output: logic() })
 }
 
-/// List all registered vectors in the ontology.
+/// Tensor 4D dispatch via Tauri IPC. Falls back to 3D semantic registry if 4D unbound.
+#[tauri::command]
+pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
+    let v4d = VectorPath4D::new(d, p, m, t).map_err(|e| e.to_string())?;
+
+    // Async modifier: spawn detached thread
+    if v4d.modifier == Modifier::Async {
+        let v_clone = v4d;
+        std::thread::spawn(move || {
+            if let Some(table) = KERNEL_TABLE_4D.get() {
+                table[v_clone.index()](&v_clone);
+            }
+        });
+        return Ok(format!("ASYNC DISPATCHED: {}", v4d));
+    }
+
+    // Sync 4D path
+    if let Some(table) = KERNEL_TABLE_4D.get() {
+        table[v4d.index()](&v4d);
+    }
+
+    // Fallback: attempt 3D semantic dispatch (backward-compat)
+    let v3d = v4d.to_3d();
+    if let Ok(result) = dispatch_3d(v3d.domain, v3d.primitive, v3d.modifier) {
+        return Ok(format!("3D FALLBACK [{}] → {}", result.vector, result.output));
+    }
+
+    Ok(format!("DISPATCHED: {}", v4d))
+}
+
+/// List all 3D bound vectors.
+#[tauri::command]
 pub fn list_vectors() -> Vec<VectorEntry> {
     let reg = registry().lock().unwrap();
     let mut entries: Vec<VectorEntry> = reg.values().cloned().collect();
@@ -74,7 +110,7 @@ pub fn list_vectors() -> Vec<VectorEntry> {
 }
 
 // ═══════════════════════════════════════════════════════
-//  ONTOLOGY GENESIS — The self-writing engine
+//  ONTOLOGY GENESIS — Self-writing 3D engine
 // ═══════════════════════════════════════════════════════
 
 pub fn build_ontology() {
@@ -84,10 +120,10 @@ pub fn build_ontology() {
         || "WAL engine initialized: journal_mode=WAL, busy_timeout=5000, synchronous=NORMAL".to_string(),
     );
 
-    // [ VECTOR 011 ]: SELLO — Commit criptográfico
+    // [ VECTOR 011 ]: SELLO — Commit criptográfico SHA-256
     bind(Domain::Matrix, Primitive::Commit, Modifier::Atomic,
-        "Cryptographic seal: SHA-256 chain-linked event append",
-        || "Event appended and chain-sealed via SHA-256(prev_hash || payload)".to_string(),
+        "Cryptographic seal: SHA3-256 chain-linked event append",
+        || "Event appended and chain-sealed via SHA3-256(prev_hash || payload)".to_string(),
     );
 
     // [ VECTOR 030 ]: KINETIC BIND RAW — Puente IPC Frontend↔Kernel
@@ -105,6 +141,21 @@ pub fn build_ontology() {
     // [ VECTOR 040 ]: KINETIC QUERY RAW — Introspección del Kernel
     bind(Domain::Kinetic, Primitive::Query, Modifier::Raw,
         "Query ontology registry: list all bound vectors",
-        || format!("{} vectors currently bound in ontology", list_vectors().len()),
+        || format!("{} vectors currently bound in ontology", registry().lock().unwrap().len()),
     );
+}
+
+// ═══════════════════════════════════════════════════════
+//  KERNEL INIT — Wire both dispatch spaces at boot
+// ═══════════════════════════════════════════════════════
+
+pub fn init_kernel() {
+    // 1. Build 3D semantic ontology
+    build_ontology();
+
+    // 2. Initialize 4D static table (all 10,000 slots default to base handler)
+    let table = [default_4d_handler as Action4D; 10_000];
+    KERNEL_TABLE_4D.set(table).ok();
+
+    println!("⚡ BABYLON60 KERNEL ONLINE — 3D semantic + 4D tensor (10,000-space)");
 }
