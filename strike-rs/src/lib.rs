@@ -332,3 +332,165 @@ fn strike_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(dispatch_tts_harness, m)?)?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    // strike-rs lib is a PyO3 cdylib — pure Rust logic (state machines, math)
+    // tested without Python runtime via direct function calls.
+
+    use super::*;
+
+    // ── Static string dictionaries ────────────────────────────────────────────
+
+    #[test]
+    fn get_domain_str_all_valid() {
+        let expected = [
+            "SOURCE", "MATRIX", "PULSE", "KINETIC", "LOGIC",
+            "VECTOR", "STORAGE", "OSINT", "CLOCK", "COMPILER",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_domain_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_domain_str_oob_returns_unknown() {
+        assert_eq!(get_domain_str(10), "UNKNOWN");
+        assert_eq!(get_domain_str(255), "UNKNOWN");
+    }
+
+    #[test]
+    fn get_primitive_str_all_valid() {
+        let expected = [
+            "INIT", "PREDICT", "UPDATE", "INNOVATION", "GAIN",
+            "COVARIANCE", "DRIFT_CHECK", "RECONSTRUCT", "SANITY_ASSERT", "FLUSH_LEDGER",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_primitive_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_modifier_str_all_valid() {
+        let expected = [
+            "RAW", "ATOMIC", "KALMAN_EXTENDED", "LUENBERGER_RIGID", "PARTICLE_PF",
+            "SLIDING_MODE", "QUANTIZED", "ADAPTIVE_R", "NEURAL_LATENT", "BFT_CONSENSUS",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_modifier_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_neuro_domain_str_all_valid() {
+        let expected = [
+            "ENERGY_BOUND", "ATTRACTOR_DECAY", "COGNITIVE_DRIFT", "RESOURCE_EXHAUST",
+            "SYBIL_REVERB", "BAYESIAN_FREE_ENERGY", "LATENT_TORQUE", "SURPRISAL_GATE",
+            "TEMPORAL_PHASE", "DEEP_MCTS_DEPTH",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_neuro_domain_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_neuro_primitive_str_all_valid() {
+        let expected = [
+            "HOMEOSTASIS_INIT", "HOMEOSTASIS_MUTATE", "PREDICTION_GENERATE",
+            "PREDICTION_AUDIT", "ATTENTION_FOCUS", "ATTENTION_QUANTIZE",
+            "ACTION_DISPATCH", "ACTION_ASSERT", "LANGUAGE_COLLAPSE", "LANGUAGE_FLUSH",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_neuro_primitive_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_neuro_modifier_str_all_valid() {
+        let expected = [
+            "RAW", "ATOMIC", "ACTIVE_INFERENCE", "LYAPUNOV_STABLE", "SPARSE_KV",
+            "BFT_CONSENSUS", "FEEDFORWARD", "BACKPROP_ERROR", "SLIDING_SURFACE", "EPIDEMIC_PURGE",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_neuro_modifier_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_tts_domain_str_all_valid() {
+        let expected = [
+            "ENTROPY_ALLOC", "LATENT_LOOKAHEAD", "POLICY_IMPROVE", "HARNESS_DISCOVERY",
+            "PROGRAMMATIC_JIT", "SWARM_GRAPH", "TRI_TIER_MEMORY", "INFO_KV_EVICTION",
+            "STAGE_DECOUPLE", "VECTOR_QUANT",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_tts_domain_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_tts_primitive_str_all_valid() {
+        let expected = [
+            "INIT", "EXPAND", "EVALUATE", "BACKPROP", "PRUNE",
+            "QUANTIZE", "ASSERT_BFT", "EXECUTE_SANDBOX", "RECONSTRUCT_STATE", "FLUSH_LEDGER",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_tts_primitive_str(i as u8), label);
+        }
+    }
+
+    #[test]
+    fn get_tts_modifier_str_all_valid() {
+        let expected = [
+            "RAW", "ATOMIC", "ADAPTIVE_COT", "RETRO_ATTENTION", "FORWARD_INFLUENCE",
+            "TURBO_QUANT", "META_PROPOSER", "FEEDFORWARD_OPEN", "SLIDING_WINDOW", "EPIDEMIC_PURGE",
+        ];
+        for (i, &label) in expected.iter().enumerate() {
+            assert_eq!(get_tts_modifier_str(i as u8), label);
+        }
+    }
+
+    // ── StateVector pure logic ────────────────────────────────────────────────
+
+    #[test]
+    fn state_vector_initial_values() {
+        let sv = StateVector::new();
+        assert_eq!(sv.states.len(), 4);
+        assert!(sv.states.iter().all(|&x| x == 0.0));
+        assert_eq!(sv.norm_error, 0.0);
+        assert_eq!(sv.execution_count, 0);
+        // identity covariance
+        for (i, row) in sv.covariance.iter().enumerate() {
+            for (j, &v) in row.iter().enumerate() {
+                let expected = if i == j { 1.0 } else { 0.0 };
+                assert_eq!(v, expected, "cov[{i}][{j}] mismatch");
+            }
+        }
+    }
+
+    // ── CognitiveChainVector pure logic ───────────────────────────────────────
+
+    #[test]
+    fn cognitive_chain_vector_initial_values() {
+        let cv = CognitiveChainVector::new();
+        assert_eq!(cv.homeostasis_energy, 1.0);
+        assert_eq!(cv.prediction_error, 0.0);
+        assert_eq!(cv.attention_weight, 1.0);
+        assert_eq!(cv.action_torque, 0.0);
+        assert_eq!(cv.language_entropy, 0.0);
+        assert_eq!(cv.execution_count, 0);
+    }
+
+    // ── TTSHarnessState pure logic ────────────────────────────────────────────
+
+    #[test]
+    fn tts_harness_state_initial_values() {
+        let ts = TTSHarnessState::new();
+        assert_eq!(ts.mcts_budget_tokens, 0);
+        assert_eq!(ts.latent_value, 0.0);
+        assert_eq!(ts.harness_score, 0.0);
+        assert_eq!(ts.kv_cache_efficiency, 1.0);
+        assert_eq!(ts.pruning_rate, 0.0);
+        assert_eq!(ts.execution_count, 0);
+    }
+}

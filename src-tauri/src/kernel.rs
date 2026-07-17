@@ -292,3 +292,250 @@ pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
     Err("Kernel not initialized".to_string())
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::convert::TryFrom;
+
+    // ── Domain ────────────────────────────────────────────────────────────────
+
+    #[test]
+    fn domain_try_from_all_valid_indices() {
+        let cases: &[(u8, Domain, &str)] = &[
+            (0, Domain::Source,   "SOURCE"),
+            (1, Domain::Matrix,   "MATRIX"),
+            (2, Domain::Pulse,    "PULSE"),
+            (3, Domain::Kinetic,  "KINETIC"),
+            (4, Domain::Logic,    "LOGIC"),
+            (5, Domain::Vector,   "VECTOR"),
+            (6, Domain::Storage,  "STORAGE"),
+            (7, Domain::Osint,    "OSINT"),
+            (8, Domain::Clock,    "CLOCK"),
+            (9, Domain::Compiler, "COMPILER"),
+        ];
+        for &(idx, ref variant, label) in cases {
+            let d = Domain::try_from(idx).expect("valid index must succeed");
+            assert_eq!(d, *variant);
+            assert_eq!(d.as_str(), label);
+        }
+    }
+
+    #[test]
+    fn domain_try_from_oob_returns_err() {
+        assert!(Domain::try_from(10).is_err());
+        assert!(Domain::try_from(255).is_err());
+    }
+
+    // ── Primitive ─────────────────────────────────────────────────────────────
+
+    #[test]
+    fn primitive_try_from_all_valid_indices() {
+        let cases: &[(u8, Primitive, &str)] = &[
+            (0, Primitive::Init,   "INIT"),
+            (1, Primitive::Mutate, "MUTATE"),
+            (2, Primitive::Bind,   "BIND"),
+            (3, Primitive::Query,  "QUERY"),
+            (4, Primitive::Stream, "STREAM"),
+            (5, Primitive::Commit, "COMMIT"),
+            (6, Primitive::Sync,   "SYNC"),
+            (7, Primitive::Halt,   "HALT"),
+            (8, Primitive::Fork,   "FORK"),
+            (9, Primitive::Join,   "JOIN"),
+        ];
+        for &(idx, ref variant, label) in cases {
+            let p = Primitive::try_from(idx).expect("valid index must succeed");
+            assert_eq!(p, *variant);
+            assert_eq!(p.as_str(), label);
+        }
+    }
+
+    #[test]
+    fn primitive_try_from_oob_returns_err() {
+        assert!(Primitive::try_from(10).is_err());
+        assert!(Primitive::try_from(200).is_err());
+    }
+
+    // ── Modifier ──────────────────────────────────────────────────────────────
+
+    #[test]
+    fn modifier_try_from_all_valid_indices() {
+        let cases: &[(u8, Modifier, &str)] = &[
+            (0, Modifier::Raw,       "RAW"),
+            (1, Modifier::Atomic,    "ATOMIC"),
+            (2, Modifier::Persist,   "PERSIST"),
+            (3, Modifier::Ephemeral, "EPHEMERAL"),
+            (4, Modifier::Async,     "ASYNC"),
+            (5, Modifier::Sync,      "SYNC"),
+            (6, Modifier::Quantized, "QUANTIZED"),
+            (7, Modifier::Mapped,    "MAPPED"),
+            (8, Modifier::Wrapped,   "WRAPPED"),
+            (9, Modifier::Locked,    "LOCKED"),
+        ];
+        for &(idx, ref variant, label) in cases {
+            let m = Modifier::try_from(idx).expect("valid index must succeed");
+            assert_eq!(m, *variant);
+            assert_eq!(m.as_str(), label);
+        }
+    }
+
+    #[test]
+    fn modifier_try_from_oob_returns_err() {
+        assert!(Modifier::try_from(10).is_err());
+    }
+
+    // ── Target ────────────────────────────────────────────────────────────────
+
+    #[test]
+    fn target_try_from_all_valid_indices() {
+        let cases: &[(u8, Target, &str)] = &[
+            (0, Target::Local,    "LOCAL"),
+            (1, Target::Network,  "NETWORK"),
+            (2, Target::Swarm,    "SWARM"),
+            (3, Target::Ledger,   "LEDGER"),
+            (4, Target::Memory,   "MEMORY"),
+            (5, Target::Dispatch, "DISPATCH"),
+            (6, Target::Ui,       "UI"),
+            (7, Target::System,   "SYSTEM"),
+            (8, Target::Bft,      "BFT"),
+            (9, Target::Core,     "CORE"),
+        ];
+        for &(idx, ref variant, label) in cases {
+            let t = Target::try_from(idx).expect("valid index must succeed");
+            assert_eq!(t, *variant);
+            assert_eq!(t.as_str(), label);
+        }
+    }
+
+    #[test]
+    fn target_try_from_oob_returns_err() {
+        assert!(Target::try_from(10).is_err());
+    }
+
+    // ── PrimitiveIdentity ─────────────────────────────────────────────────────
+
+    #[test]
+    fn primitive_identity_code_arithmetic() {
+        // code = d*1000 + p*100 + m*10 + t
+        let id = PrimitiveIdentity::new(3, 7, 2, 5).unwrap();
+        assert_eq!(id.code, 3725u16);
+    }
+
+    #[test]
+    fn primitive_identity_zero_produces_code_0() {
+        let id = PrimitiveIdentity::new(0, 0, 0, 0).unwrap();
+        assert_eq!(id.code, 0);
+    }
+
+    #[test]
+    fn primitive_identity_max_produces_code_9999() {
+        let id = PrimitiveIdentity::new(9, 9, 9, 9).unwrap();
+        assert_eq!(id.code, 9999);
+    }
+
+    #[test]
+    fn primitive_identity_oob_domain_returns_err() {
+        assert!(PrimitiveIdentity::new(10, 0, 0, 0).is_err());
+    }
+
+    #[test]
+    fn primitive_identity_oob_primitive_returns_err() {
+        assert!(PrimitiveIdentity::new(0, 10, 0, 0).is_err());
+    }
+
+    #[test]
+    fn primitive_identity_oob_modifier_returns_err() {
+        assert!(PrimitiveIdentity::new(0, 0, 10, 0).is_err());
+    }
+
+    #[test]
+    fn primitive_identity_oob_target_returns_err() {
+        assert!(PrimitiveIdentity::new(0, 0, 0, 10).is_err());
+    }
+
+    #[test]
+    fn primitive_identity_to_string_source_init_raw_local() {
+        let id = PrimitiveIdentity::new(0, 0, 0, 0).unwrap();
+        assert_eq!(id.to_string(), "SOURCE-INIT-RAW-LOCAL");
+    }
+
+    #[test]
+    fn primitive_identity_to_string_logic_query_atomic_core() {
+        let id = PrimitiveIdentity::new(4, 3, 1, 9).unwrap();
+        assert_eq!(id.to_string(), "LOGIC-QUERY-ATOMIC-CORE");
+    }
+
+    // ── Kernel init & dispatch ────────────────────────────────────────────────
+
+    #[test]
+    fn init_kernel_is_idempotent() {
+        init_kernel();
+        init_kernel(); // second call must not panic
+        assert!(KERNEL_TABLE.get().is_some());
+    }
+
+    #[test]
+    fn dispatch_sync_returns_ok_with_identity_label() {
+        init_kernel();
+        let result = dispatch(0, 0, 0, 0);
+        assert!(result.is_ok());
+        let msg = result.unwrap();
+        assert!(msg.contains("SOURCE-INIT-RAW-LOCAL"), "got: {msg}");
+    }
+
+    #[test]
+    fn dispatch_async_modifier_returns_dispatched_asynchronously() {
+        init_kernel();
+        // Modifier index 4 = Async
+        let result = dispatch(0, 0, 4, 0);
+        assert!(result.is_ok());
+        let msg = result.unwrap();
+        assert!(msg.contains("asynchronously"), "got: {msg}");
+    }
+
+    #[test]
+    fn dispatch_oob_d_returns_err() {
+        init_kernel();
+        assert!(dispatch(10, 0, 0, 0).is_err());
+    }
+
+    #[test]
+    fn dispatch_oob_p_returns_err() {
+        init_kernel();
+        assert!(dispatch(0, 10, 0, 0).is_err());
+    }
+
+    #[test]
+    fn dispatch_oob_m_returns_err() {
+        init_kernel();
+        assert!(dispatch(0, 0, 10, 0).is_err());
+    }
+
+    #[test]
+    fn dispatch_oob_t_returns_err() {
+        init_kernel();
+        assert!(dispatch(0, 0, 0, 10).is_err());
+    }
+
+    #[test]
+    fn dispatch_all_domains_resolve() {
+        init_kernel();
+        for d in 0u8..10 {
+            assert!(dispatch(d, 0, 0, 0).is_ok(), "domain {d} failed");
+        }
+    }
+
+    #[test]
+    fn dispatch_all_primitives_resolve() {
+        init_kernel();
+        for p in 0u8..10 {
+            assert!(dispatch(0, p, 0, 0).is_ok(), "primitive {p} failed");
+        }
+    }
+
+    #[test]
+    fn dispatch_compiler_join_sync_core_label() {
+        init_kernel();
+        let r = dispatch(9, 9, 5, 9).unwrap();
+        assert!(r.contains("COMPILER-JOIN-SYNC-CORE"), "got: {r}");
+    }
+}

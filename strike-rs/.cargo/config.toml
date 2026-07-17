@@ -1,0 +1,6 @@
+# C5-REAL: Pin PYO3_PYTHON to the project-root venv (Python 3.12) so that
+# `cargo test --lib` works without manual env-var injection.
+# PyO3 0.21 does not support Python 3.14+ without ABI3 forward-compat flag.
+# The venv lives at the repository root, one level above strike-rs/.
+[env]
+PYO3_PYTHON = { value = "../.venv/bin/python3", relative = true, force = false }

@@ -11,3 +11,7 @@ crate-type = ["cdylib"]
 pyo3 = { version = "0.21", features = ["extension-module"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+
+# PyO3 requires Python ≤3.12 at this version. Point to the isolated venv.
+# Run tests with: PYO3_PYTHON=.venv/bin/python3 cargo test --lib
+# Or set permanently in .cargo/config.toml (see below).
