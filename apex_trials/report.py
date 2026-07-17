@@ -15,6 +15,7 @@ import html
 
 from .backtest import BacktestReport
 from .copilot import CopilotResult
+from .modules import _MODELS as _MOD_MODELS
 from .risk_engine import _FITTED
 
 _TIER_COLOR = {
@@ -97,6 +98,34 @@ def _history_block(result: CopilotResult) -> str:
       <div class="stat"><div class="k">PREDICTED RISK</div><div class="v" style="color:#2B3BE5">{pred}</div></div>
     </div>
     <ul class="timeline">{timeline}</ul>"""
+
+
+def _module_surface_block(result: CopilotResult) -> str:
+    risks = result.module_risks
+    if not risks:
+        return ""
+    rows: list[str] = []
+    for m in risks:
+        p = m.probability * 100
+        base = m.base_rate * 100
+        color = "#CE422B" if p >= 60 else "#FF6B35" if p >= 40 else "#E5B72B" if p >= 25 else "#4CAF50"
+        rows.append(f"""
+      <div class="mrow">
+        <div class="mlabel">{_esc(m.label)}</div>
+        <div class="mbar"><span class="mfill" style="width:{p:.0f}%;background:{color}"></span>
+          <span class="mbase" style="left:{base:.0f}%"></span></div>
+        <div class="mval">{p:.0f}%<span class="mlift"> · {m.lift:.2f}×</span></div>
+      </div>""")
+    macro = "?"
+    if _MOD_MODELS is not None:
+        aucs = [v["auc"] for v in _MOD_MODELS["modules"].values()]
+        macro = f"{sum(aucs) / len(aucs):.3f}"
+    return f"""
+  <section class="card">
+    <h2>▍AMENDMENT SURFACE <span class="sub">— which modules will change · P vs base rate (tick)</span></h2>
+    <div class="msurf">{''.join(rows)}</div>
+    <div class="note">Per-module logistic models, leakage-mitigated (each excludes its own feature). Macro-AUC {macro} held-out. The tick marks the corpus base rate — bar past it = elevated risk for this design.</div>
+  </section>"""
 
 
 def _calibration_block(bt: BacktestReport | None) -> str:
@@ -198,6 +227,13 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
   .timeline .dot {{ position:absolute; left:-4px; top:11px; width:7px; height:7px; background:#FF6B35; border-radius:50%; }}
   .timeline .date {{ color:var(--cobalt); margin-right:8px; }}
   .muted {{ color:var(--mut); }}
+  .msurf {{ display:flex; flex-direction:column; gap:11px; }}
+  .mrow {{ display:grid; grid-template-columns:180px 1fr 92px; align-items:center; gap:14px; font-size:12.5px; }}
+  .mlabel {{ font-weight:600; white-space:nowrap; }}
+  .mbar {{ position:relative; height:11px; background:#0c0c12; border:1px solid var(--line); border-radius:3px; }}
+  .mfill {{ display:block; height:100%; border-radius:2px; }}
+  .mbase {{ position:absolute; top:-3px; width:2px; height:17px; background:#f5f5f7; opacity:.55; }}
+  .mval {{ text-align:right; font-weight:700; white-space:nowrap; }} .mval .mlift {{ color:var(--mut); font-weight:400; font-size:11px; }}
   .spear {{ font-size:13px; margin-bottom:14px; color:#cfcfda; }} .spear b {{ color:var(--cobalt); }}
   table.cal td, table.cal th {{ padding:7px 12px 7px 0; }}
   .note {{ color:var(--mut); font-size:11px; margin-top:12px; }}
@@ -261,6 +297,8 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
     <h2>▍GROUND-TRUTH AMENDMENT HISTORY <span class="sub">— public record vs. our prediction</span></h2>
     {_history_block(result)}
   </section>
+
+  {_module_surface_block(result)}
 
   {_calibration_block(backtest)}
 
