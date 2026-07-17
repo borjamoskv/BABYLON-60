@@ -47,7 +47,7 @@ _SF = set(StudyFeatures.__dataclass_fields__.keys())
 
 
 def row_features(r: dict) -> list[float]:
-    sf = StudyFeatures(**{k: r[k] for k in _SF})
+    sf = StudyFeatures(**{k: r[k] for k in _SF if k in r})
     phase_ord = {"EARLY_PHASE1": 1, "PHASE1": 1, "PHASE2": 2, "PHASE3": 3, "PHASE4": 1.5}.get(sf.phase, 0)
     return [
         sf.n_eligibility_criteria, sf.n_primary_endpoints + sf.n_secondary_endpoints,

@@ -71,14 +71,23 @@ def _fit_provenance() -> str:
     if _FITTED is None:
         return ""
     m = _FITTED.get("metrics", {})
-    return (
-        f'<div class="note">Weights fitted on {_FITTED.get("n_train", "?")} trials, '
+    provenance = (
+        f'<div class="note" style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px;">'
+        f'Weights fitted on {_FITTED.get("n_train", "?")} trials, '
         f'held out {_FITTED.get("n_test", "?")}: Spearman ρ(score, actual amendments) = '
         f'<b style="color:#2B3BE5">{m.get("spearman_fitted", "?")}</b> '
-        f'(prior {m.get("spearman_hand", "?")}); calibration MAE '
-        f'{m.get("isotonic_mae", "?")} vs {m.get("baseline_mae", "?")} baseline. '
-        f'Bands/thresholds unchanged — only the 8 driver mixing weights are data-earned.</div>'
+        f'(prior {m.get("spearman_hand", "?")}); calibration MAE = '
+        f'{m.get("isotonic_mae", "?")} vs {m.get("baseline_mae", "?")} baseline.</div>'
     )
+    if "spearman_temporal" in m:
+        provenance += (
+            f'<div class="note" style="margin-top:6px;color:#a9a9b6;">'
+            f'<b>▍FORWARD GENERALIZATION (Temporal Split ≤{m.get("temporal_cutoff", "?")} vs ≥{m.get("temporal_cutoff", "?")}):</b><br/>'
+            f'Spearman ρ = <b style="color:#FF6B35">{m.get("spearman_temporal", "?")}</b> · '
+            f'calibration MAE = {m.get("mae_temporal", "?")} (baseline {m.get("mae_base_temporal", "?")}) · '
+            f'macro-AUC = {m.get("macro_auc_temporal", "?")} (vs random {m.get("macro_auc_random", "?")}).</div>'
+        )
+    return provenance
 
 
 def _history_block(result: CopilotResult) -> str:

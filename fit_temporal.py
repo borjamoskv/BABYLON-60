@@ -92,7 +92,7 @@ def main() -> None:
         nct = r["nct_id"]
         if nct not in dates or nct not in mod_rows:
             continue
-        sf = StudyFeatures(**{k: r[k] for k in _SF})
+        sf = StudyFeatures(**{k: r[k] for k in _SF if k in r})
         a = assess(sf)
         frac.append([ru.points / ru.max_points if ru.max_points else 0.0 for ru in a.fired_rules])
         raw.append(raw_vec(sf))

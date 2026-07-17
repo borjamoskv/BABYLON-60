@@ -60,6 +60,11 @@ def _feature_map(f: StudyFeatures) -> dict[str, float]:
         "high_masking": 1.0 if f.masking.upper() in ("TRIPLE", "QUADRUPLE") else 0.0,
         "is_oncology": 1.0 if f.is_oncology else 0.0,
         "is_rare": 1.0 if f.is_rare_disease else 0.0,
+        "has_dmc": 1.0 if f.has_dmc else 0.0,
+        "is_fda_regulated": 1.0 if f.is_fda_regulated else 0.0,
+        "log_summary_words": math.log1p(f.brief_summary_words),
+        "n_conditions": float(f.n_conditions),
+        "n_interventions": float(f.n_interventions),
     }
 
 

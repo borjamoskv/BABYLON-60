@@ -48,6 +48,11 @@ class StudyFeatures:
     is_oncology: bool
     is_rare_disease: bool
     therapeutic_area: str
+    has_dmc: bool = False
+    is_fda_regulated: bool = False
+    brief_summary_words: int = 0
+    n_conditions: int = 1
+    n_interventions: int = 1
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -114,6 +119,8 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
     arms_mod = ps.get("armsInterventionsModule", {})
     cond_mod = ps.get("conditionsModule", {})
     loc_mod = ps.get("contactsLocationsModule", {})
+    oversight_mod = ps.get("oversightModule", {})
+    desc_mod = ps.get("descriptionModule", {})
     design_info = design.get("designInfo", {})
 
     n_inc, n_exc, n_total = _count_criteria(elig.get("eligibilityCriteria", ""))
@@ -125,6 +132,15 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
     is_onc, is_rare, area = _therapeutic_area(conditions)
 
     enrollment_info = design.get("enrollmentInfo", {})
+
+    has_dmc = bool(oversight_mod.get("oversightHasDmc", False))
+    is_fda = bool(
+        oversight_mod.get("isFdaRegulatedDrug", False)
+        or oversight_mod.get("isFdaRegulatedDevice", False)
+    )
+    brief_summary = str(desc_mod.get("briefSummary", ""))
+    summary_words = len(re.findall(r"\w+", brief_summary))
+    n_interventions = len(arms_mod.get("interventions", []))
 
     return StudyFeatures(
         nct_id=ident.get("nctId", "?"),
@@ -146,4 +162,9 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
         is_oncology=is_onc,
         is_rare_disease=is_rare,
         therapeutic_area=area,
+        has_dmc=has_dmc,
+        is_fda_regulated=is_fda,
+        brief_summary_words=summary_words,
+        n_conditions=max(1, len(conditions)),
+        n_interventions=max(1, n_interventions),
     )

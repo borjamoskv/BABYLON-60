@@ -53,7 +53,7 @@ def load() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     rows = json.loads(Path("dataset.json").read_text())
     frac, raw, hand, y = [], [], [], []
     for r in rows:
-        sf = StudyFeatures(**{k: r[k] for k in _SF_FIELDS})
+        sf = StudyFeatures(**{k: r[k] for k in _SF_FIELDS if k in r})
         a = assess(sf)
         fr = [rule.points / rule.max_points if rule.max_points else 0.0 for rule in a.fired_rules]
         frac.append(fr)
@@ -124,6 +124,23 @@ def main() -> None:
     for i in order:
         print(f"  {DRIVER_NAMES[i]:<28} {importances[i]:.3f}")
 
+    temporal_metrics = {}
+    temporal_report_path = Path("temporal_report.json")
+    if temporal_report_path.exists():
+        try:
+            tr_data = json.loads(temporal_report_path.read_text(encoding="utf-8"))
+            agg_t = tr_data.get("aggregate", {})
+            temporal_metrics = {
+                "temporal_cutoff": tr_data.get("cutoff", "2019-01-01"),
+                "spearman_temporal": agg_t.get("spearman_temporal", 0.0),
+                "mae_temporal": agg_t.get("mae_temporal", 0.0),
+                "mae_base_temporal": agg_t.get("mae_base_temporal", 0.0),
+                "macro_auc_temporal": tr_data.get("macro_auc_temporal", 0.0),
+                "macro_auc_random": tr_data.get("macro_auc_random", 0.0),
+            }
+        except Exception:
+            pass
+
     out = {
         "model_version": "apex-amendment-risk/2.0.0-fitted",
         "seed": SEED,
@@ -139,10 +156,14 @@ def main() -> None:
             "cv_spearman_std": round(float(cv_scores_arr.std()), 4),
             "isotonic_mae": round(mae_fit, 4),
             "baseline_mae": round(mae_base, 4),
+            **temporal_metrics
         },
     }
-    Path("fitted_weights.json").write_text(json.dumps(out, indent=2))
-    print("\nsaved -> fitted_weights.json")
+    Path("fitted_weights.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
+    pkg_path = Path("apex_trials/fitted_weights.json")
+    if pkg_path.parent.exists():
+        pkg_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
+    print("\nsaved -> fitted_weights.json and apex_trials/fitted_weights.json")
 
 
 if __name__ == "__main__":

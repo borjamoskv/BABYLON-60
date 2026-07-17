@@ -23,6 +23,32 @@ def test_minimal_protocol_is_low():
     assert a.score == 0 and a.tier == "LOW"
 
 
+def test_contributions_sum_to_approx_score():
+    a = assess(_mk(n_eligibility_criteria=25, enrollment=1200, n_countries=10))
+    if a.mode == "hand-tuned" and a.contributions:
+        assert abs(sum(a.contributions) - a.score) < 1.0
+
+
+def test_rich_nlp_and_oversight_features():
+    f = _mk(
+        has_dmc=True,
+        is_fda_regulated=True,
+        brief_summary_words=350,
+        n_conditions=4,
+        n_interventions=3,
+    )
+    assert f.has_dmc is True
+    assert f.is_fda_regulated is True
+    assert f.brief_summary_words == 350
+    assert f.n_conditions == 4
+    assert f.n_interventions == 3
+    # Verify the dictionary export and risk engine compatibility
+    d = f.as_dict()
+    assert d["has_dmc"] is True
+    assert d["brief_summary_words"] == 350
+    assert assess(f).score >= 0
+
+
 def test_score_is_deterministic():
     f = _mk(n_eligibility_criteria=33, phase="PHASE3", is_oncology=True, enrollment=1600, n_countries=20)
     assert assess(f).as_dict() == assess(f).as_dict()

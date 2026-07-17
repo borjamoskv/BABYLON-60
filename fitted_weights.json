@@ -79,7 +79,7 @@
     ],
     [
       65.0,
-      13.258144397966703
+      13.25814439796677
     ],
     [
       70.0,
@@ -111,12 +111,18 @@
     ]
   ],
   "metrics": {
-    "spearman_hand": 0.4023,
-    "spearman_fitted": 0.4158,
-    "spearman_poisson_raw": 0.4357,
-    "cv_spearman_mean": 0.3812,
-    "cv_spearman_std": 0.0197,
+    "spearman_hand": 0.4134,
+    "spearman_fitted": 0.4144,
+    "spearman_poisson_raw": 0.4399,
+    "cv_spearman_mean": 0.3859,
+    "cv_spearman_std": 0.0188,
     "isotonic_mae": 1.7404,
-    "baseline_mae": 2.0183
+    "baseline_mae": 2.0183,
+    "temporal_cutoff": "2019-01-01",
+    "spearman_temporal": 0.2816,
+    "mae_temporal": 1.5238,
+    "mae_base_temporal": 1.8805,
+    "macro_auc_temporal": 0.6124,
+    "macro_auc_random": 0.6782
   }
 }
