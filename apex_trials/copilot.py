@@ -17,6 +17,7 @@ from typing import Any
 from .ctgov import AmendmentHistory, CtGovClient, CtGovError, classify_history
 from .features import StudyFeatures, extract_features
 from .ledger import AmendmentLedger, LedgerEntry
+from .modules import ModuleRisk, predict_module_risks
 from .risk_engine import RiskAssessment, assess
 
 
@@ -26,6 +27,7 @@ class CopilotResult:
     assessment: RiskAssessment
     ledger_entry: LedgerEntry
     history: AmendmentHistory | None
+    module_risks: tuple[ModuleRisk, ...] | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -76,4 +78,11 @@ class Copilot:
         )
 
         entry = self.ledger.append(payload=payload, causal_taint=causal_taint)
-        return CopilotResult(features=features, assessment=assessment, ledger_entry=entry, history=history)
+        module_risks = predict_module_risks(features)
+        return CopilotResult(
+            features=features,
+            assessment=assessment,
+            ledger_entry=entry,
+            history=history,
+            module_risks=module_risks,
+        )

@@ -45,7 +45,22 @@ def page_studies(page_token: str | None) -> tuple[list[dict], str | None]:
 def fetch_target(nct: str) -> tuple[str, int, int] | None:
     client = CtGovClient(cache=None, timeout=30, retries=2)  # cacheless: no sqlite contention
     try:
-        h = classify_history(nct, client.get_history(nct))
+        raw_history = client.get_history(nct)
+        h = classify_history(nct, raw_history)
+        
+        # [C5-REAL] BFT Consensus (N=3 Assertions)
+        # A1: Epistemic Reality (Versions > 0)
+        # A2: Logical Boundaries (Substantive <= Versions)
+        # A3: Structural Payload Integrity
+        a1 = h.n_versions >= 1
+        a2 = h.n_substantive <= h.n_versions
+        a3 = isinstance(raw_history, list) or isinstance(raw_history, dict)
+        
+        bft_consensus = a1 and a2 and a3
+        if not bft_consensus:
+            # BFT Failure -> SIGKILL state purge for this node
+            return None
+            
     except CtGovError:
         return None
     return nct, h.n_substantive, h.n_versions
