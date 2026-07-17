@@ -2,7 +2,19 @@ import json
 import hashlib
 import random
 import math
-from typing import Any, Dict, List
+import sys
+from pathlib import Path
+
+# Add project root to sys.path to allow absolute imports
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+# Try importing the AmendmentLedger from the apex_trials module
+try:
+    from apex_trials.ledger import AmendmentLedger
+except ImportError:
+    AmendmentLedger = None
 
 class LuhmannAutopoiesisSimulation:
     """
@@ -108,6 +120,33 @@ class LuhmannAutopoiesisSimulation:
         payload = json.dumps(results, sort_keys=True)
         results_hash = hashlib.sha3_256(payload.encode()).hexdigest()
         
+        ledger_seq = None
+        ledger_event_id = None
+        ledger_entry_hash = None
+        ledger_prev_hash = None
+        
+        # Persist results to master_ledger.db if available
+        if AmendmentLedger is not None:
+            try:
+                db_path = project_root / "master_ledger.db"
+                ledger = AmendmentLedger(db_path)
+                entry = ledger.append(
+                    payload=results,
+                    causal_taint="borjamoskv:luhmann_autopoiesis",
+                    agent_id="borjamoskv"
+                )
+                ledger_seq = entry.seq
+                ledger_event_id = entry.id
+                ledger_entry_hash = entry.entry_hash
+                ledger_prev_hash = entry.prev_hash
+            except Exception as e:
+                # Log but proceed
+                print(f"[-] Ledger write failed: {e}")
+                import traceback
+                traceback.print_exc()
+        else:
+            print("[-] AmendmentLedger not imported")
+        
         output = {
             "metadata": {
                 "author": "borjamoskv",
@@ -115,7 +154,13 @@ class LuhmannAutopoiesisSimulation:
                 "cortex_taint": f"borjamoskv:luhmann_autopoiesis:{results_hash[:16]}"
             },
             "results": results,
-            "results_hash": results_hash
+            "results_hash": results_hash,
+            "ledger_metadata": {
+                "seq": ledger_seq,
+                "event_id": ledger_event_id,
+                "entry_hash": ledger_entry_hash,
+                "prev_hash": ledger_prev_hash
+            }
         }
         return output
 
