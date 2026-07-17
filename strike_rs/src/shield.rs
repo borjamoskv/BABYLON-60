@@ -31,7 +31,32 @@ pub fn ignite_memory_shield() {
     }
 }
 
-#[cfg(not(target_os = "macos"))]
+#[cfg(target_os = "linux")]
 pub fn ignite_memory_shield() {
-    // Fallback for non-macOS systems
+    use std::process;
+
+    // 1. Core Dump Deactivation (RLIMIT_CORE to 0)
+    let limit = libc::rlimit {
+        rlim_cur: 0,
+        rlim_max: 0,
+    };
+    
+    let res_core = unsafe { libc::setrlimit(libc::RLIMIT_CORE, &limit) };
+    if res_core != 0 {
+        process::abort();
+    }
+
+    // 2. Dumpable deactivation (PR_SET_DUMPABLE = 0)
+    let res_prctl = unsafe { libc::prctl(libc::PR_SET_DUMPABLE, 0, 0, 0, 0) };
+    if res_prctl != 0 {
+        unsafe {
+            libc::kill(libc::getpid(), libc::SIGKILL);
+        }
+    }
+}
+
+#[cfg(not(any(target_os = "macos", target_os = "linux")))]
+pub fn ignite_memory_shield() {
+    // Fail-fast on unsupported platforms to ensure strict compliance
+    std::process::abort();
 }
