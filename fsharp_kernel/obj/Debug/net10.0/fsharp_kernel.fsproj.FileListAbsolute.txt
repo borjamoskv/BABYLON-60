@@ -1,0 +1,13 @@
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/bin/Debug/net10.0/fsharp_kernel.deps.json
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/bin/Debug/net10.0/fsharp_kernel.dll
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/bin/Debug/net10.0/fsharp_kernel.pdb
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/bin/Debug/net10.0/fsharp_kernel.xml
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.fsproj.AssemblyReference.cache
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.AssemblyInfoInputs.cache
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.AssemblyInfo.fs
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.fsproj.CoreCompileInputs.cache
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.dll
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/refint/fsharp_kernel.dll
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.xml
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/fsharp_kernel.pdb
+/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/fsharp_kernel/obj/Debug/net10.0/ref/fsharp_kernel.dll
