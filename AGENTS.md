@@ -27,6 +27,7 @@
 - After any disk mutation (code, DB, config), commit immediately: `git add . && git commit -m "<Conventional Commit>"`.
 - If pre-commit hooks block on unrelated linting, use `--no-verify` and document in the commit message.
 - Never use lightweight tags for releases: `git tag -a vX.X.X -m "Release"` only.
+- **Stale Git Locks:** After a system/server restart, check for and manually remove any stale `.git/*.lock` files (such as `.git/index.lock` or `.git/HEAD.lock`) that prevent write mutations in C5-REAL.
 
 ### Authorship
 - All generated code carries authorship: **Borja Moskv (`borjamoskv`)**.
