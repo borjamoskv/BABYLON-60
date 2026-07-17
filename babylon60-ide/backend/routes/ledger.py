@@ -2,6 +2,7 @@
 BABYLON60 IDE — Ledger API routes.
 Endpoints for browsing and verifying the BFT hash-chain ledger.
 """
+
 from __future__ import annotations
 
 import sqlite3
@@ -29,9 +30,7 @@ def _find_ledger_db(project_root: Path) -> Path | None:
     for db_file in project_root.glob("*.db"):
         try:
             conn = connect_readonly(db_file)
-            cursor = conn.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-            )
+            cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'")
             if cursor.fetchone():
                 conn.close()
                 return db_file
@@ -104,18 +103,20 @@ def list_entries(
         )
         entries = []
         for row in cursor.fetchall():
-            entries.append({
-                "seq": row["seq"],
-                "event_id": row["event_id"],
-                "stream": row["stream"],
-                "entity_id": row["entity_id"],
-                "event_type": row["event_type"],
-                "lamport_t": row["lamport_t"],
-                "entry_hash": row["entry_hash"],
-                "prev_hash": row["prev_hash"],
-                "cortex_taint": row["cortex_taint"],
-                "created_at": row["created_at"],
-            })
+            entries.append(
+                {
+                    "seq": row["seq"],
+                    "event_id": row["event_id"],
+                    "stream": row["stream"],
+                    "entity_id": row["entity_id"],
+                    "event_type": row["event_type"],
+                    "lamport_t": row["lamport_t"],
+                    "entry_hash": row["entry_hash"],
+                    "prev_hash": row["prev_hash"],
+                    "cortex_taint": row["cortex_taint"],
+                    "created_at": row["created_at"],
+                }
+            )
 
         return {"entries": entries, "total": total, "limit": limit, "offset": offset}
     finally:
@@ -132,9 +133,7 @@ def get_entry(seq: int) -> dict[str, Any]:
 
     conn = connect_readonly(db_path)
     try:
-        cursor = conn.execute(
-            "SELECT * FROM ledger_entries WHERE seq = ?", (seq,)
-        )
+        cursor = conn.execute("SELECT * FROM ledger_entries WHERE seq = ?", (seq,))
         row = cursor.fetchone()
         if not row:
             raise HTTPException(404, f"Entry seq={seq} not found")

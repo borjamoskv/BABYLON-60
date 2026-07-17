@@ -2,6 +2,7 @@
 BABYLON60 IDE — FastAPI application entry point.
 Serves the API backend and static frontend files.
 """
+
 from __future__ import annotations
 
 from pathlib import Path

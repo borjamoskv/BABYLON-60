@@ -2,11 +2,11 @@
 BABYLON60 IDE — Telemetry routes + WebSocket live feed.
 System metrics: DB sizes, WAL state, process info.
 """
+
 from __future__ import annotations
 
 import asyncio
 import json
-import os
 import time
 from pathlib import Path
 from typing import Any
@@ -25,29 +25,33 @@ def _collect_snapshot() -> dict[str, Any]:
     root = _get_project_root()
 
     # Database file sizes
-    db_files = []
+    db_files: list[dict[str, Any]] = []
     for db_file in sorted(root.glob("*.db")):
         try:
             size = db_file.stat().st_size
-            db_files.append({
-                "name": db_file.name,
-                "size_bytes": size,
-                "size_mb": round(size / (1024 * 1024), 2),
-            })
+            db_files.append(
+                {
+                    "name": db_file.name,
+                    "size_bytes": size,
+                    "size_mb": round(size / (1024 * 1024), 2),
+                }
+            )
         except OSError:
             continue
 
-    total_db_size = sum(d["size_bytes"] for d in db_files)
+    total_db_size = sum(int(d["size_bytes"]) for d in db_files)
 
     # WAL files
-    wal_files = []
+    wal_files: list[dict[str, Any]] = []
     for wal in sorted(root.glob("*.db-wal")):
         try:
             size = wal.stat().st_size
-            wal_files.append({
-                "name": wal.name,
-                "size_bytes": size,
-            })
+            wal_files.append(
+                {
+                    "name": wal.name,
+                    "size_bytes": size,
+                }
+            )
         except OSError:
             continue
 
@@ -57,9 +61,7 @@ def _collect_snapshot() -> dict[str, Any]:
     if git_dir.is_dir():
         pack_dir = git_dir / "objects" / "pack"
         if pack_dir.is_dir():
-            pack_size = sum(
-                f.stat().st_size for f in pack_dir.iterdir() if f.is_file()
-            )
+            pack_size = sum(f.stat().st_size for f in pack_dir.iterdir() if f.is_file())
             git_info["pack_size_mb"] = round(pack_size / (1024 * 1024), 2)
         head_file = git_dir / "HEAD"
         if head_file.exists():
@@ -68,6 +70,7 @@ def _collect_snapshot() -> dict[str, Any]:
     # Process info
     try:
         import resource
+
         rusage = resource.getrusage(resource.RUSAGE_SELF)
         process_info = {
             "user_time_s": round(rusage.ru_utime, 2),

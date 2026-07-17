@@ -2,6 +2,7 @@
 BABYLON60 IDE — Hash-chain integrity verifier.
 Wraps the BFT ledger verification logic for the IDE frontend.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -18,28 +19,43 @@ ZERO_HASH = "0" * 64
 
 def _canonical_json(data: Any) -> str:
     return json.dumps(
-        data, sort_keys=True, separators=(",", ":"),
-        ensure_ascii=False, allow_nan=False,
+        data,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
     )
 
 
 def _compute_entry_hash(
-    event_id: str, stream: str, entity_id: str, event_type: str,
-    payload_json: str, source_db: str, source_table: str,
-    source_pk: str, cortex_taint: str, lamport_t: int,
-    prev_hash: str, created_at: str,
+    event_id: str,
+    stream: str,
+    entity_id: str,
+    event_type: str,
+    payload_json: str,
+    source_db: str,
+    source_table: str,
+    source_pk: str,
+    cortex_taint: str,
+    lamport_t: int,
+    prev_hash: str,
+    created_at: str,
 ) -> str:
     envelope = {
-        "event_id": event_id, "stream": stream, "entity_id": entity_id,
-        "event_type": event_type, "payload_json": payload_json,
-        "source_db": source_db, "source_table": source_table,
-        "source_pk": source_pk, "cortex_taint": cortex_taint,
-        "lamport_t": lamport_t, "prev_hash": prev_hash,
+        "event_id": event_id,
+        "stream": stream,
+        "entity_id": entity_id,
+        "event_type": event_type,
+        "payload_json": payload_json,
+        "source_db": source_db,
+        "source_table": source_table,
+        "source_pk": source_pk,
+        "cortex_taint": cortex_taint,
+        "lamport_t": lamport_t,
+        "prev_hash": prev_hash,
         "created_at": created_at,
     }
-    return hashlib.sha3_256(
-        _canonical_json(envelope).encode("utf-8")
-    ).hexdigest()
+    return hashlib.sha3_256(_canonical_json(envelope).encode("utf-8")).hexdigest()
 
 
 def verify_chain(db_path: str | Path) -> dict[str, Any]:
@@ -64,17 +80,13 @@ def verify_chain(db_path: str | Path) -> dict[str, Any]:
         return result
 
     try:
-        cursor = conn.execute(
-            "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-        )
+        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'")
         if not cursor.fetchone():
             result["error"] = "No ledger_entries table found"
             result["valid"] = False
             return result
 
-        cursor = conn.execute(
-            "SELECT * FROM ledger_entries ORDER BY seq ASC"
-        )
+        cursor = conn.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
         rows = cursor.fetchall()
         columns = [desc[0] for desc in cursor.description]
         result["total_entries"] = len(rows)
@@ -98,9 +110,7 @@ def verify_chain(db_path: str | Path) -> dict[str, Any]:
             # Check Lamport monotonicity
             if row_dict["lamport_t"] <= last_lamport:
                 entry_status["valid"] = False
-                entry_status["errors"].append(
-                    f"Lamport {row_dict['lamport_t']} <= {last_lamport}"
-                )
+                entry_status["errors"].append(f"Lamport {row_dict['lamport_t']} <= {last_lamport}")
 
             # Check prev_hash linkage
             if row_dict["prev_hash"] != prev_hash:

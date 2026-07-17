@@ -2,6 +2,7 @@
 BABYLON60 IDE — Read-only SQL query executor.
 Enforces PRAGMA query_only=ON to prevent any mutations via the IDE.
 """
+
 from __future__ import annotations
 
 import sqlite3
@@ -41,13 +42,22 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
 
     # Block obvious write statements at the string level as defense-in-depth
     sql_upper = req.sql.strip().upper()
-    blocked = ("INSERT", "UPDATE", "DELETE", "DROP", "ALTER", "CREATE",
-               "ATTACH", "DETACH", "PRAGMA", "VACUUM", "REINDEX")
+    blocked = (
+        "INSERT",
+        "UPDATE",
+        "DELETE",
+        "DROP",
+        "ALTER",
+        "CREATE",
+        "ATTACH",
+        "DETACH",
+        "PRAGMA",
+        "VACUUM",
+        "REINDEX",
+    )
     for kw in blocked:
         if sql_upper.startswith(kw):
-            raise HTTPException(
-                403, f"Write operation '{kw}' blocked. IDE is read-only."
-            )
+            raise HTTPException(403, f"Write operation '{kw}' blocked. IDE is read-only.")
 
     try:
         conn = connect_readonly(db_path)

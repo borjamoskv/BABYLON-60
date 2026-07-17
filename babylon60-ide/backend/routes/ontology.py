@@ -2,9 +2,9 @@
 BABYLON60 IDE — Ontology/Database browser API routes.
 Auto-discovers .db files and exposes read-only table browsing.
 """
+
 from __future__ import annotations
 
-import os
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -32,12 +32,14 @@ def _discover_databases() -> list[dict[str, Any]]:
     for db_file in sorted(root.glob("*.db")):
         try:
             size = db_file.stat().st_size
-            databases.append({
-                "name": db_file.name,
-                "path": str(db_file),
-                "size_bytes": size,
-                "size_human": _human_size(size),
-            })
+            databases.append(
+                {
+                    "name": db_file.name,
+                    "path": str(db_file),
+                    "size_bytes": size,
+                    "size_human": _human_size(size),
+                }
+            )
         except OSError:
             continue
     return databases
