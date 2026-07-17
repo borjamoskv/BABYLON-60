@@ -5,6 +5,7 @@ use petgraph::graph::DiGraph;
 pub mod omega0;
 pub mod shield;
 pub mod ledger;
+pub mod atms;
 
 /// Motor de Taint C5-REAL (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).

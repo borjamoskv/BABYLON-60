@@ -106,7 +106,7 @@ impl MasterLedger {
         }
     }
 
-    fn hash_statement(s: &Statement) -> String {
+    pub fn hash_statement(s: &Statement) -> String {
         let mut hasher = blake3::Hasher::new();
         hasher.update(s.content.as_bytes());
         hasher.update(format!("{:?}", s.modality).as_bytes());
