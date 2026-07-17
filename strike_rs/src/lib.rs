@@ -11,27 +11,36 @@ pub enum TaintError {
     TopologicalSortFailed,
 }
 
-/// Nodo del Poset Causal
+/// Nodo del Poset Causal (Owned para prevenir fugas de memoria por Box::leak en grafos dinámicos)
 #[derive(Debug, Clone)]
-pub struct CausalNode<'a> {
-    pub id: &'a str,
-    pub payload: &'a [u8],
+pub struct CausalNode {
+    pub id: String,
+    pub payload: Vec<u8>,
 }
 
-pub struct TaintEngine<'a> {
-    graph: DiGraph<CausalNode<'a>, ()>,
+pub struct TaintEngine {
+    graph: DiGraph<CausalNode, ()>,
 }
 
-impl<'a> TaintEngine<'a> {
+impl Default for TaintEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl TaintEngine {
     pub fn new() -> Self {
         Self {
             graph: DiGraph::new(),
         }
     }
 
-    /// Inyecta un nodo en el Causal Poset. Cero-Anergía.
-    pub fn add_node(&mut self, id: &'a str, payload: &'a [u8]) -> petgraph::graph::NodeIndex {
-        self.graph.add_node(CausalNode { id, payload })
+    /// Inyecta un nodo en el Causal Poset. Cero-Anergía y cero Box::leak.
+    pub fn add_node(&mut self, id: &str, payload: &[u8]) -> petgraph::graph::NodeIndex {
+        self.graph.add_node(CausalNode {
+            id: id.to_string(),
+            payload: payload.to_vec(),
+        })
     }
 
     /// Conecta dos nodos asegurando direccionalidad.
@@ -63,7 +72,7 @@ impl<'a> TaintEngine<'a> {
         for idx in sorted_indices {
             let node = &self.graph[idx];
             hasher.update(node.id.as_bytes());
-            hasher.update(node.payload);
+            hasher.update(&node.payload);
         }
 
         let hash_output = hasher.finalize();

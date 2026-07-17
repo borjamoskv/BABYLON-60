@@ -211,12 +211,8 @@ fn main() {
                     
                     let res = verify_primitive_p2p(abs_idx, d_idx, v_idx, inject_fault);
                     
-                    // Push to the TaintEngine DAG to enforce Kahn Invariant
-                    let pid_leaked: &'static str = Box::leak(res.primitive_id.clone().into_boxed_str());
-                    let taint_bytes = res.cortex_taint.as_bytes().to_vec();
-                    let taint_leaked: &'static [u8] = Box::leak(taint_bytes.into_boxed_slice());
-                    
-                    let node_ref = taint_engine.add_node(pid_leaked, taint_leaked);
+                    // Push to the TaintEngine DAG to enforce Kahn Invariant without Box::leak
+                    let node_ref = taint_engine.add_node(&res.primitive_id, res.cortex_taint.as_bytes());
                     node_indices.push(node_ref);
                     
                     domain_results.push(res);
@@ -286,5 +282,34 @@ fn main() {
     } else {
         eprintln!("[FAIL] P2P Rust verification incomplete ({}/1000). Aborting.", total_verified);
         std::process::exit(1);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_execute_re_drm_primitive_stable_and_byzantine() {
+        let node_stable = PeerNode { node_id: "PEER_ALPHA", seed_bias: 0 };
+        let (canon, hash) = node_stable.execute_re_drm_primitive("RE_DRM_Q1_PE_ELF_Headers_Extraction_000", "PE_ELF_Headers", "Extraction", 0);
+        assert!(canon.contains("VERIFIED_EMPIRICAL_RUST_C5"));
+        assert_eq!(hash, blake3_hash(canon.as_bytes()));
+
+        let node_byz = PeerNode { node_id: "PEER_GAMMA", seed_bias: 1337 };
+        let (canon_byz, hash_byz) = node_byz.execute_re_drm_primitive("RE_DRM_Q1_PE_ELF_Headers_Extraction_000", "PE_ELF_Headers", "Extraction", 0);
+        assert!(canon_byz.contains("BIZANTINE_DRIFT_RE_DRM"));
+        assert_ne!(hash, hash_byz);
+    }
+
+    #[test]
+    fn test_verify_primitive_p2p_quorums() {
+        let res_stable = verify_primitive_p2p(0, 0, 0, false);
+        assert_eq!(res_stable.quorum_match, "3/3");
+        assert_eq!(res_stable.consensus_verd, "VERIFIED_BFT_3_OF_3_UNANIMOUS");
+
+        let res_byz = verify_primitive_p2p(11, 0, 0, true);
+        assert_eq!(res_byz.quorum_match, "2/3");
+        assert_eq!(res_byz.consensus_verd, "VERIFIED_BFT_2_OF_3_QUORUM_DRIFT_ISOLATED");
     }
 }

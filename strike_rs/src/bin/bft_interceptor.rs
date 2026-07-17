@@ -204,3 +204,60 @@ mod hex {
         data.iter().map(|b| format!("{:02x}", b)).collect()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_canonical_serialize() {
+        let buf = canonical_serialize(123456789, "TEST_EVENT", "payload_data");
+        assert_eq!(&buf[0..8], &123456789u64.to_be_bytes());
+        assert_eq!(&buf[8..12], &10u32.to_be_bytes());
+        assert_eq!(&buf[12..22], b"TEST_EVENT");
+    }
+
+    #[test]
+    fn test_hash_leaf_domain_separation() {
+        let key_bytes = vec![0x41; 32];
+        let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
+        let h1 = hash_leaf(&key, &[0u8; 32], b"data_1");
+        let h2 = hash_leaf(&key, &[0u8; 32], b"data_2");
+        assert_ne!(h1, h2);
+        assert_eq!(h1.len(), 32);
+    }
+
+    #[test]
+    fn test_bft_ledger_merkle_root() {
+        let key_bytes = vec![0x42; 32];
+        let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
+        let conn = Connection::open_in_memory().unwrap();
+        conn.execute_batch(
+            "CREATE TABLE transactions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp INTEGER NOT NULL,
+                event_type TEXT NOT NULL,
+                payload TEXT NOT NULL,
+                prev_hash TEXT NOT NULL,
+                curr_hash TEXT NOT NULL
+            );"
+        ).unwrap();
+
+        let mut ledger = BftLedger {
+            conn,
+            last_hash: vec![0u8; 32],
+            key,
+            all_hashes: Vec::new(),
+        };
+
+        assert_eq!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
+
+        ledger.insert("EVENT_A", "payload_A").unwrap();
+        assert_ne!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
+        let root_1 = ledger.compute_merkle_root();
+
+        ledger.insert("EVENT_B", "payload_B").unwrap();
+        let root_2 = ledger.compute_merkle_root();
+        assert_ne!(root_1, root_2);
+    }
+}

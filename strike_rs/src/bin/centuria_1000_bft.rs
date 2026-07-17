@@ -8,6 +8,7 @@
 
 use blake3;
 use rusqlite::Connection;
+use strike_rs::TaintEngine;
 use std::fs;
 use std::path::Path;
 use std::sync::{Arc, Mutex};
@@ -197,12 +198,25 @@ fn main() {
         let results_clone = Arc::clone(&results);
         let handle = thread::spawn(move || {
             let mut domain_results = Vec::with_capacity(100);
+            let mut taint_engine = TaintEngine::new();
+            let mut node_indices = Vec::with_capacity(100);
+            
             for p in 1..=100 {
                 let p_num = (d * 100) + p;
                 let inject_fault = p_num == 100 || p_num == 250 || p_num == 500 || p_num == 750 || p_num == 999;
                 let res = verify_primitive_p2p(p_num, d, inject_fault);
+                
+                let node_ref = taint_engine.add_node(&res.primitive_id, res.cortex_taint.as_bytes());
+                node_indices.push(node_ref);
+                
                 domain_results.push(res);
             }
+            
+            for i in 0..node_indices.len() - 1 {
+                taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+            }
+            assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside Centuria execution flow");
+            
             let mut guard = results_clone.lock().expect("[C5-REAL] FATAL: Mutex poisoned in domain thread");
             guard.extend(domain_results);
         });
@@ -258,5 +272,34 @@ fn main() {
     } else {
         eprintln!("[FAIL] Verificación Par-Par Rust Incompleta ({}/1000). Abortando.", total_verified);
         std::process::exit(1);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_peer_node_execute_primitive() {
+        let node_honest = PeerNode { node_id: "HONEST_NODE", seed_bias: 0 };
+        let (canon, hash) = node_honest.execute_primitive("P_0001", "T01_Causal_Ontology_Pearl", 1);
+        assert!(canon.contains("VERIFIED_EMPIRICAL_RUST_C5"));
+        assert_eq!(hash, blake3_hash(canon.as_bytes()));
+
+        let node_byzantine = PeerNode { node_id: "BYZ_NODE", seed_bias: 999 };
+        let (canon_byz, hash_byz) = node_byzantine.execute_primitive("P_0001", "T01_Causal_Ontology_Pearl", 1);
+        assert!(canon_byz.contains("BIZANTINE_DRIFT_RUST"));
+        assert_ne!(hash, hash_byz);
+    }
+
+    #[test]
+    fn test_verify_primitive_p2p_consensus() {
+        let res_clean = verify_primitive_p2p(1, 0, false);
+        assert_eq!(res_clean.quorum_match, "3/3");
+        assert_eq!(res_clean.consensus_verd, "VERIFIED_BFT_3_OF_3_STABLE");
+
+        let res_faulty = verify_primitive_p2p(100, 0, true);
+        assert_eq!(res_faulty.quorum_match, "2/3");
+        assert_eq!(res_faulty.consensus_verd, "VERIFIED_BFT_2_OF_3_QUORUM_ISOLATED_ANOMALY");
     }
 }
