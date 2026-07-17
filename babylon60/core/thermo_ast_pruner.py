@@ -6,7 +6,7 @@ import argparse
 
 
 class AnergiaPurger(ast.NodeTransformer):
-    def __init__(self, code: str) -> None:
+    def __init__(self) -> None:
         self.injected_kill = False
 
     def visit_Expr(self, node: ast.Expr) -> Optional[ast.AST]:
@@ -74,7 +74,7 @@ def transmute_file(filepath: str) -> None:
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
         tree = ast.parse(content)
-    purger = AnergiaPurger(content)
+    purger = AnergiaPurger()
     mutated_tree = purger.visit(tree)
     ast.fix_missing_locations(mutated_tree)
     with open(filepath, "w", encoding="utf-8") as f:

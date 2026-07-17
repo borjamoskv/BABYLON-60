@@ -10,7 +10,7 @@ def example():
     return x
 """
     tree = ast.parse(source)
-    purger = AnergiaPurger(source)
+    purger = AnergiaPurger()
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
 
@@ -26,7 +26,7 @@ except Exception:
     pass
 """
     tree = ast.parse(source)
-    purger = AnergiaPurger(source)
+    purger = AnergiaPurger()
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
 
