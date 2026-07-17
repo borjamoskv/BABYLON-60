@@ -4,7 +4,9 @@ import json
 import subprocess
 import time
 
-sys.path.append("/Users/borjafernandezangulo/.gemini/config/skills/Swarm_Thread_Dispatcher")
+import os
+home = os.path.expanduser("~")
+sys.path.append(os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher"))
 from c5_swarm_compiler import ThermodynamicSwarmCompiler
 
 def run_ruff_fix():
@@ -57,10 +59,9 @@ def execute_swarm_audit():
 
     print(f"✅ Swarm compiled: {len(subagents)} nodes registered.")
     
-    # Audit transcript and ledger
-    transcript_path = "/Users/borjafernandezangulo/.gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl"
+    transcript_path = os.path.join(home, ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl")
     print("⚡ [LEA_OMEGA] Running cognitive audit...")
-    audit_script = "/Users/borjafernandezangulo/.gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"
+    audit_script = os.path.join(home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py")
     
     try:
         res = subprocess.run(["python3", audit_script, transcript_path], capture_output=True, text=True, check=True)
@@ -116,7 +117,7 @@ CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:anergy_purge_100:2026-07-18T00:39:00+00:0
 ```
 """
 
-    report_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/ANERGY_TOKEN_PURGE_REPORT.md"
+    report_path = "ANERGY_TOKEN_PURGE_REPORT.md"
     with open(report_path, "w") as f:
         f.write(report_content)
     print(f"✅ Unified Report written to: {report_path}")

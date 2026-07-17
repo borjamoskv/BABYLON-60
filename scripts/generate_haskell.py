@@ -465,13 +465,13 @@ def generate_python_test(domains, primitives, modifiers, output_path):
     print(f"Generated Python test suite in {output_path}")
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/haskell_1000_taxonomy.yaml"
-    go_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/haskell_1000.go"
-    rust_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/haskell_1000.rs"
-    py_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/haskell_1000.py"
-    haskell_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/Haskell1000.hs"
-    go_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/haskell_1000_test.go"
-    py_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/haskell_1000_test.py"
+    yaml_path = "cortex/ontology/haskell_1000_taxonomy.yaml"
+    go_output = "primitives/haskell_1000.go"
+    rust_output = "src-tauri/src/haskell_1000.rs"
+    py_output = "cortex/haskell_1000.py"
+    haskell_output = "primitives/Haskell1000.hs"
+    go_test_output = "primitives/haskell_1000_test.go"
+    py_test_output = "cortex/haskell_1000_test.py"
     
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)

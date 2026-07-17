@@ -326,11 +326,11 @@ def generate_go_test(domains, primitives, modifiers, output_path):
     print(f"Generated Go test suite in {output_path}")
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/tts_harness_1000_taxonomy.yaml"
-    go_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/tts_harness.go"
-    rust_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/tts_harness.rs"
-    py_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/tts_harness.py"
-    go_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/tts_harness_test.go"
+    yaml_path = "cortex/ontology/tts_harness_1000_taxonomy.yaml"
+    go_output = "primitives/tts_harness.go"
+    rust_output = "src-tauri/src/tts_harness.rs"
+    py_output = "cortex/tts_harness.py"
+    go_test_output = "primitives/tts_harness_test.go"
     
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)

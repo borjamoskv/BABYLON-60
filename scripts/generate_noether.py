@@ -359,12 +359,12 @@ def generate_python_test(domains, primitives, modifiers, output_path):
     print(f"Generated Python test suite in {output_path}")
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/noether_1000_taxonomy.yaml"
-    go_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/noether.go"
-    rust_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/noether.rs"
-    py_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/noether.py"
-    go_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/noether_test.go"
-    py_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/noether_test.py"
+    yaml_path = "cortex/ontology/noether_1000_taxonomy.yaml"
+    go_output = "primitives/noether.go"
+    rust_output = "src-tauri/src/noether.rs"
+    py_output = "cortex/noether.py"
+    go_test_output = "primitives/noether_test.go"
+    py_test_output = "cortex/noether_test.py"
     
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)

@@ -1,6 +1,6 @@
 import os
 
-ROOT = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv"
+ROOT = "."
 
 def update_taxonomy():
     old_yaml = os.path.join(ROOT, "cortex", "ontology", "1000_space_taxonomy.yaml")
@@ -49,8 +49,8 @@ def update_generate_primitives():
 import re
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/10000_space_taxonomy.yaml"
-    output_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/primitives_generated.rs"
+    yaml_path = "cortex/ontology/10000_space_taxonomy.yaml"
+    output_path = "src-tauri/src/primitives_generated.rs"
     
     with open(yaml_path, 'r') as f:
         content = f.read()
@@ -137,9 +137,9 @@ import (
 )
 
 func main() {
-	yamlPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/10000_space_taxonomy.yaml"
-	primitivesDir := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives"
-	reportPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/AUDITORIA_TAXONOMIA_REPORT.md"
+	yamlPath := "cortex/ontology/10000_space_taxonomy.yaml"
+	primitivesDir := "primitives"
+	reportPath := "AUDITORIA_TAXONOMIA_REPORT.md"
 
 	content, err := ioutil.ReadFile(yamlPath)
 	if err != nil {

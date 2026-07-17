@@ -326,11 +326,11 @@ def generate_go_test(domains, primitives, modifiers, output_path):
     print(f"Generated Go test suite in {output_path}")
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/neuro_chain_1000_taxonomy.yaml"
-    go_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/neuro_chain.go"
-    rust_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/neuro_chain.rs"
-    py_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/neuro_chain.py"
-    go_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/neuro_chain_test.go"
+    yaml_path = "cortex/ontology/neuro_chain_1000_taxonomy.yaml"
+    go_output = "primitives/neuro_chain.go"
+    rust_output = "src-tauri/src/neuro_chain.rs"
+    py_output = "cortex/neuro_chain.py"
+    go_test_output = "primitives/neuro_chain_test.go"
     
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)

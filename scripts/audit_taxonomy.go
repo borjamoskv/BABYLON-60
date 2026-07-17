@@ -11,9 +11,9 @@ import (
 )
 
 func main() {
-	yamlPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/10000_space_taxonomy.yaml"
-	primitivesDir := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives"
-	reportPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/AUDITORIA_TAXONOMIA_REPORT.md"
+	yamlPath := "cortex/ontology/10000_space_taxonomy.yaml"
+	primitivesDir := "primitives"
+	reportPath := "AUDITORIA_TAXONOMIA_REPORT.md"
 
 	content, err := ioutil.ReadFile(yamlPath)
 	if err != nil {

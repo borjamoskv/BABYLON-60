@@ -329,11 +329,11 @@ def generate_go_test(domains, primitives, modifiers, output_path):
     print(f"Generated Go test suite in {output_path}")
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/state_observer_1000_taxonomy.yaml"
-    go_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/state_observer.go"
-    rust_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/state_observer.rs"
-    py_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/state_observer.py"
-    go_test_output = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/state_observer_test.go"
+    yaml_path = "cortex/ontology/state_observer_1000_taxonomy.yaml"
+    go_output = "primitives/state_observer.go"
+    rust_output = "src-tauri/src/state_observer.rs"
+    py_output = "cortex/state_observer.py"
+    go_test_output = "primitives/state_observer_test.go"
     
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)

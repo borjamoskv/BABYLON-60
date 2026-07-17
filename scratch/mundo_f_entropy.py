@@ -68,7 +68,7 @@ Assertion: El texto fundacional de Mundo F (Arena) ha sido colapsado físicament
 ---
 """
 
-with open("/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/mundo_f_ledger.yml", "a") as f:
+with open("mundo_f_ledger.yml", "a") as f:
     f.write(yaml_payload)
 
 print(yaml_payload)

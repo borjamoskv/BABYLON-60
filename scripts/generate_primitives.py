@@ -2,8 +2,8 @@ import os
 import re
 
 def main():
-    yaml_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ontology/10000_space_taxonomy.yaml"
-    output_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/src-tauri/src/primitives_generated.rs"
+    yaml_path = "cortex/ontology/10000_space_taxonomy.yaml"
+    output_path = "src-tauri/src/primitives_generated.rs"
     
     with open(yaml_path, 'r') as f:
         content = f.read()
