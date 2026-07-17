@@ -34,7 +34,7 @@ Este dispatch se funda en algo más duro que 96 opiniones: **sondas forenses det
 | CENT-09 | 🟡 MEDIO | Auto-commits que saltan hooks **y** CI | `scripts/objectives_manager.py:31` · `compile_arsenal_1000.py:66` · `scratch/transduce_*` | `--no-verify`+`[skip ci]` · C5-REAL |
 | CENT-10 | 🟡 MEDIO | MD5 + inconsistencia de hash entre superficies | `attest_character_count.py:37` · `llm-attest.py` vs `core/crypto.py` vs `strike_rs` | Viola BLAKE3/SHA3 · C5-REAL |
 | CENT-11 | 🟡 MEDIO | `except:` desnudo en la herramienta de auditoría | `scratch/hyper_audit.py:165,220` (+18 broad-except totales) | Viola AGENTS.md · C5-REAL |
-| CENT-12 | 🔵 BAJO | Rutas absolutas hardcodeadas | 19 ocurrencias / 11 ficheros (`/Users/borjafernandezangulo/…`) | Portabilidad/opsec · C5-REAL |
+| CENT-12 | 🔵 BAJO | Rutas absolutas hardcodeadas | 19 ocurrencias / 11 ficheros (`~/…`) | Portabilidad/opsec · C5-REAL |
 | CENT-13 | 🔵 BAJO | `transferOwnership` de un solo paso | `contracts/MaxRouterAnchor.sol:91` | Sin Ownable2Step · C5-REAL |
 | CENT-14 | 🔵 BAJO | `.replace("sha256:","")` no-op sobre hash SHA3 | `babylon60/bft/consensus_ledger.py:33` | Confusión sha256/sha3 · C5-REAL |
 | CENT-15 | 🔵 BAJO | Pragmas Solidity flotantes `^0.8.x` | todos los `.sol` | Sin pin de compilador |

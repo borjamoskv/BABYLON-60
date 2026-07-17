@@ -62,7 +62,7 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ## Filesystem Boundaries
 
-- **Working space:** `/Users/borjafernandezangulo/10_PROJECTS/` and `20_VAULT/`
+- **Working space:** `~/10_PROJECTS/` and `20_VAULT/`
 - **Read-only / immutable:** `cortex.db` central database — use sidecar DBs for mutations
 - **Do not touch:** `/private/var/db`, `/System`, `Mobile Documents`, virtualization disks
 

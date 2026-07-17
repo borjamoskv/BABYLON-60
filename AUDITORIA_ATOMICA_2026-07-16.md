@@ -56,7 +56,7 @@ Repro: `git show HEAD:.env.vault` · `git log --oneline -- .env.vault`
 - Estrategia de defensa ante inspección fiscal (NFT 2021-2024): `ESCUDO_DEFENSA_INSPECCION_NFT_2021_2024.md`, `ESCRITO_ALEGACIONES_INSPECCION_HFB_NFT.md`.
 - **Dato de salud (categoría especial, art. 9 RGPD):** `C5_RESUMEN_PERICIAL_HERMANA_LORENA.md`.
 - Comunicaciones con abogado: `C5_MENSAJE_ACTUALIZADO_ABOGADO_RICARDO.md`, `EMAIL_RICARDO_AKORN_DOSSIER_TOTAL.md`.
-- **Logs locales de Claude Code** con rutas `/Users/borjafernandezangulo/...`: 4 `.jsonl` bajo `claude_code_local_logs/`.
+- **Logs locales de Claude Code** con rutas `~/...`: 4 `.jsonl` bajo `claude_code_local_logs/`.
 - OSINT/crónica de terceros: `DOSSIER_OSINT_ANTHROPIC_2026.md`, `LA_GUERRA_CON_ANTHROPIC_CRONICA_TOTAL.md`, `MEMORANDUM_INVESTIGACION_ARENA_Y_REVENG.md`.
 - Capturas (`evidencias_capturas/`).
 
