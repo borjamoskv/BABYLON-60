@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-# C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing
-# Vector: BFT_STATE_LOOP, Bypass estocástico (O(N^2) friction) mediante concurrencia atómica.
+# C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0)
+# Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning
 import os
 import re
 import math
 import hashlib
+import json
+import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import List, Dict, Any
 
@@ -36,8 +38,8 @@ def shannon_entropy(data: str) -> float:
 
 def scan_file(filepath: str) -> List[Dict[str, Any]]:
     findings = []
-    # Auto-evasión: No auditarse a sí mismo
-    if "secret_swarm_auditor.py" in filepath:
+    # Auto-evasión
+    if "secret_swarm_auditor.py" in filepath or not os.path.isfile(filepath):
         return findings
 
     try:
@@ -52,7 +54,6 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                     if p_name == 'GENERIC_SECRET':
                         secret_val = match.group(2)
                     
-                    # C5-REAL Enmascaramiento estructural (Hash criptográfico)
                     secret_hash = hashlib.sha3_256(secret_val.encode()).hexdigest()[:16]
                     masked = secret_val[:4] + "..." + secret_val[-4:] if len(secret_val) > 8 else "***"
                     
@@ -61,14 +62,15 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                         'line': i + 1,
                         'type': p_name,
                         'masked_value': masked,
-                        'hash': secret_hash
+                        'hash': secret_hash,
+                        'entropy': None
                     })
 
-            # Check Entropy en palabras largas (Base64/Hex)
+            # Check Entropy
             words = re.findall(r'\b[a-zA-Z0-9+/=]{20,}\b', line)
             for w in words:
                 ent = shannon_entropy(w)
-                if ent > 4.8: # Alta entropía = Posible secreto
+                if ent > 4.8:
                     secret_hash = hashlib.sha3_256(w.encode()).hexdigest()[:16]
                     masked = w[:4] + "..." + w[-4:]
                     findings.append({
@@ -80,31 +82,83 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                         'hash': secret_hash
                     })
     except (UnicodeDecodeError, OSError):
-        # Failsafe silencioso limitado a IO/Encoding
         pass
         
     return findings
 
-def get_target_files(root_dir: str) -> List[str]:
+def get_target_files(root_dir: str, explicit_files: List[str] = None) -> List[str]:
     targets = []
+    if explicit_files:
+        for f in explicit_files:
+            if os.path.exists(f):
+                ext = os.path.splitext(f)[1].lower()
+                if ext not in EXCLUDE_EXTS:
+                    targets.append(os.path.abspath(f))
+        return targets
+
     for dirpath, dirnames, filenames in os.walk(root_dir):
-        # Poda de directorios de anergía
         dirnames[:] = [d for d in dirnames if d not in EXCLUDE_DIRS]
-        
         for f in filenames:
             ext = os.path.splitext(f)[1].lower()
             if ext not in EXCLUDE_EXTS:
                 targets.append(os.path.join(dirpath, f))
     return targets
 
+def export_sarif(findings: List[Dict[str, Any]], root: str, output_path: str):
+    sarif = {
+        "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+        "version": "2.1.0",
+        "runs": [{
+            "tool": {
+                "driver": {
+                    "name": "MOSKV-1 Swarm Auditor",
+                    "informationUri": "https://github.com/borjamoskv",
+                    "rules": [
+                        {
+                            "id": "SECRET-01",
+                            "name": "HardcodedSecret",
+                            "shortDescription": {"text": "Hardcoded top secret string detected."},
+                            "helpUri": "https://github.com/borjamoskv"
+                        }
+                    ]
+                }
+            },
+            "results": []
+        }]
+    }
+
+    for f in findings:
+        rel_path = os.path.relpath(f['file'], root)
+        msg = f"Detectado secreto tipo {f['type']} con hash {f['hash']}"
+        sarif["runs"][0]["results"].append({
+            "ruleId": "SECRET-01",
+            "message": {"text": msg},
+            "locations": [{
+                "physicalLocation": {
+                    "artifactLocation": {"uri": rel_path},
+                    "region": {
+                        "startLine": f['line'],
+                        "startColumn": 1
+                    }
+                }
+            }]
+        })
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(sarif, f, indent=2)
+
 def main():
-    root = "/Users/borjafernandezangulo/30_BABYLON-60"
-    files = get_target_files(root)
+    parser = argparse.ArgumentParser(description="C5-REAL Swarm Secret Auditor")
+    parser.add_argument("--files", nargs='*', help="Delta mode: specific files to scan")
+    parser.add_argument("--sarif", action="store_true", help="Generate SARIF report")
+    args = parser.parse_args()
+
+    root = os.getcwd()
+    files = get_target_files(root, explicit_files=args.files)
     
-    print(f"[C5-REAL] Swarm Audit Initialized (ITERATION 2). Targets: {len(files)} files.")
+    print(f"[*] C5-REAL Swarm (ULTRATHINK P0). Escaneando {len(files)} deltas/archivos...")
     
     all_findings = []
-    # Despliegue de Enjambre Físico (max_workers)
     with ProcessPoolExecutor() as executor:
         futures = {executor.submit(scan_file, f): f for f in files}
         for future in as_completed(futures):
@@ -112,25 +166,26 @@ def main():
             if res:
                 all_findings.extend(res)
     
-    # Consolidación del Ledger
-    report_path = os.path.join(root, "AUDITORIA_TOP_SECRET.md")
-    with open(report_path, "w", encoding="utf-8") as rf:
-        rf.write("# C5-REAL: AUDITORÍA TOP SECRET (MASTER LEDGER - ITERATION 2)\n\n")
-        rf.write("> **MOSKV-1 APEX SINGULARITY**\n")
-        rf.write(f"> Total Archivos Escaneados: {len(files)}\n")
-        rf.write(f"> Anomalías Detectadas: {len(all_findings)}\n\n")
-        
-        if not all_findings:
-            rf.write("## ESTADO BFT: LIMPIO\nNo se detectó entropía TOP SECRET en el repositorio tras la poda de Anergía.\n")
-        else:
-            rf.write("## VULNERABILIDADES DETECTADAS\n\n")
-            rf.write("| Archivo | Línea | Tipo | Valor Enmascarado | Hash (SHA3-256) | Entropía |\n")
-            rf.write("|---|---|---|---|---|---|\n")
-            for f in all_findings:
-                ent_str = str(f.get('entropy', '-'))
-                rf.write(f"| `{os.path.relpath(f['file'], root)}` | {f['line']} | {f['type']} | `{f['masked_value']}` | `{f['hash']}` | {ent_str} |\n")
-                
-    print(f"[C5-REAL] Auditoría Completada. Resultados consolidados en: {report_path}")
+    # CI PR Annotations
+    in_ci = os.environ.get("GITHUB_ACTIONS") == "true"
+    if all_findings:
+        for f in all_findings:
+            rel_path = os.path.relpath(f['file'], root)
+            if in_ci:
+                print(f"::error file={rel_path},line={f['line']}::[C5-REAL] Secret Detected: {f['type']} ({f['hash']})")
+    
+    # SARIF Output
+    if args.sarif:
+        export_sarif(all_findings, root, os.path.join(root, "secret_audit.sarif"))
+        print("[*] Reporte SARIF generado: secret_audit.sarif")
+
+    # BFT State
+    if all_findings:
+        print("[!] ANERGÍA DETECTADA. Fricción estructural encontrada.")
+        exit(1)
+    else:
+        print("[*] ESTADO BFT: LIMPIO.")
+        exit(0)
 
 if __name__ == "__main__":
     main()

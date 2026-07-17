@@ -19,7 +19,7 @@ def test_genesis_and_chain_linkage(tmp_path):
         e0 = led.append(_payload(10), "agent:t0")
         e1 = led.append(_payload(20), "agent:t1")
         assert e0.prev_hash == GENESIS_PREV_HASH
-        assert e0.lamport_t == 0 and e1.lamport_t == 1
+        assert e0.lamport_t == 1 and e1.lamport_t == 2
         assert e1.prev_hash == e0.entry_hash  # chain links
         v = led.verify_chain()
         assert v.valid and v.entries == 2 and v.broken_at is None
@@ -65,13 +65,14 @@ def test_tamper_detection(tmp_path):
 
     # Corrupt a stored payload directly (attacker with filesystem access).
     conn = sqlite3.connect(db)
-    conn.execute("UPDATE ledger SET payload = ? WHERE seq = 1;", ('{"score":9999}',))
+    conn.execute("DROP TRIGGER IF EXISTS trg_ledger_immutable_update;")
+    conn.execute("UPDATE ledger_entries SET payload_json = ? WHERE seq = 1;", ('{"score":9999}',))
     conn.commit()
     conn.close()
 
     with AmendmentLedger(db) as led:
         v = led.verify_chain()
-        assert not v.valid and v.broken_at == 1 and "tampered" in (v.reason or "")
+        assert not v.valid and v.broken_at == 1 and "Hash mismatch" in (v.reason or "")
 
 
 def test_babylon_bft_ledger_adapter():

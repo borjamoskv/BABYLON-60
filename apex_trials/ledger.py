@@ -30,14 +30,21 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 
 from __future__ import annotations
 
+import asyncio
 import hashlib
 import json
+import os
+import re
 import sqlite3
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+import aiosqlite
+
+from babylon60.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
 
 # Fixed namespace so UUID v5 idempotency keys are stable across machines/runs.
 CORTEX_NAMESPACE: uuid.UUID = uuid.uuid5(uuid.NAMESPACE_URL, "moskv://apex-trials/ledger/v1")
@@ -112,33 +119,53 @@ class ChainVerification:
 
 
 class AmendmentLedger:
-    """Single-writer, hash-chained, WAL-backed ledger. cortex-persist contract."""
-
-    _SCHEMA = """
-    CREATE TABLE IF NOT EXISTS ledger (
-        seq          INTEGER PRIMARY KEY AUTOINCREMENT,
-        id           TEXT    NOT NULL UNIQUE,
-        prev_hash    TEXT    NOT NULL,
-        entry_hash   TEXT    NOT NULL,
-        payload      TEXT    NOT NULL,
-        causal_taint TEXT    NOT NULL,
-        lamport_t    INTEGER NOT NULL,
-        agent_id     TEXT    NOT NULL,
-        created_at   TEXT    NOT NULL
-    );
-    """
+    """Single-writer, BFT-backed ledger wrapper for babylon60.bft.ledger_actor."""
 
     def __init__(self, db_path: str | Path = "master_ledger.db") -> None:
-        self.db_path = str(db_path)
-        self._conn = sqlite3.connect(self.db_path, isolation_level=None, timeout=5.0)
-        self._conn.row_factory = sqlite3.Row
-        self._conn.execute("PRAGMA journal_mode=WAL;")
-        self._conn.execute("PRAGMA busy_timeout=5000;")
-        self._conn.execute("PRAGMA foreign_keys=ON;")
-        self._conn.executescript(self._SCHEMA)
+        self.db_path = Path(db_path)
+        # Create schema and immutable triggers synchronously using sqlite3
+        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        try:
+            conn.execute("PRAGMA journal_mode=WAL;")
+            conn.execute("PRAGMA busy_timeout=5000;")
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS ledger_entries (
+                    seq INTEGER PRIMARY KEY AUTOINCREMENT,
+                    event_id TEXT NOT NULL UNIQUE,
+                    stream TEXT NOT NULL CHECK (length(stream) > 0),
+                    entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),
+                    event_type TEXT NOT NULL CHECK (length(event_type) > 0),
+                    payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),
+                    source_db TEXT NOT NULL CHECK (length(source_db) > 0),
+                    source_table TEXT NOT NULL CHECK (length(source_table) > 0),
+                    source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),
+                    cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),
+                    lamport_t INTEGER NOT NULL UNIQUE CHECK (lamport_t > 0),
+                    prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),
+                    entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),
+                    created_at TEXT NOT NULL
+                );
+                """
+            )
+            conn.execute(
+                """
+                CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_update BEFORE UPDATE ON ledger_entries
+                BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;
+                """
+            )
+            conn.execute(
+                """
+                CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_delete BEFORE DELETE ON ledger_entries
+                BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;
+                """
+            )
+            conn.commit()
+        finally:
+            conn.close()
 
     def close(self) -> None:
-        self._conn.close()
+        pass
 
     def __enter__(self) -> "AmendmentLedger":
         return self
@@ -146,7 +173,6 @@ class AmendmentLedger:
     def __exit__(self, *_exc: object) -> None:
         self.close()
 
-    # -- writer (single writer discipline: one connection, serialized) -----------
     def append(
         self,
         payload: dict[str, Any],
@@ -157,89 +183,120 @@ class AmendmentLedger:
         if not causal_taint or ":" not in causal_taint:
             raise ValueError("causal_taint is mandatory and must be 'agent:reason' (INV_BFT_03)")
 
-        entry_id = compute_entry_id(payload, causal_taint, agent_id)
-        existing = self.get_by_id(entry_id)
-        if existing is not None:
-            return existing  # INV_BFT_04: reject duplicate silently, return prior entry.
+        async def _run() -> LedgerEntry:
+            actor = BFTLedgerActor(self.db_path)
+            await actor.start()
+            try:
+                entity_id = str(payload.get("nct_id", uuid.uuid4()))
+                content_id = compute_entry_id(payload, causal_taint, agent_id)
+                h_val = int(hashlib.sha256(content_id.encode("utf-8")).hexdigest()[:8], 16)
+                dt = datetime.fromtimestamp(1771000000 + (h_val % 1000000), tz=timezone.utc)
+                created_at = dt.isoformat(timespec="microseconds").replace("+00:00", "Z")
 
-        cur = self._conn.execute("SELECT entry_hash, lamport_t FROM ledger ORDER BY seq DESC LIMIT 1;")
-        row = cur.fetchone()
-        prev_hash = row["entry_hash"] if row is not None else GENESIS_PREV_HASH
-        lamport_t = (row["lamport_t"] + 1) if row is not None else 0
+                event = LedgerEvent(
+                    stream="apex_trials",
+                    entity_id=entity_id,
+                    event_type="risk_score",
+                    payload=payload,
+                    cortex_taint=causal_taint,
+                    source_db="apex_trials.db",
+                    source_table="assessments",
+                    source_pk=entity_id,
+                    created_at=created_at,
+                )
+                res = await actor.append(event)
 
-        entry_hash = compute_entry_hash(prev_hash, entry_id, causal_taint, lamport_t, agent_id, payload)
-        created_at = datetime.now(timezone.utc).isoformat()
-        payload_json = canonical(payload)
+                # Retrieve the inserted record
+                async with aiosqlite.connect(self.db_path) as db:
+                    db.row_factory = aiosqlite.Row
+                    async with db.execute(
+                        "SELECT * FROM ledger_entries WHERE event_id = ?", (res["event_id"],)
+                    ) as cursor:
+                        row = await cursor.fetchone()
+                        if row is None:
+                            raise RuntimeError(f"Written BFT entry not found for event_id={res['event_id']}")
+                        return self._row_to_entry(row)
+            finally:
+                await actor.stop()
 
-        self._conn.execute(
-            "INSERT OR IGNORE INTO ledger "
-            "(id, prev_hash, entry_hash, payload, causal_taint, lamport_t, agent_id, created_at) "
-            "VALUES (?,?,?,?,?,?,?,?);",
-            (entry_id, prev_hash, entry_hash, payload_json, causal_taint, lamport_t, agent_id, created_at),
-        )
-        written = self.get_by_id(entry_id)
-        if written is None:  # pragma: no cover - would indicate a storage fault
-            raise RuntimeError(f"ledger append failed for id={entry_id}")
-        return written
+        return asyncio.run(_run())
 
-    # -- readers -----------------------------------------------------------------
     def get_by_id(self, entry_id: str) -> LedgerEntry | None:
-        cur = self._conn.execute("SELECT * FROM ledger WHERE id = ?;", (entry_id,))
-        row = cur.fetchone()
-        return self._row_to_entry(row) if row is not None else None
+        async def _run() -> LedgerEntry | None:
+            async with aiosqlite.connect(self.db_path) as db:
+                db.row_factory = aiosqlite.Row
+                async with db.execute(
+                    "SELECT * FROM ledger_entries WHERE event_id = ?", (entry_id,)
+                ) as cursor:
+                    row = await cursor.fetchone()
+                    return self._row_to_entry(row) if row is not None else None
+
+        return asyncio.run(_run())
 
     def entries(self) -> list[LedgerEntry]:
-        cur = self._conn.execute("SELECT * FROM ledger ORDER BY seq ASC;")
-        return [self._row_to_entry(r) for r in cur.fetchall()]
+        async def _run() -> list[LedgerEntry]:
+            async with aiosqlite.connect(self.db_path) as db:
+                db.row_factory = aiosqlite.Row
+                async with db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC;") as cursor:
+                    rows = await cursor.fetchall()
+                    return [self._row_to_entry(r) for r in rows]
+
+        return asyncio.run(_run())
 
     def count(self) -> int:
-        cur = self._conn.execute("SELECT COUNT(*) AS n FROM ledger;")
-        return int(cur.fetchone()["n"])
+        async def _run() -> int:
+            async with aiosqlite.connect(self.db_path) as db:
+                async with db.execute("SELECT COUNT(*) AS n FROM ledger_entries;") as cursor:
+                    row = await cursor.fetchone()
+                    return int(row[0]) if row else 0
+
+        return asyncio.run(_run())
 
     def verify_chain(self) -> ChainVerification:
         """Recompute every hash and check linkage. Detects post-hoc tampering."""
-        rows = self.entries()
-        if not rows:
-            return ChainVerification(valid=True, entries=0, broken_at=None, reason=None)
 
-        expected_prev = GENESIS_PREV_HASH
-        for entry in rows:
-            if entry.prev_hash != expected_prev:
-                return ChainVerification(
-                    valid=False,
-                    entries=len(rows),
-                    broken_at=entry.seq,
-                    reason=f"prev_hash mismatch at seq={entry.seq}",
-                )
-            recomputed = compute_entry_hash(
-                entry.prev_hash,
-                entry.id,
-                entry.causal_taint,
-                entry.lamport_t,
-                entry.agent_id,
-                entry.payload,
-            )
-            if recomputed != entry.entry_hash:
-                return ChainVerification(
-                    valid=False,
-                    entries=len(rows),
-                    broken_at=entry.seq,
-                    reason=f"entry_hash mismatch at seq={entry.seq} (payload tampered)",
-                )
-            expected_prev = entry.entry_hash
-        return ChainVerification(valid=True, entries=len(rows), broken_at=None, reason=None)
+        async def _run() -> ChainVerification:
+            actor = BFTLedgerActor(self.db_path)
+            try:
+                valid = await actor.verify_chain()
+                entries = await self._async_count()
+                return ChainVerification(valid=valid, entries=entries, broken_at=None, reason=None)
+            except BFTCausalInvariantError as e:
+                reason = str(e)
+                entries = await self._async_count()
+                broken_at = None
+                match = re.search(r"at seq (\d+)", reason)
+                if match:
+                    broken_at = int(match.group(1))
+                return ChainVerification(valid=False, entries=entries, broken_at=broken_at, reason=reason)
+
+        return asyncio.run(_run())
+
+    async def _async_count(self) -> int:
+        async with aiosqlite.connect(self.db_path) as db:
+            async with db.execute("SELECT COUNT(*) AS n FROM ledger_entries;") as cursor:
+                row = await cursor.fetchone()
+                return int(row[0]) if row else 0
 
     @staticmethod
-    def _row_to_entry(row: sqlite3.Row) -> LedgerEntry:
+    def _row_to_entry(row: sqlite3.Row | aiosqlite.Row) -> LedgerEntry:
+        payload_json = str(row["payload_json"])
+        vault_key = os.environ.get("CORTEX_VAULT_KEY")
+        if vault_key and payload_json.startswith("C5ENC:"):
+            from cryptography.fernet import Fernet
+
+            fernet = Fernet(vault_key.encode("utf-8"))
+            payload_json = fernet.decrypt(payload_json[6:].encode("utf-8")).decode("utf-8")
+
         return LedgerEntry(
             seq=int(row["seq"]),
-            id=str(row["id"]),
+            id=str(row["event_id"]),
             prev_hash=str(row["prev_hash"]),
             entry_hash=str(row["entry_hash"]),
-            payload=json.loads(row["payload"]),
-            causal_taint=str(row["causal_taint"]),
+            payload=json.loads(payload_json),
+            causal_taint=str(row["cortex_taint"]),
             lamport_t=int(row["lamport_t"]),
-            agent_id=str(row["agent_id"]),
+            agent_id=str(row["entity_id"]),
             created_at=str(row["created_at"]),
         )
 
@@ -248,22 +305,45 @@ class BabylonBFTLedgerAdapter:
     """Adapter wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
 
     Transforms `append(payload, causal_taint)` into async/sync `BFTLedgerActor.append(LedgerEvent(...))`
-    and returns the underlying future or proxy record from the live BFT quorum.
+    and returns a mapped LedgerEntry for compatibility.
     """
 
-    def __init__(self, actor: Any) -> None:
-        self.actor = actor
+    def __init__(self, db_path: str | Path = "cortex.db") -> None:
+        self.db_path = str(db_path)
+        self._loop: Any = None
+        self._actor: Any = None
+
+    def __enter__(self) -> "BabylonBFTLedgerAdapter":
+        import asyncio
+        try:
+            from babylon60.bft.ledger_actor import BFTLedgerActor
+        except ImportError as exc:
+            raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
+
+        self._loop = asyncio.new_event_loop()
+        self._actor = BFTLedgerActor(self.db_path)
+        self._loop.run_until_complete(self._actor.start())
+        return self
+
+    def __exit__(self, *_exc: object) -> None:
+        if self._loop is not None and self._actor is not None:
+            self._loop.run_until_complete(self._actor.stop())
+            self._loop.close()
 
     def append(
         self,
         payload: dict[str, Any],
         causal_taint: str,
         agent_id: str = DEFAULT_AGENT_ID,
-    ) -> Any:
+    ) -> LedgerEntry:
+        import sqlite3
         try:
             from babylon60.bft.ledger_actor import LedgerEvent
         except ImportError as exc:
             raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
+
+        if self._loop is None or self._actor is None:
+            raise RuntimeError("BabylonBFTLedgerAdapter must be used as a context manager")
 
         entity_id = str(payload.get("nct_id", uuid.uuid4()))
         event = LedgerEvent(
@@ -276,4 +356,30 @@ class BabylonBFTLedgerAdapter:
             source_table="assessments",
             source_pk=entity_id,
         )
-        return self.actor.append(event)
+        
+        async def _do_append() -> Any:
+            future = self._actor.append(event)
+            return await future
+
+        res = self._loop.run_until_complete(_do_append())
+
+        # Mapeamos el resultado a un LedgerEntry síncrono accediendo directamente a SQLite
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.execute("SELECT * FROM ledger_entries WHERE event_id = ?;", (res["event_id"],))
+            row = cur.fetchone()
+
+        if row is None:
+            raise RuntimeError("Idempotency/Write failure: record not found after successful actor execution")
+
+        return LedgerEntry(
+            seq=int(row["seq"]),
+            id=str(row["event_id"]),
+            prev_hash=str(row["prev_hash"]),
+            entry_hash=str(row["entry_hash"]),
+            payload=json.loads(row["payload_json"]) if not str(row["payload_json"]).startswith("C5ENC:") else payload,
+            causal_taint=str(row["cortex_taint"]),
+            lamport_t=int(row["lamport_t"]),
+            agent_id=agent_id,
+            created_at=str(row["created_at"]),
+        )

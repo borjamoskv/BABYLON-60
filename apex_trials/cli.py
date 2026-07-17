@@ -32,6 +32,14 @@ def _client() -> CtGovClient:
     return CtGovClient(cache=HttpCache(DEFAULT_CACHE))
 
 
+def _get_ledger(db_path: str) -> Any:
+    if db_path == "live-bft" or db_path.startswith("bft:"):
+        from .ledger import BabylonBFTLedgerAdapter
+        actual_path = db_path.split(":", 1)[1] if ":" in db_path else "cortex.db"
+        return BabylonBFTLedgerAdapter(actual_path)
+    return AmendmentLedger(db_path)
+
+
 @click.group()
 def cli() -> None:
     """APEX-TRIALS — deterministic, auditable clinical-trial amendment-risk copilot."""
@@ -39,11 +47,11 @@ def cli() -> None:
 
 @cli.command()
 @click.argument("nct_id")
-@click.option("--db", default=DEFAULT_DB, help="Ledger DB path.")
+@click.option("--db", default=DEFAULT_DB, help="Ledger DB path (use 'live-bft' for BFT).")
 @click.option("--json", "as_json", is_flag=True, help="Emit machine-readable JSON.")
 def score(nct_id: str, db: str, as_json: bool) -> None:
     """Score a protocol and commit the decision to the hash-chain ledger."""
-    with AmendmentLedger(db) as ledger:
+    with _get_ledger(db) as ledger:
         result = Copilot(_client(), ledger).score(nct_id)
     if as_json:
         click.echo(json.dumps(result.as_dict(), indent=2))
@@ -69,13 +77,13 @@ def score(nct_id: str, db: str, as_json: bool) -> None:
 @cli.command()
 @click.argument("nct_id")
 @click.option("-o", "--out", default=None, help="Output HTML path (default: <NCT>_apex.html).")
-@click.option("--db", default=DEFAULT_DB, help="Ledger DB path.")
+@click.option("--db", default=DEFAULT_DB, help="Ledger DB path (use 'live-bft' for BFT).")
 @click.option("--calibrate", default=None, help="Condition to run cohort calibration against (optional).")
 @click.option("-n", "--cohort", default=30, help="Cohort size for --calibrate.")
 def report(nct_id: str, out: str | None, db: str, calibrate: str | None, cohort: int) -> None:
     """Render the Industrial Noir HTML attestation for a protocol."""
     client = _client()
-    with AmendmentLedger(db) as ledger:
+    with _get_ledger(db) as ledger:
         result = Copilot(client, ledger).score(nct_id)
     bt = run_backtest(client, condition=calibrate, n=cohort) if calibrate else None
     target = Path(out) if out else Path(f"{result.features.nct_id}_apex.html")
