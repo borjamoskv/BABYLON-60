@@ -1,0 +1,37 @@
+Claim: [SOTA-2026-INVARIANTS-ASSIMILATION] 10 Invariants of Frontier AI & Latent MCTS
+Proof:
+  Base: "Swarm Research Subagent (84cc4ff9-9b30-4001-975e-36b5ed950bc3)"
+  Sources: ["arXiv (2025-2026)", "GitHub SOTA Repositories", "OpenReview"]
+  Confidence: C5-REAL
+
+invariants:
+  INV_01:
+    Name: Per-Problem Adaptive Test-Time Compute Allocation
+    Principle: "Static inference budgets are obsolete; compute scales dynamically based on problem entropy."
+  INV_02:
+    Name: Continuous Latent-Space MCTS Lookahead
+    Principle: "Search has shifted from token-level discrete decoding to continuous latent-space lookahead search."
+  INV_03:
+    Name: Test-Time Policy Evolution & Online Optimization
+    Principle: "Inference-time reasoning operates as an online policy improvement loop rather than static expansion."
+  INV_04:
+    Name: Protocol Standardization & Token Purge (MCP)
+    Principle: "Tool integration standardizes on MCP, purging context overhead from >100k tokens to <2k tokens."
+  INV_05:
+    Name: Programmatic Code Execution vs. JSON Tooling
+    Principle: "Sandboxed programmatic execution (Python/JIT) replaces multi-turn JSON tool calls."
+  INV_06:
+    Name: Autonomous Dynamic Swarm Composition
+    Principle: "Monolithic architectures are superseded by specialized swarms with self-assembling communication graphs."
+  INV_07:
+    Name: Tri-Tiered Memory Architecture (Factual, Experiential, Working)
+    Principle: "Agent memory evolves into temporal knowledge graphs combined with vector state reconstruction."
+  INV_08:
+    Name: Information-Theoretic & Entropy-Aware KV Cache Eviction
+    Principle: "KV compression utilizes forward influence and predictive entropy over greedy attention scores."
+  INV_09:
+    Name: Stage-Aware Asymmetric Cache Optimization
+    Principle: "Prefill and decoding decoupled eviction strategies combined with retrospective attention correction."
+  INV_10:
+    Name: Pre-Decoder Latent Compression & Quantized KV Sinks
+    Principle: "Sequence compression occurs prior to decoder prefill alongside online vector quantization (TurboQuant)."
