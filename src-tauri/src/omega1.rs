@@ -67,6 +67,7 @@ pub struct KnowledgeEdge {
 /// The ONLY way to mutate this graph inside an invariant-preserving regime
 /// is through `rewrite()`. Direct mutations bypass invariants — correct usage
 /// restricts mutations to the `transform` field of a `TypedRewriteRule`.
+#[derive(Clone)]
 pub struct KnowledgeGraph<T: Clone + fmt::Debug> {
     pub nodes: Vec<Judgement<T>>,
     pub edges: Vec<KnowledgeEdge>,
