@@ -1,6 +1,7 @@
 pub mod lexicon;
 pub mod kernel;
 pub mod ledger;
+pub mod context;
 
 use std::sync::Mutex;
 use tauri::State;
@@ -55,18 +56,32 @@ pub fn run() {
     // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
     kernel::init_kernel();
 
+    let ctx_db = context::init_db().expect("Failed to initialize cognitive state db");
+    let ctx_state = context::ContextState(std::sync::Mutex::new(context::ContextStateInner {
+        current_state: context::CognitiveState::new(),
+        db: ctx_db,
+    }));
+
     tauri::Builder::default()
         .plugin(tauri_plugin_log::Builder::new().build())
         .manage(AppState {
             ledger: Mutex::new(ledger_instance),
         })
+        .manage(ctx_state)
         .invoke_handler(tauri::generate_handler![
             get_ledger_events,
             append_ledger_event,
             list_ontology_vectors,
             dispatch_vector,
             kernel::dispatch,
-            kernel::list_vectors
+            kernel::list_vectors,
+            context::get_cognitive_state,
+            context::checkpoint,
+            context::restore_checkpoint,
+            context::get_continuity_metrics,
+            context::get_cognitive_weather,
+            context::record_context_switch,
+            context::get_attention_budget
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
