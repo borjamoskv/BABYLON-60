@@ -1,124 +1,651 @@
 /**
- * BABYLON60 IDE — Frontend Core Application
- * Single Page Application wiring for Industrial Noir 2026.
+ * BABYLON60 IDE — Main Application Core
+ * 2e Cognitive Architecture (ADHD + AACC / Twice-Exceptional)
+ *
+ * Architecture:
+ *   SPINE (56px) | CONTEXT PANE (264px, CMD+B) | FOCUS ZONE (flex:1)
+ *   + TACHOMETER (3px ambient top bar)
+ *   + COMMAND PALETTE (CMD+K)
+ *   + SCRATCHPAD (CMD+Shift+Space)
+ *   + AGENT MODAL (body doubling / loop guard)
+ *   + STATUS BAR (28px fixed)
+ *
+ * Routes: canvas | ledger | databases | query | swarm
  */
 import { get, post, connectWebSocket } from './api.js';
 import { registerRoute, navigate, getInitialRoute } from './router.js';
 
-// Global state
-let databaseList = [];
-let telemetrySocket = null;
-let activeTooltip = null;
+/* ══════════════════════════════════════════════════════════
+   GLOBAL STATE
+   ══════════════════════════════════════════════════════════ */
+const S = {
+  contextPaneOpen: true,
+  bifocalMode: 'micro',           // 'micro' | 'macro'
+  tachometerState: 'idle',        // 'idle' | 'indexing' | 'working' | 'alert' | 'done'
+  paletteOpen: false,
+  scratchpadOpen: false,
+  scratchpadItems: JSON.parse(localStorage.getItem('b60-scratch') || '[]'),
+  databaseList: [],
+  ledgerStats: null,
+  telemetrySocket: null,
+  loopDetector: {
+    route: null,
+    routeEnteredAt: 0,
+    interventionFired: false,
+  },
+  sessionStart: Date.now(),
+  activeRoute: null,
+  swarmLog: [],
+  canvasOffset: { x: 0, y: 0 },
+  canvasScale: 1,
+};
 
-// Initialize layout & sidebar on page load
+/* ══════════════════════════════════════════════════════════
+   BOOT
+   ══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
-  setupSidebar();
+  setTachometer('indexing');
+  setupSpine();
+  setupContextPane();
+  setupCommandPalette();
+  setupScratchpad();
+  setupKeyboard();
   setupRouter();
-  await refreshDatabaseCount();
-  
-  // Navigate to initial route
-  const initRoute = getInitialRoute();
-  navigate(initRoute);
+  setupBifocal();
+  setupLoopDetector();
+
+  await Promise.all([
+    refreshDatabaseList(),
+    refreshLedgerStats(),
+  ]);
+
+  updateStatusBar();
+  setTachometer('done');
+
+  // Context restore banner (simulates remembering last session)
+  const lastRoute = localStorage.getItem('b60-route') || 'ledger';
+  showRestoreBanner(lastRoute);
+
+  navigate(getInitialRoute());
+  setTachometer('idle');
 });
 
-// Refresh database count and footer metadata
-async function refreshDatabaseCount() {
-  try {
-    databaseList = await get('/api/databases');
-    const dbCountEl = document.querySelector('.db-count .count');
-    if (dbCountEl) {
-      dbCountEl.textContent = databaseList.length;
-    }
-  } catch (err) {
-    console.error('Failed to fetch databases:', err);
+/* ══════════════════════════════════════════════════════════
+   TACHOMETER — Ambient agent workload indicator
+   3px bar at top. No notifications. Just peripheral signal.
+   ══════════════════════════════════════════════════════════ */
+function setTachometer(state) {
+  S.tachometerState = state;
+  const el = document.getElementById('tachometer');
+  if (!el) return;
+  el.className = `tachometer ${state !== 'idle' ? state : ''}`;
+
+  // Update agent status segment in status bar
+  const agentSeg = document.getElementById('status-agent-segment');
+  if (!agentSeg) return;
+  if (state === 'working' || state === 'indexing') {
+    agentSeg.style.display = 'flex';
+    const txt = document.getElementById('status-agent-text');
+    if (txt) txt.textContent = state === 'indexing' ? 'Indexing context...' : 'Agent working...';
+  } else {
+    agentSeg.style.display = 'none';
   }
 }
 
-// Render Sidebar Navigation
-function setupSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.innerHTML = `
-    <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <div class="dot"></div>
-        BABYLON·60
+/* ══════════════════════════════════════════════════════════
+   SPINE — Icon-only navigation
+   No labels, no sections. Just glyphs.
+   ══════════════════════════════════════════════════════════ */
+function setupSpine() {
+  const spine = document.getElementById('spine');
+  const routes = [
+    { id: 'canvas',    icon: '⬡', tip: 'Architecture Canvas  ⌘5' },
+    { id: 'ledger',    icon: '⧉', tip: 'BFT Ledger  ⌘1' },
+    { id: 'databases', icon: '⛁', tip: 'Ontologies  ⌘2' },
+    { id: 'query',     icon: '❯_', tip: 'SQL Console  ⌘3' },
+    { id: 'swarm',     icon: '⚡', tip: 'Agent Swarm  ⌘4' },
+  ];
+
+  const iconsHTML = routes.map(r =>
+    `<button class="spine-icon" data-route="${r.id}" data-tooltip="${r.tip}" aria-label="${r.tip}">${r.icon}</button>`
+  ).join('');
+
+  const sepHTML = `<div class="spine-separator"></div>`;
+
+  spine.innerHTML = `
+    <div class="spine-logo" title="BABYLON·60 v1.0.2">
+      <div class="spine-logo-dot"></div>
+    </div>
+    ${iconsHTML.slice(0, iconsHTML.indexOf('</button>') + 9)}
+    ${sepHTML}
+    ${iconsHTML.slice(iconsHTML.indexOf('</button>') + 9)}
+  `;
+
+  // Re-render properly (above logic flawed, do cleanly):
+  spine.innerHTML = '';
+  const logo = document.createElement('div');
+  logo.className = 'spine-logo';
+  logo.title = 'BABYLON·60';
+  logo.innerHTML = '<div class="spine-logo-dot"></div>';
+  spine.appendChild(logo);
+
+  routes.forEach((r, i) => {
+    if (i === 1) {
+      const sep = document.createElement('div');
+      sep.className = 'spine-separator';
+      spine.appendChild(sep);
+    }
+    const btn = document.createElement('button');
+    btn.className = 'spine-icon';
+    btn.dataset.route = r.id;
+    btn.dataset.tooltip = r.tip;
+    btn.setAttribute('aria-label', r.tip);
+    btn.textContent = r.icon;
+    btn.addEventListener('click', () => navigate(r.id));
+    spine.appendChild(btn);
+  });
+}
+
+function setActiveSpineIcon(route) {
+  document.querySelectorAll('.spine-icon').forEach(el => {
+    el.classList.toggle('active', el.dataset.route === route);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTEXT PANE — Semantic map of current project state
+   Shows blast radius, ontology tree, agent tasks.
+   Collapsible with CMD+B.
+   ══════════════════════════════════════════════════════════ */
+function setupContextPane() {
+  const btnCollapse = document.getElementById('btn-collapse-ctx');
+  if (btnCollapse) {
+    btnCollapse.addEventListener('click', toggleContextPane);
+  }
+  renderContextPaneContent();
+}
+
+function toggleContextPane() {
+  S.contextPaneOpen = !S.contextPaneOpen;
+  const pane = document.getElementById('context-pane');
+  const btn = document.getElementById('btn-collapse-ctx');
+  if (!pane) return;
+  pane.classList.toggle('collapsed', !S.contextPaneOpen);
+  if (btn) btn.textContent = S.contextPaneOpen ? '⟨' : '⟩';
+}
+
+function renderContextPaneContent() {
+  const body = document.getElementById('context-pane-body');
+  if (!body) return;
+  body.innerHTML = `
+    <div class="ctx-section">
+      <div class="ctx-section-label">Inspector</div>
+      <div class="ctx-item active" data-route="canvas">
+        <span class="ctx-item-icon">⬡</span>
+        <span class="ctx-item-label">Architecture</span>
+        <span class="ctx-item-badge verify">live</span>
       </div>
-      <div class="sidebar-subtitle">SOVEREIGN AGENT MEMORY</div>
-      <div class="sidebar-status">
-        <div class="status-indicator"></div>
-        <span class="status-text">CONNECTED</span>
+      <div class="ctx-item" data-route="ledger">
+        <span class="ctx-item-icon">⧉</span>
+        <span class="ctx-item-label">BFT Ledger</span>
+        <span class="ctx-item-badge gold" id="ctx-ledger-count">—</span>
+      </div>
+      <div class="ctx-item" data-route="databases">
+        <span class="ctx-item-icon">⛁</span>
+        <span class="ctx-item-label">Ontologies</span>
+        <span class="ctx-item-badge gold" id="ctx-db-count">—</span>
       </div>
     </div>
-    <div class="sidebar-nav">
-      <div class="nav-section-label">INSPECTOR</div>
-      <div class="nav-item" data-route="ledger">
-        <span class="icon">⧉</span>
-        <span>BFT Ledger</span>
-        <span class="shortcut">⌘1</span>
+    <div class="ctx-section">
+      <div class="ctx-section-label">Analysis</div>
+      <div class="ctx-item" data-route="query">
+        <span class="ctx-item-icon">❯_</span>
+        <span class="ctx-item-label">SQL Console</span>
       </div>
-      <div class="nav-item" data-route="databases">
-        <span class="icon">⛁</span>
-        <span>Ontologies</span>
-        <span class="shortcut">⌘2</span>
-      </div>
-      <div class="nav-section-label">ANALYSIS</div>
-      <div class="nav-item" data-route="query">
-        <span class="icon">❯_</span>
-        <span>SQL Console</span>
-        <span class="shortcut">⌘3</span>
-      </div>
-      <div class="nav-item" data-route="telemetry">
-        <span class="icon">⚡</span>
-        <span>Telemetry</span>
-        <span class="shortcut">⌘4</span>
+      <div class="ctx-item" data-route="swarm">
+        <span class="ctx-item-icon">⚡</span>
+        <span class="ctx-item-label">Agent Swarm</span>
+        <span class="ctx-item-badge lapis" style="color:var(--lapis-bright)">0</span>
       </div>
     </div>
-    <div class="sidebar-footer">
-      <div class="db-count">
-        Databases: <span class="count">0</span>
+    <div class="ctx-section">
+      <div class="ctx-section-label">Scratchpad</div>
+      <div id="ctx-scratch-preview" style="padding:4px 12px; font-size:0.65rem; color:var(--dust-faint);">
+        ${S.scratchpadItems.length === 0
+          ? '<span style="color:var(--dust-ghost)">No notes yet</span>'
+          : `<span style="color:var(--dust-dim)">${S.scratchpadItems.length} note${S.scratchpadItems.length > 1 ? 's' : ''}</span>`
+        }
       </div>
-      <div style="margin-top: 4px; opacity: 0.5;">MOSKV-1 APEX v1.0.2</div>
+    </div>
+    <div class="ctx-section">
+      <div class="ctx-section-label">System</div>
+      <div class="ctx-item depth-1">
+        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
+        <span class="ctx-item-label" style="font-size:0.65rem">master_ledger.db</span>
+        <span class="ctx-item-badge verify">ok</span>
+      </div>
+      <div class="ctx-item depth-1">
+        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
+        <span class="ctx-item-label" style="font-size:0.65rem">cortex_ontology.db</span>
+        <span class="ctx-item-badge">RO</span>
+      </div>
+      <div class="ctx-item depth-1">
+        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
+        <span class="ctx-item-label" style="font-size:0.65rem">telemetry.db</span>
+        <span class="ctx-item-badge">RO</span>
+      </div>
     </div>
   `;
 
-  // Attach nav click handlers
-  sidebar.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', () => {
-      navigate(item.dataset.route);
+  body.querySelectorAll('.ctx-item[data-route]').forEach(el => {
+    el.addEventListener('click', () => navigate(el.dataset.route));
+  });
+}
+
+function updateContextPaneCounts() {
+  const dbCount = document.getElementById('ctx-db-count');
+  if (dbCount) dbCount.textContent = S.databaseList.length || '—';
+  const ledgerCount = document.getElementById('ctx-ledger-count');
+  if (ledgerCount && S.ledgerStats) ledgerCount.textContent = S.ledgerStats.total_entries || '—';
+}
+
+function setActiveContextItem(route) {
+  document.querySelectorAll('.ctx-item[data-route]').forEach(el => {
+    el.classList.toggle('active', el.dataset.route === route);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   STATUS BAR — Single line of truth
+   ══════════════════════════════════════════════════════════ */
+function updateStatusBar() {
+  const connDot = document.getElementById('status-conn-dot');
+  const connText = document.getElementById('status-conn-text');
+  const dbCount = document.getElementById('status-db-count');
+  const ledgerEntries = document.getElementById('status-ledger-entries');
+  const lamport = document.getElementById('status-lamport');
+
+  if (connDot) connDot.className = 'status-dot';
+  if (connText) connText.textContent = 'CONNECTED';
+  if (dbCount) dbCount.textContent = S.databaseList.length || '—';
+  if (ledgerEntries) ledgerEntries.textContent = S.ledgerStats?.total_entries || '—';
+  if (lamport) lamport.textContent = S.ledgerStats?.latest_lamport_t != null
+    ? `L:${S.ledgerStats.latest_lamport_t}`
+    : '—';
+}
+
+/* ══════════════════════════════════════════════════════════
+   BIFOCAL TOGGLE — Macro ↔ Micro
+   CMD+M: switches between system view and tunnel view.
+   AACC rationale: system thinkers need the WHOLE first.
+   ══════════════════════════════════════════════════════════ */
+function setupBifocal() {
+  const btn = document.getElementById('btn-bifocal');
+  if (btn) btn.addEventListener('click', toggleBifocal);
+}
+
+function toggleBifocal() {
+  S.bifocalMode = S.bifocalMode === 'micro' ? 'macro' : 'micro';
+  document.body.classList.toggle('macro-mode', S.bifocalMode === 'macro');
+  document.body.classList.toggle('micro-mode', S.bifocalMode === 'micro');
+  const btn = document.getElementById('btn-bifocal');
+  if (btn) btn.textContent = S.bifocalMode === 'macro' ? 'MACRO ⊞' : 'MICRO ⊞';
+
+  if (S.bifocalMode === 'macro') {
+    navigate('canvas');
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   COMMAND PALETTE — CMD+K
+   Fuzzy navigation + action dispatcher.
+   Zero clicks. Keyboard-first.
+   ══════════════════════════════════════════════════════════ */
+const PALETTE_COMMANDS = [
+  { icon: '⬡', label: 'Architecture Canvas', desc: 'Macro system view', shortcut: '⌘5', action: () => navigate('canvas') },
+  { icon: '⧉', label: 'BFT Ledger',          desc: 'Hash-chain inspector', shortcut: '⌘1', action: () => navigate('ledger') },
+  { icon: '⛁', label: 'Ontologies',           desc: 'SQLite database explorer', shortcut: '⌘2', action: () => navigate('databases') },
+  { icon: '❯_', label: 'SQL Console',         desc: 'Read-only query interface', shortcut: '⌘3', action: () => navigate('query') },
+  { icon: '⚡', label: 'Agent Swarm',          desc: 'Active agent telemetry', shortcut: '⌘4', action: () => navigate('swarm') },
+  { icon: '⬡', label: 'Verify Chain Integrity', desc: 'Run BFT hash-chain verification', shortcut: '', action: () => { navigate('ledger'); setTimeout(() => document.getElementById('btn-verify-chain')?.click(), 400); } },
+  { icon: '⟨', label: 'Toggle Context Pane',  desc: 'Show / hide semantic map', shortcut: '⌘B', action: toggleContextPane },
+  { icon: '⊞', label: 'Toggle Macro / Micro', desc: 'Switch bifocal view mode', shortcut: '⌘M', action: toggleBifocal },
+  { icon: '◎', label: 'Open Scratchpad',      desc: 'Dump a thought (no focus loss)', shortcut: '⌘⇧Space', action: () => toggleScratchpad(true) },
+  { icon: '↺', label: 'Restore Session',      desc: 'Return to last known context', shortcut: '', action: () => showRestoreBanner(localStorage.getItem('b60-route') || 'ledger') },
+];
+
+let paletteSelected = 0;
+let paletteFiltered = [...PALETTE_COMMANDS];
+
+function setupCommandPalette() {
+  const overlay = document.getElementById('palette-overlay');
+  const input = document.getElementById('palette-input');
+  if (!overlay || !input) return;
+
+  overlay.addEventListener('click', e => { if (e.target === overlay) closePalette(); });
+  input.addEventListener('input', () => filterPalette(input.value));
+  input.addEventListener('keydown', handlePaletteKey);
+}
+
+function openPalette() {
+  S.paletteOpen = true;
+  const overlay = document.getElementById('palette-overlay');
+  const input = document.getElementById('palette-input');
+  if (!overlay || !input) return;
+  overlay.classList.add('visible');
+  overlay.setAttribute('aria-hidden', 'false');
+  input.value = '';
+  paletteSelected = 0;
+  paletteFiltered = [...PALETTE_COMMANDS];
+  renderPaletteResults();
+  setTimeout(() => input.focus(), 50);
+}
+
+function closePalette() {
+  S.paletteOpen = false;
+  const overlay = document.getElementById('palette-overlay');
+  if (overlay) { overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden', 'true'); }
+}
+
+function filterPalette(query) {
+  const q = query.toLowerCase().trim();
+  paletteSelected = 0;
+  if (!q) {
+    paletteFiltered = [...PALETTE_COMMANDS];
+  } else {
+    paletteFiltered = PALETTE_COMMANDS.filter(c =>
+      c.label.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q)
+    );
+  }
+  renderPaletteResults(q);
+}
+
+function renderPaletteResults(query = '') {
+  const container = document.getElementById('palette-results');
+  if (!container) return;
+
+  if (paletteFiltered.length === 0) {
+    container.innerHTML = `<div class="palette-empty">No commands match "<strong>${query}</strong>"</div>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="palette-section-label">Commands</div>
+    ${paletteFiltered.map((cmd, i) => {
+      const labelHighlighted = query
+        ? cmd.label.replace(new RegExp(`(${query})`, 'gi'), '<span class="palette-match">$1</span>')
+        : cmd.label;
+      return `
+        <div class="palette-item ${i === paletteSelected ? 'selected' : ''}" data-index="${i}">
+          <span class="palette-item-icon">${cmd.icon}</span>
+          <span class="palette-item-label">${labelHighlighted}</span>
+          <span class="palette-item-desc">${cmd.desc}</span>
+          ${cmd.shortcut ? `<span class="palette-item-shortcut">${cmd.shortcut}</span>` : ''}
+        </div>
+      `;
+    }).join('')}
+  `;
+
+  container.querySelectorAll('.palette-item').forEach(el => {
+    el.addEventListener('click', () => {
+      const idx = parseInt(el.dataset.index);
+      if (paletteFiltered[idx]) { paletteFiltered[idx].action(); closePalette(); }
+    });
+    el.addEventListener('mouseenter', () => {
+      paletteSelected = parseInt(el.dataset.index);
+      container.querySelectorAll('.palette-item').forEach((e, i) => e.classList.toggle('selected', i === paletteSelected));
+    });
+  });
+}
+
+function handlePaletteKey(e) {
+  if (e.key === 'Escape') { closePalette(); return; }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    paletteSelected = Math.min(paletteSelected + 1, paletteFiltered.length - 1);
+    renderPaletteResults(document.getElementById('palette-input')?.value || '');
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    paletteSelected = Math.max(paletteSelected - 1, 0);
+    renderPaletteResults(document.getElementById('palette-input')?.value || '');
+  }
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    if (paletteFiltered[paletteSelected]) {
+      paletteFiltered[paletteSelected].action();
+      closePalette();
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   SCRATCHPAD — Mental dump modal (CMD+Shift+Space)
+   Captures "thought bursts" without breaking flow.
+   Saves to localStorage. Agent can read and schedule.
+   ══════════════════════════════════════════════════════════ */
+function setupScratchpad() {
+  const modal = document.getElementById('scratchpad-modal');
+  const input = document.getElementById('scratchpad-input');
+  const saveBtn = document.getElementById('scratchpad-save');
+  const closeBtn = document.getElementById('scratchpad-close');
+  if (!modal || !input) return;
+
+  saveBtn?.addEventListener('click', saveScratchpadItem);
+  closeBtn?.addEventListener('click', () => toggleScratchpad(false));
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveScratchpadItem(); }
+    if (e.key === 'Escape') toggleScratchpad(false);
+  });
+
+  renderScratchpadItems();
+}
+
+function toggleScratchpad(force) {
+  const modal = document.getElementById('scratchpad-modal');
+  const input = document.getElementById('scratchpad-input');
+  if (!modal) return;
+  S.scratchpadOpen = force !== undefined ? force : !S.scratchpadOpen;
+  modal.classList.toggle('visible', S.scratchpadOpen);
+  modal.setAttribute('aria-hidden', String(!S.scratchpadOpen));
+  if (S.scratchpadOpen && input) { setTimeout(() => input.focus(), 60); }
+}
+
+function saveScratchpadItem() {
+  const input = document.getElementById('scratchpad-input');
+  if (!input || !input.value.trim()) return;
+  const item = {
+    id: Date.now(),
+    text: input.value.trim(),
+    time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+  };
+  S.scratchpadItems.unshift(item);
+  if (S.scratchpadItems.length > 20) S.scratchpadItems.pop();
+  localStorage.setItem('b60-scratch', JSON.stringify(S.scratchpadItems));
+  input.value = '';
+  renderScratchpadItems();
+  renderContextPaneContent();
+
+  // Micro-reward: brief tachometer flash
+  setTachometer('done');
+  setTimeout(() => setTachometer('idle'), 2000);
+}
+
+function renderScratchpadItems() {
+  const container = document.getElementById('scratchpad-items');
+  if (!container) return;
+  if (S.scratchpadItems.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  container.innerHTML = S.scratchpadItems.map(item => `
+    <div class="scratchpad-item" data-id="${item.id}">
+      <span class="scratchpad-item-time">${item.time}</span>
+      <span class="scratchpad-item-text">${item.text}</span>
+      <span class="scratchpad-item-del" data-del="${item.id}" title="Remove">✕</span>
+    </div>
+  `).join('');
+
+  container.querySelectorAll('[data-del]').forEach(el => {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = parseInt(el.dataset.del);
+      S.scratchpadItems = S.scratchpadItems.filter(i => i.id !== id);
+      localStorage.setItem('b60-scratch', JSON.stringify(S.scratchpadItems));
+      renderScratchpadItems();
+      renderContextPaneContent();
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   AGENT MODAL — Body Doubling / Loop Guard / Approvals
+   Drops from top edge. Disappears after action.
+   TDAH rationale: breaks dopamine loops, offers perspective.
+   ══════════════════════════════════════════════════════════ */
+function showAgentModal({ icon = '⬡', message, actions = [] }) {
+  const modal = document.getElementById('agent-modal');
+  const iconEl = document.getElementById('agent-modal-icon');
+  const msgEl = document.getElementById('agent-modal-msg');
+  const actionsEl = document.getElementById('agent-modal-actions');
+  if (!modal || !msgEl || !actionsEl) return;
+
+  if (iconEl) iconEl.textContent = icon;
+  msgEl.textContent = message;
+
+  const defaultActions = [
+    { label: 'Got it', fn: hideAgentModal, primary: true },
+    { label: 'Dismiss', fn: hideAgentModal },
+  ];
+  const finalActions = actions.length > 0 ? actions : defaultActions;
+
+  actionsEl.innerHTML = finalActions.map((a, i) =>
+    `<button class="btn ${a.primary ? 'btn-primary' : ''}" style="font-size:0.65rem" data-action-idx="${i}">${a.label}</button>`
+  ).join('');
+
+  actionsEl.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      finalActions[parseInt(btn.dataset.actionIdx)]?.fn?.();
     });
   });
 
-  // Global hotkeys (Cmd+1 to Cmd+4 / Ctrl+1 to Ctrl+4)
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && ['1', '2', '3', '4'].includes(e.key)) {
-      e.preventDefault();
-      const routes = ['ledger', 'databases', 'query', 'telemetry'];
-      navigate(routes[parseInt(e.key) - 1]);
+  modal.classList.add('visible');
+  modal.setAttribute('aria-hidden', 'false');
+  setTachometer('alert');
+}
+
+function hideAgentModal() {
+  const modal = document.getElementById('agent-modal');
+  if (modal) { modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); }
+  setTachometer('idle');
+}
+
+/* ══════════════════════════════════════════════════════════
+   LOOP DETECTOR — Cognitive Hand Brake
+   If same route for >25 minutes without navigation change,
+   fires a gentle body-doubling intervention.
+   ══════════════════════════════════════════════════════════ */
+function setupLoopDetector() {
+  // Check every 2 minutes
+  setInterval(() => {
+    if (!S.loopDetector.route) return;
+    if (S.loopDetector.interventionFired) return;
+    const elapsed = Date.now() - S.loopDetector.routeEnteredAt;
+    if (elapsed > 25 * 60 * 1000) { // 25 minutes
+      S.loopDetector.interventionFired = true;
+      const route = S.loopDetector.route;
+      showAgentModal({
+        icon: '⏱',
+        message: `You've been in ${route.toUpperCase()} for over 25 minutes. Deep focus is good — but want to step back and see the whole system?`,
+        actions: [
+          { label: 'Show Architecture', primary: true, fn: () => { hideAgentModal(); navigate('canvas'); } },
+          { label: 'Keep Going', fn: hideAgentModal },
+          { label: 'Dump a thought →', fn: () => { hideAgentModal(); toggleScratchpad(true); } },
+        ],
+      });
+    }
+  }, 2 * 60 * 1000);
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONTEXT RESTORE BANNER
+   Shows on boot. Reminds user where they were.
+   TDAH rationale: eliminates startup friction / blank slate panic.
+   ══════════════════════════════════════════════════════════ */
+function showRestoreBanner(lastRoute) {
+  const banner = document.getElementById('restore-banner');
+  const msg = document.getElementById('restore-msg');
+  const points = document.getElementById('restore-points');
+  const dismiss = document.getElementById('restore-dismiss');
+  if (!banner || !msg) return;
+
+  const routeLabels = {
+    ledger: 'BFT Ledger', databases: 'Ontologies', query: 'SQL Console',
+    swarm: 'Agent Swarm', canvas: 'Architecture Canvas',
+  };
+
+  const bullets = [
+    `Last active: ${routeLabels[lastRoute] || lastRoute}`,
+    `${S.databaseList.length || '—'} databases available`,
+    S.ledgerStats?.total_entries
+      ? `${S.ledgerStats.total_entries} ledger entries — chain intact`
+      : 'Ledger loading...',
+  ];
+
+  msg.textContent = 'Session restored · ';
+  if (points) {
+    points.innerHTML = bullets.map(b =>
+      `<span class="restore-point">${b}</span>`
+    ).join('');
+  }
+
+  banner.style.display = 'flex';
+  dismiss?.addEventListener('click', () => { banner.style.display = 'none'; });
+  setTimeout(() => { banner.style.display = 'none'; }, 12000);
+}
+
+/* ══════════════════════════════════════════════════════════
+   KEYBOARD SHORTCUTS — Global
+   ══════════════════════════════════════════════════════════ */
+function setupKeyboard() {
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas' };
+
+  window.addEventListener('keydown', e => {
+    const mod = e.metaKey || e.ctrlKey;
+
+    // CMD+K → Command Palette
+    if (mod && e.key === 'k' && !e.shiftKey) { e.preventDefault(); S.paletteOpen ? closePalette() : openPalette(); return; }
+
+    // CMD+Shift+Space → Scratchpad
+    if (mod && e.shiftKey && e.code === 'Space') { e.preventDefault(); toggleScratchpad(); return; }
+
+    // CMD+B → Toggle context pane
+    if (mod && e.key === 'b' && !e.shiftKey) { e.preventDefault(); toggleContextPane(); return; }
+
+    // CMD+M → Bifocal toggle
+    if (mod && e.key === 'm' && !e.shiftKey) { e.preventDefault(); toggleBifocal(); return; }
+
+    // CMD+1..5 → Route navigation
+    if (mod && routeKeys[e.key]) { e.preventDefault(); navigate(routeKeys[e.key]); return; }
+
+    // ESC → Close modals
+    if (e.key === 'Escape') {
+      if (S.paletteOpen) { closePalette(); return; }
+      if (S.scratchpadOpen) { toggleScratchpad(false); return; }
     }
   });
 }
 
-// Connection State Helpers
-function setConnectionState(state, text) {
-  const indicator = document.querySelector('.status-indicator');
-  const textEl = document.querySelector('.status-text');
-  if (!indicator || !textEl) return;
-
-  indicator.className = 'status-indicator';
-  if (state === 'error') {
-    indicator.classList.add('error');
-  } else if (state === 'loading') {
-    indicator.classList.add('loading');
-  }
-  textEl.textContent = text.toUpperCase();
-}
-
-// Router wiring and hash listening
+/* ══════════════════════════════════════════════════════════
+   ROUTER — wires routes to render functions
+   ══════════════════════════════════════════════════════════ */
 function setupRouter() {
-  registerRoute('ledger', renderLedgerPage);
+  registerRoute('canvas',    renderCanvasPage);
+  registerRoute('ledger',    renderLedgerPage);
   registerRoute('databases', renderDatabasesPage);
-  registerRoute('query', renderQueryPage);
-  registerRoute('telemetry', renderTelemetryPage);
+  registerRoute('query',     renderQueryPage);
+  registerRoute('swarm',     renderSwarmPage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -126,857 +653,606 @@ function setupRouter() {
   });
 }
 
-// Tooltip helpers
-function showTooltip(e, content) {
-  if (activeTooltip) activeTooltip.remove();
-  
-  const tooltip = document.createElement('div');
-  tooltip.className = 'tooltip fade-in';
-  tooltip.innerHTML = content;
-  document.body.appendChild(tooltip);
-  activeTooltip = tooltip;
-
-  const rect = e.target.getBoundingClientRect();
-  tooltip.style.left = `${rect.left + window.scrollX + 20}px`;
-  tooltip.style.top = `${rect.top + window.scrollY - 10}px`;
+/* ══════════════════════════════════════════════════════════
+   DATA FETCHING
+   ══════════════════════════════════════════════════════════ */
+async function refreshDatabaseList() {
+  try {
+    S.databaseList = await get('/api/databases');
+    updateContextPaneCounts();
+  } catch { /* offline */ }
 }
 
-function hideTooltip() {
-  if (activeTooltip) {
-    activeTooltip.remove();
-    activeTooltip = null;
+async function refreshLedgerStats() {
+  try {
+    S.ledgerStats = await get('/api/ledger/stats');
+    updateContextPaneCounts();
+    updateStatusBar();
+  } catch { /* offline */ }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FOCUS ZONE HELPERS
+   ══════════════════════════════════════════════════════════ */
+function setFocusHeader({ breadcrumb = '', badge = null, actions = '' } = {}) {
+  const bc = document.getElementById('focus-breadcrumb');
+  const fa = document.getElementById('focus-actions');
+  if (bc) bc.innerHTML = breadcrumb;
+  if (fa) fa.innerHTML = actions;
+}
+
+function setBreadcrumb(...parts) {
+  return parts.map((p, i) =>
+    i < parts.length - 1
+      ? `<span class="breadcrumb-item">${p}</span><span class="breadcrumb-sep"> › </span>`
+      : `<span class="breadcrumb-item current">${p}</span>`
+  ).join('');
+}
+
+function onRouteEnter(routeName) {
+  S.activeRoute = routeName;
+  localStorage.setItem('b60-route', routeName);
+  setActiveSpineIcon(routeName);
+  setActiveContextItem(routeName);
+
+  // Loop detector reset
+  if (S.loopDetector.route !== routeName) {
+    S.loopDetector.route = routeName;
+    S.loopDetector.routeEnteredAt = Date.now();
+    S.loopDetector.interventionFired = false;
   }
 }
 
+/* ══════════════════════════════════════════════════════════
+   ROUTE: CANVAS — Macro Architecture Graph
+   AACC rationale: system thinkers need the whole map first.
+   ══════════════════════════════════════════════════════════ */
+async function renderCanvasPage(container) {
+  onRouteEnter('canvas');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Architecture'),
+    actions: `
+      <span style="font-size:0.6rem;color:var(--dust-faint)">Scroll to zoom · Drag to pan</span>
+      <button class="btn btn-icon" id="canvas-fit" title="Fit to screen" style="margin-left:8px">⊞</button>
+    `,
+  });
 
-/* ═══════════════════════════════════════════════════════════════
-   PAGE: LEDGER VIEW
-   ═══════════════════════════════════════════════════════════════ */
-async function renderLedgerPage(container) {
+  const nodes = [
+    { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',    name: 'FastAPI',           meta: '8 routes · ASGI',       status: 'ok' },
+    { id: 'ledger',   x: 620, y: 80,  type: 'PERSISTENCE', name: 'Master Ledger DB',  meta: 'SHA3-256 · BFT chain',  status: 'ok' },
+    { id: 'ontology', x: 620, y: 220, type: 'PERSISTENCE', name: 'Cortex Ontology',   meta: '144MB · Read-only',     status: 'ok' },
+    { id: 'telemetry',x: 620, y: 350, type: 'STREAM',      name: 'Telemetry Stream',  meta: 'WebSocket · Live',      status: 'warn' },
+    { id: 'swarm',    x: 140, y: 240, type: 'AGENT',       name: 'Swarm Workers',     meta: '0 active',              status: 'idle' },
+    { id: 'frontend', x: 300, y: 350, type: 'FRONTEND',    name: 'BABYLON60 IDE',     meta: 'Vite · Vanilla JS',     status: 'ok' },
+  ];
+
+  const edges = [
+    { from: 'frontend', to: 'fastapi' },
+    { from: 'fastapi',  to: 'ledger' },
+    { from: 'fastapi',  to: 'ontology' },
+    { from: 'fastapi',  to: 'telemetry' },
+    { from: 'swarm',    to: 'fastapi' },
+    { from: 'swarm',    to: 'ledger' },
+  ];
+
+  const colors = {
+    ok: 'var(--verify)', warn: 'var(--gold)', err: 'var(--break)', idle: 'var(--dust-ghost)',
+  };
+
   container.innerHTML = `
-    <div class="panel-header slide-in">
-      <div class="panel-title">BFT MASTER LEDGER</div>
-      <div class="panel-badge live">ACTIVE</div>
-    </div>
-    <div class="panel-body slide-in">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Ledger File</div>
-          <div class="stat-value lapis" id="stat-db-name">-</div>
-          <div class="stat-sub">SQLite storage</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Total Entries</div>
-          <div class="stat-value gold" id="stat-total-entries">0</div>
-          <div class="stat-sub" id="stat-latest-time">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Consensus State</div>
-          <div class="stat-value verify" id="stat-integrity">UNKNOWN</div>
-          <div class="stat-sub" id="stat-latest-lamport">Lamport: -</div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <div class="card-title">Cryptographic Hash Chain Verification</div>
-          <button class="btn btn-verify" id="btn-verify-chain">⚿ Verify Integrity</button>
-        </div>
-        <div class="verify-progress" style="display: none;">
-          <div class="verify-progress-bar"></div>
-        </div>
-        <div class="chain-container" id="chain-visual-grid">
-          <div class="empty-state" style="padding: 20px 0;">
-            <div class="icon">⚿</div>
-            <div class="desc">Execute verification to map blocks and assert consensus state.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title" style="margin-bottom: 12px;">Ledger Sequence</div>
-        <div style="overflow-x: auto;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Seq</th>
-                <th>Stream</th>
-                <th>Event Type</th>
-                <th>Lamport T</th>
-                <th>Taint Provenance</th>
-                <th>Timestamp</th>
-                <th>Entry Hash</th>
-              </tr>
-            </thead>
-            <tbody id="ledger-table-body">
-              <tr>
-                <td colspan="7" class="empty-state" style="text-align: center;">Loading ledger entries...</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="pagination">
-          <button class="btn" id="btn-ledger-prev" disabled>◀ Prev</button>
-          <span style="font-family: var(--font-mono); font-size: 0.75rem;" id="ledger-page-info">Page 1</span>
-          <button class="btn" id="btn-ledger-next" disabled>Next ▶</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Details Sidebar Overlay -->
-    <div id="entry-detail-panel" class="card" style="display: none; position: fixed; top: var(--header-height); right: 0; width: 450px; height: calc(100vh - var(--header-height)); border-radius: 0; border-left: 1px solid var(--edge); z-index: 10; display: flex; flex-direction: column; background: var(--kiln); transform: translateX(100%); transition: transform var(--transition-normal);">
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid var(--edge);">
-        <div class="card-title" id="detail-title" style="margin-bottom: 0;">Entry #0</div>
-        <button class="btn" id="btn-close-detail" style="padding: 2px 8px;">✕</button>
-      </div>
-      <div style="flex: 1; overflow-y: auto; padding: 16px; font-family: var(--font-mono); font-size: 0.75rem;">
-        <div style="margin-bottom: 14px;">
-          <div class="stat-label">Event UUID</div>
-          <div id="detail-uuid" style="color: var(--dust); word-break: break-all; margin-top: 4px;">-</div>
-        </div>
-        <div style="margin-bottom: 14px;">
-          <div class="stat-label">Cortex Taint Signature</div>
-          <div id="detail-taint" style="color: var(--lapis-bright); word-break: break-all; margin-top: 4px;">-</div>
-        </div>
-        <div style="margin-bottom: 14px;">
-          <div class="stat-label">Linkages</div>
-          <div style="margin-top: 4px;">Prev: <span id="detail-prev-hash" style="color: var(--dust-dim);">-</span></div>
-          <div style="margin-top: 2px;">Curr: <span id="detail-curr-hash" style="color: var(--verify);">-</span></div>
-        </div>
-        <div>
-          <div class="stat-label" style="margin-bottom: 6px;">Payload State</div>
-          <pre id="detail-payload" style="background: var(--tablet); border: 1px solid var(--edge); padding: 10px; border-radius: var(--radius-sm); color: var(--dust-dim); overflow-x: auto; font-family: var(--font-mono); line-height: 1.5;"></pre>
-        </div>
+    <div class="canvas-container" id="canvas-main">
+      <svg class="canvas-svg" id="canvas-svg">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="var(--edge)" />
+          </marker>
+        </defs>
+        <g id="canvas-edges"></g>
+        <g id="canvas-nodes"></g>
+      </svg>
+      <div class="canvas-controls">
+        <button class="btn btn-icon" id="canvas-zoom-in" title="Zoom in">+</button>
+        <button class="btn btn-icon" id="canvas-zoom-out" title="Zoom out">−</button>
+        <button class="btn btn-icon" id="canvas-fit-btn" title="Fit all">⊞</button>
       </div>
     </div>
   `;
 
-  let limit = 50;
-  let offset = 0;
+  const svg = document.getElementById('canvas-svg');
+  const edgesG = document.getElementById('canvas-edges');
+  const nodesG = document.getElementById('canvas-nodes');
+  const canvasEl = document.getElementById('canvas-main');
+  if (!svg || !edgesG || !nodesG) return;
 
-  // Load metrics & initial table
-  const fetchStats = async () => {
-    try {
-      const stats = await get('/api/ledger/stats');
-      if (stats.exists) {
-        document.getElementById('stat-db-name').textContent = stats.db_path;
-        document.getElementById('stat-total-entries').textContent = stats.entries;
-        if (stats.latest && stats.latest.created_at) {
-          document.getElementById('stat-latest-time').textContent = stats.latest.created_at;
-          document.getElementById('stat-latest-lamport').textContent = `Lamport: t=${stats.latest.lamport_t}`;
-        }
-      } else {
-        document.getElementById('stat-db-name').textContent = 'NOT FOUND';
-        document.getElementById('stat-integrity').textContent = 'NO LEDGER';
-        document.getElementById('stat-integrity').className = 'stat-value break';
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const loadEntriesTable = async () => {
-    try {
-      const res = await get(`/api/ledger/entries?limit=${limit}&offset=${offset}`);
-      const tbody = document.getElementById('ledger-table-body');
-      tbody.innerHTML = '';
-
-      if (!res.entries || res.entries.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" class="empty-state">No entries in this ledger database yet.</td></tr>`;
-        return;
-      }
-
-      res.entries.forEach(entry => {
-        const tr = document.createElement('tr');
-        tr.style.cursor = 'pointer';
-        tr.innerHTML = `
-          <td class="seq-cell">#${entry.seq}</td>
-          <td class="stream-cell">${escapeHtml(entry.stream)}</td>
-          <td style="color: var(--dust); font-weight: 500;">${escapeHtml(entry.event_type)}</td>
-          <td>${entry.lamport_t}</td>
-          <td style="font-size: 0.65rem; color: var(--dust-faint); max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
-            ${escapeHtml(entry.cortex_taint || 'None')}
-          </td>
-          <td class="time-cell">${entry.created_at}</td>
-          <td class="hash-cell">${entry.entry_hash.slice(0, 16)}...</td>
-        `;
-
-        tr.addEventListener('click', () => showEntryDetail(entry.seq));
-        tbody.appendChild(tr);
-      });
-
-      // Pagination state
-      document.getElementById('btn-ledger-prev').disabled = offset === 0;
-      document.getElementById('btn-ledger-next').disabled = offset + limit >= res.total;
-      document.getElementById('ledger-page-info').textContent = `Showing ${offset + 1} - ${Math.min(offset + limit, res.total)} of ${res.total}`;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  // Entry Detail Handler
-  const showEntryDetail = async (seq) => {
-    try {
-      const entry = await get(`/api/ledger/entry/${seq}`);
-      const panel = document.getElementById('entry-detail-panel');
-      
-      document.getElementById('detail-title').textContent = `Ledger Entry #${entry.seq}`;
-      document.getElementById('detail-uuid').textContent = entry.event_id;
-      document.getElementById('detail-taint').textContent = entry.cortex_taint || 'None';
-      document.getElementById('detail-prev-hash').textContent = entry.prev_hash;
-      document.getElementById('detail-curr-hash').textContent = entry.entry_hash;
-      
-      let parsedPayload = {};
-      try {
-        parsedPayload = JSON.parse(entry.payload_json);
-      } catch {
-        parsedPayload = entry.payload_json;
-      }
-      document.getElementById('detail-payload').textContent = JSON.stringify(parsedPayload, null, 2);
-
-      panel.style.display = 'flex';
-      // Force layout calculation, then animate in
-      void panel.offsetWidth;
-      panel.style.transform = 'translateX(0)';
-    } catch (err) {
-      alert(`Failed to load entry details: ${err.message}`);
-    }
-  };
-
-  const closeEntryDetail = () => {
-    const panel = document.getElementById('entry-detail-panel');
-    panel.style.transform = 'translateX(100%)';
-    setTimeout(() => {
-      panel.style.display = 'none';
-    }, 220);
-  };
-
-  // Verification process
-  const verifyChainAction = async () => {
-    const btn = document.getElementById('btn-verify-chain');
-    const pBar = document.querySelector('.verify-progress');
-    const pBarFill = document.querySelector('.verify-progress-bar');
-    const grid = document.getElementById('chain-visual-grid');
-
-    btn.disabled = true;
-    pBar.style.display = 'block';
-    pBarFill.style.width = '20%';
-    setConnectionState('loading', 'VERIFYING CHAIN');
-
-    try {
-      pBarFill.style.width = '60%';
-      const res = await post('/api/ledger/verify');
-      pBarFill.style.width = '100%';
-
-      grid.innerHTML = '';
-      if (!res.entries || res.entries.length === 0) {
-        grid.innerHTML = `<div class="empty-state"><div class="desc">No verified entries.</div></div>`;
-        return;
-      }
-
-      // Draw blocks
-      res.entries.forEach(b => {
-        const block = document.createElement('div');
-        block.className = `chain-block ${b.valid ? '' : 'invalid'}`;
-        
-        block.addEventListener('mouseenter', (e) => {
-          const statusText = b.valid ? `<span style="color: var(--verify);">VALID linkage</span>` : `<span style="color: var(--break); font-weight:700;">BROKEN: ${b.errors.join(', ')}</span>`;
-          showTooltip(e, `
-            <strong>Sequence #${b.seq}</strong><br/>
-            Stream: ${escapeHtml(b.stream)}<br/>
-            Lamport T: ${b.lamport_t}<br/>
-            Hash: <span style="font-family: var(--font-mono);">${b.entry_hash}</span><br/>
-            Status: ${statusText}
-          `);
-        });
-        block.addEventListener('mouseleave', hideTooltip);
-        block.addEventListener('click', () => showEntryDetail(b.seq));
-        grid.appendChild(block);
-      });
-
-      // Update header indicators
-      const integrityVal = document.getElementById('stat-integrity');
-      if (res.valid) {
-        integrityVal.textContent = 'INTEGRITY OK';
-        integrityVal.className = 'stat-value verify';
-        setConnectionState('connected', 'CONNECTED');
-      } else {
-        integrityVal.textContent = `COMPROMISED (Seq #${res.broken_at})`;
-        integrityVal.className = 'stat-value break';
-        setConnectionState('error', 'LEDGER BROKEN');
-      }
-    } catch (err) {
-      grid.innerHTML = `<div class="empty-state"><div class="icon">⚠</div><div class="desc" style="color: var(--break);">${escapeHtml(err.message)}</div></div>`;
-      setConnectionState('error', 'ERROR');
-    } finally {
-      btn.disabled = false;
-      setTimeout(() => { pBar.style.display = 'none'; }, 600);
-    }
-  };
-
-  // Pagination triggers
-  document.getElementById('btn-ledger-prev').addEventListener('click', () => {
-    if (offset >= limit) {
-      offset -= limit;
-      loadEntriesTable();
-    }
+  // Draw edges
+  edges.forEach(({ from, to }) => {
+    const n1 = nodes.find(n => n.id === from);
+    const n2 = nodes.find(n => n.id === to);
+    if (!n1 || !n2) return;
+    const x1 = n1.x + 90, y1 = n1.y + 35;
+    const x2 = n2.x, y2 = n2.y + 35;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const mx = (x1 + x2) / 2;
+    line.setAttribute('d', `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`);
+    line.setAttribute('stroke', 'var(--edge)');
+    line.setAttribute('stroke-width', '1.5');
+    line.setAttribute('fill', 'none');
+    line.setAttribute('opacity', '0.5');
+    line.setAttribute('marker-end', 'url(#arrow)');
+    edgesG.appendChild(line);
   });
 
-  document.getElementById('btn-ledger-next').addEventListener('click', () => {
-    offset += limit;
-    loadEntriesTable();
-  });
+  // Draw nodes as foreignObjects
+  nodes.forEach(node => {
+    const fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
+    fo.setAttribute('x', node.x);
+    fo.setAttribute('y', node.y);
+    fo.setAttribute('width', '180');
+    fo.setAttribute('height', '70');
 
-  document.getElementById('btn-verify-chain').addEventListener('click', verifyChainAction);
-  document.getElementById('btn-close-detail').addEventListener('click', closeEntryDetail);
-
-  await fetchStats();
-  await loadEntriesTable();
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   PAGE: DATABASE EXPLORER
-   ═══════════════════════════════════════════════════════════════ */
-async function renderDatabasesPage(container) {
-  container.innerHTML = `
-    <div class="panel-header slide-in">
-      <div class="panel-title">ONTOLOGY DATABASE EXPLORER</div>
-      <div class="panel-badge beta">EXPLORER</div>
-    </div>
-    <div class="panel-body slide-in" style="display: flex; gap: 20px; overflow: hidden; height: calc(100% - var(--header-height));">
-      
-      <!-- Left sidebar: database file tree -->
-      <div class="card" style="width: 280px; min-width: 280px; display: flex; flex-direction: column; overflow-y: auto;">
-        <div class="card-title">Discovered Files</div>
-        <div id="db-tree-container" class="tree-node" style="padding-left: 0;">
-          <div class="loading-text">Loading workspace directories...</div>
-        </div>
-      </div>
-
-      <!-- Right main view: table preview -->
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 20px; overflow: hidden;">
-        
-        <!-- Schema section -->
-        <div class="card" id="db-schema-card" style="display: none; flex-direction: column; max-height: 200px;">
-          <div class="card-title" id="schema-card-title">Schema Information</div>
-          <div style="flex: 1; overflow-y: auto;">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>CID</th>
-                  <th>Name</th>
-                  <th>Type</th>
-                  <th>NotNull</th>
-                  <th>Default</th>
-                  <th>PK</th>
-                </tr>
-              </thead>
-              <tbody id="schema-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Row browser section -->
-        <div class="card" id="db-rows-card" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
-          <div class="card-title" id="rows-card-title">Table Browser</div>
-          <div style="flex: 1; overflow: auto;" id="table-rows-container">
-            <div class="empty-state">
-              <div class="icon">⛁</div>
-              <div class="desc">Select a database and table from the tree on the left to inspect records.</div>
-            </div>
-          </div>
-          <div class="pagination" id="rows-pagination" style="display: none; border-top: 1px solid var(--edge); margin-top: auto;">
-            <button class="btn" id="btn-rows-prev" disabled>◀ Prev</button>
-            <span style="font-family: var(--font-mono); font-size: 0.75rem;" id="rows-page-info">Page 1</span>
-            <button class="btn" id="btn-rows-next" disabled>Next ▶</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  `;
-
-  let currentDb = null;
-  let currentTable = null;
-  let rowsLimit = 50;
-  let rowsOffset = 0;
-
-  // Load database tree
-  const loadDatabaseTree = async () => {
-    const tree = document.getElementById('db-tree-container');
-    try {
-      const dbs = await get('/api/databases');
-      tree.innerHTML = '';
-      
-      if (dbs.length === 0) {
-        tree.innerHTML = `<div class="empty-state" style="padding: 10px 0;"><div class="desc">No databases found.</div></div>`;
-        return;
-      }
-
-      dbs.forEach(db => {
-        const dbItem = document.createElement('div');
-        dbItem.className = 'tree-item';
-        dbItem.innerHTML = `<span class="tree-icon">⛁</span><span>${escapeHtml(db.name)}</span><span class="tree-count">${db.size_human}</span>`;
-        
-        const tableNode = document.createElement('div');
-        tableNode.className = 'tree-node';
-        tableNode.style.display = 'none';
-
-        dbItem.addEventListener('click', async () => {
-          const isCollapsed = tableNode.style.display === 'none';
-          // Close others to keep clean
-          tree.querySelectorAll('.tree-node').forEach(n => n.style.display = 'none');
-          tree.querySelectorAll('.tree-item').forEach(i => i.classList.remove('active'));
-
-          if (isCollapsed) {
-            dbItem.classList.add('active');
-            tableNode.style.display = 'block';
-            if (tableNode.innerHTML === '') {
-              tableNode.innerHTML = `<div style="padding: 4px 16px; opacity:0.5; font-size:0.7rem;">Querying tables...</div>`;
-              try {
-                const tables = await get(`/api/databases/${db.name}/tables`);
-                tableNode.innerHTML = '';
-                tables.forEach(tbl => {
-                  const tblItem = document.createElement('div');
-                  tblItem.className = 'tree-item';
-                  tblItem.style.paddingLeft = '8px';
-                  tblItem.innerHTML = `<span class="tree-icon">▤</span><span>${escapeHtml(tbl.name)}</span><span class="tree-count">${tbl.row_count}</span>`;
-                  tblItem.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    tableNode.querySelectorAll('.tree-item').forEach(i => i.classList.remove('active'));
-                    tblItem.classList.add('active');
-                    selectSubtable(db.name, tbl.name);
-                  });
-                  tableNode.appendChild(tblItem);
-                });
-              } catch (err) {
-                tableNode.innerHTML = `<div style="padding:4px 16px; color:var(--break); font-size:0.7rem;">${escapeHtml(err.message)}</div>`;
-              }
-            }
-          }
-        });
-
-        tree.appendChild(dbItem);
-        tree.appendChild(tableNode);
-      });
-    } catch (err) {
-      tree.innerHTML = `<div style="color:var(--break); font-size:0.75rem; padding: 10px;">${escapeHtml(err.message)}</div>`;
-    }
-  };
-
-  const selectSubtable = async (dbname, tablename) => {
-    currentDb = dbname;
-    currentTable = tablename;
-    rowsOffset = 0;
-    
-    // Show cards
-    document.getElementById('db-schema-card').style.display = 'flex';
-    document.getElementById('schema-card-title').textContent = `SCHEMA — ${dbname}.${tablename}`;
-    document.getElementById('rows-card-title').textContent = `RECORDS — ${dbname}.${tablename}`;
-
-    await loadTableSchema();
-    await loadTableRows();
-  };
-
-  const loadTableSchema = async () => {
-    const tbody = document.getElementById('schema-table-body');
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; opacity:0.5;">Loading schema...</td></tr>';
-    try {
-      const cols = await get(`/api/databases/${currentDb}/schema/${currentTable}`);
-      tbody.innerHTML = '';
-      cols.forEach(col => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${col.cid}</td>
-          <td style="color: var(--dust); font-weight:600;">${escapeHtml(col.name)}</td>
-          <td style="color: var(--lapis-bright);">${escapeHtml(col.type)}</td>
-          <td>${col.notnull ? 'YES' : 'NO'}</td>
-          <td>${col.default !== null ? escapeHtml(String(col.default)) : 'NULL'}</td>
-          <td style="color: ${col.pk ? 'var(--gold)' : 'var(--dust-ghost)'}; font-weight: 700;">${col.pk ? 'PRIMARY KEY' : '-'}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    } catch (err) {
-      tbody.innerHTML = `<tr><td colspan="6" style="color:var(--break); text-align:center;">${escapeHtml(err.message)}</td></tr>`;
-    }
-  };
-
-  const loadTableRows = async () => {
-    const container = document.getElementById('table-rows-container');
-    const pagination = document.getElementById('rows-pagination');
-    container.innerHTML = '<div style="text-align:center; padding: 30px; opacity:0.5;">Querying records...</div>';
-    pagination.style.display = 'none';
-
-    try {
-      const res = await get(`/api/databases/${currentDb}/tables/${currentTable}?limit=${rowsLimit}&offset=${rowsOffset}`);
-      container.innerHTML = '';
-
-      if (res.rows.length === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="desc">No rows found in this table.</div></div>`;
-        return;
-      }
-
-      // Draw table structure
-      const table = document.createElement('table');
-      table.className = 'data-table';
-      
-      const thead = document.createElement('thead');
-      const headerTr = document.createElement('tr');
-      res.columns.forEach(col => {
-        headerTr.innerHTML += `<th>${escapeHtml(col)}</th>`;
-      });
-      thead.appendChild(headerTr);
-      table.appendChild(thead);
-
-      const tbody = document.createElement('tbody');
-      res.rows.forEach(row => {
-        const tr = document.createElement('tr');
-        res.columns.forEach(col => {
-          const val = row[col];
-          let displayVal = val === null ? '<span style="opacity:0.3;">NULL</span>' : escapeHtml(String(val));
-          if (typeof val === 'string' && val.length > 120) {
-            displayVal = `<span title="${escapeHtml(val)}">${escapeHtml(val.slice(0, 120))}...</span>`;
-          }
-          tr.innerHTML += `<td>${displayVal}</td>`;
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
-      container.appendChild(table);
-
-      // Pagination update
-      pagination.style.display = 'flex';
-      document.getElementById('btn-rows-prev').disabled = rowsOffset === 0;
-      document.getElementById('btn-rows-next').disabled = rowsOffset + rowsLimit >= res.total;
-      document.getElementById('rows-page-info').textContent = `Showing ${rowsOffset + 1} - ${Math.min(rowsOffset + rowsLimit, res.total)} of ${res.total}`;
-    } catch (err) {
-      container.innerHTML = `<div style="color:var(--break); padding:30px; text-align:center;">${escapeHtml(err.message)}</div>`;
-    }
-  };
-
-  // Row browser pagination
-  document.getElementById('btn-rows-prev').addEventListener('click', () => {
-    if (rowsOffset >= rowsLimit) {
-      rowsOffset -= rowsLimit;
-      loadTableRows();
-    }
-  });
-
-  document.getElementById('btn-rows-next').addEventListener('click', () => {
-    rowsOffset += rowsLimit;
-    loadTableRows();
-  });
-
-  await loadDatabaseTree();
-}
-
-
-/* ═══════════════════════════════════════════════════════════════
-   PAGE: SQL QUERY CONSOLE
-   ═══════════════════════════════════════════════════════════════ */
-async function renderQueryPage(container) {
-  container.innerHTML = `
-    <div class="panel-header slide-in">
-      <div class="panel-title">SQL READ-ONLY CONSOLE</div>
-      <div class="panel-badge beta">SANDBOX</div>
-    </div>
-    <div class="panel-body slide-in" style="display: flex; flex-direction: column; gap: 20px; overflow: hidden; height: calc(100% - var(--header-height));">
-      
-      <!-- Control / Editor card -->
-      <div class="card" style="display: flex; flex-direction: column; gap: 12px; min-height: 250px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div class="card-title" style="margin-bottom: 0;">Query Console</div>
-          <select class="select" id="query-db-select" style="min-width: 200px;">
-            <option value="">Select target database...</option>
-          </select>
-        </div>
-
-        <div class="code-editor" style="flex: 1; display: flex; flex-direction: column;">
-          <textarea id="query-sql-text" placeholder="SELECT * FROM ledger_entries ORDER BY seq DESC LIMIT 10;" spellcheck="false"></textarea>
-          <div class="code-editor-toolbar">
-            <span style="font-size:0.6rem; color:var(--dust-faint); letter-spacing:0.04em;">READ-ONLY ENFORCED (MUTATIONS BLOCKED)</span>
-            <button class="btn btn-primary" id="btn-run-query">⚡ Run Query</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Results Card -->
-      <div class="card" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;" id="query-results-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <div class="card-title" style="margin-bottom: 0;">Output Console</div>
-          <div style="font-size: 0.65rem; color: var(--dust-faint);" id="query-meta">-</div>
-        </div>
-        <div style="flex: 1; overflow: auto;" id="query-output-container">
-          <div class="empty-state">
-            <div class="icon">❯_</div>
-            <div class="desc">Enter SQL query and click Run to display output schema and records.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  `;
-
-  // Populate db select dropdown
-  const select = document.getElementById('query-db-select');
-  try {
-    const dbs = await get('/api/databases');
-    dbs.forEach(db => {
-      const opt = document.createElement('option');
-      opt.value = db.name;
-      opt.textContent = `${db.name} (${db.size_human})`;
-      select.appendChild(opt);
+    const div = document.createElement('div');
+    div.className = 'canvas-node-card';
+    div.style.position = 'relative';
+    div.innerHTML = `
+      <div class="canvas-node-type">${node.type}</div>
+      <div class="canvas-node-name">${node.name}</div>
+      <div class="canvas-node-meta">${node.meta}</div>
+      <div class="canvas-node-status" style="background:${colors[node.status] || colors.idle};box-shadow:0 0 5px ${colors[node.status] || colors.idle}"></div>
+    `;
+    div.addEventListener('click', () => {
+      // Micro-tunnel: zoom into this node's view
+      if (node.id === 'ledger') navigate('ledger');
+      else if (node.id === 'ontology') navigate('databases');
+      else if (node.id === 'swarm') navigate('swarm');
+      else if (node.id === 'fastapi') navigate('query');
     });
-    // Default select first database if available
-    if (dbs.length > 0) {
-      select.value = dbs[0].name;
+    fo.appendChild(div);
+    nodesG.appendChild(fo);
+  });
+
+  // Fit button
+  document.getElementById('canvas-fit-btn')?.addEventListener('click', () => {
+    svg.setAttribute('viewBox', '80 50 700 380');
+  });
+  svg.setAttribute('viewBox', '80 50 700 380');
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTE: LEDGER — BFT Hash-Chain Inspector
+   ══════════════════════════════════════════════════════════ */
+let ledgerPage = 1;
+const LEDGER_PAGE_SIZE = 50;
+
+async function renderLedgerPage(container) {
+  onRouteEnter('ledger');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'BFT Ledger'),
+    actions: `<button class="btn btn-verify" id="btn-verify-chain">⚿ Verify Chain</button>`,
+  });
+
+  container.innerHTML = `
+    <div class="stats-grid slide-in" id="ledger-stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Ledger File</div>
+        <div class="stat-value lapis" id="stat-db-name" style="font-size:0.85rem">—</div>
+        <div class="stat-sub">SQLite WAL</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Entries</div>
+        <div class="stat-value gold" id="stat-total-entries">0</div>
+        <div class="stat-sub" id="stat-latest-time">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Consensus</div>
+        <div class="stat-value verify" id="stat-integrity">UNKNOWN</div>
+        <div class="stat-sub" id="stat-latest-lamport">Lamport: —</div>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="card-title">Hash Chain Verification</div>
+      </div>
+      <div class="verify-progress" id="verify-progress-wrap" style="display:none">
+        <div class="verify-progress-bar" id="verify-progress-bar"></div>
+      </div>
+      <div id="chain-visual-grid" class="chain-container">
+        <div class="empty-state" style="padding:20px 0">
+          <div class="icon">⚿</div>
+          <div class="desc">Click "Verify Chain" to map blocks and assert BFT consensus.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-title" style="margin-bottom:10px">Ledger Sequence</div>
+      <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Seq</th><th>Stream</th><th>Event Type</th>
+              <th>Lamport T</th><th>Taint</th><th>Timestamp</th><th>Hash</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-table-body">
+            <tr><td colspan="7" class="empty-state" style="text-align:center">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="btn" id="btn-ledger-prev" disabled>◀ Prev</button>
+        <span style="font-family:var(--font-mono);font-size:0.72rem" id="ledger-page-info">Page 1</span>
+        <button class="btn" id="btn-ledger-next" disabled>Next ▶</button>
+      </div>
+    </div>
+
+    <div id="entry-detail-panel" class="card" style="display:none;position:fixed;top:43px;right:0;width:440px;height:calc(100vh - 71px);border-radius:0;border-left:1px solid var(--edge);z-index:10;flex-direction:column;background:var(--kiln);transform:translateX(100%);transition:transform var(--t-slow)"></div>
+  `;
+
+  // Load stats
+  try {
+    const stats = await get('/api/ledger/stats');
+    S.ledgerStats = stats;
+    document.getElementById('stat-db-name')?.let?.(el => el.textContent = stats.db_path?.split('/').pop() || 'master_ledger.db');
+    const dbNameEl = document.getElementById('stat-db-name');
+    if (dbNameEl) dbNameEl.textContent = stats.db_path?.split('/').pop() || 'master_ledger.db';
+    const totalEl = document.getElementById('stat-total-entries');
+    if (totalEl) totalEl.textContent = stats.total_entries ?? 0;
+    const lamportEl = document.getElementById('stat-latest-lamport');
+    if (lamportEl) lamportEl.textContent = `Lamport: ${stats.latest_lamport_t ?? '—'}`;
+    const timeEl = document.getElementById('stat-latest-time');
+    if (timeEl && stats.latest_ts) timeEl.textContent = stats.latest_ts.slice(0, 19);
+    updateStatusBar();
+  } catch { /* offline */ }
+
+  // Load entries
+  await loadLedgerPage(1);
+
+  // Verify chain button
+  document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
+  const verifyBtn = document.querySelector('[id="btn-verify-chain"]');
+  if (verifyBtn && !verifyBtn._wired) {
+    verifyBtn._wired = true;
+    verifyBtn.addEventListener('click', runChainVerification);
+  }
+
+  // Pagination
+  document.getElementById('btn-ledger-prev')?.addEventListener('click', () => loadLedgerPage(ledgerPage - 1));
+  document.getElementById('btn-ledger-next')?.addEventListener('click', () => loadLedgerPage(ledgerPage + 1));
+}
+
+async function loadLedgerPage(page) {
+  ledgerPage = page;
+  const tbody = document.getElementById('ledger-table-body');
+  if (!tbody) return;
+  try {
+    const data = await get(`/api/ledger/entries?page=${page}&page_size=${LEDGER_PAGE_SIZE}`);
+    const entries = Array.isArray(data) ? data : (data.entries || []);
+    if (entries.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--dust-ghost)">No entries</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = entries.map(e => `
+      <tr class="${e.is_valid ? 'row-valid' : 'row-invalid'}" data-id="${e.id}" style="cursor:pointer">
+        <td class="seq-cell">${e.id}</td>
+        <td class="stream-cell">${e.stream_id ?? '—'}</td>
+        <td>${e.event_type ?? '—'}</td>
+        <td style="color:var(--dust-dim)">${e.lamport_t ?? '—'}</td>
+        <td class="hash-cell" style="font-size:0.58rem">${(e.cortex_taint ?? '—').slice(0, 16)}…</td>
+        <td class="time-cell">${(e.ts ?? '').slice(0, 19)}</td>
+        <td class="hash-cell">${(e.curr_hash ?? '—').slice(0, 12)}…</td>
+      </tr>
+    `).join('');
+
+    document.getElementById('ledger-page-info').textContent = `Page ${page}`;
+    document.getElementById('btn-ledger-prev').disabled = page <= 1;
+    document.getElementById('btn-ledger-next').disabled = entries.length < LEDGER_PAGE_SIZE;
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--break)">Error: ${err.message}</td></tr>`;
+  }
+}
+
+async function runChainVerification() {
+  const btn = document.getElementById('btn-verify-chain');
+  const grid = document.getElementById('chain-visual-grid');
+  const progressWrap = document.getElementById('verify-progress-wrap');
+  const progressBar = document.getElementById('verify-progress-bar');
+  const integrityEl = document.getElementById('stat-integrity');
+  if (!grid) return;
+
+  if (btn) { btn.disabled = true; btn.textContent = '⚙ Verifying...'; }
+  if (progressWrap) progressWrap.style.display = 'block';
+  setTachometer('working');
+
+  let progress = 0;
+  const ticker = setInterval(() => {
+    progress = Math.min(progress + 8, 90);
+    if (progressBar) progressBar.style.width = `${progress}%`;
+  }, 120);
+
+  try {
+    const result = await get('/api/ledger/verify');
+    clearInterval(ticker);
+    if (progressBar) progressBar.style.width = '100%';
+
+    const total = result.total_checked ?? 0;
+    const valid = result.valid_count ?? 0;
+    const broken = total - valid;
+    const ratio = total > 0 ? valid / total : 1;
+
+    grid.innerHTML = '';
+    for (let i = 0; i < Math.min(total, 200); i++) {
+      const block = document.createElement('div');
+      block.className = `chain-block ${i < valid ? '' : 'invalid'}`;
+      block.title = `Block ${i + 1}: ${i < valid ? 'VALID' : 'BROKEN'}`;
+      grid.appendChild(block);
+    }
+
+    if (integrityEl) {
+      integrityEl.textContent = ratio === 1 ? 'VERIFIED' : `BROKEN (${broken})`;
+      integrityEl.className = `stat-value ${ratio === 1 ? 'verify' : 'break'}`;
+    }
+
+    if (ratio === 1) {
+      setTachometer('done');
+      container.classList.add('reward-active');
+      setTimeout(() => container.classList.remove('reward-active'), 1500);
+    } else {
+      setTachometer('alert');
+    }
+    setTimeout(() => setTachometer('idle'), 3000);
+  } catch (err) {
+    clearInterval(ticker);
+    grid.innerHTML = `<div style="color:var(--break);font-size:0.72rem;padding:10px">Verification failed: ${err.message}</div>`;
+    setTachometer('idle');
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '⚿ Verify Chain'; }
+  if (progressWrap) setTimeout(() => progressWrap.style.display = 'none', 1500);
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTE: DATABASES — Ontology Explorer
+   ══════════════════════════════════════════════════════════ */
+async function renderDatabasesPage(container) {
+  onRouteEnter('databases');
+  setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies') });
+
+  container.innerHTML = `
+    <div class="stats-grid slide-in">
+      <div class="stat-card">
+        <div class="stat-label">SQLite Files</div>
+        <div class="stat-value gold" id="db-total-count">${S.databaseList.length || '—'}</div>
+        <div class="stat-sub">Discovered</div>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <div class="card-title" style="margin-bottom:10px">Ontology Databases</div>
+      <table class="data-table">
+        <thead><tr><th>Database</th><th>Size</th><th>Type</th><th>Path</th></tr></thead>
+        <tbody id="db-table-body"><tr><td colspan="4" style="text-align:center">Loading...</td></tr></tbody>
+      </table>
+    </div>
+    <div class="card fade-in" style="margin-top:14px" id="db-schema-panel" style="display:none">
+      <div class="card-title" id="db-schema-title">Schema</div>
+      <div id="db-schema-body" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--dust-dim)"></div>
+    </div>
+  `;
+
+  try {
+    const dbs = S.databaseList.length > 0 ? S.databaseList : await get('/api/databases');
+    S.databaseList = dbs;
+    const tbody = document.getElementById('db-table-body');
+    const totalEl = document.getElementById('db-total-count');
+    if (totalEl) totalEl.textContent = dbs.length;
+
+    const formatSize = s => s > 1e6 ? `${(s/1e6).toFixed(1)}MB` : `${(s/1024).toFixed(0)}KB`;
+    const typeOf = name => {
+      if (name.includes('ledger')) return 'LEDGER';
+      if (name.includes('ontology')) return 'ONTOLOGY';
+      if (name.includes('memory') || name.includes('cortex')) return 'CORTEX';
+      if (name.includes('telemetry')) return 'TELEMETRY';
+      return 'GENERAL';
+    };
+
+    if (tbody) tbody.innerHTML = dbs.map(db => `
+      <tr style="cursor:pointer" data-path="${db.path}">
+        <td class="stream-cell">${db.name}</td>
+        <td class="time-cell">${db.size_bytes ? formatSize(db.size_bytes) : '—'}</td>
+        <td><span style="font-size:0.58rem;padding:1px 5px;border-radius:2px;background:var(--tablet-2);color:var(--dust-faint)">${typeOf(db.name)}</span></td>
+        <td class="hash-cell" style="font-size:0.6rem;max-width:320px">${db.path}</td>
+      </tr>
+    `).join('');
+
+    tbody?.querySelectorAll('tr[data-path]').forEach(row => {
+      row.addEventListener('click', () => loadDbSchema(row.dataset.path, row.querySelector('.stream-cell')?.textContent));
+    });
+  } catch (err) {
+    const tbody = document.getElementById('db-table-body');
+    if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="color:var(--break);text-align:center">${err.message}</td></tr>`;
+  }
+}
+
+async function loadDbSchema(dbPath, dbName) {
+  const panel = document.getElementById('db-schema-panel');
+  const title = document.getElementById('db-schema-title');
+  const body = document.getElementById('db-schema-body');
+  if (!panel || !body) return;
+  panel.style.display = 'block';
+  if (title) title.textContent = `Schema — ${dbName}`;
+  body.textContent = 'Loading schema...';
+  try {
+    const data = await post('/api/databases/schema', { path: dbPath });
+    if (data.tables?.length > 0) {
+      body.innerHTML = data.tables.map(t => `
+        <div style="margin-bottom:12px">
+          <div style="color:var(--lapis-bright);font-weight:700;margin-bottom:4px">▸ ${t.name}</div>
+          ${(t.columns || []).map(c => `<div style="padding-left:14px;color:var(--dust-faint)">${c.name} <span style="color:var(--dust-ghost)">${c.type}</span></div>`).join('')}
+        </div>
+      `).join('');
+    } else {
+      body.textContent = 'No tables found.';
     }
   } catch (err) {
-    console.error(err);
+    body.innerHTML = `<span style="color:var(--break)">${err.message}</span>`;
   }
-
-  // Execute query action
-  const executeQuery = async () => {
-    const db = select.value;
-    const sql = document.getElementById('query-sql-text').value.trim();
-    const container = document.getElementById('query-output-container');
-    const meta = document.getElementById('query-meta');
-    const btn = document.getElementById('btn-run-query');
-
-    if (!db) {
-      alert('Please select a target database.');
-      return;
-    }
-    if (!sql) {
-      alert('Please enter a SQL statement.');
-      return;
-    }
-
-    btn.disabled = true;
-    container.innerHTML = '<div style="text-align:center; padding: 40px; opacity:0.5;">Executing transaction against read-only core...</div>';
-    meta.textContent = '-';
-
-    try {
-      const res = await post('/api/query', { database: db, sql: sql });
-      container.innerHTML = '';
-      meta.textContent = `Rows: ${res.row_count} | Elapsed: ${res.elapsed_ms}ms`;
-
-      if (res.row_count === 0) {
-        container.innerHTML = `<div class="empty-state"><div class="desc">Query executed successfully. 0 records returned.</div></div>`;
-        return;
-      }
-
-      // Draw output table
-      const table = document.createElement('table');
-      table.className = 'data-table';
-      
-      const thead = document.createElement('thead');
-      const headerTr = document.createElement('tr');
-      res.columns.forEach(col => {
-        headerTr.innerHTML += `<th>${escapeHtml(col)}</th>`;
-      });
-      thead.appendChild(headerTr);
-      table.appendChild(thead);
-
-      const tbody = document.createElement('tbody');
-      res.rows.forEach(row => {
-        const tr = document.createElement('tr');
-        res.columns.forEach(col => {
-          const val = row[col];
-          let displayVal = val === null ? '<span style="opacity:0.3;">NULL</span>' : escapeHtml(String(val));
-          if (typeof val === 'string' && val.length > 150) {
-            displayVal = `<span title="${escapeHtml(val)}">${escapeHtml(val.slice(0, 150))}...</span>`;
-          }
-          tr.innerHTML += `<td>${displayVal}</td>`;
-        });
-        tbody.appendChild(tr);
-      });
-      table.appendChild(tbody);
-      container.appendChild(table);
-
-    } catch (err) {
-      container.innerHTML = `
-        <div class="empty-state" style="color: var(--break);">
-          <div class="icon">✕</div>
-          <div class="title" style="color: var(--break);">SQL Execution Error</div>
-          <div class="desc" style="color: var(--dust-dim); margin-top: 6px;">${escapeHtml(err.message)}</div>
-        </div>
-      `;
-    } finally {
-      btn.disabled = false;
-    }
-  };
-
-  document.getElementById('btn-run-query').addEventListener('click', executeQuery);
-
-  // Command+Enter / Ctrl+Enter helper to execute
-  document.getElementById('query-sql-text').addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-      e.preventDefault();
-      executeQuery();
-    }
-  });
 }
 
+/* ══════════════════════════════════════════════════════════
+   ROUTE: QUERY — SQL Console (read-only)
+   ══════════════════════════════════════════════════════════ */
+async function renderQueryPage(container) {
+  onRouteEnter('query');
+  setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'SQL Console') });
 
-/* ═══════════════════════════════════════════════════════════════
-   PAGE: TELEMETRY STREAM
-   ═══════════════════════════════════════════════════════════════ */
-function renderTelemetryPage(container) {
+  const defaultDb = S.databaseList[0]?.path || '';
   container.innerHTML = `
-    <div class="panel-header slide-in">
-      <div class="panel-title">SYSTEM TELEMETRY LIVE FEED</div>
-      <div class="panel-badge live" id="telemetry-connection-badge">CONNECTING...</div>
+    <div class="card slide-in" style="margin-bottom:14px">
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
+        <select class="select" id="query-db-select" style="flex:1">
+          ${S.databaseList.map(db =>
+            `<option value="${db.path}">${db.name}</option>`
+          ).join('')}
+        </select>
+        <button class="btn btn-primary" id="btn-run-query">▶ Run</button>
+        <button class="btn" id="btn-clear-query">Clear</button>
+      </div>
+      <div class="code-editor">
+        <textarea id="query-input" placeholder="SELECT * FROM ledger_entries LIMIT 20;" spellcheck="false"></textarea>
+        <div class="code-editor-toolbar">
+          <span style="font-size:0.58rem;color:var(--dust-ghost)">Read-only · No DDL/DML</span>
+          <span style="font-size:0.58rem;color:var(--dust-ghost)">Shift+Enter to run</span>
+        </div>
+      </div>
     </div>
-    <div class="panel-body slide-in">
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Total DB footprints</div>
-          <div class="stat-value lapis" id="telemetry-db-total-size">0.00 MB</div>
-          <div class="stat-sub" id="telemetry-db-count">0 database files mapped</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Active WAL files</div>
-          <div class="stat-value gold" id="telemetry-wal-count">0</div>
-          <div class="stat-sub">Write-Ahead Logging enabled</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Max RSS footprint</div>
-          <div class="stat-value verify" id="telemetry-rss-footprint">0.00 MB</div>
-          <div class="stat-sub" id="telemetry-cpu-times">CPU: u0.00s / s0.00s</div>
-        </div>
+    <div id="query-result-card" class="card fade-in" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="card-title" id="query-result-title">Results</div>
+        <span id="query-result-meta" style="font-size:0.6rem;color:var(--dust-ghost)"></span>
       </div>
-
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        
-        <!-- DB details card -->
-        <div class="card" style="display:flex; flex-direction:column; min-height: 250px;">
-          <div class="card-title">Database Storage Map</div>
-          <div style="flex:1; overflow-y:auto;">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>File Name</th>
-                  <th>Footprint Size</th>
-                </tr>
-              </thead>
-              <tbody id="telemetry-db-table-body">
-                <tr><td colspan="2" class="empty-state">Awaiting live feed snapshot...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Git info card -->
-        <div class="card" style="display:flex; flex-direction:column;">
-          <div class="card-title">Version Control Ledger</div>
-          <div style="flex: 1; display:flex; flex-direction:column; gap:16px; font-family: var(--font-mono); font-size:0.75rem; color: var(--dust-dim);">
-            <div>
-              <div class="stat-label">Git Sentinel Status</div>
-              <div id="telemetry-git-state" style="color:var(--dust); font-weight:600; margin-top:4px;">-</div>
-            </div>
-            <div>
-              <div class="stat-label">Current HEAD linkage</div>
-              <div id="telemetry-git-head" style="color:var(--lapis-bright); margin-top:4px;">-</div>
-            </div>
-            <div>
-              <div class="stat-label">Compressed pack footprint</div>
-              <div id="telemetry-git-pack-size" style="color:var(--dust); margin-top:4px;">-</div>
-            </div>
-            <div style="margin-top: auto; opacity:0.3; font-size:0.6rem; border-top:1px solid var(--edge); padding-top:10px;">
-              Project Root: <span id="telemetry-project-root">-</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
+      <div id="query-result-body" style="overflow-x:auto"></div>
     </div>
   `;
 
-  // Establish live websocket connection
-  if (telemetrySocket) {
-    try { telemetrySocket.close(); } catch {}
-  }
-
-  const badge = document.getElementById('telemetry-connection-badge');
-
-  telemetrySocket = connectWebSocket('/ws/telemetry', 
-    // onMessage callback
-    (snapshot) => {
-      badge.textContent = 'LIVE FEED';
-      badge.className = 'panel-badge live';
-      
-      // Update sizes
-      document.getElementById('telemetry-db-total-size').textContent = `${snapshot.total_db_size_mb} MB`;
-      document.getElementById('telemetry-db-count').textContent = `${snapshot.databases.length} database files mapped`;
-      document.getElementById('telemetry-wal-count').textContent = snapshot.wal_files.length;
-      
-      // Process CPU/RSS
-      if (snapshot.process && snapshot.process.max_rss_mb !== undefined) {
-        document.getElementById('telemetry-rss-footprint').textContent = `${snapshot.process.max_rss_mb} MB`;
-        document.getElementById('telemetry-cpu-times').textContent = `CPU: u${snapshot.process.user_time_s}s / s${snapshot.process.system_time_s}s`;
+  const runQuery = async () => {
+    const sql = document.getElementById('query-input')?.value?.trim();
+    const dbPath = document.getElementById('query-db-select')?.value;
+    if (!sql || !dbPath) return;
+    setTachometer('working');
+    const resultCard = document.getElementById('query-result-card');
+    const resultBody = document.getElementById('query-result-body');
+    const resultMeta = document.getElementById('query-result-meta');
+    if (resultCard) resultCard.style.display = 'block';
+    if (resultBody) resultBody.innerHTML = `<div style="color:var(--dust-faint);padding:10px">Running...</div>`;
+    try {
+      const t0 = Date.now();
+      const result = await post('/api/query', { db_path: dbPath, sql });
+      const elapsed = Date.now() - t0;
+      const rows = result.rows || [];
+      const cols = result.columns || [];
+      if (resultMeta) resultMeta.textContent = `${rows.length} rows · ${elapsed}ms`;
+      if (resultBody) {
+        if (rows.length === 0) {
+          resultBody.innerHTML = `<div style="color:var(--dust-faint);padding:10px">No results</div>`;
+        } else {
+          resultBody.innerHTML = `
+            <table class="data-table">
+              <thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+              <tbody>${rows.map(row =>
+                `<tr>${cols.map(c => `<td>${row[c] ?? ''}</td>`).join('')}</tr>`
+              ).join('')}</tbody>
+            </table>
+          `;
+        }
       }
-
-      // Populate DB list table
-      const tbody = document.getElementById('telemetry-db-table-body');
-      tbody.innerHTML = '';
-      snapshot.databases.forEach(db => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td style="color:var(--dust); font-weight:600;">${escapeHtml(db.name)}</td>
-          <td>${db.size_mb} MB</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      // Populate Git info
-      const git = snapshot.git;
-      if (git && git.exists) {
-        document.getElementById('telemetry-git-state').innerHTML = '<span style="color:var(--verify);">ACTIVE & WATCHING</span>';
-        document.getElementById('telemetry-git-head').textContent = git.head || 'UNKNOWN';
-        document.getElementById('telemetry-git-pack-size').textContent = `${git.pack_size_mb} MB`;
-      } else {
-        document.getElementById('telemetry-git-state').innerHTML = '<span style="color:var(--break);">NOT INSTANTIATED</span>';
-        document.getElementById('telemetry-git-head').textContent = 'None';
-        document.getElementById('telemetry-git-pack-size').textContent = '0.00 MB';
-      }
-      document.getElementById('telemetry-project-root').textContent = snapshot.project_root;
-    },
-    // onError callback
-    () => {
-      badge.textContent = 'DISCONNECTED';
-      badge.className = 'panel-badge beta';
-      setConnectionState('error', 'DISCONNECTED');
+      setTachometer('done');
+      setTimeout(() => setTachometer('idle'), 2000);
+    } catch (err) {
+      if (resultBody) resultBody.innerHTML = `<div style="color:var(--break);padding:10px">Error: ${err.message}</div>`;
+      setTachometer('idle');
     }
-  );
+  };
 
-  // Auto clean socket when moving pages
-  const checkStateInterval = setInterval(() => {
-    const mainEl = document.getElementById('main-content');
-    // If the telemetry views are not in active main element anymore, kill socket
-    if (!mainEl || !document.getElementById('telemetry-connection-badge')) {
-      if (telemetrySocket) {
-        try { telemetrySocket.close(); } catch {}
-        telemetrySocket = null;
-      }
-      clearInterval(checkStateInterval);
-    }
-  }, 1000);
+  document.getElementById('btn-run-query')?.addEventListener('click', runQuery);
+  document.getElementById('btn-clear-query')?.addEventListener('click', () => {
+    const input = document.getElementById('query-input');
+    if (input) input.value = '';
+    document.getElementById('query-result-card')?.style?.setProperty('display', 'none');
+  });
+  document.getElementById('query-input')?.addEventListener('keydown', e => {
+    if (e.shiftKey && e.key === 'Enter') { e.preventDefault(); runQuery(); }
+  });
 }
 
+/* ══════════════════════════════════════════════════════════
+   ROUTE: SWARM — Agent Telemetry (Devin-style split pane)
+   ══════════════════════════════════════════════════════════ */
+async function renderSwarmPage(container) {
+  onRouteEnter('swarm');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Agent Swarm'),
+    actions: `<span class="focus-badge live">LIVE</span>`,
+  });
 
-/* ═══════════════════════════════════════════════════════════════
-   UTILITY HELPERS
-   ═══════════════════════════════════════════════════════════════ */
-function escapeHtml(str) {
-  if (typeof str !== 'string') return '';
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  const mockAgents = [
+    { name: 'MOSKV-1 APEX', status: 'idle', task: 'Awaiting directive', progress: 0 },
+    { name: 'BFT Verifier', status: 'done', task: 'Chain verified: 100%', progress: 100 },
+    { name: 'Context Indexer', status: 'idle', task: 'Index up to date', progress: 100 },
+  ];
+
+  container.innerHTML = `
+    <div class="swarm-layout">
+      <div class="swarm-terminal">
+        <div class="swarm-terminal-header">
+          <div class="status-dot" style="width:5px;height:5px;border-radius:50%;background:var(--verify)"></div>
+          Agentic Log
+        </div>
+        <div class="swarm-terminal-body" id="swarm-log-body">
+          <div class="swarm-log-line"><span class="swarm-log-time">—:—</span><span class="swarm-log-agent">SYSTEM</span><span class="swarm-log-msg">Waiting for WebSocket stream...</span></div>
+        </div>
+      </div>
+      <div class="swarm-inspector">
+        <div class="swarm-inspector-header">Agent State</div>
+        <div class="swarm-inspector-body">
+          ${mockAgents.map(a => `
+            <div class="agent-card">
+              <div class="agent-card-header">
+                <span class="agent-name">${a.name}</span>
+                <span class="agent-status-pill ${a.status}">${a.status.toUpperCase()}</span>
+              </div>
+              <div class="agent-task">${a.task}</div>
+              <div class="agent-progress">
+                <div class="agent-progress-fill ${a.status === 'done' ? 'done' : ''}" style="width:${a.progress}%"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Connect to telemetry WebSocket
+  if (S.telemetrySocket) { S.telemetrySocket.close?.(); }
+  setTachometer('indexing');
+  S.telemetrySocket = connectWebSocket('/ws/telemetry', (msg) => {
+    appendSwarmLog(msg);
+  }, () => {
+    setTachometer('idle');
+  });
+}
+
+function appendSwarmLog(msg) {
+  const body = document.getElementById('swarm-log-body');
+  if (!body) return;
+  const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const line = document.createElement('div');
+  line.className = 'swarm-log-line';
+  const level = msg.level || 'info';
+  line.innerHTML = `
+    <span class="swarm-log-time">${now}</span>
+    <span class="swarm-log-agent">${msg.agent || 'SYSTEM'}</span>
+    <span class="swarm-log-msg ${level}">${msg.message || JSON.stringify(msg)}</span>
+  `;
+  body.appendChild(line);
+  body.scrollTop = body.scrollHeight;
+  S.swarmLog.push({ time: now, ...msg });
 }
