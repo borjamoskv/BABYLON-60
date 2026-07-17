@@ -25,7 +25,8 @@ _MODELS_PATH = Path(__file__).with_name("module_models.json")
 
 def _load() -> dict[str, Any] | None:
     if _MODELS_PATH.exists():
-        return json.loads(_MODELS_PATH.read_text(encoding="utf-8"))
+        from typing import cast
+        return cast(dict[str, Any], json.loads(_MODELS_PATH.read_text(encoding="utf-8")))
     return None
 
 

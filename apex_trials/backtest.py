@@ -84,7 +84,7 @@ def _pearson(xs: list[float], ys: list[float]) -> float:
     dy = sum((y - my) ** 2 for y in ys) ** 0.5
     if dx == 0 or dy == 0:
         return 0.0
-    return num / (dx * dy)
+    return float(num / (dx * dy))
 
 
 def spearman(xs: list[float], ys: list[float]) -> float:

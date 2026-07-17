@@ -121,7 +121,9 @@ class CtGovClient:
         if self.cache is not None:
             cached = self.cache.get(url)
             if cached is not None:
-                return json.loads(cached)
+                val = json.loads(cached)
+                if isinstance(val, dict):
+                    return val
 
         req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": USER_AGENT})
         last_err: Exception | None = None
@@ -131,7 +133,10 @@ class CtGovClient:
                     body = resp.read().decode("utf-8")
                 if self.cache is not None:
                     self.cache.put(url, body)
-                return json.loads(body)
+                val = json.loads(body)
+                if isinstance(val, dict):
+                    return val
+                raise CtGovError(f"Unexpected non-dict JSON response from {url}")
             except urllib.error.HTTPError as exc:
                 if exc.code == 404:
                     raise CtGovError(f"404 Not Found: {url}") from exc

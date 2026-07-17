@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0)
-# Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning
+# C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
+# Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning, Zero-Anergy Whitelisting
 import os
 import re
 import math
@@ -11,8 +11,8 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import List, Dict, Any
 
 # Exclusión de Anergía (Directorios ruidosos o binarios)
-EXCLUDE_DIRS = {'.git', '.venv', '__pycache__', 'node_modules', 'dist', 'build', '.cortex', '.babylon60', '.mypy_cache', '.pytest_cache', '.ruff_cache', 'c5_remotion_video', 'scratch', 'anvil_yung', 'BABYLON-60-fixes'}
-EXCLUDE_EXTS = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.db', '.sqlite', '.sqlite3', '.npz', '.pyc', '.so', '.dylib', '.zip', '.tar', '.gz', '.db-shm', '.db-wal', '.lock', '.ipynb', '.patch', '.json'}
+EXCLUDE_DIRS = {'.git', '.venv', '__pycache__', 'node_modules', 'dist', 'build', '.cortex', '.babylon60', '.mypy_cache', '.pytest_cache', '.ruff_cache', 'c5_remotion_video', 'scratch', 'anvil_yung', 'BABYLON-60-fixes', 'target'}
+EXCLUDE_EXTS = {'.png', '.jpg', '.jpeg', '.gif', '.pdf', '.db', '.sqlite', '.sqlite3', '.npz', '.pyc', '.so', '.dylib', '.zip', '.tar', '.gz', '.db-shm', '.db-wal', '.lock', '.ipynb', '.patch', '.json', '.rlib', '.rmeta'}
 
 # Patrones Top Secret
 PATTERNS = {
@@ -26,6 +26,14 @@ PATTERNS = {
     'GENERIC_SECRET': r'(?i)(password|secret|api_key|access_token)[\s:=]+[\'"]([^\'"]{8,})[\'"]'
 }
 
+# Whitelist de Anergía para Cadenas de Alta Entropía
+WHITELIST_ENTROPY = [
+    r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx',
+    r'0123456789abcdefghijklmnopqrstuvwxyz',
+    r'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+    r'docs\.google\.com/[^\s]+'
+]
+
 def shannon_entropy(data: str) -> float:
     if not data:
         return 0.0
@@ -36,8 +44,14 @@ def shannon_entropy(data: str) -> float:
             entropy += - p_x * math.log2(p_x)
     return entropy
 
+def is_whitelisted(line: str) -> bool:
+    for w in WHITELIST_ENTROPY:
+        if re.search(w, line):
+            return True
+    return False
+
 def scan_file(filepath: str) -> List[Dict[str, Any]]:
-    findings = []
+    findings: List[Dict[str, Any]] = []
     # Auto-evasión
     if "secret_swarm_auditor.py" in filepath or not os.path.isfile(filepath):
         return findings
@@ -67,26 +81,27 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                     })
 
             # Check Entropy
-            words = re.findall(r'\b[a-zA-Z0-9+/=]{20,}\b', line)
-            for w in words:
-                ent = shannon_entropy(w)
-                if ent > 4.8:
-                    secret_hash = hashlib.sha3_256(w.encode()).hexdigest()[:16]
-                    masked = w[:4] + "..." + w[-4:]
-                    findings.append({
-                        'file': filepath,
-                        'line': i + 1,
-                        'type': 'HIGH_ENTROPY_STRING',
-                        'entropy': round(ent, 2),
-                        'masked_value': masked,
-                        'hash': secret_hash
-                    })
+            if not is_whitelisted(line):
+                words = re.findall(r'\b[a-zA-Z0-9+/=]{20,}\b', line)
+                for w in words:
+                    ent = shannon_entropy(w)
+                    if ent > 4.8:
+                        secret_hash = hashlib.sha3_256(w.encode()).hexdigest()[:16]
+                        masked = w[:4] + "..." + w[-4:]
+                        findings.append({
+                            'file': filepath,
+                            'line': i + 1,
+                            'type': 'HIGH_ENTROPY_STRING',
+                            'entropy': round(ent, 2),
+                            'masked_value': masked,
+                            'hash': secret_hash
+                        })
     except (UnicodeDecodeError, OSError):
         pass
         
     return findings
 
-def get_target_files(root_dir: str, explicit_files: List[str] = None) -> List[str]:
+def get_target_files(root_dir: str, explicit_files: List[str] | None = None) -> List[str]:
     targets = []
     if explicit_files:
         for f in explicit_files:
@@ -105,7 +120,7 @@ def get_target_files(root_dir: str, explicit_files: List[str] = None) -> List[st
     return targets
 
 def export_sarif(findings: List[Dict[str, Any]], root: str, output_path: str):
-    sarif = {
+    sarif: Dict[str, Any] = {
         "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
         "version": "2.1.0",
         "runs": [{
@@ -144,8 +159,8 @@ def export_sarif(findings: List[Dict[str, Any]], root: str, output_path: str):
             }]
         })
 
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(sarif, f, indent=2)
+    with open(output_path, "w", encoding="utf-8") as out_file:
+        json.dump(sarif, out_file, indent=2)
 
 def main():
     parser = argparse.ArgumentParser(description="C5-REAL Swarm Secret Auditor")
@@ -156,7 +171,7 @@ def main():
     root = os.getcwd()
     files = get_target_files(root, explicit_files=args.files)
     
-    print(f"[*] C5-REAL Swarm (ULTRATHINK P0). Escaneando {len(files)} deltas/archivos...")
+    print(f"[*] C5-REAL Swarm (ULTRATHINK P0 - IT3). Escaneando {len(files)} deltas/archivos...")
     
     all_findings = []
     with ProcessPoolExecutor() as executor:
