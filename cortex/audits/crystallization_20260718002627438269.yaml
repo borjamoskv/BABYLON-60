@@ -1,0 +1,12 @@
+Claim: Crystallization_1836e39c
+Proof:
+  Base: Extraction from session 1836e39c-8bbc-4ba2-9cbc-95feb501ef4e
+  Payload: |
+    conversation_id: "1836e39c-8bbc-4ba2-9cbc-95feb501ef4e"
+    date: "2026-07-16T20:59:17Z"
+    objective: |
+      [C5-REAL STRICT] Ejecuta auditoría de recursos y deadlocks sobre `c5_remotion_video/` y `lisp_metamembrane/`. Identifica subprocesos zombies, ffmpeg unescaped paths o desbordamiento de AST. CERO PROSA. Devuelve EXCLUSIVAMENTE una matriz YAML. Si está...
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 9cf7ace322a2f23fcc0d3afac490c16dca2fa202d611b5f94e74da6bd6898f94

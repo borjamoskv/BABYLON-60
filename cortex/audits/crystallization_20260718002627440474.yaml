@@ -1,0 +1,12 @@
+Claim: Crystallization_4a832584
+Proof:
+  Base: Extraction from session 4a832584-9772-4952-a7c3-48afab57324a
+  Payload: |
+    conversation_id: "4a832584-9772-4952-a7c3-48afab57324a"
+    date: "2026-07-16T23:56:00Z"
+    objective: |
+      Trajectory not found: d85d3a0d-627f-4f30-a92b-4fe0227e15ff (error ID: 76a33df1589e41328597d5a33916ff4c)
+    files_mutated: []
+    commands_executed: ['git checkout main && git pull', 'git fetch origin', 'git diff', 'git log -n 1 --stat', 'ls -la /Users/borjafernandezangulo/10_PROJECTS/babylon-60/tests']
+  Confidence: C5
+CORTEX_TAINT: 08b18503e8a964c7692089512e81c1f4b6ce9ee637152a6fba9b6d7a0d21d9c5

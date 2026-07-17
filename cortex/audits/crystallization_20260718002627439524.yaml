@@ -1,0 +1,12 @@
+Claim: Crystallization_5d63dc2d
+Proof:
+  Base: Extraction from session 5d63dc2d-66b1-439d-a57f-b94e49289744
+  Payload: |
+    conversation_id: "5d63dc2d-66b1-439d-a57f-b94e49289744"
+    date: "2026-07-16T21:55:42Z"
+    objective: |
+      Tauri 2.x
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: f89788d172040d81082301af82a652588d641f16ce10c68eb99c1101037ae97c

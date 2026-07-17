@@ -1,0 +1,12 @@
+Claim: Crystallization_318ea5ba
+Proof:
+  Base: Extraction from session 318ea5ba-b5fb-4778-a0f2-5f4ef208b771
+  Payload: |
+    conversation_id: "318ea5ba-b5fb-4778-a0f2-5f4ef208b771"
+    date: "2026-07-17T16:13:10Z"
+    objective: |
+      - Option: "2. Integrate live ledger_actor.py + Git Sentinel into apex_trials (Roadmap item 5)"
+    files_mutated: ['backtest.py', 'ctgov.py', 'fit_weights.py', 'implementation_plan.md', 'ledger.py', 'modules.py', 'risk_engine.py', 'task.md', 'test_fitted.py', 'test_ledger.py', 'test_risk_engine.py', 'walkthrough.md']
+    commands_executed: ['pytest tests/apex/test_ledger.py -v -p no:randomly', 'python3 -m apex_trials.cli verify', 'git log -n 5', 'mypy --strict apex_trials tests', 'mypy --strict apex_trials']
+  Confidence: C5
+CORTEX_TAINT: e56fb50ea6ddb119f9a5e3960a83e4d26fb5498f0378fcae08f90863d689c762

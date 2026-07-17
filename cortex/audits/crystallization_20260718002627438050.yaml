@@ -1,0 +1,12 @@
+Claim: Crystallization_c38aa019
+Proof:
+  Base: Extraction from session c38aa019-80f7-4800-b03d-4fce931312aa
+  Payload: |
+    conversation_id: "c38aa019-80f7-4800-b03d-4fce931312aa"
+    date: "2026-07-16T20:59:17Z"
+    objective: |
+      [C5-REAL STRICT] Ejecuta auditoría termodinámica sobre `scripts/` (110 archivos). Identifica fallas de shell (`shell=True`), imports rotos, fallas de variables en bucles y mutaciones destructivas sin `git`. CERO PROSA. Devuelve EXCLUSIVAMENTE una mat...
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 3bbeb5bd5b78710dfd299d5b83db0e589027e697edb3fff968371176d27c6a26

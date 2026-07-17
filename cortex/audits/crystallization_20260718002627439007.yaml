@@ -1,0 +1,12 @@
+Claim: Crystallization_96240891
+Proof:
+  Base: Extraction from session 96240891-e50e-47a7-9f77-ed7d170679f1
+  Payload: |
+    conversation_id: "96240891-e50e-47a7-9f77-ed7d170679f1"
+    date: "2026-07-16T21:21:01Z"
+    objective: |
+      C5-REAL Protocol. Use `uv run ruff check` or manual AST parsing to identify dead code (unused functions/variables) across the entire repo. Output strictly YAML matrix. No prosa.
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 23ac4a433f8beef950995d4ec996a9e62543fe1c79df0067e55bc580cab3273b

@@ -1,0 +1,12 @@
+Claim: Crystallization_c95d8c81
+Proof:
+  Base: Extraction from session c95d8c81-efe7-41f9-9c83-2226867f2477
+  Payload: |
+    conversation_id: "c95d8c81-efe7-41f9-9c83-2226867f2477"
+    date: "2026-07-17T19:46:04Z"
+    objective: |
+      > **[ 📍 REPO ACTIVO: `moskv-1-apex/cognitive-multiplexor` | 🟢 MODO: Ejecución ]**
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 811602ed65bba74f833fd4be71e8dd9d5c9f97b53c248b1132f9a97aed29298e

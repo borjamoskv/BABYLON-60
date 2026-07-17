@@ -1,0 +1,12 @@
+Claim: Crystallization_140f7423
+Proof:
+  Base: Extraction from session 140f7423-2f8f-4501-8cd7-e462d54d7f37
+  Payload: |
+    conversation_id: "140f7423-2f8f-4501-8cd7-e462d54d7f37"
+    date: "2026-07-16T21:24:16Z"
+    objective: |
+      Fractura real reproducida y deterministizada: no son 42 ficheros ni imports a cortex — es babylon60/cli/onco_transducer.py:14 → import pandas (dependencia no declarada), que rompe la colección de test_onco_transducer.py. Los ficheros que citaba la di...
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 45223fa4133650ebea8a62ec66406a46f1bc10569996e4eb13176fcebbfd31b7

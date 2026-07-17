@@ -1,0 +1,12 @@
+Claim: Crystallization_eaedf867
+Proof:
+  Base: Extraction from session eaedf867-438f-4d9f-a029-736b07533f9d
+  Payload: |
+    conversation_id: "eaedf867-438f-4d9f-a029-736b07533f9d"
+    date: "2026-07-17T21:18:06Z"
+    objective: |
+      ok
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: b745a58437b506ed9295282686de72192a0439c6c13619dfda67add7673676d3

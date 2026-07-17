@@ -1,0 +1,12 @@
+Claim: Crystallization_7a5c1e3e
+Proof:
+  Base: Extraction from session 7a5c1e3e-dc86-4a7a-9802-fb1686a9f5bf
+  Payload: |
+    conversation_id: "7a5c1e3e-dc86-4a7a-9802-fb1686a9f5bf"
+    date: "2026-07-17T21:35:15Z"
+    objective: |
+      You are forging the CSS for AttentionOS / BABYLON60 IDE using the Cognite Material Computing design system.
+    files_mutated: ['babylon60.css']
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 6027c56151d468b3cd61830013a74a3915c3a7a68916fc44c8f20946eef75368

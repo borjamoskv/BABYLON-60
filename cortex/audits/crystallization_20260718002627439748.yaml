@@ -1,0 +1,12 @@
+Claim: Crystallization_f9b1d76c
+Proof:
+  Base: Extraction from session f9b1d76c-d398-4a61-93cf-70e29c196d33
+  Payload: |
+    conversation_id: "f9b1d76c-d398-4a61-93cf-70e29c196d33"
+    date: "2026-07-16T22:16:16Z"
+    objective: |
+      [No prompt found]...
+    files_mutated: []
+    commands_executed: ['git log --oneline -n 5 -- cortex/api', 'find /Users/borjafernandezangulo/10_PROJECTS/cortex-persist/cortex -name \\"*.py\\" 2>/dev/null', 'find /Users/borjafernandezangulo/10_PROJECTS -type f -not -path \\"*/.venv/*\\" -not -path \\"*/node_modules/*\\" -not -path \\"*/target/*\\" -not -path \\"*/dist/*\\" -exec grep -l \\"AgentRegistry\\" {} + 2>/dev/null', 'find /Users/borjafernandezangulo/10_PROJECTS -type f -not -path \\"*/.venv/*\\" -not -path \\"*/node_modules/*\\" -not -path \\"*/target/*\\" -not -path \\"*/dist/*\\" -exec grep -l \\"TaskCreate\\" {} + 2>/dev/null', 'git log -S \\"AgentRegistration\\" --oneline 2>/dev/null || echo \\"FAILED\\"']
+  Confidence: C5
+CORTEX_TAINT: 9ee3bab5761179b9803e4af4bae142f6b7f0bd1268845a6e8ecc5d2c7f4096b7

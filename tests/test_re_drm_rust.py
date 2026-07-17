@@ -16,11 +16,14 @@ def test_re_drm_rust_bft_verification():
     """
     # 1. Run the Rust compiler/executor
     print("[*] Launching native Rust BFT verifier...")
+    env = os.environ.copy()
+    env["PYO3_USE_ABI3_FORWARD_COMPATIBILITY"] = "1"
     res = subprocess.run(
         ["cargo", "run", "--manifest-path", "strike_rs/Cargo.toml", "--bin", "re_drm_1000_bft"],
         cwd=PROJECT_ROOT,
         capture_output=True,
-        text=True
+        text=True,
+        env=env
     )
     
     assert res.returncode == 0, f"Rust binary failed: {res.stderr}"

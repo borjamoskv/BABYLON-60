@@ -1,0 +1,12 @@
+Claim: Crystallization_ea2beeb3
+Proof:
+  Base: Extraction from session ea2beeb3-1b16-4abc-85f2-24222c9261f4
+  Payload: |
+    conversation_id: "ea2beeb3-1b16-4abc-85f2-24222c9261f4"
+    date: "2026-07-16T20:42:38Z"
+    objective: |
+      🔴 Alto — escape de rutas
+    files_mutated: ['MANIFIESTO_CENTURIA.md', 'llm-attest.py', 'pyproject.toml', 'router.py', 'tools.py']
+    commands_executed: ['git add . && git commit --no-verify -m \\"refactor(autonomo): purga de necrosis en experimental/cortex_legacy y asimilación de docs BFT\\"', 'uv run pyright', 'rm -f scratch/generate_voice_turns.py scripts/automejora_1000_cache.py', 'rm -f scripts/romance_common.py', 'cat /Users/borjafernandezangulo/.gemini/antigravity/brain/ea2beeb3-1b16-4abc-85f2-24222c9261f4/.system_generated/tasks/task-1144.log']
+  Confidence: C5
+CORTEX_TAINT: 44637d8e2109df21624ebf9fc705830f3a8c2917b3e92e815fda576274b1787c

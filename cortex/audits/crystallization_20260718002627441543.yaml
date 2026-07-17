@@ -1,0 +1,12 @@
+Claim: Crystallization_6cf0dd38
+Proof:
+  Base: Extraction from session 6cf0dd38-bc30-4b85-857c-2a5ba597010e
+  Payload: |
+    conversation_id: "6cf0dd38-bc30-4b85-857c-2a5ba597010e"
+    date: "2026-07-17T15:12:26Z"
+    objective: |
+      INGENIERIA INVERSA DEL BINARIO
+    files_mutated: ['atmoky_drm_analysis.md', 'create_ledger.py', 'dump_db_schema.py', 'dump_preferences.py', 'extract_symbols.py', 'find_db.py', 'list_groups.py', 'parse_car.py', 'parse_objc_verbose.py', 'populate_symbols_ledger.py', 'portal_app_reverse_engineering.md', 'portal_explorer.py']
+    commands_executed: ["strings -arch arm64 /Applications/Portal.app/Contents/MacOS/Portal | grep -E -A 1 -i 'HeadMotion'", "strings -arch arm64 /Applications/Portal.app/Contents/MacOS/Portal | grep -E -A 1 'Spatial|Opus|Kestrel|Merlin|GRDB'", 'otool -tV /Applications/Portal.app/Contents/Frameworks/atmokyDynamicRenderer.framework/atmokyDynamicRenderer | grep -A 50 \\"_registerRenderers\\" > /Users/borjafernandezangulo/.gemini/antigravity/scratch/atmoky_disasm.txt', 'otool -tV /Applications/Portal.app/Contents/Frameworks/atmokyDynamicRenderer.framework/atmokyDynamicRenderer | grep -A 50 \\"registerRenderers\\" > /Users/borjafernandezangulo/.gemini/antigravity/scratch/atmoky_disasm.txt', 'git add . && git commit -m \\"feat(cortex): crystallize atmoky DSP DRM bypass analysis\\"']
+  Confidence: C5
+CORTEX_TAINT: d0f478567128223cb3ca3cf1afa01c81f465a0d167e4c69d5680a8601965e218

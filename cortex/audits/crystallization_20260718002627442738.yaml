@@ -1,0 +1,12 @@
+Claim: Crystallization_24476f91
+Proof:
+  Base: Extraction from session 24476f91-0f16-4688-a6ce-070e13ede583
+  Payload: |
+    conversation_id: "24476f91-0f16-4688-a6ce-070e13ede583"
+    date: "2026-07-17T17:36:56Z"
+    objective: |
+      797 CONVERSACIONES EN WORKSPAES de 30_BABYLON-60
+    files_mutated: []
+    commands_executed: ['ls -la /Users/borjafernandezangulo/.gemini/ 2>&1 | head -30', 'ls -la /Users/borjafernandezangulo/.gemini/ 2>&1', 'ls /Users/borjafernandezangulo/.gemini/antigravity/brain/ | wc -l && ls /Users/borjafernandezangulo/.gemini/config/ 2>&1', 'ls /Users/borjafernandezangulo/.gemini/config/cortex/ 2>&1 && echo \\"---\\" && ls /Users/borjafernandezangulo/.gemini/config/cortex/memory_vault/ 2>&1 | head -20', 'ls /Users/borjafernandezangulo/.gemini/config/cortex/ontology/ && echo \\"---\\" && ls /Users/borjafernandezangulo/.gemini/config/cortex/audits/ | head -10']
+  Confidence: C5
+CORTEX_TAINT: 94d6e69e4bb8f87a540ffe06c5b9201f9d6e7b5b8e707cabbb3ce3860af462bf

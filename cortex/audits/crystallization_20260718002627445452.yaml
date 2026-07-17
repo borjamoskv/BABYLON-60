@@ -1,0 +1,12 @@
+Claim: Crystallization_7d64dc8b
+Proof:
+  Base: Extraction from session 7d64dc8b-a6e9-4b6e-a12b-2a924060b073
+  Payload: |
+    conversation_id: "7d64dc8b-a6e9-4b6e-a12b-2a924060b073"
+    date: "2026-07-17T22:15:30Z"
+    objective: |
+      SUDO RAM
+    files_mutated: ['CLI.swift', 'ProcessManager.swift', 'check_antigravity_docs.py', 'check_antigravity_projects.py', 'check_binary_existence.py', 'check_brew_formula.py', 'check_brew_services.py', 'check_cortex_dir.py', 'check_cortex_dir_v2.py', 'check_cortex_home.py', 'check_cortex_only.py', 'check_homebrew_perms.py', 'check_ps.py', 'check_ram_guard_dir.py', 'check_ramguard_bin.py', 'check_ramguard_binaries.py', 'check_ramguard_git.py', 'check_swift_bin_path.py', 'check_symlink.py', 'deploy_ramguard.py', 'find_all_build_files.py', 'find_any_ramguard_bin.py', 'find_build_dir.py', 'find_compiled_binary.py', 'find_ramguard_source.py', 'git_commit_ramguard.py', 'inspect_compiled_ramguard.py', 'inspect_homebrew_ramguard.py', 'kill_pids.py', 'list_ramguard_build.py', 'list_ramguard_files.py', 'list_swift_bin.py', 'read_brew_ramguard_logs.py', 'read_ram_guard.py', 'run_compiled_ramguard_status.py', 'run_manual_purge.py', 'run_ramguard_help.py', 'run_ramguard_status.py', 'run_ramguard_status_direct.py', 'run_swift_build_and_capture.py', 'search_antigravity_ramguard.py', 'search_ramguard_explicit.py', 'search_transcripts.py', 'test_all_pids.swift', 'test_monitor.swift', 'test_proc_manager.swift', 'test_ps_args.py', 'test_sysctl.swift']
+    commands_executed: ['python3 scratch/inspect_homebrew_ramguard.py', 'python3 scratch/check_homebrew_perms.py', 'python3 scratch/deploy_ramguard.py', 'python3 scratch/git_commit_ramguard.py', 'python3 scratch/run_manual_purge.py']
+  Confidence: C5
+CORTEX_TAINT: 31955a4b5cd3279799e7f27c70ed980d99d0dae571ddf69672680da319d0f4b6

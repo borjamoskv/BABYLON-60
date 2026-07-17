@@ -1,0 +1,12 @@
+Claim: Crystallization_59d42067
+Proof:
+  Base: Extraction from session 59d42067-77df-457c-bb86-62a452dcc7dc
+  Payload: |
+    conversation_id: "59d42067-77df-457c-bb86-62a452dcc7dc"
+    date: "2026-07-17T18:04:19Z"
+    objective: |
+      Mount /Users/borjafernandezangulo/Downloads/GitHub-Copilot-darwin-arm64.dmg, extract Info.plist, package configuration, and read all documentation under Contents/Resources/copilot-sdk/docs/ to write a complete markdown audit report under the artifact...
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: caa3402a54c878ffaa75bd7508a0fda59b5e7c2c988838c339aa6ae304d4eb92

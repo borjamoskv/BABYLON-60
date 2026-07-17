@@ -1,0 +1,12 @@
+Claim: Crystallization_19e1da35
+Proof:
+  Base: Extraction from session 19e1da35-da15-42fd-8ea2-41db6d71f049
+  Payload: |
+    conversation_id: "19e1da35-da15-42fd-8ea2-41db6d71f049"
+    date: "2026-07-16T21:50:35Z"
+    objective: |
+      perisste /goal
+    files_mutated: []
+    commands_executed: ['git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -20', "git rev-list --objects --all | grep -E '(736b5cc|9ed0056|b0ae087|97d9860|b992cfa|4580399|c95d192)'", 'git filter-repo --version', 'git ls-files | grep -i \\"\\\\.env.vault\\"', 'git filter-repo --path experimental/cortex_legacy --path cortex/legal_dossier --path cortex/agents/ontology/autodidact_mega_batch.yaml --path .env.vault --invert-paths --force']
+  Confidence: C5
+CORTEX_TAINT: a2e2e86a4dd8449b593ab44c12b54481a08739974ba5a2203918e05412173852

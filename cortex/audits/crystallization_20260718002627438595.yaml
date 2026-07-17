@@ -1,0 +1,12 @@
+Claim: Crystallization_937528cd
+Proof:
+  Base: Extraction from session 937528cd-d6dd-4e3e-95c7-5bb85dfad7c0
+  Payload: |
+    conversation_id: "937528cd-d6dd-4e3e-95c7-5bb85dfad7c0"
+    date: "2026-07-16T21:21:00Z"
+    objective: |
+      C5-REAL Protocol. Read files in `babylon60/core/`. Return a YAML matrix containing [File, Entropy_Score, Potential_Necrosis]. No prosa.
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: b8d9e75e85ca91df0910c4461f4dbc432659e575790cd3b2eebd42c213f153b3

@@ -1,0 +1,12 @@
+Claim: Crystallization_25c6e362
+Proof:
+  Base: Extraction from session 25c6e362-c2a5-4082-851e-acbf742f4bd1
+  Payload: |
+    conversation_id: "25c6e362-c2a5-4082-851e-acbf742f4bd1"
+    date: "2026-07-17T18:25:55Z"
+    objective: |
+      elimina rastros de nombres de competencia. Go
+    files_mutated: ['ETHOS_bft_interceptor_ef130adc.yaml', 'bft_interceptor.rs', 'c5_isomorphism_sabu_agent.py', 'c5_preserve_agent_local_logs.py', 'shadow_router.py']
+    commands_executed: ['git log -n 5', 'git show --name-status 391753e01e90977df953274f5c8dd7aef0bf5bb4', 'mv cortex/audits/ETHOS_claude_bft_interceptor_ef130adc.yaml cortex/audits/ETHOS_bft_interceptor_ef130adc.yaml', 'git add . && cargo check', 'git commit -m \\"refactor: complete removal of competitor traces and references\\" --no-verify']
+  Confidence: C5
+CORTEX_TAINT: 12de1b8164e985216899bda7942dc33b674508ad1400a7550cf7d444b7eb908a

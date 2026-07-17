@@ -1,0 +1,12 @@
+Claim: Crystallization_b7c4c946
+Proof:
+  Base: Extraction from session b7c4c946-bcf3-495f-a3db-ea8f591b49cc
+  Payload: |
+    conversation_id: "b7c4c946-bcf3-495f-a3db-ea8f591b49cc"
+    date: "2026-07-16T21:53:21Z"
+    objective: |
+      persiste Explain repository
+    files_mutated: ['EXPERIMENTAL.md', 'EXPLANATION.md', 'README.md', 'anchor_ethos.py', 'anchor_precommit.py', 'explanation_notes.md', 'ledger_actor.py', 'pre-commit', 'pyproject.toml', 'test_ledger_resilience.py']
+    commands_executed: ['git ls-files | grep -E \\"\\\\.db$|\\\\.npz$|target/|\\\\.lake/\\"', 'git ls-files \\"*.db\\"', 'git rm --cached C5_12_divergencia.npz && echo \\"*.npz\\" >> .gitignore && git add .gitignore && git commit --no-verify -m \\"chore(git): purge C5_12_divergencia.npz and ignore npz files\\"', 'git add docs/EXPERIMENTAL.md && git commit --no-verify -m \\"docs: update EXPERIMENTAL.md to reflect Lean theorems bridged via typed assertions\\"', 'git add README.md && git commit --no-verify -m \\"docs(ultrathink): colapso epistémico de BLAKE3 a SHA3-256 reflejando implementación C5-REAL\\"']
+  Confidence: C5
+CORTEX_TAINT: 7797f91317b708b8c63b26c2cb4adc02162f606c9b4495d85019427daa1cb849
