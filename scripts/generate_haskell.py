@@ -303,21 +303,21 @@ def generate_haskell_native(domains, primitives, modifiers, output_path):
     
     # Domain constructors
     for i in range(10):
-        prefix = "    " if i == 0 else "    | "
+        prefix = "    = " if i == 0 else "    | "
         lines.append(f"{prefix}HaskellDomain{domains[i].replace('_', '').capitalize()}")
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
     
     # Primitive constructors
     lines.append("data HaskellPrimitive")
     for i in range(10):
-        prefix = "    " if i == 0 else "    | "
+        prefix = "    = " if i == 0 else "    | "
         lines.append(f"{prefix}HaskellPrimitive{primitives[i].replace('_', '').capitalize()}")
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
 
     # Modifier constructors
     lines.append("data HaskellModifier")
     for i in range(10):
-        prefix = "    " if i == 0 else "    | "
+        prefix = "    = " if i == 0 else "    | "
         lines.append(f"{prefix}HaskellModifier{modifiers[i].replace('_', '').capitalize()}")
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
 

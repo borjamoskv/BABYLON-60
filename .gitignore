@@ -17,3 +17,7 @@ strike-rs/target/
 .venv/
 cortex_bft_ledger.db*
 
+# Haskell build artifacts
+*.hi
+*.o
+primitives/Haskell1000Test

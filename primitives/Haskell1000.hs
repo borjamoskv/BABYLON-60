@@ -11,7 +11,7 @@ module Primitives.Haskell1000 (
 ) where
 
 data HaskellDomain
-    HaskellDomainLazyeval
+    = HaskellDomainLazyeval
     | HaskellDomainMonadtrans
     | HaskellDomainTypeclass
     | HaskellDomainStmconcur
@@ -24,7 +24,7 @@ data HaskellDomain
     deriving (Show, Eq, Enum, Bounded)
 
 data HaskellPrimitive
-    HaskellPrimitiveThunkforce
+    = HaskellPrimitiveThunkforce
     | HaskellPrimitiveBindeval
     | HaskellPrimitiveMapapply
     | HaskellPrimitiveTxatomic
@@ -37,7 +37,7 @@ data HaskellPrimitive
     deriving (Show, Eq, Enum, Bounded)
 
 data HaskellModifier
-    HaskellModifierRaw
+    = HaskellModifierRaw
     | HaskellModifierStrict
     | HaskellModifierLazy
     | HaskellModifierReaderenv

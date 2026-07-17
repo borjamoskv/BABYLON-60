@@ -8,6 +8,7 @@ Proof:
   Confidence: C5-REAL
   GoCoverage: 100% (1000/1000 executed in 0.00s)
   PythonCoverage: 100% (1000/1000 executed in 0.001s)
+  HaskellCoverage: 100% (1000/1000 executed in 0.001s)
 ```
 
 ## 1. Topología del Espacio de Estados Observables ($10 \times 10 \times 10 = 1000$)
@@ -72,3 +73,5 @@ $$\text{Code} = D \times 100 + P \times 10 + M, \quad D, P, M \in \{0, \dots, 9\
   `PASS: 1000/1000 Primitives Executed (Final Cost: 3.453370, Wall Time: 0.424s)`
 - **Python Test Suite (`python3 -m unittest cortex/haskell_1000_test.py`)**:
   `PASS: 1000/1000 Primitives Executed (Final Cost: 3.453370, Wall Time: 0.001s)`
+- **Haskell Native Verification (`./primitives/Haskell1000Test`)**:
+  `PASS: 1000/1000 Primitives Executed (Final Cost: 3.304861, Wall Time: 0.001s)`
