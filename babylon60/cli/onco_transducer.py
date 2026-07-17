@@ -12,10 +12,63 @@ import numpy as np
 import networkx as nx
 import pandas as pd
 import logging
-from typing import Any, Dict, List, Tuple
+from dataclasses import dataclass
+from typing import Any, Dict, List, Optional, Tuple
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [C5-REAL] %(levelname)s - %(message)s")
 logger = logging.getLogger("OncoTransducer")
+
+
+@dataclass(frozen=True)
+class OncologySimulationResult:
+    steps: int
+    history: List[Dict[str, int]]
+    initial_state: Dict[str, int]
+    final_state: Dict[str, int]
+    nodes: List[str]
+
+
+class OncologyTransducer:
+    """
+    Orquestador C5-REAL para transducción y simulación de redes Booleanas oncológicas.
+    """
+
+    @classmethod
+    def run_simulation(
+        cls,
+        initial_state: Dict[str, Any],
+        steps: int = 30,
+        graph: Optional[nx.DiGraph] = None,
+        perturbed_nodes: Optional[Dict[str, Any]] = None,
+    ) -> OncologySimulationResult:
+        if graph is None:
+            graph = nx.DiGraph()
+            for k in initial_state.keys():
+                graph.add_node(k)
+                graph.add_edge(k, k)  # Auto-bucle para preservación basal si no se especifican aristas externas
+            try:
+                import babylon60.oncology_primitives as op_mod
+                edges: Any = getattr(op_mod, "ONCOLOGY_PRIMITIVES_EDGES", [])
+                for u, v in edges:
+                    if u in initial_state and v in initial_state:
+                        graph.add_edge(u, v)
+            except (ImportError, AttributeError):
+                pass
+
+        raw_history, nodes = simulate_boolean_network(
+            graph, initial_state, steps=steps, perturbed_nodes=perturbed_nodes, early_stop=False
+        )
+        history_dicts: List[Dict[str, int]] = []
+        for vec in raw_history:
+            history_dicts.append({nodes[i]: int(vec[i]) for i in range(len(nodes))})
+
+        return OncologySimulationResult(
+            steps=len(history_dicts) - 1,
+            history=history_dicts,
+            initial_state=history_dicts[0] if history_dicts else {str(k): int(v) for k, v in initial_state.items()},
+            final_state=history_dicts[-1] if history_dicts else {str(k): int(v) for k, v in initial_state.items()},
+            nodes=nodes,
+        )
 
 
 def construct_wgcna_graph(X: np.ndarray, gene_names: List[str], beta: int = 6, threshold: float = 0.15) -> nx.DiGraph:
@@ -54,7 +107,11 @@ def get_structural_driver_nodes(G: nx.DiGraph) -> List[str]:
 
 
 def simulate_boolean_network(
-    G: nx.DiGraph, initial_state: Dict[str, Any], steps: int = 30, perturbed_nodes: Dict[str, Any] | None = None
+    G: nx.DiGraph,
+    initial_state: Dict[str, Any],
+    steps: int = 30,
+    perturbed_nodes: Optional[Dict[str, Any]] = None,
+    early_stop: bool = True,
 ) -> Tuple[List[Any], List[Any]]:
     """Simula atractor de red Booleana sincrónica."""
     if perturbed_nodes is None:
@@ -80,7 +137,7 @@ def simulate_boolean_network(
         state_vector = new_state_vector
         history.append(state_vector)
 
-        if np.array_equal(history[-1], history[-2]):
+        if early_stop and np.array_equal(history[-1], history[-2]):
             break
 
     return history, nodes

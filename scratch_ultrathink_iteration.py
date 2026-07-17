@@ -4,7 +4,7 @@ import hashlib
 import datetime
 import os
 import subprocess
-from typing import Any, Dict
+from typing import Any
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))

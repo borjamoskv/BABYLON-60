@@ -6,7 +6,6 @@ Homologous Recombination Deficiency (HRD), and ecDNA Transcriptional Leverage.
 
 from __future__ import annotations
 import math
-from typing import Any
 from .models import (
     GenomicVariantRecord,
     TMBResult,
