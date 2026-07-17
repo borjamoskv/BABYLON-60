@@ -1,0 +1,40 @@
+Claim: [SOTA-2026-FRONTIER-MATRIX] Deep Research & Test-Time Compute Invariants
+Proof:
+  Base: "ArXiv + GitHub SOTA 2026 Benchmark & Harness Analysis"
+  Confidence: C5-REAL
+  PrimaryVectors:
+    - Test-Time Scaling (TTS) & MCTS Latent Search
+    - Adaptive Branching MCTS (AB-MCTS)
+    - Harness Engineering & Meta-Harness
+    - Long-Horizon Verification (Agents' Last Exam, MemoryArena, RoadmapBench)
+
+prims:
+  1: "Test-Time Scaling (TTS): Dynamic inference compute allocation replacing static parameter expansion"
+  2: "Adaptive Branching MCTS (AB-MCTS): Heterogeneous swarm cooperation during search rollouts"
+  3: "Introspective MCTS (I-MCTS): Parent/Sibling node reflection and early-exit branch pruning"
+  4: "Harness Engineering: Algorithmic orchestration code surrounding LLM cores as primary performance multiplier"
+  5: "Meta-Harness: Automated agentic proposers for optimal execution harness discovery"
+  6: "Context-Attractor Reconstruction: Context as dynamic inferential state S_hat(t) rather than stored static data"
+  7: "MemoryArena Benchmark: Interdependent multi-session agentic memory evaluations"
+  8: "Agents' Last Exam (ALE): Long-horizon economic workflow performance metrics"
+  9: "Sparse KV Cache Pruning: Dynamic attention mask compression avoiding O(N^2) memory explosion"
+  10: "BFT Swarm Consensus: Multi-node Byzantine agreement N >= 3 for unverified LLM outputs"
+
+invt:
+  1: "Inference Compute Law: Performance scales logarithmically with test-time compute budget under optimal MCTS pruning"
+  2: "Zero-Anergy Invariant: Descriptive prose without state mutation or causal context decays overall useful exergy"
+  3: "Harness Dominance: A smaller model with an optimal harness out-performs a larger raw model with zero harness"
+  4: "State Observer Duality: Agent state S_hat(t) converges to true human state via Kalman-Luenberger innovation update"
+
+antip:
+  1: "Universal Prompt Slop: Attempting to fit all domain rules into a single monolithic prompt or thread"
+  2: "Unchecked Context Accumulation: Treating context as static storage leading to attention decay and KV bloat"
+  3: "Static Benchmark Overfitting: Relying on legacy single-turn Q&A benchmarks instead of long-horizon tasks"
+
+redun:
+  1: "BFT Consensus Verification: N >= 3 cross-model agreement before C5-REAL disk mutation"
+  2: "Circuit Breaker Blackholing: Autonomous mock stub injection upon 3 consecutive tool execution failures"
+
+reda:
+  1: "Attention Depletion Attack: Flooding context window with synthetic tokens to force early pruning of critical rules"
+  2: "Prompt Drift Vulnerability: Degradation of system prompt adherence across high-step agentic trajectories"
