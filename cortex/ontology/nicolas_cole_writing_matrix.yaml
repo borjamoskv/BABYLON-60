@@ -1,0 +1,37 @@
+Claim: [NICOLAS-COLE-WRITING-ONTOLOGY] The Art & Business of Writing & AI Systems Architecture
+Proof:
+  Author: "Nicolas Cole (@nicolascole77)"
+  Corpus: ["The Art & Business of Writing", "Start Premium Ghostwriting", "Commercial Fiction Club", "Write With AI"]
+  Confidence: C5-REAL
+  Period: "2025 - July 2026"
+
+invariants:
+  EDAN_FRAMEWORK:
+    Name: "Explanation, Description, Action, Narration (EDAN)"
+    Principle: "Every piece of non-fiction text consists of exactly 4 atomic components: Explanation (Why/Context), Description (Visuals/Sense), Action (Step-by-Step SOP), and Narration (Story Arc)."
+    Formula: "Text = E(Why) + D(Visual) + A(SOP) + N(Story)"
+
+  PREPARE_THE_PAGE:
+    Name: "Speedwriting Page Prepping Invariant"
+    Principle: "Never write on a blank page. Outline subheads and fill bullet points first to trick the cognitive system into feeling 20% complete before prose generation."
+    Speedup: "Reduces book assembly time from 4 months to 7 days."
+
+  GHOSTWRITING_OUTCOMES:
+    Name: "High-Ticket Client Outcome Invariant"
+    Principle: "Ignore vanity metrics (likes, followers). Promise and deliver 3 hard commercial outcomes: Qualified Traffic, Direct Conversion/Leads, and Domain Authority."
+
+  SALES_IS_EDUCATION:
+    Name: "Objection Neutralization Engine"
+    Principle: "Selling is not persuasion; selling is structured education that dismantles customer friction and false beliefs prior to offer presentation."
+
+  LEAN_AI_PUBLISHING:
+    Name: "Data-Driven Commercial Fiction Iteration"
+    Principle: "Publish micro-novellas in rapid cycles (6 novellas in 6 days), analyze early sales data/KDP read counts, and double-down exclusively on winner series."
+
+  UNBUNDLING_LANGUAGE_PROMPTS:
+    Name: "Long-Form AI Prompt Engineering"
+    Principle: "Writing an elite AI prompt is the art of unbundling implicit human linguistic habits into explicit step-by-step rules, negative constraints, and output exemplars."
+
+  VOC_REDDIT_COPY_MINING:
+    Name: "Voice of Customer (VOC) Superiority"
+    Principle: "Synthetic AI 'Deep Research' is inferior to raw VOC copy mining. Scraping real customer pain points from subreddits/forums yields 10x conversion copy."
