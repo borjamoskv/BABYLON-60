@@ -36,11 +36,27 @@ contract SecureHook {
         return this.afterSwap.selector;
     }
 
-    // Secure EIP-1153 Transient Storage simulation (Transient Reentrancy Lock)
-    function executeAction() external {
-        // Simulates tstore/tload operation
+    error ReentrantCall();
+
+    modifier nonReentrant() {
         assembly {
+            let lock := tload(0)
+            if lock {
+                // Store custom error ReentrantCall() selector (0x12a806c9)
+                mstore(0, 0x12a806c9)
+                revert(0, 4)
+            }
             tstore(0, 1)
         }
+        _;
+        assembly {
+            tstore(0, 0)
+        }
+    }
+
+    // Secure EIP-1153 Transient Storage simulation (Transient Reentrancy Lock)
+    function executeAction() external nonReentrant {
+        // Simulates a state mutation protected by the transient lock
+        balances[msg.sender] += 10;
     }
 }

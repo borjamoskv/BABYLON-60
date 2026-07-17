@@ -8,8 +8,14 @@
 #   - Remote `main` HEAD a289204 TRACKS two private keys, present in the tree:
 #       .cortex/master_key.hex        (32 raw bytes — 256-bit master key)
 #       .cortex/solana_keypair.json   (Solana secret keypair, 64-byte array)
-#   - Local `main` is clean/diverged, so purging the LOCAL repo does NOT fix the
-#     remote. The authoritative history must be rewritten via a MIRROR clone.
+#   - Remote also TRACKS 20_VAULT/ — private PKM/CRM/OSINT naming private
+#     individuals (LinkedIn dispute log, B2B leads). Privacy exposure → purged
+#     alongside the keys in the SAME history rewrite (one force-push, not two).
+#   - VERIFIED (2026-07-17): the local repo (Teorema-Robinson-Moskv, main,
+#     803 commits) shares NO history with remote HEAD a289204 — unrelated
+#     lineages. Local NEVER tracked the keys nor 20_VAULT (git log --all empty
+#     for those paths). The remote is a stale, dead publication fork; only the
+#     remote's history needs rewriting, via a MIRROR clone.
 #
 # This script does NOT rotate your keys and does NOT move wallet funds — only you
 # can do that. It also refuses to rewrite/force-push history unless you pass
@@ -18,7 +24,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/borjamoskv/BABYLON-60.git"
-PATHS=(".cortex/master_key.hex" ".cortex/solana_keypair.json")
+PATHS=(".cortex/master_key.hex" ".cortex/solana_keypair.json" "20_VAULT")
 WORKDIR="${TMPDIR:-/tmp}/babylon60-purge-$$"
 
 banner(){ printf '\n\033[1;31m█ %s\033[0m\n' "$*"; }
@@ -41,6 +47,33 @@ EOF
 read -r -p $'\nHave you rotated/abandoned BOTH keys? [type ROTATED to continue] ' ack
 [ "$ack" = "ROTATED" ] || { echo "Aborting — rotate first."; exit 1; }
 
+banner "STEP 1.5 — TERMINAL STATE of the remote (choose before any rewrite)"
+cat <<'EOF'
+  The GitHub repo is a DEAD publication fork (no shared history with your local
+  lineage; verified 2026-07-17). Two terminal states:
+
+    OPTION A — REPLACE (max entropy annihilation, one operation):
+        On GitHub: Settings -> make BABYLON-60 private (cold archive) or delete
+        it outright. Re-publish from the local repo when/if you want:
+            git remote add origin git@github.com:borjamoskv/BABYLON-60.git
+            git push -u origin main
+        One stroke kills: exposed keys, 20_VAULT, the 622-doc entropy corpus
+        (IEI 0.532), the CORTEX<->BABYLON-60 duplicate docs, the empty .agents/
+        dirs. Caveats: forks keep their copies (rotation remains the real fix);
+        deletion is irreversible; old clones survive on other disks.
+
+    OPTION B — SURGICAL PURGE (remote stays alive as doc corpus):
+        Continue this script: mirror-clone -> filter-repo purge of the keys AND
+        20_VAULT -> single force-push. The doc-entropy collapse (audit §6 steps
+        2-7) then still needs its own follow-up commit at HEAD.
+EOF
+read -r -p $'\nChoose terminal state [type A or B] ' opt
+case "$opt" in
+  A|a) echo "OPTION A: go to GitHub Settings now (privatize or delete). Nothing further to script here."; exit 0 ;;
+  B|b) : ;;
+  *)   echo "No terminal state chosen — aborting."; exit 1 ;;
+esac
+
 if [ "${1:-}" != "--confirm-history-rewrite" ]; then
   banner "DRY RUN — history rewrite is destructive and irreversible."
   echo "  This rewrites ALL commit hashes on ALL branches and force-pushes."
@@ -55,11 +88,9 @@ command -v git-filter-repo >/dev/null 2>&1 || {
 banner "STEP 2 — MIRROR CLONE the authoritative remote (has the exposed commit)"
 rm -rf "$WORKDIR"; git clone --mirror "$REPO_URL" "$WORKDIR"; cd "$WORKDIR"
 
-banner "STEP 3 — PURGE the key paths from ALL history"
-git filter-repo --force \
-  --path .cortex/master_key.hex \
-  --path .cortex/solana_keypair.json \
-  --invert-paths
+banner "STEP 3 — PURGE keys + 20_VAULT from ALL history"
+FILTER_ARGS=(); for p in "${PATHS[@]}"; do FILTER_ARGS+=(--path "$p"); done
+git filter-repo --force "${FILTER_ARGS[@]}" --invert-paths
 
 banner "STEP 4 — RE-ADD REMOTE + HARDEN .gitignore on a working checkout"
 git remote add origin "$REPO_URL" 2>/dev/null || true
@@ -75,8 +106,8 @@ cat <<'EOF'
   - GitHub caches force-pushed commits: open a support request to purge the
     exposed commit a289204 from GitHub's cache, or the blob may stay reachable
     by SHA for a while. https://docs.github.com/removing-sensitive-data
-  - Any FORK of this repo keeps its own copy of the keys — the purge does not
-    touch forks. This is another reason rotation (STEP 1) is the true fix.
+  - Any FORK of this repo keeps its own copy of the keys AND of 20_VAULT — the
+    purge does not touch forks. Another reason rotation (STEP 1) is the true fix.
   - Add belt-and-suspenders ignores to the live tree and commit:
         printf '\n# COLLAPSE_P0_HARDENING\n.cortex/*.hex\n.cortex/*keypair*.json\n.cortex/*.key\n*.pem\n' >> .gitignore
   - Regenerate .secrets.baseline and add a gitleaks rule for 32-byte *.hex and
