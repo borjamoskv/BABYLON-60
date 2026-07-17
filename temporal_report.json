@@ -1,0 +1,48 @@
+{
+  "cutoff": "2019-01-01",
+  "n": 8000,
+  "n_train": 5323,
+  "n_test": 2677,
+  "target_mean_train": 2.998,
+  "target_mean_test": 1.625,
+  "aggregate": {
+    "spearman_random": 0.4078,
+    "spearman_temporal": 0.2816,
+    "mae_temporal": 1.5238,
+    "mae_base_temporal": 1.8805
+  },
+  "per_module": {
+    "elig": {
+      "label": "Eligibility",
+      "auc_random": 0.6898,
+      "auc_temporal": 0.633
+    },
+    "design": {
+      "label": "Study Design",
+      "auc_random": 0.6938,
+      "auc_temporal": 0.6652
+    },
+    "outcomes": {
+      "label": "Outcome Measures",
+      "auc_random": 0.6675,
+      "auc_temporal": 0.6036
+    },
+    "arms": {
+      "label": "Arms and Interventions",
+      "auc_random": 0.6829,
+      "auc_temporal": 0.6006
+    },
+    "conditions": {
+      "label": "Conditions",
+      "auc_random": 0.6906,
+      "auc_temporal": 0.5814
+    },
+    "descr": {
+      "label": "Study Description",
+      "auc_random": 0.6448,
+      "auc_temporal": 0.5908
+    }
+  },
+  "macro_auc_random": 0.6782,
+  "macro_auc_temporal": 0.6124
+}

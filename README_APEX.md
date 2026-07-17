@@ -113,15 +113,61 @@ Calibration is dense-region reliable (≈99.9% of trials score <60); the extreme
 "expect many" but the exact count is uncertain. Everything remains deterministic and
 ledger-anchored: the `causal_taint` records which model version produced each decision.
 
+### Forward generalization (temporal split — the honest number)
+
+The metrics above are a *random* split (interpolation). Under a **temporal** split
+(train on trials registered ≤2018, predict on ≥2019 — `fit_temporal.py`), performance
+degrades: aggregate Spearman **0.41 → 0.28**, per-module macro-AUC **0.68 → 0.61**.
+Signal survives (positive ρ, every module AUC > 0.58) but is **modest** — the honest
+figure to quote for deployment is the *forward* one, ρ≈0.28, not the in-regime 0.41.
+(Confound disclosed: newer trials have accrued fewer amendments, target mean 3.0 → 1.6;
+Spearman is robust to that shift, MAE is not.) See
+`AUDITORIA_APEX_TRIALS_TEMPORAL_2026-07-17.md`. Deployment practice: validate temporally
+(done), train the final model on the full corpus (shipped), and re-fit on a rolling
+window to counter temporal drift.
+
 Set `mode="hand"` in `assess()` (or delete `apex_trials/fitted_weights.json`) to fall
 back to the transparent first-principles prior.
 
+## Amendment surface — which module will change
+
+Beyond the aggregate score, APEX predicts **which** substantive module a protocol will
+amend. Six leakage-mitigated logistic models (`fit_module_models.py` →
+`module_models.json`), one per module, each trained *without* its own self-referential
+feature (the eligibility model never sees the final eligibility count, etc.), on the
+same 8k-trial corpus with per-module labels (`build_module_labels.py`):
+
+```
+module                  base   held-out AUC   PR-AUC
+Study Design            0.766     0.689        0.875
+Arms and Interventions  0.373     0.674        0.583
+Eligibility             0.330     0.669        0.529
+Outcome Measures        0.471     0.662        0.650
+Conditions              0.171     0.647        0.285
+Study Description       0.316     0.643        0.483
+macro-AUC (held-out) = 0.664   ·   CV-AUC tracks held-out within ±0.01
+```
+
+Modest but real, stable signal — every module beats chance from design features alone,
+leakage-mitigated. Runtime inference is a dependency-free standardize + sigmoid, fully
+deterministic. `predict_module_risks(features)` returns each module's P(amendment),
+base rate, and lift; the report renders it as a ranked surface with base-rate ticks.
+
+```python
+from apex_trials import CtGovClient, HttpCache, AmendmentLedger, Copilot
+res = Copilot(CtGovClient(cache=HttpCache()), AmendmentLedger()).score("NCT01245062")
+for m in res.module_risks:
+    print(f"{m.label:<24} {m.probability:.0%}  ({m.lift:.2f}× base)")
+# Study Design 100% · Outcome Measures 100% · Eligibility 94% · Arms 92% ...
+```
+
 ## Roadmap (real moat, if pursued)
 
-1. ~~Fit the weights against the history corpus.~~ **Done** — NNLS-band + isotonic on 8k trials (`fit_weights.py`, `fitted_weights.json`). Next: scale the corpus toward the full ~560k records and add stratified/temporal splits.
-2. Per-driver amendment *cause* prediction (which module will change), not just aggregate risk — the history `moduleLabels` already carry the labels.
-3. Site-feasibility scoring from `contactsLocationsModule` enrollment velocity.
-4. Swap the standalone ledger for the live `babylon60.bft.ledger_actor` + Git Sentinel.
+1. ~~Fit the aggregate weights against the history corpus.~~ **Done** — NNLS-band + isotonic on 8k trials (`fit_weights.py`).
+2. ~~Per-module amendment *cause* prediction.~~ **Done** — 6 leakage-mitigated logistic models, macro-AUC 0.664 held-out (`fit_module_models.py`). Next: richer features (protocol text embeddings), calibrated per-module probabilities.
+3. ~~Temporal split (train ≤2018, test ≥2019) to verify forward generalization.~~ **Done** — forward ρ≈0.28 / macro-AUC≈0.61 (`fit_temporal.py`, `AUDITORIA_APEX_TRIALS_TEMPORAL_2026-07-17.md`). Next: rolling-window re-fitting and scaling toward ~560k records.
+4. Site-feasibility scoring from `contactsLocationsModule` enrollment velocity.
+5. Swap the standalone ledger for the live `babylon60.bft.ledger_actor` + Git Sentinel.
 
 ---
 <sub>Titular Civil: Borja Fernández Angulo · AKA Borja Moskv (<code>borjamoskv</code>) · data © ClinicalTrials.gov (public domain)</sub>
