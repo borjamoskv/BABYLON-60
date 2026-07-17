@@ -124,8 +124,11 @@ def verify_receipt(receipt_path: str) -> Dict[str, Any]:
     return report
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="Verify Proof-of-Route v0.2 Receipts")
     parser.add_argument("receipt_file", help="Path to the JSON receipt")
     args = parser.parse_args()
     verify_receipt(args.receipt_file)
+
+if __name__ == "__main__":
+    main()
