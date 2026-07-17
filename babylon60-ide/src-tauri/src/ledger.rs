@@ -1,4 +1,4 @@
-use rusqlite::{Connection, Result, params, OptionalExtension};
+use rusqlite::{Connection, Result, params};
 use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};
 use chrono::Utc;
@@ -8,7 +8,7 @@ pub struct CortexEvent {
     pub id: Option<i64>,
     pub timestamp: String,
     pub event_type: String,
-    pub payload: String, // Stored as JSON string
+    pub payload: String,
     pub prev_hash: String,
     pub event_hash: String,
 }
@@ -20,7 +20,7 @@ pub struct CortexLedger {
 impl CortexLedger {
     pub fn new(db_path: &str) -> Result<Self> {
         let conn = Connection::open(db_path)?;
-        
+
         // Ω10 · Concurrencia Confiable de DB: busy_timeout=5000ms and WAL mode
         conn.execute_batch(
             "PRAGMA journal_mode = WAL;
@@ -40,7 +40,6 @@ impl CortexLedger {
             [],
         )?;
 
-        // Ensure genesis block exists
         let count: i64 = conn.query_row(
             "SELECT COUNT(*) FROM cortex_events",
             [],
@@ -50,7 +49,7 @@ impl CortexLedger {
         if count == 0 {
             let genesis_hash = Self::compute_hash("0", "GENESIS", "{}", "0");
             conn.execute(
-                "INSERT INTO cortex_events (timestamp, event_type, payload, prev_hash, event_hash) 
+                "INSERT INTO cortex_events (timestamp, event_type, payload, prev_hash, event_hash)
                  VALUES (?1, ?2, ?3, ?4, ?5)",
                 params![
                     Utc::now().to_rfc3339(),
@@ -89,7 +88,7 @@ impl CortexLedger {
         let event_hash = Self::compute_hash(&timestamp, event_type, &payload_str, &prev_hash);
 
         self.conn.execute(
-            "INSERT INTO cortex_events (timestamp, event_type, payload, prev_hash, event_hash) 
+            "INSERT INTO cortex_events (timestamp, event_type, payload, prev_hash, event_hash)
              VALUES (?1, ?2, ?3, ?4, ?5)",
             params![
                 timestamp,
@@ -112,10 +111,10 @@ impl CortexLedger {
 
     pub fn get_events(&self, limit: u32) -> Result<Vec<CortexEvent>> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, timestamp, event_type, payload, prev_hash, event_hash 
+            "SELECT id, timestamp, event_type, payload, prev_hash, event_hash
              FROM cortex_events ORDER BY id DESC LIMIT ?1"
         )?;
-        
+
         let event_iter = stmt.query_map(params![limit], |row| {
             Ok(CortexEvent {
                 id: row.get(0)?,
@@ -131,7 +130,7 @@ impl CortexLedger {
         for event in event_iter {
             events.push(event?);
         }
-        
+
         events.reverse();
         Ok(events)
     }

@@ -6,10 +6,16 @@ use std::sync::Mutex;
 use tauri::State;
 use serde_json::Value;
 use ledger::{CortexLedger, CortexEvent};
+use kernel::{VectorEntry, DispatchResult};
+use lexicon::{Domain, Primitive, Modifier};
 
 struct AppState {
     ledger: Mutex<CortexLedger>,
 }
+
+// ═══════════════════════════════════════════════════════
+//  LEDGER IPC
+// ═══════════════════════════════════════════════════════
 
 #[tauri::command]
 fn get_ledger_events(state: State<AppState>, limit: u32) -> Result<Vec<CortexEvent>, String> {
@@ -23,9 +29,27 @@ fn append_ledger_event(state: State<AppState>, event_type: String, payload: Valu
     ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
 }
 
+// ═══════════════════════════════════════════════════════
+//  KINETIC BIND RAW — Ontology IPC Bridge
+// ═══════════════════════════════════════════════════════
+
+#[tauri::command]
+fn list_ontology_vectors() -> Vec<VectorEntry> {
+    kernel::list_vectors()
+}
+
+#[tauri::command]
+fn dispatch_vector(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
+    kernel::dispatch(domain, primitive, modifier)
+}
+
+// ═══════════════════════════════════════════════════════
+//  BOOT SEQUENCE
+// ═══════════════════════════════════════════════════════
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let db_path = "cortex.db"; // Will be created in current directory
+    let db_path = "cortex.db";
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
 
     // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ]
@@ -36,7 +60,12 @@ pub fn run() {
         .manage(AppState {
             ledger: Mutex::new(ledger_instance),
         })
-        .invoke_handler(tauri::generate_handler![get_ledger_events, append_ledger_event])
+        .invoke_handler(tauri::generate_handler![
+            get_ledger_events,
+            append_ledger_event,
+            list_ontology_vectors,
+            dispatch_vector
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
