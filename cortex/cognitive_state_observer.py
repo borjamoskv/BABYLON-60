@@ -27,7 +27,7 @@ class CognitiveStateObserver:
         self.S_hat = [0.0] * dims  # Estimated state vector
         self.P = [[1.0 if i == j else 0.0 for j in range(dims)] for i in range(dims)] # Covariance
         self.landscape = AttractorLandscape(dims)
-        self.model_shifts = []
+        self.model_shifts: List[Dict[str, Any]] = []
 
     def predict(self, control_u: List[float]) -> List[float]:
         """

@@ -2,7 +2,8 @@ import asyncio
 import sqlite3
 import hashlib
 import time
-import strike_rs
+from typing import Tuple, Dict
+import strike_rs  # type: ignore[import-untyped]
 
 # DB Concurrency & Persist Configurations (R10)
 DB_PATH = "cortex_bft_ledger.db"
@@ -107,7 +108,7 @@ class BFTOrchestrator:
     """Asynchronous Orchestrator confined to queue routing and BFT Consensus Verification (R10, Ω11)."""
     def __init__(self, num_nodes: int = 3):
         init_bft_database()
-        self.queue = asyncio.Queue()
+        self.queue: asyncio.Queue[Tuple[int, int, int]] = asyncio.Queue()
         self.nodes = [BFTNode(i) for i in range(num_nodes)]
         self.step_index = 0
         self.last_committed_hash = "GENESIS_HASH_00000000000000000000000000000000000000000000000000000"
@@ -155,7 +156,7 @@ class BFTOrchestrator:
                     print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
 
             # 2. BFT Consensus voting (N >= 3 consensus check)
-            hash_votes = {}
+            hash_votes: Dict[str, int] = {}
             for node_id, h in hashes.items():
                 hash_votes[h] = hash_votes.get(h, 0) + 1
 
@@ -166,7 +167,7 @@ class BFTOrchestrator:
                 break
 
             # Find majority hash
-            majority_hash = max(hash_votes, key=hash_votes.get)
+            majority_hash = max(hash_votes, key=lambda k: hash_votes[k])
             vote_count = hash_votes[majority_hash]
             
             # Consensus achieved if majority matches simple majority of active nodes
