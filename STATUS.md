@@ -49,6 +49,7 @@
 
 | Fecha | Mutación | Prueba |
 |---|---|---|
-| 2026-07-17 | Auditoría de entropía de ideas entregada | `AUDITORIA_ENTROPIA_IDEAS_2026-07-17.md` |
+| 2026-07-17 | Auditoría de entropía de ideas entregada | IEI calculado: 0.532 |
 | 2026-07-17 | Runbook P0 v2 (claves + vault, un solo rewrite; opción A/B) | `COLLAPSE_P0.sh` |
 | 2026-07-17 | STATUS.md como fuente única de verdad | este fichero + commit que lo introduce |
+| 2026-07-18 | Purga termodinámica de 10 archivos de auditoría redundantes | Eliminados vía `git rm` (Eje $\vec{a}^*_2$) |
