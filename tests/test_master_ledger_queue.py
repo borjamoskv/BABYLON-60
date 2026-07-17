@@ -1,5 +1,4 @@
 import os
-import asyncio
 import pytest
 from babylon60.bft.master_ledger_queue import MasterLedgerQueue
 
@@ -16,7 +15,7 @@ async def test_master_ledger_queue_single_writer(tmp_path) -> None:
         for i in range(50):
             await queue.submit_transaction("INSERT INTO test_items (id, val) VALUES (?, ?);", (i, f"item_{i}"))
 
-        await asyncio.sleep(0.3)
+        await queue.queue.join()
         assert queue.db is not None
 
         async with queue.db.execute("SELECT COUNT(*) FROM test_items;") as cursor:

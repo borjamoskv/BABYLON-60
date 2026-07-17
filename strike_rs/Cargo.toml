@@ -3,6 +3,10 @@ name = "strike_rs"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "strike_rs"
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
 blake3 = "1.8.5"
 petgraph = "0.8.3"
@@ -10,3 +14,4 @@ rusqlite = { version = "0.31.0", features = ["bundled"] }
 ring = "0.17.8"
 inotify = "0.10.2"
 signal-hook = "0.3.17"
+pyo3 = { version = "0.21.2", features = ["extension-module"] }
