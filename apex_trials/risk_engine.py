@@ -25,7 +25,9 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Callable
 
 from .features import StudyFeatures
@@ -34,6 +36,36 @@ from .features import StudyFeatures
 RAW_MAX: int = 114
 
 MODEL_VERSION: str = "apex-amendment-risk/1.0.0"
+
+# Optional data-fitted mixing weights (see fit_weights.py). When present, the score
+# uses learned per-driver importances + isotonic calibration to an expected
+# substantive-amendment count. The transparent bands/thresholds are unchanged —
+# only the driver mixing weights are relearned. Absent -> hand-tuned prior.
+_FITTED_PATH = Path(__file__).with_name("fitted_weights.json")
+
+
+def _load_fitted() -> dict[str, Any] | None:
+    if _FITTED_PATH.exists():
+        return json.loads(_FITTED_PATH.read_text(encoding="utf-8"))
+    return None
+
+
+_FITTED: dict[str, Any] | None = _load_fitted()
+
+
+def _interp_curve(curve: list[list[float]], x: float) -> float:
+    """Deterministic linear interpolation over the isotonic knots (ascending x)."""
+    if not curve:
+        return 0.0
+    if x <= curve[0][0]:
+        return curve[0][1]
+    if x >= curve[-1][0]:
+        return curve[-1][1]
+    for (x0, y0), (x1, y1) in zip(curve, curve[1:]):
+        if x0 <= x <= x1:
+            t = (x - x0) / (x1 - x0) if x1 > x0 else 0.0
+            return y0 + t * (y1 - y0)
+    return curve[-1][1]
 
 
 @dataclass(frozen=True)
@@ -62,6 +94,9 @@ class RiskAssessment:
     score: int          # normalized 0..100
     tier: str
     fired_rules: tuple[FiredRule, ...]
+    mode: str = "hand-tuned"                       # "hand-tuned" | "fitted"
+    expected_amendments: float | None = None        # isotonic-calibrated count (fitted only)
+    contributions: tuple[float, ...] = ()           # per-driver 0..100 contribution, aligned to fired_rules
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -70,7 +105,10 @@ class RiskAssessment:
             "raw_score": self.raw_score,
             "score": self.score,
             "tier": self.tier,
+            "mode": self.mode,
+            "expected_amendments": self.expected_amendments,
             "fired_rules": [r.as_dict() for r in self.fired_rules],
+            "contributions": list(self.contributions),
         }
 
 
@@ -186,15 +224,34 @@ def _tier(score: int) -> str:
     return "LOW"
 
 
-def assess(features: StudyFeatures) -> RiskAssessment:
+def assess(features: StudyFeatures, mode: str = "auto") -> RiskAssessment:
+    """Score a protocol. mode: 'auto' (fitted if weights present else hand-tuned),
+    'fitted' (force learned weights), or 'hand' (force first-principles prior).
+
+    Both modes share the same transparent bands (`fired_rules`); they differ only in
+    how the 8 drivers are mixed into the 0..100 score.
+    """
     fired = tuple(driver(features) for driver in _DRIVERS)
     raw = sum(r.points for r in fired)
+    fractions = [(r.points / r.max_points if r.max_points else 0.0) for r in fired]
+
+    use_fitted = mode == "fitted" or (mode == "auto" and _FITTED is not None)
+    if use_fitted and _FITTED is not None:
+        importances = _FITTED["importances"]
+        raw_contribs = [100.0 * importances[i] * fractions[i] for i in range(len(fired))]
+        score = round(sum(raw_contribs))
+        expected = round(_interp_curve(_FITTED["isotonic_curve"], float(score)), 2)
+        return RiskAssessment(
+            nct_id=features.nct_id, model_version=_FITTED["model_version"], raw_score=raw,
+            score=score, tier=_tier(score), fired_rules=fired, mode="fitted",
+            expected_amendments=expected,
+            contributions=tuple(round(c, 2) for c in raw_contribs),
+        )
+
+    contribs = tuple(round(r.points / RAW_MAX * 100, 2) for r in fired)
     score = round(raw / RAW_MAX * 100)
     return RiskAssessment(
-        nct_id=features.nct_id,
-        model_version=MODEL_VERSION,
-        raw_score=raw,
-        score=score,
-        tier=_tier(score),
-        fired_rules=fired,
+        nct_id=features.nct_id, model_version=MODEL_VERSION, raw_score=raw,
+        score=score, tier=_tier(score), fired_rules=fired, mode="hand-tuned",
+        expected_amendments=None, contributions=contribs,
     )

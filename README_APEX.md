@@ -80,23 +80,46 @@ and every one is visible in `risk_engine.py` for a sponsor to retune.
 
 ## Validation (C5-REAL, against public ground-truth)
 
-Pooled cohort (cancer + diabetes + heart-failure, n=75 completed trials):
+The mixing weights are fit on a corpus of **8,000 completed interventional trials**
+(`build_dataset.py`), each labeled with its true substantive-amendment count from the
+public version history. Fit on 6,000, **held out 2,000**:
 
 ```
-Spearman ρ(score, actual substantive amendments) = 0.30
-LOW      mean actual amendments = 1.87
-MODERATE mean actual amendments = 3.14
-HIGH     mean actual amendments = 5.50
+                         Spearman ρ (held-out)
+hand-tuned prior              0.402
+NNLS-band fitted              0.416     (+0.014)
+Poisson raw (ceiling)         0.436
+5-fold CV (fitted)            0.381 ± 0.020
+
+Isotonic calibration MAE = 1.74 amendments  vs  2.02 predict-the-mean   (−13.8%)
 ```
 
-Positive rank-ordering from a zero-training prior, fully auditable. Not a claim of
-trained accuracy — the value is the reproducible, verifiable framework; accuracy is a
-tuning/back-testing exercise the harness already supports.
+Honest read: fitting buys a **marginal ranking gain** but a **meaningful calibration
+gain** — the model now forecasts the *actual number* of substantive amendments (score
+30 → ~3.1, 50 → ~6.3), 13.8% better than the naive baseline on held-out data. It also
+**corrected the prior**: geography was over-weighted (0.12 → 0.07), enrollment
+(0.11 → 0.17) and therapeutic area (0.05 → 0.12) under-weighted; eligibility stays #1
+(0.20).
+
+Learned importances (`fitted_weights.json`, non-negative, sum = 1):
+
+```
+eligibility 0.195 · enrollment 0.172 · design 0.128 · endpoints 0.127
+phase 0.124 · therapeutic-area 0.116 · geography 0.070 · arms 0.069
+```
+
+Calibration is dense-region reliable (≈99.9% of trials score <60); the extreme tail
+(score ≥60, ~0.3% of trials) is small-n and high-variance — forecasts there say
+"expect many" but the exact count is uncertain. Everything remains deterministic and
+ledger-anchored: the `causal_taint` records which model version produced each decision.
+
+Set `mode="hand"` in `assess()` (or delete `apex_trials/fitted_weights.json`) to fall
+back to the transparent first-principles prior.
 
 ## Roadmap (real moat, if pursued)
 
-1. Fit the weights via isotonic/logistic regression on the full ~560k-record history corpus (the harness is ready; only the fit is missing).
-2. Per-driver amendment *cause* prediction (which module will change), not just aggregate risk.
+1. ~~Fit the weights against the history corpus.~~ **Done** — NNLS-band + isotonic on 8k trials (`fit_weights.py`, `fitted_weights.json`). Next: scale the corpus toward the full ~560k records and add stratified/temporal splits.
+2. Per-driver amendment *cause* prediction (which module will change), not just aggregate risk — the history `moduleLabels` already carry the labels.
 3. Site-feasibility scoring from `contactsLocationsModule` enrollment velocity.
 4. Swap the standalone ledger for the live `babylon60.bft.ledger_actor` + Git Sentinel.
 

@@ -200,7 +200,7 @@ BFT Swarm, Vector Memory, Lean 4 proofs, LoRA daemon, Blockchain anchoring, and 
 
 <p align="center">
   <sub>
-    Titular Civil: <strong>Borja Fernández Angulo</strong> · AKA: <strong>Borja Moskv</strong> (<code>borjamoskv</code>)<br/>
+    Titular Civil: <strong>CORTEX Core Dev</strong> · AKA: <strong>Borja Moskv</strong> (<code>borjamoskv</code>)<br/>
     All Rights Reserved — Proprietary &amp; Trade Secret<br/>
     Art. 6.1, 6.2, 14 LPI (España) · Convenio de Berna · Ley 1/2019 de Secretos Empresariales
   </sub>

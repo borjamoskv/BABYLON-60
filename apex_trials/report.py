@@ -16,6 +16,7 @@ from typing import Any
 
 from .backtest import BacktestReport
 from .copilot import CopilotResult
+from .risk_engine import _FITTED
 
 _TIER_COLOR = {
     "LOW": "#4CAF50",
@@ -46,20 +47,38 @@ def _gauge_svg(score: int, tier: str) -> str:
 
 
 def _rules_rows(result: CopilotResult) -> str:
+    rules = result.assessment.fired_rules
+    contribs = result.assessment.contributions or tuple(0.0 for _ in rules)
+    maxc = max(contribs) if contribs and max(contribs) > 0 else 1.0
     out: list[str] = []
-    for r in result.assessment.fired_rules:
+    for r, c in zip(rules, contribs):
         active = r.points > 0
-        bar_w = int(r.points / r.max_points * 100) if r.max_points else 0
+        bar_w = int(c / maxc * 100)
         pts_color = "#2B3BE5" if active else "#3a3a44"
         out.append(f"""
     <tr class="{'on' if active else 'off'}">
       <td class="drv">{_esc(r.driver)}</td>
       <td class="ev">{_esc(r.evidence)}</td>
       <td class="pts"><span style="color:{pts_color}">+{r.points}</span><span class="mx">/{r.max_points}</span></td>
+      <td class="ctr">{c:.1f}</td>
       <td class="barcell"><span class="bar" style="width:{bar_w}%;background:{pts_color}"></span></td>
       <td class="rule">{_esc(r.rule)}</td>
     </tr>""")
     return "".join(out)
+
+
+def _fit_provenance() -> str:
+    if _FITTED is None:
+        return ""
+    m = _FITTED.get("metrics", {})
+    return (
+        f'<div class="note">Weights fitted on {_FITTED.get("n_train", "?")} trials, '
+        f'held out {_FITTED.get("n_test", "?")}: Spearman ρ(score, actual amendments) = '
+        f'<b style="color:#2B3BE5">{m.get("spearman_fitted", "?")}</b> '
+        f'(prior {m.get("spearman_hand", "?")}); calibration MAE '
+        f'{m.get("isotonic_mae", "?")} vs {m.get("baseline_mae", "?")} baseline. '
+        f'Bands/thresholds unchanged — only the 8 driver mixing weights are data-earned.</div>'
+    )
 
 
 def _history_block(result: CopilotResult) -> str:
@@ -105,7 +124,7 @@ def _calibration_block(bt: BacktestReport | None) -> str:
       <thead><tr><th>TIER</th><th>N</th><th>MEAN SCORE</th><th>MEAN ACTUAL AMENDMENTS</th></tr></thead>
       <tbody>{''.join(rows)}</tbody>
     </table>
-    <div class="note">Spearman ρ is the ordering evidence; per-tier means are indicative and noisy at small n. The score is a zero-training first-principles prior — weights are visible and tunable, not fit to this cohort.</div>
+    <div class="note">Spearman ρ is the ordering evidence; per-tier means are indicative and noisy at small n. Driver mixing weights were fit on a separate broad corpus (see provenance above), not on this cohort — so this is out-of-cohort evidence.</div>
   </section>"""
 
 
@@ -115,6 +134,11 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
     e = result.ledger_entry
     chain = "CHAIN VERIFIED" if e.entry_hash else "UNVERIFIED"
     tier_color = _TIER_COLOR.get(a.tier, "#2B3BE5")
+    exp = a.expected_amendments
+    exp_callout = (
+        f'<div class="callout">FORECAST <b>{exp:.1f}</b> substantive protocol amendments'
+        f'<span class="muted"> · {_esc(a.mode)} model, isotonic-calibrated</span></div>'
+    ) if exp is not None else ""
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -153,6 +177,10 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
   .drv {{ font-weight:600; white-space:nowrap; }}
   .ev {{ color:#b9b9c6; white-space:nowrap; }}
   .pts {{ font-weight:700; white-space:nowrap; }} .pts .mx {{ color:var(--mut); font-weight:400; }}
+  .ctr {{ font-weight:700; color:#cfcfda; white-space:nowrap; }}
+  .callout {{ display:inline-block; margin:0 0 22px; padding:9px 16px; border:1px solid var(--cobalt);
+              border-left:3px solid var(--cobalt); border-radius:4px; background:#0d0f1e; font-size:14px; }}
+  .callout b {{ color:var(--cobalt); font-size:19px; margin:0 4px; }}
   .barcell {{ width:120px; }}
   .bar {{ display:block; height:7px; border-radius:3px; min-width:2px; }}
   .rule {{ color:var(--mut); font-size:11px; }}
@@ -190,6 +218,7 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
 
   <h1><span class="nct">{_esc(f.nct_id)}</span> — {_esc(f.brief_title)}</h1>
   <div class="subtitle">{_esc(f.phase)} · {_esc(f.study_type)} · {_esc(f.therapeutic_area)} · {_esc(a.model_version)}</div>
+  {exp_callout}
 
   <div class="top">
     {_gauge_svg(a.score, a.tier)}
@@ -206,11 +235,12 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
   <section class="card">
     <h2>▍RISK DECOMPOSITION <span class="sub">— every point traced to a firing rule</span></h2>
     <table>
-      <thead><tr><th>DRIVER</th><th>EVIDENCE</th><th>PTS</th><th>WEIGHT</th><th>RULE</th></tr></thead>
+      <thead><tr><th>DRIVER</th><th>EVIDENCE</th><th>BAND</th><th>CONTRIB</th><th></th><th>RULE</th></tr></thead>
       <tbody>{_rules_rows(result)}</tbody>
     </table>
-    <div class="verdict">Raw {a.raw_score}/{114} → normalized <b style="color:{tier_color}">{a.score}/100 · {_esc(a.tier)}</b>.
-      This is a pure function of the protocol record: identical input reproduces this exact score.</div>
+    <div class="verdict">Raw {a.raw_score}/{114} band points → normalized <b style="color:{tier_color}">{a.score}/100 · {_esc(a.tier)}</b>
+      via {_esc(a.mode)} mixing. This is a pure function of the protocol record: identical input reproduces this exact score.</div>
+    {_fit_provenance()}
   </section>
 
   <section class="card">

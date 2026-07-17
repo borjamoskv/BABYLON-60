@@ -50,6 +50,8 @@ def score(nct_id: str, db: str, as_json: bool) -> None:
     a, e, f = result.assessment, result.ledger_entry, result.features
     click.echo(f"\n🔍 {f.nct_id} — {f.brief_title[:64]}")
     click.echo(f"⚙️  {a.tier}  score={a.score}/100  (raw {a.raw_score}/114)  · {f.phase} · {f.therapeutic_area}")
+    if a.expected_amendments is not None:
+        click.echo(f"🧮 forecast {a.expected_amendments:.1f} substantive amendments  · model {a.mode} ({a.model_version})")
     for r in a.fired_rules:
         if r.points:
             click.echo(f"    +{r.points:>2}/{r.max_points:<2}  {r.driver:<28} [{r.evidence}]")

@@ -57,16 +57,23 @@ class Copilot:
         payload: dict[str, Any] = {
             "nct_id": features.nct_id,
             "model_version": assessment.model_version,
+            "mode": assessment.mode,
             "score": assessment.score,
             "tier": assessment.tier,
             "raw_score": assessment.raw_score,
+            "expected_amendments": assessment.expected_amendments,
             "features": features.as_dict(),
             "fired_rules": [r.as_dict() for r in assessment.fired_rules],
+            "contributions": list(assessment.contributions),
         }
         top_drivers = "+".join(
             r.driver.split()[0].lower() for r in assessment.fired_rules if r.points > 0
         ) or "none"
-        causal_taint = f"apex-amendment-engine:{assessment.tier.lower()}({assessment.score})|{top_drivers}"
+        # causal_taint carries the model tag so the audit trail records WHICH model decided.
+        causal_taint = (
+            f"apex-amendment-engine:{assessment.model_version}|"
+            f"{assessment.tier.lower()}({assessment.score})|{top_drivers}"
+        )
 
         entry = self.ledger.append(payload=payload, causal_taint=causal_taint)
         return CopilotResult(features=features, assessment=assessment, ledger_entry=entry, history=history)
