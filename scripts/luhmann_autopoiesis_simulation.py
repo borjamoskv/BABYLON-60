@@ -139,7 +139,7 @@ class LuhmannAutopoiesisSimulation:
                 ledger_event_id = entry.id
                 ledger_entry_hash = entry.entry_hash
                 ledger_prev_hash = entry.prev_hash
-            except Exception as e:
+            except (RuntimeError, ValueError, OSError) as e:
                 # Log but proceed
                 print(f"[-] Ledger write failed: {e}")
                 import traceback

@@ -2,8 +2,8 @@
 
 Loads the baked logistic models (module_models.json, produced by fit_module_models.py)
 and predicts, for each substantive protocol module, the probability it will be amended.
-Inference is a plain standardize + sigmoid — no sklearn/numpy needed at runtime, fully
-deterministic (same protocol -> same probabilities, byte-for-byte).
+Inference is fully deterministic and dependency-free (Option B: pure Python TF-IDF).
+Same protocol -> same probabilities, byte-for-byte.
 
 Each model is leakage-mitigated: it excludes the feature derived from its own module.
 
@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -31,6 +32,81 @@ def _load() -> dict[str, Any] | None:
 
 
 _MODELS: dict[str, Any] | None = _load()
+
+# Sklearn English Stop Words (318 words) - Frozen for byte-exact matching
+_ENGLISH_STOP_WORDS = frozenset([
+    'a', 'about', 'above', 'across', 'after', 'afterwards', 'again', 'against', 'all', 'almost', 'alone', 'along',
+    'already', 'also', 'although', 'always', 'am', 'among', 'amongst', 'amoungst', 'amount', 'an', 'and', 'another',
+    'any', 'anyhow', 'anyone', 'anything', 'anyway', 'anywhere', 'are', 'around', 'as', 'at', 'back', 'be', 'became',
+    'because', 'become', 'becomes', 'becoming', 'been', 'before', 'beforehand', 'behind', 'being', 'below', 'beside',
+    'besides', 'between', 'beyond', 'bill', 'both', 'bottom', 'but', 'by', 'call', 'can', 'cannot', 'cant', 'co',
+    'con', 'could', 'couldnt', 'cry', 'de', 'describe', 'detail', 'do', 'done', 'down', 'due', 'during', 'each',
+    'eg', 'eight', 'either', 'eleven', 'else', 'elsewhere', 'empty', 'enough', 'etc', 'even', 'ever', 'every',
+    'everyone', 'everything', 'everywhere', 'except', 'few', 'fifteen', 'fifty', 'fill', 'find', 'fire', 'first',
+    'five', 'for', 'former', 'formerly', 'forty', 'found', 'four', 'from', 'front', 'full', 'further', 'get',
+    'give', 'go', 'had', 'has', 'hasnt', 'have', 'he', 'hence', 'her', 'here', 'hereafter', 'hereby', 'herein',
+    'hereupon', 'hers', 'herself', 'him', 'himself', 'his', 'how', 'however', 'hundred', 'i', 'ie', 'if', 'in',
+    'inc', 'indeed', 'interest', 'into', 'is', 'it', 'its', 'itself', 'keep', 'last', 'latter', 'latterly', 'least',
+    'less', 'ltd', 'made', 'many', 'may', 'me', 'meanwhile', 'might', 'mill', 'mine', 'more', 'moreover', 'most',
+    'mostly', 'move', 'much', 'must', 'my', 'myself', 'name', 'namely', 'neither', 'never', 'nevertheless', 'next',
+    'nine', 'no', 'nobody', 'none', 'noone', 'nor', 'not', 'nothing', 'now', 'nowhere', 'of', 'off', 'often', 'on',
+    'once', 'one', 'only', 'onto', 'or', 'other', 'others', 'otherwise', 'our', 'ours', 'ourselves', 'out', 'over',
+    'own', 'part', 'per', 'perhaps', 'please', 'put', 'rather', 're', 'same', 'see', 'seem', 'seemed', 'seeming',
+    'seems', 'serious', 'several', 'she', 'should', 'show', 'side', 'since', 'sincere', 'six', 'sixty', 'so',
+    'some', 'somehow', 'someone', 'something', 'sometime', 'sometimes', 'somewhere', 'still', 'such', 'system',
+    'take', 'ten', 'than', 'that', 'the', 'their', 'them', 'themselves', 'then', 'thence', 'there', 'thereafter',
+    'thereby', 'therefore', 'therein', 'thereupon', 'these', 'they', 'thick', 'thin', 'third', 'this', 'those',
+    'though', 'three', 'through', 'throughout', 'thru', 'thus', 'to', 'together', 'too', 'top', 'toward',
+    'towards', 'twelve', 'twenty', 'two', 'un', 'under', 'until', 'up', 'upon', 'us', 'very', 'via', 'was', 'we',
+    'well', 'were', 'what', 'whatever', 'when', 'whence', 'whenever', 'where', 'whereafter', 'whereas', 'whereby',
+    'wherein', 'whereupon', 'wherever', 'whether', 'which', 'while', 'whither', 'who', 'whoever', 'whole', 'whom',
+    'whose', 'why', 'will', 'with', 'within', 'without', 'would', 'yet', 'you', 'your', 'yours', 'yourself',
+    'yourselves'
+])
+
+_TOKEN_RE = re.compile(r"(?u)\b\w\w+\b")
+
+
+def _tokenize_pure(text: str) -> list[str]:
+    # 1. lowercase, 2. regex tokenization, 3. stop words filtering
+    return [t for t in _TOKEN_RE.findall(text.lower()) if t not in _ENGLISH_STOP_WORDS]
+
+
+def _get_ngrams(tokens: list[str]) -> list[str]:
+    ngrams = []
+    # 1-grams
+    ngrams.extend(tokens)
+    # 2-grams
+    for i in range(len(tokens) - 1):
+        ngrams.append(f"{tokens[i]} {tokens[i+1]}")
+    return ngrams
+
+
+def _transform_pure(text: str, vocab: dict[str, int], idf: list[float]) -> list[float]:
+    tokens = _tokenize_pure(text)
+    ngrams = _get_ngrams(tokens)
+    
+    # Count frequencies
+    counts: dict[str, int] = {}
+    for ngram in ngrams:
+        if ngram in vocab:
+            counts[ngram] = counts.get(ngram, 0) + 1
+            
+    # Calculate sublinear TF-IDF
+    V = len(vocab)
+    vector = [0.0] * V
+    for term, count in counts.items():
+        idx = vocab[term]
+        tf = 1.0 + math.log(count)
+        vector[idx] = tf * idf[idx]
+        
+    # L2 normalization
+    sq_sum = sum(val**2 for val in vector)
+    if sq_sum > 0:
+        norm = math.sqrt(sq_sum)
+        vector = [val / norm for val in vector]
+        
+    return vector
 
 
 @dataclass(frozen=True)
@@ -81,19 +157,43 @@ def model_version() -> str | None:
     return _MODELS["model_version"] if _MODELS is not None else None
 
 
-def predict_module_risks(features: StudyFeatures) -> tuple[ModuleRisk, ...]:
-    """Per-module P(amendment), sorted high->low. Empty tuple if models absent."""
+def predict_module_risks(
+    features: StudyFeatures,
+    eligibility_text: str = "",
+    brief_summary_text: str = ""
+) -> tuple[ModuleRisk, ...]:
+    """Per-module P(amendment), sorted high->low. Empty tuple if models absent.
+
+    Uses structured features plus optional free text (eligibility and brief summary)
+    for deterministic, dependency-free text prediction.
+    """
     if _MODELS is None:
         return ()
     fmap = _feature_map(features)
+    text_content = (eligibility_text + " " + brief_summary_text).strip()
+    
     risks: list[ModuleRisk] = []
     for key, m in _MODELS["modules"].items():
         used = m["used_features"]
         mean, std, coef = m["mean"], m["std"], m["coef"]
         logit = float(m["intercept"])
+        
+        # 1. Structured contribution
         for i, feat in enumerate(used):
             z = (fmap[feat] - mean[i]) / (std[i] if std[i] else 1.0)
             logit += coef[i] * z
+            
+        # 2. Text contribution (if text features are trained and text content is present)
+        if "tfidf_vocab" in m and "tfidf_idf" in m and "text_coef" in m and text_content:
+            vocab = m["tfidf_vocab"]
+            idf = m["tfidf_idf"]
+            text_coef = m["text_coef"]
+            vec = _transform_pure(text_content, vocab, idf)
+            
+            # Dot product of text vector and text coefficients
+            for i, val in enumerate(vec):
+                logit += text_coef[i] * val
+                
         p = 1.0 / (1.0 + math.exp(-logit))
         base = float(m["base_rate"])
         risks.append(
