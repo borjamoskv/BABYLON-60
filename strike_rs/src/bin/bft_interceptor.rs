@@ -129,16 +129,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 2. Monitoreo inotify de ~/.agent_persist
     let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
-    let claude_dir = format!("{}/.agent_persist", home);
+    let agent_dir = format!("{}/.agent_persist", home);
     
     let l_fs = Arc::clone(&ledger);
     let s_fs = Arc::clone(&shutdown_flag);
     
-    if Path::new(&claude_dir).exists() {
+    if Path::new(&agent_dir).exists() {
         thread::spawn(move || {
             if let Ok(mut inotify) = Inotify::init() {
                 let _ = inotify.watches().add(
-                    Path::new(&claude_dir),
+                    Path::new(&agent_dir),
                     WatchMask::MODIFY | WatchMask::CREATE | WatchMask::DELETE,
                 );
                 

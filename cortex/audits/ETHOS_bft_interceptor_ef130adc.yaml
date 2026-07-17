@@ -1,6 +1,6 @@
 Claim: Erradicación definitiva de fallback estático HMAC y adopción estricta de variables de entorno (CORTEX_BFT_KEY / CORTEX_VAULT_KEY) bajo arquitectura C5-REAL BFT.
 Proof:
-  Base: ~/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/src/bin/claude_bft_interceptor.rs
+  Base: ~/10_PROJECTS/Teorema-Robinson-Moskv/strike_rs/src/bin/bft_interceptor.rs
   CORTEX_TAINT_SHA3_256: ef130adc1955f3bf207ca4f15c1c699dca94d1a6ff3a0f22e80436d1fa83450e
   Timestamp: 2026-07-17T00:35:51.403981Z
   Confidence: C5-REAL
