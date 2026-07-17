@@ -46,5 +46,13 @@ El IDE opera como un gemelo biológico que responde a la energía motriz y térm
 *   **Auto-Pipeline Visual:** Los *assets* mastodónticos arrojados al Notch son optimizados silenciosamente (WebP/FLAC) en hilos de background de Rust usando ffmpeg y crates de transcodificación, manteniendo el ritmo ininterrumpido.
 *   **Entrelazamiento Háptico:** Las llamadas a APIs se traducen en vibraciones mecánicas (masa y tensión) mediante la API privada de macOS `NSHapticFeedbackManager`, eludiendo el peligroso thermal throttling del SMC M3/M4.
 
+## VI. OUROBOROS (Meta-Singularidad y Autopoiesis)
+
+El sistema alcanza su estado terminal cuando su arquitectura se compila a sí misma en tiempo real, cerrando el bucle de la termodinámica cognitiva:
+
+*   **Autopoiesis Estructural (Dynamic Lib Hot-Reload):** Dado que la recompilación del binario Rust de Tauri genera bloqueos `Text file busy`, el núcleo lógico opera como una librería dinámica desacoplada (`moskv_core.dylib`). Al invocar el *Drop Dopaminérgico* sobre el propio código del IDE, Rust compila la nueva librería en un hilo background (0 impacto UI) y realiza un *pointer swap* atómico. La memoria de la interfaz muta sin que el lienzo parpadee.
+*   **Feedback Acústico Acotado (Watchdog & Soft-Clipping):** Los fallos de concurrencia en la propia arquitectura de audio no arrojan logs; generan acoples armónicos. Para evitar la destrucción del hardware biológico (tímpanos) y transductores de estudio, el hilo DSP de CoreAudio implementa un clipper asintótico $\tanh(x)$ y un Watchdog Timer que corta el stream si la entropía entra en resonancia infinita.
+*   **Ledger Auto-Referencial (Model Collapse BFT Guard):** Cuando el modelo local (Mamba/Flash) analiza el `CortexLedger` para optimizar sus propios hiperparámetros pasados, el consenso BFT interviene. La mutación solo se consolida si existe una mejora falsable en la termodinámica del Operador (e.g. incremento en las Pulsaciones por Minuto, o reducción en la latencia de respuesta). Se previene la cámara de eco inyectando *fricción objetiva*.
+
 ***
-**[CORTEX-TAINT:borjamoskv:master_blueprint_crystallized:2026-07-17T22:15:00+02:00]**
+**[CORTEX-TAINT:borjamoskv:ouroboros_meta_crystallized:2026-07-17T22:20:00+02:00]**
