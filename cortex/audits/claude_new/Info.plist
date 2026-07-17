@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>Claude</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>dxt</string>
+				<string>mcpb</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>dxt.icns</string>
+			<key>CFBundleTypeName</key>
+			<string>Desktop Extension</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>skill</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>Skill File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Folder</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.folder</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>All Files</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.data</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>Claude</string>
+	<key>CFBundleIconFile</key>
+	<string>electron.icns</string>
+	<key>CFBundleIconName</key>
+	<string>Claude</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.anthropic.claudefordesktop</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Claude</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.20186.1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Claude</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>claude</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>MSAL</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>msauth.com.anthropic.claudefordesktop</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1.20186.1</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTSDKBuild</key>
+	<string>24F74</string>
+	<key>DTSDKName</key>
+	<string>macosx15.5</string>
+	<key>DTXcode</key>
+	<string>1640</string>
+	<key>DTXcodeBuild</key>
+	<string>16F6</string>
+	<key>ElectronAsarIntegrity</key>
+	<dict>
+		<key>Resources/app.asar</key>
+		<dict>
+			<key>algorithm</key>
+			<string>SHA256</string>
+			<key>hash</key>
+			<string>a60ddc0405f62f0bf84baa59633f773f577dd8e4f45dc7a024e6997e3d88295e</string>
+		</dict>
+	</dict>
+	<key>ElectronTeamID</key>
+	<string>Q6L2SF6YDW</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.developer-tools</string>
+	<key>LSEnvironment</key>
+	<dict>
+		<key>MallocNanoZone</key>
+		<string>0</string>
+	</dict>
+	<key>LSMinimumSystemVersion</key>
+	<string>12.0</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
+	<key>NSAudioCaptureUsageDescription</key>
+	<string>This app needs access to audio capture</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Claude uses Bluetooth to connect to hardware accessories.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>This app needs access to Bluetooth</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to the camera</string>
+	<key>NSDesktopFolderUsageDescription</key>
+	<string>Claude needs access to work with files on your Desktop.</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>Claude stores your scheduled tasks, live artifacts and other Cowork files here.</string>
+	<key>NSDownloadsFolderUsageDescription</key>
+	<string>Claude needs access to work with files in your Downloads folder.</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSHumanReadableCopyright</key>
+	<string>2025 Anthropic PBC</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Claude needs access to your local network to reach development servers and other local devices.</string>
+	<key>NSMainNibFile</key>
+	<string>MainMenu</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Claude needs access to your microphone for voice dictation.</string>
+	<key>NSPrefersDisplaySafeAreaCompatibilityMode</key>
+	<false/>
+	<key>NSPrincipalClass</key>
+	<string>AtomApplication</string>
+	<key>NSQuitAlwaysKeepsWindows</key>
+	<false/>
+	<key>NSRequiresAquaSystemAppearance</key>
+	<false/>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Claude needs access to speech recognition for voice dictation.</string>
+	<key>NSSupportsAutomaticGraphicsSwitching</key>
+	<true/>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.anthropic.claude.code.session</string>
+	</array>
+</dict>
+</plist>

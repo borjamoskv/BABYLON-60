@@ -1,0 +1,27 @@
+{
+  "name": "@ant/claude-swift",
+  "version": "1.0.0",
+  "description": "A demo module that exposes Swift code to Electron",
+  "main": "js/index.js",
+  "private": true,
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "types": "js/index.d.ts",
+  "author": "Felix Rieseberg <felix@felixrieseberg.com>",
+  "scripts": {
+    "clean": "rm -rf build_swift && rm -rf build && rm -rf bin",
+    "build": "node build.mjs",
+    "build:dev": "CLAUDE_SWIFT_DEV=1 node build.mjs",
+    "build:watch": "../../../scripts/desktop/watch-swift.sh",
+    "build:test": "swift build --product NAPITestBindings && mkdir -p tests/build && cp .build/arm64-apple-macosx/debug/libNAPITestBindings.dylib tests/build/napi_test_bindings.node",
+    "test": "yarn test:swift && yarn test:napi",
+    "test:swift": "swift test",
+    "test:napi": "yarn build:test && node --test tests/napi-e2e.test.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@ant/computer-use-swift": "workspace:*",
+    "node-gyp": "^11.1.0"
+  }
+}
