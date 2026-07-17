@@ -13,6 +13,7 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 
 from __future__ import annotations
 
+from typing import Any
 import json
 from pathlib import Path
 
