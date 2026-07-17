@@ -10,6 +10,7 @@ Emoji protocol denotes ledger/hardware state only (per AGENTS.md), never sentime
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import json
@@ -51,7 +52,9 @@ def score(nct_id: str, db: str, as_json: bool) -> None:
     click.echo(f"\n🔍 {f.nct_id} — {f.brief_title[:64]}")
     click.echo(f"⚙️  {a.tier}  score={a.score}/100  (raw {a.raw_score}/114)  · {f.phase} · {f.therapeutic_area}")
     if a.expected_amendments is not None:
-        click.echo(f"🧮 forecast {a.expected_amendments:.1f} substantive amendments  · model {a.mode} ({a.model_version})")
+        click.echo(
+            f"🧮 forecast {a.expected_amendments:.1f} substantive amendments  · model {a.mode} ({a.model_version})"
+        )
     for r in a.fired_rules:
         if r.points:
             click.echo(f"    +{r.points:>2}/{r.max_points:<2}  {r.driver:<28} [{r.evidence}]")
@@ -95,8 +98,10 @@ def backtest(condition: str, n: int, status: str, as_json: bool) -> None:
     for tier in ("LOW", "MODERATE", "HIGH", "CRITICAL"):
         tm = rep.tier_means.get(tier)
         if tm:
-            click.echo(f"    {tier:<9} n={int(tm['n']):>2}  mean_score={tm['mean_score']:>5}  "
-                       f"mean_actual_amendments={tm['mean_actual_amendments']}")
+            click.echo(
+                f"    {tier:<9} n={int(tm['n']):>2}  mean_score={tm['mean_score']:>5}  "
+                f"mean_actual_amendments={tm['mean_actual_amendments']}"
+            )
 
 
 @cli.command()
@@ -121,7 +126,7 @@ def search(query: str, phase: str | None, status: str | None, n: int) -> None:
         ident = st.get("protocolSection", {}).get("identificationModule", {})
         design = st.get("protocolSection", {}).get("designModule", {})
         phases = ",".join(design.get("phases", []) or ["NA"])
-        click.echo(f"  {ident.get('nctId','?'):<13} [{phases:<12}] {ident.get('briefTitle','')[:66]}")
+        click.echo(f"  {ident.get('nctId', '?'):<13} [{phases:<12}] {ident.get('briefTitle', '')[:66]}")
 
 
 def main() -> None:

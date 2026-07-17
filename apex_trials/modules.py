@@ -9,6 +9,7 @@ Each model is leakage-mitigated: it excludes the feature derived from its own mo
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import json
@@ -33,16 +34,19 @@ _MODELS: dict[str, Any] | None = _load()
 
 @dataclass(frozen=True)
 class ModuleRisk:
-    module: str          # short key, e.g. "elig"
-    label: str           # e.g. "Eligibility"
-    probability: float   # P(module amended), 0..1
-    base_rate: float     # corpus prevalence
-    lift: float          # probability / base_rate
+    module: str  # short key, e.g. "elig"
+    label: str  # e.g. "Eligibility"
+    probability: float  # P(module amended), 0..1
+    base_rate: float  # corpus prevalence
+    lift: float  # probability / base_rate
 
     def as_dict(self) -> dict[str, Any]:
         return {
-            "module": self.module, "label": self.label,
-            "probability": self.probability, "base_rate": self.base_rate, "lift": self.lift,
+            "module": self.module,
+            "label": self.label,
+            "probability": self.probability,
+            "base_rate": self.base_rate,
+            "lift": self.lift,
         }
 
 
@@ -91,10 +95,14 @@ def predict_module_risks(features: StudyFeatures) -> tuple[ModuleRisk, ...]:
             logit += coef[i] * z
         p = 1.0 / (1.0 + math.exp(-logit))
         base = float(m["base_rate"])
-        risks.append(ModuleRisk(
-            module=key, label=m["label"],
-            probability=round(p, 4), base_rate=round(base, 4),
-            lift=round(p / base, 3) if base > 0 else 0.0,
-        ))
+        risks.append(
+            ModuleRisk(
+                module=key,
+                label=m["label"],
+                probability=round(p, 4),
+                base_rate=round(base, 4),
+                lift=round(p / base, 3) if base > 0 else 0.0,
+            )
+        )
     risks.sort(key=lambda r: r.probability, reverse=True)
     return tuple(risks)

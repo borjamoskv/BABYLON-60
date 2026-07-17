@@ -8,6 +8,7 @@ post-hoc description.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import re
@@ -18,12 +19,35 @@ _NUMBERED = re.compile(r"^\s*(\d+)\s*[.)]\s+\S")
 _BULLET = re.compile(r"^\s*[-*•]\s+\S")
 
 _ONCOLOGY_TERMS = (
-    "cancer", "carcinoma", "tumor", "tumour", "oncolog", "neoplasm", "leukemia",
-    "leukaemia", "lymphoma", "melanoma", "sarcoma", "myeloma", "glioma", "metasta",
+    "cancer",
+    "carcinoma",
+    "tumor",
+    "tumour",
+    "oncolog",
+    "neoplasm",
+    "leukemia",
+    "leukaemia",
+    "lymphoma",
+    "melanoma",
+    "sarcoma",
+    "myeloma",
+    "glioma",
+    "metasta",
 )
 _RARE_TERMS = (
-    "rare", "orphan", "cystic fibrosis", "duchenne", "amyloidosis", "hemophilia",
-    "haemophilia", "gaucher", "pompe", "huntington", "als ", "sma ", "spinal muscular",
+    "rare",
+    "orphan",
+    "cystic fibrosis",
+    "duchenne",
+    "amyloidosis",
+    "hemophilia",
+    "haemophilia",
+    "gaucher",
+    "pompe",
+    "huntington",
+    "als ",
+    "sma ",
+    "spinal muscular",
 )
 
 
@@ -156,10 +180,7 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
     enrollment_info = design.get("enrollmentInfo", {})
 
     has_dmc = bool(oversight_mod.get("oversightHasDmc", False))
-    is_fda = bool(
-        oversight_mod.get("isFdaRegulatedDrug", False)
-        or oversight_mod.get("isFdaRegulatedDevice", False)
-    )
+    is_fda = bool(oversight_mod.get("isFdaRegulatedDrug", False) or oversight_mod.get("isFdaRegulatedDevice", False))
     brief_summary = str(desc_mod.get("briefSummary", ""))
     summary_words = len(re.findall(r"\w+", brief_summary))
     n_interventions = len(arms_mod.get("interventions", []))

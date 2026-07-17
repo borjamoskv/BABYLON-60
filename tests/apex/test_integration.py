@@ -2,6 +2,7 @@
 
 Skips cleanly when offline so the unit suite stays green in isolated CI.
 """
+
 from __future__ import annotations
 
 import urllib.error

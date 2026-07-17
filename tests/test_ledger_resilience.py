@@ -87,6 +87,7 @@ async def test_hash_chain_corruption_detection(ephemeral_ledger: BFTLedgerActor)
 
     # Verification should now fail
     from babylon60.bft.ledger_actor import BFTCausalInvariantError
+
     with pytest.raises(BFTCausalInvariantError, match="INV_BFT_LEAN_04"):
         await ephemeral_ledger.verify_chain()
 

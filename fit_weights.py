@@ -55,7 +55,7 @@ def load() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     frac, raw, hand, y = [], [], [], []
     for r in rows:
         sf = StudyFeatures(**{k: r[k] for k in _SF_FIELDS if k in r})
-        a = assess(sf)
+        a = assess(sf, mode="hand")
         fr = [rule.points / rule.max_points if rule.max_points else 0.0 for rule in a.fired_rules]
         frac.append(fr)
         hand.append(a.score)

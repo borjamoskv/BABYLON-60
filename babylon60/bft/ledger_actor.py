@@ -12,9 +12,12 @@ from typing import Any, Dict, Optional
 from cryptography.fernet import Fernet
 import aiosqlite
 
+
 class BFTCausalInvariantError(RuntimeError):
     """FAIL-FAST Exception for violations of Babylon.lean BFT invariants."""
+
     pass
+
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 ZERO_HASH = "0" * 64
@@ -150,11 +153,17 @@ class BFTLedgerActor:
                 entry_hash = row[12]
                 created_at = row[13]
                 if seq != expected_seq:
-                    raise BFTCausalInvariantError(f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}")
+                    raise BFTCausalInvariantError(
+                        f"INV_BFT_LEAN_03 (seq_monotone): Sequence gap at expected seq {expected_seq}"
+                    )
                 if lamport_t <= last_lamport:
-                    raise BFTCausalInvariantError(f"INV_BFT_LEAN_01 (causal_strict): lamport_t {lamport_t} is not strictly greater than {last_lamport}")
+                    raise BFTCausalInvariantError(
+                        f"INV_BFT_LEAN_01 (causal_strict): lamport_t {lamport_t} is not strictly greater than {last_lamport}"
+                    )
                 if row_prev_hash != prev_hash:
-                    raise BFTCausalInvariantError(f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}")
+                    raise BFTCausalInvariantError(
+                        f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}"
+                    )
                 vault_key = os.environ.get("CORTEX_VAULT_KEY")
                 if vault_key and payload_json.startswith("C5ENC:"):
                     fernet = Fernet(vault_key.encode("utf-8"))

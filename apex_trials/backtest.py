@@ -11,6 +11,7 @@ on ranks).
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -45,8 +46,11 @@ class BacktestReport:
             "tier_means": self.tier_means,
             "rows": [
                 {
-                    "nct_id": r.nct_id, "score": r.score, "tier": r.tier,
-                    "actual_substantive": r.actual_substantive, "n_versions": r.n_versions,
+                    "nct_id": r.nct_id,
+                    "score": r.score,
+                    "tier": r.tier,
+                    "actual_substantive": r.actual_substantive,
+                    "n_versions": r.n_versions,
                     "title": r.title,
                 }
                 for r in self.rows
@@ -108,14 +112,16 @@ def run_backtest(
             continue
         features = extract_features(study)
         assessment = assess(features)
-        rows.append(BacktestRow(
-            nct_id=nct,
-            score=assessment.score,
-            tier=assessment.tier,
-            actual_substantive=history.n_substantive,
-            n_versions=history.n_versions,
-            title=features.brief_title[:60],
-        ))
+        rows.append(
+            BacktestRow(
+                nct_id=nct,
+                score=assessment.score,
+                tier=assessment.tier,
+                actual_substantive=history.n_substantive,
+                n_versions=history.n_versions,
+                title=features.brief_title[:60],
+            )
+        )
 
     scores = [float(r.score) for r in rows]
     actuals = [float(r.actual_substantive) for r in rows]

@@ -9,6 +9,7 @@ Palette: absolute dark #0A0A0A, cobalt #2B3BE5, ferrous grays.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import html
@@ -56,7 +57,7 @@ def _rules_rows(result: CopilotResult) -> str:
         bar_w = int(c / maxc * 100)
         pts_color = "#2B3BE5" if active else "#3a3a44"
         out.append(f"""
-    <tr class="{'on' if active else 'off'}">
+    <tr class="{"on" if active else "off"}">
       <td class="drv">{_esc(r.driver)}</td>
       <td class="ev">{_esc(r.evidence)}</td>
       <td class="pts"><span style="color:{pts_color}">+{r.points}</span><span class="mx">/{r.max_points}</span></td>
@@ -73,19 +74,19 @@ def _fit_provenance() -> str:
     m = _FITTED.get("metrics", {})
     provenance = (
         f'<div class="note" style="margin-top:12px;border-top:1px solid var(--line);padding-top:12px;">'
-        f'Weights fitted on {_FITTED.get("n_train", "?")} trials, '
-        f'held out {_FITTED.get("n_test", "?")}: Spearman ρ(score, actual amendments) = '
+        f"Weights fitted on {_FITTED.get('n_train', '?')} trials, "
+        f"held out {_FITTED.get('n_test', '?')}: Spearman ρ(score, actual amendments) = "
         f'<b style="color:#2B3BE5">{m.get("spearman_fitted", "?")}</b> '
-        f'(prior {m.get("spearman_hand", "?")}); calibration MAE = '
-        f'{m.get("isotonic_mae", "?")} vs {m.get("baseline_mae", "?")} baseline.</div>'
+        f"(prior {m.get('spearman_hand', '?')}); calibration MAE = "
+        f"{m.get('isotonic_mae', '?')} vs {m.get('baseline_mae', '?')} baseline.</div>"
     )
     if "spearman_temporal" in m:
         provenance += (
             f'<div class="note" style="margin-top:6px;color:#a9a9b6;">'
-            f'<b>▍FORWARD GENERALIZATION (Temporal Split ≤{m.get("temporal_cutoff", "?")} vs ≥{m.get("temporal_cutoff", "?")}):</b><br/>'
+            f"<b>▍FORWARD GENERALIZATION (Temporal Split ≤{m.get('temporal_cutoff', '?')} vs ≥{m.get('temporal_cutoff', '?')}):</b><br/>"
             f'Spearman ρ = <b style="color:#FF6B35">{m.get("spearman_temporal", "?")}</b> · '
-            f'calibration MAE = {m.get("mae_temporal", "?")} (baseline {m.get("mae_base_temporal", "?")}) · '
-            f'macro-AUC = {m.get("macro_auc_temporal", "?")} (vs random {m.get("macro_auc_random", "?")}).</div>'
+            f"calibration MAE = {m.get('mae_temporal', '?')} (baseline {m.get('mae_base_temporal', '?')}) · "
+            f"macro-AUC = {m.get('macro_auc_temporal', '?')} (vs random {m.get('macro_auc_random', '?')}).</div>"
         )
     return provenance
 
@@ -96,7 +97,9 @@ def _history_block(result: CopilotResult) -> str:
         return '<div class="muted">History plane unavailable for this record.</div>'
     tl: list[str] = []
     for d in h.substantive_dates:
-        tl.append(f'<li><span class="dot"></span><span class="date">{_esc(d)}</span> substantive protocol amendment</li>')
+        tl.append(
+            f'<li><span class="dot"></span><span class="date">{_esc(d)}</span> substantive protocol amendment</li>'
+        )
     timeline = "".join(tl) or '<li class="muted">No substantive amendments on record.</li>'
     pred = result.assessment.score
     return f"""
@@ -132,7 +135,7 @@ def _module_surface_block(result: CopilotResult) -> str:
     return f"""
   <section class="card">
     <h2>▍AMENDMENT SURFACE <span class="sub">— which modules will change · P vs base rate (tick)</span></h2>
-    <div class="msurf">{''.join(rows)}</div>
+    <div class="msurf">{"".join(rows)}</div>
     <div class="note">Per-module logistic models, leakage-mitigated (each excludes its own feature). Macro-AUC {macro} held-out. The tick marks the corpus base rate — bar past it = elevated risk for this design.</div>
   </section>"""
 
@@ -149,9 +152,9 @@ def _calibration_block(bt: BacktestReport | None) -> str:
         rows.append(f"""
       <tr>
         <td style="color:{color};font-weight:700">{tier}</td>
-        <td>{int(tm['n'])}</td>
-        <td>{tm['mean_score']}</td>
-        <td style="color:#FF6B35">{tm['mean_actual_amendments']}</td>
+        <td>{int(tm["n"])}</td>
+        <td>{tm["mean_score"]}</td>
+        <td style="color:#FF6B35">{tm["mean_actual_amendments"]}</td>
       </tr>""")
     return f"""
   <section class="card">
@@ -159,7 +162,7 @@ def _calibration_block(bt: BacktestReport | None) -> str:
     <div class="spear">Spearman ρ(score, actual amendments) = <b>{bt.spearman:.3f}</b> &nbsp;·&nbsp; n={bt.n} completed trials</div>
     <table class="cal">
       <thead><tr><th>TIER</th><th>N</th><th>MEAN SCORE</th><th>MEAN ACTUAL AMENDMENTS</th></tr></thead>
-      <tbody>{''.join(rows)}</tbody>
+      <tbody>{"".join(rows)}</tbody>
     </table>
     <div class="note">Spearman ρ is the ordering evidence; per-tier means are indicative and noisy at small n. Driver mixing weights were fit on a separate broad corpus (see provenance above), not on this cohort — so this is out-of-cohort evidence.</div>
   </section>"""
@@ -173,9 +176,13 @@ def render_report(result: CopilotResult, backtest: BacktestReport | None = None)
     tier_color = _TIER_COLOR.get(a.tier, "#2B3BE5")
     exp = a.expected_amendments
     exp_callout = (
-        f'<div class="callout">FORECAST <b>{exp:.1f}</b> substantive protocol amendments'
-        f'<span class="muted"> · {_esc(a.mode)} model, isotonic-calibrated</span></div>'
-    ) if exp is not None else ""
+        (
+            f'<div class="callout">FORECAST <b>{exp:.1f}</b> substantive protocol amendments'
+            f'<span class="muted"> · {_esc(a.mode)} model, isotonic-calibrated</span></div>'
+        )
+        if exp is not None
+        else ""
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="en">

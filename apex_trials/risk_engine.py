@@ -23,6 +23,7 @@ starting prior, not a claim of trained accuracy.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import json
@@ -91,12 +92,12 @@ class RiskAssessment:
     nct_id: str
     model_version: str
     raw_score: int
-    score: int          # normalized 0..100
+    score: int  # normalized 0..100
     tier: str
     fired_rules: tuple[FiredRule, ...]
-    mode: str = "hand-tuned"                       # "hand-tuned" | "fitted"
-    expected_amendments: float | None = None        # isotonic-calibrated count (fitted only)
-    contributions: tuple[float, ...] = ()           # per-driver 0..100 contribution, aligned to fired_rules
+    mode: str = "hand-tuned"  # "hand-tuned" | "fitted"
+    expected_amendments: float | None = None  # isotonic-calibrated count (fitted only)
+    contributions: tuple[float, ...] = ()  # per-driver 0..100 contribution, aligned to fired_rules
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -122,7 +123,7 @@ def _band(value: int, thresholds: list[tuple[int, int]], driver: str, unit: str)
         is_last = i == len(thresholds) - 1
         if is_last or value <= upper:
             lo = 0 if i == 0 else thresholds[i - 1][0] + 1
-            band = f">{thresholds[i-1][0]}" if is_last else (f"<={upper}" if i == 0 else f"{lo}-{upper}")
+            band = f">{thresholds[i - 1][0]}" if is_last else (f"<={upper}" if i == 0 else f"{lo}-{upper}")
             return pts, f"{value} {unit}", f"{driver} band {band} -> +{pts}"
     return 0, f"{value} {unit}", f"{driver} band none -> +0"  # pragma: no cover
 
@@ -131,7 +132,8 @@ def _eligibility(f: StudyFeatures) -> FiredRule:
     pts, ev, rule = _band(
         f.n_eligibility_criteria,
         [(10, 0), (20, 8), (30, 16), (45, 24), (999, 30)],
-        "eligibility_criteria", "criteria",
+        "eligibility_criteria",
+        "criteria",
     )
     return FiredRule("Eligibility complexity", pts, 30, ev, rule)
 
@@ -141,7 +143,8 @@ def _endpoints(f: StudyFeatures) -> FiredRule:
     pts, ev, rule = _band(
         total,
         [(3, 0), (6, 6), (10, 12), (999, 18)],
-        "endpoints", "endpoints",
+        "endpoints",
+        "endpoints",
     )
     return FiredRule("Endpoint burden", pts, 18, ev, rule)
 
@@ -150,7 +153,8 @@ def _arms(f: StudyFeatures) -> FiredRule:
     pts, ev, rule = _band(
         f.n_arms,
         [(2, 0), (4, 5), (999, 10)],
-        "arms", "arms",
+        "arms",
+        "arms",
     )
     return FiredRule("Arm multiplicity", pts, 10, ev, rule)
 
@@ -159,7 +163,8 @@ def _enrollment(f: StudyFeatures) -> FiredRule:
     pts, ev, rule = _band(
         f.enrollment,
         [(99, 0), (499, 4), (1499, 8), (999999, 12)],
-        "enrollment", "subjects",
+        "enrollment",
+        "subjects",
     )
     return FiredRule("Enrollment scale", pts, 12, ev, rule)
 
@@ -168,7 +173,8 @@ def _geography(f: StudyFeatures) -> FiredRule:
     pts, ev, rule = _band(
         f.n_countries,
         [(1, 0), (5, 5), (15, 10), (999, 14)],
-        "countries", "countries",
+        "countries",
+        "countries",
     )
     return FiredRule("Geographic spread", pts, 14, ev, rule)
 
@@ -211,7 +217,10 @@ def _therapeutic(f: StudyFeatures) -> FiredRule:
 
 def _site_feasibility(f: StudyFeatures) -> FiredRule:
     v = f.enrollment_velocity
-    if v <= 0.1:
+    if v <= 0.0:
+        pts = 0
+        band = "zero/none"
+    elif v <= 0.1:
         pts = 10
         band = "<=0.1"
     elif v <= 0.5:
@@ -269,8 +278,13 @@ def assess(features: StudyFeatures, mode: str = "auto") -> RiskAssessment:
         score = round(sum(raw_contribs))
         expected = round(_interp_curve(_FITTED["isotonic_curve"], float(score)), 2)
         return RiskAssessment(
-            nct_id=features.nct_id, model_version=_FITTED["model_version"], raw_score=raw,
-            score=score, tier=_tier(score), fired_rules=fired, mode="fitted",
+            nct_id=features.nct_id,
+            model_version=_FITTED["model_version"],
+            raw_score=raw,
+            score=score,
+            tier=_tier(score),
+            fired_rules=fired,
+            mode="fitted",
             expected_amendments=expected,
             contributions=tuple(round(c, 2) for c in raw_contribs),
         )
@@ -278,7 +292,13 @@ def assess(features: StudyFeatures, mode: str = "auto") -> RiskAssessment:
     contribs = tuple(round(r.points / RAW_MAX * 100, 2) for r in fired)
     score = round(raw / RAW_MAX * 100)
     return RiskAssessment(
-        nct_id=features.nct_id, model_version=MODEL_VERSION, raw_score=raw,
-        score=score, tier=_tier(score), fired_rules=fired, mode="hand-tuned",
-        expected_amendments=None, contributions=contribs,
+        nct_id=features.nct_id,
+        model_version=MODEL_VERSION,
+        raw_score=raw,
+        score=score,
+        tier=_tier(score),
+        fired_rules=fired,
+        mode="hand-tuned",
+        expected_amendments=None,
+        contributions=contribs,
     )

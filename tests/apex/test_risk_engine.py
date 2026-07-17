@@ -1,4 +1,5 @@
 """Risk engine: deterministic bands, monotonicity, tier boundaries."""
+
 from __future__ import annotations
 
 from apex_trials.features import StudyFeatures
@@ -7,12 +8,25 @@ from apex_trials.risk_engine import assess, RAW_MAX
 
 def _mk(**over: object) -> StudyFeatures:
     base = dict(
-        nct_id="NCT0", brief_title="t", phase="NA", study_type="INTERVENTIONAL",
-        n_eligibility_criteria=0, n_inclusion=0, n_exclusion=0,
-        n_primary_endpoints=1, n_secondary_endpoints=0, n_arms=1,
-        enrollment=0, n_sites=0, n_countries=0,
-        allocation="NA", intervention_model="PARALLEL", masking="NONE",
-        is_oncology=False, is_rare_disease=False, therapeutic_area="general",
+        nct_id="NCT0",
+        brief_title="t",
+        phase="NA",
+        study_type="INTERVENTIONAL",
+        n_eligibility_criteria=0,
+        n_inclusion=0,
+        n_exclusion=0,
+        n_primary_endpoints=1,
+        n_secondary_endpoints=0,
+        n_arms=1,
+        enrollment=0,
+        n_sites=0,
+        n_countries=0,
+        allocation="NA",
+        intervention_model="PARALLEL",
+        masking="NONE",
+        is_oncology=False,
+        is_rare_disease=False,
+        therapeutic_area="general",
     )
     base.update(over)
     return StudyFeatures(**base)  # type: ignore[arg-type]
@@ -61,10 +75,17 @@ def test_eligibility_monotonic():
 
 def test_complex_oncology_phase3_is_high_or_critical():
     f = _mk(
-        n_eligibility_criteria=50, n_primary_endpoints=4, n_secondary_endpoints=8,
-        n_arms=5, enrollment=2000, n_countries=25, phase="PHASE3",
-        intervention_model="CROSSOVER", masking="QUADRUPLE",
-        is_oncology=True, therapeutic_area="Oncology",
+        n_eligibility_criteria=50,
+        n_primary_endpoints=4,
+        n_secondary_endpoints=8,
+        n_arms=5,
+        enrollment=2000,
+        n_countries=25,
+        phase="PHASE3",
+        intervention_model="CROSSOVER",
+        masking="QUADRUPLE",
+        is_oncology=True,
+        therapeutic_area="Oncology",
     )
     a = assess(f)
     assert a.tier in ("HIGH", "CRITICAL") and a.score >= 50

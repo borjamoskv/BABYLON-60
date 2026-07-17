@@ -19,7 +19,9 @@ class EvaluatorT2:
     def _jcs_hash(self, payload: Dict[str, Any]) -> str:
         return hash_sha3_256(canonicalize_cbor(payload))
 
-    def calculate_utility(self, quality_bp: int, execution_receipt: Dict[str, Any], privacy_violation: bool = False) -> float:
+    def calculate_utility(
+        self, quality_bp: int, execution_receipt: Dict[str, Any], privacy_violation: bool = False
+    ) -> float:
         status = execution_receipt.get("status", "success")
         is_fail = 1 if status != "success" else 0
         ttft_ms = float(execution_receipt.get("ttft_ms", self.MAX_TTFT_MS))

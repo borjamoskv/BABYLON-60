@@ -1,4 +1,5 @@
 """Ledger invariants: determinism, chain integrity, idempotency, tamper detection."""
+
 from __future__ import annotations
 
 import sqlite3
@@ -77,6 +78,7 @@ def test_babylon_bft_ledger_adapter():
     class MockActor:
         def __init__(self):
             self.events = []
+
         def append(self, event):
             self.events.append(event)
             return "mock-future"
@@ -89,4 +91,3 @@ def test_babylon_bft_ledger_adapter():
     assert mock.events[0].stream == "apex_trials"
     assert mock.events[0].entity_id == "NCT99999999"
     assert mock.events[0].cortex_taint == "apex:test"
-

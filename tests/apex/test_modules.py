@@ -1,4 +1,5 @@
 """Per-module amendment-surface prediction: determinism, ranges, leakage mitigation."""
+
 from __future__ import annotations
 
 import pytest
@@ -11,12 +12,25 @@ _HAS = available()
 
 def _mk(**over: object) -> StudyFeatures:
     base = dict(
-        nct_id="NCT0", brief_title="t", phase="PHASE3", study_type="INTERVENTIONAL",
-        n_eligibility_criteria=30, n_inclusion=15, n_exclusion=15,
-        n_primary_endpoints=2, n_secondary_endpoints=6, n_arms=3,
-        enrollment=800, n_sites=40, n_countries=12,
-        allocation="RANDOMIZED", intervention_model="PARALLEL", masking="DOUBLE",
-        is_oncology=True, is_rare_disease=False, therapeutic_area="Oncology",
+        nct_id="NCT0",
+        brief_title="t",
+        phase="PHASE3",
+        study_type="INTERVENTIONAL",
+        n_eligibility_criteria=30,
+        n_inclusion=15,
+        n_exclusion=15,
+        n_primary_endpoints=2,
+        n_secondary_endpoints=6,
+        n_arms=3,
+        enrollment=800,
+        n_sites=40,
+        n_countries=12,
+        allocation="RANDOMIZED",
+        intervention_model="PARALLEL",
+        masking="DOUBLE",
+        is_oncology=True,
+        is_rare_disease=False,
+        therapeutic_area="Oncology",
     )
     base.update(over)
     return StudyFeatures(**base)  # type: ignore[arg-type]
@@ -35,7 +49,7 @@ def test_predictions_valid_and_sorted():
     assert len(risks) == 6
     assert all(0.0 <= r.probability <= 1.0 for r in risks)
     probs = [r.probability for r in risks]
-    assert probs == sorted(probs, reverse=True)          # ranked high -> low
+    assert probs == sorted(probs, reverse=True)  # ranked high -> low
 
 
 def test_deterministic():
@@ -63,10 +77,11 @@ def test_models_beat_chance_on_record():
     if not _HAS:
         pytest.skip("no module_models.json baked")
     for m in _MODELS["modules"].values():
-        assert m["auc"] > 0.55            # every module carries real held-out signal
+        assert m["auc"] > 0.55  # every module carries real held-out signal
 
 
 def test_no_models_returns_empty(monkeypatch):
     import apex_trials.modules as mod
+
     monkeypatch.setattr(mod, "_MODELS", None)
     assert mod.predict_module_risks(_mk()) == ()

@@ -13,7 +13,7 @@ def example():
     purger = AnergiaPurger(source)
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
-    
+
     assert "Docstring that should be pruned" not in code_out
     assert "x = 10" in code_out
 
@@ -29,7 +29,7 @@ except Exception:
     purger = AnergiaPurger(source)
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
-    
+
     assert "signal.SIGKILL" in code_out
     assert "os.kill" in code_out
     assert "FAIL-FAST: General Exception intercepted." in code_out

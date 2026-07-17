@@ -9,6 +9,7 @@ ordered, and independently verifiable, with no black box in between.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -68,9 +69,7 @@ class Copilot:
             "fired_rules": [r.as_dict() for r in assessment.fired_rules],
             "contributions": list(assessment.contributions),
         }
-        top_drivers = "+".join(
-            r.driver.split()[0].lower() for r in assessment.fired_rules if r.points > 0
-        ) or "none"
+        top_drivers = "+".join(r.driver.split()[0].lower() for r in assessment.fired_rules if r.points > 0) or "none"
         # causal_taint carries the model tag so the audit trail records WHICH model decided.
         causal_taint = (
             f"apex-amendment-engine:{assessment.model_version}|"

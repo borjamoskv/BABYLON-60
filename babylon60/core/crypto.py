@@ -52,9 +52,7 @@ class Ed25519Signer:
             return False
         try:
             raw = bytes.fromhex(signature.removeprefix("ed25519:"))
-            public_key = ed25519.Ed25519PublicKey.from_public_bytes(
-                bytes.fromhex(self.public_key_hex)
-            )
+            public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(self.public_key_hex))
             public_key.verify(raw, payload_hash.encode("utf-8"))
             return True
         except (InvalidSignature, ValueError):

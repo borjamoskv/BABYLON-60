@@ -30,9 +30,7 @@ class ShadowRouter:
     """
 
     def __init__(self, signer: Ed25519Signer) -> None:
-        key_material = os.environ.get("CORTEX_SHADOW_HMAC_KEY") or os.environ.get(
-            "CORTEX_MASTER_KEY"
-        )
+        key_material = os.environ.get("CORTEX_SHADOW_HMAC_KEY") or os.environ.get("CORTEX_MASTER_KEY")
         if not key_material:
             raise RuntimeError(
                 "FATAL: CORTEX_SHADOW_HMAC_KEY or CORTEX_MASTER_KEY env var required "
@@ -83,9 +81,7 @@ class ShadowRouter:
             "provider_receipt_hash": None,
         }
 
-    async def route_request(
-        self, prompt: str, context: Dict[str, Any]
-    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         request_id = f"req_{secrets.token_hex(8)}"
         primary_model = "provider-x/gemini-2.0-flash-2026-07-01"
         shadow_models = ["provider-y/claude-3.5-sonnet-2026-06"]
@@ -95,9 +91,7 @@ class ShadowRouter:
             "request_commitment": self._commit(b"request|" + prompt.encode("utf-8")),
             "policy_id": policy_id,
             "policy_hash": self._sha256_of(policy_id.encode("utf-8")),
-            "candidate_set_hash": self._sha256_of(
-                json.dumps(candidate_set, separators=(",", ":")).encode("utf-8")
-            ),
+            "candidate_set_hash": self._sha256_of(json.dumps(candidate_set, separators=(",", ":")).encode("utf-8")),
             "mode": "simulation",
             "selected_route": {
                 "provider": "provider-x",
@@ -164,9 +158,7 @@ async def demo() -> None:
     os.environ.setdefault("CORTEX_SHADOW_HMAC_KEY", secrets.token_hex(32))
     signer = Ed25519Signer()
     router = ShadowRouter(signer)
-    t0_receipt, t1_receipt = await router.route_request(
-        "Explain quantum gravity", {"contains_pii": False}
-    )
+    t0_receipt, t1_receipt = await router.route_request("Explain quantum gravity", {"contains_pii": False})
     print("Decision Receipt (T0):")
     print(json.dumps(t0_receipt, indent=2))
     print("\nExecution Receipt (T1):")

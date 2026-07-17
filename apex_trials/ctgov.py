@@ -17,6 +17,7 @@ reproducible offline and API load stays polite. No third-party deps.
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import json
@@ -34,35 +35,41 @@ USER_AGENT = "apex-trials/0.1 (+moskv://cortex-persist)"
 
 # moduleLabels emitted by the history API, partitioned by regulatory weight.
 # Vocabulary verified empirically against a 48-study sample (see labels probe).
-SUBSTANTIVE_MODULES: frozenset[str] = frozenset({
-    "Study Design",
-    "Outcome Measures",
-    "Arms and Interventions",
-    "Eligibility",
-    "Conditions",
-    "Study Description",
-})
-ADMINISTRATIVE_MODULES: frozenset[str] = frozenset({
-    "Study Status",
-    "Contacts/Locations",
-    "Study Identification",
-    "Sponsor/Collaborators",
-    "More Information",
-    "References",
-    "Document Section",
-    "Oversight",
-    "Study Documents",
-    "Recruitment Status",
-})
+SUBSTANTIVE_MODULES: frozenset[str] = frozenset(
+    {
+        "Study Design",
+        "Outcome Measures",
+        "Arms and Interventions",
+        "Eligibility",
+        "Conditions",
+        "Study Description",
+    }
+)
+ADMINISTRATIVE_MODULES: frozenset[str] = frozenset(
+    {
+        "Study Status",
+        "Contacts/Locations",
+        "Study Identification",
+        "Sponsor/Collaborators",
+        "More Information",
+        "References",
+        "Document Section",
+        "Oversight",
+        "Study Documents",
+        "Recruitment Status",
+    }
+)
 # Results-reporting sections: posted AFTER completion, not protocol amendments.
 # Excluded from both amendment and admin counts.
-RESULTS_MODULES: frozenset[str] = frozenset({
-    "Baseline Characteristics",
-    "Outcome Measures (Results)",
-    "Participant Flow",
-    "Adverse Events",
-    "Limitations and Caveats",
-})
+RESULTS_MODULES: frozenset[str] = frozenset(
+    {
+        "Baseline Characteristics",
+        "Outcome Measures (Results)",
+        "Participant Flow",
+        "Adverse Events",
+        "Limitations and Caveats",
+    }
+)
 
 
 class CtGovError(RuntimeError):
@@ -78,7 +85,9 @@ class HttpCache:
     def _conn(self) -> sqlite3.Connection:
         conn = sqlite3.connect(self.db_path, timeout=5.0)
         conn.execute("PRAGMA busy_timeout=5000;")
-        conn.execute("CREATE TABLE IF NOT EXISTS http_cache (url TEXT PRIMARY KEY, body TEXT NOT NULL, ts REAL NOT NULL);")
+        conn.execute(
+            "CREATE TABLE IF NOT EXISTS http_cache (url TEXT PRIMARY KEY, body TEXT NOT NULL, ts REAL NOT NULL);"
+        )
         return conn
 
     def get(self, url: str) -> str | None:
@@ -247,8 +256,17 @@ def classify_history(nct_id: str, history: dict[str, Any]) -> AmendmentHistory:
 def _normalize_phase(phase: str) -> str:
     p = phase.strip().upper().replace(" ", "")
     mapping = {
-        "1": "PHASE1", "2": "PHASE2", "3": "PHASE3", "4": "PHASE4",
-        "PHASE1": "PHASE1", "PHASE2": "PHASE2", "PHASE3": "PHASE3", "PHASE4": "PHASE4",
-        "I": "PHASE1", "II": "PHASE2", "III": "PHASE3", "IV": "PHASE4",
+        "1": "PHASE1",
+        "2": "PHASE2",
+        "3": "PHASE3",
+        "4": "PHASE4",
+        "PHASE1": "PHASE1",
+        "PHASE2": "PHASE2",
+        "PHASE3": "PHASE3",
+        "PHASE4": "PHASE4",
+        "I": "PHASE1",
+        "II": "PHASE2",
+        "III": "PHASE3",
+        "IV": "PHASE4",
     }
     return mapping.get(p, p)

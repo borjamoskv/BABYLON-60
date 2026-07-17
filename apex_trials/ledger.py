@@ -27,6 +27,7 @@ This module is standalone (no external deps) and contract-compatible with
 
 Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -58,9 +59,7 @@ def compute_entry_hash(
     payload: dict[str, Any],
 ) -> str:
     """SHA3-256 over the deterministic decision content. Wall-clock excluded by design."""
-    material = "|".join(
-        [prev_hash, entry_id, causal_taint, str(lamport_t), agent_id, canonical(payload)]
-    )
+    material = "|".join([prev_hash, entry_id, causal_taint, str(lamport_t), agent_id, canonical(payload)])
     return hashlib.sha3_256(material.encode("utf-8")).hexdigest()
 
 
@@ -207,16 +206,24 @@ class AmendmentLedger:
         for entry in rows:
             if entry.prev_hash != expected_prev:
                 return ChainVerification(
-                    valid=False, entries=len(rows), broken_at=entry.seq,
+                    valid=False,
+                    entries=len(rows),
+                    broken_at=entry.seq,
                     reason=f"prev_hash mismatch at seq={entry.seq}",
                 )
             recomputed = compute_entry_hash(
-                entry.prev_hash, entry.id, entry.causal_taint,
-                entry.lamport_t, entry.agent_id, entry.payload,
+                entry.prev_hash,
+                entry.id,
+                entry.causal_taint,
+                entry.lamport_t,
+                entry.agent_id,
+                entry.payload,
             )
             if recomputed != entry.entry_hash:
                 return ChainVerification(
-                    valid=False, entries=len(rows), broken_at=entry.seq,
+                    valid=False,
+                    entries=len(rows),
+                    broken_at=entry.seq,
                     reason=f"entry_hash mismatch at seq={entry.seq} (payload tampered)",
                 )
             expected_prev = entry.entry_hash
@@ -270,4 +277,3 @@ class BabylonBFTLedgerAdapter:
             source_pk=entity_id,
         )
         return self.actor.append(event)
-

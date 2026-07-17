@@ -65,7 +65,7 @@ def verify_merkle_proof(leaf_hash: str, proof: List[str], root: str, index: int)
     return current == root
 
 
-def verify_receipt(receipt_path: str) -> Dict[str, Any]:  
+def verify_receipt(receipt_path: str) -> Dict[str, Any]:
     with open(receipt_path, "r") as f:
         receipt = json.load(f)
     if "payload" not in receipt or "payload_hash" not in receipt or "signature" not in receipt:
