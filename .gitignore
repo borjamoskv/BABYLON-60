@@ -11,6 +11,7 @@
 .env.*
 .git-credentials
 .venv/
+takedown_manifest/
 __pycache__/
 # dotnet leftovers
 src/ontology/bin/
