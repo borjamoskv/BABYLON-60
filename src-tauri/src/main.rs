@@ -1,17 +1,35 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod ledger;
-use std::sync::Mutex;
+mod antigravity;
+mod dsp_clock;
+mod precognition;
+
+use std::sync::Arc;
+use tokio::sync::Mutex; // Usar Mutex asíncrono para prevenir bloqueos del hilo de render
 
 struct AppState {
-    db: Mutex<ledger::CortexLedger>,
+    db: Arc<Mutex<ledger::CortexLedger>>,
+    antigravity: Arc<antigravity::AntigravityEngine>,
 }
 
-fn main() {
-    let db = ledger::CortexLedger::init().unwrap();
+#[tokio::main]
+async fn main() {
+    let db = ledger::CortexLedger::init().expect("Error al inicializar la base de datos.");
+    let db_arc = Arc::new(Mutex::new(db));
+    let antigravity_engine = Arc::new(antigravity::AntigravityEngine::new());
+
+    // Iniciar el Demonio de Precognición
+    let db_for_precognition = db_arc.clone();
+    tokio::spawn(async move {
+        precognition::ignite_precognition_daemon(db_for_precognition).await;
+    });
 
     tauri::Builder::default()
-        .manage(AppState { db: Mutex::new(db) })
+        .manage(AppState { 
+            db: db_arc, 
+            antigravity: antigravity_engine,
+        })
         .run(tauri::generate_context!())
         .expect("FATAL: Tauri colapsó");
 }
