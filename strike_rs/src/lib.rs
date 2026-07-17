@@ -84,7 +84,7 @@ mod tests {
         engine.add_edge(n1, n2); // A -> B
 
         assert!(engine.verify_kahn_invariant().is_ok());
-        let taint = engine.compute_cortex_taint().unwrap();
+        let taint = engine.compute_cortex_taint().expect("[C5-REAL] FATAL: Taint computation failed in test");
         assert!(taint.starts_with("TAINT:C5_REAL_RUST:"));
     }
 

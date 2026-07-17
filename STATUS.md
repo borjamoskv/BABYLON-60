@@ -29,7 +29,7 @@
 | Ratio victoria:trabajo-abierto | 327:0 (inflación pura) | 10:55 (sano) † |
 | Claves en historia git | SÍ | NO |
 | `20_VAULT/` en historia git | SÍ | NO |
-| Blobs duplicados en índice | masivo (fork de renombrado) | 3 (`fitted_weights.json`, `module_models.json` en raíz y `apex_trials/`) |
+| Blobs duplicados en índice | masivo (fork de renombrado) | 0 (deduplicados a `apex_trials/`) |
 | IEI — Índice de Entropía de Ideas | **0.532 (ALTO)** | no medido (corpus 12,7× menor) |
 | Tests trackeados | — | 19 ficheros `tests/*.py` |
 
@@ -39,9 +39,10 @@
 
 - [ ] **P0**: rotación de master key + keypair Solana (humano, irreversible, primero)
 - [ ] **P0**: estado terminal del remoto — OPCIÓN A o B + force-push/borrado
-- [ ] FIND-001 / FIND-002 (`CODE_REVIEW_fable5.md` del remoto, `applied: 0`): re-verificar si los 2 breaks de integridad de datos aplican al código del linaje local
-- [ ] Dedupe `fitted_weights.json` / `module_models.json`: decidir path canónico (raíz vs `apex_trials/`) tras grep de referencias
-- [ ] Triage de ~42 `.md` en disco sin trackear (91 en disco − 49 trackeados): trackear, archivar o eliminar
+- [x] **Dedupe JSONs**: `fitted_weights.json` y `module_models.json` deduplicados en el path canónico `apex_trials/` (completado 2026-07-17).
+- [x] **Re-verificar FIND-001/002**: verificado que no aplican a la línea local; los ficheros vulnerables del remoto (`swarm/state_store.py`, Stripe webhooks) no existen en este linaje.
+- [x] **Triage de `.md`**: todos los md físicos están trackeados, ignorados en `.gitignore` (`.agents/`, `.pytest_cache/`, etc.) o pertenecen al submódulo Git `docs/aie-book`.
+- [x] **SecureHook.sol (CENT-04)**: implementado lock de reentrada real con EIP-1153 transitorio (tstore/tload) y control de errores en `contracts/test/SecureHook.sol`.
 - [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
 
 ## Registro de mutaciones de este colapso
