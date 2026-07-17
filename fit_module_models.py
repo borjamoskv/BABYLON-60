@@ -171,9 +171,6 @@ def main() -> None:
     out_path = Path(__file__).parent / "apex_trials" / "module_models.json"
     out_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
     
-    # Save a backup in root as well
-    Path("module_models.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
-    
     macro_auc = float(np.mean([m["auc"] for m in models.values()]))
     print(f"\nmacro-AUC (held-out combined): {macro_auc:.3f}")
     print(f"saved -> {out_path}")

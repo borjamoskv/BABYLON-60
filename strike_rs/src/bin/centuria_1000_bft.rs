@@ -109,9 +109,9 @@ fn verify_primitive_p2p(p_num: usize, domain_idx: usize, inject_byzantine: bool)
     let dom_g = domain_name.clone();
     let handle_g = thread::spawn(move || node_gamma.execute_primitive(&pid_g, &dom_g, p_num).1);
 
-    let hash_a = handle_a.join().unwrap();
-    let hash_b = handle_b.join().unwrap();
-    let hash_g = handle_g.join().unwrap();
+    let hash_a = handle_a.join().expect("[C5-REAL] FATAL: Alpha thread panicked in execution");
+    let hash_b = handle_b.join().expect("[C5-REAL] FATAL: Beta thread panicked in execution");
+    let hash_g = handle_g.join().expect("[C5-REAL] FATAL: Gamma thread panicked in execution");
 
     let verdict: String;
     let quorum: String;
@@ -127,7 +127,7 @@ fn verify_primitive_p2p(p_num: usize, domain_idx: usize, inject_byzantine: bool)
         quorum = "0/3".to_string();
     }
 
-    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
+    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).expect("[C5-REAL] FATAL: Time went backwards").as_secs_f64();
     let raw_taint = format!(
         "{}:{}:{}:{}:{}:{}:{}",
         primitive_id, domain_name, hash_a, hash_b, hash_g, verdict, timestamp_sec
@@ -203,17 +203,17 @@ fn main() {
                 let res = verify_primitive_p2p(p_num, d, inject_fault);
                 domain_results.push(res);
             }
-            let mut guard = results_clone.lock().unwrap();
+            let mut guard = results_clone.lock().expect("[C5-REAL] FATAL: Mutex poisoned in domain thread");
             guard.extend(domain_results);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("[C5-REAL] FATAL: Domain thread panicked");
     }
 
-    let mut results_vec = Arc::try_unwrap(results).unwrap().into_inner().unwrap();
+    let mut results_vec = Arc::try_unwrap(results).expect("[C5-REAL] FATAL: Arc still has multiple owners").into_inner().expect("[C5-REAL] FATAL: Mutex poisoned in finalization");
     results_vec.sort_by(|a, b| a.primitive_id.cmp(&b.primitive_id));
 
     let mut total_verified = 0;
@@ -248,7 +248,7 @@ fn main() {
         tx.commit().expect("[C5-REAL] FATAL: Error confirmando transacción WAL");
     }
 
-    let elapsed = start_time.elapsed().unwrap().as_micros() as f64 / 1000.0;
+    let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
     println!("[C5-REAL] Barrido Empírico Rust Finalizado: {}/1000 Primitivas Verificadas en {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimidad): {} | Quorum 2/3 (Tolerancia Bizantina): {}", quorum_3of3, quorum_2of3);
 

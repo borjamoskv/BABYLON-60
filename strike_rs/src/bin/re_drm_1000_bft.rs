@@ -111,9 +111,9 @@ fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, in
     let pid_g = primitive_id.clone();
     let handle_g = thread::spawn(move || node_gamma.execute_re_drm_primitive(&pid_g, domain_name, vector_name, abs_idx).1);
 
-    let hash_a = handle_a.join().unwrap();
-    let hash_b = handle_b.join().unwrap();
-    let hash_g = handle_g.join().unwrap();
+    let hash_a = handle_a.join().expect("[C5-REAL] FATAL: Alpha thread panicked in RE/DRM execution");
+    let hash_b = handle_b.join().expect("[C5-REAL] FATAL: Beta thread panicked in RE/DRM execution");
+    let hash_g = handle_g.join().expect("[C5-REAL] FATAL: Gamma thread panicked in RE/DRM execution");
 
     let verdict: String;
     let quorum: String;
@@ -129,7 +129,7 @@ fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, in
         quorum = "0/3".to_string();
     }
 
-    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
+    let timestamp_sec = SystemTime::now().duration_since(UNIX_EPOCH).expect("[C5-REAL] FATAL: Time went backwards").as_secs_f64();
     
     // Construct local CORTEX-TAINT using BLAKE3 Hash-chain representation
     let raw_taint = format!(
@@ -231,17 +231,17 @@ fn main() {
             // Verify topological correctness (acyclic check)
             assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside RE/DRM execution flow");
             
-            let mut guard = results_clone.lock().unwrap();
+            let mut guard = results_clone.lock().expect("[C5-REAL] FATAL: Mutex poisoned in RE/DRM domain thread");
             guard.extend(domain_results);
         });
         handles.push(handle);
     }
 
     for handle in handles {
-        handle.join().unwrap();
+        handle.join().expect("[C5-REAL] FATAL: RE/DRM Domain thread panicked");
     }
 
-    let mut results_vec = Arc::try_unwrap(results).unwrap().into_inner().unwrap();
+    let mut results_vec = Arc::try_unwrap(results).expect("[C5-REAL] FATAL: Arc still has multiple owners").into_inner().expect("[C5-REAL] FATAL: Mutex poisoned in RE/DRM finalization");
     results_vec.sort_by(|a, b| a.primitive_id.cmp(&b.primitive_id));
 
     let mut total_verified = 0;
@@ -276,7 +276,7 @@ fn main() {
         tx.commit().expect("[C5-REAL] FATAL: Error committing WAL transaction");
     }
 
-    let elapsed = start_time.elapsed().unwrap().as_micros() as f64 / 1000.0;
+    let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
     println!("[C5-REAL] RE/DRM Empirical verification completed: {}/1000 primitives in {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
 

@@ -161,11 +161,9 @@ def main() -> None:
             **temporal_metrics
         },
     }
-    Path("fitted_weights.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
     pkg_path = Path("apex_trials/fitted_weights.json")
-    if pkg_path.parent.exists():
-        pkg_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
-    print("\nsaved -> fitted_weights.json and apex_trials/fitted_weights.json")
+    pkg_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
+    print("\nsaved -> apex_trials/fitted_weights.json")
 
 
 if __name__ == "__main__":
