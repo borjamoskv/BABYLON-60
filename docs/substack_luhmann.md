@@ -59,7 +59,7 @@ Para validar esta dinámica de forma cuantitativa en el régimen físico C5-REAL
 - **Entropía Final de los Dossiers del Sistema:** 0.06570
 - **Hash de Resultados (SHA3-256):** `4aae346e43cdef89ee5b9c185e4a6e530e7e55c6132fac5fe8d872d4ee0cb162`
 - **Firma Cortex Taint:** `borjamoskv:luhmann_autopoiesis:4aae346e43cdef89`
-- **Commit Ledger Hash (Git Sentinel):** `PENDING`
+- **Commit Ledger Hash (Git Sentinel):** `d12b4f0b8788f22fd6227a2b90f7e5b2786938eb`
 
 ---
 
