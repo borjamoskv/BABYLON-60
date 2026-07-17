@@ -2,6 +2,8 @@ use blake3::Hasher;
 use petgraph::algo::{is_cyclic_directed, toposort};
 use petgraph::graph::DiGraph;
 
+pub mod omega0;
+
 /// Motor de Taint C5-REAL (Causal Poset)
 /// Garantiza ejecución de coste cero en el Fast-Loop y verifica Kahn's Invariant (INV-GCM-003).
 
