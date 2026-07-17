@@ -5,7 +5,7 @@ import sqlite3
 
 import pytest
 
-from apex_trials.ledger import AmendmentLedger, GENESIS_PREV_HASH
+from apex_trials.ledger import AmendmentLedger, BabylonBFTLedgerAdapter, GENESIS_PREV_HASH
 
 
 def _payload(score: int) -> dict[str, object]:
@@ -71,3 +71,22 @@ def test_tamper_detection(tmp_path):
     with AmendmentLedger(db) as led:
         v = led.verify_chain()
         assert not v.valid and v.broken_at == 1 and "tampered" in (v.reason or "")
+
+
+def test_babylon_bft_ledger_adapter():
+    class MockActor:
+        def __init__(self):
+            self.events = []
+        def append(self, event):
+            self.events.append(event)
+            return "mock-future"
+
+    mock = MockActor()
+    adapter = BabylonBFTLedgerAdapter(mock)
+    res = adapter.append({"nct_id": "NCT99999999", "score": 42}, "apex:test")
+    assert res == "mock-future"
+    assert len(mock.events) == 1
+    assert mock.events[0].stream == "apex_trials"
+    assert mock.events[0].entity_id == "NCT99999999"
+    assert mock.events[0].cortex_taint == "apex:test"
+

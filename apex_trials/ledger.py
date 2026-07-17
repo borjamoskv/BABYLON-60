@@ -235,3 +235,39 @@ class AmendmentLedger:
             agent_id=str(row["agent_id"]),
             created_at=str(row["created_at"]),
         )
+
+
+class BabylonBFTLedgerAdapter:
+    """Adapter wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
+
+    Transforms `append(payload, causal_taint)` into async/sync `BFTLedgerActor.append(LedgerEvent(...))`
+    and returns the underlying future or proxy record from the live BFT quorum.
+    """
+
+    def __init__(self, actor: Any) -> None:
+        self.actor = actor
+
+    def append(
+        self,
+        payload: dict[str, Any],
+        causal_taint: str,
+        agent_id: str = DEFAULT_AGENT_ID,
+    ) -> Any:
+        try:
+            from babylon60.bft.ledger_actor import LedgerEvent
+        except ImportError as exc:
+            raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
+
+        entity_id = str(payload.get("nct_id", uuid.uuid4()))
+        event = LedgerEvent(
+            stream="apex_trials",
+            entity_id=entity_id,
+            event_type="risk_score",
+            payload=payload,
+            cortex_taint=causal_taint,
+            source_db="apex_trials.db",
+            source_table="assessments",
+            source_pk=entity_id,
+        )
+        return self.actor.append(event)
+

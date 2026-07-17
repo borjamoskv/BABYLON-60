@@ -16,7 +16,7 @@ from typing import Any
 
 from .ctgov import AmendmentHistory, CtGovClient, CtGovError, classify_history
 from .features import StudyFeatures, extract_features
-from .ledger import AmendmentLedger, LedgerEntry
+from .ledger import LedgerEntry
 from .modules import ModuleRisk, predict_module_risks
 from .risk_engine import RiskAssessment, assess
 
@@ -39,7 +39,7 @@ class CopilotResult:
 
 
 class Copilot:
-    def __init__(self, client: CtGovClient, ledger: AmendmentLedger) -> None:
+    def __init__(self, client: CtGovClient, ledger: Any) -> None:
         self.client = client
         self.ledger = ledger
 

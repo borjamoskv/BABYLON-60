@@ -1,5 +1,0 @@
-# --- add to Teorema-Robinson-Moskv pyproject.toml to ship apex_trials ---
-# [tool.setuptools] packages = ["babylon60", "apex_trials"]
-# [tool.setuptools.package-data] apex_trials = ["fitted_weights.json"]
-# [project.scripts] apex = "apex_trials.cli:main"
-# optional-deps for the fitting harness: numpy, scikit-learn, scipy
