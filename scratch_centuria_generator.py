@@ -2,6 +2,7 @@ import yaml
 import os
 import concurrent.futures
 import hashlib
+from typing import Any, Callable, Dict, List, Tuple
 
 DOMAINS = [
     "AST", "DOM", "TCP_IP", "BFT_Ledger", "SQLite_WAL", 
@@ -15,10 +16,10 @@ VECTORS = [
     "Transduction", "Injection", "Bypass", "Audit", "Synchronization"
 ]
 
-def generate_hash(seed):
+def generate_hash(seed: str) -> str:
     return hashlib.sha256(seed.encode()).hexdigest()[:12]
 
-def generate_quadrant_1(count=200):
+def generate_quadrant_1(count: int = 200) -> dict[str, Any]:
     # Q1: Omniscience
     items = []
     for i in range(count):
@@ -33,7 +34,7 @@ def generate_quadrant_1(count=200):
         })
     return {"Quadrant": "Q1_Omniscience", "Primitives": items}
 
-def generate_quadrant_2(count=200):
+def generate_quadrant_2(count: int = 200) -> dict[str, Any]:
     # Q2: Latent Manifold
     items = []
     for i in range(count):
@@ -48,7 +49,7 @@ def generate_quadrant_2(count=200):
         })
     return {"Quadrant": "Q2_Latent_Manifold", "Primitives": items}
 
-def generate_quadrant_3(count=200):
+def generate_quadrant_3(count: int = 200) -> dict[str, Any]:
     # Q3: Epistemic Voids
     items = []
     for i in range(count):
@@ -63,7 +64,7 @@ def generate_quadrant_3(count=200):
         })
     return {"Quadrant": "Q3_Epistemic_Voids", "Primitives": items}
 
-def generate_quadrant_4(count=200):
+def generate_quadrant_4(count: int = 200) -> dict[str, Any]:
     # Q4: Systemic Failures
     items = []
     for i in range(count):
@@ -78,7 +79,7 @@ def generate_quadrant_4(count=200):
         })
     return {"Quadrant": "Q4_Systemic_Failures", "Primitives": items}
 
-def generate_quadrant_5(count=200):
+def generate_quadrant_5(count: int = 200) -> dict[str, Any]:
     # Q5: Event Horizon
     items = []
     for i in range(count):
@@ -93,7 +94,7 @@ def generate_quadrant_5(count=200):
         })
     return {"Quadrant": "Q5_Event_Horizon", "Primitives": items}
 
-GENERATORS = [
+GENERATORS: list[tuple[str, Callable[[int], dict[str, Any]]]] = [
     ("q1_omniscience.yaml", generate_quadrant_1),
     ("q2_latent_manifold.yaml", generate_quadrant_2),
     ("q3_epistemic_voids.yaml", generate_quadrant_3),
@@ -101,7 +102,7 @@ GENERATORS = [
     ("q5_event_horizon.yaml", generate_quadrant_5)
 ]
 
-def write_quadrant(filename, generator_func):
+def write_quadrant(filename: str, generator_func: Callable[[int], dict[str, Any]]) -> str:
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     path = os.path.join(PROJECT_ROOT, 'cortex/ontology/primitives', filename)
     data = generator_func(200)
@@ -118,6 +119,6 @@ if __name__ == "__main__":
             try:
                 res = future.result()
                 print(f"[+] Crystallized {f_name} -> {res}")
-            except Exception as exc:
+            except (OSError, RuntimeError, ValueError) as exc:
                 print(f"[-] FATAL: {f_name} generated an exception: {exc}")
     print("[*] 1000 Primitives BFT Ledger Anchored.")

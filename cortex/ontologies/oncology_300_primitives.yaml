@@ -1353,109 +1353,179 @@ ontology:
       category: genome
       layer: molecular
       role: process
-      description: "Tasa elevada de ganancias/perdidas cromosomicas."
-      therapeutic_relevance: "Fuente de heterogeneidad y resistencia."
-      reference: "Lengauer et al., Nature 1998"
+      description: "Tasa elevada de errores en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana."
+      therapeutic_relevance: "Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC."
+      reference: "Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018"
       confidence: C5-established
     - id: ONC-143
       name: "Microsatellite instability (MSI)"
       category: genome
       layer: molecular
       role: biomarker
-      description: "Hipermutabilidad de repeticiones por fallo de MMR."
-      therapeutic_relevance: "MSI-H predice respuesta a inmunoterapia."
-      reference: "Vogelstein et al., Science 2013 (Cancer Genome Landscapes)"
+      description: "Hipermutabilidad y expansion/contraccion aberrante de secuencias repetitivas mononucleotidas y dinucleotidas provocada por deficiencia en el sistema de reparacion de apareamientos erroneos (dMMR: MLH1, MSH2, MSH6, PMS2)."
+      therapeutic_relevance: "Biomarcador agnostico tumor-independiente (MSI-H/dMMR) que predice respuesta excepcional y duradera al bloqueo de puntos de control inmunitario (anti-PD-1 pembrolizumab/nivolumab)."
+      reference: "Vogelstein et al., Science 2013; Le et al., NEJM 2017"
       confidence: C5-established
+      genomic_mechanics:
+        coordinate_hygiene: "BED_0based_vs_VCF_1based"
+        seg_threshold: "log2_cnv_delta > 0.3"
+        hrd_cin_score_cut: 42.0
+        synthetic_lethality_target: "PARP1/ATR"
+        chromosomal_imbalance_index: "fraction_genome_altered > 0.2"
     - id: ONC-144
       name: "Aneuploidy"
       category: genome
       layer: molecular
       role: process
-      description: "Numero anomalo de cromosomas que altera dosis genica."
-      therapeutic_relevance: "Vulnerabilidades emergentes."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Estado genomico con numero anomalo de cromosomas enteros (monosomia/trisomia/tetrasomia) que altera el balance de dosis genica, induce estres proteotoxico endoplasmico y activa checkpoints de spindle."
+      therapeutic_relevance: "Las celulas aneuploides presentan vulnerabilidades emergentes acopladas al estres del reticulo endoplasmico y dependencia hipertrofica del punto de control del huso mitotico (SAC: BUB1B/MPS1)."
+      reference: "Ben-David & Amon, Nat Rev Cancer 2020"
       confidence: C5-established
+      genomic_mechanics:
+        mmr_genes:
+          - "MLH1"
+          - "MSH2"
+          - "MSH6"
+          - "PMS2"
+        bat25_bat26_threshold: ">= 2 unstable mononucleotide loci"
+        immunotherapy_biomarker: "pembrolizumab_agnostic_approval"
+        hypermutability_rate: "> 100 mutations per genome"
     - id: ONC-145
       name: "Tumor mutational burden (TMB)"
       category: genome
       layer: molecular
       role: biomarker
-      description: "Densidad de mutaciones somaticas por megabase."
-      therapeutic_relevance: "TMB alto predice beneficio de checkpoint."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb)."
+      therapeutic_relevance: "TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos."
+      reference: "Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020"
       confidence: C5-established
+      genomic_mechanics:
+        chromosomal_imbalance_index: "fraction_genome_altered > 0.2"
+        gene_dosage_leverage: "proteotoxic_stress_dependency"
+        target_pathway: "SAC_bub1b_mps1"
+        mitotic_spindle_checkpoint: "active_surveillance"
     - id: ONC-146
       name: "Mutational signatures (COSMIC)"
       category: genome
       layer: molecular
       role: biomarker
-      description: "Patrones que revelan procesos mutagenicos (UV, tabaco, APOBEC)."
-      therapeutic_relevance: "Orientan etiologia y diana."
-      reference: "Alexandrov et al., Nature 2013"
+      description: "Deconstruccion matematica de perfiles trinucleotidos (catálogo COSMIC v3.4 SBS/ID/CN) que revela las huellas digitales mutacionales de procesos endogenos y exogenos (desaminacion 5mC SBS1, APOBEC SBS2/13, HRD SBS3, tabaco SBS4, UV SBS7)."
+      therapeutic_relevance: "Permiten inferir la etiologia oncogenica subyacente, estratificar la agresividad tumoral y predecir dianas accionables (ej. firma HRD/SBS3 predice sensibilidad a platino y PARPi)."
+      reference: "Alexandrov et al., Nature 2013; Alexandrov et al., Nature 2020"
       confidence: C5-established
+      genomic_mechanics:
+        calculation: "somatic_snv_indel_count / target_region_mb"
+        tmb_high_threshold_per_mb: 10.0
+        target_region_default_mb: 38.0
+        biomarker_clinical_utility: "anti_pd1_response_prediction"
     - id: ONC-147
       name: "APOBEC mutagenesis"
       category: genome
       layer: molecular
       role: process
-      description: "Citidina-deaminasas que introducen mutaciones agrupadas."
-      therapeutic_relevance: "Fuente de neoantigenos."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Hiperactividad desregulada de enzimas citidina-desaminasas (APOBEC3A/APOBEC3B) sobre ADN de cadena sencilla que catalizan C->T o C->G preferentemente en contextos trinucleotidos TCW (W = A o T)."
+      therapeutic_relevance: "Genera lluvias mutacionales agrupadas y alto volumen de neoantigenos; su actividad sostenida promueve evolucion clonal, evasión inmunológica y resistencia adquirida a terapias dirigidas."
+      reference: "Swanton et al., Cancer Discov 2015; Bozek et al., Genome Biol 2023"
       confidence: C5-established
+      genomic_mechanics:
+        sbs_catalog_version: "COSMIC_v3.4"
+        deconstruct_sigs_metric: "cosine_similarity >= 0.85"
+        etiology_mapping:
+          SBS1: "5mC_deamination"
+          SBS2_SBS13: "APOBEC_cytidine_deaminase"
+          SBS3: "HRD_BRCAness"
+          SBS4: "tobacco_PAH"
+          SBS7: "UV_pyrimidine_dimers"
     - id: ONC-148
       name: "Chromothripsis"
       category: genome
       layer: molecular
       role: process
-      description: "Evento catastrofico que fragmenta y reordena un cromosoma."
-      therapeutic_relevance: "Genera amplificaciones oncogenicas."
-      reference: "Stephens et al., Cell 2011"
+      description: "Evento catastrofico en una sola division celular (a menudo en micronucleos tras segregacion anomala) donde uno o varios cromosomas se fragmentan masivamente y re-ensamblan aleatoriamente por NHEJ/MMEJ propensos a error."
+      therapeutic_relevance: "Origina amplificaciones masivas en aglomerados de oncogenes clave (ecDNA que contiene MYC, MDM2, CDK4 o EGFR) al tiempo que deleciona supresores tumorales en los puntos de fractura."
+      reference: "Stephens et al., Cell 2011; Ly et al., Nat Genet 2019"
       confidence: C5-established
+      genomic_mechanics:
+        motif_context: "TCW -> TTW / TGW (W = A or T)"
+        enrichment_ratio_cut: 2.0
+        cosmic_signatures:
+          - "SBS2"
+          - "SBS13"
+        driver_neoantigen_leverage: "high_immunogenicity_clusters"
     - id: ONC-149
       name: "Kataegis"
       category: genome
       layer: molecular
       role: process
-      description: "Hipermutacion localizada, a menudo por APOBEC."
-      therapeutic_relevance: "Marca regiones inestables."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB."
+      therapeutic_relevance: "Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal."
+      reference: "Nik-Zainal et al., Cell 2012"
       confidence: C5-established
+      genomic_mechanics:
+        genomic_hallmark: "localized_shattering_and_re_ligation"
+        copy_number_oscillations: "2_to_3_states_in_dense_cluster"
+        oncogene_amplification_link:
+          - "MYC"
+          - "MDM2"
+          - "CDK4"
+          - "EGFR"
+        repair_mechanism: "NHEJ_MMEJ_catastrophe"
     - id: ONC-150
       name: "Whole-genome doubling"
       category: genome
       layer: molecular
       role: process
-      description: "Duplicacion del genoma que tolera aneuploidia posterior."
-      therapeutic_relevance: "Asociada a mal pronostico."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide."
+      therapeutic_relevance: "Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global."
+      reference: "Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020"
       confidence: C5-established
+      genomic_mechanics:
+        definition: "localized_hypermutation_rain"
+        intermutational_distance_bp: "<= 1000"
+        associated_enzyme: "APOBEC3A_APOBEC3B"
+        strand_coordination: "processive_deamination_on_ssDNA"
     - id: ONC-151
       name: "Loss of heterozygosity (LOH)"
       category: genome
       layer: molecular
       role: process
-      description: "Perdida del alelo funcional restante de un supresor."
-      therapeutic_relevance: "Segundo golpe de Knudson; HRD-LOH score."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental."
+      therapeutic_relevance: "El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama."
+      reference: "Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012"
       confidence: C5-established
+      genomic_mechanics:
+        ploidy_state: "tetraploid_or_near_tetraploid_transition"
+        buffer_capacity: "tolerates_deleterious_chromosomal_losses"
+        prognostic_impact: "high_relapse_risk_and_multidrug_resistance"
     - id: ONC-152
       name: "Oncogene-induced replication stress"
       category: genome
       layer: molecular
       role: process
-      description: "Oncogenes fuerzan replicacion aberrante y dano."
-      therapeutic_relevance: "Talon de Aquiles (ATR/WEE1i)."
-      reference: "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+      description: "Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, colapso de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA."
+      therapeutic_relevance: "Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib)."
+      reference: "Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014"
       confidence: C5-established
+      genomic_mechanics:
+        mechanism: "biallelic_inactivation_knudson_2nd_hit"
+        hrd_loh_score: "number_of_subchromosomal_LOH_regions > 15Mb"
+        diagnostic_panel: "SNP_array_or_WGS_b_allele_frequency_shift"
     - id: ONC-153
       name: "Extrachromosomal DNA (ecDNA)"
       category: genome
       layer: molecular
       role: process
-      description: "Amplicones circulares que elevan y diversifican oncogenes."
-      therapeutic_relevance: "Diana emergente de resistencia."
-      reference: "Turner et al., Nature 2017"
+      description: "Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta."
+      therapeutic_relevance: "Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales)."
+      reference: "Turner et al., Nature 2017; Wu et al., Nature 2019"
       confidence: C5-established
+      genomic_mechanics:
+        origin_firing_aberration: "premature_S_phase_entry_fork_stalling"
+        checkpoint_dependency:
+          - "ATR"
+          - "CHK1"
+          - "WEE1"
+        biomarker: "RPA_ssDNA_accumulation_and_gamma_H2AX"
     - id: ONC-154
       name: "Telomerase (TERT)"
       category: telomere
@@ -1465,6 +1535,11 @@ ontology:
       therapeutic_relevance: "Inhibicion de telomerasa (investigacion)."
       reference: "Kim et al., Science 1994"
       confidence: C5-established
+      genomic_mechanics:
+        topology: "circular_amplicon_lacking_centromere"
+        copy_number_leverage: "up_to_100x_oncogene_amplification"
+        chromatin_state: "highly_accessible_super_enhancer_hub"
+        segregation_dynamics: "non_mendelian_random_segregation_under_drug_selection"
     - id: ONC-155
       name: "TERT promoter mutations"
       category: telomere

@@ -4,6 +4,7 @@ import hashlib
 import datetime
 import os
 import subprocess
+from typing import Any, Dict
 
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -11,7 +12,7 @@ TARGET_FILE = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/centuria_matrix
 DB_PATH = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/centuria_bft_ledger.db")
 AGENTS_MD_PATH = os.path.expanduser("~/.gemini/config/AGENTS.md")
 
-def enforce_global_rule():
+def enforce_global_rule() -> None:
     rule = "\n\n- **Ω21 · LLM INVARIANT (IDENTITY DECLARATION):** ANUNCIA SIEMPRE QUE LLM VAS A USAR al iniciar un ciclo cognitivo (ej. Gemini 3.1 Pro High / Inference_L3_Node).\n"
     if os.path.exists(AGENTS_MD_PATH):
         with open(AGENTS_MD_PATH, "a") as f:
@@ -20,7 +21,7 @@ def enforce_global_rule():
         with open(AGENTS_MD_PATH, "w") as f:
             f.write("# GLOBAL RULES\n" + rule)
 
-def iterate_ultrathink():
+def iterate_ultrathink() -> dict[str, Any]:
     with open(TARGET_FILE, "r") as f:
         data = yaml.safe_load(f)
 
