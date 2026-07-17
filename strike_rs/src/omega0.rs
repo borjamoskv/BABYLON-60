@@ -10,9 +10,11 @@
 // TYPES
 // ──────────────────────────────────────────────────────────
 
+use serde::{Serialize, Deserialize};
+
 /// Modality parameter M ∈ {Epistemic, Deontic}.
 /// Captures Hume's guillotine as a type rule.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Modality {
     /// Assertions about what IS (facts, hypotheses, observations).
     Epistemic,
@@ -22,7 +24,7 @@ pub enum Modality {
 
 /// Statement⟨M⟩ — A typed claim parameterized by modality.
 /// Corresponds to a Harrop formula over signature Σ.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Statement {
     pub content: String,
     pub modality: Modality,
@@ -31,7 +33,7 @@ pub struct Statement {
 }
 
 /// A proof obligation that must be discharged before a statement is fully justified.
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Obligation {
     Provenance,
     Reproducibility,
@@ -43,7 +45,7 @@ pub enum Obligation {
 
 /// Justification — A proof term establishing WHY a Statement holds.
 /// Corresponds to typed λ-terms of the Hereditary Harrop fragment.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Justification {
     // === Endogenous (derived within the system) ===
     FormalProof {
@@ -83,7 +85,7 @@ pub enum Justification {
 }
 
 /// A justified pair (S, J) — the atomic unit of knowledge.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct JustifiedStatement {
     pub statement: Statement,
     pub justification: Justification,
