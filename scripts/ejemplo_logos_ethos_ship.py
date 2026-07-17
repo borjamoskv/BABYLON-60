@@ -24,7 +24,11 @@ def ethos_attestation(ast_state: str, lamport: int) -> str:
 
 def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
     print('[3] SHIP: Forzando colapso físico (DB WAL + Git Tag)...')
-    db_path: str = '/tmp/c5_ejemplo_ship.db'
+    import os
+    root_dir: str = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    scratch_dir: str = os.path.join(root_dir, 'scratch')
+    os.makedirs(scratch_dir, exist_ok=True)
+    db_path: str = os.path.join(scratch_dir, 'c5_ejemplo_ship.db')
     with sqlite3.connect(db_path, timeout=5.0) as conn:
         conn.execute('PRAGMA journal_mode = WAL;')
         conn.execute('CREATE TABLE IF NOT EXISTS master_ledger (hash TEXT UNIQUE, payload TEXT)')
