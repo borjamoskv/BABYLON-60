@@ -1,469 +1,645 @@
-use std::collections::{BTreeSet, HashMap, HashSet};
-use crate::ledger::{MasterLedger, AtmsState};
-use crate::omega0::{JustifiedStatement, Statement, derive, verify_with_nogoods, Omega0Error, hash_statement, Justification};
+//! ATMS — Assumption-based Truth Maintenance System (runtime layer of Ω₀)
+//!
+//! Faithful to de Kleer 1986, "An Assumption-based TMS" (Artificial
+//! Intelligence 28). This is the RUNTIME, not the kernel: it holds the four
+//! artifacts the kernel cannot (they are global properties of a belief set,
+//! not of a single (S,J) pair):
+//!
+//!   • Environments  — sets of assumptions (conjunctions of "what-ifs").
+//!   • Labels        — for each node, the minimal, consistent, sound and
+//!                     complete set of environments under which it holds.
+//!   • Nogoods       — minimal inconsistent environments.
+//!   • DDB           — dependency-directed backtracking: given a
+//!                     contradiction, the *culprit* assumptions, not a
+//!                     chronological rewind.
+//!
+//! Bridge to the kernel (omega0):
+//!   - a `Justification::Conjecture` becomes a defeasible ASSUMPTION;
+//!   - a verified non-conjecture becomes a PREMISE (holds in the empty env);
+//!   - `Obligation::Contradiction`, which the kernel conservatively passes,
+//!     is DISCHARGED here by `contradiction_free`.
+//!
+//! Pure `std`. Portable (no macOS/Linux syscalls) — belongs to the same
+//! rlib as the kernel and compiles anywhere the kernel does.
 
-/// Environment es un conjunto ordenado de hashes de assumptions.
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+use crate::omega0::{Justification, JustifiedStatement, verify};
+use std::collections::BTreeSet;
+
+pub type AssumptionId = usize;
+pub type NodeId = usize;
+
+/// An Environment: a conjunction of assumptions. Ordered & hashable so it can
+/// live in sets and be compared canonically.
+#[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
 pub struct Environment {
-    pub assumptions: BTreeSet<String>,
+    assumptions: BTreeSet<AssumptionId>,
 }
 
 impl Environment {
-    pub fn new(assumptions: BTreeSet<String>) -> Self {
-        Self { assumptions }
+    pub fn empty() -> Self {
+        Environment {
+            assumptions: BTreeSet::new(),
+        }
     }
 
-    pub fn is_subset_of(&self, other: &Environment) -> bool {
+    pub fn singleton(a: AssumptionId) -> Self {
+        let mut s = BTreeSet::new();
+        s.insert(a);
+        Environment { assumptions: s }
+    }
+
+    pub fn from_assumptions<I: IntoIterator<Item = AssumptionId>>(it: I) -> Self {
+        Environment {
+            assumptions: it.into_iter().collect(),
+        }
+    }
+
+    /// Self ⊆ other (self is at least as weak an assumption set).
+    pub fn is_subset(&self, other: &Environment) -> bool {
         self.assumptions.is_subset(&other.assumptions)
     }
 
-    pub fn union(&self, other: &Environment) -> Self {
-        let mut union = self.assumptions.clone();
-        union.extend(other.assumptions.iter().cloned());
-        Self::new(union)
+    pub fn union(&self, other: &Environment) -> Environment {
+        Environment {
+            assumptions: self.assumptions.union(&other.assumptions).copied().collect(),
+        }
+    }
+
+    pub fn len(&self) -> usize {
+        self.assumptions.len()
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.assumptions.is_empty()
+    }
+
+    pub fn assumptions(&self) -> impl Iterator<Item = AssumptionId> + '_ {
+        self.assumptions.iter().copied()
     }
 }
 
-/// Justificación formal ATMS
-#[derive(Debug, Clone)]
-pub struct AtmsJustification {
-    pub antecedents: Vec<String>,
+struct Node {
+    datum: String,
+    /// Some(id) iff this node *is* an assumption.
+    assumption: Option<AssumptionId>,
+    /// The label: minimal, consistent supporting environments.
+    label: Vec<Environment>,
 }
 
-/// Nodo formal del ATMS de de Kleer
-#[derive(Debug, Clone)]
-pub struct AtmsNode {
-    pub statement_hash: String,
-    pub statement: Statement,
-    pub label: Vec<Environment>,
-    pub justifications: Vec<AtmsJustification>,
+#[derive(Clone, Debug)]
+struct Justif {
+    consequent: NodeId,
+    antecedents: Vec<NodeId>,
 }
 
-pub struct AtmsRuntime {
-    ledger: MasterLedger,
-    nodes: HashMap<String, AtmsNode>,
-    assumptions: HashSet<String>,
+pub struct Atms {
+    nodes: Vec<Node>,
+    /// assumption id → node id
+    assumption_nodes: Vec<NodeId>,
+    justifs: Vec<Justif>,
+    /// minimal inconsistent environments (an antichain)
     nogoods: Vec<Environment>,
-    // Mapeo de entornos de string a sus asunciones base
-    env_to_assumptions: HashMap<String, BTreeSet<String>>,
-    // Cache de compatibilidad de AtmsState
-    compat_state: AtmsState,
+    /// the distinguished ⊥ node
+    contradiction: NodeId,
 }
 
-#[derive(Debug, Clone, PartialEq)]
-pub enum AtmsError {
-    LedgerError(String),
-    Omega0Error(Omega0Error),
-    NogoodViolation,
-}
-
-impl From<rusqlite::Error> for AtmsError {
-    fn from(err: rusqlite::Error) -> Self {
-        AtmsError::LedgerError(err.to_string())
+impl Default for Atms {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
-impl From<Omega0Error> for AtmsError {
-    fn from(err: Omega0Error) -> Self {
-        AtmsError::Omega0Error(err)
-    }
-}
-
-impl AtmsRuntime {
-    pub fn new(ledger: MasterLedger) -> Result<Self, rusqlite::Error> {
-        let mut runtime = Self {
-            ledger,
-            nodes: HashMap::new(),
-            assumptions: HashSet::new(),
-            nogoods: Vec::new(),
-            env_to_assumptions: HashMap::new(),
-            compat_state: AtmsState {
-                environments: HashMap::new(),
-                nogoods: HashSet::new(),
-            },
-        };
-
-        runtime.replay_from_ledger()?;
-        Ok(runtime)
-    }
-
-    /// Reconstruye el ATMS leyendo secuencialmente los datos del Master Ledger
-    fn replay_from_ledger(&mut self) -> Result<(), rusqlite::Error> {
-        let assertions = self.ledger.get_all_assertions()?;
-        let mut replayed_assertions = Vec::new();
-
-        for (_id, stmt_hash, just_hash, env_id) in assertions {
-            let stmt = self.ledger.get_statement(&stmt_hash)?;
-            let just = self.ledger.get_justification(&just_hash)?;
-            let js = JustifiedStatement {
-                statement: stmt,
-                justification: just,
-            };
-            replayed_assertions.push((js, env_id));
-        }
-
-        // Bucle de inserción en memoria
-        for (js, env_id) in replayed_assertions {
-            self.insert_in_memory(&js, &env_id);
-        }
-
-        // Leemos el log de nogoods de la DB
-        let mut stmt = self.ledger.conn.prepare(
-            "SELECT nogood_hash, environment_id FROM atms_nogoods_log"
-        )?;
-        let mut rows = stmt.query([])?;
-        let mut nogoods_from_db = Vec::new();
-        while let Some(row) = rows.next()? {
-            let ng_hash: String = row.get(0)?;
-            let env_id: String = row.get(1)?;
-            nogoods_from_db.push((ng_hash, env_id));
-        }
-        drop(rows);
-        drop(stmt);
-
-        for (ng_hash, env_id) in nogoods_from_db {
-            self.declare_nogood_in_memory(&ng_hash, &env_id);
-        }
-
-        self.recompute_compat_state();
-        Ok(())
-    }
-
-    fn insert_in_memory(&mut self, js: &JustifiedStatement, environment_id: &str) {
-        let stmt_hash = hash_statement(&js.statement);
-
-        // Si es una asunción (conjetura, axioma, etc.), la registramos
-        let is_assumption = matches!(
-            js.justification,
-            Justification::Conjecture | Justification::Axiom { .. }
-        );
-
-        if is_assumption {
-            self.assumptions.insert(stmt_hash.clone());
-            self.env_to_assumptions.entry(environment_id.to_string())
-                .or_default()
-                .insert(stmt_hash.clone());
-        }
-
-        // Separamos el préstamo inmutable de self.nodes para obtener antecedentes antes de mutar self.nodes
-        let antecedents: Vec<String> = if let Justification::FormalProof { premises, .. } = &js.justification {
-            premises.iter().map(|p| {
-                self.nodes.values()
-                    .find(|n| n.statement.content == *p)
-                    .map(|n| n.statement_hash.clone())
-                    .unwrap_or_else(|| {
-                        hash_statement(&Statement {
-                            content: p.clone(),
-                            modality: crate::omega0::Modality::Epistemic,
-                            obligations: vec![],
-                        })
-                    })
-            }).collect()
-        } else {
-            Vec::new()
-        };
-
-        let node = self.nodes.entry(stmt_hash.clone()).or_insert_with(|| AtmsNode {
-            statement_hash: stmt_hash.clone(),
-            statement: js.statement.clone(),
+impl Atms {
+    pub fn new() -> Self {
+        // Node 0 is ⊥ (the contradiction), with a deliberately empty label.
+        let contradiction = Node {
+            datum: "⊥".into(),
+            assumption: None,
             label: Vec::new(),
-            justifications: Vec::new(),
+        };
+        Atms {
+            nodes: vec![contradiction],
+            assumption_nodes: Vec::new(),
+            justifs: Vec::new(),
+            nogoods: Vec::new(),
+            contradiction: 0,
+        }
+    }
+
+    // ── construction ────────────────────────────────────────
+
+    /// A defeasible assumption. Its label is the singleton {itself}.
+    pub fn add_assumption(&mut self, datum: &str) -> NodeId {
+        let aid = self.assumption_nodes.len();
+        let nid = self.nodes.len();
+        self.nodes.push(Node {
+            datum: datum.into(),
+            assumption: Some(aid),
+            label: vec![Environment::singleton(aid)],
         });
-
-        if let Justification::FormalProof { .. } = &js.justification {
-            node.justifications.push(AtmsJustification { antecedents });
-        }
-
-        // Propagamos la etiqueta en el ATMS
-        self.propagate_label(&stmt_hash);
+        self.assumption_nodes.push(nid);
+        nid
     }
 
-    /// Inyecta un `JustifiedStatement` en un entorno y lo asienta en el Master Ledger.
-    pub fn assume(&mut self, js: &JustifiedStatement, environment_id: &str) -> std::result::Result<String, AtmsError> {
-        let stmt_hash = hash_statement(&js.statement);
-
-        // DDB Check: Evitar inyectar si viola un Nogood del entorno activo
-        let current_env_assumptions = self.env_to_assumptions.get(environment_id).cloned().unwrap_or_default();
-        let mut test_env = current_env_assumptions.clone();
-        test_env.insert(stmt_hash.clone());
-        let test_env_struct = Environment::new(test_env);
-
-        if self.is_inconsistent(&test_env_struct) {
-            return Err(AtmsError::NogoodViolation);
-        }
-
-        let nogoods_hashes: HashSet<String> = self.compat_state.nogoods.clone();
-        if !verify_with_nogoods(js, &nogoods_hashes) {
-            return Err(AtmsError::Omega0Error(Omega0Error::UnverifiedPremise(js.statement.content.clone())));
-        }
-
-        // Persistimos en base de datos
-        let id = self.ledger.assert_knowledge(js, environment_id)?;
-
-        // Insertamos en memoria
-        self.insert_in_memory(js, environment_id);
-
-        self.recompute_compat_state();
-        Ok(id)
+    /// A premise that holds unconditionally — label = { ∅ }.
+    pub fn add_premise(&mut self, datum: &str) -> NodeId {
+        let nid = self.nodes.len();
+        self.nodes.push(Node {
+            datum: datum.into(),
+            assumption: None,
+            label: vec![Environment::empty()],
+        });
+        nid
     }
 
-    /// Deriva un nuevo statement usando Ω₀, y lo inyecta directamente al entorno.
-    pub fn derive_and_assume(
-        &mut self,
-        premises: &[JustifiedStatement],
-        goal: &Statement,
-        environment_id: &str,
-    ) -> std::result::Result<(JustifiedStatement, String), AtmsError> {
-        let derived = derive(premises, goal)?;
-        let id = self.assume(&derived, environment_id)?;
-        Ok((derived, id))
+    /// A derived node with, as yet, no support — label = { } (not believed).
+    pub fn add_node(&mut self, datum: &str) -> NodeId {
+        let nid = self.nodes.len();
+        self.nodes.push(Node {
+            datum: datum.into(),
+            assumption: None,
+            label: Vec::new(),
+        });
+        nid
     }
 
-    fn declare_nogood_in_memory(&mut self, statement_hash: &str, _environment_id: &str) {
-        let mut new_nogoods = Vec::new();
-        if let Some(node) = self.nodes.get(statement_hash) {
-            if node.label.is_empty() {
-                let mut base = BTreeSet::new();
-                base.insert(statement_hash.to_string());
-                new_nogoods.push(Environment::new(base));
-            } else {
-                new_nogoods.extend(node.label.clone());
+    /// Record a support (justification) `consequent ⇐ antecedents` and
+    /// propagate labels to a fixpoint.
+    pub fn justify(&mut self, consequent: NodeId, antecedents: &[NodeId]) {
+        self.justifs.push(Justif {
+            consequent,
+            antecedents: antecedents.to_vec(),
+        });
+        self.propagate();
+    }
+
+    /// Declare a set of nodes jointly inconsistent (justifies ⊥).
+    pub fn contradict(&mut self, antecedents: &[NodeId]) {
+        let c = self.contradiction;
+        self.justify(c, antecedents);
+    }
+
+    // ── queries ─────────────────────────────────────────────
+
+    pub fn label(&self, node: NodeId) -> &[Environment] {
+        &self.nodes[node].label
+    }
+
+    /// The datum attached to a node (its human-readable content).
+    pub fn datum(&self, node: NodeId) -> &str {
+        &self.nodes[node].datum
+    }
+
+    /// Whether a node is an assumption, and which one.
+    pub fn assumption_of(&self, node: NodeId) -> Option<AssumptionId> {
+        self.nodes[node].assumption
+    }
+
+    /// A node is believed iff it has at least one consistent supporting env.
+    pub fn is_believed(&self, node: NodeId) -> bool {
+        !self.nodes[node].label.is_empty()
+    }
+
+    /// An environment is consistent iff no nogood is a subset of it.
+    pub fn is_consistent(&self, env: &Environment) -> bool {
+        !self.nogoods.iter().any(|ng| ng.is_subset(env))
+    }
+
+    /// `node` holds in `env` iff env is consistent and some label environment
+    /// is a subset of env.
+    pub fn holds_in(&self, node: NodeId, env: &Environment) -> bool {
+        self.is_consistent(env) && self.nodes[node].label.iter().any(|l| l.is_subset(env))
+    }
+
+    pub fn nogoods(&self) -> &[Environment] {
+        &self.nogoods
+    }
+
+    /// DDB: the nogoods that make `env` inconsistent — the reasons to backtrack.
+    pub fn minimal_conflicts(&self, env: &Environment) -> Vec<Environment> {
+        self.nogoods
+            .iter()
+            .filter(|ng| ng.is_subset(env))
+            .cloned()
+            .collect()
+    }
+
+    /// DDB: the assumptions implicated in `env`'s inconsistency. A solver
+    /// retracts one of THESE (dependency-directed), not the most recent choice.
+    pub fn culprits(&self, env: &Environment) -> BTreeSet<AssumptionId> {
+        let mut c = BTreeSet::new();
+        for ng in self.minimal_conflicts(env) {
+            for a in ng.assumptions() {
+                c.insert(a);
             }
-        } else {
-            let mut base = BTreeSet::new();
-            base.insert(statement_hash.to_string());
-            new_nogoods.push(Environment::new(base));
         }
+        c
+    }
 
-        for ng in new_nogoods {
-            self.register_nogood(ng);
+    // ── omega0 bridge ───────────────────────────────────────
+
+    /// Install a kernel `JustifiedStatement` as an ATMS node.
+    /// Conjecture → assumption; verified non-conjecture → premise;
+    /// unverified non-conjecture → unsupported node (not believed).
+    pub fn install(&mut self, js: &JustifiedStatement) -> NodeId {
+        match &js.justification {
+            Justification::Conjecture => self.add_assumption(&js.statement.content),
+            _ if verify(js) => self.add_premise(&js.statement.content),
+            _ => self.add_node(&js.statement.content),
         }
     }
 
-    /// Cierra el bucle DDB (Dependency-Directed Backtracking).
-    /// Declara una contradicción (Nogood) y purga su presencia de todos los mundos posibles.
-    pub fn declare_nogood(&mut self, statement_hash: &str, environment_id: &str) -> Result<String, rusqlite::Error> {
-        let taint = self.ledger.assert_nogood(statement_hash, environment_id)?;
-        self.declare_nogood_in_memory(statement_hash, environment_id);
-        self.recompute_compat_state();
-        Ok(taint)
+    /// Runtime discharge of `omega0::Obligation::Contradiction`: the node is
+    /// contradiction-free iff it is believed in at least one consistent
+    /// environment. This closes the loop the kernel deferred.
+    pub fn contradiction_free(&self, node: NodeId) -> bool {
+        self.is_believed(node)
     }
 
-    /// Recomputa el AtmsState de compatibilidad
-    fn recompute_compat_state(&mut self) {
-        let mut compat_nogoods = HashSet::new();
-        for ng in &self.nogoods {
-            if ng.assumptions.len() == 1 {
-                compat_nogoods.insert(ng.assumptions.iter().next().unwrap().clone());
+    // ── propagation engine ──────────────────────────────────
+
+    fn propagate(&mut self) {
+        // Assumptions are finite; environments are subsets of a finite set;
+        // labels only gain minimal envs / lose subsumed ones and nogoods only
+        // grow as an antichain, so this converges. Cap guards against bugs.
+        for _ in 0..100_000 {
+            if !self.step() {
+                return;
             }
         }
-        
-        let mut environments = HashMap::new();
-        for (env_id, assumptions) in &self.env_to_assumptions {
-            let env_struct = Environment::new(assumptions.clone());
-            let mut supported_stmts = HashSet::new();
-
-            for node in self.nodes.values() {
-                let is_supported = node.label.iter().any(|label_env| label_env.is_subset_of(&env_struct));
-                if is_supported && !compat_nogoods.contains(&node.statement_hash) {
-                    supported_stmts.insert(node.statement_hash.clone());
-                }
-            }
-            environments.insert(env_id.clone(), supported_stmts);
-        }
-
-        self.compat_state = AtmsState {
-            environments,
-            nogoods: compat_nogoods,
-        };
+        debug_assert!(false, "ATMS failed to reach a fixpoint");
     }
 
-    fn propagate_label(&mut self, target_hash: &str) {
-        let mut new_label: Vec<Environment> = Vec::new();
-
-        if self.assumptions.contains(target_hash) {
-            let mut base = BTreeSet::new();
-            base.insert(target_hash.to_string());
-            new_label.push(Environment::new(base));
-        }
-
-        let justifications = if let Some(node) = self.nodes.get(target_hash) {
-            node.justifications.clone()
-        } else {
-            return;
-        };
-
-        for just in &justifications {
-            let mut just_label = vec![Environment::new(BTreeSet::new())];
-            let mut antecedents_exist = true;
-
-            for ant in &just.antecedents {
-                if let Some(ant_node) = self.nodes.get(ant) {
-                    let mut temp = Vec::new();
-                    for e_ant in &ant_node.label {
-                        for e_j in &just_label {
-                            let combined = e_j.union(e_ant);
-                            if !self.is_inconsistent(&combined) {
-                                temp.push(combined);
-                            }
-                        }
+    fn step(&mut self) -> bool {
+        let mut changed = false;
+        let justifs = self.justifs.clone();
+        for j in &justifs {
+            let contrib = self.contributions(j);
+            if j.consequent == self.contradiction {
+                for env in contrib {
+                    if self.add_nogood(env) {
+                        changed = true;
                     }
-                    just_label = temp;
-                } else {
-                    antecedents_exist = false;
-                    break;
-                }
-            }
-
-            if antecedents_exist {
-                new_label.extend(just_label);
-            }
-        }
-
-        let minimized = self.minimize_label(new_label);
-
-        let label_changed = if let Some(node) = self.nodes.get_mut(target_hash) {
-            if node.label != minimized {
-                node.label = minimized;
-                true
-            } else {
-                false
-            }
-        } else {
-            false
-        };
-
-        if label_changed {
-            if target_hash == "CONTRADICTION" || self.is_contradiction_node(target_hash) {
-                let conflicts = self.nodes.get(target_hash).unwrap().label.clone();
-                for conflict in conflicts {
-                    self.register_nogood(conflict);
                 }
             } else {
-                let dependents: Vec<String> = self.nodes.values()
-                    .filter(|n| n.justifications.iter().any(|j| j.antecedents.contains(&target_hash.to_string())))
-                    .map(|n| n.statement_hash.clone())
-                    .collect();
-
-                for dep in dependents {
-                    self.propagate_label(&dep);
+                for env in contrib {
+                    if self.add_to_label(j.consequent, env) {
+                        changed = true;
+                    }
                 }
             }
         }
-    }
-
-    fn minimize_label(&self, label: Vec<Environment>) -> Vec<Environment> {
-        let mut result: Vec<Environment> = Vec::new();
-        for env in label {
-            if self.is_inconsistent(&env) {
-                continue;
-            }
-            if result.iter().any(|existing| existing.is_subset_of(&env)) {
-                continue;
-            }
-            result.retain(|existing| !env.is_subset_of(existing));
-            result.push(env);
+        if self.prune_labels() {
+            changed = true;
         }
-        result.sort();
-        result
+        changed
     }
 
-    fn is_inconsistent(&self, env: &Environment) -> bool {
-        self.nogoods.iter().any(|nogood| nogood.is_subset_of(env))
-    }
-
-    fn is_contradiction_node(&self, hash: &str) -> bool {
-        if let Some(node) = self.nodes.get(hash) {
-            node.statement.obligations.contains(&crate::omega0::Obligation::Contradiction)
-        } else {
-            false
-        }
-    }
-
-    fn register_nogood(&mut self, env: Environment) {
-        if !self.nogoods.contains(&env) {
-            self.nogoods.push(env);
-
-            let mut minimized_nogoods: Vec<Environment> = Vec::new();
-            for ng in &self.nogoods {
-                if minimized_nogoods.iter().any(|existing| existing.is_subset_of(ng)) {
-                    continue;
+    /// The consistent, minimal environments a justification contributes to its
+    /// consequent: the minimized cross-product union of antecedent labels.
+    fn contributions(&self, j: &Justif) -> Vec<Environment> {
+        let mut acc = vec![Environment::empty()];
+        for &ant in &j.antecedents {
+            let lbl = &self.nodes[ant].label;
+            if lbl.is_empty() {
+                return Vec::new(); // an unsupported antecedent kills the support
+            }
+            let mut next = Vec::new();
+            for base in &acc {
+                for e in lbl {
+                    let u = base.union(e);
+                    if self.is_consistent(&u) {
+                        next.push(u);
+                    }
                 }
-                minimized_nogoods.retain(|existing| !ng.is_subset_of(existing));
-                minimized_nogoods.push(ng.clone());
             }
-            self.nogoods = minimized_nogoods;
-
-            let current_nogoods = &self.nogoods;
-            let nodes = &mut self.nodes;
-            for node in nodes.values_mut() {
-                node.label.retain(|e| !current_nogoods.iter().any(|nogood| nogood.is_subset_of(e)));
+            acc = minimize(next);
+            if acc.is_empty() {
+                return Vec::new();
             }
         }
+        acc
     }
 
-    pub fn state(&self) -> &AtmsState {
-        &self.compat_state
+    fn add_to_label(&mut self, node: NodeId, env: Environment) -> bool {
+        if !self.is_consistent(&env) {
+            return false;
+        }
+        let lbl = &self.nodes[node].label;
+        if lbl.iter().any(|e| e.is_subset(&env)) {
+            return false; // env is subsumed → not minimal
+        }
+        // drop existing supersets of env, then add env
+        let mut new_label: Vec<Environment> =
+            lbl.iter().filter(|e| !env.is_subset(e)).cloned().collect();
+        new_label.push(env);
+        self.nodes[node].label = new_label;
+        true
+    }
+
+    fn add_nogood(&mut self, env: Environment) -> bool {
+        if self.nogoods.iter().any(|ng| ng.is_subset(&env)) {
+            return false; // already covered by a smaller nogood
+        }
+        self.nogoods.retain(|ng| !env.is_subset(ng)); // drop supersets
+        self.nogoods.push(env);
+        true
+    }
+
+    fn prune_labels(&mut self) -> bool {
+        let mut changed = false;
+        let nogoods = self.nogoods.clone();
+        for node in &mut self.nodes {
+            let before = node.label.len();
+            node.label
+                .retain(|e| !nogoods.iter().any(|ng| ng.is_subset(e)));
+            if node.label.len() != before {
+                changed = true;
+            }
+        }
+        changed
     }
 }
+
+/// Reduce a set of environments to its minimal antichain: dedup, then drop any
+/// environment that has a proper subset also present.
+fn minimize(envs: Vec<Environment>) -> Vec<Environment> {
+    let mut uniq: Vec<Environment> = Vec::new();
+    for e in envs {
+        if !uniq.contains(&e) {
+            uniq.push(e);
+        }
+    }
+    let mut result: Vec<Environment> = Vec::new();
+    for (i, e) in uniq.iter().enumerate() {
+        let has_proper_subset = uniq
+            .iter()
+            .enumerate()
+            .any(|(k, o)| k != i && o.is_subset(e) && o != e);
+        if !has_proper_subset {
+            result.push(e.clone());
+        }
+    }
+    result
+}
+
+// ──────────────────────────────────────────────────────────
+// TESTS
+// ──────────────────────────────────────────────────────────
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::omega0::{Modality, Justification};
+    use crate::omega0::{Modality, Statement};
 
-    #[test]
-    fn test_atms_assume_and_derive() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
-        let mut atms = AtmsRuntime::new(ledger).unwrap();
-
-        let s1 = Statement {
-            content: "Gravitational lensing is real".into(),
-            modality: Modality::Epistemic,
-            obligations: vec![],
-        };
-        let js1 = JustifiedStatement { statement: s1.clone(), justification: Justification::Conjecture };
-
-        atms.assume(&js1, "science_env").unwrap();
-
-        let goal = Statement {
-            content: "Light bends".into(),
-            modality: Modality::Epistemic,
-            obligations: vec![],
-        };
-
-        let (derived, _) = atms.derive_and_assume(&[js1], &goal, "science_env").unwrap();
-        assert_eq!(derived.statement.content, "Light bends");
-
-        let state = atms.state();
-        assert!(state.environments.get("science_env").is_some());
+    fn env(xs: &[AssumptionId]) -> Environment {
+        Environment::from_assumptions(xs.iter().copied())
     }
 
     #[test]
-    fn test_atms_nogood_ddb() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
-        let mut atms = AtmsRuntime::new(ledger).unwrap();
+    fn assumptions_get_singleton_labels() {
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        assert_eq!(a.label(x), &[env(&[0])]);
+        assert_eq!(a.label(y), &[env(&[1])]);
+    }
 
-        let s1 = Statement {
-            content: "False fact".into(),
-            modality: Modality::Epistemic,
-            obligations: vec![],
+    #[test]
+    fn disjunctive_support_unions_labels() {
+        // c holds under {x} OR under {y}: two separate justifications.
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        let c = a.add_node("c");
+        a.justify(c, &[x]);
+        a.justify(c, &[y]);
+        let lbl = a.label(c);
+        assert_eq!(lbl.len(), 2);
+        assert!(lbl.contains(&env(&[0])));
+        assert!(lbl.contains(&env(&[1])));
+    }
+
+    #[test]
+    fn conjunctive_support_unions_assumptions() {
+        // c needs BOTH x and y.
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        let c = a.add_node("c");
+        a.justify(c, &[x, y]);
+        assert_eq!(a.label(c), &[env(&[0, 1])]);
+    }
+
+    #[test]
+    fn premise_holds_in_empty_env() {
+        let mut a = Atms::new();
+        let p = a.add_premise("p");
+        assert!(a.holds_in(p, &Environment::empty()));
+        assert!(a.is_believed(p));
+    }
+
+    #[test]
+    fn nogood_kills_the_label_and_marks_inconsistent() {
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        let c = a.add_node("c");
+        a.justify(c, &[x, y]); // label(c) = {{x,y}}
+        assert_eq!(a.label(c), &[env(&[0, 1])]);
+
+        a.contradict(&[x, y]); // {x,y} is nogood
+        assert!(a.label(c).is_empty(), "contradiction must erase support");
+        assert!(!a.is_consistent(&env(&[0, 1])));
+        assert!(a.is_consistent(&env(&[0]))); // {x} alone is still fine
+    }
+
+    #[test]
+    fn nogood_subset_prunes_supersets() {
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        let c = a.add_node("c");
+        a.justify(c, &[x, y]); // {x,y}
+        a.contradict(&[x]); // {x} nogood ⇒ {x,y} also inconsistent
+        assert!(a.label(c).is_empty());
+        assert!(!a.is_consistent(&env(&[0, 1])));
+    }
+
+    #[test]
+    fn holds_in_is_monotone_over_consistent_supersets() {
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let _y = a.add_assumption("y");
+        let c = a.add_node("c");
+        a.justify(c, &[x]); // label {x}
+        assert!(a.holds_in(c, &env(&[0])));
+        assert!(a.holds_in(c, &env(&[0, 1]))); // superset, still consistent
+    }
+
+    #[test]
+    fn ddb_reports_culprits_not_chronology() {
+        let mut a = Atms::new();
+        let x = a.add_assumption("x");
+        let y = a.add_assumption("y");
+        let _z = a.add_assumption("z"); // most-recent choice (assumption id 2) — but innocent
+        let c = a.add_node("c");
+        a.justify(c, &[x, y]);
+        a.contradict(&[x, y]); // culprit set is {x,y}, NOT z
+        let culprits = a.culprits(&env(&[0, 1, 2]));
+        assert!(culprits.contains(&0) && culprits.contains(&1));
+        assert!(!culprits.contains(&2), "z is innocent; DDB must not blame it");
+    }
+
+    #[test]
+    fn bridge_conjecture_becomes_assumption_and_contradiction_free_tracks_nogoods() {
+        let mut a = Atms::new();
+        let conj = JustifiedStatement {
+            statement: Statement {
+                content: "H".into(),
+                modality: Modality::Epistemic,
+                obligations: vec![],
+            },
+            justification: Justification::Conjecture,
         };
-        let js1 = JustifiedStatement { statement: s1.clone(), justification: Justification::Conjecture };
-        
-        let stmt_hash = hash_statement(&s1);
-
-        atms.assume(&js1, "test_env").unwrap();
-        assert!(atms.state().environments.get("test_env").unwrap().contains(&stmt_hash));
-
-        // Inject Nogood
-        atms.declare_nogood(&stmt_hash, "test_env").unwrap();
-
-        // Should be purged from environment
-        assert!(!atms.state().environments.get("test_env").unwrap().contains(&stmt_hash));
-        
-        // Re-assuming should fail fast with NogoodViolation
-        assert_eq!(atms.assume(&js1, "test_env"), Err(AtmsError::NogoodViolation));
+        let h = a.install(&conj);
+        // A bare conjecture installs as an assumption and is believed under itself.
+        assert!(a.contradiction_free(h));
+        // Make the assumption self-contradictory.
+        a.contradict(&[h]);
+        assert!(!a.contradiction_free(h), "nogood must revoke contradiction-freedom");
     }
 }
 
+// ──────────────────────────────────────────────────────────
+// LAWS — structural invariants of the label algebra (proptest).
+// ──────────────────────────────────────────────────────────
+
+#[cfg(test)]
+mod laws {
+    use super::*;
+    use proptest::prelude::*;
+
+    // Layout of the random instance: node 0 is ⊥, nodes 1..=N_ASSUM are
+    // assumptions, nodes N_ASSUM+1..=N_ASSUM+N_DERIVED are derived. Antecedents
+    // may reference any non-⊥ node (chains and cycles included); Justify only
+    // targets derived nodes (assumptions keep their singleton labels).
+    const N_ASSUM: usize = 4;
+    const N_DERIVED: usize = 3;
+    const N_NODES: usize = N_ASSUM + N_DERIVED; // highest referenceable node id
+
+    /// A tiny script of ATMS operations, replayed to build a random instance.
+    #[derive(Clone, Debug)]
+    enum Op {
+        Justify(usize, Vec<usize>),
+        Contradict(Vec<usize>),
+    }
+
+    fn arb_ops() -> impl Strategy<Value = Vec<Op>> {
+        let ant = prop::collection::vec(1..=N_NODES, 1..=3);
+        let op = prop_oneof![
+            (N_ASSUM + 1..=N_NODES, ant.clone()).prop_map(|(c, a)| Op::Justify(c, a)),
+            ant.prop_map(Op::Contradict),
+        ];
+        prop::collection::vec(op, 0..12)
+    }
+
+    fn build(ops: &[Op]) -> Atms {
+        let mut a = Atms::new();
+        for i in 0..N_ASSUM {
+            a.add_assumption(&format!("a{i}"));
+        }
+        for i in 0..N_DERIVED {
+            a.add_node(&format!("d{i}"));
+        }
+        for op in ops {
+            match op {
+                Op::Justify(c, ants) => a.justify(*c, ants),
+                Op::Contradict(ants) => a.contradict(ants),
+            }
+        }
+        a
+    }
+
+    proptest! {
+        /// INV-1: every label is an antichain — no environment in a label is a
+        /// subset of another distinct environment in the same label.
+        #[test]
+        fn labels_are_antichains(ops in arb_ops()) {
+            let a = build(&ops);
+            for node in 0..a.nodes.len() {
+                let lbl = a.label(node);
+                for i in 0..lbl.len() {
+                    for k in 0..lbl.len() {
+                        if i != k {
+                            prop_assert!(!(lbl[i].is_subset(&lbl[k]) && lbl[i] != lbl[k]),
+                                "label of node {} not minimal: {:?} ⊆ {:?}", node, lbl[i], lbl[k]);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// INV-2: no label environment is subsumed by a nogood.
+        #[test]
+        fn labels_avoid_nogoods(ops in arb_ops()) {
+            let a = build(&ops);
+            for node in 0..a.nodes.len() {
+                for e in a.label(node) {
+                    prop_assert!(a.is_consistent(e),
+                        "node {} retains inconsistent env {:?}", node, e);
+                }
+            }
+        }
+
+        /// INV-3: nogoods form an antichain (all minimal).
+        #[test]
+        fn nogoods_are_minimal(ops in arb_ops()) {
+            let a = build(&ops);
+            let ng = a.nogoods();
+            for i in 0..ng.len() {
+                for k in 0..ng.len() {
+                    if i != k {
+                        prop_assert!(!(ng[i].is_subset(&ng[k]) && ng[i] != ng[k]),
+                            "nogood {:?} subsumes {:?}", ng[i], ng[k]);
+                    }
+                }
+            }
+        }
+
+        /// INV-4 (soundness/completeness of labels): for every justification
+        /// c ⇐ antecedents and every choice of one label-env per antecedent,
+        /// if their union U is consistent then some env in label(c) ⊆ U.
+        #[test]
+        fn justified_consequents_are_covered(ops in arb_ops()) {
+            let a = build(&ops);
+            for j in &a.justifs {
+                if j.consequent == a.contradiction {
+                    continue;
+                }
+                // cross-product of antecedent labels
+                let mut unions = vec![Environment::empty()];
+                let mut dead = false;
+                for &ant in &j.antecedents {
+                    let lbl = a.label(ant);
+                    if lbl.is_empty() { dead = true; break; }
+                    let mut next = Vec::new();
+                    for base in &unions {
+                        for e in lbl {
+                            next.push(base.union(e));
+                        }
+                    }
+                    unions = next;
+                }
+                if dead { continue; }
+                for u in unions {
+                    if a.is_consistent(&u) {
+                        let covered = a.label(j.consequent).iter().any(|l| l.is_subset(&u));
+                        prop_assert!(covered,
+                            "consequent {} not covered for consistent env {:?}", j.consequent, u);
+                    }
+                }
+            }
+        }
+    }
+}
