@@ -7,7 +7,7 @@
 
 - Proyecto: **Teorema-Robinson-Moskv** (linaje local = canónico)
 - Versión de proyecto: **1.0.2** — fuente única: `pyproject.toml`. `AGENTS.md` declara "Version: 1.1.0" pero es la versión del *documento de comportamiento*, no del proyecto: namespaces distintos, no hay conflicto (verificado 2026-07-17).
-- HEAD: `f62135b` · 803 commits · rama `main` · sin remoto configurado (deliberado hasta resolver P0)
+- HEAD: `0c048ee` · 805 commits · rama `main` · sin remoto configurado (deliberado hasta resolver P0)
 
 ## Topología del fork CORTEX↔BABYLON-60 — RESUELTA
 
