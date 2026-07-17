@@ -76,8 +76,8 @@ def test_replay_corruption() -> None:
     # Valid signatures are checked in invoke_subagent, but we just insert manually or use mock
     from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256
     m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
-    ledger.conn.execute('INSERT INTO state_log (mutation_hash, agent_id, payload, ts) VALUES (?, ?, ?, ?)',
-                        (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp))
+    ledger.conn.execute('INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)',
+                        (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint))
     ledger.conn.commit()
 
     # Ensure integrity is 100%

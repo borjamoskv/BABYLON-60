@@ -8,6 +8,8 @@ from typing import Any, Dict
 from dataclasses import dataclass
 from datetime import datetime, timezone
 
+from babylon60.database import core as dbcore
+
 # -----------------------------------------------------------------------------
 # MOSKV-1 APEX SINGULARITY KERNEL (C5-REAL)
 # -----------------------------------------------------------------------------
@@ -39,11 +41,8 @@ class Moskv1Kernel:
     def _boot_sequence(self) -> None:
         """Ignición Síncrona. Prepara el entorno BFT_STATE_LOOP."""
         try:
-            with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-                conn.execute("PRAGMA journal_mode=WAL;")
-                conn.execute("PRAGMA synchronous=NORMAL;")
-                conn.execute("PRAGMA busy_timeout=5000;")
-                
+            conn = dbcore.connect_sync(self.db_path, synchronous="FULL")
+            try:
                 # Tabla Master Ledger (Solo INSERTS, inmutable)
                 conn.execute('''
                     CREATE TABLE IF NOT EXISTS master_ledger (
@@ -62,6 +61,8 @@ class Moskv1Kernel:
                 if row and row[0] is not None:
                     self._lamport_clock = row[0]
                     self._last_hash = row[1]
+            finally:
+                conn.close()
         except (sqlite3.DatabaseError, OSError, ValueError):
             os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError("FAIL-FAST: Fallo catastrófico en boot BFT.")
@@ -102,13 +103,16 @@ class Moskv1Kernel:
                 taint_signature = f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
 
                 try:
-                    with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-                        conn.execute(
+                    db = await dbcore.connect(self.db_path, synchronous="FULL")
+                    try:
+                        await db.execute(
                             "INSERT INTO master_ledger (claim_id, payload, prev_hash, current_hash, cortex_taint, lamport_t) VALUES (?, ?, ?, ?, ?, ?)",
                             (claim.claim_id, json.dumps(claim.payload), claim.prev_hash, current_hash, taint_signature, claim.lamport_t)
                         )
                         self._last_hash = current_hash
                         print(f"[+] Cristalizado: {claim.claim_id} -> {current_hash[:8]}")
+                    finally:
+                        await db.close()
                 except sqlite3.IntegrityError:
                     # Invariante de Idempotency Lock
                     print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Entropía abortada.")

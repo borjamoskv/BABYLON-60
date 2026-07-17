@@ -95,8 +95,8 @@ def test_audit_integrity_indecodificable_es_corrupcion(tmp_path: Path) -> None:
 
     ledger = BFT_Ledger(str(tmp_path / "audit.db"))
     ledger.conn.execute(
-        "INSERT INTO state_log (mutation_hash, agent_id, payload, ts) VALUES (?, ?, ?, ?)",
-        ("deadbeef" * 8, "atacante", b"\xff\xfe\xfd garbage no-cbor no-json", 1.0),
+        "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
+        ("deadbeef" * 8, "atacante", b"\xff\xfe\xfd garbage no-cbor no-json", 1.0, "test_corruption"),
     )
     assert ledger.audit_integrity() is False  # y el proceso sigue vivo
 
