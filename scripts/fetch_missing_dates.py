@@ -89,7 +89,7 @@ def main() -> None:
                     comp = status.get("primaryCompletionDateStruct", {}).get("date")
                 if nct:
                     study_dates[nct] = {"start": start, "completion": comp}
-        except Exception as e:
+        except RuntimeError as e:
             print(f"Warning: batch failed: {e}", flush=True)
         time.sleep(0.5)
 
