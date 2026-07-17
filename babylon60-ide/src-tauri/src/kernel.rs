@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 use serde::{Deserialize, Serialize};
-use crate::lexicon::{Domain, Primitive, Modifier, Target, VectorPath, VectorPath4D};
+use crate::lexicon::{Domain, Primitive, Modifier, VectorPath, VectorPath4D};
 
 // ═══════════════════════════════════════════════════════
 //  KERNEL — Dual-space dispatcher
