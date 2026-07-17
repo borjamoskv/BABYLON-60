@@ -1,18 +1,53 @@
+# [C5-REAL] Exergy-Maximized
+from __future__ import annotations
+
 from typing import Any, Dict
 import asyncio
-import time
-import json
-import secrets
-import hmac
 import hashlib
+import hmac
+import json
+import os
+import secrets
+import time
+from datetime import datetime, timezone
 from typing import Tuple
+
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
 
+def _utc_now_iso() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
 class ShadowRouter:
+    """
+    Router de sombra con recibos proof-of-route.
+
+    C5-REAL: los commitments son HMAC con clave inyectada por el operador
+    (CORTEX_SHADOW_HMAC_KEY o CORTEX_MASTER_KEY). Cero fallback estático.
+    La ejecución es simulada (C4-SIM) y se declara como tal en los payloads:
+    ningún campo fabrica procedencia que no existe.
+    """
+
     def __init__(self, signer: Ed25519Signer) -> None:
+        key_material = os.environ.get("CORTEX_SHADOW_HMAC_KEY") or os.environ.get(
+            "CORTEX_MASTER_KEY"
+        )
+        if not key_material:
+            raise RuntimeError(
+                "FATAL: CORTEX_SHADOW_HMAC_KEY or CORTEX_MASTER_KEY env var required "
+                "for proof-of-route commitments. Zero static fallback permitted."
+            )
+        self._commitment_key = key_material.encode("utf-8")
         self.signer = signer
         self.shadow_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
+
+    def _commit(self, data: bytes) -> str:
+        return f"hmac-sha256:{hmac.new(self._commitment_key, data, hashlib.sha256).hexdigest()}"
+
+    @staticmethod
+    def _sha256_of(data: bytes) -> str:
+        return f"sha256:{hashlib.sha256(data).hexdigest()}"
 
     def _jcs_hash(self, payload: Dict[str, Any]) -> str:
         return hash_sha3_256(canonicalize_cbor(payload))
@@ -36,25 +71,34 @@ class ShadowRouter:
         total_latency_ms = (completed_ns - start_ns) // 1000000
         return {
             "status": "success",
+            "mode": "simulation",
             "ttft_ms": ttft_ms,
             "total_latency_ms": total_latency_ms,
             "input_tokens": 100,
             "output_tokens": 50,
             "cost_microusd": 4200,
             "fallback_used": False,
-            "response_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
-            "provider_receipt_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
+            "response_commitment": self._commit(b"response|" + prompt.encode("utf-8")),
+            # C4-SIM: no existe recibo real de proveedor; nunca se fabrica uno.
+            "provider_receipt_hash": None,
         }
 
-    async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    async def route_request(
+        self, prompt: str, context: Dict[str, Any]
+    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         request_id = f"req_{secrets.token_hex(8)}"
         primary_model = "provider-x/gemini-2.0-flash-2026-07-01"
         shadow_models = ["provider-y/claude-3.5-sonnet-2026-06"]
+        policy_id = "arcstride-v4.2.1"
+        candidate_set = sorted([primary_model, *shadow_models])
         decision_payload = {
-            "request_commitment": f"hmac-sha256:{hmac.new(b'shadow_key', prompt.encode('utf-8'), hashlib.sha256).hexdigest()}",
-            "policy_id": "arcstride-v4.2.1",
-            "policy_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
-            "candidate_set_hash": f"sha256:{hashlib.sha256(secrets.token_bytes(32)).hexdigest()}",
+            "request_commitment": self._commit(b"request|" + prompt.encode("utf-8")),
+            "policy_id": policy_id,
+            "policy_hash": self._sha256_of(policy_id.encode("utf-8")),
+            "candidate_set_hash": self._sha256_of(
+                json.dumps(candidate_set, separators=(",", ":")).encode("utf-8")
+            ),
+            "mode": "simulation",
             "selected_route": {
                 "provider": "provider-x",
                 "model_alias": "gemini-2.0-flash",
@@ -75,19 +119,25 @@ class ShadowRouter:
         decision_receipt = {
             "schema": "proof-of-route/decision/v0.2",
             "receipt_id": f"dr_{secrets.token_hex(8)}",
-            "issued_at": "2026-07-10T14:32:08.442Z",
+            "issued_at": _utc_now_iso(),
             "payload": decision_payload,
             "payload_hash": decision_hash,
             "signature": {
                 "algorithm": "Ed25519",
-                "key_id": "did:key:z6Mkmock",
+                "key_id": self.signer.key_id if self.signer else "",
+                "public_key": self.signer.public_key_hex if self.signer else "",
                 "value": self.signer.sign(decision_hash) if self.signer else "",
             },
         }
         if decision_payload["shadow_eligible"]:
             for sm in shadow_models:
                 self.shadow_queue.put_nowait(
-                    {"model": sm, "prompt": prompt, "request_id": request_id, "decision_hash": decision_hash}
+                    {
+                        "model": sm,
+                        "prompt": prompt,
+                        "request_id": request_id,
+                        "decision_hash": decision_hash,
+                    }
                 )
         execution_metrics = await self._execute_route(primary_model, prompt)
         execution_payload = execution_metrics
@@ -95,12 +145,14 @@ class ShadowRouter:
         execution_receipt = {
             "schema": "proof-of-route/execution/v0.2",
             "receipt_id": f"er_{secrets.token_hex(8)}",
+            "issued_at": _utc_now_iso(),
             "decision_receipt_hash": decision_hash,
             "payload": execution_payload,
             "payload_hash": exec_hash,
             "signature": {
                 "algorithm": "Ed25519",
-                "key_id": "did:key:z6Mkmock",
+                "key_id": self.signer.key_id if self.signer else "",
+                "public_key": self.signer.public_key_hex if self.signer else "",
                 "value": self.signer.sign(exec_hash) if self.signer else "",
             },
         }
@@ -108,9 +160,13 @@ class ShadowRouter:
 
 
 async def demo() -> None:
+    # Clave efímera SOLO para la demo local; en runtime real la inyecta el operador.
+    os.environ.setdefault("CORTEX_SHADOW_HMAC_KEY", secrets.token_hex(32))
     signer = Ed25519Signer()
     router = ShadowRouter(signer)
-    t0_receipt, t1_receipt = await router.route_request("Explain quantum gravity", {"contains_pii": False})
+    t0_receipt, t1_receipt = await router.route_request(
+        "Explain quantum gravity", {"contains_pii": False}
+    )
     print("Decision Receipt (T0):")
     print(json.dumps(t0_receipt, indent=2))
     print("\nExecution Receipt (T1):")

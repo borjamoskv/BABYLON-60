@@ -1,0 +1,4 @@
+# --- add to Teorema-Robinson-Moskv pyproject.toml to ship apex_trials ---
+# [project.optional-dependencies] already has click via base deps.
+# [tool.setuptools] packages = ["babylon60", "apex_trials"]
+# [project.scripts] apex = "apex_trials.cli:main"

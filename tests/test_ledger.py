@@ -1,0 +1,73 @@
+"""Ledger invariants: determinism, chain integrity, idempotency, tamper detection."""
+from __future__ import annotations
+
+import sqlite3
+
+import pytest
+
+from apex_trials.ledger import AmendmentLedger, GENESIS_PREV_HASH
+
+
+def _payload(score: int) -> dict[str, object]:
+    return {"nct_id": "NCT00000001", "score": score, "features": {"a": 1, "b": [1, 2, 3]}}
+
+
+def test_genesis_and_chain_linkage(tmp_path):
+    db = tmp_path / "l.db"
+    with AmendmentLedger(db) as led:
+        e0 = led.append(_payload(10), "agent:t0")
+        e1 = led.append(_payload(20), "agent:t1")
+        assert e0.prev_hash == GENESIS_PREV_HASH
+        assert e0.lamport_t == 0 and e1.lamport_t == 1
+        assert e1.prev_hash == e0.entry_hash  # chain links
+        v = led.verify_chain()
+        assert v.valid and v.entries == 2 and v.broken_at is None
+
+
+def test_determinism_same_inputs_same_hash(tmp_path):
+    with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
+        ha = a.append(_payload(42), "agent:x").entry_hash
+        hb = b.append(_payload(42), "agent:x").entry_hash
+        assert ha == hb  # byte-for-byte reproducible across fresh ledgers
+
+
+def test_key_order_independence(tmp_path):
+    """Canonical serialization => payload key order does not change the hash."""
+    with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
+        p1 = {"score": 5, "nct_id": "X", "z": 1}
+        p2 = {"z": 1, "nct_id": "X", "score": 5}
+        assert a.append(p1, "agent:x").entry_hash == b.append(p2, "agent:x").entry_hash
+
+
+def test_idempotency(tmp_path):
+    with AmendmentLedger(tmp_path / "l.db") as led:
+        first = led.append(_payload(7), "agent:same")
+        again = led.append(_payload(7), "agent:same")
+        assert first.id == again.id
+        assert led.count() == 1  # duplicate not appended
+
+
+def test_causal_taint_mandatory(tmp_path):
+    with AmendmentLedger(tmp_path / "l.db") as led:
+        with pytest.raises(ValueError):
+            led.append(_payload(1), "")
+        with pytest.raises(ValueError):
+            led.append(_payload(1), "no-colon-here")
+
+
+def test_tamper_detection(tmp_path):
+    db = tmp_path / "l.db"
+    with AmendmentLedger(db) as led:
+        led.append(_payload(10), "agent:t0")
+        led.append(_payload(20), "agent:t1")
+        assert led.verify_chain().valid
+
+    # Corrupt a stored payload directly (attacker with filesystem access).
+    conn = sqlite3.connect(db)
+    conn.execute("UPDATE ledger SET payload = ? WHERE seq = 1;", ('{"score":9999}',))
+    conn.commit()
+    conn.close()
+
+    with AmendmentLedger(db) as led:
+        v = led.verify_chain()
+        assert not v.valid and v.broken_at == 1 and "tampered" in (v.reason or "")

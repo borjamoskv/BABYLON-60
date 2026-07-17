@@ -1,0 +1,200 @@
+"""apex_trials.risk_engine — deterministic protocol-amendment risk score.
+
+A transparent, tunable, fully-auditable heuristic. NOT a black box: the score
+is a weighted sum of independent complexity drivers, each firing a named rule
+with an explicit threshold and evidence value. Given the same features, the
+same score and the same fired-rule set are produced — byte-for-byte.
+
+Design rationale (why these drivers)
+------------------------------------
+Protocol amendments are dominated by avoidable design complexity. The public
+literature (Tufts CSDD amendment studies; FDA/EMA protocol-deviation reports)
+consistently identifies the same drivers:
+  - over-specified eligibility criteria      -> screen failures + amendments
+  - endpoint proliferation                    -> analysis/design amendments
+  - multi-arm / complex allocation            -> operational amendments
+  - large, multinational enrollment           -> regulatory/site amendments
+  - late-phase, oncology, rare-disease designs-> higher baseline amendment rate
+
+Weights are first-principles and INTENTIONALLY visible so a sponsor can retune
+them. Calibration against the public amendment ground-truth (see `backtest`)
+is the C5-REAL proof that the ordering is sound; the absolute weights are a
+starting prior, not a claim of trained accuracy.
+
+Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any, Callable
+
+from .features import StudyFeatures
+
+# Sum of per-driver maxima below. Used to normalize raw -> 0..100.
+RAW_MAX: int = 114
+
+MODEL_VERSION: str = "apex-amendment-risk/1.0.0"
+
+
+@dataclass(frozen=True)
+class FiredRule:
+    driver: str
+    points: int
+    max_points: int
+    evidence: str
+    rule: str
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "driver": self.driver,
+            "points": self.points,
+            "max_points": self.max_points,
+            "evidence": self.evidence,
+            "rule": self.rule,
+        }
+
+
+@dataclass(frozen=True)
+class RiskAssessment:
+    nct_id: str
+    model_version: str
+    raw_score: int
+    score: int          # normalized 0..100
+    tier: str
+    fired_rules: tuple[FiredRule, ...]
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "nct_id": self.nct_id,
+            "model_version": self.model_version,
+            "raw_score": self.raw_score,
+            "score": self.score,
+            "tier": self.tier,
+            "fired_rules": [r.as_dict() for r in self.fired_rules],
+        }
+
+
+def _band(value: int, thresholds: list[tuple[int, int]], driver: str, unit: str) -> tuple[int, str, str]:
+    """Return (points, evidence, rule) for the first threshold band value falls into.
+
+    thresholds: ascending list of (upper_inclusive, points); last entry is the catch-all
+    and its upper bound is treated as +inf.
+    """
+    for i, (upper, pts) in enumerate(thresholds):
+        is_last = i == len(thresholds) - 1
+        if is_last or value <= upper:
+            lo = 0 if i == 0 else thresholds[i - 1][0] + 1
+            band = f">{thresholds[i-1][0]}" if is_last else (f"<={upper}" if i == 0 else f"{lo}-{upper}")
+            return pts, f"{value} {unit}", f"{driver} band {band} -> +{pts}"
+    return 0, f"{value} {unit}", f"{driver} band none -> +0"  # pragma: no cover
+
+
+def _eligibility(f: StudyFeatures) -> FiredRule:
+    pts, ev, rule = _band(
+        f.n_eligibility_criteria,
+        [(10, 0), (20, 8), (30, 16), (45, 24), (999, 30)],
+        "eligibility_criteria", "criteria",
+    )
+    return FiredRule("Eligibility complexity", pts, 30, ev, rule)
+
+
+def _endpoints(f: StudyFeatures) -> FiredRule:
+    total = f.n_primary_endpoints + f.n_secondary_endpoints
+    pts, ev, rule = _band(
+        total,
+        [(3, 0), (6, 6), (10, 12), (999, 18)],
+        "endpoints", "endpoints",
+    )
+    return FiredRule("Endpoint burden", pts, 18, ev, rule)
+
+
+def _arms(f: StudyFeatures) -> FiredRule:
+    pts, ev, rule = _band(
+        f.n_arms,
+        [(2, 0), (4, 5), (999, 10)],
+        "arms", "arms",
+    )
+    return FiredRule("Arm multiplicity", pts, 10, ev, rule)
+
+
+def _enrollment(f: StudyFeatures) -> FiredRule:
+    pts, ev, rule = _band(
+        f.enrollment,
+        [(99, 0), (499, 4), (1499, 8), (999999, 12)],
+        "enrollment", "subjects",
+    )
+    return FiredRule("Enrollment scale", pts, 12, ev, rule)
+
+
+def _geography(f: StudyFeatures) -> FiredRule:
+    pts, ev, rule = _band(
+        f.n_countries,
+        [(1, 0), (5, 5), (15, 10), (999, 14)],
+        "countries", "countries",
+    )
+    return FiredRule("Geographic spread", pts, 14, ev, rule)
+
+
+def _phase(f: StudyFeatures) -> FiredRule:
+    table = {"EARLY_PHASE1": 2, "PHASE1": 2, "PHASE2": 6, "PHASE3": 10, "PHASE4": 4, "NA": 0}
+    pts = table.get(f.phase, 0)
+    return FiredRule("Phase baseline", pts, 10, f.phase, f"phase {f.phase} -> +{pts}")
+
+
+def _design(f: StudyFeatures) -> FiredRule:
+    pts = 0
+    notes: list[str] = []
+    model = f.intervention_model.upper()
+    if "CROSSOVER" in model:
+        pts += 4
+        notes.append("crossover+4")
+    if "FACTORIAL" in model:
+        pts += 4
+        notes.append("factorial+4")
+    if f.masking.upper() in ("TRIPLE", "QUADRUPLE"):
+        pts += 2
+        notes.append("high-masking+2")
+    pts = min(pts, 10)
+    ev = f"{f.intervention_model}/{f.masking}"
+    return FiredRule("Design complexity", pts, 10, ev, "; ".join(notes) or "standard parallel -> +0")
+
+
+def _therapeutic(f: StudyFeatures) -> FiredRule:
+    pts = 0
+    note = "general"
+    if f.is_oncology:
+        pts = 6
+        note = "oncology+6"
+    elif f.is_rare_disease:
+        pts = 4
+        note = "rare_disease+4"
+    return FiredRule("Therapeutic-area baseline", pts, 6, f.therapeutic_area, f"{note} -> +{pts}")
+
+
+_DRIVERS: tuple[Callable[[StudyFeatures], FiredRule], ...] = (
+    _eligibility, _endpoints, _arms, _enrollment, _geography, _phase, _design, _therapeutic,
+)
+
+
+def _tier(score: int) -> str:
+    if score >= 75:
+        return "CRITICAL"
+    if score >= 50:
+        return "HIGH"
+    if score >= 25:
+        return "MODERATE"
+    return "LOW"
+
+
+def assess(features: StudyFeatures) -> RiskAssessment:
+    fired = tuple(driver(features) for driver in _DRIVERS)
+    raw = sum(r.points for r in fired)
+    score = round(raw / RAW_MAX * 100)
+    return RiskAssessment(
+        nct_id=features.nct_id,
+        model_version=MODEL_VERSION,
+        raw_score=raw,
+        score=score,
+        tier=_tier(score),
+        fired_rules=fired,
+    )
