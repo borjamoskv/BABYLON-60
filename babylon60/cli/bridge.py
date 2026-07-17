@@ -3,7 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-def main():
+def main() -> None:
     """
     Ignición Determinista del Puente CORTEX.
     Busca la raíz del workspace (30_BABYLON-60) y compila/ejecuta la topología C5-REAL (moskv-1-apex).

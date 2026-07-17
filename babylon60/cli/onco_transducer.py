@@ -145,7 +145,7 @@ def execute_pipeline(data_path: str | None = None, falsifiability_threshold: flo
     logger.info("VERIFICACIÓN C5-REAL EXITOSA. Hipótesis apta para In-Vitro.")
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="MOSKV-1 Onco Transducer CLI")
     parser.add_argument(
         "--data", type=str, help="Path a la matriz TSV (genes en filas, muestras en columnas).", default=None

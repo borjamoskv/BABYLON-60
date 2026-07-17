@@ -147,7 +147,7 @@ def _load_cli(name: str, filename: str):
 
 def test_attest_pair_sha3_roundtrip(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     attest = _load_cli("attest_cc", "attest_character_count.py")
-    llm_attest = _load_cli("llm_attest", "llm-attest.py")
+    llm_attest = _load_cli("llm_attest", "llm_attest.py")
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(sys, "argv", ["attest_character_count.py", "babylon", "b"])
     attest.main()
@@ -165,7 +165,7 @@ def test_llm_attest_acepta_legacy_sha256_marcado(tmp_path: Path) -> None:
 
     from nacl.signing import SigningKey
 
-    llm_attest = _load_cli("llm_attest2", "llm-attest.py")
+    llm_attest = _load_cli("llm_attest2", "llm_attest.py")
     payload = {"word": "legacy", "n": 1}
     canonical = llm_attest.jcs_canonicalize(payload)
     payload_hash = f"sha256:{hashlib.sha256(canonical).hexdigest()}"
