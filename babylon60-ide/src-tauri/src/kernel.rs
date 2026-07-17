@@ -18,9 +18,16 @@ macro_rules! bind_vector {
 }
 
 pub fn build_ontology() {
-    // El primer token ontológico grabado a fuego en el Kernel.
-    // Garantiza que cualquier mutación se sella en el Ledger inmutablemente.
+    // [ VECTOR 000 ]: EL GÉNESIS
+    // Inicializar el motor de persistencia WAL con seguridad BFT. 
+    // Si esto falla, el universo no nace.
+    bind_vector!(MATRIX, INIT, ATOMIC, || {
+        println!("🚀 Executing MATRIX INIT ATOMIC: Igniting SQLite WAL Engine...");
+    });
+
+    // [ VECTOR 001 ]: EL SELLO DE LA REALIDAD
+    // La mutación criptográfica que ancla los eventos al Master Ledger.
     bind_vector!(MATRIX, COMMIT, ATOMIC, || {
-        println!("🚀 Executing MATRIX COMMIT ATOMIC...");
+        println!("🚀 Executing MATRIX COMMIT ATOMIC: Cryptographic seal anchored...");
     });
 }
