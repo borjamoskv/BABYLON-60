@@ -232,8 +232,18 @@ impl PrimitiveIdentity {
         })
     }
 
-    pub fn to_string(&self) -> String {
-        format!("{}-{}-{}-{}", self.domain.as_str(), self.primitive.as_str(), self.modifier.as_str(), self.target.as_str())
+}
+
+impl std::fmt::Display for PrimitiveIdentity {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "{}-{}-{}-{}",
+            self.domain.as_str(),
+            self.primitive.as_str(),
+            self.modifier.as_str(),
+            self.target.as_str()
+        )
     }
 }
 
@@ -247,7 +257,7 @@ fn default_dispatch_handler(identity: &PrimitiveIdentity) {
     println!(
         "⚡ [{:04}] {} executed via base transductor.",
         identity.code,
-        identity.to_string()
+        identity
     );
 }
 
@@ -255,9 +265,9 @@ pub fn init_kernel() {
     let mut table = [default_dispatch_handler as Action; 10000];
     
     // Retroactively populate all 1000 actions from the generated taxonomy module
-    for i in 0..10000 {
+    for (i, slot) in table.iter_mut().enumerate() {
         if let Some(action) = primitives_generated::get_generated_action(i) {
-            table[i] = action;
+            *slot = action;
         }
     }
     
@@ -280,12 +290,12 @@ pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
                 std::thread::spawn(move || {
                     action(&id_clone);
                 });
-                return Ok(format!("Dispatched asynchronously: {}", identity.to_string()));
+                return Ok(format!("Dispatched asynchronously: {}", identity));
             }
             
             // Standard Sync Execution
             action(&identity);
-            return Ok(format!("Dispatched: {}", identity.to_string()));
+            return Ok(format!("Dispatched: {}", identity));
         }
     }
     

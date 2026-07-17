@@ -166,10 +166,8 @@ impl<T: Clone + fmt::Debug> KnowledgeGraph<T> {
             }
             state[node] = 1;
             for e in edges {
-                if e.source == node && e.kind == EdgeKind::DerivesFrom {
-                    if e.target < state.len() && dfs(e.target, edges, state) {
-                        return true;
-                    }
+                if e.source == node && e.kind == EdgeKind::DerivesFrom && e.target < state.len() && dfs(e.target, edges, state) {
+                    return true;
                 }
             }
             state[node] = 2;

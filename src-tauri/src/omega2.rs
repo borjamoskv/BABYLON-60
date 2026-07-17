@@ -14,7 +14,6 @@
 
 #![allow(dead_code)]
 
-use crate::omega0::Judgement;
 use crate::omega1::{EpistemicInvariant, KnowledgeGraph, RewriteOutcome, TypedRewriteRule};
 use std::collections::{HashSet, VecDeque};
 use std::fmt;

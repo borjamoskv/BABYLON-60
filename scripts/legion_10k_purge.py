@@ -7,7 +7,7 @@ import time
 import os
 home = os.path.expanduser("~")
 sys.path.append(os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher"))
-from c5_swarm_compiler import ThermodynamicSwarmCompiler
+from c5_swarm_compiler import ThermodynamicSwarmCompiler  # type: ignore[import-not-found]
 
 def run_ruff_fix():
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")

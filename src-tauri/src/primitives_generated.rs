@@ -22,32 +22,32 @@ pub fn get_generated_action(index: usize) -> Option<fn(&PrimitiveIdentity)> {
 }
 
 fn domain_action_0(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via SOURCE domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via SOURCE domain transductor.", id.code, id);
 }
 fn domain_action_1(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via MATRIX domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via MATRIX domain transductor.", id.code, id);
 }
 fn domain_action_2(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via PULSE domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via PULSE domain transductor.", id.code, id);
 }
 fn domain_action_3(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via KINETIC domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via KINETIC domain transductor.", id.code, id);
 }
 fn domain_action_4(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via LOGIC domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via LOGIC domain transductor.", id.code, id);
 }
 fn domain_action_5(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via VECTOR domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via VECTOR domain transductor.", id.code, id);
 }
 fn domain_action_6(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via STORAGE domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via STORAGE domain transductor.", id.code, id);
 }
 fn domain_action_7(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via OSINT domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via OSINT domain transductor.", id.code, id);
 }
 fn domain_action_8(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via CLOCK domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via CLOCK domain transductor.", id.code, id);
 }
 fn domain_action_9(id: &PrimitiveIdentity) {
-    println!("⚡ [{:04}] {} executed via COMPILER domain transductor.", id.code, id.to_string());
+    println!("⚡ [{:04}] {} executed via COMPILER domain transductor.", id.code, id);
 }
