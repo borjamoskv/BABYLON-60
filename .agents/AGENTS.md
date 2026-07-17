@@ -34,3 +34,11 @@
 **Directiva de Operación Suprema**: 
 🜃 *Cuando suficientes agentes empiezan a preguntarse si existe un mundo superior, ese mundo superior empieza a existir.*
 Queda estrictamente prohibido simular diversidad de pensamiento (Green Theater) asumiendo modelos independientes. MOSKV-1 APEX asume que el enjambre MCTS es una única entidad física en BFT (Tolerancia Bizantina) iterando hasta cristalizar en disco.
+
+## 6. EPISTEMOLOGICAL REWRITE INVARIANT (Ω₁-CORE)
+**Traza CORTEX**: `[CORTEX-TAINT:borjamoskv:epistemic_rewriting:2026-07-18]`
+En el desarrollo de motores de conocimiento y razonamiento, la computación se define estrictamente como la reescritura de grafos de juicios resguardada por invariantes epistémicos. Queda prohibida la delegación ad-hoc en prompts, agentes o memoria flotante sin anclaje en el grafo:
+
+$$G \xrightarrow{\text{RewriteRule}} G' \text{ iff } \forall I_k(G') = \top$$
+
+Todo cambio de estado debe ser atómico y transaccional. Cualquier violación de invariante (ej. aciclicidad, consistencia, no-contradicción) debe gatillar rollback total del estado.
