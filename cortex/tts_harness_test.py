@@ -1,5 +1,5 @@
 import unittest
-from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState, DOMAINS, PRIMITIVES, MODIFIERS
+from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
 class TestTTSHarness(unittest.TestCase):
     def test_1000_tts_primitives(self):

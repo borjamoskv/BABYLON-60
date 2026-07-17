@@ -1,6 +1,5 @@
 import os
 import re
-import yaml
 
 def parse_yaml(yaml_path):
     with open(yaml_path, 'r') as f:

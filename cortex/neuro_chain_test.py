@@ -1,5 +1,5 @@
 import unittest
-from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector, DOMAINS, PRIMITIVES, MODIFIERS
+from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 
 class TestNeuroChain(unittest.TestCase):
     def test_1000_neuro_primitives(self):

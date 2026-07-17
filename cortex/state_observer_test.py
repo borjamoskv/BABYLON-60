@@ -1,5 +1,5 @@
 import unittest
-from cortex.state_observer import dispatch_state_observer, StateVector, DOMAINS, PRIMITIVES, MODIFIERS
+from cortex.state_observer import dispatch_state_observer, StateVector
 
 class TestStateObserver(unittest.TestCase):
     def test_1000_primitives(self):
