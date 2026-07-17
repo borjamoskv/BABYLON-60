@@ -8,7 +8,6 @@ Output: dates.json  {nct_id: "YYYY-MM-DD"}
 from __future__ import annotations
 
 import json
-import sys
 import urllib.parse
 import urllib.request
 from collections import Counter

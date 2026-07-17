@@ -44,8 +44,10 @@ MODULES = [("elig", "Eligibility", ["n_eligibility_criteria"]),
 
 
 def spearman(a: np.ndarray, b: np.ndarray) -> float:
-    ar = np.argsort(np.argsort(a)).astype(float); br = np.argsort(np.argsort(b)).astype(float)
-    ar -= ar.mean(); br -= br.mean()
+    ar = np.argsort(np.argsort(a)).astype(float)
+    br = np.argsort(np.argsort(b)).astype(float)
+    ar -= ar.mean()
+    br -= br.mean()
     d = np.sqrt((ar**2).sum() * (br**2).sum())
     return float((ar * br).sum() / d) if d else 0.0
 
@@ -75,7 +77,9 @@ def agg_eval(frac, y, tr, te):
 def module_auc(X, ycol, drop, tr, te):
     use = [i for i, f in enumerate(RAW_FEATURES) if f not in drop]
     Xu = X[:, use]
-    mu = Xu[tr].mean(axis=0); sd = Xu[tr].std(axis=0); sd[sd == 0] = 1.0
+    mu = Xu[tr].mean(axis=0)
+    sd = Xu[tr].std(axis=0)
+    sd[sd == 0] = 1.0
     clf = LogisticRegression(max_iter=1000).fit((Xu[tr]-mu)/sd, ycol[tr])
     if len(np.unique(ycol[te])) < 2:
         return float("nan")
@@ -101,23 +105,26 @@ def main() -> None:
         mr = mod_rows[nct]
         mlabels.append([mr[f"amended_{k}"] for k, _, _ in MODULES])
 
-    frac = np.array(frac); raw = np.array(raw); y = np.array(y, float)
-    when = np.array(when); M = np.array(mlabels, int)
-    n = len(y)
+    frac_arr = np.array(frac)
+    raw_arr = np.array(raw)
+    y_arr = np.array(y, float)
+    when_arr = np.array(when)
+    M = np.array(mlabels, int)
+    n = len(y_arr)
     idx = np.arange(n)
 
-    tmask = when < CUTOFF
+    tmask = when_arr < CUTOFF
     tr_t, te_t = idx[tmask], idx[~tmask]
     tr_r, te_r = train_test_split(idx, test_size=len(te_t) / n, random_state=SEED)
 
     print(f"n={n}  cutoff={CUTOFF}")
     print(f"  temporal:  train={len(tr_t)} (≤2018)  test={len(te_t)} (≥2019)")
-    print(f"  target mean: train={y[tr_t].mean():.2f}  test={y[te_t].mean():.2f}  "
+    print(f"  target mean: train={y_arr[tr_t].mean():.2f}  test={y_arr[te_t].mean():.2f}  "
           f"(confound: newer trials, less elapsed time -> fewer amendments)")
 
     # aggregate
-    rho_t, mae_t, base_t = agg_eval(frac, y, tr_t, te_t)
-    rho_r, mae_r, base_r = agg_eval(frac, y, tr_r, te_r)
+    rho_t, mae_t, base_t = agg_eval(frac_arr, y_arr, tr_t, te_t)
+    rho_r, mae_r, base_r = agg_eval(frac_arr, y_arr, tr_r, te_r)
     print("\n=== AGGREGATE (Spearman ρ, higher=better) ===")
     print(f"  random split : ρ={rho_r:.3f}   MAE={mae_r:.3f} (base {base_r:.3f})")
     print(f"  TEMPORAL     : ρ={rho_t:.3f}   MAE={mae_t:.3f} (base {base_t:.3f})")
@@ -129,9 +136,10 @@ def main() -> None:
     rand_aucs, temp_aucs = [], []
     per_mod = {}
     for j, (key, label, drop) in enumerate(MODULES):
-        ar = module_auc(raw, M[:, j], drop, tr_r, te_r)
-        at = module_auc(raw, M[:, j], drop, tr_t, te_t)
-        rand_aucs.append(ar); temp_aucs.append(at)
+        ar = module_auc(raw_arr, M[:, j], drop, tr_r, te_r)
+        at = module_auc(raw_arr, M[:, j], drop, tr_t, te_t)
+        rand_aucs.append(ar)
+        temp_aucs.append(at)
         per_mod[key] = {"label": label, "auc_random": round(ar, 4), "auc_temporal": round(at, 4)}
         print(f"{label:<24}{ar:>9.3f}{at:>10.3f}{at-ar:>+8.3f}")
     print(f"{'macro':<24}{np.mean(rand_aucs):>9.3f}{np.mean(temp_aucs):>10.3f}{np.mean(temp_aucs)-np.mean(rand_aucs):>+8.3f}")
