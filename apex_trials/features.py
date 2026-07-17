@@ -53,6 +53,7 @@ class StudyFeatures:
     brief_summary_words: int = 0
     n_conditions: int = 1
     n_interventions: int = 1
+    enrollment_velocity: float = 0.0
 
     def as_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -110,6 +111,27 @@ def _max_phase(phases: list[str]) -> str:
     return max(present, key=order.index)
 
 
+def _parse_date_to_months(date_str: str | None) -> float | None:
+    if not date_str:
+        return None
+    parts = date_str.split("-")
+    try:
+        year = int(parts[0])
+        month = int(parts[1]) if len(parts) > 1 else 1
+        return year * 12.0 + month
+    except (ValueError, IndexError):
+        return None
+
+
+def _calculate_duration_months(start_str: str | None, completion_str: str | None) -> float | None:
+    start_m = _parse_date_to_months(start_str)
+    comp_m = _parse_date_to_months(completion_str)
+    if start_m is not None and comp_m is not None:
+        diff = comp_m - start_m
+        return max(1.0, diff)
+    return None
+
+
 def extract_features(study: dict[str, Any]) -> StudyFeatures:
     ps = study.get("protocolSection", {})
     ident = ps.get("identificationModule", {})
@@ -142,6 +164,17 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
     summary_words = len(re.findall(r"\w+", brief_summary))
     n_interventions = len(arms_mod.get("interventions", []))
 
+    status_mod = ps.get("statusModule", {})
+    start_str = status_mod.get("startDateStruct", {}).get("date")
+    comp_str = status_mod.get("completionDateStruct", {}).get("date")
+    if not comp_str:
+        comp_str = status_mod.get("primaryCompletionDateStruct", {}).get("date")
+    duration = _calculate_duration_months(start_str, comp_str) or 24.0
+
+    enrollment_val = int(enrollment_info.get("count", 0) or 0)
+    sites_val = len(locations)
+    velocity = enrollment_val / (max(1, sites_val) * duration) if enrollment_val > 0 else 0.0
+
     return StudyFeatures(
         nct_id=ident.get("nctId", "?"),
         brief_title=ident.get("briefTitle", ""),
@@ -153,8 +186,8 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
         n_primary_endpoints=len(outcomes.get("primaryOutcomes", [])),
         n_secondary_endpoints=len(outcomes.get("secondaryOutcomes", [])),
         n_arms=len(arms_mod.get("armGroups", [])),
-        enrollment=int(enrollment_info.get("count", 0) or 0),
-        n_sites=len(locations),
+        enrollment=enrollment_val,
+        n_sites=sites_val,
         n_countries=len(countries),
         allocation=design_info.get("allocation", "NA"),
         intervention_model=design_info.get("interventionModel", "NA"),
@@ -167,4 +200,5 @@ def extract_features(study: dict[str, Any]) -> StudyFeatures:
         brief_summary_words=summary_words,
         n_conditions=max(1, len(conditions)),
         n_interventions=max(1, n_interventions),
+        enrollment_velocity=velocity,
     )

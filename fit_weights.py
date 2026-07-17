@@ -36,6 +36,7 @@ SEED = 42
 DRIVER_NAMES = [
     "Eligibility complexity", "Endpoint burden", "Arm multiplicity", "Enrollment scale",
     "Geographic spread", "Phase baseline", "Design complexity", "Therapeutic-area baseline",
+    "Site feasibility",
 ]
 _SF_FIELDS = set(StudyFeatures.__dataclass_fields__.keys())
 
@@ -66,6 +67,7 @@ def load() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
             float("FACTORIAL" in sf.intervention_model.upper()),
             float(sf.masking.upper() in ("TRIPLE", "QUADRUPLE")),
             float(sf.is_oncology), float(sf.is_rare_disease),
+            sf.enrollment_velocity,
         ])
         y.append(r["target_substantive"])
     return np.array(frac), np.array(raw), np.array(hand, float), np.array(y, float)

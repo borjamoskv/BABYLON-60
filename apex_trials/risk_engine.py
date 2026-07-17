@@ -33,7 +33,7 @@ from typing import Any, Callable
 from .features import StudyFeatures
 
 # Sum of per-driver maxima below. Used to normalize raw -> 0..100.
-RAW_MAX: int = 114
+RAW_MAX: int = 124
 
 MODEL_VERSION: str = "apex-amendment-risk/1.0.0"
 
@@ -209,8 +209,35 @@ def _therapeutic(f: StudyFeatures) -> FiredRule:
     return FiredRule("Therapeutic-area baseline", pts, 6, f.therapeutic_area, f"{note} -> +{pts}")
 
 
+def _site_feasibility(f: StudyFeatures) -> FiredRule:
+    v = f.enrollment_velocity
+    if v <= 0.1:
+        pts = 10
+        band = "<=0.1"
+    elif v <= 0.5:
+        pts = 6
+        band = "0.11-0.5"
+    elif v <= 2.0:
+        pts = 2
+        band = "0.51-2.0"
+    else:
+        pts = 0
+        band = ">2.0"
+    ev = f"{v:.4f} pts/site/month"
+    rule = f"enrollment_velocity band {band} -> +{pts}"
+    return FiredRule("Site feasibility", pts, 10, ev, rule)
+
+
 _DRIVERS: tuple[Callable[[StudyFeatures], FiredRule], ...] = (
-    _eligibility, _endpoints, _arms, _enrollment, _geography, _phase, _design, _therapeutic,
+    _eligibility,
+    _endpoints,
+    _arms,
+    _enrollment,
+    _geography,
+    _phase,
+    _design,
+    _therapeutic,
+    _site_feasibility,
 )
 
 

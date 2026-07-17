@@ -27,7 +27,7 @@ def test_fitted_weights_are_valid_distribution():
     if not _HAS_FITTED:
         pytest.skip("no fitted_weights.json baked")
     imp = _FITTED["importances"]
-    assert len(imp) == 8
+    assert len(imp) == 9
     assert all(w >= 0 for w in imp)                 # non-negative: drivers only add risk
     assert abs(sum(imp) - 1.0) < 1e-3               # normalized (JSON stores 6-dp rounded)
 
@@ -50,8 +50,8 @@ def test_fitted_mode_is_deterministic_and_calibrated():
     assert a1.mode == "fitted"
     assert 0 <= a1.score <= 100
     assert a1.expected_amendments is not None and a1.expected_amendments >= 0
-    # contributions align to the 8 drivers and (rounding aside) reconstruct the score
-    assert len(a1.contributions) == 8
+    # contributions align to the 9 drivers and (rounding aside) reconstruct the score
+    assert len(a1.contributions) == 9
     assert abs(sum(a1.contributions) - a1.score) <= 1.0
 
 

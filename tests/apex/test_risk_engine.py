@@ -83,6 +83,6 @@ def test_tier_boundaries():
 
 def test_every_driver_reports_a_rule():
     a = assess(_mk(n_eligibility_criteria=40))
-    assert len(a.fired_rules) == 8  # all 8 drivers always present (transparency)
+    assert len(a.fired_rules) == 9  # all 9 drivers always present (transparency)
     elig = next(r for r in a.fired_rules if r.driver == "Eligibility complexity")
     assert elig.points == 24 and "band 31-45" in elig.rule
