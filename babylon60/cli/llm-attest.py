@@ -22,6 +22,27 @@ def hash_sha256(data: bytes) -> str:
     return f"sha256:{hashlib.sha256(data).hexdigest()}"
 
 
+def hash_sha3_256(data: bytes) -> str:
+    return f"sha3-256:{hashlib.sha3_256(data).hexdigest()}"
+
+
+_HEX_CHARS = set("0123456789abcdef")
+
+
+def _recompute_declared(declared_hash: str, canonical_payload: bytes) -> tuple[str | None, str]:
+    """INV_C5_03: despacho por primitivo declarado. SHA3-256 es el arco canónico;
+    `sha256:` se acepta SOLO como legacy y se marca en el reporte; hex desnudo de
+    64 chars se interpreta como SHA3-256 bare (recibos de shadow_router). Prefijo
+    desconocido → fail-closed (None)."""
+    if declared_hash.startswith("sha3-256:"):
+        return hash_sha3_256(canonical_payload), "sha3-256"
+    if declared_hash.startswith("sha256:"):
+        return hash_sha256(canonical_payload), "sha256-legacy"
+    if len(declared_hash) == 64 and set(declared_hash) <= _HEX_CHARS:
+        return hashlib.sha3_256(canonical_payload).hexdigest(), "sha3-256-bare"
+    return None, "unknown"
+
+
 def verify_ed25519(public_key_b64: str, signature_b64: str, message: bytes) -> bool:
     if not NACL_AVAILABLE:
         print("ERROR: PyNaCl not installed. Cannot verify Ed25519 signatures.")
@@ -75,8 +96,8 @@ def verify_receipt(receipt_path: str) -> Dict[str, Any]:
     declared_hash = receipt["payload_hash"]
     sig_block = receipt["signature"]
     canonical_payload = jcs_canonicalize(payload)
-    calculated_hash = hash_sha256(canonical_payload)
-    hash_valid = calculated_hash == declared_hash
+    calculated_hash, hash_primitive = _recompute_declared(declared_hash, canonical_payload)
+    hash_valid = calculated_hash is not None and calculated_hash == declared_hash
     sig_valid = False
     if sig_block.get("algorithm") == "Ed25519":
         sig_valid = verify_ed25519(
@@ -91,6 +112,7 @@ def verify_receipt(receipt_path: str) -> Dict[str, Any]:
         "receipt_id": receipt.get("receipt_id", "unknown"),
         "schema": receipt.get("schema", "unknown"),
         "payload_hash_valid": hash_valid,
+        "hash_primitive": hash_primitive,
         "signature_valid": sig_valid,
         "status": "verified" if hash_valid and sig_valid else "invalid",
     }

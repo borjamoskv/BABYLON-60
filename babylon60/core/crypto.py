@@ -48,12 +48,23 @@ class Ed25519Signer:
         return f"ed25519:{signature.hex()}"
 
     def verify(self, payload_hash: str, signature: str) -> bool:
-        if not signature.startswith("ed25519:"):
-            return False
-        try:
-            raw = bytes.fromhex(signature.removeprefix("ed25519:"))
-            public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(self.public_key_hex))
-            public_key.verify(raw, payload_hash.encode("utf-8"))
-            return True
-        except (InvalidSignature, ValueError):
-            return False
+        return verify_ed25519(self.public_key_hex, payload_hash, signature)
+
+
+def verify_ed25519(public_key_hex: str, message: str, signature: str) -> bool:
+    """
+    Verificación Ed25519 contra una clave pública arbitraria (hex raw, 32 bytes).
+
+    C5-REAL: cierra el ciclo de falsación multi-nodo (consenso BFT) — cualquier
+    superficie que cuente votos verifica contra el registro de claves, no contra
+    un mock. Formato de firma: `ed25519:<hex>` (emitido por Ed25519Signer.sign).
+    """
+    if not signature.startswith("ed25519:"):
+        return False
+    try:
+        raw = bytes.fromhex(signature.removeprefix("ed25519:"))
+        public_key = ed25519.Ed25519PublicKey.from_public_bytes(bytes.fromhex(public_key_hex))
+        public_key.verify(raw, message.encode("utf-8"))
+        return True
+    except (InvalidSignature, ValueError):
+        return False

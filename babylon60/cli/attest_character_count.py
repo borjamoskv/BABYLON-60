@@ -30,7 +30,8 @@ def main() -> None:
         "verifier": "Physical CPU Core",
     }
     canonical_payload = jcs_canonicalize(payload)
-    payload_hash = f"sha256:{hashlib.sha256(canonical_payload).hexdigest()}"
+    # INV_C5_03: un solo primitivo (SHA3-256) atraviesa el arco de atestación.
+    payload_hash = f"sha3-256:{hashlib.sha3_256(canonical_payload).hexdigest()}"
     signature_bytes = signing_key.sign(payload_hash.encode("utf-8")).signature
     sig_b64 = base64.urlsafe_b64encode(signature_bytes).decode("utf-8").rstrip("=")
     receipt = {
