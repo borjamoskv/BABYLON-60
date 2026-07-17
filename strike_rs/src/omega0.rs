@@ -11,6 +11,7 @@
 // ──────────────────────────────────────────────────────────
 
 use serde::{Serialize, Deserialize};
+use blake3;
 
 /// Modality parameter M ∈ {Epistemic, Deontic}.
 /// Captures Hume's guillotine as a type rule.
@@ -114,6 +115,11 @@ pub enum Omega0Error {
 /// Checks that a Justification satisfies the obligations of a Statement.
 /// This is the elimination rule — it does not construct proofs, only validates.
 pub fn verify(js: &JustifiedStatement) -> bool {
+    verify_with_nogoods(js, &std::collections::HashSet::new())
+}
+
+/// Verification with active nogoods set to resolve Obligation::Contradiction.
+pub fn verify_with_nogoods(js: &JustifiedStatement, nogoods: &std::collections::HashSet<String>) -> bool {
     let s = &js.statement;
     let j = &js.justification;
 
@@ -127,7 +133,10 @@ pub fn verify(js: &JustifiedStatement) -> bool {
             Obligation::Provenance => has_provenance(j),
             Obligation::Reproducibility => has_reproducibility(j),
             Obligation::Confidence => has_sufficient_confidence(j),
-            Obligation::Contradiction => true, // Requires runtime ATMS layer
+            Obligation::Contradiction => {
+                let s_hash = hash_statement(s);
+                !nogoods.contains(&s_hash)
+            }
             Obligation::Freshness => has_freshness(j),
             Obligation::Completeness => !matches!(j, Justification::Conjecture),
         };
@@ -137,6 +146,15 @@ pub fn verify(js: &JustifiedStatement) -> bool {
     }
     true
 }
+
+/// Deterministically computes the statement hash.
+pub fn hash_statement(s: &Statement) -> String {
+    let mut hasher = blake3::Hasher::new();
+    hasher.update(s.content.as_bytes());
+    hasher.update(format!("{:?}", s.modality).as_bytes());
+    format!("STMT:{}", hasher.finalize().to_hex())
+}
+
 
 fn has_provenance(j: &Justification) -> bool {
     !matches!(j, Justification::Conjecture)
@@ -446,4 +464,118 @@ mod tests {
         assert_eq!(optimized.len(), 1); // deduplicated
         assert!(verify(&optimized[0]));
     }
+
+    #[cfg(test)]
+    mod proptests {
+        use super::super::*;
+        use proptest::prelude::*;
+
+        fn any_modality() -> impl Strategy<Value = Modality> {
+            prop_oneof![
+                Just(Modality::Epistemic),
+                Just(Modality::Deontic),
+            ]
+        }
+
+        fn any_obligation() -> impl Strategy<Value = Obligation> {
+            prop_oneof![
+                Just(Obligation::Provenance),
+                Just(Obligation::Reproducibility),
+                Just(Obligation::Confidence),
+                Just(Obligation::Contradiction),
+                Just(Obligation::Freshness),
+                Just(Obligation::Completeness),
+            ]
+        }
+
+        fn any_justification() -> impl Strategy<Value = Justification> {
+            prop_oneof![
+                Just(Justification::Conjecture),
+                any::<f64>().prop_map(|confidence| Justification::StatisticalInference {
+                    confidence: confidence.abs().min(1.0),
+                    method: "proptest_gen".to_string(),
+                }),
+                any::<f64>().prop_map(|quorum| Justification::ExpertConsensus {
+                    agents: vec!["agent1".to_string()],
+                    quorum: quorum.abs().min(1.0),
+                }),
+                any::<f64>().prop_map(|reputation| Justification::Citation {
+                    source: "citation_gen".to_string(),
+                    reputation: reputation.abs().min(1.0),
+                }),
+                Just(Justification::Axiom { domain: "math".to_string() }),
+                Just(Justification::FormalProof {
+                    proof_term: "proof".to_string(),
+                    premises: vec![],
+                }),
+                Just(Justification::Observation {
+                    timestamp: 123456,
+                    sensor: "sensor".to_string(),
+                }),
+                Just(Justification::ExogenousInjection {
+                    source: "ext".to_string(),
+                    context: "context".to_string(),
+                })
+            ]
+        }
+
+        fn any_statement() -> impl Strategy<Value = Statement> {
+            (
+                "[a-zA-Z0-9 ]{1,10}", // string de texto alfanumérico simple
+                any_modality(),
+                prop::collection::vec(any_obligation(), 0..3)
+            ).prop_map(|(content, modality, obligations)| Statement {
+                content,
+                modality,
+                obligations,
+            })
+        }
+
+        fn any_justified_statement() -> impl Strategy<Value = JustifiedStatement> {
+            (any_statement(), any_justification()).prop_map(|(statement, justification)| {
+                JustifiedStatement {
+                    statement,
+                    justification,
+                }
+            })
+        }
+
+        proptest! {
+            #![proptest_config(ProptestConfig::with_cases(50))]
+
+            #[test]
+            fn test_optimize_is_idempotent_prop(proof in prop::collection::vec(any_justified_statement(), 0..10)) {
+                let once = optimize(&proof);
+                let twice = optimize(&once);
+                prop_assert_eq!(once, twice);
+            }
+
+            #[test]
+            fn test_optimize_is_conservative_prop(proof in prop::collection::vec(any_justified_statement(), 0..10)) {
+                let optimized = optimize(&proof);
+                for js in &optimized {
+                    prop_assert!(verify(js));
+                }
+            }
+
+            #[test]
+            fn test_hume_guillotine_prop(
+                premises in prop::collection::vec(any_justified_statement(), 1..5),
+                goal_content in "[a-zA-Z0-9 ]{1,10}"
+            ) {
+                // Si el objetivo es Deontic, y todas las premisas son Epistemic, derive debe fallar
+                let all_epistemic = premises.iter().all(|p| p.statement.modality == Modality::Epistemic);
+                let goal = Statement {
+                    content: goal_content,
+                    modality: Modality::Deontic,
+                    obligations: vec![],
+                };
+                let result = derive(&premises, &goal);
+                if all_epistemic {
+                    prop_assert_eq!(result.err(), Some(Omega0Error::HumeViolation));
+                }
+            }
+        }
+    }
 }
+

@@ -16,7 +16,7 @@ const UUID_V5_NAMESPACE: Uuid = Uuid::from_bytes([
 ]);
 
 pub struct MasterLedger {
-    conn: Connection,
+    pub(crate) conn: Connection,
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -47,6 +47,7 @@ impl MasterLedger {
                 statement_hash TEXT PRIMARY KEY,
                 content TEXT NOT NULL,
                 modality TEXT NOT NULL,
+                obligations_json TEXT NOT NULL DEFAULT '[]',
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
             )",
             [],
@@ -157,9 +158,15 @@ impl MasterLedger {
 
         let tx = self.conn.transaction()?;
 
+        let obligations_json = serde_json::to_string(&js.statement.obligations).unwrap_or_else(|_| "[]".to_string());
         tx.execute(
-            "INSERT OR IGNORE INTO statements (statement_hash, content, modality) VALUES (?1, ?2, ?3)",
-            params![statement_hash, js.statement.content, format!("{:?}", js.statement.modality)],
+            "INSERT OR IGNORE INTO statements (statement_hash, content, modality, obligations_json) VALUES (?1, ?2, ?3, ?4)",
+            params![
+                statement_hash,
+                js.statement.content,
+                format!("{:?}", js.statement.modality),
+                obligations_json
+            ],
         )?;
 
         let variant = match &js.justification {
@@ -269,6 +276,51 @@ impl MasterLedger {
         }
 
         Ok(state)
+    }
+
+    pub fn get_statement(&self, hash: &str) -> Result<Statement> {
+        let mut stmt = self.conn.prepare(
+            "SELECT content, modality, obligations_json FROM statements WHERE statement_hash = ?1"
+        )?;
+        stmt.query_row(params![hash], |row| {
+            let content: String = row.get(0)?;
+            let modality_str: String = row.get(1)?;
+            let modality = if modality_str == "Epistemic" {
+                crate::omega0::Modality::Epistemic
+            } else {
+                crate::omega0::Modality::Deontic
+            };
+            let obligations_json: String = row.get(2)?;
+            let obligations = serde_json::from_str(&obligations_json).unwrap_or_default();
+            Ok(Statement {
+                content,
+                modality,
+                obligations,
+            })
+        })
+    }
+
+    pub fn get_justification(&self, hash: &str) -> Result<Justification> {
+        let mut stmt = self.conn.prepare(
+            "SELECT payload_json FROM justifications WHERE justification_hash = ?1"
+        )?;
+        stmt.query_row(params![hash], |row| {
+            let payload_json: String = row.get(0)?;
+            let justification = serde_json::from_str(&payload_json).unwrap_or(Justification::Conjecture);
+            Ok(justification)
+        })
+    }
+
+    pub fn get_all_assertions(&self) -> Result<Vec<(String, String, String, String)>> {
+        let mut stmt = self.conn.prepare(
+            "SELECT id, statement_hash, justification_hash, environment_id FROM ledger_assertions ORDER BY lamport_t ASC"
+        )?;
+        let mut rows = stmt.query([])?;
+        let mut result = Vec::new();
+        while let Some(row) = rows.next()? {
+            result.push((row.get(0)?, row.get(1)?, row.get(2)?, row.get(3)?));
+        }
+        Ok(result)
     }
 }
 
