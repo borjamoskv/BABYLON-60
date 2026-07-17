@@ -1,0 +1,9 @@
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src-tauri/target/debug/deps/auto_generate_cdp-a3db401e07f1000f.d: /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/lib.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/types.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/compile.rs
+
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src-tauri/target/debug/deps/libauto_generate_cdp-a3db401e07f1000f.rlib: /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/lib.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/types.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/compile.rs
+
+/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/src-tauri/target/debug/deps/libauto_generate_cdp-a3db401e07f1000f.rmeta: /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/lib.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/types.rs /Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/compile.rs
+
+/Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/lib.rs:
+/Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/types.rs:
+/Users/borjafernandezangulo/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/auto_generate_cdp-0.4.6/src/compile.rs:
