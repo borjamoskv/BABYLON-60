@@ -4,7 +4,7 @@ import random
 import math
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 # Add project root to sys.path to allow absolute imports
 project_root = Path(__file__).resolve().parent.parent

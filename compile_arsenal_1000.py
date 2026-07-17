@@ -4,7 +4,6 @@ import hashlib
 import glob
 import subprocess
 from pathlib import Path
-from typing import Any, Dict, List
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 SOURCE_YAML = PROJECT_ROOT / "cortex" / "agents" / "ontology" / "centuria_matrix_1000.yaml"

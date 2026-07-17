@@ -38,8 +38,10 @@ MODULES = [("elig", "Eligibility", ["n_eligibility_criteria"]),
 
 
 def spearman(a, b) -> float:
-    ar = np.argsort(np.argsort(a)).astype(float); br = np.argsort(np.argsort(b)).astype(float)
-    ar -= ar.mean(); br -= br.mean()
+    ar = np.argsort(np.argsort(a)).astype(float)
+    br = np.argsort(np.argsort(b)).astype(float)
+    ar -= ar.mean()
+    br -= br.mean()
     d = np.sqrt((ar**2).sum() * (br**2).sum())
     return float((ar * br).sum() / d) if d else 0.0
 
@@ -73,9 +75,13 @@ def main() -> None:
         corpus.append((t.get("elig", "") + " " + t.get("brief", "")).strip())
         M.append([mods[nct][f"amended_{k}"] for k, _, _ in MODULES])
 
-    X = np.array(X, float); y = np.array(y, float); when = np.array(when); M = np.array(M, int)
+    X = np.array(X, float)
+    y = np.array(y, float)
+    when = np.array(when)
+    M = np.array(M, int)
     corpus = np.array(corpus, dtype=object)
-    n = len(y); idx = np.arange(n)
+    n = len(y)
+    idx = np.arange(n)
     tr, te = idx[when < CUTOFF], idx[when >= CUTOFF]
     print(f"n={n}  temporal train={len(tr)} (≤2018)  test={len(te)} (≥2019)")
 
@@ -87,7 +93,9 @@ def main() -> None:
     print(f"TF-IDF vocab (train-fit): {len(vec.vocabulary_)} terms")
 
     def std(cols, tr_i, te_i):
-        mu = cols[tr_i].mean(axis=0); sd = cols[tr_i].std(axis=0); sd[sd == 0] = 1.0
+        mu = cols[tr_i].mean(axis=0)
+        sd = cols[tr_i].std(axis=0)
+        sd[sd == 0] = 1.0
         return (cols[tr_i]-mu)/sd, (cols[te_i]-mu)/sd
 
     print("\n=== PER-MODULE ROC-AUC (temporal test): structured vs +text ===")
@@ -105,7 +113,8 @@ def main() -> None:
         Xc_te = hstack([csr_matrix(Xs_te), Tte]).tocsr()
         a_c = roc_auc_score(ycol[te], LogisticRegression(max_iter=1000).fit(Xc_tr, ycol[tr]).predict_proba(Xc_te)[:, 1])
         rep[key] = {"label": label, "auc_struct": round(a_s, 4), "auc_text": round(a_c, 4), "delta": round(a_c-a_s, 4)}
-        ds.append(a_s); dt.append(a_c)
+        ds.append(a_s)
+        dt.append(a_c)
         print(f"{label:<24}{a_s:>9.3f}{a_c:>9.3f}{a_c-a_s:>+8.3f}")
     print(f"{'macro':<24}{np.mean(ds):>9.3f}{np.mean(dt):>9.3f}{np.mean(dt)-np.mean(ds):>+8.3f}")
 
@@ -113,9 +122,10 @@ def main() -> None:
     Xs_tr, Xs_te = std(X, tr, te)
     yt = np.sqrt(y)
     rho_s = spearman(Ridge(alpha=1.0).fit(Xs_tr, yt[tr]).predict(Xs_te), y[te])
-    Xc_tr = hstack([csr_matrix(Xs_tr), Ttr]).tocsr(); Xc_te = hstack([csr_matrix(Xs_te), Tte]).tocsr()
+    Xc_tr = hstack([csr_matrix(Xs_tr), Ttr]).tocsr()
+    Xc_te = hstack([csr_matrix(Xs_te), Tte]).tocsr()
     rho_c = spearman(Ridge(alpha=1.0).fit(Xc_tr, yt[tr]).predict(Xc_te), y[te])
-    print(f"\n=== AGGREGATE count Spearman (temporal test) ===")
+    print("\n=== AGGREGATE count Spearman (temporal test) ===")
     print(f"  structured : {rho_s:.3f}")
     print(f"  +text      : {rho_c:.3f}   (Δ {rho_c-rho_s:+.3f})")
 

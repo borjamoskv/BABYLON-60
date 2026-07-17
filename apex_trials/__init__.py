@@ -9,14 +9,14 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 from __future__ import annotations
 
 from .transducer import Transducer, TransducerResult
-
-# Backwards compatibility aliases
-Copilot = Transducer
-CopilotResult = TransducerResult
 from .ctgov import AmendmentHistory, CtGovClient, CtGovError, HttpCache, classify_history
 from .features import StudyFeatures, extract_features
 from .ledger import AmendmentLedger, BabylonBFTLedgerAdapter, ChainVerification, LedgerEntry
 from .risk_engine import RiskAssessment, assess
+
+# Backwards compatibility aliases
+Copilot = Transducer
+CopilotResult = TransducerResult
 
 __version__ = "0.2.0"
 __all__ = [
