@@ -67,12 +67,12 @@ def main() -> None:
     
     # Extract structured features and text corpus
     X = np.array([row_features(r) for r in rows], dtype=float)
-    corpus = []
+    corpus_list = []
     for r in rows:
         nct = r["nct_id"]
         t = texts.get(nct, {})
-        corpus.append((t.get("elig", "") + " " + t.get("brief", "")).strip())
-    corpus = np.array(corpus, dtype=object)
+        corpus_list.append((t.get("elig", "") + " " + t.get("brief", "")).strip())
+    corpus = np.array(corpus_list, dtype=object)
     
     n = len(rows)
     idx_all = np.arange(n)

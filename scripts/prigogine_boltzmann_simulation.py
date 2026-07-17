@@ -14,7 +14,7 @@ def run_boltzmann_entropy_simulation(steps: int = 200, num_particles: int = 1000
     
     for step in range(steps):
         # Count particles per cell
-        counts = {}
+        counts: dict[tuple[int, int], int] = {}
         for x, y in particles:
             counts[(x, y)] = counts.get((x, y), 0) + 1
             

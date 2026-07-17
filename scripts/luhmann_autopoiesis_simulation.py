@@ -12,10 +12,12 @@ if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 # Try importing the AmendmentLedger from the apex_trials module
+AmendmentLedgerClass = None
 try:
     from apex_trials.ledger import AmendmentLedger
+    AmendmentLedgerClass = AmendmentLedger
 except ImportError:
-    AmendmentLedger = None
+    pass
 
 class LuhmannAutopoiesisSimulation:
     """
@@ -127,10 +129,10 @@ class LuhmannAutopoiesisSimulation:
         ledger_prev_hash = None
         
         # Persist results to master_ledger.db if available
-        if AmendmentLedger is not None:
+        if AmendmentLedgerClass is not None:
             try:
                 db_path = project_root / "master_ledger.db"
-                ledger = AmendmentLedger(db_path)
+                ledger = AmendmentLedgerClass(db_path)
                 entry = ledger.append(
                     payload=results,
                     causal_taint="borjamoskv:luhmann_autopoiesis",

@@ -62,24 +62,24 @@ def main() -> None:
     dates = json.loads(Path("dates.json").read_text())
     texts = json.loads(Path("texts.json").read_text())
 
-    X, y, when, corpus, M = [], [], [], [], []
+    X_list, y_list, when_list, corpus_list, M_list = [], [], [], [], []
     for r in rows:
         nct = r["nct_id"]
         if nct not in dates or nct not in mods or nct not in texts:
             continue
         sf = StudyFeatures(**{k: r[k] for k in _SF})
-        X.append(raw_vec(sf))
-        y.append(r["target_substantive"])
-        when.append(dates[nct])
+        X_list.append(raw_vec(sf))
+        y_list.append(r["target_substantive"])
+        when_list.append(dates[nct])
         t = texts[nct]
-        corpus.append((t.get("elig", "") + " " + t.get("brief", "")).strip())
-        M.append([mods[nct][f"amended_{k}"] for k, _, _ in MODULES])
+        corpus_list.append((t.get("elig", "") + " " + t.get("brief", "")).strip())
+        M_list.append([mods[nct][f"amended_{k}"] for k, _, _ in MODULES])
 
-    X = np.array(X, float)
-    y = np.array(y, float)
-    when = np.array(when)
-    M = np.array(M, int)
-    corpus = np.array(corpus, dtype=object)
+    X = np.array(X_list, float)
+    y = np.array(y_list, float)
+    when = np.array(when_list)
+    M = np.array(M_list, int)
+    corpus = np.array(corpus_list, dtype=object)
     n = len(y)
     idx = np.arange(n)
     tr, te = idx[when < CUTOFF], idx[when >= CUTOFF]
