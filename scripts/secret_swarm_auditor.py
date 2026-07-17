@@ -31,7 +31,8 @@ WHITELIST_ENTROPY = [
     r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx',
     r'0123456789abcdefghijklmnopqrstuvwxyz',
     r'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
-    r'docs\.google\.com/[^\s]+'
+    r'docs\.google\.com/[^\s]+',
+    r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv'
 ]
 
 def shannon_entropy(data: str) -> float:

@@ -164,8 +164,9 @@ for m in res.module_risks:
 ## Roadmap (real moat, if pursued)
 
 1. ~~Fit the aggregate weights against the history corpus.~~ **Done** — NNLS-band + isotonic on 8k trials (`fit_weights.py`).
-2. ~~Per-module amendment *cause* prediction.~~ **Done** — 6 leakage-mitigated logistic models, macro-AUC 0.664 held-out (`fit_module_models.py`). Next: richer features (protocol text embeddings), calibrated per-module probabilities.
-3. ~~Temporal split (train ≤2018, test ≥2019) to verify forward generalization.~~ **Done** — forward ρ≈0.28 / macro-AUC≈0.61 (`fit_temporal.py`, `AUDITORIA_APEX_TRIALS_TEMPORAL_2026-07-17.md`). Next: rolling-window re-fitting and scaling toward ~560k records.
+2. ~~Per-module amendment *cause* prediction.~~ **Done** — 6 leakage-mitigated logistic models, macro-AUC 0.664 held-out (`fit_module_models.py`).
+2b. ~~Protocol text features vs temporal drift.~~ **Validated** — TF-IDF recovers ~half the temporal degradation (macro-AUC 0.612→0.647, agg ρ 0.290→0.333; `fit_text.py`, `APEX_TEXT_FEATURES_2026-07-17.md`). Runtime integration pending a byte-exact equivalence test (Option B) — see the doc.
+3. Scale both corpora toward the full ~560k records; add temporal splits (train on pre-2020, test on post) to prove the model generalizes forward.
 4. Site-feasibility scoring from `contactsLocationsModule` enrollment velocity.
 5. Swap the standalone ledger for the live `babylon60.bft.ledger_actor` + Git Sentinel.
 
