@@ -4,6 +4,7 @@ mod ledger;
 mod antigravity;
 mod dsp_clock;
 mod precognition;
+mod llm_bridge;
 
 use std::sync::Arc;
 use tokio::sync::Mutex; // Usar Mutex asíncrono para prevenir bloqueos del hilo de render
@@ -23,6 +24,11 @@ async fn main() {
     let db_for_precognition = db_arc.clone();
     tokio::spawn(async move {
         precognition::ignite_precognition_daemon(db_for_precognition).await;
+    });
+    // Iniciar el Puente LLM (CORTEX Bridge)
+    let db_for_bridge = db_arc.clone();
+    tokio::spawn(async move {
+        llm_bridge::ignite_cortex_bridge(db_for_bridge).await;
     });
 
     tauri::Builder::default()
