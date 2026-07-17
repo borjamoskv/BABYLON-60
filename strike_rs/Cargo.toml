@@ -15,3 +15,4 @@ ring = "0.17.8"
 inotify = "0.10.2"
 signal-hook = "0.3.17"
 pyo3 = { version = "0.21.2", features = ["extension-module"] }
+libc = "0.2.186"
