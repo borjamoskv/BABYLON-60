@@ -1,2 +1,1 @@
-# C5-REAL CENTURIA ARSENAL EXPORT
-from .registry import get_primitive, list_primitives_by_domain, execute_primitive, get_all_primitives
+# C5-REAL CENTURIA ARSENAL EXPORT\nfrom .registry import get_primitive, list_primitives_by_domain, execute_primitive, get_all_primitives\n

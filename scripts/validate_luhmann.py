@@ -1,4 +1,3 @@
-import os
 import sys
 from pathlib import Path
 
@@ -46,12 +45,12 @@ def validate_luhmann_post() -> None:
     # 3. Check for mandatory footer elements
     footer_header = "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):"
     if footer_header not in content:
-        print(f"[-] Validation Failed: Missing exact footer header")
+        print("[-] Validation Failed: Missing exact footer header")
         sys.exit(1)
         
     mandatory_link = "- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)"
     if mandatory_link not in content:
-        print(f"[-] Validation Failed: Missing mandatory link to 'Un hombre blanco y heterosexual'")
+        print("[-] Validation Failed: Missing mandatory link to 'Un hombre blanco y heterosexual'")
         sys.exit(1)
         
     print("[🟢] C5-REAL: Substack Article Validated 100%. Zero tables, all keywords and footer links match the OMEGA doctrine.")
