@@ -1,364 +1,266 @@
 # Local Deep Research Under the Microscope
 
-## Why Research Agents Are Not Cognitive Operating Systems
+## Research Is Not Cognition
 
-The current wave of AI infrastructure is obsessed with a single question:
+The history of AI has been dominated by a single optimization target:
 
-> How do we make models smarter?
+**Produce better answers.**
 
-The more interesting question is different:
+Local Deep Research is one of the strongest open-source attempts to solve that problem.
 
-> What happens after the model?
+It plans.
 
-This distinction matters because we are approaching the end of the "model-centric" era.
+It searches.
 
-The next competitive frontier is not intelligence in isolation.
+It evaluates.
 
-It is architecture.
+It synthesizes.
 
----
+It writes.
 
-## The Illusion of Complexity
+As an engineering system, it is elegant.
 
-At first glance, Local Deep Research appears sophisticated.
+But it also exposes the boundary of an entire architectural generation.
 
-Multiple search engines.
-
-Multi-step reasoning.
-
-Research planning.
-
-Source synthesis.
-
-Report generation.
-
-Autonomous retrieval loops.
-
-The system looks remarkably capable.
-
-But after examining the public architecture, a different picture emerges.
-
-The core innovation is not intelligence.
-
-The core innovation is orchestration.
+The boundary between **information processing** and **cognition**.
 
 ---
 
-## The Actual Architecture
+# Every Architecture Optimizes Something
 
-Stripped to its essentials, the system resembles the following pipeline:
+Architectures are not defined by the libraries they import.
 
-```txt
-USER
-  ↓
-Planner
-  ↓
-Search Router
-  ↓
-Search Engines
-  ↓
-Retriever
-  ↓
-Source Ranking
-  ↓
-LLM Synthesis
-  ↓
-Report Generator
-```
+They are defined by the state they preserve.
 
-This is good engineering.
+A compiler preserves program semantics.
 
-In many respects, excellent engineering.
+A database preserves information.
 
-But it remains a research pipeline.
+A distributed system preserves consistency.
 
-Not a cognitive system.
+A research engine preserves evidence.
+
+Those invariants determine everything else.
 
 ---
 
-## Layer One: Research Planning
+# The LDR Invariant
 
-Questions are decomposed into smaller search objectives.
+Stripped of implementation details, the architecture can be reduced to a closed research loop.
 
 ```txt
 Question
     ↓
-Sub-Queries
-```
-
-For example:
-
-```txt
-"What is the future of agent architecture?"
-```
-
-becomes:
-
-```yaml
-queries:
-  - agent architecture
-  - multi-agent systems
-  - memory systems
-  - orchestration frameworks
-```
-
-This improves retrieval quality and research coverage.
-
-It is effective.
-
-It is also relatively standard.
-
----
-
-## Layer Two: Search Specialization
-
-One of the strongest design choices is routing.
-
-Different questions trigger different information sources.
-
-```yaml
-scientific:
-  arxiv
-
-biomedical:
-  pubmed
-
-software:
-  github
-
-general:
-  searxng
-
-private:
-  vector_database
-```
-
-This prevents the common mistake of treating every query as a generic web search.
-
-The result is a more efficient research engine.
-
----
-
-## Layer Three: Iterative Investigation
-
-The system does not stop after the first answer.
-
-Instead it executes a recursive loop.
-
-```txt
-Search
- ↓
+Plan
+    ↓
+Retrieve
+    ↓
 Evaluate
- ↓
-Need More?
- ↓
+    ↓
 Search Again
- ↓
-Evaluate
- ↓
+    ↓
 Synthesize
+    ↓
+Report
 ```
 
-This is arguably the architectural heart of the project.
+Every subsystem exists to maximize one objective:
 
-The system behaves more like a researcher than a chatbot.
+**Evidence acquisition.**
 
-Yet it still remains fundamentally retrieval-driven.
+Search routing.
+
+Embedding.
+
+Ranking.
+
+Iterative retrieval.
+
+Source synthesis.
+
+Everything converges toward the same invariant.
+
+Find better information.
+
+That is precisely why the architecture works.
 
 ---
 
-## Layer Four: Knowledge Accumulation
+# The Missing State
 
-Documents can be stored, embedded, indexed and retrieved later.
+The interesting question is not what the system can retrieve.
+
+The interesting question is:
+
+> What survives after retrieval?
+
+Suppose today's investigation concludes:
+
+> Architecture A is superior.
+
+Tomorrow, new evidence appears.
+
+What changes?
+
+Does the system merely generate a different report?
+
+Or does it modify its internal model of reality?
+
+These are different computational problems.
+
+One updates a document.
+
+The other updates a belief.
+
+---
+
+# Libraries Remember Documents
+
+Minds Remember Reasons
+
+A vector database can retrieve a paper.
+
+It cannot explain why that paper overturned a previous conclusion.
+
+An embedding remembers proximity.
+
+It does not remember justification.
+
+Persistence is not memory.
+
+Memory is not cognition.
+
+---
+
+# Information Is Not Belief
+
+Research systems operate over information.
+
+Cognitive systems operate over beliefs.
+
+Information accumulates.
+
+Beliefs compete.
+
+Information is retrieved.
+
+Beliefs are revised.
+
+Information can coexist indefinitely.
+
+Contradictory beliefs cannot.
+
+The distinction is structural, not philosophical.
+
+---
+
+# The Next Invariant
+
+A Cognitive Operating System would optimize something fundamentally different.
+
+Not retrieval.
+
+Not reporting.
+
+Not even reasoning in isolation.
+
+Its primary invariant would be:
 
 ```txt
-Source
- ↓
-Embedding
- ↓
-Index
- ↓
-Future Retrieval
+Maintain a coherent model of reality while evidence changes.
 ```
 
-This creates persistence.
+Everything else follows from that.
 
-But persistence alone is not memory.
+Memory.
 
-A library remembers documents.
+Contradiction handling.
 
-A mind remembers conclusions.
+Uncertainty propagation.
 
-The distinction is critical.
+Identity.
+
+Governance.
+
+Long-term consistency.
+
+Those are not features.
+
+They are consequences of the invariant.
 
 ---
 
-# What Is Missing
+# Architectural Taxonomy
 
-This is where the architectural boundary becomes visible.
+The easiest mistake is to compare components.
 
-Based on the publicly described system architecture, there is no evidence of:
+Search engine versus search engine.
+
+Planner versus planner.
+
+Model versus model.
+
+The more useful comparison is between computational classes.
 
 ```yaml
-episodic_memory:
-  present: false
+Research Engine:
 
-belief_graph:
-  present: false
+  optimizes:
+    - evidence acquisition
+    - retrieval quality
+    - synthesis
 
-causal_reasoning_memory:
-  present: false
+  state:
+    documents
 
-contradiction_tracking:
-  present: false
+  output:
+    reports
 
-belief_revision:
-  present: false
+Cognitive Operating System:
 
-uncertainty_propagation:
-  present: false
+  optimizes:
+    - belief continuity
+    - epistemic consistency
+    - uncertainty management
+    - autonomous evolution
 
-identity_model:
-  present: false
+  state:
+    beliefs
 
-governance_layer:
-  present: false
+  output:
+    updated world model
 ```
 
-The system remembers information.
+These systems do not compete.
 
-It does not appear to remember why it believes something.
-
-That difference sounds subtle.
-
-It is not.
+They solve different problems.
 
 ---
 
-## Research Engine vs Cognitive System
+# The Real Frontier
 
-A research engine answers questions.
+Local Deep Research demonstrates that open-source research orchestration has reached a remarkable level of maturity.
 
-A cognitive system maintains a model of reality.
+The next frontier is no longer discovering information.
 
-The distinction becomes obvious when new evidence appears.
+It is deciding what information deserves to survive.
 
-A research engine asks:
+Research answers questions.
 
-> What do the sources say?
+Cognition preserves understanding.
 
-A cognitive system asks:
+The transition from one to the other will not be achieved by larger models.
 
-> Which beliefs should change?
+It will be achieved by different architectures.
 
-One retrieves.
-
-The other evolves.
+That is where the next generation begins.
 
 ---
 
-## The Architectural Gap
-
-Local Deep Research is optimized around:
-
-```yaml
-optimize:
-  - search
-  - retrieval
-  - synthesis
-  - reporting
-```
-
-A Cognitive Operating System would optimize around:
-
-```yaml
-optimize:
-  - belief continuity
-  - contradiction handling
-  - uncertainty management
-  - memory governance
-  - long-term identity
-  - autonomous execution
-```
-
-These are fundamentally different objectives.
-
----
-
-## A Different Category
-
-This is not criticism.
-
-Local Deep Research succeeds at what it was designed to do.
-
-It is one of the strongest open-source research agents currently available.
-
-The mistake is assuming that research and cognition are the same problem.
-
-They are not.
-
-Research is information acquisition.
-
-Cognition is belief management.
-
-Research discovers evidence.
-
-Cognition decides what survives.
-
----
-
-## The Next Layer
-
-The most interesting future is not replacing Local Deep Research.
-
-It is extending it.
-
-```txt
-Local Deep Research
-        +
-Persistent Memory
-        +
-Belief Revision
-        +
-Contradiction Tracking
-        +
-Knowledge Ledger
-        +
-Governance Layer
-```
-
-At that point the architecture stops behaving like a research assistant.
-
-It starts behaving like a persistent epistemic entity.
-
----
-
-## Final Assessment
-
-Local Deep Research is not an artificial mind.
-
-It is not an autonomous cognitive system.
-
-It is not an AGI precursor.
-
-It is a highly capable research engine.
-
-And that is precisely why it matters.
-
-Because it solves one of the hardest problems in modern AI infrastructure:
-
-finding reality.
-
-The next generation of systems will face a different challenge.
-
-Remembering what reality changed.
-
----
-
-> **Research acquires evidence. Cognition manages beliefs.**
+> **Architectures are defined by the state they preserve.**
 
 <!-- 
-CORTEX-TAINT:borjamoskv:substck_manifesto:2026-07-18T00:10:20+02:00
+CORTEX-TAINT:borjamoskv:substck_manifesto_v2:2026-07-18T00:11:46+02:00
 EXERGY_VALIDATION: True
 AESTHETIC: Industrial Noir 2026
 -->
