@@ -1,3 +1,5 @@
+pub mod lexicon;
+pub mod kernel;
 pub mod ledger;
 
 use std::sync::Mutex;
@@ -25,6 +27,9 @@ fn append_ledger_event(state: State<AppState>, event_type: String, payload: Valu
 pub fn run() {
     let db_path = "cortex.db"; // Will be created in current directory
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
+
+    // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ]
+    kernel::build_ontology();
 
     tauri::Builder::default()
         .plugin(tauri_plugin_log::Builder::new().build())
