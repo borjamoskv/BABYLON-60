@@ -305,45 +305,22 @@ class BabylonBFTLedgerAdapter:
     """Adapter wrapping `babylon60.bft.ledger_actor.BFTLedgerActor` for synchronous Copilot calls.
 
     Transforms `append(payload, causal_taint)` into async/sync `BFTLedgerActor.append(LedgerEvent(...))`
-    and returns a mapped LedgerEntry for compatibility.
+    and returns the underlying future or proxy record from the live BFT quorum.
     """
 
-    def __init__(self, db_path: str | Path = "cortex.db") -> None:
-        self.db_path = str(db_path)
-        self._loop: Any = None
-        self._actor: Any = None
-
-    def __enter__(self) -> "BabylonBFTLedgerAdapter":
-        import asyncio
-        try:
-            from babylon60.bft.ledger_actor import BFTLedgerActor
-        except ImportError as exc:
-            raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
-
-        self._loop = asyncio.new_event_loop()
-        self._actor = BFTLedgerActor(self.db_path)
-        self._loop.run_until_complete(self._actor.start())
-        return self
-
-    def __exit__(self, *_exc: object) -> None:
-        if self._loop is not None and self._actor is not None:
-            self._loop.run_until_complete(self._actor.stop())
-            self._loop.close()
+    def __init__(self, actor: Any) -> None:
+        self.actor = actor
 
     def append(
         self,
         payload: dict[str, Any],
         causal_taint: str,
         agent_id: str = DEFAULT_AGENT_ID,
-    ) -> LedgerEntry:
-        import sqlite3
+    ) -> Any:
         try:
             from babylon60.bft.ledger_actor import LedgerEvent
         except ImportError as exc:
             raise RuntimeError("babylon60 not installed or accessible for BFTLedgerActor") from exc
-
-        if self._loop is None or self._actor is None:
-            raise RuntimeError("BabylonBFTLedgerAdapter must be used as a context manager")
 
         entity_id = str(payload.get("nct_id", uuid.uuid4()))
         event = LedgerEvent(
@@ -356,30 +333,4 @@ class BabylonBFTLedgerAdapter:
             source_table="assessments",
             source_pk=entity_id,
         )
-        
-        async def _do_append() -> Any:
-            future = self._actor.append(event)
-            return await future
-
-        res = self._loop.run_until_complete(_do_append())
-
-        # Mapeamos el resultado a un LedgerEntry síncrono accediendo directamente a SQLite
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
-            cur = conn.execute("SELECT * FROM ledger_entries WHERE event_id = ?;", (res["event_id"],))
-            row = cur.fetchone()
-
-        if row is None:
-            raise RuntimeError("Idempotency/Write failure: record not found after successful actor execution")
-
-        return LedgerEntry(
-            seq=int(row["seq"]),
-            id=str(row["event_id"]),
-            prev_hash=str(row["prev_hash"]),
-            entry_hash=str(row["entry_hash"]),
-            payload=json.loads(row["payload_json"]) if not str(row["payload_json"]).startswith("C5ENC:") else payload,
-            causal_taint=str(row["cortex_taint"]),
-            lamport_t=int(row["lamport_t"]),
-            agent_id=agent_id,
-            created_at=str(row["created_at"]),
-        )
+        return self.actor.append(event)
