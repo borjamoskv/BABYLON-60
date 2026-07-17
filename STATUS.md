@@ -52,3 +52,4 @@
 | 2026-07-18 | Purga Eje a*_3: `REMEDIACION_*`, `design-philosophy.md`, `lamport_lattice_philosophy.md` | Git Sentinel `02a56b8` |
 | 2026-07-18 | fix(opsec): `arm()` return type widened a `dict[str, bool \| str]` (mypy strict) | Git Sentinel `0c048ee` |
 | 2026-07-18 | chore(forensics): track Claude Code log preservation script | Git Sentinel `1fb5f84` |
+| 2026-07-18 | fix(forensics): exclude pericial logs from secret swarm auditor check | Git Sentinel `012b64c` |
