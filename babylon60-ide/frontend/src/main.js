@@ -11,9 +11,11 @@
  *   + STATUS BAR (28px fixed)
  *
  * Routes: canvas | ledger | databases | query | swarm
+ * Kernel: Tauri v2 IPC + CortexLedger (Rust) + KINETIC BIND RAW Ontology
  */
 import { get, post, connectWebSocket } from './api.js';
 import { registerRoute, navigate, getInitialRoute } from './router.js';
+import { listVectors, dispatchVector } from './ontology.js';
 
 /* ══════════════════════════════════════════════════════════
    GLOBAL STATE
@@ -106,22 +108,7 @@ function setupSpine() {
     { id: 'swarm',     icon: '⚡', tip: 'Agent Swarm  ⌘4' },
   ];
 
-  const iconsHTML = routes.map(r =>
-    `<button class="spine-icon" data-route="${r.id}" data-tooltip="${r.tip}" aria-label="${r.tip}">${r.icon}</button>`
-  ).join('');
-
-  const sepHTML = `<div class="spine-separator"></div>`;
-
-  spine.innerHTML = `
-    <div class="spine-logo" title="BABYLON·60 v1.0.2">
-      <div class="spine-logo-dot"></div>
-    </div>
-    ${iconsHTML.slice(0, iconsHTML.indexOf('</button>') + 9)}
-    ${sepHTML}
-    ${iconsHTML.slice(iconsHTML.indexOf('</button>') + 9)}
-  `;
-
-  // Re-render properly (above logic flawed, do cleanly):
+  // Re-render: canonical single-pass DOM build
   spine.innerHTML = '';
   const logo = document.createElement('div');
   logo.className = 'spine-logo';
@@ -718,16 +705,20 @@ async function renderCanvasPage(container) {
   });
 
   const nodes = [
-    { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',    name: 'FastAPI',           meta: '8 routes · ASGI',       status: 'ok' },
-    { id: 'ledger',   x: 620, y: 80,  type: 'PERSISTENCE', name: 'Master Ledger DB',  meta: 'SHA3-256 · BFT chain',  status: 'ok' },
-    { id: 'ontology', x: 620, y: 220, type: 'PERSISTENCE', name: 'Cortex Ontology',   meta: '144MB · Read-only',     status: 'ok' },
-    { id: 'telemetry',x: 620, y: 350, type: 'STREAM',      name: 'Telemetry Stream',  meta: 'WebSocket · Live',      status: 'warn' },
-    { id: 'swarm',    x: 140, y: 240, type: 'AGENT',       name: 'Swarm Workers',     meta: '0 active',              status: 'idle' },
+    { id: 'tauri',    x: 140, y: 80,  type: 'KERNEL',      name: 'Tauri v2 + Rust',   meta: 'CortexLedger · IPC',    status: 'ok' },
+    { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',     name: 'FastAPI',            meta: '8 routes · ASGI',       status: 'ok' },
+    { id: 'ledger',   x: 620, y: 80,  type: 'PERSISTENCE', name: 'Master Ledger DB',  meta: 'SHA256 · BFT chain',    status: 'ok' },
+    { id: 'ontology', x: 620, y: 220, type: 'PERSISTENCE', name: 'Cortex Ontology',   meta: '1000 vectors · WAL',    status: 'ok' },
+    { id: 'telemetry',x: 620, y: 360, type: 'STREAM',      name: 'Telemetry Stream',  meta: 'WebSocket · Live',      status: 'warn' },
+    { id: 'swarm',    x: 140, y: 260, type: 'AGENT',       name: 'Swarm Workers',     meta: '0 active',              status: 'idle' },
     { id: 'frontend', x: 300, y: 350, type: 'FRONTEND',    name: 'BABYLON60 IDE',     meta: 'Vite · Vanilla JS',     status: 'ok' },
   ];
 
   const edges = [
+    { from: 'frontend', to: 'tauri' },
     { from: 'frontend', to: 'fastapi' },
+    { from: 'tauri',    to: 'ledger' },
+    { from: 'tauri',    to: 'ontology' },
     { from: 'fastapi',  to: 'ledger' },
     { from: 'fastapi',  to: 'ontology' },
     { from: 'fastapi',  to: 'telemetry' },
@@ -908,13 +899,8 @@ async function renderLedgerPage(container) {
   // Load entries
   await loadLedgerPage(1);
 
-  // Verify chain button
+  // Verify chain button — single wired listener
   document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
-  const verifyBtn = document.querySelector('[id="btn-verify-chain"]');
-  if (verifyBtn && !verifyBtn._wired) {
-    verifyBtn._wired = true;
-    verifyBtn.addEventListener('click', runChainVerification);
-  }
 
   // Pagination
   document.getElementById('btn-ledger-prev')?.addEventListener('click', () => loadLedgerPage(ledgerPage - 1));
