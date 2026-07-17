@@ -50,7 +50,7 @@ def enforce_anti_debug() -> None:
         _kill_self()
 
 
-def arm() -> dict[str, bool]:
+def arm() -> dict[str, bool | str]:
     """Execute full OPSEC Memory Shield sequence.
 
     Returns a status dict for audit logging.
