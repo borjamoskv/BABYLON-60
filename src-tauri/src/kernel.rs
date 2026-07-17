@@ -237,7 +237,7 @@ impl PrimitiveIdentity {
     }
 }
 
-pub mod primitives_generated;
+use crate::primitives_generated;
 
 type Action = fn(&PrimitiveIdentity);
 

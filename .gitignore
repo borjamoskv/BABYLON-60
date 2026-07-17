@@ -1,0 +1,13 @@
+# Build artifacts and caches
+target/
+src-tauri/target/
+node_modules/
+.ruff_cache/
+.vite/
+*.log
+*.tmp
+__pycache__/
+*.pyc
+out/
+dist/
+.DS_Store
