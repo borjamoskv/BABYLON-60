@@ -23,6 +23,7 @@ async def test_master_ledger_queue_single_writer(tmp_path) -> None:
             )
         
         await asyncio.sleep(0.3)
+        assert queue.db is not None
         
         async with queue.db.execute("SELECT COUNT(*) FROM test_items;") as cursor:
             row = await cursor.fetchone()
