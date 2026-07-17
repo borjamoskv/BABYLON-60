@@ -11,3 +11,9 @@ __pycache__/
 out/
 dist/
 .DS_Store
+fsharp_kernel/bin/
+fsharp_kernel/obj/
+strike-rs/target/
+.venv/
+cortex_bft_ledger.db*
+
