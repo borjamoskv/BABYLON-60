@@ -30,7 +30,7 @@ from sklearn.preprocessing import StandardScaler
 
 sys.path.insert(0, str(Path(__file__).parent))
 from apex_trials.features import StudyFeatures  # noqa: E402
-from apex_trials.risk_engine import _DRIVERS, assess  # noqa: E402
+from apex_trials.risk_engine import assess  # noqa: E402
 
 SEED = 42
 DRIVER_NAMES = [
@@ -43,7 +43,8 @@ _SF_FIELDS = set(StudyFeatures.__dataclass_fields__.keys())
 def spearman(a: np.ndarray, b: np.ndarray) -> float:
     ar = np.argsort(np.argsort(a)).astype(float)
     br = np.argsort(np.argsort(b)).astype(float)
-    ar -= ar.mean(); br -= br.mean()
+    ar -= ar.mean()
+    br -= br.mean()
     denom = np.sqrt((ar**2).sum() * (br**2).sum())
     return float((ar * br).sum() / denom) if denom else 0.0
 
@@ -94,7 +95,7 @@ def main() -> None:
         b, _ = nnls(frac[f_tr], yt[f_tr])
         imp = b / b.sum() if b.sum() > 0 else np.ones(len(b)) / len(b)
         cv_scores.append(spearman(100.0 * frac[f_te] @ imp, y[f_te]))
-    cv_scores = np.array(cv_scores)
+    cv_scores_arr = np.array(cv_scores)
 
     # --- Poisson GLM on raw features (ceiling comparison) -----------------------
     sc = StandardScaler().fit(raw[tr])
@@ -114,7 +115,7 @@ def main() -> None:
     print(f"  Spearman  hand-tuned prior : {rho_hand:.3f}")
     print(f"  Spearman  NNLS-band fitted : {rho_fit:.3f}   (Δ {rho_fit-rho_hand:+.3f})")
     print(f"  Spearman  Poisson raw (ceil): {rho_pois:.3f}")
-    print(f"  CV Spearman NNLS-band      : {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
+    print(f"  CV Spearman NNLS-band      : {cv_scores_arr.mean():.3f} ± {cv_scores_arr.std():.3f}")
     print(f"  Isotonic MAE (amendments)  : {mae_fit:.3f}  vs predict-mean {mae_base:.3f}  "
           f"({100*(mae_base-mae_fit)/mae_base:+.1f}%)")
 
@@ -134,8 +135,8 @@ def main() -> None:
             "spearman_hand": round(rho_hand, 4),
             "spearman_fitted": round(rho_fit, 4),
             "spearman_poisson_raw": round(rho_pois, 4),
-            "cv_spearman_mean": round(float(cv_scores.mean()), 4),
-            "cv_spearman_std": round(float(cv_scores.std()), 4),
+            "cv_spearman_mean": round(float(cv_scores_arr.mean()), 4),
+            "cv_spearman_std": round(float(cv_scores_arr.std()), 4),
             "isotonic_mae": round(mae_fit, 4),
             "baseline_mae": round(mae_base, 4),
         },

@@ -1,8 +1,6 @@
 """Fitted-model path: determinism, calibration output, mode switching, weights sanity."""
 from __future__ import annotations
 
-import json
-from pathlib import Path
 
 import pytest
 

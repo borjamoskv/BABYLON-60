@@ -53,8 +53,8 @@ def fetch_target(nct: str) -> tuple[str, int, int] | None:
 
 def main() -> None:
     if OUT.exists():
-        rows = json.loads(OUT.read_text())
-        print(f"loaded existing dataset.json: {len(rows)} rows")
+        existing_rows = json.loads(OUT.read_text())
+        print(f"loaded existing dataset.json: {len(existing_rows)} rows")
         return
 
     t0 = time.monotonic()

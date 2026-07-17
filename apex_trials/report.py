@@ -12,7 +12,6 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 from __future__ import annotations
 
 import html
-from typing import Any
 
 from .backtest import BacktestReport
 from .copilot import CopilotResult
