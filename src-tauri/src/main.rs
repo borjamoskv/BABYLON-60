@@ -2,31 +2,29 @@
 
 mod ledger;
 mod atomic_swarm;
-mod audio_dsp; // Importamos el sintetizador
+mod audio_dsp;
+mod voice_dictation;
 
 use std::sync::{Arc, Mutex};
 use audio_dsp::AstAcoustics;
+use voice_dictation::VoiceEngine;
+use tokio::sync::mpsc;
 
 // Estado global de la aplicación (El sistema nervioso central)
 pub struct ApexState {
     pub memory: Arc<Mutex<ledger::CortexLedger>>,
-    pub acoustics: Arc<AstAcoustics>, // El puente hacia el audio (Lock-free Atomic)
+    pub acoustics: Arc<AstAcoustics>, 
+    pub voice_engine: Arc<VoiceEngine>,
 }
 
 #[tauri::command]
 fn system_ready(state: tauri::State<ApexState>) -> String {
     let memory_lock = state.memory.lock().unwrap();
-    
     let payload = "{\"action\": \"ignition\", \"status\": \"online\"}";
-    let semantic_context = "Ignición del sistema operativo cognitivo MOSKV-1-apex. Inicialización del canvas WebGPU y el bus latente de memoria CORTEX.";
-
-    // Sello con indexación vectorial instantánea
-    match memory_lock.seal_event_vectorized("SYSTEM_BOOT", payload, semantic_context) {
-        Ok(_) => println!("📊 Hipocampo: Nodo de arranque indexado semánticamente."),
-        Err(e) => eprintln!("❌ Fallo al inyectar vector: {:?}", e),
-    }
+    let semantic_context = "Ignición del sistema operativo cognitivo MOSKV-1-apex.";
+    let _ = memory_lock.seal_event_vectorized("SYSTEM_BOOT", payload, semantic_context);
     
-    let msg = "⚡ CORTEX: Puente IPC establecido. Memoria inmutable montada.";
+    let msg = "⚡ CORTEX: Puente IPC establecido.";
     println!("{}", msg);
     msg.to_string()
 }
@@ -36,33 +34,20 @@ async fn command_swarm_assault(
     state: tauri::State<'_, ApexState>, 
     target_url: String
 ) -> Result<String, String> {
-    
-    // 1. El Alcove (Notch) empieza a parpadear en azul cobalto (Modo Sonar)
     println!("📡 Desplegando enjambre atómico a {}...", target_url);
-
-    // 2. Ejecutar asalto asíncrono
     let harvest = atomic_swarm::deploy_swarm(&target_url).await
         .map_err(|e| format!("Fallo en el enjambre: {}", e))?;
 
     let memory_lock = state.memory.lock().unwrap();
-
-    // 3. Digerir e indexar vectorialmente cada fragmento cosechado
     for fragment in harvest {
         let payload = format!("{{\"agent\": \"{}\", \"data\": \"{}\"}}", fragment.agent_id, fragment.extracted_data);
-        
-        let _ = memory_lock.seal_event_vectorized(
-            "OSINT_SWARM_HARVEST", 
-            &payload, 
-            &fragment.extracted_data
-        ).map_err(|e| format!("Error en memoria vectorial: {:?}", e))?;
+        let _ = memory_lock.seal_event_vectorized("OSINT_SWARM_HARVEST", &payload, &fragment.extracted_data);
     }
-
-    Ok("Asimilación completa. Conocimiento inyectado en CORTEX.".to_string())
+    Ok("Asimilación completa.".to_string())
 }
 
 #[tauri::command]
 fn update_ast_topology(state: tauri::State<ApexState>, nesting_level: f32, has_locks: bool) {
-    // Isomorfismo puro (Sin Mutex.lock(), atómico directo C5-REAL): 
     let comp_idx = if nesting_level > 3.0 { (nesting_level - 3.0) * 0.5 } else { 0.0 };
     state.acoustics.set_complexity(comp_idx);
     
@@ -70,30 +55,44 @@ fn update_ast_topology(state: tauri::State<ApexState>, nesting_level: f32, has_l
     state.acoustics.set_pressure(press_idx);
 }
 
+#[tauri::command]
+fn toggle_vibe_dictation(state: tauri::State<ApexState>) -> String {
+    let is_on = state.voice_engine.toggle();
+    if is_on {
+        "🎙️ Vibe Coding: ACTIVADO. Dicta tu estructura.".to_string()
+    } else {
+        "🔇 Vibe Coding: DESACTIVADO. Ignorando ruido ambiente.".to_string()
+    }
+}
+
 fn main() {
-    // 1. Despertar la base de datos vectorial BGE-Small
-    let db = ledger::CortexLedger::ignite().expect("Error crítico: Imposible forjar la memoria.");
-
-    // Estado inicial del código: Paz absoluta (Dron limpio, Atomics C5-REAL)
+    let db = ledger::CortexLedger::ignite().expect("Error crítico en Memoria.");
     let acoustics = Arc::new(AstAcoustics::new());
-
-    // Iniciar el Sintetizador en paralelo
     audio_dsp::ignite_dsp_engine(acoustics.clone());
 
+    let voice_engine = Arc::new(VoiceEngine::new());
+    let (tx_audio, mut rx_audio) = mpsc::channel(100);
+    voice_dictation::ignite_vibe_dictation(voice_engine.clone(), tx_audio);
+
+    // Hilo receptor de voz para Vibe Code
+    tokio::spawn(async move {
+        while let Some(chunk) = rx_audio.recv().await {
+            println!("🧠 VIBE CODE: Chunk de audio recibido ({} muestras). Enviando a Whisper/ASR...", chunk.len());
+            // TODO: Inyección al modelo local (Whisper.cpp)
+        }
+    });
+
     tauri::Builder::default()
-        // 2. Inyectar el Ledger y el Sintetizador en el estado de Tauri
         .manage(ApexState {
             memory: Arc::new(Mutex::new(db)),
             acoustics,
-        })
-        .setup(|_app| {
-            println!("⬛ El Vacío ha sido instanciado.");
-            Ok(())
+            voice_engine,
         })
         .invoke_handler(tauri::generate_handler![
             system_ready, 
             command_swarm_assault,
-            update_ast_topology
+            update_ast_topology,
+            toggle_vibe_dictation
         ])
         .run(tauri::generate_context!())
         .expect("Colapso del motor Tauri.");
