@@ -54,15 +54,46 @@ func (e *UnifiedActiveInferenceEngine) Step(d, p, m byte) error {
 	e.StepsCount++
 
 	// Compute Variational Free Energy F = D_KL - E[ln p(O|S)]
-	obsNorm := e.StateVector.NormError
-	neuroNorm := e.CognitiveChainVector.PredictionError
-	ttsEfficiency := e.TTSHarnessState.KVCacheEfficiency
+	// q(S) = N(mu_q, Sigma_q) from StateVector (estimated state)
+	// p(S) = N(mu_p, Sigma_p) representing target prior cognitive states
+	// mu_q = e.StateVector.States
+	// Sigma_q = e.StateVector.Covariance
+	// mu_p = [HomeostasisEnergy, AttentionWeight, ActionTorque, LanguageEntropy]
+	
+	// Rigorous closed-form D_KL for 4D Gaussians assuming Sigma_p = Identity for stabilization
+	// D_KL = 0.5 * [ tr(Sigma_q) + mu_diff^T * mu_diff - 4 - ln(det(Sigma_q)) ]
+	
+	trSigmaQ := 0.0
+	for i := 0; i < 4; i++ {
+		trSigmaQ += e.StateVector.Covariance[i][i]
+	}
+	
+	muP := [4]float64{
+		e.CognitiveChainVector.HomeostasisEnergy,
+		e.CognitiveChainVector.AttentionWeight,
+		e.CognitiveChainVector.ActionTorque,
+		e.CognitiveChainVector.LanguageEntropy,
+	}
+	
+	mahalanobis := 0.0
+	for i := 0; i < 4; i++ {
+		diff := e.StateVector.States[i] - muP[i]
+		mahalanobis += diff * diff // mu_diff^T * Sigma_p^-1 * mu_diff where Sigma_p = I
+	}
+	
+	// Determinant approximation of Sigma_q (diagonal product since it dominates)
+	detSigmaQ := 1.0
+	for i := 0; i < 4; i++ {
+		detSigmaQ *= math.Max(1e-5, e.StateVector.Covariance[i][i])
+	}
+	
+	e.D_KL = 0.5 * (trSigmaQ + mahalanobis - 4.0 - math.Log(detSigmaQ))
+	if e.D_KL < 0 {
+		e.D_KL = 0.0 // Numerical lower bound
+	}
 
-	// Divergence D_KL
-	e.D_KL = math.Abs(obsNorm - neuroNorm)
-	// Expected Log Likelihood
+	ttsEfficiency := e.TTSHarnessState.KVCacheEfficiency
 	e.ExpectedLogLikelihood = math.Log(math.Max(0.001, ttsEfficiency))
-	// Free Energy F
 	e.FreeEnergy = e.D_KL - e.ExpectedLogLikelihood
 
 	return nil

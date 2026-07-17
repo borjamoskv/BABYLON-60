@@ -24,11 +24,32 @@ class UnifiedActiveInferenceEngine:
 
         self.steps_count += 1
 
-        obs_norm = self.state_vector.norm_error
-        neuro_norm = self.cognitive_chain_vector.prediction_error
-        tts_eff = self.tts_harness_state.kv_cache_efficiency
+        # Compute Variational Free Energy F = D_KL - E[ln p(O|S)]
+        # q(S) = N(mu_q, Sigma_q) from state_vector (estimated state)
+        # p(S) = N(mu_p, Sigma_p) representing target prior cognitive states
+        # Sigma_p is assumed to be Identity for stabilization
 
-        self.d_kl = abs(obs_norm - neuro_norm)
+        tr_sigma_q = sum(self.state_vector.covariance[i][i] for i in range(4))
+        
+        mu_p = [
+            self.cognitive_chain_vector.homeostasis_energy,
+            self.cognitive_chain_vector.attention_weight,
+            self.cognitive_chain_vector.action_torque,
+            self.cognitive_chain_vector.language_entropy
+        ]
+        
+        mahalanobis = sum((self.state_vector.states[i] - mu_p[i]) ** 2 for i in range(4))
+        
+        # Determinant approximation of Sigma_q (diagonal product since it dominates)
+        det_sigma_q = 1.0
+        for i in range(4):
+            det_sigma_q *= max(1e-5, self.state_vector.covariance[i][i])
+            
+        self.d_kl = 0.5 * (tr_sigma_q + mahalanobis - 4.0 - math.log(det_sigma_q))
+        if self.d_kl < 0:
+            self.d_kl = 0.0
+
+        tts_eff = self.tts_harness_state.kv_cache_efficiency
         self.expected_log_likelihood = math.log(max(0.001, tts_eff))
         self.free_energy = self.d_kl - self.expected_log_likelihood
 

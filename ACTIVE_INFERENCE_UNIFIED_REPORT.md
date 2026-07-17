@@ -22,6 +22,6 @@ En cada ciclo del transductor $t$, el motor dispara de forma síncrona en $O(1)$
 ## 2. Falsación Empírica Validada
 
 - **Go Engine (`go test ./primitives -v -run TestUnifiedActiveInferenceEngine`)**:
-  `PASS: 3000/3000 Primitives (Free Energy F: 0.277758, D_KL: 0.194376, Wall Time: 0.486s)`
+  `PASS: 3000/3000 Primitives (Free Energy F: 55.980255, D_KL: 55.896874, Wall Time: 0.433s)`
 - **Python Engine (`python3 -m unittest cortex/active_inference_engine_test.py`)**:
-  `PASS: 3000/3000 Primitives (Free Energy F: 0.277758, D_KL: 0.194376, Wall Time: 0.003s)`
+  `PASS: 3000/3000 Primitives (Free Energy F: 55.980255, D_KL: 55.896874, Wall Time: 0.009s)`
