@@ -84,7 +84,7 @@ class ShadowRouter:
     async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
         request_id = f"req_{secrets.token_hex(8)}"
         primary_model = "provider-x/gemini-2.0-flash-2026-07-01"
-        shadow_models = ["provider-y/claude-3.5-sonnet-2026-06"]
+        shadow_models = ["provider-y/agent-3.5-model-2026-06"]
         policy_id = "arcstride-v4.2.1"
         candidate_set = sorted([primary_model, *shadow_models])
         decision_payload = {

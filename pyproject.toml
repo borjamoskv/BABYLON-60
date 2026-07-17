@@ -91,5 +91,5 @@ ignore = ["E743"]
 [tool.mypy]
 python_version = "3.12"
 disallow_any_generics = false
-exclude = ["^scratch/", "^anvil_yung/", "^cortex/scripts/sandbox_stress/claude-science-data/"]
+exclude = ["^scratch/", "^anvil_yung/"]
 ignore_missing_imports = true

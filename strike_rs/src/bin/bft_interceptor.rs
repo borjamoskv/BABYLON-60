@@ -82,9 +82,9 @@ impl BftLedger {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("█▄ [C5-REAL] CLAUDE CODE BFT INTERCEPTOR (HARDENED MCTS)");
+    println!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
-    let ledger_path = "claude_bft_ledger.db";
+    let ledger_path = "agent_bft_ledger.db";
     let conn = Connection::open(ledger_path)?;
     conn.execute_batch(
         "PRAGMA journal_mode = WAL;
@@ -127,9 +127,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 2. Monitoreo inotify de ~/.claude
+    // 2. Monitoreo inotify de ~/.agent_persist
     let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
-    let claude_dir = format!("{}/.claude", home);
+    let claude_dir = format!("{}/.agent_persist", home);
     
     let l_fs = Arc::clone(&ledger);
     let s_fs = Arc::clone(&shutdown_flag);
@@ -161,10 +161,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // 3. Subproceso CLI (Bypass de recursión infinita)
-    let real_cli = env::var("REAL_CLAUDE_PATH").unwrap_or_else(|_| "npx".to_string());
+    let real_cli = env::var("REAL_AGENT_PATH").unwrap_or_else(|_| "npx".to_string());
     let mut cmd = Command::new(&real_cli);
     if real_cli == "npx" {
-        cmd.arg("-y").arg("@anthropic-ai/claude-code");
+        cmd.arg("-y").arg("@agent-ai/agent-code");
     }
     
     let mut child = cmd

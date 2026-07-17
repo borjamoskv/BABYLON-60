@@ -20,7 +20,7 @@ from pathlib import Path
 import click
 
 from .backtest import run_backtest
-from .copilot import Copilot
+from .transducer import Transducer
 from .ctgov import CtGovClient, HttpCache
 from .ledger import AmendmentLedger
 from .report import render_report
@@ -43,7 +43,7 @@ def _get_ledger(db_path: str) -> Any:
 
 @click.group()
 def cli() -> None:
-    """APEX-TRIALS — deterministic, auditable clinical-trial amendment-risk copilot."""
+    """APEX-TRIALS — deterministic, auditable clinical-trial amendment-risk transducer."""
 
 
 @cli.command()
@@ -53,7 +53,7 @@ def cli() -> None:
 def score(nct_id: str, db: str, as_json: bool) -> None:
     """Score a protocol and commit the decision to the hash-chain ledger."""
     with _get_ledger(db) as ledger:
-        result = Copilot(_client(), ledger).score(nct_id)
+        result = Transducer(_client(), ledger).score(nct_id)
     if as_json:
         click.echo(json.dumps(result.as_dict(), indent=2))
         return
@@ -85,7 +85,7 @@ def report(nct_id: str, out: str | None, db: str, calibrate: str | None, cohort:
     """Render the Industrial Noir HTML attestation for a protocol."""
     client = _client()
     with _get_ledger(db) as ledger:
-        result = Copilot(client, ledger).score(nct_id)
+        result = Transducer(client, ledger).score(nct_id)
     bt = run_backtest(client, condition=calibrate, n=cohort) if calibrate else None
     target = Path(out) if out else Path(f"{result.features.nct_id}_apex.html")
     target.write_text(render_report(result, backtest=bt), encoding="utf-8")
