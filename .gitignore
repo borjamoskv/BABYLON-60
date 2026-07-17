@@ -21,6 +21,7 @@ src/ontology/obj/
 # legacy build artifacts
 /target
 strike_rs/target/
+src-tauri/target/
 proof_artifact.json
 b60_kernel
 receipt.json
