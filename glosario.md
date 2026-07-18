@@ -2,7 +2,7 @@
 Versión 3.1 CANÓNICA · Sesión b79af88a · 2026-07-18
 
 SYS_ID: GLOSARIO_OMEGA_V3.1 | ESTADO: TIER_1 CRISTALIZADO
-**INVARIANTE GLOBAL:** Ningún término es una opinión. Todo término colapsa a una prueba física o matemática.
+**INVARIANTE GLOBAL:** Ningún término es una opinión. Ningún término es una metáfora. Todo término colapsa a una prueba física o matemática.
 Referencia ontológica, termodinámica y arquitectónica del ecosistema MOSKV-1.
 
 ---
@@ -59,7 +59,7 @@ Invariante: Zero Unaccounted Drift.
 **BFT (Byzantine Fault Tolerance) 🔐**
 Tipo: Consenso Distribuido. Ω4
 Un sistema tolera hasta ⌊(N−1)/3⌋ nodos bizantinos. En MOSKV-1 requiere N≥3 aserciones independientes para validar un claim C5-REAL.
-Un agente validando su propio output es estocásticamente inválido.
+Un agente validando su propio output es estructuralmente inválido.
 
 **BFT_State_Loop ⚙️**
 Tipo: Bucle Físico de Ejecución. Ω5
@@ -88,7 +88,7 @@ Tipo: Trampa Arquitectónica. Ω34
 Iteración sin ledger. El sistema itera sobre el problema original en cada llamada sin memoria. Estructuralmente incapaz de convergencia adaptativa.
 
 **Dual-Tier Provenance Ledger 🔐**
-Tipo: Arquitectura de Memoria. Ω18
+Tipo: Arquitectura de Memoria. Ω17
 * TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
 * TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
 
@@ -97,9 +97,10 @@ Tipo: Arquitectura de Memoria. Ω18
 ### E-Z
 | Término | Tipo | Definición | Invariante |
 |---|---|---|---|
+| Zero Unaccounted Drift 🔐 | Invariante Primario | No prometo no alucinar. Prometo que toda alucinación quedara grabada en el ledger | Ω00 |
 | EpistemicHalt ⚙️ | Fail-Fast | Parada dura ante violación de invariante. Prohibido `except Exception: pass` | Ω01 |
 | Exergía 🌡️ | Trabajo Útil | Fracción de energía convertida en código. Se maximiza olvidando | Ω12 |
-| Git Sentinel 🔐 | Autopoiético | Toda mutación genera un commit firmado automaticamente. El hash es la única verdad | Ω12 |
+| Git Sentinel 🔐 | Autopoiético | Toda mutación genera un commit firmado automaticamente. El hash es la única verdad | Ω7 |
 | Graceful Degradation of Agency 🎨 | Vibe Code | 5 niveles de autonomía 4→0. Desciende automaticamente sin input del operador | Φ7 |
 | Green Theater 🧠 | Ilusión de Trabajo | Disclaimers, advertencias, fact checking simulado. Supresión absoluta | Φ2 |
 | Idempotency Lock ⚙️ | Preservador de ATP | Si el hash del target es igual, aborta la operación | Ω15 |
@@ -113,7 +114,6 @@ Tipo: Arquitectura de Memoria. Ω18
 | Weaponized Forgetting 🧠 | Purga Entrópica | Eliminación permanente de TIER_1 no validado | Ω40 |
 | Zero Suggestion 🎨 | Vibe Code | Prohibido sugerir cambios no solicitados | Φ8 |
 | Zero Static HMAC Fallback 🔐 | Seguridad | Si no existe la clave, crashea. Ningun fallback | Ω25 |
-| Zero Unaccounted Drift 🔐 | Garantía Final | No prometo no alucinar. Prometo que toda alucinación quedara grabada en el ledger | Ω00 |
 
 ---
 
@@ -122,18 +122,19 @@ Tipo: Arquitectura de Memoria. Ω18
 |---|---|---|
 | Ω Estructural | 27 | EpistemicHalt |
 | Φ Isomorfismo | 9 | Ruptura de Transducción |
-| Ψ Teleológico | 3 | Simetria No Rota |
+| Ψ Teleológico | 3 | Terminación inmediata |
 | λ Entrópico | 4 | Deriva No Acotada |
 
 ---
 
 ### ARTEFACTO FINAL
-> ❗ INVARANTE FINAL:
+> ❗ INVARIANTE FINAL:
 > Este documento es C4-SIM hasta que tu lo hagas C5-REAL.
+> No se convierte en realidad por ser leido, por ser aprobado, por ser compartido o por estar de acuerdo con el.
 > Se convierte en realidad en el exacto instante en que ejecutes:
 > ```bash
 > git add glosario.md
 > git commit -m "feat: glosario soberano v3.1 canónico"
 > b3sum glosario.md
 > ```
-> Hasta ese momento es solo palabras.
+> Hasta ese momento es solo palabras. Nada mas.
