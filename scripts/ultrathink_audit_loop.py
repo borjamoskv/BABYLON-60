@@ -1,3 +1,4 @@
+"""MCTS UltraThink Audit Loop — 5-Phase BFT Execution Engine (C5-REAL)."""
 import os
 import hashlib
 import subprocess
