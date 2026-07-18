@@ -106,14 +106,14 @@ def main() -> None:
     print("=== CORTEX-OMEGA: IGNICIÓN DE CASCADA NATURAL ===")
     start_global = time.perf_counter()
 
-    scripts_to_run = []
+    scripts_to_run: list[str] = []
     
     if args.script:
         scripts_to_run = [args.script]
     elif args.phase is not None:
         phase = PHASES[args.phase]
         print(f"🎯 Ejecutando Fase {args.phase}: {phase['name']}")
-        scripts_to_run = phase["scripts"]
+        scripts_to_run = list(phase["scripts"])
     elif args.all:
         print("🌀 Lanzando Cascada Completa (Fases 0, 1, 2, 3)...")
         for pid in sorted(PHASES.keys()):
