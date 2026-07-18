@@ -84,6 +84,9 @@ class IRType:
     kind: IRTypeKind
     custom_name: str = ""
     type_params: tuple[IRType, ...] = ()
+    is_linear: bool = False
+    is_affine: bool = False
+    region: str = ""
 
     def __repr__(self) -> str:
         if self.kind == IRTypeKind.CUSTOM:
@@ -254,6 +257,7 @@ class IRParam:
     """Function parameter."""
     name: str
     ir_type: IRType
+    is_consumed: bool = False
 
 
 class FunctionClassification(Enum):
