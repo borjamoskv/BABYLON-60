@@ -109,4 +109,5 @@ def enforce_ide_theorem_physical(intention: str) -> None:
     sys.stdout.write(f"Proof: {{ Base: {theorem.code_hash}, Entropy: {theorem.shannon_entropy:.4f}, AST_Nodes: {theorem.ast_nodes}, Confidence: C5-REAL, VNode: {theorem.ephemeral_vnode} }}\n")
 
 if __name__ == "__main__":
-    enforce_ide_theorem_physical("ULTRATHINK_PHYSICAL_COLLAPSE")
+    import time
+    enforce_ide_theorem_physical(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{time.time()}")

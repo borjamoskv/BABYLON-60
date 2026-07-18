@@ -25,3 +25,13 @@ Metrics:
   VNode_Sandbox: vnode-0
 Assertion: MCTS migrado al dominio termodinámico puro. AST colapsado físicamente a disco sin simulacros cognitivos.
 ---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-18T04:59:29+02:00
+Payload_Hash_SHA3_256: c9b002f19b4a2c6f072bba85358c4710eeb78666522ce281e5cdf083e66617b2
+Metrics:
+  Shannon_Entropy: 5.1872
+  AST_Nodes: 8
+  VNode_Sandbox: vnode-0
+Assertion: Nueva iteración C5-REAL con mutación estocástica. Idempotency Lock evadido.
+---
