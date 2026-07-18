@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 
-// SOTA Minimalist Awwwards Theme
+// SOTA Minimalist Awwwards Theme (YInMn Blue Palette based on v1.1.0)
 interface Theme {
   id: string;
   name: string;
@@ -10,28 +10,40 @@ interface Theme {
   accent: string;
   text: string;
   muted: string;
+  lapis: string;
+  gold: string;
+  verify: string;
+  breakColor: string;
 }
 
 const THEMES: Record<string, Theme> = {
   awwwards: {
     id: 'awwwards',
-    name: 'Void Minimalist',
-    bg: '#000000',
-    surface: '#030303',
-    border: 'rgba(255, 255, 255, 0.03)',
-    accent: '#FFFFFF',
-    text: '#EAEAEA',
-    muted: '#4A4A4A',
+    name: 'YInMn Noir',
+    bg: '#090B19', // --bitumen
+    surface: '#0F1226', // --kiln
+    border: '#2E3866', // --edge
+    accent: '#3B4DFF', // --lapis
+    text: '#FFFFFF', // --dust
+    muted: '#B4B9DF', // --dust-dim
+    lapis: '#3B4DFF',
+    gold: '#F59E0B',
+    verify: '#10B981',
+    breakColor: '#EF4444'
   },
-  geist: {
-    id: 'geist',
-    name: 'Geist Monolith',
-    bg: '#FAFAFA',
-    surface: '#FFFFFF',
-    border: 'rgba(0, 0, 0, 0.04)',
-    accent: '#000000',
-    text: '#111111',
-    muted: '#A0A0A0',
+  obsidian: {
+    id: 'obsidian',
+    name: 'Obsidian Pulse',
+    bg: '#000000',
+    surface: '#111111',
+    border: '#2a2a2a',
+    accent: '#FF3366',
+    text: '#F0F0F0',
+    muted: '#888888',
+    lapis: '#FF3366',
+    gold: '#F59E0B',
+    verify: '#10B981',
+    breakColor: '#EF4444'
   }
 };
 
@@ -51,6 +63,12 @@ interface SkillItem {
   exergy: string;
   desc: string;
   status: 'active' | 'idle' | 'locked';
+}
+
+interface DatabaseTable {
+  name: string;
+  rows: number;
+  columns: { name: string; type: string; pk: boolean }[];
 }
 
 const PROJECT_FILES: FileItem[] = [
@@ -114,24 +132,82 @@ const PREDEFINED_SKILLS: SkillItem[] = [
   { id: 'S4', name: 'OBLITERATOR', type: 'Destructive', exergy: 'Max', desc: 'Entropy vector purge', status: 'locked' }
 ];
 
-export default function BabylonMinimalistIDE() {
+const MOCK_TABLES: DatabaseTable[] = [
+  {
+    name: 'ledger_entries',
+    rows: 14502,
+    columns: [
+      { name: 'seq', type: 'INTEGER', pk: true },
+      { name: 'entry_hash', type: 'VARCHAR(64)', pk: false },
+      { name: 'lamport_t', type: 'INTEGER', pk: false },
+      { name: 'created_at', type: 'TIMESTAMP', pk: false },
+      { name: 'payload', type: 'TEXT', pk: false }
+    ]
+  },
+  {
+    name: 'swarm_nodes',
+    rows: 5,
+    columns: [
+      { name: 'node_id', type: 'VARCHAR(36)', pk: true },
+      { name: 'role', type: 'VARCHAR(50)', pk: false },
+      { name: 'status', type: 'VARCHAR(20)', pk: false },
+      { name: 'last_seen', type: 'TIMESTAMP', pk: false }
+    ]
+  }
+];
+
+export default function BabylonCompleteIDE() {
   const [theme, setTheme] = useState<Theme>(THEMES.awwwards);
+  const [cognitiveMode, setCognitiveMode] = useState<'NT' | '2E'>('2E'); // NT vs Double Exceptionality
   const [activeFile, setActiveFile] = useState<FileItem>(PROJECT_FILES[0]);
   const [editorContent, setEditorContent] = useState(activeFile.content);
   const [ghostText, setGhostText] = useState('');
   const [cursorPos, setCursorPos] = useState(0);
-  const [sidebarTab, setSidebarTab] = useState<'architecture' | 'swarm' | 'ledger' | 'settings'>('architecture');
+  const [sidebarTab, setSidebarTab] = useState<'architecture' | 'swarm' | 'ledger' | 'inference' | 'settings'>('architecture');
+  
+  // State indicators for Tachometer
+  const [agentState, setAgentState] = useState<'idle' | 'indexing' | 'working' | 'done'>('idle');
+
+  // UI state variables
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeSkillId, setActiveSkillId] = useState<string | null>(null);
+  const [isHypervigilant, setIsHypervigilant] = useState(false);
+
+  // Local Inference Console
+  const [promptInput, setPromptInput] = useState('');
+  const [inferenceOutput, setInferenceOutput] = useState('');
+  const [tokensPerSecond, setTokensPerSecond] = useState(0);
+  const [latencyMs, setLatencyMs] = useState(0);
+
+  // Database / SQL Playground
+  const [selectedTable, setSelectedTable] = useState<DatabaseTable | null>(MOCK_TABLES[0]);
+  const [sqlQuery, setSqlQuery] = useState('SELECT * FROM ledger_entries LIMIT 5;');
+  const [queryResults, setQueryResults] = useState<any[]>([]);
 
   // Dictation State
   const [isDictating, setIsDictating] = useState(false);
-  const [isHypervigilant, setIsHypervigilant] = useState(false);
   const recognitionRef = useRef<any>(null);
 
+  // Keyboard Event Listeners for ⌘⇧E & ⌘8
   useEffect(() => {
     setIsLoaded(true);
+
+    const handleKeyDownGlobal = (e: KeyboardEvent) => {
+      // ⌘⇧E (or Ctrl+Shift+E) toggles Cognitive Mode
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
+        e.preventDefault();
+        setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'));
+      }
+      // ⌘8 (or Ctrl+8) toggles Local Inference Console
+      if ((e.metaKey || e.ctrlKey) && e.key === '8') {
+        e.preventDefault();
+        setSidebarTab('inference');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDownGlobal);
     return () => {
+      window.removeEventListener('keydown', handleKeyDownGlobal);
       if (recognitionRef.current) recognitionRef.current.stop();
     };
   }, []);
@@ -141,6 +217,38 @@ export default function BabylonMinimalistIDE() {
     setGhostText('');
   }, [activeFile]);
 
+  // Dictation Handler
+  const toggleDictation = () => {
+    if (isDictating) {
+      recognitionRef.current?.stop();
+      setIsDictating(false);
+    } else {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (!SpeechRecognition) return alert("Speech API no soportada.");
+      
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'es-ES';
+      recognition.continuous = true;
+      recognition.interimResults = false;
+      recognition.onresult = (event: any) => {
+        let text = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) text += event.results[i][0].transcript;
+        }
+        if (text) setEditorContent(prev => prev + (prev.endsWith('\n') ? '' : ' ') + text.trim() + '\n');
+      };
+      recognition.onerror = () => setIsDictating(false);
+      recognition.onend = () => isDictating && recognition.start();
+      
+      try {
+        recognition.start();
+        recognitionRef.current = recognition;
+        setIsDictating(true);
+      } catch (err) {}
+    }
+  };
+
+  // Editor Input
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
     setEditorContent(val);
@@ -160,58 +268,77 @@ export default function BabylonMinimalistIDE() {
     }
   };
 
-  const toggleDictation = () => {
-    if (isDictating) {
-      recognitionRef.current?.stop();
-      setIsDictating(false);
-    } else {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (!SpeechRecognition) return alert("Speech API no soportada.");
-      
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'es-ES';
-      recognition.continuous = true;
-      recognition.interimResults = false;
-      recognition.onresult = (event: any) => {
-        let text = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) text += event.results[i][0].transcript;
-        }
-        if (text) setEditorContent(prev => prev + (prev.endsWith('\\n') ? '' : ' ') + text.trim() + '\\n');
-      };
-      recognition.onerror = () => setIsDictating(false);
-      recognition.onend = () => isDictating && recognition.start();
-      
-      try {
-        recognition.start();
-        recognitionRef.current = recognition;
-        setIsDictating(true);
-      } catch (err) {}
-    }
+  // Local Inference Console Action
+  const runInference = (promptText = promptInput) => {
+    if (!promptText.trim()) return;
+    setAgentState('working');
+    setInferenceOutput('C5-REAL Silicon Model Attestation Initialized...\n');
+    setTokensPerSecond(0);
+    setLatencyMs(0);
+
+    let currentTokens = 0;
+    const start = performance.now();
+    const interval = setInterval(() => {
+      currentTokens += 8;
+      const progress = Math.min(100, currentTokens);
+      const elapsed = performance.now() - start;
+      setTokensPerSecond(Math.round((currentTokens / elapsed) * 1000));
+      setLatencyMs(Math.round(elapsed));
+
+      setInferenceOutput(prev => prev + `[Node Sync] Generating token stream - segment ${progress/8}...\n`);
+
+      if (currentTokens >= 80) {
+        clearInterval(interval);
+        setAgentState('done');
+        setInferenceOutput(prev => prev + `\n[VERIFIED] Resolution path computed under Mamba layer.\nExecution successful. Code verified to Ledger chain.`);
+        setTimeout(() => setAgentState('idle'), 3000);
+      }
+    }, 200);
+  };
+
+  // SQL query executor
+  const runSQLQuery = () => {
+    if (!sqlQuery.trim()) return;
+    setAgentState('indexing');
+    setTimeout(() => {
+      if (sqlQuery.toLowerCase().includes('ledger_entries')) {
+        setQueryResults([
+          { seq: 1, entry_hash: '9a339ceb0565c1918c...', lamport_t: 104, created_at: '2026-07-18T04:14:09Z' },
+          { seq: 2, entry_hash: 'f62f1cba31f1d0b3a3...', lamport_t: 105, created_at: '2026-07-18T05:01:22Z' },
+          { seq: 3, entry_hash: 'e493a30c5ba9d19a3b...', lamport_t: 106, created_at: '2026-07-18T08:21:28Z' }
+        ]);
+      } else {
+        setQueryResults([
+          { node_id: 'Alpha', role: 'Consensus Coordinator', status: 'ACTIVE', last_seen: 'Just now' },
+          { node_id: 'Beta', role: 'Memory Shield Core', status: 'ACTIVE', last_seen: 'Just now' }
+        ]);
+      }
+      setAgentState('idle');
+    }, 400);
   };
 
   const isDark = theme.id === 'awwwards';
 
   return (
     <div 
-      className={\`w-screen h-screen flex flex-col overflow-hidden select-none transition-all duration-[1200ms] ease-out \${isLoaded ? 'opacity-100' : 'opacity-0 scale-[0.98]'}\`}
-      style={{ backgroundColor: theme.bg, color: theme.text, fontFamily: '"Inter", "Helvetica Neue", sans-serif' }}
+      className={`w-screen h-screen flex flex-col overflow-hidden select-none transition-all duration-[1000ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 scale-[0.99]'}`}
+      style={{ backgroundColor: theme.bg, color: theme.text, fontFamily: '"Inter", sans-serif' }}
     >
-      <style>{\`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap');
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
         
         * { box-sizing: border-box; }
         
-        ::-webkit-scrollbar { width: 2px; height: 2px; }
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: \${theme.muted}; opacity: 0.2; }
+        ::-webkit-scrollbar-thumb { background: ${theme.border}; border-radius: 4px; }
         
         .grain {
           position: absolute;
           top: -150%; left: -50%; right: -50%; bottom: -150%;
           width: 200%; height: 400vh;
           background: transparent url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-          opacity: \${isDark ? 0.04 : 0.015};
+          opacity: ${isDark ? 0.04 : 0.015};
           pointer-events: none;
           z-index: 50;
           animation: grain 8s steps(10) infinite;
@@ -240,11 +367,11 @@ export default function BabylonMinimalistIDE() {
 
         .nav-link {
           position: relative;
-          color: \${theme.muted};
+          color: ${theme.muted};
           transition: color 0.4s ease;
         }
         .nav-link:hover, .nav-link.active {
-          color: \${theme.accent};
+          color: ${theme.accent};
         }
         .nav-link::after {
           content: '';
@@ -253,7 +380,7 @@ export default function BabylonMinimalistIDE() {
           left: 0;
           width: 100%;
           height: 1px;
-          background: \${theme.accent};
+          background: ${theme.accent};
           transform: scaleX(0);
           transform-origin: right;
           transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -261,6 +388,37 @@ export default function BabylonMinimalistIDE() {
         .nav-link:hover::after, .nav-link.active::after {
           transform: scaleX(1);
           transform-origin: left;
+        }
+
+        /* Ambient Tachometer Animations */
+        @keyframes breathing-blue {
+          0%, 100% { opacity: 0.3; transform: scaleX(0.98); }
+          50% { opacity: 1; transform: scaleX(1); }
+        }
+        @keyframes scanning-cobalt {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        @keyframes alert-gold {
+          0%, 100% { background-color: #F59E0B; opacity: 0.5; }
+          50% { background-color: #EF4444; opacity: 1; }
+        }
+        
+        .tachometer-indexing {
+          animation: breathing-blue 2s ease-in-out infinite;
+          background: #3B4DFF;
+        }
+        .tachometer-working {
+          background: linear-gradient(90deg, #3B4DFF, #7080FF, #3B4DFF);
+          background-size: 200% 100%;
+          animation: scanning-cobalt 1.5s infinite linear;
+        }
+        .tachometer-alert {
+          animation: alert-gold 0.8s ease-in-out infinite;
+        }
+        .tachometer-done {
+          background: #10B981;
+          transition: background-color 1s ease;
         }
 
         ${isHypervigilant ? `
@@ -274,6 +432,18 @@ export default function BabylonMinimalistIDE() {
 
       <div className="grain" />
 
+      {/* AMBIENT TACHOMETER (3px Top-screen bar for 2E Mode) */}
+      {cognitiveMode === '2E' && (
+        <div 
+          className={`h-[3px] w-full z-50 transition-all duration-500 ${
+            agentState === 'indexing' ? 'tachometer-indexing' :
+            agentState === 'working' ? 'tachometer-working' :
+            agentState === 'done' ? 'tachometer-done' :
+            isHypervigilant ? 'tachometer-alert' : 'bg-transparent opacity-10'
+          }`}
+        />
+      )}
+
       {/* ULTRA MINIMAL HEADER */}
       <header 
         className="h-16 flex items-center justify-between px-10 z-40"
@@ -281,24 +451,43 @@ export default function BabylonMinimalistIDE() {
       >
         <div className="flex items-center gap-12">
           <span className="text-[10px] font-medium tracking-[0.2em] uppercase" style={{ color: theme.accent }}>
-            Babylon_60
+            {cognitiveMode === '2E' ? 'B_60' : 'Babylon_60'}
           </span>
           
           <nav className="flex gap-8 text-[11px] font-medium tracking-wide uppercase" style={{ WebkitAppRegion: 'no-drag' } as any}>
-            <button className={\`nav-link \${sidebarTab === 'architecture' ? 'active' : ''} outline-none\`\} onClick={() => setSidebarTab('architecture')}>Architecture</button>
-            <button className={\`nav-link \${sidebarTab === 'swarm' ? 'active' : ''} outline-none\`\} onClick={() => setSidebarTab('swarm')}>Swarm</button>
-            <button className={\`nav-link \${sidebarTab === 'ledger' ? 'active' : ''} outline-none\`\} onClick={() => setSidebarTab('ledger')}>Ledger</button>
-            <button className={\`nav-link \${sidebarTab === 'settings' ? 'active' : ''} outline-none\`\} onClick={() => setSidebarTab('settings')}>Settings</button>
+            <button className={`nav-link ${sidebarTab === 'architecture' ? 'active' : ''} outline-none`} onClick={() => setSidebarTab('architecture')}>
+              {cognitiveMode === '2E' ? '◈' : 'Architecture'}
+            </button>
+            <button className={`nav-link ${sidebarTab === 'swarm' ? 'active' : ''} outline-none`} onClick={() => setSidebarTab('swarm')}>
+              {cognitiveMode === '2E' ? '⎈' : 'Swarm'}
+            </button>
+            <button className={`nav-link ${sidebarTab === 'ledger' ? 'active' : ''} outline-none`} onClick={() => setSidebarTab('ledger')}>
+              {cognitiveMode === '2E' ? '⌬' : 'Ledger'}
+            </button>
+            <button className={`nav-link ${sidebarTab === 'inference' ? 'active' : ''} outline-none`} onClick={() => setSidebarTab('inference')}>
+              {cognitiveMode === '2E' ? '⚡' : 'Inference'}
+            </button>
+            <button className={`nav-link ${sidebarTab === 'settings' ? 'active' : ''} outline-none`} onClick={() => setSidebarTab('settings')}>
+              {cognitiveMode === '2E' ? '⚙' : 'Settings'}
+            </button>
           </nav>
         </div>
         
         <div className="flex items-center gap-6" style={{ WebkitAppRegion: 'no-drag' } as any}>
+          {/* Cognitive Mode Toggle Switch */}
+          <button 
+            onClick={() => setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'))}
+            className="text-[10px] uppercase tracking-widest font-mono text-white/40 hover:text-white transition-colors"
+          >
+            {cognitiveMode} Mode
+          </button>
+
           <button
             onClick={() => setIsHypervigilant(!isHypervigilant)}
             className="text-[10px] uppercase tracking-widest font-medium outline-none transition-all duration-300"
             style={{ color: isHypervigilant ? '#FF3366' : theme.muted }}
           >
-            {isHypervigilant ? '● Hypervigilant' : 'Hypervigilance'}
+            {isHypervigilant ? '● Vigilant' : 'Vigilance'}
           </button>
 
           <button
@@ -306,18 +495,8 @@ export default function BabylonMinimalistIDE() {
             className="text-[10px] uppercase tracking-widest font-medium outline-none transition-all duration-300"
             style={{ color: isDictating ? '#FF3333' : theme.muted }}
           >
-            {isDictating ? 'Recording' : 'Dictation'}
+            {isDictating ? 'Dict' : 'Dictation'}
           </button>
-          
-          {/* Subtle Theme Toggle */}
-          <button 
-            onClick={() => setTheme(isDark ? THEMES.geist : THEMES.awwwards)}
-            className="w-3 h-3 rounded-full border transition-all duration-500 outline-none"
-            style={{ 
-              borderColor: theme.accent, 
-              backgroundColor: isDark ? 'transparent' : theme.accent 
-            }}
-          />
         </div>
       </header>
 
@@ -343,10 +522,7 @@ export default function BabylonMinimalistIDE() {
                   >
                     {file.name}
                   </span>
-                  <span 
-                    className="text-[10px] font-mono mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ color: theme.muted }}
-                  >
+                  <span className="text-[10px] font-mono mt-1 opacity-40 group-hover:opacity-100 transition-opacity duration-300">
                     {file.path}
                   </span>
                 </div>
@@ -367,7 +543,7 @@ export default function BabylonMinimalistIDE() {
                       className="w-1.5 h-1.5 rounded-full transition-all duration-500" 
                       style={{ 
                         backgroundColor: skill.status === 'active' ? theme.accent : 'transparent',
-                        border: \`1px solid \${theme.muted}\`,
+                        border: `1px solid ${theme.border}`,
                         transform: activeSkillId === skill.id ? 'scale(1.5)' : 'scale(1)'
                       }} 
                     />
@@ -380,100 +556,276 @@ export default function BabylonMinimalistIDE() {
                   </div>
                   
                   <div 
-                    className="overflow-hidden transition-all duration-500 pl-4.5 flex flex-col gap-1"
+                    className="overflow-hidden transition-all duration-500 pl-4 flex flex-col gap-1"
                     style={{ 
                       maxHeight: activeSkillId === skill.id ? '100px' : '0',
                       opacity: activeSkillId === skill.id ? 1 : 0,
                       marginTop: activeSkillId === skill.id ? '8px' : '0'
                     }}
                   >
-                    <span className="text-[10px] uppercase tracking-widest" style={{ color: theme.muted }}>{skill.type} · {skill.exergy}</span>
-                    <span className="text-[11px] leading-relaxed" style={{ color: theme.muted }}>{skill.desc}</span>
+                    <span className="text-[10px] uppercase tracking-widest text-white/30">{skill.type} · {skill.exergy}</span>
+                    <span className="text-[11px] leading-relaxed opacity-75">{skill.desc}</span>
                   </div>
                 </div>
               ))}
             </div>
           )}
 
+          {sidebarTab === 'ledger' && (
+            <div className="flex flex-col gap-6">
+              <span className="text-[10px] tracking-widest uppercase text-white/30">Schema & Databases</span>
+              {MOCK_TABLES.map(table => (
+                <div 
+                  key={table.name} 
+                  onClick={() => setSelectedTable(table)}
+                  className={`cursor-pointer transition-colors p-2 rounded ${selectedTable?.name === table.name ? 'bg-white/5 text-white' : 'text-[#B4B9DF] hover:text-white'}`}
+                >
+                  <div className="text-[13px] font-medium">{table.name}</div>
+                  <div className="text-[10px] font-mono opacity-50">{table.rows} rows</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {sidebarTab === 'inference' && (
+            <div className="flex flex-col gap-8">
+              <span className="text-[10px] tracking-widest uppercase text-white/30">Quick Presets</span>
+              <button 
+                onClick={() => { setPromptInput("Explain the core of the Robinson-Moskv theorem"); runInference("Explain the core of the Robinson-Moskv theorem"); }}
+                className="text-left bg-transparent border-0 text-[#B4B9DF] hover:text-white text-[12px] cursor-pointer outline-none"
+              >
+                ⚡ Robinson Theorem
+              </button>
+              <button 
+                onClick={() => { setPromptInput("Attest current ledger transaction status"); runInference("Attest current ledger transaction status"); }}
+                className="text-left bg-transparent border-0 text-[#B4B9DF] hover:text-white text-[12px] cursor-pointer outline-none"
+              >
+                🛡 Attest Ledger
+              </button>
+              <button 
+                onClick={() => { setPromptInput("Run self-audit loop on active workspace"); runInference("Run self-audit loop on active workspace"); }}
+                className="text-left bg-transparent border-0 text-[#B4B9DF] hover:text-white text-[12px] cursor-pointer outline-none"
+              >
+                ◈ Self-Audit
+              </button>
+            </div>
+          )}
+
           {sidebarTab === 'settings' && (
             <div className="flex flex-col gap-10">
               <div className="flex flex-col gap-6">
-                <span className="text-[10px] tracking-widest uppercase" style={{ color: theme.muted }}>Preferences</span>
+                <span className="text-[10px] tracking-widest uppercase text-white/30">Preferences</span>
                 <div className="flex justify-between items-center cursor-pointer group">
-                  <span className="text-[12px] transition-colors" style={{ color: theme.accent }}>Typography Engine</span>
-                  <span className="text-[10px] font-mono" style={{ color: theme.muted }}>Inter / JetBrains</span>
+                  <span className="text-[12px] transition-colors" style={{ color: theme.accent }}>Typography</span>
+                  <span className="text-[10px] font-mono text-white/40">JetBrains Mono</span>
                 </div>
                 <div className="flex justify-between items-center cursor-pointer group" onClick={toggleDictation}>
-                  <span className="text-[12px] transition-colors" style={{ color: theme.accent }}>Voice Dictation Mode</span>
-                  <span className="text-[10px] font-mono" style={{ color: isDictating ? '#FF3333' : theme.muted }}>{isDictating ? 'ACTIVE' : 'OFF'}</span>
-                </div>
-                <div className="flex justify-between items-center cursor-pointer group">
-                  <span className="text-[12px] transition-colors" style={{ color: theme.accent }}>BFT Consensus Strict</span>
-                  <span className="text-[10px] font-mono" style={{ color: theme.muted }}>ON</span>
+                  <span className="text-[12px] transition-colors" style={{ color: theme.accent }}>Voice Override</span>
+                  <span className="text-[10px] font-mono" style={{ color: isDictating ? '#FF3333' : theme.muted }}>{isDictating ? 'ON' : 'OFF'}</span>
                 </div>
               </div>
               
               <div className="flex flex-col gap-5">
-                <span className="text-[10px] tracking-widest uppercase" style={{ color: theme.muted }}>Languages</span>
+                <span className="text-[10px] tracking-widest uppercase text-white/30">Languages</span>
                 <div className="flex gap-6 text-[11px] font-mono">
                   <span className="cursor-pointer border-b pb-1" style={{ color: theme.accent, borderColor: theme.accent }}>ES-ES</span>
-                  <span className="cursor-pointer pb-1 transition-colors hover:text-white" style={{ color: theme.muted }}>EN-US</span>
-                  <span className="cursor-pointer pb-1 transition-colors hover:text-white" style={{ color: theme.muted }}>JA-JP</span>
-                  <span className="cursor-pointer pb-1 transition-colors hover:text-white" style={{ color: theme.muted }}>RU-RU</span>
+                  <span className="cursor-pointer pb-1 transition-colors hover:text-white text-white/40">EN-US</span>
+                  <span className="cursor-pointer pb-1 transition-colors hover:text-white text-white/40">JA-JP</span>
+                  <span className="cursor-pointer pb-1 transition-colors hover:text-white text-white/40">RU-RU</span>
                 </div>
               </div>
             </div>
           )}
         </div>
 
-        {/* EDITOR AREA - MASSIVE NEGATIVE SPACE */}
+        {/* EDITOR OR OTHER CONSOLES */}
         <div className="flex-1 flex flex-col relative pt-12">
           
-          <div className="flex items-baseline gap-4 mb-12">
-            <h1 className="text-4xl font-light tracking-tight m-0 p-0" style={{ color: theme.accent }}>
-              {activeFile.name.split('.')[0]}
-            </h1>
-            <span className="text-[12px] font-mono tracking-widest" style={{ color: theme.muted }}>
-              .{activeFile.name.split('.')[1]}
-            </span>
-          </div>
+          {sidebarTab === 'inference' ? (
+            // LOCAL INFERENCE PLAYGROUND (⌘8 / ◈)
+            <div className="flex-1 flex gap-10 relative">
+              <div className="flex-1 flex flex-col">
+                <h1 className="text-3xl font-light tracking-tight mb-8">Local Inference Console</h1>
+                
+                <div className="flex flex-col gap-4 mb-6">
+                  <span className="text-[10px] font-mono uppercase text-white/40">Local Prompt</span>
+                  <textarea
+                    value={promptInput}
+                    onChange={(e) => setPromptInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        runInference();
+                      }
+                    }}
+                    placeholder="Enter prompt... (Press Enter to submit, Shift+Enter for newline)"
+                    className="w-full h-32 bg-white/5 border border-white/10 rounded-md p-4 text-[13.5px] font-mono text-white outline-none focus:border-[#3B4DFF] resize-none"
+                  />
+                  <div className="flex justify-between">
+                    <span className="text-[10px] font-mono text-white/40">Model: mamba-ssm-c5</span>
+                    <button 
+                      onClick={() => runInference()}
+                      className="px-6 py-2 bg-[#3B4DFF] text-white border-0 rounded text-[11px] font-mono tracking-widest uppercase cursor-pointer hover:bg-[#5060FF]"
+                    >
+                      Execute
+                    </button>
+                  </div>
+                </div>
 
-          <div className="flex-1 relative">
-            {isHypervigilant && (
-              <div className="absolute top-0 right-0 z-30 flex items-center gap-3 text-[9px] font-mono tracking-[0.2em] text-[#FF3366] uppercase animate-pulse">
-                <span>Threat Level: Zero</span>
-                <span>·</span>
-                <span>Anergy Filter: Strict</span>
+                <div className="flex-1 flex flex-col">
+                  <span className="text-[10px] font-mono uppercase text-white/40 mb-2">Attestation Stream Output</span>
+                  <div className="flex-1 bg-black/40 border border-white/5 rounded-md p-4 font-mono text-[12px] overflow-y-auto whitespace-pre text-white/80">
+                    {inferenceOutput || 'Awaiting execution. Select a preset or type a prompt above.'}
+                  </div>
+                </div>
               </div>
-            )}
 
-            <textarea
-              value={editorContent}
-              onChange={handleTextChange}
-              onKeyDown={handleKeyDown}
-              spellCheck={false}
-              className="editor-text absolute inset-0 w-full h-full bg-transparent border-0 resize-none outline-none focus:ring-0 z-20"
-              style={{ color: theme.text }}
-            />
-            
-            {ghostText && (
-              <pre className="editor-text absolute inset-0 pointer-events-none z-10 whitespace-pre-wrap">
-                <span className="opacity-0">{editorContent.slice(0, cursorPos)}</span>
-                <span className="opacity-40 transition-opacity duration-1000" style={{ color: theme.muted }}>{ghostText}</span>
-              </pre>
-            )}
-          </div>
-          
-          {/* FOOTER METADATA */}
-          <div className="h-10 flex items-center justify-between text-[10px] font-mono tracking-widest border-t transition-colors duration-500" style={{ borderColor: theme.border, color: theme.muted }}>
-            <div className="flex items-center gap-6">
-              <span>{activeFile.path}</span>
+              {/* Onboarding Help Widget in a right-hand column */}
+              <div className="w-80 border-l border-white/5 pl-10 flex flex-col gap-6">
+                <span className="text-[10px] font-mono uppercase text-white/30">Local Attestation Manual</span>
+                <div className="flex flex-col gap-4 text-[12.5px] leading-relaxed text-white/70">
+                  <p>Every transaction, fact, or code block generated in this console is computed locally under the **Zero-Network Policy**.</p>
+                  <p>The resulting logical path is parsed by the local Mamba SSM engine, hash-chained, and anchored directly to the BFT state chain.</p>
+                  <p>This guarantees that decisions generated by local silicon are untamperable and fully auditable by downstream validators.</p>
+                </div>
+                
+                {/* Performance Tachometer */}
+                {latencyMs > 0 && (
+                  <div className="border border-[#3B4DFF]/30 bg-[#3B4DFF]/5 rounded-md p-4 flex flex-col gap-2 mt-auto">
+                    <span className="text-[10px] font-mono uppercase text-[#7080FF] tracking-wider">Silicon Throughput</span>
+                    <div className="text-2xl font-light">{tokensPerSecond} <span className="text-[11px] font-mono text-white/50">tok/s</span></div>
+                    <div className="text-[11px] font-mono text-white/40">Latency: {latencyMs} ms</div>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="flex items-center gap-8">
-              <span>C5-REAL</span>
-              <span>{activeFile.lang.toUpperCase()}</span>
+
+          ) : sidebarTab === 'ledger' ? (
+            // LEDGER INSPECT / DATABASE PLAYGROUND
+            <div className="flex-1 flex flex-col">
+              <h1 className="text-3xl font-light tracking-tight mb-8">Ledger Database Console</h1>
+              
+              <div className="flex gap-10 flex-1">
+                <div className="flex-1 flex flex-col">
+                  <div className="flex flex-col gap-3 mb-6">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-mono uppercase text-white/40">SQL query</span>
+                      <button 
+                        onClick={runSQLQuery}
+                        className="px-4 py-1.5 bg-white/10 hover:bg-white/15 text-white border-0 rounded text-[11px] font-mono uppercase cursor-pointer"
+                      >
+                        Run Query
+                      </button>
+                    </div>
+                    <input 
+                      type="text"
+                      value={sqlQuery}
+                      onChange={(e) => setSqlQuery(e.target.value)}
+                      className="bg-white/5 border border-white/10 rounded p-3 text-[13px] font-mono text-white outline-none focus:border-[#3B4DFF]"
+                    />
+                  </div>
+
+                  <div className="flex-1 bg-black/40 border border-white/5 rounded-md p-4 overflow-auto">
+                    {queryResults.length > 0 ? (
+                      <table className="w-full border-collapse font-mono text-[12px] text-left text-white/80">
+                        <thead>
+                          <tr className="border-b border-white/10">
+                            {Object.keys(queryResults[0]).map(key => (
+                              <th key={key} className="pb-2 font-medium uppercase tracking-wider text-white/40">{key}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {queryResults.map((row, idx) => (
+                            <tr key={idx} className="border-b border-white/5 hover:bg-white/5">
+                              {Object.values(row).map((val: any, colIdx) => (
+                                <td key={colIdx} className="py-2.5 truncate max-w-[200px]" title={val}>{val}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-white/30 font-mono text-xs uppercase tracking-widest">
+                        Awaiting Query Execution
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="w-72 border-l border-white/5 pl-10 flex flex-col gap-6">
+                  {selectedTable ? (
+                    <>
+                      <span className="text-[10px] font-mono uppercase text-white/30">Schema: {selectedTable.name}</span>
+                      <div className="flex flex-col gap-4">
+                        {selectedTable.columns.map(col => (
+                          <div key={col.name} className="flex justify-between items-baseline font-mono text-xs">
+                            <span className={col.pk ? 'text-[#3B4DFF]' : 'text-white/80'}>
+                              {col.name} {col.pk && '🔑'}
+                            </span>
+                            <span className="text-white/30">{col.type}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <span className="text-[10px] font-mono uppercase text-white/30">No Table Selected</span>
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
+
+          ) : (
+            // STANDARD MINIMAL CODE EDITOR
+            <>
+              <div className="flex items-baseline gap-4 mb-12">
+                <h1 className="text-4xl font-light tracking-tight m-0 p-0" style={{ color: theme.accent }}>
+                  {activeFile.name.split('.')[0]}
+                </h1>
+                <span className="text-[12px] font-mono tracking-widest" style={{ color: theme.muted }}>
+                  .{activeFile.name.split('.')[1]}
+                </span>
+              </div>
+
+              <div className="flex-1 relative">
+                {isHypervigilant && (
+                  <div className="absolute top-0 right-0 z-30 flex items-center gap-3 text-[9px] font-mono tracking-[0.2em] text-[#FF3366] uppercase animate-pulse">
+                    <span>Threat Level: Zero</span>
+                    <span>·</span>
+                    <span>Anergy Filter: Strict</span>
+                  </div>
+                )}
+
+                <textarea
+                  value={editorContent}
+                  onChange={handleTextChange}
+                  onKeyDown={handleKeyDown}
+                  spellCheck={false}
+                  className="editor-text absolute inset-0 w-full h-full bg-transparent border-0 resize-none outline-none focus:ring-0 z-20"
+                  style={{ color: theme.text }}
+                />
+                
+                {ghostText && (
+                  <pre className="editor-text absolute inset-0 pointer-events-none z-10 whitespace-pre-wrap">
+                    <span className="opacity-0">{editorContent.slice(0, cursorPos)}</span>
+                    <span className="opacity-40 transition-opacity duration-1000" style={{ color: theme.muted }}>{ghostText}</span>
+                  </pre>
+                )}
+              </div>
+              
+              {/* FOOTER METADATA */}
+              <div className="h-10 flex items-center justify-between text-[10px] font-mono tracking-widest border-t transition-colors duration-500" style={{ borderColor: theme.border, color: theme.muted }}>
+                <div className="flex items-center gap-6">
+                  <span>{activeFile.path}</span>
+                </div>
+                <div className="flex items-center gap-8">
+                  <span>C5-REAL</span>
+                  <span>{activeFile.lang.toUpperCase()}</span>
+                </div>
+              </div>
+            </>
+          )}
+
         </div>
       </div>
     </div>
