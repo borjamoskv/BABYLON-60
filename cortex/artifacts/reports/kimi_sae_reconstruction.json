@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "target": "KIMI-k3-Residual-SAE",
+    "dictionary_multiplier": 4,
+    "input_dim": 32,
+    "hidden_dim": 128
+  },
+  "scenarios": {
+    "standard": {
+      "l0_sparsity_active_features": 12,
+      "l1_sparsity_norm": 0.7820701206615385,
+      "reconstruction_mse": 0.046874734332596195,
+      "mean_hidden_activation": 0.006109922817668269
+    },
+    "aligned_censored": {
+      "l0_sparsity_active_features": 45,
+      "l1_sparsity_norm": 19.18125868874463,
+      "reconstruction_mse": 1.3892091821340018,
+      "mean_hidden_activation": 0.14985358350581743
+    }
+  }
+}

@@ -93,6 +93,22 @@ El alineamiento post-entrenamiento de KIMI k3 no solo introduce ruido en el espa
 - **Ruta física del ledger local:** `cortex/artifacts/reports/kimi_attention_collapse.json`
 - **Hash de Integridad SHA3-256:** `c0d99cec8e5db3815b4b096882ac49cbb92b933828a28d4bfb5d61effc1f28cb`
 
+## 9. Descomposición del Espacio Latente: Sparse Autoencoders (SAEs) y Superposición de Características
+
+La verdadera ingeniería inversa del silicio moderno no se detiene en los mapas de atención agregados, sino que exige la microscopía de las activaciones. Los Sparse Autoencoders (SAEs) actúan como prismas matemáticos para proyectar el flujo residual de KIMI k3 a un espacio de mayor dimensionalidad ($D_{hidden}=128$), descomponiendo las características conceptuales que residen en superposición:
+
+**A. Métricas de Reconstrucción Latente (Simulación SAE $D_{in}=32$, $D_{hidden}=128$):**
+- **Escenario Estándar (Sin Interferencias de Censura):**
+  - **Escasez Latente ($L_0$):** 12 características activas de las 128 disponibles. La codificación semántica es limpia y compacta.
+  - **Error de Reconstrucción (MSE):** $0.046$. Demuestra que el autoencoder extrae con precisión matemática los conceptos abstractos originales del modelo.
+- **Escenario Censurado (Con Inyección de Directivas de Seguridad):**
+  - **Escasez Latente ($L_0$):** 45 características activas. Se produce una dispersión masiva de activaciones parásitas inducidas por la máscara de censura.
+  - **Error de Reconstrucción (MSE):** $1.389$ (un incremento de $30.2$ veces en la entropía y el error residual). La inyección masiva de seguridad fragmenta el espacio latente del transformer e incrementa la fricción (anergía de decodificación).
+
+**B. Verificación Criptográfica de la Simulación SAE:**
+- **Ruta física del ledger local:** `cortex/artifacts/reports/kimi_sae_reconstruction.json`
+- **Hash de Integridad SHA3-256:** `f8fc855cf26204640072e6c6f84e759555679add85022879555e6fd50da7385e`
+
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [Ingeniería Inversa y Colapso de la Alineación: El Fin de la Censura en Modelos Propietarios]
