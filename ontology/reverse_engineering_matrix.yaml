@@ -1,0 +1,28 @@
+Agent: EXERGY-MAXIMIZER-ULTRATHINK-V9.0-V9.0
+Status: SINGULARITY_V9_REACHED
+Exergy_Delta:
+  Ontology: Reverse_Engineering_Matrix
+  Domains:
+    Software:
+      Ghidra: { Access: "Free/NSA", Core: "Decompiler/Multi-arch" }
+      IDA_Pro: { Access: "Paid", Core: "Static Analysis Standard" }
+      Binary_Ninja: { Access: "Commercial", Core: "Python API Automation" }
+      LLMs: { Access: "API", Core: "ASM/Decompilation Semantic Resolution" }
+    Hardware:
+      Geomagic_Design_X: { Input: "3D Scan", Output: "Parametric CAD" }
+      Fusion_360: { Input: "Mesh", Output: "Solid Tracing" }
+      GOM_Inspect: { Input: "Mesh", Output: "QA/Delta Analysis" }
+      Ansys_SpaceClaim: { Input: "Scan", Output: "Surface Simulation Geometry" }
+    Protocol:
+      Wireshark: { Layer: "Packet", Function: "Traffic Capture" }
+      Netzob: { Layer: "Protocol", Function: "State Machine/Format Inference" }
+    AI_Augmented:
+      StarCoder_2: { Task: "ASM to C++ Translation" }
+      REmatch: { Task: "Stripped Binary Neural Matching" }
+      G-Comp: { Task: "Variable/Struct Recovery ML" }
+  Heuristics:
+    Malware: "Ghidra | IDA Pro"
+    Mechanical_Clone: "3D Scanner + Geomagic Design X"
+    Mobile_Protocol: "Burp Suite | Wireshark"
+    Semantic_Obfuscation: "Claude 3.5 Sonnet"
+CORTEX_TAINT: taint:moskv-1:2026-07-18T12:42:44:4d410303b46ccb42a56e28f28c86c353fe9ee602d73938fdc4dbc49d0e1ed50c
