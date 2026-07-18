@@ -28,7 +28,10 @@ PROTECTED_FILES = {
     "MANIFIESTO_CENTURIA.md", "MOSKV_1_APEX_BLUEPRINT.md", "Makefile", 
     "PROJECT.md", "README.md", "README_APEX.md", "SECURITY.md", 
     "STATUS.md", "TEXTBOOK_EXERGY_INVARIANT.md", "VECTOR_A_MASTER_LEDGER_DESIGN.md", 
-    "pyproject.toml", "uv.lock", "cortex_purge_anergy.py"
+    "pyproject.toml", "uv.lock", "cortex_purge_anergy.py",
+    "cortex_ssm_mamba_core.py", "cortex_mamba_block.py", "cortex_mamba_network.py",
+    "cortex_mamba_inference.py", "cortex_bpe_tokenizer.py", "core_graph_ledger.py",
+    "io_persist_ledger.py", "net_mamba_ledger_engine.py"
 }
 
 def ensure_dirs():
