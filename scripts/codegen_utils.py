@@ -1,9 +1,12 @@
 """
-codegen_utils.py — Shared primitives and template engine for YAML-to-code generation (C5-REAL).
-Enforces DRY and Orthogonal Primitive designs to resolve AP-R1.
+codegen_utils.py — Shared primitives for YAML-to-code generation pipeline.
+Extracted from generate_*.py scripts (C5-REAL DRY enforcement).
+DO NOT duplicate parse_yaml, write_output, or get_ledger_hash in individual generators.
 """
 
 from __future__ import annotations
+
+import hashlib
 import os
 import re
 from typing import Any, Dict, List, Tuple
@@ -61,6 +64,18 @@ def write_output(path: str, lines: list[Any]) -> None:
     with open(path, "w") as f:
         f.write("\n".join(str(ln) for ln in lines))
     print(f"Generated: {path}")
+
+
+def get_ledger_hash(ledger_path: str = "mundo_f_ledger.yml") -> str | None:
+    """AP-2: Canonical ledger hash function. Import this — DO NOT redefine.
+
+    Returns SHA-256 hex digest of the ledger file, or None if not found.
+    """
+    try:
+        with open(ledger_path, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except FileNotFoundError:
+        return None
 
 
 # METADATA CONFIGURATIONS FOR DRY PARALLEL GENERATOR (AP-R1)

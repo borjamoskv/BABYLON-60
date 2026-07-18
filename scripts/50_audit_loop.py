@@ -6,7 +6,7 @@ import subprocess
 import time
 import sqlite3
 from typing import TypedDict, Optional
-from cortex.llm_router import C5LLMRouter
+from cortex.llm_router import C5LLMRouter, EpistemicHalt  # AP-1: no local redefinition
 
 
 class AuditState(TypedDict):
@@ -16,12 +16,6 @@ class AuditState(TypedDict):
     semantic_valid: bool
     bft_passed: bool
     hash_delta: str
-
-
-class EpistemicHalt(Exception):
-    """Excepción dura (Ω26). Prohibido usar except Exception: pass."""
-
-    pass
 
 
 def phase_1_latent_friction(prompt: str) -> str:
