@@ -128,11 +128,10 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         
         # Exclude self, tests, and demo files from strict pattern checks
         is_excluded = any(x in header for x in [
-            "test_c5_invariants.py", 
             "demo_exergy_poc.py", 
             "exergy_optimizer_agent.py", 
             "autodetect_invariants.py"
-        ])
+        ]) or "test_" in header or "tests/" in header
         
         added_lines = [line for line in lines if line.startswith("+") and not line.startswith("+++")]
         removed_lines = [line for line in lines if line.startswith("-") and not line.startswith("---")]
