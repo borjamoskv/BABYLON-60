@@ -14,141 +14,143 @@ import (
 	"time"
 )
 
+// Response is the generic JSON envelope returned by action endpoints.
 type Response struct {
 	Status  string `json:"status"`
 	Message string `json:"message"`
 }
 
+// HealthResponse is returned by the /health endpoint.
+type HealthResponse struct {
+	Status  string `json:"status"`
+	Version string `json:"version"`
+}
+
+// enableCors sets permissive CORS headers on every response.
 func enableCors(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Content-Type")
 }
 
-func writeJSON(w http.ResponseWriter, resp Response) {
+// writeJSON serialises v as JSON into w with the given HTTP status code.
+func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(resp)
+	w.WriteHeader(status)
+	if err := json.NewEncoder(w).Encode(v); err != nil {
+		log.Printf("[ERROR] json encode: %v", err)
+	}
 }
 
+// corsMiddleware wraps a handler with CORS + OPTIONS pre-flight handling.
+func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		enableCors(&w)
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		next(w, r)
+	}
+}
+
+// mustPOST rejects non-POST requests with 405.
+func mustPOST(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "POST" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			return
+		}
+		next(w, r)
+	}
+}
+
+// mustGET rejects non-GET requests with 405.
+func mustGET(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != "GET" {
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			return
+		}
+		next(w, r)
+	}
+}
+
+// launchBraveHandler handles POST /launch-brave.
 func launchBraveHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-	if r.Method != "POST" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	log.Printf("[ACTION] Executing launchBraveHandler")
-	
-	resp := Response{Status: "error"}
+	log.Printf("[%s] POST /launch-brave from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
+	resp := Response{Status: "error", Message: "Ruta no configurada"}
+
 	cmd := exec.Command("open", "-a", "Brave Browser")
-	err := cmd.Start()
-	if err != nil {
+	if err := cmd.Start(); err != nil {
 		resp.Message = fmt.Sprintf("Fallo al lanzar Brave: %v", err)
-		log.Printf("[ERROR] launchBraveHandler: %v", err)
+		log.Printf("[ERROR] /launch-brave: %v", err)
 	} else {
 		resp.Status = "ok"
 		resp.Message = "Brave Browser lanzado exitosamente"
-		log.Printf("[SUCCESS] launchBraveHandler")
+		log.Printf("[INFO] /launch-brave: success")
 	}
-	writeJSON(w, resp)
+
+	writeJSON(w, http.StatusOK, resp)
 }
 
+// mountDMGHandler handles POST /mount-dmg.
 func mountDMGHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-	if r.Method != "POST" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	log.Printf("[ACTION] Executing mountDMGHandler")
+	log.Printf("[%s] POST /mount-dmg from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
+	resp := Response{Status: "error", Message: "Ruta no configurada"}
 
-	resp := Response{Status: "error"}
 	dmgPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv.dmg"
 	if _, err := os.Stat(dmgPath); os.IsNotExist(err) {
 		resp.Message = "Archivo DMG no encontrado en la ruta raíz"
-		log.Printf("[ERROR] mountDMGHandler: %v", err)
+		log.Printf("[WARN] /mount-dmg: DMG not found at %s", dmgPath)
 	} else {
 		cmd := exec.Command("hdiutil", "attach", "-nobrowse", "-readonly", dmgPath)
 		out, err := cmd.CombinedOutput()
 		if err != nil {
 			resp.Message = fmt.Sprintf("Fallo al montar: %v", err)
-			log.Printf("[ERROR] mountDMGHandler: %v", err)
+			log.Printf("[ERROR] /mount-dmg: %v", err)
 		} else {
 			parts := strings.Fields(string(out))
-			var mountPoint string
+			mountPoint := "Volumen"
 			if len(parts) > 0 {
 				mountPoint = parts[len(parts)-1]
-			} else {
-				mountPoint = "Volumen"
 			}
 			resp.Status = "ok"
 			resp.Message = fmt.Sprintf("DMG montado en: %s", mountPoint)
-			log.Printf("[SUCCESS] mountDMGHandler: %s", mountPoint)
+			log.Printf("[INFO] /mount-dmg: mounted at %s", mountPoint)
 		}
 	}
-	writeJSON(w, resp)
+
+	writeJSON(w, http.StatusOK, resp)
 }
 
+// restartOllamaHandler handles POST /restart-ollama.
 func restartOllamaHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-	if r.Method != "POST" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	log.Printf("[ACTION] Executing restartOllamaHandler")
+	log.Printf("[%s] POST /restart-ollama from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
+	resp := Response{Status: "error", Message: "Ruta no configurada"}
 
-	resp := Response{Status: "error"}
 	cmd := exec.Command("open", "-a", "Ollama")
-	err := cmd.Start()
-	if err != nil {
+	if err := cmd.Start(); err != nil {
 		resp.Message = fmt.Sprintf("Fallo al iniciar Ollama: %v", err)
-		log.Printf("[ERROR] restartOllamaHandler: %v", err)
+		log.Printf("[ERROR] /restart-ollama: %v", err)
 	} else {
 		resp.Status = "ok"
 		resp.Message = "Ollama activado o reiniciado"
-		log.Printf("[SUCCESS] restartOllamaHandler")
+		log.Printf("[INFO] /restart-ollama: success")
 	}
-	writeJSON(w, resp)
+
+	writeJSON(w, http.StatusOK, resp)
 }
 
+// healthHandler handles GET /health — liveness probe.
 func healthHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-	if r.Method != "GET" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	log.Printf("[ACTION] Executing healthHandler")
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]string{"status": "ok", "version": "c5-real"})
+	log.Printf("[%s] GET /health from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
+	writeJSON(w, http.StatusOK, HealthResponse{Status: "ok", Version: "c5-real"})
 }
 
+// listRoutesHandler handles GET /list-routes — returns available route names.
 func listRoutesHandler(w http.ResponseWriter, r *http.Request) {
-	enableCors(&w)
-	if r.Method == "OPTIONS" {
-		w.WriteHeader(http.StatusOK)
-		return
-	}
-	if r.Method != "GET" {
-		w.WriteHeader(http.StatusMethodNotAllowed)
-		return
-	}
-	log.Printf("[ACTION] Executing listRoutesHandler")
+	log.Printf("[%s] GET /list-routes from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
 	routes := []string{
 		"/launch-brave",
 		"/mount-dmg",
@@ -156,9 +158,7 @@ func listRoutesHandler(w http.ResponseWriter, r *http.Request) {
 		"/health",
 		"/list-routes",
 	}
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(routes)
+	writeJSON(w, http.StatusOK, routes)
 }
 
 func main() {
@@ -169,15 +169,18 @@ func main() {
 	addr := ":" + port
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("/launch-brave", launchBraveHandler)
-	mux.HandleFunc("/mount-dmg", mountDMGHandler)
-	mux.HandleFunc("/restart-ollama", restartOllamaHandler)
-	mux.HandleFunc("/health", healthHandler)
-	mux.HandleFunc("/list-routes", listRoutesHandler)
+	mux.HandleFunc("/launch-brave", corsMiddleware(mustPOST(launchBraveHandler)))
+	mux.HandleFunc("/mount-dmg", corsMiddleware(mustPOST(mountDMGHandler)))
+	mux.HandleFunc("/restart-ollama", corsMiddleware(mustPOST(restartOllamaHandler)))
+	mux.HandleFunc("/health", corsMiddleware(mustGET(healthHandler)))
+	mux.HandleFunc("/list-routes", corsMiddleware(mustGET(listRoutesHandler)))
 
 	srv := &http.Server{
-		Addr:    addr,
-		Handler: mux,
+		Addr:         addr,
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  30 * time.Second,
 	}
 
 	go func() {
