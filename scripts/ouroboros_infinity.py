@@ -43,7 +43,7 @@ def execute_pulse() -> dict[str, Any]:
     large_files = 0
     for ext in ['*.py', '*.rs', '*.ts', '*.md']:
         for f in PROJECT_ROOT.rglob(ext):
-            if '.git' in str(f) or 'node_modules' in str(f) or '.venv' in str(f):
+            if '.git' in str(f) or 'node_modules' in str(f) or '.venv' in str(f) or '.cortex' in str(f) or 'anvil_yung' in str(f) or 'target' in str(f):
                 continue
             try:
                 lines = len(f.read_text(errors='ignore').splitlines())
