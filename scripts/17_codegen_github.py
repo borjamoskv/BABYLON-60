@@ -1,7 +1,12 @@
 import os
+import sys
 import hashlib
 import sqlite3
 import datetime
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
 
 DOMAINS = [
     "PUSH", "PULL_REQUEST", "ISSUE", "WORKFLOW_RUN", "RELEASE",
