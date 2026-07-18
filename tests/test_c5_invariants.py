@@ -50,8 +50,9 @@ def _fail_msg(law, hits):
 def test_inv_c5_02_no_hardcoded_keys():
     """INV_C5_02 — ninguna clave simétrica literal vive en el árbol (env/KMS o nada)."""
     hits = _scan({".rs"}, r'Key::new\([^,]*,\s*b"')
-    hits += _scan({".py", ".rs", ".sol", ".sh", ".yaml", ".yml", ".toml"},
-                  r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY)\s*[:=]\s*["\']\w')
+    hits += _scan({".py", ".rs", ".ts", ".js", ".sol", ".sh", ".yaml", ".yml", ".toml"},
+                  r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY|master_key|solana_keypair)\s*[:=]\s*["\']\w')
+    hits = [h for h in hits if "demo_exergy_poc.py" not in h]
     assert not hits, _fail_msg("INV_C5_02 (clave soberana)", hits)
 
 
@@ -73,11 +74,7 @@ def test_inv_c5_04_no_mock_signatures():
     assert not hits, _fail_msg("INV_C5_04 (firma real)", hits)
 
 
-def test_inv_c5_02_no_hardcoded_keys():
-    """INV_C5_02 — No hardcoded master key or solana keypair in codebase."""
-    hits = _scan({".py", ".ts", ".js"}, r'(master_key|solana_keypair|MASTER_LEDGER_KEY)\s*=\s*["\']\w+')
-    hits = [h for h in hits if "demo_exergy_poc.py" not in h]
-    assert not hits, _fail_msg("INV_C5_02 (clave soberana)", hits)
+
 
 
 @pytest.mark.xfail(reason="Advisory: SIGKILL es fail-fast intencional hoy; INV_C5_07 pide SIGTERM+cleanup.", strict=False)

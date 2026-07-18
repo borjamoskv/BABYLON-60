@@ -5,7 +5,7 @@ Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
 from dataclasses import dataclass
-from typing import Union, List, Set, Any
+from typing import Union, List, Set
 import os
 import sys
 import re
@@ -130,48 +130,48 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
             "autodetect_invariants.py"
         ])
         
-        added_lines = [l for l in lines if l.startswith("+") and not l.startswith("+++")]
-        removed_lines = [l for l in lines if l.startswith("-") and not l.startswith("---")]
+        added_lines = [line for line in lines if line.startswith("+") and not line.startswith("+++")]
+        removed_lines = [line for line in lines if line.startswith("-") and not line.startswith("---")]
         
         added += len(added_lines)
         removed += len(removed_lines)
         
         if not is_excluded:
-            for l in added_lines:
+            for line in added_lines:
                 # 1. Broad exceptions (INV_C5_07)
-                if re.search(r'except\s+Exception\b|except\s*:', l):
-                    print(f"DEBUG Match in {header}: {l}")
+                if re.search(r'except\s+Exception\b|except\s*:', line):
+                    print(f"DEBUG Match in {header}: {line}")
                     e_points += 4.0
                     msg = "Broad exception caught (INV_C5_07 violation)."
                     reasons_e.append(msg)
                     reasons_failed.append(msg)
                     
                 # 2. Hardcoded secrets (INV_C5_02)
-                if re.search(r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY)\s*[:=]\s*["\']\w', l, re.IGNORECASE):
+                if re.search(r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY)\s*[:=]\s*["\']\w', line, re.IGNORECASE):
                     e_points += 8.0
                     msg = "Hardcoded key pattern found (INV_C5_02 violation)."
                     reasons_e.append(msg)
                     reasons_failed.append(msg)
                     
                 # 3. Weak hashes (INV_C5_03)
-                if re.search(r'hashlib\.(md5|sha1)\b', l):
+                if re.search(r'hashlib\.(md5|sha1)\b', line):
                     e_points += 5.0
                     msg = "Weak hashing primitives (MD5/SHA1) (INV_C5_03 violation)."
                     reasons_e.append(msg)
                     reasons_failed.append(msg)
 
                 # 4. Typing/Strict conversions (INV_C5_10)
-                if re.search(r'bytes\((sk|sk\.public_key)\)', l):
+                if re.search(r'bytes\((sk|sk\.public_key)\)', line):
                     l_points += 3
                     reasons_l.append("PyNaCl bytes serialization aligned with INV_C5_10.")
 
                 # 5. Relative symlink checks (INV_C5_12)
-                if "readlink" in l or "is_symlink" in l:
+                if "readlink" in line or "is_symlink" in line:
                     l_points += 2
                     reasons_l.append("Nexus package symlink validation (INV_C5_12).")
         else:
             # If tests/checks are added, register autoloop credit
-            if any("test" in l or "invariant" in l for l in added_lines):
+            if any("test" in line or "invariant" in line for line in added_lines):
                 a_points += 4
                 reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
         
@@ -344,7 +344,7 @@ ProvSignature: "{prov_hash}"
     # Fail-Fast if exergy score is below threshold (700)
     if isinstance(verdict, ExergyFailed):
         print(f"🚨 ALERT: Iteration Exergy too low ({verdict.score.value:.1f}/1000.0). Purge entropy before committing.")
-        print(f"Reasons:\n  - " + "\n  - ".join(verdict.reasons))
+        print("Reasons:\n  - " + "\n  - ".join(verdict.reasons))
         sys.exit(1)
         
     sys.exit(0)
