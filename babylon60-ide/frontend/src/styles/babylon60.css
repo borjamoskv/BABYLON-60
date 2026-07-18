@@ -6,26 +6,26 @@
 
 /* ─── 0. DESIGN TOKENS ─────────────────────────────────────── */
 :root {
-  /* YInMn Blue-derived surface hierarchy */
-  --bitumen: #070914;      /* Background — dark YInMn void, prevents halation unlike pure #000 */
-  --kiln: #0C0E1C;
-  --tablet: #111626;
-  --tablet-2: #181F33;
-  --tablet-3: #1E2540;
-  --edge: #1E2540;
-  --edge-soft: #161C30;
+  /* YInMn Blue-derived surface hierarchy (Optimized for higher luminance) */
+  --bitumen: #090B19;      /* Background — slightly lighter to increase overall screen luminance */
+  --kiln: #0F1226;
+  --tablet: #151A33;
+  --tablet-2: #1D2342;
+  --tablet-3: #262E52;
+  --edge: #2E3866;         /* Brighter borders for high definition */
+  --edge-soft: #20274D;
 
   /* Text: high contrast but not pure white */
-  --dust: #F0F2FF;         /* Slightly blue-tinted white: reduces contrast glare */
-  --dust-dim: #9AA0C8;
-  --dust-faint: #4A5070;
-  --dust-ghost: #2C3155;
+  --dust: #FFFFFF;         /* Pure white for maximum readability */
+  --dust-dim: #B4B9DF;     /* Brighter gray/blue */
+  --dust-faint: #676E99;
+  --dust-ghost: #3E4473;
 
   /* YInMn accent (the pure pigment) */
-  --lapis: #2B3BE5;
-  --lapis-bright: #4D5CFF;
-  --lapis-dim: #1a2599;
-  --lapis-glow: rgba(43, 59, 229, 0.12);
+  --lapis: #3B4DFF;        /* Brighter accent blue */
+  --lapis-bright: #7080FF;
+  --lapis-dim: #2230D1;
+  --lapis-glow: rgba(59, 77, 255, 0.22);
 
   /* Semantic */
   --gold: #F59E0B;
@@ -86,8 +86,9 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(43, 59, 229, 0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(245, 158, 11, 0.02) 0%, transparent 70%);
+    radial-gradient(ellipse 80% 60% at 50% -20%, rgba(112, 128, 255, 0.20) 0%, transparent 80%),
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(59, 77, 255, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(245, 158, 11, 0.08) 0%, transparent 70%);
 }
 
 /* ─── 3. TACHOMETER ─────────────────────────────────────────── */
