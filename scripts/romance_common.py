@@ -95,7 +95,7 @@ TreeNode = tuple[str, ...]
 def L(name: str, length: float) -> TreeNode:
     return ('L', name, str(length))
 
-def I(length: float, kids: list[TreeNode]) -> TreeNode:
+def I(length: float, kids: list[TreeNode]) -> TreeNode:  # noqa: E743
     return ('I', str(length), *[str(id(k)) for k in kids])
 
 # NOTE: The tree is built with raw tuples for runtime flexibility.

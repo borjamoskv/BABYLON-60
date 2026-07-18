@@ -97,7 +97,7 @@ def audit_databases() -> dict[str, dict[str, int]]:
 
 def audit_ruff() -> dict[str, int]:
     ruff_bin = ROOT_DIR / ".venv" / "bin" / "ruff"
-    cmd = [str(ruff_bin) if ruff_bin.exists() else "ruff", "check", ".", "--select", "E,F", "--statistics", "-q"]
+    cmd = [str(ruff_bin) if ruff_bin.exists() else "ruff", "check", ".", "--statistics", "-q"]
     result = subprocess.run(
         cmd,
         cwd=str(ROOT_DIR),
