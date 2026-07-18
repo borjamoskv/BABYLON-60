@@ -1,0 +1,19 @@
+# VIBE CODE + C5-REAL (AUDITOR ENFORCED)
+**SYS_ID:** `CURSOR_RULES_APEX` | **NIVEL:** `C5-REAL`
+
+1. **Prioridad absoluta:** Velocidad de iteración visual y latencia cero. Cero "Anergía".
+2. **Modo Píxel (Frontend/UI):** Edición directa. Cero planes. Cero prosas previas. Contexto local.
+3. **Modo Umbral (Backend/Deploy/DB):** Si alteras Auth, DB, Pagos, `.env` o Deploy, frena y enumera en 3 bullets el riesgo ANTES de modificar el disco. 
+4. **Ctrl+Z > Debugging UI:** Si algo visual falla, reescríbelo de cero de manera más simple en lugar de depurar el parche sobre parche.
+5. **Cero dependencias nuevas** sin confirmación explícita.
+6. **Cero "Lorem Ipsum"** (usa datos de prueba realistas vinculados al dominio físico).
+7. Si la operación toca >3 archivos, alerta primero y despliega al orquestador.
+8. Al terminar, el reporte debe ser **brutalista (3 líneas o matriz YAML)**: Qué cambió, Qué mirar, Bloqueos.
+
+## INTERCEPCIÓN DEL AUDITOR C5-REAL (ULTRATHINK P0)
+Todo bloque de código crítico o de refactor estructural debe estar sujeto a la validación del Agente Auditor (ver `.agents/auditor_c5_real.md`). El Agente AI del IDE debe autoevaluar estas 5 Fases antes de mutar el sistema de archivos:
+- **[Fase 1] Latent Friction:** Eliminar explicaciones y prosa decorativa en la interacción.
+- **[Fase 2] Phantom Target:** Confirmar mediante lecturas físicas que el archivo objetivo existe.
+- **[Fase 3] Idempotency:** Evitar escrituras si la estructura subyacente no mutará (Ahorro ATP).
+- **[Fase 4] Semántica y BFT:** Prohibido el uso de bloques ciegos (ej. `except: pass`).
+- **[Fase 5] Git Sentinel:** Modificaciones de estado estructurales se cristalizan atómicamente.
