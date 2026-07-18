@@ -30,7 +30,6 @@ from causal_isomorphism.ir import (
     IRRecordType,
     IRType,
     IRTypeKind,
-    IRUnionCase,
 )
 
 
@@ -282,21 +281,21 @@ class RustEmitter:
         # REGIME FILTER: Block physics computation
         if func.classification == FunctionClassification.STATE_TRANSITION:
             self._line(f"// @regime-blocked: {func.name}")
-            self._line(f"// Classification: STATE_TRANSITION — physics stays in F# Domain Kernel.")
-            self._line(f"// Rust receives the computed result via IPC/FFI boundary.")
+            self._line("// Classification: STATE_TRANSITION — physics stays in F# Domain Kernel.")
+            self._line("// Rust receives the computed result via IPC/FFI boundary.")
             self._line("")
             return
 
         # Block consensus anchoring (belongs to Solidity)
         if func.classification == FunctionClassification.COMMIT_BOUNDARY:
             self._line(f"// @regime-blocked: {func.name}")
-            self._line(f"// Classification: COMMIT_BOUNDARY — anchoring belongs to Solidity/Anvil.")
+            self._line("// Classification: COMMIT_BOUNDARY — anchoring belongs to Solidity/Anvil.")
             self._line("")
             return
 
         if func.classification == FunctionClassification.EVENT_EMITTER:
             self._line(f"// @regime-blocked: {func.name}")
-            self._line(f"// Classification: EVENT_EMITTER — event emission belongs to Solidity/Anvil.")
+            self._line("// Classification: EVENT_EMITTER — event emission belongs to Solidity/Anvil.")
             self._line("")
             return
 

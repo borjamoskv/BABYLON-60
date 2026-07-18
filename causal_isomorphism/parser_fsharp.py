@@ -519,7 +519,7 @@ class FSharpParser:
         if not lines:
             return IRExpr(kind=IRExprKind.LITERAL, literal_value="()", literal_type=IR_UNIT)
 
-        combined = " ".join(l.strip() for l in lines if l.strip())
+        combined = " ".join(line_str.strip() for line_str in lines if line_str.strip())
 
         # sprintf detection
         sprintf_match = self.RE_SPRINTF.match(combined)

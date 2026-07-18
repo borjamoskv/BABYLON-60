@@ -25,16 +25,13 @@ from causal_isomorphism.ir import (
     EmitPermission,
     FunctionClassification,
     IRDiscriminatedUnion,
-    IRExpr,
     IRExprKind,
     IRFunction,
     IRModule,
     IRParam,
-    IRRecordField,
     IRRecordType,
     IRType,
     IRTypeKind,
-    IRUnionCase,
     REGIME_PERMISSIONS,
     RegimeLayer,
 )
@@ -104,7 +101,7 @@ class SolidityEmitter:
         self._line("/// @dev Causal Isomorphism Transpiler — Trilingual Regime")
         self._line("/// @notice TYPE DEFINITIONS and CONSENSUS ANCHORING only.")
         self._line("/// @notice Physics computation stays in F# Domain Kernel.")
-        self._line(f"/// @author borjamoskv")
+        self._line("/// @author borjamoskv")
 
         contract_name = self._sanitize_name(module.name) + "Anchor"
         self._line(f"contract {contract_name} {{")
@@ -246,14 +243,14 @@ class SolidityEmitter:
         if func.classification == FunctionClassification.STATE_TRANSITION:
             self._line("")
             self._line(f"// @regime-blocked: {func.name}")
-            self._line(f"// Classification: STATE_TRANSITION — physics computation stays in F# Domain Kernel.")
-            self._line(f"// The off-chain F# kernel computes the transition and calls commitState() with the result.")
+            self._line("// Classification: STATE_TRANSITION — physics computation stays in F# Domain Kernel.")
+            self._line("// The off-chain F# kernel computes the transition and calls commitState() with the result.")
             return
 
         if func.classification == FunctionClassification.HASH_COMPUTATION:
             self._line("")
             self._line(f"// @regime-blocked: {func.name}")
-            self._line(f"// Classification: HASH_COMPUTATION — BLAKE3/DAG operations stay in Rust strike_rs.")
+            self._line("// Classification: HASH_COMPUTATION — BLAKE3/DAG operations stay in Rust strike_rs.")
             return
 
         # COMMIT_BOUNDARY → emit as external function
@@ -275,7 +272,7 @@ class SolidityEmitter:
         """Emit a commit/anchor function for the EVM layer."""
         self._line("")
         self._line(f"/// @notice {func.name} — Anchors computed state from F# Domain Kernel")
-        self._line(f"/// @dev Off-chain F# computes transition; this function anchors the result on-chain")
+        self._line("/// @dev Off-chain F# computes transition; this function anchors the result on-chain")
 
         params_sol = self._format_params(func.params)
         self._line(f"function {func.name}({params_sol}) external {{")

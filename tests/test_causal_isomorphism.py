@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# ruff: noqa: E402
 # tests/test_causal_isomorphism.py — C5-REAL Verification Suite
 # Author: Borja Moskv (borjamoskv)
 """
@@ -22,8 +23,6 @@ from causal_isomorphism.ir import (
     FunctionClassification,
     IRDiscriminatedUnion,
     IRModule,
-    IRRecordField,
-    IRRecordType,
     IRType,
     IRTypeKind,
     IRUnionCase,

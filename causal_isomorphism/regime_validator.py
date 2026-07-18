@@ -24,7 +24,6 @@ from enum import Enum, auto
 from causal_isomorphism.ir import (
     EmitPermission,
     FunctionClassification,
-    IRFunction,
     IRModule,
     REGIME_PERMISSIONS,
     RegimeLayer,
@@ -70,7 +69,7 @@ class ValidationReport:
 
     def summary(self) -> str:
         lines = [
-            f"=== Regime Validation Report ===",
+            "=== Regime Validation Report ===",
             f"Types:     {self.total_types}",
             f"Functions: {self.total_functions}",
             f"  Permitted: {len(self.permitted_functions)}",
