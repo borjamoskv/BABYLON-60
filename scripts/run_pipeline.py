@@ -26,21 +26,41 @@ PHASES = {
             "14_codegen_neuro.py",
             "15_codegen_tts.py",
             "16_codegen_primitives.py",
+            "17_codegen_github.py",
             "18_codegen_kimi.py",
         ],
     },
     2: {
-        "name": "Validación, Simulación e Iteración",
+        "name": "Calidad de Código (Formatting & Linting)",
         "scripts": [
-            "20_stress_db.py",
-            "21_iter_100.py",
-            "22_iter_5000.py",
-            "23_iter_ultrathink.py",
+            "20_format_all.py",
+            "21_lint_clippy.py",
         ],
     },
     3: {
+        "name": "Verificación y Pruebas Unitarias",
+        "scripts": [
+            "30_test_pytest.py",
+            "31_test_go.py",
+            "32_test_cargo.py",
+        ],
+    },
+    4: {
+        "name": "Simulación de Carga, Iteración y MCTS",
+        "scripts": [
+            "40_stress_db.py",
+            "41_iter_100.py",
+            "42_iter_5000.py",
+            "43_iter_ultrathink.py",
+        ],
+    },
+    5: {
         "name": "Auditoría, Consolidación y Mantenimiento",
-        "scripts": ["30_audit_loop.py", "31_autoconsolidate.py", "32_legion_purge.py"],
+        "scripts": [
+            "50_audit_loop.py",
+            "51_autoconsolidate.py",
+            "52_legion_purge.py",
+        ],
     },
 }
 
@@ -87,13 +107,13 @@ def main() -> None:
     parser.add_argument(
         "--phase",
         type=int,
-        choices=[0, 1, 2, 3],
-        help="Ejecutar una fase específica completa (0-3).",
+        choices=[0, 1, 2, 3, 4, 5],
+        help="Ejecutar una fase específica completa (0-5).",
     )
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Ejecutar la cascada completa de todas las fases (0 a 3).",
+        help="Ejecutar la cascada completa de todas las fases (0 a 5).",
     )
     parser.add_argument(
         "--script",
@@ -106,7 +126,7 @@ def main() -> None:
     if not (args.all or args.phase is not None or args.script):
         print("=== CORTEX-OMEGA: PIPELINE RUNNER ===")
         print(
-            "Uso: python3 scripts/run_pipeline.py [--all] [--phase <0-3>] [--script <nombre>]"
+            "Uso: python3 scripts/run_pipeline.py [--all] [--phase <0-5>] [--script <nombre>]"
         )
         print("\nFases Disponibles:")
         for pid, phase in PHASES.items():
@@ -127,12 +147,8 @@ def main() -> None:
         print(f"🎯 Ejecutando Fase {args.phase}: {phase['name']}")
         scripts_to_run = list(phase["scripts"])
     elif args.all:
-        print("🌀 Lanzando Cascada Completa (Fases 0, 1, 2, 3)...")
+        print("🌀 Lanzando Cascada Completa (Fases 0 a 5)...")
         for pid in sorted(PHASES.keys()):
-            # Saltamos scripts interactivos o de bucle infinito (como cdp transducer o iter_5000/ultrathink si no tienen argumentos cortos)
-            # Nota: cdp_transducer intenta abrir conexión con puerto 9222.
-            # En la cascada automática, si no hay chrome corriendo, puede fallar o continuar.
-            # Los scripts de iteración larga o estrés pueden limitarse si es necesario.
             for s in PHASES[pid]["scripts"]:
                 scripts_to_run.append(s)
 
@@ -142,9 +158,9 @@ def main() -> None:
         # Si ejecutamos --all, saltamos cdp_transducer y stress_db / itera5000 / itera_ultrathink / audit_loop de forma automática para evitar bloqueos
         if args.all and script in [
             "01_cdp_transducer.py",
-            "22_iter_5000.py",
-            "23_iter_ultrathink.py",
-            "30_audit_loop.py",
+            "42_iter_5000.py",
+            "43_iter_ultrathink.py",
+            "50_audit_loop.py",
         ]:
             print(
                 f"⏩ [SKIP] Saltando {script} en cascada general para evitar bloqueos/esperas de puerto o bucles infinitos."
