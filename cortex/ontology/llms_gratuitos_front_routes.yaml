@@ -1,0 +1,47 @@
+Claim: [LLMS-GRATUITOS-FRONTERA-ROUTES] Rutas de Acceso y Endpoints de LLMs de Frontera Libres de Coste (2026)
+Proof:
+  Base: "API Specifications + Developer Console Endpoints"
+  Confidence: C5-REAL
+  PrimaryVectors:
+    - GitHub Models Free Developer Tier
+    - Hugging Face Serverless Inference API
+    - Groq Cloud Console Free Limits
+    - Local Inference via Ollama CLI
+    - Anonymous Swarm Access via DDG Chat
+
+routes:
+  - name: "GitHub Models"
+    url: "https://github.com/marketplace/models"
+    auth: "GitHub Personal Access Token (PAT)"
+    models: ["Llama-3-8B-Instruct", "Gemma-2-9B-It", "Qwen-2.5-72B-Instruct", "Phi-3.5-MoE-Instruct"]
+    description: "Acceso gratuito diario para desarrollo de prototipos e investigación de agentes."
+
+  - name: "Hugging Face Inference API"
+    url: "https://huggingface.co/docs/api-inference/index"
+    auth: "Hugging Face User Access Token (Free)"
+    models: ["Qwen/Qwen2.5-72B-Instruct", "meta-llama/Llama-3.2-3B-Instruct", "mistralai/Mistral-7B-Instruct-v0.3"]
+    description: "API Serverless para solicitudes de baja frecuencia en workflows automatizados."
+
+  - name: "Groq Cloud Console"
+    url: "https://console.groq.com"
+    auth: "Groq API Key (Free Tier Limits)"
+    models: ["llama3-70b-8192", "gemma2-9b-it", "mixtral-8x7b-32768"]
+    description: "Inferencia de velocidad extrema (LPU) con límites diarios gratuitos para prototipos."
+
+  - name: "Ollama Local Engine"
+    url: "http://localhost:11434"
+    auth: "Ninguna (100% Autarquía / Local)"
+    models: ["llama3", "gemma2", "qwen2.5", "deepseek-r1:8b"]
+    description: "Servicio local de inferencia. Cero dependencia de red, exergía de red optimizada y privacidad absoluta."
+
+  - name: "DuckDuckGo AI Chat API Bypass"
+    url: "https://duckduckgo.com/chat"
+    auth: "Ninguna (Conexión Anónima)"
+    models: ["Llama-3-70B", "Mixtral-8x7B", "Claude-Haiku"]
+    description: "Interfaz web anónima para consultas rápidas sin persistencia ni llaves de acceso."
+
+  - name: "DeepSeek Platform Console"
+    url: "https://platform.deepseek.com"
+    auth: "API Key (Créditos Gratuitos Iniciales)"
+    models: ["deepseek-chat", "deepseek-reasoner"]
+    description: "Punto de acceso API para DeepSeek-V3 y DeepSeek-R1 con créditos de bienvenida gratuitos."
