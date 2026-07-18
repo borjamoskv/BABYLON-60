@@ -2,7 +2,12 @@ import time
 import sys
 import os
 import statistics
-from cortex.swarm.engine_fsm import run_fsm_cycle
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
+
+from cortex.swarm.engine_fsm import run_fsm_cycle  # noqa: E402
 
 def itera_5000():
     print("=== CORTEX-OMEGA: IGNICIÓN DE BUCLE ITERA 5000 (TEST DE ENDURANCIA TERMODINÁMICA) ===")

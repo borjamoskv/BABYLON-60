@@ -4,7 +4,12 @@ import sys
 import hashlib
 import subprocess
 from datetime import datetime, timezone
-from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
+
+from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical  # noqa: E402
 
 def get_ledger_hash():
     try:

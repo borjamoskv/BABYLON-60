@@ -1,7 +1,12 @@
 import concurrent.futures
 import time
 import sys
-from cortex.swarm.memory_store import AgentMemory
+import os
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+
+from cortex.swarm.memory_store import AgentMemory  # noqa: E402
 
 def worker(worker_id: int):
     try:
