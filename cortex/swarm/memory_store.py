@@ -2,7 +2,7 @@ import os
 import sqlite3
 import hashlib
 from typing import Dict, Any, Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 class AgentMemory:
     """
@@ -56,8 +56,8 @@ class AgentMemory:
     def log(self, issue_id: int, agent_role: str, action: str, result: str) -> str:
         prev_hash = self._get_last_hash()
         
-        # Generar firma CORTEX-TAINT (Ω11)
-        timestamp_iso = datetime.utcnow().isoformat() + "Z"
+        timestamp_iso = datetime.now(timezone.utc).isoformat()
+
         raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode('utf-8')
         cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
         
