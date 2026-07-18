@@ -44,7 +44,16 @@ Optional low-latency extension via PyO3/Maturin. Bypasses Python GIL for:
 
 **Status: Alpha.** Do not use in production without benchmarking.
 
-### 3. Ledger Contract
+### 3. Sovereign Agentic IDE (`babylon60-ide/`)
+
+A local-first environment designed for inspectability and low-latency interaction with the ledger.
+
+*   **Tauri App Wrapper (`src-tauri/`):** Manages OS integration, native windows, and bridges local database state to the renderer thread via IPC command handlers.
+*   **FastAPI Backend (`backend/`):** Exposes REST and WebSocket endpoints for ledger querying, BM25 searching, telemetry tracking, and local model generation.
+*   **Vite Frontend (`frontend/`):** Built with Vanilla JS, styled with a high-contrast neuro-inclusive palette, and configured with keyboard-first navigation (Command Palette `Cmd+K`, Scratchpad `Cmd+Shift+Space`).
+*   **Local Inference Module (`inference/`):** Confined to loopback endpoints (`127.0.0.1:11434` / `localhost`). Bridges the FastAPI server to local inference engines (Ollama, MLX, or the native Mamba SSM engine), ensuring zero data leak to public hyperscalers.
+
+### 4. Ledger Contract
 
 Every entry written to the ledger must satisfy:
 
@@ -62,7 +71,7 @@ Every entry written to the ledger must satisfy:
 Duplicate `id` → write is rejected (idempotent).
 `prev_hash` mismatch → write aborted, chain integrity violated.
 
-### 4. Consensus Topology (M12 Levels)
+### 5. Consensus Topology (M12 Levels)
 
 | Level | Mechanism | Scope |
 |:---|:---|:---|
@@ -75,11 +84,11 @@ Duplicate `id` → write is rejected (idempotent).
 > [!NOTE]
 > L4 and L5 are **not required** for local agent memory use cases. They are research extensions. The stable core uses L1–L3 only.
 
-### 5. Git Sentinel
+### 6. Git Sentinel
 
 Each disk mutation triggers an automatic commit with Conventional Commit prefix and `CORTEX_TAINT` metadata injected into the commit message. This creates an auditable, human-readable history of all agent state changes.
 
-### 6. Formal Proofs (`proof/lean/`)
+### 7. Formal Proofs (`proof/lean/`)
 
 **Status: Prototype.** Lean 4 theorem formalization of:
 - Partial ordering invariant
