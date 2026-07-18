@@ -9,6 +9,7 @@ import sys
 import subprocess
 import time
 import argparse
+import concurrent.futures
 
 # Configuración de fases y sus scripts correspondientes
 PHASES = {
@@ -101,6 +102,43 @@ def run_script(script_name: str) -> bool:
         return False
 
 
+def run_script_captured(script_name: str) -> tuple[bool, float, str, str]:
+    script_path = os.path.join(PROJECT_ROOT, "scripts", script_name)
+    if not os.path.exists(script_path):
+        return False, 0.0, "", f"Script no encontrado: {script_name}"
+
+    start_time = time.perf_counter()
+    try:
+        cmd = [sys.executable, script_path]
+        res = subprocess.run(cmd, capture_output=True, text=True, cwd=PROJECT_ROOT)
+        elapsed = time.perf_counter() - start_time
+        return res.returncode == 0, elapsed, res.stdout, res.stderr
+    except (OSError, ValueError, subprocess.SubprocessError) as e:
+        return False, 0.0, "", f"Excepción: {str(e)}"
+
+
+def run_scripts_parallel(scripts: list[str]) -> bool:
+    print(f"\n⚡ [PARALELO] Lanzando {len(scripts)} scripts en paralelo...")
+    success = True
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = {executor.submit(run_script_captured, s): s for s in scripts}
+        for future in concurrent.futures.as_completed(futures):
+            script = futures[future]
+            ok, elapsed, stdout, stderr = future.result()
+            if ok:
+                print(f"✅ [SUCCESS] {script} completado con éxito en {elapsed:.4f}s.")
+                if stdout.strip():
+                    print(f"--- Output {script} ---\n{stdout.strip()}")
+            else:
+                success = False
+                print(f"❌ [FAILURE] {script} falló en {elapsed:.4f}s.")
+                if stdout.strip():
+                    print(f"--- Stdout {script} ---\n{stdout.strip()}")
+                if stderr.strip():
+                    print(f"--- Stderr {script} ---\n{stderr.strip()}")
+    return success
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Orquestador de Cascada de Fases C5-REAL."
@@ -139,39 +177,48 @@ def main() -> None:
     print("=== CORTEX-OMEGA: IGNICIÓN DE CASCADA NATURAL ===")
     start_global = time.perf_counter()
 
-    scripts_to_run: list[str] = []
+    success = True
 
     if args.script:
-        scripts_to_run = [args.script]
+        success = run_script(args.script)
     elif args.phase is not None:
         phase = PHASES[args.phase]
         print(f"🎯 Ejecutando Fase {args.phase}: {phase['name']}")
-        scripts_to_run = list(phase["scripts"])
+        scripts = list(phase["scripts"])
+        if args.phase in [1, 3]:
+            success = run_scripts_parallel(scripts)
+        else:
+            for s in scripts:
+                if not run_script(s):
+                    success = False
+                    break
     elif args.all:
         print("🌀 Lanzando Cascada Completa (Fases 0 a 5)...")
-        for pid in sorted(PHASES.keys()):
-            for s in PHASES[pid]["scripts"]:
-                scripts_to_run.append(s)
-
-    # Ejecución secuencial en cascada
-    success = True
-    for script in scripts_to_run:
-        # Si ejecutamos --all, saltamos cdp_transducer y stress_db / itera5000 / itera_ultrathink / audit_loop de forma automática para evitar bloqueos
-        if args.all and script in [
+        skip_list = [
             "01_cdp_transducer.py",
             "42_iter_5000.py",
             "43_iter_ultrathink.py",
             "50_audit_loop.py",
-        ]:
-            print(
-                f"⏩ [SKIP] Saltando {script} en cascada general para evitar bloqueos/esperas de puerto o bucles infinitos."
-            )
-            continue
-
-        res = run_script(script)
-        if not res:
-            success = False
-            break
+        ]
+        for pid in sorted(PHASES.keys()):
+            phase = PHASES[pid]
+            scripts = [s for s in phase["scripts"] if s not in skip_list]
+            if not scripts:
+                continue
+            print(f"\n🎯 Ejecutando Fase {pid}: {phase['name']}")
+            if pid in [1, 3]:
+                if not run_scripts_parallel(scripts):
+                    success = False
+                    break
+            else:
+                phase_success = True
+                for s in scripts:
+                    if not run_script(s):
+                        phase_success = False
+                        break
+                if not phase_success:
+                    success = False
+                    break
 
     elapsed_global = time.perf_counter() - start_global
     print("\n=== FIN DE LA CASCADA ===")

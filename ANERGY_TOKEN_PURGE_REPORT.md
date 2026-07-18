@@ -5,8 +5,8 @@ Claim: C5-REAL LEGION 10K ANERGY PURGE & COGNITIVE CONGRUENCE VERIFIED
 Proof:
   Base: "100 Swarm Agents (10 Blocks x 10 Nodes) acting on 10000 Primitives (LEGION 10K)"
   Confidence: C5-REAL
-  ExergyRatio: 0.0506
-  OP_TAINT_SEAL: borjamoskv:anergy_purge:100_agents_legion_10k:1784396167
+  ExergyRatio: 0.0489
+  OP_TAINT_SEAL: borjamoskv:anergy_purge:100_agents_legion_10k:1784396218
 ```
 
 ## 1. Executive Summary & Swarm Mitosis (`LEGION-10K v10.0`)
@@ -34,9 +34,9 @@ Static cleanups completed successfully. All PEP8 and unused import violations ha
 ---
 
 ## 3. Cognitive & Exergy Metrics
-- **Transcript Steps Analyzed**: 476 steps.
-- **Exergy Ratio**: 0.0506
-- **Anergy Ratio**: 0.9494
+- **Transcript Steps Analyzed**: 502 steps.
+- **Exergy Ratio**: 0.0489
+- **Anergy Ratio**: 0.9511
 - **Sequential Command Loops**: 10
 
 ```yaml
