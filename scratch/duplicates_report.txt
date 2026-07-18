@@ -1,0 +1,145 @@
+=== EXACT DUPLICATES BY HASH ===
+Hash: 7178242a3fe994083d0281fd43634b4eb514af083073c39c5010b3cf735ac77f
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/heavy-work-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/shell-path-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/transcript-search-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/mcp-runtime/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/file-index-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/pty-host/window-shared.css
+Hash: b42aec2b75413cd5bd6786662a1ebf52ad7f6f678a96a65697b0e5440ddb438c
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+Hash: 0d02326c60100e47779da65978359736c6a0f45e463fbb72a82fd3f3ed2e1ec5
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+Hash: 46471d7f8c98354f935f202c6ffcdf77586a06143f0e964dbb5d732c9ceedc48
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+Hash: ae82f4e9b5ae030ff57ae1f6eed9f2c785ef981b4b651033c551c428ef816656
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+
+=== DUPLICATE FILENAMES IN DIFFERENT PATHS ===
+Filename: cortex.db
+  - cortex.db
+  - .cortex/cortex.db
+Filename: package.json
+  - package.json
+  - cortex/audits/codex/package.json
+  - cortex/audits/claude_new/package.json
+  - cortex/audits/vscode/package.json
+  - cortex/audits/claude_v1.21459.3/app_source/package.json
+Filename: ANERGY_TOKEN_PURGE_REPORT.md
+  - ANERGY_TOKEN_PURGE_REPORT.md
+  - cortex/artifacts/reports/ANERGY_TOKEN_PURGE_REPORT.md
+Filename: Cargo.toml
+  - strike-rs/Cargo.toml
+  - src-tauri/Cargo.toml
+Filename: Cargo.lock
+  - strike-rs/Cargo.lock
+  - src-tauri/Cargo.lock
+Filename: lib.rs
+  - strike-rs/src/lib.rs
+  - src-tauri/src/lib.rs
+Filename: __init__.cpython-314.pyc
+  - cortex/swarm/__pycache__/__init__.cpython-314.pyc
+  - cortex/__pycache__/__init__.cpython-314.pyc
+Filename: __init__.cpython-312.pyc
+  - cortex/swarm/__pycache__/__init__.cpython-312.pyc
+  - cortex/__pycache__/__init__.cpython-312.pyc
+Filename: pycharm_audit.md
+  - cortex/audits/ing-inv/pycharm_audit.md
+  - cortex/audits/pycharm_2026.1.4/pycharm_audit.md
+Filename: webstorm_audit.md
+  - cortex/audits/ing-inv/webstorm_audit.md
+  - cortex/audits/webstorm_2026.2/webstorm_audit.md
+Filename: codex_claude_deep_audit.md
+  - cortex/audits/ing-inv/codex_claude_deep_audit.md
+  - cortex/audits/codex/codex_claude_deep_audit.md
+Filename: copilot_sdk_audit_report.md
+  - cortex/audits/ing-inv/copilot_sdk_audit_report.md
+  - cortex/audits/copilot/copilot_sdk_audit_report.md
+Filename: vscode_audit.md
+  - cortex/audits/ing-inv/vscode_audit.md
+  - cortex/audits/vscode/vscode_audit.md
+Filename: claude_science_audit_report.md
+  - cortex/audits/ing-inv/claude_science_audit_report.md
+  - cortex/audits/claude_science/claude_science_audit_report.md
+Filename: flow_ax_audit_report.md
+  - cortex/audits/ing-inv/flow_ax_audit_report.md
+  - cortex/audits/flow/flow_ax_audit_report.md
+Filename: asar_header.json
+  - cortex/audits/codex/asar_header.json
+  - cortex/audits/claude_new/asar_header.json
+Filename: urls_extracted.txt
+  - cortex/audits/codex/urls_extracted.txt
+  - cortex/audits/claude_new/urls_extracted.txt
+Filename: Info.plist
+  - cortex/audits/codex/Info.plist
+  - cortex/audits/claude_new/Info.plist
+  - cortex/audits/webstorm_2026.2/Info.plist
+  - cortex/audits/pycharm_2026.1.4/Info.plist
+  - cortex/audits/vscode/Info.plist
+Filename: idea.properties
+  - cortex/audits/webstorm_2026.2/idea.properties
+  - cortex/audits/pycharm_2026.1.4/idea.properties
+Filename: window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/heavy-work-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/shell-path-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/transcript-search-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/mcp-runtime/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/file-index-worker/window-shared.css
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/build/pty-host/window-shared.css
+Filename: AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+Filename: AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+Filename: AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+Filename: AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+Filename: matrix.md
+  - axioms/ddd/matrix.md
+  - axioms/autoreferential/matrix.md
+  - axioms/semantics/matrix.md
+  - axioms/ontology/matrix.md

@@ -1,0 +1,64 @@
+---
+redundancy_audit_report:
+  exact_duplicates:
+    - paths:
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/heavy-work-worker/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/shell-path-worker/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/transcript-search-worker/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/mcp-runtime/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/file-index-worker/window-shared.css
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/build/pty-host/window-shared.css
+    - paths:
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Italic-Variable-B9Ik5ODi.ttf
+    - paths:
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSerif-Roman-Variable-D05ngSTe.ttf
+    - paths:
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Roman-Variable-DCEzLfgm.ttf
+    - paths:
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/quick_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/find_in_page/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/buddy_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/main_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+        - cortex/audits/claude_v1.21459.3/app_source/.vite/renderer/about_window/assets/AnthropicSans-Italic-Variable-Dqj5mHDM.ttf
+  near_duplicates:
+    - file_1: package.json
+      file_2: cortex/audits/codex/package.json
+      similarity_ratio: 0.9956
+    - file_1: cortex/audits/claude_new/package.json
+      file_2: cortex/audits/claude_v1.21459.3/app_source/package.json
+      similarity_ratio: 0.9813
+    - file_1: ANERGY_TOKEN_PURGE_REPORT.md
+      file_2: cortex/artifacts/reports/ANERGY_TOKEN_PURGE_REPORT.md
+      similarity_ratio: 0.9946
+  database_instances:
+    - path: cortex.db
+      size_bytes: 4096
+      last_modified: 1784372325.1228924
+    - path: .cortex/cortex.db
+      size_bytes: 20480
+      last_modified: 1784372324.7761576
+    - path: agent_memory.db
+      size_bytes: 888832
+      last_modified: 1784373001.7025378
+    - path: cognitive_state.db
+      size_bytes: 12288
+      last_modified: 1784372325.1225827
+...
