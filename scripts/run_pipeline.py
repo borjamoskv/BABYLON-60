@@ -27,7 +27,8 @@ PHASES = {
             "13_codegen_haskell.py",
             "14_codegen_neuro.py",
             "15_codegen_tts.py",
-            "16_codegen_primitives.py"
+            "16_codegen_primitives.py",
+            "18_codegen_kimi.py"
         ]
     },
     2: {

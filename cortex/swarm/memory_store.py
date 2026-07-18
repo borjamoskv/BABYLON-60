@@ -1,7 +1,11 @@
+import os
 import sqlite3
 import hashlib
 from typing import Any
 from datetime import datetime, timezone
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DEFAULT_DB_PATH = os.path.join(PROJECT_ROOT, "db", "agent_memory.db")
 
 
 class AgentMemory:
@@ -10,7 +14,7 @@ class AgentMemory:
     Cumple con Ω11: Ledger inmutable (RAISE ABORT), prev_hash, y CORTEX-TAINT obligatorio.
     """
 
-    def __init__(self, db_path: str = "agent_memory.db") -> None:
+    def __init__(self, db_path: str = DEFAULT_DB_PATH) -> None:
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         # Habilitar WAL para concurrencia BFT segura (R10)
         self.conn.execute("PRAGMA journal_mode=WAL;")

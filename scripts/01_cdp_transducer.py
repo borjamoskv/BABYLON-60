@@ -12,7 +12,7 @@ sys.path.append(PROJECT_ROOT)
 
 CDP_PORT = 9222
 CDP_URL = f"http://127.0.0.1:{CDP_PORT}/json/version"
-LEDGER_PATH = os.path.join(PROJECT_ROOT, "cdp_ledger.db")
+LEDGER_PATH = os.path.join(PROJECT_ROOT, "db", "cdp_ledger.db")
 
 def init_ledger() -> sqlite3.Connection:
     conn = sqlite3.connect(LEDGER_PATH, timeout=5.0)
