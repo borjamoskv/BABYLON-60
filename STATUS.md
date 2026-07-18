@@ -7,7 +7,7 @@
 
 - Proyecto: **Teorema-Robinson-Moskv** (linaje local = canónico)
 - Versión de proyecto: **1.0.2** — fuente única: `pyproject.toml`. `AGENTS.md` declara "Version: 1.1.0" pero es la versión del *documento de comportamiento*, no del proyecto: namespaces distintos, no hay conflicto (verificado 2026-07-17).
-- HEAD: `7a21b468e` · 766 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
+- HEAD: `15b9fe962` · 768 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
 
 ## Topología del fork CORTEX↔BABYLON-60 — RESUELTA
 
@@ -68,3 +68,5 @@
 | 2026-07-18 | C5-REAL DOCUMENTATION: Creación de manual y guía de desarrollo completo del ecosistema, APIs y empaquetamiento DMG | Git Sentinel `8aa35e5c1` (`docs/BABYLON60_COMPLETE_GUIDE.md`) |
 | 2026-07-18 | C5-REAL LANDING PAGE: Inyección de enlace directo de descarga local del DMG de macOS Apple Silicon en el dropdown de index.html | Git Sentinel `aaa735656` |
 | 2026-07-18 | C5-REAL NEXUS REPAIR: Ajuste de profundidad relativa (dos niveles `..`) en enlaces simbólicos del paquete `babylon60`, reactivando la sincronización cruzada de proyectos | Git Sentinel `7a21b468e` (Pulse/Ghosts sincronizados) |
+| 2026-07-18 | C5-REAL LAUNCHER: Creación de run_backend.py para iniciar uvicorn del IDE de forma síncrona con PYTHONPATH correcto | Git Sentinel `a8049be5d` |
+| 2026-07-18 | C5-REAL AUTOPOIESIS: Auto-alineamiento de invariantes definidos en AGENTS.md agregando test assertions concretos de forma autónoma (test tests) | Git Sentinel `15b9fe962` (12 tests passed) |
