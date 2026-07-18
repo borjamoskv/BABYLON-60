@@ -32,13 +32,16 @@ WHITELIST_ENTROPY = [
     r'0123456789abcdefghijklmnopqrstuvwxyz',
     r'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
     r'docs\.google\.com/[^\s]+',
-    r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv'
+    r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv',
+    r'0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ',  # BASE60_ALPHABET (constante pública de diseño, utils/base60.py)
 ]
 
-# Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación).
-# C5-REAL: cada entrada debe estar justificada inline. Nunca añadir secretos reales.
+# Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación
+# o dummies de test auto-descritos). C5-REAL: cada entrada justificada inline.
 WHITELIST_VALUES = {
-    'AKIAIOSFODNN7EXAMPLE',  # Clave de ejemplo oficial de la documentación de AWS (no es real)
+    'AKIAIOSFODNN7EXAMPLE',      # Clave de ejemplo oficial de la documentación de AWS (no es real)
+    'dummy_key_for_stress',      # Dummy auto-descrito: stress test (extensions/llm/fable_stress_test.py)
+    'dummy_key_for_steerability',  # Dummy auto-descrito: PoC steerability (extensions/llm/fable_steerability_poc.py)
 }
 
 def shannon_entropy(data: str) -> float:

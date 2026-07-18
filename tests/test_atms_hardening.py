@@ -1,7 +1,17 @@
 # C5-REAL: TEST_ATMS_HARDENING
 # [CORTEX-TAINT:borjamoskv:test_atms_hardening:2026-07-18T05:00:00Z]
 
-from strike_rs import CortexKernel  # type: ignore[attr-defined]
+import pytest
+
+try:
+    from strike_rs import CortexKernel  # type: ignore[attr-defined]
+except ImportError:
+    # El núcleo Rust (PyO3) es opcional por diseño: solo existe si se compiló
+    # e instaló strike_rs en el entorno. En CI limpio no está -> skip honesto.
+    pytest.skip(
+        "strike_rs (núcleo PyO3 nativo) no compilado en este entorno",
+        allow_module_level=True,
+    )
 
 
 def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
