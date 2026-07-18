@@ -35,3 +35,6 @@ cortex_bft_ledger.db*
 # Compiled Go Portal Daemon
 bin/portal_daemon
 
+# Scratch scripts
+scratch/
+
