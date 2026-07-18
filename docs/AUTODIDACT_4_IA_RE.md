@@ -7,37 +7,41 @@
 *   **StarCoder 2 / CodeLlama:** Modelos de lenguaje especializados en código capaces de traducir/transducir ensamblador (Assembly) a lenguajes de alto nivel como C++.
 *   **REmatch:** Modelo de investigación basado en redes neuronales para identificar funciones conocidas (firmas funcionales/estructurales) en binarios despojados de símbolos (stripped binaries).
 *   **G-Comp:** Descompilador asistido por Machine Learning diseñado para recuperar y reconstruir nombres de variables y estructuras de datos originales a partir de código descompilado.
+*   **LLM4Decompile:** Modelo especializado entrenado directamente en decompilación masiva, refinando código ensamblador decompilado hacia código C compilable con alta fidelidad sintáctica.
+*   **r2ai / Gepetto / Sidekick:** Frameworks de integración (Radare2, IDA Pro, Binary Ninja) que interactúan localmente o mediante APIs con LLMs para realizar renombrado contextual, análisis heurístico de flujos y generación de explicaciones de algoritmos complejos.
+*   **DecompAI (Agentic RE):** Orquestador agéntico basado en grafos de ejecución (como LangGraph) que acopla LLMs con herramientas dinámicas y estáticas (`gdb`, `objdump`) para validar comportamientos de binarios de forma autónoma.
 
 ---
 
 ## 2. Matrices ONTOLOGY-FORGE
 
 ### Primitivas Epistémicas (`prims`)
-*   **Assembly-to-High-Level Transduction:** El proceso estocástico pero guiado por gramática de mapear instrucciones de ensamblador de bajo nivel (ej. x86, ARM) a semánticas estructuradas de alto nivel (C++).
-*   **Stripped Binary Feature Extraction:** Extracción de características topológicas y de flujo de control (CFG) a partir de binarios despojados de tablas de símbolos para análisis de afinidad en redes neuronales.
-*   **Structural Name Recovery:** Reconstrucción heurística y contextual de nombres de variables y tipos de datos mediante inferencia en grafos de flujo de datos.
+*   **Assembly-to-High-Level Transduction:** Mapeo de secuencias de instrucciones de bajo nivel a código fuente estructurado de alto nivel preservando el comportamiento.
+*   **Stripped Binary Feature Extraction:** Aislamiento de firmas y patrones de flujo sin metadatos simbólicos.
+*   **Structural Name Recovery:** Inferencia predictiva de variables y layouts de tipos basada en el flujo de datos.
+*   **Iterative Compile-Feedback Decompilation:** Bucle agéntico que compila el código generado por la IA, mide los deltas de comportamiento y re-inyecta el error al modelo hasta converger en semántica correcta.
 
 ### Invariantes Estructurales (`invt`)
-*   **Preservación de Grafo de Flujo de Control (CFG):** La traducción de ensamblador a C++ debe mantener el isomorfismo funcional del grafo de control; de lo contrario, se altera el comportamiento en tiempo de ejecución.
-*   **Equivalencia Semántica:** Las variables recuperadas por descompilación ML son descriptivas y no funcionales; su cambio de nombre no debe mutar las operaciones de máquina del binario.
-*   **Consistencia de Tipos en Dataflow:** El renombrado de estructuras en G-Comp está limitado por las relaciones del grafo de flujo de datos (dataflow graph); variables que comparten registros deben mantener compatibilidad de tipo.
+*   **Preservación de Grafo de Flujo de Control (CFG):** La transducción no debe alterar las bifurcaciones y loops lógicos del binario original.
+*   **Equivalencia Semántica:** Las variables inferidas en el mismo registro o slot de memoria deben conservar coherencia algebraica.
+*   **Fidelidad de Compilación:** Todo código generado bajo `LLM4Decompile` debe poder ser compilado con el mismo compilador de origen (`gcc`, `clang`) sin provocar errores sintácticos de nivel de AST.
 
 ### Antipatrones Identificados (`antip`)
-*   **Alucinación Semántica en RE:** Confiar ciegamente en nombres de variables generados por G-Comp que pueden malinterpretar el contexto del negocio, introduciendo asunciones falsas en la auditoría.
-*   **Divergencia de Compilación (StarCoder Translation):** Producir código C++ que compila pero altera sutilmente el orden de evaluación o la alineación de memoria del ensamblador original.
-*   **Falso Positivo de Firmas (REmatch Misalignment):** Identificar una función de criptografía conocida debido a bucles similares, cuando en realidad se trata de una implementación alterada o vulnerable.
+*   **Alucinación Semántica:** Confiar ciegamente en nombres de variables o explicaciones algorítmicas generadas por LLMs sin validación dinámica.
+*   **Divergencia Funcional de Re-compilación:** Código generado por IA que es sintácticamente válido pero altera el comportamiento lógico en tiempo de ejecución (ej. condiciones de carrera o desalineación de bytes).
+*   **Context Exhaustion:** Sobrecargar la ventana de contexto del LLM inyectando binarios completos en lugar de fragmentar subrutinas aisladas mediante el flujo del CFG.
 
 ### Redundancias Activas (`redun`)
-*   **Verificación Sintáctica por Compilación Dual:** El código C++ generado debe ser recompilado y comparado funcionalmente contra el binario original usando aserciones de entrada/salida.
-*   **Consenso de Enjambre (Multi-Model RE Verification):** Validar la inferencia de REmatch utilizando firmas estáticas clásicas (YARA, BinDiff) para resolver empates estructurales.
+*   **Verificación por Compilación Dual:** El código generado se compila y compara funcionalmente mediante casos de prueba automatizados contra el binario original.
+*   **Consenso de Enjambre (Multi-Agent Consensus):** Uso de múltiples modelos (ej. Claude 3.7 + GPT-4o) para validar explicaciones de funciones críticas en canales adversariales.
 
 ### Vectores Adversariales (`reda`)
-*   **Ofuscación por Control Flow Flattening:** Modificar artificialmente el CFG del binario para frustrar el reconocimiento de patrones de REmatch.
-*   **Semantics Poisoning:** Introducir comentarios o variables falsas en el código original para inducir a G-Comp a reconstruir un flujo lógico erróneo en fases de auditoría automática.
+*   **Control Flow Flattening:** Ofuscación artificial del flujo para distorsionar la extracción de características de REmatch.
+*   **Obfuscated Prompt Injection:** Malware diseñado con payloads que explotan el analizador de código de la IA para comprometer el runtime del host durante la ingeniería inversa automática.
 
 ---
 
 ## 3. INVENTARIO DE IGNORANCIA: Lo que sé que no sé
-*   **Límites de Contexto de StarCoder 2 en Instrucciones SIMD:** Se desconoce el ratio de acierto del modelo al traducir bucles vectorizados complejos (AVX-512) a construcciones legibles en C++ sin perder la semántica de hardware original.
-*   **Sensibilidad de REmatch ante Compiladores Esotéricos:** Falta evidencia empírica sobre la precisión de REmatch al evaluar binarios compilados con optimizaciones agresivas (`-O3` / `-Ofast`) o con compiladores no estándar.
-*   **Integración de G-Comp con Ghidra/IDA Pro APIs:** No está documentado el overhead en tiempo de ejecución de las llamadas IPC/RPC al integrar las redes neuronales de G-Comp con frameworks de ingeniería inversa clásicos.
+*   **Límites de Contexto en Instrucciones SIMD:** Eficacia de StarCoder 2 al traducir bucles vectorizados complejos (AVX-512) a C++.
+*   **Sensibilidad ante Compiladores Esotéricos:** Precisión de REmatch/G-Comp en código compilado con optimizaciones agresivas (`-O3`) o arquitecturas no-x86/non-ARM.
+*   **Overhead de Ejecución IPC en Ghidra/IDA Plugins:** Retardo en milisegundos de las llamadas de inferencia locales mediante r2ai bajo análisis interactivo en tiempo real.
