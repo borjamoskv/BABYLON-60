@@ -14,12 +14,17 @@
 - `github.com/borjamoskv/BABYLON-60` (HEAD `a289204`, público) es un **fork de publicación muerto**: historia NO relacionada con el linaje local. Verificado: `git cat-file -t a289204` → objeto inexistente en local; `merge-base --is-ancestor` → NOT-ANCESTOR.
 - Decisión: **canónico = linaje local.** El remoto queda pendiente de estado terminal — OPCIÓN A (borrar/reemplazar: aniquilación total de su entropía) u OPCIÓN B (purga quirúrgica y sigue vivo como corpus doc). Runbook: `COLLAPSE_P0.sh` (v2).
 
-## P0 — Exposición de claves — ABIERTO (bloqueado en acción humana)
+## P0 — Exposición de claves — ROTACIÓN EJECUTADA (2026-07-18) · queda estado terminal del remoto
 
-- El remoto trackea `.cortex/master_key.hex` (256-bit) y `.cortex/solana_keypair.json` en `a289204`, repo público → **ambas claves comprometidas por definición**. Rotación manual pendiente.
+- El remoto trackea `.cortex/master_key.hex` (256-bit) y `.cortex/solana_keypair.json` en `a289204`, repo público → **ambas claves comprometidas por definición**.
+- **Rotación ejecutada (2026-07-18, C5-REAL):**
+  - Wallet vieja verificada on-chain **vacía** (RPC mainnet: 0 SOL, 0 token accounts, 0 transacciones en su historia — pubkey vieja `CqrUNg4o…2yvb`) → nada que transferir; keypair viejo abandonado.
+  - `master_key.hex` rotada (`openssl rand 32`, raw bytes, `chmod 600`). Verificado: 0 payloads `C5ENC:` en DBs locales → no requiere re-cifrado ni migración de hash-chain. Ningún código local lee el fichero (los consumidores usan env vars); verificado que ningún shell rc exporta `CORTEX_*`.
+  - `solana_keypair.json` rotado (Ed25519 vía pynacl; nueva pubkey `HR36xxpL…thsU`, verificado round-trip desde disco). `chmod 600`.
+  - Viejas claves en `~/.cortex_p0_backup/` (fuera del árbol del repo, 700/600) por si la pubkey vieja resultara ser autoridad de algún programa desplegado desde otra wallet (improbable: 0 actividad on-chain).
 - El remoto trackea `20_VAULT/` (PKM/CRM/OSINT con individuos nombrados) → exposición de privacidad; purga incluida en el mismo rewrite.
 - El linaje local **jamás** trackeó claves ni vault (`git log --all -- <path>` vacío para los tres paths).
-- Secuencia: rotar claves → elegir estado terminal (A/B) → ejecutar `COLLAPSE_P0.sh --confirm-history-rewrite` si B.
+- Secuencia: ~~rotar claves~~ ✅ → elegir estado terminal (A/B) → ejecutar `COLLAPSE_P0.sh --confirm-history-rewrite` si B.
 
 ## Métricas medidas (no estimadas)
 
@@ -37,7 +42,7 @@
 
 ## Trabajo abierto (lo que NO está hecho)
 
-- [ ] **P0**: rotación de master key + keypair Solana (humano, irreversible, primero)
+- [x] **P0**: rotación de master key + keypair Solana (ejecutada 2026-07-18 — ver §P0; wallet vieja vacía on-chain, sin C5ENC local → sin migraciones)
 - [ ] **P0**: estado terminal del remoto — OPCIÓN A o B + force-push/borrado
 - [x] **Dedupe JSONs**: `fitted_weights.json` y `module_models.json` deduplicados en el path canónico `apex_trials/` (completado 2026-07-17).
 - [x] **Re-verificar FIND-001/002**: verificado que no aplican a la línea local; los ficheros vulnerables del remoto (`swarm/state_store.py`, Stripe webhooks) no existen en este linaje.
