@@ -54,18 +54,24 @@ class AgentMemory:
         return row[0] if row else "GENESIS_BLOCK_00000000000000000000000000000000000000000000000000"
     
     def log(self, issue_id: int, agent_role: str, action: str, result: str) -> str:
-        prev_hash = self._get_last_hash()
-        
-        timestamp_iso = datetime.now(timezone.utc).isoformat()
+        try:
+            self.conn.execute("BEGIN EXCLUSIVE TRANSACTION")
+            prev_hash = self._get_last_hash()
+            
+            timestamp_iso = datetime.now(timezone.utc).isoformat()
 
-        raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode('utf-8')
-        cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
-        
-        self.conn.execute(
-            "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
-            (issue_id, agent_role, action, result, prev_hash, cortex_taint)
-        )
-        return cortex_taint
+            raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode('utf-8')
+            cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
+            
+            self.conn.execute(
+                "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
+                (issue_id, agent_role, action, result, prev_hash, cortex_taint)
+            )
+            self.conn.execute("COMMIT")
+            return cortex_taint
+        except Exception:
+            self.conn.execute("ROLLBACK")
+            raise
     
     def query_similar(self, issue_text: str) -> list[Any]:
         # TODO: C5-REAL ChromaDB Vector Search embedding lookup
