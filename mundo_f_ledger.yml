@@ -16,3 +16,12 @@ Metrics:
   VNode_Sandbox: vnode-5
 Assertion: Inferencia L3 iterada sobre Sandbox efímero. Rama validada y anclada al BFT Ledger tras descartes silenciosos.
 ---
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_GENERATED
+Timestamp: 2026-07-18T04:54:57+02:00
+Payload_Hash_SHA3_256: 0bb09d15f17b0ee451f8047ffae1fe7674e7155f59e88efd4531fc853a1b2f4e
+Metrics:
+  Shannon_Entropy: 4.8449
+  AST_Nodes: 8
+  VNode_Sandbox: vnode-0
+Assertion: MCTS migrado al dominio termodinámico puro. AST colapsado físicamente a disco sin simulacros cognitivos.
+---
