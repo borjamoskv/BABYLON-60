@@ -24,7 +24,12 @@
   - Viejas claves en `~/.cortex_p0_backup/` (fuera del árbol del repo, 700/600) por si la pubkey vieja resultara ser autoridad de algún programa desplegado desde otra wallet (improbable: 0 actividad on-chain).
 - El remoto trackea `20_VAULT/` (PKM/CRM/OSINT con individuos nombrados) → exposición de privacidad; purga incluida en el mismo rewrite.
 - El linaje local **jamás** trackeó claves ni vault (`git log --all -- <path>` vacío para los tres paths).
-- Secuencia: ~~rotar claves~~ ✅ → elegir estado terminal (A/B) → ejecutar `COLLAPSE_P0.sh --confirm-history-rewrite` si B.
+- Secuencia: ~~rotar claves~~ ✅ → **OPCIÓN A elegida (2026-07-18)** → remoto **PRIVATIZADO** ✅ → borrado + republicación pendiente de scope.
+- **OPCIÓN A en curso (2026-07-18, C5-REAL):**
+  - Backups pre-aniquilación en `~/.cortex_p0_backup/`: `BABYLON-60-main-tip.tar.gz` (7,1 MB, tip de main `57282100`) y `BABYLON-60-corpus-a289204.tar.gz` (5,7 MB — verificado: 629 `.md`, incluye el corpus documental del fork muerto). El mirror completo (1,35 GB) no cabía en una sola ventana de clonado; los tarballs preservan el contenido de ambos árboles.
+  - `github.com/borjamoskv/BABYLON-60` → **PRIVATE** (verificado: acceso anónimo HTTP 404). Las claves y `20_VAULT/` ya NO son públicamente accesibles. 0 forks → sin copias externas del objeto `a289204` fuera de GitHub.
+  - **Bloqueo restante:** `gh repo delete` exige scope `delete_repo` (ausente en el token actual). Pendiente: `gh auth refresh -h github.com -s delete_repo` (humano, flujo navegador) → borrar repo → recrear → push del linaje canónico (`main`, 805+ commits, jamás trackeó claves ni vault) → secret scanning → decidir visibilidad final.
+  - Nota: `main` del remoto ya no apunta a `a289204` (movió a `57282100` vía pushes de agentes copilot); las claves viven en ramas `copilot/*`. El borrado del repo aniquila TODAS las ramas de un golpe — por eso A es superior a B.
 
 ## Métricas medidas (no estimadas)
 
