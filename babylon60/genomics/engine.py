@@ -13,12 +13,34 @@ from .models import (
     LOHHRDResult,
     ECDNAAmpliconResult,
 )
-
+from .adt import ClonalEntropyResult
 
 class GenomicEvaluationEngine:
     """
     Deterministic C5-REAL mathematical engine for oncological genomic biomarker calculation.
     """
+
+    @staticmethod
+    def evaluate_clonal_entropy(allele_frequencies: list[float]) -> ClonalEntropyResult:
+        """
+        Calculates Shannon entropy S = -sum(p_i * ln(p_i)) over normalized subclonal allele frequencies
+        to strictly satisfy Thermodynamic Rule Ω31.
+        """
+        if not isinstance(allele_frequencies, list):
+            raise TypeError("[C5-FAIL] Allele frequencies must be a list.")
+        
+        valid_afs = [f for f in allele_frequencies if isinstance(f, (int, float)) and f > 0.0]
+        if not valid_afs:
+            return ClonalEntropyResult(shannon_entropy=0.0, subclone_count=0)
+            
+        total_freq = sum(valid_afs)
+        normalized_probs = [f / total_freq for f in valid_afs]
+        
+        entropy = -sum(p * math.log(p) for p in normalized_probs)
+        return ClonalEntropyResult(
+            shannon_entropy=round(entropy, 4),
+            subclone_count=len(valid_afs)
+        )
 
     @staticmethod
     def evaluate_tmb(variants: list[GenomicVariantRecord], target_region_mb: float = 38.0) -> TMBResult:

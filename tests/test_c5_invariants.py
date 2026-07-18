@@ -188,3 +188,9 @@ def test_inv_c5_15_sync_vault_uuids():
     script_path = ROOT / "scripts" / "sync_vault_uuids.py"
     assert script_path.exists(), "sync_vault_uuids.py missing."
     assert os.access(script_path, os.X_OK), "sync_vault_uuids.py is not executable."
+
+
+def test_inv_c5_16_stub():
+    """INV_C5_16 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_16
+    pass

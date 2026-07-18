@@ -101,3 +101,6 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Memory Vault Session Synchronizer
 - **INV_C5_15:** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
 
+### PyO3 Forward ABI Compatibility (Anti-Deadlock)
+- **Ω30 · PYO3 FORWARD ABI INVARIANT:** Queda estrictamente prohibido ejecutar validaciones `cargo check` o compilaciones `cargo build` en repositorios mixtos Rust/Python sin la declaración explícita de `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1`. La omisión causa necrosis de compilación al resolver contra intérpretes 3.14+ o sandboxes de `uv`, considerándose Anergía clase C4-SIM.
+

@@ -5,7 +5,7 @@
 
 Source:    /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/domain_kernel/IRPAutomata.fs
 Hash:      e9f78b444ca42f825e69780b3cf86b652c2f770e29502badb3588bafdb0f5803
-Timestamp: 2026-07-18T20:04:02.880636+00:00
+Timestamp: 2026-07-18T21:20:44.783368+00:00
 Status:    ❌ REGIME VIOLATIONS DETECTED
 
 ── IR Module ──
