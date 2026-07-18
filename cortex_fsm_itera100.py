@@ -1,7 +1,7 @@
 import time
 from cortex.swarm.engine_fsm import run_fsm_cycle
 
-def itera_100():
+def itera_100() -> None:
     print("=== CORTEX-OMEGA: INICIANDO BUCLE ITERA 100 (TERCER COROLARIO) ===")
     start_time = time.time()
     
@@ -10,7 +10,7 @@ def itera_100():
     
     import hashlib
     
-    def get_ledger_hash():
+    def get_ledger_hash() -> str | None:
         try:
             with open("mundo_f_ledger.yml", "rb") as f:
                 return hashlib.sha256(f.read()).hexdigest()
@@ -38,8 +38,8 @@ def itera_100():
                 break
             else:
                 # El estado ha mutado (Gradiente Entrópico superado). Forzando Git Sentinel (Ω3).
-                os.system(f'git add . && git commit -m "chore(cortex): [ITERA-100] BFT State Collapse Cycle {i+1} - Hash: {current_hash[:8]}" > /dev/null 2>&1')
-                print(f"[ITERA-100] Mutación física confirmada en Ciclo {i+1}. Git Sentinel activado. Hash: {current_hash[:8]}")
+                os.system(f'git add . && git commit -m "chore(cortex): [ITERA-100] BFT State Collapse Cycle {i+1} - Hash: {current_hash[:8] if current_hash else "NONE"}" > /dev/null 2>&1')
+                print(f"[ITERA-100] Mutación física confirmada en Ciclo {i+1}. Git Sentinel activado. Hash: {current_hash[:8] if current_hash else 'NONE'}")
 
             last_hash = current_hash
             
