@@ -2,7 +2,7 @@
 # MOSKV-1 APEX SINGULARITY
 # 1000 Computable Linear Algebra Primitives
 import math
-from typing import List, Tuple, Any
+from typing import List
 
 def vector_add_1d(v1: List[float], v2: List[float]) -> List[float]:
     '''Vector addition in 1D'''

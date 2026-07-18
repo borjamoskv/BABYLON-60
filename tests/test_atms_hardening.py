@@ -1,9 +1,7 @@
 # C5-REAL: TEST_ATMS_HARDENING
 # [CORTEX-TAINT:borjamoskv:test_atms_hardening:2026-07-18T05:00:00Z]
 
-import os
-import pytest
-from strike_rs import CortexKernel
+from strike_rs import CortexKernel  # type: ignore[attr-defined]
 
 def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
     """

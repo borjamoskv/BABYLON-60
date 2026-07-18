@@ -11,7 +11,7 @@ from cortex_mamba_network import MambaNetwork
 def softmax(logits: List[float], temperature: float = 1.0) -> List[float]:
     """C5-REAL Softmax with numerical stability and Temperature."""
     max_l = max(logits)
-    exp_l = [math.exp((l - max_l) / temperature) for l in logits]
+    exp_l = [math.exp((logit - max_l) / temperature) for logit in logits]
     sum_exp = sum(exp_l)
     return [e / sum_exp for e in exp_l]
 

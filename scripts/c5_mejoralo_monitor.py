@@ -5,11 +5,9 @@ MOSKV-1 APEX SINGULARITY — C5-REAL STATE MONITOR (MEJORALO)
 Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
 linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
 """
-import os
 import hashlib
 import sqlite3
 import subprocess
-import json
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -166,7 +164,7 @@ def c5_real_colapso() -> None:
     print(f"\n[GIT] HEAD: {git_report['head']} | Branch: {git_report['branch']}")
     print(f"[GIT] Commits: {git_report['commits']} | Tag: {git_report['last_tag']}")
     print(f"[GIT] Entropía: {git_report['dirty_count']} archivos mutados")
-    if git_report["dirty_files"]:
+    if isinstance(git_report["dirty_files"], list):
         for f in git_report["dirty_files"][:10]:
             print(f"      ↳ {f}")
 
@@ -206,11 +204,11 @@ def c5_real_colapso() -> None:
     sentinel_hash = git_sentinel_commit(status_hash)
 
     # Rewrite [PENDING] → actual hash
-    with open(STATUS_FILE, "r") as f:
-        content = f.read()
+    with open(STATUS_FILE, "r") as file_in:
+        content = file_in.read()
     content = content.replace("`[PENDING]`", f"`{sentinel_hash}`")
-    with open(STATUS_FILE, "w") as f:
-        f.write(content)
+    with open(STATUS_FILE, "w") as file_out:
+        file_out.write(content)
     _git(["add", "STATUS.md"])
     _git(["commit", "--amend", "--no-edit", "--no-verify"])
     final_hash = _git(["rev-parse", "--short", "HEAD"])
