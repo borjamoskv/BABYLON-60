@@ -106,7 +106,11 @@ def test_text_features_inference():
 def test_tfidf_pure_sklearn_equivalence():
     if not _HAS:
         pytest.skip("no module_models.json baked")
-        
+
+    pytest.importorskip(
+        "sklearn",
+        reason="sklearn no instalado — solo es oráculo de referencia para esta prueba, no una dependencia de runtime de apex_trials",
+    )
     from sklearn.feature_extraction.text import TfidfVectorizer
     import numpy as np
     from apex_trials.modules import _transform_pure

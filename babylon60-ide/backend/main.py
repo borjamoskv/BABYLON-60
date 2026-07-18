@@ -5,25 +5,35 @@ Serves the API backend and static frontend files.
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry
 from .services import cortex_ledger
 
+logger = logging.getLogger("babylon60")
+
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
-    version="0.3.0",
+    version="0.4.0",
 )
 
 # Initialize the IDE's own CortexLedger (append-only, hash-chained).
 cortex_ledger.init(Path(__file__).parent.parent.parent)
 
-# CORS — localhost only for v1
+# GZip — comprime bundle estático + respuestas JSON grandes por el puente.
+app.add_middleware(GZipMiddleware, minimum_size=1024)
+
+# CORS — solo localhost. Verbos/headers acotados a lo que los routers usan
+# (defensa en profundidad; la extensión MV3 no depende de CORS: usa
+# host_permissions que ya evitan la comprobación en el navegador).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -33,9 +43,18 @@ app.add_middleware(
         "http://127.0.0.1:5174",
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
+
+
+@app.exception_handler(Exception)
+async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
+    """Cualquier fallo no controlado en un handler sync (threadpool) devuelve
+    un 500 JSON estable, sin filtrar el traceback al cliente (Ley 1: Falla =
+    Crash Causal, pero contenida y auditable en el log del servidor)."""
+    logger.exception("unhandled error on %s %s", request.method, request.url.path)
+    return JSONResponse(status_code=500, content={"detail": "Error interno (ver log del servidor)"})
 
 # Mount API routes
 app.include_router(ledger.router)

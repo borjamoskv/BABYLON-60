@@ -5,6 +5,7 @@ Endpoints for browsing and verifying the BFT hash-chain ledger.
 
 from __future__ import annotations
 
+import contextlib
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -26,16 +27,18 @@ def _find_ledger_db(project_root: Path) -> Path | None:
     for c in candidates:
         if c.exists():
             return c
-    # Fallback: any .db with ledger_entries table
-    for db_file in project_root.glob("*.db"):
+    # Fallback: any .db with ledger_entries table. sorted() → elección
+    # determinista (glob() depende del filesystem). closing → sin fuga de
+    # conexión si execute lanza antes del close.
+    for db_file in sorted(project_root.glob("*.db")):
         try:
-            conn = connect_readonly(db_file)
-            cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'")
-            if cursor.fetchone():
-                conn.close()
-                return db_file
-            conn.close()
-        except sqlite3.OperationalError:
+            with contextlib.closing(connect_readonly(db_file)) as conn:
+                cursor = conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
+                )
+                if cursor.fetchone():
+                    return db_file
+        except sqlite3.DatabaseError:
             continue
     return None
 

@@ -190,6 +190,29 @@ def list_events(
         conn.close()
 
 
+def claim(project_root: Path, key: str) -> bool:
+    """Atomically claim a one-shot key. Returns True if this caller won it,
+    False if already claimed. Backs at-most-once execution (closes TOCTOU)."""
+    conn = _connect(_ledger_path(project_root))
+    try:
+        conn.execute(
+            "CREATE TABLE IF NOT EXISTS cortex_claims (key TEXT PRIMARY KEY, ts INTEGER NOT NULL)"
+        )
+        conn.execute("BEGIN IMMEDIATE")
+        try:
+            conn.execute(
+                "INSERT INTO cortex_claims (key, ts) VALUES (?, ?)",
+                (key, int(time.time() * 1000)),
+            )
+            conn.execute("COMMIT")
+            return True
+        except sqlite3.IntegrityError:
+            conn.execute("ROLLBACK")
+            return False
+    finally:
+        conn.close()
+
+
 def verify_chain(project_root: Path) -> dict[str, Any]:
     """Recompute the SHA-256 chain of the IDE's own ledger."""
     conn = _connect(_ledger_path(project_root))

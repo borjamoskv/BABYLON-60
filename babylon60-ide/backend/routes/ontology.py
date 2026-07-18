@@ -5,6 +5,7 @@ Auto-discovers .db files and exposes read-only table browsing.
 
 from __future__ import annotations
 
+import contextlib
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -72,17 +73,21 @@ def list_databases() -> list[dict[str, Any]]:
     return _discover_databases()
 
 
+# Stable, non-leaking message: never echo raw sqlite text (could leak paths).
+_DB_ERR = "No se pudo leer la base (fichero corrupto o no es SQLite)"
+
+
 @router.get("/{name}/tables")
 def list_tables(name: str) -> list[dict[str, Any]]:
     """List tables in a specific database."""
     db_path = _resolve_db(name)
     try:
-        conn = connect_readonly(db_path)
-        tables = get_table_list(conn)
-        conn.close()
-        return tables
-    except sqlite3.OperationalError as e:
-        raise HTTPException(500, f"Database error: {e}") from e
+        # contextlib.closing → conn.close() ocurre también si execute lanza
+        # (antes solo se cerraba en la ruta feliz: fuga de conexión).
+        with contextlib.closing(connect_readonly(db_path)) as conn:
+            return get_table_list(conn)
+    except sqlite3.DatabaseError as e:
+        raise HTTPException(500, _DB_ERR) from e
 
 
 @router.get("/{name}/schema/{table}")
@@ -90,14 +95,13 @@ def table_schema(name: str, table: str) -> list[dict[str, Any]]:
     """Get column schema for a table."""
     db_path = _resolve_db(name)
     try:
-        conn = connect_readonly(db_path)
-        schema = get_table_schema(conn, table)
-        conn.close()
-        if not schema:
-            raise HTTPException(404, f"Table '{table}' not found in '{name}'")
-        return schema
-    except sqlite3.OperationalError as e:
-        raise HTTPException(500, f"Database error: {e}") from e
+        with contextlib.closing(connect_readonly(db_path)) as conn:
+            schema = get_table_schema(conn, table)
+    except sqlite3.DatabaseError as e:
+        raise HTTPException(500, _DB_ERR) from e
+    if not schema:
+        raise HTTPException(404, f"Table '{table}' not found in '{name}'")
+    return schema
 
 
 @router.get("/{name}/tables/{table}")
@@ -110,9 +114,12 @@ def browse_table(
     """Paginated table browser."""
     db_path = _resolve_db(name)
     try:
-        conn = connect_readonly(db_path)
-        result = get_table_rows(conn, table, limit, offset)
-        conn.close()
-        return result
-    except sqlite3.OperationalError as e:
-        raise HTTPException(500, f"Database error: {e}") from e
+        with contextlib.closing(connect_readonly(db_path)) as conn:
+            # Validar la tabla contra el catálogo real → 404 claro en vez de
+            # un 500 con "no such table" y texto crudo filtrado.
+            valid = {t["name"] for t in get_table_list(conn)}
+            if table not in valid:
+                raise HTTPException(404, f"Table '{table}' not found in '{name}'")
+            return get_table_rows(conn, table, limit, offset)
+    except sqlite3.DatabaseError as e:
+        raise HTTPException(500, _DB_ERR) from e

@@ -5,6 +5,7 @@ Enforces PRAGMA query_only=ON to prevent any mutations via the IDE.
 
 from __future__ import annotations
 
+import contextlib
 import sqlite3
 import time
 from pathlib import Path
@@ -60,13 +61,16 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
             raise HTTPException(403, f"Write operation '{kw}' blocked. IDE is read-only.")
 
     try:
-        conn = connect_readonly(db_path)
-        t0 = time.monotonic()
-        result = execute_readonly_query(conn, req.sql)
-        elapsed_ms = (time.monotonic() - t0) * 1000
-        conn.close()
+        # closing → la conexión se cierra aunque la query lance (antes solo
+        # se cerraba en éxito: fuga en cada error SQL). sqlite3.Error cubre
+        # OperationalError/DatabaseError/ProgrammingError. El texto SÍ se
+        # muestra: es una consola SQL, el error es la señal útil.
+        with contextlib.closing(connect_readonly(db_path)) as conn:
+            t0 = time.monotonic()
+            result = execute_readonly_query(conn, req.sql)
+            elapsed_ms = (time.monotonic() - t0) * 1000
         result["elapsed_ms"] = round(elapsed_ms, 2)
         result["database"] = req.database
         return result
-    except sqlite3.OperationalError as e:
+    except sqlite3.Error as e:
         raise HTTPException(400, f"SQL error: {e}") from e

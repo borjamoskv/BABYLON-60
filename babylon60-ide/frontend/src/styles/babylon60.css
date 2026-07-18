@@ -20,8 +20,8 @@
   /* Text: off-white lavanda cálido (no #FFF puro: reduce glare/fatiga) */
   --dust: #E6E4F0;
   --dust-dim: #ABA8C0;
-  --dust-faint: #6E6B83;
-  --dust-ghost: #3E3B4F;
+  --dust-faint: #8C8AA4;   /* WCAG AA body ≥4.5 en superficies principales (audit) */
+  --dust-ghost: #66647E;   /* dim pero legible: large-text AA ≥3.0 (era #3E3B4F, 1.6) */
 
   /* YInMn accent, suavizado (menos neón → menos alerta del sistema nervioso) */
   --lapis: #5A6CE0;
@@ -2070,3 +2070,19 @@ body.mode-nt {
 }
 /* 2E: ablanda aún más el overlay ambiental (sin gradiente agresivo) */
 body.mode-2e::before { opacity: 0.7; }
+
+/* ─── 28. PREFERS-REDUCED-MOTION (v1.2.2) ──────────────────────
+   Brief TDAH/AACC: "animaciones suaves, sin parpadeos". Con movimiento
+   reducido del SO se detienen los bucles (tachómetro, pulso, loading, blast)
+   y las transiciones se vuelven casi instantáneas — cero alerta constante. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .tachometer.indexing, .tachometer.working, .tachometer.alert,
+  .spine-logo::after { animation: none !important; }
+  .tachometer.indexing { opacity: 1; }
+}

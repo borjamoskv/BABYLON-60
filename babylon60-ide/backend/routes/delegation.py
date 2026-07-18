@@ -154,6 +154,12 @@ def execute(delegation_id: str) -> dict[str, Any]:
 
     kind = deleg["kind"]
 
+    # ── Atomic one-shot claim (closes the check-then-act TOCTOU) ──
+    # Two concurrent execute() calls both pass the QUEUED check above; only the
+    # winner of this atomic claim runs the git side-effect. At-most-once.
+    if kind in ("commit", "precommit", "status", "custom") and not cortex_ledger.claim(root, f"exec:{delegation_id}"):
+        raise HTTPException(409, f"Delegation '{delegation_id}' ya está en ejecución (claim tomado)")
+
     # ── Causal crash: cloud upload blocked while P0 open ──
     if kind in _CLOUD_KINDS and P0_OPEN:
         reason = (
