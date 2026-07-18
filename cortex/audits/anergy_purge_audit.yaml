@@ -3,12 +3,12 @@ Claim: Root directory Anergy (loose scripts, DBs, and datasets) has been structu
 Proof:
   Base: sha3_256::cortex_taint
   Range:
-  - 49
-  - 49
+  - 1
+  - 1
   Confidence: C5-REAL
 Operator: borjamoskv
 System_Level: C5-REAL
-Anergy_Files_Purged: 49
-Anergy_Bytes_Purged: 195875126
-Cortex_Taint: c09af6cfc6795c69491304f01ea325785bb1bb520bf9e7903fdd9b02b505e884
-Timestamp: '2026-07-18T04:57:41.842153+00:00'
+Anergy_Files_Purged: 1
+Anergy_Bytes_Purged: 49152
+Cortex_Taint: 04805764d94099e730780b8caea663ec12e3529d25ba1a55c4e37618e6b22196
+Timestamp: '2026-07-18T05:50:49.023482+00:00'

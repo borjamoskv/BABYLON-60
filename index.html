@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BABYLON·60 — Tamper-evident memory & decision lineage for AI agents</title>
+<meta name="description" content="BABYLON-60 gives an AI agent a memory it cannot quietly rewrite. Typed records, hash-chained HMAC-SHA256 over SQLite WAL, externally anchored via OpenTimestamps / RFC 3161. Fail-stop. Built for EU AI Act Article 12. Apache-2.0.">
+<meta name="keywords" content="tamper-evident ledger, decision lineage, AI agent memory, EU AI Act Article 12, hash chain, HMAC, OpenTimestamps, RFC 3161, audit trail, fail-stop">
+<meta property="og:title" content="BABYLON·60 — A memory your agent can't quietly rewrite">
+<meta property="og:description" content="Typed, hash-chained, externally-anchored records for AI agents. Fail-stop. Built for EU AI Act Article 12.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://babylon60.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo:wdth,wght@125,700;125,800;125,900&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bitumen:#050505;      /* deep space noir */
+    --kiln:#0A0A0A;         /* raised surfaces */
+    --tablet:#101010;       /* panels */
+    --tablet-2:#151515;     /* panels, lighter */
+    --edge:#202020;         /* hairline borders */
+    --edge-soft:#111111;
+    --dust:#F5F5F5;         /* primary text */
+    --dust-dim:#A0A0A0;     /* secondary text */
+    --dust-faint:#555555;   /* tertiary / rules */
+    --lapis:#2B3BE5;        /* Cobalt */
+    --lapis-bright:#5C6BFF; /* links & hover on dark */
+    --gold:#F59E0B;         /* Kintsugi Gold */
+    --gold-bright:#FBBF24;
+    --verify:#10B981;       /* integrity intact */
+    --break:#EF4444;        /* tamper / halt */
+    --measure:64ch;
+
+    --disp:"Archivo",system-ui,sans-serif;
+    --body:"Spectral",Georgia,serif;
+    --mono:"Space Mono",ui-monospace,monospace;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    margin:0;
+    background:var(--bitumen);
+    color:var(--dust);
+    font-family:var(--body);
+    font-weight:400;
+    font-size:clamp(16px,1.05vw,18px);
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  /* faint fired-tablet grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(1200px 800px at 78% -8%, rgba(47,85,199,.10), transparent 60%),
+      radial-gradient(900px 700px at -10% 12%, rgba(200,146,46,.06), transparent 55%);
+  }
+
+  a{color:var(--lapis-bright);text-decoration:none}
+  a:hover{color:var(--dust)}
+  ::selection{background:rgba(110,146,255,.28);color:var(--dust)}
+
+  :focus-visible{outline:2px solid var(--lapis-bright);outline-offset:3px;border-radius:2px}
+
+  .wrap{width:min(1180px,92vw);margin-inline:auto;position:relative;z-index:1}
+
+  /* ---------- eyebrow / labels ---------- */
+  .eyebrow{
+    font-family:var(--mono);font-size:.7rem;font-weight:700;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+    display:inline-flex;align-items:center;gap:.6em;margin:0 0 1.1rem;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);opacity:.7}
+
+  /* ---------- display headings ---------- */
+  h1,h2,h3{margin:0;font-family:var(--disp);font-weight:800;line-height:1.02;letter-spacing:-.01em}
+  .h-mono{font-family:var(--mono)}
+  h1{
+    font-stretch:125%;font-weight:900;
+    font-size:clamp(2.5rem,6.4vw,5.3rem);
+    line-height:.98;letter-spacing:-.02em;
+    text-wrap:balance;
+  }
+  h2{
+    font-stretch:125%;font-weight:800;
+    font-size:clamp(1.9rem,3.9vw,3.1rem);
+    letter-spacing:-.015em;text-wrap:balance;
+  }
+  h3{font-weight:700;font-size:1.06rem;letter-spacing:.005em}
+  .lead{font-size:clamp(1.12rem,1.5vw,1.32rem);color:var(--dust);max-width:var(--measure);font-weight:400}
+  p{max-width:var(--measure)}
+  .dim{color:var(--dust-dim)}
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:40;
+    background:rgba(5, 5, 5, 0.4);
+    backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%);
+    border-bottom:1px solid var(--edge-soft);
+  }
+  .nav-in{display:flex;align-items:center;gap:1.6rem;height:60px}
+  .brand{display:flex;align-items:center;gap:.62rem;font-family:var(--disp);font-stretch:125%;font-weight:900;letter-spacing:.02em;font-size:1.02rem;color:var(--dust)}
+  .brand:hover{color:var(--dust)}
+  .brand .mark{width:20px;height:20px;flex:0 0 auto}
+  .nav-links{display:flex;gap:1.35rem;margin-left:auto;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;text-transform:uppercase}
+  .nav-links a{color:var(--dust-dim)}
+  .nav-links a:hover{color:var(--dust)}
+  .nav-cta{
+    font-family:var(--mono);font-size:.76rem;font-weight:700;letter-spacing:.02em;
+    color:var(--bitumen);background:var(--gold);
+    padding:.5rem .8rem;border-radius:3px;white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--gold-bright);color:var(--bitumen)}
+  @media(max-width:860px){.nav-links{display:none}}
+
+  /* ---------- compliance strip ---------- */
+  .strip{background:var(--kiln);border-bottom:1px solid var(--edge-soft)}
+  .strip-in{
+    display:flex;gap:.7rem;align-items:center;justify-content:center;flex-wrap:wrap;
+    padding:.55rem 0;font-family:var(--mono);font-size:.72rem;letter-spacing:.02em;color:var(--dust-dim);text-align:center;
+  }
+  .strip-in b{color:var(--dust);font-weight:700}
+  .strip-in .tick{color:var(--lapis-bright)}
+
+  /* ---------- generic section ---------- */
+  section{padding-block:clamp(4.5rem,9vw,7.5rem);position:relative}
+  .rule-top{border-top:1px solid var(--edge-soft)}
+
+  /* ledger-rail motif for technical sections */
+  .rail{position:relative;padding-left:2.1rem}
+  .rail::before{content:"";position:absolute;left:0;top:.3rem;bottom:.3rem;width:1px;background:linear-gradient(var(--edge),transparent)}
+  .rail .ticks{position:absolute;left:-4px;top:.3rem;bottom:.3rem;width:9px;background-image:repeating-linear-gradient(to bottom,var(--gold) 0 6px,transparent 6px 22px);opacity:.5;-webkit-mask:linear-gradient(#000,#000);}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:clamp(3rem,6vw,5rem);padding-bottom:clamp(3rem,6vw,4.5rem)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,4vw,3.6rem);align-items:center}
+  @media(max-width:960px){.hero-grid{grid-template-columns:1fr;gap:2.4rem}}
+  .hero h1 .glaze{color:var(--lapis-bright)}
+  .hero .lead{margin-top:1.5rem}
+  .cta-row{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+  .btn{
+    font-family:var(--mono);font-size:.82rem;font-weight:700;letter-spacing:.01em;
+    padding:.72rem 1.1rem;border-radius:4px;border:1px solid transparent;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.55rem;transition:transform .12s ease,background .15s ease,border-color .15s ease;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--lapis);color:#fff;border-color:var(--lapis)}
+  .btn-primary:hover{background:var(--lapis-bright);color:#0b0f1e}
+  .btn-ghost{background:transparent;color:var(--dust);border-color:var(--edge)}
+  .btn-ghost:hover{border-color:var(--dust-dim);color:var(--dust)}
+  .btn svg{width:15px;height:15px}
+
+  /* ---------- signature: cuneiform hash-chain ledger ---------- */
+  .tablet-card{
+    background:
+      linear-gradient(180deg,var(--tablet-2),var(--tablet));
+    border:1px solid var(--edge);
+    border-radius:9px;
+    box-shadow:0 1px 0 rgba(236,225,205,.05) inset, 0 30px 70px -40px rgba(0,0,0,.9);
+    overflow:hidden;
+    position:relative;
+  }
+  .tablet-card::after{ /* ruled columns, like a scribe's tablet */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(90deg,transparent 0 33.33%,rgba(58,44,30,.5) 33.33% calc(33.33% + 1px));
+  }
+  .tab-head{
+    display:flex;align-items:center;gap:.7rem;padding:.7rem .9rem;
+    border-bottom:1px solid var(--edge);background:rgba(14,11,8,.5);position:relative;z-index:2;
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--dust-dim);
+  }
+  .tab-head .dot{width:7px;height:7px;border-radius:50%;background:var(--verify);box-shadow:0 0 8px var(--verify)}
+  .tab-head .title{color:var(--dust);font-weight:700}
+  .tab-head .spacer{margin-left:auto}
+  .tab-head .kv b{color:var(--gold)}
+  .dt-read{color:var(--lapis-bright)}
+
+  .ledger{position:relative;z-index:2;padding:.35rem .35rem .5rem;min-height:330px}
+  .row{
+    display:grid;grid-template-columns:auto 1fr auto;gap:.6rem;align-items:center;
+    padding:.5rem .6rem;border-radius:5px;
+    border:1px solid transparent;
+    animation:drop .5s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes drop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .row + .row{margin-top:.18rem}
+  .row .num{display:flex;align-items:center;gap:.5rem;min-width:74px}
+  .wedge{height:20px;width:auto;opacity:.92}
+  .row .dec{font-family:var(--mono);font-size:.64rem;color:var(--dust-faint)}
+  .row .mid{min-width:0}
+  .row .type{
+    font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:.08rem .38rem;border-radius:3px;display:inline-block;margin-bottom:.12rem;
+    color:var(--dust);background:rgba(236,225,205,.06);border:1px solid var(--edge);
+  }
+  .type.decision{color:var(--lapis-bright);border-color:rgba(110,146,255,.4)}
+  .type.fact{color:var(--dust-dim)}
+  .type.tool_call{color:var(--gold-bright);border-color:rgba(200,146,46,.4)}
+  .type.error{color:var(--break);border-color:rgba(208,86,63,.4)}
+  .row .payload{font-family:var(--mono);font-size:.72rem;color:var(--dust);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .hash{font-family:var(--mono);font-size:.66rem;color:var(--dust-faint);text-align:right;white-space:nowrap}
+  .row .hash b{color:var(--verify)}
+
+  .row.broken{border-color:rgba(208,86,63,.5);background:rgba(208,86,63,.07)}
+  .row.broken .hash b{color:var(--break)}
+  .row.broken .payload{color:var(--break)}
+  .row.anchored-mark{border-color:rgba(200,146,46,.35);background:rgba(200,146,46,.05)}
+
+  .seal{
+    display:flex;align-items:center;gap:.6rem;margin:.3rem .35rem;padding:.45rem .7rem;
+    border-radius:5px;border:1px dashed rgba(200,146,46,.5);background:rgba(200,146,46,.06);
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--gold-bright);
+    animation:stamp .45s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes stamp{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+  .seal svg{width:20px;height:20px;flex:0 0 auto}
+  .seal .lab b{color:var(--dust)}
+  .seal .ts{margin-left:auto;color:var(--dust-dim)}
+
+  .tab-foot{
+    display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;border-top:1px solid var(--edge);
+    position:relative;z-index:2;background:rgba(14,11,8,.45);
+  }
+  .mini-btn{
+    font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    background:transparent;border:1px solid var(--edge);color:var(--dust-dim);
+    padding:.4rem .65rem;border-radius:4px;cursor:pointer;
+  }
+  .mini-btn:hover{border-color:var(--dust-dim);color:var(--dust)}
+  .mini-btn.danger:hover{border-color:var(--break);color:var(--break)}
+  .foot-status{margin-left:auto;font-family:var(--mono);font-size:.66rem;letter-spacing:.05em;color:var(--verify)}
+  .foot-status.halted{color:var(--break)}
+
+  .halt-banner{
+    display:none;align-items:flex-start;gap:.6rem;margin:.35rem;padding:.6rem .75rem;
+    border-radius:5px;border:1px solid rgba(208,86,63,.5);background:rgba(208,86,63,.09);
+    font-family:var(--mono);font-size:.68rem;line-height:1.5;color:var(--break);position:relative;z-index:2;
+  }
+  .halt-banner.show{display:flex}
+  .halt-banner b{color:#f0a99b}
+  .halt-banner svg{width:16px;height:16px;flex:0 0 auto;margin-top:1px}
+
+  /* ---------- two-col claim blocks ---------- */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.6rem,3vw,3rem)}
+  @media(max-width:820px){.split{grid-template-columns:1fr;gap:1.6rem}}
+  .pull{
+    font-family:var(--disp);font-stretch:125%;font-weight:800;
+    font-size:clamp(1.3rem,2.4vw,1.9rem);line-height:1.1;color:var(--dust);letter-spacing:-.01em;
+    border-left:2px solid var(--gold);padding-left:1.1rem;margin:2.2rem 0;max-width:26ch;
+  }
+
+  /* ---------- spec chips ---------- */
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.8rem}
+  .chip{
+    font-family:var(--mono);font-size:.72rem;color:var(--dust);
+    background:var(--kiln);border:1px solid var(--edge);border-radius:4px;padding:.42rem .7rem;
+    display:inline-flex;align-items:center;gap:.55rem;
+  }
+  .chip .g{color:var(--verify)}
+
+  /* ---------- anchoring diagram ---------- */
+  .anchor-wrap{margin-top:2.6rem;background:var(--tablet);border:1px solid var(--edge);border-radius:8px;padding:clamp(1.2rem,2.5vw,1.8rem)}
+  .axiom{
+    margin-top:1.8rem;border:1px solid rgba(200,146,46,.35);border-radius:7px;
+    background:linear-gradient(180deg,rgba(200,146,46,.07),transparent);
+    padding:1.2rem 1.3rem;
+  }
+  .axiom .tag{font-family:var(--mono);font-weight:700;color:var(--gold-bright);font-size:.74rem;letter-spacing:.06em}
+  .axiom p{margin:.5rem 0 0;color:var(--dust);max-width:60ch;font-size:1.02rem}
+  .axiom code{font-family:var(--mono);color:var(--gold-bright);font-size:.92em}
+
+  /* ---------- article 12 map ---------- */
+  .map{display:grid;gap:.9rem;margin-top:2.2rem}
+  .map-row{
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:1.3rem;align-items:start;
+    background:var(--tablet);border:1px solid var(--edge);border-radius:7px;padding:1.1rem 1.2rem;
+  }
+  @media(max-width:720px){.map-row{grid-template-columns:1fr;gap:.6rem}}
+  .map-row .art{font-family:var(--mono)}
+  .map-row .art .code{color:var(--lapis-bright);font-weight:700;font-size:.82rem;letter-spacing:.02em}
+  .map-row .art .sub{color:var(--dust-dim);font-size:.86rem;margin-top:.25rem;line-height:1.45}
+  .map-row .does{color:var(--dust);font-size:.98rem}
+  .facts-line{
+    margin-top:1.6rem;font-family:var(--mono);font-size:.78rem;line-height:1.7;color:var(--dust-dim);
+    border-top:1px solid var(--edge-soft);padding-top:1.2rem;
+  }
+  .facts-line b{color:var(--dust)}
+  .fine{font-size:.74rem;color:var(--dust-faint);margin-top:.9rem;font-family:var(--body);font-style:italic}
+
+  /* ---------- fail-stop ---------- */
+  .failstop h2{color:var(--dust)}
+  .failstop .es{color:var(--break)}
+  .necro{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:2.2rem}
+  @media(max-width:720px){.necro{grid-template-columns:1fr}}
+  .necro .card{background:var(--tablet);border:1px solid var(--edge);border-radius:7px;padding:1.2rem 1.3rem}
+  .necro .card h3{font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;margin-bottom:.6rem}
+  .necro .bad h3{color:var(--break)}
+  .necro .good h3{color:var(--verify)}
+  .necro .card p{font-size:.96rem;color:var(--dust-dim);max-width:none}
+
+  /* ---------- "what it isn't" ---------- */
+  .nots{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.2rem}
+  @media(max-width:820px){.nots{grid-template-columns:1fr}}
+  .not{background:var(--tablet);border:1px solid var(--edge);border-radius:7px;padding:1.2rem 1.25rem}
+  .not h3{font-size:1rem;margin-bottom:.5rem;color:var(--dust)}
+  .not p{font-size:.92rem;color:var(--dust-dim);max-width:none}
+
+  .divider-quote{text-align:center;padding-block:clamp(3rem,6vw,4.5rem)}
+  .divider-quote .q{
+    font-family:var(--disp);font-stretch:125%;font-weight:900;letter-spacing:-.02em;
+    font-size:clamp(1.8rem,4.6vw,3.4rem);color:var(--dust);
+  }
+  .divider-quote .q .b{color:var(--gold)}
+
+  /* ---------- writing ---------- */
+  .essays{display:grid;gap:.7rem;margin-top:2rem}
+  .essay{
+    display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:baseline;
+    padding:1.2rem .4rem;border-top:1px solid var(--edge-soft);
+  }
+  .essay:last-child{border-bottom:1px solid var(--edge-soft)}
+  .essay .meta{font-family:var(--mono);font-size:.7rem;color:var(--gold);letter-spacing:.04em;white-space:nowrap}
+  .essay .et{font-family:var(--disp);font-stretch:125%;font-weight:700;font-size:1.12rem;color:var(--dust);letter-spacing:-.005em}
+  .essay .ed{font-size:.92rem;color:var(--dust-dim);margin-top:.3rem;max-width:70ch}
+  .essay .go{font-family:var(--mono);font-size:.74rem;color:var(--lapis-bright);white-space:nowrap;align-self:center}
+  .essay:hover .et{color:var(--lapis-bright)}
+  @media(max-width:720px){.essay{grid-template-columns:1fr;gap:.4rem}.essay .go{justify-self:start}}
+
+  /* ---------- final CTA ---------- */
+  .final{text-align:left}
+  .final .cta-row{margin-top:2.2rem}
+  .cli{
+    margin-top:2.4rem;background:#0a0805;border:1px solid var(--edge);border-radius:8px;
+    font-family:var(--mono);font-size:.82rem;line-height:1.9;overflow:hidden;max-width:640px;
+  }
+  .cli .bar{display:flex;gap:.4rem;padding:.6rem .8rem;border-bottom:1px solid var(--edge);background:rgba(20,16,11,.6)}
+  .cli .bar i{width:9px;height:9px;border-radius:50%;background:var(--dust-faint);opacity:.6}
+  .cli pre{margin:0;padding:1rem 1.1rem;white-space:pre-wrap;color:var(--dust-dim)}
+  .cli .p{color:var(--gold)}
+  .cli .c{color:var(--dust)}
+  .cli .o{color:var(--verify)}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--edge-soft);padding-block:3rem;background:var(--kiln)}
+  .foot-in{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center}
+  .foot-brand{display:flex;align-items:center;gap:.55rem;font-family:var(--disp);font-stretch:125%;font-weight:900;color:var(--dust);font-size:.95rem}
+  .foot-brand .mark{width:18px;height:18px}
+  .foot-links{display:flex;gap:1.3rem;margin-left:auto;font-family:var(--mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.03em}
+  .foot-links a{color:var(--dust-dim)}
+  .foot-links a:hover{color:var(--dust)}
+  .foot-meta{width:100%;font-family:var(--mono);font-size:.7rem;color:var(--dust-faint);border-top:1px solid var(--edge-soft);padding-top:1.2rem;margin-top:.4rem}
+
+  .copied{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--gold);color:var(--bitumen);font-family:var(--mono);font-size:.76rem;font-weight:700;
+    padding:.5rem .9rem;border-radius:5px;opacity:0;transition:.2s;pointer-events:none;z-index:99}
+  .copied.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  /* Premium Download Dropdown */
+  .download-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    min-width: 220px;
+    background: rgba(10, 10, 10, 0.98);
+    border: 1px solid var(--edge);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+    backdrop-filter: blur(16px);
+    z-index: 50;
+    overflow: hidden;
+    transform: translateY(8px);
+    transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out), visibility var(--duration-fast);
+  }
+  .download-dropdown:hover .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .dropdown-content a {
+    color: var(--dust-dim);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid rgba(32,32,32,0.5);
+    transition: background 0.2s, color 0.2s;
+  }
+  .dropdown-content a:last-child {
+    border-bottom: none;
+  }
+  .dropdown-content a:hover {
+    background: rgba(43, 59, 229, 0.15); /* Lapis transparent */
+    color: var(--dust);
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<style>
+  /* Cinematic Cursor Magnet */
+  .cursor-magnet {
+    position: fixed;
+    top: 0; left: 0;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(245, 158, 11, 0.5); /* Gold */
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: exclusion;
+  }
+  .cursor-magnet.hover {
+    width: 60px; height: 60px;
+    background: rgba(43, 59, 229, 0.1); /* Cobalt */
+    border-color: transparent;
+    backdrop-filter: blur(4px);
+  }
+  /* Remove body before background (replaced by WebGL) */
+  body::before { display: none !important; }
+</style>
+</head>
+<body>
+<canvas id="bg-canvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+<div class="cursor-magnet" id="cursor-magnet"></div>
+
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <!-- stacked wedge / brick mark -->
+        <path d="M3 8 L12 4 L21 8 L12 12 Z" fill="#C8922E"/>
+        <path d="M3 8 L12 12 L12 20 L3 16 Z" fill="#2F55C7"/>
+        <path d="M21 8 L12 12 L12 20 L21 16 Z" fill="#6E92FF"/>
+      </svg>
+      BABYLON·60
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#ledger">Ledger</a>
+      <a href="#anchoring">Anchoring</a>
+      <a href="#article12">Article&nbsp;12</a>
+      <a href="#failstop">Fail-stop</a>
+      <a href="#writing">Writing</a>
+      <a href="https://github.com/borjamoskv/Cortex-Persist">GitHub</a>
+    </nav>
+    <a class="nav-cta" href="#start">pip&nbsp;install</a>
+  </div>
+</header>
+
+<!-- ============ COMPLIANCE STRIP ============ -->
+<div class="strip">
+  <div class="wrap strip-in">
+    <span class="tick">▲</span>
+    <span>EU AI Act · <b>Article 12</b> record-keeping applies to high-risk systems <b>2 Aug 2026</b> · penalties up to <b>€15M or 3%</b> of worldwide turnover</span>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Tamper-evident memory &amp; decision lineage for AI agents</span>
+      <h1>The clay tablet was the first <span class="glaze">tamper-evident</span> ledger.</h1>
+      <p class="lead">BABYLON-60 gives an AI agent a memory it cannot quietly rewrite. Every fact, decision, and tool call is typed, hash-chained, and — when it has to hold up in front of a regulator — anchored to a timestamp the operator does not control.</p>
+      <p class="lead dim" style="margin-top:.9rem;font-size:1rem">Local-first. Fail-stop. Apache-2.0.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" data-copy="pip install babylon60">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3"/><path d="M9 3v4h6V3"/></svg>
+          pip install babylon60
+        </button>
+        <div class="download-dropdown">
+          <button class="btn btn-primary" id="download-btn" style="background: var(--lapis); border-color: var(--lapis);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download IDE
+          </button>
+          <div class="dropdown-content">
+            <a href="https://github.com/borjamoskv/BABYLON-60/releases/latest/download/Babylon60_x64.dmg">macOS (Intel)</a>
+            <a href="https://github.com/borjamoskv/BABYLON-60/releases/latest/download/Babylon60_aarch64.dmg">macOS (Apple Silicon)</a>
+            <a href="https://github.com/borjamoskv/BABYLON-60/releases/latest/download/Babylon60.msi">Windows (.msi)</a>
+            <a href="https://github.com/borjamoskv/BABYLON-60/releases/latest/download/Babylon60.AppImage">Linux (.AppImage)</a>
+          </div>
+        </div>
+        <a class="btn btn-ghost" href="https://github.com/borjamoskv/Cortex-Persist">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 22 12.2C22 6.6 17.5 2 12 2Z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: cuneiform hash-chain ledger -->
+    <div class="tablet-card" id="ledger" aria-label="Live tamper-evident ledger demonstration">
+      <div class="tab-head">
+        <span class="dot" id="statusDot"></span>
+        <span class="title">BABYLON·60 LEDGER</span>
+        <span class="spacer"></span>
+        <span class="kv">height <b id="height">0</b></span>
+        <span class="kv">ΔT_ancla <span class="dt-read" id="dt">00:00</span></span>
+      </div>
+      <div class="ledger" id="ledgerBody"></div>
+      <div class="halt-banner" id="haltBanner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+        <span><b>TamperError · chain broken at the mutated record.</b> Verification failed downstream. Fail-stop engaged — the ledger refuses to continue on a broken chain. Every halt leaves a reason.</span>
+      </div>
+      <div class="tab-foot">
+        <button class="mini-btn danger" id="tamperBtn">Simulate tamper</button>
+        <button class="mini-btn" id="resetBtn">Reset</button>
+        <span class="foot-status" id="footStatus">chain intact</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="rule-top">
+  <div class="wrap">
+    <span class="eyebrow">The gap</span>
+    <div class="split">
+      <div>
+        <h2>Most agents can act. Few can prove what they knew.</h2>
+        <p class="pull">You don't have memory. You have fragments, logs, and optimism.</p>
+      </div>
+      <div class="rail">
+        <span class="ticks"></span>
+        <p>Agents keep getting better at calling tools and producing plausible output. What they still lack is a durable record of <em>what they knew, when they knew it, and how a decision was reached</em> — one that survives an adversary who can reach the database.</p>
+        <p class="dim">Application logs answer <em>"what happened"</em> for operations. They were never built to answer <em>"prove it"</em> for an auditor. They are mutable, scattered across systems, hard to tie to a single decision, and dependent on the very production access you're trying to hold accountable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT IT IS ============ -->
+<section class="rule-top" id="what">
+  <div class="wrap">
+    <span class="eyebrow">What it is</span>
+    <div class="split">
+      <div>
+        <h2>A memory substrate that keeps evidence, not just state.</h2>
+        <p>BABYLON-60 is a local-first memory and verification layer for AI systems that need to remember, retrieve, and prove what happened. Structured facts and decisions are written as typed records into a hash-chained ledger — HMAC-SHA256 over SQLite in WAL mode — so any silent mutation of history breaks the chain and is caught on verification.</p>
+      </div>
+      <div class="rail">
+        <span class="ticks"></span>
+        <p class="dim">It sits <em>beside</em> your existing stack as an append-only evidence layer, not on top of it as another place for state to drift. Start with a file on disk; reach for anchoring and cloud backends only when the records start to matter to someone who doesn't trust you.</p>
+        <div class="chips">
+          <span class="chip"><span class="g">◆</span> Hash-chained HMAC-SHA256</span>
+          <span class="chip"><span class="g">◆</span> SQLite + WAL, local-first</span>
+          <span class="chip"><span class="g">◆</span> Typed: fact / decision / tool-call / error</span>
+          <span class="chip"><span class="g">◆</span> Two-phase write-ahead</span>
+          <span class="chip"><span class="g">◆</span> Deterministic audit export</span>
+          <span class="chip"><span class="g">◆</span> Python-first · CLI + API</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANCHORING (differentiator) ============ -->
+<section class="rule-top" id="anchoring">
+  <div class="wrap">
+    <span class="eyebrow">The part every "immutable ledger" skips</span>
+    <h2>A ledger you control is not proof against you.</h2>
+    <div class="anchor-wrap">
+      <div class="split">
+        <div>
+          <p>A private HMAC ledger proves exactly two things: <b>internal integrity</b> and <b>ordering</b>. It does not prove <em>anteriority to a third party</em> — because you hold the key and you hold the storage. Under Article 12 the operator is the regulated party. To a regulator, <em>"trust my own append-only log"</em> is not evidence: in principle the operator could rebuild the entire chain from scratch.</p>
+        </div>
+        <div>
+          <p class="dim">BABYLON-60 closes the gap by anchoring the chain to a clock the operator cannot move: a public commitment through <b>OpenTimestamps</b>, or an <b>RFC 3161</b> timestamp from an independent authority. After an anchor, everything before it is fixed against an external record — rewriting it means contradicting a party you don't control.</p>
+        </div>
+      </div>
+
+      <!-- rewritable-window diagram -->
+      <svg viewBox="0 0 720 140" style="width:100%;height:auto;margin-top:1.6rem" role="img" aria-label="Timeline: between two anchors, a shaded rewritable window ΔT collapses to zero at each anchor seal.">
+        <line x1="20" y1="86" x2="700" y2="86" stroke="#3A2C1E" stroke-width="2"/>
+        <!-- rewritable window shading -->
+        <rect x="120" y="62" width="240" height="24" fill="#D0563F" opacity="0.16"/>
+        <rect x="480" y="62" width="150" height="24" fill="#D0563F" opacity="0.16"/>
+        <!-- records -->
+        <g fill="#AC9E86">
+          <circle cx="60" cy="86" r="3"/><circle cx="90" cy="86" r="3"/>
+          <circle cx="150" cy="86" r="3"/><circle cx="200" cy="86" r="3"/><circle cx="260" cy="86" r="3"/><circle cx="320" cy="86" r="3"/>
+          <circle cx="410" cy="86" r="3"/><circle cx="440" cy="86" r="3"/>
+          <circle cx="510" cy="86" r="3"/><circle cx="560" cy="86" r="3"/><circle cx="610" cy="86" r="3"/>
+        </g>
+        <!-- anchor seals -->
+        <g font-family="Space Mono, monospace" font-size="10" fill="#E6B54E" text-anchor="middle">
+          <g transform="translate(120,86)"><circle r="9" fill="#20170F" stroke="#C8922E" stroke-width="1.5"/><path d="M-3.5 0 L0 -4 L3.5 0 L0 4 Z" fill="#C8922E"/></g>
+          <text x="120" y="118">OTS</text>
+          <g transform="translate(480,86)"><circle r="9" fill="#20170F" stroke="#C8922E" stroke-width="1.5"/><path d="M-3.5 0 L0 -4 L3.5 0 L0 4 Z" fill="#C8922E"/></g>
+          <text x="480" y="118">RFC 3161</text>
+          <g transform="translate(660,86)"><circle r="9" fill="#20170F" stroke="#C8922E" stroke-width="1.5"/><path d="M-3.5 0 L0 -4 L3.5 0 L0 4 Z" fill="#C8922E"/></g>
+          <text x="660" y="118">OTS</text>
+        </g>
+        <!-- labels -->
+        <g font-family="Space Mono, monospace" font-size="11" fill="#D0563F" text-anchor="middle">
+          <text x="240" y="52">ΔT_ancla — still rewritable</text>
+          <text x="555" y="52">ΔT_ancla</text>
+        </g>
+        <text x="20" y="24" font-family="Space Mono, monospace" font-size="11" fill="#6F6353">past</text>
+        <text x="700" y="24" font-family="Space Mono, monospace" font-size="11" fill="#6F6353" text-anchor="end">now →</text>
+      </svg>
+
+      <div class="axiom">
+        <span class="tag">THE LATENCY AXIOM</span>
+        <p><code>ΔT_ancla</code> — the interval between anchors — is the maximum window in which history can still be silently rewritten. Anchor frequency isn't a deployment detail; it's the security parameter. Choose <code>ΔT_ancla</code>, and you've chosen how much of the past is still soft.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTICLE 12 MAP ============ -->
+<section class="rule-top" id="article12">
+  <div class="wrap">
+    <span class="eyebrow">EU AI Act · Article 12</span>
+    <h2>What the regulation asks for, in the shape it asks for it.</h2>
+    <p class="dim" style="margin-top:1.2rem">Article 12 requires high-risk AI systems to <em>technically allow the automatic recording of events over the lifetime of the system</em>, for three stated purposes. BABYLON-60 supplies the record layer for each.</p>
+    <div class="map">
+      <div class="map-row">
+        <div class="art">
+          <div class="code">Art. 12(2)(a)</div>
+          <div class="sub">Identify situations that may present a risk (Art. 79) or a substantial modification.</div>
+        </div>
+        <div class="does">Typed risk and error records that carry the input context and the decision path that produced them — reconstructable after the fact, not summarized away.</div>
+      </div>
+      <div class="map-row">
+        <div class="art">
+          <div class="code">Art. 12(2)(b)</div>
+          <div class="sub">Facilitate post-market monitoring (Art. 72).</div>
+        </div>
+        <div class="does">A continuous, exportable trail with stable correlation IDs linking each record to the user-visible action it belongs to.</div>
+      </div>
+      <div class="map-row">
+        <div class="art">
+          <div class="code">Art. 12(2)(c)</div>
+          <div class="sub">Support operational monitoring by deployers (Art. 26(5)).</div>
+        </div>
+        <div class="does">A verifiable, tamper-evident history a deployer can inspect later — without needing to trust privileged access to the production environment.</div>
+      </div>
+    </div>
+
+    <p class="pull" style="margin-top:2.4rem">Article 12 doesn't say "tamper-proof." Logs that can be silently altered say nothing.</p>
+    <p class="dim">The regulation asks for traceability; it leaves integrity to you. But a log you cannot demonstrate was <em>not</em> altered carries close to zero evidentiary weight — and that weight is exactly what a competent authority is testing. BABYLON-60 supplies the evidence layer. Retention policy, access control, and governance remain yours.</p>
+
+    <div class="facts-line">
+      <b>Applicable to high-risk (Annex III) systems 2 Aug 2026.</b> · Penalties up to <b>€15M or 3%</b> of worldwide annual turnover, whichever is higher. · <b>Buying a third-party system does not move the obligation off the deployer</b> — you remain accountable for log retention and accessibility.
+      <div class="fine">A Digital Omnibus delay (possibly to Dec 2027) has been proposed but not adopted. Until it is, 2 Aug 2026 remains the enforceable date — and the practical expectation is a retained audit trail already running before enforcement, not started on the day.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAIL-STOP ============ -->
+<section class="rule-top failstop" id="failstop">
+  <div class="wrap">
+    <span class="eyebrow">Failure semantics</span>
+    <h2><span class="es">No degradar jamás. Antes morir.</span></h2>
+    <p style="margin-top:1.2rem">On any integrity failure, BABYLON-60 halts. Ledger integrity outranks availability. A system that keeps serving after its evidence is compromised is worse than one that stops — because it manufactures false confidence in records that can no longer be trusted.</p>
+    <div class="necro">
+      <div class="card bad">
+        <h3>Necrosis — the silent failure</h3>
+        <p>A table quietly dropped on schema drift. Evidence gone, and the system carries on as if nothing happened. The worst outcome for a compliance product: an anti-forensic failure that looks like health. This is the failure mode BABYLON-60 is built to make impossible.</p>
+      </div>
+      <div class="card good">
+        <h3>Apoptosis — the disciplined halt</h3>
+        <p>Detect the break, refuse to continue, and leave a compensation record as the signal. The system stops loudly and legibly, with the reason attached. It will refuse to boot on a broken chain rather than paper over it.</p>
+      </div>
+    </div>
+    <div class="chips">
+      <span class="chip"><span class="g">◆</span> TamperError → hard refusal to continue</span>
+      <span class="chip"><span class="g">◆</span> integrity &gt; availability</span>
+      <span class="chip"><span class="g">◆</span> every halt leaves a reason</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVIDER QUOTE ============ -->
+<div class="wrap divider-quote rule-top">
+  <div class="q">Similarity is not <span class="b">lineage.</span></div>
+</div>
+
+<!-- ============ WHAT IT ISN'T ============ -->
+<section id="isnt">
+  <div class="wrap">
+    <span class="eyebrow">Honest scope</span>
+    <h2>What it isn't.</h2>
+    <div class="nots">
+      <div class="not">
+        <h3>Not a semantic search database</h3>
+        <p>Keep Qdrant or Pinecone for ephemeral RAG chunks. BABYLON-60 stores the decisions and facts worth defending — the ones you'd have to justify later.</p>
+      </div>
+      <div class="not">
+        <h3>Not an observability platform</h3>
+        <p>Keep Datadog or ELK for metrics, traces, and string logs. Different question, different tool. This is the evidence layer, not the dashboard.</p>
+      </div>
+      <div class="not">
+        <h3>Not a hallucination filter</h3>
+        <p>A cryptographically logged lie is still a lie. BABYLON-60 proves what was recorded and that it wasn't altered — not that the model was right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WRITING ============ -->
+<section class="rule-top" id="writing">
+  <div class="wrap">
+    <span class="eyebrow">Writing · notes from building it</span>
+    <h2>The reasoning, in the open.</h2>
+    <div class="essays">
+      <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
+        <span class="meta">Jul 2026 · C5-REAL</span>
+        <span>
+          <span class="et">Soberanía Criptográfica y el Bucle Autopoiético: Bitcoin ACI V1.0</span>
+          <span class="ed">El desmantelamiento final de las APIs de pago fiat (Visa/Stripe). Cómo integramos un transductor JSON-RPC directo a Bitcoin Core y firmas Schnorr (Secp256k1) para que el agente pague su propia inferencia.</span>
+        </span>
+        <span class="go">Read →</span>
+      </a>
+      <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
+        <span class="meta">Jun 2026 · Ensayo</span>
+        <span>
+          <span class="et">Te digo tó y no te digo ná: Termodinámica + Teoría de la Información</span>
+          <span class="ed">El 0.002% de la población mundial domina la intersección entre Boltzmann y Shannon. La matemática de la equivalencia física de la información.</span>
+        </span>
+        <span class="go">Read →</span>
+      </a>
+      <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
+        <span class="meta">Jun 2026 · Técnica</span>
+        <span>
+          <span class="et">La Mutación Causal del Genoma: AST y Exergía Pura</span>
+          <span class="ed">La transición de evolución estocástica a deducción causal — cómo BABYLON-60 aplica cirugía determinista sobre nodos fallidos mutando su propio genoma.</span>
+        </span>
+        <span class="go">Read →</span>
+      </a>
+      <a class="essay" href="https://github.com/borjamoskv/Cortex-Persist">
+        <span class="meta">May 2026 · Análisis</span>
+        <span>
+          <span class="et">La Paradoja del Contexto Infinito</span>
+          <span class="ed">Google ofrece 2M de tokens de contexto y tu agente sigue amnésico al día siguiente. El problema nunca fue el tamaño de la ventana.</span>
+        </span>
+        <span class="go">Read →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="rule-top final" id="start">
+  <div class="wrap">
+    <span class="eyebrow">Get started</span>
+    <h2>Give your agent a memory it can't quietly rewrite.</h2>
+    <p style="margin-top:1.2rem">Start local with persistent memory. Add anchoring when the records have to hold up in front of someone who doesn't trust you. Keep both when accountability stops being optional.</p>
+    <div class="cli">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <pre><span class="p">$</span> <span class="c">pip install babylon60</span>
+<span class="p">$</span> <span class="c">babylon60 init</span>
+<span class="p">$</span> <span class="c">babylon60 store decision "hold transfer €12,400 — IP/geo mismatch"</span>
+<span class="o">[+] record sealed · chain height 1</span>
+<span class="p">$</span> <span class="c">babylon60 verify</span>
+<span class="o">[✔] VERIFIED — chain intact, 1 record</span>
+<span class="p">$</span> <span class="c">babylon60 anchor --ots</span>
+<span class="o">[⌛] anchored · ΔT_ancla reset · records now fixed against external record</span></pre>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/borjamoskv/Cortex-Persist">Explore GitHub</a>
+      <a class="btn btn-ghost" href="https://github.com/borjamoskv/Cortex-Persist#readme">Read the docs</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 8 L12 4 L21 8 L12 12 Z" fill="#C8922E"/>
+        <path d="M3 8 L12 12 L12 20 L3 16 Z" fill="#2F55C7"/>
+        <path d="M21 8 L12 12 L12 20 L21 16 Z" fill="#6E92FF"/>
+      </svg>
+      BABYLON·60
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/borjamoskv/Cortex-Persist#readme">Docs</a>
+      <a href="https://github.com/borjamoskv/Cortex-Persist">GitHub</a>
+      <a href="#anchoring">Security model</a>
+      <a href="#article12">Article 12</a>
+    </div>
+    <div class="foot-meta">© 2026 borjamoskv · Apache-2.0 · Tamper-evident memory &amp; decision lineage for AI agents. Fail-stop by design — no degradar jamás.</div>
+  </div>
+</footer>
+
+<div class="copied" id="copied">copied to clipboard</div>
+
+<script>
+(() => {
+  "use strict";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---------- base-60 encoder (Babylon's sexagesimal, over the real digest) ----------
+  const B60 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx"; // 60 symbols
+  function hexToBase60(hex, len){
+    let n = 0n;
+    for (const ch of hex){ n = n*16n + BigInt(parseInt(ch,16)); }
+    let out = "";
+    while (n > 0n){ out = B60[Number(n % 60n)] + out; n = n / 60n; }
+    out = out || "0";
+    // stable-length prefix for display
+    return out.padStart(len,"0").slice(0,len);
+  }
+
+  // ---------- hash (real SHA-256 chain when available; sync fallback otherwise) ----------
+  const enc = new TextEncoder();
+  const subtle = (window.crypto && window.crypto.subtle) ? window.crypto.subtle : null;
+  async function sha256hex(str){
+    if (subtle){
+      const buf = await subtle.digest("SHA-256", enc.encode(str));
+      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    // fallback: fnv1a-64-ish expanded to 64 hex (non-crypto, demo only)
+    let h1=0x811c9dc5, h2=0x1b873593;
+    for(let i=0;i<str.length;i++){const c=str.charCodeAt(i);h1=(h1^c)>>>0;h1=Math.imul(h1,0x01000193)>>>0;h2=(h2^((c<<3)|i&7))>>>0;h2=Math.imul(h2,0x85ebca6b)>>>0;}
+    let s=(h1>>>0).toString(16).padStart(8,"0")+(h2>>>0).toString(16).padStart(8,"0");
+    while(s.length<64){s+= (Math.imul(parseInt(s.slice(-8),16)||1,0x27d4eb2d)>>>0).toString(16).padStart(8,"0");}
+    return s.slice(0,64);
+  }
+
+  // ---------- cuneiform numeral (Babylonian, base-60 positional) as SVG ----------
+  // vertical wedge = 1 ; Winkelhaken (corner) = 10
+  function wedgeSVG(n){
+    n = Math.max(0, Math.floor(n));
+    let digits = [];
+    if (n === 0) digits = [0];
+    else { let m=n; while(m>0){ digits.unshift(m%60); m=Math.floor(m/60);} }
+
+    // a "nail" (value 1): triangular head + thin tail, pointing down
+    const nail = (x,y)=>`<path d="M${x} ${y} L${x+4} ${y+1} L${x+2} ${y+3.2} Z" fill="#ECE1CD"/><rect x="${x+1.5}" y="${y+2.6}" width="1" height="9" fill="#ECE1CD"/>`;
+    // a "Winkelhaken" (value 10): a clean corner hook
+    const hook = (x,y)=>`<path d="M${x} ${y} L${x+8.5} ${y+2.2} L${x+2.4} ${y+3.4} L${x+3} ${y+9} L${x+0.4} ${y+3.8} Z" fill="#C8922E"/>`;
+
+    let x = 0; const parts = []; const gap = 7; const NW=5.2, HW=11.5;
+    digits.forEach((d,di)=>{
+      const tens = Math.floor(d/10), units = d%10;
+      const gx = x;
+      for(let i=0;i<tens;i++){ const col=Math.floor(i/3), row=i%3; parts.push(hook(gx+col*HW, 2+row*8.5)); }
+      const tensCols = Math.ceil(tens/3);
+      const ux = gx + (tens>0 ? tensCols*HW + 2 : 0);
+      for(let i=0;i<units;i++){ const col=Math.floor(i/3), row=i%3; parts.push(nail(ux+col*NW, 2+row*8.5)); }
+      const unitsCols = Math.ceil(units/3);
+      const groupW = (tens>0?tensCols*HW+2:0) + (units>0?unitsCols*NW:0) + 2;
+      x = gx + groupW;
+      if (di<digits.length-1){ parts.push(`<circle cx="${x+gap/2-1}" cy="15" r="0.9" fill="#6F6353"/>`); x += gap; }
+    });
+    const totalW = Math.max(x, 6);
+    return `<svg class="wedge" viewBox="0 0 ${totalW} 30" width="${Math.min(totalW*0.8,58)}" height="22" aria-hidden="true">${parts.join("")}</svg>`;
+  }
+
+  // ---------- ledger state ----------
+  const POOL = [
+    ["tool_call","bitcoin_rpc.getbalance() → 0.50000000 BTC"],
+    ["decision","delegate subtask via Lightning HTLC (10,000 sats)"],
+    ["fact","secp256k1.verify(sig, payload) → VALID"],
+    ["error","EconomicSIGKILL · balance (980 sats) <= threshold"],
+    ["tool_call","bitcoin_rpc.generatetoaddress(1) → 50.0 BTC"],
+    ["decision","hold transfer €12,400 · reason=IP/geo mismatch"],
+    ["fact","kyc.match=false · doc=passport · conf=0.94"],
+    ["tool_call","sanctions.screen(entity=0x7f…a2) → clear"],
+    ["decision","escalate case #4471 · human-review required"],
+    ["tool_call","ledger.verify(1..n) → chain intact"],
+    ["fact","policy=NF-13/2013 · jurisdiction=Bizkaia"],
+  ];
+  const GENESIS = "0".repeat(64);
+
+  let records = [];      // {i, type, payload, prev, hash}
+  let seals = {};        // index -> {kind, ts}  (anchor after record i)
+  let sinceAnchor = 0;   // seconds since last anchor
+  let appendsSinceAnchor = 0;
+  let halted = false;
+  let poolPtr = 0;
+
+  const body = document.getElementById("ledgerBody");
+  const heightEl = document.getElementById("height");
+  const dtEl = document.getElementById("dt");
+  const statusDot = document.getElementById("statusDot");
+  const footStatus = document.getElementById("footStatus");
+  const haltBanner = document.getElementById("haltBanner");
+
+  function fmtTime(s){ const m=Math.floor(s/60), ss=s%60; return String(m).padStart(2,"0")+":"+String(ss).padStart(2,"0"); }
+
+  async function appendRecord(){
+    if (halted) return;
+    const [type, payload] = POOL[poolPtr % POOL.length]; poolPtr++;
+    const i = records.length + 1;
+    const prev = records.length ? records[records.length-1].hash : GENESIS;
+    const hash = await sha256hex(prev + "|" + i + "|" + type + "|" + payload);
+    records.push({i, type, payload, prev, hash});
+    appendsSinceAnchor++;
+    // anchor every 6 records (base-60 nod), but not on the very first
+    if (appendsSinceAnchor >= 6){
+      seals[i] = { kind: (Object.keys(seals).length % 2 === 0 ? "OpenTimestamps" : "RFC 3161 TSA"), ts: nowStamp() };
+      appendsSinceAnchor = 0; sinceAnchor = 0;
+    }
+    trimWindow();
+    render();
+  }
+
+  function nowStamp(){
+    const d = new Date();
+    return d.toISOString().replace("T"," ").slice(0,19)+"Z";
+  }
+
+  // keep the visible window bounded (older records roll off but height keeps counting)
+  const MAXROWS = 7;
+  let offset = 0;
+  function trimWindow(){
+    if (records.length - offset > MAXROWS){ offset = records.length - MAXROWS; }
+  }
+
+  function render(){
+    heightEl.textContent = records.length;
+    const visible = records.slice(offset);
+    let html = "";
+    for (const r of visible){
+      const brokenClass = r.broken ? " broken" : "";
+      const anchoredClass = seals[r.i] ? " anchored-mark" : "";
+      const b60 = hexToBase60(r.hash, 12);
+      const hashLabel = r.broken ? `⚠ ${b60}` : `<b>✔</b> ${b60}`;
+      html += `<div class="row${brokenClass}${anchoredClass}">
+        <span class="num">${wedgeSVG(r.i)}<span class="dec">#${r.i}</span></span>
+        <span class="mid"><span class="type ${r.type}">${r.type.replace("_"," ")}</span><div class="payload">${r.payload}</div></span>
+        <span class="hash">${hashLabel}</span>
+      </div>`;
+      if (seals[r.i]){
+        const s = seals[r.i];
+        html += `<div class="seal">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#20170F" stroke="#C8922E" stroke-width="1.4"/><path d="M9 12 L12 9 L15 12 L12 15 Z" fill="#C8922E"/></svg>
+          <span class="lab"><b>ANCHOR</b> · ${s.kind}</span>
+          <span class="ts">${s.ts} · ΔT reset</span>
+        </div>`;
+      }
+    }
+    body.innerHTML = html;
+  }
+
+  // ΔT ticker
+  function tick(){
+    if (!halted){ sinceAnchor++; dtEl.textContent = fmtTime(sinceAnchor); }
+  }
+
+  // ---------- tamper simulation ----------
+  async function simulateTamper(){
+    if (halted || records.length < 3) return;
+    // mutate an earlier decision record (classic evidence tamper: "hold" → "approve")
+    let target = records.findIndex(r => r.type === "decision");
+    if (target < 0 || target >= records.length-1) target = Math.max(0, Math.floor(records.length/3));
+    records[target].payload = "approve transfer €12,400 · reason=IP/geo mismatch";
+    // recompute the chain forward — every downstream hash now diverges from what the anchor sealed
+    for (let k = target; k < records.length; k++){
+      const prev = k===0 ? GENESIS : records[k-1].hash;
+      const newHash = await sha256hex(prev + "|" + records[k].i + "|" + records[k].type + "|" + records[k].payload);
+      records[k].broken = true;
+      records[k].hash = newHash; // recomputed value diverges from what anchors/successors expect
+    }
+    // ensure visible window shows the break
+    offset = 0; trimWindow();
+    halted = true;
+    render();
+    statusDot.style.background = "var(--break)";
+    statusDot.style.boxShadow = "0 0 8px var(--break)";
+    footStatus.textContent = "FAIL-STOP · HALTED";
+    footStatus.classList.add("halted");
+    haltBanner.classList.add("show");
+  }
+
+  function reset(){
+    records = []; seals = {}; offset = 0; sinceAnchor = 0; appendsSinceAnchor = 0; halted = false; poolPtr = 0;
+    statusDot.style.background = "var(--verify)";
+    statusDot.style.boxShadow = "0 0 8px var(--verify)";
+    footStatus.textContent = "chain intact";
+    footStatus.classList.remove("halted");
+    haltBanner.classList.remove("show");
+    dtEl.textContent = "00:00";
+    seed();
+  }
+
+  document.getElementById("tamperBtn").addEventListener("click", simulateTamper);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+
+  // ---------- copy buttons ----------
+  const copied = document.getElementById("copied");
+  document.querySelectorAll("[data-copy]").forEach(btn=>{
+    btn.addEventListener("click", async ()=>{
+      const txt = btn.getAttribute("data-copy");
+      try{ await navigator.clipboard.writeText(txt); }catch(e){}
+      copied.classList.add("show");
+      setTimeout(()=>copied.classList.remove("show"), 1400);
+    });
+  });
+
+  // ---------- boot ----------
+  async function seed(){
+    // prefill 6 so the very first paint shows a full tablet with one anchor already sealed
+    for (let k=0;k<6;k++){ await appendRecord(); }
+  }
+
+  let streamTimer=null, tickTimer=null;
+  (async ()=>{
+    await seed();
+    if (!reduce){
+      streamTimer = setInterval(appendRecord, 3500);
+      tickTimer = setInterval(tick, 1000);
+    }
+  })();
+})();
+</script>
+
+<script src="cortex/frontend/cinematic_engine.js"></script>
+</body>
+</html>
