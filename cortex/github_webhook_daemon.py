@@ -9,16 +9,11 @@ import sqlite3
 import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+
 # C5-REAL Invariant: Zero External Dependencies for perception.
 CORTEX_DB_PATH = ".cortex/cortex.db"
 SECRET_KEY = os.getenv("CORTEX_GITHUB_SECRET", "cortex-fallback-secret-strict")
 TRIGGER_PATH = ".cortex/.trigger_swarm"
-
-
-class EpistemicHalt(Exception):
-    """Falla crítica en la percepción del webhook."""
-
-    pass
 
 
 def init_perception_ledger() -> None:
