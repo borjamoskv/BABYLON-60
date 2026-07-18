@@ -56,4 +56,4 @@
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `87dad3dba9d9`) | Git Sentinel `ac2c1dd63` |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `ceb66b2e8b65`) | Git Sentinel `e86d80f79` |
 | 2026-07-18 | C5-REAL ITERA: hardening de enlazado PyO3 (`extension-module` opcional + `.cargo/config.toml` universal) y verificación 100% limpia de Rust ATMS/bft y Python suites (182 tests) | Git Sentinel `501bf62e0` |
-| 2026-07-18 | C5-REAL OMEGA-0 ATMS: hardening de Kleer 1986, sincronización de nogoods/creencias desde SQLite WAL, DDB backtracking verificado y bindings PyO3 expuestos (`is_believed`, `contradict_knowledge`, `contradiction_free`) | 42 tests Rust, 183 tests Python |
+| 2026-07-18 | C5-REAL OMEGA-0 ATMS: hardening de Kleer 1986, sincronización de nogoods/creencias desde SQLite WAL, DDB backtracking verificado y bindings PyO3 expuestos (`is_believed`, `contradict_knowledge`, `contradiction_free`) | Git Sentinel `044b46468` (42 tests Rust, 184 tests Python) |
