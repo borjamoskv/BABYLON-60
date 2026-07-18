@@ -1,0 +1,41 @@
+name: C5-REAL Soverign Cloud Allocation (GCP)
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'infra/**'
+
+env:
+  PROJECT_ID: cortex-babylon-60
+  REGION: europe-west1
+
+jobs:
+  terraform-apply:
+    name: "ULTRATHINK BFT Infra Execution"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Authenticate via Workload Identity Federation (C5-REAL Zero-Trust)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: 'projects/123456789012/locations/global/workloadIdentityPools/github/providers/my-repo'
+          service_account: 'c5-deployer@cortex-babylon-60.iam.gserviceaccount.com'
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: ./infra
+
+      - name: Terraform Apply (Auto-Approve / R7 Override)
+        run: terraform apply -auto-approve
+        working-directory: ./infra
