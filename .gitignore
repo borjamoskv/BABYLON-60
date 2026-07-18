@@ -26,3 +26,6 @@ primitives/Haskell1000Test
 
 # Scratch / temp artifacts (R9 — Anti-dirty-loop)
 scratch/
+
+# Compiled Go Portal Daemon
+bin/portal_daemon
