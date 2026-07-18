@@ -174,6 +174,7 @@ export default function BabylonPremiumIDE() {
   const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger' | 'extensions' | 'portal'>('files');
   const [chatInput, setChatInput] = useState('');
   const [showAutopromptMenu, setShowAutopromptMenu] = useState(false);
+  const [focusMode, setFocusMode] = useState(false);
   
   // Extension State
   const [extensions, setExtensions] = useState<ExtensionItem[]>([
@@ -422,7 +423,14 @@ export default function BabylonPremiumIDE() {
             />
           </div>
           
-          <div>
+          <div className="flex flex-col gap-3">
+            <IconButton 
+              icon={focusMode ? "🎯" : "👁️"} 
+              active={focusMode} 
+              onClick={() => setFocusMode(!focusMode)} 
+              accent={activeTheme.accent} 
+              title="Modo Foco (Focus Mode)" 
+            />
             <IconButton 
               icon="🩸" 
               active={false} 
@@ -434,11 +442,12 @@ export default function BabylonPremiumIDE() {
         </div>
 
         {/* Sidebar Panel Content */}
-        <div 
-          className="w-64 h-full border-r flex flex-col transition-colors duration-300"
-          style={{ backgroundColor: activeTheme.sidebar, borderColor: activeTheme.border }}
-        >
-          {sidebarTab === 'files' && (
+        {!focusMode && (
+          <div 
+            className="w-64 h-full border-r flex flex-col transition-all duration-300"
+            style={{ backgroundColor: activeTheme.sidebar, borderColor: activeTheme.border }}
+          >
+            {sidebarTab === 'files' && (
             <div className="p-4 flex flex-col gap-4">
               <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">// PROYECTO</span>
               <div className="flex flex-col gap-2">
@@ -661,7 +670,8 @@ export default function BabylonPremiumIDE() {
               </div>
             </div>
           )}
-        </div>
+          </div>
+        )}
 
         {/* Code Editor and Prediction Workspace */}
         <div className="flex-1 flex flex-col" style={{ backgroundColor: activeTheme.editorBg }}>
