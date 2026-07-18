@@ -2,6 +2,7 @@ import os
 import hashlib
 import subprocess
 import time
+import sqlite3
 from typing import TypedDict, Optional
 
 class AuditState(TypedDict):
@@ -91,8 +92,49 @@ def execute_bft_state_loop(prompt: str, target_path: str, payload: str) -> Optio
     phase_4_bft_consensus(state)
     commit_hash = phase_5_git_sentinel(target_path, payload)
     
+    # Escribir al Master Ledger físico (Ω11, Ω12)
+    write_to_cortex_ledger(commit_hash, payload)
+    
     print(f"[{time.strftime('%H:%M:%S')}] Mutación Cristalizada. C5-REAL Hash: {commit_hash}")
     return commit_hash
+
+def write_to_cortex_ledger(commit_hash: str, payload: str, agent_id: str = "auditor_c5") -> None:
+    db_path = ".cortex/cortex.db"
+    if not os.path.exists(db_path):
+        raise EpistemicHalt(f"Master Ledger no inicializado en {db_path}")
+        
+    conn = sqlite3.connect(db_path, timeout=5.0)
+    cursor = conn.cursor()
+    cursor.execute("PRAGMA journal_mode = WAL;")
+    cursor.execute("PRAGMA busy_timeout = 5000;")
+    
+    # 1. Obtener el último registro para prev_hash y lamport_t (Ω12)
+    cursor.execute("SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1")
+    row = cursor.fetchone()
+    if row:
+        prev_hash = row[0]
+        last_lamport = row[1]
+    else:
+        prev_hash = "0000000000000000000000000000000000000000000000000000000000000000"
+        last_lamport = 0
+        
+    new_lamport = last_lamport + 1
+    new_hash = hashlib.sha256(payload.encode('utf-8')).hexdigest()
+    
+    # Firma obligatoria CORTEX-TAINT (Ω11)
+    taint_signature = f"CORTEX-TAINT:borjamoskv:mutation:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{commit_hash[:8]}"
+    
+    try:
+        cursor.execute(
+            "INSERT INTO bft_ledger (agent_id, lamport_t, payload_hash, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?)",
+            (agent_id, new_lamport, new_hash, prev_hash, taint_signature)
+        )
+        conn.commit()
+        print(f"[Ledger] Transacción registrada físicamente. Lamport={new_lamport}, Hash={new_hash[:8]}")
+    except sqlite3.Error as e:
+        raise EpistemicHalt(f"Violación de Inmutabilidad o Consistencia en Master Ledger: {e}")
+    finally:
+        conn.close()
 
 if __name__ == "__main__":
     print("Módulo ULTRATHINK P0 Audit Loop (C5-REAL) cargado.")
