@@ -104,3 +104,8 @@ cortex/audits/*.yaml
 scripts/cib_async_ledger.db
 scripts/cib_master_ledger.db
 scripts/*.db
+
+# IDE sidecar ledger
+babylon60_ide.db*
+**/babylon60_ide.db*
+
