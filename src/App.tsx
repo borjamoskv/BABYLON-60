@@ -269,6 +269,21 @@ export default function BabylonPremiumIDE() {
     setLedgerLogs(prev => [`[${time}] [Obliterator] Weaponized Forgetting finalizado.`, ...prev]);
   };
 
+  const triggerPortalAction = async (route: string, label: string) => {
+    const time = new Date().toTimeString().slice(0, 8);
+    try {
+      const res = await fetch(`http://localhost:6060${route}`, { method: 'POST' });
+      const data = await res.json();
+      if (data.status === 'ok') {
+        setLedgerLogs(l => [`[${time}] [Portal] ${data.message}`, ...l]);
+      } else {
+        setLedgerLogs(l => [`[${time}] [Portal ERROR] ${data.message}`, ...l]);
+      }
+    } catch (e) {
+      setLedgerLogs(l => [`[${time}] [Portal C4-SIM] ${label} ejecutado (Daemon offline).`, ...l]);
+    }
+  };
+
   const handleInstallExtension = () => {
     if (!newExtensionName.trim()) return;
     const time = new Date().toTimeString().slice(0, 8);
@@ -605,7 +620,7 @@ export default function BabylonPremiumIDE() {
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-white">🌐 Brave Browser</span>
                       <button 
-                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Brave Browser lanzado.`, ...l])}
+                        onClick={() => triggerPortalAction('/launch-brave', 'Brave Browser')}
                         className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
                         style={{ borderColor: activeTheme.accent }}
                       >
@@ -619,7 +634,7 @@ export default function BabylonPremiumIDE() {
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-white">💿 Teorema-Robinson-Moskv DMG</span>
                       <button 
-                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Mapeando DMG de solo lectura.`, ...l])}
+                        onClick={() => triggerPortalAction('/mount-dmg', 'Montar DMG')}
                         className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
                         style={{ borderColor: activeTheme.accent }}
                       >
@@ -633,7 +648,7 @@ export default function BabylonPremiumIDE() {
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-white">⚙️ Ollama local</span>
                       <button 
-                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Daemon de Ollama reiniciado.`, ...l])}
+                        onClick={() => triggerPortalAction('/restart-ollama', 'Ollama local')}
                         className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
                         style={{ borderColor: activeTheme.accent }}
                       >
