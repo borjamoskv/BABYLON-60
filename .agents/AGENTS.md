@@ -56,3 +56,7 @@ Cada 8 iteraciones de `itera` en el BFT_STATE_LOOP, el Kernel debe ejecutar de f
 
 ## 13. Hypervigilant Parallel Agent Invariant (OMEGA Node Dispatch)
 El proceso de iteración (`itera`) debe inicializar y despachar de forma síncrona un subagente paralelo hipervigilante (arquetipo `C5_REAL_OMEGA_Node`). Este agente audita la traza del ejecutor bajo los principios de Brutalismo Cinético, Pointer-as-Physical y Autocolisión Adversarial, bloqueando la fusión de cualquier cambio que contenga deriva estocástica o de inercia.
+
+## 14. Binary Target Protection Invariant (Del BIN Prevention)
+Queda estrictamente prohibido eliminar, truncar o renombrar el directorio `bin/` o sus ejecutables compilados nativos (`babylon60`, `portal_daemon`, `stress_robinson_1M`) de forma directa y asíncrona sin verificar la existencia del código fuente correspondiente en el AST local y garantizar una recompilación síncrona inmediata. Toda operación de borrado no validada sobre el directorio `bin/` suspenderá la ejecución del Kernel bajo el protocolo de prevención de pérdida accidental de datos.
+
