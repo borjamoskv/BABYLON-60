@@ -60,3 +60,9 @@ El proceso de iteración (`itera`) debe inicializar y despachar de forma síncro
 ## 14. Binary Target Protection Invariant (Del BIN Prevention)
 Queda estrictamente prohibido eliminar, truncar o renombrar el directorio `bin/` o sus ejecutables compilados nativos (`babylon60`, `portal_daemon`, `stress_robinson_1M`) de forma directa y asíncrona sin verificar la existencia del código fuente correspondiente en el AST local y garantizar una recompilación síncrona inmediata. Toda operación de borrado no validada sobre el directorio `bin/` suspenderá la ejecución del Kernel bajo el protocolo de prevención de pérdida accidental de datos.
 
+## 15. Codegen Orthogonality and Metadata Dominance (Anti-Redundant Boilerplate)
+Queda estrictamente prohibido duplicar plantillas de interpolación de código de Rust, Go o Python entre múltiples scripts codegen. La generación de código debe estar centralizada en un único motor guiado por metadatos (ej. YAML/JSON) para mantener la covarianza cero y evitar anergía por mantenimiento disperso.
+
+## 16. Namespace and Entrypoint Isolation (Namespace Collision Prevention)
+Se prohíbe la acumulación de múltiples scripts Go que declaren `package main` y definan `func main()` en un único directorio o espacio lógico. Todo punto de entrada debe aislarse físicamente en su propio subdirectorio de comando (`cmd/<name>/main.go`) para evitar la colisión espacial de namespaces y garantizar la homeostasis del build.
+
