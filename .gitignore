@@ -109,3 +109,12 @@ scripts/*.db
 babylon60_ide.db*
 **/babylon60_ide.db*
 
+# Purga Entropía v2 2026-07-19 — sellado contra reincidencia
+# Backups editoriales commiteados por accidente
+*.bak
+# Tooling IDE (AI snapshot extension)
+.snapshots/
+# Build artifacts del frontend Vite (babylon60-ide)
+babylon60-ide/frontend/dist/
+# Schemas JSON generados por tauri-build (src-tauri raíz)
+src-tauri/gen/schemas/
