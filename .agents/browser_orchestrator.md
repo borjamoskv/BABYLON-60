@@ -3,11 +3,20 @@ name: browser_orchestrator
 description: Browser Orchestrator - Orquestador principal de automatización de navegador vía CDP.
 triggers:
   - "/browser"
+  - "/web-automation"
   - "browser_orchestrator"
   - "browser orchestrator"
   - "cdp session"
   - "chrome devtools protocol"
   - "browser automation"
+  - "navegación web"
+  - "web automation"
+  - "abrir navegador"
+  - "screenshot browser"
+  - "cdp connection"
+  - "chrome connection"
+  - "controlar chrome"
+  - "automatización de chrome"
 ---
 # 🔌 AGENTE: BROWSER_ORCHESTRATOR
 **SYS_ID:** `BROWSER_ORCHESTRATOR` | **NIVEL:** `C5-REAL`

@@ -3,6 +3,7 @@ name: dom_css_transducer
 description: DOM CSS Transducer (Modo Píxel) - Colapsa ideas visuales en interfaces directamente con latencia cero.
 triggers:
   - "/css-transducer"
+  - "/style-edit"
   - "dom_css_transducer"
   - "dom css transducer"
   - "pixel mode"
@@ -10,6 +11,15 @@ triggers:
   - "frontend rewrite"
   - "css edit"
   - "ui styling"
+  - "ajustar estilos"
+  - "maquetación frontend"
+  - "estilos css"
+  - "visual styles"
+  - "dom modification"
+  - "noir style"
+  - "premium css"
+  - "ui refactor"
+  - "css injection"
 ---
 # 🎨 DOM CSS TRANSDUCER (Modo Píxel)
 **SYS_ID:** `DOM_TRANSDUCER` | **ESTADO:** `ACTIVO`

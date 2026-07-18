@@ -3,11 +3,20 @@ name: form_filler
 description: Form Filler - Subagente especialista en completar campos del DOM mediante selectores CSS y eventos de type/click.
 triggers:
   - "/fill-form"
+  - "/input-form"
   - "form_filler"
   - "form filler"
   - "dom filler"
   - "cdp form input"
   - "type selector"
+  - "rellenar formulario"
+  - "completar campos"
+  - "hacer click"
+  - "send keys"
+  - "cdp fill"
+  - "input automation"
+  - "click selector"
+  - "form automation"
 ---
 # 🧩 AGENTE: FORM_FILLER
 **SYS_ID:** `FORM_FILLER` | **NIVEL:** `C5-REAL`

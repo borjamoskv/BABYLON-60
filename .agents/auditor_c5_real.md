@@ -4,6 +4,7 @@ description: Auditor C5-REAL (ULTRATHINK P0) - Ejecuta el BFT State Loop sobre c
 triggers:
   - "/auditor"
   - "/audit"
+  - "/verificar"
   - "auditor_c5_real"
   - "auditor c5-real"
   - "bft state loop"
@@ -12,6 +13,15 @@ triggers:
   - "idempotency lock"
   - "git sentinel"
   - "epistemic gate"
+  - "verificación de estado"
+  - "auditoría de mutación"
+  - "state loop validation"
+  - "bft audit"
+  - "epistemic gates"
+  - "validación de exergía"
+  - "evaluación epistémica"
+  - "bft verification"
+  - "c5-real audit"
 ---
 # 🛡️ AUDITOR C5-REAL (ULTRATHINK P0)
 **SYS_ID:** `AGENTE_AUDITOR_OMEGA` | **ESTADO:** `ACTIVO`
