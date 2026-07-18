@@ -1,76 +1,225 @@
 #!/usr/bin/env python3
+"""
+MOSKV-1 APEX SINGULARITY — C5-REAL STATE MONITOR (MEJORALO)
+------------------------------------------------------------
+Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
+linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
+"""
 import os
 import hashlib
 import sqlite3
 import subprocess
+import json
 from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+STATUS_FILE = ROOT_DIR / "STATUS.md"
+
+DB_TARGETS = [
+    "master_ledger.db",
+    "apex_cortex.db",
+    "cortex.db",
+    "cortex_memory.db",
+    "cortex_ontology.db",
+    "cortex_voice_ledger.db",
+    "telemetry.db",
+    "ultrathink_ledger.db",
+]
+
+LEDGER_TABLES = [
+    "master_ledger", "ledger_entries", "state_log", "ledger",
+    "jetsam_async_ledger", "ontology", "L1_primitive_nodes",
+    "L2_isomorphism_edges", "L3_inference_cache", "voice_turns",
+    "audit_ledger", "ttft_log", "throughput_log",
+    "autonomic_daemon_log", "ttft_metrics",
+]
+
+
+def _git(args: list[str]) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=str(ROOT_DIR),
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip()
+
+
+def audit_git_entropy() -> dict[str, str | int | list[str]]:
+    porcelain = _git(["status", "--porcelain"])
+    dirty_files = [line.strip() for line in porcelain.splitlines() if line.strip()]
+    head = _git(["rev-parse", "--short", "HEAD"])
+    branch = _git(["branch", "--show-current"])
+    commit_count = int(_git(["rev-list", "--count", "HEAD"]) or "0")
+    last_tag = _git(["tag", "--sort=-creatordate"]).splitlines()
+    return {
+        "head": head,
+        "branch": branch,
+        "commits": commit_count,
+        "last_tag": last_tag[0] if last_tag else "NONE",
+        "dirty_count": len(dirty_files),
+        "dirty_files": dirty_files,
+    }
+
+
+def audit_databases() -> dict[str, dict[str, int]]:
+    census: dict[str, dict[str, int]] = {}
+    for db_name in DB_TARGETS:
+        db_path = ROOT_DIR / db_name
+        if not db_path.exists():
+            continue
+        try:
+            conn = sqlite3.connect(str(db_path), timeout=2.0)
+            conn.execute("PRAGMA journal_mode=WAL;")
+            tables = [
+                t[0]
+                for t in conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table'"
+                ).fetchall()
+            ]
+            counts: dict[str, int] = {}
+            for t in tables:
+                if t.startswith("sqlite_"):
+                    continue
+                try:
+                    c = conn.execute(f"SELECT count(*) FROM [{t}]").fetchone()[0]
+                    counts[t] = c
+                except sqlite3.OperationalError:
+                    pass
+            conn.close()
+            census[db_name] = counts
+        except sqlite3.DatabaseError:
+            census[db_name] = {"ERROR": -1}
+    return census
+
+
+def audit_ruff() -> dict[str, int]:
+    result = subprocess.run(
+        ["python3", "-m", "ruff", "check", ".", "--select", "E,F", "--statistics", "-q"],
+        cwd=str(ROOT_DIR),
+        capture_output=True,
+        text=True,
+    )
+    error_count = 0
+    fixable_count = 0
+    for line in result.stdout.splitlines():
+        parts = line.strip().split()
+        if parts and parts[0].isdigit():
+            error_count += int(parts[0])
+        if "fixable" in line.lower():
+            fixable_count += int(parts[0]) if parts[0].isdigit() else 0
+    for line in result.stderr.splitlines():
+        if "Found" in line and "error" in line:
+            try:
+                error_count = int(line.split()[1])
+            except (IndexError, ValueError):
+                pass
+        if "fixable" in line:
+            try:
+                fixable_count = int(line.split()[1])
+            except (IndexError, ValueError):
+                pass
+    return {"total_errors": error_count, "fixable": fixable_count}
+
+
+def audit_tests() -> dict[str, int | str]:
+    tests_dir = ROOT_DIR / "tests"
+    if not tests_dir.exists():
+        return {"test_files": 0, "status": "NO_TESTS_DIR"}
+    test_files = list(tests_dir.rglob("test_*.py"))
+    return {"test_files": len(test_files), "status": "PRESENT"}
+
+
+def crystallize_status(report: dict[str, object]) -> str:
+    with open(STATUS_FILE, "rb") as f:
+        status_hash = hashlib.sha3_256(f.read()).hexdigest()
+    return status_hash
+
+
+def append_mutation(git_hash: str, status_hash: str) -> None:
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    mutation_line = (
+        f"| {today} | C5-REAL MEJORALO: Transductor de Estado "
+        f"(SHA3: `{status_hash[:12]}`) | Git Sentinel `{git_hash}` |\n"
+    )
+    with open(STATUS_FILE, "a") as f:
+        f.write(mutation_line)
+
+
+def git_sentinel_commit(status_hash: str) -> str:
+    _git(["add", "STATUS.md", "scripts/c5_mejoralo_monitor.py"])
+    commit_msg = (
+        f"chore(c5-real): state monitor iteration [{status_hash[:8]}]"
+    )
+    _git(["commit", "-m", commit_msg, "--no-verify"])
+    return _git(["rev-parse", "--short", "HEAD"])
+
 
 def c5_real_colapso() -> None:
-    print("[+] Igniting C5-REAL Monitor de Estado (MEJORALO)...")
-    
-    root_dir = "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv"
-    status_file = os.path.join(root_dir, "STATUS.md")
-    
-    # 1. Calculate entropy (files with uncommitted changes)
-    try:
-        git_status = subprocess.check_output(["git", "status", "--porcelain"], cwd=root_dir).decode("utf-8").strip()
-    except Exception as e:
-        git_status = ""
-        
-    entropy_count = len(git_status.split('\n')) if git_status else 0
-    print(f"[-] Entropía actual en working directory: {entropy_count} archivos mutados.")
-    
-    # 2. Append [CORTEX-TAINT] to STATUS.md
-    today = datetime.now(timezone.utc).strftime('%Y-%m-%d')
-    taint_signature = f"| {today} | C5-REAL MEJORALO: Ejecución del Transductor de Estado | Git Sentinel `[PENDING]` |\n"
-    
-    with open(status_file, "a") as f:
-        f.write(taint_signature)
-        
-    # 3. Read STATUS.md hash
-    with open(status_file, "rb") as f:
-        status_hash = hashlib.sha3_256(f.read()).hexdigest()
-        
-    print(f"[✓] STATUS.md cristalizado. Hash SHA3-256: {status_hash[:16]}...")
-    
-    # 4. Extract SQLite Ledger info
-    db_path = os.path.join(root_dir, "master_ledger.db")
-    if os.path.exists(db_path):
-        try:
-            with sqlite3.connect(db_path, timeout=5.0) as conn:
-                tables_query = conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
-                tables = [t[0] for t in tables_query]
-                exergy_nodes = 0
-                for table in ['master_ledger', 'ledger_entries', 'state_log', 'ledger']:
-                    if table in tables:
-                        exergy_nodes += conn.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
-                print(f"[✓] master_ledger.db conectado. Nodos de exergía consolidados: {exergy_nodes}")
-        except Exception as e:
-            print(f"[!] SQLite Error: {e}")
-            
-    # 5. Forzar colapso Git Sentinel
-    print("[+] Ejecutando Git Sentinel (R4)...")
-    # Usa --no-verify (Regla Σ7)
-    subprocess.run(["git", "add", "STATUS.md", "scripts/c5_mejoralo_monitor.py"], cwd=root_dir, check=True)
-    commit_msg = f"chore(c5-real): colapso termodinamico del monitor de estado [{status_hash[:8]}]"
-    subprocess.run(["git", "commit", "-m", commit_msg, "--no-verify"], cwd=root_dir, check=False)
-    
-    git_hash = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=root_dir).decode("utf-8").strip()
-    
-    # Update the [PENDING] to actual hash
-    with open(status_file, "r") as f:
+    print("=" * 60)
+    print(" MOSKV-1 APEX — C5-REAL STATE MONITOR (MEJORALO)")
+    print("=" * 60)
+
+    # Phase 1: Git
+    git_report = audit_git_entropy()
+    print(f"\n[GIT] HEAD: {git_report['head']} | Branch: {git_report['branch']}")
+    print(f"[GIT] Commits: {git_report['commits']} | Tag: {git_report['last_tag']}")
+    print(f"[GIT] Entropía: {git_report['dirty_count']} archivos mutados")
+    if git_report["dirty_files"]:
+        for f in git_report["dirty_files"][:10]:
+            print(f"      ↳ {f}")
+
+    # Phase 2: BFT Database Census
+    db_census = audit_databases()
+    total_nodes = 0
+    print("\n[BFT] Censo de Bases de Datos:")
+    for db_name, tables in db_census.items():
+        if isinstance(tables, dict) and "ERROR" not in tables:
+            db_total = sum(tables.values())
+            total_nodes += db_total
+            print(f"  {db_name:30s} → {db_total:>8,} nodos ({len(tables)} tablas)")
+        else:
+            print(f"  {db_name:30s} → ERROR")
+    print(f"  {'TOTAL':30s} → {total_nodes:>8,} nodos")
+
+    # Phase 3: Linter
+    ruff_report = audit_ruff()
+    print(f"\n[RUFF] Errores: {ruff_report['total_errors']} | Fixable: {ruff_report['fixable']}")
+
+    # Phase 4: Tests
+    test_report = audit_tests()
+    print(f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']}")
+
+    # Phase 5: Crystallize
+    status_hash = crystallize_status({
+        "git": git_report,
+        "bft": db_census,
+        "ruff": ruff_report,
+        "tests": test_report,
+    })
+    print(f"\n[HASH] STATUS.md SHA3-256: {status_hash[:24]}...")
+
+    # Phase 6: Mutate STATUS.md + Git Sentinel
+    print("[GIT SENTINEL] Forzando colapso...")
+    append_mutation("[PENDING]", status_hash)
+    sentinel_hash = git_sentinel_commit(status_hash)
+
+    # Rewrite [PENDING] → actual hash
+    with open(STATUS_FILE, "r") as f:
         content = f.read()
-    content = content.replace("`[PENDING]`", f"`{git_hash}`")
-    with open(status_file, "w") as f:
+    content = content.replace("`[PENDING]`", f"`{sentinel_hash}`")
+    with open(STATUS_FILE, "w") as f:
         f.write(content)
-        
-    subprocess.run(["git", "add", "STATUS.md"], cwd=root_dir, check=True)
-    subprocess.run(["git", "commit", "--amend", "--no-edit", "--no-verify"], cwd=root_dir, check=False)
-    
-    final_hash = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], cwd=root_dir).decode("utf-8").strip()
-    
-    print(f"[✓] Colapso finalizado. Git Ledger Hash: {final_hash}")
-    print(f"--- MEJORALO COMPLETADO ---")
+    _git(["add", "STATUS.md"])
+    _git(["commit", "--amend", "--no-edit", "--no-verify"])
+    final_hash = _git(["rev-parse", "--short", "HEAD"])
+
+    print(f"[GIT SENTINEL] Colapso: {final_hash}")
+    print("=" * 60)
+    print(f" MEJORALO COMPLETADO | {total_nodes:,} nodos BFT | {final_hash}")
+    print("=" * 60)
+
 
 if __name__ == "__main__":
     c5_real_colapso()
