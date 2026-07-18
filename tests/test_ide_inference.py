@@ -6,8 +6,8 @@ backend_dir = str(Path(__file__).resolve().parent.parent / "babylon60-ide" / "ba
 if backend_dir not in sys.path:
     sys.path.insert(0, backend_dir)
 
-from routes.inference import generate_mamba, MambaInferenceRequest
 
+from routes.inference import generate_mamba, MambaInferenceRequest  # noqa: E402
 
 def test_mamba_route_handler():
     """Verify that the FastAPI inference route correctly drives the Mamba Ledger Engine."""
