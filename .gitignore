@@ -97,3 +97,4 @@ domain_kernel/bin/
 domain_kernel/obj/
 
 *.npz
+*.dmg
