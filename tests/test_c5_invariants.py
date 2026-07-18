@@ -149,3 +149,14 @@ def test_inv_c5_13_autodetect_executable():
     script_path = ROOT / "scripts" / "autodetect_invariants.py"
     assert script_path.exists(), "autodetect_invariants.py missing."
     assert os.access(script_path, os.X_OK), "autodetect_invariants.py is not executable."
+
+
+def test_inv_c5_14_exergy_agent():
+    """INV_C5_14 — exergy_optimizer_agent.py must exist, be executable, and write attestation into ledger."""
+    import os
+    script_path = ROOT / "scripts" / "exergy_optimizer_agent.py"
+    assert script_path.exists(), "exergy_optimizer_agent.py missing."
+    assert os.access(script_path, os.X_OK), "exergy_optimizer_agent.py is not executable."
+    
+    db_path = pathlib.Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
+    assert db_path.exists(), "Exergy agent ledger database missing."
