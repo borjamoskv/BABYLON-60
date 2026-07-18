@@ -3,9 +3,8 @@
 # Prefix: core_ (pure primitive, zero I/O, deterministic)
 
 import hashlib
-import json
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 @dataclass(frozen=True)
 class StateNode:

@@ -2,7 +2,7 @@
 # Prefix: test_ (empirical assertions and unit falsification)
 
 import pytest
-from core_graph_ledger import GraphLedger, StateNode, core_calc_sha256
+from core_graph_ledger import GraphLedger, core_calc_sha256
 
 def test_ledger_append_and_trace() -> None:
     """Verifica que mut_append_node inserta correctamente y core_get_path reconstruye la traza."""
