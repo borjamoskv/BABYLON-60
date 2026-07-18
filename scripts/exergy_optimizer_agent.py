@@ -4,16 +4,21 @@
 Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
-from dataclasses import dataclass
-from typing import Union, List, Set
 import os
 import sys
+from pathlib import Path
+
+# Add project root to sys.path to resolve local packages
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from dataclasses import dataclass
+from typing import Union, List, Set, Any
 import re
 import sqlite3
 import hashlib
 import time
 import subprocess
-from pathlib import Path
 
 # Invariants
 DB_PATH = Path(os.path.expanduser("~") + "/.babylon60/exergy_agent_ledger.db")
@@ -171,7 +176,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                     reasons_l.append("Nexus package symlink validation (INV_C5_12).")
         else:
             # If tests/checks are added, register autoloop credit
-            if any("test" in line or "invariant" in line for line in added_lines):
+            if any("test" in ln or "invariant" in ln for ln in added_lines):
                 a_points += 4
                 reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
         
@@ -271,7 +276,10 @@ def main() -> None:
         
     timestamp = time.time()
     prov_payload = f"{timestamp}:{commit_hash}:{verdict.score.value}".encode("utf-8")
-    prov_hash = hashlib.sha3_256(prov_payload).hexdigest()
+    digest = hashlib.sha3_256(prov_payload).digest()
+    
+    from babylon60.utils.base60 import bytes_to_base60
+    prov_hash = bytes_to_base60(digest)
     
     # Update prov_hash on verdict if it's passed
     if isinstance(verdict, ExergyPassed):
