@@ -1,4 +1,4 @@
-// BABYLON60 IDE — Client-side router (3-Zone Architecture)
+// BABYLON60 IDE — Client-side router
 const routes = {};
 let currentRoute = null;
 
@@ -7,19 +7,32 @@ export function registerRoute(name, renderFn) {
 }
 
 export function navigate(name) {
-  if (!routes[name]) return;
   if (currentRoute === name) return;
   currentRoute = name;
 
-  // Render content into focus-zone body
+  // Update sidebar
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.route === name);
+  });
+
+  // Render content
   const main = document.getElementById('main-content');
   if (routes[name]) {
     main.innerHTML = '';
     routes[name](main);
   }
 
-  // Update URL hash (no page reload)
+  // Update URL hash
   history.replaceState(null, '', `#${name}`);
+}
+
+// Force re-render of the current route (used after cognitive-mode switch)
+export function rerender() {
+  const main = document.getElementById('main-content');
+  if (currentRoute && routes[currentRoute] && main) {
+    main.innerHTML = '';
+    routes[currentRoute](main);
+  }
 }
 
 export function getCurrentRoute() {
@@ -28,5 +41,5 @@ export function getCurrentRoute() {
 
 export function getInitialRoute() {
   const hash = location.hash.replace('#', '');
-  return hash && routes[hash] ? hash : 'canvas';
+  return hash && routes[hash] ? hash : 'ledger';
 }

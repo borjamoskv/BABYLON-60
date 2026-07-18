@@ -70,12 +70,15 @@ def _collect_snapshot() -> dict[str, Any]:
     # Process info
     try:
         import resource
+        import sys
 
         rusage = resource.getrusage(resource.RUSAGE_SELF)
+        # ru_maxrss unit is platform-dependent: bytes on macOS, kilobytes on Linux.
+        rss_divisor = (1024 * 1024) if sys.platform == "darwin" else 1024
         process_info = {
             "user_time_s": round(rusage.ru_utime, 2),
             "system_time_s": round(rusage.ru_stime, 2),
-            "max_rss_mb": round(rusage.ru_maxrss / (1024 * 1024), 2),
+            "max_rss_mb": round(rusage.ru_maxrss / rss_divisor, 2),
         }
     except (ImportError, ValueError):
         process_info = {}

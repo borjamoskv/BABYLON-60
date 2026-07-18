@@ -1,51 +1,104 @@
 /**
  * BABYLON60 IDE — Main Application Core
- * 2e Cognitive Architecture (ADHD + AACC / Twice-Exceptional)
+ * v1.1.0 · C5-REAL · Author: Borja Moskv (borjamoskv)
  *
- * Architecture:
- *   SPINE (56px) | CONTEXT PANE (264px, CMD+B) | FOCUS ZONE (flex:1)
- *   + TACHOMETER (3px ambient top bar)
- *   + COMMAND PALETTE (CMD+K)
- *   + SCRATCHPAD (CMD+Shift+Space)
- *   + AGENT MODAL (body doubling / loop guard)
- *   + STATUS BAR (28px fixed)
+ * Exergy doctrine: maximize both ABSTRAER (macro: see the whole system)
+ * and DETERMINAR (micro: verify one causal fact to the hash).
  *
- * Routes: canvas | ledger | databases | query | swarm
- * Kernel: Tauri v2 IPC + CortexLedger (Rust) + KINETIC BIND RAW Ontology
+ * Dual Cognitive Architecture:
+ *   MODE 2E — Doble Excepcionalidad (TDAH + AACC): ambient tachometer,
+ *             loop guard, restore banner, micro-rewards, icon-only spine.
+ *   MODE NT — Neurotípico: labeled navigation, standard density,
+ *             no interventions, no ambient signals.
+ *
+ * Layout: SPINE | CONTEXT PANE (⌘B) | FOCUS ZONE
+ *   + TACHOMETER (3px, 2E only) + PALETTE (⌘K) + SCRATCHPAD (⌘⇧Space)
+ *   + AGENT MODAL + STATUS BAR (repo identity always visible)
+ *
+ * API contract (backend/routes — single source of truth):
+ *   GET  /api/ledger/stats                → {exists, db_path, entries, latest:{entry_hash, lamport_t, created_at}}
+ *   GET  /api/ledger/entries?limit&offset → {entries[], total, limit, offset}
+ *   GET  /api/ledger/entry/{seq}          → full row (payload_json included)
+ *   POST /api/ledger/verify               → {valid, total_entries, verified_entries, broken_at, entries[]}
+ *   GET  /api/databases                   → [{name, path, size_bytes, size_human}]
+ *   GET  /api/databases/{db}/tables       → [{name, row_count}]
+ *   GET  /api/databases/{db}/schema/{t}   → [{cid, name, type, notnull, default, pk}]
+ *   GET  /api/databases/{db}/tables/{t}   → {columns, rows, total, limit, offset}
+ *   POST /api/query {database, sql}       → {columns, rows, row_count, elapsed_ms, database}
+ *   GET  /api/sentinel/status             → repo identity + lineage warnings
+ *   GET  /api/telemetry/snapshot · WS /ws/telemetry
  */
 import { get, post, connectWebSocket } from './api.js';
-import { registerRoute, navigate, getInitialRoute } from './router.js';
-import { listVectors, dispatchVector } from './ontology.js';
+import { registerRoute, navigate, rerender, getInitialRoute } from './router.js';
+
+/* ══════════════════════════════════════════════════════════
+   COGNITIVE MODES
+   ══════════════════════════════════════════════════════════ */
+const MODES = {
+  '2e': {
+    key: '2e',
+    label: '2E ◐',
+    name: 'Doble Excepcionalidad (TDAH + AACC)',
+    tachometer: true,
+    loopGuard: true,
+    restoreBanner: true,
+    rewards: true,
+    spineLabels: false,
+  },
+  'nt': {
+    key: 'nt',
+    label: 'NT ○',
+    name: 'Neurotípico',
+    tachometer: false,
+    loopGuard: false,
+    restoreBanner: false,
+    rewards: false,
+    spineLabels: true,
+  },
+};
+
+function mode() { return MODES[S.cognitiveMode] || MODES['2e']; }
 
 /* ══════════════════════════════════════════════════════════
    GLOBAL STATE
    ══════════════════════════════════════════════════════════ */
+// Corrupt localStorage must never brick the boot (module-scope parse crash)
+function safeParseArray(raw) {
+  try {
+    const v = JSON.parse(raw || '[]');
+    return Array.isArray(v) ? v : [];
+  } catch { return []; }
+}
+
 const S = {
+  cognitiveMode: localStorage.getItem('b60-cogmode') || '2e',
   contextPaneOpen: true,
-  bifocalMode: 'micro',           // 'micro' | 'macro'
-  tachometerState: 'idle',        // 'idle' | 'indexing' | 'working' | 'alert' | 'done'
+  bifocalMode: 'micro',
+  tachometerState: 'idle',
   paletteOpen: false,
   scratchpadOpen: false,
-  scratchpadItems: JSON.parse(localStorage.getItem('b60-scratch') || '[]'),
+  scratchpadItems: safeParseArray(localStorage.getItem('b60-scratch')),
+  delegationQueue: safeParseArray(localStorage.getItem('b60-delegation')),
   databaseList: [],
   ledgerStats: null,
+  lastVerify: null,
+  sentinel: null,
+  sentinelModalShown: false,
+  telemetrySnapshot: null,
   telemetrySocket: null,
-  loopDetector: {
-    route: null,
-    routeEnteredAt: 0,
-    interventionFired: false,
-  },
+  loopDetector: { route: null, routeEnteredAt: 0, interventionFired: false },
   sessionStart: Date.now(),
   activeRoute: null,
   swarmLog: [],
-  canvasOffset: { x: 0, y: 0 },
-  canvasScale: 1,
+  canvasVB: { x: 80, y: 40, w: 720, h: 400 },
+  canvasAbort: null,
 };
 
 /* ══════════════════════════════════════════════════════════
    BOOT
    ══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
+  applyCognitiveMode(S.cognitiveMode, { silent: true });
   setTachometer('indexing');
   setupSpine();
   setupContextPane();
@@ -54,35 +107,83 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupKeyboard();
   setupRouter();
   setupBifocal();
+  setupCogModeButton();
   setupLoopDetector();
 
   await Promise.all([
     refreshDatabaseList(),
     refreshLedgerStats(),
+    refreshSentinel(),
   ]);
 
   updateStatusBar();
+  renderContextPaneContent();
   setTachometer('done');
 
-  // Context restore banner (simulates remembering last session)
-  const lastRoute = localStorage.getItem('b60-route') || 'ledger';
-  showRestoreBanner(lastRoute);
+  if (mode().restoreBanner) {
+    showRestoreBanner(localStorage.getItem('b60-route') || 'ledger');
+  }
 
   navigate(getInitialRoute());
   setTachometer('idle');
 });
 
 /* ══════════════════════════════════════════════════════════
-   TACHOMETER — Ambient agent workload indicator
-   3px bar at top. No notifications. Just peripheral signal.
+   COGNITIVE MODE SWITCH — NT ○ ↔ 2E ◐  (⌘⇧E)
+   ══════════════════════════════════════════════════════════ */
+function applyCognitiveMode(key, { silent = false } = {}) {
+  S.cognitiveMode = MODES[key] ? key : '2e';
+  localStorage.setItem('b60-cogmode', S.cognitiveMode);
+  document.body.classList.toggle('mode-2e', S.cognitiveMode === '2e');
+  document.body.classList.toggle('mode-nt', S.cognitiveMode === 'nt');
+
+  const btn = document.getElementById('btn-cogmode');
+  if (btn) { btn.textContent = mode().label; btn.title = `Modo cognitivo: ${mode().name} — click o ⌘⇧E para alternar`; }
+
+  if (!silent) {
+    setupSpine();
+    rerender();
+    showAgentModal({
+      icon: mode().key === '2e' ? '◐' : '○',
+      message: `Modo cognitivo: ${mode().name}. ${mode().key === '2e'
+        ? 'Tacómetro ambiental (carga del agente en visión periférica), loop-guard (freno de hiperfoco) y micro-recompensas activos.'
+        : 'Interfaz estándar: navegación etiquetada, sin intervenciones ni señales ambientales.'}`,
+    });
+    setTimeout(hideAgentModal, 3000);
+  }
+}
+
+function toggleCognitiveMode() {
+  applyCognitiveMode(S.cognitiveMode === '2e' ? 'nt' : '2e');
+}
+
+function setupCogModeButton() {
+  let btn = document.getElementById('btn-cogmode');
+  if (!btn) {
+    const bifocalSeg = document.getElementById('btn-bifocal')?.parentElement;
+    if (bifocalSeg) {
+      const seg = document.createElement('div');
+      seg.className = 'status-segment';
+      seg.innerHTML = `<button class="status-bifocal" id="btn-cogmode"></button>`;
+      bifocalSeg.parentElement.insertBefore(seg, bifocalSeg);
+      btn = seg.querySelector('#btn-cogmode');
+    }
+  }
+  if (btn) {
+    btn.textContent = mode().label;
+    btn.title = `Modo cognitivo: ${mode().name} — click o ⌘⇧E para alternar`;
+    btn.addEventListener('click', toggleCognitiveMode);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   TACHOMETER — ambient workload (2E). Hidden by CSS in NT.
    ══════════════════════════════════════════════════════════ */
 function setTachometer(state) {
   S.tachometerState = state;
   const el = document.getElementById('tachometer');
-  if (!el) return;
-  el.className = `tachometer ${state !== 'idle' ? state : ''}`;
+  if (el) el.className = `tachometer ${state !== 'idle' ? state : ''}`;
 
-  // Update agent status segment in status bar
   const agentSeg = document.getElementById('status-agent-segment');
   if (!agentSeg) return;
   if (state === 'working' || state === 'indexing') {
@@ -95,28 +196,30 @@ function setTachometer(state) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   SPINE — Icon-only navigation
-   No labels, no sections. Just glyphs.
+   SPINE — icon-only (2E) or icon+label (NT)
    ══════════════════════════════════════════════════════════ */
+const SPINE_ROUTES = [
+  { id: 'canvas',    icon: '⬡',  label: 'Canvas',     tip: 'Architecture Canvas — ABSTRAER  ⌘5' },
+  { id: 'ledger',    icon: '⧉',  label: 'Ledger',     tip: 'BFT Ledger — DETERMINAR  ⌘1' },
+  { id: 'databases', icon: '⛁',  label: 'Ontologies', tip: 'Ontologies (explorador SQLite)  ⌘2' },
+  { id: 'query',     icon: '❯_', label: 'SQL',        tip: 'SQL Console (solo lectura)  ⌘3' },
+  { id: 'swarm',     icon: '⚡',  label: 'Swarm',      tip: 'Agent Swarm (telemetría en vivo)  ⌘4' },
+  { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación)  ⌘6' },
+];
+
 function setupSpine() {
   const spine = document.getElementById('spine');
-  const routes = [
-    { id: 'canvas',    icon: '⬡', tip: 'Architecture Canvas  ⌘5' },
-    { id: 'ledger',    icon: '⧉', tip: 'BFT Ledger  ⌘1' },
-    { id: 'databases', icon: '⛁', tip: 'Ontologies  ⌘2' },
-    { id: 'query',     icon: '❯_', tip: 'SQL Console  ⌘3' },
-    { id: 'swarm',     icon: '⚡', tip: 'Agent Swarm  ⌘4' },
-  ];
-
-  // Re-render: canonical single-pass DOM build
+  if (!spine) return;
   spine.innerHTML = '';
+
   const logo = document.createElement('div');
   logo.className = 'spine-logo';
-  logo.title = 'BABYLON·60';
+  logo.title = 'BABYLON·60 v1.1.0';
   logo.innerHTML = '<div class="spine-logo-dot"></div>';
   spine.appendChild(logo);
 
-  routes.forEach((r, i) => {
+  const withLabels = mode().spineLabels;
+  SPINE_ROUTES.forEach((r, i) => {
     if (i === 1) {
       const sep = document.createElement('div');
       sep.className = 'spine-separator';
@@ -125,12 +228,15 @@ function setupSpine() {
     const btn = document.createElement('button');
     btn.className = 'spine-icon';
     btn.dataset.route = r.id;
-    btn.dataset.tooltip = r.tip;
+    if (!withLabels) btn.dataset.tooltip = r.tip;
     btn.setAttribute('aria-label', r.tip);
-    btn.textContent = r.icon;
+    btn.innerHTML = withLabels
+      ? `<span class="spine-glyph">${r.icon}</span><span class="spine-label">${r.label}</span>`
+      : r.icon;
     btn.addEventListener('click', () => navigate(r.id));
     spine.appendChild(btn);
   });
+  setActiveSpineIcon(S.activeRoute);
 }
 
 function setActiveSpineIcon(route) {
@@ -140,15 +246,10 @@ function setActiveSpineIcon(route) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   CONTEXT PANE — Semantic map of current project state
-   Shows blast radius, ontology tree, agent tasks.
-   Collapsible with CMD+B.
+   CONTEXT PANE
    ══════════════════════════════════════════════════════════ */
 function setupContextPane() {
-  const btnCollapse = document.getElementById('btn-collapse-ctx');
-  if (btnCollapse) {
-    btnCollapse.addEventListener('click', toggleContextPane);
-  }
+  document.getElementById('btn-collapse-ctx')?.addEventListener('click', toggleContextPane);
   renderContextPaneContent();
 }
 
@@ -164,10 +265,23 @@ function toggleContextPane() {
 function renderContextPaneContent() {
   const body = document.getElementById('context-pane-body');
   if (!body) return;
+
+  const dbItems = S.databaseList.slice(0, 5).map(db => `
+    <div class="ctx-item depth-1" data-goto-db="${escapeHtml(db.name)}">
+      <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
+      <span class="ctx-item-label" style="font-size:0.65rem">${escapeHtml(db.name)}</span>
+      <span class="ctx-item-badge">RO</span>
+    </div>
+  `).join('');
+
+  const sentinelBadge = S.sentinel?.warnings?.some(w => w.level === 'red')
+    ? '<span class="ctx-item-badge break">!</span>'
+    : (S.sentinel?.warnings?.length ? '<span class="ctx-item-badge gold">△</span>' : '<span class="ctx-item-badge verify">ok</span>');
+
   body.innerHTML = `
     <div class="ctx-section">
       <div class="ctx-section-label">Inspector</div>
-      <div class="ctx-item active" data-route="canvas">
+      <div class="ctx-item" data-route="canvas">
         <span class="ctx-item-icon">⬡</span>
         <span class="ctx-item-label">Architecture</span>
         <span class="ctx-item-badge verify">live</span>
@@ -175,12 +289,12 @@ function renderContextPaneContent() {
       <div class="ctx-item" data-route="ledger">
         <span class="ctx-item-icon">⧉</span>
         <span class="ctx-item-label">BFT Ledger</span>
-        <span class="ctx-item-badge gold" id="ctx-ledger-count">—</span>
+        <span class="ctx-item-badge gold" id="ctx-ledger-count">${S.ledgerStats?.entries ?? '—'}</span>
       </div>
       <div class="ctx-item" data-route="databases">
         <span class="ctx-item-icon">⛁</span>
         <span class="ctx-item-label">Ontologies</span>
-        <span class="ctx-item-badge gold" id="ctx-db-count">—</span>
+        <span class="ctx-item-badge gold" id="ctx-db-count">${S.databaseList.length || '—'}</span>
       </div>
     </div>
     <div class="ctx-section">
@@ -192,7 +306,12 @@ function renderContextPaneContent() {
       <div class="ctx-item" data-route="swarm">
         <span class="ctx-item-icon">⚡</span>
         <span class="ctx-item-label">Agent Swarm</span>
-        <span class="ctx-item-badge lapis" style="color:var(--lapis-bright)">0</span>
+        <span class="ctx-item-badge lapis" style="color:var(--lapis-bright)">ws</span>
+      </div>
+      <div class="ctx-item" data-route="sentinel">
+        <span class="ctx-item-icon">⎇</span>
+        <span class="ctx-item-label">Git Sentinel</span>
+        ${sentinelBadge}
       </div>
     </div>
     <div class="ctx-section">
@@ -205,27 +324,16 @@ function renderContextPaneContent() {
       </div>
     </div>
     <div class="ctx-section">
-      <div class="ctx-section-label">System</div>
-      <div class="ctx-item depth-1">
-        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
-        <span class="ctx-item-label" style="font-size:0.65rem">master_ledger.db</span>
-        <span class="ctx-item-badge verify">ok</span>
-      </div>
-      <div class="ctx-item depth-1">
-        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
-        <span class="ctx-item-label" style="font-size:0.65rem">cortex_ontology.db</span>
-        <span class="ctx-item-badge">RO</span>
-      </div>
-      <div class="ctx-item depth-1">
-        <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
-        <span class="ctx-item-label" style="font-size:0.65rem">telemetry.db</span>
-        <span class="ctx-item-badge">RO</span>
-      </div>
+      <div class="ctx-section-label">Databases</div>
+      ${dbItems || '<div style="padding:4px 12px;font-size:0.62rem;color:var(--dust-ghost)">No .db discovered</div>'}
     </div>
   `;
 
   body.querySelectorAll('.ctx-item[data-route]').forEach(el => {
     el.addEventListener('click', () => navigate(el.dataset.route));
+  });
+  body.querySelectorAll('.ctx-item[data-goto-db]').forEach(el => {
+    el.addEventListener('click', () => navigate('databases'));
   });
 }
 
@@ -233,7 +341,7 @@ function updateContextPaneCounts() {
   const dbCount = document.getElementById('ctx-db-count');
   if (dbCount) dbCount.textContent = S.databaseList.length || '—';
   const ledgerCount = document.getElementById('ctx-ledger-count');
-  if (ledgerCount && S.ledgerStats) ledgerCount.textContent = S.ledgerStats.total_entries || '—';
+  if (ledgerCount) ledgerCount.textContent = S.ledgerStats?.entries ?? '—';
 }
 
 function setActiveContextItem(route) {
@@ -243,7 +351,7 @@ function setActiveContextItem(route) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   STATUS BAR — Single line of truth
+   STATUS BAR — repo identity ALWAYS visible
    ══════════════════════════════════════════════════════════ */
 function updateStatusBar() {
   const connDot = document.getElementById('status-conn-dot');
@@ -252,23 +360,70 @@ function updateStatusBar() {
   const ledgerEntries = document.getElementById('status-ledger-entries');
   const lamport = document.getElementById('status-lamport');
 
-  if (connDot) connDot.className = 'status-dot';
-  if (connText) connText.textContent = 'CONNECTED';
+  const online = S.ledgerStats !== null || S.databaseList.length > 0;
+  if (connDot) connDot.className = online ? 'status-dot' : 'status-dot error';
+  if (connText) connText.textContent = online ? 'CONNECTED' : 'OFFLINE';
   if (dbCount) dbCount.textContent = S.databaseList.length || '—';
-  if (ledgerEntries) ledgerEntries.textContent = S.ledgerStats?.total_entries || '—';
-  if (lamport) lamport.textContent = S.ledgerStats?.latest_lamport_t != null
-    ? `L:${S.ledgerStats.latest_lamport_t}`
+  if (ledgerEntries) ledgerEntries.textContent = S.ledgerStats?.entries ?? '—';
+  if (lamport) lamport.textContent = S.ledgerStats?.latest?.lamport_t != null
+    ? `L:${S.ledgerStats.latest.lamport_t}`
     : '—';
+  updateRepoSegment();
+}
+
+/* ── Repo segment: RECALCAR siempre el repo actual ── */
+function updateRepoSegment() {
+  let seg = document.getElementById('status-repo-segment');
+  if (!seg) {
+    const bar = document.getElementById('status-bar');
+    const firstSeg = bar?.querySelector('.status-segment');
+    if (!bar || !firstSeg) return;
+    seg = document.createElement('div');
+    seg.className = 'status-segment';
+    seg.id = 'status-repo-segment';
+    seg.style.cursor = 'pointer';
+    seg.innerHTML = `<span style="color:var(--dust-ghost)">REPO</span><span class="status-value" id="status-repo-text">—</span>`;
+    firstSeg.after(seg);
+    seg.addEventListener('click', () => navigate('sentinel'));
+  }
+  const txt = document.getElementById('status-repo-text');
+  if (!txt) return;
+  const s = S.sentinel;
+  if (!s) { txt.textContent = '—'; return; }
+  const red = s.warnings?.some(w => w.level === 'red');
+  const amber = !red && s.warnings?.length > 0;
+  txt.textContent = `${s.repo_name}${s.branch ? ' @' + s.branch : ''}${s.head ? ' · ' + s.head : ''}${red ? ' ⚠' : amber ? ' △' : ' ✓'}`;
+  txt.style.color = red ? 'var(--break)' : amber ? 'var(--gold)' : 'var(--verify)';
+  seg.title = red
+    ? 'LINAJE NO CANÓNICO — abre Git Sentinel'
+    : amber ? 'Avisos de linaje — abre Git Sentinel' : `Linaje canónico verificado (${s.commit_count ?? '—'} commits)`;
+}
+
+async function refreshSentinel() {
+  try {
+    S.sentinel = await get('/api/sentinel/status');
+    updateRepoSegment();
+    // Intuir repo incorrecto → interrumpir UNA vez con modal si hay rojo
+    const reds = S.sentinel.warnings?.filter(w => w.level === 'red') || [];
+    if (reds.length > 0 && !S.sentinelModalShown) {
+      S.sentinelModalShown = true;
+      showAgentModal({
+        icon: '⚠',
+        message: `GIT SENTINEL: ${reds[0].msg}`,
+        actions: [
+          { label: 'Abrir Sentinel', primary: true, fn: () => { hideAgentModal(); navigate('sentinel'); } },
+          { label: 'Entendido', fn: hideAgentModal },
+        ],
+      });
+    }
+  } catch { /* offline */ }
 }
 
 /* ══════════════════════════════════════════════════════════
-   BIFOCAL TOGGLE — Macro ↔ Micro
-   CMD+M: switches between system view and tunnel view.
-   AACC rationale: system thinkers need the WHOLE first.
+   BIFOCAL — ABSTRAER (macro) ↔ DETERMINAR (micro) · ⌘M
    ══════════════════════════════════════════════════════════ */
 function setupBifocal() {
-  const btn = document.getElementById('btn-bifocal');
-  if (btn) btn.addEventListener('click', toggleBifocal);
+  document.getElementById('btn-bifocal')?.addEventListener('click', toggleBifocal);
 }
 
 function toggleBifocal() {
@@ -277,28 +432,24 @@ function toggleBifocal() {
   document.body.classList.toggle('micro-mode', S.bifocalMode === 'micro');
   const btn = document.getElementById('btn-bifocal');
   if (btn) btn.textContent = S.bifocalMode === 'macro' ? 'MACRO ⊞' : 'MICRO ⊞';
-
-  if (S.bifocalMode === 'macro') {
-    navigate('canvas');
-  }
+  if (S.bifocalMode === 'macro') navigate('canvas');
 }
 
 /* ══════════════════════════════════════════════════════════
-   COMMAND PALETTE — CMD+K
-   Fuzzy navigation + action dispatcher.
-   Zero clicks. Keyboard-first.
+   COMMAND PALETTE — ⌘K
    ══════════════════════════════════════════════════════════ */
 const PALETTE_COMMANDS = [
-  { icon: '⬡', label: 'Architecture Canvas', desc: 'Macro system view', shortcut: '⌘5', action: () => navigate('canvas') },
-  { icon: '⧉', label: 'BFT Ledger',          desc: 'Hash-chain inspector', shortcut: '⌘1', action: () => navigate('ledger') },
-  { icon: '⛁', label: 'Ontologies',           desc: 'SQLite database explorer', shortcut: '⌘2', action: () => navigate('databases') },
-  { icon: '❯_', label: 'SQL Console',         desc: 'Read-only query interface', shortcut: '⌘3', action: () => navigate('query') },
-  { icon: '⚡', label: 'Agent Swarm',          desc: 'Active agent telemetry', shortcut: '⌘4', action: () => navigate('swarm') },
-  { icon: '⬡', label: 'Verify Chain Integrity', desc: 'Run BFT hash-chain verification', shortcut: '', action: () => { navigate('ledger'); setTimeout(() => document.getElementById('btn-verify-chain')?.click(), 400); } },
-  { icon: '⟨', label: 'Toggle Context Pane',  desc: 'Show / hide semantic map', shortcut: '⌘B', action: toggleContextPane },
-  { icon: '⊞', label: 'Toggle Macro / Micro', desc: 'Switch bifocal view mode', shortcut: '⌘M', action: toggleBifocal },
-  { icon: '◎', label: 'Open Scratchpad',      desc: 'Dump a thought (no focus loss)', shortcut: '⌘⇧Space', action: () => toggleScratchpad(true) },
-  { icon: '↺', label: 'Restore Session',      desc: 'Return to last known context', shortcut: '', action: () => showRestoreBanner(localStorage.getItem('b60-route') || 'ledger') },
+  { icon: '⬡', label: 'Architecture Canvas', desc: 'ABSTRAER: ver el sistema completo', shortcut: '⌘5', action: () => navigate('canvas') },
+  { icon: '⧉', label: 'BFT Ledger',          desc: 'DETERMINAR: inspector de cadena de hashes', shortcut: '⌘1', action: () => navigate('ledger') },
+  { icon: '⛁', label: 'Ontologies',           desc: 'Explorador SQLite (solo lectura)', shortcut: '⌘2', action: () => navigate('databases') },
+  { icon: '❯_', label: 'SQL Console',         desc: 'Consultas read-only contra cualquier .db', shortcut: '⌘3', action: () => navigate('query') },
+  { icon: '⚡', label: 'Agent Swarm',          desc: 'Telemetría en vivo (push WS, sin polling)', shortcut: '⌘4', action: () => navigate('swarm') },
+  { icon: '⎇', label: 'Git Sentinel',         desc: 'Identidad de repo + delegación de mutaciones git', shortcut: '⌘6', action: () => navigate('sentinel') },
+  { icon: '⚿', label: 'Verify Chain Integrity', desc: 'Recomputar SHA3-256 de toda la cadena', shortcut: '', action: () => { navigate('ledger'); setTimeout(() => document.getElementById('btn-verify-chain')?.click(), 400); } },
+  { icon: '◐', label: 'Toggle Cognitive Mode', desc: 'Neurotípico ○ ↔ Doble Excepcionalidad ◐ (TDAH+AACC)', shortcut: '⌘⇧E', action: toggleCognitiveMode },
+  { icon: '⟨', label: 'Toggle Context Pane',  desc: 'Mostrar / ocultar mapa semántico', shortcut: '⌘B', action: toggleContextPane },
+  { icon: '⊞', label: 'Toggle Macro / Micro', desc: 'Alternar vista bifocal', shortcut: '⌘M', action: toggleBifocal },
+  { icon: '◎', label: 'Open Scratchpad',      desc: 'Volcar un pensamiento sin perder foco', shortcut: '⌘⇧Space', action: () => toggleScratchpad(true) },
 ];
 
 let paletteSelected = 0;
@@ -308,7 +459,6 @@ function setupCommandPalette() {
   const overlay = document.getElementById('palette-overlay');
   const input = document.getElementById('palette-input');
   if (!overlay || !input) return;
-
   overlay.addEventListener('click', e => { if (e.target === overlay) closePalette(); });
   input.addEventListener('input', () => filterPalette(input.value));
   input.addEventListener('keydown', handlePaletteKey);
@@ -337,22 +487,20 @@ function closePalette() {
 function filterPalette(query) {
   const q = query.toLowerCase().trim();
   paletteSelected = 0;
-  if (!q) {
-    paletteFiltered = [...PALETTE_COMMANDS];
-  } else {
-    paletteFiltered = PALETTE_COMMANDS.filter(c =>
-      c.label.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q)
-    );
-  }
+  paletteFiltered = !q ? [...PALETTE_COMMANDS] : PALETTE_COMMANDS.filter(c =>
+    c.label.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q)
+  );
   renderPaletteResults(q);
 }
+
+function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 function renderPaletteResults(query = '') {
   const container = document.getElementById('palette-results');
   if (!container) return;
 
   if (paletteFiltered.length === 0) {
-    container.innerHTML = `<div class="palette-empty">No commands match "<strong>${query}</strong>"</div>`;
+    container.innerHTML = `<div class="palette-empty">No commands match "<strong>${escapeHtml(query)}</strong>"</div>`;
     return;
   }
 
@@ -360,7 +508,7 @@ function renderPaletteResults(query = '') {
     <div class="palette-section-label">Commands</div>
     ${paletteFiltered.map((cmd, i) => {
       const labelHighlighted = query
-        ? cmd.label.replace(new RegExp(`(${query})`, 'gi'), '<span class="palette-match">$1</span>')
+        ? cmd.label.replace(new RegExp(`(${escapeRegExp(query)})`, 'gi'), '<span class="palette-match">$1</span>')
         : cmd.label;
       return `
         <div class="palette-item ${i === paletteSelected ? 'selected' : ''}" data-index="${i}">
@@ -407,19 +555,15 @@ function handlePaletteKey(e) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   SCRATCHPAD — Mental dump modal (CMD+Shift+Space)
-   Captures "thought bursts" without breaking flow.
-   Saves to localStorage. Agent can read and schedule.
+   SCRATCHPAD — ⌘⇧Space
    ══════════════════════════════════════════════════════════ */
 function setupScratchpad() {
   const modal = document.getElementById('scratchpad-modal');
   const input = document.getElementById('scratchpad-input');
-  const saveBtn = document.getElementById('scratchpad-save');
-  const closeBtn = document.getElementById('scratchpad-close');
   if (!modal || !input) return;
 
-  saveBtn?.addEventListener('click', saveScratchpadItem);
-  closeBtn?.addEventListener('click', () => toggleScratchpad(false));
+  document.getElementById('scratchpad-save')?.addEventListener('click', saveScratchpadItem);
+  document.getElementById('scratchpad-close')?.addEventListener('click', () => toggleScratchpad(false));
 
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveScratchpadItem(); }
@@ -436,7 +580,7 @@ function toggleScratchpad(force) {
   S.scratchpadOpen = force !== undefined ? force : !S.scratchpadOpen;
   modal.classList.toggle('visible', S.scratchpadOpen);
   modal.setAttribute('aria-hidden', String(!S.scratchpadOpen));
-  if (S.scratchpadOpen && input) { setTimeout(() => input.focus(), 60); }
+  if (S.scratchpadOpen && input) setTimeout(() => input.focus(), 60);
 }
 
 function saveScratchpadItem() {
@@ -454,22 +598,20 @@ function saveScratchpadItem() {
   renderScratchpadItems();
   renderContextPaneContent();
 
-  // Micro-reward: brief tachometer flash
-  setTachometer('done');
-  setTimeout(() => setTachometer('idle'), 2000);
+  if (mode().rewards) {
+    setTachometer('done');
+    setTimeout(() => setTachometer('idle'), 2000);
+  }
 }
 
 function renderScratchpadItems() {
   const container = document.getElementById('scratchpad-items');
   if (!container) return;
-  if (S.scratchpadItems.length === 0) {
-    container.innerHTML = '';
-    return;
-  }
+  if (S.scratchpadItems.length === 0) { container.innerHTML = ''; return; }
   container.innerHTML = S.scratchpadItems.map(item => `
     <div class="scratchpad-item" data-id="${item.id}">
       <span class="scratchpad-item-time">${item.time}</span>
-      <span class="scratchpad-item-text">${item.text}</span>
+      <span class="scratchpad-item-text">${escapeHtml(item.text)}</span>
       <span class="scratchpad-item-del" data-del="${item.id}" title="Remove">✕</span>
     </div>
   `).join('');
@@ -487,9 +629,7 @@ function renderScratchpadItems() {
 }
 
 /* ══════════════════════════════════════════════════════════
-   AGENT MODAL — Body Doubling / Loop Guard / Approvals
-   Drops from top edge. Disappears after action.
-   TDAH rationale: breaks dopamine loops, offers perspective.
+   AGENT MODAL — approvals (ambos modos) / loop guard (solo 2E)
    ══════════════════════════════════════════════════════════ */
 function showAgentModal({ icon = '⬡', message, actions = [] }) {
   const modal = document.getElementById('agent-modal');
@@ -501,25 +641,21 @@ function showAgentModal({ icon = '⬡', message, actions = [] }) {
   if (iconEl) iconEl.textContent = icon;
   msgEl.textContent = message;
 
-  const defaultActions = [
+  const finalActions = actions.length > 0 ? actions : [
     { label: 'Got it', fn: hideAgentModal, primary: true },
-    { label: 'Dismiss', fn: hideAgentModal },
   ];
-  const finalActions = actions.length > 0 ? actions : defaultActions;
 
   actionsEl.innerHTML = finalActions.map((a, i) =>
     `<button class="btn ${a.primary ? 'btn-primary' : ''}" style="font-size:0.65rem" data-action-idx="${i}">${a.label}</button>`
   ).join('');
 
   actionsEl.querySelectorAll('button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      finalActions[parseInt(btn.dataset.actionIdx)]?.fn?.();
-    });
+    btn.addEventListener('click', () => finalActions[parseInt(btn.dataset.actionIdx)]?.fn?.());
   });
 
   modal.classList.add('visible');
   modal.setAttribute('aria-hidden', 'false');
-  setTachometer('alert');
+  if (mode().tachometer) setTachometer('alert');
 }
 
 function hideAgentModal() {
@@ -529,26 +665,23 @@ function hideAgentModal() {
 }
 
 /* ══════════════════════════════════════════════════════════
-   LOOP DETECTOR — Cognitive Hand Brake
-   If same route for >25 minutes without navigation change,
-   fires a gentle body-doubling intervention.
+   LOOP DETECTOR — solo 2E (freno de hiperfoco, 25 min)
    ══════════════════════════════════════════════════════════ */
 function setupLoopDetector() {
-  // Check every 2 minutes
   setInterval(() => {
-    if (!S.loopDetector.route) return;
-    if (S.loopDetector.interventionFired) return;
+    if (!mode().loopGuard) return;
+    if (!S.loopDetector.route || S.loopDetector.interventionFired) return;
     const elapsed = Date.now() - S.loopDetector.routeEnteredAt;
-    if (elapsed > 25 * 60 * 1000) { // 25 minutes
+    if (elapsed > 25 * 60 * 1000) {
       S.loopDetector.interventionFired = true;
       const route = S.loopDetector.route;
       showAgentModal({
         icon: '⏱',
-        message: `You've been in ${route.toUpperCase()} for over 25 minutes. Deep focus is good — but want to step back and see the whole system?`,
+        message: `Llevas más de 25 minutos en ${route.toUpperCase()}. El foco profundo es bueno — ¿quieres dar un paso atrás y ver el sistema completo?`,
         actions: [
-          { label: 'Show Architecture', primary: true, fn: () => { hideAgentModal(); navigate('canvas'); } },
-          { label: 'Keep Going', fn: hideAgentModal },
-          { label: 'Dump a thought →', fn: () => { hideAgentModal(); toggleScratchpad(true); } },
+          { label: 'Ver Arquitectura', primary: true, fn: () => { hideAgentModal(); navigate('canvas'); } },
+          { label: 'Sigo aquí', fn: hideAgentModal },
+          { label: 'Volcar idea →', fn: () => { hideAgentModal(); toggleScratchpad(true); } },
         ],
       });
     }
@@ -556,9 +689,7 @@ function setupLoopDetector() {
 }
 
 /* ══════════════════════════════════════════════════════════
-   CONTEXT RESTORE BANNER
-   Shows on boot. Reminds user where they were.
-   TDAH rationale: eliminates startup friction / blank slate panic.
+   CONTEXT RESTORE BANNER — solo 2E
    ══════════════════════════════════════════════════════════ */
 function showRestoreBanner(lastRoute) {
   const banner = document.getElementById('restore-banner');
@@ -569,23 +700,18 @@ function showRestoreBanner(lastRoute) {
 
   const routeLabels = {
     ledger: 'BFT Ledger', databases: 'Ontologies', query: 'SQL Console',
-    swarm: 'Agent Swarm', canvas: 'Architecture Canvas',
+    swarm: 'Agent Swarm', canvas: 'Architecture Canvas', sentinel: 'Git Sentinel',
   };
 
   const bullets = [
     `Last active: ${routeLabels[lastRoute] || lastRoute}`,
     `${S.databaseList.length || '—'} databases available`,
-    S.ledgerStats?.total_entries
-      ? `${S.ledgerStats.total_entries} ledger entries — chain intact`
-      : 'Ledger loading...',
-  ];
+    S.ledgerStats?.entries != null ? `${S.ledgerStats.entries} ledger entries` : 'Ledger loading...',
+    S.sentinel ? `repo ${S.sentinel.repo_name}@${S.sentinel.branch ?? '—'}` : '',
+  ].filter(Boolean);
 
   msg.textContent = 'Session restored · ';
-  if (points) {
-    points.innerHTML = bullets.map(b =>
-      `<span class="restore-point">${b}</span>`
-    ).join('');
-  }
+  if (points) points.innerHTML = bullets.map(b => `<span class="restore-point">${escapeHtml(b)}</span>`).join('');
 
   banner.style.display = 'flex';
   dismiss?.addEventListener('click', () => { banner.style.display = 'none'; });
@@ -593,39 +719,31 @@ function showRestoreBanner(lastRoute) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   KEYBOARD SHORTCUTS — Global
+   KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
 
-    // CMD+K → Command Palette
     if (mod && e.key === 'k' && !e.shiftKey) { e.preventDefault(); S.paletteOpen ? closePalette() : openPalette(); return; }
-
-    // CMD+Shift+Space → Scratchpad
     if (mod && e.shiftKey && e.code === 'Space') { e.preventDefault(); toggleScratchpad(); return; }
-
-    // CMD+B → Toggle context pane
+    if (mod && e.shiftKey && (e.key === 'e' || e.key === 'E')) { e.preventDefault(); toggleCognitiveMode(); return; }
     if (mod && e.key === 'b' && !e.shiftKey) { e.preventDefault(); toggleContextPane(); return; }
-
-    // CMD+M → Bifocal toggle
     if (mod && e.key === 'm' && !e.shiftKey) { e.preventDefault(); toggleBifocal(); return; }
-
-    // CMD+1..5 → Route navigation
     if (mod && routeKeys[e.key]) { e.preventDefault(); navigate(routeKeys[e.key]); return; }
 
-    // ESC → Close modals
     if (e.key === 'Escape') {
       if (S.paletteOpen) { closePalette(); return; }
       if (S.scratchpadOpen) { toggleScratchpad(false); return; }
+      closeEntryDetail();
     }
   });
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTER — wires routes to render functions
+   ROUTER
    ══════════════════════════════════════════════════════════ */
 function setupRouter() {
   registerRoute('canvas',    renderCanvasPage);
@@ -633,6 +751,7 @@ function setupRouter() {
   registerRoute('databases', renderDatabasesPage);
   registerRoute('query',     renderQueryPage);
   registerRoute('swarm',     renderSwarmPage);
+  registerRoute('sentinel',  renderSentinelPage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -661,7 +780,7 @@ async function refreshLedgerStats() {
 /* ══════════════════════════════════════════════════════════
    FOCUS ZONE HELPERS
    ══════════════════════════════════════════════════════════ */
-function setFocusHeader({ breadcrumb = '', badge = null, actions = '' } = {}) {
+function setFocusHeader({ breadcrumb = '', actions = '' } = {}) {
   const bc = document.getElementById('focus-breadcrumb');
   const fa = document.getElementById('focus-actions');
   if (bc) bc.innerHTML = breadcrumb;
@@ -681,8 +800,15 @@ function onRouteEnter(routeName) {
   localStorage.setItem('b60-route', routeName);
   setActiveSpineIcon(routeName);
   setActiveContextItem(routeName);
+  closeEntryDetail();
 
-  // Loop detector reset
+  // Leaving Swarm → kill the telemetry socket (no background stream
+  // stomping the tachometer or leaking connections).
+  if (routeName !== 'swarm' && S.telemetrySocket) {
+    S.telemetrySocket.close();
+    S.telemetrySocket = null;
+  }
+
   if (S.loopDetector.route !== routeName) {
     S.loopDetector.route = routeName;
     S.loopDetector.routeEnteredAt = Date.now();
@@ -690,45 +816,48 @@ function onRouteEnter(routeName) {
   }
 }
 
+function escapeHtml(s) {
+  return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
 /* ══════════════════════════════════════════════════════════
-   ROUTE: CANVAS — Macro Architecture Graph
-   AACC rationale: system thinkers need the whole map first.
+   ROUTE: CANVAS — ABSTRAER (macro con métricas reales)
    ══════════════════════════════════════════════════════════ */
 async function renderCanvasPage(container) {
   onRouteEnter('canvas');
   setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'Architecture'),
-    actions: `
-      <span style="font-size:0.6rem;color:var(--dust-faint)">Scroll to zoom · Drag to pan</span>
-      <button class="btn btn-icon" id="canvas-fit" title="Fit to screen" style="margin-left:8px">⊞</button>
-    `,
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Architecture — ABSTRAER (ver el todo antes que la parte)'),
+    actions: `<span style="font-size:0.6rem;color:var(--dust-faint)">Scroll = zoom · Drag = pan</span>`,
   });
 
+  try { S.telemetrySnapshot = await get('/api/telemetry/snapshot'); } catch { /* offline */ }
+
+  const snap = S.telemetrySnapshot;
+  const dbCount = S.databaseList.length;
+  const ledgerEntries = S.ledgerStats?.entries ?? '—';
+  const totalMb = snap?.total_db_size_mb != null ? `${snap.total_db_size_mb}MB` : '—';
+  const sent = S.sentinel;
+  const gitMeta = sent?.is_git ? `${sent.repo_name}@${sent.branch ?? '—'} · ${sent.head ?? '—'}` : 'no git';
+  const gitStatus = sent?.warnings?.some(w => w.level === 'red') ? 'err' : sent?.warnings?.length ? 'warn' : 'ok';
+
   const nodes = [
-    { id: 'tauri',    x: 140, y: 80,  type: 'KERNEL',      name: 'Tauri v2 + Rust',   meta: 'CortexLedger · IPC',    status: 'ok' },
-    { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',     name: 'FastAPI',            meta: '8 routes · ASGI',       status: 'ok' },
-    { id: 'ledger',   x: 620, y: 80,  type: 'PERSISTENCE', name: 'Master Ledger DB',  meta: 'SHA256 · BFT chain',    status: 'ok' },
-    { id: 'ontology', x: 620, y: 220, type: 'PERSISTENCE', name: 'Cortex Ontology',   meta: '1000 vectors · WAL',    status: 'ok' },
-    { id: 'telemetry',x: 620, y: 360, type: 'STREAM',      name: 'Telemetry Stream',  meta: 'WebSocket · Live',      status: 'warn' },
-    { id: 'swarm',    x: 140, y: 260, type: 'AGENT',       name: 'Swarm Workers',     meta: '0 active',              status: 'idle' },
-    { id: 'frontend', x: 300, y: 350, type: 'FRONTEND',    name: 'BABYLON60 IDE',     meta: 'Vite · Vanilla JS',     status: 'ok' },
+    { id: 'frontend', x: 140, y: 350, type: 'FRONTEND',    name: 'BABYLON60 IDE',    meta: `Vite · modo ${mode().key.toUpperCase()}`, status: 'ok' },
+    { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',     name: 'FastAPI',          meta: '14 endpoints · ASGI', status: 'ok' },
+    { id: 'ledger',   x: 620, y: 80,  type: 'PERSISTENCE', name: 'Master Ledger',    meta: `${ledgerEntries} entries · SHA3-256 (huella criptográfica)`, status: S.ledgerStats?.exists ? 'ok' : 'err', goto: 'ledger' },
+    { id: 'ontology', x: 620, y: 220, type: 'PERSISTENCE', name: 'Ontology DBs',     meta: `${dbCount} DBs · ${totalMb} · RO`, status: dbCount > 0 ? 'ok' : 'warn', goto: 'databases' },
+    { id: 'telemetry',x: 620, y: 350, type: 'STREAM',      name: 'Telemetry Stream', meta: snap ? 'WS push 2s (sin polling)' : 'offline', status: snap ? 'ok' : 'warn', goto: 'swarm' },
+    { id: 'git',      x: 140, y: 240, type: 'SENTINEL',    name: 'Git Sentinel',     meta: gitMeta, status: gitStatus, goto: 'sentinel' },
   ];
 
   const edges = [
-    { from: 'frontend', to: 'tauri' },
     { from: 'frontend', to: 'fastapi' },
-    { from: 'tauri',    to: 'ledger' },
-    { from: 'tauri',    to: 'ontology' },
     { from: 'fastapi',  to: 'ledger' },
     { from: 'fastapi',  to: 'ontology' },
     { from: 'fastapi',  to: 'telemetry' },
-    { from: 'swarm',    to: 'fastapi' },
-    { from: 'swarm',    to: 'ledger' },
+    { from: 'git',      to: 'fastapi' },
   ];
 
-  const colors = {
-    ok: 'var(--verify)', warn: 'var(--gold)', err: 'var(--break)', idle: 'var(--dust-ghost)',
-  };
+  const colors = { ok: 'var(--verify)', warn: 'var(--gold)', err: 'var(--break)', idle: 'var(--dust-ghost)' };
 
   container.innerHTML = `
     <div class="canvas-container" id="canvas-main">
@@ -752,10 +881,8 @@ async function renderCanvasPage(container) {
   const svg = document.getElementById('canvas-svg');
   const edgesG = document.getElementById('canvas-edges');
   const nodesG = document.getElementById('canvas-nodes');
-  const canvasEl = document.getElementById('canvas-main');
   if (!svg || !edgesG || !nodesG) return;
 
-  // Draw edges
   edges.forEach(({ from, to }) => {
     const n1 = nodes.find(n => n.id === from);
     const n2 = nodes.find(n => n.id === to);
@@ -773,13 +900,12 @@ async function renderCanvasPage(container) {
     edgesG.appendChild(line);
   });
 
-  // Draw nodes as foreignObjects
   nodes.forEach(node => {
     const fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
     fo.setAttribute('x', node.x);
     fo.setAttribute('y', node.y);
-    fo.setAttribute('width', '180');
-    fo.setAttribute('height', '70');
+    fo.setAttribute('width', '195');
+    fo.setAttribute('height', '76');
 
     const div = document.createElement('div');
     div.className = 'canvas-node-card';
@@ -787,29 +913,57 @@ async function renderCanvasPage(container) {
     div.innerHTML = `
       <div class="canvas-node-type">${node.type}</div>
       <div class="canvas-node-name">${node.name}</div>
-      <div class="canvas-node-meta">${node.meta}</div>
+      <div class="canvas-node-meta">${escapeHtml(node.meta)}</div>
       <div class="canvas-node-status" style="background:${colors[node.status] || colors.idle};box-shadow:0 0 5px ${colors[node.status] || colors.idle}"></div>
     `;
-    div.addEventListener('click', () => {
-      // Micro-tunnel: zoom into this node's view
-      if (node.id === 'ledger') navigate('ledger');
-      else if (node.id === 'ontology') navigate('databases');
-      else if (node.id === 'swarm') navigate('swarm');
-      else if (node.id === 'fastapi') navigate('query');
-    });
+    if (node.goto) div.addEventListener('click', () => navigate(node.goto));
     fo.appendChild(div);
     nodesG.appendChild(fo);
   });
 
-  // Fit button
-  document.getElementById('canvas-fit-btn')?.addEventListener('click', () => {
-    svg.setAttribute('viewBox', '80 50 700 380');
-  });
-  svg.setAttribute('viewBox', '80 50 700 380');
+  const applyVB = () => svg.setAttribute('viewBox', `${S.canvasVB.x} ${S.canvasVB.y} ${S.canvasVB.w} ${S.canvasVB.h}`);
+  const fit = () => { S.canvasVB = { x: 80, y: 40, w: 720, h: 400 }; applyVB(); };
+  fit();
+
+  const zoom = (factor) => {
+    const vb = S.canvasVB;
+    const cx = vb.x + vb.w / 2, cy = vb.y + vb.h / 2;
+    vb.w = Math.max(200, Math.min(2000, vb.w * factor));
+    vb.h = Math.max(110, Math.min(1100, vb.h * factor));
+    vb.x = cx - vb.w / 2; vb.y = cy - vb.h / 2;
+    applyVB();
+  };
+
+  document.getElementById('canvas-zoom-in')?.addEventListener('click', () => zoom(1 / 1.2));
+  document.getElementById('canvas-zoom-out')?.addEventListener('click', () => zoom(1.2));
+  document.getElementById('canvas-fit-btn')?.addEventListener('click', fit);
+
+  svg.addEventListener('wheel', e => {
+    e.preventDefault();
+    zoom(e.deltaY > 0 ? 1.1 : 1 / 1.1);
+  }, { passive: false });
+
+  // Window-level listeners scoped to this render via AbortController —
+  // re-rendering the canvas aborts the old ones (no listener/DOM leak).
+  if (S.canvasAbort) S.canvasAbort.abort();
+  S.canvasAbort = new AbortController();
+  const sig = S.canvasAbort.signal;
+
+  let dragging = false, lastX = 0, lastY = 0;
+  svg.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; });
+  window.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const scale = S.canvasVB.w / svg.clientWidth;
+    S.canvasVB.x -= (e.clientX - lastX) * scale;
+    S.canvasVB.y -= (e.clientY - lastY) * scale;
+    lastX = e.clientX; lastY = e.clientY;
+    applyVB();
+  }, { signal: sig });
+  window.addEventListener('pointerup', () => { dragging = false; }, { signal: sig });
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTE: LEDGER — BFT Hash-Chain Inspector
+   ROUTE: LEDGER — DETERMINAR (verificación causal al hash)
    ══════════════════════════════════════════════════════════ */
 let ledgerPage = 1;
 const LEDGER_PAGE_SIZE = 50;
@@ -817,16 +971,19 @@ const LEDGER_PAGE_SIZE = 50;
 async function renderLedgerPage(container) {
   onRouteEnter('ledger');
   setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'BFT Ledger'),
+    breadcrumb: setBreadcrumb('BABYLON·60', 'BFT Ledger — DETERMINAR (verificar hasta el hash)'),
     actions: `<button class="btn btn-verify" id="btn-verify-chain">⚿ Verify Chain</button>`,
   });
+  // Attach BEFORE any await: the palette command clicks this button on a
+  // timer and must never hit a listener-less element on a slow backend.
+  document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
 
   container.innerHTML = `
     <div class="stats-grid slide-in" id="ledger-stats-grid">
       <div class="stat-card">
         <div class="stat-label">Ledger File</div>
         <div class="stat-value lapis" id="stat-db-name" style="font-size:0.85rem">—</div>
-        <div class="stat-sub">SQLite WAL</div>
+        <div class="stat-sub">SQLite WAL (diario de escritura: nunca corrompe) · RO</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Total Entries</div>
@@ -834,15 +991,16 @@ async function renderLedgerPage(container) {
         <div class="stat-sub" id="stat-latest-time">—</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Consensus</div>
+        <div class="stat-label" title="Cada hash sella al anterior: manipular una entrada rompe la cadena entera">Consensus</div>
         <div class="stat-value verify" id="stat-integrity">UNKNOWN</div>
-        <div class="stat-sub" id="stat-latest-lamport">Lamport: —</div>
+        <div class="stat-sub" id="stat-latest-lamport">Lamport (reloj lógico causal): —</div>
       </div>
     </div>
 
     <div class="card fade-in" style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div class="card-title">Hash Chain Verification</div>
+        <span id="verify-summary" style="font-size:0.62rem;color:var(--dust-faint)"></span>
       </div>
       <div class="verify-progress" id="verify-progress-wrap" style="display:none">
         <div class="verify-progress-bar" id="verify-progress-bar"></div>
@@ -850,7 +1008,7 @@ async function renderLedgerPage(container) {
       <div id="chain-visual-grid" class="chain-container">
         <div class="empty-state" style="padding:20px 0">
           <div class="icon">⚿</div>
-          <div class="desc">Click "Verify Chain" to map blocks and assert BFT consensus.</div>
+          <div class="desc">Click "Verify Chain" para recomputar SHA3-256 (huella digital de cada evento) y asertar integridad.</div>
         </div>
       </div>
     </div>
@@ -861,12 +1019,18 @@ async function renderLedgerPage(container) {
         <table class="data-table">
           <thead>
             <tr>
-              <th>Seq</th><th>Stream</th><th>Event Type</th>
-              <th>Lamport T</th><th>Taint</th><th>Timestamp</th><th>Hash</th>
+              <th>Seq</th>
+              <th>Stream</th>
+              <th>Entity</th>
+              <th>Event Type</th>
+              <th title="Reloj lógico: orden causal sin depender del reloj de pared">Lamport</th>
+              <th title="Huella causal: quién escribió, con qué motor y por qué">Taint</th>
+              <th>Timestamp</th>
+              <th title="SHA3-256: huella digital criptográfica del evento">Hash</th>
             </tr>
           </thead>
           <tbody id="ledger-table-body">
-            <tr><td colspan="7" class="empty-state" style="text-align:center">Loading...</td></tr>
+            <tr><td colspan="8" style="text-align:center;padding:16px;color:var(--dust-ghost)">Loading...</td></tr>
           </tbody>
         </table>
       </div>
@@ -877,73 +1041,136 @@ async function renderLedgerPage(container) {
       </div>
     </div>
 
-    <div id="entry-detail-panel" class="card" style="display:none;position:fixed;top:43px;right:0;width:440px;height:calc(100vh - 71px);border-radius:0;border-left:1px solid var(--edge);z-index:10;flex-direction:column;background:var(--kiln);transform:translateX(100%);transition:transform var(--t-slow)"></div>
+    <div id="entry-detail-panel" class="detail-panel" aria-hidden="true"></div>
   `;
 
-  // Load stats
   try {
     const stats = await get('/api/ledger/stats');
     S.ledgerStats = stats;
-    document.getElementById('stat-db-name')?.let?.(el => el.textContent = stats.db_path?.split('/').pop() || 'master_ledger.db');
     const dbNameEl = document.getElementById('stat-db-name');
-    if (dbNameEl) dbNameEl.textContent = stats.db_path?.split('/').pop() || 'master_ledger.db';
+    if (dbNameEl) dbNameEl.textContent = stats.db_path || '—';
     const totalEl = document.getElementById('stat-total-entries');
-    if (totalEl) totalEl.textContent = stats.total_entries ?? 0;
+    if (totalEl) totalEl.textContent = stats.entries ?? 0;
     const lamportEl = document.getElementById('stat-latest-lamport');
-    if (lamportEl) lamportEl.textContent = `Lamport: ${stats.latest_lamport_t ?? '—'}`;
+    if (lamportEl) lamportEl.textContent = `Lamport (reloj lógico causal): ${stats.latest?.lamport_t ?? '—'}`;
     const timeEl = document.getElementById('stat-latest-time');
-    if (timeEl && stats.latest_ts) timeEl.textContent = stats.latest_ts.slice(0, 19);
+    if (timeEl && stats.latest?.created_at) timeEl.textContent = String(stats.latest.created_at).slice(0, 19);
     updateStatusBar();
+    updateContextPaneCounts();
   } catch { /* offline */ }
 
-  // Load entries
   await loadLedgerPage(1);
 
-  // Verify chain button — single wired listener
-  document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
-
-  // Pagination
   document.getElementById('btn-ledger-prev')?.addEventListener('click', () => loadLedgerPage(ledgerPage - 1));
   document.getElementById('btn-ledger-next')?.addEventListener('click', () => loadLedgerPage(ledgerPage + 1));
 }
 
 async function loadLedgerPage(page) {
+  if (page < 1) page = 1;
   ledgerPage = page;
   const tbody = document.getElementById('ledger-table-body');
   if (!tbody) return;
   try {
-    const data = await get(`/api/ledger/entries?page=${page}&page_size=${LEDGER_PAGE_SIZE}`);
-    const entries = Array.isArray(data) ? data : (data.entries || []);
-    if (entries.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:20px;color:var(--dust-ghost)">No entries</td></tr>`;
-      return;
-    }
-    tbody.innerHTML = entries.map(e => `
-      <tr class="${e.is_valid ? 'row-valid' : 'row-invalid'}" data-id="${e.id}" style="cursor:pointer">
-        <td class="seq-cell">${e.id}</td>
-        <td class="stream-cell">${e.stream_id ?? '—'}</td>
-        <td>${e.event_type ?? '—'}</td>
-        <td style="color:var(--dust-dim)">${e.lamport_t ?? '—'}</td>
-        <td class="hash-cell" style="font-size:0.58rem">${(e.cortex_taint ?? '—').slice(0, 16)}…</td>
-        <td class="time-cell">${(e.ts ?? '').slice(0, 19)}</td>
-        <td class="hash-cell">${(e.curr_hash ?? '—').slice(0, 12)}…</td>
-      </tr>
-    `).join('');
+    const offset = (page - 1) * LEDGER_PAGE_SIZE;
+    const data = await get(`/api/ledger/entries?limit=${LEDGER_PAGE_SIZE}&offset=${offset}`);
+    const entries = data.entries || [];
+    const total = data.total ?? entries.length;
 
-    document.getElementById('ledger-page-info').textContent = `Page ${page}`;
-    document.getElementById('btn-ledger-prev').disabled = page <= 1;
-    document.getElementById('btn-ledger-next').disabled = entries.length < LEDGER_PAGE_SIZE;
+    if (entries.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--dust-ghost)">No entries</td></tr>`;
+    } else {
+      tbody.innerHTML = entries.map(e => `
+        <tr data-seq="${e.seq}" style="cursor:pointer" title="Abrir detalle (micro-túnel)">
+          <td class="seq-cell">${e.seq}</td>
+          <td class="stream-cell">${escapeHtml(e.stream)}</td>
+          <td class="hash-cell" style="font-size:0.6rem;max-width:130px;overflow:hidden;text-overflow:ellipsis">${escapeHtml(e.entity_id)}</td>
+          <td>${escapeHtml(e.event_type)}</td>
+          <td style="color:var(--dust-dim)">${e.lamport_t}</td>
+          <td class="hash-cell" style="font-size:0.58rem;max-width:170px;overflow:hidden;text-overflow:ellipsis" title="${escapeHtml(e.cortex_taint)}">${escapeHtml((e.cortex_taint || '—').slice(0, 26))}${(e.cortex_taint || '').length > 26 ? '…' : ''}</td>
+          <td class="time-cell">${String(e.created_at || '').slice(0, 19)}</td>
+          <td class="hash-cell" title="${escapeHtml(e.entry_hash)}">${(e.entry_hash || '—').slice(0, 12)}…</td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('tr[data-seq]').forEach(row => {
+        row.addEventListener('click', () => openEntryDetail(parseInt(row.dataset.seq)));
+      });
+    }
+
+    const totalPages = Math.max(1, Math.ceil(total / LEDGER_PAGE_SIZE));
+    const info = document.getElementById('ledger-page-info');
+    if (info) info.textContent = `Page ${page} / ${totalPages} · ${total} entries`;
+    const prev = document.getElementById('btn-ledger-prev');
+    const next = document.getElementById('btn-ledger-next');
+    if (prev) prev.disabled = page <= 1;
+    if (next) next.disabled = page >= totalPages;
   } catch (err) {
-    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--break)">Error: ${err.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--break);padding:16px">Error: ${escapeHtml(err.message)}</td></tr>`;
   }
 }
 
+/* ── Entry detail (micro-túnel: una entrada, causa completa) ── */
+async function openEntryDetail(seq) {
+  const panel = document.getElementById('entry-detail-panel');
+  if (!panel) return;
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  panel.innerHTML = `<div class="detail-header"><span class="detail-title">⧉ Entry #${seq}</span>
+    <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button></div>
+    <div class="detail-body" style="color:var(--dust-faint)">Loading...</div>`;
+  panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
+
+  try {
+    const e = await get(`/api/ledger/entry/${seq}`);
+    let payloadPretty = e.payload_json || '';
+    try { payloadPretty = JSON.stringify(JSON.parse(e.payload_json), null, 2); } catch { /* raw */ }
+
+    const field = (label, value, cls = '') => `
+      <div class="detail-field">
+        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
+      </div>`;
+
+    panel.innerHTML = `
+      <div class="detail-header">
+        <span class="detail-title">⧉ Entry #${e.seq} · ${escapeHtml(e.event_type)}</span>
+        <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button>
+      </div>
+      <div class="detail-body">
+        ${field('Event ID (UUID v5: determinista, mismo input → mismo id)', e.event_id, 'mono')}
+        ${field('Stream · Entity', `${e.stream} · ${e.entity_id}`)}
+        ${field('Lamport T (reloj lógico: orden causal)', e.lamport_t)}
+        ${field('Causal Taint (quién/por qué escribió)', e.cortex_taint, 'mono')}
+        ${field('Source (origen del dato)', `${e.source_db ?? '—'} › ${e.source_table ?? '—'} › ${e.source_pk ?? '—'}`, 'mono')}
+        ${field('Created At', e.created_at, 'mono')}
+        ${field('Prev Hash (sello del evento anterior)', e.prev_hash, 'mono hash')}
+        ${field('Entry Hash (SHA3-256 de todo el sobre)', e.entry_hash, 'mono hash')}
+        <div class="detail-field">
+          <div class="detail-field-label">Payload (contenido del evento)</div>
+          <pre class="detail-payload">${escapeHtml(payloadPretty)}</pre>
+        </div>
+      </div>
+    `;
+    panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
+  } catch (err) {
+    const bodyEl = panel.querySelector('.detail-body');
+    if (bodyEl) bodyEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
+  }
+}
+
+function closeEntryDetail() {
+  const panel = document.getElementById('entry-detail-panel');
+  if (panel) { panel.classList.remove('open'); panel.setAttribute('aria-hidden', 'true'); }
+}
+
+/* ── Chain verification — POST /api/ledger/verify ── */
 async function runChainVerification() {
   const btn = document.getElementById('btn-verify-chain');
   const grid = document.getElementById('chain-visual-grid');
   const progressWrap = document.getElementById('verify-progress-wrap');
   const progressBar = document.getElementById('verify-progress-bar');
   const integrityEl = document.getElementById('stat-integrity');
+  const summaryEl = document.getElementById('verify-summary');
   if (!grid) return;
 
   if (btn) { btn.disabled = true; btn.textContent = '⚙ Verifying...'; }
@@ -957,47 +1184,77 @@ async function runChainVerification() {
   }, 120);
 
   try {
-    const result = await get('/api/ledger/verify');
+    const result = await post('/api/ledger/verify', {});
+    S.lastVerify = result;
     clearInterval(ticker);
     if (progressBar) progressBar.style.width = '100%';
 
-    const total = result.total_checked ?? 0;
-    const valid = result.valid_count ?? 0;
+    const total = result.total_entries ?? 0;
+    const valid = result.verified_entries ?? 0;
     const broken = total - valid;
-    const ratio = total > 0 ? valid / total : 1;
 
     grid.innerHTML = '';
-    for (let i = 0; i < Math.min(total, 200); i++) {
+    (result.entries || []).slice(0, 400).forEach(entry => {
       const block = document.createElement('div');
-      block.className = `chain-block ${i < valid ? '' : 'invalid'}`;
-      block.title = `Block ${i + 1}: ${i < valid ? 'VALID' : 'BROKEN'}`;
+      block.className = `chain-block ${entry.valid ? '' : 'invalid'}`;
+      block.title = `Seq ${entry.seq} · L:${entry.lamport_t} · ${entry.valid ? 'VALID' : entry.errors.join(' · ')}`;
+      block.addEventListener('click', () => openEntryDetail(entry.seq));
       grid.appendChild(block);
+    });
+    if (total === 0) {
+      grid.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.7rem;padding:8px">Ledger vacío — nada que verificar.</div>`;
     }
 
+    const hasBreakSeq = result.broken_at != null;
     if (integrityEl) {
-      integrityEl.textContent = ratio === 1 ? 'VERIFIED' : `BROKEN (${broken})`;
-      integrityEl.className = `stat-value ${ratio === 1 ? 'verify' : 'break'}`;
+      integrityEl.textContent = result.valid ? 'VERIFIED' : (hasBreakSeq ? `BROKEN (${broken})` : 'ERROR');
+      integrityEl.className = `stat-value ${result.valid ? 'verify' : 'break'}`;
+    }
+    if (summaryEl) {
+      summaryEl.textContent = result.valid
+        ? `${valid}/${total} entries · cadena SHA3-256 intacta`
+        : (hasBreakSeq
+          ? `rota en seq ${result.broken_at} · ${valid}/${total} válidas`
+          : (result.error || 'verificación fallida'));
+    }
+    if (!result.valid && result.error && total === 0) {
+      grid.innerHTML = `<div style="color:var(--break);font-size:0.7rem;padding:8px">${escapeHtml(result.error)}</div>`;
     }
 
-    if (ratio === 1) {
+    if (result.valid) {
       setTachometer('done');
-      container.classList.add('reward-active');
-      setTimeout(() => container.classList.remove('reward-active'), 1500);
+      if (mode().rewards) {
+        const focusBody = document.getElementById('main-content');
+        focusBody?.classList.add('reward-active');
+        setTimeout(() => focusBody?.classList.remove('reward-active'), 1400);
+      }
     } else {
       setTachometer('alert');
+      showAgentModal({
+        icon: '⚠',
+        message: hasBreakSeq
+          ? `Violación de integridad en seq ${result.broken_at} (la cadena de sellos se rompe ahí: todo lo posterior queda bajo sospecha).`
+          : `Verificación fallida: ${result.error || 'error desconocido'}.`,
+        actions: hasBreakSeq
+          ? [
+              { label: 'Inspeccionar entrada', primary: true, fn: () => { hideAgentModal(); openEntryDetail(result.broken_at); } },
+              { label: 'Cerrar', fn: hideAgentModal },
+            ]
+          : [{ label: 'Cerrar', primary: true, fn: hideAgentModal }],
+      });
     }
     setTimeout(() => setTachometer('idle'), 3000);
   } catch (err) {
     clearInterval(ticker);
-    grid.innerHTML = `<div style="color:var(--break);font-size:0.72rem;padding:10px">Verification failed: ${err.message}</div>`;
+    grid.innerHTML = `<div style="color:var(--break);font-size:0.72rem;padding:10px">Verification failed: ${escapeHtml(err.message)}</div>`;
     setTachometer('idle');
   }
   if (btn) { btn.disabled = false; btn.textContent = '⚿ Verify Chain'; }
-  if (progressWrap) setTimeout(() => progressWrap.style.display = 'none', 1500);
+  if (progressWrap) setTimeout(() => { progressWrap.style.display = 'none'; }, 1500);
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTE: DATABASES — Ontology Explorer
+   ROUTE: DATABASES — drill-down: db → tablas → schema + filas
    ══════════════════════════════════════════════════════════ */
 async function renderDatabasesPage(container) {
   onRouteEnter('databases');
@@ -1007,97 +1264,169 @@ async function renderDatabasesPage(container) {
     <div class="stats-grid slide-in">
       <div class="stat-card">
         <div class="stat-label">SQLite Files</div>
-        <div class="stat-value gold" id="db-total-count">${S.databaseList.length || '—'}</div>
-        <div class="stat-sub">Discovered</div>
+        <div class="stat-value gold" id="db-total-count">—</div>
+        <div class="stat-sub">Descubiertos en la raíz del proyecto</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Size</div>
+        <div class="stat-value lapis" id="db-total-size" style="font-size:1.1rem">—</div>
+        <div class="stat-sub">Huella en disco</div>
       </div>
     </div>
     <div class="card fade-in">
-      <div class="card-title" style="margin-bottom:10px">Ontology Databases</div>
+      <div class="card-title" style="margin-bottom:10px">Ontology Databases <span style="color:var(--dust-ghost);font-weight:400;font-size:0.62rem">(click = ver tablas)</span></div>
       <table class="data-table">
-        <thead><tr><th>Database</th><th>Size</th><th>Type</th><th>Path</th></tr></thead>
-        <tbody id="db-table-body"><tr><td colspan="4" style="text-align:center">Loading...</td></tr></tbody>
+        <thead><tr><th>Database</th><th>Size</th><th>Type</th></tr></thead>
+        <tbody id="db-table-body"><tr><td colspan="3" style="text-align:center;padding:14px;color:var(--dust-ghost)">Loading...</td></tr></tbody>
       </table>
     </div>
-    <div class="card fade-in" style="margin-top:14px" id="db-schema-panel" style="display:none">
-      <div class="card-title" id="db-schema-title">Schema</div>
-      <div id="db-schema-body" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--dust-dim)"></div>
+    <div class="card fade-in" style="margin-top:14px;display:none" id="db-tables-panel">
+      <div class="card-title" id="db-tables-title">Tables</div>
+      <div id="db-tables-body" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"></div>
+    </div>
+    <div class="card fade-in" style="margin-top:14px;display:none" id="db-browse-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="card-title" id="db-browse-title">Table</div>
+        <span id="db-browse-meta" style="font-size:0.6rem;color:var(--dust-ghost)"></span>
+      </div>
+      <div id="db-schema-body" style="font-family:var(--font-mono);font-size:0.68rem;color:var(--dust-dim);margin-bottom:10px"></div>
+      <div id="db-rows-body" style="overflow-x:auto"></div>
     </div>
   `;
 
   try {
-    const dbs = S.databaseList.length > 0 ? S.databaseList : await get('/api/databases');
+    const dbs = await get('/api/databases');
     S.databaseList = dbs;
+    updateContextPaneCounts();
+
     const tbody = document.getElementById('db-table-body');
     const totalEl = document.getElementById('db-total-count');
+    const sizeEl = document.getElementById('db-total-size');
     if (totalEl) totalEl.textContent = dbs.length;
+    if (sizeEl) {
+      const totalBytes = dbs.reduce((a, d) => a + (d.size_bytes || 0), 0);
+      sizeEl.textContent = totalBytes > 1e6 ? `${(totalBytes / 1e6).toFixed(1)} MB` : `${(totalBytes / 1024).toFixed(0)} KB`;
+    }
 
-    const formatSize = s => s > 1e6 ? `${(s/1e6).toFixed(1)}MB` : `${(s/1024).toFixed(0)}KB`;
     const typeOf = name => {
       if (name.includes('ledger')) return 'LEDGER';
       if (name.includes('ontology')) return 'ONTOLOGY';
       if (name.includes('memory') || name.includes('cortex')) return 'CORTEX';
       if (name.includes('telemetry')) return 'TELEMETRY';
+      if (name.includes('nexus')) return 'NEXUS';
       return 'GENERAL';
     };
 
     if (tbody) tbody.innerHTML = dbs.map(db => `
-      <tr style="cursor:pointer" data-path="${db.path}">
-        <td class="stream-cell">${db.name}</td>
-        <td class="time-cell">${db.size_bytes ? formatSize(db.size_bytes) : '—'}</td>
+      <tr style="cursor:pointer" data-db="${escapeHtml(db.name)}" title="Browse tables">
+        <td class="stream-cell">${escapeHtml(db.name)}</td>
+        <td class="time-cell">${escapeHtml(db.size_human || '—')}</td>
         <td><span style="font-size:0.58rem;padding:1px 5px;border-radius:2px;background:var(--tablet-2);color:var(--dust-faint)">${typeOf(db.name)}</span></td>
-        <td class="hash-cell" style="font-size:0.6rem;max-width:320px">${db.path}</td>
       </tr>
     `).join('');
 
-    tbody?.querySelectorAll('tr[data-path]').forEach(row => {
-      row.addEventListener('click', () => loadDbSchema(row.dataset.path, row.querySelector('.stream-cell')?.textContent));
+    tbody?.querySelectorAll('tr[data-db]').forEach(row => {
+      row.addEventListener('click', () => loadDbTables(row.dataset.db));
     });
   } catch (err) {
     const tbody = document.getElementById('db-table-body');
-    if (tbody) tbody.innerHTML = `<tr><td colspan="4" style="color:var(--break);text-align:center">${err.message}</td></tr>`;
+    if (tbody) tbody.innerHTML = `<tr><td colspan="3" style="color:var(--break);text-align:center;padding:14px">${escapeHtml(err.message)}</td></tr>`;
   }
 }
 
-async function loadDbSchema(dbPath, dbName) {
-  const panel = document.getElementById('db-schema-panel');
-  const title = document.getElementById('db-schema-title');
-  const body = document.getElementById('db-schema-body');
+async function loadDbTables(dbName) {
+  const panel = document.getElementById('db-tables-panel');
+  const title = document.getElementById('db-tables-title');
+  const body = document.getElementById('db-tables-body');
+  const browsePanel = document.getElementById('db-browse-panel');
   if (!panel || !body) return;
   panel.style.display = 'block';
-  if (title) title.textContent = `Schema — ${dbName}`;
-  body.textContent = 'Loading schema...';
+  if (browsePanel) browsePanel.style.display = 'none';
+  if (title) title.textContent = `Tables — ${dbName}`;
+  body.innerHTML = `<span style="color:var(--dust-faint);font-size:0.68rem">Loading...</span>`;
+  setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies', dbName) });
+
   try {
-    const data = await post('/api/databases/schema', { path: dbPath });
-    if (data.tables?.length > 0) {
-      body.innerHTML = data.tables.map(t => `
-        <div style="margin-bottom:12px">
-          <div style="color:var(--lapis-bright);font-weight:700;margin-bottom:4px">▸ ${t.name}</div>
-          ${(t.columns || []).map(c => `<div style="padding-left:14px;color:var(--dust-faint)">${c.name} <span style="color:var(--dust-ghost)">${c.type}</span></div>`).join('')}
-        </div>
-      `).join('');
+    const tables = await get(`/api/databases/${encodeURIComponent(dbName)}/tables`);
+    if (tables.length === 0) {
+      body.innerHTML = `<span style="color:var(--dust-ghost);font-size:0.68rem">No tables.</span>`;
+      return;
+    }
+    body.innerHTML = tables.map(t => `
+      <button class="btn" data-table="${escapeHtml(t.name)}" style="font-size:0.62rem">
+        ${escapeHtml(t.name)} <span style="color:var(--gold);margin-left:4px">${t.row_count}</span>
+      </button>
+    `).join('');
+    body.querySelectorAll('[data-table]').forEach(btn => {
+      btn.addEventListener('click', () => browseTable(dbName, btn.dataset.table));
+    });
+  } catch (err) {
+    body.innerHTML = `<span style="color:var(--break);font-size:0.68rem">${escapeHtml(err.message)}</span>`;
+  }
+}
+
+async function browseTable(dbName, table) {
+  const panel = document.getElementById('db-browse-panel');
+  const title = document.getElementById('db-browse-title');
+  const meta = document.getElementById('db-browse-meta');
+  const schemaBody = document.getElementById('db-schema-body');
+  const rowsBody = document.getElementById('db-rows-body');
+  if (!panel || !rowsBody) return;
+  panel.style.display = 'block';
+  if (title) title.textContent = `${dbName} › ${table}`;
+  if (schemaBody) schemaBody.textContent = 'Loading schema...';
+  rowsBody.innerHTML = '';
+  setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies', dbName, table) });
+
+  try {
+    const [schema, data] = await Promise.all([
+      get(`/api/databases/${encodeURIComponent(dbName)}/schema/${encodeURIComponent(table)}`),
+      get(`/api/databases/${encodeURIComponent(dbName)}/tables/${encodeURIComponent(table)}?limit=25`),
+    ]);
+
+    if (schemaBody) schemaBody.innerHTML = schema.map(c =>
+      `<span style="margin-right:12px;white-space:nowrap">${c.pk ? '⚿' : '·'} ${escapeHtml(c.name)} <span style="color:var(--dust-ghost)">${escapeHtml(c.type || '')}</span></span>`
+    ).join('');
+
+    if (meta) meta.textContent = `${data.total} rows total · showing ${data.rows.length}`;
+
+    if (data.rows.length === 0) {
+      rowsBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.68rem;padding:8px">Empty table.</div>`;
     } else {
-      body.textContent = 'No tables found.';
+      rowsBody.innerHTML = `
+        <table class="data-table">
+          <thead><tr>${data.columns.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead>
+          <tbody>${data.rows.map(row => `
+            <tr>${data.columns.map(c => {
+              let v = row[c];
+              if (v === null || v === undefined) v = '—';
+              v = String(v);
+              const truncated = v.length > 90 ? v.slice(0, 90) + '…' : v;
+              return `<td title="${escapeHtml(v.slice(0, 400))}" style="max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(truncated)}</td>`;
+            }).join('')}</tr>
+          `).join('')}</tbody>
+        </table>
+      `;
     }
   } catch (err) {
-    body.innerHTML = `<span style="color:var(--break)">${err.message}</span>`;
+    rowsBody.innerHTML = `<div style="color:var(--break);font-size:0.7rem;padding:8px">${escapeHtml(err.message)}</div>`;
   }
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTE: QUERY — SQL Console (read-only)
+   ROUTE: QUERY — SQL Console · POST /api/query {database, sql}
    ══════════════════════════════════════════════════════════ */
 async function renderQueryPage(container) {
   onRouteEnter('query');
   setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'SQL Console') });
 
-  const defaultDb = S.databaseList[0]?.path || '';
+  if (S.databaseList.length === 0) await refreshDatabaseList();
+
   container.innerHTML = `
     <div class="card slide-in" style="margin-bottom:14px">
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
         <select class="select" id="query-db-select" style="flex:1">
-          ${S.databaseList.map(db =>
-            `<option value="${db.path}">${db.name}</option>`
-          ).join('')}
+          ${S.databaseList.map(db => `<option value="${escapeHtml(db.name)}">${escapeHtml(db.name)}</option>`).join('')}
         </select>
         <button class="btn btn-primary" id="btn-run-query">▶ Run</button>
         <button class="btn" id="btn-clear-query">Clear</button>
@@ -1105,7 +1434,7 @@ async function renderQueryPage(container) {
       <div class="code-editor">
         <textarea id="query-input" placeholder="SELECT * FROM ledger_entries LIMIT 20;" spellcheck="false"></textarea>
         <div class="code-editor-toolbar">
-          <span style="font-size:0.58rem;color:var(--dust-ghost)">Read-only · No DDL/DML</span>
+          <span style="font-size:0.58rem;color:var(--dust-ghost)">query_only=ON (candado a nivel de motor: imposible mutar) · INSERT/UPDATE/DDL bloqueados</span>
           <span style="font-size:0.58rem;color:var(--dust-ghost)">Shift+Enter to run</span>
         </div>
       </div>
@@ -1121,8 +1450,8 @@ async function renderQueryPage(container) {
 
   const runQuery = async () => {
     const sql = document.getElementById('query-input')?.value?.trim();
-    const dbPath = document.getElementById('query-db-select')?.value;
-    if (!sql || !dbPath) return;
+    const database = document.getElementById('query-db-select')?.value;
+    if (!sql || !database) return;
     setTachometer('working');
     const resultCard = document.getElementById('query-result-card');
     const resultBody = document.getElementById('query-result-body');
@@ -1130,21 +1459,25 @@ async function renderQueryPage(container) {
     if (resultCard) resultCard.style.display = 'block';
     if (resultBody) resultBody.innerHTML = `<div style="color:var(--dust-faint);padding:10px">Running...</div>`;
     try {
-      const t0 = Date.now();
-      const result = await post('/api/query', { db_path: dbPath, sql });
-      const elapsed = Date.now() - t0;
+      const result = await post('/api/query', { database, sql });
       const rows = result.rows || [];
       const cols = result.columns || [];
-      if (resultMeta) resultMeta.textContent = `${rows.length} rows · ${elapsed}ms`;
+      if (resultMeta) resultMeta.textContent = `${result.row_count ?? rows.length} rows · ${result.elapsed_ms ?? '—'}ms · ${result.database}`;
       if (resultBody) {
         if (rows.length === 0) {
           resultBody.innerHTML = `<div style="color:var(--dust-faint);padding:10px">No results</div>`;
         } else {
           resultBody.innerHTML = `
             <table class="data-table">
-              <thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>
+              <thead><tr>${cols.map(c => `<th>${escapeHtml(c)}</th>`).join('')}</tr></thead>
               <tbody>${rows.map(row =>
-                `<tr>${cols.map(c => `<td>${row[c] ?? ''}</td>`).join('')}</tr>`
+                `<tr>${cols.map(c => {
+                  let v = row[c];
+                  if (v === null || v === undefined) v = '';
+                  v = String(v);
+                  const truncated = v.length > 120 ? v.slice(0, 120) + '…' : v;
+                  return `<td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(v.slice(0, 400))}">${escapeHtml(truncated)}</td>`;
+                }).join('')}</tr>`
               ).join('')}</tbody>
             </table>
           `;
@@ -1153,7 +1486,7 @@ async function renderQueryPage(container) {
       setTachometer('done');
       setTimeout(() => setTachometer('idle'), 2000);
     } catch (err) {
-      if (resultBody) resultBody.innerHTML = `<div style="color:var(--break);padding:10px">Error: ${err.message}</div>`;
+      if (resultBody) resultBody.innerHTML = `<div style="color:var(--break);padding:10px">Error: ${escapeHtml(err.message)}</div>`;
       setTachometer('idle');
     }
   };
@@ -1162,7 +1495,8 @@ async function renderQueryPage(container) {
   document.getElementById('btn-clear-query')?.addEventListener('click', () => {
     const input = document.getElementById('query-input');
     if (input) input.value = '';
-    document.getElementById('query-result-card')?.style?.setProperty('display', 'none');
+    const card = document.getElementById('query-result-card');
+    if (card) card.style.display = 'none';
   });
   document.getElementById('query-input')?.addEventListener('keydown', e => {
     if (e.shiftKey && e.key === 'Enter') { e.preventDefault(); runQuery(); }
@@ -1170,7 +1504,7 @@ async function renderQueryPage(container) {
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTE: SWARM — Agent Telemetry (Devin-style split pane)
+   ROUTE: SWARM — telemetría en vivo (push WS, sin polling)
    ══════════════════════════════════════════════════════════ */
 async function renderSwarmPage(container) {
   onRouteEnter('swarm');
@@ -1179,66 +1513,234 @@ async function renderSwarmPage(container) {
     actions: `<span class="focus-badge live">LIVE</span>`,
   });
 
-  const mockAgents = [
-    { name: 'MOSKV-1 APEX', status: 'idle', task: 'Awaiting directive', progress: 0 },
-    { name: 'BFT Verifier', status: 'done', task: 'Chain verified: 100%', progress: 100 },
-    { name: 'Context Indexer', status: 'idle', task: 'Index up to date', progress: 100 },
-  ];
-
   container.innerHTML = `
     <div class="swarm-layout">
       <div class="swarm-terminal">
         <div class="swarm-terminal-header">
           <div class="status-dot" style="width:5px;height:5px;border-radius:50%;background:var(--verify)"></div>
-          Agentic Log
+          Telemetry Stream · push cada 2s (el servidor empuja: la UI nunca pregunta)
         </div>
         <div class="swarm-terminal-body" id="swarm-log-body">
-          <div class="swarm-log-line"><span class="swarm-log-time">—:—</span><span class="swarm-log-agent">SYSTEM</span><span class="swarm-log-msg">Waiting for WebSocket stream...</span></div>
+          <div class="swarm-log-line"><span class="swarm-log-time">—:—</span><span class="swarm-log-agent">SYSTEM</span><span class="swarm-log-msg">Connecting to /ws/telemetry...</span></div>
         </div>
       </div>
       <div class="swarm-inspector">
         <div class="swarm-inspector-header">Agent State</div>
-        <div class="swarm-inspector-body">
-          ${mockAgents.map(a => `
-            <div class="agent-card">
-              <div class="agent-card-header">
-                <span class="agent-name">${a.name}</span>
-                <span class="agent-status-pill ${a.status}">${a.status.toUpperCase()}</span>
-              </div>
-              <div class="agent-task">${a.task}</div>
-              <div class="agent-progress">
-                <div class="agent-progress-fill ${a.status === 'done' ? 'done' : ''}" style="width:${a.progress}%"></div>
-              </div>
-            </div>
-          `).join('')}
-        </div>
+        <div class="swarm-inspector-body" id="swarm-agents"></div>
       </div>
     </div>
   `;
 
-  // Connect to telemetry WebSocket
-  if (S.telemetrySocket) { S.telemetrySocket.close?.(); }
+  renderSwarmAgents();
+
+  if (S.telemetrySocket) { try { S.telemetrySocket.close(); } catch { /* noop */ } }
   setTachometer('indexing');
-  S.telemetrySocket = connectWebSocket('/ws/telemetry', (msg) => {
-    appendSwarmLog(msg);
-  }, () => {
-    setTachometer('idle');
-  });
+  S.telemetrySocket = connectWebSocket('/ws/telemetry', (snap) => {
+    S.telemetrySnapshot = snap;
+    appendSwarmSnapshot(snap);
+    // Only clear the 'indexing' handshake state — never stomp
+    // 'working'/'alert' set by other operations.
+    if (S.tachometerState === 'indexing') setTachometer('idle');
+  }, () => { if (S.tachometerState === 'indexing') setTachometer('idle'); });
 }
 
-function appendSwarmLog(msg) {
+function renderSwarmAgents() {
+  const el = document.getElementById('swarm-agents');
+  if (!el) return;
+  const verify = S.lastVerify;
+  const sent = S.sentinel;
+  const agents = [
+    {
+      name: 'MOSKV-1 APEX', status: 'idle',
+      task: 'Meta-orquestador · esperando directiva', progress: 0,
+    },
+    {
+      name: 'BFT Verifier',
+      status: verify ? (verify.valid ? 'done' : 'error') : 'idle',
+      task: verify
+        ? (verify.valid ? `Cadena verificada: ${verify.verified_entries}/${verify.total_entries}` : `ROTA en seq ${verify.broken_at}`)
+        : 'Sin verificación en esta sesión',
+      progress: verify ? 100 : 0,
+    },
+    {
+      name: 'Git Sentinel',
+      status: sent ? (sent.warnings?.some(w => w.level === 'red') ? 'error' : 'done') : 'idle',
+      task: sent
+        ? `${sent.repo_name}@${sent.branch ?? '—'} · ${sent.dirty_files} dirty · delegación 100% al agente`
+        : 'Sin datos de repo',
+      progress: sent ? 100 : 0,
+    },
+    {
+      name: 'Telemetry Stream', status: 'running',
+      task: 'Empujando snapshots del sistema vía WS', progress: 100,
+    },
+  ];
+  el.innerHTML = agents.map(a => `
+    <div class="agent-card">
+      <div class="agent-card-header">
+        <span class="agent-name">${a.name}</span>
+        <span class="agent-status-pill ${a.status}">${a.status.toUpperCase()}</span>
+      </div>
+      <div class="agent-task">${escapeHtml(a.task)}</div>
+      <div class="agent-progress">
+        <div class="agent-progress-fill ${a.status === 'done' ? 'done' : ''}" style="width:${a.progress}%"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function appendSwarmSnapshot(snap) {
   const body = document.getElementById('swarm-log-body');
   if (!body) return;
   const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+  const dbs = snap.databases?.length ?? 0;
+  const size = snap.total_db_size_mb != null ? `${snap.total_db_size_mb}MB` : '—';
+  const wal = snap.wal_files?.length ?? 0;
+  const rss = snap.process?.max_rss_mb != null ? `${snap.process.max_rss_mb}MB` : '—';
+  const head = snap.git?.head ? snap.git.head.replace('ref: refs/heads/', '@') : '';
+
   const line = document.createElement('div');
   line.className = 'swarm-log-line';
-  const level = msg.level || 'info';
   line.innerHTML = `
     <span class="swarm-log-time">${now}</span>
-    <span class="swarm-log-agent">${msg.agent || 'SYSTEM'}</span>
-    <span class="swarm-log-msg ${level}">${msg.message || JSON.stringify(msg)}</span>
+    <span class="swarm-log-agent">TELEMETRY</span>
+    <span class="swarm-log-msg info">⛁ ${dbs} DBs · ${size} · WAL×${wal} · RSS ${rss} ${head ? '· ' + escapeHtml(head) : ''}</span>
   `;
   body.appendChild(line);
+  while (body.children.length > 200) body.removeChild(body.firstChild);
   body.scrollTop = body.scrollHeight;
-  S.swarmLog.push({ time: now, ...msg });
+  S.swarmLog.push({ time: now, snap });
+  if (S.swarmLog.length > 200) S.swarmLog.shift();
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTE: SENTINEL — identidad de repo + delegación 100% al agente
+   ══════════════════════════════════════════════════════════ */
+async function renderSentinelPage(container) {
+  onRouteEnter('sentinel');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Git Sentinel'),
+    actions: `<button class="btn" id="btn-sentinel-refresh">↺ Refresh</button>`,
+  });
+
+  container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⎇</div><div class="desc">Leyendo identidad del repo...</div></div>`;
+
+  try { S.sentinel = await get('/api/sentinel/status'); } catch (err) {
+    container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
+    return;
+  }
+  updateRepoSegment();
+  renderContextPaneContent();
+
+  const s = S.sentinel;
+  const reds = s.warnings.filter(w => w.level === 'red');
+  const ambers = s.warnings.filter(w => w.level === 'amber');
+  const lineageOk = reds.length === 0;
+
+  const warningsHtml = s.warnings.length === 0
+    ? `<div style="color:var(--verify);font-size:0.7rem">✓ Linaje canónico: repo, rama y política de remoto coinciden con STATUS.md</div>`
+    : s.warnings.map(w => `
+        <div class="sentinel-warning ${w.level}">
+          <span class="sentinel-warning-dot"></span>
+          <span>${escapeHtml(w.msg)}</span>
+        </div>
+      `).join('');
+
+  const remotesHtml = s.remotes.length === 0
+    ? `<div style="color:var(--verify);font-size:0.66rem">✓ Sin remoto configurado (política P0 activa: nada sale a la nube hasta rotar claves)</div>`
+    : s.remotes.map(r => `<div style="font-family:var(--font-mono);font-size:0.64rem;color:var(--dust-dim)">${escapeHtml(r.name)} → ${escapeHtml(r.url)}</div>`).join('');
+
+  container.innerHTML = `
+    <div class="stats-grid slide-in">
+      <div class="stat-card" style="border-left:2px solid ${lineageOk ? 'var(--verify)' : 'var(--break)'}">
+        <div class="stat-label">Repo Actual (recalcado siempre — abajo en la barra de estado también)</div>
+        <div class="stat-value ${lineageOk ? 'verify' : 'break'}" style="font-size:1rem">${escapeHtml(s.repo_name)}</div>
+        <div class="stat-sub">@${escapeHtml(s.branch ?? '—')} · HEAD ${escapeHtml(s.head ?? '—')} · ${s.commit_count ?? '—'} commits</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Working Tree (árbol de trabajo: cambios sin commitear)</div>
+        <div class="stat-value gold">${s.dirty_files}</div>
+        <div class="stat-sub">${s.dirty_files === 0 ? 'Limpio — todo sellado en git' : 'ficheros sucios pendientes de commit'}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Último Commit</div>
+        <div class="stat-value lapis" style="font-size:0.78rem">${escapeHtml((s.head_subject || '—').slice(0, 44))}</div>
+        <div class="stat-sub">${escapeHtml(String(s.head_time || '—').slice(0, 19))}</div>
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:8px">Lineage Guard (intuición de repo incorrecto)</div>
+      ${warningsHtml}
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--edge-soft)">
+        <div style="font-size:0.6rem;color:var(--dust-ghost);margin-bottom:4px">CANON: ${escapeHtml(s.canonical.repo_name)} @ ${escapeHtml(s.canonical.branch)} · remotos: ${escapeHtml(s.canonical.remote_policy)}</div>
+        ${remotesHtml}
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-title" style="margin-bottom:6px">Delegación 100% al Agente</div>
+      <div style="font-size:0.66rem;color:var(--dust-dim);margin-bottom:10px">
+        Toda mutación hacia la nube (commits, merges, pushes, pre-commits, ships, deploys) se delega a MOSKV-1.
+        Tú declaras la intención; el agente ejecuta con Git Sentinel y lo sella en el ledger.
+        <span style="color:var(--gold)">Push/deploy bloqueados por P0 (claves expuestas en el fork remoto) hasta rotación.</span>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <input class="input" id="delegation-input" placeholder="Directiva git… ej: 'commit: feat(ide) sentinel + dual mode' o 'push cuando P0 esté resuelto'" style="flex:1">
+        <button class="btn btn-primary" id="delegation-add">⚡ Delegar</button>
+      </div>
+      <div id="delegation-list"></div>
+    </div>
+  `;
+
+  document.getElementById('btn-sentinel-refresh')?.addEventListener('click', () => rerender());
+  document.getElementById('delegation-add')?.addEventListener('click', addDelegation);
+  document.getElementById('delegation-input')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') addDelegation();
+  });
+  renderDelegationList();
+}
+
+function addDelegation() {
+  const input = document.getElementById('delegation-input');
+  if (!input || !input.value.trim()) return;
+  S.delegationQueue.unshift({
+    id: Date.now(),
+    text: input.value.trim(),
+    state: 'QUEUED',
+    time: new Date().toISOString().slice(0, 19),
+  });
+  if (S.delegationQueue.length > 30) S.delegationQueue.pop();
+  localStorage.setItem('b60-delegation', JSON.stringify(S.delegationQueue));
+  input.value = '';
+  renderDelegationList();
+  if (mode().rewards) {
+    setTachometer('done');
+    setTimeout(() => setTachometer('idle'), 1500);
+  }
+}
+
+function renderDelegationList() {
+  const el = document.getElementById('delegation-list');
+  if (!el) return;
+  if (S.delegationQueue.length === 0) {
+    el.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem">Cola vacía. El agente no tiene directivas git pendientes.</div>`;
+    return;
+  }
+  el.innerHTML = S.delegationQueue.map(d => `
+    <div class="delegation-item">
+      <span class="delegation-state">${d.state}</span>
+      <span class="delegation-text">${escapeHtml(d.text)}</span>
+      <span class="delegation-time">${d.time.replace('T', ' ')}</span>
+      <span class="delegation-del" data-del="${d.id}" title="Retirar directiva">✕</span>
+    </div>
+  `).join('');
+  el.querySelectorAll('[data-del]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      S.delegationQueue = S.delegationQueue.filter(d => d.id !== parseInt(btn.dataset.del));
+      localStorage.setItem('b60-delegation', JSON.stringify(S.delegationQueue));
+      renderDelegationList();
+    });
+  });
 }

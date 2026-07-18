@@ -11,12 +11,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .routes import ledger, ontology, query, telemetry
+from .routes import ledger, ontology, query, sentinel, telemetry
 
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
-    version="0.1.0",
+    version="0.2.0",
 )
 
 # CORS — localhost only for v1
@@ -37,6 +37,7 @@ app.add_middleware(
 app.include_router(ledger.router)
 app.include_router(ontology.router)
 app.include_router(query.router)
+app.include_router(sentinel.router)
 app.include_router(telemetry.router)
 
 
