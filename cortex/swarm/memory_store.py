@@ -1,9 +1,14 @@
 import os
 import sqlite3
-from typing import Dict, Any
+import hashlib
+from typing import Dict, Any, Optional
+from datetime import datetime
 
 class AgentMemory:
-    """Memoria persistente BFT (SQLite WAL) para agentes soberanos."""
+    """
+    Memoria persistente BFT (SQLite WAL) para agentes soberanos.
+    Cumple con Ω11: Ledger inmutable (RAISE ABORT), prev_hash, y CORTEX-TAINT obligatorio.
+    """
     
     def __init__(self, db_path: str = "agent_memory.db") -> None:
         self.conn = sqlite3.connect(db_path, isolation_level=None)
@@ -20,16 +25,47 @@ class AgentMemory:
             agent_role TEXT,
             action TEXT,
             result TEXT,
+            prev_hash TEXT UNIQUE,
+            cortex_taint TEXT NOT NULL,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         )
         """)
+        
+        # Trigger para garantizar inmutabilidad (Ω11)
+        self.conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS prevent_update_decisions
+        BEFORE UPDATE ON decisions
+        BEGIN
+            SELECT RAISE(ABORT, 'CORTEX_LEDGER_ERROR: Updates are strictly forbidden in C5-REAL ledger.');
+        END;
+        """)
+        
+        self.conn.execute("""
+        CREATE TRIGGER IF NOT EXISTS prevent_delete_decisions
+        BEFORE DELETE ON decisions
+        BEGIN
+            SELECT RAISE(ABORT, 'CORTEX_LEDGER_ERROR: Deletions are strictly forbidden in C5-REAL ledger.');
+        END;
+        """)
     
-    def log(self, issue_id: int, agent_role: str, action: str, result: str) -> None:
+    def _get_last_hash(self) -> str:
+        cursor = self.conn.execute("SELECT cortex_taint FROM decisions ORDER BY id DESC LIMIT 1")
+        row = cursor.fetchone()
+        return row[0] if row else "GENESIS_BLOCK_00000000000000000000000000000000000000000000000000"
+    
+    def log(self, issue_id: int, agent_role: str, action: str, result: str) -> str:
+        prev_hash = self._get_last_hash()
+        
+        # Generar firma CORTEX-TAINT (Ω11)
+        timestamp_iso = datetime.utcnow().isoformat() + "Z"
+        raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode('utf-8')
+        cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
+        
         self.conn.execute(
-            "INSERT INTO decisions (issue_id, agent_role, action, result) VALUES (?, ?, ?, ?)",
-            (issue_id, agent_role, action, result)
+            "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
+            (issue_id, agent_role, action, result, prev_hash, cortex_taint)
         )
-        # Auto-commit en modo isolation_level=None
+        return cortex_taint
     
     def query_similar(self, issue_text: str) -> list[Any]:
         # TODO: C5-REAL ChromaDB Vector Search embedding lookup
