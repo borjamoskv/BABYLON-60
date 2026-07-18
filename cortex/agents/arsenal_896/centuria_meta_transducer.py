@@ -24,7 +24,7 @@ class CenturiaMetaTransducer:
     Condenses 1000 APEX primitives (Centuria Matrix) into a single deterministic causal operation
     across all orthogonal domains.
     """
-    def __init__(self, db_path: str = "cortex.db", audit_path: str = "cortex/audits/centuria_1000_ultrathink_consolidation.yaml"):
+    def __init__(self, db_path: str = "cortex.db", audit_path: str = "cortex/audits/centuria_896_ultrathink_consolidation.yaml"):
         self.db_path = db_path
         self.audit_path = audit_path
         self.operator = "borjamoskv"
