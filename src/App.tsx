@@ -126,6 +126,7 @@ export default function BabylonMinimalistIDE() {
 
   // Dictation State
   const [isDictating, setIsDictating] = useState(false);
+  const [isHypervigilant, setIsHypervigilant] = useState(false);
   const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
@@ -261,7 +262,15 @@ export default function BabylonMinimalistIDE() {
           transform: scaleX(1);
           transform-origin: left;
         }
-      \`}</style>
+
+        ${isHypervigilant ? `
+          .grain { opacity: 0.12 !important; }
+          textarea { color: #FF3366 !important; text-shadow: 0 0 5px rgba(255, 51, 102, 0.3); }
+          h1 { color: #FF3366 !important; }
+          .nav-link.active { color: #FF3366 !important; }
+          .nav-link.active::after { background: #FF3366 !important; }
+        ` : ''}
+      `}</style>
 
       <div className="grain" />
 
@@ -284,6 +293,14 @@ export default function BabylonMinimalistIDE() {
         </div>
         
         <div className="flex items-center gap-6" style={{ WebkitAppRegion: 'no-drag' } as any}>
+          <button
+            onClick={() => setIsHypervigilant(!isHypervigilant)}
+            className="text-[10px] uppercase tracking-widest font-medium outline-none transition-all duration-300"
+            style={{ color: isHypervigilant ? '#FF3366' : theme.muted }}
+          >
+            {isHypervigilant ? '● Hypervigilant' : 'Hypervigilance'}
+          </button>
+
           <button
             onClick={toggleDictation}
             className="text-[10px] uppercase tracking-widest font-medium outline-none transition-all duration-300"
@@ -422,6 +439,14 @@ export default function BabylonMinimalistIDE() {
           </div>
 
           <div className="flex-1 relative">
+            {isHypervigilant && (
+              <div className="absolute top-0 right-0 z-30 flex items-center gap-3 text-[9px] font-mono tracking-[0.2em] text-[#FF3366] uppercase animate-pulse">
+                <span>Threat Level: Zero</span>
+                <span>·</span>
+                <span>Anergy Filter: Strict</span>
+              </div>
+            )}
+
             <textarea
               value={editorContent}
               onChange={handleTextChange}
