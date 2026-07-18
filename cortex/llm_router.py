@@ -1,19 +1,28 @@
+"""C5-REAL Cascade LLM Router: Ollama → Groq → GitHub Models"""
+
 import os
 import json
 import urllib.request
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TypedDict
+
+__all__ = ['C5LLMRouter']
+
+class RouteConfig(TypedDict, total=False):
+    name: str
+    url: str
+    models: List[str]
 
 class EpistemicHalt(Exception):
     """Exclusión rígida de excepciones mudas (Ω26)."""
     pass
 
-def parse_yaml_routes(filepath: str) -> List[Dict[str, Any]]:
+def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     """Parseador lineal de YAML sin dependencias para conservar ATP (Ω15)."""
     if not os.path.exists(filepath):
         raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
         
     routes = []
-    current_route: Dict[str, Any] = {}
+    current_route: RouteConfig = {}
     
     with open(filepath, 'r', encoding='utf-8') as f:
         for line in f:
@@ -52,17 +61,17 @@ class C5LLMRouter:
     def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml"):
         self.routes = parse_yaml_routes(routes_path)
         
-    def dispatch_inference(self, prompt: str, target_model: str) -> str:
+    def dispatch_inference(self, prompt: str, model: str) -> str:
         """Enruta la petición buscando autarquía local y cascading a APIs gratuitas."""
         errors = []
         
         # 1. Prioridad: Ollama Local (Autarquía Offline)
         for route in self.routes:
-            if route.get("name") == "Ollama Local Engine" and target_model in route.get("models", []):
+            if route.get("name") == "Ollama Local Engine" and model in route.get("models", []):
                 try:
-                    return self._call_ollama(route.get("url"), target_model, prompt)
-                except Exception as e:
-                    errors.append(f"Ollama ({target_model}) falló: {e}")
+                    return self._call_ollama(route.get("url"), model, prompt)
+                except (OSError, RuntimeError, ConnectionError) as e:
+                    errors.append(f"Ollama ({model}) falló: {e}")
                     
         # 2. Cascada a Groq Console (Límites Gratuitos)
         for route in self.routes:
@@ -72,7 +81,7 @@ class C5LLMRouter:
                     actual_model = route.get("models")[0] if route.get("models") else "llama3-70b-8192"
                     url = f"{route.get('url')}/v1/chat/completions"
                     return self._call_openai_compatible(url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt)
-                except Exception as e:
+                except (OSError, RuntimeError, ConnectionError) as e:
                     errors.append(f"Groq ({route.get('name')}) falló: {e}")
 
         # 3. Cascada a GitHub Models (Developer Free Tier)
@@ -82,7 +91,7 @@ class C5LLMRouter:
                     actual_model = route.get("models")[0] if route.get("models") else "Llama-3-8B-Instruct"
                     url = "https://models.inference.ai.azure.com/chat/completions"
                     return self._call_openai_compatible(url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt)
-                except Exception as e:
+                except (OSError, RuntimeError, ConnectionError) as e:
                     errors.append(f"GitHub Models falló: {e}")
 
         # Si todas fallan, levantar pánico epistémico
