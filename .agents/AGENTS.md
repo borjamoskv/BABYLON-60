@@ -22,4 +22,6 @@ Code guidelines:
 - **INV_C5_13 (Autopoietic Invariant Alignment):** The agent must periodically trigger `scripts/autodetect_invariants.py` to auto-align code assertions in the test suite (`tests/test_c5_invariants.py`) with the active rule definitions in `AGENTS.md`.
 - **INV_C5_14 (Exergy Optimization Agent):** Commits containing code alterations must run `scripts/exergy_optimizer_agent.py` to evaluate the GELABP exergy matrix. If the score falls below $700.0/1000.0$, execution must immediately fail-fast (exit code 1) to prevent the propagation of low-exergy iterations.
 - **INV_C5_15 (Memory Vault Session Synchronizer):** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
+- **INV_C5_16 (Lambda Calculus Core Minimal):** Every architectural choice, refactoring step, or functional implementation must prioritize minimization by asking: "What can be eliminated without losing expressive power?". All logic should reduce to minimal functional primitives: variables, pure functional abstractions, and applications. Avoid object-oriented scaffolding or speculative code paths that cannot be justified by core execution requirements.
+
 
