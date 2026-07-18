@@ -132,3 +132,20 @@ def test_inv_c5_11_gh_purge_constraints():
     # Scan for Option B retries in error catching blocks
     hits = _scan({".py", ".sh"}, r'git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B')
     assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)
+
+
+def test_inv_c5_12_nexus_symlinks():
+    """INV_C5_12 — Relative symbolic links within babylon60 must have exactly two levels of depth (../../)."""
+    for link_name in ["crypto", "extensions", "utils"]:
+        link_path = ROOT / "babylon60" / link_name
+        if link_path.is_symlink():
+            target = str(link_path.readlink())
+            assert target.startswith("../../"), f"Symlink {link_name} target '{target}' does not have correct relative depth of 2."
+
+
+def test_inv_c5_13_autodetect_executable():
+    """INV_C5_13 — autodetect_invariants.py script must exist and be executable."""
+    import os
+    script_path = ROOT / "scripts" / "autodetect_invariants.py"
+    assert script_path.exists(), "autodetect_invariants.py missing."
+    assert os.access(script_path, os.X_OK), "autodetect_invariants.py is not executable."
