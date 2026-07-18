@@ -74,8 +74,8 @@ def phase_4_bft_consensus(state: AuditState) -> bool:
             return True
         else:
             raise EpistemicHalt(f"Crítica del Swarm: Código Inválido. Detalle: {critique.strip()}")
-    except Exception as e:
-        # Fallback de Contingencia (Ω27): Linter local estático rápido
+    except (ImportError, OSError, RuntimeError) as e:
+        # Fallback de Contingencia (Ω27): Linter local estático rápido — sólo fallos de infraestructura (Ω26)
         print(f"⚠️ Swarm de Inferencia inalcanzable ({e}). Utilizando validación local básica...")
         # Linter local básico para verificar bloques except vacíos (Ω26)
         if "except:" in payload and "pass" in payload:
