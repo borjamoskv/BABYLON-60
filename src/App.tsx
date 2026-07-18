@@ -165,6 +165,7 @@ export default function BabylonPremiumIDE() {
   const [cursorPos, setCursorPos] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger' | 'extensions'>('files');
   const [chatInput, setChatInput] = useState('');
+  const [showAutopromptMenu, setShowAutopromptMenu] = useState(false);
   
   // Extension State
   const [extensions, setExtensions] = useState<ExtensionItem[]>([
@@ -511,12 +512,42 @@ export default function BabylonPremiumIDE() {
               </div>
 
               {/* Chat Input */}
-              <div className="p-3 border-t flex gap-2" style={{ borderColor: activeTheme.border }}>
+              <div className="p-3 border-t flex gap-2 relative" style={{ borderColor: activeTheme.border }}>
+                {showAutopromptMenu && (
+                  <div 
+                    className="absolute bottom-14 left-3 right-3 bg-black border p-2 flex flex-col gap-1.5 z-50 font-mono text-[10px]"
+                    style={{ borderColor: activeTheme.accent }}
+                  >
+                    <div className="text-white/40 border-b border-white/10 pb-1 uppercase tracking-widest text-[8px] flex justify-between">
+                      <span>// AUTOPROMPTER SELECT</span>
+                      <button onClick={() => setShowAutopromptMenu(false)} className="text-[#ff5500] cursor-pointer bg-transparent border-0">X</button>
+                    </div>
+                    {['mejoralo /goal', 'itera', 'SIGKILL slop', 'forjar /goal', 'BFT sync'].map(preset => (
+                      <button
+                        key={preset}
+                        onClick={() => {
+                          setChatInput(preset);
+                          setShowAutopromptMenu(false);
+                          setChatHistory(prev => [...prev, { timestamp: new Date().toTimeString().slice(0, 8), sender: 'System', message: `Autoprompt insertado: "${preset}"` }]);
+                        }}
+                        className="text-left px-2 py-1 hover:bg-white/10 text-white/80 rounded-sm cursor-pointer border-0 bg-transparent"
+                      >
+                        ⚡ {preset}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <input
                   type="text"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleChatSend()}
+                  onClick={(e) => {
+                    if (e.detail === 3) {
+                      setShowAutopromptMenu(true);
+                      setChatHistory(prev => [...prev, { timestamp: new Date().toTimeString().slice(0, 8), sender: 'System', message: 'Modo AUTOPROMPTER activado vía triple click.' }]);
+                    }
+                  }}
                   placeholder="Inyectar Ψ..."
                   className="flex-1 bg-black/40 border px-3 py-2 font-mono text-[10px] text-white focus:outline-none"
                   style={{ borderColor: activeTheme.border }}
