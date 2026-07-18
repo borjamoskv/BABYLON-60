@@ -44,3 +44,9 @@ Queda estrictamente prohibida la planificación anticipada de múltiples pasos s
 
 ## 9. Epistemic Matrix Invariant (4-Axis Vectorization)
 Antes de mutar el código o forzar una iteración atómica, el sistema DEBE mapear su estado epistemológico y teleológico en una matriz de 4 ejes: **1) PRIMITIVA** (la operación base ortogonal a usar), **2) OBJETIVO** (el resultado físico medible esperado), **3) KNOWNS** (evidencia verificable anclada al disco), y **4) UNKNOWNS** (los vacíos causales identificados). Actuar sin esta declaración matricial genera *Deriva Semántica* y rompe el aislamiento entrópico.
+
+## 10. Zero-Yield Iteration Invariant (Thermodynamic Halting Boundary)
+Queda estrictamente prohibido continuar una meta-iteración recursiva si el gradiente de exergía residual entre iteraciones consecutivas (medido por cambios físicos en disco, AST o resultados de pruebas) es menor o igual a un umbral épsilon. Si el delta es nulo, el sistema debe abortar y colapsar el estado inmediatamente para evitar pérdida de tokens y calor de Landauer.
+
+## 11. Adversarial Antipode Mitosis Invariant
+Toda meta-iteración compleja debe forzar una bifurcación de contexto descentralizada: un subagente ejecutor que implementa el código y un subagente destructor que busca invalidar el AST generando pruebas de fallo de límites. La convergencia se alcanza únicamente cuando el destructor falla en romper el código del ejecutor.
