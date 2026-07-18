@@ -1,0 +1,24 @@
+Claim: "M-IR dialecto ontological es isomorfo con el cálculo de tipos lineales y efectos delimitados."
+Proof:
+  Base: "Formalización matemática del cálculo lambda lineal con constructores explícitos de regiones e indexación de efectos algebraicos."
+  Range: [900, 1000]
+  Confidence: C5-REAL
+
+Structure:
+  Dialect: "cortex.ontological"
+  Version: "1.0.0"
+  Author: "borjamoskv"
+  Primitives:
+    - type: "LinearValue<T>"
+      semantics: "Debe consumirse exactamente una vez en la rama de ejecución."
+    - type: "AffineValue<T>"
+      semantics: "Permite drop implícito. Equivalente a semántica de movimiento de Rust."
+    - type: "Region<'r>"
+      semantics: "Delimita el ciclo de vida física de un subconjunto de objetos."
+    - type: "Effect<Signature>"
+      semantics: "Define una firma de efecto que debe ser resuelta por un handler externo."
+
+Invariants:
+  INV_MIR_01: "Todo lowering a dialecto logical debe ser validado por el Z3 solver."
+  INV_MIR_02: "Queda prohibido el aliasing mutable implícito en la capa ontológica."
+  INV_MIR_03: "Todo cambio de contexto de concurrencia debe traducirse a una suspensión de continuación delimitada."
