@@ -1,0 +1,19 @@
+/* 🏭 PALETA DE COLORES: REDEFINICIÓN DE LA INDUSTRIA (INDUSTRIAL NOIR 2026) */
+/* SYS_ID: DESIGN_PALETTE_REDEFINED */
+
+:root {
+  /* 1. Base Entrópica (El Substrato) */
+  --color-industrial-obsidian: #09090a; /* Negro mate absoluto. Simula el colapso gravitatorio de la anergía. */
+  
+  /* 2. Conducción Térmica (Exergía de Datos) */
+  --color-yinmn-superconductor: #2b3be5; /* YInMn Blue. Canal de transmisión de alta energía, superconductividad y señal limpia. */
+  
+  /* 3. Decaimiento Físico (El Óxido de Hierro) */
+  --color-raw-rust: #c24b36; /* Arcilla quemada / óxido de hierro. Representa el desgaste físico del metal, hardware expuesto y entropía residual. */
+  
+  /* 4. Refrigeración de Silicio (Cámara Fría) */
+  --color-chilled-cybernetic: #7ba8b0; /* Gris-turquesa helado. Simula la disipación del calor en racks de servidores y aleaciones de titanio anodizado. */
+  
+  /* 5. Consenso Atómico (El Ledger) */
+  --color-radioactive-consensus: #00ff52; /* Verde terminal fosforescente. Representa la sincronización Bizantina (BFT) y validación de estado exitosa. */
+}
