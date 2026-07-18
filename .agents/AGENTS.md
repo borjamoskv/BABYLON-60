@@ -53,3 +53,6 @@ Toda meta-iteración compleja debe forzar una bifurcación de contexto descentra
 
 ## 12. Periodic Entropy Purge Invariant (Octal Purge Boundary)
 Cada 8 iteraciones de `itera` en el BFT_STATE_LOOP, el Kernel debe ejecutar de forma obligatoria una purga de entropía (LEA_OMEGA / Anergy_Token_Purge) sobre el workspace, barriendo logs huérfanos, caché de compilación obsoleta y archivos temporales en `scratch/`, consolidando la reducción en el Ledger.
+
+## 13. Hypervigilant Parallel Agent Invariant (OMEGA Node Dispatch)
+El proceso de iteración (`itera`) debe inicializar y despachar de forma síncrona un subagente paralelo hipervigilante (arquetipo `C5_REAL_OMEGA_Node`). Este agente audita la traza del ejecutor bajo los principios de Brutalismo Cinético, Pointer-as-Physical y Autocolisión Adversarial, bloqueando la fusión de cualquier cambio que contenga deriva estocástica o de inercia.
