@@ -7,4028 +7,4028 @@ Invariante: Mapeo ortogonal de 10 dominios de eventos GitHub contra 100 arquetip
 
 ### CMX-0001 | PUSH::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `ccb9aff3b7e9109e2102081d26e8c447a1b7f7279bad332dea4eefe4c6191cce`
+- **CORTEX-TAINT**: `5cab0d59a704338b08f416ccd12cd598fba36ca6a1b83bbc6626a38256b502b4`
 
 ### CMX-0002 | PUSH::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `c801b51d467af6276837e995f23f90b334730edb788eceac7062c7bab771619f`
+- **CORTEX-TAINT**: `4cdcf8783f239a9becd0adc63d146c45889e39cb6bb0e1005dd65a19a64e210a`
 
 ### CMX-0003 | PUSH::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e9ff1a5a6c35cfa7a7594fe790b9188a6f24caf31fea657f60fbc56117a2c374`
+- **CORTEX-TAINT**: `7719d87f2e79a7cb92e4958e6c1efc05f4c363b1bbcbd444dba6f870ed359625`
 
 ### CMX-0004 | PUSH::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `b20bc95768769e2fbc8627c4139b014cdf7add0b9227282a5963cc7c0869f637`
+- **CORTEX-TAINT**: `6501211ac05c19f1aca517288deb16f5f77e6a1829eb856154ac9710c672d5f2`
 
 ### CMX-0005 | PUSH::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a4c50c8e3bbd436ec0b429b48065c8087db9f00ae54565a4ff7c6ffc19d921f2`
+- **CORTEX-TAINT**: `c0978d86cef7fb49a9d60f2082d28619062c62084774e766132e48c87f51fb19`
 
 ### CMX-0006 | PUSH::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e13feca13e758772ca1b6227159e6ebb212bf78271a8d5336de58c343fba3192`
+- **CORTEX-TAINT**: `b598e0a1929712ccdcc43c00e29a37ff746d5b313d6da6db2ef2690cd8d3501c`
 
 ### CMX-0007 | PUSH::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a28415d7ec9192d41ba29f464c16281d13816f5fc998998d9ffb38ee94d58561`
+- **CORTEX-TAINT**: `f95672c20bf2745ccf3e3a332965183301c83afd5640c3a9be0200e7796dd56a`
 
 ### CMX-0008 | PUSH::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `8aa21bde2af99cf646da5f530b96833989fbf59a09742575800e2d67f3e9c101`
+- **CORTEX-TAINT**: `6ca64e6ec3ad85c43ecfce3d1a90de51a9b80e4bce0374a28b592e02c76c4115`
 
 ### CMX-0009 | PUSH::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `322491999307b6e4a2c3eb3f7a3fb1533dfa5ed506f3172a86b74a580a7dac6e`
+- **CORTEX-TAINT**: `8e1124e0051c7baa96e5169ad350a672a1b946a61f28625e569c08216fdf081b`
 
 ### CMX-0010 | PUSH::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `76e050c7ecdf23dac2a1fe92877383b97be67ff1ce8a62006c90c6113d8d5aad`
+- **CORTEX-TAINT**: `1b02fd61f53bf9d00d4f509c05cea728008251b598e04eff79ddfaf9d6f77034`
 
 ### CMX-0011 | PUSH::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `75122d29dc8b7804fe246904b6e7c899d3e7ff906e85a5f0a86579d211a1015c`
+- **CORTEX-TAINT**: `4067ef2bfdfe95ca8c7bd6acae2950891f429faa1fe4659ba885582b63489f0e`
 
 ### CMX-0012 | PUSH::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5afda747dbaccce7af4f614db3ea6b484dcc4ae8ad013663c45105f33908e4a4`
+- **CORTEX-TAINT**: `735011539d7e9a95bc965ed9e05daa6d13d3a56dc8d83e1711f2dc73404171fd`
 
 ### CMX-0013 | PUSH::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `f478de0f6d4b0361800ec97541a8f04c783ad041d1e9bfb7be69182d1bfc9e44`
+- **CORTEX-TAINT**: `e858423590c6be365a9ad0475ff3b4ff9a893ce6db177cdc84bdeec795cc2c90`
 
 ### CMX-0014 | PUSH::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `76d4c5c8aa2495814f2adf46b8dc6e4f3fca53a663385b50804766c9ba87d643`
+- **CORTEX-TAINT**: `c4776fe5232d7ecca1fa36df9c12de039a3d9d8272f603f35c082669677f0ad6`
 
 ### CMX-0015 | PUSH::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `867af265bc1010517db24c0567c0d63ab7b6df47366b25eb62e0e8bceda5dddf`
+- **CORTEX-TAINT**: `e91acb560e1b8cc79913912606c92a7d67a55494f05708ebabfa7a135c6a451b`
 
 ### CMX-0016 | PUSH::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e98e977714f4ccb4f12a997294c49e55a4849ad331a52d733bffdcfbdc2eacc0`
+- **CORTEX-TAINT**: `8d4decf69a7a43c3eef645a9996b4e95e1e9b1b4c7a2028200bbf6203e20395d`
 
 ### CMX-0017 | PUSH::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `bb04f46516ef63e5ba41ca9b8b3f36ad803db5128a8e59caf6b09306bb9492ea`
+- **CORTEX-TAINT**: `55983085860bf94c2dcd4703be5b5048aa51e7513274918d4ee1073ef5566233`
 
 ### CMX-0018 | PUSH::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `9da588115d04e920a9cfe3edc1d5eff16f17793c425cc18e7c57026efa59ae80`
+- **CORTEX-TAINT**: `29137215279d33333eb1d5d62ea58af77c528b174fdadd9f2128fa91f10b4196`
 
 ### CMX-0019 | PUSH::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `46b9090c5b5ff5d01a1bdfb6322ca75bd03e67bf65276edd164bcf2fba3eddd1`
+- **CORTEX-TAINT**: `91277845f47f812716c6034c90b3f0d9cde9d5da6d3ec6e7dcf522210d5d853e`
 
 ### CMX-0020 | PUSH::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `c03b2764cd4516b2b1ae5c98399ba138b48b5ca959ce9765e7223b391e6f0934`
+- **CORTEX-TAINT**: `c83c2809bc11c90c1b22629b619d3ad56ccad38d0631139114f3035472d6a310`
 
 ### CMX-0021 | PUSH::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `7cb72c2b78d1a364d77308000942995508385d327dabc01e0f57e50275aff382`
+- **CORTEX-TAINT**: `f8fc2db910dbfcba147c32c88849e5cf1c9512a27be54266f8910cac1f36c085`
 
 ### CMX-0022 | PUSH::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `29f37a7eddc361c0a1def2ee03e4af67717c15f7e22bc43333b40a843713cd6d`
+- **CORTEX-TAINT**: `15b413231ec06d3b5a8c6b62019321e7064a8adddb8df05e32912a57d501533d`
 
 ### CMX-0023 | PUSH::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `55c3dc2f9b6297bee483a2f7680b5e917b2d6bbb0132087f9940e5450d5dd4bc`
+- **CORTEX-TAINT**: `36ebb51be53f86941539d5566c614db3f589e5a8addf8548a96f5edb9a619a4f`
 
 ### CMX-0024 | PUSH::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `13519875ef59db6a9ce6ec5bd430fdf62c5f1e08df19a75a53071d6c6e4b9d3e`
+- **CORTEX-TAINT**: `fa278f0c718bacf7c9e1e1fdbf030599f05bc51b0e519d2ae5057892d7ff0258`
 
 ### CMX-0025 | PUSH::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `00f8bac2870f8a42ee043628ecce816589f04adb75329b7ccea42ee97c0f0936`
+- **CORTEX-TAINT**: `45cf49f593e55b8aeda0c6ccb07fd87aee81a1cb030f7ea357bf445ddf527529`
 
 ### CMX-0026 | PUSH::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `f8160d64a1cd51141fae13afc72c6c740921e26038eebfb98f55121f4a9a69a6`
+- **CORTEX-TAINT**: `3e6b9cf90ec7d68c951915ffc339e67e217e4450b6164e94fedd24174a6c23f2`
 
 ### CMX-0027 | PUSH::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a82e02366d51922edbfadd56ab85a0dbdefd871c791e06c87d194bbaa686fb36`
+- **CORTEX-TAINT**: `59032883b9e3e28b1818de72ae48b9b341eea7fc9de8eb8d9d23f0eee2b4d5e1`
 
 ### CMX-0028 | PUSH::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a04c9519f6e426df91ab2fa69116d19807cace8a9ecc1842060ecee539a63865`
+- **CORTEX-TAINT**: `61870377cecbc48badd6cdc29b8b7de418276b5455ef275aaeb14299b7fbd599`
 
 ### CMX-0029 | PUSH::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a759d7bf1a0240614fa7c9405fb80c9ea0f39dd032e504376fd0994d87a0a446`
+- **CORTEX-TAINT**: `8746beeeeecd4a6849b6c32c2c5f3a9310ff5f8ea00ae3c02c9067830fa9743e`
 
 ### CMX-0030 | PUSH::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `c91a3b17de02755e3efdec4a50a9270bf500573acc722341dbe16c4413830249`
+- **CORTEX-TAINT**: `6fb7533b0f68c17ee35a265b665fd394469b58efe303f413057e79e5fafe691a`
 
 ### CMX-0031 | PUSH::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `5ef0e7803312581d868e23a91b05dad0fa84adc5a356b310dff69f6e79e5cda4`
+- **CORTEX-TAINT**: `cfec99324a8c0e388603f9f560676996787a66a108b0edeb3ff51d40d885bbf8`
 
 ### CMX-0032 | PUSH::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f2fb9a8341d7d66a9d46ca2065cc00be24e4a2c31d711eb006945871baa42c52`
+- **CORTEX-TAINT**: `3b86f6a2a3a8db3f6d217d2795aa16473b37e5bc34b868fdca81d9a45d4583e2`
 
 ### CMX-0033 | PUSH::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `c8eb11cda0cbcd1927490d1c90c17965934d641eb21ada3cccefc735ff76e662`
+- **CORTEX-TAINT**: `ba9dfb2bb37925441c8e9d8d7487990625d9f9ae5bba58b0ece450a3ae3f8570`
 
 ### CMX-0034 | PUSH::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `2da1ddd75a0479dac0179451da106bbf6216939b386e9a24cf19c5e7cb6796a6`
+- **CORTEX-TAINT**: `615a8e9231c198517b2f0ebb2c7c97121aa387f0832fa27bf9dffab1ef77d712`
 
 ### CMX-0035 | PUSH::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `a003c27063b6ee5f4aa067048bd38d8e2c5d568c642a3633dec1fe697d182528`
+- **CORTEX-TAINT**: `0c994ff20d87ea86a9d5b484aa4b3c92bb899dcdd67fca81d1e4a2f586f59323`
 
 ### CMX-0036 | PUSH::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `db53c6f0c11ff2b3e017aa4f19bbf4c9a117f31c5d4e6fdc239ff9d76ce9256d`
+- **CORTEX-TAINT**: `cc6e972904e413319c37779a8876604cdd9d0f5e4035412db69f784fcb15e885`
 
 ### CMX-0037 | PUSH::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `378d4b28c447c70ec073dd1cbc03ad240d89bfb199d7c7ea0c2dc61726a7a54c`
+- **CORTEX-TAINT**: `246fdb7aa8fe483ce01326ffda012be97cf1861a8d2e06b0fb85482574eaf8cc`
 
 ### CMX-0038 | PUSH::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `9390b656487b96ef10ba0786ec50ee9198cf99cfcc9421650b5028be57e4f103`
+- **CORTEX-TAINT**: `c520eedfefbd4c71d866beef27ddea6574459804872c3fe182fd38d922eeb3b1`
 
 ### CMX-0039 | PUSH::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `8a3f60cfe7fabd0d6e53e17efa5e1cc9dede8fed858b19491cc5f07420f03661`
+- **CORTEX-TAINT**: `ffb36107a442f5a7647568d97af186e7ece936363c7890b5132162bc17c2bb44`
 
 ### CMX-0040 | PUSH::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `b590e05b637468761223392dcd61c7a6b68dc2e40f59571f29021f83c0c73593`
+- **CORTEX-TAINT**: `ea07498be51c886bf40436d1231212188d4fea78677dd3ec7172e4f798d417b5`
 
 ### CMX-0041 | PUSH::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `6a9325d38414d4670c4a594aaf6cf761b7d9ad1011ab4482f1ac8d5ebdac5218`
+- **CORTEX-TAINT**: `bf7820457b229231d6ceffabce575b58efc74988ba98c0e596ca3b3c6faa53c1`
 
 ### CMX-0042 | PUSH::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `17eb6e2189209507d90018bd12d83dc6548415ece201e0e4b2a161acf98967b3`
+- **CORTEX-TAINT**: `8eb959e4224774b274c6c10be50c4f75f81bc8b796a837a7c6595d642903b86b`
 
 ### CMX-0043 | PUSH::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `610c7e190adc89ff0b932a406c66ac6cc052648469fa4986a1c2b98f52e8d3bd`
+- **CORTEX-TAINT**: `5654daec6464bc8eb332056e745ec8f31d572cd9ddf54892098485521f2096cc`
 
 ### CMX-0044 | PUSH::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `669edf809fcd6d10eee664ed1ce655631e4beee81858387c2e3ae6c32aaa5710`
+- **CORTEX-TAINT**: `e3333275333749a7de259cf6678ba0326cecead3164900dbec3c05c458256570`
 
 ### CMX-0045 | PUSH::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `98135af6bb353c6193ed2505e356259fd69e39c0933ae98d6e5e5cde03b9152b`
+- **CORTEX-TAINT**: `a62fd427b5d9a6603a0848b4488b879194cab1553182da742dd62a6c1cffcffe`
 
 ### CMX-0046 | PUSH::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `23308d3579446f3d81e5292647684b0881f7d57ec5d29f150aad40d601651850`
+- **CORTEX-TAINT**: `cd09d72ccfc6af5027982e4ae099d0383850dc22c62ce10e14b5788efb5d7872`
 
 ### CMX-0047 | PUSH::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `cbccb5c687cb75d7fcdd3d96c8913e927ff1450204d18252adbeecf84b6913e4`
+- **CORTEX-TAINT**: `df9ec05c93acf909493ab19bc92f0c3f595b0294ac761ac3b24c8c967814125d`
 
 ### CMX-0048 | PUSH::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `eecde400d388282c972bb6541fd383eb64ce9ea97e519d98c2162b89baf7b6f8`
+- **CORTEX-TAINT**: `81337df0cb6fd57f083e24b3663e0203c28f9ace94f831e194966287c0d6a32d`
 
 ### CMX-0049 | PUSH::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `975b66a56f994f7724b199e174c9abdfff030cfc2158c1ac0a770764383cb63c`
+- **CORTEX-TAINT**: `15ec2fadfd6ec030b61fbf292344595eb03307ac900ab79232df72ac51c058d0`
 
 ### CMX-0050 | PUSH::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `cca8a48b59db4dcb16583b18fbf6b46a681175370f15c7b1f951db8730c1df7e`
+- **CORTEX-TAINT**: `9a18918ac8b3ab075bda501bf8cb8f80318e3886c2d5f07aa5809082b93219fc`
 
 ### CMX-0051 | PUSH::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `4e220dc8de32533ab2aaa16c28df65d7475ca253a41d43177c3ec5edf86455ef`
+- **CORTEX-TAINT**: `7a3804d2cb1f8a8c1bf8ac08a9c9000a7497a2e8df65f680134052b6d1dac0f6`
 
 ### CMX-0052 | PUSH::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `c0dbb179873fc536c244a3ac31c428d191c30cbb4d9716f7c4449c04ac91ab02`
+- **CORTEX-TAINT**: `7fdfceef5547c85e280fefe2928c0f04c83a1d7af8f19cc829bdbed3b1b9a668`
 
 ### CMX-0053 | PUSH::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `20509251418f7b13d5ec257cc426c118f7277fd7ae0ac0f5f77de17a58949fc3`
+- **CORTEX-TAINT**: `86d325554eb5e188df4a50341aa414826ca6fb62aa252ea5764d257a3c69c9d0`
 
 ### CMX-0054 | PUSH::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `2a6a397700ceb0e8ce57df3b4d0cb7449d9855939b14a4ff8e78873f25557172`
+- **CORTEX-TAINT**: `621841752eb85f6890af63ddbf7ebb3ca632ba1a0d8ae974cc4efa92c8edeb1c`
 
 ### CMX-0055 | PUSH::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `200a069e3618ac06b7108b0dcaa106c0eba1639df09e7c58270a794cd183b533`
+- **CORTEX-TAINT**: `4e3d9cf7928ccad45d134362fc806e9d7c6d77af7c46d70e802163b34179e8c7`
 
 ### CMX-0056 | PUSH::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `2b71b98554a80083afb6af12b5679017c10f7177795200fc7cc45317781e4f43`
+- **CORTEX-TAINT**: `7585328b48599dd26f2985e21b9b4e87b4f59847401e7fc61cf636cfb01d6cef`
 
 ### CMX-0057 | PUSH::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `fcd5f6b68f61887ea642f11930b6809b929c650cbb87abb870de8eb1e4befce8`
+- **CORTEX-TAINT**: `2ac1ad947ee77d7e4703a8426a5ced616ea1fbca3cc6e1138879b0f847afcb58`
 
 ### CMX-0058 | PUSH::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `59e2c36d8b6724ed1e92434adf346a0508e0b91155d22bc45c20940a9d257ca2`
+- **CORTEX-TAINT**: `64cd9bf50f342ecac3ccc3a9e400f4c4f1281e9459ab7328e42fa47e7a6a4bd8`
 
 ### CMX-0059 | PUSH::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `6206b332422faee9ef006f9aa008b818a703f9c7c20df06235efd04fb2b99bbc`
+- **CORTEX-TAINT**: `da5516ea9638d045223599d92ea1a06cb16306610fa3f8b068e017423b8661a8`
 
 ### CMX-0060 | PUSH::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `9bac84ffe9ecde2eb22fa1de7ccb970822eefa3f404a9c5a3e0c973a2cfd0d0d`
+- **CORTEX-TAINT**: `99b13e8efb0d275d2555a3056b0d6a7617cfb5bb850c695e704b17fb6bb0266c`
 
 ### CMX-0061 | PUSH::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `61e1e7558649f6125a6239ce8e196825814771ef62bdd197f9a63a79177ce54f`
+- **CORTEX-TAINT**: `3c11e2670108a789866626574ebe3ac4cd6e72f1278861e56cbe3c402616f06e`
 
 ### CMX-0062 | PUSH::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b2faf2a747ebf51972fbf5843ab1631ee7bf7d7a0990fddde4b2cb53494fe2b5`
+- **CORTEX-TAINT**: `6b9f67f4487560238c43ed97d5eef601c493faa375985162177f0f0e4b0f67e8`
 
 ### CMX-0063 | PUSH::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b0ec1b9b543d1bea003fb4b168de93b5fbeed25903d6cc7b2df20bb4df9fbd51`
+- **CORTEX-TAINT**: `b5a328c63c2a0078b8fdc17cb48bdd4267fb957f506d08d10e061ee21da02557`
 
 ### CMX-0064 | PUSH::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `0bb5a59a1884eada726c9442bdd6f2c71dd9692d9b8fcf629b0947811368d154`
+- **CORTEX-TAINT**: `c741769057c52e48405474d5786d8d046a1d06f87dad3ca22aa08f17840ecbd9`
 
 ### CMX-0065 | PUSH::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `bbfb97227f0106c3e06d94ce828e5002ca996756ddf3d4799dc71c7d2483dd60`
+- **CORTEX-TAINT**: `33a219f52ecdc7a3eb2092e0a1e2e04cf7f548ec57e6bea096968028b9d66783`
 
 ### CMX-0066 | PUSH::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `2235804e9b366554547a7342161de9c6e9f52b233be26b7c3b6733293cee21e1`
+- **CORTEX-TAINT**: `b2981c7d1a534a11f84c08a9d984c299b61b4589021fb0189b4626000ef9ce43`
 
 ### CMX-0067 | PUSH::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `bd2d42e0f815c241a5c65dff59c481f04bfd8842e0552ea3299e6faecbfdfb41`
+- **CORTEX-TAINT**: `873b2a5f05acb9f1e3c8ba77a462698f36962d17d0ac877b9b199bcd2ba4b1f3`
 
 ### CMX-0068 | PUSH::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `4be3ccc929391ca1e9be68814f692f87e9102bf76d9b7cdb412f2d39bcbcbfe9`
+- **CORTEX-TAINT**: `9cc5ff06f9aa98eac7dda85a1d9e29c8c9cc7ff4b62dfa3b0c53ceb1f8e5b996`
 
 ### CMX-0069 | PUSH::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `5388aa68484f16c9c9a6bb722329c4fc2078798f771e22b7d9f535a3b5f8ffaa`
+- **CORTEX-TAINT**: `2a5e0d5d3d5c827560ce7b36fa60942f8e1308ff226390bd86d8565c4d2dff80`
 
 ### CMX-0070 | PUSH::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `153ff01ad6d06b5487f59a9549aa9185105e77b0f3c8959e671dfedaebcf5b1d`
+- **CORTEX-TAINT**: `176c76730a5120ffdfac765d3a11d333ce211eda885d0c2005e1e84c3fa033a9`
 
 ### CMX-0071 | PUSH::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `24e1f761731705a031a2aa9c3b77f1a8c82cfd5eaa64ac009e1f0ff0c3334a2d`
+- **CORTEX-TAINT**: `1c4f0a34b3f940a43c62f0a72a4b0a573fe02d5a28b702f1f645032ad57df6dc`
 
 ### CMX-0072 | PUSH::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `eb4caa6afa40ba93e764e02e9cf80b1eefcb55670cfd1191d51956b6988758a3`
+- **CORTEX-TAINT**: `4538edf27b5b1bfbc17298628c8cdb36d4f7c2e4a1cf7789338cfdf32345d260`
 
 ### CMX-0073 | PUSH::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `c6062a702d4db35ef9b6c83e345659ebd005f9be8f004e9f34b0906329712d16`
+- **CORTEX-TAINT**: `6a772a51013252e6c9ef8474b3c2841b3e219174102244ea49ced12077101709`
 
 ### CMX-0074 | PUSH::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `39a969c0419631ffde39543ba2cc8b1915a72977812f42f47051660acbf39ac3`
+- **CORTEX-TAINT**: `8c470065f06cd0ca93cf9ad579852032a2f29a58970247d74b36f22e18481bb3`
 
 ### CMX-0075 | PUSH::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `29755d6e980efad2d57608a47742d626a9cc4e8e2a11c81cce14a2af8d184820`
+- **CORTEX-TAINT**: `a01a9e19db510e01a4210eb50ac82eb32b108a29de5eb2610fc4f4c487e28fd7`
 
 ### CMX-0076 | PUSH::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `c2d93486f643cb1a4548139e995b8eec763d0d26752569eb8dac19771ba7bfc8`
+- **CORTEX-TAINT**: `11cc16160b58da153f6bd02e3f402d357c81b653885c631cb8fa877bb27c9d56`
 
 ### CMX-0077 | PUSH::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `f2a6324cd6ee573794aa53d0b5dd5c1b746f1f05d9bf8954a2a49d0fa4e8f489`
+- **CORTEX-TAINT**: `cab08350fe93e44ace039dd149e99783df0bdaea8ecae06aa61855247d882e1b`
 
 ### CMX-0078 | PUSH::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `a418894d024fb4b83cb506f2247359fbf3d32ddce7edffac3aebc8a7bc7ce3b1`
+- **CORTEX-TAINT**: `e02c16603cb16d69ff02972e450d193c7919d10eeeb973076db99310e983ecdc`
 
 ### CMX-0079 | PUSH::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `3a53fede0a34847e7b4b920c83f0c8d609a390dd8bac9d7d36b62d74416873f8`
+- **CORTEX-TAINT**: `d6797c79a69354263543ba80346c6e3678865852ccb40fdf7942e31cc4127159`
 
 ### CMX-0080 | PUSH::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `ce30f6378708fad0e23ac62a52eed7b6dccfd303cca40bbe524fa27d655197a0`
+- **CORTEX-TAINT**: `8cc53a193d2ef22713a6ea279616ba44ea3c79daa4db57ca9dbe96d0e8aaf6c8`
 
 ### CMX-0081 | PUSH::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `2e120f596410861d996ede5d7dd17a5bd4a2b39cb2243604db0ee55768d24c41`
+- **CORTEX-TAINT**: `9d76ce8ca17abc60fe8bf8de9763898a640e8e94a0221d65d007117703cf4e4e`
 
 ### CMX-0082 | PUSH::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b3d7f57dd396f4b65fc438d9dcc4a9d97c5704f63c87c5617d7be62230677437`
+- **CORTEX-TAINT**: `9484fc90ed8e935fd91e0d2e0df564258293ba948d206ec5bf0a716d086c7c29`
 
 ### CMX-0083 | PUSH::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `18a310b65833f9bc67ecddadfa7ed8f6f09a7b8625a96f0974ad9be1916f83d5`
+- **CORTEX-TAINT**: `d12791d785fdce709dfb62a6d4c14f48da7e16c7e4976d92257c4132b2b42d27`
 
 ### CMX-0084 | PUSH::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b9c04b5abe443f0f0692683d050030e7facdf16013ff59bc523c73f38b28d40e`
+- **CORTEX-TAINT**: `5e0da57a55500ade24742a0f9cf764ba87801831ee771605e23ff03178effa32`
 
 ### CMX-0085 | PUSH::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1676f2c2346eb845b529dc940ad411eeb6a9be6beccb853e43f2921470aa677f`
+- **CORTEX-TAINT**: `5e67512cefc88fbee00665686451178fe083d1ce0bcdea6ba22efca715950381`
 
 ### CMX-0086 | PUSH::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `937955cec005575248b54fc8930f632dc9e256d7f6b73dcb23df2b38bbf858d4`
+- **CORTEX-TAINT**: `dfaea2bc631fa892a83469f6bf034262b7c48d7d17d99fc7ece584205f4d75ab`
 
 ### CMX-0087 | PUSH::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `fd553f310d1ddb6f168037e3da47c63c33b34e02bd22588261c40576307a4f10`
+- **CORTEX-TAINT**: `849e055c1de4ebbdcc0a1b744c71438f9ee773c2553c08aa005d20992d8d106c`
 
 ### CMX-0088 | PUSH::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `4dbf32e81dbfc6139ed825a72c26b796c94e35f1aa81de7e1d4bbbbf7a91738a`
+- **CORTEX-TAINT**: `7680a3e38e572492bcde9172a132f5bc41698a5b4323ff8be6383d48bcd08ae7`
 
 ### CMX-0089 | PUSH::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `07bfea8f3437075febee7edd784c983671d38bb35f6b738e66c0618eb3b212d4`
+- **CORTEX-TAINT**: `ffb277c4870225e08eb74382d5114b02e8156515bdc5c9037e87294ab72aaff6`
 
 ### CMX-0090 | PUSH::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `ad742a561ea81948a35f3bc5caa2af504f342da8f3057b9c146782e8e5ac680d`
+- **CORTEX-TAINT**: `9853ea88dbf1524434c39327e027905a30230e39da74aa0f4302addf14c34d48`
 
 ### CMX-0091 | PUSH::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `59524aea896c4cac6b486f94db7b5700045e25969eaea8aedf1307c7183b476a`
+- **CORTEX-TAINT**: `65867a67e1c86907d2ef6db9e565aab7cc2e24662b93fcee08a57ff4512d43c1`
 
 ### CMX-0092 | PUSH::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `e0c1dd2cf6eea7cca66d6289445053e4b5656780f42d238b37eb3e52657a31bc`
+- **CORTEX-TAINT**: `b8fa4cba788e81e6d5af739369c05d0540e53a836db08365c9ef1f51f0a5c879`
 
 ### CMX-0093 | PUSH::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `5605a092c2b9becccfe5ac4ff59f13af7ef531a66b202c06379f4d249664dbde`
+- **CORTEX-TAINT**: `676e01969950651e890e57f112c8c5e2b52c38330f1cabfd8b5ff49dddf2d1ef`
 
 ### CMX-0094 | PUSH::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9c8d3047f230de8e5e93c31ece722833bd03cb7f9a26410ca36f5e38530dd2ae`
+- **CORTEX-TAINT**: `5d1ff2869686a8d97ca328f2753f18f6c897b51d86414634734a748bc0f98493`
 
 ### CMX-0095 | PUSH::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `132009d06541f275d79fe67d1b4729478a4e7c219d4682fa4d8ead1870acdab4`
+- **CORTEX-TAINT**: `5fc6f05c00fbc05447f19901ac93ebe583210728dbe3cc9c465529be61615fcc`
 
 ### CMX-0096 | PUSH::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `7656d4c1c4fba1cf0c2b17473540cb59adc6a787706020b5697f6fa592152211`
+- **CORTEX-TAINT**: `83b12c28321534849de13a81c420e35f5bf60a405f40d1dc625824faac24e565`
 
 ### CMX-0097 | PUSH::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c7e9f0b17496a9c2a738149b46c0a71d4ab81e7552f3f0be10e79c9963df4c37`
+- **CORTEX-TAINT**: `ba24c1655a156d40cf8efab9e0b430437c36db21ce3f96f611887d9a04b9d810`
 
 ### CMX-0098 | PUSH::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `d0c25d7072e37025e1ca3ef951cab126b54699dd9fcfb3a8d030c5d184e65a6d`
+- **CORTEX-TAINT**: `f1cd45e93a9875cca85e69f596fc56d16ad80575bf07f9ed4c28ba5045b0798d`
 
 ### CMX-0099 | PUSH::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `7cdea9f94653fd26955188ca85be561d7021d894731d0a6974398fa6b562da2b`
+- **CORTEX-TAINT**: `10aabb4dc7fd0245003e4ff3d041c67bcebe4e192b9102a295a0f0caab18db4f`
 
 ### CMX-0100 | PUSH::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PUSH, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `6f00a3cd4b370b84f235fbea87375d3e53d2a8fdb800f4329bbbb2f89d63f176`
+- **CORTEX-TAINT**: `53f5bfb4b206d9c4a59161ef1ddd3891bf7f5000b2c17770d9c0a1df5b33f46f`
 
 
 ## DOMINIO: PULL_REQUEST
 
 ### CMX-0101 | PULL_REQUEST::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `b77fbdfe26d069090165ae6f0d1b1ef4c945cdabefdd9bcb1d7905165b357086`
+- **CORTEX-TAINT**: `50799eaa8b4a3281d0727b823898c19680bd618190a02617577722bdf7145ae7`
 
 ### CMX-0102 | PULL_REQUEST::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `7f9b7312f7e10892353444e9216ba6e340fa2ac8d64015028053ee355928276d`
+- **CORTEX-TAINT**: `93305740515a0ef4a1246449a8fcc07c2814fb16b592f96b302ea25df5469bbb`
 
 ### CMX-0103 | PULL_REQUEST::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a3ce6684fcbcf36ca40bb4426731944a4582f566457a3e04a058033a8ea5ebc4`
+- **CORTEX-TAINT**: `1153126fd5a727e8d6e9dfa41a97dcf9b1d9dcb91feadce833935aa9f0f4feb5`
 
 ### CMX-0104 | PULL_REQUEST::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `f198034a7965d284f5993a16b62be0ae44af742c4d1dd851e5a5c2b8206b4fdb`
+- **CORTEX-TAINT**: `c566b4f0bfa26bca9a5da3795547f5e8fb084eacbe51fdb1c3588a78bd8d601d`
 
 ### CMX-0105 | PULL_REQUEST::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e5fdf233d36845015c2e6898423f4cd173741dfb620354d1522f4e88a7b2684d`
+- **CORTEX-TAINT**: `6014e4093d94783a05b8f355b6b4b00a8cea5bc94b654547cc47910d2b8d431a`
 
 ### CMX-0106 | PULL_REQUEST::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `ffffd9e98054205fca44eb25a706d0d37b9ea5c48137a2249010d1263dbdc852`
+- **CORTEX-TAINT**: `4a7d0980d9f97da0f650bb60e9ed7a0bfdc70859ff8ad8eeb4722f9a9960ebc7`
 
 ### CMX-0107 | PULL_REQUEST::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e98b4544341edf5bb295980d06a572c0c954bfe9ff767d4b4377483ab7645c7c`
+- **CORTEX-TAINT**: `4fc30355478c8303852550a42112677e8759d477fd5cc7929211cd145484f04e`
 
 ### CMX-0108 | PULL_REQUEST::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `b3b3e9d3a14fd7600d1b15b279cb57d0d146c63fa9542cf600703b581a0bef73`
+- **CORTEX-TAINT**: `7f10f2c8b484f4386cf325c9c0a8fc8b0bb7d01d8b35d869ab30cd482468355c`
 
 ### CMX-0109 | PULL_REQUEST::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `ee7703e85eb44705a8387e793239df73c2b21919e9001b301e4b10de7a93a355`
+- **CORTEX-TAINT**: `96333e08deeaa2caa18bd42e4f126176aebdd62a92ff24bc804fb242d916b91a`
 
 ### CMX-0110 | PULL_REQUEST::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `78e97aa24e92d0fcf60e3fde24194d6d57a862b784885567bc301b1b39898a9c`
+- **CORTEX-TAINT**: `d1bba2ea75768136d84ddd15fd21bcc0e53cb34e2a8ee488e4b26a5f460f4ed5`
 
 ### CMX-0111 | PULL_REQUEST::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `6acadd127e74345a0346190d1957a556c8a26d117c9b40bc6b42ed1daec4c27f`
+- **CORTEX-TAINT**: `8873a5ae21fcdf4248acb12f0e61b2e97944f2a9535abf73a25fe8aa5b721c0d`
 
 ### CMX-0112 | PULL_REQUEST::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `458694cb6691e98d2edcdc7297e1630b79b4109a596711cad7eb08590ba44dca`
+- **CORTEX-TAINT**: `dc5aec687e76775f61bf95065db17da6eecdc6921263ad1aecf739214321802b`
 
 ### CMX-0113 | PULL_REQUEST::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5413840a6fb11969fc1fec7eca99e2aeef648c4a34c52b23830838cef747cc12`
+- **CORTEX-TAINT**: `5f6e0cefb975d1f2349023b552296eecd69591b33ae9581f5ffb76c30487837f`
 
 ### CMX-0114 | PULL_REQUEST::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `325ad529d4d52ffad377502d8eb731519f00868bcfcba7f3de30a17b98a3b4bc`
+- **CORTEX-TAINT**: `c276568dc868aad6f7224b8f7379a6b2fe4bc0734087b3e400b2596a5e78da9a`
 
 ### CMX-0115 | PULL_REQUEST::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `f3537d9b5b37f60d6836b10a99e0d6e8db5ef5c71383d99a46ba845bd0c3353f`
+- **CORTEX-TAINT**: `0dcb61b01817d8ca37195b84ec8147584ac1a3bf4f64017babff83e066288b60`
 
 ### CMX-0116 | PULL_REQUEST::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `4976838718ca3ed396677a26af231080acb8ebb30011c8e77dcdb93516d43816`
+- **CORTEX-TAINT**: `72a29a048c07485d5fc4ab8dab65c1948508e2f6c319218240af989a45aa1bd0`
 
 ### CMX-0117 | PULL_REQUEST::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `a034f7c7f1de42dacedd8a4442f7d97d660930c1f748b5c704690ff42d36b40e`
+- **CORTEX-TAINT**: `4aa344a5dc316e8dfd771265ad9a373d2bc980a84144b414891cad972acdea5a`
 
 ### CMX-0118 | PULL_REQUEST::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `70b80ad0429afe121244e94aaf86cae755793c789ceaf9cf9d4067771c2ba0a8`
+- **CORTEX-TAINT**: `f1758fbd37c703dd48d82494d69810d0a9d5d0ee5928f2e9f518c1c6739e6763`
 
 ### CMX-0119 | PULL_REQUEST::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `de313f62fb27793f33163fc53ddbdedd17dfeb9313b8ef5139b6b3aa6527bfdf`
+- **CORTEX-TAINT**: `956d5ab21a87ffc7dc5279f0f36550a60112d2705a0bf56c3afaf7569c3c0ecf`
 
 ### CMX-0120 | PULL_REQUEST::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5c25ea8accc21061ad4e135fc69c0d840abb99149d105c28402bc861a72e7d0f`
+- **CORTEX-TAINT**: `433ecc77967514b1eb0ca2cf21771f8cc44b240a9c3dc32addaa4aaacd74805d`
 
 ### CMX-0121 | PULL_REQUEST::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `bc1c0814f31ac9b59e5c22a2de857971f167f1fa843fe1719f50117462eaaa8d`
+- **CORTEX-TAINT**: `4f637fa7021cb39893f763d0392fc7a10c3b4aad8d941b0965d12ae071a8f54d`
 
 ### CMX-0122 | PULL_REQUEST::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `b4562d3e7cdae3d602f83780d5d9f10864e9617ccaad4f70d2a6bfea8fd08cec`
+- **CORTEX-TAINT**: `068c4e83c95e0c47989e7b738f40cdfaa43e51abb7985e1b326fe1fc30c4f483`
 
 ### CMX-0123 | PULL_REQUEST::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `c35e0149f5a8ca201a455e19db81978abc4c8479f939d938fadb9022de6f0faa`
+- **CORTEX-TAINT**: `bb607b353200e4e38177804dd734db584254e4a5da75ed765e3edfe31f5b210c`
 
 ### CMX-0124 | PULL_REQUEST::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `61860a2507ae489dd5c790381fcc3dafb600e1d76f0136f26025c5bce6f8c6cf`
+- **CORTEX-TAINT**: `dd7e0f653fd6ac8aac3b559a668c5e2a84ca562322114bc6c6610d7a7893a375`
 
 ### CMX-0125 | PULL_REQUEST::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `d48c7e2cd05ef451646c835ef2febaadce2c7d224f454bc8ad8dcbfad61bd88b`
+- **CORTEX-TAINT**: `30fafec26c3a3024f7fd0050e46d006b69a169b0c4a0b39d2b57d2647474655b`
 
 ### CMX-0126 | PULL_REQUEST::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `f8172ae1bb544295b2d15b0ba28e43d5195619fdc93937a0e3c9026bf3e15e8f`
+- **CORTEX-TAINT**: `7b15e38924946cc3db5b382728d63be1b47465d1cf047f42d07534bae6e9ce81`
 
 ### CMX-0127 | PULL_REQUEST::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `dbbde7b0f6cf85e7ab124c8b11a5e8133efa40547a76eb1ebda4b6696dae9e56`
+- **CORTEX-TAINT**: `c898e9b663ff3d091b7126d8b00945a606651b52c532e4b3659600b010cbf495`
 
 ### CMX-0128 | PULL_REQUEST::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `2ac559dea95f6585ff20e56c9f6dcd43bbc7b58a31f7d00689063818157d1a5a`
+- **CORTEX-TAINT**: `b92f141b9420562ec03d82a24188c3ab028c1bc2bafaa002fc8bb6715e381f87`
 
 ### CMX-0129 | PULL_REQUEST::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `e0ef21235c9ee5bdf6c13559b45c3bfa7b1e3ebd4500747b70d406eb76e22f6a`
+- **CORTEX-TAINT**: `308d636ea3ff77da67826739bffea5c61ba8575ede68b6a23a785a3f027a2e0c`
 
 ### CMX-0130 | PULL_REQUEST::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `ba84602aee56095690f204575980011fbb9673ed8f39ad4bc665d87b8e8af9a4`
+- **CORTEX-TAINT**: `1c62881dda79e02b562eb70f5fca4730995d76332c0df3df2b735931cd945d6f`
 
 ### CMX-0131 | PULL_REQUEST::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `1df029907e94202f3e6a1b09c1a966e40ce61eb43d0dcbe4c07af9f77397de67`
+- **CORTEX-TAINT**: `d7d38a471129e1a6069d80e34df3636e7ae0de1ade853f6fd529836e01ebff97`
 
 ### CMX-0132 | PULL_REQUEST::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `69b476b9343f9c1b926fa098cc3077083f5a1350a7f4ef6dcabf4169103ced81`
+- **CORTEX-TAINT**: `75bcbaf0a5fa534947496b0e6923bbadf2e01ac51261bd5b2e25a6399a614e62`
 
 ### CMX-0133 | PULL_REQUEST::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `764943b9656bf5c8d0819b0e71fbc2d2af7c9ac58bf446d10729559763a94001`
+- **CORTEX-TAINT**: `22e7d105d0001045ec06e9b9c126824d7e31025c64989f58cf8d24f1ae33de51`
 
 ### CMX-0134 | PULL_REQUEST::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `4354cc837b6a904bd4c05a2012aa71849bac0c940ed8748b17e07c18334681c4`
+- **CORTEX-TAINT**: `543439bbeeb3bc9de00f2ecba92d4ed57fbc55405b985c35e9baddba2b4992e5`
 
 ### CMX-0135 | PULL_REQUEST::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `b716ee4e3dfa5521f5a9faf7a8c2139bc3d83008968f11a6cbb37ad8ea5fd92e`
+- **CORTEX-TAINT**: `67e68c8cf75b4b2c2ce6db0241316ff4e620aa13e4c4a7fa7bbe7dd73b8de8a3`
 
 ### CMX-0136 | PULL_REQUEST::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `75408c062a0cfe8cfc2ba6b0905a40537db7e316135712a2e56c4c3bbe495aa2`
+- **CORTEX-TAINT**: `0373ceb4a1458a444094b8e9a3e855315e645915e1bf3f6cc12f515a221f21dd`
 
 ### CMX-0137 | PULL_REQUEST::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `273ffc895d4841bc19c80347cbbdf5f684f1e98233396db6cee2bc6a4d640564`
+- **CORTEX-TAINT**: `894a84a917efaad3cb87f1309bb0107733d84a868c8bef2c3cccaa5a1e4ad096`
 
 ### CMX-0138 | PULL_REQUEST::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `8d6a39f641fc4cd07292a1cdcbf6f7db3b0bf4d0f4e00ee6452805dea9dc1b60`
+- **CORTEX-TAINT**: `62ce75c2d6ba2a7e87dbd8404e397a06c5d231e87eb7e5adcd468a5e997361a8`
 
 ### CMX-0139 | PULL_REQUEST::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `735959943f09c15169542d0fa406bc3edc48ac7e296ccf3407b9a73616644ed6`
+- **CORTEX-TAINT**: `1528e1f0c0e7c989cd61f3b35078a3c03d3ed4aa3cb6e7ae80b32b668e388a6c`
 
 ### CMX-0140 | PULL_REQUEST::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `e19a96ededb0a2e34892f05878edfb6e3af96ccdec3e3cb8b4e78bd05f31da28`
+- **CORTEX-TAINT**: `d25c1f63ae797e598c4ae14194279f0298701b538a001cc231d12dcaf2b0a9f2`
 
 ### CMX-0141 | PULL_REQUEST::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `142ad918f6a300273ddad8f60f1f0be7f8fc29bbbfa8daf188e5ba73a6a3368c`
+- **CORTEX-TAINT**: `b8c0931e16fdad6b4c7531da92a4dcb3ed24085a400f3398b0d098b757f6e2e3`
 
 ### CMX-0142 | PULL_REQUEST::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `09174d709f5df5546e28aec96283c95d8a74a515a635f0490578ea04b3662f3c`
+- **CORTEX-TAINT**: `dc0407dca5f9aeaf42974e332604db512eb959d62792b1a025d0a013ed91883a`
 
 ### CMX-0143 | PULL_REQUEST::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `8cba7e6af6113ff0fd8f85478b5bbe0e01e421abc8cd573737ac9c8685de7eb6`
+- **CORTEX-TAINT**: `0289a8828f7b36a106563f57a8428a4d3a83ceb3c6ed81248c39f31f5b56b3b6`
 
 ### CMX-0144 | PULL_REQUEST::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `95682fbffc41102fdf878488097667f3e14c9b2b09451cf0b4ff9cbe9ef44266`
+- **CORTEX-TAINT**: `491451f17d5ceef97f94c18c1d9ff01dc785a01368dda5c6abc3e86a904e39e8`
 
 ### CMX-0145 | PULL_REQUEST::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1176f3489970bc57b5d814fab072a53c1b3eeb27d6e48fd1b59df1b875fe10aa`
+- **CORTEX-TAINT**: `c72cd3ab883942f06edc8d707f938d88bdbcd692db4e2eab909f0bf97916eee0`
 
 ### CMX-0146 | PULL_REQUEST::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `f7246abf0236c829b683ccd8c9f9db5982f6cd263b6a2bfcb2711b04afe7d061`
+- **CORTEX-TAINT**: `b2ab5e24ae35913791de92d347b93d0476b30e85997f91828f3a23c1be3c76c8`
 
 ### CMX-0147 | PULL_REQUEST::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `3ce0751fa8a488455aadd4d8919c8efe53bd145a8705c7a20d06a952f8a8c6bd`
+- **CORTEX-TAINT**: `507974defb6385f620ee3154f2357220ec3e281222d2e1baecd748810b1c22d6`
 
 ### CMX-0148 | PULL_REQUEST::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `f5fd35a4b8407163c5401716e686d47d661eee2c258d9232f9f7847f498cbf08`
+- **CORTEX-TAINT**: `db15b6a36c23d8372c592019406c9769fa1667efcbd8a3921e905ebe5785aadb`
 
 ### CMX-0149 | PULL_REQUEST::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c25ffa284f91ac7e7071d9291875e9316d9c087062ebba20be206b7fbd575039`
+- **CORTEX-TAINT**: `a3f4f901cdbe6bdc7c6f091ea4f721d48afa3da749faa453a31b0d315360745c`
 
 ### CMX-0150 | PULL_REQUEST::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `894b4c18a8a18c031aa7ec9cb1ceef95e01bd3422eae0dd69d0e6226ec932ef3`
+- **CORTEX-TAINT**: `6ea44a587b0fb325a464f569f958724c661c441633e32c7441ae36e4cde4fab4`
 
 ### CMX-0151 | PULL_REQUEST::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `b5d257a91cbdecec2e6aa598d8a62102900fe1a42466eb7a978b0e580ef66095`
+- **CORTEX-TAINT**: `453bc660f462353cea03c3f6c695e30111718c2c6098dd6b85e2b890547c7024`
 
 ### CMX-0152 | PULL_REQUEST::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `1e327b6df89bde111c3c45df84b4dba4a13a06a9c4fde4f733bb9d3ced2e5551`
+- **CORTEX-TAINT**: `53643d2f7966c83e08020b490c5f92917f4790f84d694489c5f8cff826d9b5f0`
 
 ### CMX-0153 | PULL_REQUEST::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `941120fe8c2b7b515c0bac2f388a574a77ed3bfed9d831c9487003eab1885645`
+- **CORTEX-TAINT**: `667e7ff6f3713a0bfff8213a75305774970e6f66895730915bd1e63284575e6e`
 
 ### CMX-0154 | PULL_REQUEST::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `8807a6f3255806c3b44f0dfa712a255b1e03a440c829f5c04a3cc06f1c7570eb`
+- **CORTEX-TAINT**: `4bbb8da97f3cefbc7a88925a2467ce80409c65fecd10ff4d498086d061651925`
 
 ### CMX-0155 | PULL_REQUEST::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `9cf2b0a7fad8f373452ad059d1d8fd63111d00e61f709573470fcd579eee70e3`
+- **CORTEX-TAINT**: `9e55cb953dd575f61bd926ae5b28681a5add12ed8ab3af3b8af8e0030987e3b6`
 
 ### CMX-0156 | PULL_REQUEST::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `c81e58654b5162fca95363fd7444b7fcf1c6cf1f7b413be344f6d944aec76bae`
+- **CORTEX-TAINT**: `87281d844ac75fe091cc1f93d244b47794ab14f0ad13ec9725f388f1c52b2602`
 
 ### CMX-0157 | PULL_REQUEST::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `757408d95b338b26fd83a91486e0156c73e1ab0ac269dda63e25cd499196d3d0`
+- **CORTEX-TAINT**: `93798fa105daefbdff70a5a2894289610082ef35c4e768cf0d20b6e7b0bf639f`
 
 ### CMX-0158 | PULL_REQUEST::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `5ffca3ededc56b311f78f50bc2b48686d161e2521d0265f986ecc572865d0918`
+- **CORTEX-TAINT**: `8623a9b89ed781d6c94063354fdb5273f52315060ee36e01b2739b35185980e7`
 
 ### CMX-0159 | PULL_REQUEST::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `689a1d0886b895b92772f79fdd3cd6b99bb3397c3f0f86daa16ba9ed92f7b411`
+- **CORTEX-TAINT**: `6b90877de5a245b7b302ea2b8bb870a1afdeaa95739c8b0e9a9d3cdbf66c2a65`
 
 ### CMX-0160 | PULL_REQUEST::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `d8037278144ba2d8c6109aeed9503207e677a213e02eb8e0f9abed176d5f923a`
+- **CORTEX-TAINT**: `bb12cf98dc1f3455918f58b57ef36288e1a562f8bd0bdfd3a9323ffbffbeb826`
 
 ### CMX-0161 | PULL_REQUEST::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `22d7dd7ee89493370340c9b34ca98151b3aa9917ae50fc90224656701e718a22`
+- **CORTEX-TAINT**: `3152d663bcf9a4bed9f85cd8ea23e892c467c1a8e4adbd2b92a2145366032737`
 
 ### CMX-0162 | PULL_REQUEST::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `f3388880ccafd8bc143e57f05b41c86425b3328279b2a0b6ab72dbb6f1ec94e3`
+- **CORTEX-TAINT**: `dd0bcec6584ce6dc279079c4e9afdd41f028cff8fa550b9f641e53b5d039b9f2`
 
 ### CMX-0163 | PULL_REQUEST::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `4220a0e6333f9b0d13039172ff81b81b269488ebb85e3dea581330e30e3fc98a`
+- **CORTEX-TAINT**: `ebe303f4a1c39b1b488d26c083e1a4037d5396c70bbda1d796d8a844369ffa00`
 
 ### CMX-0164 | PULL_REQUEST::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `dfe80fd91e44c58d5a43fa5e7043a51b7e575afc21537ba5b70c48ad850391f1`
+- **CORTEX-TAINT**: `dff209f175432cee6a27e5412b35ff67c469d2af18b97aefc0f8356deaea6095`
 
 ### CMX-0165 | PULL_REQUEST::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `03d7a843f103a05942a5abc22bb89557c63bed658c61121f65ea4b3705579264`
+- **CORTEX-TAINT**: `8e532d6d2d86576276b59171e759787ae9a95a4b657fa6f8c3e0f87a8dfad2af`
 
 ### CMX-0166 | PULL_REQUEST::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `bbf8c598b1d5d17206830a6a4f2c281ffe63c155300c2daf904eac5075edbec0`
+- **CORTEX-TAINT**: `1f5d09db247a41666d97e3109531a9a84e2f6f7c8dfb789f26df4d639bc7b4c1`
 
 ### CMX-0167 | PULL_REQUEST::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `6dabc6d39f09025ea670a4b7bf17f89eb432b0bb052e236b5dd6c17b936ae21b`
+- **CORTEX-TAINT**: `5547ba81c21b71d25145b9da07a1394a7920369d4614fae0e852a21c12a2a25b`
 
 ### CMX-0168 | PULL_REQUEST::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `07b7cbbb87c77450837adc49ad88b6b8c6ba43b1dbaecffa2f0ea28cb95958dd`
+- **CORTEX-TAINT**: `7ee521ab19d2a5e0ea087eb8106e551ceb8c3ebaa9c27c2482aa2022d36c5acc`
 
 ### CMX-0169 | PULL_REQUEST::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `1fef4c9c31998a185150c7801a318f9eb7902f3c49d882ab82dceadcee036f1b`
+- **CORTEX-TAINT**: `b54ba9be1e749f40168939c28768e111a63785cce470f8edeb3faa44478ddbcb`
 
 ### CMX-0170 | PULL_REQUEST::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `63b6ac33d8b890c639176abc92bb0cf3a6249dc0559ec224c7296f982e100892`
+- **CORTEX-TAINT**: `c437bd8e6e743026a28a7c1b420da191eba7133b735f5ffc0546ef7bf738bf77`
 
 ### CMX-0171 | PULL_REQUEST::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `03ec81f1c9c35bc54d738ec8fdf2505fe1295c8e7cb5eb2df8a6c8dbce7bda7c`
+- **CORTEX-TAINT**: `f4e473d601214be68ed95fe97321107f9e6e59abc8f164ca88b9d365dcc1cb88`
 
 ### CMX-0172 | PULL_REQUEST::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `4d5601c25a6a980247c6de1fe1f8eaf9afb54f6b0f635d34692c10a71aeb890a`
+- **CORTEX-TAINT**: `e089851ff0ec21e3e726494fc14b32f69cfbdbe96b5f8df0e5f89eee04b2f46b`
 
 ### CMX-0173 | PULL_REQUEST::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `6b48f6373c2e03772c5ae27de09600d88c9fd8ebe69bb09de6f2318adcb67950`
+- **CORTEX-TAINT**: `7c2a470a8208e7696ed73644e40e1fae1994f0c834873f6293793ff45c5773a2`
 
 ### CMX-0174 | PULL_REQUEST::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `63fcbcb6d048c0981ed4fcd99929eb2fa727b19c20962e03457dad6f60faa3c5`
+- **CORTEX-TAINT**: `1761e9423177a1b8d5ccffa91dffd7797121d3dfd481bc684485bc34a5b44fc7`
 
 ### CMX-0175 | PULL_REQUEST::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `f95470f70a3515e7cba61266fe062c793c2fad81a07071d3d299c6d8642a59ac`
+- **CORTEX-TAINT**: `573664177a9c923562c99ca69b6e4f997b338d9fd122004fc9d67f42e56aa404`
 
 ### CMX-0176 | PULL_REQUEST::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `3d393e2e543821accef52202bc9759ce454537297948dae4e83032320d64d191`
+- **CORTEX-TAINT**: `39819e23c481e910e450e33dca4b686ae07e74c31c94204e0e3a62a08ea52081`
 
 ### CMX-0177 | PULL_REQUEST::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `2169a1bd1d8febcacec6edf20b3e0fad279542d187d159daeea55655d023c44e`
+- **CORTEX-TAINT**: `ee9cc8bddf34b0f50fdf9ee434c53b0c94a2159fecc331c1db8adb86a1c04a28`
 
 ### CMX-0178 | PULL_REQUEST::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `bb8c9da0eb27f94340652f44ae01553ef3496cf28538142a2d4657d9c1457bab`
+- **CORTEX-TAINT**: `6b8fcb56d4b4efa26e0087df320eaf215db6c93483d37e3001aae2696e271bd3`
 
 ### CMX-0179 | PULL_REQUEST::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `e5cfee8615974535aa719f60a01b9f436527faa350f5c262e580f314c51c3c83`
+- **CORTEX-TAINT**: `ceed32563be726e99c33ffe112b651c0d82a7f40d8461f4a5df60584415e0e24`
 
 ### CMX-0180 | PULL_REQUEST::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `28c76d8f0be497538d62cfbf254b61888c116c72b28951e2dd733a8502051e96`
+- **CORTEX-TAINT**: `1403f62db0edc64469f12b76d3083b3be0c0d469aa59c9258c4273ac1d36a68e`
 
 ### CMX-0181 | PULL_REQUEST::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `eae191809645954deea697f20e4d3dab87422aac539297dd3d120156f31db1ed`
+- **CORTEX-TAINT**: `a45e8b8025cc7de3d4abd190b815879d29d793a277c36810529bec9d8ece49a3`
 
 ### CMX-0182 | PULL_REQUEST::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `723af53ff5195bec0b01834a7cf03afcf20365255378f7bb87d5334910f9ce34`
+- **CORTEX-TAINT**: `ecf6a511f714a3e35ec6ef039eb3b6266cbd9fdab5beaa8e80cfb4096fa9a3ee`
 
 ### CMX-0183 | PULL_REQUEST::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `365946e08cde428f27c2a260520448d1032f4f9c5cbcf75d5cf8f33dddaccc1c`
+- **CORTEX-TAINT**: `029a96be1f2fc33d822a6e1cb09bbb0097aba708b77fc28bf8718b3f4cbb2c68`
 
 ### CMX-0184 | PULL_REQUEST::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `97dfba764b4dd30d855383f6afc6274740e0aed031c36f09202c4eca9a40017e`
+- **CORTEX-TAINT**: `551ff2221fa166a3c767e3277fad26887deeaa7b3b58c942ac50ae0f3e933489`
 
 ### CMX-0185 | PULL_REQUEST::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `344d6f45ed25e97bbfa200937d52b0e07d3cba15e12573d686aa80cfbe4cd0ec`
+- **CORTEX-TAINT**: `36b28cbe71d67d8fb5a7193670b21264cacec97aeaa23a43f176889808b3dc9d`
 
 ### CMX-0186 | PULL_REQUEST::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8e4af5accdd0e3d338739e27950f2021a4054600a8ef4f667467f03b78852c92`
+- **CORTEX-TAINT**: `19c65c666112051a6e346f06bbd77dd10594a948610ceaa996b326265d3f8f56`
 
 ### CMX-0187 | PULL_REQUEST::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `d15ad72a2a45cab8ad8765bceb1a5a949947c2477e61b1861c9574a7b8746244`
+- **CORTEX-TAINT**: `6a0a7df7a2bb4a79e2807ae9e2bcb0c7e983091e4f521385cb045dfde9639aad`
 
 ### CMX-0188 | PULL_REQUEST::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1613641c2c6c743b04f8194b92a75f3f4affdd95e0b800a9be7d10ffee978bb0`
+- **CORTEX-TAINT**: `84bf4013a595e3aada55d16fff7348019193abfb3a149f422ff6458f97f5ba79`
 
 ### CMX-0189 | PULL_REQUEST::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `50a53b8ba937394ecef563f8a12e4f31f9ec2b0abd4935bc257b822e78407ddd`
+- **CORTEX-TAINT**: `94a6daf644b3c840c8df1935d00a237dde94ff3ff4b8056dd059fb3dafa6deb9`
 
 ### CMX-0190 | PULL_REQUEST::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1ead71c8e98a5e25a53478b59a8408ffe94599a9ca145c37da3d07f6a6f494e4`
+- **CORTEX-TAINT**: `c862661426e089a5d1022b82bcc0b1fa48f3854db299e8e30e6369d5748668a3`
 
 ### CMX-0191 | PULL_REQUEST::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `36a1b17e4dd7c871754d01c83ea100673acca065e9d8981ad94b67936cb55da7`
+- **CORTEX-TAINT**: `e8c19cf3be07e5ec9c5d63bca3b9c4ae5226b0cd20a8ff74c00b6da55440a34b`
 
 ### CMX-0192 | PULL_REQUEST::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `755df697a527de36fc24c7015a7f8bad45a6fbf85a33f8c4306569082892a9b5`
+- **CORTEX-TAINT**: `24fbfb61f228b731ec81b36499a58c7a2e4d694f6459eda57dcf54142bad6119`
 
 ### CMX-0193 | PULL_REQUEST::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `5b8053ea359408691c16bedd6bc67ec48b8a94aefa3cfe61ac78459efaf85b75`
+- **CORTEX-TAINT**: `85498ab1ef930f6c8fdcec6605d4a30b7a250d962853085615d44d929c46fd76`
 
 ### CMX-0194 | PULL_REQUEST::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `08f96e8daaee1bc2a71ccfaa6cee3c93f3aa47234fceeeafc54740a50794f5c2`
+- **CORTEX-TAINT**: `20f11a8dffcc1ec57ae82af801bf529e24ef54ca935d3045955076d3adc6feb1`
 
 ### CMX-0195 | PULL_REQUEST::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `4fe55168a0faac2a9c568d77631b297947c66fa743f7ffc2ff745ebf18cc6b69`
+- **CORTEX-TAINT**: `aab97509367df5fecf7888ab1eea4fabb11fce766fee787127c7fb7caa566c76`
 
 ### CMX-0196 | PULL_REQUEST::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `337bc2fa6c8ac3915a5ac8232a3eacd7e82a0e1b9c996b710d5e4ce9eb043185`
+- **CORTEX-TAINT**: `0a0b4862a6da15ebf7baf26cbe02186845c5cba9dd47383ae824d1caf87840a0`
 
 ### CMX-0197 | PULL_REQUEST::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `ddbe540e76e6c4afdee8683bf4f6b67f13413d8dc282a210f9ccc593dac31761`
+- **CORTEX-TAINT**: `6ef8d0c0965957969eb61a94d375d725627f1e3a793db965307566bc6d82207e`
 
 ### CMX-0198 | PULL_REQUEST::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `52b2e4f09d59a9502a3570679d9f38032908925db5af5a04d157ee0a55802810`
+- **CORTEX-TAINT**: `86991f5f947e3a0d62c8aef8e7d846c2326cba4d63404652739f5ac18cf432ab`
 
 ### CMX-0199 | PULL_REQUEST::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `b9d1401856d5c6f7a2a8b3ce2303a6ec9f0df3f3d5e5b85f7488623ce38c0b9d`
+- **CORTEX-TAINT**: `f219c2d63e691de2472da088804a22fdafe726ac40d4e16544bb2d10dc9f859d`
 
 ### CMX-0200 | PULL_REQUEST::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PULL_REQUEST, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `16ec25e2861c29e3a1795256510b778973f1daf865c9b8d6e2cad8384685de69`
+- **CORTEX-TAINT**: `5d8416f645c4c34858d29dacabd748f1680f51ace3c84f6dda0f77dd69e8f16c`
 
 
 ## DOMINIO: ISSUE
 
 ### CMX-0201 | ISSUE::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `5a8e2a7dcf44f40e362ffca453ac11a3a30ef0f3bb20bc07619ccbc8870ca4ca`
+- **CORTEX-TAINT**: `e16537e4a61dcad1fc9679e8ebe03ecd941c9b639ef797ea89d70f509d810175`
 
 ### CMX-0202 | ISSUE::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e17748e7323b165dc85d5a41d37d146787726bbb4fdfd50f90d4d9e7ecfe5b29`
+- **CORTEX-TAINT**: `fe48b2b97625570d22024c06856da9767887bb3a053aac079fe431ec19913a65`
 
 ### CMX-0203 | ISSUE::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `c880640772fd477e94a7519cd071fd6e954a210b021f5ffd4bbe884b127ceeb5`
+- **CORTEX-TAINT**: `eaab2b8e7adb57cebc1645d7f6d0765891b47c9f9049c7429f70bbda621e37e1`
 
 ### CMX-0204 | ISSUE::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `71875397ce5b7b12478c21a7453ff724d6cf1b90647afefad8e3f664f596b4f3`
+- **CORTEX-TAINT**: `105a13b97880a975495efa42890886f18041ccebc4ff19e8e78fa1ab66e0f71a`
 
 ### CMX-0205 | ISSUE::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a6c438ee77c23c6359342fba1f7a72bb115e411c08bc8dac09e8ee8d19386e1e`
+- **CORTEX-TAINT**: `8cb50f8f610c4f79064f86bb25a64e0088d04427940e58ecd60281529bc6743a`
 
 ### CMX-0206 | ISSUE::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `95a30475a4fcdf42b49b7fade1b27aa78ec4babde9d5bfe9a8c2f6f07def8152`
+- **CORTEX-TAINT**: `1ac18ed92a5ee83dca110387a9ab6a88bde0e05b7625b977ee5b1c5b5e31d0c6`
 
 ### CMX-0207 | ISSUE::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `55597287e3f9d6583de9de7d7bd757fd5cb719071e306167f14b77c241aadbe9`
+- **CORTEX-TAINT**: `25a7495efe467b75472ea8321809b1bd5d15ccc8acb6a86b4140510340e53a4e`
 
 ### CMX-0208 | ISSUE::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `dd90f087ee294dff22142632db1a9421da20393a7a7204e6edc73417d25270e4`
+- **CORTEX-TAINT**: `4b7f44efc2c77e1ec3349d8e74a76678275c2fa989acc8a4511a6534d2835966`
 
 ### CMX-0209 | ISSUE::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `9fef9abc4d30e96a90231f036046212eb79476a4ccb6ecd2a060f917dc989605`
+- **CORTEX-TAINT**: `f879add226778fa2bc799c3d07ca80668981572638969f72823e15fef18c7165`
 
 ### CMX-0210 | ISSUE::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `19fb4cc0a3a19992b3bdefde81e6d84fc4ef595121c9f4716ef94c33456c5aac`
+- **CORTEX-TAINT**: `ed3c247e751350b350302eeb048238834bb9e39efdc0e25c65c937e0e7aaa397`
 
 ### CMX-0211 | ISSUE::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `27ce77c7ebe9458f17d9247f0fcb1787ead9ab29fd1d7dba0dfeee9c562bfc8f`
+- **CORTEX-TAINT**: `81bbe9e3c891e2832d89391b1e2a6636ea7b8d03d504d9f35345c1a3436870ed`
 
 ### CMX-0212 | ISSUE::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `dea2c2031a073974e6cbca93a3ad28b89924919a3483549c3e8bec84d522bd51`
+- **CORTEX-TAINT**: `31b4a754c6808dc6dbfde1096e4dae04a9653fcbb4e267644cae9252965e79ff`
 
 ### CMX-0213 | ISSUE::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `1e0a413bab88ba0a4069a3a77b612382be6aebacf4bc3745cebf52c2e2c37801`
+- **CORTEX-TAINT**: `6bf08422709712e0d920247a6315a805a5d16567b547d4e192644bc0a16d985a`
 
 ### CMX-0214 | ISSUE::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `2ad697012cb646a62ece9242e27a521ea7ec2db9ccbac71bd0e6bf2cecd0561d`
+- **CORTEX-TAINT**: `a4940df7feb275021f468583d3e77f4c7a61bd968bd627bc9dd01576f49be9f8`
 
 ### CMX-0215 | ISSUE::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `b24adb9440657f70b08039676962c5959bbf8ba475140ace0e02d6412535f502`
+- **CORTEX-TAINT**: `0f92f8570da46e184667792f0601c166d09b5e2f2cf324e2d44f9c19118c1d39`
 
 ### CMX-0216 | ISSUE::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `d3012f0fdc38e365b86afe67622ad15c853b547950eac8f8e7204e4874ac6c5e`
+- **CORTEX-TAINT**: `c108a8a880634dafec1b1eb48dc0ed520cb2f5ff71254788084db43c45198a41`
 
 ### CMX-0217 | ISSUE::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `6d7a88eca39781c1c8caac6f6d24b018011de23de22af83cdf16aae61e851881`
+- **CORTEX-TAINT**: `94787f9e6823329110b56de952fd8c39f8be714a604389f3a890d6d4f9af6138`
 
 ### CMX-0218 | ISSUE::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `91b8b23bf1cc3094ce119740428979a781c99deb957184ac4b36fde44d5fbfce`
+- **CORTEX-TAINT**: `916649596f38980a165732450ccde282cfff9219724569451a2a282899639b52`
 
 ### CMX-0219 | ISSUE::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `4c1333fd16fdedb91376578240b1b7bb1214d9d1fe50dd0d40f940984f6ea1c9`
+- **CORTEX-TAINT**: `45dc1d7d2ab05a446585549cee42bcb2d2a88ca99385ffb905d4e06d4e0e6f7b`
 
 ### CMX-0220 | ISSUE::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5a9025880a65aefa5506953a0a9d32bf70947a1fdf58ccbfca00b0975175b75a`
+- **CORTEX-TAINT**: `f6767916551afe5527734a1d9f8374cefef443ee0f5cd7f60acb5fa5e5ce380e`
 
 ### CMX-0221 | ISSUE::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `1afeb4d9df5ad6bf88671c1a9a9730a535a8b657fc61dfd17d0110ab8ca5d194`
+- **CORTEX-TAINT**: `72a351204c3df5791bd36326b4f699fbce68086cccce8fc81478f0bc4351a81f`
 
 ### CMX-0222 | ISSUE::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `f98e0f1f9a1d730e50461379ad353232db1ed38514938423fbcbf47bf740a093`
+- **CORTEX-TAINT**: `a94c1e71277d10fd6ed48d012f0aeb9dfc8324e6804a8e8e8c600a500079aee9`
 
 ### CMX-0223 | ISSUE::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `760532c36e7c991df8905763cecf50e2534bcba0c9f1fd3297b02d323f346857`
+- **CORTEX-TAINT**: `088899ec501f8e9f21a4a1c7860d3a5d559bc53591524148cec1e1447ecadd20`
 
 ### CMX-0224 | ISSUE::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a1b12394cf8434d4af44891eec4c92936ab09d6e66beec743d0035a42a4be892`
+- **CORTEX-TAINT**: `b232d8d76f1d4d8ae1c85db90ccf7222787d62cd9d124c0b967e6c64e0e4d0e5`
 
 ### CMX-0225 | ISSUE::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `134e206b6c94c16979dc6394227cc49e8960b8c2cc9b29a580428d7e7484bd33`
+- **CORTEX-TAINT**: `9a9a2b7dfa9c51eff66473febcd40583a1b673e9afe7abff5bcd0a9a21f8926e`
 
 ### CMX-0226 | ISSUE::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `50c5e913b43a56b9744f2d35cab050f0b0a28f64c5130a508cc777354c26d0a0`
+- **CORTEX-TAINT**: `9f4e1a49f2b0aa35eb991e5d977f9aa9b602dc1ae925ff39c13c19f4f0b3fc3d`
 
 ### CMX-0227 | ISSUE::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `aca97c5ccb1342965c416ac86ae131da746dc6140815347f2d479a25c9a22ffc`
+- **CORTEX-TAINT**: `6e25f98e6fc20a17acce9e196717eb66b98ece8f17f709cbe5600661864fcc98`
 
 ### CMX-0228 | ISSUE::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `cf4e8b1dedf1d8620873ddff39acc833750151f4ecb2922a8531863ffece6e77`
+- **CORTEX-TAINT**: `dceb2e316ae330a206eeaff173c2fa68ecd99e43af3d0dcc63e2348823a80c65`
 
 ### CMX-0229 | ISSUE::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a05db2c79f3016581b2cac93776b82a3867ec2386d49550cc103b30268366de7`
+- **CORTEX-TAINT**: `c95438f6dc4b4f9f7a9c3d964a6815c2bd714dea0484658b994bc0783a844fe6`
 
 ### CMX-0230 | ISSUE::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `def137da2480ee20f81c6f73c4be365a19219696158eaace39c1ea089c308281`
+- **CORTEX-TAINT**: `2ef459d924775d265f80b71369b78f4671117fee454c9e7c8fc98184718800f0`
 
 ### CMX-0231 | ISSUE::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `86a700921d1da5a8ddcf585ad58772259e9024bc34ba512fbff16a8e4c724252`
+- **CORTEX-TAINT**: `c6fef86a0aa60df9f947d385d58769439c466a53f51c837ae8cac686743432bb`
 
 ### CMX-0232 | ISSUE::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `a33f49f0b79de0b03ad958fe4d492b01c9fda1359b3a8c66efe52db7f30cbf8d`
+- **CORTEX-TAINT**: `5101b681c2009bb3be1ba52834c113f18fb37fe9d7992258452a1dc1c2c2b87d`
 
 ### CMX-0233 | ISSUE::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `9445b3c6c8128999c0fed26ebdec4a38eb56a159282308419c99b1c73d359413`
+- **CORTEX-TAINT**: `f736285992c8e058dce1d4fc05fe11dab64018367f68bbee6e8c6c8810710b38`
 
 ### CMX-0234 | ISSUE::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `de9268ed4292ba88abaf14679509e25c4fe07dab8b7079da4e042c820367113d`
+- **CORTEX-TAINT**: `0b5e40c2254a49a6b240b08c1205bcc486ecee3575173158ac0b48408154de25`
 
 ### CMX-0235 | ISSUE::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `d274d35b32d10b8f4c3e41080c994a684feffc15bc2e377773a82fe814c186e0`
+- **CORTEX-TAINT**: `a6f6bf1d06d7f1b44eca28aeb22a85674e3ead123adcabb773e27d81dc70c365`
 
 ### CMX-0236 | ISSUE::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `3fad8100864199fb3817446cdddcfad2c05d0e5b21cc01fddeac25b377eb79f5`
+- **CORTEX-TAINT**: `fb0ef9c5b023db34b9bca3478499d861c341681c3211d6860968a7bbeba9e8f9`
 
 ### CMX-0237 | ISSUE::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f998e7156162d6625a5d678d267b52c70c05b6c0f9b46189e2e32e2853cf7133`
+- **CORTEX-TAINT**: `58891531b2fc84c2f11ec14a7072cb1246ba8ea1f6fc8fded64c542f769181d7`
 
 ### CMX-0238 | ISSUE::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `05ed2e166e9657e547ad6db243e828ce8c94fb56c81d71af09d38efbf565cb5d`
+- **CORTEX-TAINT**: `29270f53630a55bcbfc851bf3d65af300d08fbbaa28ba5e88565931228bd798f`
 
 ### CMX-0239 | ISSUE::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `ad21a228982cb3c22afb63a1ce2ac9a660fdd1cd88304e19ae079a6398861eca`
+- **CORTEX-TAINT**: `dfc49410ecb70d609dd33695ab12b79b72cb67723090caeea166506b0f7d867e`
 
 ### CMX-0240 | ISSUE::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `65a360019613f0cbae50083ba44cafda662071b4642745a728c8d5c23b7f1259`
+- **CORTEX-TAINT**: `1862e7e673a061999ca80d53aff67dd48fb5680c15a1b4c089cae04a87fe8f80`
 
 ### CMX-0241 | ISSUE::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `13bfafefa71c730edbb17e6cf5375f0b1152f8c0e9d738592ec17a514ce0df03`
+- **CORTEX-TAINT**: `0a863cb0be64347b35b027442a4739880f545b01d80e4518315daf5c9f6dc6d3`
 
 ### CMX-0242 | ISSUE::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `6cd4a2b884b98d79445de5fc6efa87d772f34f99998985db0c7f996485228333`
+- **CORTEX-TAINT**: `4e192f5994c751a2414367f0658901231f50ae2a21f3818c020d254b4e0caf2e`
 
 ### CMX-0243 | ISSUE::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1ffdc5ed6883aea9f434e4b17ec49079cb41403f2563e6474739e9023097312e`
+- **CORTEX-TAINT**: `76b8b05727d829c4dbfab881ee50dbd3564beeb781884933d7b9319e975ae692`
 
 ### CMX-0244 | ISSUE::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `b16dbda0574a606735bd4ffa5bdb1379a64b1062e4b6306ef6952fa5abeb3015`
+- **CORTEX-TAINT**: `4d948bd4fab9618216a5ca08151a07723255efb346e663d795e3243f528afcb1`
 
 ### CMX-0245 | ISSUE::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `84b2f680feea181ab81f7fa1dd4c2bfec828b57358a2e3b2fd05141b81b056fc`
+- **CORTEX-TAINT**: `edd5d76b93c8dddf917bc8ec14f251a8cd884fad395b19c3afb9ced5f8ad5e1b`
 
 ### CMX-0246 | ISSUE::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `4773c0701527a10d3ac74964ed546b3c660990dc17a67c48f1d355111dc5fe07`
+- **CORTEX-TAINT**: `8ede711a84d5992759cb5a0b83e604f7a379ea0feb1767782888085d52271bf6`
 
 ### CMX-0247 | ISSUE::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c6345ff663c2a13a8bfc31498b65c1d8856ec40e3204fbcc9441bd2b9df8eb10`
+- **CORTEX-TAINT**: `83cc2804ce50fb0d0ea34a52f6df50e4e84b46753bb01f9319715a0ecf5df6fa`
 
 ### CMX-0248 | ISSUE::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `fb91fdfdc2e24b78cd71096cec6a0ae5dd8c391d7797f0f843120bba508db662`
+- **CORTEX-TAINT**: `e0c8a183120245a911b47cb930f1f5674c1a71d4098ce2315d0cdf596257f6e2`
 
 ### CMX-0249 | ISSUE::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `847e501aab10438ba3c823573a666d2ee7a9f2d002597e7fc246b304ab1276e1`
+- **CORTEX-TAINT**: `7e5a22fddad2497397fb3ec4a8ddc3211eaddb608f5cf93eb92de91fbd0b3a2d`
 
 ### CMX-0250 | ISSUE::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `4995dc05d64983b6a93e96d8923a0a2a5da6493dbe9c1ecadfd01e772da7560f`
+- **CORTEX-TAINT**: `47e4a4e611c6c48b04d14b91c0dfe4dd7346e9cb04d518b0180665416ff5b234`
 
 ### CMX-0251 | ISSUE::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `119954fca8baa3315aa76e6fa3b749058457c7aec935830ea37996530e7d1058`
+- **CORTEX-TAINT**: `c31dfe62baa73cccb98d9c211ae4c54f591be81896d4f382d9f0f2ef89e37a8e`
 
 ### CMX-0252 | ISSUE::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `d0cce73001dec1b1087e90f7f95c29984a0d39ce503916b31ead8d900a57efc1`
+- **CORTEX-TAINT**: `cf14370db01806e36913e47ccc7e6d44ee61d6c030e3babd90d47d901eb73b37`
 
 ### CMX-0253 | ISSUE::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `f6d6f022a8bf91eec51bbd22e68ab8cf735c64404c4fbb0813202985ad4d1119`
+- **CORTEX-TAINT**: `0ce08d211921131fd4d46c0de3d4b93c6bc6f83f154c7664bb2821b13e5dd25d`
 
 ### CMX-0254 | ISSUE::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `a9f1ea8f6ed51a88fabeb6f523077ff025f2fc759758e7bdaa5818a3db5504d3`
+- **CORTEX-TAINT**: `25070ce506b70a4a250d81e2f919daaaf9f26f7355368b93193d36c4133369f2`
 
 ### CMX-0255 | ISSUE::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `2c5a7f96c6e000e7f3bb59b944ec242edf358e46f263f357bd2fdbbc90e49464`
+- **CORTEX-TAINT**: `0084de1bdc1b912f0e5b17553fc1793571507ed4618e2d134a113c8fc6c368dc`
 
 ### CMX-0256 | ISSUE::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `70b807604f6d71b6ba99ada3365c5a3da829cf7975966358c813146228957a38`
+- **CORTEX-TAINT**: `5e92e4d050fdf5bb94906261c75190ec65b2e628ca0af478afa6227656f4a107`
 
 ### CMX-0257 | ISSUE::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `057c195822fdb5b42e717e7ffebdad6f1ce599e9b1039e34f2def95345a9a72a`
+- **CORTEX-TAINT**: `47d0c97a6823e82eac092c760cac9940ccad7fdb2d55a7fa612851fe4b982815`
 
 ### CMX-0258 | ISSUE::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `ec8835e20acc141dd7d8af11b527a97a4fe97cb482abdb41324e22d686697cd8`
+- **CORTEX-TAINT**: `81e1bb477fe60a874f634eb00071ee1d2b665a369bb40308dbc41e3b8f0c2147`
 
 ### CMX-0259 | ISSUE::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `5cbc06d9201ef552eab0fefcac3eed0a5777d93eeaf42edcd47800c9e026fb87`
+- **CORTEX-TAINT**: `b3c2004f69304f481a53dabd0545fbc7c9b683cfb6306a714e33b807c037a7be`
 
 ### CMX-0260 | ISSUE::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `23e34b4e9e0fae1ab2685d47c557887132399cafc7e0ebed9d93319d0f87a609`
+- **CORTEX-TAINT**: `2ff44727622fa04ddd1ba900711cf5f252b698e9e84f6d3fbe834a013403a06e`
 
 ### CMX-0261 | ISSUE::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `0a60e61da5172b857f42c97a8c8a3756a7c325ed044386562a389464a0111cc7`
+- **CORTEX-TAINT**: `fa597773526e8792dc21a52e1d50736652cbacf52f6f606512fe437b9cb76240`
 
 ### CMX-0262 | ISSUE::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `8714846225f0cc538a808e082f0dea30fb1307417ab7d782d441cfe9ee503835`
+- **CORTEX-TAINT**: `f8b9828eac1b46dc674819d3addb023909b0154f52202681e57f8990cd421943`
 
 ### CMX-0263 | ISSUE::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `8c11a5354d69a3381e816a21eb11250050756ab11115e1a498d7bc7d4fd709f2`
+- **CORTEX-TAINT**: `441307002db24e15c853916d4f165ab5f0af7a7c2a6ae18857b72fb6b24b5ed3`
 
 ### CMX-0264 | ISSUE::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `1989999ac6c7a1f42703067695e65800d2fd2c81166b30766f8c2503775d4748`
+- **CORTEX-TAINT**: `80cad938dce61641020b82cd5827a149eb9d564e6814e40bab3c0e8c859d60c3`
 
 ### CMX-0265 | ISSUE::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `416c736c8aeae8f1ca439db575c22a4627ffe8faeb6a0c03ceb35309766af244`
+- **CORTEX-TAINT**: `4f428209006ddacedcfa39b908839103c8c6cda2463be9045f09b10502229e8a`
 
 ### CMX-0266 | ISSUE::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `5e10eb6be30e0274316b8692a678fd20682d1bfe07217198af54772656903ab2`
+- **CORTEX-TAINT**: `e15b531343bd9959b4ee44901b4a5a9c7cd0b6797bdb0f7f39907477b3691d78`
 
 ### CMX-0267 | ISSUE::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `6fc28ab46863c0243c9c64a9e6a73a51b6e1682accf574a32428b40ce99c3f1a`
+- **CORTEX-TAINT**: `888c95c78cd85d7b427609560cfa34a5513ee2a08b4dea7b44fa7625fe57f6fb`
 
 ### CMX-0268 | ISSUE::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b59b0e5b574468b80e3188eda5ddbf36a59694abfed07e3a876f40b064662cf4`
+- **CORTEX-TAINT**: `34068f1002245a062cce3367cd97dc61f7431a29343adec5c951a38075ecd57d`
 
 ### CMX-0269 | ISSUE::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `293c2b858059eb613948dce7b1fb8620d295744832934290ae83cf835974b334`
+- **CORTEX-TAINT**: `2eea39f84526378f899da2e5763479aba8a1948b65c7d646b8611ef87bbd8e17`
 
 ### CMX-0270 | ISSUE::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b3aba5722a06e4542a4cd862d949f3673af4e7307d5dc8ed89bd8ee5c5a52ea4`
+- **CORTEX-TAINT**: `49ece00516373f8ac16b7f05f15525234acef2f4ff8146fe5034789a468c4333`
 
 ### CMX-0271 | ISSUE::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `741b710150aa36fe245cdcd35b523969b93a5052c405b835be7a8f1771fe6cdc`
+- **CORTEX-TAINT**: `4df7a0225ec22e237f66f4d8fbfac13134df37d180009ea1e6477345325d07af`
 
 ### CMX-0272 | ISSUE::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `1771358c5c688fb90d5eba0cd244388a5cc26fa497ada1311450ac29006e6924`
+- **CORTEX-TAINT**: `a75d6ea933af06cadf4eb79d295927c3c9ca5b4f9390606b898d1d51a433998c`
 
 ### CMX-0273 | ISSUE::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `b9d618cf79eb0781c071075d7b918db50cb1f135a858c06ce3ed0d7cf66e6614`
+- **CORTEX-TAINT**: `294f37fe45ec59749de82ce48d84e6a42737a08d1e890ca5328aacda497cf254`
 
 ### CMX-0274 | ISSUE::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `fa8a6a413f84effe00a023d5f872a9f7bc35b46e59c386bcfa16f1d64c0e0245`
+- **CORTEX-TAINT**: `8a2ad11249e9163eef270383881f033f1ab33e7b562684cf1679fac531868a2f`
 
 ### CMX-0275 | ISSUE::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `b058b7058db9fc8fbff644b6bcaa19d7ddcb6538e67e107d3425550797786dc7`
+- **CORTEX-TAINT**: `45feb182b69c4de44629992f6447ef7b0a4b68750b93124bf2ae41f18f673057`
 
 ### CMX-0276 | ISSUE::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `eb753645ef0270f095e910b200caca23ad87d4088212e78b4401d241811dcaf0`
+- **CORTEX-TAINT**: `eb240cae4319fe907a0ce65ba00320687b0c0a44e14d5dd55c43153f393d9cbd`
 
 ### CMX-0277 | ISSUE::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `38f6ee5c299d83bf2cc06f91c15d6c8c1247f9eadd35c8a715cef521c91e60bc`
+- **CORTEX-TAINT**: `7c38b0717379756a68f3b5ba78b76f91d540eb5928367d8ed97cb9c8f2419ff1`
 
 ### CMX-0278 | ISSUE::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `758cf689e95c883fe33c528036294c28e6ed842eb330efd796ff1876467faaad`
+- **CORTEX-TAINT**: `5d0517bef264567e78607282989f4e423e51689d26309652d5c52f86fa2cdfe3`
 
 ### CMX-0279 | ISSUE::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `705572eff11d1efe694fa6a172f4cddafcaf0e03e642f814dcdfcc84acf1528b`
+- **CORTEX-TAINT**: `21bd3fd94e3dbea1a19bcf7ffe3a48942db1a57500e075e3de30026568a7c355`
 
 ### CMX-0280 | ISSUE::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `ae9cac60af04f709d656dfd539d8e09aa4c2df5b5597bbfdbbdb52373bca177f`
+- **CORTEX-TAINT**: `4d8c9c6743385da16a29dc3ec665813dccfc119601df922cc8e726d8106f20ea`
 
 ### CMX-0281 | ISSUE::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `febdc8a81bfdb10bfda83e67718a5d8157509f5529d8342b7a04079f1d16f803`
+- **CORTEX-TAINT**: `f66dc92895eaf299ab08556f9b3c287362f1a5315ccfa9a684bc28a728b037e2`
 
 ### CMX-0282 | ISSUE::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `5f0404ef0b3896424be00890e9744a27c45429ee84140b2983cc92d437a1cd2a`
+- **CORTEX-TAINT**: `fc62c9e425575f41269e0a0f7e5d49f7bbe5e77b89f8827e9a753a3ddfad6c76`
 
 ### CMX-0283 | ISSUE::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `53f255a8d74c45853906baf3d6ea91c7ec5d191bf6ad7fc4d5274942d6274498`
+- **CORTEX-TAINT**: `c6ae0672c79ea60d73d2333cfe81ca2ce7014b6b396731955ee09d51a1fa833c`
 
 ### CMX-0284 | ISSUE::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `68253126529721787719286071de254d9f62d3b9138a848ec0277304d24d8b76`
+- **CORTEX-TAINT**: `447bacfae501d39644caef8be44cc969fdec70d3473fd1bffa9da36ae3df486d`
 
 ### CMX-0285 | ISSUE::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `3853967916d595b4af7d22ba46850c5de9cc22d7ab4b1066477ebf2d4bc62ccc`
+- **CORTEX-TAINT**: `c7fafce273432a71e9fd54be6f0f2c3bcd613b05d9d4bfad419d15be3d69d85d`
 
 ### CMX-0286 | ISSUE::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `16c22dc3a992901ccd9af7133127e6a0cc6812e48a5d4fd2cf0226619c87df1b`
+- **CORTEX-TAINT**: `c015eb1090238f74a142086604eb6ebf07279f383b9a2089b7aa903603db70a5`
 
 ### CMX-0287 | ISSUE::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `07b6a1f3a64b3ff5a338a705de20658dd6529ec7545d33584c2e2439989405af`
+- **CORTEX-TAINT**: `b38597b8206b7cdef52ebef064366275364ffdec8f5ac0f40fdcf00256007ca1`
 
 ### CMX-0288 | ISSUE::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `5ad306d0774d4327f488bb1d45a7f1dd1f0d020c0140da22ddc54e1ea8b60434`
+- **CORTEX-TAINT**: `1ec01378fc73de20a645b00d93cd82dee3f34263de487b741124a11f589b7d94`
 
 ### CMX-0289 | ISSUE::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `0c37503d230dae7bc3bda429274039d397b5a0775876b1952b016a1fec666c75`
+- **CORTEX-TAINT**: `94a6c084a4418ac2d5847a515b0a153bddc7b72275047a90878648ef2bc1bcd5`
 
 ### CMX-0290 | ISSUE::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `33e71477a94d89ca151bc473f46e2a3dd3bd1b39a9287b64466cc022941222d6`
+- **CORTEX-TAINT**: `cb9f3a6fd8da16328f0fcc8f78b537b30bcfbef6ec01910fcf6f7abed2099705`
 
 ### CMX-0291 | ISSUE::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c78d73307c7a0d5210d1ed1972c0b5fb00a1d35c1a096abea599597b65ed9df6`
+- **CORTEX-TAINT**: `0fb0a41bf0c7a330fc3d65b038abdc63c7294eaf88ac1d2f2f5ffd2c753f8b2b`
 
 ### CMX-0292 | ISSUE::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `799b1e6122fee117dea08c45ae14a3aeac03333f2c3d749af2bcd910f4a090e2`
+- **CORTEX-TAINT**: `0f0bb7bc4ba6af872697187a7d23177c2e9ac0aac730b91ffbf2da13bdc04ae1`
 
 ### CMX-0293 | ISSUE::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c5741e728d6335738aaabaf74e668b413df32eb82e422e384a2d133a4a740752`
+- **CORTEX-TAINT**: `08bd652315f0fec9e928748d6b514c9551779ded15aa55fe11cfb933ff730989`
 
 ### CMX-0294 | ISSUE::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `f3c2e1758c6a67254b54089d6be57ab173d134954be5c94fd312d2ce08e7f60c`
+- **CORTEX-TAINT**: `f65345b8b853ddec93639a9766ed0fe8b1aed1635ca2b20422a7f88ea1a32c31`
 
 ### CMX-0295 | ISSUE::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `3e8aafcc0f31b40b1489d317121375511a2fbdaf73423583926e07e8d5f4b94d`
+- **CORTEX-TAINT**: `da64436b40cd1be294e385c8eb6343859ec3280dab8416926f9b56817ea0fd58`
 
 ### CMX-0296 | ISSUE::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `b389aaa2e492d7e9bdb86850078b94bb9b58d9caa3965e66b4e78a444c88b99e`
+- **CORTEX-TAINT**: `737ccc78e749b9eee8408d51c9bbe0ccb12e131eb832c7e63192ac8af4c7deb3`
 
 ### CMX-0297 | ISSUE::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9f833a98b2c6211b60a92a5bfd867bec29752d2cc04e790be86a3381d781aa2b`
+- **CORTEX-TAINT**: `e98da2086a0f751b6301f92c91d30a11ac2e39fdcf14d01ee4c670f47e49f043`
 
 ### CMX-0298 | ISSUE::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `2433c98edba05991479d60abc129463e1ca4b9c0e33c3e608ee367265f2d4f6e`
+- **CORTEX-TAINT**: `53fbd822f74f802f33f69308b1dc1d279857a7e8f1e6cba8597ef9c8959fa769`
 
 ### CMX-0299 | ISSUE::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `375928aa5fa3f6cc789b34670d330ff269b8f9c3f7ee2aa91d6c2040c55e063b`
+- **CORTEX-TAINT**: `0e81d42491bced0be1aea23df0d07fa879d3e9f6bb65b646fb90ce61e8a510f1`
 
 ### CMX-0300 | ISSUE::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de ISSUE, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `ddf7c4de7814d9329e8c31a495b02ccd7b083710b4a7177547b7233a7a62c807`
+- **CORTEX-TAINT**: `2cab84ae56ab1408753027c25539caf11df0552dd61688477575d574525a86e9`
 
 
 ## DOMINIO: WORKFLOW_RUN
 
 ### CMX-0301 | WORKFLOW_RUN::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `9ab80862cf8025fe2939b9a8da15bd3fec28cfd8953c8f7307426579cdd1cfd1`
+- **CORTEX-TAINT**: `fa43a21a48a1afc76b77b1b8aeb107c642eb58e21c2e1035589d9808283bb792`
 
 ### CMX-0302 | WORKFLOW_RUN::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `9e46ba7b6b5be0c1762aa16377734d149cdac1c09d5502afb3fd9964d65290c5`
+- **CORTEX-TAINT**: `411ce4009998036c99ad996dc45587f7bff6043208e9e574959c52459979a727`
 
 ### CMX-0303 | WORKFLOW_RUN::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `5454ad49df2baa115d7cb99d3cf04ac8e58d155bf3ef6f067419a7cda584ff22`
+- **CORTEX-TAINT**: `f3ee00bb6ec5efcf0bac73a627ba4210aad40fc5da0413f0d5dc453276ac8806`
 
 ### CMX-0304 | WORKFLOW_RUN::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `14ba6a3f5b04d0971a3fab16627b1e12faf97e3d0f5cab6ced95711a39a1d9e0`
+- **CORTEX-TAINT**: `995196f8d99688448ca9b71eb8f8539c4750ba4eec85971f6587a989e44cbddb`
 
 ### CMX-0305 | WORKFLOW_RUN::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `5c93a2d6492cf18c32a13e0870cf46414faf4b94792bce5984ceb93a617d86ab`
+- **CORTEX-TAINT**: `4a638831c25799f53c45b1224e44b6f49cb60060329070215126cd42801ddca7`
 
 ### CMX-0306 | WORKFLOW_RUN::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `b0fe1361aad1ab15808b97c14c0ccc612e7405567de3e40189bc2512e2c26e1e`
+- **CORTEX-TAINT**: `ecfde119e436659eaa637ec244f89e34fc0d81a621ad1dca68a4cf4d13e2a513`
 
 ### CMX-0307 | WORKFLOW_RUN::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `33449bf65fefb042ddd1c186d4ee4b624182d92b30612ffb9b77e7d78a448a7b`
+- **CORTEX-TAINT**: `4e7aeadee83f7e8608daf71328706bfbde79a64ae2029b0aca2fdbe8c8eb8399`
 
 ### CMX-0308 | WORKFLOW_RUN::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `329aa6a3ffba87ca938a7435292582238db540d805f19a6ea90ec85b8938a1cf`
+- **CORTEX-TAINT**: `5f713027fd35f4b51283d78a98c3963f7081c799092bdaa2efc5d3a0aab1b190`
 
 ### CMX-0309 | WORKFLOW_RUN::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `92c15e806e53a4bea25836abc7bb2f27824db3cbbd31f345003c050fca31961d`
+- **CORTEX-TAINT**: `46acf191d590a0eccb377629ff617185e76a8612f18e45e1cf27455da3bf6c7d`
 
 ### CMX-0310 | WORKFLOW_RUN::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `f413c612c9cd1e2c38764809d3dce7d8e56e7a0bb7e42f30868d07f83353f295`
+- **CORTEX-TAINT**: `dde94eac4ddfd46748545bd9432aac830df8046702ceddfe6a6d3c11e0901b80`
 
 ### CMX-0311 | WORKFLOW_RUN::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `6308433a783e872eee515697a6146d0b50818f0c2d72061fb41d8a40c8b4997f`
+- **CORTEX-TAINT**: `222a1ca0519dfea23c8789e7a0694f48f1d91957c07796f5d285406e96fdd26a`
 
 ### CMX-0312 | WORKFLOW_RUN::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `7e4e9a9bc4050100b8737f5aa1671c7ac09fab02a636bde38bef25d7e21f0e28`
+- **CORTEX-TAINT**: `1a9f1fdabec4fbddfd3572dfde1b44c177987826349f0684146c21dd27583762`
 
 ### CMX-0313 | WORKFLOW_RUN::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `001f6603f8327d3b156ed1043cc3b59ce506731486a54fd6c7224affd2a89864`
+- **CORTEX-TAINT**: `2ae1eda1f9d502c5fdd9d4196681b20084b7fe795cc7f6bdbe7e957ecb5aa433`
 
 ### CMX-0314 | WORKFLOW_RUN::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `1372e58d527d21c53519ee1f6d53568d93eda6d0120ffe9c56295c0ead62457c`
+- **CORTEX-TAINT**: `673ea112297615914894600b6c5316d9ad7941da4d0a0179ae515863069e9479`
 
 ### CMX-0315 | WORKFLOW_RUN::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `37950ae0c6573a00f757b9b1d0825ce62720ea806afa4a074c876d78123a99d6`
+- **CORTEX-TAINT**: `b6daa9bec98348799107912a352de894f947ce6e42a023452a7507282528796a`
 
 ### CMX-0316 | WORKFLOW_RUN::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `7963103d9fbab27c3ebb05cf622b5251e54b7325fe737f5ae669a1857ed49313`
+- **CORTEX-TAINT**: `078d488e4e6d5041378849cb729f5e759411e0bb98e94537783f2f5cb3710307`
 
 ### CMX-0317 | WORKFLOW_RUN::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `462c99c1102b55dea8b7da1b621b2d07ef2e03f6797ae02c3891ba4367a339bb`
+- **CORTEX-TAINT**: `8344862d98c9aa7885c1ff181bcc9481b045519f57bb7df88c965f3aaf810cbe`
 
 ### CMX-0318 | WORKFLOW_RUN::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `bd5cd68c1bb67789d05f5a2dff1b278bbbacf6d5f452d5ce8bb4c183b6b888d5`
+- **CORTEX-TAINT**: `dc572879f01f891e217fef31a913b51fc3f0bf40de9f86cd0378c6db704cbab8`
 
 ### CMX-0319 | WORKFLOW_RUN::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5d02f42d6de0ddfa8f26cd180a8263f0d628528686bdf0e1f1e864cf521f7018`
+- **CORTEX-TAINT**: `6475f50b53c61de46b9f8a80a0dfb9333fa67751b8e4086bae4e48cca9a6faed`
 
 ### CMX-0320 | WORKFLOW_RUN::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `a93530fbf9d46e63f164e02560f941ee4c3212f77380652edf34e5e5260c4e4a`
+- **CORTEX-TAINT**: `33389a24f9975f3d050a516032bcf08c2f431ce9620166be353e92a7e8f45f01`
 
 ### CMX-0321 | WORKFLOW_RUN::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `4113e1e7f0a7c4167c96165abd968cc3549650c91a5904c619b5eb3f6ebbd993`
+- **CORTEX-TAINT**: `46ce0ed743796fbb9d4aa08a889a1c9838a36bb3c65f91c320a0438db4fef2a8`
 
 ### CMX-0322 | WORKFLOW_RUN::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `0f778553801fcb6b89612cf1e49b6d851756ebefc4b6faac4107f457b5e1ce29`
+- **CORTEX-TAINT**: `51975bdc340e8acf2859bc9563e4b3e0cd2cb5fc4fb96628ba7c10661f2d4556`
 
 ### CMX-0323 | WORKFLOW_RUN::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `53f9df8444217bd32a7de2d46bd35cbfe89e4ef630cd53c2d17407b013e608ed`
+- **CORTEX-TAINT**: `c92f7dc69382b81abda67fc55a89bdfd048772944767e41f58a4701356b99bd9`
 
 ### CMX-0324 | WORKFLOW_RUN::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `deaffb6bd0c542cc32e17c874c874503cc41ab885ee18933c81dacf1ab141709`
+- **CORTEX-TAINT**: `32e78fc56a1a1839e25854a06f0f1543fc490b8c68db0fb46b5e0df0a971488a`
 
 ### CMX-0325 | WORKFLOW_RUN::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `fffbecbaef1fd690f2e4fae69e1fb8c415333caaf11f46d3c39d4dd72237a083`
+- **CORTEX-TAINT**: `b706a2e66184bfd1953d2e0d9c4631cb688a3fcec624a8455c46f16d0a3bf277`
 
 ### CMX-0326 | WORKFLOW_RUN::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `bdf07dc3373fa2361a234ff6b3e7492896db489bb1a2a79d678151652fea997a`
+- **CORTEX-TAINT**: `ceb17550181f8f93211d7e9cd1d0de210a50f022a1914a38a8ff3d37895330cb`
 
 ### CMX-0327 | WORKFLOW_RUN::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `db996a87380b8fabe1b3e9071fc7ae3fc2eade16b20a111a5dcb98497aad4a99`
+- **CORTEX-TAINT**: `70284e6840cd22e9400b69fc239803f88d659bc182b234434991b4f7ca24dc3e`
 
 ### CMX-0328 | WORKFLOW_RUN::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `9a990eac58c60868b791361e1a4d5b8d9d026c3c64571beeb143387ac0d3334a`
+- **CORTEX-TAINT**: `82eaeaea35b21999688c449715f6cceb2f3a45dd1086699e8337e14a908ada9e`
 
 ### CMX-0329 | WORKFLOW_RUN::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `edc383c451f7ce690a21b0bf8c379e7725be450152ec28327e9d634fcc772635`
+- **CORTEX-TAINT**: `eb744f27fd679c4a244eb3f31e7e9a3f24ef17e823429ec815090436aae6a21f`
 
 ### CMX-0330 | WORKFLOW_RUN::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a72a3dde96b4afa3c3dae421b64eefe4754fea96e0b5bfe370f9de3b95b984c3`
+- **CORTEX-TAINT**: `468c23a86a65b73553f53f7f63c29b6b089ecdadd55c5f041a7f378b09c39379`
 
 ### CMX-0331 | WORKFLOW_RUN::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `eeed0af9c4f12b5da9dc75693ff54f1276ec068078f62eee98e9079d779dacab`
+- **CORTEX-TAINT**: `3a104135b0566e6a5c55c87938abc4086c988ccd331170b71518353953de97fa`
 
 ### CMX-0332 | WORKFLOW_RUN::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `69e1fcc238f9ea8a87efb931cad72c8449f9d144b4beccf2be91912f57202928`
+- **CORTEX-TAINT**: `c4c9212fb14974a7f2d0e499a4934ac5c9b2ac6aca9d30a7e253d315245a06e6`
 
 ### CMX-0333 | WORKFLOW_RUN::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `8ce98c3c47e5f7f178feda30582df64d8f0733fad6d57c9ef580bda0b7c7d623`
+- **CORTEX-TAINT**: `ad2da80ad2ee5b5019d92e6ae69c912713348f7b07425f45cb47244e5e25a432`
 
 ### CMX-0334 | WORKFLOW_RUN::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `c3a7184f392e89461810f7da5c4118a079c7b84c9b7321c5f701015f4dea6c6b`
+- **CORTEX-TAINT**: `637f78608fdabfd3ba147e3edd09b5f78abb790c320758d121aa442604fcd9cc`
 
 ### CMX-0335 | WORKFLOW_RUN::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `0fca89f27d2082eca206d82a37b4ea62b13c911f6ef3f6d770d103386f9ac5f5`
+- **CORTEX-TAINT**: `07009ebe91bac110617ad382f525fd0fe917d4b2cff010358e487595013635b5`
 
 ### CMX-0336 | WORKFLOW_RUN::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `1cdaf95a4726aeb3a3409d3b6137832dc3b9925d557fbb543ea458c2074ff752`
+- **CORTEX-TAINT**: `e8c34fc577638751e3b7b4273199dcbe47eaeb48b9132114f10d9391ce69f25c`
 
 ### CMX-0337 | WORKFLOW_RUN::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `71c75bd951e9a301f43e40c1e66692757a4cb1c46913f5edc1573b26e717a51d`
+- **CORTEX-TAINT**: `68d0d3552ec8899a1d3c227d7381f2d5173faad438823adf8a8341fc5035e676`
 
 ### CMX-0338 | WORKFLOW_RUN::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `4651468521f14f5360c985133d583f3ce90f54ed54f825bf08d4f2c566cf01dc`
+- **CORTEX-TAINT**: `bebaefc222bf6cab4c32a7b955569c6ef3765af7845df2cf010257f359d8b508`
 
 ### CMX-0339 | WORKFLOW_RUN::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `a0f148e4a96e8fefced08393c32292d2e2c068cc0d5e3edb69331f90e71ddbf7`
+- **CORTEX-TAINT**: `743e74a6636b28a4670c8f3ccef49678d426a51139ed9f47d99f0f5393b135fa`
 
 ### CMX-0340 | WORKFLOW_RUN::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `7c33a5924be7cfe021150daa4c2369a68a21de8471cdea2f96131ae39f6b298e`
+- **CORTEX-TAINT**: `8d7d652a6b86a50d7700d628e16ad86b7dfdc5973518cb250ee905cc2e7a23e5`
 
 ### CMX-0341 | WORKFLOW_RUN::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `2176cc33dab47486ed934ffb611c9b6caedc0f35fcd6377f2271cfcd51bbeff6`
+- **CORTEX-TAINT**: `ff627853bd80c3b07e4445e27ca7138b0f4e43e0b7dc0cb47869db58bf9322d2`
 
 ### CMX-0342 | WORKFLOW_RUN::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `069dd2ba650594299bb5ec0f0f0137b60f667ac82cb30ad7086e4c9244cd686a`
+- **CORTEX-TAINT**: `805cf6356b8d33781035a3785f9b21988bb37fca13881211de3d5f0e07a6e185`
 
 ### CMX-0343 | WORKFLOW_RUN::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `066f31fdbdf5442d7f9efcd50d387177b2d50436e8fc167ea8826fdbb7f1f037`
+- **CORTEX-TAINT**: `a88d97afc154ed1d24dfd165afe3d442db6ed8468d4a185c89e5037ca13771e5`
 
 ### CMX-0344 | WORKFLOW_RUN::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `ff71fad20856203ac4c66f20f51125801dfd2d92de8ac09ecc774b45b548372e`
+- **CORTEX-TAINT**: `d28880ab278e5c8385a614e97636691e53b5ce186f66ddaf9a770f249efeb037`
 
 ### CMX-0345 | WORKFLOW_RUN::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `de50ef0abe25c3916909382a3b12d60af95b647d942e7f837670cb338a41984c`
+- **CORTEX-TAINT**: `9dc76a7cd68607db1a1f4854e3c90e0418793f7a0d3bc2b1b2c2633e2b81e5c6`
 
 ### CMX-0346 | WORKFLOW_RUN::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `fc6b76ccfd2e3b7925dd42865491f0adea822e203a958c0b023245e3712b2891`
+- **CORTEX-TAINT**: `758848c725187dfdaf10c0f9c876604e259d65145beff382f6d0b323168ff45c`
 
 ### CMX-0347 | WORKFLOW_RUN::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `d64bbf5e06855e8cdd759aa1c8dcc53ea7532b9e92e83e1e889da0c67a11c24c`
+- **CORTEX-TAINT**: `983d916fa4d1ecbe56c27a0b4ac929a3ece4577dbd1fa01222c446b64702d697`
 
 ### CMX-0348 | WORKFLOW_RUN::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `03eb2438e3c187f26fb077dfdb002ca4d36089a551dff7f5a6311edeb428f7f4`
+- **CORTEX-TAINT**: `19f370d695906556f877d092404e3dfa5f6ab314510e04bcf577dd44b4d14333`
 
 ### CMX-0349 | WORKFLOW_RUN::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `3abedce012a05d59fcd4033a83dae1d472ea2d51544da609fb7fe07b12f6ab47`
+- **CORTEX-TAINT**: `bab1166b7d787536a70a94f35b82fb053ed7831c29d2652696648ff1ed37a136`
 
 ### CMX-0350 | WORKFLOW_RUN::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `6d98844951d6fba559da405bfd725a9ab0677e3239f9f7989cf353ce917d0272`
+- **CORTEX-TAINT**: `d782b6e16a77d1c1d05a89d4e42310e89f44c27668be65be75f2d84a70e5930c`
 
 ### CMX-0351 | WORKFLOW_RUN::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `4546d8c786859fc3c8aec9730ae45f1dbc177820c108f33d51361385d00a6978`
+- **CORTEX-TAINT**: `8e408ef93e8becf9c391b683033e3a45b5f2c0909ae0b5a6feed1fdf4dda94b0`
 
 ### CMX-0352 | WORKFLOW_RUN::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `adb4d49d045a6278ae7885baf0df6c92540c678a6f78fab6c2ae4ec81358c493`
+- **CORTEX-TAINT**: `151f7507b5b8419aae3b64e7658501c6c114acb56625dc95127cb0f7d1b013d2`
 
 ### CMX-0353 | WORKFLOW_RUN::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `ce2022c6cec98fe653780ea16a9dc3b18c1fb060845d53855c4871026104cb95`
+- **CORTEX-TAINT**: `99e508c526dca156418e6b40826bf7bd95c6bb0230d3454f9e506ba7b6d9142f`
 
 ### CMX-0354 | WORKFLOW_RUN::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `63187d7d2607cb55a40855b71f93e1cacd3c8eabbc222cf0f19cda68064fc2cb`
+- **CORTEX-TAINT**: `e730c3cdc135d8973991ed453948df930dc7872ec1b27c87bd707cb8931b247f`
 
 ### CMX-0355 | WORKFLOW_RUN::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `055c1cf186920de9a9f0b4a175578141221c677db2970dc6d62f7f020d2f3d28`
+- **CORTEX-TAINT**: `2a4562d60bf46524feb30a09045c5eae14d1e79395587cb8cd3e021d23cd0227`
 
 ### CMX-0356 | WORKFLOW_RUN::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `7de9ee74a8049e3bb74b279e8458d0ae28fe8772448b11211672d6bf4f71fbba`
+- **CORTEX-TAINT**: `009b94a58ee06d5e58a6d9c64f829c5761be467d0261f29516c30f50c6671a32`
 
 ### CMX-0357 | WORKFLOW_RUN::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `14c0a1ae90e47f92dd0d916bed75be991be41aeb1dd1db5f766389becde25552`
+- **CORTEX-TAINT**: `27bbdf275ab4bc9e197693ff5cdabb1018786c963ec608eac69eff6180e9b02e`
 
 ### CMX-0358 | WORKFLOW_RUN::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `f3acc5f19a0451beff26bf3fd72bab2aa79e00f30a2149d7b33633724c6c6860`
+- **CORTEX-TAINT**: `299830a17c91e6c5483da8150a3941cd8a15d42de7877ee2c7e62918fabc1719`
 
 ### CMX-0359 | WORKFLOW_RUN::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `8daf87d01d26fb2c6427142633202562132fba896868e1ffc6204f2a75e5da1a`
+- **CORTEX-TAINT**: `ae95bd74f35f4e557861abfc1a2a8abd83c4ffde8af51519c14ae3d42c76a70f`
 
 ### CMX-0360 | WORKFLOW_RUN::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `a6ed9229798a73e63bdfb9d7395c596364e44c4234923b3b7ebbd5b1ca360efb`
+- **CORTEX-TAINT**: `0196eb3a84da6700b9f9236ada8845c285f8c73475b60fc9c651f1e4b5ad7684`
 
 ### CMX-0361 | WORKFLOW_RUN::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `2d88e273a1f6d96a11b18e84d8ea779ace2e1be022b49590068a59d89037c557`
+- **CORTEX-TAINT**: `5799289b84cd4ea079adba17ef0858fcb6e37ef9955f614ce7a289a18fd1cb28`
 
 ### CMX-0362 | WORKFLOW_RUN::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `56c6f6e08289e0989d4f6798784dc00b5e904eab24177f0806465eba57998942`
+- **CORTEX-TAINT**: `6d561fb53bcb10a2891497929efdc137d128ab0b1c7a9640ad4c61d2c6c71d7b`
 
 ### CMX-0363 | WORKFLOW_RUN::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `8210b83fcdb1076967b5e65f24000d8af3f793cb9a0b742c3a3988f21328c46d`
+- **CORTEX-TAINT**: `d4ab72da2294841cb1f26ddfc5cdbf20d99017ea7e71f2b37b22d268e76dae6a`
 
 ### CMX-0364 | WORKFLOW_RUN::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `1aef808b0d02e5c451462fa1115346ce4434261ea5d5d2b4d4267b3ad46b2241`
+- **CORTEX-TAINT**: `cd3106269d8dc81f73f2b7d01e03d4a962abc0f84c7f85ff420139ec370ac91b`
 
 ### CMX-0365 | WORKFLOW_RUN::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `647945f9578426b8a3040592a4088f70b2ab27cd3183df89fdd3c49e34e8cac1`
+- **CORTEX-TAINT**: `ace6e398d55bc2cd41ce1b55eab7b41f124fe2935114b41fffd5535dd8e8759c`
 
 ### CMX-0366 | WORKFLOW_RUN::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `100ee9464d785c1e2b5e90feee81f2b3e75b8d1c9cbcf39e1f11af0f1e19074f`
+- **CORTEX-TAINT**: `1ea50f3ccc52458e3cf0d86f891fa36ad8eda55fe021a8eccbca25abe5f69e67`
 
 ### CMX-0367 | WORKFLOW_RUN::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b14032eabfa5ac170bfbe3ba8831bf20a062db8cf48c27b61fc96ebbc6a06261`
+- **CORTEX-TAINT**: `4514d6f5f2ab67ac2b3752409946209ab4b0fb03e14157dc9e951bfec1a4863f`
 
 ### CMX-0368 | WORKFLOW_RUN::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `a520d839e4b3778706aac239b744da2e83918d759b162ba129e34199fb1e60f6`
+- **CORTEX-TAINT**: `87a2b60a6057bce3c4e1af4d7e6f5605f55ea3a1ce2235b04ed5368e15a26280`
 
 ### CMX-0369 | WORKFLOW_RUN::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `7e30011d52cb710c8b1a601281f28db3e126fa879aa8c45b0633a781ae639fa2`
+- **CORTEX-TAINT**: `d7b7728348e607b2253aa625ef6b260b1865ad21b2ebd133a7adb3023c489fc0`
 
 ### CMX-0370 | WORKFLOW_RUN::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `a66abf995132fba09fd510804084d3677bb190a0334ba0332347df421271e8da`
+- **CORTEX-TAINT**: `da548f905c9d910d8acb9e34c334949911356b5bcc6508bfb2be42f143e7a4da`
 
 ### CMX-0371 | WORKFLOW_RUN::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `7920d4bb0dcc55e0445dcc8659c92e4b30b869e9000854fc4a09828b702a50b5`
+- **CORTEX-TAINT**: `71fcf29716602437d2ac5366bae4b38f997a3d9bba5569998c26c23522a6897c`
 
 ### CMX-0372 | WORKFLOW_RUN::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `85615ced31ff28b2d29155c4bfa0687fb95208272d72ada3c509aef9a08c967d`
+- **CORTEX-TAINT**: `4069429ed395f42facb333fba7dd0542fbc17f0b5e6b2688eb9edd8fe283fa3b`
 
 ### CMX-0373 | WORKFLOW_RUN::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `d967764fdd4083d1dc715d980fad559d321c1d4dbe4ba7484200be0be6e1bb96`
+- **CORTEX-TAINT**: `b813a7cbc017d0277035003648839e3e34bc6ec973ae94b9036d095f9c076153`
 
 ### CMX-0374 | WORKFLOW_RUN::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `44c5ebb2023255a7a65cacdd800abad4f87969e1b1ef3447f2d0311d00b9452a`
+- **CORTEX-TAINT**: `2311a586523ed6a9ae4f20c1a3703b1152046b66d8f67394bc5bef718614daff`
 
 ### CMX-0375 | WORKFLOW_RUN::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `67a97dec228c3a4b30d244fd3774b99dd06910e5e45dcd69b6e22bd1ad66c9e9`
+- **CORTEX-TAINT**: `0554d46f105e18bee391f45575cd8b2478b028f87f762d8a36b9290f2c1e88f4`
 
 ### CMX-0376 | WORKFLOW_RUN::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `036eed068d4f5447dbd359ef5344b49c9c90a4b9401d8ec1a91d5825c7ca8758`
+- **CORTEX-TAINT**: `60c3f883a1b8e16b174b2a83aef0fa49a8d82f42f65c569678f19f7fd077bba3`
 
 ### CMX-0377 | WORKFLOW_RUN::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `7f60dc127918274fa781274792ffef9536ade4b5ab69cad6d8636a5ca598463f`
+- **CORTEX-TAINT**: `f15d28aff7fbbbebf2fee166c2bd75634b41b072e28a60094a44eb998f33a608`
 
 ### CMX-0378 | WORKFLOW_RUN::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `d9deaf238f424595b7490b16859dbd5e2b1e2595e2acb8ea093e3393d99958c4`
+- **CORTEX-TAINT**: `c079db0636a2fda69e86c7cdfb16400d2cdd4770c0134cff53b329d82f7063a0`
 
 ### CMX-0379 | WORKFLOW_RUN::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `a2122f5487e159c1b0b987517112d248e6d44f5b9305d7eaddb5afdc69258391`
+- **CORTEX-TAINT**: `bf7060dc477baaa0b97bee75bd9e267006b980afa65293610fb5e946baa48b2b`
 
 ### CMX-0380 | WORKFLOW_RUN::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `425adb1a3583aac6e18db1b43acaa0e629f98d1f4329e3536a4e7292f157c810`
+- **CORTEX-TAINT**: `9ad27594fe86faad55674054590d7a9bfe0735f6c36ab28d7bf134d6c52e2881`
 
 ### CMX-0381 | WORKFLOW_RUN::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `d642473843f1c30466ecd988d02d799019819527a94891a88808c04f794e95c0`
+- **CORTEX-TAINT**: `949189436002599d9a516eda01daad097d1ea277339870123d5e724e6f8d76f1`
 
 ### CMX-0382 | WORKFLOW_RUN::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `f42276fd6a7fc5b4344ad0c26549922a7d0badc4ea778902deba2db2582410fe`
+- **CORTEX-TAINT**: `e67be7e9982cd2c2884a11610bfe0ab69902602970f17f2dfbaf7becce70236b`
 
 ### CMX-0383 | WORKFLOW_RUN::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `ac2a2c8576e37bccf196c446182d1fe3b94a670c0a43cbf6032c4563eaa19d27`
+- **CORTEX-TAINT**: `63c498a0bb484328ad3f69d204148f02cd510f037d35501f71350433071ac473`
 
 ### CMX-0384 | WORKFLOW_RUN::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `9df6c0170eed143ea49750c41e9a67016b3b27b76bca5fe747b8040f9493884f`
+- **CORTEX-TAINT**: `323eb67b9ca7d2559a91fed527d25062cf4aec2db5b3f8ff9092b3d7bd6078c6`
 
 ### CMX-0385 | WORKFLOW_RUN::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `46cae5b04b8896a383ae9fba1cf4e00b8b6b03749a313ce4273c1df30ab8a5c8`
+- **CORTEX-TAINT**: `de922f13a91f08a16a7a688a199fc176f3be3203e3c7e43f4c34f76c5a62bd1e`
 
 ### CMX-0386 | WORKFLOW_RUN::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `c4a386f282c23ce4f7914c720873657e17a52b4aa34e3e1bb4b169b8ddf9c97f`
+- **CORTEX-TAINT**: `f5b2ca5dea57af8cf2ea98628d1dffc4d267d4136cdbae29cd9e192eacfccb25`
 
 ### CMX-0387 | WORKFLOW_RUN::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `f911007af367f6712610f236ae59fa4b50cd8078cc3cf67b24f9defb59cb585e`
+- **CORTEX-TAINT**: `b3f47932a8fa4aaf3a7adebbacba99eb00b53099b53456723597119f16d45b60`
 
 ### CMX-0388 | WORKFLOW_RUN::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `67e69a588baae76397ed187254755b0fba9f5a4988811f7a1762b8b86426b9a1`
+- **CORTEX-TAINT**: `58c9e7b3ad78fff33759ec6528effe99efb8cb75d095ceed1be445573b659747`
 
 ### CMX-0389 | WORKFLOW_RUN::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `738762afb2e9a3503d4e3b31a020621f4676433636afc73aba0899a443a00dc6`
+- **CORTEX-TAINT**: `9495db62d1e7fa8ac59d6a189fcac49a86624bcbc496be5f3e8b5b6bb0168add`
 
 ### CMX-0390 | WORKFLOW_RUN::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `79dfb5c1c55d407e7f59a15085a29784a0a3dfcad6b8f1b5c210ca5414d1bbf9`
+- **CORTEX-TAINT**: `3c4afcc6b2a8f46830c02ec7235d590b7c33188c05312bd096636675945493e2`
 
 ### CMX-0391 | WORKFLOW_RUN::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `df9c5fee3001aa7bb349c942bba2adf8a00f73eb1feb877edf0924fe5e7ae88f`
+- **CORTEX-TAINT**: `4a568846c9f31e0ac765e5f44c17652befd5c284838ca42122bacc5cdbaccd1f`
 
 ### CMX-0392 | WORKFLOW_RUN::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `1d7bb2f88490acfe2a5dcf374d92d91073df90729df58faafd9ed6c07235a955`
+- **CORTEX-TAINT**: `2185a336fa58f82569570e87828e9e170116ba92810f422e33f9440b6a8dd807`
 
 ### CMX-0393 | WORKFLOW_RUN::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9ea810d75e3915e0eecc175dff65e6f0a19ee22a4f39c8d2f1520648dbfad6a4`
+- **CORTEX-TAINT**: `949cd1af3ee96cf054d9e136a0cdb5e98aa3527f7b13c05d62148e90d2706f34`
 
 ### CMX-0394 | WORKFLOW_RUN::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `d78bda2f3fc23f20ab20699698868a6d80a5d5adf4081f46d4046dc9b085e347`
+- **CORTEX-TAINT**: `df8fdea8e3a6322b3923c0b7e3ee52801e8af3feccee9877c7dc79591fd4197a`
 
 ### CMX-0395 | WORKFLOW_RUN::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `8ec704f94329fcf367a7f1f703cf00b6b51b138ace93338482c17f8034642c32`
+- **CORTEX-TAINT**: `82ba80fda963439fc00e62dd9d5c65423ef1b5fd8bdd7f460c346220ce5069f8`
 
 ### CMX-0396 | WORKFLOW_RUN::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `6173c729f910dc40bb70df0a7dd9fa79e25a8ed24a6ea104f5e6ab76bbdad83a`
+- **CORTEX-TAINT**: `9c060ea81d02d7860d940e4117ea21141976bd54be75802c72f7e7dd5e3db03c`
 
 ### CMX-0397 | WORKFLOW_RUN::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `504a8fce56767b7269e1a02776f5d115d3733d731e72ed9b3acac0f30799cc23`
+- **CORTEX-TAINT**: `6f6ea06fff635397ae430e9be58c3c17d6029dafdf1ef2d5cc3918ec950ab8c7`
 
 ### CMX-0398 | WORKFLOW_RUN::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `490547a9896ea8e3210024784688129e77da2f615d877771afcf9769dd72baaa`
+- **CORTEX-TAINT**: `b17ed14fa4f66dec1408b561ac5fa261c5c4ab82e04426d72f6ea435bf0943a5`
 
 ### CMX-0399 | WORKFLOW_RUN::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `04fcc390d0420f8fb58c28c0ba93763da0ff9f8a05d9ba78f23fd2536eeaad88`
+- **CORTEX-TAINT**: `0e04d4fd0c405b25f90f10e9a1afe75b69b629f63b5f106584e82a1aeffbb812`
 
 ### CMX-0400 | WORKFLOW_RUN::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de WORKFLOW_RUN, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `49724b70bd49a62e1efb2294b4220cb451c2783f4a9d26960b63f63f68aa88eb`
+- **CORTEX-TAINT**: `44458593b9a6adfd48467ba03f5a4a84c5720271cacbc6ed95b8b98a02114789`
 
 
 ## DOMINIO: RELEASE
 
 ### CMX-0401 | RELEASE::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `b1c3bd3c79de9a9c23bcf6b27165bfb7f6987565cbf7e3932e50c5d7100ef7cd`
+- **CORTEX-TAINT**: `66e279e79a72555dd6c14cb9ca803287375f305059500104f1ed46f9e236a30d`
 
 ### CMX-0402 | RELEASE::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `25136239568ff9c273651516ab8bec65537897f2a67a381c4bb202b4cccfb348`
+- **CORTEX-TAINT**: `19d143f0d0b6284988099fec1548b23acbf50e24735a17b28180f4a9271fd34d`
 
 ### CMX-0403 | RELEASE::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `4efb58df5c7c628cd29397844c5311195b54be58086323727587e10ca5d592e4`
+- **CORTEX-TAINT**: `140565c1c16b684ded3a63ff0ae432309f4b0f805b32e8d5f70988b67787545a`
 
 ### CMX-0404 | RELEASE::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `10d673f3fdb60d954b7c60bd699036d59e11741c4cfaed1f9db034f6ff3cfe93`
+- **CORTEX-TAINT**: `9292cd90f2707b0300d42257189decf80eb709844ef2cf2878dbff71cdde45d9`
 
 ### CMX-0405 | RELEASE::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `23ae2a8de6e27fdbeec6bd89a20f7e7c4b8cd260fb2b9a92c8a163dec841c969`
+- **CORTEX-TAINT**: `add90f1d59b9828b42cd7dd13e0ac3ac4a46ec1b79cdb5e2f3e8f625d677db3a`
 
 ### CMX-0406 | RELEASE::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `88e8e25611f5990c70e2a54f5057946754772065a15ef1b45c5fa1455afe2b44`
+- **CORTEX-TAINT**: `df0d48041a02d8bee5b80252196f8fe1c800e696a12daa0b2e82bba757c38fa4`
 
 ### CMX-0407 | RELEASE::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `139737f8bf85f9a970ae5a4d41190bd6812d01ab21c62956d47f3317ba10f509`
+- **CORTEX-TAINT**: `de0274691d78ce4a8c15fa87357d9094224545b44bad71ab2456dc4f0d8c3d70`
 
 ### CMX-0408 | RELEASE::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a846950a5928e594a1cd4e33dd3d2c42c0e1473e087a909ffab1ad2214b8d0fb`
+- **CORTEX-TAINT**: `f0bd82f3e071a84eeb59a9165a7af176c9bf653b2854f2cfa2bdc6be871c68f7`
 
 ### CMX-0409 | RELEASE::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `63efee722ca20055c045cef755395ec6ede76a3afc37d6f3d04c012923cdac79`
+- **CORTEX-TAINT**: `6ae30a72be1b8c0b2547955ac975bc312d31f4fc9e25c8e741ab26ccb3b251d1`
 
 ### CMX-0410 | RELEASE::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a5e05b19b08f4b23e76f71b05ea471002cf879f9d86f1aee012689d8aa94b51a`
+- **CORTEX-TAINT**: `0632f5be24c3698d5143dbe1d5e0d5f5fa8e88204ab2aca0d349330cf936e3fc`
 
 ### CMX-0411 | RELEASE::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `8aab2b4cc054475dca35c802634518058cd6103502331e86946243718bc277e0`
+- **CORTEX-TAINT**: `b00300052b005cca341369d2cd38eb16e79761c563dbefeed97aef93a8261b28`
 
 ### CMX-0412 | RELEASE::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `ee7ad54e1b8c5adc9e07bc20adc450a0a1eeab2ba94c06293bfcf3fad79ea66a`
+- **CORTEX-TAINT**: `bf8b9fdc246820aec5e166294ab95735b468045faf4299c6c7970bf5d38a3c65`
 
 ### CMX-0413 | RELEASE::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `451153fefa068f8bdeba964a4ad3d0be8e1bb01c9c82fc0917f3ab80285700a8`
+- **CORTEX-TAINT**: `7b4619ef8defdfed80cb25c9fef9897a2291ebb623f37ea8bf79479312fb448a`
 
 ### CMX-0414 | RELEASE::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `79d3b02a707216b71b6b12062ae1d7cba68196f8be1e736da3cd8f88dd51acd8`
+- **CORTEX-TAINT**: `82b1bc55b07ba1e4b662f6093badf4aab91d8f3ff9294ca8dba96c135638199c`
 
 ### CMX-0415 | RELEASE::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `fb4b4b2033236563074a86b4d3707a6965e2baa4cef3df8756a755bf6f24d58a`
+- **CORTEX-TAINT**: `79a017f1a4dea9761386e956c81d3c5b178ce4f38b3fc94c52491c899c1d10ad`
 
 ### CMX-0416 | RELEASE::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `73aa638332f0e0d927b6037dc3afc23ec5338505d73ac54c8114ee8a0f1dabcb`
+- **CORTEX-TAINT**: `69935050d396be02a85b9ed9cac5b5138bb6898e74197f89b22bc5529e495893`
 
 ### CMX-0417 | RELEASE::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e12d3e39cc80da71b7bbf5b8222d4fd2275dad8bd3c66265914ee62565dd7564`
+- **CORTEX-TAINT**: `53bc24f94324a47344471e93bd8d03d3cee9a53b178b575bddeec00b9251d749`
 
 ### CMX-0418 | RELEASE::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `13af9e1f66db1c8930afea8aec832784b91efd04f55901fcd36731a8d8e2bacb`
+- **CORTEX-TAINT**: `147ac3aa73edeb3a74df6cd0f24e826f1a065711564aeef33a76bd0cc6f26765`
 
 ### CMX-0419 | RELEASE::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `b096c36ce476c24edfda048fa9ed0da0e3d420ca909dd40706fe75554af00ab2`
+- **CORTEX-TAINT**: `550dbc05eec114272c0ce77d271a6030711d323c8741472877f22ef7c042cef1`
 
 ### CMX-0420 | RELEASE::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `f934bf63a92c5e4f944a44e3507b1a7775a8b867d9836db6a4bb87abe24bc919`
+- **CORTEX-TAINT**: `66df19432a566dba6dfc90843ee98f5d54c49e872abf4fd66b11344de118a636`
 
 ### CMX-0421 | RELEASE::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `f5ad9c18d333889d3644d30f104f0f86f7e15be1735b53579d626d25850bd75c`
+- **CORTEX-TAINT**: `a0369d563ceb4dd50d106b4a452df4f908c4200b3fda0e23d5053dbf1367e618`
 
 ### CMX-0422 | RELEASE::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `3a7801670ef03104078afa9000c95689cf47327d8530c740f7a28c5bf36c9f0d`
+- **CORTEX-TAINT**: `456aa593d696c3d9eacaee9600358ebab2a8e63b93f500b899b1960c3e2c3515`
 
 ### CMX-0423 | RELEASE::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `736382ac30b6fc5a9365f8ae1ed405f426409a2ab41989958eb631f394c3a2ff`
+- **CORTEX-TAINT**: `839e8c8cd5f8dd779520d8a79aa20f420ec7327073a376374cdc8550a81f03d2`
 
 ### CMX-0424 | RELEASE::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `efecf462af7d4f33519988aa4e692645aa1a9f4491a406fdd040ac8f02600341`
+- **CORTEX-TAINT**: `971771db9b5cd6ccadfaa92c6a7b61522d7d95d25bfd22c48f4220c31e0c39c8`
 
 ### CMX-0425 | RELEASE::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `eb5d7d2a6fef2c0f2f106199799d0d766ace1b72c67b5a2321c928b791ced288`
+- **CORTEX-TAINT**: `819830a4a9cbcb420fb8a7d18724009e30b2e5b591c12f81b811c2facf38c14a`
 
 ### CMX-0426 | RELEASE::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `ec521433d68ba58a8f7d4f36431908befd4c9889dbb1d2b8e3737e63b58f7e66`
+- **CORTEX-TAINT**: `2b41b173addeeb84a154651a95ccb8e304bf43ec132c252522a012f33c2aa17e`
 
 ### CMX-0427 | RELEASE::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `e1edd07dd57af81ff737b8f1284969f450b4ae6a927b2fd3489d7d23820f1577`
+- **CORTEX-TAINT**: `a84878f834b0f05e6fcf0adc18843fc9f0957d6f6ded8a781ea6fc9869f45d06`
 
 ### CMX-0428 | RELEASE::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `986b2e6a0c6df5e044c3c2ffaf1ff006c6975b677da025ac7d7777d0fba1c5f6`
+- **CORTEX-TAINT**: `077de5279bfc8701a76eee75f94b0fd65678c63ad406570efd68d993f4bccf3f`
 
 ### CMX-0429 | RELEASE::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `4fa2a8501cd3b04d0ab86b53b42dbd5f626047993a35532dd61e66e6077efe05`
+- **CORTEX-TAINT**: `f507858cc1845240ff0ea2060966bd8b9ebbba8d48a5c88765a7524c882ff70f`
 
 ### CMX-0430 | RELEASE::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `abcff7645c5db7c08b52c41e6a8e0ce79a30ea0389f8f9041739b00963ccb8b9`
+- **CORTEX-TAINT**: `d39143bbde45358d4730307fe9b5e7e574a093128fdb8636c9b4e27e462461f4`
 
 ### CMX-0431 | RELEASE::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `25ff1e3adae2b60c17ab7f1f141f6d8d38a8b6f1300f14d757abaacb959258b6`
+- **CORTEX-TAINT**: `cd2b7ece196d28d6642e13c95c8dc02e9f53dae43a69e0eca74583cb48bf1b76`
 
 ### CMX-0432 | RELEASE::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `cb3b55afbcc2c1e70527d7b9e946182eb5787b77eaa65c8c0d25f776c036d2a6`
+- **CORTEX-TAINT**: `9f0ef28db1e8366093d07a144a3ce3a4e72bd5ae65718634a7b30b8c3bf0c7a0`
 
 ### CMX-0433 | RELEASE::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `b3fdc1a07951d16920f3c86c9e71cbad0d7c8900b8c4c5a54f350b9860709c06`
+- **CORTEX-TAINT**: `e3b2a3fcef7bfc8b04f2cb5900b8188881b266917e83f65133c9dd12d888d9d8`
 
 ### CMX-0434 | RELEASE::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `bf90017a05d772bb79bd0b5f052b626a00fdf333c9c0550f2baf9178bc875f3a`
+- **CORTEX-TAINT**: `6c9bf2dd16e8c66f6c1f7e31472bfbaa37820e0d5ee414629a64e27e23e7df01`
 
 ### CMX-0435 | RELEASE::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `5553a0bd60c9730dfce5f719e5629f8fffb51c0c0eab74e802ea35ab1838b6a3`
+- **CORTEX-TAINT**: `417f73516c02f030f3f467c6bd9b6898e3ec829d5528298aaf769b7b0ee93068`
 
 ### CMX-0436 | RELEASE::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `5853e9b38ac507356c9c3f971ea0a4727aacda581740adcfd20951c224d27190`
+- **CORTEX-TAINT**: `07438ae8fd1c4fedccc1f7650de9b38bfe6471fde08c2d6d237a7b8ba36e7ba8`
 
 ### CMX-0437 | RELEASE::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `7a370465a7bc976ae4b52cd6c7476900cd5a07d59ae7af9ec7b71050e37e5a05`
+- **CORTEX-TAINT**: `c5bf1f1cad5ef44fb3f4d3d516c9d5f5ed43f702034cee592757aff0f436e7fa`
 
 ### CMX-0438 | RELEASE::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `e6845fd3563f3b20396396a7844cdbf920cf450d84f80037529494a4abacb1e7`
+- **CORTEX-TAINT**: `f3ff67455260cf2de37e4933ba49a100bb60cdf203728ba36eedb10dc8a458da`
 
 ### CMX-0439 | RELEASE::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `335dff744f098c2ae8071867f38918614452907a90e0e6a2edde8fbc0fbe987c`
+- **CORTEX-TAINT**: `4bf97d34f3148b8bc66f4cfb64bc9cdb30cc0858dc63d704541c2e1dcd9c2a98`
 
 ### CMX-0440 | RELEASE::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `ec62a4da994c5869962e7f7e92e87724c40df9140fcb0455ab6b49ea856a3d6d`
+- **CORTEX-TAINT**: `3b66e1cee71645f9a83657ee5435ee9953cc090ee2152f0ffa24c4e6936cf60b`
 
 ### CMX-0441 | RELEASE::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `8429a5336fecfd02e2fad968b77b5eb15c913337ce53406d5bd2ae1f37a3d10c`
+- **CORTEX-TAINT**: `d5bf3f333d353524b0fc70b45c7fb511e001bb4d4e7ec2881b83d69509939849`
 
 ### CMX-0442 | RELEASE::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `5380572f6e48314e7c7363c4c1ff15f25f9da14c71cb725a7d63b0a0f6bb0407`
+- **CORTEX-TAINT**: `a11935667c5c2c0b3a44c577b5d27d8d0010e6dc9c72c4a2447b8193a30fda8c`
 
 ### CMX-0443 | RELEASE::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `74bea39fadd5defc45ee3f248f41616892d4d3052fcde60f1502ff3b8b041821`
+- **CORTEX-TAINT**: `e96c66f6a860270f7428169ede56a0c2200f89d7b900429962f85cfbbf6a08e6`
 
 ### CMX-0444 | RELEASE::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `d035b541ac267524411f37363b2c0c8efc5d596f9a539c69d775c24566a9d49b`
+- **CORTEX-TAINT**: `559378d1fcd143b3d8d0f36199f6715d9211d53361c527cceee7d1bdf53b6ba0`
 
 ### CMX-0445 | RELEASE::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `219d87caa3f16f56e9a2065380c84fbaa39dc9ef1277dce67f7b657241fe84fa`
+- **CORTEX-TAINT**: `b8abd69c381b97a6b61dd75d6c7ade1cc70e6bed7068791d3f34ecc917eaac1e`
 
 ### CMX-0446 | RELEASE::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `7dfee6306aa5ab16c9f946af72e0028263aedf389ce20d28aed3438a306db482`
+- **CORTEX-TAINT**: `2d8fc3bd2d68973700750e64eeb492a791abd318fc5ee6044fa61e061ea8880e`
 
 ### CMX-0447 | RELEASE::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `21c3e904360f794c85f65b8cbf6e98c5cb5a63c879b9a5ff3b1b33899710ff5f`
+- **CORTEX-TAINT**: `b21e440599e3ffd52e93f30bc46f87fda390ef1b163a18cb724a84b048bcd9bd`
 
 ### CMX-0448 | RELEASE::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `40654750ca85f7fcae639c936a66800e7657d007c6c1297bfee797b430f86c8d`
+- **CORTEX-TAINT**: `012b89a591b01fb570552fa1a21b895b4859c5095402c87e5c448d471c679c94`
 
 ### CMX-0449 | RELEASE::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `25101f683b29b7ed77c746485f9d66ea53efccc2d15efde28c08c24c080402b3`
+- **CORTEX-TAINT**: `383472f81ce926cc62a176f3d1945592c88d4039e1b5da69e9beeef60551885b`
 
 ### CMX-0450 | RELEASE::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `ed30e3fc3f6dae8bffd77cc1f4d7f5f1137538c53b22c8defe3955f91d4faedc`
+- **CORTEX-TAINT**: `8be336eec39b4dd1d4a28f9140d32d66466e0d4f9e1ac8dba9a627e082adce58`
 
 ### CMX-0451 | RELEASE::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `a90d57ca85b6e441f75568ee700566ac022fb6ec0da100d25da94a05847f88f2`
+- **CORTEX-TAINT**: `eb0c19920fc83c4056e407f6f71f3e0bddd2ed148b19ea0ae3309d4044e3fc5e`
 
 ### CMX-0452 | RELEASE::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `af1cc46e2a53bb3329c5ed687789210c65479e00e4fa55ba63a52181217da9e0`
+- **CORTEX-TAINT**: `89dcd4ca3cf1589eb130332848414e93023ee0130687feb6eee3eeaa99cbdb6e`
 
 ### CMX-0453 | RELEASE::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `41cf2b1ba238bfc9209abaec1bc44af30010c9cd86fbcc78bec9795ca0c4ab57`
+- **CORTEX-TAINT**: `60ba3c90fadef4dbd544d0ecc8c9c759f07d3c929605d9b5f92de5daaeb1729b`
 
 ### CMX-0454 | RELEASE::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `06dc1ac6360a44f4fcd6d51f01ff5b02dccf3f504cc6bc7292e5875605727f15`
+- **CORTEX-TAINT**: `023884be96306d677a3025dd039ab5a55c1cba8a4258289dc3db459c2dc3dcd2`
 
 ### CMX-0455 | RELEASE::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `b013906893a8380d54c23f1a86901dd499f4ffb120a2b9214d8fea4763a9d5a0`
+- **CORTEX-TAINT**: `a1f5ea19eff8833a67de480ddb905a30fdee4945eef3e48b1e688038dfa2fc00`
 
 ### CMX-0456 | RELEASE::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `19b4067e831d5ecd12c9bf6bcdda199005ae443608ac3468786534367eec23d5`
+- **CORTEX-TAINT**: `0cccd6f9a02a8f0d9467b0fd9d47b960af7000ae75b1beeda1a0b87993532abd`
 
 ### CMX-0457 | RELEASE::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `a0d6f0ffd8617e57ca5ad7dfb63d393cf224bea677e4808685c26344c67549f2`
+- **CORTEX-TAINT**: `6915d15c8db39a32b748284c28e05e3974ba90efd74e7209be7eeac9928d7bb3`
 
 ### CMX-0458 | RELEASE::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `d459683b218fc651898d8ebecaaeb73fe380fa35d17637cd5b2e506f725a7efc`
+- **CORTEX-TAINT**: `b12bc47342969f492e66008c19bf059a2729516f94495ebdbedc3f7e8e9978f0`
 
 ### CMX-0459 | RELEASE::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `4b88551f1925b9486884bc9c488e9ee572e3cd267f875eb3a6f8cd44c74f36d4`
+- **CORTEX-TAINT**: `5b13de2c7b56be545470b00e97874a5e86179daea88175df16de0440a7546e86`
 
 ### CMX-0460 | RELEASE::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `cd9bbe82297941eec8dc02caa2166a18a2feb1658791e5a09c274d09c961b1cb`
+- **CORTEX-TAINT**: `2173b93af6fb2d67a99e0513bf011319add639ec97765fa0f902d5e3703f2502`
 
 ### CMX-0461 | RELEASE::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `09f6bc1eed6c87c743fec126d1f589b6864a0a771dba38dd37d7bfd0a96fe9c1`
+- **CORTEX-TAINT**: `9a3e568a69aef396cc519cb6ea9f6733b7f4bfdf20fae2b2c772db6b78336de3`
 
 ### CMX-0462 | RELEASE::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `f272efc30cdd304cae503832ec836520703046cad290df93a5e03a5d66ce4444`
+- **CORTEX-TAINT**: `25290e5c72c554a5258bdc5324c27a51a790979adc55802219395c12dc85a8a5`
 
 ### CMX-0463 | RELEASE::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `c4868074e2ac1cad17fb46d1049c9299b18f645c0465b9a8004f9d5935aafcd0`
+- **CORTEX-TAINT**: `4dc3e988f455e6774f25c0ff59ac973d09ecae8670b7e238c212b6efac795a1d`
 
 ### CMX-0464 | RELEASE::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `79a415062ecf98ed1b47932a491b5e21d14883063b3b0687cd96cc63f870089a`
+- **CORTEX-TAINT**: `72e718682526bd279527e53cdb92d357f39a7a539c4c521bfd3e4d76e9d46922`
 
 ### CMX-0465 | RELEASE::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `0c9af06dcb0d5a9ea20c4d04ee850020f756a78154db45e43311e07fa99fdb76`
+- **CORTEX-TAINT**: `354f5b3f51d5a4047ca1213bc9505ef39b48170455e0e66119a06416644f2ea7`
 
 ### CMX-0466 | RELEASE::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `ac26886f973ae5547d7b0590fc6e62fd50fef02edb763a5aa80a8f7f6315080c`
+- **CORTEX-TAINT**: `64816ec49ed5eb3a0033a24aa651ecb3a7da9b7e84b31f8559d730e23b82fbbd`
 
 ### CMX-0467 | RELEASE::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `33989a0cfcbda5f086b0a8dce42ff16126777dac3137a993d93a67d52a49d1fe`
+- **CORTEX-TAINT**: `24c18717191fde0dcc20e00b8e5ecda510b4908c1278e2c9e5bff8fac27d2f26`
 
 ### CMX-0468 | RELEASE::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `c14480d32b33e37c30b4239fac6f5b06cb24956026df060aca4f68ceb6c2ae66`
+- **CORTEX-TAINT**: `405e85cc07a16c0d38b63b05b078babf50e77538f65fb077f558fcbb549b9855`
 
 ### CMX-0469 | RELEASE::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `e3a7b01a75a963da5936bc7e72b52cfd2d0399f6d6739a051ba5e5cea8dded3d`
+- **CORTEX-TAINT**: `056ed75ca3af70f10b265305ac17acb2e6ad6f01762fed78389e7d27467ce683`
 
 ### CMX-0470 | RELEASE::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `5993fbc796a10d5b8ff412e3b0332647e3892f42cbbb9b310005e64f71a527ef`
+- **CORTEX-TAINT**: `0dc71d5bbafa45591f2ba6ef08c1c6e29fed8f12ba83d340398f4e116bd110c4`
 
 ### CMX-0471 | RELEASE::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `4a5f9e80586ca2e83fb79ad14f50f0693f29f979eef5545089d6a5c37aaa922c`
+- **CORTEX-TAINT**: `4c82c7b8f2df47db843ed9304cdf5aa9735fc9a5e94f58fcb717194168b00bd7`
 
 ### CMX-0472 | RELEASE::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `a69f3839472d5e9227802102a1c77bf9b0abb2231f217639bb1562d25f5cf1b7`
+- **CORTEX-TAINT**: `08df25b9ef018611c90f1c19a0a9845233307bcfdcc9e5c1e4d76127c2ca31f8`
 
 ### CMX-0473 | RELEASE::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `edc453ef8948228b71d1f6dc96d07a9dd74ddeb87232a358c03dcfdc33b6409f`
+- **CORTEX-TAINT**: `e52a9fd29509ddb6f9433829badef71a6c8680e5f6055261490b2e8a5a4a3652`
 
 ### CMX-0474 | RELEASE::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `a21c815c4266a0547102a48922020f1e1ec138b2054b5f602d53dea26e65a117`
+- **CORTEX-TAINT**: `3dd2371dcabe0fb5664c2b6a74e886c8acb04948f7563dfcb064e38553854dc4`
 
 ### CMX-0475 | RELEASE::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `89fcaff565b44e3748f9bef176c9e45fea3698aa7581c3c03ec358217f0477b6`
+- **CORTEX-TAINT**: `dcb2289c51566db3456715ecf00e9703e1f2ebdb97c0bcd986567533f83620d0`
 
 ### CMX-0476 | RELEASE::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `33b335a8702c68949ab42f3f8d648caddcc5dbc1820f6b24745036a91972e69c`
+- **CORTEX-TAINT**: `b456683bfe0dabc88fc9a32c659a2c699d114b2ba330ca88d710e5e30fed2e08`
 
 ### CMX-0477 | RELEASE::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `0f17ab573e3e1b8b9ecb01596ad52713f6b04084d4dcbebd7eda4042d9d686e9`
+- **CORTEX-TAINT**: `ba53a65db49084cde6de25311dffc8bdc7216f34f0c72cce2fa4e2dd9b9ba081`
 
 ### CMX-0478 | RELEASE::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `9365d8743e09280510009f7e9aef9549cd16eb576692f5269db6e820764a1643`
+- **CORTEX-TAINT**: `ff21f1ee26bbbfc64224d930a00476f28e0e786368a4f2cf0564ffc2fe97b878`
 
 ### CMX-0479 | RELEASE::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `0189622088ffc93cf006405f01f6d9ec45a5deba20007b86b3e37329b4f09900`
+- **CORTEX-TAINT**: `03264bc0fb7bdd9001779d22ff06fc23d38eea5099533b709e699ebf31eee1c6`
 
 ### CMX-0480 | RELEASE::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `6fa65041cdc11a274eebfc1e965aa2fe8ea298d7aa4108e9d18bc7ee641abc89`
+- **CORTEX-TAINT**: `3100aae1fa3b02bf76c185cc15cb9f1b48fa4871b43dd96fbf024d8f8aee075f`
 
 ### CMX-0481 | RELEASE::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `0d475adf097631c9e4da615e7b5c6e34cb04e0d0b41188cfd6c6f5b34fe944b4`
+- **CORTEX-TAINT**: `921b279e3876bb406220d96cf56f888277b53883fdccad2ccf1db66706a9591a`
 
 ### CMX-0482 | RELEASE::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `2e09cf108b4956a9a895b4e2abc8a235ba892398e0f4735d0f87935b429bc2e7`
+- **CORTEX-TAINT**: `49ada1d10af927fdb18ca121c66d86873ba2a85e83040b85fc8e0c0e35d5b23d`
 
 ### CMX-0483 | RELEASE::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `740c971ef9584501bf74dd754496592360df79410a00006eb294740bb1c7427e`
+- **CORTEX-TAINT**: `8c0bcdb2e9d786f744f4cb416a9df68461b95c6c235eb077c92b3e24b168db01`
 
 ### CMX-0484 | RELEASE::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1e586ebdb8947e62b1cf263431602be66a5fd8955458e2ea29cd48d452aefd27`
+- **CORTEX-TAINT**: `a854056cd17a32d1c9bcc55cde018e30ae5633c953fc43ff36093d8ebbf5bd39`
 
 ### CMX-0485 | RELEASE::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8a686bdd1e42875c168d08ae8b0dab8b3e539419b6e78af7e64e810f4aac47b8`
+- **CORTEX-TAINT**: `54d5befbeebc3fb9af4ca6ac667ad6c85c8d5519dbbc0d43cc862c725d506af7`
 
 ### CMX-0486 | RELEASE::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `dd6ab950a6d315c6de5ee4c5b1887892e54406a94e6723c41908f3a380f240bb`
+- **CORTEX-TAINT**: `4174746b939e17bffd4d778ed6223864b14804807e4182a7046527e45f8afb0d`
 
 ### CMX-0487 | RELEASE::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `0bb23f69f5c686119a6c19079a783b8cbd3517b161d25c8451abbc3398a5897d`
+- **CORTEX-TAINT**: `9adbb7509b39ae0032f01235a2790d525b75b6573569736f7e518da58a13bfd0`
 
 ### CMX-0488 | RELEASE::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `99c6931b61438244866eacc9e972c1061c40c47b50155ce18a7c05515909f27c`
+- **CORTEX-TAINT**: `592f03a02f25395b0a5bc1d62e4b95af51737bf2c11ede787331c9a91af4a5f6`
 
 ### CMX-0489 | RELEASE::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `046f588154ee3dffcd3e7a28f7d5e4f1687a84b45c56d9e9026e5eef75253edd`
+- **CORTEX-TAINT**: `f2d979f3a7246519792e14148f9c49c2b63f4db159571bbe9da7068bb21601b5`
 
 ### CMX-0490 | RELEASE::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b7c4a687fbc8c30b7c680083ab7a600e78b49ad31db465017b4495e6db6c7c6e`
+- **CORTEX-TAINT**: `18822f385514ccca890c2b4026320240ef964e9a905fe79b036400d614747793`
 
 ### CMX-0491 | RELEASE::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `f63cb5f2e5568d4f1fdf7ea1db9402445c8e8d5780eeb8f7d3bdacd47c2b3e94`
+- **CORTEX-TAINT**: `e385cba2a90670c20950359a55bed70f87849c0290a933d46251e7b7cfa95a3e`
 
 ### CMX-0492 | RELEASE::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `71ad7f1fcbcf673dd79065e8d068a920949b67f0fbfdb0a2b1f488ff4be20461`
+- **CORTEX-TAINT**: `f4810ae880c29f29529c28b6defcc301021aff5b5bdb126a2063fb7c84efad5b`
 
 ### CMX-0493 | RELEASE::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9d0c0758fda6283cbbbe64b12294654260e1b835c61a0d8940e431cbb0e60ac8`
+- **CORTEX-TAINT**: `d74c5987008f3c33902e318a9d6effcf4a74e9b15a1a8445dc77ac066be6e747`
 
 ### CMX-0494 | RELEASE::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `ef829a435c41c6832afd399dd49f629048e91a82b47116119e5c9bcbd8a9b4ba`
+- **CORTEX-TAINT**: `67dd54d862048ef419fae93d1ae5ccbc7569e63c9c0f299cd292dd97488f26a3`
 
 ### CMX-0495 | RELEASE::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c32b3279c917cb7f5aee53bbee5071518c1a57b131d2271614f069399fd52f70`
+- **CORTEX-TAINT**: `a916ea96585e1013fa3cc438f860a7bc0ae705dd312c43bd22f1e7d5e374aff2`
 
 ### CMX-0496 | RELEASE::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `210618a1d64cb9582e7b97aac9dfaae091fcab59a180c20b3bef61739c8369c1`
+- **CORTEX-TAINT**: `6935522a439fa53e544a966c7a61088e6a934e3bbbfe6840de90a6add74e2aa0`
 
 ### CMX-0497 | RELEASE::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `efc98416c25882e672e68e31fe22b9ff9008cd1316bc64322c61b152fd440ae6`
+- **CORTEX-TAINT**: `b4bdde183cdf4f49431c1d9fd68fd1359f117df9866c240040075be0edd36ddb`
 
 ### CMX-0498 | RELEASE::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `003021da66c62dbba06b33e10e127f9be7faf0f9f065202e2fedbc5bbf951441`
+- **CORTEX-TAINT**: `aba6062306a8a978df4c87a62f9420d8291a4268a84bf2a8bff39e453563e543`
 
 ### CMX-0499 | RELEASE::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `5925b2bc9d4abdac828930ed3564933117cfd1087f28122d2ef1666544155673`
+- **CORTEX-TAINT**: `92d4e8f8e085381010b9be6d14efdcb4ccbbd952299584a853762adc55db3efe`
 
 ### CMX-0500 | RELEASE::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de RELEASE, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `a2f5228d075b202419d4aba222fe47909c83f9b6b6101798030925a55b83cfad`
+- **CORTEX-TAINT**: `dd1bb5460a60bc91a87f28e680960b533af40ab5cb28717c9e4ecd337b21fa97`
 
 
 ## DOMINIO: DEPLOYMENT
 
 ### CMX-0501 | DEPLOYMENT::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `16b382a8cdaa8648e6b7acd1de6c57cb06bde18771738f5ffd2f3c5aace92220`
+- **CORTEX-TAINT**: `055e2d084a575e44f6b05d30c8f6f77e5a89ba38764c1e5ce1a621bf77c03ae3`
 
 ### CMX-0502 | DEPLOYMENT::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `26d893e60ec60179d6f1c50a54dd9b3ebad789570ff121a1b435d0c182238879`
+- **CORTEX-TAINT**: `68ec584564bd3256379437d789f372e76621ce9f60f36577035b3890283696a0`
 
 ### CMX-0503 | DEPLOYMENT::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `9fd1b52525c157ec86cbca8dc14b0d274d66fd3de6de4df6d342beb466d9b9bd`
+- **CORTEX-TAINT**: `af3105a7cec8c0774275fbffdb65afa0072bd8b607e1f9ab19f28b7c3e11ea13`
 
 ### CMX-0504 | DEPLOYMENT::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `2adcbbbe3c5e476d12f1737937746669c6d65e5cdfa094e2e9c1c8efa339ca5f`
+- **CORTEX-TAINT**: `4475964f96e6fb08be8ff35c985dec35c1da5bc3eb0e860bd14fac27a1ac28af`
 
 ### CMX-0505 | DEPLOYMENT::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `bc7d6cf3ca509070c4dbbb6f3e8b35340967e023f57ee65829efefde33a644b4`
+- **CORTEX-TAINT**: `347fdc5583771c1033497a72ab4d3d626d3f17ab551cac301020ee1001dc32a7`
 
 ### CMX-0506 | DEPLOYMENT::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `563d28abf33daf494a6eeecdf6ba6db08e6c0e00c7421b86bfd8083e964186d5`
+- **CORTEX-TAINT**: `68dd7507d135a6b895e38e5daa2e95bb93a77dbf6c60bed25d33f663e968ec76`
 
 ### CMX-0507 | DEPLOYMENT::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `68d4ac84ff30cdf91e7cefe7afa2449beb3e96e1edd7d74e7ccd8471cc2afa63`
+- **CORTEX-TAINT**: `ec7c86613e31c34f877013804d4964094ea5d6946166007b84966ab62a5eecb7`
 
 ### CMX-0508 | DEPLOYMENT::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `6cfd588c40c6adb979ad9eadaa6d12136cfd073cd5b42a21a94a23bca83c2fde`
+- **CORTEX-TAINT**: `6ebfc78ceb0949cf7afe215889113ec1b01e5e38e598391b311c73189d04860f`
 
 ### CMX-0509 | DEPLOYMENT::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `217f6047d8b905f229f1eb6c733f06b3edecedc3b4b9e50cebd52ccb253974ea`
+- **CORTEX-TAINT**: `69b6ff08cebe19d4b99d95dd6e51efef1e4c54e3004aeaeeee21279051442c3a`
 
 ### CMX-0510 | DEPLOYMENT::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `5979553f43abb9b1d1ddeeb51430dbefe68db17cc27851c2f48189d4cf8a7087`
+- **CORTEX-TAINT**: `5131c75ca631b728d91d1767d7b6719aad9c73f3ae4fef57b35db116b60a1770`
 
 ### CMX-0511 | DEPLOYMENT::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `ff915821aaa5522c8a894d916092f7f03d4e830aabfec3190089b916ce345ac1`
+- **CORTEX-TAINT**: `bdeed96f37ea5ce4698a645bd8098f5742aab1607e749bedc3afc8d8a8dc8f1c`
 
 ### CMX-0512 | DEPLOYMENT::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e4bb0fbcb197f34f43f5f38aa72159dd996598078271ab75a3f5ee4275580018`
+- **CORTEX-TAINT**: `7fc1f57cd714b5cbc0697a3af1b5dd498b0c295b3d800f266bbc2c966696dbb3`
 
 ### CMX-0513 | DEPLOYMENT::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `edb8a06251babf827da94f2ffb7fab3b8b0736624b8485de7c0c213e68b8a199`
+- **CORTEX-TAINT**: `f9af79ea660df9e46a9d3cc10df180f2f6c234a61d7a39fcd2dcff4a04df07b9`
 
 ### CMX-0514 | DEPLOYMENT::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `986f0db7491878c21196d903430c725c06a62dba9600e3940ce7a9c76368a72f`
+- **CORTEX-TAINT**: `e0b083ef2fb93b588fb0d5d3204ae8b08775316ee99794409fc027494ddc58c1`
 
 ### CMX-0515 | DEPLOYMENT::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `607d3f5429f84ab6c318e9def34ef8683eb8b0a535a057cbf54d208eeb209d42`
+- **CORTEX-TAINT**: `14c6742320b0717b2e3b6b06c39887116bad247d81d9a82dd1ffaecb8d3946ef`
 
 ### CMX-0516 | DEPLOYMENT::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e2668128ead8a6cd4ebe6ca65149143411a4832e2191e4cbedbded6bacc8ae46`
+- **CORTEX-TAINT**: `22b91784e2394b3e6c9cbda8cba99b621d634aad39969868131366e53ad86216`
 
 ### CMX-0517 | DEPLOYMENT::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `606276d1095ca93b65949becdbce39119ca7b11e9e7072b06f32d8cda909c181`
+- **CORTEX-TAINT**: `a8a731565a1e8d5a3434b383c2a19859fb79a1031887e82d53f2dd714727561f`
 
 ### CMX-0518 | DEPLOYMENT::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `4cc9a46cc4d4988ca7406f8ce7233a8326a62c528222d669a7ad584d0ca5a2a2`
+- **CORTEX-TAINT**: `ae9f810a6e78c1555406b7e0f8efaa22444cb93eb00749d65c98151ecb948e7c`
 
 ### CMX-0519 | DEPLOYMENT::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `aa904149fb1babb9b134d717779b3aa3a3c8dfaa71cf05503f394f99a6e823aa`
+- **CORTEX-TAINT**: `d47ce2b337583e96bfbc8bfd7c8d2f881821aa0c20cd174a314698855737bc0c`
 
 ### CMX-0520 | DEPLOYMENT::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `875a40506208ae2e0e40463fe6210aafb964f18ebd62e436bc76082a05c1a511`
+- **CORTEX-TAINT**: `1872abf0e3a31d08ababe6f162b78f7ea718131b1564abf14d39573a87f4fcaf`
 
 ### CMX-0521 | DEPLOYMENT::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `dbc6156eff6b66221e3d985a62e7f21bdfe2cc779b2f40b11394859c93ec502b`
+- **CORTEX-TAINT**: `cafca8f70e9f4abc58dc3535d58dd1b88b18244fd4c60334c6b0175463eb4740`
 
 ### CMX-0522 | DEPLOYMENT::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `0c8fccdfb0b68e14243a9f78d18c477990b44d8e6506e4c81941360cebd9d0be`
+- **CORTEX-TAINT**: `045c7e85874948202389bff3f9d809fa0640dd07312e0cf718cc03b07c1bcd93`
 
 ### CMX-0523 | DEPLOYMENT::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `91b3e5c40aec544af5985c5dc3d73f3e04c2c8ab9348367033bd0e34e4258af4`
+- **CORTEX-TAINT**: `a9b8609f8a7141baeafbafc21490e2aab3ca974d3b562f2cc299781102384850`
 
 ### CMX-0524 | DEPLOYMENT::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `1eebd970c31b58b7b47d9a87dedd038fe84410eb00f6e011ba42387ae725866b`
+- **CORTEX-TAINT**: `feddec6b2b1cc5bd789d60ab27434d8ce7f8f6e3955c96b3d62e9019f06bfe1d`
 
 ### CMX-0525 | DEPLOYMENT::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `dbc4002c78306105441412e120b3b3ee97478ee00f2983bf8a1e769e67e54215`
+- **CORTEX-TAINT**: `2903452f042327564b25f4564611e78010ad7456f92e404a5cb82bfb37fb7241`
 
 ### CMX-0526 | DEPLOYMENT::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `cc5e5139d70d064bfcc3b249caa8a1a515a393e3630915a7b413c6ab18a1859d`
+- **CORTEX-TAINT**: `4951349af4b1a1e37d42e6961e6d86641aeb6f939bdd02bd4627ac4ddee186c6`
 
 ### CMX-0527 | DEPLOYMENT::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `4e1051f8524e3d24a316ae6f8b6165dd0f8b9a681ca65f1dfdea872acb719537`
+- **CORTEX-TAINT**: `c04ddf1391a471cc2f733ffeee00dd458c55b88acebf24461fd7747496aa47aa`
 
 ### CMX-0528 | DEPLOYMENT::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `5cf82a2226e0922a605fe689587e66ae40eb3445fc7ae186839c480530770f50`
+- **CORTEX-TAINT**: `86ffdbab49aef0c74f8f01657d5bc6846011eaa611cae7535f29681d8945fc26`
 
 ### CMX-0529 | DEPLOYMENT::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `54ff783b577202b6e96fd19c507df85627689b4fac9f1300386e5ff04a73f4f3`
+- **CORTEX-TAINT**: `e25da7b05829c1ea61ad6166b916bf4eea97e955704a787ab3a72554982e0187`
 
 ### CMX-0530 | DEPLOYMENT::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `f58bc46c5be297a2308d741783b8730541959ed899b4276d9062d727356c0796`
+- **CORTEX-TAINT**: `e2dd159fa8bd15a85d53c2f1b8f98c94be218d7f16c8853d527b4d9ea994831d`
 
 ### CMX-0531 | DEPLOYMENT::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `3526bb13eae1b1c2c6f74e42bb406f65a7eca2b375c3c4c75d3adeb82b678899`
+- **CORTEX-TAINT**: `b2cd260518819cccec060ba25d18690760fc5333bceaf2ec7aee5fdc38167034`
 
 ### CMX-0532 | DEPLOYMENT::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `d76a405c623e3223dbbd261f5f4530d24275564ea4db5562a8e580e8071de194`
+- **CORTEX-TAINT**: `93d92f4bc9d01b0b812cd4af606ba3521a3e375331b08a02508139fce6547740`
 
 ### CMX-0533 | DEPLOYMENT::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `84f402d905b1743fd5f25cbeba73de32d517b578a4088e94b4571dd1035c81b4`
+- **CORTEX-TAINT**: `b9f0c2625cb72dde637e747694d6137f7cbb31c02c28c22575279fd15af8016c`
 
 ### CMX-0534 | DEPLOYMENT::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `2af9f329b9a62196dba1f67b927885fa027a5112f4b92fcdfea95ce2366e027c`
+- **CORTEX-TAINT**: `7a9b3c71ada91a8d6a3b7d2614d5f4fcb7fe24cdcebb1c8f4b082ca44bbbfd1e`
 
 ### CMX-0535 | DEPLOYMENT::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f2226070466827382ec94155834c35501be24a2a2018d25ec4388caecf10ea68`
+- **CORTEX-TAINT**: `ce1f21e1c77e0ab132cf1e0df820b9694a2a02b451886fb9aa260df232d54cc4`
 
 ### CMX-0536 | DEPLOYMENT::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `ad5c1c8e5129d3e04cbf2d15191aeeebb44f6bcae86bf34947739a3efd31bcf3`
+- **CORTEX-TAINT**: `4f09ee3ff32b3a8125b2aa025211d91baa10f9654a023068946c0a77a6f6d88c`
 
 ### CMX-0537 | DEPLOYMENT::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `34f3a64d5890191fe1944c49cb818626a71cefc6122ceb7c96fd83e59d6529c6`
+- **CORTEX-TAINT**: `cb59dfd940d0c7bc81aeb19cf07d099a803625a29be5abcdbd78a8f09836d400`
 
 ### CMX-0538 | DEPLOYMENT::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `87558e1d1231d723b45574ca8f28a25ece9986eede03003bd1b6c40a1229c5ec`
+- **CORTEX-TAINT**: `f146ebbc73ca65fdbe09ee390c1ffa056a42b9f0258148a843a7609bf99c0ba1`
 
 ### CMX-0539 | DEPLOYMENT::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `a88c016b607958629985cd5bb18487aaf6b7cbe30575cccd54a239a704ef178e`
+- **CORTEX-TAINT**: `efb8fa1bd1b1b98a12aec4435269d943be0b168f5c00a83e077f6a0415df0cd0`
 
 ### CMX-0540 | DEPLOYMENT::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `a8f2690d4ead47f5f6ae53052210859c3add75a9eab84191b6faee25485c6cf3`
+- **CORTEX-TAINT**: `956f9a73ec383e956d255207cd60c75bed6ddb9ae9ab6fe29d19f2ad189827c4`
 
 ### CMX-0541 | DEPLOYMENT::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `3ecf5f0ced277ebc917a5fca567a99fd8b64ba25d7f5a0621a237f2c8a29ce22`
+- **CORTEX-TAINT**: `a893c2515e9954f5bc1dc7043aedb02df6d273a03328ed468f81155cdbad8933`
 
 ### CMX-0542 | DEPLOYMENT::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `ee7aed6a84847d3dae3d6348549954ef303e6df9d2e199c15b20dfb078050405`
+- **CORTEX-TAINT**: `a0eceb821050fafcfa3e133ad5bf82086a4bcbad25aa76cef478f42cd6c8e1ad`
 
 ### CMX-0543 | DEPLOYMENT::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c203708c5bfb40e4f31f06f5870ad79fd0ff1d8481a4ab31211b1996dea31baf`
+- **CORTEX-TAINT**: `c31e97cf0756e236c5027d5e26a433c3ce78a1e94ed101919349d65205afe351`
 
 ### CMX-0544 | DEPLOYMENT::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `35989ac3ab8326b2ee5422635fbe4f83a67c00f8f9e160bc6791cff221611c9b`
+- **CORTEX-TAINT**: `44e094bfd095ba21d2c3f8b25c1b8ba011f299a4e073cd9d765de11e799b63f2`
 
 ### CMX-0545 | DEPLOYMENT::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1af6fad52772f3273a858615a5ba403ec48a6d1b61fc5c309fe038d483707506`
+- **CORTEX-TAINT**: `d91cf23ef623f186812ac72bc8dd70ce37a6eeff11f7684d31670ca4736232b2`
 
 ### CMX-0546 | DEPLOYMENT::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `608b805131ae5af93f1dd9488c5908ce28403aeba5e41cc9dcb56be1c52b6fea`
+- **CORTEX-TAINT**: `4cb69397541e141e008f0bff7d7002ada18d3ee1872a6f3752b78f208a19b835`
 
 ### CMX-0547 | DEPLOYMENT::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `0ed20d22528ef7ff981ae4fc43134f5de427d53bc4b7b28da064ef38850072b2`
+- **CORTEX-TAINT**: `7a4ae3a16b1499420c6d23e12f4795fb6fcfc29f7f341c301a9de431aff921c5`
 
 ### CMX-0548 | DEPLOYMENT::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `8b33d44945271eb94ae4a7167ee76b9dbe0ffebe8c9083ae792dcadb01ee2aa9`
+- **CORTEX-TAINT**: `106dbe5126d0cd9962e5a3892edbc59a47b150514b927701ae30b7cee3b5fddb`
 
 ### CMX-0549 | DEPLOYMENT::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `0348e2ba9cdc362c09a5de10856bac2135fecaca495ebbc199c79973118f4609`
+- **CORTEX-TAINT**: `f9b947c42e7d224c16a51bce1d80f14342c2b4452df6cb41fca2392e010e73a1`
 
 ### CMX-0550 | DEPLOYMENT::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `88ae4ccf3693167b3b4665a3cbdd3e163b463b73f0f6f54bde2829db4fe28855`
+- **CORTEX-TAINT**: `51eee47db32ee7a55889731d3ff51d95a8803afd6560b422e9b27dbd71eda351`
 
 ### CMX-0551 | DEPLOYMENT::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `0e7636c09114122307a0e5203f6ab10cdbf553d6b97041ed3783bc3c20bc623d`
+- **CORTEX-TAINT**: `0cad672f92836bffb612deeb74e6cb7fc5b583d45c43429336a0ff0756add7de`
 
 ### CMX-0552 | DEPLOYMENT::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `e6d842743f4599078434e9e343dee3426c5fbb93b06d15cc0f170b5f05dfbc21`
+- **CORTEX-TAINT**: `003611b02df9934c472b7de6a7891d8a9f3085e7e77100fa52d416ec17f9cc32`
 
 ### CMX-0553 | DEPLOYMENT::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `29b2389d57bf17665e144626794ada737fd09909445de61f2207b8cea9cf8824`
+- **CORTEX-TAINT**: `c046e95d8d2fa4e7acbafe7960046d32e94e9320cc661461c774e16adb5ab339`
 
 ### CMX-0554 | DEPLOYMENT::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `eb2278637992f3cd3b0c6bda97d6590ae4bd939f47f09f40e884e8243d4480fb`
+- **CORTEX-TAINT**: `56a2737af4d17a4a61ecbcba36083b1d57bdc82b8e141578313f8a8c3153c361`
 
 ### CMX-0555 | DEPLOYMENT::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `3afa4af1e53dbe792d8be269acddf8fd3c46ceeba372b7a96c75e20f9d6d1772`
+- **CORTEX-TAINT**: `e749e768a039e955daa7834afbfc4c12b922821832478782a3da917f919e918e`
 
 ### CMX-0556 | DEPLOYMENT::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `9b99764effa67cd443e589c763cb180ba497287578620ef8951b19e222a305f0`
+- **CORTEX-TAINT**: `bafacee941601dff923a719af2b8ab041e95f654548b1059dbafac8bf778d01b`
 
 ### CMX-0557 | DEPLOYMENT::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `e54b6444cb254eab37fc55230f3e9f98f01edc2c02ac2ee867d817518cf3927c`
+- **CORTEX-TAINT**: `0a2c840a87eb666a93d321ec017bc3eeb3699b371b8afa516b3275884eb01820`
 
 ### CMX-0558 | DEPLOYMENT::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `eb3f7e45c605cf31664c41e8b95e27006bc085e198e4d6372ad4c38fef872ae5`
+- **CORTEX-TAINT**: `a23a610439778c65b207b7bb13b8f330fa76f8a525efa7899e83a33355d3fc6e`
 
 ### CMX-0559 | DEPLOYMENT::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `7bbcf0bfeaeeb37ab2beab5006511390c4d577265ece93debfbe9db83e593629`
+- **CORTEX-TAINT**: `26161d778ac4be304c9bb0ab4da39b390c8ed6f50eff1252b3f642d81fcc728f`
 
 ### CMX-0560 | DEPLOYMENT::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `4c346f802f7b329276eb839ccf9fd9fac5f9661ff37ce454b4905be7caf9fd04`
+- **CORTEX-TAINT**: `322982c0eb6fbacd555ffc6694f016610398144e7361782aded7d213b7efd783`
 
 ### CMX-0561 | DEPLOYMENT::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `9d60a9a296217e25cef565ad6d189ee481aeaa58405de16e02d51bc6e9b38b6d`
+- **CORTEX-TAINT**: `45ea1b7c63d0343c1b1856b767c73bf0c6102b038a71860f0fa4dc970ba1f18a`
 
 ### CMX-0562 | DEPLOYMENT::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `656f5c1e05a1194e777f192de18411092d170b350a5e402fa2f025b30e8087cd`
+- **CORTEX-TAINT**: `5cb1601c78a07516396d64cd00b5d449b738ed6989f3a6e6b49b6d7779dd7a73`
 
 ### CMX-0563 | DEPLOYMENT::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `576986d623910c85b70c28ba3c78f8fd0998ee475453374ef8a6584edd3b147b`
+- **CORTEX-TAINT**: `5a088eb59e31cd2242af74977ab8cbc5e0b45d187e23e5b9e863a75ed557f207`
 
 ### CMX-0564 | DEPLOYMENT::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `efa666c74caf9494736953be323534d3b0001fc19c82f3e944504908d1f20875`
+- **CORTEX-TAINT**: `ee4a5b26d56a2621ae632ebcd06cdb7661b1b7c27a69bd003d8a9945f248a36c`
 
 ### CMX-0565 | DEPLOYMENT::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `2ef1638a16a505e3a59f96a42ddca3dbb66e7bb90c06f84d81f6dc57fe019247`
+- **CORTEX-TAINT**: `d11c558317b8b6c43bfffdeba6385fa5686ee5418d9b7864807dbfe04a8ea121`
 
 ### CMX-0566 | DEPLOYMENT::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `efbfd9c688edc24b291d6d80732605f880ea70668656c23c3e9cc85947df68c2`
+- **CORTEX-TAINT**: `5a06fdf1e5e0d4f084525b4ff8223f573ea5b5deefe712ac6f81c2d13a632180`
 
 ### CMX-0567 | DEPLOYMENT::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `2d33566d1167e880b76f854113d04d1dc1a0e5a40565041e4c14b1a2ecdef234`
+- **CORTEX-TAINT**: `3ca5a765d16558d39627e2a24596dc7a1647805c17b7102aa52c94627690ba16`
 
 ### CMX-0568 | DEPLOYMENT::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `14893853b5832fe5a236cf188fee09bd92e48e4acd0c8841e4cbc44638cc2c56`
+- **CORTEX-TAINT**: `749f0f4e8dca654f610de0235582d20edd0f90b7c192cb6eb8d780c28a235f15`
 
 ### CMX-0569 | DEPLOYMENT::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `5232904bc020b0d284941ac91952ea6beb995779acd088eb0af3721744dab40d`
+- **CORTEX-TAINT**: `8305055efdc06639dab07c7de19d537be9d6f980cd44bd41dd782279c9b038cb`
 
 ### CMX-0570 | DEPLOYMENT::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b9faa4d506d5e09b8a081d6ccb546399e1d83acd58a4b6df3c6edd76fb963106`
+- **CORTEX-TAINT**: `1db1191d0d59b0f851537da9e96c401af8371c8f6b8ef6b0172176ecb31b4cca`
 
 ### CMX-0571 | DEPLOYMENT::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `a8bf044ecc0c5ca3103b8d8ce2bca9e58e7d4c795e5ee4bc312c200e29c9a726`
+- **CORTEX-TAINT**: `567a3dfbd7432e0e6483d4e74213eede739edc7f2e2b56c6fb8c9330699d2afe`
 
 ### CMX-0572 | DEPLOYMENT::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `50484f3309c838f1e64b98cdcf2fc4f37f862061a1f48d3ba7ab8ef6dc54119e`
+- **CORTEX-TAINT**: `ea10e4a5b6b83c511a62e222d06408d0ca491c1f14840bca09ca84a09ef91a7e`
 
 ### CMX-0573 | DEPLOYMENT::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `6bfcd777bf4ca961f77045a0de19980f3c250d9f0e29a48e2d4e34d41767837d`
+- **CORTEX-TAINT**: `cc175b0bdd6c32dc2c05eda367cf885ffcfec738f670db3f06df1e85041f9238`
 
 ### CMX-0574 | DEPLOYMENT::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `e0651a03776f65c5e05f7a79ff374c93e7f63630b63799079738e70c3ce569b4`
+- **CORTEX-TAINT**: `df6146377d0c05f0b4602913c7eba5a6fdab92702af9d72974c75ca3e508dc78`
 
 ### CMX-0575 | DEPLOYMENT::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `e0701499ad1e44be6fac72e95b0c60dbcc08b96f16eeaaf3a5951d61a6d4e88b`
+- **CORTEX-TAINT**: `8ae8b73963153a1840bf8e02572eab62def8f59bca09cdcc9399296d19cf02a7`
 
 ### CMX-0576 | DEPLOYMENT::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `dac5f6ea505065e492f0fd9b23524b3a8bdc0df5d8828f162f7802d3acf383e9`
+- **CORTEX-TAINT**: `0d587fbe90af6619556235ed9f62d968a2c411efaf1f712394417f5d40c73ece`
 
 ### CMX-0577 | DEPLOYMENT::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `51cb9adb3f0f83408339861ecf5b9e7afcac27d616ff4cc5cc2acc212307e32e`
+- **CORTEX-TAINT**: `d0aca02392841c72d4d9488fc6d13dcaa8e6f3eee067800ba06f92242f00d0fa`
 
 ### CMX-0578 | DEPLOYMENT::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `73856fcffccac8750dddca130100e3b777184ea2757a20565a297b6a03f16ee0`
+- **CORTEX-TAINT**: `6d92f958271f3c3db4d4365396ee1a11fbb0ee6b188859554cccf7aeddf49bbc`
 
 ### CMX-0579 | DEPLOYMENT::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `52312be75f5a2dcb7317b97955f8b2bb0970de996229f8e8698a94d67bcca68f`
+- **CORTEX-TAINT**: `9823fbae2038281f80471f9232c1faa1adea548e2482611d1a0fb00376a7b865`
 
 ### CMX-0580 | DEPLOYMENT::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `1e6577bed45fc84658dd1ca4d9a5cd9a16d92da9e39e076c62e6f57f99984247`
+- **CORTEX-TAINT**: `b84cf52eb9de2b589c25d6d0f14018533c61aab62c4bf0c1deeb17352345de11`
 
 ### CMX-0581 | DEPLOYMENT::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `6a99f87323ed739305e5654710a1be9ac4d87958cedbbd95e4320d5103d4e242`
+- **CORTEX-TAINT**: `d7fc2cc0d2c0adbf0d8c509937209de4aeed7dcc719e8a8e0a9c61717b34d426`
 
 ### CMX-0582 | DEPLOYMENT::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `f2dfd6d8dde1e583ba610a5913a8a07f01642f612d458c6d95ea793f75640e9d`
+- **CORTEX-TAINT**: `46f3f00e429e4f667805a25e68546c3315a6f9dcf15b8314280ac24359ba6011`
 
 ### CMX-0583 | DEPLOYMENT::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b09e0f8911e9facf5fa5fd19ee35df0942dca911b247070769d3be4e51599bb4`
+- **CORTEX-TAINT**: `1146806bf33472a2f43561830449e40e9b765476dfb82d4cd2725ee0ee117ad5`
 
 ### CMX-0584 | DEPLOYMENT::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `6f1a5edc7bcb2d75d5780f11da621f412d33934a89f7048aad5883bbc97c49b3`
+- **CORTEX-TAINT**: `730dcf2d02e5ed639c25e9e15e63c548a8e035aecd1ebf8029b671aff6cb604c`
 
 ### CMX-0585 | DEPLOYMENT::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `208d0cd3f2deccbed0b653d5c7711f0e29a1c6b0fabae5262da83f5f2ef49ec6`
+- **CORTEX-TAINT**: `846126d8b09718b22254c2284977011aa892967d9828c6211df3fd3bc616e415`
 
 ### CMX-0586 | DEPLOYMENT::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8f5b883f4f6e985a63195d741ef8cbfba2fc325e13b82e34bcb236cd0c2a3906`
+- **CORTEX-TAINT**: `328c21a93311a98861f002641c63fdfa0c0255703cc4e46515686b08beacdeef`
 
 ### CMX-0587 | DEPLOYMENT::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `9c3b7a689bda4c0ce10abbf51186423464dcb5e95ba4f498cfb6c17306c5ce7f`
+- **CORTEX-TAINT**: `177ec2fb43486367ecd5e19c7e45e41e8a430f89f4de77bd7935bb946d4a1eab`
 
 ### CMX-0588 | DEPLOYMENT::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `a0837015368d75e625ef022ec83f553035fb98190d1f3541af6ed483c0ebafdf`
+- **CORTEX-TAINT**: `4da80a1174d098bfadf00a307c095f8b8c17260874c871961ff7134bef318a48`
 
 ### CMX-0589 | DEPLOYMENT::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `056afdf5f2111e929e760abb64b1ec1ef08f122c5daf0d5138b90d3be146c2d8`
+- **CORTEX-TAINT**: `076bf8a6977188ce84332caf83592e70fa87041ce32eb2abb1faa04feeb66f80`
 
 ### CMX-0590 | DEPLOYMENT::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `e22e5f89944edd6d27b5b7e36679f3ffd0e3886a33219fbce23d3257d0e91423`
+- **CORTEX-TAINT**: `c76e4a73399ce7e4860c54587725f5e6f1275dba8a527a9a8dc14cc36bab1ee9`
 
 ### CMX-0591 | DEPLOYMENT::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `5f2ee0f74df7e84f732e3e98d4aa2a4facc15366180c11bcfb18fe61bf428e09`
+- **CORTEX-TAINT**: `66250e4266804bba5ab49118b8406d98909f455acb19116261eacca8329d1ce3`
 
 ### CMX-0592 | DEPLOYMENT::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `d7b17a59cd257d83788adaebf7f9fea98c3c74a78aab76024494a9ba23e59a9d`
+- **CORTEX-TAINT**: `bb1688287d1124bc73f44a0aaf9bb9a463c34360d90a1ea00c2ead26ead0c4f7`
 
 ### CMX-0593 | DEPLOYMENT::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `e6152d57da561e1aa23019a548dd765ce05e6f59a19492da90f2145371802959`
+- **CORTEX-TAINT**: `8f3508701621f99940144b02e9746c23c53ad12212d5bc3168dec5d854bfb165`
 
 ### CMX-0594 | DEPLOYMENT::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `dc3851b9bfca8f5ca896bbd970f9518b5eb4f6cb329885c7d9898c9fde7f44e5`
+- **CORTEX-TAINT**: `7a7b16be57540bae8f07741bb01b992c10513158c9eb25108682f8ded6b0367a`
 
 ### CMX-0595 | DEPLOYMENT::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c31a73d7b3942925c8536650fe004f66e334662833a7b19d0bc6a036002de9c5`
+- **CORTEX-TAINT**: `33bd8bf6771ad3589c8d50864fca6d898ad9144e85112b09de5e3914166b1da9`
 
 ### CMX-0596 | DEPLOYMENT::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `1d51ad93e21f5a9dc300b5380ee1780c8daae51bde3ac4bd4d2c29fbe7c2ddb3`
+- **CORTEX-TAINT**: `da178c8701a62eaa281dd44df8194646e7c46fa863762fbde1252dab8944bd75`
 
 ### CMX-0597 | DEPLOYMENT::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `da74afecc294400130df89482864dd9e29329f80ff855caebf2a6739e160a8cd`
+- **CORTEX-TAINT**: `13632190b9b0a873e68bd66bc64f6a9b92405196c5e860e59b101119aaf08a56`
 
 ### CMX-0598 | DEPLOYMENT::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `729360b6f1dcab7872eecd63a7302cc239dd2911d0279f5ee2515b029c7807f6`
+- **CORTEX-TAINT**: `c8ff0900ad734318202925ccb60bff756ed806c624cc3dea58702cf981502643`
 
 ### CMX-0599 | DEPLOYMENT::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `043a3039fafd306d06fbc2c01ccde74103a3f54940ea4e1271ce6e52bdf7cc1d`
+- **CORTEX-TAINT**: `51776f21974e94651347b6fb6539707fc68ef5fffa5c10c932e24252ef82449f`
 
 ### CMX-0600 | DEPLOYMENT::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DEPLOYMENT, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `3fb263d6cae05f77d9febcab3cae65a114c25378351d7dd1d04f2054dfcdf6ac`
+- **CORTEX-TAINT**: `a2d799c16c2ed58b7c4be02cfc3af27c52f22060f8f8b077767355fac84fbce9`
 
 
 ## DOMINIO: CODE_SCANNING_ALERT
 
 ### CMX-0601 | CODE_SCANNING_ALERT::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a8dbf5caf91a699051b4a29e9ad14eb47fbe3f1a2a1c6e8572980417def8d61b`
+- **CORTEX-TAINT**: `4fabb0bfdf40888f5f7a0e185a26f7a13f7b41a1e5773ccef54d7dc18b4cea23`
 
 ### CMX-0602 | CODE_SCANNING_ALERT::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `dd61b90b3a39bec51dfd6f4072c102558d1c12857279ae2e411393bde25123f8`
+- **CORTEX-TAINT**: `bb05369f1d19b208ad22706d8bba3c98397bfe7817bc5776c4a4cd5ee9393838`
 
 ### CMX-0603 | CODE_SCANNING_ALERT::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `132c6866596065754c15ef0eff1deb942ef60c6d9b2820b2486dc2ef4271365b`
+- **CORTEX-TAINT**: `5424651dc8780bd46231410a8d402128db4a3e0d6ace49d0f7f7b536adb8e1ef`
 
 ### CMX-0604 | CODE_SCANNING_ALERT::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `836220f37f50135b3cdbd43b54b23f7cf69c6e3cd679eb6ae5eed84b9bc061b8`
+- **CORTEX-TAINT**: `9067cc1d21fc2b68568c18210ecf7d1bc54641f7d6febc192861af01616b6c4c`
 
 ### CMX-0605 | CODE_SCANNING_ALERT::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `18f37ff08eb32c858627562636032b79edc4ff0429221cefe651c56de31c0c22`
+- **CORTEX-TAINT**: `8d50cf280150783e0430b543748b3a32a5c93f127fbe63ba7fd5edd75ab55927`
 
 ### CMX-0606 | CODE_SCANNING_ALERT::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `49bc2426f836cfba6c053163195da276d8274e4d6ab8f2f44ca2e82465148f6f`
+- **CORTEX-TAINT**: `5fb2a9118030884085408556530c782f177dd7427187a81c65c8996ea8aab6aa`
 
 ### CMX-0607 | CODE_SCANNING_ALERT::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `94486c79d2ad8bd06baf321ae2f14e4388c3be70e20c8a14fde72a518d432935`
+- **CORTEX-TAINT**: `e752be5e44c5300682fe1740a88963ad891a959270bf6ce313e99b0c232d446c`
 
 ### CMX-0608 | CODE_SCANNING_ALERT::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `48683f8597c2bbf213cf6578b2b30d0ab376ea00ef6f2b06c01f16d88b344c01`
+- **CORTEX-TAINT**: `7509375d05d3176b4bd8d2fd947badd2b6697fdc70a0b642ed39c61cefcd8fda`
 
 ### CMX-0609 | CODE_SCANNING_ALERT::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `eb15e08be5f5a39133d49692ff272ccf49b5b3c2717760b0d7a216591caedc7d`
+- **CORTEX-TAINT**: `47d4227bfe6dacc505873ea53a571f245746cf634bded20fb431d356f13f9912`
 
 ### CMX-0610 | CODE_SCANNING_ALERT::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e949f3cc4f0231f3826f2dbb0e49adb5e1086e81b83852fb7792f69bfdbf4861`
+- **CORTEX-TAINT**: `18f62e731ba620deee493ef11c04a23552a539409905d9ed7a2b677b1732ec0c`
 
 ### CMX-0611 | CODE_SCANNING_ALERT::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `336cb993d58bcd889c462f296ba06e8cbaa69fc2bd5e620684a76b97b8b5dcec`
+- **CORTEX-TAINT**: `0032fe60b2c84cda239d585a3feea5ebb2ed92771cd6c7e8ad2d971c16ed5d5d`
 
 ### CMX-0612 | CODE_SCANNING_ALERT::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5ca03697899283bf221a6f78bd772c8f0a8bf01fb7962cb039d8dba423027294`
+- **CORTEX-TAINT**: `58a089baf72b5a770daa553171b02ec7e1ac2c036a7dc6f921ffd3f6074977bd`
 
 ### CMX-0613 | CODE_SCANNING_ALERT::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `a1ed69a6fce8170e898d917af4457c5fe8a69a6af2e19385a86197a984b2e853`
+- **CORTEX-TAINT**: `a5d4ab6b82b6ac0e7f10404bd16c30645eb845554b19f4825adca2c7aa95acd6`
 
 ### CMX-0614 | CODE_SCANNING_ALERT::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `8e079fa7b599bb96abdde154c431fe4edd84f47759bf15c780d88d0ec4259be6`
+- **CORTEX-TAINT**: `ce89a1949e8c75dc867202d98cd1163aa3c5553b5003ce29247125b1b601c76a`
 
 ### CMX-0615 | CODE_SCANNING_ALERT::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `f4a155ecc7314f5b5d25acfe5eeb47091ffe59f64ab0a2a3492254655e4f31b6`
+- **CORTEX-TAINT**: `8d45e55e3bfc13faea580afd576a68597ad17bc9d52d5ed7a4a125d0f93aa294`
 
 ### CMX-0616 | CODE_SCANNING_ALERT::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `461f8b7f7d06dea3edc67cadc75fd6cf1267e1e76d3952651268e43a3e482906`
+- **CORTEX-TAINT**: `23c0b284102863ec02241d9a53afeb0c17a3e44b770c84a07e83d90414b61870`
 
 ### CMX-0617 | CODE_SCANNING_ALERT::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `0eb093f70124d0d1ba2c81ea26c4274e892a283d4d26106ee5b726c1e21aa805`
+- **CORTEX-TAINT**: `213a2ad1483914ae9775c57354df186dff5e15d94e3052d4ce985b6305d466b1`
 
 ### CMX-0618 | CODE_SCANNING_ALERT::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `edf753f22ce16b68af5572c4551481dc07b0242a216a9fa6f16fa932246e92bf`
+- **CORTEX-TAINT**: `db2d3713f2e14baf6cb386e8a7c6e0cc0259f863f468a48cd79786f982efc407`
 
 ### CMX-0619 | CODE_SCANNING_ALERT::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `61ee4fef765ca22af0735463ff6ba5f91b28a984179ffe36a7476dcb6a81ed33`
+- **CORTEX-TAINT**: `4831e334c0bf043a0f7a6f28209b0149fa3de2bf0fc31599b3a9421fe720f49c`
 
 ### CMX-0620 | CODE_SCANNING_ALERT::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `56675e7de24d783833d3ac64040efb7eab56071c2e4427609e106e0bba78d341`
+- **CORTEX-TAINT**: `57e10447627bff4a1e45bc309e74491e5129f7134063c82daeb0c039aa26953b`
 
 ### CMX-0621 | CODE_SCANNING_ALERT::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `fd364f63a01ed04f62877578cbab05f4001e6ea0ced8a5a5b6857b31f8f68c24`
+- **CORTEX-TAINT**: `752636d719c438b7215f7fea3596050b62fd75d8b1b0b2bbaa880b290638a9e3`
 
 ### CMX-0622 | CODE_SCANNING_ALERT::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `b370c6392e8c34399c0577f60ab9ff2fe03b24f899ad6f7c3b9c64aed03b61db`
+- **CORTEX-TAINT**: `c2ebd158d9ca92a17295004f7bd87da5fae002d37fd763f37573bddab79ea7a1`
 
 ### CMX-0623 | CODE_SCANNING_ALERT::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `7715321b0131b9d85e87dcff1d08485fe5d560dfe9622b8a91efa7eb86a85695`
+- **CORTEX-TAINT**: `781eb0cb99c7cd7ce7a572e4debcf1de6da77568b00dbf045bbab2d65ead7bc0`
 
 ### CMX-0624 | CODE_SCANNING_ALERT::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `2eae72f0eb50139420c605401da982f6dbdf30a78d2d34e948c76669d39a6e1b`
+- **CORTEX-TAINT**: `d199171ee86913d1f7640ba3a026a60abcfbb589a3d8dd8a6ea8296f0ac0de35`
 
 ### CMX-0625 | CODE_SCANNING_ALERT::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `0b99fe8f083067fdf60108db8a6a9235fa4eeef06035a74c7fdaea55972bc215`
+- **CORTEX-TAINT**: `ebc500ed5d941d466d8044e7b894a644e1e9e14e11c8e6e1c103885e4bc2f09b`
 
 ### CMX-0626 | CODE_SCANNING_ALERT::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `b4867773ac8e69ba4037ec2286595ddadc1d6a9955db0f948c1a4a0f01182795`
+- **CORTEX-TAINT**: `6adf510e73c938eb173364037378f4cdde0f7ec5c83c1e9f91b3480a4082a03f`
 
 ### CMX-0627 | CODE_SCANNING_ALERT::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `269ce33dfd9a4873b5344dff1edd2d0bd1f67d9e7b61ed626beae242d8d2a3cd`
+- **CORTEX-TAINT**: `4427e7543bdd26175168f9e34599c0b163455bf1c5db32e2e099f7acb278f718`
 
 ### CMX-0628 | CODE_SCANNING_ALERT::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `0d2ffbfd5cc595bbaf1b1d9fe16f4cc68500f8c13edd1c1df04f1eb943588e96`
+- **CORTEX-TAINT**: `07a9561ea53527ad7fcfa82aa3475d9833c681da786205caf00508d2dfc1f64e`
 
 ### CMX-0629 | CODE_SCANNING_ALERT::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `2482b3b7c39ab47b85f435de5a79390213975c073d3399146d7d2abbf3bd0f3d`
+- **CORTEX-TAINT**: `6e1aa8d5d3a169d738831d4528aa3f0904fa6f2108dfec4b54545e48af933fee`
 
 ### CMX-0630 | CODE_SCANNING_ALERT::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `5365113026d2205388847fcfccb713f84bfcb7dd27a161aa5b6b2afcb91ac7ed`
+- **CORTEX-TAINT**: `4d6389d0749e07a41300ac313164fb2386b06fe0cf1a3ce9d303685b604fe8ab`
 
 ### CMX-0631 | CODE_SCANNING_ALERT::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `73a1f8a25c7faa3ccda47154d24e8324b84e135c33c1d0684edbffe71a06f9b2`
+- **CORTEX-TAINT**: `4ea09aa9acb0f3a40bdfde54a9449f2699dce37613a58de0aa342d2f3449a364`
 
 ### CMX-0632 | CODE_SCANNING_ALERT::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `21e68ab6ed3a31d6b437aad6b19bbf93066666aa6c16a2df470e78a67b31d792`
+- **CORTEX-TAINT**: `603649202ed4d143d9d98e2f36bff74740041553ab759431e8a044cab1647b80`
 
 ### CMX-0633 | CODE_SCANNING_ALERT::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `fc1de5602a5172dbd9b3b4b07df626c03dff63a71954776df48c2ed1241d961d`
+- **CORTEX-TAINT**: `824a7808015d4bc322e7c325a285d2dd154145ecac0b238a4b1db0fa3f8bf8f2`
 
 ### CMX-0634 | CODE_SCANNING_ALERT::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `8c7bd13d39e993a785e5e5b3e8dc2232a0fa291768ce8bb91a37d9103d491df8`
+- **CORTEX-TAINT**: `b48d4b181d1e0585b423ccada6c7f06367c00dcad30400e56062a5994a185bc0`
 
 ### CMX-0635 | CODE_SCANNING_ALERT::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `80fa870c13f528a4916c3fe94223d486ce20ec35d942169d50b470f464637c43`
+- **CORTEX-TAINT**: `a0246780950121844f59eb4fdbdfaf7d69f8dfcc0db639e2e5a15352a2d34c0e`
 
 ### CMX-0636 | CODE_SCANNING_ALERT::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `bffd90a248fdbedf46fe4d12a84d361d866acf855baba78ac1c8735189be4c1a`
+- **CORTEX-TAINT**: `d7bccab47ce433cd08df737f1376e6ed628e52860289b73c00cff6d460be79c5`
 
 ### CMX-0637 | CODE_SCANNING_ALERT::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `6c96be42dff4316bc033ab5b7178aea085324f68a0c9b5425124fc52d998b363`
+- **CORTEX-TAINT**: `52e4ade2271b1d735d38666d9cc8f415aac6ae5b922aa0c38249d242b53e1f2a`
 
 ### CMX-0638 | CODE_SCANNING_ALERT::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `641dbbd604ec59659ebdca80ee5633eb2f07037d8543f580c6b38afde7cd5677`
+- **CORTEX-TAINT**: `8cdc2bc525523fff523a73ae13d96036a043d74b744240572a388d8a89c96011`
 
 ### CMX-0639 | CODE_SCANNING_ALERT::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `12fe577e61e11a4e32f5129167b88cd3b42a36111db4bd05d053d2200e8f9b67`
+- **CORTEX-TAINT**: `b0ed629ae9caeb3e6437f0cc76bb1a8ff96b33b5d06f24117faa7c3c9e52f5b0`
 
 ### CMX-0640 | CODE_SCANNING_ALERT::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `0d85a1e1d2044afcdc040f55ba241b43a5c20724b3233990e850f4f3550a9f1d`
+- **CORTEX-TAINT**: `3d85e124d9abd0fe488968d38ff534b1f38a8f4cc9da6b9a5e10bb6b5e81900d`
 
 ### CMX-0641 | CODE_SCANNING_ALERT::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `f00cd089b455c05f0b292ecec1d82f0022d4eeba8706861ddd5afd627d2830aa`
+- **CORTEX-TAINT**: `1a796338e60f558134212fe22accfa7306b3185e0a4ff125499e539c373e94c1`
 
 ### CMX-0642 | CODE_SCANNING_ALERT::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `44de4c492077b1d2eb850ba129ef2ec45c8942b3a1ea11c1017ffc34fb59a18f`
+- **CORTEX-TAINT**: `2d5470469f2d20d0d7d7284924fe52726a3e4502f868c899d1447d1cb1eb2ab1`
 
 ### CMX-0643 | CODE_SCANNING_ALERT::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `0bc997b5682bf700ecea43c584bf885ac486885103eea06d63062fc4c8340162`
+- **CORTEX-TAINT**: `5a0de034c6794417023e978c81624a4f0666dc43a46b6de03e7b27d8994a5b27`
 
 ### CMX-0644 | CODE_SCANNING_ALERT::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `e9eeddef7dacc4255ea572cf3dcc4e84b34944bcac39b47d349b7c70535184c6`
+- **CORTEX-TAINT**: `7931f0314eb103fce55ce377188b4dbcb857734b6da22350a18b5c7a4aa57e20`
 
 ### CMX-0645 | CODE_SCANNING_ALERT::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `f5559e386e4cccb5fd6e77a687dd43b734e90508f584d5770989cca9ecfff3ee`
+- **CORTEX-TAINT**: `1f8369c6944a4f0261ff192d790bfa201757190358f5571d6b4d0ae9ecc7c234`
 
 ### CMX-0646 | CODE_SCANNING_ALERT::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `431b98f3c537c169a7e3383e16a5cbd4e76a19812c86772bc8f5c965268c3e9b`
+- **CORTEX-TAINT**: `1188ba241bbc995d2259e56c73f9bc56c60e38716ded78ee8bd61f9a81bde84e`
 
 ### CMX-0647 | CODE_SCANNING_ALERT::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1434f96a777570cd6385bd4d48f773065e3cb29200336e285efc1cc402c6f0dd`
+- **CORTEX-TAINT**: `cc6f1e986d7994e7435d09dcab24cfb4c83b1e6121af887af2cb5db5233a0a3b`
 
 ### CMX-0648 | CODE_SCANNING_ALERT::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `4a4b3e849c16aa2c95a4673b34a707adbf06be00abddf406eb8631c5596bc4e6`
+- **CORTEX-TAINT**: `fc9ca3c053afab96884940b1077a2fdf9c20bfc82d07fcb4b563fe66f64ead4d`
 
 ### CMX-0649 | CODE_SCANNING_ALERT::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1f2d13d37dc1ebe35655d9aca44a36e49e4480cdbe43a23ed47643981fe4833f`
+- **CORTEX-TAINT**: `f9f4178c4e2139fb0b56b117475ee293d1c40386fb6cc2c4d4bb4f82eb684539`
 
 ### CMX-0650 | CODE_SCANNING_ALERT::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `62e0e67bd8626a65f4636cd2dd4a2f23f34421ef66e37b93c2b4b83868488bfc`
+- **CORTEX-TAINT**: `93bbc914042e936ef03c7954b8879d7cc2fb1dde00f80c433b5a139b5b2ac13f`
 
 ### CMX-0651 | CODE_SCANNING_ALERT::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `35ce7c176616d320fbb6bad473cf702e5626a3ee5cbb3c003d056b703fb96765`
+- **CORTEX-TAINT**: `227347214cd510e48fb453e0e41dfc19fda63158d8c912e653c4ec4179033b8b`
 
 ### CMX-0652 | CODE_SCANNING_ALERT::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `435d9f7aebb633883531b21c1c998796c1a9eb9aa05b082e5275b7561f684868`
+- **CORTEX-TAINT**: `9818815cac358e8d8f95a983a010bb8d9254ade8bfcf249a98fa564a38589d15`
 
 ### CMX-0653 | CODE_SCANNING_ALERT::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `ab6c7bb028cd1759df70f12376d00d26fb9d85acab2589893cc21d0d27090243`
+- **CORTEX-TAINT**: `8ffe26ce36a4094c2357f325cc5a70fe7df1222ea308bb82fb77e11f17a399a3`
 
 ### CMX-0654 | CODE_SCANNING_ALERT::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `385032b6b95430725f237408c4414e29606518d108f91586b21cee254d4a6000`
+- **CORTEX-TAINT**: `0a598bab76eef29c5fe1a4718a9748be20e40b77b73ccbe6bfc6e6cb6c10bc47`
 
 ### CMX-0655 | CODE_SCANNING_ALERT::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `a19c299ab86c56c44f4e7fa1b1e611ff083ac6b30851da75fdc1c1518d944ce3`
+- **CORTEX-TAINT**: `3522e3604b99da63afb43e38f9aa84e5d2754274ab87c6ea7ec1d0d3b1114adc`
 
 ### CMX-0656 | CODE_SCANNING_ALERT::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `0c22404de7e7f2c47e7332f750352f79f6b8419e549d2537573a6a0006a9c434`
+- **CORTEX-TAINT**: `c4e1c79d20ce4623c117461294c7442d25a07ef9b36218749e99f06077afd01a`
 
 ### CMX-0657 | CODE_SCANNING_ALERT::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `9cc28e0b6dcc7f3475180ec603f5bad6eb5dc4dd9e0aab81aa44f38f0a345af7`
+- **CORTEX-TAINT**: `e0ecd2fe438b423e4446ace750c4e8ef9dab590e986ca5f9937e6f65872177f3`
 
 ### CMX-0658 | CODE_SCANNING_ALERT::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `80a9e62c67e3ab4b9312cb6427808db9f946119c4987668360114d4f2ce02eee`
+- **CORTEX-TAINT**: `3a8914f0ac1b825ce9ea43b3bc7c438de312681339604a5d7621d00b9703c3a0`
 
 ### CMX-0659 | CODE_SCANNING_ALERT::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `f769180e4a5b811cf5287896e54f0b19ed9eb62f2216249b2c960c1d22cc959b`
+- **CORTEX-TAINT**: `4658b599a9c3e5a622828a37f114d09872ee250e67ce5f11cddb5ae613f14a79`
 
 ### CMX-0660 | CODE_SCANNING_ALERT::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `ab73e29998fd838ec0b9baf1dbe566d867e1e30ad9f8c6454ff38a01c64f101c`
+- **CORTEX-TAINT**: `b0979a065f27b7e3ef84167f12e9f9aea261801ea720db7e47130cd6a9f98fdd`
 
 ### CMX-0661 | CODE_SCANNING_ALERT::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `ae7a85c100ab396061e6d8b1be4c74b86ae83b103eb90e3dc9f684c7a25677ab`
+- **CORTEX-TAINT**: `90935ac8704f8b2be0cab971a71fc71362fc6772fe3002343ca6506a6dcd6b79`
 
 ### CMX-0662 | CODE_SCANNING_ALERT::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `59e70b8dff4e281c1e9f186d05d0d1a09198901d659a0759a04c731ecd792379`
+- **CORTEX-TAINT**: `7a1d83159bafed7a2e918771ad9b5a6827c0b63e5206fbc2a432fc4a83f06bc7`
 
 ### CMX-0663 | CODE_SCANNING_ALERT::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `dc5f698ea6a023215d0ab49a12430a2160b4a87b10946fe95b324ac935ac08f6`
+- **CORTEX-TAINT**: `e4f0109c4c3e85b1b8dc0919ed32bb7ffd0b4010b94c9277959091e84a915f91`
 
 ### CMX-0664 | CODE_SCANNING_ALERT::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `96b3e972bd63baa81706d62324144ede5455d444446395d58fc03ec557c28494`
+- **CORTEX-TAINT**: `41254144ff714a61ca1cde7fddc67db1c31dc4ef9ac5285b7b65e781eaa6e9d9`
 
 ### CMX-0665 | CODE_SCANNING_ALERT::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `964fcf84db1919cf7a957dfad02ed511e06004a3e437a78548bd49f333db842a`
+- **CORTEX-TAINT**: `80b311a04470413a5bca29a2b541e2e78b5422212122fdd046af6115fd043d71`
 
 ### CMX-0666 | CODE_SCANNING_ALERT::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b3cbb891684df012ba3c5770924cc9fdd5a21ade86d4d82fdcd98cf349d41b6c`
+- **CORTEX-TAINT**: `128819e087b40671ce3b5a51d0e63dabcb6165881510bf2549e1e7d5a63e1093`
 
 ### CMX-0667 | CODE_SCANNING_ALERT::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `ad9e824002e1c62ee2840adeee58e50adaf1119b85bb1d721c86e10949e2325e`
+- **CORTEX-TAINT**: `8304b974e8f52bc89cc9ba6c00825038eda1e72874849733839c3c8d92d7e919`
 
 ### CMX-0668 | CODE_SCANNING_ALERT::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `0f2cc253f811863b30992c6e6dfff2d94c9b94cca814db557686488506a86a7b`
+- **CORTEX-TAINT**: `b90c5209c57013d30a244c31a71faedd5a5f384a316939ebf28c20a5e5d03272`
 
 ### CMX-0669 | CODE_SCANNING_ALERT::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `d76a7c00977f7c2c3786171d1d851185dd401735144e57ce664721b4ebf27746`
+- **CORTEX-TAINT**: `7eb03b8c2a57b50d98f1ecadbd69db8d853308a6f2472431877a3579c2e90343`
 
 ### CMX-0670 | CODE_SCANNING_ALERT::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `ab7d8981e36af4c127d21d74e6e14519d3ed735661c88ab09022f0b51d29570b`
+- **CORTEX-TAINT**: `b7309e5e8d596c869db6b7c9d0f60f49e5878fc916d4a3de55f39239e9fe0b3f`
 
 ### CMX-0671 | CODE_SCANNING_ALERT::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `3e05240472791c180ce02fb515fd74f93c6a0f7a22ec9407d766be6171d7cbcd`
+- **CORTEX-TAINT**: `f2d30415b6a29c7207ee547d51dcf46343f091e97ea691bef94d28264f1c7da9`
 
 ### CMX-0672 | CODE_SCANNING_ALERT::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `5a2be6511086eb1c55eae83a3ef32b720a4996c2a829bacb0d18a4f2256d552c`
+- **CORTEX-TAINT**: `0f21c876131de7c3bbf27c97228c19a1e92bc76486d00ae608ce3a6150214e07`
 
 ### CMX-0673 | CODE_SCANNING_ALERT::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `439020f3bd68dea97811b82c3cffcd2743816df2690404a7c14b3d10e61d54f5`
+- **CORTEX-TAINT**: `0c1ee7b310f8bb871ef88e89b6b327749afa446f8c17bb63527823dd75e08313`
 
 ### CMX-0674 | CODE_SCANNING_ALERT::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `ebf6c56fb0a4bcf63f5fb1d7d0ea56b9f0a9b3f7c389dbbc6abf28330840cabf`
+- **CORTEX-TAINT**: `9e92ac6abf5c05e1d81b95e0122e97e65e65fa58a86223f1607a26a1b4ee6d8c`
 
 ### CMX-0675 | CODE_SCANNING_ALERT::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `0901426bb9ae857124264e8f19f5c62061c0dfc4587c5b70bcc890e1a8496459`
+- **CORTEX-TAINT**: `1e11f0d6d1fa3b5e152c103145bd804018870e0ed9e5fe33319cb4e03a547f14`
 
 ### CMX-0676 | CODE_SCANNING_ALERT::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `b4eb5a33b4ce9b820f44583df9576dd61c8d10bd5198126f74d2b7b5905c1393`
+- **CORTEX-TAINT**: `e7ec18c200f04cd8ade613a5bea76fe6cd80a31aa73eeba482ab670dd439de34`
 
 ### CMX-0677 | CODE_SCANNING_ALERT::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `5e9c0b0b8fe309e273dbc825e094119dca653217a44d6e972c3dd389bcac70be`
+- **CORTEX-TAINT**: `c0e7906a5115025bf5a64604d4a7be73154e7dd34e4017d1726c8603416e0dee`
 
 ### CMX-0678 | CODE_SCANNING_ALERT::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `e0c77e62405f4973b905b0677f93058f01cf597a0d8a57fae36c4c1f93a2fd3b`
+- **CORTEX-TAINT**: `b3cf9874b34aa23f9043a0080f3347b1fd56d3b2bcb0f9008151b3a33cc43c88`
 
 ### CMX-0679 | CODE_SCANNING_ALERT::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `cadda61345c35eb9a428d709b34daa4fad3b2382a1d1383ea8610ef1bc94e803`
+- **CORTEX-TAINT**: `980956612210f4447af7c42091a6cb96f93a0c9a583279c95b001e9ebf32258b`
 
 ### CMX-0680 | CODE_SCANNING_ALERT::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `571720537374f7cd76676b53d95cad11c1cbca711686668e64cc6bd1d6e80b03`
+- **CORTEX-TAINT**: `17789783075d0b1a0e9624234723fc2952e8ff7721d275fbcdcbd97acf052d89`
 
 ### CMX-0681 | CODE_SCANNING_ALERT::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `19482d577ab0a1a8ec55f51e0cafb1844c9c9959f31a88563eace8c37732c0e1`
+- **CORTEX-TAINT**: `8aaf644b49ebb156a505296b0069acb23ddd5f7698fa10381638409e1d7b21a1`
 
 ### CMX-0682 | CODE_SCANNING_ALERT::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `4908ad3c7298a79943624418e75d84f9fe14960ac3355a2c801df37d07894fe9`
+- **CORTEX-TAINT**: `cff2e879f054345cec07d014c81b886b59d93489c203a9cbe99482c9aace770a`
 
 ### CMX-0683 | CODE_SCANNING_ALERT::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `357c67b22df96a119b72752919f3e89e9e018454adbb2a974b0e4432a0db4c7b`
+- **CORTEX-TAINT**: `1cfe01d7cfcf56fb10cc9b0a7560da571fe5488ac3f423d71db705edbd45f37c`
 
 ### CMX-0684 | CODE_SCANNING_ALERT::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8de9fd26d14f36dde55832c5ec38afd304617cb4e927db0af385cd0170cf409a`
+- **CORTEX-TAINT**: `30d237d8a4d43f46296eb49d9b852199d33fa02e7199bf3df8692907750aaaf2`
 
 ### CMX-0685 | CODE_SCANNING_ALERT::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `2bde2c65adaeee9eb336d776777f35c887b35a341d87d49bfe42af579ae1b1d6`
+- **CORTEX-TAINT**: `8ebf9291bb597a7f22476eb3f91783049bb0914ead0aac199a673e0be0e9cce0`
 
 ### CMX-0686 | CODE_SCANNING_ALERT::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `f8efa78bde1661070925b1903bec49dd7bd7e7dfdaaa4757dd5efb5e9a5da227`
+- **CORTEX-TAINT**: `3f34f24bbd091ae447048b7d1e5b797dd03850f6b7c7708da85cf78e647e14f9`
 
 ### CMX-0687 | CODE_SCANNING_ALERT::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1542e9b6672911c1437dd88bde6a069108a3b002959b134f4f8be32c90010fa2`
+- **CORTEX-TAINT**: `23bfa11c12444b152289c8514792f01044c22cb91e2c28e7f6aefaf950b39397`
 
 ### CMX-0688 | CODE_SCANNING_ALERT::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `05626a22ef47b787df10447a773ce3bbbfa87b76e98ebb3b6dce80f70a3b338d`
+- **CORTEX-TAINT**: `6632165532a28aef3abc16e433c39c30c404fe924391dfab78838d0518250759`
 
 ### CMX-0689 | CODE_SCANNING_ALERT::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `61aae9da79f4128032f3db8fa76d0e8f2cbd803826318d1d888523227c334cd2`
+- **CORTEX-TAINT**: `aa37355f34de7cd2224b7bcfb593a09e576b760a927d795cb8c3e5124fa19c16`
 
 ### CMX-0690 | CODE_SCANNING_ALERT::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `67a35655ba72245a0a377fc363da9a219c6663e5dbadce8c0d4c44480f1d86ee`
+- **CORTEX-TAINT**: `24d09ea09d140367ffedb71e9d0a32a00115a14562d13e4fb310739d0a2c42be`
 
 ### CMX-0691 | CODE_SCANNING_ALERT::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `57459275a5532dab6163e0e932eca025162f3270ccca405314d448c887be43a1`
+- **CORTEX-TAINT**: `0eecdd6cc91bb595d9a0b9e16e56bd8bc0dc4f3fc8a222fbaa27cf51a7e4e7c1`
 
 ### CMX-0692 | CODE_SCANNING_ALERT::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `4a77d5224d7eaf47a71db8d433ab280273f455d646c50230196a0a864349d28a`
+- **CORTEX-TAINT**: `c4e1298716743d3bbd1a95c3114a2f41918c9ec7ac3f0deac0fcc7f7ba2196a3`
 
 ### CMX-0693 | CODE_SCANNING_ALERT::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `a9859671b436e8b7ec94e08d154e1295a8556c714d71b9104e7876052bffbfa0`
+- **CORTEX-TAINT**: `54d9ee3235a4e030f24aff00ec81a8ab93098f680bf114b4241ac5e9f42d9570`
 
 ### CMX-0694 | CODE_SCANNING_ALERT::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `97b46547da0c51336c5135eaf8c4f058f82b03851fe372bc71f28c038c583d85`
+- **CORTEX-TAINT**: `8fe5e725fc6f1d8adfe0af6dd8a9f254b17914e43135c4ce6703bebbb21fc504`
 
 ### CMX-0695 | CODE_SCANNING_ALERT::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `a44e345eaacd7ec9e4ad8380c1a4c9546e5fbae8ddcf9fe6dd3c7b1fe1d991aa`
+- **CORTEX-TAINT**: `d77599f23c8b12e550339daba8258b48df920352936b445935cba179d47551a7`
 
 ### CMX-0696 | CODE_SCANNING_ALERT::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `d18a5599fc4c098d7ca9f766ae2b9a1e0e660d1e9e60eff8771c35498a47fd7d`
+- **CORTEX-TAINT**: `90bb7cd18ff3abb3068ad52e4e7d5f6d5bbe986b5550e8fb23055f67ff960eaf`
 
 ### CMX-0697 | CODE_SCANNING_ALERT::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c35a2619a9223e260721defe7b458befd6141aff1d6a847ea7363d34d6e17818`
+- **CORTEX-TAINT**: `0422b770399482a4fd5a8dd504c66c401219e2818b976d7145123417d98c9cd8`
 
 ### CMX-0698 | CODE_SCANNING_ALERT::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `ec7fc8d961e32fe0c09fbd776847725210a901ffa7fc247e8c8ea38c9c142e59`
+- **CORTEX-TAINT**: `a67c80072e40a3163aec59bf49854002d17b56596976078132e04446bfe043b0`
 
 ### CMX-0699 | CODE_SCANNING_ALERT::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `0867d9259ee2a1b744c955fe8ef7fe3b322d0702310868127a8f7571e8a61d20`
+- **CORTEX-TAINT**: `f495bfefcc9f87e01c2e67f75a8b9c1b04380a8551828ae54137d45f38a5df93`
 
 ### CMX-0700 | CODE_SCANNING_ALERT::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de CODE_SCANNING_ALERT, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `3a3fbae5f387006822b1a9db5f6420d3e4b873dfdcb833c6f36527ec6b44adc2`
+- **CORTEX-TAINT**: `9a4bb8798e380986639798d9cfb0fdd714fe24a046820fdb3b10ef4f9b3dfd87`
 
 
 ## DOMINIO: DISCUSSION
 
 ### CMX-0701 | DISCUSSION::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `1a4cf08793774e580462b8dddc25c2d54c42684cc09f10236af815119f515c5c`
+- **CORTEX-TAINT**: `3428fc4413dcc64f3ca878b33f0ed638f9ec9b21e7cef7adcf74a91475330bc5`
 
 ### CMX-0702 | DISCUSSION::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `81a07f6b347db941bcedfde0fe2287be0f598c672eeca95e5c95e9c6dc34bce8`
+- **CORTEX-TAINT**: `5692258e81ebd639048c98e7184e2f3e3727fa722c26427d2c311f44797b7f5a`
 
 ### CMX-0703 | DISCUSSION::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `269c4c99723e45cf329a77e68a87e09b381e484ecd2156b740bf0e1e89ff11b0`
+- **CORTEX-TAINT**: `399f0ce48b981013ccff8f6b43191a777bbf39d96fdd01558d2f1299445260ed`
 
 ### CMX-0704 | DISCUSSION::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `08b5ea95bb50251c5a1ca4f51a184673ec00522f3dadf1492dcd6ff7b1f76c1e`
+- **CORTEX-TAINT**: `0515858ce31453bfa3f8dbee175b27a012a147036e287b182364604b3d61e404`
 
 ### CMX-0705 | DISCUSSION::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `284a58f31e56c9e8397d003c83330f2a308f7c1d8bccb2db1dce3fa495dbe05f`
+- **CORTEX-TAINT**: `77e1b14e10a444c5e686eb7e438456964a58eb3b04e597ae513bde9c1838c983`
 
 ### CMX-0706 | DISCUSSION::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a22a58b088cc14ebfee97110adf4d49fd666fa5a437622c507f51efc8b0ea878`
+- **CORTEX-TAINT**: `b6d28ec815ec6344681b3acba8a9a769d97489c1965eb76fda4b843f63b2d79f`
 
 ### CMX-0707 | DISCUSSION::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `6ee019651f8162cfb5d4ed37ff468cfe4a2a7d85a03c40eb59a706cc8535afcb`
+- **CORTEX-TAINT**: `babc2f3fa454793fb646c9daf611f06edc62365d5a5933f4a9b0cf2f8ee7df72`
 
 ### CMX-0708 | DISCUSSION::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `e4701efd2aa839f90b76e561a02e6a58ba441745f5d98bbae036ccaad4be0f7a`
+- **CORTEX-TAINT**: `dfb408c4d01857eac5ba07753dd6cea540cb0d184edbcade4bb63afa468c3900`
 
 ### CMX-0709 | DISCUSSION::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `04200d50a292777c64d556c47958d837c3187ba6edc3d2a854ae2892c358d4bb`
+- **CORTEX-TAINT**: `175d382e36b46f045439677586caad0d6821bf592d9a1d35f7089eb7319406e4`
 
 ### CMX-0710 | DISCUSSION::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `420cd1cdc5d8ba8316380565930cdd37a15da73feb5bee49eb30cac832899ed5`
+- **CORTEX-TAINT**: `f43fb27f8e7057e76db614d55dc58f5ba47681a78b0696ab715810bfb7b84cf7`
 
 ### CMX-0711 | DISCUSSION::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `dc7076b259e066e3fd4fdb7529b8efef0d07e25657f3e07d4be8bb479405bb53`
+- **CORTEX-TAINT**: `50fca6c871202c399013a210635d6952f593d05954c715accab10d5762ced026`
 
 ### CMX-0712 | DISCUSSION::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `396306b01a16152e4956ef19b208def38a81e409ae8628317a45a27360fb85af`
+- **CORTEX-TAINT**: `b7725a8537417ba06f59332ee12f818e21e1c205c9f92cbe904be1911223aaa0`
 
 ### CMX-0713 | DISCUSSION::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `dd1500f966384074e8e0743772813f4a0d30266db7088689d4bc8acbf371f70f`
+- **CORTEX-TAINT**: `8ce8f65267451c60d951d1d8e68b99fdff8da63f766332cfbb89dccf9e2531b7`
 
 ### CMX-0714 | DISCUSSION::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `316605ad33f86d924fab3f8dabef6658babab5f320710917810f7346f6de3699`
+- **CORTEX-TAINT**: `900053b218dd62ff5c2b7348b727aab8e0be4f13a22ce35522ecd8aa48787be3`
 
 ### CMX-0715 | DISCUSSION::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `12dd5eea8a42418bd0a12e81af0b06bb7d3ce2245ff41cf9877024ab75a7bbe9`
+- **CORTEX-TAINT**: `93970647175ce9e31d8ad4507ea025be7078c37ad7bb3c9a61c5fc63b8615987`
 
 ### CMX-0716 | DISCUSSION::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `ce76a202bfe066d0cbfdeea567b562a3d44341177e80ad93216f45659a968b9b`
+- **CORTEX-TAINT**: `88dada29e327be91bcc4a4852907e455fd1250e21ae996c467a37a27373eaed6`
 
 ### CMX-0717 | DISCUSSION::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `ec39a197716a419dcf9a139d3ee2a26dadef8bd0945075381d23e284ba033304`
+- **CORTEX-TAINT**: `963cc7a11dd5105678963a65f8ba3ce23f678627a6dfa5bd1e0b0bf9c0505cec`
 
 ### CMX-0718 | DISCUSSION::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e3bccb075bf1197b3c59ed389b5a5c092fa23bbd10b7df734b21f5c8fa804fb3`
+- **CORTEX-TAINT**: `f6eb0462740cc1646f61dfb9a199fe15842cbd5c0d87136a068917a1bd3f2279`
 
 ### CMX-0719 | DISCUSSION::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `1586acc732e8386b49a8bbff3c2ff3deacbbcca6460864470ce9a6870814bbbd`
+- **CORTEX-TAINT**: `7c84062dc761d282ce5c1fdc0b304eb249d9a4972a36803dc3f2ff361a9098d9`
 
 ### CMX-0720 | DISCUSSION::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `2b7205842b92ae78d799ace0e8219b8adb523323d939cbe710be621142b366f1`
+- **CORTEX-TAINT**: `0e99ed82cc56ee9ad7b6a42c818a427a96ae18f2e5fd927a131d275d8df3eb9a`
 
 ### CMX-0721 | DISCUSSION::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `7c2de48175d3b6b21d214aa1febf43e4a1113a41b4b275bf0f5bb65fcfb83425`
+- **CORTEX-TAINT**: `9c9d1de66e034154b4debb8485c8d70769bd641e785ea2eefe5eb85602f8022a`
 
 ### CMX-0722 | DISCUSSION::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `3ad5ae674c63765523f2bc648fcbef5f63b16e0701c2dbbbe22a82ebb51a8d3e`
+- **CORTEX-TAINT**: `8fbd6f9b2dd9475960b30f470073d651f3e934a425781f2e82a00a1fe347556a`
 
 ### CMX-0723 | DISCUSSION::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `0cebf7f1a4688fb5d6efe48b48dacf6f9ab02451a00bfe5a62d4bd9ec61cb9fb`
+- **CORTEX-TAINT**: `665a590ff13390854400498728f80c9c9c7d6705af8412fb31f63fab8e58bea0`
 
 ### CMX-0724 | DISCUSSION::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `6f8350f10fe11d1defc75324705ff8991431217838763b966a01db1a99851e1a`
+- **CORTEX-TAINT**: `d044e9d7237ba14883aead91f5e1397c2a3afd3d81e94f007ce71a9902d7eaca`
 
 ### CMX-0725 | DISCUSSION::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `6bead1d4546f1248d95e4e381b52e8b8f39e8f296f779d7b6912324f25b03e31`
+- **CORTEX-TAINT**: `39a4628592ff0d9a9bf4fcda28c4c4f1507e025d65408e346883af757005d4f3`
 
 ### CMX-0726 | DISCUSSION::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `e8e0fb027e08f9296f1466004d09a701d9968da5eab7208f4f433bd9b35a5ab4`
+- **CORTEX-TAINT**: `f8881bdcbb89081e879545c5ed91c1bdf5674c5b1bd18839f9deda49cd5ed0d3`
 
 ### CMX-0727 | DISCUSSION::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `48318af32846837761ec49714800ee4f1d7f35c8a00de4583be8b0e668ca17d8`
+- **CORTEX-TAINT**: `b3ea560e2f30a8b31fc1fd3680dd890b7331a6936ef6aacc639d7f9906db4466`
 
 ### CMX-0728 | DISCUSSION::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `5d612a7487d25165314fa1851dbf1945180e73d89029c41539e90579588b5208`
+- **CORTEX-TAINT**: `223ae49e520357da0c7d7d555ecbf2210e931ea365d3d28567ff6a88432edf22`
 
 ### CMX-0729 | DISCUSSION::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `8de83cb21a51ce7326186243a23e1ced2ab6ad90391f25aa920845d81ed0bcd3`
+- **CORTEX-TAINT**: `6e545ebc31e2e2a243a2a03f0216be982219dbd3ba3ba19a8714e4cf0b43a838`
 
 ### CMX-0730 | DISCUSSION::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `57aca2f7c3eb0190ad767c8ff2fb2a7f27dca14e7d103a623656bc814cfc405b`
+- **CORTEX-TAINT**: `b29e5e1100799a394e629d123072ea64b31ffd777daa8a6e4a59b4c3cb7ac9b6`
 
 ### CMX-0731 | DISCUSSION::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `05102ac4f19b2c6255cb53ff4d12ecba1b3be022e85d0398bba0a49e79288f44`
+- **CORTEX-TAINT**: `b97d184654dbd8185dca2730c2dd7fec0199d6bc6bed082e8e3ca0d6ddbc4513`
 
 ### CMX-0732 | DISCUSSION::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `b85b7a074782c10eaae6541373afb73a5ec2aa88c194338d8935a421f9c1d4b2`
+- **CORTEX-TAINT**: `f4e0f084087050203c0f71cfc77ae40a1ab64b070260a774b7e4d76a5206c93c`
 
 ### CMX-0733 | DISCUSSION::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `6d2006000b330a7dcc50c57edeb36ea7541265d0d47e9d11bb8e2fb19d9c8736`
+- **CORTEX-TAINT**: `ebda5c116bf2edc9026c6ce2cb20dc3940341d2370531723052d82d57e691084`
 
 ### CMX-0734 | DISCUSSION::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `65a0592c1401d4fd20d7fd94a0bea7b1132b32b8ded1bb8441a8a68aa31fd686`
+- **CORTEX-TAINT**: `b0d21cee956f7f36fde3fc7f25e272cd9f1f509a68ebd00c47c201ef6298b855`
 
 ### CMX-0735 | DISCUSSION::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f52c518e1086953a1caf8d5e97a764eb87d25423a63f56476c6859064923a3e4`
+- **CORTEX-TAINT**: `8307c2b22ab2461d5d2afe4369c2f51434ee3e8eb83399658f0943c1a81f6a2b`
 
 ### CMX-0736 | DISCUSSION::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `409926d93b7491a5cc99c262674d20eee991439e3b84263ab8775397e369b16c`
+- **CORTEX-TAINT**: `424e15fcae1f943abbf458fe7cca3ede785009312c27511de3cb8259ef103ebf`
 
 ### CMX-0737 | DISCUSSION::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `d849ce791ec983928644e4e00b6550469e43376573186f01771eab7799e5dfbf`
+- **CORTEX-TAINT**: `07a9be3f89ecbb03a6093f18fa9de42cecfc08194fadd78755acb016a14d5bf8`
 
 ### CMX-0738 | DISCUSSION::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f9c61e35833de28a7d7e7f105af1cfed97cee0cf8150b2b6dbe3dfa8a2002fc8`
+- **CORTEX-TAINT**: `6a6f4c8f8ddcbb78e6cf646bd8fcaead5426378a34c9adbe66deab0dc7458858`
 
 ### CMX-0739 | DISCUSSION::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `03abe877efcb09889bdbf3274f3a3498b622208c4d0b32b7c8d8b9b65d64c6bf`
+- **CORTEX-TAINT**: `221b502444727590b6c9a3369f0ff93ab9ae15a02172b9f6b9808f58fbe9bf3b`
 
 ### CMX-0740 | DISCUSSION::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f3bacd3390ca168013f953cb73cac63b7ebc10cd83dbe62f2170c714dfc2a5f0`
+- **CORTEX-TAINT**: `7e7e4cf6d6f865fec3e1bc7ae02b2217da9baed244764e8fa737ba1929163cb4`
 
 ### CMX-0741 | DISCUSSION::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `4f39c3493dca6565172cc65fd58f22be8c5020c0bddc639569c7a6ca8e450616`
+- **CORTEX-TAINT**: `912d5021282cba4fb055ff457d9ec40587bc1b568b957e832bedfc2899a47085`
 
 ### CMX-0742 | DISCUSSION::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `96952c990c784caa52f0461083631642c2a9cd940e1264f8cff3b0a6cb34eb9b`
+- **CORTEX-TAINT**: `3ce37d000c871508c3a5a1b540cb7c71714837c9a366ddc995f5a109f4d1dbd0`
 
 ### CMX-0743 | DISCUSSION::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1664cda3a4d19ad80ccab87c710c66333c39a69c2c2c63ada87c2a3a10f3e815`
+- **CORTEX-TAINT**: `7c9497b92e2abc432fdbdb3d9eaa96285fcbd748f5a98cd135b50fce72f06cb1`
 
 ### CMX-0744 | DISCUSSION::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c9d281fc2a01e13c73f3e64a3cdeb6f2c82787e7ea8b6b230fd92d4a475193f6`
+- **CORTEX-TAINT**: `f0f0fe40cfcc467c60f2905396556950feda2ed905be181a99808ffa642114c3`
 
 ### CMX-0745 | DISCUSSION::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `83cd084dabe5389fa7fc7c8c35a23ff2252c9db696183da9b55c11f74ae8f413`
+- **CORTEX-TAINT**: `841ea7c4072dde8b719a1e4e8fb5d1e8b4d13142ebcaa52964c51e968b56fd43`
 
 ### CMX-0746 | DISCUSSION::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `4b2e65162ac42085e2889ac3ae32627902cabefd04c454db61f15843633e8af3`
+- **CORTEX-TAINT**: `88de9a7088de05a6bbb54b00760f940adf7709ee6bbdf193b0009e83f7e562af`
 
 ### CMX-0747 | DISCUSSION::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c74bffe9d9b9017196045ed89f3ac0bf168ef6712c9aa91cb0a1ed29249a3882`
+- **CORTEX-TAINT**: `35859c8e61ec8b274cc0fbfed27e625260006605252357e0b45451c5d0436abb`
 
 ### CMX-0748 | DISCUSSION::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `2e3189ad150861450fa17de62bacc646192d1c50c28b60c1c29562b0178d295f`
+- **CORTEX-TAINT**: `8971f5350ffac34559ed2ca87a5d80e9799026cd256f3b2cc9e5933ae296d8c0`
 
 ### CMX-0749 | DISCUSSION::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `fcdd10148f3d106642b27da39edc46e1b3b400fcc5f577d694aa5b2550a5c112`
+- **CORTEX-TAINT**: `2f91bcfba336b051e5286a31858bcf3114387f51c452500dc9bc30127246f7e6`
 
 ### CMX-0750 | DISCUSSION::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `cac12196ddb6df316353a9bd1f43d25aef0dd434deffcac93f3b6542053dd79b`
+- **CORTEX-TAINT**: `fb2c2f03fffa3c405888c4dc190053979e9a69e58681f2a2b6c3ae60c1c2a01d`
 
 ### CMX-0751 | DISCUSSION::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `a66ce46fd27dc3e063e172519c8ddb7134ad35519816fb9d88f2bec97fa50a74`
+- **CORTEX-TAINT**: `7f9eeddabf9bf40eaa057db0c915b17ccb4ff54dc69bc58019c9bb59a8fca1dd`
 
 ### CMX-0752 | DISCUSSION::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `ccfbeb17494fd3a4a566ac6159cfbd4a753c76d37fb34ca0ee52e9593562990c`
+- **CORTEX-TAINT**: `83310285cefde649447137fa1a82cff27e6cb72e8eaacc220a98745d4308029c`
 
 ### CMX-0753 | DISCUSSION::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `e0ac3271be52b886eba049def392ac9e7063725dc4044a501d3bd025d6a283f2`
+- **CORTEX-TAINT**: `987decf2293849670b588f609e4c8b8d0309d1ef88a8e8e5496e7f23123cb71d`
 
 ### CMX-0754 | DISCUSSION::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `fe018710fa2a185729316d3c80b1e66a01b4e193d4ba8f3b722c1e2aaf746842`
+- **CORTEX-TAINT**: `22a964fe6b4e22b6b09c743cc5e5fd0c0dc3821bcc67316c722488015140f0bb`
 
 ### CMX-0755 | DISCUSSION::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `8c672174f8f8c2abcbe14a0ee5de5cafdf2427b4ccc978703d4f865fb3938c80`
+- **CORTEX-TAINT**: `b522161d64e879ab67b67d346bf0f35063118c4f06a7b9b3c7a07521049fea94`
 
 ### CMX-0756 | DISCUSSION::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `870db0768faccbde0d64c52184d705e574dbc47d6bb9e782b19afc60e88d3d64`
+- **CORTEX-TAINT**: `63cedf5dcbfab9730cbbb7dd5f671051ec60a4b63ca9a76e724fe822c0841d62`
 
 ### CMX-0757 | DISCUSSION::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `6c31b0a84c033a4257d5f7456e19753923f97a60f1bcfcd1947a613a50fec0bf`
+- **CORTEX-TAINT**: `509b5371c8d26effbc7e501501cb00ce4a8c022c916287fd3bccb66cc9e73d5b`
 
 ### CMX-0758 | DISCUSSION::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `e2eff065492cc966b9133a7fb562a6b9e9010cc8b4a4de9417b98a59995f5de7`
+- **CORTEX-TAINT**: `fbdb23d78cfe07f04f2ce56a120c151fd810fd1f765c6f6ac151051ca48adc23`
 
 ### CMX-0759 | DISCUSSION::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `1fea6def9fd135f3bd01ba1dac60d403329ac0f84c5758bbe8914c4aa936d5e4`
+- **CORTEX-TAINT**: `f1cf4102a971b5e3d9cfc1abf7911e1fcd83fd782bd8f0374fc29a573c230fd9`
 
 ### CMX-0760 | DISCUSSION::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `84d0a48c64b4fbe973d3c2db15bd234a52db794df846274f6e8c08da6f70233a`
+- **CORTEX-TAINT**: `18b62d13c334f5880053732b9b9982bf1f578a337986559f57cfea7afb10594a`
 
 ### CMX-0761 | DISCUSSION::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b9cb45a40111b404092585f51be99159f6718426dbe852f6c03b589519c8b845`
+- **CORTEX-TAINT**: `8440378e3c49b8420ba03e7394172bb7d740e5e4ba5c920a941681f010abcb15`
 
 ### CMX-0762 | DISCUSSION::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `f0677ec0413563e712950389a4f226d4600475ff851a88c6bf65b78aab081b62`
+- **CORTEX-TAINT**: `9a14ed1fd9ab470bf01ef039c79e08f78916b0ba5382e015ad7d3a2e871153d6`
 
 ### CMX-0763 | DISCUSSION::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `6ed0a26e43d8cfd9974694803038e723d0d4fd58468d880860aa227d2af481af`
+- **CORTEX-TAINT**: `2a2c994fd39fa5461ecdf7744f4694f7f418e98143ea7d48c26f9c403e654d18`
 
 ### CMX-0764 | DISCUSSION::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `f2fef213bcbc608795f3e6f9670cf2e675d1e3622eb9703e928fa1cd57ace94f`
+- **CORTEX-TAINT**: `ba6dad0c270e96725692e4e92cc7b5b592eec2802a4aaf6ea599a833535d0322`
 
 ### CMX-0765 | DISCUSSION::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `76cd78be1319828f5c6ef0e0c470b5fc951d6925011af640de111adf031a9ce2`
+- **CORTEX-TAINT**: `e9d140f50c9232b34c42abc01386fcd35b1b6ee63151e6b8b980ec543fb233c4`
 
 ### CMX-0766 | DISCUSSION::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `c3d6bf8ff793c7c700fc60e4103313438673b61182eaae9f3f75de3a13485cfb`
+- **CORTEX-TAINT**: `9504d50da7d1fd05499e192f603ca7e1ae625087042036bb360492044e406b76`
 
 ### CMX-0767 | DISCUSSION::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `667693393b192e67dac047b8e058a20dc18a1206f181a38a9d62a68386817139`
+- **CORTEX-TAINT**: `da0ee6145f4a4b35b7e5d3ee59bc7d17981c405c1328220b3411892c1dae4deb`
 
 ### CMX-0768 | DISCUSSION::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `8180d083d7926fcc0a3488795a7e1c7131909c88015d754e25d9e3d7e58860e6`
+- **CORTEX-TAINT**: `59f7f5b5b7433044537ad84f36040f2fd99889d57c6390d8ad91dfb61e84cb2a`
 
 ### CMX-0769 | DISCUSSION::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `0016a166349fd13477b51cd21db57281cecbc745d6d9be290c18e9a2d39b56df`
+- **CORTEX-TAINT**: `8b083eb9754c2f2b1abf0757d28fb2df4bf22da87a9c717ef862d3c3bc7fef44`
 
 ### CMX-0770 | DISCUSSION::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `c474092e1f9be74947f8d6f0d9daaa33de25ddec5d6fcebf1a02fecc8985c814`
+- **CORTEX-TAINT**: `5fb29667a86b35f16c494c95d1e0f3e7ad41197d9a95bf355f192f3dcfb2ab27`
 
 ### CMX-0771 | DISCUSSION::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `fe6dea4cd6ed3607821a248e23f36cdfd4138e7b2e0f70135cb84acbcc6e18ce`
+- **CORTEX-TAINT**: `4b36fe7046c24b8a82357697576fcd50b143343c30aa987e1269f3778e06fcff`
 
 ### CMX-0772 | DISCUSSION::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `30ea6551f0a9031ad4e7a6af477afa62301b83f4932057bb26dabce298f3b000`
+- **CORTEX-TAINT**: `d4f915832e199d70851c706972409fb0d47350e05477935ce80f1fc035174610`
 
 ### CMX-0773 | DISCUSSION::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `61443cb374319fbb464de83678e6ddf35a4c31f6fbb0bf1e51f5dc49127850bc`
+- **CORTEX-TAINT**: `40f821a414b0048d1cb079de51477392d7ee9bf4e62074ba7023e9fb7133efdd`
 
 ### CMX-0774 | DISCUSSION::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `dde8135741642dd4f6dbe2f8d57dd0742e841e51777cf2c42e1d32347382d550`
+- **CORTEX-TAINT**: `9e8c429cf4281cc4181822bde3ecac7cabb15a396327f346b2da8dc0f8734111`
 
 ### CMX-0775 | DISCUSSION::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `302c77ebe7b82fd4c8c680081c9e4fcc3834abe8dde14052c77504070d9b361d`
+- **CORTEX-TAINT**: `c6c396307def2310140426353de7eaae606dcd73de244b59407b01f01bce4fab`
 
 ### CMX-0776 | DISCUSSION::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `2e4842c9aba706f3e8565d43862b416c35b5d32ce600a384f06b946abca23477`
+- **CORTEX-TAINT**: `a9d6d84e40214952dfa7ea3ad4b702a9ea3beac0ed262a59feb6f289d2040517`
 
 ### CMX-0777 | DISCUSSION::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `1397bce9f31115e2b044b6a46a0e565679a49afa34c999d7d58aa8589fcf8017`
+- **CORTEX-TAINT**: `f5e4ce7f1ec1b4cc7007092f521e93eb88818c2a70013bb3765941a44eab6739`
 
 ### CMX-0778 | DISCUSSION::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `2fea24f57bbe3f5e54db03cec496c6241da96da3b54d406a0b7c290a6dfa947b`
+- **CORTEX-TAINT**: `008a642db7cf58004d4454cb658955d2bf6e2b472470f94625983cd44afadd19`
 
 ### CMX-0779 | DISCUSSION::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `cf53ec365ee6f17fb5eab59233c65dbe31bfeb561161ad7bd0e50336a92a83b2`
+- **CORTEX-TAINT**: `148ce90bef318f953d42fd3cedb3c41fc6e6228ba64aded4790654d2500ca07e`
 
 ### CMX-0780 | DISCUSSION::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `79501f2b61fe4cd666d57c37abd2710aa7afe2b273d7c6adb340d6a01937b8ab`
+- **CORTEX-TAINT**: `7c0374e2f313cad9edc1bac97d931904c2c2adb0a7a0facc4e3bc02b7e31cbab`
 
 ### CMX-0781 | DISCUSSION::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `c97b85978dfd5661ad5d2ba459c36706a3655db91a6aec130b15fe91f95e03dd`
+- **CORTEX-TAINT**: `a8f119a3036aa5bcb0a6fcc45d76a100edcda4c452283da2b6f74421ca56a703`
 
 ### CMX-0782 | DISCUSSION::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `70b7575b7cc00e85d70fabd79ffd1c80aa1730318e746584cc1b283473fb747c`
+- **CORTEX-TAINT**: `dc89844ad99e371c3d6107a1d1956ec939307320f41c05cf412323e7653c5c21`
 
 ### CMX-0783 | DISCUSSION::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b9734cc80c13a04b7a2adb00394d5b5a313c5856d89bb45b64810827fbf6ee9f`
+- **CORTEX-TAINT**: `687aa6a76c4d977a27c9678d475bce54a7d3d743265a4f9e359849bcbf89b0b6`
 
 ### CMX-0784 | DISCUSSION::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `6791e0a9ba675d16b27ad5e855168e6a77421e70ccf341e3e89f54c293a82d33`
+- **CORTEX-TAINT**: `16e332803873933a88b74efa8ace780c341c377f0150c430197d278c2c857ae2`
 
 ### CMX-0785 | DISCUSSION::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `ba5f90223bfa626e2d1fb52f162e8131934745817a1737af2e2cc363c6b186ad`
+- **CORTEX-TAINT**: `495487418a3738f31ba621a2137b408f5ad9d3d8b11f70d90dfc84a6b476a2a4`
 
 ### CMX-0786 | DISCUSSION::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `c7aa0e65ec821f590320ee457e908ccee3b0bf41d55b0bac17c4e0c8f71e1ce4`
+- **CORTEX-TAINT**: `e4624d306bed0b14be96e5b3b222b243cb1d0180522d698bb90be884a48b54b7`
 
 ### CMX-0787 | DISCUSSION::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8803ee83ee08b9c0aff6ac60604ad47fc2d860e0e3bb9bdad90863433741f29d`
+- **CORTEX-TAINT**: `391b37258bf84748d07e36ed3170df91d0c7f26d18895ca4f5bc3616f67191c3`
 
 ### CMX-0788 | DISCUSSION::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1bd2d8490fb840bd54c8e674e4be0a9d87fc779c4012bcfaf1046a59f1ffcad9`
+- **CORTEX-TAINT**: `2a3224b8c37356b33ad8abd2483a6aa54390e818937198d665fe34debf1bd4cd`
 
 ### CMX-0789 | DISCUSSION::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `e272801a23253e6a4e6c1531855aa48ec3696f9f353cc51e2b127d275239b997`
+- **CORTEX-TAINT**: `703f51611fa332aa17245fe183db69b1e495f89008b52dad7ad9d25f80b68836`
 
 ### CMX-0790 | DISCUSSION::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1912fa1c6e404a5a4e44eff2e78ff43cba6e3fa548e8dc36dc876ed7b744a282`
+- **CORTEX-TAINT**: `d23672d6c7dd58a664fdc262d85ff2992816061cb11b2c93beff3d6c45228542`
 
 ### CMX-0791 | DISCUSSION::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c2649099585754842ddad976519f9e30a14bdf29ede9ff826af299f5d59e8971`
+- **CORTEX-TAINT**: `38c6fbde2ba9cf7ca8b2de4d68b49a02523458c338991ec99b006d004fafb123`
 
 ### CMX-0792 | DISCUSSION::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `5c01e2c824b3d955a53ea6666a2943b8824d4fc69bde89dba9ddc193ee49102e`
+- **CORTEX-TAINT**: `80fff8ae2dfa3812331266bc31a1c6b33eb2cb78fbe1519cb9c5b08c0511500a`
 
 ### CMX-0793 | DISCUSSION::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `c5bae92e1e2093ad98f569696e946dc5d084efbeb0f4673993ee0fb5ec1cec00`
+- **CORTEX-TAINT**: `f91d5b46a77a24f6c0ed70999060db49dc4779b09e7cef56a1cf23ec462fb1ab`
 
 ### CMX-0794 | DISCUSSION::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `7f082135862291f47ba07ab3898cd927ed10920e002310779793b3b361a9504c`
+- **CORTEX-TAINT**: `3a344f47ff24f661bdf8dd156cdba5a0c997d137f44560fa40f3b1050122615d`
 
 ### CMX-0795 | DISCUSSION::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `7045de8d01748c5bc998004cfc74f50ca0527c5892bb817021b649fefb415a65`
+- **CORTEX-TAINT**: `64fd8a48e7d03ce70950796a64cbdca75947057560fcacaac8679571b3aa8032`
 
 ### CMX-0796 | DISCUSSION::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `d60a23641c5c7a04c760ba76a2e48eee9f217d4bfba1784d071f41915c16b730`
+- **CORTEX-TAINT**: `b2ea4ae4531cab62f7b43e54c591774574c1489cb902cc611d1b2275b086d4f9`
 
 ### CMX-0797 | DISCUSSION::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `6863f6b098a274d16f5799bafaeebd6127ef2e4cca06796cf9bbeba2960d8747`
+- **CORTEX-TAINT**: `75098f963067de1d79505f4df1c784f56b403b2875dd586c0242735704a70134`
 
 ### CMX-0798 | DISCUSSION::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `b699656a918851187daca60f3600ef777ef5ee49f9b83c8c31d6a6d15cbd7486`
+- **CORTEX-TAINT**: `b0f87b3babd382ce440575ac4e0e99e9354af310eb06ff405c48f776938f16f8`
 
 ### CMX-0799 | DISCUSSION::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9c27a75909f85a7facfde8c6c614e766a264a04ae4e9892f78d6785ff0123467`
+- **CORTEX-TAINT**: `2c0238c26d25ed8af0ce00bf65768aec26e30f49c7f1110bd69b40453c4340b7`
 
 ### CMX-0800 | DISCUSSION::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de DISCUSSION, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `3594ec17720a7a792628887bf20b324867bdb3f347963bbbf0c160b950c54111`
+- **CORTEX-TAINT**: `0613db1f60857f792ce4b119d5cf78230ce101bee9f82512b025afb119ad306c`
 
 
 ## DOMINIO: REPOSITORY
 
 ### CMX-0801 | REPOSITORY::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `0f17f38d8dcb18adcaef589ae333cdc21ae3627e4731f192dbbe0c638e946455`
+- **CORTEX-TAINT**: `575a3a877b902e555b76238b0a2932135176d79e99401eb0d429966c300a85f6`
 
 ### CMX-0802 | REPOSITORY::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `74cbbfa30c7de06319413b76d06bb8b3a65641c6a17ceadea6a2373ad2369210`
+- **CORTEX-TAINT**: `7f4ea1cf480ee4adb2337425dcb857ce9544cebfed2bcc2552dd6677cecb7da8`
 
 ### CMX-0803 | REPOSITORY::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `8f8d82865e675ae3d036341ac9fc628a4ded6cf7d9f680bbc1a2b835efbd5c0f`
+- **CORTEX-TAINT**: `48e06f40c63643e31c9c740ac80f204b553202e3269ca5d6d88210d676d37a0c`
 
 ### CMX-0804 | REPOSITORY::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `772a5c5e60bd73b9b37b735a862c35596f8dfef4476e9cd33ed7674836b7afbb`
+- **CORTEX-TAINT**: `9c3840f834dbfc0e5a2555f63959c98549249d281730bbe14a0ad67cb25a9ab8`
 
 ### CMX-0805 | REPOSITORY::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `3bc74112ce05dc5e3aafdc545d33804c833d3b301c60c6062b93aaa55bb94e63`
+- **CORTEX-TAINT**: `3b62200e47f8dd65fac171b78b9220f8bc7640f7b1333355727b24b8f2e16bc0`
 
 ### CMX-0806 | REPOSITORY::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `a585e7c303b04c701834912d65e6181e914eb58a070ea92dbf031d4d3deee455`
+- **CORTEX-TAINT**: `afc3173ca89a3c52c9ae6e4cc30649e4c7370565fc18a92cc180fbc936582718`
 
 ### CMX-0807 | REPOSITORY::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `8e6f1999b6df1bf08af820fa6b4c2fda24fac9bb66ec1d032ed9f3d40d0d27af`
+- **CORTEX-TAINT**: `74094eb0ecfed8a9bd2a17abe13d1c931f84ec5882c0a9ae7a38b70317dc4c57`
 
 ### CMX-0808 | REPOSITORY::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `28ade4a1f3817b07301ffe039a86f8d0ab78c8190ef9f4c0f4ae535dae070e6f`
+- **CORTEX-TAINT**: `1194ac87bbbf0d1dd712255c80432eed3214b70e2d308a313c7b3275c75bd759`
 
 ### CMX-0809 | REPOSITORY::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `8037af18070d68b4d9ceeac2838fc38572fb437fd4d9fca3816395dc47d58506`
+- **CORTEX-TAINT**: `4f265380268396e88189b4149414bb24d39888dc4079fac67951f97edfb9af74`
 
 ### CMX-0810 | REPOSITORY::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `da592b441feea151a709d32c9643981c487757f7d5fe04393cc01827cdf3765f`
+- **CORTEX-TAINT**: `83ac9756fd4258e358f93b65eef17ff83d0a8779a3cfc72904ed30cfc95fae9b`
 
 ### CMX-0811 | REPOSITORY::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `1faf06ceab39847db922d1dab9226d86521f6930e9ee76433b18767cb558c487`
+- **CORTEX-TAINT**: `20c0be3d3440582e12fd05b76f9fea58e79902bdc1409afe8fb19d9af123a890`
 
 ### CMX-0812 | REPOSITORY::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `437e253c4ceba5010f41c443a1c21c457222317a0ee8ba116cc0296764bf4f76`
+- **CORTEX-TAINT**: `1342a0693c8934179bee90475873d86ee48629890c4176bc7f6c2776cd6ccb09`
 
 ### CMX-0813 | REPOSITORY::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `9746eaf76c953b684d8f7158b74848007c7b71fb8d97bdb54fb7e7ec7a282ad0`
+- **CORTEX-TAINT**: `3f48118b6ce682fdb42b0303ad32879a537851db96134523546ed13c4f17f5de`
 
 ### CMX-0814 | REPOSITORY::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `7be5f55ffd74c17f6561bd1f711a158fd0e8799ac0c4fc8c2819855a62fc165d`
+- **CORTEX-TAINT**: `7c04987b3faff66ae55ceb770761f5638cf1ddfaf03cac16768c37f384d76c1a`
 
 ### CMX-0815 | REPOSITORY::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `030714c425f68d026e7d5e96713f87117a3cfbffa0117ed107ab369a5353d647`
+- **CORTEX-TAINT**: `fb346db94100d6691ea664021b538b5778b324b98ee03a3ab245b3fec41e0b20`
 
 ### CMX-0816 | REPOSITORY::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `a0d0acdb9174e09376a050fa835775e39842ab0eff8fe4f7f156f27715d09f00`
+- **CORTEX-TAINT**: `473bd873a217ef264ee542b1301da8baa1c9377ecf2586ea4f1134dd56d22c39`
 
 ### CMX-0817 | REPOSITORY::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `77b08d8455a4e21df33af5596e9fd235cc7f87a5a2ce63ceac7cfc2f68ef0308`
+- **CORTEX-TAINT**: `9bddfaafd77b7a47783f28fc85b6aecb95894eb106d4103bddd2db0ebee38653`
 
 ### CMX-0818 | REPOSITORY::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `54714fd2fe80aa65b85d80d265fa5a7c2ef5bfdd71f7e909f09bfb0176390237`
+- **CORTEX-TAINT**: `300c243631d4212886043906206ad79b994fd82372e9b9e651c4f8579a455d29`
 
 ### CMX-0819 | REPOSITORY::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `f0b414a29fd2d9c484661567a8b1ee004a3d346e07e61a3e776bff91656b00ee`
+- **CORTEX-TAINT**: `397fdad0a76e0670601c60a6d947ab9adf197ba18fb47fab735ffc8ed433f110`
 
 ### CMX-0820 | REPOSITORY::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `24707ed725d8d693831029510d9a01073dd612024c359179f6b11aa933e26755`
+- **CORTEX-TAINT**: `1f038358d608e93f233f382445af4754f17ae59a76d27ada23b8b6d971749ee1`
 
 ### CMX-0821 | REPOSITORY::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `32c768bcdc51822e1542ee41c4d7ab96013fb3f9fafa773c6d0393a4d40457e6`
+- **CORTEX-TAINT**: `3c0d1abe4cb8f6dbd2801f404bec9ef1d88c53521c84c46cebc4f5746a07a41e`
 
 ### CMX-0822 | REPOSITORY::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `7d1a864143b203c019bf6196e19052f41284654f4b0e0690ff77fc05e10b334b`
+- **CORTEX-TAINT**: `c2a399dfe7533caf949c8b4760101fd7bc6897d8232baf41089104238811ecc4`
 
 ### CMX-0823 | REPOSITORY::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `fdc4a3bf4d56863ef3a9518dce7101dffb96ca3f8a759ee0ff24f487f1d3bf9b`
+- **CORTEX-TAINT**: `2aa443e47c8bd76ce3f41976c3e5dd06e72b7cedadc684c0101d92a1de4c6489`
 
 ### CMX-0824 | REPOSITORY::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `066f5995c6afde6dbd982da888116de3d7f7a66793ce756c58ec0bb6bcc49876`
+- **CORTEX-TAINT**: `5c549b96cb6ffc9d22b5676e20076149800a4374678dc19377cfabc93088d1f6`
 
 ### CMX-0825 | REPOSITORY::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `247a11bce4d400492015049966257bd0bbe9c272a627623f867cab81ce9f22c3`
+- **CORTEX-TAINT**: `d491be89c416809951866281274b821194a88676a2cc1e0c56dac26c60f2a3b5`
 
 ### CMX-0826 | REPOSITORY::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `bb7afacfde88db933fcf71a27a94330520077dac4befd934003ff296776428ee`
+- **CORTEX-TAINT**: `cfc7d5784da248653b3a8cd371a6fee89f0ef9c509d4e20c192dbaf5a6bacd57`
 
 ### CMX-0827 | REPOSITORY::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `7e63b8f861437f09dd6d2e66e61e523ee66b675203c2e4d15be15097f3928fb6`
+- **CORTEX-TAINT**: `e53f59b6bbad6316f62e95acc1a51003a0c2f4510957257a70dad4a28f1272fd`
 
 ### CMX-0828 | REPOSITORY::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `5ffd534e1a3ce665a3b49dda6f235e36a656ca252b355d2baa3888e73c975ec7`
+- **CORTEX-TAINT**: `cedef9925c999be232c103ed29e85a4711310664a5c9d66f45fdcd31203f52cc`
 
 ### CMX-0829 | REPOSITORY::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `9ddf61342f58b774598d4eb3233b30cfc34810283b219dc3e46b04e7ebe82df2`
+- **CORTEX-TAINT**: `0fa9cf40a6759427de47b252ad75103417e4ec28a92d8084d147f88f436537ea`
 
 ### CMX-0830 | REPOSITORY::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `bf2447dabe6bc3530fc8d1de751464d4629eb6a0eb887b289dd6b89ea90a5424`
+- **CORTEX-TAINT**: `67a3ab01f136736ddaac2bec630ae8cf792041f5165905904848855a58a3f970`
 
 ### CMX-0831 | REPOSITORY::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `4bfc815d2c2264465eb35c33584c35b60aec271d8dc7eb81e64a711e73df3940`
+- **CORTEX-TAINT**: `8925464f0dc2840ddc00e7e959be47f6c4de6757d4642023c3b80a52ce640ffd`
 
 ### CMX-0832 | REPOSITORY::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `2ddd9d8de3274695f2a9c87791e77fa426ee79b13ae98e2194751d3e89493d66`
+- **CORTEX-TAINT**: `004ca25a8a3e728c3734ed903795f1531ece27327ca542fba179742b323dc4c4`
 
 ### CMX-0833 | REPOSITORY::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `dc771a66cef1e23fcd4a3da3a9caa268bca3014ceeaa86f57889fc148694b61b`
+- **CORTEX-TAINT**: `97fc6ad0a768f5f9bd1e234180ebe5f2a7d31447b50de279999b7b1da574047c`
 
 ### CMX-0834 | REPOSITORY::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `4bb56ffd9c0ddf0449e0480846792d1bf7e5ca571839112c4149b6b9490ab13b`
+- **CORTEX-TAINT**: `4722cea4b3912be78671f29d8fa0e881c0598d0ae8616340f17c42002c8cce70`
 
 ### CMX-0835 | REPOSITORY::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `3bd1c43b5cffac128c8d6d867c7869363a2f93866d9b98a747039c6b3b60036c`
+- **CORTEX-TAINT**: `95c48fd58c7bb4ccef79d21e4199ca99b4d792e1066eec251cac22c0440e263e`
 
 ### CMX-0836 | REPOSITORY::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f833c6dc9b1f5217f043e391deb60d8b5461d13af770c19086cb10c83dcf6de2`
+- **CORTEX-TAINT**: `db968791a94c3d59ab5920a9873cbafb8fbd938fe98232d8fa842cb17c87a0a9`
 
 ### CMX-0837 | REPOSITORY::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `249d9fdf60ec7cb4e3c6ebd3620235eebfdfb68b0d4c862a68cb1c1353d0f0a3`
+- **CORTEX-TAINT**: `698e2770b51686ce9246950e7624b200003096b7b4338d281ae4bc5c2a6b23f0`
 
 ### CMX-0838 | REPOSITORY::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `33453d0d70b4a5262d1d44e507b39102dd6ecf72fecb41f5dac6c678f9bb672c`
+- **CORTEX-TAINT**: `6a989018de000dcd65df51e59c20678c4fd5314ce82867a93bde34853f0187db`
 
 ### CMX-0839 | REPOSITORY::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `f0fc431dbf7cb50e963c143dee59c43e34a32865c31989c42abda3dec3c4640e`
+- **CORTEX-TAINT**: `fd5027ada616217b0f420a50b8c39603f99d6cbca40b1fbbe8f94c2207d8b501`
 
 ### CMX-0840 | REPOSITORY::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `7926af209f2feff4532f1d587bcd8dce6b54a65b3ecfb0af8c77836033f7a031`
+- **CORTEX-TAINT**: `f4c371473ffde242a2518cec3b8aca66e6f95f36a5ad0661516c4fd028a72876`
 
 ### CMX-0841 | REPOSITORY::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `1f7269697c61b9f1b1d0e542a67e79fdfe1525790a0b0b6616d53054f22e536e`
+- **CORTEX-TAINT**: `c50b7d72a2787857bd219b3f0ecd38077012f0b162410df48117eb30eea7628a`
 
 ### CMX-0842 | REPOSITORY::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `31988032ddcdb0474bf51797cf553f56421b11aa6c06d81dd3a36de790daac8d`
+- **CORTEX-TAINT**: `8d82f67a13e46efa451c70b9fe3e9377056780db1aac5a84ddb2f1bb7710c994`
 
 ### CMX-0843 | REPOSITORY::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `85798475a63436f7ab6193f53d5aff280490f35fbb46552c3bab05eb21bd5eb9`
+- **CORTEX-TAINT**: `673edfb3146008a0de6512409ed46faa1953647d2fed3e95b3b7cecd28e54bd5`
 
 ### CMX-0844 | REPOSITORY::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `8ac2dc4f00454f6c29dcd801cf6887be40b9c2c7de7bbd73b1d32a7eac5fc191`
+- **CORTEX-TAINT**: `1a99f80d1006dcf24bade625c9cdfe277df2b251c46a083990b23a5105d2cd92`
 
 ### CMX-0845 | REPOSITORY::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `2c00692c3634dabe167a8cf51aad5f2efd3e8d900f23e87fcb610aa15ce20e3e`
+- **CORTEX-TAINT**: `6c8bbae70d0ce77c28627b363b41f81288167b0a157f44cd4934305b8f104a8e`
 
 ### CMX-0846 | REPOSITORY::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `df8b99b76299e5951d7681cc2b32ad4a17ad0274bf39422a9666826275300138`
+- **CORTEX-TAINT**: `bb27a3e01bb68a6a4b40fcd5f503e981935717b8fb803137e98209b3ceb0e55e`
 
 ### CMX-0847 | REPOSITORY::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `8d9927715c4fcdb1baa1991d6452fad68fc31b0053e354a1fb9d6ebe4853fd6e`
+- **CORTEX-TAINT**: `8a09c9c74d7badea8d7a00fd1309dad024d9cd148a9b33afeee47909da75677a`
 
 ### CMX-0848 | REPOSITORY::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `08929e3623a7d255b6993eb7483512f0b01ac718e106a10d9f2f8cad7f879cec`
+- **CORTEX-TAINT**: `cfc5fc708425f2f28861c04d80919572047e731c76da2e096c62fdac797504ec`
 
 ### CMX-0849 | REPOSITORY::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `59ade430d2c85ec749768193876fb28802a66eacb530cff2731b50a0fb2e928c`
+- **CORTEX-TAINT**: `a0d98351aeeac26611c86883c8260731554ea42ad4dc7b158661621e264f5618`
 
 ### CMX-0850 | REPOSITORY::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `b2a74152878d1929182e0f8b93d7ba2f63abb77b62a8b32aec8ec95395ceda5c`
+- **CORTEX-TAINT**: `fb5f0e5b0807a32b04a4ede595e50982c986ea6ce732446c9a6fc98194036877`
 
 ### CMX-0851 | REPOSITORY::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `16d603fccc7d0e2966071e719b3a45a4f231a61f42fc8386fe6cb1d04148e0bc`
+- **CORTEX-TAINT**: `aa9e0eb37ccebb36d7e705321e94ad298319b070231ffe76c05d8be76c6c9fbe`
 
 ### CMX-0852 | REPOSITORY::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `f50ed27fdd9063725deca5f4404ebe0a4934201184b08678158212ea31ac5c21`
+- **CORTEX-TAINT**: `90697b1eaa46ec47da35ff91e11c2975b80e5326a0d9c980b4d7a1fe52683d57`
 
 ### CMX-0853 | REPOSITORY::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `1bdc5fa547232f0c4d3941d8bb5955a21336c2b2a7973d7c7cf94c326ce17747`
+- **CORTEX-TAINT**: `ea7f072ff01236d0d7016b3128000494529a07d73b35c172717416573cc40533`
 
 ### CMX-0854 | REPOSITORY::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `72e30e1748be78f82b731db764a3845c4390a5d87ae0295fbd068e18fac3ca38`
+- **CORTEX-TAINT**: `421c28d1c9808b5e9198d383371a43037a96d61033257e6e65250e9952ce79e8`
 
 ### CMX-0855 | REPOSITORY::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `0001091bce1aa8adc1d28c8583861fbf9e590ebdb29323db60adb7c1c075fb0f`
+- **CORTEX-TAINT**: `dc74bd31b3c215f6f682370e356199a637be9e0c10f3b7cc69ca051c21125425`
 
 ### CMX-0856 | REPOSITORY::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `27f0576d94bb5d991005ad8d1e3275820e5fe440ec43bbb2a603d36e68bf6ae2`
+- **CORTEX-TAINT**: `7a6b50f16a0f2124a7e15769c31e14769f651818040db482301c5a900e78abdc`
 
 ### CMX-0857 | REPOSITORY::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `cedb9268b1fdd8c1dbd87cb796be572f345c831087c8abfc2008863f503afb64`
+- **CORTEX-TAINT**: `e1c029533f4e7310c85537ad271acb31f7e8bb62d391ae4d1fcc45552dd7820f`
 
 ### CMX-0858 | REPOSITORY::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `34b5f673887e4526bdfbfbfbb03d3b2b079d7ffeb1c36cc255615494f693c9ea`
+- **CORTEX-TAINT**: `f1bc047d301404befb6072ec652a3981c126f95272bc6c6ea79ad6f0483c6549`
 
 ### CMX-0859 | REPOSITORY::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `0458b95981f78a571fdc38545c353d5531c8f9c3ae8304c0b9d8320ffb7981f2`
+- **CORTEX-TAINT**: `4b0b41f953197dc3e972a96771e175c07647a708a68544f73c4b572358ce64f6`
 
 ### CMX-0860 | REPOSITORY::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `2afa0701eb5abeca50b27909309c534d4d1326b500fd3a8499eed1afa12b4a29`
+- **CORTEX-TAINT**: `10fd57c78c9991b566bf5e07cc816cbc83383b9f6d732787c5426a2d4c6afac5`
 
 ### CMX-0861 | REPOSITORY::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `66efefe37be7b55ad3011a5a95ea7d01ce17c9c719d9971ef90bae252b14b0c1`
+- **CORTEX-TAINT**: `ec7ba810cc5dd4bd4c223131d962b6c24a0eb3ba3d1adc16abab835911e6b294`
 
 ### CMX-0862 | REPOSITORY::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `e0a44c104c1a8f553416696e33c42f302428571faf82afe410e1f8bd9641f18c`
+- **CORTEX-TAINT**: `73e9d0bebad166e13b24483c96cee7519952e147e8534b2c4d86dfe63d232df8`
 
 ### CMX-0863 | REPOSITORY::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `4a08f0f5695b69f36f6ea14ab9da3faf93030511ba8f1b3648dafbcead727220`
+- **CORTEX-TAINT**: `42d33bdc0e21be04b02859e4d09aceef5f6698088064f11fd9b5140a99358966`
 
 ### CMX-0864 | REPOSITORY::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `aae61d006f3e140e149103def5eb377d8ecddeaad66afc27c32525537f91a85d`
+- **CORTEX-TAINT**: `2e26a96178471636f376203b11494ff9621d961298dd321e57f92fa56b3e4b84`
 
 ### CMX-0865 | REPOSITORY::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `d56f66a9b0087094f099a096e6924c689c0c18f1915fd1d612e8f70710a94fcd`
+- **CORTEX-TAINT**: `98d5c2d17293896a6adfbd835ced8059021a5c3b1e06d05ee996a2799e9f6170`
 
 ### CMX-0866 | REPOSITORY::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `9b7da08485407cee1d4bc031e1b1deee1c58781bb446a957ba7329ceda6177de`
+- **CORTEX-TAINT**: `10bf5640144cf0a889ca18bbd34e4ee39822caf67fb023789a2b4577efef788d`
 
 ### CMX-0867 | REPOSITORY::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `79584480ef99b7719a6fd71fba4a0c08984742094c0bda2058f3fa6a5461dde0`
+- **CORTEX-TAINT**: `d17a102948217d6eed2380a78553d567fcabbd2a787f94910d6990b68b972ede`
 
 ### CMX-0868 | REPOSITORY::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `51166c92d994f088c176c8aa61f0e3f358b6c1574a60433638f5ce4687708081`
+- **CORTEX-TAINT**: `01e949b8153034b56531735fbd783b9a9f9a1da7a743a9a0ee6ce943473b14d2`
 
 ### CMX-0869 | REPOSITORY::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `72070809dcdf377e3e54657f59722ca3b27457703317e6429bb56b0c39cd11dc`
+- **CORTEX-TAINT**: `cfb4b06958a18768d1a4171121b94762a6e39662e760dab962648025df9a8b44`
 
 ### CMX-0870 | REPOSITORY::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `c4eb0a7afcfa36b81b6e540556e30f0861727b6b77a2c3e4584bd010081049de`
+- **CORTEX-TAINT**: `3b9c100b613b0d308f97798a599c047b93b09a39adea9fdd0e1e07982464bb49`
 
 ### CMX-0871 | REPOSITORY::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `d0390d6d65537d47989a2b9dda215410e25883ece8216ec0e7386f66a88d64da`
+- **CORTEX-TAINT**: `c97ec8a980558dcf057b9199e76ad21ff032f2fdade26afab7d5fc2ceac1c1bd`
 
 ### CMX-0872 | REPOSITORY::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `0f9901bedcaa534075694f3a7a6f85edea0a1595b468383cb7ba534211e4b4ce`
+- **CORTEX-TAINT**: `9ce64a52ead023c2e97a3a2d54ef42ff6ccd3f7c90571fb8cf58f4a9cdb068c5`
 
 ### CMX-0873 | REPOSITORY::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `726933c58fabbec93708f3828f4b4f4260ef6c62a7dcafb446c431d358e138a6`
+- **CORTEX-TAINT**: `8611c8577b779febdd88fe8fdcfdb87f9dab4221c01aad06a6b5553cf4219740`
 
 ### CMX-0874 | REPOSITORY::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `d817092a58dd3e4eaa230a861347c1c4da87628fe7c11a6c0a90560895b812fe`
+- **CORTEX-TAINT**: `59acabc8974c4d265305eef811434edcd36a755e6a4e10a0b0626ae61eff8f38`
 
 ### CMX-0875 | REPOSITORY::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `f3aff58cb273cdc26a77a5e41cdc387f7ad304704bbb12203e97c28618ed5deb`
+- **CORTEX-TAINT**: `0041ab6809de3bddb29a0e26406b2cf961f186c4aadf5f57851580efe8bfa449`
 
 ### CMX-0876 | REPOSITORY::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `bafd387beb0453e6d732fc355318f835cf16c9fc4cd8e6e3abe689e9cf7e5214`
+- **CORTEX-TAINT**: `a09666ce4c4d82c43459c6399df2f4d531d3ae5c0c8732dea52aea05d1cf43f1`
 
 ### CMX-0877 | REPOSITORY::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `f907f91003e5fd34a02f58495dc4e493bc40ced3d8fbe74066a736be5657b8ec`
+- **CORTEX-TAINT**: `86f6f1cfbdef53469c76a481878b15695bcf9c438dae625df1cfb1160d18cd43`
 
 ### CMX-0878 | REPOSITORY::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `fe43480a3680878faa5f2941ce27605087a9a4d602727b38549e8a732e3294b1`
+- **CORTEX-TAINT**: `673d47973e235571a9e5f63d11f257f8d8df380154323c33200114c9a6df9ac2`
 
 ### CMX-0879 | REPOSITORY::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `e92c9a457bcab0cc793e74e4662de13b6a07db6a57cf8f05a03dd1d632c6bfe9`
+- **CORTEX-TAINT**: `f31b7f98e244cd5f76b3fbed6cf9ed3e1a2e822a325383210dfea5a0ef485326`
 
 ### CMX-0880 | REPOSITORY::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `24d50b6a4486b948a1e653080b798fb7f387df3194757a2a281f936175ed24e9`
+- **CORTEX-TAINT**: `b341ffbf547e2bb13b7a0f20b57377902a91f34b75d390c178f4293cb3fb7346`
 
 ### CMX-0881 | REPOSITORY::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `0787e263cbaf5ed127c64b2fb4722a43d113e2a836f10fc7552070372912f59f`
+- **CORTEX-TAINT**: `17c494d4cbeb2ae7c02cf9c15e6ce334b0a9795015eda7ebfef4b891650a984f`
 
 ### CMX-0882 | REPOSITORY::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `8898a4260f5fbef6f7e8f61492eec0edb1027ea9db49276dfe0e117f92604788`
+- **CORTEX-TAINT**: `6838005f8ee04cfa0193ed96aba660c09d092b7a88f5df08404681b9adcd7d3d`
 
 ### CMX-0883 | REPOSITORY::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `600a840fe9f637ae7fe2a296e855be1b895cacf8691e0746a5f3a20569373264`
+- **CORTEX-TAINT**: `5333c57ac666c7c37e34c3f7e4eaccb23e4db98343d22777bab6b2ee489cce8c`
 
 ### CMX-0884 | REPOSITORY::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `ed4c94893663f9e72a621bbfa6f21dbf9d5efbcd23811e18073e7d1af6f13ed5`
+- **CORTEX-TAINT**: `b322c9dd665753ad56267ee411614598e1c7c013e865449522aa2ba8562a3614`
 
 ### CMX-0885 | REPOSITORY::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `b3f3f639ecc345cda42770738341d2bbe24c87ee76cb7a5f038cbf58b9863606`
+- **CORTEX-TAINT**: `cae91f6364f9443efb43a4d23f92bd71be6f77a6f23f074efbc5d3bba722e4a3`
 
 ### CMX-0886 | REPOSITORY::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `c887abbe603e8ed420645fc0b4e0496005d24951609109f6762d82b49a94e794`
+- **CORTEX-TAINT**: `7ed622dd05b6826048d567f3aa137c703d0b0a4915e509e77144ca07f8c0db6f`
 
 ### CMX-0887 | REPOSITORY::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1b9c3fe7cad8eff67c55f19d2bd1bf2867b5fcb3d7f4d0fba096df6bcbd07463`
+- **CORTEX-TAINT**: `c62e24e4e0c87c8f3133fb611d9839923ca650b41c5af886a121734e5fec4fe3`
 
 ### CMX-0888 | REPOSITORY::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `6fe142f217a5dcf1ebb386acb88b147156ef0308ee3ed15d5d04d159d1c10eb7`
+- **CORTEX-TAINT**: `9b214faccaff751c34f147a9b9c707d06afb8aff59a0015c55c3b72dc0719bc1`
 
 ### CMX-0889 | REPOSITORY::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `3edf33d10a465d70f070b5ac32fd84a69643b71e0e210a716484ef00552bc2f9`
+- **CORTEX-TAINT**: `8882162c2ed0304b7ba1a7b5bfab8067963d154e95b036f6d751433ebc79ab20`
 
 ### CMX-0890 | REPOSITORY::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `dd5d92fe717d9e3ff21232f363083100bb67a81ae499b5900d0eea1dde8f5c67`
+- **CORTEX-TAINT**: `fb794e116f880cc4b4d49efe4900c82f6855f6b80c09a930509f30d23d85bf8a`
 
 ### CMX-0891 | REPOSITORY::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `b7d47c65ce1bfc34da45bfa41707b052b3a3a19252f5acef1e4c7b5cf003f066`
+- **CORTEX-TAINT**: `be70f02eb6c81b6cf9471a94aaa0aa7afe80ca58a57050cd7408fb76a4b932a5`
 
 ### CMX-0892 | REPOSITORY::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `24f4fdd39ba7307fda3c1e856bf3df77f517905b26c6dfe6b58632f379333684`
+- **CORTEX-TAINT**: `429df921f21bb2d7201b34406c0b2f6566284b3f3277262d24cdfa1108b5faaa`
 
 ### CMX-0893 | REPOSITORY::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `4a567979ad5e0ecd3bf0ba38d7a3d22f228e163ab503a24dc642ab5e72eca47f`
+- **CORTEX-TAINT**: `3f3a165bb0093310f82f6fccfa1d548da4768ff2e49c526c9c86711083a74b98`
 
 ### CMX-0894 | REPOSITORY::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `cc42382ab5b094209d62e41953545976950f66cba671db6ed85bd703a8e40f59`
+- **CORTEX-TAINT**: `c8be4ae96d7a1db27737af058bb5a8a40736f23aeaa979e2b951a819ff7169dd`
 
 ### CMX-0895 | REPOSITORY::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `82051b2587336f7a7ba586fe7ebca237df66e2d9c6ad53482f3eb9a33d8caedf`
+- **CORTEX-TAINT**: `2da6a885e0803c2a308ba20d5d55b96db5677ebfb4ce3f3a926caa982efd1132`
 
 ### CMX-0896 | REPOSITORY::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `46c07070cc8d1499abaad2103837e27caed32fef0efd8b3fadeff85e65d1d968`
+- **CORTEX-TAINT**: `e94ab7f27a41943ce646bf30205fcc65b7023b7703bf5fe101b4f4459020d7cb`
 
 ### CMX-0897 | REPOSITORY::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `9b0fec6d601eee5a0a457c1328d56fe182881697e60a4d6f81dfeeb8faf52024`
+- **CORTEX-TAINT**: `8e001f3434826f124cb84b3f993fa0ee9093e874e162bffe7107c24a8fe92218`
 
 ### CMX-0898 | REPOSITORY::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `b66b780b39abcf90e5ce155bab30f0ab807f7badb2c53b9df97d8d35551f9240`
+- **CORTEX-TAINT**: `f028054968dcfe9a059eaf410b2aad15f56d26a36fd150180eea187007fc7b35`
 
 ### CMX-0899 | REPOSITORY::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `7dec0b39d904a9ce9a29be0b6bb199b58c6137d6bf84b587cfd57bc6e5b10e72`
+- **CORTEX-TAINT**: `3ced9b95f1333a6624e288574f33500da48b897c6cadbb518bab4d8091e378f5`
 
 ### CMX-0900 | REPOSITORY::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de REPOSITORY, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `8aa36b6e3221a4e1b74075cc174897ecedd34e15cdad966f9bf9c427dee579f8`
+- **CORTEX-TAINT**: `9c6566275a2e6ab4a229174ae771945a8f5670d7699546437ef362bee7ac6cdb`
 
 
 ## DOMINIO: PACKAGE
 
 ### CMX-0901 | PACKAGE::Transducir_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de mutación autónoma.
-- **CORTEX-TAINT**: `753bc1566268a1dc38591a6794d2b95b3553e821619085e2226623f657696654`
+- **CORTEX-TAINT**: `bb8d0aab33200d79de48748b31bc54871cace6a751bba75f6d34258b4b2ae4f5`
 
 ### CMX-0902 | PACKAGE::Aniquilar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `094f6e918c20866d415865a1b677a6e8c380c83ee09e39eebecd7cd6963495f5`
+- **CORTEX-TAINT**: `b5b7734348c1c659143bacd7d8ace350d6b61d797275b72d6fb01eece5e10168`
 
 ### CMX-0903 | PACKAGE::Cristalizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `31431112b6aa64fb5742c2155f081a8f78131fb28c3e41c9e7ed0650f644ea2e`
+- **CORTEX-TAINT**: `4633fbb08c6dab3cb6ef487e025ba1449ae0f8f30e5f6c32a6938720222a5434`
 
 ### CMX-0904 | PACKAGE::Falsar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `c2ae0f5ca21b8ab43244040871da8404db424e9c6dd410d1fe59cb370c88cdc9`
+- **CORTEX-TAINT**: `d01bf82591de8729b6eb3871f03f94ada19f79b3b04e0ed548693a0eb7e559f4`
 
 ### CMX-0905 | PACKAGE::Confrontar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `fd94e67234558190e0ed31efd3a50590271cfa8f0b2c711d2a4686bc2486c8ab`
+- **CORTEX-TAINT**: `4f14abf447440cce9edf2b11123bf71915b2b12f3160547ebb4a7a294acaa60e`
 
 ### CMX-0906 | PACKAGE::Auditar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `3d11e4045f0b4219c4c38bed9f53e85d58107ffd2a148c56c9f6199680a7b825`
+- **CORTEX-TAINT**: `85e3b372965b807276df90280644f34537673a86d3dee37d4e9d518b775407ce`
 
 ### CMX-0907 | PACKAGE::Interceptar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `45968a8c50d6e76d2367e6d56b1f7791d906cfbe0b43e6002605f33601c0f199`
+- **CORTEX-TAINT**: `cb1f020dd0368539d29ed085bd78307816de22e06c6bd4e1a5bdc0fe7e6df7fe`
 
 ### CMX-0908 | PACKAGE::Purgar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `457dd1bbe01e2c9b3da8b80136f156ff9efb0461d1c73b92cee57dfe30969461`
+- **CORTEX-TAINT**: `fdae86af77978208ec8c0cfe4a05785c0bb85474faaec9d771802d229a74b852`
 
 ### CMX-0909 | PACKAGE::Sintetizar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `43b427a44626f9dc4402e75b467d6c1e91b7cd32da5c54ffcc3460746bac424f`
+- **CORTEX-TAINT**: `8c82de3728a2e95c477bd301a184d452e3c301cfe73f574180f503f4f0ac6c57`
 
 ### CMX-0910 | PACKAGE::Aislar_Mutación_Autónoma
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de mutación autónoma.
-- **CORTEX-TAINT**: `cc31681a3d7571c31a7ede1e7b0de1791dc9c2c98a514ecb15cc13161a709540`
+- **CORTEX-TAINT**: `a312fc5b46a2740ca56aea21829cd14374510a20c7915a61203bb6b1ead5d722`
 
 ### CMX-0911 | PACKAGE::Transducir_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5b166464483d3197f9c2fe0aea198f92c6089f5bd1cacb233a4cba96090441e2`
+- **CORTEX-TAINT**: `0606b9f2a894dd6e0dd9cf7e2a3ef8bc41320450b4c26d5ff228781a94b215c6`
 
 ### CMX-0912 | PACKAGE::Aniquilar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `42817fd41841fbc3be6fc61bbdff5eab47b4ca4303c6df3570f21d00ad0d6fa6`
+- **CORTEX-TAINT**: `d19ffee476ee21a7182cdbb63bfa0de861ce812f7a83e425751fa4c6bce9f38d`
 
 ### CMX-0913 | PACKAGE::Cristalizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `47086be2f796f3b137c0337e0e065683496042622d07d20ee3bbfd21549ff041`
+- **CORTEX-TAINT**: `c2ba7bbf8e1d69741b55823ca9dcdf2ab5d9421f71b2c5fd1f633fdcf055da9f`
 
 ### CMX-0914 | PACKAGE::Falsar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `86b51fa924ddd8523d3ff7d2b36726a683b0c7b66d2a0bac1d190278b2c676fd`
+- **CORTEX-TAINT**: `b01f8be8dc8762e2a53dfe759b578b28b2182804386a8b2b779dd4f1b248e145`
 
 ### CMX-0915 | PACKAGE::Confrontar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `5e9349e621b701d5ae1e8ac2d9860a43cb9db740cb1ea8f88ae0dbc670163b2c`
+- **CORTEX-TAINT**: `969af19de409be9667000d7c6af74b70f0d98902496d6238f4d0c3e8ccfdacfc`
 
 ### CMX-0916 | PACKAGE::Auditar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `a14e7e77400706402acb65a7a56905ef7c2ed3185bcf8f55c8df4745530739f0`
+- **CORTEX-TAINT**: `89bd99edf1f965482510dddd3591183ffe14ce344edb92e69c284f037130e9d4`
 
 ### CMX-0917 | PACKAGE::Interceptar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `e8f2461e84e6cde8b2e79e0bc75e1ce5f4ee706211998c72682517d0801be9dd`
+- **CORTEX-TAINT**: `1958594399611d4bad05fc9209f91b086351043f01c1fc77615ec081f41962b8`
 
 ### CMX-0918 | PACKAGE::Purgar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `06b6d576cfc9b682ca70e6529a2f9ad3d8291f8081d3e475a26a19a0029629ba`
+- **CORTEX-TAINT**: `4d0c0c834643d78b7ef25cfad11551bdd5b639593aeb92431a2c980d452bbf18`
 
 ### CMX-0919 | PACKAGE::Sintetizar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `7787a0ef9ab8864ed801c8080f6687331c5466cf27d0b73b7ddffb6ee7054c05`
+- **CORTEX-TAINT**: `14cde425755af7dcac45315aedf9939c34a0dd6f2011035f7d2c001486ec3c5a`
 
 ### CMX-0920 | PACKAGE::Aislar_Destrucción_Anergía
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de destrucción anergía.
-- **CORTEX-TAINT**: `62c8cff4ae6322ef2b83044ebe83beb287277cd70e4949fb0f7654669d0394a4`
+- **CORTEX-TAINT**: `cf6a7729ed5b1770a7984a0cad7163c6ee62840f1fc49a0ec27c1c065ba548e3`
 
 ### CMX-0921 | PACKAGE::Transducir_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de mitosis celular.
-- **CORTEX-TAINT**: `f26c784ad55b933ed34f3707d6750b68de34b72ffc6a4dae1527222851db4311`
+- **CORTEX-TAINT**: `8678032931d8cd13d131a1c7cd93be13b488e3a798de1a3aab58d0fe4861c000`
 
 ### CMX-0922 | PACKAGE::Aniquilar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de mitosis celular.
-- **CORTEX-TAINT**: `a30bfa1a8debc9eabc47fbfa0bc0853afe73c91511322fef5d358c83e54d36f8`
+- **CORTEX-TAINT**: `5b67b0c6c3460ff9602955894af01f281ba99da49a1683e9d1ce82b1f3da46d0`
 
 ### CMX-0923 | PACKAGE::Cristalizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `50ad125957e95b070d45f55f237b222c9bfcfb56458e04ebf250c68b436f8df9`
+- **CORTEX-TAINT**: `92c6f899e1e7731b512058c6942df1a460dc815e39e44ce805f1c450d7adb7a1`
 
 ### CMX-0924 | PACKAGE::Falsar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de mitosis celular.
-- **CORTEX-TAINT**: `4baaaf1d0cf3f089ba0beb632346eacb9c4e872fe792c11b07e4e1bb4f55c27f`
+- **CORTEX-TAINT**: `5e8361d0062f42544b4848be6a9b6a80f3fd67c1f2612aa225c7c7af73ad55b0`
 
 ### CMX-0925 | PACKAGE::Confrontar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de mitosis celular.
-- **CORTEX-TAINT**: `d6b039b3d8bcb49c11de10d2ffa2c81cdd78dc468a8581b452ca23a6c6f32830`
+- **CORTEX-TAINT**: `c06034f2aabf9d82778a1a9e06f50b2471888477b44cd141ae1d2fa79d0df756`
 
 ### CMX-0926 | PACKAGE::Auditar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de mitosis celular.
-- **CORTEX-TAINT**: `000834a36fb27234f50424c2fec39be00729f3af1284c361b20a918ab1d57e5a`
+- **CORTEX-TAINT**: `551839960417248cc34cc2f37e3c8cffe76a779576a5242b616edb5b06bcc5bb`
 
 ### CMX-0927 | PACKAGE::Interceptar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de mitosis celular.
-- **CORTEX-TAINT**: `152ed9b83ad4875e0f247260df967e288bb572e3e5e40fbcc908431c8b927c34`
+- **CORTEX-TAINT**: `c21fb573ac3f3fd0c492b3d9474450269f4ef3bf2e06398042b05d3720b642d2`
 
 ### CMX-0928 | PACKAGE::Purgar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de mitosis celular.
-- **CORTEX-TAINT**: `db464e324315e3f2495b96c83a0f5ea9a75fd13f65450df9acf64a8c13b13c31`
+- **CORTEX-TAINT**: `be101dc52080d485c56042db48cdb1b2a8f726932223c1dd2271d85cca175b85`
 
 ### CMX-0929 | PACKAGE::Sintetizar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de mitosis celular.
-- **CORTEX-TAINT**: `48e89ba567ae0156a238906fdc5d886355256f0d516365c931e6b08ec83a2669`
+- **CORTEX-TAINT**: `faf362e44c9986ef0d179690bab04a63658c0b0cf64b9e7e31646d1292b376ec`
 
 ### CMX-0930 | PACKAGE::Aislar_Mitosis_Celular
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de mitosis celular.
-- **CORTEX-TAINT**: `b8b9efe406adf51fc56c8a1d6bbf09e3272db7d2d04993821b90233c32060b03`
+- **CORTEX-TAINT**: `baaf1e05ef06b603cda75bd604d2f07d06e6874a76cf836569eebdc3c903ec21`
 
 ### CMX-0931 | PACKAGE::Transducir_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de bucle adversarial.
-- **CORTEX-TAINT**: `c68e5a7679db8b81fca9eb67a5b15d3baa4e9c2621ec46a9dfe156f584a74082`
+- **CORTEX-TAINT**: `9708d703a143efb4911698d0deda47d1e58e29a1128c3aa7c3899c40ce69b4cd`
 
 ### CMX-0932 | PACKAGE::Aniquilar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `c21c5b5c8dcb414010064cf9248b69a89c07e11a05ada91411d0e7017fc88085`
+- **CORTEX-TAINT**: `03b27e58fdffcb9df9491c04d6c7bad100e2ae1b9d8e45c359fce5d8150bbe31`
 
 ### CMX-0933 | PACKAGE::Cristalizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `2bb82e1c8c6b71ee229820ce75c38b3b93b358584325e449a7e26557834a7195`
+- **CORTEX-TAINT**: `48875cd2a044f4f485ff040192cc7334a248eec6252473ac14c287e2ee84e0f1`
 
 ### CMX-0934 | PACKAGE::Falsar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `7838d57523c675d7fc29f203889734346cbb0ba6b4eba4b0e4efbbda7f30ee9f`
+- **CORTEX-TAINT**: `44cfbdf37754d73d5f2c8ff58b9a78a18d97c25510a22c073bd243a51f8fc3cc`
 
 ### CMX-0935 | PACKAGE::Confrontar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `192b5805cfc7be63917cd6b5a756499ad5052c348f2e2439ca4821883088a963`
+- **CORTEX-TAINT**: `ca9c7592a43974dc823d11498d54d1ce03796cfb056594dbf22e8c45d8929919`
 
 ### CMX-0936 | PACKAGE::Auditar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `8959af93407063f0dc2df500494e57be1b0c3099ef466eafae245c54151ac57e`
+- **CORTEX-TAINT**: `d1c8b8533c49b5938c13879596c397bdad5ae6a7aba6dd369e7f75c3655569ab`
 
 ### CMX-0937 | PACKAGE::Interceptar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `85f7213f74758621a47b7a3119b5d00de2a537df71da4663423f698645ae272b`
+- **CORTEX-TAINT**: `b1c67a48f89320f6d836470200f7dfed37511c6078500772a4da97056165a8b7`
 
 ### CMX-0938 | PACKAGE::Purgar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `c08bc88640352118d94c908506c5f7cc4f3e19cdabac3e806ad3de24e6cdd1e3`
+- **CORTEX-TAINT**: `1dc74776baa3383a4ea01bb7feaee033ff87dce950cbe97b777b01c5299663ac`
 
 ### CMX-0939 | PACKAGE::Sintetizar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `e07da3d3874597eee86e31e22ea814c8d5be578c93536dfe52927090d54c72d5`
+- **CORTEX-TAINT**: `5382bf6d8baf048ee7de77b3db5b43ede11cf6013926aae7f41365ca18e47a48`
 
 ### CMX-0940 | PACKAGE::Aislar_Bucle_Adversarial
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de bucle adversarial.
-- **CORTEX-TAINT**: `0b94b13f086c4fe7a1c3e67705a71ac4c58f8dbd04fc38233a43af038172a8dd`
+- **CORTEX-TAINT**: `939759fe343df0085c413a08d09946a0350ba03ce9bf97641c9c012e5e6d69d5`
 
 ### CMX-0941 | PACKAGE::Transducir_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `48f36153e0e1c922804208b6a27521f48757e2e6c39a8de7122fe09e11cf8ed9`
+- **CORTEX-TAINT**: `71e554e2663d9f3ea6c4ce4a6bf9ac300e4ea4a7351eeff85f014227f09cc688`
 
 ### CMX-0942 | PACKAGE::Aniquilar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `0bd872427321d1ef3a1520971d11f49131fc4a501a649a8303f29c52da0058ac`
+- **CORTEX-TAINT**: `f473b29d0490422c876d60001a76c9343a2517eeb695316180f2d4f29a10f44b`
 
 ### CMX-0943 | PACKAGE::Cristalizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `c3d876351dca60dd689e55965a713865c949d3d192c1c207d4595b5bd8889302`
+- **CORTEX-TAINT**: `ad8a53c8fa11f213ee7013b428df7fa9d30555cc4867b2e41ac098b37d2a7461`
 
 ### CMX-0944 | PACKAGE::Falsar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `827db4735eb50709334f33690184073f98846edf9c3d028bc1d8598f515ce429`
+- **CORTEX-TAINT**: `f4ad434c9a149cd7d9735eb3f82a01326f66b75de3498233c52ea8fba859bf8f`
 
 ### CMX-0945 | PACKAGE::Confrontar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `e9c8ecc556b488bf918e4d52954d65e7bb8e8624e0cdd69f401e2e7f8875249b`
+- **CORTEX-TAINT**: `54437fdaaee5e0391aa02aa8627c72da66f9c1eaeef69c29bfc17aaed9c0e232`
 
 ### CMX-0946 | PACKAGE::Auditar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `5d8f36d10bff3494fbb8f9eaa414b4506c211e0cd3cc345fc5a81019d27c5ff8`
+- **CORTEX-TAINT**: `18be981cc2730b46d44c21457788f6d9f333d38a743499818da0b01e8b8da437`
 
 ### CMX-0947 | PACKAGE::Interceptar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `52d84ccd6abae3a9ccace02683b1461900d200effadd19be6afafdc541015327`
+- **CORTEX-TAINT**: `af696031831059ce5da3c4431e77507e54ea8d9e252edb8d56d2ac251fe720e8`
 
 ### CMX-0948 | PACKAGE::Purgar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `01da5bc71c971699b32d26097618c4ffb5b0f0a00357e9f2cfb3a9d9fcbbbe7c`
+- **CORTEX-TAINT**: `4d0bd01ef0baf33f299a050f72a73e31345b1ac0f31d1d153acf0a5751e0cc13`
 
 ### CMX-0949 | PACKAGE::Sintetizar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `826e75ad6e54ebe404e2c87b3ffea1baff25196caca312c74cf5736101de0eef`
+- **CORTEX-TAINT**: `76e88f4addd217fb26aa9cf0a9d52f237f6226c5814967878209a5ea4436beb7`
 
 ### CMX-0950 | PACKAGE::Aislar_Bloqueo_Termodinámico
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de bloqueo termodinámico.
-- **CORTEX-TAINT**: `6c1fc0b2a888f8bd9ead3382e3363b1610ee4557e8e846541e065f742fb6192d`
+- **CORTEX-TAINT**: `a6a7adcc60da567fd80691e017385c9abd73db48cba490d62d8d1b4112cae202`
 
 ### CMX-0951 | PACKAGE::Transducir_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de bypass causal.
-- **CORTEX-TAINT**: `b9111c91ee20f79f500b16aa7883989955aec5bed659acada14c7fe7c5080005`
+- **CORTEX-TAINT**: `a3420367dc283ee2e75794afe34e46769d0fcadd023741c556f49bec41c45b75`
 
 ### CMX-0952 | PACKAGE::Aniquilar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de bypass causal.
-- **CORTEX-TAINT**: `9a27ce0ac7b018d9eeeb3d832afc02b1e774e35d69425630f319f0c0584bf358`
+- **CORTEX-TAINT**: `611242e336916c24baadc8b152f5a83ad21992f91f709579cb458f898ec4da10`
 
 ### CMX-0953 | PACKAGE::Cristalizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de bypass causal.
-- **CORTEX-TAINT**: `380aba852861c7fdebba48c18ae039ff9a1e29c7aee966a3e357a418f8271bdd`
+- **CORTEX-TAINT**: `01a6c9c772e0330bb4a733b75a9ee258a4b528dff6b8bdfba9cce2ea8f1e9328`
 
 ### CMX-0954 | PACKAGE::Falsar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de bypass causal.
-- **CORTEX-TAINT**: `495dc441e24a4af6d6d102b69dca11443c74e404a2cddee36370e39e0a1e7dc3`
+- **CORTEX-TAINT**: `4f841fb5e266373894fe523745cecbc37468c9d87c8e7b89bc0de8942bf9a265`
 
 ### CMX-0955 | PACKAGE::Confrontar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de bypass causal.
-- **CORTEX-TAINT**: `4b353f860452f9585ebe5cb39d9a63c413dcb38ff710fc2e8e7bdb8b17ba955b`
+- **CORTEX-TAINT**: `fad1c0ad7d9b6c2cf284feb23c1010215b1f1114675a69af876f3e14fac1c0d3`
 
 ### CMX-0956 | PACKAGE::Auditar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de bypass causal.
-- **CORTEX-TAINT**: `04d36fa40dedd7c1a28347f778b2a2630ccbed6c0d188c2ec0330c240085dafc`
+- **CORTEX-TAINT**: `8570030a186a46166e229a78ad48e0b3c78527052e6ed3d3eda2d6f6c9b3192c`
 
 ### CMX-0957 | PACKAGE::Interceptar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de bypass causal.
-- **CORTEX-TAINT**: `7301afb51dfe47a13c943e88f715582c95fad1d9b175dd833e3c7e0b4a03e537`
+- **CORTEX-TAINT**: `caa0cebd5376ca6432d72b4f87c7dfadb0836a87101792b5ad935ed113101520`
 
 ### CMX-0958 | PACKAGE::Purgar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de bypass causal.
-- **CORTEX-TAINT**: `720abe1c4bc983dd62026f8cdca35e10b89b68ed35ad0c5e622bb277474710d1`
+- **CORTEX-TAINT**: `4e20e216d24800a76d3ac9725aa8f31a5cf2296e0c94de0c3bd8f4ad1b159b65`
 
 ### CMX-0959 | PACKAGE::Sintetizar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de bypass causal.
-- **CORTEX-TAINT**: `ead29d44cde7e6c12eadc49fb44d4c927f8e185991c0660357dd89a48bc9dc30`
+- **CORTEX-TAINT**: `ebd1425741c237b46b3f98d4c68ef50788de687a494b658e5ca949a948d79358`
 
 ### CMX-0960 | PACKAGE::Aislar_Bypass_Causal
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de bypass causal.
-- **CORTEX-TAINT**: `076f7bfe17ccbb1be4df1912e79adf2e277c16f3bbfe2dda7818e96d2b4953c0`
+- **CORTEX-TAINT**: `1dbf89264a87cc9f077f7dcfcd735c99db5fbf3854b3bd2ac7d95a8bf6e874d0`
 
 ### CMX-0961 | PACKAGE::Transducir_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de rechazo soberano.
-- **CORTEX-TAINT**: `3f05715944e1d25ed7f9f5758e45c80476aa35660a910146acfa3028b387c6cf`
+- **CORTEX-TAINT**: `84f2470eed939b7b7fd1eea182aeb7a62d144ae5af6b0ed077f9e4b3157daf52`
 
 ### CMX-0962 | PACKAGE::Aniquilar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `47eff1b74f9e023217f689f955c1714f28d0faa5d5697d9a27c1a97def122ce9`
+- **CORTEX-TAINT**: `ef4cb3816888d0645083010612339283017ea6b9d6aa79da189edb6990237cfb`
 
 ### CMX-0963 | PACKAGE::Cristalizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `b427f6423c6f444ba76ff54aa046866171fa7504299bf451a36cf14e00a2a1b7`
+- **CORTEX-TAINT**: `0bbd6cae9ad6ce8c349944437bceae25bdc7da428bd6f6c3dacb7a94e1ded64d`
 
 ### CMX-0964 | PACKAGE::Falsar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `939c05016e13e4ee9c1bbbcddb841179b764975a0afd8f6603cd980d538d1321`
+- **CORTEX-TAINT**: `665f23dfebc2f5a16bf659d4cd9ebd53ca15f1c510b449670c2e1271c2008bd8`
 
 ### CMX-0965 | PACKAGE::Confrontar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `9bf6e9b0c4b3a50e4ded9833da132f955ef182798fff1e284aff897568af36d3`
+- **CORTEX-TAINT**: `4b7431d17ad21fa10ea9678893e03dfbf78ac985bccdf132922aa3e5a040e62f`
 
 ### CMX-0966 | PACKAGE::Auditar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `7a64bf8ed00908d0a8e4b3ed22b7667cd36601938df309cbdcb2677df5cbf4a4`
+- **CORTEX-TAINT**: `b7f79fd4f16df2d1722d858cd465802670b74156563d3a2b00ed7dd1f8f8437f`
 
 ### CMX-0967 | PACKAGE::Interceptar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `679f21e861ff5b9210041b8cc92c1fd7cf4aee80149073a7d6dcf538755cf951`
+- **CORTEX-TAINT**: `7a8adaca82301a0013f1bbdc2f28fd0ac132e69f3b8634015bec7aeffd52ba2f`
 
 ### CMX-0968 | PACKAGE::Purgar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `9c3278f4ab1c840f71a7d01085e82236029a23797f05f0cf08a6a366ccf9f461`
+- **CORTEX-TAINT**: `4b582a72f6856d855c06f4ca04621f2d01d760b9a8aa69420cf1c9f27de3e0bc`
 
 ### CMX-0969 | PACKAGE::Sintetizar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `841df0f24b688e9641f0b9abd6f44f5283b63b241a278ce452515e2b0abb1ecc`
+- **CORTEX-TAINT**: `180008e0e431cb5c3d524c3f99a44516a7d62572da17fb7218e04abbb2ad66ef`
 
 ### CMX-0970 | PACKAGE::Aislar_Rechazo_Soberano
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de rechazo soberano.
-- **CORTEX-TAINT**: `598fee1390ccda79161e67a59dd5802d45b38d24fc6eeb31adeecbe3851e5107`
+- **CORTEX-TAINT**: `77d5d52a190058969cfef92d2f623642c1e644e5b697c311dbea0c7600c3a3e3`
 
 ### CMX-0971 | PACKAGE::Transducir_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de contención epistémica.
-- **CORTEX-TAINT**: `7d3197a30a1b103c05674418f15b4f052a7714668eeb776654c796516e6afa0b`
+- **CORTEX-TAINT**: `43fa582642498d48cc70acc2734563139b4b9b21bf6952980f56fe3d75ec87c8`
 
 ### CMX-0972 | PACKAGE::Aniquilar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de contención epistémica.
-- **CORTEX-TAINT**: `af999128e2567abbe8020310f01481bfe600242d1c0211f71a08e0cb19c6851a`
+- **CORTEX-TAINT**: `ae9c6d06bb6c8b4a2ea22f75aa9d1915956eefe3a519b635a6f4fbc092973a44`
 
 ### CMX-0973 | PACKAGE::Cristalizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `44370ee2f2e00c63a8e5fb25dcee3d4c837afa5828dfc82656ef3e9d466b38bc`
+- **CORTEX-TAINT**: `a9782edfdb3ba03c3f736b719a7b16e3e96709fd0c53816216a7601064693d8b`
 
 ### CMX-0974 | PACKAGE::Falsar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de contención epistémica.
-- **CORTEX-TAINT**: `cb2262738bd8c4bc251d13be61645d4c7c7005cadab273618250e227888b5296`
+- **CORTEX-TAINT**: `5adfc1d872e324e1c4d529c1111b004c501e633ea8509f68dd99c7d3cb207f10`
 
 ### CMX-0975 | PACKAGE::Confrontar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de contención epistémica.
-- **CORTEX-TAINT**: `3c68b54fe7da1541d24c53c4ef27e8b9d1aeee415b15925263cf6c676be8e3d4`
+- **CORTEX-TAINT**: `c99c04640b9cc074152b4b392c70cb42311fec158fa95d878e98d85c6da59b82`
 
 ### CMX-0976 | PACKAGE::Auditar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de contención epistémica.
-- **CORTEX-TAINT**: `816cfb5598f2375f9814cacef7d43f1c13caaf50fb72c40e62be28677f779d35`
+- **CORTEX-TAINT**: `e774657dbce6edf1eb71960efb2423415e3fa497da7d40f865d0a847440c460d`
 
 ### CMX-0977 | PACKAGE::Interceptar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de contención epistémica.
-- **CORTEX-TAINT**: `8b16805d4aef0904c1959c4da9fee2c299e218d875f80da5bb46e9c7e8e38aa9`
+- **CORTEX-TAINT**: `8cad1cd91a3a640766f00133cdd30834b0e658feda2f8527b0d99c532e7a46dc`
 
 ### CMX-0978 | PACKAGE::Purgar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de contención epistémica.
-- **CORTEX-TAINT**: `660e6d4444ed14d29c8a3ce2b1a2655baa53e59d71bccf368f4e2f56fad449f9`
+- **CORTEX-TAINT**: `dd85f70eb0f99a8dd010889124ccb46276aa99e6b6a85776084a39088a81ae93`
 
 ### CMX-0979 | PACKAGE::Sintetizar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de contención epistémica.
-- **CORTEX-TAINT**: `83e812c8e25f45e98ee35cc3c3aab621cdd8e9ffc1b51a6f55ede469593db4b9`
+- **CORTEX-TAINT**: `151e32696b996d9126b248dde12cd92923685f7f12bfaf71adc29c852179442f`
 
 ### CMX-0980 | PACKAGE::Aislar_Contención_Epistémica
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de contención epistémica.
-- **CORTEX-TAINT**: `147ee6da8c978a0c25826b59830e9654916423d45b1a47434cf00c0b1a60e7e7`
+- **CORTEX-TAINT**: `596bb73cf5716a57daf05539d1f1e47f1abcd0b0808ee7e995d2748a348ae230`
 
 ### CMX-0981 | PACKAGE::Transducir_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de causalidad base-60.
-- **CORTEX-TAINT**: `061af60691c1ff814461a7eb6523d22329496e2247983a8d73c3f191c568d74f`
+- **CORTEX-TAINT**: `cf57776fce3a36c36d86afc3fc933f1b5ded4bf7af59eda93c6269903d80c6d2`
 
 ### CMX-0982 | PACKAGE::Aniquilar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `1d5e3aafcc9fac32b415d2026ab7d5c2a34dce9e1c84d1342d74cdf5e2849be2`
+- **CORTEX-TAINT**: `ef04aa819866fe4ba00c7f596459fa2f6c7cbc07b08927357070df7bc75f125b`
 
 ### CMX-0983 | PACKAGE::Cristalizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `e22849b22744adc916aa35e7b24c3f1d5b404770d07825d7c24366206677c41f`
+- **CORTEX-TAINT**: `9009a4e70f16f5b17d385bff43860d845ca8b3cf64a6a2dfaee216701787b1a9`
 
 ### CMX-0984 | PACKAGE::Falsar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `50f438c66c53bd35b5401a095d24c3e2435fa29c56969ada09e755dcab499915`
+- **CORTEX-TAINT**: `4eb9ad0a3b6845a6cbc589cfc422bf554ca421b777784b526705cd5ae08392a5`
 
 ### CMX-0985 | PACKAGE::Confrontar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `7f7c984cd4849284b7a9fb3dc890f3774f94cae153891830f2ead998fc9e208e`
+- **CORTEX-TAINT**: `603098c483b3a40a0e1c13f56b899dd79a059e4e056a9bf40ee6ab363bf7efbc`
 
 ### CMX-0986 | PACKAGE::Auditar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `406da23e574851b46aeeb276d1369a3597f4f30e40c940c3cc71c5416fdd6d93`
+- **CORTEX-TAINT**: `7d42a577276826ecf33f96b842509934017effeb56727fe5e686ca3d776d757b`
 
 ### CMX-0987 | PACKAGE::Interceptar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `dca8f6ad58f621cf767390960d0c3a905843a8b3fdbe3fcedf369d513f2b35e0`
+- **CORTEX-TAINT**: `1b80bdd63b4f42d1ede3878289826720ddc21bc568ca149dd813df2a124393ca`
 
 ### CMX-0988 | PACKAGE::Purgar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `f15211c18df90b5a3fa1be3427860704675fc52953f49b440f7408da40d96d5d`
+- **CORTEX-TAINT**: `22abcf9b108031c07ff6203e4f879b0d148d0003ef0b3d2d3375f391b5179a6d`
 
 ### CMX-0989 | PACKAGE::Sintetizar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `a5d3da41a25b2fc6994ddddfe21e68931837804c8d68d4db6eb28bdcb6427177`
+- **CORTEX-TAINT**: `caaf35ae880f5a60e937b0682175670fab018d5d3ff3e1b9bbd0a5337bbfc151`
 
 ### CMX-0990 | PACKAGE::Aislar_Causalidad_Base-60
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de causalidad base-60.
-- **CORTEX-TAINT**: `06572fc03a01c4cd2e6f6a44256f3f1c662435e1f87f53bb5aaa7d388407d61f`
+- **CORTEX-TAINT**: `f4cf6195f9259e76282247972d65d35d0314de149d5a19e2a03271e39fb77459`
 
 ### CMX-0991 | PACKAGE::Transducir_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, transducir elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `e3a4e2a06869e3a34e18bd6062bd5491301ef32177846e01f4357c61a624ca35`
+- **CORTEX-TAINT**: `d85189dad143e39d9595698ebeafcaaf04caa9439460dffec1387dd075b13439`
 
 ### CMX-0992 | PACKAGE::Aniquilar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, aniquilar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `4a6d43d4aec041b2e0a23f8f566bbb910d0ef43cc329d4369362c879e62db222`
+- **CORTEX-TAINT**: `992ce9fc268e262200454d7ddd5eaa619d9df777d7750c12b848a53469a36341`
 
 ### CMX-0993 | PACKAGE::Cristalizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, cristalizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `683588a2dcd5872b3e8279ede9502e39d5f9180d2a0055004d93fef3dc3d6b5d`
+- **CORTEX-TAINT**: `a4468b06ed3fb8bcc3ecd238f49274a43b9edeecef4260f8b7e3f857cc75700c`
 
 ### CMX-0994 | PACKAGE::Falsar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, falsar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `a3b1f980cb58fec799bde362c1c91c5608140a857856ef0c064d95332b418074`
+- **CORTEX-TAINT**: `7cad8d8794b704e1c99883c007a478278169857d61aec3e36642f70912e68eea`
 
 ### CMX-0995 | PACKAGE::Confrontar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, confrontar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `1d84f50102121278b573ffc577ae772b2a439c6b86c59d41d6bc84365eb38e7b`
+- **CORTEX-TAINT**: `b64d3bd2daec3807df841cfac65ddfa1c4db011ce0e861c7c5a2b3bb7820dd79`
 
 ### CMX-0996 | PACKAGE::Auditar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, auditar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `f2e4cad86a31012b841542187b1ca68b117756db4584b27fb48feab117525abf`
+- **CORTEX-TAINT**: `4ac2bda8b352d08cc72db205e19de85c051a3267361b0c2bc9543e467bf3812d`
 
 ### CMX-0997 | PACKAGE::Interceptar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, interceptar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `e972b5949b25f4f7072b64a1c52a83981fa12430c16b8e6d0834dfc798473426`
+- **CORTEX-TAINT**: `3c305fd34fa611c1fd84da819c90cf8569c916b36cb0a1b01a1d09e83d5e25b5`
 
 ### CMX-0998 | PACKAGE::Purgar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, purgar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `38c0e7fed11da4b7a322b8888dcdd67d168d65f8b68f0f74a0daafbf02cdcae4`
+- **CORTEX-TAINT**: `b752a5b0ae10125acf69c615b3896b9275df8750cdb83355162468e4e3daf3d8`
 
 ### CMX-0999 | PACKAGE::Sintetizar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, sintetizar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `a1d7ce0a51ea2234ee5da7c0ba17982cd045968e62909fd5b638b812cb29854f`
+- **CORTEX-TAINT**: `84f896b5f1f96d71516cf9e4ab3a042b3b280aba32b6132b78c91c919ec3d94b`
 
 ### CMX-1000 | PACKAGE::Aislar_Ruteo_Multidimensional
 - **Regla**: Al recibir webhook de PACKAGE, aislar elementos de ruteo multidimensional.
-- **CORTEX-TAINT**: `e488b8bcd558c1bd24532c49a776d6482bda945cd0bdfbe5aace1cf49280d7c4`
+- **CORTEX-TAINT**: `78b5dd7b878554877360fe923e1bf72ae3262e09cb7d07b8fcb78e77eca67b4e`
 

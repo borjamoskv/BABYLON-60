@@ -60,6 +60,7 @@ PHASES = {
             "50_audit_loop.py",
             "51_autoconsolidate.py",
             "52_legion_purge.py",
+            "53_centuria_swarm.py",
         ],
     },
 }
