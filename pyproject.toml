@@ -6,8 +6,14 @@ build-backend = "setuptools.build_meta"
 name = "cortex-persist"
 version = "1.0.2"
 description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-transducer, exergy pipelines"
+readme = "README.md"
 authors = [{ name = "Borja Moskv (borjamoskv)" }]
 requires-python = ">=3.10"
+classifiers = [
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
 dependencies = [
     "aiosqlite>=0.19",
     "cbor2>=5.6.0",
@@ -18,6 +24,10 @@ dependencies = [
     "click>=8.0",
     "pyyaml>=6.0",
 ]
+
+[project.urls]
+Repository = "https://github.com/borjamoskv/BABYLON-60"
+Issues = "https://github.com/borjamoskv/BABYLON-60/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -67,8 +77,16 @@ cortex-onco = "babylon60.cli.onco_transducer:main"
 cortex-attest = "babylon60.cli.llm_attest:main"
 cortex-char-attest = "babylon60.cli.attest_character_count:main"
 
-[tool.setuptools]
-packages = ["babylon60", "apex_trials"]
+[tool.setuptools.packages.find]
+include = ["babylon60*", "apex_trials*"]
+exclude = [
+    "babylon60.crypto",
+    "babylon60.crypto.*",
+    "babylon60.extensions",
+    "babylon60.extensions.*",
+    "babylon60.utils",
+    "babylon60.utils.*",
+]
 
 [tool.setuptools.package-data]
 apex_trials = ["*.json"]

@@ -52,7 +52,9 @@ def _canonical(data: Any) -> str:
 
 
 def _connect(db_path: str | Path) -> sqlite3.Connection:
-    conn = sqlite3.connect(str(db_path), timeout=5.0)
+    # isolation_level=None → autocommit; append_event manages its own
+    # BEGIN IMMEDIATE so read-head + insert is atomic against other writers.
+    conn = sqlite3.connect(str(db_path), timeout=5.0, isolation_level=None)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
@@ -109,18 +111,23 @@ def append_event(
     conn = _connect(_ledger_path(project_root))
     try:
         conn.executescript(DDL)
-        cur = conn.execute("SELECT current_hash FROM cortex_events ORDER BY seq DESC LIMIT 1")
-        row = cur.fetchone()
-        parent_hash = row["current_hash"] if row else _ZERO_HASH
-
-        created_at = int(time.time() * 1000)
-        payload_c = _canonical(payload)
-        # UUID v5 idempotency: same payload at same chain position → same id.
-        event_id = str(uuid.uuid5(_NS, f"{parent_hash}|{event_type}|{entity_ref}|{payload_c}"))
-        envelope = f"{parent_hash}|{created_at}|{event_type}|{entity_ref}|{payload_c}"
-        current_hash = hashlib.sha256(envelope.encode("utf-8")).hexdigest()
-
+        # BEGIN IMMEDIATE takes the write lock BEFORE reading the head, so two
+        # concurrent appends serialize instead of forking the hash chain
+        # (single-writer invariant enforced at the SQLite layer).
+        conn.execute("BEGIN IMMEDIATE")
         try:
+            row = conn.execute(
+                "SELECT current_hash FROM cortex_events ORDER BY seq DESC LIMIT 1"
+            ).fetchone()
+            parent_hash = row["current_hash"] if row else _ZERO_HASH
+
+            created_at = int(time.time() * 1000)
+            payload_c = _canonical(payload)
+            # UUID v5 idempotency: same payload at same chain position → same id.
+            event_id = str(uuid.uuid5(_NS, f"{parent_hash}|{event_type}|{entity_ref}|{payload_c}"))
+            envelope = f"{parent_hash}|{created_at}|{event_type}|{entity_ref}|{payload_c}"
+            current_hash = hashlib.sha256(envelope.encode("utf-8")).hexdigest()
+
             conn.execute(
                 "INSERT INTO cortex_events "
                 "(event_id, parent_hash, current_hash, event_type, entity_ref, payload, metadata, created_at) "
@@ -136,8 +143,9 @@ def append_event(
                     created_at,
                 ),
             )
-            conn.commit()
+            conn.execute("COMMIT")
         except sqlite3.IntegrityError:
+            conn.execute("ROLLBACK")
             # INV_BFT_04: duplicate idempotency key — reject silently, return existing.
             existing = conn.execute(
                 "SELECT * FROM cortex_events WHERE event_id = ?", (event_id,)

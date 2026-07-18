@@ -6,14 +6,26 @@ Motor de CLI para transducción de datos transcriptómicos a modelos Booleanos.
 Enfuerza la Regla Λ13 (Falsabilidad Empírica).
 """
 
+from __future__ import annotations
+
 import argparse
-import sys
-import numpy as np
-import networkx as nx
-import pandas as pd
 import logging
+import sys
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
+
+_ONCO_IMPORT_ERROR: Optional[BaseException]
+try:
+    import numpy as np
+    import networkx as nx
+    import pandas as pd
+except ImportError as _exc:  # extra 'onco' no instalado
+    np = None  # type: ignore[assignment]
+    nx = None  # type: ignore[assignment]
+    pd = None  # type: ignore[assignment]
+    _ONCO_IMPORT_ERROR = _exc
+else:
+    _ONCO_IMPORT_ERROR = None
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - [C5-REAL] %(levelname)s - %(message)s")
 logger = logging.getLogger("OncoTransducer")
@@ -203,6 +215,15 @@ def execute_pipeline(data_path: str | None = None, falsifiability_threshold: flo
 
 
 def main() -> None:
+    if _ONCO_IMPORT_ERROR is not None:
+        print(
+            "🔴 [FATAL] cortex-onco requiere el extra 'onco' (numpy, networkx, pandas).\n"
+            "    Instalar con: pip install cortex-persist[onco]\n"
+            f"    Error subyacente: {_ONCO_IMPORT_ERROR}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
     parser = argparse.ArgumentParser(description="MOSKV-1 Onco Transducer CLI")
     parser.add_argument(
         "--data", type=str, help="Path a la matriz TSV (genes en filas, muestras en columnas).", default=None

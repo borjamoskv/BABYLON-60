@@ -30,6 +30,9 @@ router = APIRouter(prefix="/api/ledger", tags=["analytics"])
 _TOKEN_RE = re.compile(r"[a-z0-9_]+")
 _BM25_K1 = 1.5
 _BM25_B = 0.75
+# Bound the scan so a huge ledger can't OOM the process on a single query.
+# No silent truncation: the response reports `scanned` vs `total`.
+_SEARCH_SCAN_CAP = 5000
 
 
 def _get_project_root() -> Path:
@@ -140,9 +143,13 @@ def ledger_search(
 
     conn = connect_readonly(db_path)
     try:
+        total_rows = conn.execute("SELECT COUNT(*) AS c FROM ledger_entries").fetchone()["c"]
+        # Scan the most recent N entries (bounded memory); newest is where the
+        # "por qué" usually lives. Truncation is reported, never silent.
         rows = conn.execute(
             "SELECT seq, stream, entity_id, event_type, cortex_taint, payload_json, created_at "
-            "FROM ledger_entries"
+            "FROM ledger_entries ORDER BY seq DESC LIMIT ?",
+            (_SEARCH_SCAN_CAP,),
         ).fetchall()
 
         docs: list[tuple[int, list[str], sqlite3.Row]] = []
@@ -200,6 +207,9 @@ def ledger_search(
             "terms": q_terms,
             "results": scored[:limit],
             "corpus_size": n,
+            "scanned": n,
+            "total": total_rows,
+            "truncated": total_rows > n,
             "method": "Okapi BM25 (léxico, no neuronal)",
         }
     finally:

@@ -61,6 +61,9 @@ def _git(root: Path, *args: str) -> tuple[int, str, str]:
         return 127, "", "git not found on PATH"
     except subprocess.TimeoutExpired:
         return 124, "", "git command timed out (15s)"
+    except ValueError:
+        # embedded NUL or invalid argv → handled error, never an uncaught 500
+        return 2, "", "invalid argument (embedded NUL?)"
     return proc.returncode, proc.stdout.strip(), proc.stderr.strip()
 
 
@@ -70,7 +73,7 @@ def _projection(root: Path) -> list[dict[str, Any]]:
     A delegation's id IS the current_hash[:16] of its QUEUED event — the
     causal anchor. Lifecycle events reference it via payload.delegation_id.
     """
-    data = cortex_ledger.list_events(root, limit=500, offset=0)
+    data = cortex_ledger.list_events(root, limit=2000, offset=0)
     by_id: dict[str, dict[str, Any]] = {}
     order: list[str] = []
     for ev in reversed(data["events"]):  # oldest → newest
@@ -236,6 +239,10 @@ def cancel(delegation_id: str) -> dict[str, Any]:
     deleg = items.get(delegation_id)
     if not deleg:
         raise HTTPException(404, f"Delegation '{delegation_id}' not found")
+    # State guard: only a QUEUED delegation is cancellable — never override a
+    # terminal EXECUTED/BLOCKED/FAILED state in the projection.
+    if deleg["state"] != "QUEUED":
+        raise HTTPException(409, f"Delegation is '{deleg['state']}', cannot cancel")
     ev = cortex_ledger.append_event(
         root,
         event_type="DELEGATION_CANCELLED",

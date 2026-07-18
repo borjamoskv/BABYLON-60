@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "BABYLON·60 — MOSKV-1 Alcove",
+  "version": "1.0.0",
+  "description": "Alcove de navegador para el IDE agéntico soberano BABYLON·60. Pulso periférico del agente + ledger/sentinel/delegación, local-first (localhost:8060).",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MOSKV-1 Alcove"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "alarms"],
+  "host_permissions": [
+    "http://localhost:8060/*",
+    "http://127.0.0.1:8060/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

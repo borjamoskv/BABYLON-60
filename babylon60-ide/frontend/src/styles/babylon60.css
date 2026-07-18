@@ -6,34 +6,36 @@
 
 /* ─── 0. DESIGN TOKENS ─────────────────────────────────────── */
 :root {
-  /* YInMn Blue-derived surface hierarchy */
-  --bitumen: #070914;      /* Background — dark YInMn void, prevents halation unlike pure #000 */
-  --kiln: #0C0E1C;
-  --tablet: #111626;
-  --tablet-2: #181F33;
-  --tablet-3: #1E2540;
-  --edge: #1E2540;
-  --edge-soft: #161C30;
+  /* ── Surfaces: warm-graphite + faint YInMn undertone.
+     Brief TDAH/AACC: "grises cálidos o azules muy oscuros", nunca #000
+     (halación). Base desaturada → menor carga sensorial que el azul frío. */
+  --bitumen: #0E0E16;      /* fondo — carbón cálido, no vacío azul clínico */
+  --kiln: #14141F;
+  --tablet: #1A1A28;
+  --tablet-2: #22222F;
+  --tablet-3: #2A2A3A;
+  --edge: #2A2A3C;
+  --edge-soft: #1F1F2C;
 
-  /* Text: high contrast but not pure white */
-  --dust: #F0F2FF;         /* Slightly blue-tinted white: reduces contrast glare */
-  --dust-dim: #9AA0C8;
-  --dust-faint: #4A5070;
-  --dust-ghost: #2C3155;
+  /* Text: off-white lavanda cálido (no #FFF puro: reduce glare/fatiga) */
+  --dust: #E6E4F0;
+  --dust-dim: #ABA8C0;
+  --dust-faint: #6E6B83;
+  --dust-ghost: #3E3B4F;
 
-  /* YInMn accent (the pure pigment) */
-  --lapis: #2B3BE5;
-  --lapis-bright: #4D5CFF;
-  --lapis-dim: #1a2599;
-  --lapis-glow: rgba(43, 59, 229, 0.12);
+  /* YInMn accent, suavizado (menos neón → menos alerta del sistema nervioso) */
+  --lapis: #5A6CE0;
+  --lapis-bright: #8A98F5;
+  --lapis-dim: #3A44A0;
+  --lapis-glow: rgba(90, 108, 224, 0.14);
 
-  /* Semantic */
-  --gold: #F59E0B;
-  --gold-dim: rgba(245, 158, 11, 0.10);
-  --verify: #10B981;
-  --verify-dim: rgba(16, 185, 129, 0.10);
-  --break: #EF4444;
-  --break-dim: rgba(239, 68, 68, 0.10);
+  /* Semantic — apagados por diseño (brief: "naranja/rojo apagado") */
+  --gold: #E5B567;         /* ámbar cálido, no #F59E0B chillón */
+  --gold-dim: rgba(229, 181, 103, 0.11);
+  --verify: #86C79A;       /* verde salvia, no neón */
+  --verify-dim: rgba(134, 199, 154, 0.11);
+  --break: #E3877E;        /* terracota — claramente error, sin agredir */
+  --break-dim: rgba(227, 135, 126, 0.11);
 
   /* Fonts */
   --font-display: 'Archivo', system-ui, sans-serif;
@@ -86,8 +88,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(43, 59, 229, 0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(245, 158, 11, 0.02) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(90, 108, 224, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(229, 181, 103, 0.02) 0%, transparent 70%);
 }
 
 /* ─── 3. TACHOMETER ─────────────────────────────────────────── */
@@ -179,13 +181,13 @@ body::before {
   height: 8px;
   border-radius: 50%;
   background: var(--lapis-bright);
-  box-shadow: 0 0 8px var(--lapis-bright), 0 0 16px rgba(77, 92, 255, 0.4);
+  box-shadow: 0 0 8px var(--lapis-bright), 0 0 16px rgba(138, 152, 245, 0.4);
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
   0%, 100% { opacity: 0.6; box-shadow: 0 0 4px var(--lapis-bright); }
-  50% { opacity: 1; box-shadow: 0 0 10px var(--lapis-bright), 0 0 20px rgba(77, 92, 255, 0.5); }
+  50% { opacity: 1; box-shadow: 0 0 10px var(--lapis-bright), 0 0 20px rgba(138, 152, 245, 0.5); }
 }
 
 .spine-icon {
@@ -211,7 +213,7 @@ body::before {
 .spine-icon.active {
   background: var(--lapis-glow);
   color: var(--lapis-bright);
-  border-color: rgba(43, 59, 229, 0.2);
+  border-color: rgba(90, 108, 224, 0.2);
 }
 
 .spine-icon.active::before {
@@ -385,7 +387,7 @@ body::before {
 
 @keyframes blast-ctx-pulse {
   0%, 100% { background: transparent; border-left-color: transparent; }
-  50% { background: rgba(245, 158, 11, 0.1); border-left-color: var(--gold); }
+  50% { background: rgba(229, 181, 103, 0.1); border-left-color: var(--gold); }
 }
 
 /* ─── 7. FOCUS ZONE ─────────────────────────────────────────── */
@@ -432,25 +434,25 @@ body::before {
 .focus-badge.live {
   background: var(--verify-dim);
   color: var(--verify);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(134, 199, 154, 0.2);
 }
 
 .focus-badge.beta {
   background: var(--lapis-glow);
   color: var(--lapis-bright);
-  border: 1px solid rgba(43, 59, 229, 0.2);
+  border: 1px solid rgba(90, 108, 224, 0.2);
 }
 
 .focus-badge.warn {
   background: var(--gold-dim);
   color: var(--gold);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(229, 181, 103, 0.2);
 }
 
 .focus-badge.break {
   background: var(--break-dim);
   color: var(--break);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(227, 135, 126, 0.2);
 }
 
 .focus-actions {
@@ -601,7 +603,7 @@ body::before {
   right: 16px;
   width: 140px;
   height: 80px;
-  background: rgba(12, 14, 28, 0.8);
+  background: rgba(20, 20, 31, 0.8);
   border: 1px solid var(--edge);
   border-radius: var(--r-sm);
   overflow: hidden;
@@ -719,7 +721,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background: rgba(7, 9, 20, 0.75);
+  background: rgba(14, 14, 22, 0.75);
   backdrop-filter: blur(12px);
   display: flex;
   align-items: flex-start;
@@ -741,7 +743,7 @@ body::before {
   background: var(--kiln);
   border: 1px solid var(--edge);
   border-radius: var(--r-md);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(43, 59, 229, 0.08);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(90, 108, 224, 0.08);
   overflow: hidden;
   transform: translateY(-10px);
   transition: transform var(--t-normal);
@@ -868,12 +870,12 @@ body::before {
   top: calc(var(--tachometer-height) + 8px);
   right: 20px;
   width: 380px;
-  background: rgba(12, 14, 28, 0.94);
+  background: rgba(20, 20, 31, 0.94);
   backdrop-filter: blur(18px);
   border: 1px solid var(--edge);
   border-radius: var(--r-md);
   z-index: 300;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(43, 59, 229, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(90, 108, 224, 0.06);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-12px);
@@ -989,13 +991,13 @@ body::before {
   width: 500px;
   max-width: calc(100vw - 40px);
   background: var(--kiln);
-  border: 1px solid rgba(43, 59, 229, 0.3);
+  border: 1px solid rgba(90, 108, 224, 0.3);
   border-top: none;
   border-radius: 0 0 var(--r-md) var(--r-md);
   z-index: 500;
   padding: 16px 20px;
   transition: transform var(--t-slow);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(43, 59, 229, 0.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(90, 108, 224, 0.05);
 }
 
 .agent-modal.visible {
@@ -1021,8 +1023,8 @@ body::before {
 
 /* ─── 13. CONTEXT RESTORE BANNER ────────────────────────────── */
 .restore-banner {
-  background: rgba(43, 59, 229, 0.08);
-  border-bottom: 1px solid rgba(43, 59, 229, 0.15);
+  background: rgba(90, 108, 224, 0.08);
+  border-bottom: 1px solid rgba(90, 108, 224, 0.15);
   padding: 8px 20px;
   display: flex;
   align-items: center;
@@ -1361,7 +1363,7 @@ tr.row-invalid td:first-child {
 
 .btn-verify {
   background: var(--verify-dim);
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(134, 199, 154, 0.3);
   color: var(--verify);
 }
 
@@ -1373,7 +1375,7 @@ tr.row-invalid td:first-child {
 
 .btn-danger {
   background: var(--break-dim);
-  border-color: rgba(239, 68, 68, 0.3);
+  border-color: rgba(227, 135, 126, 0.3);
   color: var(--break);
 }
 
@@ -1734,7 +1736,7 @@ body.micro-mode .focus-zone::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 65% 75% at 50% 45%, transparent 55%, rgba(7, 9, 20, 0.75) 100%);
+  background: radial-gradient(ellipse 65% 75% at 50% 45%, transparent 55%, rgba(14, 14, 22, 0.75) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1746,9 +1748,9 @@ body.micro-mode .focus-zone::before {
 
 /* ─── 21. MICRO-REWARD ANIMATION ────────────────────────────── */
 @keyframes reward-flash {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-  40% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0.18); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(134, 199, 154, 0); }
+  40% { box-shadow: 0 0 0 14px rgba(134, 199, 154, 0.18); }
+  100% { box-shadow: 0 0 0 0 rgba(134, 199, 154, 0); }
 }
 
 .reward-active {
@@ -1784,7 +1786,7 @@ a:hover {
 }
 
 ::selection {
-  background: rgba(77, 92, 255, 0.25);
+  background: rgba(138, 152, 245, 0.25);
   color: var(--dust);
 }
 
@@ -1831,8 +1833,8 @@ a:hover {
 
 /* Hyperfocus lock banner */
 .hyperfocus-banner {
-  background: rgba(43, 59, 229, 0.06);
-  border-bottom: 1px solid rgba(43, 59, 229, 0.12);
+  background: rgba(90, 108, 224, 0.06);
+  border-bottom: 1px solid rgba(90, 108, 224, 0.12);
   padding: 5px 16px;
   display: flex;
   align-items: center;
@@ -1857,7 +1859,7 @@ a:hover {
   gap: 5px;
   padding: 2px 7px;
   background: var(--gold-dim);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(229, 181, 103, 0.2);
   border-radius: var(--r-sm);
   font-size: 0.55rem;
   color: var(--gold);
@@ -1907,7 +1909,7 @@ a:hover {
 }
 
 @keyframes bft-row-appear {
-  from { background: rgba(43, 59, 229, 0.15); }
+  from { background: rgba(90, 108, 224, 0.15); }
   to { background: transparent; }
 }
 
@@ -2057,3 +2059,14 @@ body.mode-nt .data-table thead th { padding: 5px 10px; }
 .search-hit { display: flex; gap: 10px; align-items: center; padding: 6px 8px; border: 1px solid var(--edge-soft); border-radius: var(--r-sm); margin-bottom: 5px; cursor: pointer; transition: all var(--t-fast); }
 .search-hit:hover { border-color: var(--lapis); background: var(--tablet); }
 .search-score { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--gold); background: var(--gold-dim); padding: 3px 7px; border-radius: 2px; flex-shrink: 0; min-width: 42px; text-align: center; }
+
+/* ─── 27. PALETTE PER COGNITIVE MODE (v1.2.1) ──────────────────
+   Base = calma (segura para 2E: TDAH+AACC, menor carga sensorial).
+   NT sube contraste de texto y brillo de acento (nitidez estándar). */
+body.mode-nt {
+  --dust: #F1EFFA;
+  --dust-dim: #BAB7CE;
+  --lapis-bright: #9AA6FF;
+}
+/* 2E: ablanda aún más el overlay ambiental (sin gradiente agresivo) */
+body.mode-2e::before { opacity: 0.7; }
