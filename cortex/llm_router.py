@@ -31,16 +31,17 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
             if not line_str or line_str.startswith("Claim") or line_str.startswith("Proof") or line_str.startswith("Base") or line_str.startswith("Confidence") or line_str.startswith("PrimaryVectors") or line_str.startswith("routes:"):
                 continue
             
-            if line_str.startswith("- "):
-                if current_route:
-                    routes.append(current_route)
-                current_route = {}
-                line_str = line_str[2:]
-                
             if ":" in line_str:
                 parts = line_str.split(":", 1)
                 key = parts[0].strip()
                 val = parts[1].strip()
+                
+                # Manejar el caso de un nuevo elemento de la lista (ej: `- name: "GitHub Models"`)
+                if key.startswith("-"):
+                    if current_route:
+                        routes.append(current_route)
+                    current_route = {}
+                    key = key[1:].strip()
                 
                 # Quitar comillas
                 if val.startswith('"') and val.endswith('"'):
@@ -49,8 +50,9 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
                     # Parsear listas de strings simples
                     models_list: list[str] = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
                     current_route["models"] = models_list
-                else:
-                    current_route[key] = val
+                    continue
+                
+                current_route[key] = val
                 
     if current_route:
         routes.append(current_route)
