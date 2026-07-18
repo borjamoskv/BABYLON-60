@@ -23,6 +23,7 @@ dependencies = [
     "pynacl>=1.5.0",
     "click>=8.0",
     "pyyaml>=6.0",
+    "defusedxml>=0.7.1",
 ]
 
 [project.urls]
