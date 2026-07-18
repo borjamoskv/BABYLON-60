@@ -171,7 +171,7 @@ export default function BabylonPremiumIDE() {
   const [editorContent, setEditorContent] = useState(activeFile.content);
   const [ghostText, setGhostText] = useState('');
   const [cursorPos, setCursorPos] = useState(0);
-  const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger' | 'extensions'>('files');
+  const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger' | 'extensions' | 'portal'>('files');
   const [chatInput, setChatInput] = useState('');
   const [showAutopromptMenu, setShowAutopromptMenu] = useState(false);
   
@@ -398,6 +398,13 @@ export default function BabylonPremiumIDE() {
               accent={activeTheme.accent} 
               title="Master Ledger WAL" 
             />
+            <IconButton 
+              icon="🌀" 
+              active={sidebarTab === 'portal'} 
+              onClick={() => setSidebarTab('portal')} 
+              accent={activeTheme.accent} 
+              title="Portal de Aplicaciones" 
+            />
           </div>
           
           <div>
@@ -585,6 +592,57 @@ export default function BabylonPremiumIDE() {
                     {log}
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {sidebarTab === 'portal' && (
+            <div className="p-4 flex flex-col gap-4 h-full justify-between">
+              <div className="flex flex-col gap-4">
+                <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">// PORTAL.APP SHORTCUTS</span>
+                <div className="flex flex-col gap-3">
+                  <div className="p-3 bg-white/5 border border-white/10 rounded-sm flex flex-col gap-1.5 font-mono text-[10px]">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-white">🌐 Brave Browser</span>
+                      <button 
+                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Brave Browser lanzado.`, ...l])}
+                        className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
+                        style={{ borderColor: activeTheme.accent }}
+                      >
+                        LAUNCH
+                      </button>
+                    </div>
+                    <span className="text-white/40">Foco: OSINT / Scraper Web local.</span>
+                  </div>
+
+                  <div className="p-3 bg-white/5 border border-white/10 rounded-sm flex flex-col gap-1.5 font-mono text-[10px]">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-white">💿 Teorema-Robinson-Moskv DMG</span>
+                      <button 
+                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Mapeando DMG de solo lectura.`, ...l])}
+                        className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
+                        style={{ borderColor: activeTheme.accent }}
+                      >
+                        MOUNT
+                      </button>
+                    </div>
+                    <span className="text-white/40">Origen: Teorema-Robinson-Moskv.dmg</span>
+                  </div>
+
+                  <div className="p-3 bg-white/5 border border-white/10 rounded-sm flex flex-col gap-1.5 font-mono text-[10px]">
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-white">⚙️ Ollama local</span>
+                      <button 
+                        onClick={() => setLedgerLogs(l => [`[${new Date().toTimeString().slice(0, 8)}] [Portal] Daemon de Ollama reiniciado.`, ...l])}
+                        className="text-[8px] border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer text-white bg-transparent border-0 outline-none"
+                        style={{ borderColor: activeTheme.accent }}
+                      >
+                        RESTART
+                      </button>
+                    </div>
+                    <span className="text-white/40">Host: http://localhost:11434</span>
+                  </div>
+                </div>
               </div>
             </div>
           )}
