@@ -1,6 +1,0 @@
-Claim: Saneamiento de ruta temporal (/tmp/) por directorio aislado en el proyecto (scratch/) y verificación empírica de transductor LOGOS -> ETHOS -> SHIP.
-Proof:
-  Base: ~/10_PROJECTS/Teorema-Robinson-Moskv/scripts/ejemplo_logos_ethos_ship.py
-  CORTEX_TAINT_SHA3_256: 5c076171ce1194211605301286ced2b168b24f0261f97e22298baaf1a00babd6
-  Timestamp: 2026-07-17T00:35:51.403981Z
-  Confidence: C5-REAL

@@ -1,6 +1,0 @@
-Claim: Motor de cálculo y transductor de Consenso Yuma multi-época para Bittensor (TAO) cristalizado empíricamente con poda Sybil, acumulación EMA y persistencia WAL.
-Proof:
-  Base: ~/10_PROJECTS/Teorema-Robinson-Moskv/scripts/bittensor_yuma_consensus_c5.py
-  CORTEX_TAINT_SHA3_256: f0ec01cb8c525e3e3a8e264bdfbb20821e5b4296178f21f77ede79586f4d924b
-  Timestamp: 2026-07-17T00:15:02.268441+00:00
-  Confidence: C5-REAL

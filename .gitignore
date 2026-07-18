@@ -98,3 +98,4 @@ domain_kernel/obj/
 
 *.npz
 *.dmg
+cortex/audits/*.yaml

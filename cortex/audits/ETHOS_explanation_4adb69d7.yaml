@@ -1,6 +1,0 @@
-Claim: "Forjar mapa del repositorio, tips de workflow, y protocolo de planeamiento"
-Proof:
-  Base: "~/30_BABYLON-60/docs/EXPLANATION.md"
-  CORTEX_TAINT_SHA3_256: "4adb69d7fd248c80fb899a80ae98fe9bcbff77e25dc85234ef635b060921d340"
-  Timestamp: "2026-07-16T22:01:51Z"
-  Confidence: C5-REAL
