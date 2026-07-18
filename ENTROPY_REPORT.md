@@ -1,57 +1,73 @@
-# PURGA DE ENTROPÍA v2 — BABYLON-60
+# PURGA DE ENTROPÍA — BABYLON-60 (v2 + v3)
 
-> **Operación:** `purge/entropia-v2-2026-07-19`
-> **Fecha:** 2026-07-19 · **Base:** `main@462d9c25`
-> **Ejecutor:** Kimi K3 (orquestador) vía GitHub MCP, a petición de @borjamoskv
-> **Resultado:** 23 archivos purgados · ~1 MB recuperados · 0 líneas de código fuente tocadas
+> **Operación:** `purge/entropia-v2-2026-07-19` · **Fecha:** 2026-07-19
+> **Base:** `main@462d9c25` · **Ejecutor:** Kimi K3 vía GitHub MCP
+> **v2:** 23 archivos purgados · **v3:** guardián anti-reincidencia + incidente iconos
 
 ---
 
-## 0. CONTEXTO: EL REPO SE RESETÓ ENTRE ITERACIONES
+## 0. CONTEXTO: RESET DEL REPO ENTRE ITERACIONES
 
 | Evento | Detalle |
 | :--- | :--- |
-| Iteración 1 (PR #553, hoy) | 19 archivos purgados sobre `main@5728210` |
-| Reset total | El repo fue force-pusheado a otra línea temporal: 30+ ramas y el PR #553 desaparecieron. Head observado oscilando: `bc224018` → `d22f24ef` → `462d9c25` (swarm activo mutando el árbol en tiempo real) |
-| Iteración 2 (este PR) | Re-auditoría sobre el head vigente y purga de la entropía **reincidente** + la nueva |
+| Iteración 1 (PR #553) | 19 archivos purgados sobre `main@5728210` |
+| Reset total | Repo force-pusheado a otra línea temporal: 30+ ramas y PR #553 destruidos. Head oscilando: `bc224018` → `d22f24ef` → `462d9c25` (swarm mutando en vivo) |
+| Iteración 2 (este PR) | Re-auditoría sobre el head vigente: entropía **reincidente** + nueva |
+| Iteración 3 (este PR) | ENTROPY GUARD (hook pre-commit) + sellado de proceso |
 
-## 1. INVENTARIO DE PURGA v2 (23 archivos)
+## 1. PURGA v2 — 23 ARCHIVOS
 
-### 1.1 Reincidentes (ya purgados en v1, reaparecieron tras el reset)
-| Archivo | Diagnóstico |
-| :--- | :--- |
-| `main` | **Vacío (0 bytes). Tercera línea temporal en la que reaparece.** Commit accidental estructural — revisar el pipeline que lo genera (probable `git add -A` sobre un redirect roto). |
-| `.agents/AGENTS.md` | Copia trackeada en directorio que el propio `.gitignore` ignora (`.agents/`) |
-| `.snapshots/` (3) | Tooling IDE (extensión AI snapshots) |
-| `scratch/*.py` (2) | Directorio ignorado (`scratch/`) pero con contenido trackeado |
-| `cortex/agents/ontology/centuria_bft_ledger.db` | Binario SQLite de runtime (331 KB) — `*.db` ya ignorado |
-| `src-tauri/gen/schemas/` (4) | JSON generados por `tauri-build` |
-| `babylon60-ide/frontend/dist/` (9) | Build de Vite commiteado. **Agravante v2: 3 bundles JS byte-idénticos** (`index-B9RiJxKJ.js` = `index-Cf2209wm.js` = `index-mDHNxfK0.js`, mismo blob `48ee3ed`) — se están commiteando builds sucesivos sin limpiar `dist/` |
+### Reincidentes (purgados en v1, reaparecieron tras el reset)
+- `main` — **vacío (0 bytes), 3ª línea temporal en la que reaparece**. Revisar el pipeline que lo genera (probable `git add -A` sobre redirect roto).
+- `.agents/AGENTS.md` · `.snapshots/` (3) · `scratch/*.py` (2)
+- `cortex/agents/ontology/centuria_bft_ledger.db` (331 KB, runtime)
+- `src-tauri/gen/schemas/` (4, regenerados por tauri-build)
+- `babylon60-ide/frontend/dist/` (9 — **3 bundles JS byte-idénticos**, mismo blob `48ee3ed`: builds sucesivos commiteados sin limpiar `dist/`)
 
-### 1.2 Entropía nueva (esta línea temporal)
-| Archivo | Diagnóstico |
-| :--- | :--- |
-| `Dockerfile.bak` | Backup editorial del Dockerfile commiteado |
-| `pyproject.toml.bak` | Backup editorial del pyproject commiteado |
+### Nuevos
+- `Dockerfile.bak` · `pyproject.toml.bak` (backups editoriales)
 
-### 1.3 Ya purgada por el propio swarm (verificado, sin acción)
-`C5_12_*.npz/.png/.json`, `shards.json`, `iteration_05_ledger.jsonl`, `reconstruccion_resultados.csv`, `scratch_*.py` raíz, `AUDITORIA_*.md`, `visual-canvas.png` — presentes en el head `d22f24ef`, eliminados en `462d9c25` por la purga propia del repo.
+### Ya purgados por el propio swarm (verificado)
+`C5_12_*.npz/.png/.json`, `shards.json`, `iteration_05_ledger.jsonl`, `AUDITORIA_*.md`, `visual-canvas.png`, `scratch_*.py` raíz.
 
 ## 2. SELLADO `.gitignore` v2
-Añadidas: `*.bak`, `.snapshots/`, `babylon60-ide/frontend/dist/`, `src-tauri/gen/schemas/`.
-(Estas reglas ya existían en la línea temporal anterior — el reset las perdió. **Recomendación: proteger el `.gitignore` como invariante en `AGENTS.md`** para que futuros resets/merges no lo degraden.)
+`*.bak` · `.snapshots/` · `babylon60-ide/frontend/dist/` · `src-tauri/gen/schemas/`
+(las reglas de v1 murieron con el reset — **declarar `.gitignore` invariante en `AGENTS.md`**)
 
-## 3. NO PURGADO (mismo criterio que v1)
-- `cortex/legal_dossier/` — custodia forense intencional con sellado hash (si existe en esta línea)
+## 3. v3 — ENTROPY GUARD (anti-reincidencia)
+
+La purga sin guardián es Sisifo (el `main` vacío lleva 3 reincidencias). Esta iteración instala el guardián:
+
+- **`.githooks/pre-commit`** — bloquea: archivos 0 bytes (whitelist `__init__.py`, `.gitkeep`), `*.bak/tmp/swp`, `dist/*.{js,css,html}`, `src-tauri/gen/schemas/*`, `*.db*`, blobs >2MB. Override: `git commit --no-verify`.
+- **`make install-hooks`** — activa `core.hooksPath .githooks` y da permiso de ejecución (la API no puede fijar el bit +x, por eso va en el Makefile).
+
+## 4. INCIDENTE DECLARADO: `src-tauri/icons/32x32.png`
+
+Los 6 iconos raíz eran **el mismo placeholder de 83 bytes** (PNG 32×32 vacío del template Tauri). En v3 intenté regenerarlos desde el logo real (`babylon60-ide/src-tauri/icons/icon.png`, 512×512) y descubrí que **la API MCP de esta sesión no puede escribir binarios** (guarda base64 como texto ASCII — verificado por round-trip en `create_or_update_file` y `push_files`).
+
+Consecuencia: `32x32.png` quedó corrupto **solo en esta rama** (`main` intacto). Se ha eliminado de la rama para no arrastrar el archivo roto al merge.
+
+**Restauración / fix real (local, 1 comando):**
+```bash
+git checkout main -- src-tauri/icons/32x32.png        # restaura el placeholder
+cd src-tauri && cargo tauri icon ../babylon60-ide/src-tauri/icons/icon.png   # regenera TODO el set con el logo real
+```
+
+## 5. BRANCH PROTECTION (acción manual — la API de sesión no la expone)
+
+La entropía de proceso (oscilación de heads, resets) solo muere con protección:
+```bash
+gh api -X PUT repos/borjamoskv/BABYLON-60/branches/main/protection \
+  -f required_pull_request_reviews='{"required_approving_review_count":1}' \
+  -f enforce_admins=false -F required_status_checks=null -F restrictions=null
+```
+Efecto: todo cambio entra por PR → adiós force-push anónimos, adiós oscilación.
+
+## 6. NO PURGADO (criterio)
+- `cortex/legal_dossier/` — custodia forense intencional con sellado hash
 - `Anergy_Audit.yml`, docs raíz, `.py` raíz — invariantes `PROTECTED_FILES` del motor `cortex_purge_anergy.py`
-- `index.html` raíz — landing protegida (además ignorada en una variante del `.gitignore`; mantener trackeada por GitHub Pages)
-- Iconos Tauri duplicados — requieren `tauri icon`, no borrado
-
-## 4. HALLAZGO ESTRUCTURAL (más allá de archivos)
-La entropía dominante ya no es de archivos: es **de proceso**. El repo oscila entre líneas temporales (3 heads distintos en <1h), los mismos artefactos reaparecen tras cada reset, y hay dos purgas concurrentes (la del swarm y esta). Recomendaciones:
-1. **Congelar `main`** (branch protection) y exigir PR para todo push — mata la oscilación.
-2. **Un solo purge-engine**: el `cortex_purge_anergy.py` ya archiva a `.cortex/archive`; alinearlo con estas reglas `.gitignore`.
-3. Hook `pre-commit` que rechace: archivos de 0 bytes, `*.bak`, `dist/`, `*.db`.
+- `index.html` raíz — landing protegida
+- 5 iconos placeholder restantes — referenciados por `tauri.conf.json` (ver §4)
 
 ---
-*Purga v2 ejecutada sobre head `462d9c25`. Merge recomendado: **squash**. Nivel de certeza: C5-REAL.*
+*Merge recomendado: **squash**. C5-REAL.*

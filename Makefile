@@ -1,4 +1,4 @@
-.PHONY: all check test lint typecheck format backend
+.PHONY: all check test lint typecheck format backend install-hooks
 
 all: format lint typecheck test
 
@@ -20,3 +20,9 @@ test:
 
 backend:
 	python3 run_backend.py
+
+# Purga Entropía v3 — activa el ENTROPY GUARD (pre-commit)
+install-hooks:
+	chmod +x .githooks/pre-commit
+	git config core.hooksPath .githooks
+	@echo "ENTROPY GUARD activo — los commits pasan por .githooks/pre-commit"

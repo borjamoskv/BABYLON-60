@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# ═══════════════════════════════════════════════════════════════
+# BABYLON-60 · ENTROPY GUARD v1.0 — pre-commit hook
+# Bloquea la reincidencia de la entropía purgada en 2026-07-19:
+#   archivos vacíos, *.bak, build artifacts, DBs de runtime,
+#   tooling IDE, schemas generados, blobs >2MB.
+# Override de emergencia: git commit --no-verify
+# Instalación: make install-hooks
+# ═══════════════════════════════════════════════════════════════
+set -u
+fail=0
+
+while IFS= read -r f; do
+  [ -f "$f" ] || continue
+
+  case "$f" in
+    *.bak|*.tmp|*.swp|*.orig)
+      echo "✖ ENTROPY[backup]: $f"; fail=1 ;;
+    .snapshots/*)
+      echo "✖ ENTROPY[ide-tooling]: $f"; fail=1 ;;
+    */dist/*.js|*/dist/*.css|*/dist/*.html|dist/*.js|dist/*.css|dist/*.html)
+      echo "✖ ENTROPY[build-artifact]: $f"; fail=1 ;;
+    src-tauri/gen/schemas/*)
+      echo "✖ ENTROPY[tauri-generated]: $f"; fail=1 ;;
+    *.db|*.db-shm|*.db-wal|*.db-journal)
+      echo "✖ ENTROPY[runtime-db]: $f"; fail=1 ;;
+  esac
+
+  # Archivos de 0 bytes (whitelist de marcadores idiomáticos)
+  if [ ! -s "$f" ]; then
+    case "$(basename "$f")" in
+      __init__.py|__init__.pyi|.gitkeep|.keep|.gitignore) : ;;
+      *) echo "✖ ENTROPY[empty-file]: $f (0 bytes)"; fail=1 ;;
+    esac
+  fi
+
+  # Blobs pesados
+  sz=$(wc -c < "$f")
+  if [ "$sz" -gt 2097152 ]; then
+    echo "✖ ENTROPY[>2MB]: $f ($sz bytes)"; fail=1
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACM)
+
+if [ "$fail" -eq 1 ]; then
+  echo
+  echo "ENTROPY GUARD: commit bloqueado. C5-REAL."
+  echo "Si el archivo es legítimo: git commit --no-verify"
+  exit 1
+fi
+exit 0
