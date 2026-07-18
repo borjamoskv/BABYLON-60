@@ -175,6 +175,35 @@ export default function BabylonPremiumIDE() {
   const [chatInput, setChatInput] = useState('');
   const [showAutopromptMenu, setShowAutopromptMenu] = useState(false);
   const [focusMode, setFocusMode] = useState(false);
+  const [cognitiveMode, setCognitiveMode] = useState<'neurotypical' | 'fatigue_reduced' | 'twice_exceptional'>('twice_exceptional');
+
+  const getEditorStyles = () => {
+    switch (cognitiveMode) {
+      case 'fatigue_reduced':
+        return {
+          fontFamily: '"Inter", sans-serif',
+          fontSize: '14px',
+          lineHeight: '1.85',
+          letterSpacing: '0.05em',
+        };
+      case 'twice_exceptional':
+        return {
+          fontFamily: '"Outfit", sans-serif',
+          fontSize: '15px',
+          lineHeight: '2.0',
+          letterSpacing: '0.07em',
+        };
+      case 'neurotypical':
+      default:
+        return {
+          fontFamily: 'monospace',
+          fontSize: '12px',
+          lineHeight: '1.5',
+          letterSpacing: 'normal',
+        };
+    }
+  };
+  const editorStyle = getEditorStyles();
   
   // Extension State
   const [extensions, setExtensions] = useState<ExtensionItem[]>([
@@ -208,11 +237,13 @@ export default function BabylonPremiumIDE() {
     const cursor = e.target.selectionStart;
     setCursorPos(cursor);
 
-    // Detección del trigger para autocompletado en línea (solo si la extensión de autocomplete está habilitada)
     const autocompleteEnabled = extensions.find(ext => ext.id === 'mcts-auto')?.enabled;
-    if (autocompleteEnabled && activeFile.trigger && activeFile.prediction) {
+    if (autocompleteEnabled && activeFile.prediction) {
       const textBeforeCursor = val.slice(0, cursor);
-      if (textBeforeCursor.endsWith(activeFile.trigger)) {
+      // En modo Doble Excepcionalidad, inyectamos predicciones más dinámicamente
+      const isTrigger = (activeFile.trigger && textBeforeCursor.endsWith(activeFile.trigger)) || 
+                        (cognitiveMode === 'twice_exceptional' && val.length > 3 && cursor % 5 === 0);
+      if (isTrigger) {
         setGhostText(activeFile.prediction);
       } else {
         setGhostText('');
@@ -228,9 +259,15 @@ export default function BabylonPremiumIDE() {
       e.preventDefault();
       const textBefore = editorContent.slice(0, cursorPos);
       const textAfter = editorContent.slice(cursorPos);
-      const newText = textBefore + ghostText + textAfter;
-      setEditorContent(newText);
+      const newContent = textBefore + ghostText + textAfter;
+      setEditorContent(newContent);
+      setCursorPos(cursorPos + ghostText.length);
       setGhostText('');
+
+      if (cognitiveMode === 'twice_exceptional') {
+        const time = new Date().toTimeString().slice(0, 8);
+        setLedgerLogs(l => [`[${time}] [Hyperfocus] Predicción inyectada al AST (+Exergía).`, ...l]);
+      }
       
       // Mover el cursor al final de la predicción insertada
       setTimeout(() => {
@@ -348,16 +385,24 @@ export default function BabylonPremiumIDE() {
         {/* Dynamic Config Controls */}
         <div className="flex items-center gap-6">
           {/* Ergonomic Switch */}
-          <button 
-            onClick={() => setFatigueReduction(!fatigueReduction)}
-            className="flex items-center gap-2 px-3 py-1 border font-mono text-[9px] tracking-wider uppercase bg-transparent transition-all duration-200 cursor-pointer"
-            style={{ 
-              borderColor: fatigueReduction ? activeTheme.accent : '#555',
-              color: fatigueReduction ? activeTheme.accent : '#888'
-            }}
-          >
-            👁️ FATIGA: {fatigueReduction ? 'REDUCIDA (CALIBRADO)' : 'OFF'}
-          </button>
+          {/* Cognitive Style Selectors */}
+          <div className="flex items-center gap-1.5 bg-[#000] p-1 border border-[#333]">
+            {(['neurotypical', 'fatigue_reduced', 'twice_exceptional'] as const).map(mode => (
+              <button
+                key={mode}
+                onClick={() => setCognitiveMode(mode)}
+                className="px-2 py-0.5 border text-[8px] font-mono tracking-wider uppercase bg-transparent transition-all duration-150 cursor-pointer"
+                style={{ 
+                  borderColor: cognitiveMode === mode ? activeTheme.accent : '#222',
+                  color: cognitiveMode === mode ? activeTheme.accent : '#555'
+                }}
+              >
+                {mode === 'neurotypical' && '🧠 Neurotípico'}
+                {mode === 'fatigue_reduced' && '👁️ Anti-Fatiga'}
+                {mode === 'twice_exceptional' && '🚀 AACC + TDAH'}
+              </button>
+            ))}
+          </div>
 
           {/* Theme Selector */}
           <div className="flex items-center gap-1.5 bg-[#000] p-1 border border-[#333]">
@@ -689,23 +734,27 @@ export default function BabylonPremiumIDE() {
               onChange={handleTextChange}
               onKeyDown={handleKeyDown}
               spellCheck={false}
-              className="absolute inset-0 w-full h-full p-6 bg-transparent border-0 resize-none outline-none font-mono text-xs focus:ring-0 focus:outline-none whitespace-pre"
+              className="absolute inset-0 w-full h-full p-6 bg-transparent border-0 resize-none outline-none font-mono text-xs focus:ring-0 focus:outline-none whitespace-pre transition-all duration-300"
               style={{
                 color: activeTheme.text,
-                fontSize: fatigueReduction ? '14px' : '12px',
-                lineHeight: fatigueReduction ? '1.85' : '1.5',
-                letterSpacing: fatigueReduction ? '0.05em' : 'normal',
+                fontFamily: editorStyle.fontFamily,
+                fontSize: editorStyle.fontSize,
+                lineHeight: editorStyle.lineHeight,
+                letterSpacing: editorStyle.letterSpacing,
+                border: cognitiveMode === 'twice_exceptional' ? `1px solid ${activeTheme.accent}15` : '0',
+                boxShadow: cognitiveMode === 'twice_exceptional' ? `inset 0 0 20px ${activeTheme.accent}05` : 'none'
               }}
             />
             {/* Transparent prediction layer (Ghost Text) */}
             {ghostText && (
               <pre 
-                className="absolute pointer-events-none p-6 font-mono text-xs whitespace-pre"
+                className="absolute pointer-events-none p-6 font-mono text-xs whitespace-pre transition-all duration-300"
                 style={{
                   color: activeTheme.comment,
-                  fontSize: fatigueReduction ? '14px' : '12px',
-                  lineHeight: fatigueReduction ? '1.85' : '1.5',
-                  letterSpacing: fatigueReduction ? '0.05em' : 'normal',
+                  fontFamily: editorStyle.fontFamily,
+                  fontSize: editorStyle.fontSize,
+                  lineHeight: editorStyle.lineHeight,
+                  letterSpacing: editorStyle.letterSpacing,
                 }}
               >
                 {/* Repetimos el texto antes de la predicción y metemos la sugerencia translúcida */}
@@ -735,7 +784,7 @@ export default function BabylonPremiumIDE() {
         style={{ backgroundColor: activeTheme.sidebar, borderColor: activeTheme.border }}
       >
         <div>THEME: {activeTheme.name}</div>
-        <div>SPACING: {fatigueReduction ? 'CALIBRADO (ANTI-FATIGA)' : 'ESTÁNDAR'}</div>
+        <div>MODO: {cognitiveMode === 'twice_exceptional' ? 'AACC + TDAH (HYPERFOCUS)' : cognitiveMode === 'fatigue_reduced' ? 'CALIBRADO (ANTI-FATIGA)' : 'NEUROTÍPICO'}</div>
         <div>CORTEX BFT SYNC: PASS</div>
       </footer>
     </main>
