@@ -27,6 +27,8 @@ dev = [
     "mypy>=1.8",
     "networkx>=3.0",
     "pandas>=2.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.28.0",
 ]
 embeddings = [
     "numpy>=1.24",

@@ -9,6 +9,7 @@ import hashlib
 import time
 import urllib.request
 import json
+from pathlib import Path
 from typing import Any
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
@@ -121,3 +122,59 @@ def status_local() -> dict[str, Any]:
             "endpoint": "http://127.0.0.1:11434",
             "models": []
         }
+
+
+class MambaInferenceRequest(BaseModel):
+    prompt: str = Field(..., description="Prompt text for local Mamba SSM generation")
+    max_tokens: int = Field(default=10, ge=1, le=100)
+
+
+@router.post("/mamba/generate")
+def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
+    """Execute local Mamba SSM inference integrated with GraphLedger."""
+    try:
+        # Import primitives from parent workspace dynamically
+        import sys
+        parent_dir = str(Path(__file__).resolve().parent.parent.parent.parent)
+        if parent_dir not in sys.path:
+            sys.path.insert(0, parent_dir)
+
+        from core_graph_ledger import GraphLedger
+        from cortex_bpe_tokenizer import BPETokenizer
+        from cortex_mamba_network import MambaNetwork
+        from net_mamba_ledger_engine import MambaLedgerEngine
+
+        # JIT Initialization of lightweight Mamba Engine
+        tokenizer = BPETokenizer()
+        tokenizer.train("Lorem ipsum dolor sit amet. Babylon-60 is a C5-REAL sovereign kernel and Mamba network.", num_merges=10)
+        network = MambaNetwork(vocab_size=len(tokenizer.vocab), d_model=16, d_state=8, n_layers=2)
+        ledger = GraphLedger()
+        engine = MambaLedgerEngine(tokenizer, network, ledger)
+
+        text, nodes = engine.mut_generate_audited(
+            prompt=req.prompt,
+            max_new_tokens=req.max_tokens,
+            temperature=1.0,
+            k=3
+        )
+
+        nodes_list = []
+        for n in nodes:
+            nodes_list.append({
+                "node_id": n.node_id,
+                "parent_id": n.parent_id,
+                "claim": n.claim_summary,
+                "payload_hash": n.payload_hash
+            })
+
+        return {
+            "text": text,
+            "nodes": nodes_list,
+            "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
+            "vocab_size": len(tokenizer.vocab)
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Native Mamba inference failed: {str(e)}"
+        )
