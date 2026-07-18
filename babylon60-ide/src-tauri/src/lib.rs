@@ -2,6 +2,7 @@ pub mod lexicon;
 pub mod kernel;
 pub mod ledger;
 pub mod context;
+pub mod inference;
 
 use std::sync::Mutex;
 use tauri::State;
@@ -9,6 +10,7 @@ use serde_json::Value;
 use ledger::{CortexLedger, CortexEvent};
 use kernel::{VectorEntry, DispatchResult};
 use lexicon::{Domain, Primitive, Modifier};
+use inference::{InferenceResult, run_local_inference, check_local_status};
 
 struct AppState {
     ledger: Mutex<CortexLedger>,
@@ -28,6 +30,20 @@ fn get_ledger_events(state: State<AppState>, limit: u32) -> Result<Vec<CortexEve
 fn append_ledger_event(state: State<AppState>, event_type: String, payload: Value) -> Result<CortexEvent, String> {
     let ledger = state.ledger.lock().unwrap();
     ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
+}
+
+// ═══════════════════════════════════════════════════════
+//  INFERENCE IPC (LOCAL SILICON / MLX / OLLAMA)
+// ═══════════════════════════════════════════════════════
+
+#[tauri::command]
+fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
+    run_local_inference(&prompt, model, base_url, temperature)
+}
+
+#[tauri::command]
+fn get_local_inference_status() -> Result<Value, String> {
+    check_local_status()
 }
 
 // ═══════════════════════════════════════════════════════
@@ -71,6 +87,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             get_ledger_events,
             append_ledger_event,
+            local_infer_sync,
+            get_local_inference_status,
             list_ontology_vectors,
             dispatch_vector,
             kernel::dispatch,
@@ -86,3 +104,4 @@ pub fn run() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+

@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .routes import arena, ledger, ontology, query, sentinel, telemetry
+from .routes import arena, ledger, ontology, query, sentinel, telemetry, inference
 
 app = FastAPI(
     title="BABYLON60 IDE",
@@ -40,6 +40,7 @@ app.include_router(query.router)
 app.include_router(sentinel.router)
 app.include_router(telemetry.router)
 app.include_router(arena.router)
+app.include_router(inference.router)
 
 
 @app.get("/api/health")
