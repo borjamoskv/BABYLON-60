@@ -27,7 +27,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         
-        async def run_test():
+        async def run_test() -> None:
             # Queue 5 tasks covering different domains, primitives, modifiers
             await self.orchestrator.enqueue_task(0, 0, 0)
             await self.orchestrator.enqueue_task(1, 2, 3)
@@ -54,7 +54,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
-        async def run_test():
+        async def run_test() -> None:
             # Run one initial step to get nodes out of default zero state
             await self.orchestrator.enqueue_task(1, 1, 1)
             await self.orchestrator.start_loop(max_steps=1)
@@ -91,7 +91,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         # Setup initial database row
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        async def run_test():
+        async def run_test() -> None:
             await self.orchestrator.enqueue_task(0, 0, 0)
             await self.orchestrator.start_loop(max_steps=1)
         loop.run_until_complete(run_test())

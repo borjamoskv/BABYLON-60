@@ -1,5 +1,5 @@
 import unittest
-from cortex.active_inference_engine import UnifiedActiveInferenceEngine
+from .active_inference_engine import UnifiedActiveInferenceEngine
 
 class TestUnifiedActiveInferenceEngine(unittest.TestCase):
     def test_3000_primitives_orquestated(self) -> None:

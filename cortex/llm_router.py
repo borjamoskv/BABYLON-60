@@ -3,7 +3,7 @@
 import os
 import json
 import urllib.request
-from typing import List, TypedDict
+from typing import List, TypedDict, Any
 
 __all__ = ['C5LLMRouter']
 
@@ -22,7 +22,7 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
         raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
         
     routes = []
-    current_route: RouteConfig = {}
+    current_route: Any = {}
     
     with open(filepath, 'r', encoding='utf-8') as f:
         for line in f:
@@ -54,7 +54,8 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     if current_route:
         routes.append(current_route)
         
-    return routes
+    from typing import cast
+    return cast(List[RouteConfig], routes)
 
 class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""
@@ -69,7 +70,7 @@ class C5LLMRouter:
         for route in self.routes:
             if route.get("name") == "Ollama Local Engine" and model in route.get("models", []):
                 try:
-                    return self._call_ollama(route.get("url"), model, prompt)
+                    return self._call_ollama(str(route.get("url", "")), model, prompt)
                 except (OSError, RuntimeError, ConnectionError) as e:
                     errors.append(f"Ollama ({model}) falló: {e}")
                     
@@ -78,7 +79,8 @@ class C5LLMRouter:
             if route.get("name") == "Groq Cloud Console" and os.getenv("GROQ_API_KEY"):
                 try:
                     # Tomar el primer modelo disponible de la lista
-                    actual_model = route.get("models")[0] if route.get("models") else "llama3-70b-8192"
+                    models = route.get("models", [])
+                    actual_model = models[0] if models else "llama3-70b-8192"
                     url = f"{route.get('url')}/v1/chat/completions"
                     return self._call_openai_compatible(url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt)
                 except (OSError, RuntimeError, ConnectionError) as e:
@@ -88,7 +90,8 @@ class C5LLMRouter:
         for route in self.routes:
             if route.get("name") == "GitHub Models" and os.getenv("GITHUB_TOKEN"):
                 try:
-                    actual_model = route.get("models")[0] if route.get("models") else "Llama-3-8B-Instruct"
+                    models = route.get("models", [])
+                    actual_model = models[0] if models else "Llama-3-8B-Instruct"
                     url = "https://models.inference.ai.azure.com/chat/completions"
                     return self._call_openai_compatible(url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt)
                 except (OSError, RuntimeError, ConnectionError) as e:
@@ -113,7 +116,7 @@ class C5LLMRouter:
         
         with urllib.request.urlopen(req, timeout=5) as response:
             res_data = json.loads(response.read().decode("utf-8"))
-            return res_data["response"]
+            return str(res_data["response"])
 
     def _call_openai_compatible(self, url: str, token: str, model: str, prompt: str) -> str:
         req_data = json.dumps({
@@ -133,4 +136,4 @@ class C5LLMRouter:
         
         with urllib.request.urlopen(req, timeout=8) as response:
             res_data = json.loads(response.read().decode("utf-8"))
-            return res_data["choices"][0]["message"]["content"]
+            return str(res_data["choices"][0]["message"]["content"])

@@ -9,14 +9,14 @@ import subprocess
 RULES_FILE = ".cursorrules"
 AGENTS_RULES = ".agents/auditor_c5_real.md"
 
-def get_current_branch() -> None:
+def get_current_branch() -> str:
     try:
         branch = subprocess.check_output(["git", "branch", "--show-current"]).decode().strip()
         return branch
     except Exception:
         return "master"
 
-def get_python_version() -> None:
+def get_python_version() -> str:
     return f"{sys.version_info.major}.{sys.version_info.minor}"
 
 def audit_and_align_invariants() -> None:
