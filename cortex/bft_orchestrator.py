@@ -30,7 +30,7 @@ __all__ = [
 # DB Concurrency & Persist Configurations (R10)
 DB_PATH = "cortex_bft_ledger.db"
 
-def init_bft_database():
+def init_bft_database() -> None:
     """Initializes SQLite Master Ledger with WAL, busy_timeout, and write protection triggers (R10, Ω11)."""
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
     # Enable WAL mode and set busy_timeout
@@ -73,7 +73,7 @@ def init_bft_database():
 
 class BFTNode:
     """Represents a virtual Byzantine replica node holding its own Rust-backed states."""
-    def __init__(self, node_id: int):
+    def __init__(self, node_id: int) -> None:
         self.node_id = node_id
         self.state_vector = strike_rs.StateVector()
         self.cognitive_chain_vector = strike_rs.CognitiveChainVector()
@@ -98,7 +98,7 @@ class BFTNode:
         )
         return hashlib.sha3_256(state_data.encode("utf-8")).hexdigest()
 
-    def sync_from(self, source_node: 'BFTNode'):
+    def sync_from(self, source_node: 'BFTNode') -> None:
         """Synchronizes the state from a healthy node to resolve a Byzantine fault."""
         # Synchronize StateVector
         self.state_vector.states = list(source_node.state_vector.states)
@@ -128,7 +128,7 @@ class BFTNode:
 
 class BFTOrchestrator:
     """Asynchronous Orchestrator confined to queue routing and BFT Consensus Verification (R10, Ω11)."""
-    def __init__(self, num_nodes: int = 3):
+    def __init__(self, num_nodes: int = 3) -> None:
         if not isinstance(num_nodes, int) or num_nodes < 1:
             raise ValueError("num_nodes must be a positive integer")
         init_bft_database()
@@ -245,7 +245,7 @@ class BFTOrchestrator:
             self.queue.task_done()
             steps_executed += 1
 
-    def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str):
+    def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11)."""
         taint = f"[CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{int(time.time())}]"
         

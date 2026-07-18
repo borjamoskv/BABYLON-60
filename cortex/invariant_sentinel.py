@@ -9,17 +9,17 @@ import subprocess
 RULES_FILE = ".cursorrules"
 AGENTS_RULES = ".agents/auditor_c5_real.md"
 
-def get_current_branch():
+def get_current_branch() -> None:
     try:
         branch = subprocess.check_output(["git", "branch", "--show-current"]).decode().strip()
         return branch
     except Exception:
         return "master"
 
-def get_python_version():
+def get_python_version() -> None:
     return f"{sys.version_info.major}.{sys.version_info.minor}"
 
-def audit_and_align_invariants():
+def audit_and_align_invariants() -> None:
     print("[C5-REAL] Ignición de Invariant Sentinel...")
     mutated = False
     

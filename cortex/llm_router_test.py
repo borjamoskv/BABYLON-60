@@ -4,7 +4,7 @@ import json
 from cortex.llm_router import parse_yaml_routes, C5LLMRouter
 
 class TestLLMRouter(unittest.TestCase):
-    def test_parse_yaml_routes(self):
+    def test_parse_yaml_routes(self) -> None:
         # Validar el parseador sin dependencias contra el archivo real de la ontología
         routes = parse_yaml_routes("cortex/ontology/llms_gratuitos_front_routes.yaml")
         self.assertGreater(len(routes), 0)
@@ -12,7 +12,7 @@ class TestLLMRouter(unittest.TestCase):
         self.assertIn("Gemma-2-9B-It", routes[0]["models"])
 
     @patch('urllib.request.urlopen')
-    def test_dispatch_inference_ollama_success(self, mock_urlopen):
+    def test_dispatch_inference_ollama_success(self, mock_urlopen) -> None:
         # Mock de respuesta JSON de Ollama local
         mock_response = MagicMock()
         mock_response.read.return_value = json.dumps({"response": "Respuesta simulada de Ollama"}).encode('utf-8')

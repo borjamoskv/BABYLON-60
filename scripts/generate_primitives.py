@@ -1,7 +1,7 @@
 import os
 import re
 
-def main():
+def main() -> None:
     yaml_path = "cortex/ontology/10000_space_taxonomy.yaml"
     output_path = "src-tauri/src/primitives_generated.rs"
     

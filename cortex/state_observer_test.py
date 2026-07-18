@@ -2,7 +2,7 @@ import unittest
 from cortex.state_observer import dispatch_state_observer, StateVector
 
 class TestStateObserver(unittest.TestCase):
-    def test_1000_primitives(self):
+    def test_1000_primitives(self) -> None:
         state = StateVector()
         tested = 0
         for d in range(10):

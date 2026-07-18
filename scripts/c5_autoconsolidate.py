@@ -6,7 +6,7 @@ import datetime
 BRAIN_DIR = os.path.expanduser("~/.gemini/antigravity/brain")
 ARTIFACT_DIR = os.path.join(os.getcwd(), "artifacts")
 
-def consolidate_conversations():
+def consolidate_conversations() -> None:
     print("[C5-REAL] Iniciando Autoconsolidación de Conversaciones-Ω...")
     os.makedirs(ARTIFACT_DIR, exist_ok=True)
     

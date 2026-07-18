@@ -4,7 +4,7 @@ import os
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
 
-def init_ledger():
+def init_ledger() -> None:
     if not os.path.exists(CORTEX_DIR):
         os.makedirs(CORTEX_DIR)
         

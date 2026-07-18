@@ -9,7 +9,7 @@ home = os.path.expanduser("~")
 sys.path.append(os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher"))
 from c5_swarm_compiler import ThermodynamicSwarmCompiler  # type: ignore[import-not-found]  # noqa: E402
 
-def run_ruff_fix():
+def run_ruff_fix() -> None:
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")
     try:
         res = subprocess.run(["ruff", "check", ".", "--fix"], capture_output=True, text=True, check=True)
@@ -17,7 +17,7 @@ def run_ruff_fix():
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix failed: {e.stdout}\n{e.stderr}")
 
-def execute_swarm_audit():
+def execute_swarm_audit() -> None:
     print("⚡ [LEGION-10K] Deploying 100 agents (10 blocks x 10 nodes)...")
     compiler = ThermodynamicSwarmCompiler(
         goal="PURGA MASIVA DE ENTROPIA across 10000 primitives (LEGION 10K)",

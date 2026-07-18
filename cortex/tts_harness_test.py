@@ -2,7 +2,7 @@ import unittest
 from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
 class TestTTSHarness(unittest.TestCase):
-    def test_1000_tts_primitives(self):
+    def test_1000_tts_primitives(self) -> None:
         state = TTSHarnessState()
         tested = 0
         for d in range(10):

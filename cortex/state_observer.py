@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'INIT', 1: 'PREDICT', 2: 'UPDATE', 3: 'INNOVATION', 4: 'GAIN', 
 MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'KALMAN_EXTENDED', 3: 'LUENBERGER_RIGID', 4: 'PARTICLE_PF', 5: 'SLIDING_MODE', 6: 'QUANTIZED', 7: 'ADAPTIVE_R', 8: 'NEURAL_LATENT', 9: 'BFT_CONSENSUS'}
 
 class StateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.states = [0.0, 0.0, 0.0, 0.0]
         self.covariance = [[1.0 if i==j else 0.0 for j in range(4)] for i in range(4)]
         self.innovation = [0.0, 0.0, 0.0, 0.0]

@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Tuple
 
 class AttractorLandscape:
     """Represents the cognitive state space as a Lyapunov potential energy field V(S)."""
-    def __init__(self, num_dimensions: int = 10):
+    def __init__(self, num_dimensions: int = 10) -> None:
         self.dims = num_dimensions
         # Center of attractor valley S_attractor
         self.attractor = [0.0] * num_dimensions
@@ -22,7 +22,7 @@ class CognitiveStateObserver:
     State Observer Transductor g(History, Objectives, Observed_State) -> S_hat(t).
     Estimates the human-project cognitive continuity state vector S_hat(t).
     """
-    def __init__(self, dims: int = 10):
+    def __init__(self, dims: int = 10) -> None:
         self.dims = dims
         self.S_hat = [0.0] * dims  # Estimated state vector
         self.P = [[1.0 if i == j else 0.0 for j in range(dims)] for i in range(dims)] # Covariance

@@ -2,7 +2,7 @@ import unittest
 from cortex.active_inference_engine import UnifiedActiveInferenceEngine
 
 class TestUnifiedActiveInferenceEngine(unittest.TestCase):
-    def test_3000_primitives_orquestated(self):
+    def test_3000_primitives_orquestated(self) -> None:
         engine = UnifiedActiveInferenceEngine()
         step_count = 0
         for d in range(10):

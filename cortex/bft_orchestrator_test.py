@@ -5,7 +5,7 @@ import sqlite3
 from cortex.bft_orchestrator import BFTOrchestrator, DB_PATH
 
 class TestBFTOrchestrator(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         # Remove DB before each test for isolation
         if os.path.exists(DB_PATH):
             try:
@@ -14,7 +14,7 @@ class TestBFTOrchestrator(unittest.TestCase):
                 pass
         self.orchestrator = BFTOrchestrator(num_nodes=3)
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         # Cleanup database
         if os.path.exists(DB_PATH):
             try:
@@ -22,7 +22,7 @@ class TestBFTOrchestrator(unittest.TestCase):
             except OSError:
                 pass
 
-    def test_clean_bft_execution(self):
+    def test_clean_bft_execution(self) -> None:
         """Tests that orchestrator runs successfully and achieves consensus for multiple tasks."""
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
@@ -49,7 +49,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         self.assertEqual(hash0, hash1)
         self.assertEqual(hash1, hash2)
 
-    def test_byzantine_fault_recovery(self):
+    def test_byzantine_fault_recovery(self) -> None:
         """Tests that a single corrupted/divergent node is detected, consensus is reached, and the node is recovered."""
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
@@ -86,7 +86,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         self.assertEqual(hash1, hash2)
         self.assertAlmostEqual(self.orchestrator.nodes[2].state_vector.states[0], self.orchestrator.nodes[0].state_vector.states[0])
 
-    def test_ledger_immutability(self):
+    def test_ledger_immutability(self) -> None:
         """Verifies that direct UPDATEs and DELETEs on the sqlite Master Ledger are rejected by triggers."""
         # Setup initial database row
         loop = asyncio.new_event_loop()

@@ -5,7 +5,7 @@ from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
 class UnifiedActiveInferenceEngine:
-    def __init__(self):
+    def __init__(self) -> None:
         self.state_vector = StateVector()
         self.cognitive_chain_vector = CognitiveChainVector()
         self.tts_harness_state = TTSHarnessState()

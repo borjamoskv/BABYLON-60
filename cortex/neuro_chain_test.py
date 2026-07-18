@@ -2,7 +2,7 @@ import unittest
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 
 class TestNeuroChain(unittest.TestCase):
-    def test_1000_neuro_primitives(self):
+    def test_1000_neuro_primitives(self) -> None:
         vec = CognitiveChainVector()
         tested = 0
         for d in range(10):

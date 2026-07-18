@@ -2,7 +2,7 @@ import unittest
 from cortex.cognitive_state_observer import CognitiveStateObserver
 
 class TestCognitiveStateObserver(unittest.TestCase):
-    def test_attractor_convergence_and_divergence_minimization(self):
+    def test_attractor_convergence_and_divergence_minimization(self) -> None:
         observer = CognitiveStateObserver(dims=10)
         u_control = [0.1] * 10
         Y_human = [0.05] * 10

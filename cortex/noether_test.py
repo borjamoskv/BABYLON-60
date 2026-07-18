@@ -3,7 +3,7 @@ import unittest
 from cortex.noether import dispatch_noether, NoetherStateVector
 
 class TestNoetherKernel(unittest.TestCase):
-    def test_noether_coverage(self):
+    def test_noether_coverage(self) -> None:
         vec = NoetherStateVector()
         count = 0
         for d in range(10):

@@ -34,7 +34,7 @@ def calculate_shannon_entropy(data: bytes) -> float:
 
 class EphemeralVNodePhysical:
     """Sandbox físico para compilación de AST y cálculo de exergía."""
-    def __init__(self, node_id: str):
+    def __init__(self, node_id: str) -> None:
         self.node_id = node_id
 
     def execute_physical_test(self, payload: str) -> Tuple[bool, float, int]:
@@ -78,7 +78,7 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
 
 class L3InferenceEnginePhysical:
     """Motor de Inferencia L3 acoplado a MCTS con colapso multiproceso."""
-    def __init__(self, target_trajectories: int = 10000):
+    def __init__(self, target_trajectories: int = 10000) -> None:
         self.target = target_trajectories
 
     def compile_theorem(self, intention: str) -> ASTTheorem:

@@ -58,7 +58,7 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
 
 class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""
-    def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml"):
+    def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml") -> None:
         self.routes = parse_yaml_routes(routes_path)
         
     def dispatch_inference(self, prompt: str, model: str) -> str:
