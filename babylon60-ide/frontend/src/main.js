@@ -206,6 +206,7 @@ const SPINE_ROUTES = [
   { id: 'swarm',     icon: '⚡',  label: 'Swarm',      tip: 'Agent Swarm (telemetría en vivo)  ⌘4' },
   { id: 'analytics', icon: '∿',  label: 'Analytics',  tip: 'Ledger Analytics — DETERMINAR (agregación + BM25)  ⌘7' },
   { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación real)  ⌘6' },
+  { id: 'inference', icon: '◈',  label: 'Inference',  tip: 'Local Inference (Ollama/MLX/Mamba)  ⌘8' },
 ];
 
 function setupSpine() {
@@ -725,7 +726,7 @@ function showRestoreBanner(lastRoute) {
    KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics', '8': 'inference' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
@@ -756,6 +757,7 @@ function setupRouter() {
   registerRoute('swarm',     renderSwarmPage);
   registerRoute('analytics', renderAnalyticsPage);
   registerRoute('sentinel',  renderSentinelPage);
+  registerRoute('inference', renderInferencePage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -1905,4 +1907,186 @@ async function runLedgerSearch(q) {
   } catch (err) {
     el.innerHTML = `<div style="color:var(--break);font-size:0.64rem">${escapeHtml(err.message)}</div>`;
   }
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTE: LOCAL INFERENCE — SOVEREIGN SILICON
+   ══════════════════════════════════════════════════════════ */
+async function renderInferencePage(container) {
+  onRouteEnter('inference');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Local Inference — SOVEREIGN SILICON'),
+    actions: `<button class="btn" id="btn-infer-refresh" style="font-size:0.62rem">↺ Refresh Status</button>`,
+  });
+
+  container.innerHTML = `
+    <div class="stats-grid" style="margin-bottom:14px">
+      <div class="stat-card">
+        <div class="stat-label">Local Daemon Status</div>
+        <div class="stat-value break" id="infer-status-val">Probing...</div>
+        <div class="stat-sub" id="infer-status-sub">Checking loopback...</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Model Provider</div>
+        <div class="stat-value lapis" style="font-size:0.8rem">LOCAL SILICON</div>
+        <div class="stat-sub">Zero-Network Confined</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Last Generation Metrics</div>
+        <div class="stat-value gold" id="infer-speed-val">— tps</div>
+        <div class="stat-sub" id="infer-latency-sub">— ms latency</div>
+      </div>
+    </div>
+
+    <div class="card slide-in" style="margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:8px">Local Generation Parameters</div>
+      
+      <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Target Model</label>
+          <select class="select" id="infer-model-select" style="width:100%">
+            <option value="qwen2.5-coder:32b">qwen2.5-coder:32b (Ollama/MLX default)</option>
+            <option value="native-mamba">Native Mamba SSM (Integrated GraphLedger)</option>
+          </select>
+        </div>
+        <div style="width:120px">
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Temperature</label>
+          <input class="input" type="number" id="infer-temp-input" value="0.2" min="0.0" max="2.0" step="0.1" style="width:100%">
+        </div>
+        <div style="width:120px">
+          <label style="font-size:0.58rem;color:var(--dust-dim);display:block;margin-bottom:4px">Max Tokens</label>
+          <input class="input" type="number" id="infer-tokens-input" value="1024" min="1" max="8192" style="width:100%">
+        </div>
+      </div>
+
+      <div class="code-editor" style="margin-bottom:12px">
+        <textarea id="infer-prompt-input" placeholder="Type prompt here... (e.g. Write a brief explanation of BFT consensus in 2 sentences)" spellcheck="false" style="height:120px"></textarea>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:0.58rem;color:var(--dust-ghost)">Confined to loopback (127.0.0.1 / localhost)</span>
+        <button class="btn btn-primary" id="btn-run-inference">⚡ Generate Output</button>
+      </div>
+    </div>
+
+    <div id="infer-output-card" class="card fade-in" style="display:none;margin-bottom:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div class="card-title">Output Integrity</div>
+        <span id="infer-output-hash" style="font-family:var(--mono);font-size:0.58rem;color:var(--gold)"></span>
+      </div>
+      <pre id="infer-output-body" style="font-family:var(--mono);font-size:0.68rem;background:var(--bitumen);padding:14px;border:1px solid var(--edge);border-radius:2px;white-space:pre-wrap;margin:0;max-height:400px;overflow-y:auto;color:var(--dust)"></pre>
+    </div>
+
+    <div id="mamba-trace-card" class="card fade-in" style="display:none">
+      <div class="card-title" style="margin-bottom:10px">Mamba GraphLedger Trace</div>
+      <div id="mamba-trace-body"></div>
+    </div>
+  `;
+
+  // Bind actions
+  const refreshStatus = async () => {
+    const statusVal = document.getElementById('infer-status-val');
+    const statusSub = document.getElementById('infer-status-sub');
+    const modelSelect = document.getElementById('infer-model-select');
+    if (!statusVal || !statusSub || !modelSelect) return;
+
+    try {
+      const data = await get('/api/inference/local/status');
+      if (data.status === 'ONLINE') {
+        statusVal.textContent = 'ONLINE';
+        statusVal.className = 'stat-value verify';
+        statusSub.textContent = `Running at ${data.endpoint}`;
+        
+        // Retain selection, but populate other models
+        const prevVal = modelSelect.value;
+        modelSelect.innerHTML = `<option value="native-mamba" ${prevVal === 'native-mamba' ? 'selected' : ''}>Native Mamba SSM (Integrated GraphLedger)</option>`;
+        (data.models || []).forEach(m => {
+          modelSelect.innerHTML += `<option value="${escapeHtml(m)}" ${prevVal === m ? 'selected' : ''}>${escapeHtml(m)}</option>`;
+        });
+      } else {
+        statusVal.textContent = 'OFFLINE';
+        statusVal.className = 'stat-value break';
+        statusSub.textContent = `Daemon offline at ${data.endpoint}`;
+      }
+    } catch (err) {
+      statusVal.textContent = 'ERROR';
+      statusVal.className = 'stat-value break';
+      statusSub.textContent = err.message;
+    }
+  };
+
+  document.getElementById('btn-infer-refresh')?.addEventListener('click', refreshStatus);
+  await refreshStatus();
+
+  // Run Inference
+  document.getElementById('btn-run-inference')?.addEventListener('click', async () => {
+    const prompt = document.getElementById('infer-prompt-input')?.value?.trim();
+    const model = document.getElementById('infer-model-select')?.value;
+    const temp = parseFloat(document.getElementById('infer-temp-input')?.value || '0.2');
+    const tokens = parseInt(document.getElementById('infer-tokens-input')?.value || '1024');
+
+    if (!prompt) return;
+
+    setTachometer('working');
+    const outputCard = document.getElementById('infer-output-card');
+    const outputBody = document.getElementById('infer-output-body');
+    const outputHash = document.getElementById('infer-output-hash');
+    const mambaCard = document.getElementById('mamba-trace-card');
+    const mambaBody = document.getElementById('mamba-trace-body');
+    const speedVal = document.getElementById('infer-speed-val');
+    const latencySub = document.getElementById('infer-latency-sub');
+
+    if (outputCard) outputCard.style.display = 'block';
+    if (outputBody) outputBody.textContent = 'Generating...';
+    if (outputHash) outputHash.textContent = '';
+    if (mambaCard) mambaCard.style.display = 'none';
+
+    try {
+      if (model === 'native-mamba') {
+        const data = await post('/api/inference/local/mamba/generate', {
+          prompt,
+          max_tokens: Math.min(tokens, 100) // Mamba SSM generation cap for lightweight demo
+        });
+        
+        if (outputBody) outputBody.textContent = data.text;
+        if (outputHash) outputHash.textContent = `Provider: ${data.provider} · Vocab: ${data.vocab_size}`;
+        if (speedVal) speedVal.textContent = 'N/A';
+        if (latencySub) latencySub.textContent = 'Instant generation';
+
+        if (mambaCard && mambaBody && data.nodes && data.nodes.length > 0) {
+          mambaCard.style.display = 'block';
+          mambaBody.innerHTML = `
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+              ${data.nodes.map((n, idx) => `
+                <div style="border-left:2px solid var(--gold);padding-left:12px;margin-bottom:6px">
+                  <div style="font-size:0.64rem;color:var(--dust-dim)">
+                    <b>Node #${idx + 1}: ${escapeHtml(n.node_id.slice(0, 12))}</b> 
+                    ${n.parent_id ? `(Parent: ${escapeHtml(n.parent_id.slice(0, 12))})` : '(Root)'}
+                  </div>
+                  <div style="font-size:0.6rem;color:var(--gold);font-family:var(--mono);margin:2px 0">${escapeHtml(n.claim)}</div>
+                  <div style="font-size:0.54rem;color:var(--dust-ghost);font-family:var(--mono)">payload_hash: ${n.payload_hash}</div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+      } else {
+        const data = await post('/api/inference/local/generate', {
+          prompt,
+          model,
+          temperature: temp,
+          max_tokens: tokens
+        });
+
+        if (outputBody) outputBody.textContent = data.text;
+        if (outputHash) outputHash.textContent = `SHA256: ${data.sha256.slice(0, 32)}...`;
+        if (speedVal) speedVal.textContent = `${data.tps} tps`;
+        if (latencySub) latencySub.textContent = `${data.latency_ms} ms latency`;
+      }
+    } catch (err) {
+      if (outputBody) outputBody.textContent = `Error: ${err.message}`;
+    } finally {
+      setTachometer('idle');
+    }
+  });
 }

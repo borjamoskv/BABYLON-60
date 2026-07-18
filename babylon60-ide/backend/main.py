@@ -14,7 +14,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry
+from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry, inference
 from .services import cortex_ledger
 
 logger = logging.getLogger("babylon60")
@@ -64,6 +64,7 @@ app.include_router(query.router)
 app.include_router(sentinel.router)
 app.include_router(delegation.router)
 app.include_router(telemetry.router)
+app.include_router(inference.router)
 
 
 @app.get("/api/health")
