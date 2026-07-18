@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Ω-08 Dependency-Sentinel: auto-PR semanal de dependencias Python.
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Acciones de GitHub (los workflows también envejecen).
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
