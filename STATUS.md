@@ -7,7 +7,7 @@
 
 - Proyecto: **Teorema-Robinson-Moskv** (linaje local = canónico)
 - Versión de proyecto: **1.0.2** — fuente única: `pyproject.toml`. `AGENTS.md` declara "Version: 1.1.0" pero es la versión del *documento de comportamiento*, no del proyecto: namespaces distintos, no hay conflicto (verificado 2026-07-17).
-- HEAD: `5e22f8fab` · 773 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
+- HEAD: `dccc1b412` · 774 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
 
 ## Topología del fork CORTEX↔BABYLON-60 — RESUELTA
 
@@ -75,4 +75,5 @@
 | 2026-07-18 | C5-REAL EXERGY TYPING & CONSOLIDATION: Refactorización con Tipado Algebraico (Union Sum Types), comprobación autónoma de consolidación y panel del Ledger en IDE | Git Sentinel `68ebebce9` |
 | 2026-07-18 | C5-REAL BASE 60 UTIL: Implementación del codificador/decodificador sexagesimal de exergía máxima babylon60/utils/base60.py y tests unitarios | Git Sentinel `67f204a49` |
 | 2026-07-18 | C5-REAL BASE 60 INTEGRATION: Sincronización del módulo base60 con el agente exergético, codificando la firma de procedencia criptográfica (44 chars Base60) | Git Sentinel `5e22f8fab` |
+| 2026-07-18 | C5-REAL EXERGY LINTER: Saneamiento de importaciones y orden de llamadas PEP8 (E402) en el agente exergético para cumplimiento estricto del linter | Git Sentinel `dccc1b412` |
 
