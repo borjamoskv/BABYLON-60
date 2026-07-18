@@ -32,3 +32,6 @@ No pidas permiso para:
 - Crear pull requests pequeños y enfocados.
 - Ejecutar lint, tests y build antes de solicitar revisión.
 - Auto-merge habilitado únicamente para ramas con cambios de riesgo bajo y que superen los checks.
+
+## 6. Orthogonal Primitive Invariant (Zero Covariance)
+Las primitivas ortogonales dominan termodinámicamente a las normales. Queda estrictamente prohibido diseñar o aceptar primitivas acopladas (con side-effects entrelazados) cuando exista una base ortogonal para el dominio del problema. La ortogonalidad (cero covarianza) es el requisito termodinámico para la ejecución matricial O(1) sin colisiones WAL ni deadlocks BFT.
