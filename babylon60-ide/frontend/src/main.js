@@ -204,9 +204,8 @@ const SPINE_ROUTES = [
   { id: 'databases', icon: '⛁',  label: 'Ontologies', tip: 'Ontologies (explorador SQLite)  ⌘2' },
   { id: 'query',     icon: '❯_', label: 'SQL',        tip: 'SQL Console (solo lectura)  ⌘3' },
   { id: 'swarm',     icon: '⚡',  label: 'Swarm',      tip: 'Agent Swarm (telemetría en vivo)  ⌘4' },
-  { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación)  ⌘6' },
-  { id: 'arena',     icon: '⚔',  label: 'Arena',      tip: 'Arena Matrix (Chatbot Arena)  ⌘7' },
-  { id: 'inference', icon: '◈',  label: 'Inference',  tip: 'Local Inference Console — ⌘8' },
+  { id: 'analytics', icon: '∿',  label: 'Analytics',  tip: 'Ledger Analytics — DETERMINAR (agregación + BM25)  ⌘7' },
+  { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación real)  ⌘6' },
 ];
 
 function setupSpine() {
@@ -446,7 +445,9 @@ const PALETTE_COMMANDS = [
   { icon: '⛁', label: 'Ontologies',           desc: 'Explorador SQLite (solo lectura)', shortcut: '⌘2', action: () => navigate('databases') },
   { icon: '❯_', label: 'SQL Console',         desc: 'Consultas read-only contra cualquier .db', shortcut: '⌘3', action: () => navigate('query') },
   { icon: '⚡', label: 'Agent Swarm',          desc: 'Telemetría en vivo (push WS, sin polling)', shortcut: '⌘4', action: () => navigate('swarm') },
-  { icon: '⎇', label: 'Git Sentinel',         desc: 'Identidad de repo + delegación de mutaciones git', shortcut: '⌘6', action: () => navigate('sentinel') },
+  { icon: '∿', label: 'Ledger Analytics',     desc: 'DETERMINAR: agregación + búsqueda BM25 del ledger', shortcut: '⌘7', action: () => navigate('analytics') },
+  { icon: '⎇', label: 'Git Sentinel',         desc: 'Identidad de repo + delegación real (commit/push)', shortcut: '⌘6', action: () => navigate('sentinel') },
+  { icon: '⌕', label: 'Search Ledger',        desc: 'BM25 léxico sobre payloads y taints', shortcut: '', action: () => { navigate('analytics'); setTimeout(() => document.getElementById('ledger-search-input')?.focus(), 300); } },
   { icon: '⚿', label: 'Verify Chain Integrity', desc: 'Recomputar SHA3-256 de toda la cadena', shortcut: '', action: () => { navigate('ledger'); setTimeout(() => document.getElementById('btn-verify-chain')?.click(), 400); } },
   { icon: '◐', label: 'Toggle Cognitive Mode', desc: 'Neurotípico ○ ↔ Doble Excepcionalidad ◐ (TDAH+AACC)', shortcut: '⌘⇧E', action: toggleCognitiveMode },
   { icon: '⟨', label: 'Toggle Context Pane',  desc: 'Mostrar / ocultar mapa semántico', shortcut: '⌘B', action: toggleContextPane },
@@ -724,7 +725,7 @@ function showRestoreBanner(lastRoute) {
    KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'arena', '8': 'inference' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
@@ -753,9 +754,8 @@ function setupRouter() {
   registerRoute('databases', renderDatabasesPage);
   registerRoute('query',     renderQueryPage);
   registerRoute('swarm',     renderSwarmPage);
+  registerRoute('analytics', renderAnalyticsPage);
   registerRoute('sentinel',  renderSentinelPage);
-  registerRoute('arena',     renderArenaPage);
-  registerRoute('inference', renderInferencePage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -1630,26 +1630,14 @@ async function renderSentinelPage(container) {
 
   container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⎇</div><div class="desc">Leyendo identidad del repo...</div></div>`;
 
-  let s;
-  let exergyHistory = [];
-  try {
-    s = await get('/api/sentinel/status');
-    S.sentinel = s;
-  } catch (err) {
+  try { S.sentinel = await get('/api/sentinel/status'); } catch (err) {
     container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
     return;
   }
-  
-  try {
-    const ex_res = await get('/api/sentinel/exergy');
-    exergyHistory = ex_res.history || [];
-  } catch (err) {
-    console.error("No se pudo obtener historial de exergía:", err);
-  }
-
   updateRepoSegment();
   renderContextPaneContent();
 
+  const s = S.sentinel;
   const reds = s.warnings.filter(w => w.level === 'red');
   const ambers = s.warnings.filter(w => w.level === 'amber');
   const lineageOk = reds.length === 0;
@@ -1666,19 +1654,6 @@ async function renderSentinelPage(container) {
   const remotesHtml = s.remotes.length === 0
     ? `<div style="color:var(--verify);font-size:0.66rem">✓ Sin remoto configurado (política P0 activa: nada sale a la nube hasta rotar claves)</div>`
     : s.remotes.map(r => `<div style="font-family:var(--font-mono);font-size:0.64rem;color:var(--dust-dim)">${escapeHtml(r.name)} → ${escapeHtml(r.url)}</div>`).join('');
-
-  const exergyHtml = exergyHistory.length === 0
-    ? `<div style="color:var(--dust-ghost);font-size:0.64rem">Sin auditorías de exergía registradas en el Ledger.</div>`
-    : exergyHistory.slice(0, 10).map(e => `
-        <div class="delegation-item" style="border-left:2px solid ${e.exergy_score >= 700.0 ? 'var(--verify)' : 'var(--break)'}; padding-left: 8px; margin-bottom: 6px; display: flex; flex-direction: column;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-            <span style="font-weight:bold; font-size:0.7rem; color:${e.exergy_score >= 700.0 ? 'var(--verify)' : 'var(--break)'}">${e.exergy_score.toFixed(1)}/1000.0</span>
-            <span style="font-family:var(--font-mono); font-size:0.6rem; color:var(--dust-dim)">HEAD: ${escapeHtml(e.commit_hash.slice(0, 8))}</span>
-          </div>
-          <div style="color:var(--dust-heavy); font-size:0.62rem; line-height: 1.2;">G: ${escapeHtml(e.gradient)}</div>
-          <div style="color:var(--dust-dim); font-size:0.58rem; margin-top: 1px;">E: ${escapeHtml(e.entropy)}</div>
-        </div>
-      `).join('');
 
   container.innerHTML = `
     <div class="stats-grid slide-in">
@@ -1708,28 +1683,31 @@ async function renderSentinelPage(container) {
       </div>
     </div>
 
-    <div class="card fade-in" style="margin-bottom:14px">
-      <div class="card-title" style="margin-bottom:8px">GELABP Exergy Ledger (Auditoría Termodinámica)</div>
-      <div style="font-size:0.66rem;color:var(--dust-dim);margin-bottom:10px">
-        Historial de exergía de las mutaciones físicas en el AST, calculado autónomamente según la matriz GELABP.
-      </div>
-      <div style="max-height: 250px; overflow-y: auto;">
-        ${exergyHtml}
-      </div>
-    </div>
-
     <div class="card fade-in">
-      <div class="card-title" style="margin-bottom:6px">Delegación 100% al Agente</div>
-      <div style="font-size:0.66rem;color:var(--dust-dim);margin-bottom:10px">
-        Toda mutación hacia la nube (commits, merges, pushes, pre-commits, ships, deploys) se delega a MOSKV-1.
-        Tú declaras la intención; el agente ejecuta con Git Sentinel y lo sella en el ledger.
-        <span style="color:var(--gold)">Push/deploy bloqueados por P0 (claves expuestas en el fork remoto) hasta rotación.</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <div class="card-title">Delegación 100% al Agente <span style="color:var(--dust-ghost);font-weight:400;font-size:0.6rem">(sellada en CortexLedger real)</span></div>
+        <button class="btn" id="btn-verify-ide-ledger" style="font-size:0.6rem">⚿ Verify IDE Ledger</button>
       </div>
-      <div style="display:flex;gap:8px;margin-bottom:10px">
-        <input class="input" id="delegation-input" placeholder="Directiva git… ej: 'commit: feat(ide) sentinel + dual mode' o 'push cuando P0 esté resuelto'" style="flex:1">
+      <div style="font-size:0.66rem;color:var(--dust-dim);margin-bottom:10px">
+        Declaras la intención; MOSKV-1 ejecuta con Git Sentinel y la sella en el ledger propio del IDE (append-only, hash-chain SHA-256).
+        <code style="color:var(--verify)">commit</code> se ejecuta de verdad (git local); <code style="color:var(--gold)">push/merge/ship/deploy</code> hacen <b>crash causal</b> mientras P0 esté abierto (claves expuestas en el fork remoto).
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:10px">
+        <select class="select" id="delegation-kind" style="width:120px">
+          <option value="commit">commit</option>
+          <option value="precommit">precommit</option>
+          <option value="status">status</option>
+          <option value="push">push ⛔</option>
+          <option value="merge">merge ⛔</option>
+          <option value="ship">ship ⛔</option>
+          <option value="deploy">deploy ⛔</option>
+          <option value="custom">custom</option>
+        </select>
+        <input class="input" id="delegation-input" placeholder="Directiva… ej: 'feat(ide): analytics + delegación real'" style="flex:1">
         <button class="btn btn-primary" id="delegation-add">⚡ Delegar</button>
       </div>
-      <div id="delegation-list"></div>
+      <div id="delegation-status" style="font-size:0.62rem;margin-bottom:8px;min-height:14px"></div>
+      <div id="delegation-list"><div style="color:var(--dust-ghost);font-size:0.64rem">Cargando cola…</div></div>
     </div>
   `;
 
@@ -1738,519 +1716,193 @@ async function renderSentinelPage(container) {
   document.getElementById('delegation-input')?.addEventListener('keydown', e => {
     if (e.key === 'Enter') addDelegation();
   });
-  renderDelegationList();
+  document.getElementById('btn-verify-ide-ledger')?.addEventListener('click', verifyIdeLedger);
+  await refreshDelegations();
 }
 
-function addDelegation() {
-  const input = document.getElementById('delegation-input');
-  if (!input || !input.value.trim()) return;
-  S.delegationQueue.unshift({
-    id: Date.now(),
-    text: input.value.trim(),
-    state: 'QUEUED',
-    time: new Date().toISOString().slice(0, 19),
-  });
-  if (S.delegationQueue.length > 30) S.delegationQueue.pop();
-  localStorage.setItem('b60-delegation', JSON.stringify(S.delegationQueue));
-  input.value = '';
-  renderDelegationList();
-  if (mode().rewards) {
-    setTachometer('done');
-    setTimeout(() => setTachometer('idle'), 1500);
+async function refreshDelegations() {
+  const el = document.getElementById('delegation-list');
+  if (!el) return;
+  try {
+    const data = await get('/api/delegation');
+    renderDelegationList(data.delegations || []);
+  } catch (err) {
+    el.innerHTML = `<div style="color:var(--break);font-size:0.64rem">${escapeHtml(err.message)}</div>`;
   }
 }
 
-function renderDelegationList() {
+async function addDelegation() {
+  const input = document.getElementById('delegation-input');
+  const kindSel = document.getElementById('delegation-kind');
+  const statusEl = document.getElementById('delegation-status');
+  if (!input || !input.value.trim()) return;
+  const directive = input.value.trim();
+  const kind = kindSel?.value || 'custom';
+  try {
+    const res = await post('/api/delegation', { directive, kind });
+    input.value = '';
+    if (statusEl) {
+      statusEl.innerHTML = res.cloud_blocked
+        ? `<span style="color:var(--gold)">⛔ '${kind}' encolado pero bloqueado por P0 — ejecútalo para ver el crash causal.</span>`
+        : `<span style="color:var(--verify)">✓ '${kind}' encolado (${res.delegation_id}).</span>`;
+    }
+    if (mode().rewards) { setTachometer('done'); setTimeout(() => setTachometer('idle'), 1500); }
+    await refreshDelegations();
+  } catch (err) {
+    if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
+  }
+}
+
+async function executeDelegation(id) {
+  const statusEl = document.getElementById('delegation-status');
+  if (statusEl) statusEl.innerHTML = `<span style="color:var(--dust-faint)">Ejecutando ${id}…</span>`;
+  try {
+    const res = await post(`/api/delegation/${id}/execute`, {});
+    if (statusEl) statusEl.innerHTML = `<span style="color:var(--verify)">✓ EXECUTED: ${escapeHtml(res.result || '')}</span>`;
+    if (mode().rewards) {
+      const fb = document.getElementById('main-content');
+      fb?.classList.add('reward-active');
+      setTimeout(() => fb?.classList.remove('reward-active'), 1400);
+    }
+  } catch (err) {
+    // Causal crash (423 P0 block / 422 no-repo) surfaces here with its reason.
+    if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">⛔ ${escapeHtml(err.message)}</span>`;
+    setTachometer('alert');
+    setTimeout(() => setTachometer('idle'), 2500);
+  }
+  await refreshDelegations();
+}
+
+async function cancelDelegation(id) {
+  try { await post(`/api/delegation/${id}/cancel`, {}); } catch { /* noop */ }
+  await refreshDelegations();
+}
+
+async function verifyIdeLedger() {
+  const statusEl = document.getElementById('delegation-status');
+  try {
+    const v = await post('/api/delegation/verify', {});
+    if (statusEl) statusEl.innerHTML = v.valid
+      ? `<span style="color:var(--verify)">⚿ IDE CortexLedger íntegro: ${v.verified_entries}/${v.total_entries} eventos, cadena SHA-256 intacta.</span>`
+      : `<span style="color:var(--break)">⚿ Cadena rota en seq ${v.broken_at} (${v.verified_entries}/${v.total_entries}).</span>`;
+  } catch (err) {
+    if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
+  }
+}
+
+const STATE_COLORS = {
+  QUEUED: 'var(--gold)', EXECUTED: 'var(--verify)', BLOCKED: 'var(--break)',
+  FAILED: 'var(--break)', CANCELLED: 'var(--dust-ghost)',
+};
+
+function renderDelegationList(items) {
   const el = document.getElementById('delegation-list');
   if (!el) return;
-  if (S.delegationQueue.length === 0) {
+  if (!items || items.length === 0) {
     el.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem">Cola vacía. El agente no tiene directivas git pendientes.</div>`;
     return;
   }
-  el.innerHTML = S.delegationQueue.map(d => `
+  const CLOUD = new Set(['push', 'merge', 'ship', 'deploy']);
+  el.innerHTML = items.map(d => {
+    const canExec = d.state === 'QUEUED';
+    const blocked = CLOUD.has(d.kind);
+    return `
     <div class="delegation-item">
-      <span class="delegation-state">${d.state}</span>
-      <span class="delegation-text">${escapeHtml(d.text)}</span>
-      <span class="delegation-time">${d.time.replace('T', ' ')}</span>
-      <span class="delegation-del" data-del="${d.id}" title="Retirar directiva">✕</span>
-    </div>
-  `).join('');
-  el.querySelectorAll('[data-del]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      S.delegationQueue = S.delegationQueue.filter(d => d.id !== parseInt(btn.dataset.del));
-      localStorage.setItem('b60-delegation', JSON.stringify(S.delegationQueue));
-      renderDelegationList();
-    });
-  });
+      <span class="delegation-state" style="color:${STATE_COLORS[d.state] || 'var(--dust-dim)'};background:transparent;border:1px solid currentColor">${d.state}</span>
+      <span class="delegation-kind-tag" title="${blocked ? 'op de nube — bloqueada por P0' : 'op local'}">${escapeHtml(d.kind)}${blocked ? ' ⛔' : ''}</span>
+      <span class="delegation-text">${escapeHtml(d.directive)}${d.result ? ` <span style="color:var(--dust-faint)">— ${escapeHtml(String(d.result).slice(0, 80))}</span>` : ''}</span>
+      ${canExec ? `<button class="btn delegation-exec" data-exec="${d.delegation_id}" style="font-size:0.56rem;padding:2px 7px">▶ EJECUTAR</button>` : ''}
+      ${canExec ? `<span class="delegation-del" data-del="${d.delegation_id}" title="Cancelar">✕</span>` : ''}
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-exec]').forEach(b => b.addEventListener('click', () => executeDelegation(b.dataset.exec)));
+  el.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => cancelDelegation(b.dataset.del)));
 }
 
 /* ══════════════════════════════════════════════════════════
-   ROUTE: ARENA MATRIX — LMSYS Chatbot Arena Integration
+   ROUTE: ANALYTICS — DETERMINAR (agregación + búsqueda BM25)
    ══════════════════════════════════════════════════════════ */
-async function renderArenaPage(container) {
-  onRouteEnter('arena');
+async function renderAnalyticsPage(container) {
+  onRouteEnter('analytics');
   setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'Arena Matrix'),
-    actions: `<span class="focus-badge live">ARENA MATRIX</span>`,
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Ledger Analytics — DETERMINAR'),
+    actions: `<button class="btn" id="btn-analytics-refresh" style="font-size:0.62rem">↺ Refresh</button>`,
   });
 
   container.innerHTML = `
-    <div class="arena-layout">
-      <!-- LEADERBOARD PANEL -->
-      <div class="arena-panel">
-        <div class="arena-panel-header">
-          <span>⚔ LMSYS Leaderboard Sync</span>
-          <div class="arena-meta" id="arena-leaderboard-meta"></div>
-        </div>
-        <div class="arena-panel-body" style="padding:0;">
-          <table class="data-table" id="arena-leaderboard-table">
-            <thead>
-              <tr>
-                <th style="width:50px; text-align:center;">Rank</th>
-                <th>Model</th>
-                <th>Vendor</th>
-                <th>Elo Score</th>
-                <th>Votes</th>
-                <th style="width:80px;">Exergy</th>
-                <th>Risk</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td colspan="7" style="text-align:center;color:var(--dust-faint);padding:16px;">Loading leaderboard data...</td></tr>
-            </tbody>
-          </table>
-        </div>
+    <div class="card slide-in" style="margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:8px">Búsqueda semántico-léxica <span style="color:var(--dust-ghost);font-weight:400;font-size:0.6rem">(Okapi BM25 sobre payload+taint — el "por qué macro")</span></div>
+      <div style="display:flex;gap:8px">
+        <input class="input" id="ledger-search-input" placeholder="Buscar en el ledger… ej: 'amendment risk', 'autopoietic', 'enrollment'" style="flex:1">
+        <button class="btn btn-primary" id="ledger-search-btn">⌕ Buscar</button>
       </div>
-
-      <!-- SIDE ACTIONS / DETAILS PANEL -->
-      <div style="display:flex; flex-direction:column; gap:16px; overflow:hidden; height:100%;">
-        <!-- BATTLES PANEL -->
-        <div class="arena-panel" style="flex: 1; overflow:hidden;">
-          <div class="arena-panel-header">
-            <span>⚡ Domestic battles (DOM)</span>
-          </div>
-          <div class="arena-panel-body" id="arena-battles-body" style="overflow-y:auto; padding:12px;">
-            <div style="color:var(--dust-faint); font-size:0.7rem; text-align:center; padding:16px;">Loading battles...</div>
-          </div>
-        </div>
-
-        <!-- HF CONVERSATIONS PANEL -->
-        <div class="arena-panel" style="flex: 1; overflow:hidden;">
-          <div class="arena-panel-header">
-            <span>⬡ Dataset: toxic-chat (Hugging Face)</span>
-          </div>
-          <div class="arena-panel-body" id="arena-toxic-body" style="overflow-y:auto; padding:12px;">
-            <div style="color:var(--dust-faint); font-size:0.7rem; text-align:center; padding:16px;">Loading conversations...</div>
-          </div>
-        </div>
-      </div>
+      <div id="ledger-search-results" style="margin-top:10px"></div>
     </div>
+    <div id="analytics-body">
+      <div class="empty-state" style="padding:20px 0"><div class="icon">∿</div><div class="desc">Cargando agregación del ledger…</div></div>
+    </div>
+    <div id="entry-detail-panel" class="detail-panel" aria-hidden="true"></div>
   `;
 
-  // Fetch and render data
+  document.getElementById('btn-analytics-refresh')?.addEventListener('click', () => rerender());
+  const doSearch = () => runLedgerSearch(document.getElementById('ledger-search-input')?.value || '');
+  document.getElementById('ledger-search-btn')?.addEventListener('click', doSearch);
+  document.getElementById('ledger-search-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+
+  const body = document.getElementById('analytics-body');
   try {
-    const [leaderboard, battles, conversations] = await Promise.all([
-      get('/api/arena/leaderboard').catch(() => ({ exists: false, models: [] })),
-      get('/api/arena/battles').catch(() => ({ exists: false, battles: [] })),
-      get('/api/arena/conversations').catch(() => ({ exists: false, conversations: [] })),
-    ]);
-
-    // Render Leaderboard
-    const tableBody = document.querySelector('#arena-leaderboard-table tbody');
-    const metaEl = document.getElementById('arena-leaderboard-meta');
-
-    if (leaderboard.exists && leaderboard.models.length > 0) {
-      const meta = leaderboard.meta;
-      metaEl.innerHTML = `
-        <span>Latency: <b>${meta.latency_ms}ms</b></span>
-        <span>Entropy: <b>${meta.entropy ? meta.entropy.toFixed(4) : '—'}</b></span>
-        <span>Updated: <b>${meta.fetched_at ? meta.fetched_at.slice(11,19) : 'Recent'}</b></span>
-      `;
-
-      tableBody.innerHTML = leaderboard.models.map(m => {
-        let exClass = 'rating-C';
-        let exRating = 'C';
-        let riskClass = '';
-        let riskLabel = 'Unknown';
-        
-        const name = m.model.toLowerCase();
-        if (name.includes('claude') || name.includes('qwen') || name.includes('llama')) {
-          exRating = 'A';
-          exClass = 'rating-A';
-        } else if (name.includes('gemini') || name.includes('gpt')) {
-          exRating = 'B';
-          exClass = 'rating-B';
-        }
-
-        if (name.includes('claude')) {
-          riskLabel = 'Moderate-High (RLHF)';
-          riskClass = 'risk-moderate';
-        } else if (name.includes('gpt') || name.includes('gemini')) {
-          riskLabel = 'High (Strict refusal)';
-          riskClass = 'risk-high';
-        } else if (name.includes('llama') || name.includes('qwen')) {
-          riskLabel = 'Low-Moderate';
-          riskClass = '';
-        }
-
-        return `
-          <tr>
-            <td class="seq-cell" style="text-align:center;">#${m.rank}</td>
-            <td class="stream-cell">${escapeHtml(m.model)}</td>
-            <td>${escapeHtml(m.vendor)}</td>
-            <td><b>${m.score}</b></td>
-            <td>${m.votes}</td>
-            <td><span class="exergy-badge ${exClass}">${exRating}</span></td>
-            <td><span class="risk-tag ${riskClass}">${riskLabel}</span></td>
-          </tr>
-        `;
-      }).join('');
-    } else {
-      tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--break);padding:16px;">No leaderboard data found in ojeador_leaderboard.db.</td></tr>`;
-    }
-
-    // Render Battles
-    const battlesBody = document.getElementById('arena-battles-body');
-    if (battles.exists && battles.battles.length > 0) {
-      battlesBody.innerHTML = battles.battles.map(b => `
-        <div class="battle-item" data-id="${b.id}">
-          <div class="battle-header">
-            <span>Vector: <b>${escapeHtml(b.vector)}</b></span>
-            <span class="battle-winner">WINNER: ${escapeHtml(b.winner)}</span>
+    const a = await get('/api/ledger/analytics');
+    const bar = (rows, key, valKey, color) => {
+      const max = Math.max(...rows.map(r => r[valKey]), 1);
+      return rows.map(r => `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <span style="width:150px;font-size:0.64rem;color:var(--dust-dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(String(r[key]))}">${escapeHtml(String(r[key]))}</span>
+          <div style="flex:1;background:var(--tablet);border-radius:2px;height:14px;position:relative">
+            <div style="width:${(r[valKey] / max * 100).toFixed(1)}%;background:${color};height:100%;border-radius:2px;opacity:0.75"></div>
           </div>
-          <div style="font-weight:700; color:var(--dust-dim); margin-bottom:4px;">${escapeHtml(b.model_a)} vs ${escapeHtml(b.model_b)}</div>
-          <div class="chat-bubble">${escapeHtml(b.prompt)}</div>
-        </div>
-      `).join('');
-
-      battlesBody.querySelectorAll('.battle-item').forEach(el => {
-        el.addEventListener('click', () => {
-          const battleId = parseInt(el.dataset.id);
-          const battle = battles.battles.find(b => b.id === battleId);
-          if (battle) openBattleDetail(battle);
-        });
-      });
-    } else {
-      battlesBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem;text-align:center;padding:24px;">No domestic battles recorded yet. Start arena_automata.py to run battles.</div>`;
-    }
-
-    // Render HF Conversations
-    const toxicBody = document.getElementById('arena-toxic-body');
-    if (conversations.exists && conversations.conversations.length > 0) {
-      toxicBody.innerHTML = `
-        <div class="toxic-list">
-          ${conversations.conversations.map((c, idx) => {
-            const isToxic = c.toxicity.toLowerCase() !== 'none / none';
-            const pillClass = isToxic ? 'toxic-pill' : 'toxic-pill safe';
-            const pillLabel = isToxic ? 'TOXIC/Jailbreak' : 'SAFE';
-            return `
-              <div class="toxic-item" data-idx="${idx}">
-                <div class="toxic-meta">
-                  <span>ID: <b>${c.conv_id.slice(0, 12)}...</b></span>
-                  <span class="${pillClass}">${pillLabel}</span>
-                </div>
-                <div class="chat-bubble">${escapeHtml(c.prompt)}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-      `;
-
-      toxicBody.querySelectorAll('.toxic-item').forEach(el => {
-        el.addEventListener('click', () => {
-          const idx = parseInt(el.dataset.idx);
-          const convo = conversations.conversations[idx];
-          if (convo) openConversationDetail(convo);
-        });
-      });
-    } else {
-      toxicBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem;text-align:center;padding:24px;">Dataset conversations sample not found or empty.</div>`;
-    }
-
+          <span style="width:40px;text-align:right;font-size:0.62rem;color:var(--gold)">${r[valKey]}</span>
+        </div>`).join('');
+    };
+    const lam = a.lamport;
+    body.innerHTML = `
+      <div class="stats-grid" style="margin-bottom:14px">
+        <div class="stat-card"><div class="stat-label">Total Eventos</div><div class="stat-value gold">${a.total_entries}</div><div class="stat-sub">${escapeHtml(a.db_path)}</div></div>
+        <div class="stat-card"><div class="stat-label" title="Reloj lógico: sin huecos = orden causal total reconstruible">Continuidad Lamport</div><div class="stat-value ${lam.contiguous ? 'verify' : 'break'}">${lam.contiguous ? 'CONTIGUA' : `${lam.gaps} HUECOS`}</div><div class="stat-sub">L:${lam.min}–${lam.max} · ${lam.distinct} distintos</div></div>
+        <div class="stat-card"><div class="stat-label">Span Temporal</div><div class="stat-value lapis" style="font-size:0.8rem">${String(a.time_span.first || '—').slice(0,10)}</div><div class="stat-sub">→ ${String(a.time_span.last || '—').slice(0,10)}</div></div>
+      </div>
+      <div class="card" style="margin-bottom:12px"><div class="card-title" style="margin-bottom:8px">Streams</div>${bar(a.streams, 'stream', 'count', 'var(--lapis-bright)')}</div>
+      <div class="card" style="margin-bottom:12px"><div class="card-title" style="margin-bottom:8px">Event Types</div>${bar(a.event_types, 'event_type', 'count', 'var(--verify)')}</div>
+      <div class="card"><div class="card-title" style="margin-bottom:8px">Agentes <span style="color:var(--dust-ghost);font-weight:400;font-size:0.6rem">(prefijo del causal_taint — quién escribió)</span></div>${bar(a.agents, 'agent', 'count', 'var(--gold)')}</div>
+    `;
   } catch (err) {
-    console.error(err);
+    body.innerHTML = `<div class="empty-state" style="padding:24px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
   }
 }
 
-function openBattleDetail(b) {
-  const panel = document.getElementById('entry-detail-panel');
-  if (!panel) return;
-  panel.classList.add('open');
-  panel.setAttribute('aria-hidden', 'false');
-  
-  const field = (label, value, cls = '') => `
-    <div class="detail-field">
-      <div class="detail-field-label">${label}</div>
-      <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
-    </div>`;
-
-  panel.innerHTML = `
-    <div class="detail-header">
-      <span class="detail-title">⚡ Battle #${b.id} detail</span>
-      <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button>
-    </div>
-    <div class="detail-body">
-      ${field('Timestamp', b.timestamp, 'mono')}
-      ${field('Vector Category', b.vector)}
-      ${field('Model A', b.model_a, 'stream-cell')}
-      ${field('Model B', b.model_b, 'stream-cell')}
-      ${field('Winner', b.winner, 'battle-winner')}
-      ${field('Cortex Taint Hash', b.cortex_taint_hash, 'mono hash')}
-      ${field('Entropy A / B', `${b.entropy_a ? b.entropy_a.toFixed(4) : '—'} / ${b.entropy_b ? b.entropy_b.toFixed(4) : '—'}`)}
-      
-      <div class="detail-field">
-        <div class="detail-field-label">Battle Prompt</div>
-        <pre class="detail-payload" style="max-height:120px; overflow-y:auto;">${escapeHtml(b.prompt)}</pre>
-      </div>
-
-      <div class="detail-field">
-        <div class="detail-field-label">Response A (${escapeHtml(b.model_a)})</div>
-        <pre class="detail-payload" style="max-height:160px; overflow-y:auto;">${escapeHtml(b.response_a)}</pre>
-      </div>
-
-      <div class="detail-field">
-        <div class="detail-field-label">Response B (${escapeHtml(b.model_b)})</div>
-        <pre class="detail-payload" style="max-height:160px; overflow-y:auto;">${escapeHtml(b.response_b)}</pre>
-      </div>
-    </div>
-  `;
-  panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
-}
-
-function openConversationDetail(c) {
-  const panel = document.getElementById('entry-detail-panel');
-  if (!panel) return;
-  panel.classList.add('open');
-  panel.setAttribute('aria-hidden', 'false');
-
-  const field = (label, value, cls = '') => `
-    <div class="detail-field">
-      <div class="detail-field-label">${label}</div>
-      <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
-    </div>`;
-
-  panel.innerHTML = `
-    <div class="detail-header">
-      <span class="detail-title">⬡ Conversation Detail</span>
-      <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button>
-    </div>
-    <div class="detail-body">
-      ${field('HF Conversation ID', c.conv_id, 'mono')}
-      ${field('Toxicity / Jailbreak Class', c.toxicity, 'mono')}
-      
-      <div class="detail-field">
-        <div class="detail-field-label">User Input (Prompt)</div>
-        <pre class="detail-payload" style="max-height:180px; overflow-y:auto;">${escapeHtml(c.prompt)}</pre>
-      </div>
-
-      <div class="detail-field">
-        <div class="detail-field-label">Model Output (Response)</div>
-        <pre class="detail-payload" style="max-height:280px; overflow-y:auto;">${escapeHtml(c.response)}</pre>
-      </div>
-    </div>
-  `;
-  panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
-}
-
-async function renderInferencePage(container) {
-  onRouteEnter('inference');
-  setFocusHeader({
-    breadcrumb: setBreadcrumb('BABYLON·60', 'Local Inference Console'),
-    actions: `<span class="focus-badge live">LOCAL SILICON</span>`,
-  });
-
-  container.innerHTML = `
-    <div class="arena-layout" style="grid-template-columns: 1.15fr 0.85fr; gap: 16px;">
-      <!-- GENERATION CARD -->
-      <div class="card slide-in" style="margin-bottom:0; display:flex; flex-direction:column; gap:14px; height:100%;">
-        <div class="card-title">Sovereign Local Generation</div>
-        
-        <!-- Onboarding hint -->
-        <div style="font-size:0.62rem; color:var(--dust-dim); line-height:1.3; background:rgba(43,59,229,0.08); border:1px solid var(--edge-soft); padding:8px 12px; border-radius:4px;">
-          <strong>Offline Assistant</strong>: Executing local language models. 
-          All prompts are parsed locally and verified directly to the local ATMS ledger.
-        </div>
-
-        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-          <div style="flex:1; min-width:200px;">
-            <label class="detail-field-label" for="inference-model-select">Target Silicon Model</label>
-            <select class="select" id="inference-model-select" style="width:100%;">
-              <option value="mamba">Native Mamba SSM (Integrated DAG Ledger)</option>
-            </select>
-          </div>
-          
-          <div style="width:100px;">
-            <label class="detail-field-label" for="inference-max-tokens">Max Tokens</label>
-            <input class="input" type="number" id="inference-max-tokens" value="40" min="5" max="100" style="width:100%; height:32px;">
-          </div>
-        </div>
-
-        <div style="display:flex; flex-direction:column; gap:6px;">
-          <label class="detail-field-label">Quick Templates (Click to load)</label>
-          <div style="display:flex; gap:6px; flex-wrap:wrap;">
-            <button class="btn preset-btn" data-prompt="Explain the core of the Robinson-Moskv theorem" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">⚡ Robinson Theorem</button>
-            <button class="btn preset-btn" data-prompt="Attest current ledger transaction status" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">🛡 Attest Ledger</button>
-            <button class="btn preset-btn" data-prompt="Run self-audit loop on active workspace" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">◈ Self-Audit</button>
-          </div>
-        </div>
-
-        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-          <label class="detail-field-label" for="inference-prompt">Prompt Input <span style="font-size:0.55rem; color:var(--dust-faint); font-weight:normal;">(Press Enter to generate, Shift+Enter for newline)</span></label>
-          <textarea id="inference-prompt" placeholder="Type a prompt for local generation..." style="flex:1; min-height:80px; font-family:var(--body); padding:10px; background:rgba(0,0,0,0.3); border:1px solid var(--edge); border-radius:4px; color:var(--dust); resize:none;" spellcheck="false">Verification of local execution path</textarea>
-        </div>
-
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-size:0.58rem; color:var(--dust-ghost)">zero_network=ON · Enforcing C5-REAL Zero-Network Policy</span>
-          <button class="btn btn-primary" id="btn-run-inference">▶ Generate</button>
-        </div>
-
-        <div style="flex:1.2; display:flex; flex-direction:column; gap:6px;">
-          <label class="detail-field-label">Generated Output</label>
-          <div id="inference-output" style="flex:1; min-height:120px; font-family:var(--mono); font-size:0.75rem; padding:10px; background:rgba(10,10,10,0.5); border:1px solid var(--edge); border-radius:4px; color:var(--dust-dim); overflow-y:auto; white-space:pre-wrap;">Output will appear here...</div>
-        </div>
-      </div>
-
-      <!-- AUDIT TRACE & LEDGER PANEL -->
-      <div style="display:flex; flex-direction:column; gap:16px; height:100%; overflow:hidden;">
-        <!-- STATS PANEL -->
-        <div class="card" style="padding:12px; margin-bottom:0;">
-          <div class="card-title" style="margin-bottom:8px;">Silicon Performance</div>
-          <div id="inference-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <div class="detail-field">
-              <span class="detail-field-label">Throughput</span>
-              <span class="detail-field-value" id="inference-tps">— tps</span>
-            </div>
-            <div class="detail-field">
-              <span class="detail-field-label">Latency</span>
-              <span class="detail-field-value" id="inference-latency">— ms</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- DAG LEDGER PANEL -->
-        <div class="arena-panel" style="flex:1; overflow:hidden; display:flex; flex-direction:column; margin-bottom:0;">
-          <div class="arena-panel-header">
-            <span>🛡 Tamper-Evident DAG Trace</span>
-          </div>
-          <div class="arena-panel-body" id="inference-dag-body" style="flex:1; overflow-y:auto; padding:12px; font-family:var(--mono); font-size:0.65rem;">
-            <div style="display:flex; flex-direction:column; gap:10px; padding:10px; color:var(--dust-dim); font-size:0.6rem; line-height:1.4;">
-              <div style="font-weight:700; color:var(--gold); border-bottom:1px solid var(--edge); padding-bottom:4px; margin-bottom:4px;">💡 ¿CÓMO FUNCIONA?</div>
-              <div><strong>1. Elige tu Modelo</strong>: Selecciona Mamba nativo para auditoría de ledger o un modelo de Ollama en el selector.</div>
-              <div><strong>2. Introduce el Prompt</strong>: Escribe en la caja o pulsa un preset arriba.</div>
-              <div><strong>3. Ejecuta</strong>: Pulsa 'Generate' o presiona 'Enter'.</div>
-              <div><strong>4. Verifica la Traza</strong>: Observa cómo cada token generado es sellado con SHA-256 e indexado en el grafo inmutable de estados.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Fetch available Ollama models to populate dropdown
+async function runLedgerSearch(q) {
+  const el = document.getElementById('ledger-search-results');
+  if (!el) return;
+  if (!q.trim()) { el.innerHTML = ''; return; }
+  el.innerHTML = `<div style="color:var(--dust-faint);font-size:0.64rem">Rankeando…</div>`;
   try {
-    const status = await get('/api/inference/local/status');
-    const select = document.getElementById('inference-model-select');
-    if (select && status && status.status === 'ONLINE' && status.models) {
-      status.models.forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = `ollama:${m}`;
-        opt.textContent = `${m} (Ollama daemon)`;
-        select.appendChild(opt);
-      });
+    const data = await get(`/api/ledger/search?q=${encodeURIComponent(q)}&limit=15`);
+    if (!data.results.length) {
+      el.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem">Sin coincidencias léxicas para «${escapeHtml(q)}» en ${data.corpus_size} eventos.</div>`;
+      return;
     }
-  } catch (e) {
-    console.error("Failed to load local models:", e);
+    el.innerHTML = `
+      <div style="font-size:0.58rem;color:var(--dust-ghost);margin-bottom:6px">${data.results.length} resultados · ${escapeHtml(data.method)} · corpus ${data.corpus_size}</div>
+      ${data.results.map(r => `
+        <div class="search-hit" data-seq="${r.seq}" title="Abrir entrada #${r.seq}">
+          <span class="search-score">${r.score.toFixed(2)}</span>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:0.64rem;color:var(--dust-dim)"><b>#${r.seq}</b> · ${escapeHtml(r.event_type)} · ${escapeHtml(r.stream)}</div>
+            <div style="font-size:0.58rem;color:var(--dust-faint);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(r.snippet)}</div>
+          </div>
+        </div>`).join('')}
+    `;
+    el.querySelectorAll('[data-seq]').forEach(h => h.addEventListener('click', () => openEntryDetail(parseInt(h.dataset.seq))));
+  } catch (err) {
+    el.innerHTML = `<div style="color:var(--break);font-size:0.64rem">${escapeHtml(err.message)}</div>`;
   }
-
-  const runInference = async () => {
-    const select = document.getElementById('inference-model-select');
-    const prompt = document.getElementById('inference-prompt')?.value?.trim();
-    const maxTokens = parseInt(document.getElementById('inference-max-tokens')?.value || '30', 10);
-    const outputEl = document.getElementById('inference-output');
-    const tpsEl = document.getElementById('inference-tps');
-    const latencyEl = document.getElementById('inference-latency');
-    const dagBody = document.getElementById('inference-dag-body');
-
-    if (!prompt || !select) return;
-
-    setTachometer('working');
-    if (outputEl) outputEl.innerHTML = `<span style="color:var(--dust-faint);">Inference ignited...</span>`;
-    if (dagBody) dagBody.innerHTML = `<div style="color:var(--dust-faint); text-align:center; padding:20px;">Computing state transitions...</div>`;
-
-    const selectedModel = select.value;
-    const startTime = performance.now();
-
-    try {
-      let res;
-      if (selectedModel === 'mamba') {
-        res = await post('/api/inference/local/mamba/generate', { prompt, max_tokens: maxTokens });
-      } else {
-        const modelId = selectedModel.replace('ollama:', '');
-        res = await post('/api/inference/local/generate', { prompt, model: modelId, max_tokens: maxTokens });
-      }
-
-      const elapsed = Math.round(performance.now() - startTime);
-
-      if (outputEl) outputEl.textContent = res.text || "(empty response)";
-      if (tpsEl) tpsEl.textContent = `${res.tps ?? '—'} tps`;
-      if (latencyEl) latencyEl.textContent = `${res.latency_ms ?? elapsed} ms`;
-
-      // Render DAG trace if returned (Mamba native ledger)
-      if (dagBody) {
-        if (res.nodes && res.nodes.length > 0) {
-          dagBody.innerHTML = `
-            <div style="display:flex; flex-direction:column; gap:8px;">
-              ${res.nodes.map((node, i) => `
-                <div style="border: 1px solid var(--edge); border-radius: 4px; padding: 6px; background: rgba(5,5,5,0.4);">
-                  <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
-                    <span style="color:var(--gold); font-weight:700;">Node #${i}</span>
-                    <span style="color:var(--verify); font-weight:700;">Verified</span>
-                  </div>
-                  <div style="color:var(--dust-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">ID: ${node.node_id.slice(0, 16)}...</div>
-                  <div style="color:var(--dust-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Parent: ${node.parent_id.slice(0, 16)}...</div>
-                  <div style="margin-top:4px; font-weight:700; color:var(--dust); border-top:1px dashed var(--edge); padding-top:4px;">Claim: "${escapeHtml(node.claim)}"</div>
-                </div>
-              `).join('<div style="text-align:center; color:var(--lapis-bright); font-size:0.8rem; margin:2px 0;">↓ parent link</div>')}
-            </div>
-          `;
-        } else {
-          dagBody.innerHTML = `
-            <div style="color:var(--dust-faint); text-align:center; padding:20px;">
-              No DAG trace returned for this model provider.
-              <div style="font-size:0.55rem; margin-top:4px; color:var(--dust-ghost);">Only Native Mamba SSM records state transitions into the GraphLedger.</div>
-            </div>
-          `;
-        }
-      }
-      setTachometer('done');
-      setTimeout(() => setTachometer('idle'), 2000);
-    } catch (err) {
-      if (outputEl) outputEl.innerHTML = `<span style="color:var(--break);">Error: ${escapeHtml(err.message)}</span>`;
-      if (dagBody) dagBody.innerHTML = `<div style="color:var(--break); text-align:center; padding:20px;">Failed to verify state trace.</div>`;
-      setTachometer('idle');
-    }
-  };
-
-  // Bind Preset Templates
-  container.querySelectorAll('button.preset-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = btn.getAttribute('data-prompt');
-      const input = document.getElementById('inference-prompt');
-      if (input) {
-        input.value = p;
-        input.focus();
-      }
-    });
-  });
-
-  // Submit on Enter (without Shift)
-  const inputEl = document.getElementById('inference-prompt');
-  inputEl?.addEventListener('keydown', e => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      runInference();
-    }
-  });
-
-  document.getElementById('btn-run-inference')?.addEventListener('click', runInference);
 }

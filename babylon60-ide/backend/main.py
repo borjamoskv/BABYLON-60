@@ -11,13 +11,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from .routes import arena, ledger, ontology, query, sentinel, telemetry, inference
+from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry
+from .services import cortex_ledger
 
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
-    version="0.2.0",
+    version="0.3.0",
 )
+
+# Initialize the IDE's own CortexLedger (append-only, hash-chained).
+cortex_ledger.init(Path(__file__).parent.parent.parent)
 
 # CORS — localhost only for v1
 app.add_middleware(
@@ -35,12 +39,12 @@ app.add_middleware(
 
 # Mount API routes
 app.include_router(ledger.router)
+app.include_router(analytics.router)
 app.include_router(ontology.router)
 app.include_router(query.router)
 app.include_router(sentinel.router)
+app.include_router(delegation.router)
 app.include_router(telemetry.router)
-app.include_router(arena.router)
-app.include_router(inference.router)
 
 
 @app.get("/api/health")
