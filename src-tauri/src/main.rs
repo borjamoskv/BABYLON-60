@@ -7,6 +7,7 @@ pub mod llm_bridge;
 pub mod antigravity;
 pub mod dsp_clock;
 pub mod precognition;
+pub mod inference;
 
 use std::sync::Arc;
 
@@ -45,6 +46,10 @@ async fn main() {
     // Antigravity execution
     tauri::Builder::default()
         .manage(state)
+        .invoke_handler(tauri::generate_handler![
+            inference::infer_local_command,
+            inference::check_inference_health_command
+        ])
         .run(tauri::generate_context!())
         .expect("FATAL: System desync");
 }

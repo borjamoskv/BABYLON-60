@@ -42,7 +42,7 @@
 - [x] **SecureHook.sol (CENT-04)**: implementado lock de reentrada real con EIP-1153 transitorio.
 - [x] **BABYLON60 IDE v1.1.0 operativo end-to-end** (2026-07-17).
 - [x] **Cosecha de logs Claude Code**: ejecutado y anclados al Ledger.
-- [ ] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) — requiere capa Tauri v2/Rust.
+- [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) — requiere capa Tauri v2/Rust (implementado en `src-tauri/src/inference.rs` + comandos Tauri).
 - [x] **OMEGA-0 ATMS: hardening final del motor lógico de Kleer 1986 (strike_rs)** (sincronización y reconstrucción causal desde SQLite WAL + propagación DDB de nogoods + bindings PyO3 expuestos).
 
 ## Registro de mutaciones de este colapso
@@ -57,3 +57,4 @@
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `ceb66b2e8b65`) | Git Sentinel `e86d80f79` |
 | 2026-07-18 | C5-REAL ITERA: hardening de enlazado PyO3 (`extension-module` opcional + `.cargo/config.toml` universal) y verificación 100% limpia de Rust ATMS/bft y Python suites (182 tests) | Git Sentinel `501bf62e0` |
 | 2026-07-18 | C5-REAL OMEGA-0 ATMS: hardening de Kleer 1986, sincronización de nogoods/creencias desde SQLite WAL, DDB backtracking verificado y bindings PyO3 expuestos (`is_believed`, `contradict_knowledge`, `contradiction_free`) | Git Sentinel `044b46468` (42 tests Rust, 184 tests Python) |
+| 2026-07-18 | C5-REAL ULTRATHINK & INFERENCE: Motor de inferencia local en Rust/Tauri v2 (`src-tauri/src/inference.rs`) + reescritura retroactiva de 1000 primitivas (`CenturiaMetaTransducer`) consolidada en BFT WAL (`a002f3404ef886b`) | `cortex/audits/centuria_1000_ultrathink_consolidation.yaml` |
