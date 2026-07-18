@@ -1,0 +1,44 @@
+title = "BABYLON-60 gitleaks config (OPSEC-Ω TASKFORCE)"
+# Capa de escaneo en CI (no capa de git-history). Complementa al
+# secret_swarm_auditor.py propio y a GitHub secret scanning.
+# Ω-03 / Ω-07. Install: gitleaks detect --config=.gitleaks.toml
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Fixtures de tests y placeholders documentales"
+paths = [
+  '''tests/fixtures/.*''',
+  '''\.env\.example''',
+]
+regexes = [
+  # Ejemplo canónico de AWS documentado (fixture de SecretGuard)
+  '''AKIAIOSFODNN7EXAMPLE''',
+]
+
+# ── Ω-03: clave maestra CORTEX (32 bytes / 64 hex en fichero .hex) ────
+[[rules]]
+id = "cortex-master-key-hex"
+description = "Clave maestra CORTEX: 32 bytes (64 hex) en fichero .hex"
+regex = '''\b[0-9a-fA-F]{64}\b'''
+path = '''\.hex$'''
+entropy = 4.0
+tags = ["p0", "key", "cortex"]
+
+# ── Ω-03: keypair Solana (array JSON de exactamente 64 bytes) ─────────
+[[rules]]
+id = "solana-keypair-json"
+description = "Solana keypair: array JSON de 64 bytes"
+regex = '''\[\s*\d{1,3}\s*(,\s*\d{1,3}\s*){63}\]'''
+path = '''(?i)keypair.*\.json$'''
+tags = ["p0", "solana", "key"]
+
+# ── Ω-07: cualquier fichero *keypair* con blob base58/base64 ──────────
+[[rules]]
+id = "generic-keypair-file"
+description = "Fichero *keypair* con blob base58/base64 de 64+ chars"
+regex = '''[1-9A-HJ-NP-Za-km-z]{64,88}'''
+path = '''(?i)keypair'''
+entropy = 4.5
+tags = ["p0", "keypair"]
