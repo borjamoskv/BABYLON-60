@@ -1,0 +1,5 @@
+# Seguridad e infraestructura requieren revisión especial
+/.github/                @security-team
+/infra/                  @platform-team
+/docker/                 @platform-team
+package-lock.json        @dependency-reviewers

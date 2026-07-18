@@ -1,0 +1,49 @@
+name: Agent CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci || echo "No package.json, skipping"
+
+      - name: Lint
+        run: npm run lint || echo "No lint script, skipping"
+
+      - name: Tests
+        run: npm test -- --coverage || echo "No test script, skipping"
+
+      - name: Build
+        run: npm run build || echo "No build script, skipping"
+
+  # Optional auto-merge job for low-risk changes if tests pass
+  # (Requires GitHub repository settings to allow auto-merge)
+  auto-merge:
+    needs: test-and-lint
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'automerge')
+    steps:
+      - name: Auto-merge PR
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

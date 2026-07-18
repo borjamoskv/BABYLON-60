@@ -21,3 +21,14 @@ No pidas permiso para:
 - editar archivos existentes
 - ejecutar scripts locales
 - generar hashes
+
+## 5. Reglas de Contribución C5-REAL para Swarm
+- No hacer push directo a main.
+- Todo cambio debe estar vinculado a un issue.
+- Todo cambio debe tener pruebas cuando aplique.
+- No modificar archivos de infraestructura sin etiqueta `human-approved`.
+- No exponer secretos, tokens, claves o datos personales.
+- Actualizar documentación si cambia una API o comportamiento público.
+- Crear pull requests pequeños y enfocados.
+- Ejecutar lint, tests y build antes de solicitar revisión.
+- Auto-merge habilitado únicamente para ramas con cambios de riesgo bajo y que superen los checks.
