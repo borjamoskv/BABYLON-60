@@ -1,8 +1,15 @@
+"""
+BFT Orchestrator Module.
+Provides Byzantine Fault Tolerance consensus orchestration and immutable ledgering.
+"""
+
+__all__ = ["init_bft_database", "BFTNode", "BFTOrchestrator"]
+
 import asyncio
 import sqlite3
 import hashlib
 import time
-from typing import Tuple, Dict
+from typing import Tuple, Dict, Any
 import strike_rs  # type: ignore[import-untyped]
 
 # DB Concurrency & Persist Configurations (R10)
@@ -107,6 +114,8 @@ class BFTNode:
 class BFTOrchestrator:
     """Asynchronous Orchestrator confined to queue routing and BFT Consensus Verification (R10, Ω11)."""
     def __init__(self, num_nodes: int = 3):
+        if not isinstance(num_nodes, int) or num_nodes < 1:
+            raise ValueError("num_nodes must be a positive integer")
         init_bft_database()
         self.queue: asyncio.Queue[Tuple[int, int, int]] = asyncio.Queue()
         self.nodes = [BFTNode(i) for i in range(num_nodes)]
@@ -116,10 +125,14 @@ class BFTOrchestrator:
 
     async def enqueue_task(self, d: int, p: int, m: int):
         """Enqueues an action tuple to be processed asynchronously."""
+        if not all(isinstance(x, int) for x in (d, p, m)):
+            raise ValueError("Task arguments must be integers")
         await self.queue.put((d, p, m))
 
     async def start_loop(self, max_steps: int = -1):
         """Runs the main BFT State Loop consuming tasks from the asyncio.Queue."""
+        if not isinstance(max_steps, int):
+            raise ValueError("max_steps must be an integer")
         self.is_running = True
         steps_executed = 0
         
@@ -137,7 +150,7 @@ class BFTOrchestrator:
             self.step_index += 1
             
             # 1. Parallel execution across all nodes via Rust strike_rs
-            hashes = {}
+            hashes: dict[str, Any] = {}
             for node in self.nodes:
                 if not node.is_healthy:
                     continue
@@ -149,16 +162,16 @@ class BFTOrchestrator:
                     
                     # Compute state hash
                     h = node.compute_state_hash()
-                    hashes[node.node_id] = h
-                except Exception as e:
+                    hashes[str(node.node_id)] = h
+                except (OSError, RuntimeError, ValueError) as e:
                     # Mark node as Byzantine/unhealthy if execution throws
                     node.is_healthy = False
                     print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
 
             # 2. BFT Consensus voting (N >= 3 consensus check)
-            hash_votes: Dict[str, int] = {}
+            hash_votes: dict[str, Any] = {}
             for node_id, h in hashes.items():
-                hash_votes[h] = hash_votes.get(h, 0) + 1
+                hash_votes[str(h)] = hash_votes.get(str(h), 0) + 1
 
             if not hash_votes:
                 print("❌ Fatal: All nodes failed execution. Apoptosis triggered.")
@@ -182,10 +195,11 @@ class BFTOrchestrator:
                 
                 # Correct any Byzantine outlier node
                 for node in self.nodes:
-                    if node.node_id in hashes and hashes[node.node_id] != majority_hash:
+                    nid_str = str(node.node_id)
+                    if nid_str in hashes and hashes[nid_str] != majority_hash:
                         print(f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority.")
                         # Find a healthy node with the majority hash
-                        leader_node = next(n for n in self.nodes if hashes.get(n.node_id) == majority_hash)
+                        leader_node = next(n for n in self.nodes if hashes.get(str(n.node_id)) == majority_hash)
                         node.sync_from(leader_node)
             else:
                 print("❌ BFT consensus could not be reached! Splitting or fault limit exceeded.")
