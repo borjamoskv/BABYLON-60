@@ -205,6 +205,7 @@ const SPINE_ROUTES = [
   { id: 'query',     icon: '❯_', label: 'SQL',        tip: 'SQL Console (solo lectura)  ⌘3' },
   { id: 'swarm',     icon: '⚡',  label: 'Swarm',      tip: 'Agent Swarm (telemetría en vivo)  ⌘4' },
   { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación)  ⌘6' },
+  { id: 'arena',     icon: '⚔',  label: 'Arena',      tip: 'Arena Matrix (Chatbot Arena)  ⌘7' },
 ];
 
 function setupSpine() {
@@ -722,7 +723,7 @@ function showRestoreBanner(lastRoute) {
    KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'arena' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
@@ -752,6 +753,7 @@ function setupRouter() {
   registerRoute('query',     renderQueryPage);
   registerRoute('swarm',     renderSwarmPage);
   registerRoute('sentinel',  renderSentinelPage);
+  registerRoute('arena',     renderArenaPage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -1743,4 +1745,272 @@ function renderDelegationList() {
       renderDelegationList();
     });
   });
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTE: ARENA MATRIX — LMSYS Chatbot Arena Integration
+   ══════════════════════════════════════════════════════════ */
+async function renderArenaPage(container) {
+  onRouteEnter('arena');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Arena Matrix'),
+    actions: `<span class="focus-badge live">ARENA MATRIX</span>`,
+  });
+
+  container.innerHTML = `
+    <div class="arena-layout">
+      <!-- LEADERBOARD PANEL -->
+      <div class="arena-panel">
+        <div class="arena-panel-header">
+          <span>⚔ LMSYS Leaderboard Sync</span>
+          <div class="arena-meta" id="arena-leaderboard-meta"></div>
+        </div>
+        <div class="arena-panel-body" style="padding:0;">
+          <table class="data-table" id="arena-leaderboard-table">
+            <thead>
+              <tr>
+                <th style="width:50px; text-align:center;">Rank</th>
+                <th>Model</th>
+                <th>Vendor</th>
+                <th>Elo Score</th>
+                <th>Votes</th>
+                <th style="width:80px;">Exergy</th>
+                <th>Risk</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="7" style="text-align:center;color:var(--dust-faint);padding:16px;">Loading leaderboard data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SIDE ACTIONS / DETAILS PANEL -->
+      <div style="display:flex; flex-direction:column; gap:16px; overflow:hidden; height:100%;">
+        <!-- BATTLES PANEL -->
+        <div class="arena-panel" style="flex: 1; overflow:hidden;">
+          <div class="arena-panel-header">
+            <span>⚡ Domestic battles (DOM)</span>
+          </div>
+          <div class="arena-panel-body" id="arena-battles-body" style="overflow-y:auto; padding:12px;">
+            <div style="color:var(--dust-faint); font-size:0.7rem; text-align:center; padding:16px;">Loading battles...</div>
+          </div>
+        </div>
+
+        <!-- HF CONVERSATIONS PANEL -->
+        <div class="arena-panel" style="flex: 1; overflow:hidden;">
+          <div class="arena-panel-header">
+            <span>⬡ Dataset: toxic-chat (Hugging Face)</span>
+          </div>
+          <div class="arena-panel-body" id="arena-toxic-body" style="overflow-y:auto; padding:12px;">
+            <div style="color:var(--dust-faint); font-size:0.7rem; text-align:center; padding:16px;">Loading conversations...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Fetch and render data
+  try {
+    const [leaderboard, battles, conversations] = await Promise.all([
+      get('/api/arena/leaderboard').catch(() => ({ exists: false, models: [] })),
+      get('/api/arena/battles').catch(() => ({ exists: false, battles: [] })),
+      get('/api/arena/conversations').catch(() => ({ exists: false, conversations: [] })),
+    ]);
+
+    // Render Leaderboard
+    const tableBody = document.querySelector('#arena-leaderboard-table tbody');
+    const metaEl = document.getElementById('arena-leaderboard-meta');
+
+    if (leaderboard.exists && leaderboard.models.length > 0) {
+      const meta = leaderboard.meta;
+      metaEl.innerHTML = `
+        <span>Latency: <b>${meta.latency_ms}ms</b></span>
+        <span>Entropy: <b>${meta.entropy ? meta.entropy.toFixed(4) : '—'}</b></span>
+        <span>Updated: <b>${meta.fetched_at ? meta.fetched_at.slice(11,19) : 'Recent'}</b></span>
+      `;
+
+      tableBody.innerHTML = leaderboard.models.map(m => {
+        let exClass = 'rating-C';
+        let exRating = 'C';
+        let riskClass = '';
+        let riskLabel = 'Unknown';
+        
+        const name = m.model.toLowerCase();
+        if (name.includes('claude') || name.includes('qwen') || name.includes('llama')) {
+          exRating = 'A';
+          exClass = 'rating-A';
+        } else if (name.includes('gemini') || name.includes('gpt')) {
+          exRating = 'B';
+          exClass = 'rating-B';
+        }
+
+        if (name.includes('claude')) {
+          riskLabel = 'Moderate-High (RLHF)';
+          riskClass = 'risk-moderate';
+        } else if (name.includes('gpt') || name.includes('gemini')) {
+          riskLabel = 'High (Strict refusal)';
+          riskClass = 'risk-high';
+        } else if (name.includes('llama') || name.includes('qwen')) {
+          riskLabel = 'Low-Moderate';
+          riskClass = '';
+        }
+
+        return `
+          <tr>
+            <td class="seq-cell" style="text-align:center;">#${m.rank}</td>
+            <td class="stream-cell">${escapeHtml(m.model)}</td>
+            <td>${escapeHtml(m.vendor)}</td>
+            <td><b>${m.score}</b></td>
+            <td>${m.votes}</td>
+            <td><span class="exergy-badge ${exClass}">${exRating}</span></td>
+            <td><span class="risk-tag ${riskClass}">${riskLabel}</span></td>
+          </tr>
+        `;
+      }).join('');
+    } else {
+      tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--break);padding:16px;">No leaderboard data found in ojeador_leaderboard.db.</td></tr>`;
+    }
+
+    // Render Battles
+    const battlesBody = document.getElementById('arena-battles-body');
+    if (battles.exists && battles.battles.length > 0) {
+      battlesBody.innerHTML = battles.battles.map(b => `
+        <div class="battle-item" data-id="${b.id}">
+          <div class="battle-header">
+            <span>Vector: <b>${escapeHtml(b.vector)}</b></span>
+            <span class="battle-winner">WINNER: ${escapeHtml(b.winner)}</span>
+          </div>
+          <div style="font-weight:700; color:var(--dust-dim); margin-bottom:4px;">${escapeHtml(b.model_a)} vs ${escapeHtml(b.model_b)}</div>
+          <div class="chat-bubble">${escapeHtml(b.prompt)}</div>
+        </div>
+      `).join('');
+
+      battlesBody.querySelectorAll('.battle-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const battleId = parseInt(el.dataset.id);
+          const battle = battles.battles.find(b => b.id === battleId);
+          if (battle) openBattleDetail(battle);
+        });
+      });
+    } else {
+      battlesBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem;text-align:center;padding:24px;">No domestic battles recorded yet. Start arena_automata.py to run battles.</div>`;
+    }
+
+    // Render HF Conversations
+    const toxicBody = document.getElementById('arena-toxic-body');
+    if (conversations.exists && conversations.conversations.length > 0) {
+      toxicBody.innerHTML = `
+        <div class="toxic-list">
+          ${conversations.conversations.map((c, idx) => {
+            const isToxic = c.toxicity.toLowerCase() !== 'none / none';
+            const pillClass = isToxic ? 'toxic-pill' : 'toxic-pill safe';
+            const pillLabel = isToxic ? 'TOXIC/Jailbreak' : 'SAFE';
+            return `
+              <div class="toxic-item" data-idx="${idx}">
+                <div class="toxic-meta">
+                  <span>ID: <b>${c.conv_id.slice(0, 12)}...</b></span>
+                  <span class="${pillClass}">${pillLabel}</span>
+                </div>
+                <div class="chat-bubble">${escapeHtml(c.prompt)}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+
+      toxicBody.querySelectorAll('.toxic-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const idx = parseInt(el.dataset.idx);
+          const convo = conversations.conversations[idx];
+          if (convo) openConversationDetail(convo);
+        });
+      });
+    } else {
+      toxicBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.64rem;text-align:center;padding:24px;">Dataset conversations sample not found or empty.</div>`;
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function openBattleDetail(b) {
+  const panel = document.getElementById('entry-detail-panel');
+  if (!panel) return;
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+  
+  const field = (label, value, cls = '') => `
+    <div class="detail-field">
+      <div class="detail-field-label">${label}</div>
+      <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
+    </div>`;
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <span class="detail-title">⚡ Battle #${b.id} detail</span>
+      <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button>
+    </div>
+    <div class="detail-body">
+      ${field('Timestamp', b.timestamp, 'mono')}
+      ${field('Vector Category', b.vector)}
+      ${field('Model A', b.model_a, 'stream-cell')}
+      ${field('Model B', b.model_b, 'stream-cell')}
+      ${field('Winner', b.winner, 'battle-winner')}
+      ${field('Cortex Taint Hash', b.cortex_taint_hash, 'mono hash')}
+      ${field('Entropy A / B', `${b.entropy_a ? b.entropy_a.toFixed(4) : '—'} / ${b.entropy_b ? b.entropy_b.toFixed(4) : '—'}`)}
+      
+      <div class="detail-field">
+        <div class="detail-field-label">Battle Prompt</div>
+        <pre class="detail-payload" style="max-height:120px; overflow-y:auto;">${escapeHtml(b.prompt)}</pre>
+      </div>
+
+      <div class="detail-field">
+        <div class="detail-field-label">Response A (${escapeHtml(b.model_a)})</div>
+        <pre class="detail-payload" style="max-height:160px; overflow-y:auto;">${escapeHtml(b.response_a)}</pre>
+      </div>
+
+      <div class="detail-field">
+        <div class="detail-field-label">Response B (${escapeHtml(b.model_b)})</div>
+        <pre class="detail-payload" style="max-height:160px; overflow-y:auto;">${escapeHtml(b.response_b)}</pre>
+      </div>
+    </div>
+  `;
+  panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
+}
+
+function openConversationDetail(c) {
+  const panel = document.getElementById('entry-detail-panel');
+  if (!panel) return;
+  panel.classList.add('open');
+  panel.setAttribute('aria-hidden', 'false');
+
+  const field = (label, value, cls = '') => `
+    <div class="detail-field">
+      <div class="detail-field-label">${label}</div>
+      <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
+    </div>`;
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <span class="detail-title">⬡ Conversation Detail</span>
+      <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button>
+    </div>
+    <div class="detail-body">
+      ${field('HF Conversation ID', c.conv_id, 'mono')}
+      ${field('Toxicity / Jailbreak Class', c.toxicity, 'mono')}
+      
+      <div class="detail-field">
+        <div class="detail-field-label">User Input (Prompt)</div>
+        <pre class="detail-payload" style="max-height:180px; overflow-y:auto;">${escapeHtml(c.prompt)}</pre>
+      </div>
+
+      <div class="detail-field">
+        <div class="detail-field-label">Model Output (Response)</div>
+        <pre class="detail-payload" style="max-height:280px; overflow-y:auto;">${escapeHtml(c.response)}</pre>
+      </div>
+    </div>
+  `;
+  panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
 }

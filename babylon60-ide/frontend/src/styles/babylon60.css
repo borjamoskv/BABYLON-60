@@ -2049,3 +2049,162 @@ body.mode-nt .data-table thead th { padding: 5px 10px; }
 .delegation-time { font-family: var(--font-mono); font-size: 0.56rem; color: var(--dust-ghost); }
 .delegation-del { cursor: pointer; color: var(--dust-ghost); font-size: 0.66rem; }
 .delegation-del:hover { color: var(--break); }
+
+/* ─── 26. ARENA MATRIX DASHBOARD ────────────────────────────── */
+.arena-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 16px;
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.arena-panel {
+  background: var(--tablet);
+  border: 1px solid var(--edge);
+  border-radius: var(--r-md);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.arena-panel-header {
+  padding: 10px 14px;
+  background: var(--kiln);
+  border-bottom: 1px solid var(--edge);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--dust-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.arena-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.arena-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.58rem;
+  color: var(--dust-ghost);
+}
+
+.exergy-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-size: 0.6rem;
+}
+.exergy-badge.rating-A { background: var(--verify-dim); color: var(--verify); }
+.exergy-badge.rating-B { background: var(--gold-dim); color: var(--gold); }
+.exergy-badge.rating-C { background: var(--tablet-2); color: var(--dust-ghost); }
+
+.risk-tag {
+  font-size: 0.62rem;
+  color: var(--dust-dim);
+  border-left: 2px solid var(--edge);
+  padding-left: 6px;
+}
+.risk-tag.risk-high { border-left-color: var(--break); color: var(--break); }
+.risk-tag.risk-moderate { border-left-color: var(--gold); color: var(--gold); }
+
+.battle-item {
+  background: var(--tablet-2);
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--r-sm);
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.battle-item:hover {
+  border-color: var(--lapis-dim);
+  background: var(--tablet);
+}
+
+.battle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+}
+
+.battle-winner {
+  color: var(--verify);
+  font-weight: 700;
+  background: var(--verify-dim);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.chat-bubble {
+  background: var(--bitumen);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--dust-dim);
+  white-space: pre-wrap;
+  max-height: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+
+.toxic-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toxic-item {
+  background: var(--tablet-2);
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.toxic-item:hover {
+  border-color: var(--lapis-dim);
+  background: var(--tablet);
+}
+
+.toxic-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.58rem;
+  font-family: var(--font-mono);
+  color: var(--dust-ghost);
+}
+
+.toxic-pill {
+  font-size: 0.52rem;
+  background: var(--break-dim);
+  color: var(--break);
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: 700;
+}
+.toxic-pill.safe {
+  background: var(--verify-dim);
+  color: var(--verify);
+}
+

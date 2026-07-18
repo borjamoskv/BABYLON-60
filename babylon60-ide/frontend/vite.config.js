@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: '.',
+  cacheDir: 'vite_cache',
   server: {
     port: 5173,
     proxy: {
