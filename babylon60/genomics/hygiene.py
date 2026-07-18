@@ -66,6 +66,7 @@ class FASTASequenceValidator:
     """
     Validates FASTA nucleotide sequences and calculates cryptographic SHA3-256 signatures for exact C5-REAL provenance.
     """
+
     IUPAC_NUCLEOTIDES: set[str] = set("ACGTNURYKMSWBDHV")
 
     @classmethod
@@ -82,7 +83,9 @@ class FASTASequenceValidator:
         upper_seq = sequence.upper().strip()
         invalid_chars = set(upper_seq) - cls.IUPAC_NUCLEOTIDES
         if invalid_chars:
-            raise ValueError(f"[C5-FAIL] Sequence '{seq_id}' contains invalid IUPAC characters: {sorted(invalid_chars)}")
+            raise ValueError(
+                f"[C5-FAIL] Sequence '{seq_id}' contains invalid IUPAC characters: {sorted(invalid_chars)}"
+            )
 
         seq_len = len(upper_seq)
         if quality_scores is not None:
@@ -105,5 +108,5 @@ class FASTASequenceValidator:
             "gc_content": gc_content,
             "sha3_256": sha3_hash,
             "causal_taint": "borjamoskv:fasta_validator_c5",
-            "is_valid": True
+            "is_valid": True,
         }

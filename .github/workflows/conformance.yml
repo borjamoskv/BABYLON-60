@@ -13,4 +13,4 @@ jobs:
       - name: Install uv
         run: pip install uv
       - name: Run Conformance Script
-        run: python3 scripts/conformance_test.py
+        run: uv run --all-extras python scripts/conformance_test.py

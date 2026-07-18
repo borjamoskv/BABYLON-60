@@ -104,6 +104,7 @@ extend-exclude = [
     "L1_sink",
     "BABYLON-60-fixes",
     "c5_remotion_video",
+    "babylon60/extensions",
 ]
 
 [tool.ruff.lint]
@@ -114,5 +115,11 @@ ignore = ["E743"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^anvil_yung/"]
+exclude = ["^scratch/", "^anvil_yung/", "^babylon60/extensions/"]
 ignore_missing_imports = true
+
+# Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
+# Se trata como Any hasta su poda/tipado — deuda registrada en el issue tracker.
+[[tool.mypy.overrides]]
+module = ["babylon60.extensions.*"]
+follow_imports = "skip"

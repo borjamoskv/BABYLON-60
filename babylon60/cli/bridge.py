@@ -69,5 +69,6 @@ def main() -> None:
         print("\n💥 [SIGKILL] Puente CORTEX desconectado. Anergía purgada.")
         sys.exit(0)
 
+
 if __name__ == "__main__":
     main()

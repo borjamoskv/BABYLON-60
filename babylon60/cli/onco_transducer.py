@@ -60,6 +60,7 @@ class OncologyTransducer:
                 graph.add_edge(k, k)  # Auto-bucle para preservación basal si no se especifican aristas externas
             try:
                 import babylon60.oncology_primitives as op_mod
+
                 edges: Any = getattr(op_mod, "ONCOLOGY_PRIMITIVES_EDGES", [])
                 for u, v in edges:
                     if u in initial_state and v in initial_state:
@@ -239,6 +240,7 @@ def main() -> None:
     except (OSError, ValueError, RuntimeError, MemoryError) as e:
         logger.error(f"Error estructural fatal: {str(e)}")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

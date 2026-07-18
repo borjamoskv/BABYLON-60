@@ -35,6 +35,12 @@ WHITELIST_ENTROPY = [
     r'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv'
 ]
 
+# Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación).
+# C5-REAL: cada entrada debe estar justificada inline. Nunca añadir secretos reales.
+WHITELIST_VALUES = {
+    'AKIAIOSFODNN7EXAMPLE',  # Clave de ejemplo oficial de la documentación de AWS (no es real)
+}
+
 def shannon_entropy(data: str) -> float:
     if not data:
         return 0.0
@@ -68,6 +74,8 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                     secret_val = match.group(0)
                     if p_name == 'GENERIC_SECRET':
                         secret_val = match.group(2)
+                    if secret_val in WHITELIST_VALUES:
+                        continue
                     
                     secret_hash = hashlib.sha3_256(secret_val.encode()).hexdigest()[:16]
                     masked = secret_val[:4] + "..." + secret_val[-4:] if len(secret_val) > 8 else "***"

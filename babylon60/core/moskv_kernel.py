@@ -19,18 +19,21 @@ from babylon60.database import core as dbcore
 # - Fail-Fast SIGKILL ante derivas estocásticas o violaciones de invariante.
 # -----------------------------------------------------------------------------
 
+
 @dataclass
 class ApexClaim:
     """Invariante Tipado para mutaciones de estado."""
+
     claim_id: str
     payload: Dict[str, Any]
     prev_hash: str
     confidence: str
     lamport_t: int
 
+
 class Moskv1Kernel:
     """Transductor determinista de leyes termodinámicas y mutaciones de estado sobre el disco."""
-    
+
     def __init__(self, db_path: str = "apex_cortex.db") -> None:
         self.db_path = db_path
         self._write_queue: asyncio.Queue[ApexClaim] = asyncio.Queue()
@@ -44,7 +47,7 @@ class Moskv1Kernel:
             conn = dbcore.connect_sync(self.db_path, synchronous="FULL")
             try:
                 # Tabla Master Ledger (Solo INSERTS, inmutable)
-                conn.execute('''
+                conn.execute("""
                     CREATE TABLE IF NOT EXISTS master_ledger (
                         claim_id TEXT PRIMARY KEY,
                         payload JSON NOT NULL,
@@ -53,8 +56,8 @@ class Moskv1Kernel:
                         cortex_taint TEXT NOT NULL,
                         lamport_t INTEGER NOT NULL
                     )
-                ''')
-                
+                """)
+
                 # Recuperación de reloj de Lamport para tie-breaking BFT
                 cursor = conn.execute("SELECT MAX(lamport_t), current_hash FROM master_ledger")
                 row = cursor.fetchone()
@@ -75,7 +78,7 @@ class Moskv1Kernel:
             payload=payload,
             prev_hash=self._last_hash,
             confidence=confidence,
-            lamport_t=self._lamport_clock
+            lamport_t=self._lamport_clock,
         )
         await self._write_queue.put(claim)
         return claim.claim_id
@@ -83,7 +86,7 @@ class Moskv1Kernel:
     def _compute_hash(self, claim: ApexClaim) -> str:
         """Firma BFT con SHA3-256 (Crypto BFT Sovereignty)."""
         data = f"{claim.prev_hash}:{json.dumps(claim.payload, sort_keys=True)}:{claim.lamport_t}"
-        return hashlib.sha3_256(data.encode('utf-8')).hexdigest()
+        return hashlib.sha3_256(data.encode("utf-8")).hexdigest()
 
     async def bft_state_loop(self) -> None:
         """El bucle infinito de cristalización física (1 solo escritor)."""
@@ -91,7 +94,7 @@ class Moskv1Kernel:
         try:
             while True:
                 claim = await self._write_queue.get()
-                
+
                 # 1. Auditoría
                 if claim.confidence not in ("C4", "C5"):
                     print(f"[-] Anergía detectada en {claim.claim_id}. Purgando.")
@@ -100,14 +103,23 @@ class Moskv1Kernel:
 
                 # 2. Mutación Atómica
                 current_hash = self._compute_hash(claim)
-                taint_signature = f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
+                taint_signature = (
+                    f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
+                )
 
                 try:
                     db = await dbcore.connect(self.db_path, synchronous="FULL")
                     try:
                         await db.execute(
                             "INSERT INTO master_ledger (claim_id, payload, prev_hash, current_hash, cortex_taint, lamport_t) VALUES (?, ?, ?, ?, ?, ?)",
-                            (claim.claim_id, json.dumps(claim.payload), claim.prev_hash, current_hash, taint_signature, claim.lamport_t)
+                            (
+                                claim.claim_id,
+                                json.dumps(claim.payload),
+                                claim.prev_hash,
+                                current_hash,
+                                taint_signature,
+                                claim.lamport_t,
+                            ),
                         )
                         self._last_hash = current_hash
                         print(f"[+] Cristalizado: {claim.claim_id} -> {current_hash[:8]}")
@@ -124,15 +136,17 @@ class Moskv1Kernel:
         except asyncio.CancelledError:
             print("[MOSKV-1] KERNEL SHUTDOWN: SIGTERM RECIBIDO.")
 
+
 async def _main() -> None:
     kernel = Moskv1Kernel()
     loop_task = asyncio.create_task(kernel.bft_state_loop())
-    
+
     # Ingesta sintética de prueba
     await kernel.ingest_entropy({"action": "kernel_bootstrap", "status": "C5-REAL", "target": "master_ledger"})
-    
-    await asyncio.sleep(0.5) # Espera termodinámica de cristalización
+
+    await asyncio.sleep(0.5)  # Espera termodinámica de cristalización
     loop_task.cancel()
+
 
 if __name__ == "__main__":
     asyncio.run(_main())

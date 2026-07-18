@@ -1,0 +1,130 @@
+# [C5-REAL] Exergy-Maximized
+"""Cryptographic Vaults.
+
+Implements L3 Application-Level Encryption using AES-GCM.
+"""
+
+from __future__ import annotations
+
+import base64
+import os
+
+__all__ = ["Vault"]
+
+try:
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+    _HAS_AESGCM = True
+except ImportError:
+    _HAS_AESGCM = False
+    AESGCM = None  # type: ignore
+
+
+class Vault:
+    """Secure Vault for storing sensitive facts.
+    Supports AEAD contextual binding and Keyring rotation.
+    """
+
+    def __init__(self, key: bytes | None = None) -> None:
+        self._keys: dict[int, bytes] = {}
+        self._primary_version: int = 1
+
+        if not _HAS_AESGCM:
+            return
+
+        if key:
+            self._keys[1] = key
+            return
+
+        # Load multiple keys if available (format: 1:base64,2:base64)
+        env_keys = os.environ.get("CORTEX_VAULT_KEYS")
+        if env_keys:
+            for part in env_keys.split(","):
+                part = part.strip()
+                if not part:
+                    continue
+                try:
+                    v_str, k_b64 = part.split(":", 1)
+                    v = int(v_str)
+                    self._keys[v] = base64.b64decode(k_b64)
+                    if v > self._primary_version:
+                        self._primary_version = v
+                except (ValueError, OSError):
+                    pass
+            if self._keys:
+                return
+
+        # Fallback to single key
+        env_key = os.environ.get("CORTEX_VAULT_KEY")
+        if not env_key:
+            return
+
+        try:
+            self._keys[1] = base64.b64decode(env_key)
+        except (OSError, ValueError):
+            pass
+
+    @property
+    def is_available(self) -> bool:
+        return _HAS_AESGCM and bool(self._keys)
+
+    def encrypt(self, data: str, context_hash: str | None = None) -> str:
+        """Encrypt string using AES-GCM with optional AEAD context."""
+        if not self.is_available:
+            raise RuntimeError("Encryption not available (missing key or library)")
+
+        key = self._keys[self._primary_version]
+        aesgcm = AESGCM(key)  # type: ignore
+        nonce = os.urandom(12)
+        aad = context_hash.encode("utf-8") if context_hash else None
+        ciphertext = aesgcm.encrypt(nonce, data.encode("utf-8"), aad)
+
+        # Format: base64(version_byte + nonce + ciphertext)
+        version_byte = bytes([self._primary_version])
+        return base64.b64encode(version_byte + nonce + ciphertext).decode("utf-8")
+
+    def decrypt(self, encrypted_data: str, context_hash: str | None = None) -> str:
+        """Decrypt string using AES-GCM, verifying AEAD context if provided."""
+        if not self.is_available:
+            raise RuntimeError("Encryption not available (missing key or library)")
+
+        try:
+            raw = base64.b64decode(encrypted_data)
+            version = raw[0]
+
+            # Try new versioned + AAD format first
+            if version in self._keys and len(raw) > 13:
+                nonce = raw[1:13]
+                ciphertext = raw[13:]
+                key = self._keys[version]
+                aesgcm = AESGCM(key)  # type: ignore
+                aad = context_hash.encode("utf-8") if context_hash else None
+                try:
+                    plaintext = aesgcm.decrypt(nonce, ciphertext, aad)
+                    return plaintext.decode("utf-8")
+                except Exception:  # noqa: BLE001
+                    pass  # Fallthrough to try legacy
+
+            # Try legacy format (no version byte, no AAD)
+            nonce = raw[:12]
+            ciphertext = raw[12:]
+            key_v1 = self._keys.get(1)
+            if key_v1:
+                aesgcm = AESGCM(key_v1)  # type: ignore
+                try:
+                    plaintext = aesgcm.decrypt(nonce, ciphertext, None)  # type: ignore[assignment]
+                    return plaintext.decode("utf-8")
+                except Exception:  # noqa: BLE001
+                    pass
+
+            raise ValueError("Decryption failed: Invalid key, corrupted data, or AAD mismatch.")
+        except (OSError, ValueError, IndexError) as e:
+            raise ValueError(f"Decryption failed: {e}") from e
+
+    @staticmethod
+    def generate_key() -> str:
+        """Generate a new secure key (base64 encoded)."""
+        if not _HAS_AESGCM:
+            raise ImportError("cryptography library not installed")
+        key = AESGCM.generate_key(bit_length=256)  # type: ignore
+        return base64.b64encode(key).decode("utf-8")

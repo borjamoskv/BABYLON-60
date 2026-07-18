@@ -61,7 +61,7 @@ def test_tmb_evaluation_engine() -> None:
             alt_allele="G",
             variant_type="SNV",
             quality=40.0,
-            metadata={"gene": "TP53" if i == 0 else "GENE_X"}
+            metadata={"gene": "TP53" if i == 0 else "GENE_X"},
         )
         for i in range(400)  # 400 mutations over 38 Mb = ~10.52 mut/Mb (TMB-High)
     ]
@@ -83,7 +83,7 @@ def test_apobec_enrichment_engine() -> None:
             alt_allele="T",
             variant_type="SNV",
             quality=35.0,
-            metadata={"trinucleotide_context": "TCA"}  # TCW motif
+            metadata={"trinucleotide_context": "TCA"},  # TCW motif
         )
         for i in range(10)
     ] + [
@@ -95,7 +95,7 @@ def test_apobec_enrichment_engine() -> None:
             alt_allele="G",
             variant_type="SNV",
             quality=35.0,
-            metadata={"trinucleotide_context": "AAA"}
+            metadata={"trinucleotide_context": "AAA"},
         )
         for i in range(5)
     ]
@@ -118,7 +118,7 @@ def test_loh_hrd_and_ecdna_engine() -> None:
         oncogenes=["MYC", "PVT1"],
         copy_number=25,
         circular_confirmed=True,
-        rna_fold_change=150.0
+        rna_fold_change=150.0,
     )
     assert ecdna.amplicon_id == "AMP_MYC_01"
     assert "MYC" in ecdna.oncogenes
@@ -133,7 +133,9 @@ def test_genomic_transducer_integration_with_oncology_transducer() -> None:
         GenomicVariantRecord("chr17", 43044294, 43044295, "G", "A", "SNV", 45.0, metadata={"gene": "BRCA1"}),
         GenomicVariantRecord("chr7", 55242464, 55242465, "T", "G", "SNV", 50.0, metadata={"gene": "EGFR"}),
     ] + [
-        GenomicVariantRecord("chr1", 10000 + i, 10001 + i, "C", "T", "SNV", 35.0, metadata={"trinucleotide_context": "TCA"})
+        GenomicVariantRecord(
+            "chr1", 10000 + i, 10001 + i, "C", "T", "SNV", 35.0, metadata={"trinucleotide_context": "TCA"}
+        )
         for i in range(400)
     ]
 
@@ -142,13 +144,15 @@ def test_genomic_transducer_integration_with_oncology_transducer() -> None:
         loh_events=20,
         total_regions=35,
         wgd_detected=True,
-        ecdna_records=[{
-            "amplicon_id": "AMP_MYC_CIRC",
-            "oncogenes": ["MYC"],
-            "copy_number": 30,
-            "circular_confirmed": True,
-            "rna_fold_change": 200.0
-        }]
+        ecdna_records=[
+            {
+                "amplicon_id": "AMP_MYC_CIRC",
+                "oncogenes": ["MYC"],
+                "copy_number": 30,
+                "circular_confirmed": True,
+                "rna_fold_change": 200.0,
+            }
+        ],
     )
 
     state_matrix = profile["state_matrix"]
@@ -164,12 +168,14 @@ def test_genomic_transducer_integration_with_oncology_transducer() -> None:
     # Verify execution inside Boolean network simulation (`simulate_boolean_network`)
     G = nx.DiGraph()
     # Create directed edges among activated oncogenic/suppressor nodes to model causal propagation
-    G.add_edges_from([
-        ("ONC-046", "ONC-143"),  # TP53 loss promotes HRD / DDR instability
-        ("ONC-143", "ONC-146"),  # HRD promotes TMB-High
-        ("ONC-017", "ONC-019"),  # EGFR kinase signaling drives MYC transcription
-        ("ONC-154", "ONC-019")   # ecDNA amplicon reinforces MYC activation
-    ])
+    G.add_edges_from(
+        [
+            ("ONC-046", "ONC-143"),  # TP53 loss promotes HRD / DDR instability
+            ("ONC-143", "ONC-146"),  # HRD promotes TMB-High
+            ("ONC-017", "ONC-019"),  # EGFR kinase signaling drives MYC transcription
+            ("ONC-154", "ONC-019"),  # ecDNA amplicon reinforces MYC activation
+        ]
+    )
 
     history, nodes = simulate_boolean_network(G, state_matrix, steps=3)
     assert len(history) >= 2

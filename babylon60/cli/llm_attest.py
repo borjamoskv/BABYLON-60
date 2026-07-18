@@ -130,5 +130,6 @@ def main() -> None:
     args = parser.parse_args()
     verify_receipt(args.receipt_file)
 
+
 if __name__ == "__main__":
     main()

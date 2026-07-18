@@ -1,0 +1,54 @@
+# [C5-REAL] Exergy-Maximized
+from __future__ import annotations
+
+import importlib
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from babylon60.extensions.gate.core import SovereignGate, get_gate, reset_gate
+    from babylon60.extensions.gate.enums import ActionLevel, ActionStatus, GatePolicy
+    from babylon60.extensions.gate.errors import (
+        GateError,
+        GateExpired,
+        GateInvalidSignature,
+        GateNotApproved,
+    )
+    from babylon60.extensions.gate.models import PendingAction
+
+__all__ = [
+    "ActionLevel",
+    "ActionStatus",
+    "GateError",
+    "GateExpired",
+    "GateInvalidSignature",
+    "GateNotApproved",
+    "GatePolicy",
+    "PendingAction",
+    "SovereignGate",
+    "get_gate",
+    "reset_gate",
+]
+
+_LAZY_IMPORTS: dict[str, tuple[str, str]] = {
+    "ActionLevel": ("babylon60.extensions.gate.enums", "ActionLevel"),
+    "ActionStatus": ("babylon60.extensions.gate.enums", "ActionStatus"),
+    "GateError": ("babylon60.extensions.gate.errors", "GateError"),
+    "GateExpired": ("babylon60.extensions.gate.errors", "GateExpired"),
+    "GateInvalidSignature": ("babylon60.extensions.gate.errors", "GateInvalidSignature"),
+    "GateNotApproved": ("babylon60.extensions.gate.errors", "GateNotApproved"),
+    "GatePolicy": ("babylon60.extensions.gate.enums", "GatePolicy"),
+    "PendingAction": ("babylon60.extensions.gate.models", "PendingAction"),
+    "SovereignGate": ("babylon60.extensions.gate.core", "SovereignGate"),
+    "get_gate": ("babylon60.extensions.gate.core", "get_gate"),
+    "reset_gate": ("babylon60.extensions.gate.core", "reset_gate"),
+}
+
+
+def __getattr__(name: str):
+    if name in _LAZY_IMPORTS:
+        module_path, attr_name = _LAZY_IMPORTS[name]
+        module = importlib.import_module(module_path)
+        value = getattr(module, attr_name)
+        globals()[name] = value
+        return value
+    raise AttributeError(f"module 'cortex.extensions.gate' has no attribute {name!r}")

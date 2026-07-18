@@ -16,6 +16,7 @@ from .models import (
 from .engine import GenomicEvaluationEngine
 from dataclasses import dataclass
 
+
 @dataclass
 class FullProfileParams:
     variants: list[GenomicVariantRecord]
@@ -35,17 +36,17 @@ class GenomicStateTransducer:
 
     # Mapping of canonical genes to their primary oncological primitive node IDs
     GENE_TO_PRIMITIVE_MAP: dict[str, str] = {
-        "TP53": "ONC-046",       # Suppressor loss / DDR disruption
-        "BRCA1": "ONC-151",      # HRD vulnerability / BRCA1_loss
-        "BRCA2": "ONC-152",      # HRD vulnerability / BRCA2_loss
-        "ATM": "ONC-136",        # DDR ATM kinase
-        "ATR": "ONC-137",        # DDR ATR kinase
-        "EGFR": "ONC-017",       # Oncogene kinase activation
-        "KRAS": "ONC-018",       # Oncogene GTPase signaling
-        "MYC": "ONC-019",        # Oncogene transcription factor
-        "PIK3CA": "ONC-020",     # Oncogene lipid kinase
-        "PTEN": "ONC-047",       # Suppressor loss / PI3K hyperactivation
-        "TERT": "ONC-163",       # Telomerase reactivation
+        "TP53": "ONC-046",  # Suppressor loss / DDR disruption
+        "BRCA1": "ONC-151",  # HRD vulnerability / BRCA1_loss
+        "BRCA2": "ONC-152",  # HRD vulnerability / BRCA2_loss
+        "ATM": "ONC-136",  # DDR ATM kinase
+        "ATR": "ONC-137",  # DDR ATR kinase
+        "EGFR": "ONC-017",  # Oncogene kinase activation
+        "KRAS": "ONC-018",  # Oncogene GTPase signaling
+        "MYC": "ONC-019",  # Oncogene transcription factor
+        "PIK3CA": "ONC-020",  # Oncogene lipid kinase
+        "PTEN": "ONC-047",  # Suppressor loss / PI3K hyperactivation
+        "TERT": "ONC-163",  # Telomerase reactivation
     }
 
     @classmethod
@@ -53,7 +54,7 @@ class GenomicStateTransducer:
         cls,
         variants: list[GenomicVariantRecord],
         base_state: dict[str, int] | None = None,
-        target_region_mb: float = 38.0
+        target_region_mb: float = 38.0,
     ) -> dict[str, Any]:
         """
         Transduces a list of genomic variant records into a Boolean state activation map
@@ -89,7 +90,7 @@ class GenomicStateTransducer:
             "tmb_result": tmb_res,
             "apobec_result": apobec_res,
             "mutated_genes": sorted(mutated_genes),
-            "causal_taint": "borjamoskv:genomic_state_transducer_c5"
+            "causal_taint": "borjamoskv:genomic_state_transducer_c5",
         }
 
     @classmethod
@@ -103,7 +104,7 @@ class GenomicStateTransducer:
         wgd_detected: bool = False,
         ecdna_records: list[dict[str, Any]] | None = None,
         base_state: dict[str, int] | None = None,
-        target_region_mb: float = 38.0
+        target_region_mb: float = 38.0,
     ) -> dict[str, Any]:
         """
         Transduces a complete multi-scale genomic profile (SNVs, INDELs, LOH, WGD, ecDNA amplicons)
@@ -120,14 +121,18 @@ class GenomicStateTransducer:
                 wgd_detected=wgd_detected,
                 ecdna_records=ecdna_records,
                 base_state=base_state,
-                target_region_mb=target_region_mb
+                target_region_mb=target_region_mb,
             )
 
-        base_transduction = cls.transduce_variant_records(params.variants, base_state=params.base_state, target_region_mb=params.target_region_mb)
+        base_transduction = cls.transduce_variant_records(
+            params.variants, base_state=params.base_state, target_region_mb=params.target_region_mb
+        )
         state_matrix: dict[str, int] = base_transduction["state_matrix"]
 
         # Evaluate LOH & HRD
-        hrd_res: LOHHRDResult = GenomicEvaluationEngine.evaluate_loh_hrd(params.loh_events, params.total_regions, wgd_detected=params.wgd_detected)
+        hrd_res: LOHHRDResult = GenomicEvaluationEngine.evaluate_loh_hrd(
+            params.loh_events, params.total_regions, wgd_detected=params.wgd_detected
+        )
         if hrd_res.status == "HRD-Positive":
             state_matrix["ONC-143"] = 1  # Homologous Recombination Deficiency overall node
             if hrd_res.wgd_detected:
@@ -144,7 +149,7 @@ class GenomicStateTransducer:
                     oncogenes=list(rec["oncogenes"]),
                     copy_number=int(rec["copy_number"]),
                     circular_confirmed=bool(rec["circular_confirmed"]),
-                    rna_fold_change=float(rec["rna_fold_change"])
+                    rna_fold_change=float(rec["rna_fold_change"]),
                 )
                 ecdna_results.append(amp_res)
                 if amp_res.transcriptional_leverage >= 5.0 or amp_res.copy_number >= 10:
@@ -161,5 +166,5 @@ class GenomicStateTransducer:
             "hrd_result": hrd_res,
             "ecdna_results": ecdna_results,
             "mutated_genes": base_transduction["mutated_genes"],
-            "causal_taint": "borjamoskv:full_genomic_profile_transducer_c5"
+            "causal_taint": "borjamoskv:full_genomic_profile_transducer_c5",
         }

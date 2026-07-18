@@ -16,19 +16,13 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     # Phase 1: Build in-memory DAG and persist
     ledger = GraphLedger()
     n1 = ledger.mut_append_node(
-        parent_id=ledger.genesis_id,
-        claim="Genesis node",
-        payload_hash=core_calc_sha256("payload_genesis")
+        parent_id=ledger.genesis_id, claim="Genesis node", payload_hash=core_calc_sha256("payload_genesis")
     )
     n2 = ledger.mut_append_node(
-        parent_id=n1.node_id,
-        claim="Second node",
-        payload_hash=core_calc_sha256("payload_second")
+        parent_id=n1.node_id, claim="Second node", payload_hash=core_calc_sha256("payload_second")
     )
     n3 = ledger.mut_append_node(
-        parent_id=n2.node_id,
-        claim="Third node",
-        payload_hash=core_calc_sha256("payload_third")
+        parent_id=n2.node_id, claim="Third node", payload_hash=core_calc_sha256("payload_third")
     )
 
     persist = LedgerPersist(db_file)
@@ -64,11 +58,7 @@ def test_idempotent_persist(tmp_path: object) -> None:
     db_file = str(tmp_path) + "/test_idempotent.db"  # type: ignore[operator]
 
     ledger = GraphLedger()
-    ledger.mut_append_node(
-        parent_id=ledger.genesis_id,
-        claim="Only node",
-        payload_hash=core_calc_sha256("data")
-    )
+    ledger.mut_append_node(parent_id=ledger.genesis_id, claim="Only node", payload_hash=core_calc_sha256("data"))
 
     persist = LedgerPersist(db_file)
     first = persist.io_persist_ledger(ledger)
@@ -96,10 +86,7 @@ def test_orphan_detection(tmp_path: object) -> None:
     """)
     # Insert a node whose parent doesn't exist and isn't genesis
     fake_parent = "f" * 64
-    conn_raw.execute(
-        "INSERT INTO dag_nodes VALUES (?, ?, ?, ?)",
-        ("a" * 64, fake_parent, "orphan", "b" * 64)
-    )
+    conn_raw.execute("INSERT INTO dag_nodes VALUES (?, ?, ?, ?)", ("a" * 64, fake_parent, "orphan", "b" * 64))
     conn_raw.commit()
     conn_raw.close()
 

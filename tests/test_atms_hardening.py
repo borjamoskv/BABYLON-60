@@ -3,6 +3,7 @@
 
 from strike_rs import CortexKernel  # type: ignore[attr-defined]
 
+
 def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
     """
     Test suite verifying that CortexKernel exposed via PyO3 to Python correctly:
@@ -15,17 +16,17 @@ def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
 
     # Instance 1: Assert knowledge and contradiction
     kernel1 = CortexKernel(db_file)
-    
+
     id1 = kernel1.assert_knowledge("Water is H2O", "sensor_py", "env_py")
     assert id1 and "-" in id1, f"Expected UUID for assertion, got {id1}"
-    
+
     assert kernel1.is_believed("Water is H2O") is True
     assert kernel1.contradiction_free("Water is H2O") is True
-    
+
     # Inject contradiction against a conjecture hypothesis
     taint_nogood = kernel1.contradict_knowledge("Alien hypothesis Y", "env_py")
     assert "TAINT:C5_REAL_RUST:NOGOOD:" in taint_nogood
-    
+
     assert kernel1.is_believed("Water is H2O") is True
     assert kernel1.is_believed("Alien hypothesis Y") is False
     assert kernel1.contradiction_free("Alien hypothesis Y") is False

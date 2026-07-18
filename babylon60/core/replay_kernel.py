@@ -4,7 +4,6 @@ import time
 from typing import Any, Dict, Optional
 
 
-
 def canonical_json(obj: Any) -> str:
     """
     Serialización determinista.
@@ -57,7 +56,6 @@ class ReplayKernel:
         ) as cursor:
             row = await cursor.fetchone()
         return row[0] if row else "GENESIS"
-
 
     async def propose_model_output(
         self,
@@ -184,5 +182,6 @@ class ReplayKernel:
 
         if event["parent_hash"] is None:
             raise EpistemicHalt("Evento sin parent_hash")
+
 
 pass

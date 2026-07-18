@@ -13,6 +13,7 @@ class GenomicVariantRecord:
     """
     1-based closed and 0-based half-open coordinate-hygienic variant representation.
     """
+
     chrom: str
     pos_0based: int
     pos_1based: int
@@ -29,6 +30,7 @@ class TMBResult:
     """
     Quantitative evaluation of Tumor Mutational Burden (ONC-146).
     """
+
     total_mutations: int
     target_region_mb: float
     tmb_score: float
@@ -44,6 +46,7 @@ class APOBECEnrichmentResult:
     Quantitative evaluation of APOBEC mutagenesis enrichment (ONC-148, ONC-150).
     Focuses on TCW -> TTW / TGW motifs.
     """
+
     tcw_mutations: int
     total_snvs: int
     enrichment_score: float
@@ -58,6 +61,7 @@ class LOHHRDResult:
     """
     Quantitative evaluation of Loss of Heterozygosity and Homologous Recombination Deficiency (ONC-152, ONC-143, ONC-151).
     """
+
     loh_events: int
     total_regions: int
     hr_deficiency_score: float
@@ -72,6 +76,7 @@ class ECDNAAmpliconResult:
     """
     Quantitative evaluation of Extrachromosomal DNA amplicons and transcriptional leverage (ONC-154).
     """
+
     amplicon_id: str
     oncogenes: list[str]
     copy_number: int

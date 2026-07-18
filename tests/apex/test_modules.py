@@ -90,15 +90,19 @@ def test_no_models_returns_empty(monkeypatch):
 def test_text_features_inference():
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    
+
     # 1. Test inference with text does not crash and behaves deterministically
     r_no_text = predict_module_risks(_mk())
-    r_text_1 = predict_module_risks(_mk(), eligibility_text="Patient must have cancer.", brief_summary_text="Oncology trial.")
-    r_text_2 = predict_module_risks(_mk(), eligibility_text="Patient must have cancer.", brief_summary_text="Oncology trial.")
-    
+    r_text_1 = predict_module_risks(
+        _mk(), eligibility_text="Patient must have cancer.", brief_summary_text="Oncology trial."
+    )
+    r_text_2 = predict_module_risks(
+        _mk(), eligibility_text="Patient must have cancer.", brief_summary_text="Oncology trial."
+    )
+
     assert len(r_text_1) == 6
     assert [r.as_dict() for r in r_text_1] == [r.as_dict() for r in r_text_2]
-    
+
     # 2. Test that passing text actually shifts the probabilities (proves text path is executed)
     assert [r.probability for r in r_no_text] != [r.probability for r in r_text_1]
 
@@ -114,24 +118,23 @@ def test_tfidf_pure_sklearn_equivalence():
     from sklearn.feature_extraction.text import TfidfVectorizer
     import numpy as np
     from apex_trials.modules import _transform_pure
-    
+
     # Take a sample module's vocab and idf
     elig_model = _MODELS["modules"]["elig"]
     vocab = elig_model["tfidf_vocab"]
     idf = elig_model["tfidf_idf"]
-    
+
     sample_text = "This is a brief summary of a clinical trial for rare disease, focusing on oncology patients."
-    
+
     # Run pure TF-IDF transform
     vec_pure = _transform_pure(sample_text, vocab, idf)
-    
+
     # Reconstruct sklearn vectorizer with the same vocabulary and IDF
     vec_sk = TfidfVectorizer(vocabulary=vocab, stop_words="english", ngram_range=(1, 2), sublinear_tf=True)
     vec_sk.idf_ = np.array(idf)
-    
+
     X_sk = vec_sk.transform([sample_text]).toarray()[0]
-    
+
     # Verify byte-exact equivalence within floating-point precision limit (1e-9)
     diff = np.abs(np.array(vec_pure) - X_sk)
     assert np.max(diff) < 1e-9, f"Pure TF-IDF mismatch with sklearn: max diff {np.max(diff)}"
-

@@ -52,12 +52,14 @@ class GenomicEvaluationEngine:
             causal_taint="borjamoskv:tmb_evaluator_c5",
             details={
                 "snv_count": sum(1 for v in coding_muts if v.variant_type == "SNV"),
-                "indel_count": sum(1 for v in coding_muts if v.variant_type == "INDEL")
-            }
+                "indel_count": sum(1 for v in coding_muts if v.variant_type == "INDEL"),
+            },
         )
 
     @staticmethod
-    def evaluate_apobec_enrichment(variants: list[GenomicVariantRecord], trinucleotide_context: dict[str, str] | None = None) -> APOBECEnrichmentResult:
+    def evaluate_apobec_enrichment(
+        variants: list[GenomicVariantRecord], trinucleotide_context: dict[str, str] | None = None
+    ) -> APOBECEnrichmentResult:
         """
         Evaluates APOBEC signature enrichment (SBS2 / SBS13) focusing on TCW -> TTW / TGW motifs.
         If trinucleotide_context dict is provided (mapping variant key to 3-mer), uses it; otherwise evaluates metadata context.
@@ -75,7 +77,7 @@ class GenomicEvaluationEngine:
                 is_apobec_driven=False,
                 signature_match="NONE",
                 causal_taint="borjamoskv:apobec_evaluator_c5",
-                details={"reason": "No somatic SNVs present in cohort"}
+                details={"reason": "No somatic SNVs present in cohort"},
             )
 
         tcw_muts = 0
@@ -88,16 +90,18 @@ class GenomicEvaluationEngine:
                 motif = str(v.metadata["trinucleotide_context"]).upper()
             else:
                 # Fallback check if alt allele is C->T or C->G and metadata flags APOBEC
-                if (v.ref_allele == "C" and v.alt_allele in ("T", "G")) or (v.ref_allele == "G" and v.alt_allele in ("A", "C")):
+                if (v.ref_allele == "C" and v.alt_allele in ("T", "G")) or (
+                    v.ref_allele == "G" and v.alt_allele in ("A", "C")
+                ):
                     if v.metadata.get("apobec_motif", False):
                         tcw_muts += 1
                 continue
 
             if len(motif) == 3 and motif[1] == "C" and motif[2] in ("A", "T"):
-                if (v.ref_allele == "C" and v.alt_allele in ("T", "G")):
+                if v.ref_allele == "C" and v.alt_allele in ("T", "G"):
                     tcw_muts += 1
             elif len(motif) == 3 and motif[1] == "G" and motif[0] in ("A", "T"):
-                if (v.ref_allele == "G" and v.alt_allele in ("A", "C")):
+                if v.ref_allele == "G" and v.alt_allele in ("A", "C"):
                     tcw_muts += 1
 
         # Enrichment ratio calculation: observed fraction of TCW mutations relative to expected random baseline (~16%)
@@ -112,10 +116,7 @@ class GenomicEvaluationEngine:
             is_apobec_driven=is_driven,
             signature_match="COSMIC_SBS2_SBS13" if is_driven else "BACKGROUND",
             causal_taint="borjamoskv:apobec_evaluator_c5",
-            details={
-                "observed_tcw_fraction": round(observed_fraction, 4),
-                "expected_baseline": 0.16
-            }
+            details={"observed_tcw_fraction": round(observed_fraction, 4), "expected_baseline": 0.16},
         )
 
     @staticmethod
@@ -140,14 +141,13 @@ class GenomicEvaluationEngine:
             wgd_detected=bool(wgd_detected),
             status=status,
             causal_taint="borjamoskv:loh_hrd_evaluator_c5",
-            details={
-                "loh_fraction": round(loh_fraction, 4),
-                "wgd_penalty_applied": 10.0 if wgd_detected else 0.0
-            }
+            details={"loh_fraction": round(loh_fraction, 4), "wgd_penalty_applied": 10.0 if wgd_detected else 0.0},
         )
 
     @staticmethod
-    def evaluate_ecdna_amplicon(amplicon_id: str, oncogenes: list[str], copy_number: int, circular_confirmed: bool, rna_fold_change: float) -> ECDNAAmpliconResult:
+    def evaluate_ecdna_amplicon(
+        amplicon_id: str, oncogenes: list[str], copy_number: int, circular_confirmed: bool, rna_fold_change: float
+    ) -> ECDNAAmpliconResult:
         """
         Evaluates extrachromosomal DNA (ecDNA) amplicon status and calculates transcriptional leverage (ONC-154).
         """
@@ -174,6 +174,6 @@ class GenomicEvaluationEngine:
             causal_taint="borjamoskv:ecdna_evaluator_c5",
             details={
                 "raw_fold_change": float(rna_fold_change),
-                "circular_enhancer_boost": 1.35 if circular_confirmed else 1.0
-            }
+                "circular_enhancer_boost": 1.35 if circular_confirmed else 1.0,
+            },
         )

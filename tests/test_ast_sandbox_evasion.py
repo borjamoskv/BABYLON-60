@@ -1,8 +1,10 @@
 import ast
 import pytest
 
+
 class SecurityError(Exception):
     pass
+
 
 def validate_ast_sandbox(source_code: str) -> bool:
     try:
@@ -10,10 +12,17 @@ def validate_ast_sandbox(source_code: str) -> bool:
         for node in ast.walk(tree):
             # 1. Bloqueo de atributos dunder
             if isinstance(node, ast.Attribute):
-                if isinstance(node.attr, str) and node.attr.startswith('__') and node.attr.endswith('__'):
+                if isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
                     raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
             # 2. Bloqueo de funciones de introspección dinámica
-            if isinstance(node, ast.Name) and node.id in ('getattr', 'setattr', 'eval', 'exec', 'compile', '__import__'):
+            if isinstance(node, ast.Name) and node.id in (
+                "getattr",
+                "setattr",
+                "eval",
+                "exec",
+                "compile",
+                "__import__",
+            ):
                 raise SecurityError(f"Llamada a función de introspección prohibida: {node.id}")
             # 3. Bloqueo de importaciones no autorizadas (Denegación por defecto)
             if isinstance(node, (ast.Import, ast.ImportFrom)):
@@ -23,6 +32,7 @@ def validate_ast_sandbox(source_code: str) -> bool:
         raise
     except SyntaxError as e:
         raise SecurityError(f"Syntax error (safe): {e}")
+
 
 class TestASTSandboxEvasion:
     def test_basic_dunder_blocking(self):
