@@ -4,7 +4,6 @@ import sys
 import hashlib
 import subprocess
 from datetime import datetime, timezone
-from cortex.swarm.engine_fsm import run_fsm_cycle
 from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical
 
 def get_ledger_hash():
@@ -29,7 +28,7 @@ def run_itera_ultrathink(cycles: int = 16):
         
         try:
             # 1. Ejecutar compilación MCTS del Teorema físico (Ω31)
-            print(f"[ITERA-ULTRATHINK] Ejecutando MCTS Physical Compiler...")
+            print("[ITERA-ULTRATHINK] Ejecutando MCTS Physical Compiler...")
             engine = L3InferenceEnginePhysical(target_trajectories=1000)
             theorem = engine.compile_theorem(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{cycle_num}_{time.time()}")
             
@@ -62,7 +61,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
                 break
                 
             # 3. Ejecutar la FSM del Swarm con el Payload Dinámico (Ω33 Meta-Execution)
-            print(f"[ITERA-ULTRATHINK] Ejecutando FSM con payload dinámico...")
+            print("[ITERA-ULTRATHINK] Ejecutando FSM con payload dinámico...")
             from cortex.swarm.engine_fsm import SwarmFSM
             fsm = SwarmFSM()
             issue_payload = {
@@ -79,7 +78,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
             }
             
             # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente
-            print(f"[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation...")
+            print("[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation...")
             validation_proc = subprocess.Popen(
                 [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
                 stdout=subprocess.DEVNULL,
@@ -96,10 +95,10 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
             exit_code = validation_proc.wait()
             if exit_code != 0:
                 raise RuntimeError("OMEGA Node validation failed! Parallel AST state corrupted.")
-            print(f"[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo completó con éxito. Aislamiento intacto.")
+            print("[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo completó con éxito. Aislamiento intacto.")
             
             # 5. Git Sentinel: Guardar cambios en el ledger
-            print(f"[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
+            print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
             subprocess.run(["git", "add", "mundo_f_ledger.yml", "cortex/compiled_theorem.py"], check=True)
             subprocess.run(["git", "commit", "-m", f"chore(cortex): [ITERA] BFT State Collapse Cycle {cycle_num} - Hash: {theorem.code_hash[:8]}", "--no-verify"], check=True)
             
@@ -108,14 +107,14 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
             
             # 6. Purga de Entropía Periódica (Invariante 12)
             if cycle_num % 8 == 0:
-                print(f"\n[ITERA-ULTRATHINK] [OCTAL PURGE] Ejecutando purga periódica de anergía (Regla 12)...")
+                print("\n[ITERA-ULTRATHINK] [OCTAL PURGE] Ejecutando purga periódica de anergía (Regla 12)...")
                 # Limpiar archivos temporales compilados
                 if os.path.exists(compiled_path):
                     os.remove(compiled_path)
                     # Sellar la purga en git
                     subprocess.run(["git", "add", "cortex/compiled_theorem.py"], check=True)
                     subprocess.run(["git", "commit", "-m", f"chore(cortex): [PURGE] Octal Anergy Purge at Cycle {cycle_num}", "--no-verify"], check=True)
-                print(f"[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado.")
+                print("[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado.")
                 
         except Exception as e:
             print(f"[ITERA-ULTRATHINK] FALLO ESTRUCTURAL EN CICLO {cycle_num}: {e}")
