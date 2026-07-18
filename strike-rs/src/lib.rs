@@ -185,6 +185,11 @@ impl StateVector {
         }
     }
 }
+impl Default for StateVector {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 // ==========================================
 // 2. COGNITIVE CHAIN VECTOR
@@ -219,6 +224,11 @@ impl CognitiveChainVector {
             language_entropy: 0.0,
             execution_count: 0,
         }
+    }
+}
+impl Default for CognitiveChainVector {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -257,6 +267,11 @@ impl TTSHarnessState {
         }
     }
 }
+impl Default for TTSHarnessState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
 // ==========================================
 // DISPATCH ENGINE FUNCTION IMPLEMENTATIONS
@@ -264,17 +279,31 @@ impl TTSHarnessState {
 
 /// Dispatches an observation step on the StateVector given domain d, primitive p, and modifier m.
 #[pyfunction]
-pub fn dispatch_state_observer(d: u8, p: u8, m: u8, mut state: PyRefMut<StateVector>) -> PyResult<(u16, String, f64)> {
+pub fn dispatch_state_observer(
+    d: u8,
+    p: u8,
+    m: u8,
+    mut state: PyRefMut<StateVector>,
+) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err("Index out of range [0-9]"));
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "Index out of range [0-9]",
+        ));
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!("OBS-{}-{}-{}", get_domain_str(d), get_primitive_str(p), get_modifier_str(m));
-    
+    let name = format!(
+        "OBS-{}-{}-{}",
+        get_domain_str(d),
+        get_primitive_str(p),
+        get_modifier_str(m)
+    );
+
     state.execution_count += 1;
     let mut sum_sq = 0.0;
     if state.states.len() < 4 || state.innovation.len() < 4 {
-        return Err(pyo3::exceptions::PyValueError::new_err("StateVector arrays states/innovation must have length >= 4"));
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "StateVector arrays states/innovation must have length >= 4",
+        ));
     }
     for i in 0..4 {
         state.states[i] += ((code as f64) + (i as f64)).sin() * 0.01;
@@ -287,13 +316,25 @@ pub fn dispatch_state_observer(d: u8, p: u8, m: u8, mut state: PyRefMut<StateVec
 
 /// Dispatches a neuro-chain mutation step on the CognitiveChainVector.
 #[pyfunction]
-pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, mut vec: PyRefMut<CognitiveChainVector>) -> PyResult<(u16, String, f64)> {
+pub fn dispatch_neuro_chain(
+    d: u8,
+    p: u8,
+    m: u8,
+    mut vec: PyRefMut<CognitiveChainVector>,
+) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err("Index out of range [0-9]"));
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "Index out of range [0-9]",
+        ));
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!("NEURO-{}-{}-{}", get_neuro_domain_str(d), get_neuro_primitive_str(p), get_neuro_modifier_str(m));
-    
+    let name = format!(
+        "NEURO-{}-{}-{}",
+        get_neuro_domain_str(d),
+        get_neuro_primitive_str(p),
+        get_neuro_modifier_str(m)
+    );
+
     vec.execution_count += 1;
     let cos_val = (code as f64).cos();
     vec.homeostasis_energy = f64::max(0.01, vec.homeostasis_energy * 0.98 + 0.02 * cos_val);
@@ -301,31 +342,43 @@ pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, mut vec: PyRefMut<CognitiveChai
     vec.attention_weight = 1.0 / (1.0 + vec.prediction_error);
     vec.action_torque = vec.attention_weight * (((code % 10) as f64) + 1.0);
     vec.language_entropy = (1.0 + vec.action_torque).log2();
-    
+
     Ok((code, name, vec.language_entropy))
 }
 
 /// Dispatches a TTS harness evaluation step on the TTSHarnessState.
 #[pyfunction]
-pub fn dispatch_tts_harness(d: u8, p: u8, m: u8, mut state: PyRefMut<TTSHarnessState>) -> PyResult<(u16, String, f64)> {
+pub fn dispatch_tts_harness(
+    d: u8,
+    p: u8,
+    m: u8,
+    mut state: PyRefMut<TTSHarnessState>,
+) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err("Index out of range [0-9]"));
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "Index out of range [0-9]",
+        ));
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!("TTS-{}-{}-{}", get_tts_domain_str(d), get_tts_primitive_str(p), get_tts_modifier_str(m));
-    
+    let name = format!(
+        "TTS-{}-{}-{}",
+        get_tts_domain_str(d),
+        get_tts_primitive_str(p),
+        get_tts_modifier_str(m)
+    );
+
     state.execution_count += 1;
     state.mcts_budget_tokens += ((code % 50) as i64) + 10;
     state.latent_value = ((code as f64) * 0.001).tanh();
     state.harness_score = 0.5 + 0.5 * ((code as f64).sin());
     state.kv_cache_efficiency = f64::min(1.0, 0.2 + ((code % 10) as f64) * 0.08);
     state.pruning_rate = 1.0 - state.kv_cache_efficiency * 0.5;
-    
+
     Ok((code, name, state.harness_score))
 }
 
 mod arm64_re;
-use arm64_re::{Arm64ReMatrix, dispatch_arm64_re};
+use arm64_re::{dispatch_arm64_re, Arm64ReMatrix};
 
 // ==========================================
 // PYMOD PYFUNCTION SIGNATURE
@@ -356,8 +409,8 @@ mod tests {
     #[test]
     fn get_domain_str_all_valid() {
         let expected = [
-            "SOURCE", "MATRIX", "PULSE", "KINETIC", "LOGIC",
-            "VECTOR", "STORAGE", "OSINT", "CLOCK", "COMPILER",
+            "SOURCE", "MATRIX", "PULSE", "KINETIC", "LOGIC", "VECTOR", "STORAGE", "OSINT", "CLOCK",
+            "COMPILER",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_domain_str(i as u8), label);
@@ -373,8 +426,16 @@ mod tests {
     #[test]
     fn get_primitive_str_all_valid() {
         let expected = [
-            "INIT", "PREDICT", "UPDATE", "INNOVATION", "GAIN",
-            "COVARIANCE", "DRIFT_CHECK", "RECONSTRUCT", "SANITY_ASSERT", "FLUSH_LEDGER",
+            "INIT",
+            "PREDICT",
+            "UPDATE",
+            "INNOVATION",
+            "GAIN",
+            "COVARIANCE",
+            "DRIFT_CHECK",
+            "RECONSTRUCT",
+            "SANITY_ASSERT",
+            "FLUSH_LEDGER",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_primitive_str(i as u8), label);
@@ -384,8 +445,16 @@ mod tests {
     #[test]
     fn get_modifier_str_all_valid() {
         let expected = [
-            "RAW", "ATOMIC", "KALMAN_EXTENDED", "LUENBERGER_RIGID", "PARTICLE_PF",
-            "SLIDING_MODE", "QUANTIZED", "ADAPTIVE_R", "NEURAL_LATENT", "BFT_CONSENSUS",
+            "RAW",
+            "ATOMIC",
+            "KALMAN_EXTENDED",
+            "LUENBERGER_RIGID",
+            "PARTICLE_PF",
+            "SLIDING_MODE",
+            "QUANTIZED",
+            "ADAPTIVE_R",
+            "NEURAL_LATENT",
+            "BFT_CONSENSUS",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_modifier_str(i as u8), label);
@@ -395,9 +464,16 @@ mod tests {
     #[test]
     fn get_neuro_domain_str_all_valid() {
         let expected = [
-            "ENERGY_BOUND", "ATTRACTOR_DECAY", "COGNITIVE_DRIFT", "RESOURCE_EXHAUST",
-            "SYBIL_REVERB", "BAYESIAN_FREE_ENERGY", "LATENT_TORQUE", "SURPRISAL_GATE",
-            "TEMPORAL_PHASE", "DEEP_MCTS_DEPTH",
+            "ENERGY_BOUND",
+            "ATTRACTOR_DECAY",
+            "COGNITIVE_DRIFT",
+            "RESOURCE_EXHAUST",
+            "SYBIL_REVERB",
+            "BAYESIAN_FREE_ENERGY",
+            "LATENT_TORQUE",
+            "SURPRISAL_GATE",
+            "TEMPORAL_PHASE",
+            "DEEP_MCTS_DEPTH",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_neuro_domain_str(i as u8), label);
@@ -407,9 +483,16 @@ mod tests {
     #[test]
     fn get_neuro_primitive_str_all_valid() {
         let expected = [
-            "HOMEOSTASIS_INIT", "HOMEOSTASIS_MUTATE", "PREDICTION_GENERATE",
-            "PREDICTION_AUDIT", "ATTENTION_FOCUS", "ATTENTION_QUANTIZE",
-            "ACTION_DISPATCH", "ACTION_ASSERT", "LANGUAGE_COLLAPSE", "LANGUAGE_FLUSH",
+            "HOMEOSTASIS_INIT",
+            "HOMEOSTASIS_MUTATE",
+            "PREDICTION_GENERATE",
+            "PREDICTION_AUDIT",
+            "ATTENTION_FOCUS",
+            "ATTENTION_QUANTIZE",
+            "ACTION_DISPATCH",
+            "ACTION_ASSERT",
+            "LANGUAGE_COLLAPSE",
+            "LANGUAGE_FLUSH",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_neuro_primitive_str(i as u8), label);
@@ -419,8 +502,16 @@ mod tests {
     #[test]
     fn get_neuro_modifier_str_all_valid() {
         let expected = [
-            "RAW", "ATOMIC", "ACTIVE_INFERENCE", "LYAPUNOV_STABLE", "SPARSE_KV",
-            "BFT_CONSENSUS", "FEEDFORWARD", "BACKPROP_ERROR", "SLIDING_SURFACE", "EPIDEMIC_PURGE",
+            "RAW",
+            "ATOMIC",
+            "ACTIVE_INFERENCE",
+            "LYAPUNOV_STABLE",
+            "SPARSE_KV",
+            "BFT_CONSENSUS",
+            "FEEDFORWARD",
+            "BACKPROP_ERROR",
+            "SLIDING_SURFACE",
+            "EPIDEMIC_PURGE",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_neuro_modifier_str(i as u8), label);
@@ -430,9 +521,16 @@ mod tests {
     #[test]
     fn get_tts_domain_str_all_valid() {
         let expected = [
-            "ENTROPY_ALLOC", "LATENT_LOOKAHEAD", "POLICY_IMPROVE", "HARNESS_DISCOVERY",
-            "PROGRAMMATIC_JIT", "SWARM_GRAPH", "TRI_TIER_MEMORY", "INFO_KV_EVICTION",
-            "STAGE_DECOUPLE", "VECTOR_QUANT",
+            "ENTROPY_ALLOC",
+            "LATENT_LOOKAHEAD",
+            "POLICY_IMPROVE",
+            "HARNESS_DISCOVERY",
+            "PROGRAMMATIC_JIT",
+            "SWARM_GRAPH",
+            "TRI_TIER_MEMORY",
+            "INFO_KV_EVICTION",
+            "STAGE_DECOUPLE",
+            "VECTOR_QUANT",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_tts_domain_str(i as u8), label);
@@ -442,8 +540,16 @@ mod tests {
     #[test]
     fn get_tts_primitive_str_all_valid() {
         let expected = [
-            "INIT", "EXPAND", "EVALUATE", "BACKPROP", "PRUNE",
-            "QUANTIZE", "ASSERT_BFT", "EXECUTE_SANDBOX", "RECONSTRUCT_STATE", "FLUSH_LEDGER",
+            "INIT",
+            "EXPAND",
+            "EVALUATE",
+            "BACKPROP",
+            "PRUNE",
+            "QUANTIZE",
+            "ASSERT_BFT",
+            "EXECUTE_SANDBOX",
+            "RECONSTRUCT_STATE",
+            "FLUSH_LEDGER",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_tts_primitive_str(i as u8), label);
@@ -453,8 +559,16 @@ mod tests {
     #[test]
     fn get_tts_modifier_str_all_valid() {
         let expected = [
-            "RAW", "ATOMIC", "ADAPTIVE_COT", "RETRO_ATTENTION", "FORWARD_INFLUENCE",
-            "TURBO_QUANT", "META_PROPOSER", "FEEDFORWARD_OPEN", "SLIDING_WINDOW", "EPIDEMIC_PURGE",
+            "RAW",
+            "ATOMIC",
+            "ADAPTIVE_COT",
+            "RETRO_ATTENTION",
+            "FORWARD_INFLUENCE",
+            "TURBO_QUANT",
+            "META_PROPOSER",
+            "FEEDFORWARD_OPEN",
+            "SLIDING_WINDOW",
+            "EPIDEMIC_PURGE",
         ];
         for (i, &label) in expected.iter().enumerate() {
             assert_eq!(get_tts_modifier_str(i as u8), label);

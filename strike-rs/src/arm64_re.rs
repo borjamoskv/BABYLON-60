@@ -26,7 +26,9 @@ impl Arm64ReMatrix {
     }
 
     pub fn compute_re_entropy(&self) -> f64 {
-        self.pac_bypass_entropy * 0.4 + (1.0 - self.dyld_cache_hit_rate) * 0.3 + self.amfi_enforcement_level * 0.3
+        self.pac_bypass_entropy * 0.4
+            + (1.0 - self.dyld_cache_hit_rate) * 0.3
+            + self.amfi_enforcement_level * 0.3
     }
 }
 
@@ -47,17 +49,24 @@ pub fn get_arm64_domain_str(d: u8) -> &'static str {
 }
 
 #[pyfunction]
-pub fn dispatch_arm64_re(d: u8, p: u8, m: u8, mut matrix: PyRefMut<Arm64ReMatrix>) -> PyResult<(u16, String, f64)> {
+pub fn dispatch_arm64_re(
+    d: u8,
+    p: u8,
+    m: u8,
+    mut matrix: PyRefMut<Arm64ReMatrix>,
+) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err("Index out of range [0-9]"));
+        return Err(pyo3::exceptions::PyValueError::new_err(
+            "Index out of range [0-9]",
+        ));
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     let name = format!("ARM64-{}-{}-{}", get_arm64_domain_str(d), p, m); // Simplificando por entropía
-    
+
     matrix.execution_count += 1;
     matrix.pac_bypass_entropy = ((code as f64) * 0.01).sin().abs();
     matrix.dyld_cache_hit_rate = ((code as f64) * 0.02).cos().abs();
     matrix.amfi_enforcement_level = 1.0 / (1.0 + matrix.pac_bypass_entropy);
-    
+
     Ok((code, name, matrix.compute_re_entropy()))
 }
