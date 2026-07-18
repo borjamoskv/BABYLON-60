@@ -1,7 +1,7 @@
 # GLOSARIO SOBERANO — BABYLON-60 / C5-REAL / VIBE CODE
-Versión 3.1 CANÓNICA · Sesión b79af88a · 2026-07-18
+Versión 3.2 CANÓNICA · Sesión b79af88a · 2026-07-18
 
-SYS_ID: GLOSARIO_OMEGA_V3.1 | ESTADO: TIER_1 CRISTALIZADO
+SYS_ID: GLOSARIO_OMEGA_V3.2 | ESTADO: TIER_1 CRISTALIZADO
 **INVARIANTE GLOBAL:** Ningún término es una opinión. Ningún término es una metáfora. Todo término colapsa a una prueba física o matemática.
 Referencia ontológica, termodinámica y arquitectónica del ecosistema MOSKV-1.
 
@@ -34,6 +34,10 @@ Tipo: Métrica de degradación termodinámica. Ω12
 Energía disipada sin producir trabajo útil. En MOSKV-1: prosa decorativa, commits sin hash real, ciclos de API sin mutación de estado.
 $$ Exergía = 1 - \frac{Tokens Anérgicos}{Tokens Totales} $$
 Límite de colapso: < 0.8 → EpistemicHalt
+
+**ArchitectAgent ⚙️**
+Tipo: Motor Anti-Entropía AST. Ω6
+Agente de mantenimiento periódico que audita la complejidad ciclomática del código en tiempo de compilación y desencadena refactorizaciones puras sin alterar la API.
 
 **ATP ⚙️**
 Tipo: Moneda de computación. Ω15
@@ -111,9 +115,12 @@ Tipo: Arquitectura de Memoria. Ω17
 | Phantom Target Verification 🔐 | Prueba de Realidad | Antes de aceptar un claim, comprueba que el archivo existe en disco | Ω27 |
 | Slop Horizon Hs 🌡️ | Punto de No Retorno | El costo de auditar supera el valor de lo generado | Ω22 |
 | Transducción Causal ⚙️ | Operación Fundamental | Convertir palabras en mutaciones de disco. Sin esto solo hay anergía | Φ1 |
+| VesicularSandbox ⚙️ | Aislamiento Efímero | Micro-vesícula de ejecución aislada sin red para probar código no confiable | Ω4 |
+| VibeIDEEngine 🎨 | Orquestación Vibe Code | Motor agéntico con degradación de agencia 4->0 y memoria Dual-Tier aislada | Φ7 |
 | Weaponized Forgetting 🧠 | Purga Entrópica | Eliminación permanente de TIER_1 no validado | Ω40 |
 | Zero Suggestion 🎨 | Vibe Code | Prohibido sugerir cambios no solicitados | Φ8 |
 | Zero Static HMAC Fallback 🔐 | Seguridad | Si no existe la clave, crashea. Ningun fallback | Ω25 |
+| ZeroTrustSanitizer 🔐 | Escudo de Entrada | Sanitización estricta de prompts contra inyecciones y obfuscaciones base64 | Ω5 |
 
 ---
 
@@ -134,7 +141,7 @@ Tipo: Arquitectura de Memoria. Ω17
 > Se convierte en realidad en el exacto instante en que ejecutes:
 > ```bash
 > git add glosario.md
-> git commit -m "feat: glosario soberano v3.1 canónico"
+> git commit -m "feat: glosario soberano v3.2 canónico"
 > b3sum glosario.md
 > ```
 > Hasta ese momento es solo palabras. Nada mas.
