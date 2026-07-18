@@ -10,6 +10,8 @@
 <p align="center">
   <a href="https://pypi.org/project/cortex-persist/"><img src="https://img.shields.io/pypi/v/cortex-persist.svg?style=flat-square&color=2B3BE5" alt="PyPI version" /></a>
   <a href="https://pypi.org/project/cortex-persist/"><img src="https://img.shields.io/pypi/pyversions/cortex-persist.svg?style=flat-square" alt="Python versions" /></a>
+  <a href="https://github.com/borjamoskv/BABYLON-60/actions/workflows/codeql.yml"><img src="https://github.com/borjamoskv/BABYLON-60/actions/workflows/codeql.yml/badge.svg?branch=main" alt="CodeQL Advanced Security" /></a>
+  <a href="https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_ledger.yml"><img src="https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_ledger.yml/badge.svg?branch=main" alt="Verify Master Ledger Trailer" /></a>
   <img src="https://img.shields.io/badge/SQLite-WAL-4CAF50?style=flat-square&logo=sqlite" alt="SQLite WAL" />
   <img src="https://img.shields.io/badge/Rust-optional-CE422B?style=flat-square&logo=rust" alt="Rust optional" />
   <img src="https://img.shields.io/badge/license-Proprietary-FF6B35?style=flat-square" alt="License" />
