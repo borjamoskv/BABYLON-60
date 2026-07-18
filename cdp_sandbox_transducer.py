@@ -2,7 +2,8 @@ import json
 import sqlite3
 import sys
 import urllib.request
-from datetime import datetime
+import urllib.error
+from datetime import datetime, timezone
 import hashlib
 
 CDP_PORT = 9222
@@ -28,7 +29,7 @@ def fetch_cdp_status() -> dict[str, str]:
         req = urllib.request.Request(CDP_URL)
         with urllib.request.urlopen(req, timeout=2.0) as response:
             return json.loads(response.read().decode())
-    except Exception as e:
+    except (urllib.error.URLError, urllib.error.HTTPError) as e:
         print(f"FAILED: No CDP endpoint at {CDP_URL}. Error: {e}")
         # Simulamos payload para C5-REAL testing si no hay sandbox activo
         return {
@@ -41,7 +42,7 @@ def fetch_cdp_status() -> dict[str, str]:
         }
 
 def commit_to_ledger(conn: sqlite3.Connection, data: dict[str, str]) -> None:
-    ts = datetime.utcnow().isoformat()
+    ts = datetime.now(timezone.utc).isoformat()
     raw = json.dumps(data, sort_keys=True)
     h = hashlib.sha3_256(raw.encode()).hexdigest()
     try:
