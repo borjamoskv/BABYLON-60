@@ -18,7 +18,10 @@ import asyncio
 import sqlite3
 import hashlib
 import time
-import strike_rs  # type: ignore[import-untyped]
+try:
+    import strike_rs  # type: ignore[import-untyped]
+except ImportError:
+    strike_rs = None
 
 __all__ = [
     "BFTNode",

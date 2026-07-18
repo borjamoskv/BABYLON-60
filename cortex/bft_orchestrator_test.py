@@ -2,8 +2,10 @@ import unittest
 import asyncio
 import os
 import sqlite3
-from cortex.bft_orchestrator import BFTOrchestrator, DB_PATH
+import pytest
+from cortex.bft_orchestrator import BFTOrchestrator, DB_PATH, strike_rs
 
+@pytest.mark.skipif(strike_rs is None, reason="strike_rs nativo no está disponible en este entorno.")
 class TestBFTOrchestrator(unittest.TestCase):
     def setUp(self) -> None:
         # Remove DB before each test for isolation
