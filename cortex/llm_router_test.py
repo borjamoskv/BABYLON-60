@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import json
+from typing import Any
 from cortex.llm_router import parse_yaml_routes, C5LLMRouter
 
 class TestLLMRouter(unittest.TestCase):
@@ -12,7 +13,7 @@ class TestLLMRouter(unittest.TestCase):
         self.assertIn("Gemma-2-9B-It", routes[0]["models"])
 
     @patch('urllib.request.urlopen')
-    def test_dispatch_inference_ollama_success(self, mock_urlopen) -> None:
+    def test_dispatch_inference_ollama_success(self, mock_urlopen: Any) -> None:
         # Mock de respuesta JSON de Ollama local
         mock_response = MagicMock()
         mock_response.read.return_value = json.dumps({"response": "Respuesta simulada de Ollama"}).encode('utf-8')

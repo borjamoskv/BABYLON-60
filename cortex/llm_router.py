@@ -47,9 +47,10 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
                     val = val[1:-1]
                 elif val.startswith('[') and val.endswith(']'):
                     # Parsear listas de strings simples
-                    val = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
-                    
-                current_route[key] = val
+                    models_list: list[str] = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
+                    current_route["models"] = models_list
+                else:
+                    current_route[key] = val
                 
     if current_route:
         routes.append(current_route)

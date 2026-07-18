@@ -3,6 +3,7 @@ C5-REAL Swarm Engine FSM (DEEPTHINK v3.0)
 Implementa Máquina de Estados Finita (FSM) con Circuit Breaker para evitar Death Loops termodinámicos.
 """
 import os
+from typing import Any
 from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.sandbox import VesicularSandbox
 from cortex.swarm.reviewer_agent import evaluate_diff
@@ -27,7 +28,7 @@ class SwarmFSM:
         return is_valid
 
 
-    def transition_state(self, issue_id: int, current_state: str, payload: dict) -> str:
+    def transition_state(self, issue_id: int, current_state: str, payload: dict[str, Any]) -> str:
         """Motor de transiciones de estado estricto (C5-REAL)."""
         if self.check_kill_switch():
             self.memory.log(issue_id, "fsm", "kill_switch_triggered", "ABORTED_BY_OPERATOR")

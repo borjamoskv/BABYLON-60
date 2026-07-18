@@ -28,6 +28,7 @@ __all__ = [
     "BFTOrchestrator",
     "init_bft_database",
     "DB_PATH",
+    "strike_rs",
 ]
 
 # DB Concurrency & Persist Configurations (R10)
