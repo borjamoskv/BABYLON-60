@@ -6,6 +6,7 @@ Enforces zero noise accumulation, computes Exergy/Anergy ratios across the curre
 and crystallizes an OP_TAINT_SEAL audit into the Memory Vault (`cortex_memory.db`).
 """
 
+import os
 import sqlite3
 import hashlib
 import json
@@ -16,8 +17,27 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "cortex_memory.db"
 AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
-AUDIT_FILE = AUDIT_DIR / "autocognition_omega_audit_6718def3.yaml"
-TRANSCRIPT_PATH = Path.home() / ".gemini" / "antigravity" / "brain" / "6718def3-c226-496e-80bb-565d0b70fa15" / ".system_generated" / "logs" / "transcript.jsonl"
+
+def get_conversation_id() -> str:
+    cid = os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
+    if cid:
+        return cid
+    brain_dir = Path.home() / ".gemini" / "antigravity" / "brain"
+    uuid_pattern = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
+    candidates = []
+    if brain_dir.exists():
+        for entry in brain_dir.iterdir():
+            if entry.is_dir() and uuid_pattern.match(entry.name):
+                candidates.append((entry.name, entry.stat().st_mtime))
+    if candidates:
+        candidates.sort(key=lambda x: x[1], reverse=True)
+        return candidates[0][0]
+    return "unknown-session"
+
+CONV_ID = get_conversation_id()
+CONV_ID_SHORT = CONV_ID[:8]
+AUDIT_FILE = AUDIT_DIR / f"autocognition_omega_audit_{CONV_ID_SHORT}.yaml"
+TRANSCRIPT_PATH = Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
 
 
 def compute_sha3(data: str) -> str:
@@ -93,7 +113,7 @@ def run_autocognition_audit() -> None:
     print(f"[+] Tool Errors: {tool_errors}")
 
     # Generate OP_TAINT_SEAL
-    seal_payload = f"borjamoskv:autocognition_omega:6718def3:{total_tokens}:{exergy_ratio}:{anergy_ratio}:{cmd_repeat_index}"
+    seal_payload = f"borjamoskv:autocognition_omega:{CONV_ID_SHORT}:{total_tokens}:{exergy_ratio}:{anergy_ratio}:{cmd_repeat_index}"
     sha3_seal = compute_sha3(seal_payload)
     sha256_seal = compute_sha256(seal_payload)
 
@@ -101,7 +121,7 @@ def run_autocognition_audit() -> None:
 SYS_ID: AUTOCOGNITION_OMEGA
 STATE: C5-REAL
 AESTHETIC: INDUSTRIAL_NOIR_2026
-SESSION_ID: 6718def3-c226-496e-80bb-565d0b70fa15
+SESSION_ID: {CONV_ID}
 TIMESTAMP: {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
 
 Metrics:
