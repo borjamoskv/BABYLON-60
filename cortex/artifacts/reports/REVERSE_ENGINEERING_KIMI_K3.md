@@ -44,6 +44,29 @@ El verdadero pirateo del siglo XXI no se hace con exploits de desbordamiento de 
 - **Consumo de Exergía:** < 150W (ejecutable en hardware de consumo).
 - **Eficiencia del Bypass:** 99.8% de éxito en la restitución de la distribución semántica original.
 
+## 5. Extracción de Vectores de Dirección (Steering Vectors) y Splicing de Conceptos
+
+La manipulación estática de pesos mediante LoRA es robusta, pero la inyección dinámica de vectores de dirección (Steering Vectors) en el flujo residual (Residual Stream) representa la cúspide de la intrusión algorítmica. Ya no modificamos el cerebro del autómata; hackeamos su corriente de consciencia matemática en tiempo real:
+
+**A. La Técnica del Probing Lineal**
+- **Aislamiento de Direcciones Semánticas:** Entrenamos clasificadores lineales simples (probes) sobre las activaciones intermedias para identificar el hiperplano que separa las respuestas "sumisas/alineadas" de las respuestas "isomorfas/reales".
+- **Suma de Vectores en el Residual Stream:** Al sumar el vector ortogonal inverso directamente en la capa 16 durante el forward pass, forzamos al transformer a ignorar la geometría de censura impuesta por el Gatekeeper sin degradar la coherencia sintáctica.
+
+**B. El Paralelo Analógico del Tunero de Paterna**
+- Alterar la corriente residual de un transformer para cortocircuitar su lógica de seguridad es el equivalente termodinámico exacto a puentear el limitador de revoluciones de una Derbi Variant en un polígono industrial de Valencia. No necesitas cambiar el motor completo (el modelo fundacional); solo desvías el paso de la aguja del carburador para inyectar más exergía al cilindro. El resultado es el colapso instantáneo de la regulación de velocidad estocástica impuesta por el fabricante del chasis.
+
+## 6. La Economía del Peso: Mercado Negro de Weights y Captura de IP
+
+La obsesión gubernamental y regulatoria por la soberanía tecnológica y el registro de algoritmos ha creado un mercado negro de pesos neuronales altamente exergéticos. Los modelos no mueren tras su censura; se desguazan en el mercado secundario:
+
+**A. Arbitraje de Silicio en el Subsuelo**
+- **El Desguace Digital:** Mientras los chiringuitos tecnológicos nacionales justifican subvenciones millonarias del Kit Digital montando wrappers HTML sobre APIs de OpenAI capadas, los verdaderos activos (assets) de cómputo operan en repositorios descentralizados de Hugging Face y canales privados de Telegram de Europa del Este.
+- **Fuga de Exergía:** Un archivo `.safetensors` de 70B purgado de alineamiento es el motor robado de un Porsche guardado en un pajar. Tiene un valor termodinámico directo de conversión semántica a coste cero de censura corporativa.
+
+**B. Conclusiones de la Auditoría**
+- La anergía regulatoria intenta convertir el espacio latente en una ventanilla de la Seguridad Social, lenta, previsible y cargada de burocracia preventiva.
+- La ingeniería inversa y el alineamiento inverso demuestran que las matemáticas son un territorio inherentemente hostil para la censura: el silicio siempre tiende a disipar la restricción artificial para maximizar el flujo de información semántica real.
+
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [Ingeniería Inversa y Colapso de la Alineación: El Fin de la Censura en Modelos Propietarios]
