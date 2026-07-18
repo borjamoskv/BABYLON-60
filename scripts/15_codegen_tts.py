@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -20,96 +22,105 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type TTSPrimitive int",
         "type TTSModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
-        lines.append(f"\tTTSDomain{domains[i].replace('_', '').capitalize()} TTSDomain = {i}")
+        lines.append(
+            f"\tTTSDomain{domains[i].replace('_', '').capitalize()} TTSDomain = {i}"
+        )
     lines.append("\n\t// TTS Primitives")
     for i in range(10):
-        lines.append(f"\tTTSPrimitive{primitives[i].replace('_', '').capitalize()} TTSPrimitive = {i}")
+        lines.append(
+            f"\tTTSPrimitive{primitives[i].replace('_', '').capitalize()} TTSPrimitive = {i}"
+        )
     lines.append("\n\t// TTS Modifiers")
     for i in range(10):
-        lines.append(f"\tTTSModifier{modifiers[i].replace('_', '').capitalize()} TTSModifier = {i}")
+        lines.append(
+            f"\tTTSModifier{modifiers[i].replace('_', '').capitalize()} TTSModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d TTSDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d TTSDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p TTSPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p TTSPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m TTSModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m TTSModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type TTSHarnessIdentity struct {",
-        "\tDomain    TTSDomain",
-        "\tPrimitive TTSPrimitive",
-        "\tModifier  TTSModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type TTSHarnessState struct {",
-        "\tMCTSBudgetTokens uint64",
-        "\tLatentValue      float64",
-        "\tHarnessScore     float64",
-        "\tKVCacheEfficiency float64",
-        "\tPruningRate      float64",
-        "\tExecutionCount   uint64",
-        "}",
-        "",
-        "func ResolveTTSHarnessIdentity(d, p, m byte) (TTSHarnessIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn TTSHarnessIdentity{}, errors.New("tts harness index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("TTS-%s-%s-%s", TTSDomain(d).String(), TTSPrimitive(p).String(), TTSModifier(m).String())',
-        "\treturn TTSHarnessIdentity{",
-        "\t\tDomain:    TTSDomain(d),",
-        "\t\tPrimitive: TTSPrimitive(p),",
-        "\t\tModifier:  TTSModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type TTSHarnessHandler func(id TTSHarnessIdentity, state *TTSHarnessState) error",
-        "",
-        "var (",
-        "\tTTSHarnessTable [1000]TTSHarnessHandler",
-        "\tTTSHarnessMetrics [1000]uint64",
-        ")",
-        "",
-        "func InitTTSHarnessKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type TTSHarnessIdentity struct {",
+            "\tDomain    TTSDomain",
+            "\tPrimitive TTSPrimitive",
+            "\tModifier  TTSModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type TTSHarnessState struct {",
+            "\tMCTSBudgetTokens uint64",
+            "\tLatentValue      float64",
+            "\tHarnessScore     float64",
+            "\tKVCacheEfficiency float64",
+            "\tPruningRate      float64",
+            "\tExecutionCount   uint64",
+            "}",
+            "",
+            "func ResolveTTSHarnessIdentity(d, p, m byte) (TTSHarnessIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn TTSHarnessIdentity{}, errors.New("tts harness index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("TTS-%s-%s-%s", TTSDomain(d).String(), TTSPrimitive(p).String(), TTSModifier(m).String())',
+            "\treturn TTSHarnessIdentity{",
+            "\t\tDomain:    TTSDomain(d),",
+            "\t\tPrimitive: TTSPrimitive(p),",
+            "\t\tModifier:  TTSModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type TTSHarnessHandler func(id TTSHarnessIdentity, state *TTSHarnessState) error",
+            "",
+            "var (",
+            "\tTTSHarnessTable [1000]TTSHarnessHandler",
+            "\tTTSHarnessMetrics [1000]uint64",
+            ")",
+            "",
+            "func InitTTSHarnessKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -125,31 +136,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchTTSHarness(d, p, m byte, state *TTSHarnessState) error {",
-        "\tidentity, err := ResolveTTSHarnessIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := TTSHarnessTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("tts harness kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, state)",
-        "}",
-        "",
-        "func GetTTSHarnessExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&TTSHarnessMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchTTSHarness(d, p, m byte, state *TTSHarnessState) error {",
+            "\tidentity, err := ResolveTTSHarnessIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := TTSHarnessTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("tts harness kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, state)",
+            "}",
+            "",
+            "func GetTTSHarnessExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&TTSHarnessMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go tts harness primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -188,7 +202,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_tts_harness(d: u8, p: u8, m: u8, state: &mut TTSHarnessState) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"TTS Harness indices out of bounds [0-9]\".to_string());",
+        '        return Err("TTS Harness indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    state.execution_count += 1;",
@@ -198,13 +212,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    state.kv_cache_efficiency = 1.0f64.min(0.2 + ((code % 10) as f64) * 0.08);",
         "    state.pruning_rate = 1.0 - state.kv_cache_efficiency * 0.5;",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust tts harness in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -241,13 +256,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "    state.kv_cache_efficiency = min(1.0, 0.2 + (code % 10) * 0.08)",
         "    state.pruning_rate = 1.0 - state.kv_cache_efficiency * 0.5",
         "    return code, name, state.harness_score",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python tts harness in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -282,13 +298,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 tts harness primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 TTS & Harness Primitives. Final Score: %f", state.HarnessScore)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/tts_harness_1000_taxonomy.yaml"
@@ -296,12 +313,13 @@ def main() -> None:
     rust_output = "src-tauri/src/tts_harness.rs"
     py_output = "cortex/tts_harness.py"
     go_test_output = "primitives/tts_harness_test.go"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
     generate_python(domains, primitives, modifiers, py_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
+
 
 if __name__ == "__main__":
     main()

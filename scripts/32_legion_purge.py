@@ -4,13 +4,17 @@ import json
 import subprocess
 import time
 
+
 def run_ruff_fix() -> None:
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")
     try:
-        res = subprocess.run(["ruff", "check", ".", "--fix"], capture_output=True, text=True, check=True)
+        res = subprocess.run(
+            ["ruff", "check", ".", "--fix"], capture_output=True, text=True, check=True
+        )
         print(res.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix failed: {e.stdout}\n{e.stderr}")
+
 
 def execute_swarm_audit() -> None:
     home = os.path.expanduser("~")
@@ -26,9 +30,13 @@ def execute_swarm_audit() -> None:
     if ThermodynamicSwarmCompiler:
         compiler = ThermodynamicSwarmCompiler(
             goal="PURGA MASIVA DE ENTROPIA across 10000 primitives (LEGION 10K)",
-            target_files=["primitives/primitives.go", "src-tauri/src/kernel.rs", "src/App.tsx"]
+            target_files=[
+                "primitives/primitives.go",
+                "src-tauri/src/kernel.rs",
+                "src/App.tsx",
+            ],
         )
-    
+
     # Custom compile with 10 blocks x 10 agents = 100 agents
     subagents = []
     block_definitions = [
@@ -41,38 +49,67 @@ def execute_swarm_audit() -> None:
         ("BFT-Validator", "Consensus boundary checking"),
         ("Metric-Collector", "Exergy and anergy metric calculation"),
         ("Apoptosis-Trigger", "Dead thread pruning"),
-        ("Sentinel-Guard", "Git index health monitoring")
+        ("Sentinel-Guard", "Git index health monitoring"),
     ]
-    
+
     total_id = 1
     for b_idx in range(10):
         role_base, subtask_base = block_definitions[b_idx]
         for a_idx in range(10):
-            role = f"B{b_idx+1}-{role_base}-{a_idx+1:02d}"
-            prompt_str = compiler._compile_prompt_invariant(
-                role=role,
-                subtask=f"[BLOQUE {b_idx+1}/10] {subtask_base}\nMETA: PURGA MASIVA DE ENTROPIA",
-                vector=f"Partition-{b_idx+1}.{a_idx+1}",
-                bft_id=total_id
-            ) if ThermodynamicSwarmCompiler else f"Agent {role}"
-            subagents.append({
-                "TypeName": "self" if b_idx > 0 else "research",
-                "Role": role,
-                "Prompt": prompt_str,
-                "Workspace": "branch" if b_idx in [1, 2, 3, 5, 6] else ("inherit" if b_idx in [0, 7] else "share")
-            })
+            role = f"B{b_idx + 1}-{role_base}-{a_idx + 1:02d}"
+            prompt_str = (
+                compiler._compile_prompt_invariant(
+                    role=role,
+                    subtask=f"[BLOQUE {b_idx + 1}/10] {subtask_base}\nMETA: PURGA MASIVA DE ENTROPIA",
+                    vector=f"Partition-{b_idx + 1}.{a_idx + 1}",
+                    bft_id=total_id,
+                )
+                if ThermodynamicSwarmCompiler
+                else f"Agent {role}"
+            )
+            subagents.append(
+                {
+                    "TypeName": "self" if b_idx > 0 else "research",
+                    "Role": role,
+                    "Prompt": prompt_str,
+                    "Workspace": "branch"
+                    if b_idx in [1, 2, 3, 5, 6]
+                    else ("inherit" if b_idx in [0, 7] else "share"),
+                }
+            )
             total_id += 1
 
     print(f"✅ Swarm compiled: {len(subagents)} nodes registered.")
-    
-    transcript_path = os.getenv("CORTEX_TRANSCRIPT_PATH", os.path.join(home, ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl"))
+
+    transcript_path = os.getenv(
+        "CORTEX_TRANSCRIPT_PATH",
+        os.path.join(
+            home,
+            ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl",
+        ),
+    )
     print("⚡ [LEA_OMEGA] Running cognitive audit...")
-    audit_script = os.getenv("CORTEX_AUDIT_SCRIPT", os.path.join(home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"))
-    
+    audit_script = os.getenv(
+        "CORTEX_AUDIT_SCRIPT",
+        os.path.join(
+            home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"
+        ),
+    )
+
     try:
-        res = subprocess.run(["python3", audit_script, transcript_path], capture_output=True, text=True, check=True)
+        res = subprocess.run(
+            ["python3", audit_script, transcript_path],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
         audit_results = json.loads(res.stdout)
-    except (subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError, OSError) as e:
+    except (
+        subprocess.CalledProcessError,
+        json.JSONDecodeError,
+        FileNotFoundError,
+        OSError,
+    ) as e:
         audit_results = {"error": f"Failed to run cognitive audit: {str(e)}"}
 
     # Generate massive report
@@ -83,7 +120,7 @@ Claim: C5-REAL LEGION 10K ANERGY PURGE & COGNITIVE CONGRUENCE VERIFIED
 Proof:
   Base: "100 Swarm Agents (10 Blocks x 10 Nodes) acting on 10000 Primitives (LEGION 10K)"
   Confidence: C5-REAL
-  ExergyRatio: {audit_results.get('exergy_metrics', {}).get('exergy_ratio', 0.0823)}
+  ExergyRatio: {audit_results.get("exergy_metrics", {}).get("exergy_ratio", 0.0823)}
   OP_TAINT_SEAL: borjamoskv:anergy_purge:100_agents_legion_10k:{int(time.time())}
 ```
 
@@ -112,10 +149,10 @@ Static cleanups completed successfully. All PEP8 and unused import violations ha
 ---
 
 ## 3. Cognitive & Exergy Metrics
-- **Transcript Steps Analyzed**: {audit_results.get('metadata', {}).get('total_steps', 0)} steps.
-- **Exergy Ratio**: {audit_results.get('exergy_metrics', {}).get('exergy_ratio', 0.0)}
-- **Anergy Ratio**: {audit_results.get('exergy_metrics', {}).get('anergy_ratio', 0.0)}
-- **Sequential Command Loops**: {audit_results.get('loop_detection', {}).get('sequential_repeats', 0)}
+- **Transcript Steps Analyzed**: {audit_results.get("metadata", {}).get("total_steps", 0)} steps.
+- **Exergy Ratio**: {audit_results.get("exergy_metrics", {}).get("exergy_ratio", 0.0)}
+- **Anergy Ratio**: {audit_results.get("exergy_metrics", {}).get("anergy_ratio", 0.0)}
+- **Sequential Command Loops**: {audit_results.get("loop_detection", {}).get("sequential_repeats", 0)}
 
 ```yaml
 Status: COMPLETED_ABSOLUTE_COLLAPSE
@@ -127,6 +164,7 @@ CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:anergy_purge_100:2026-07-18T00:39:00+00:0
     with open(report_path, "w") as f:
         f.write(report_content)
     print(f"✅ Unified Report written to: {report_path}")
+
 
 if __name__ == "__main__":
     run_ruff_fix()

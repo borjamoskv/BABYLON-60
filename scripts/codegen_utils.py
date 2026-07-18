@@ -3,6 +3,7 @@ codegen_utils.py — Shared primitives for YAML-to-code generation pipeline.
 Extracted from generate_*.py scripts (C5-REAL DRY enforcement).
 DO NOT duplicate parse_yaml or write_output in individual generators.
 """
+
 from __future__ import annotations
 
 import os

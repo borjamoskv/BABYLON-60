@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -20,96 +22,105 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type ConstantsPrimitive int",
         "type ConstantsModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
-        lines.append(f"\tConstantsDomain{domains[i].replace('_', '').capitalize()} ConstantsDomain = {i}")
+        lines.append(
+            f"\tConstantsDomain{domains[i].replace('_', '').capitalize()} ConstantsDomain = {i}"
+        )
     lines.append("\n\t// Constants Primitives")
     for i in range(10):
-        lines.append(f"\tConstantsPrimitive{primitives[i].replace('_', '').capitalize()} ConstantsPrimitive = {i}")
+        lines.append(
+            f"\tConstantsPrimitive{primitives[i].replace('_', '').capitalize()} ConstantsPrimitive = {i}"
+        )
     lines.append("\n\t// Constants Modifiers")
     for i in range(10):
-        lines.append(f"\tConstantsModifier{modifiers[i].replace('_', '').capitalize()} ConstantsModifier = {i}")
+        lines.append(
+            f"\tConstantsModifier{modifiers[i].replace('_', '').capitalize()} ConstantsModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d ConstantsDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d ConstantsDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p ConstantsPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p ConstantsPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m ConstantsModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m ConstantsModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type ConstantsIdentity struct {",
-        "\tDomain    ConstantsDomain",
-        "\tPrimitive ConstantsPrimitive",
-        "\tModifier  ConstantsModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type ConstantsStateVector struct {",
-        "\tPlanckScaleRatio        float64",
-        "\tGravitationalCoupling   float64",
-        "\tElectromagneticShielding float64",
-        "\tQuantumEntropy          float64",
-        "\tSingularityDensity      float64",
-        "\tExecutionCount          uint64",
-        "}",
-        "",
-        "func ResolveConstantsIdentity(d, p, m byte) (ConstantsIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn ConstantsIdentity{}, errors.New("constants index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("CONST-%s-%s-%s", ConstantsDomain(d).String(), ConstantsPrimitive(p).String(), ConstantsModifier(m).String())',
-        "\treturn ConstantsIdentity{",
-        "\t\tDomain:    ConstantsDomain(d),",
-        "\t\tPrimitive: ConstantsPrimitive(p),",
-        "\t\tModifier:  ConstantsModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type ConstantsHandler func(id ConstantsIdentity, vec *ConstantsStateVector) error",
-        "",
-        "var (",
-        "\tConstantsTable [1000]ConstantsHandler",
-        "\tConstantsMetrics [1000]uint64",
-        ")",
-        "",
-        "func InitConstantsKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type ConstantsIdentity struct {",
+            "\tDomain    ConstantsDomain",
+            "\tPrimitive ConstantsPrimitive",
+            "\tModifier  ConstantsModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type ConstantsStateVector struct {",
+            "\tPlanckScaleRatio        float64",
+            "\tGravitationalCoupling   float64",
+            "\tElectromagneticShielding float64",
+            "\tQuantumEntropy          float64",
+            "\tSingularityDensity      float64",
+            "\tExecutionCount          uint64",
+            "}",
+            "",
+            "func ResolveConstantsIdentity(d, p, m byte) (ConstantsIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn ConstantsIdentity{}, errors.New("constants index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("CONST-%s-%s-%s", ConstantsDomain(d).String(), ConstantsPrimitive(p).String(), ConstantsModifier(m).String())',
+            "\treturn ConstantsIdentity{",
+            "\t\tDomain:    ConstantsDomain(d),",
+            "\t\tPrimitive: ConstantsPrimitive(p),",
+            "\t\tModifier:  ConstantsModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type ConstantsHandler func(id ConstantsIdentity, vec *ConstantsStateVector) error",
+            "",
+            "var (",
+            "\tConstantsTable [1000]ConstantsHandler",
+            "\tConstantsMetrics [1000]uint64",
+            ")",
+            "",
+            "func InitConstantsKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -125,31 +136,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchConstants(d, p, m byte, vec *ConstantsStateVector) error {",
-        "\tidentity, err := ResolveConstantsIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := ConstantsTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("constants kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, vec)",
-        "}",
-        "",
-        "func GetConstantsExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&ConstantsMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchConstants(d, p, m byte, vec *ConstantsStateVector) error {",
+            "\tidentity, err := ResolveConstantsIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := ConstantsTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("constants kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, vec)",
+            "}",
+            "",
+            "func GetConstantsExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&ConstantsMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go constants primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -188,7 +202,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_constants(d: u8, p: u8, m: u8, vec: &mut ConstantsStateVector) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"Constants indices out of bounds [0-9]\".to_string());",
+        '        return Err("Constants indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    vec.execution_count += 1;",
@@ -198,13 +212,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    vec.quantum_entropy = (vec.quantum_entropy * 0.99 + 1.054571817e-34 * (code as f64)).max(0.0);",
         "    vec.singularity_density = vec.gravitational_coupling / (vec.planck_scale_ratio * vec.planck_scale_ratio).max(1e-100);",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust Constants in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -241,13 +256,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "    vec.quantum_entropy = max(0.0, vec.quantum_entropy * 0.99 + 1.054571817e-34 * code)",
         "    vec.singularity_density = vec.gravitational_coupling / max(1e-100, vec.planck_scale_ratio ** 2)",
         "    return code, name, vec.singularity_density",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python Constants in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -282,13 +298,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 Constants primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Constants Primitives. Final Quantum Entropy: %e", vec.QuantumEntropy)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -311,13 +328,14 @@ def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
         "",
         "if __name__ == '__main__':",
         "    unittest.main()",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/fundamental_constants_1000_taxonomy.yaml"
@@ -326,13 +344,14 @@ def main() -> None:
     py_output = "cortex/fundamental_constants.py"
     go_test_output = "primitives/fundamental_constants_test.go"
     py_test_output = "cortex/fundamental_constants_test.py"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
     generate_python(domains, primitives, modifiers, py_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
     generate_python_test(domains, primitives, modifiers, py_test_output)
+
 
 if __name__ == "__main__":
     main()

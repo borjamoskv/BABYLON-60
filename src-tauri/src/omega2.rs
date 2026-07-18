@@ -148,7 +148,9 @@ impl<'a, T: Clone + fmt::Debug + PartialEq> StrategyExecutor<'a, T> {
                     }
 
                     // Check if state actually mutated. If not, break to prevent infinite loops.
-                    if graph.nodes.len() == snap_nodes.len() && graph.edges.len() == snap_edges.len() {
+                    if graph.nodes.len() == snap_nodes.len()
+                        && graph.edges.len() == snap_edges.len()
+                    {
                         break;
                     }
                 }
@@ -343,7 +345,10 @@ mod tests {
         let outcome = exec.execute(&mut g, &seq, &mut trace);
         assert_eq!(outcome, StrategyOutcome::Success);
         assert_eq!(g.node_count(), 2);
-        assert_eq!(trace.applied_rules, vec!["add_1".to_string(), "add_2".to_string()]);
+        assert_eq!(
+            trace.applied_rules,
+            vec!["add_1".to_string(), "add_2".to_string()]
+        );
     }
 
     #[test]
@@ -432,7 +437,11 @@ mod tests {
         let exec = StrategyExecutor::new(&rules, &[]);
         let mut trace = Trace::default();
 
-        let outcome = exec.execute(&mut g, &Strategy::Try(Box::new(Strategy::Apply("fail".to_string()))), &mut trace);
+        let outcome = exec.execute(
+            &mut g,
+            &Strategy::Try(Box::new(Strategy::Apply("fail".to_string()))),
+            &mut trace,
+        );
         assert_eq!(outcome, StrategyOutcome::Success);
         assert!(g.is_empty());
         assert!(trace.applied_rules.is_empty());

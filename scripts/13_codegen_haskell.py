@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -20,96 +22,105 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type HaskellPrimitive int",
         "type HaskellModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
-        lines.append(f"\tHaskellDomain{domains[i].replace('_', '').capitalize()} HaskellDomain = {i}")
+        lines.append(
+            f"\tHaskellDomain{domains[i].replace('_', '').capitalize()} HaskellDomain = {i}"
+        )
     lines.append("\n\t// Haskell Primitives")
     for i in range(10):
-        lines.append(f"\tHaskellPrimitive{primitives[i].replace('_', '').capitalize()} HaskellPrimitive = {i}")
+        lines.append(
+            f"\tHaskellPrimitive{primitives[i].replace('_', '').capitalize()} HaskellPrimitive = {i}"
+        )
     lines.append("\n\t// Haskell Modifiers")
     for i in range(10):
-        lines.append(f"\tHaskellModifier{modifiers[i].replace('_', '').capitalize()} HaskellModifier = {i}")
+        lines.append(
+            f"\tHaskellModifier{modifiers[i].replace('_', '').capitalize()} HaskellModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d HaskellDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d HaskellDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p HaskellPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p HaskellPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m HaskellModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m HaskellModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type HaskellIdentity struct {",
-        "\tDomain    HaskellDomain",
-        "\tPrimitive HaskellPrimitive",
-        "\tModifier  HaskellModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type HaskellStateVector struct {",
-        "\tThunkDepth     float64",
-        "\tMonadicDepth   float64",
-        "\tCategoryDepth  float64",
-        "\tConcurrency    float64",
-        "\tCompileCost    float64",
-        "\tExecutionCount uint64",
-        "}",
-        "",
-        "func ResolveHaskellIdentity(d, p, m byte) (HaskellIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn HaskellIdentity{}, errors.New("haskell index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("HS-%s-%s-%s", HaskellDomain(d).String(), HaskellPrimitive(p).String(), HaskellModifier(m).String())',
-        "\treturn HaskellIdentity{",
-        "\t\tDomain:    HaskellDomain(d),",
-        "\t\tPrimitive: HaskellPrimitive(p),",
-        "\t\tModifier:  HaskellModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type HaskellHandler func(id HaskellIdentity, vec *HaskellStateVector) error",
-        "",
-        "var (",
-        "\tHaskellTable [1000]HaskellHandler",
-        "\tHaskellMetrics [1000]uint64",
-        ")",
-        "",
-        "func InitHaskellKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type HaskellIdentity struct {",
+            "\tDomain    HaskellDomain",
+            "\tPrimitive HaskellPrimitive",
+            "\tModifier  HaskellModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type HaskellStateVector struct {",
+            "\tThunkDepth     float64",
+            "\tMonadicDepth   float64",
+            "\tCategoryDepth  float64",
+            "\tConcurrency    float64",
+            "\tCompileCost    float64",
+            "\tExecutionCount uint64",
+            "}",
+            "",
+            "func ResolveHaskellIdentity(d, p, m byte) (HaskellIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn HaskellIdentity{}, errors.New("haskell index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("HS-%s-%s-%s", HaskellDomain(d).String(), HaskellPrimitive(p).String(), HaskellModifier(m).String())',
+            "\treturn HaskellIdentity{",
+            "\t\tDomain:    HaskellDomain(d),",
+            "\t\tPrimitive: HaskellPrimitive(p),",
+            "\t\tModifier:  HaskellModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type HaskellHandler func(id HaskellIdentity, vec *HaskellStateVector) error",
+            "",
+            "var (",
+            "\tHaskellTable [1000]HaskellHandler",
+            "\tHaskellMetrics [1000]uint64",
+            ")",
+            "",
+            "func InitHaskellKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -125,31 +136,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchHaskell(d, p, m byte, vec *HaskellStateVector) error {",
-        "\tidentity, err := ResolveHaskellIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := HaskellTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("haskell kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, vec)",
-        "}",
-        "",
-        "func GetHaskellExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&HaskellMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchHaskell(d, p, m byte, vec *HaskellStateVector) error {",
+            "\tidentity, err := ResolveHaskellIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := HaskellTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("haskell kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, vec)",
+            "}",
+            "",
+            "func GetHaskellExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&HaskellMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go Haskell primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -188,7 +202,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_haskell(d: u8, p: u8, m: u8, vec: &mut HaskellStateVector) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"Haskell indices out of bounds [0-9]\".to_string());",
+        '        return Err("Haskell indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    vec.execution_count += 1;",
@@ -198,13 +212,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    vec.concurrency = vec.category_depth * (((code % 10) as f64) + 1.0);",
         "    vec.compile_cost = (1.0 + vec.concurrency).log2();",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust Haskell in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -241,13 +256,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "    vec.concurrency = vec.category_depth * ((code % 10) + 1.0)",
         "    vec.compile_cost = math.log2(1.0 + vec.concurrency)",
         "    return code, name, vec.compile_cost",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python Haskell in {output_path}")
+
 
 def generate_haskell_native(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -263,72 +279,78 @@ def generate_haskell_native(domains, primitives, modifiers, output_path) -> Any:
         "    resolveHaskellIdentity",
         ") where",
         "",
-        "data HaskellDomain"
+        "data HaskellDomain",
     ]
-    
+
     # Domain constructors
     for i in range(10):
         prefix = "    = " if i == 0 else "    | "
         lines.append(f"{prefix}HaskellDomain{domains[i].replace('_', '').capitalize()}")
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
-    
+
     # Primitive constructors
     lines.append("data HaskellPrimitive")
     for i in range(10):
         prefix = "    = " if i == 0 else "    | "
-        lines.append(f"{prefix}HaskellPrimitive{primitives[i].replace('_', '').capitalize()}")
+        lines.append(
+            f"{prefix}HaskellPrimitive{primitives[i].replace('_', '').capitalize()}"
+        )
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
 
     # Modifier constructors
     lines.append("data HaskellModifier")
     for i in range(10):
         prefix = "    = " if i == 0 else "    | "
-        lines.append(f"{prefix}HaskellModifier{modifiers[i].replace('_', '').capitalize()}")
+        lines.append(
+            f"{prefix}HaskellModifier{modifiers[i].replace('_', '').capitalize()}"
+        )
     lines.append("    deriving (Show, Eq, Enum, Bounded)\n")
 
-    lines.extend([
-        "data HaskellIdentity = HaskellIdentity",
-        "    { domain    :: HaskellDomain",
-        "    , primitive :: HaskellPrimitive",
-        "    , modifier  :: HaskellModifier",
-        "    , code      :: Int",
-        "    , name      :: String",
-        "    } deriving (Show, Eq)",
-        "",
-        "data HaskellStateVector = HaskellStateVector",
-        "    { thunkDepth     :: Double",
-        "    , monadicDepth   :: Double",
-        "    , categoryDepth  :: Double",
-        "    , concurrency    :: Double",
-        "    , compileCost    :: Double",
-        "    , executionCount :: Int",
-        "    } deriving (Show, Eq)",
-        "",
-        "initialState :: HaskellStateVector",
-        "initialState = HaskellStateVector 1.0 0.0 1.0 0.0 0.0 0",
-        "",
-        "resolveHaskellIdentity :: Int -> Either String HaskellIdentity",
-        "resolveHaskellIdentity c",
-        "    | c < 0 || c >= 1000 = Left \"Index out of range [0-999]\"",
-        "    | otherwise = Right HaskellIdentity",
-        "        { domain    = toEnum d",
-        "        , primitive = toEnum p",
-        "        , modifier  = toEnum m",
-        "        , code      = c",
-        "        , name      = \"HS-\" ++ showDomain d ++ \"-\" ++ showPrimitive p ++ \"-\" ++ showModifier m",
-        "        }",
-        "  where",
-        "    d = c `div` 100",
-        "    p = (c `mod` 100) `div` 10",
-        "    m = c `mod` 10",
-        "",
-        "    showDomain :: Int -> String"
-    ])
-    
+    lines.extend(
+        [
+            "data HaskellIdentity = HaskellIdentity",
+            "    { domain    :: HaskellDomain",
+            "    , primitive :: HaskellPrimitive",
+            "    , modifier  :: HaskellModifier",
+            "    , code      :: Int",
+            "    , name      :: String",
+            "    } deriving (Show, Eq)",
+            "",
+            "data HaskellStateVector = HaskellStateVector",
+            "    { thunkDepth     :: Double",
+            "    , monadicDepth   :: Double",
+            "    , categoryDepth  :: Double",
+            "    , concurrency    :: Double",
+            "    , compileCost    :: Double",
+            "    , executionCount :: Int",
+            "    } deriving (Show, Eq)",
+            "",
+            "initialState :: HaskellStateVector",
+            "initialState = HaskellStateVector 1.0 0.0 1.0 0.0 0.0 0",
+            "",
+            "resolveHaskellIdentity :: Int -> Either String HaskellIdentity",
+            "resolveHaskellIdentity c",
+            '    | c < 0 || c >= 1000 = Left "Index out of range [0-999]"',
+            "    | otherwise = Right HaskellIdentity",
+            "        { domain    = toEnum d",
+            "        , primitive = toEnum p",
+            "        , modifier  = toEnum m",
+            "        , code      = c",
+            '        , name      = "HS-" ++ showDomain d ++ "-" ++ showPrimitive p ++ "-" ++ showModifier m',
+            "        }",
+            "  where",
+            "    d = c `div` 100",
+            "    p = (c `mod` 100) `div` 10",
+            "    m = c `mod` 10",
+            "",
+            "    showDomain :: Int -> String",
+        ]
+    )
+
     for i in range(10):
         lines.append(f'    showDomain {i} = "{domains[i]}"')
     lines.append('    showDomain _ = "UNKNOWN"')
-    
+
     lines.append("\n    showPrimitive :: Int -> String")
     for i in range(10):
         lines.append(f'    showPrimitive {i} = "{primitives[i]}"')
@@ -339,25 +361,28 @@ def generate_haskell_native(domains, primitives, modifiers, output_path) -> Any:
         lines.append(f'    showModifier {i} = "{modifiers[i]}"')
     lines.append('    showModifier _ = "UNKNOWN"')
 
-    lines.extend([
-        "",
-        "dispatchHaskell :: Int -> HaskellStateVector -> Either String HaskellStateVector",
-        "dispatchHaskell c vec",
-        "    | c < 0 || c >= 1000 = Left \"Index out of range\"",
-        "    | otherwise = Right $ vec",
-        "        { thunkDepth     = max 0.01 (thunkDepth vec * 0.98 + 0.02 * cos (fromIntegral c))",
-        "        , monadicDepth   = abs (sin (fromIntegral c) * 0.1 - thunkDepth vec * 0.05)",
-        "        , categoryDepth  = 1.0 / (1.0 + monadicDepth vec)",
-        "        , concurrency    = categoryDepth vec * (fromIntegral (c `mod` 10) + 1.0)",
-        "        , compileCost    = logBase 2.0 (1.0 + concurrency vec)",
-        "        , executionCount = executionCount vec + 1",
-        "        }"
-    ])
+    lines.extend(
+        [
+            "",
+            "dispatchHaskell :: Int -> HaskellStateVector -> Either String HaskellStateVector",
+            "dispatchHaskell c vec",
+            '    | c < 0 || c >= 1000 = Left "Index out of range"',
+            "    | otherwise = Right $ vec",
+            "        { thunkDepth     = max 0.01 (thunkDepth vec * 0.98 + 0.02 * cos (fromIntegral c))",
+            "        , monadicDepth   = abs (sin (fromIntegral c) * 0.1 - thunkDepth vec * 0.05)",
+            "        , categoryDepth  = 1.0 / (1.0 + monadicDepth vec)",
+            "        , concurrency    = categoryDepth vec * (fromIntegral (c `mod` 10) + 1.0)",
+            "        , compileCost    = logBase 2.0 (1.0 + concurrency vec)",
+            "        , executionCount = executionCount vec + 1",
+            "        }",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Haskell native file in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -392,13 +417,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 Haskell primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Haskell Primitives. Final Cost: %f", vec.CompileCost)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -421,13 +447,14 @@ def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
         "",
         "if __name__ == '__main__':",
         "    unittest.main()",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/haskell_1000_taxonomy.yaml"
@@ -437,7 +464,7 @@ def main() -> None:
     haskell_output = "primitives/Haskell1000.hs"
     go_test_output = "primitives/haskell_1000_test.go"
     py_test_output = "cortex/haskell_1000_test.py"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
@@ -445,6 +472,7 @@ def main() -> None:
     generate_haskell_native(domains, primitives, modifiers, haskell_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
     generate_python_test(domains, primitives, modifiers, py_test_output)
+
 
 if __name__ == "__main__":
     main()

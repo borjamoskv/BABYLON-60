@@ -35,12 +35,12 @@ class SwarmFSM:
         if not matrix or not isinstance(matrix, dict):
             self.memory.log(issue_id, "fsm", "epistemic_violation", "MISSING_MATRIX")
             return False
-            
+
         required_axes = {"primitiva", "objetivo", "knowns", "unknowns"}
         if not required_axes.issubset(matrix.keys()):
             self.memory.log(issue_id, "fsm", "epistemic_violation", "INCOMPLETE_AXES")
             return False
-            
+
         return True
 
     def transition_state(

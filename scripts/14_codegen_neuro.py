@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -20,96 +22,105 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type NeuroPrimitive int",
         "type NeuroModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
-        lines.append(f"\tNeuroDomain{domains[i].replace('_', '').capitalize()} NeuroDomain = {i}")
+        lines.append(
+            f"\tNeuroDomain{domains[i].replace('_', '').capitalize()} NeuroDomain = {i}"
+        )
     lines.append("\n\t// Neuro Primitives")
     for i in range(10):
-        lines.append(f"\tNeuroPrimitive{primitives[i].replace('_', '').capitalize()} NeuroPrimitive = {i}")
+        lines.append(
+            f"\tNeuroPrimitive{primitives[i].replace('_', '').capitalize()} NeuroPrimitive = {i}"
+        )
     lines.append("\n\t// Neuro Modifiers")
     for i in range(10):
-        lines.append(f"\tNeuroModifier{modifiers[i].replace('_', '').capitalize()} NeuroModifier = {i}")
+        lines.append(
+            f"\tNeuroModifier{modifiers[i].replace('_', '').capitalize()} NeuroModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d NeuroDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d NeuroDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p NeuroPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p NeuroPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m NeuroModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m NeuroModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type NeuroChainIdentity struct {",
-        "\tDomain    NeuroDomain",
-        "\tPrimitive NeuroPrimitive",
-        "\tModifier  NeuroModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type CognitiveChainVector struct {",
-        "\tHomeostasisEnergy float64",
-        "\tPredictionError   float64",
-        "\tAttentionWeight   float64",
-        "\tActionTorque      float64",
-        "\tLanguageEntropy   float64",
-        "\tExecutionCount    uint64",
-        "}",
-        "",
-        "func ResolveNeuroChainIdentity(d, p, m byte) (NeuroChainIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn NeuroChainIdentity{}, errors.New("neuro chain index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("NEURO-%s-%s-%s", NeuroDomain(d).String(), NeuroPrimitive(p).String(), NeuroModifier(m).String())',
-        "\treturn NeuroChainIdentity{",
-        "\t\tDomain:    NeuroDomain(d),",
-        "\t\tPrimitive: NeuroPrimitive(p),",
-        "\t\tModifier:  NeuroModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type NeuroChainHandler func(id NeuroChainIdentity, vec *CognitiveChainVector) error",
-        "",
-        "var (",
-        "\tNeuroChainTable [1000]NeuroChainHandler",
-        "\tNeuroChainMetrics [1000]uint64",
-        ")",
-        "",
-        "func InitNeuroChainKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type NeuroChainIdentity struct {",
+            "\tDomain    NeuroDomain",
+            "\tPrimitive NeuroPrimitive",
+            "\tModifier  NeuroModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type CognitiveChainVector struct {",
+            "\tHomeostasisEnergy float64",
+            "\tPredictionError   float64",
+            "\tAttentionWeight   float64",
+            "\tActionTorque      float64",
+            "\tLanguageEntropy   float64",
+            "\tExecutionCount    uint64",
+            "}",
+            "",
+            "func ResolveNeuroChainIdentity(d, p, m byte) (NeuroChainIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn NeuroChainIdentity{}, errors.New("neuro chain index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("NEURO-%s-%s-%s", NeuroDomain(d).String(), NeuroPrimitive(p).String(), NeuroModifier(m).String())',
+            "\treturn NeuroChainIdentity{",
+            "\t\tDomain:    NeuroDomain(d),",
+            "\t\tPrimitive: NeuroPrimitive(p),",
+            "\t\tModifier:  NeuroModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type NeuroChainHandler func(id NeuroChainIdentity, vec *CognitiveChainVector) error",
+            "",
+            "var (",
+            "\tNeuroChainTable [1000]NeuroChainHandler",
+            "\tNeuroChainMetrics [1000]uint64",
+            ")",
+            "",
+            "func InitNeuroChainKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -125,31 +136,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchNeuroChain(d, p, m byte, vec *CognitiveChainVector) error {",
-        "\tidentity, err := ResolveNeuroChainIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := NeuroChainTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("neuro chain kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, vec)",
-        "}",
-        "",
-        "func GetNeuroChainExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&NeuroChainMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchNeuroChain(d, p, m byte, vec *CognitiveChainVector) error {",
+            "\tidentity, err := ResolveNeuroChainIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := NeuroChainTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("neuro chain kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, vec)",
+            "}",
+            "",
+            "func GetNeuroChainExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&NeuroChainMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go neuro chain primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -188,7 +202,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, vec: &mut CognitiveChainVector) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"Neuro chain indices out of bounds [0-9]\".to_string());",
+        '        return Err("Neuro chain indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    vec.execution_count += 1;",
@@ -198,13 +212,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    vec.action_torque = vec.attention_weight * (((code % 10) as f64) + 1.0);",
         "    vec.language_entropy = (1.0 + vec.action_torque).log2();",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust neuro chain in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -241,13 +256,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "    vec.action_torque = vec.attention_weight * ((code % 10) + 1.0)",
         "    vec.language_entropy = math.log2(1.0 + vec.action_torque)",
         "    return code, name, vec.language_entropy",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python neuro chain in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -282,13 +298,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 neuro chain primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Neuro Chain Primitives. Final Entropy: %f", vec.LanguageEntropy)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/neuro_chain_1000_taxonomy.yaml"
@@ -296,12 +313,13 @@ def main() -> None:
     rust_output = "src-tauri/src/neuro_chain.rs"
     py_output = "cortex/neuro_chain.py"
     go_test_output = "primitives/neuro_chain_test.go"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
     generate_python(domains, primitives, modifiers, py_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
+
 
 if __name__ == "__main__":
     main()

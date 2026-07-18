@@ -1,5 +1,5 @@
-use std::sync::OnceLock;
 use std::convert::TryFrom;
+use std::sync::OnceLock;
 
 // 1000-Primitive Action Space Enums
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -155,7 +155,6 @@ impl Modifier {
     }
 }
 
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(u8)]
 pub enum Target {
@@ -231,7 +230,6 @@ impl PrimitiveIdentity {
             code,
         })
     }
-
 }
 
 impl std::fmt::Display for PrimitiveIdentity {
@@ -256,34 +254,32 @@ static KERNEL_TABLE: OnceLock<[Action; 10000]> = OnceLock::new();
 fn default_dispatch_handler(identity: &PrimitiveIdentity) {
     println!(
         "⚡ [{:04}] {} executed via base transductor.",
-        identity.code,
-        identity
+        identity.code, identity
     );
 }
 
 pub fn init_kernel() {
     let mut table = [default_dispatch_handler as Action; 10000];
-    
+
     // Retroactively populate all 1000 actions from the generated taxonomy module
     for (i, slot) in table.iter_mut().enumerate() {
         if let Some(action) = primitives_generated::get_generated_action(i) {
             *slot = action;
         }
     }
-    
+
     KERNEL_TABLE.set(table).ok();
 }
-
 
 #[tauri::command]
 pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
     let identity = PrimitiveIdentity::new(d, p, m, t).map_err(|e| e.to_string())?;
-    
+
     if let Some(table) = KERNEL_TABLE.get() {
         let index = identity.code as usize;
         if index < 10000 {
             let action = table[index];
-            
+
             // Async modifier handling:
             if identity.modifier == Modifier::Async {
                 let id_clone = identity.clone();
@@ -292,13 +288,13 @@ pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
                 });
                 return Ok(format!("Dispatched asynchronously: {}", identity));
             }
-            
+
             // Standard Sync Execution
             action(&identity);
             return Ok(format!("Dispatched: {}", identity));
         }
     }
-    
+
     Err("Kernel not initialized".to_string())
 }
 
@@ -312,15 +308,15 @@ mod tests {
     #[test]
     fn domain_try_from_all_valid_indices() {
         let cases: &[(u8, Domain, &str)] = &[
-            (0, Domain::Source,   "SOURCE"),
-            (1, Domain::Matrix,   "MATRIX"),
-            (2, Domain::Pulse,    "PULSE"),
-            (3, Domain::Kinetic,  "KINETIC"),
-            (4, Domain::Logic,    "LOGIC"),
-            (5, Domain::Vector,   "VECTOR"),
-            (6, Domain::Storage,  "STORAGE"),
-            (7, Domain::Osint,    "OSINT"),
-            (8, Domain::Clock,    "CLOCK"),
+            (0, Domain::Source, "SOURCE"),
+            (1, Domain::Matrix, "MATRIX"),
+            (2, Domain::Pulse, "PULSE"),
+            (3, Domain::Kinetic, "KINETIC"),
+            (4, Domain::Logic, "LOGIC"),
+            (5, Domain::Vector, "VECTOR"),
+            (6, Domain::Storage, "STORAGE"),
+            (7, Domain::Osint, "OSINT"),
+            (8, Domain::Clock, "CLOCK"),
             (9, Domain::Compiler, "COMPILER"),
         ];
         for &(idx, ref variant, label) in cases {
@@ -341,16 +337,16 @@ mod tests {
     #[test]
     fn primitive_try_from_all_valid_indices() {
         let cases: &[(u8, Primitive, &str)] = &[
-            (0, Primitive::Init,   "INIT"),
+            (0, Primitive::Init, "INIT"),
             (1, Primitive::Mutate, "MUTATE"),
-            (2, Primitive::Bind,   "BIND"),
-            (3, Primitive::Query,  "QUERY"),
+            (2, Primitive::Bind, "BIND"),
+            (3, Primitive::Query, "QUERY"),
             (4, Primitive::Stream, "STREAM"),
             (5, Primitive::Commit, "COMMIT"),
-            (6, Primitive::Sync,   "SYNC"),
-            (7, Primitive::Halt,   "HALT"),
-            (8, Primitive::Fork,   "FORK"),
-            (9, Primitive::Join,   "JOIN"),
+            (6, Primitive::Sync, "SYNC"),
+            (7, Primitive::Halt, "HALT"),
+            (8, Primitive::Fork, "FORK"),
+            (9, Primitive::Join, "JOIN"),
         ];
         for &(idx, ref variant, label) in cases {
             let p = Primitive::try_from(idx).expect("valid index must succeed");
@@ -370,16 +366,16 @@ mod tests {
     #[test]
     fn modifier_try_from_all_valid_indices() {
         let cases: &[(u8, Modifier, &str)] = &[
-            (0, Modifier::Raw,       "RAW"),
-            (1, Modifier::Atomic,    "ATOMIC"),
-            (2, Modifier::Persist,   "PERSIST"),
+            (0, Modifier::Raw, "RAW"),
+            (1, Modifier::Atomic, "ATOMIC"),
+            (2, Modifier::Persist, "PERSIST"),
             (3, Modifier::Ephemeral, "EPHEMERAL"),
-            (4, Modifier::Async,     "ASYNC"),
-            (5, Modifier::Sync,      "SYNC"),
+            (4, Modifier::Async, "ASYNC"),
+            (5, Modifier::Sync, "SYNC"),
             (6, Modifier::Quantized, "QUANTIZED"),
-            (7, Modifier::Mapped,    "MAPPED"),
-            (8, Modifier::Wrapped,   "WRAPPED"),
-            (9, Modifier::Locked,    "LOCKED"),
+            (7, Modifier::Mapped, "MAPPED"),
+            (8, Modifier::Wrapped, "WRAPPED"),
+            (9, Modifier::Locked, "LOCKED"),
         ];
         for &(idx, ref variant, label) in cases {
             let m = Modifier::try_from(idx).expect("valid index must succeed");
@@ -398,16 +394,16 @@ mod tests {
     #[test]
     fn target_try_from_all_valid_indices() {
         let cases: &[(u8, Target, &str)] = &[
-            (0, Target::Local,    "LOCAL"),
-            (1, Target::Network,  "NETWORK"),
-            (2, Target::Swarm,    "SWARM"),
-            (3, Target::Ledger,   "LEDGER"),
-            (4, Target::Memory,   "MEMORY"),
+            (0, Target::Local, "LOCAL"),
+            (1, Target::Network, "NETWORK"),
+            (2, Target::Swarm, "SWARM"),
+            (3, Target::Ledger, "LEDGER"),
+            (4, Target::Memory, "MEMORY"),
             (5, Target::Dispatch, "DISPATCH"),
-            (6, Target::Ui,       "UI"),
-            (7, Target::System,   "SYSTEM"),
-            (8, Target::Bft,      "BFT"),
-            (9, Target::Core,     "CORE"),
+            (6, Target::Ui, "UI"),
+            (7, Target::System, "SYSTEM"),
+            (8, Target::Bft, "BFT"),
+            (9, Target::Core, "CORE"),
         ];
         for &(idx, ref variant, label) in cases {
             let t = Target::try_from(idx).expect("valid index must succeed");

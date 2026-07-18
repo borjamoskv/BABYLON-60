@@ -27,20 +27,27 @@
 /// Every other justification type is syntactic sugar over these three.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Justification {
-    Axiom { label: &'static str },
+    Axiom {
+        label: &'static str,
+    },
     Derived {
         rule: &'static str,
         /// Indices into the owning `ProofContext`'s judgement table.
         antecedents: Vec<usize>,
     },
     /// SHA3-256 hash of the external evidence payload (Ω24: no MD5/SHA-1).
-    Empirical { anchor: [u8; 32] },
+    Empirical {
+        anchor: [u8; 32],
+    },
 }
 
 impl Justification {
     /// True iff the justification requires no antecedents in a proof context.
     pub fn is_ground(&self) -> bool {
-        matches!(self, Justification::Axiom { .. } | Justification::Empirical { .. })
+        matches!(
+            self,
+            Justification::Axiom { .. } | Justification::Empirical { .. }
+        )
     }
 }
 
@@ -261,7 +268,9 @@ mod tests {
 
     #[test]
     fn axiom_is_ground() {
-        let j = Justification::Axiom { label: "reflexivity" };
+        let j = Justification::Axiom {
+            label: "reflexivity",
+        };
         assert!(j.is_ground());
     }
 

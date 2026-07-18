@@ -37,17 +37,17 @@ func TestResolveOutOfRange(t *testing.T) {
 	if err == nil {
 		t.Error("Expected error for out-of-range domain")
 	}
-	
+
 	_, err = ResolveIdentity(0, 10, 0, 0)
 	if err == nil {
 		t.Error("Expected error for out-of-range primitive")
 	}
-	
+
 	_, err = ResolveIdentity(0, 0, 10, 0)
 	if err == nil {
 		t.Error("Expected error for out-of-range modifier")
 	}
-	
+
 	_, err = ResolveIdentity(0, 0, 0, 10)
 	if err == nil {
 		t.Error("Expected error for out-of-range target")

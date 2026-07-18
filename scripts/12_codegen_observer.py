@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -21,97 +23,104 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type ObserverPrimitive int",
         "type ObserverModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
         lines.append(f"\tObserverDomain{domains[i].capitalize()} ObserverDomain = {i}")
     lines.append("\n\t// Observer Primitives")
     for i in range(10):
-        lines.append(f"\tObserverPrimitive{primitives[i].replace('_', '').capitalize()} ObserverPrimitive = {i}")
+        lines.append(
+            f"\tObserverPrimitive{primitives[i].replace('_', '').capitalize()} ObserverPrimitive = {i}"
+        )
     lines.append("\n\t// Observer Modifiers")
     for i in range(10):
-        lines.append(f"\tObserverModifier{modifiers[i].replace('_', '').capitalize()} ObserverModifier = {i}")
+        lines.append(
+            f"\tObserverModifier{modifiers[i].replace('_', '').capitalize()} ObserverModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d ObserverDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d ObserverDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p ObserverPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p ObserverPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m ObserverModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m ObserverModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type StateObserverIdentity struct {",
-        "\tDomain    ObserverDomain",
-        "\tPrimitive ObserverPrimitive",
-        "\tModifier  ObserverModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type StateVector struct {",
-        "\tStates      [4]float64",
-        "\tCovariance  [4][4]float64",
-        "\tInnovation  [4]float64",
-        "\tGain        [4][4]float64",
-        "\tNormError   float64",
-        "\tExecutionCount uint64",
-        "}",
-        "",
-        "func ResolveStateObserverIdentity(d, p, m byte) (StateObserverIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn StateObserverIdentity{}, errors.New("state observer index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("OBS-%s-%s-%s", ObserverDomain(d).String(), ObserverPrimitive(p).String(), ObserverModifier(m).String())',
-        "\treturn StateObserverIdentity{",
-        "\t\tDomain:    ObserverDomain(d),",
-        "\t\tPrimitive: ObserverPrimitive(p),",
-        "\t\tModifier:  ObserverModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type StateObserverHandler func(id StateObserverIdentity, state *StateVector) error",
-        "",
-        "var (",
-        "\tStateObserverTable [1000]StateObserverHandler",
-        "\tStateObserverMetrics [1000]uint64",
-        "\tObserverMutex sync.RWMutex",
-        ")",
-        "",
-        "func InitStateObserverKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type StateObserverIdentity struct {",
+            "\tDomain    ObserverDomain",
+            "\tPrimitive ObserverPrimitive",
+            "\tModifier  ObserverModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type StateVector struct {",
+            "\tStates      [4]float64",
+            "\tCovariance  [4][4]float64",
+            "\tInnovation  [4]float64",
+            "\tGain        [4][4]float64",
+            "\tNormError   float64",
+            "\tExecutionCount uint64",
+            "}",
+            "",
+            "func ResolveStateObserverIdentity(d, p, m byte) (StateObserverIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn StateObserverIdentity{}, errors.New("state observer index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("OBS-%s-%s-%s", ObserverDomain(d).String(), ObserverPrimitive(p).String(), ObserverModifier(m).String())',
+            "\treturn StateObserverIdentity{",
+            "\t\tDomain:    ObserverDomain(d),",
+            "\t\tPrimitive: ObserverPrimitive(p),",
+            "\t\tModifier:  ObserverModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type StateObserverHandler func(id StateObserverIdentity, state *StateVector) error",
+            "",
+            "var (",
+            "\tStateObserverTable [1000]StateObserverHandler",
+            "\tStateObserverMetrics [1000]uint64",
+            "\tObserverMutex sync.RWMutex",
+            ")",
+            "",
+            "func InitStateObserverKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -128,31 +137,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchStateObserver(d, p, m byte, state *StateVector) error {",
-        "\tidentity, err := ResolveStateObserverIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := StateObserverTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("state observer kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, state)",
-        "}",
-        "",
-        "func GetStateObserverExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&StateObserverMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchStateObserver(d, p, m byte, state *StateVector) error {",
+            "\tidentity, err := ResolveStateObserverIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := StateObserverTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("state observer kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, state)",
+            "}",
+            "",
+            "func GetStateObserverExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&StateObserverMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go state observer primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -192,7 +204,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_state_observer(d: u8, p: u8, m: u8, state: &mut StateVector) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"Observer indices out of bounds [0-9]\".to_string());",
+        '        return Err("Observer indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    let identity = StateObserverIdentity { domain: d, primitive: p, modifier: m, code };",
@@ -203,13 +215,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    }",
         "    state.norm_error = (state.innovation[0].powi(2) + state.innovation[1].powi(2) + state.innovation[2].powi(2) + state.innovation[3].powi(2)).sqrt();",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust state observer in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -244,13 +257,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "        state.innovation[i] = (math.cos(code) - state.states[i]) * 0.1",
         "    state.norm_error = math.sqrt(sum(x**2 for x in state.innovation))",
         "    return code, name, state.norm_error",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python state observer in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -285,13 +299,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 state observer primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 State Observer Primitives. NormError: %f", state.NormError)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/state_observer_1000_taxonomy.yaml"
@@ -299,12 +314,13 @@ def main() -> None:
     rust_output = "src-tauri/src/state_observer.rs"
     py_output = "cortex/state_observer.py"
     go_test_output = "primitives/state_observer_test.go"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
     generate_python(domains, primitives, modifiers, py_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
+
 
 if __name__ == "__main__":
     main()

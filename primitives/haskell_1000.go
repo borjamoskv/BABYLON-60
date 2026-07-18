@@ -13,87 +13,120 @@ type HaskellPrimitive int
 type HaskellModifier int
 
 const (
-	HaskellDomainLazyeval HaskellDomain = 0
-	HaskellDomainMonadtrans HaskellDomain = 1
-	HaskellDomainTypeclass HaskellDomain = 2
-	HaskellDomainStmconcur HaskellDomain = 3
-	HaskellDomainFunctorcat HaskellDomain = 4
+	HaskellDomainLazyeval    HaskellDomain = 0
+	HaskellDomainMonadtrans  HaskellDomain = 1
+	HaskellDomainTypeclass   HaskellDomain = 2
+	HaskellDomainStmconcur   HaskellDomain = 3
+	HaskellDomainFunctorcat  HaskellDomain = 4
 	HaskellDomainParsermonad HaskellDomain = 5
-	HaskellDomainPuremath HaskellDomain = 6
+	HaskellDomainPuremath    HaskellDomain = 6
 	HaskellDomainFiberthread HaskellDomain = 7
-	HaskellDomainFfisystem HaskellDomain = 8
+	HaskellDomainFfisystem   HaskellDomain = 8
 	HaskellDomainCompilerghc HaskellDomain = 9
 
 	// Haskell Primitives
-	HaskellPrimitiveThunkforce HaskellPrimitive = 0
-	HaskellPrimitiveBindeval HaskellPrimitive = 1
-	HaskellPrimitiveMapapply HaskellPrimitive = 2
-	HaskellPrimitiveTxatomic HaskellPrimitive = 3
-	HaskellPrimitiveReducefold HaskellPrimitive = 4
-	HaskellPrimitiveParsetoken HaskellPrimitive = 5
+	HaskellPrimitiveThunkforce  HaskellPrimitive = 0
+	HaskellPrimitiveBindeval    HaskellPrimitive = 1
+	HaskellPrimitiveMapapply    HaskellPrimitive = 2
+	HaskellPrimitiveTxatomic    HaskellPrimitive = 3
+	HaskellPrimitiveReducefold  HaskellPrimitive = 4
+	HaskellPrimitiveParsetoken  HaskellPrimitive = 5
 	HaskellPrimitiveStatemutate HaskellPrimitive = 6
-	HaskellPrimitiveLifteffect HaskellPrimitive = 7
-	HaskellPrimitiveForkspark HaskellPrimitive = 8
-	HaskellPrimitiveFficall HaskellPrimitive = 9
+	HaskellPrimitiveLifteffect  HaskellPrimitive = 7
+	HaskellPrimitiveForkspark   HaskellPrimitive = 8
+	HaskellPrimitiveFficall     HaskellPrimitive = 9
 
 	// Haskell Modifiers
-	HaskellModifierRaw HaskellModifier = 0
-	HaskellModifierStrict HaskellModifier = 1
-	HaskellModifierLazy HaskellModifier = 2
+	HaskellModifierRaw       HaskellModifier = 0
+	HaskellModifierStrict    HaskellModifier = 1
+	HaskellModifierLazy      HaskellModifier = 2
 	HaskellModifierReaderenv HaskellModifier = 3
 	HaskellModifierWriterlog HaskellModifier = 4
 	HaskellModifierExcepterr HaskellModifier = 5
-	HaskellModifierStmretry HaskellModifier = 6
-	HaskellModifierParallel HaskellModifier = 7
-	HaskellModifierContcps HaskellModifier = 8
-	HaskellModifierIounsafe HaskellModifier = 9
+	HaskellModifierStmretry  HaskellModifier = 6
+	HaskellModifierParallel  HaskellModifier = 7
+	HaskellModifierContcps   HaskellModifier = 8
+	HaskellModifierIounsafe  HaskellModifier = 9
 )
 
 func (d HaskellDomain) String() string {
 	switch d {
-	case 0: return "LAZY_EVAL"
-	case 1: return "MONAD_TRANS"
-	case 2: return "TYPE_CLASS"
-	case 3: return "STM_CONCUR"
-	case 4: return "FUNCTOR_CAT"
-	case 5: return "PARSER_MONAD"
-	case 6: return "PURE_MATH"
-	case 7: return "FIBER_THREAD"
-	case 8: return "FFI_SYSTEM"
-	case 9: return "COMPILER_GHC"
-	default: return "UNKNOWN"
+	case 0:
+		return "LAZY_EVAL"
+	case 1:
+		return "MONAD_TRANS"
+	case 2:
+		return "TYPE_CLASS"
+	case 3:
+		return "STM_CONCUR"
+	case 4:
+		return "FUNCTOR_CAT"
+	case 5:
+		return "PARSER_MONAD"
+	case 6:
+		return "PURE_MATH"
+	case 7:
+		return "FIBER_THREAD"
+	case 8:
+		return "FFI_SYSTEM"
+	case 9:
+		return "COMPILER_GHC"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p HaskellPrimitive) String() string {
 	switch p {
-	case 0: return "THUNK_FORCE"
-	case 1: return "BIND_EVAL"
-	case 2: return "MAP_APPLY"
-	case 3: return "TX_ATOMIC"
-	case 4: return "REDUCE_FOLD"
-	case 5: return "PARSE_TOKEN"
-	case 6: return "STATE_MUTATE"
-	case 7: return "LIFT_EFFECT"
-	case 8: return "FORK_SPARK"
-	case 9: return "FFI_CALL"
-	default: return "UNKNOWN"
+	case 0:
+		return "THUNK_FORCE"
+	case 1:
+		return "BIND_EVAL"
+	case 2:
+		return "MAP_APPLY"
+	case 3:
+		return "TX_ATOMIC"
+	case 4:
+		return "REDUCE_FOLD"
+	case 5:
+		return "PARSE_TOKEN"
+	case 6:
+		return "STATE_MUTATE"
+	case 7:
+		return "LIFT_EFFECT"
+	case 8:
+		return "FORK_SPARK"
+	case 9:
+		return "FFI_CALL"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m HaskellModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "STRICT"
-	case 2: return "LAZY"
-	case 3: return "READER_ENV"
-	case 4: return "WRITER_LOG"
-	case 5: return "EXCEPT_ERR"
-	case 6: return "STM_RETRY"
-	case 7: return "PARALLEL"
-	case 8: return "CONT_CPS"
-	case 9: return "IO_UNSAFE"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "STRICT"
+	case 2:
+		return "LAZY"
+	case 3:
+		return "READER_ENV"
+	case 4:
+		return "WRITER_LOG"
+	case 5:
+		return "EXCEPT_ERR"
+	case 6:
+		return "STM_RETRY"
+	case 7:
+		return "PARALLEL"
+	case 8:
+		return "CONT_CPS"
+	case 9:
+		return "IO_UNSAFE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -132,7 +165,7 @@ func ResolveHaskellIdentity(d, p, m byte) (HaskellIdentity, error) {
 type HaskellHandler func(id HaskellIdentity, vec *HaskellStateVector) error
 
 var (
-	HaskellTable [1000]HaskellHandler
+	HaskellTable   [1000]HaskellHandler
 	HaskellMetrics [1000]uint64
 )
 
@@ -141,7 +174,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[0], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -152,7 +185,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[1], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -163,7 +196,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[2], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -174,7 +207,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[3], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -185,7 +218,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[4], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -196,7 +229,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[5], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -207,7 +240,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[6], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -218,7 +251,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[7], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -229,7 +262,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[8], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -240,7 +273,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[9], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -251,7 +284,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[10], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -262,7 +295,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[11], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -273,7 +306,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[12], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -284,7 +317,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[13], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -295,7 +328,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[14], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -306,7 +339,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[15], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -317,7 +350,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[16], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -328,7 +361,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[17], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -339,7 +372,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[18], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -350,7 +383,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[19], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -361,7 +394,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[20], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -372,7 +405,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[21], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -383,7 +416,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[22], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -394,7 +427,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[23], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -405,7 +438,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[24], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -416,7 +449,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[25], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -427,7 +460,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[26], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -438,7 +471,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[27], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -449,7 +482,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[28], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -460,7 +493,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[29], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -471,7 +504,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[30], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -482,7 +515,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[31], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -493,7 +526,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[32], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -504,7 +537,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[33], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -515,7 +548,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[34], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -526,7 +559,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[35], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -537,7 +570,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[36], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -548,7 +581,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[37], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -559,7 +592,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[38], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -570,7 +603,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[39], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -581,7 +614,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[40], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -592,7 +625,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[41], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -603,7 +636,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[42], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -614,7 +647,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[43], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -625,7 +658,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[44], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -636,7 +669,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[45], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -647,7 +680,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[46], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -658,7 +691,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[47], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -669,7 +702,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[48], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -680,7 +713,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[49], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -691,7 +724,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[50], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -702,7 +735,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[51], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -713,7 +746,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[52], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -724,7 +757,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[53], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -735,7 +768,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[54], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -746,7 +779,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[55], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -757,7 +790,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[56], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -768,7 +801,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[57], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -779,7 +812,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[58], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -790,7 +823,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[59], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -801,7 +834,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[60], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -812,7 +845,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[61], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -823,7 +856,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[62], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -834,7 +867,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[63], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -845,7 +878,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[64], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -856,7 +889,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[65], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -867,7 +900,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[66], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -878,7 +911,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[67], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -889,7 +922,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[68], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -900,7 +933,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[69], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -911,7 +944,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[70], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -922,7 +955,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[71], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -933,7 +966,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[72], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -944,7 +977,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[73], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -955,7 +988,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[74], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -966,7 +999,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[75], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -977,7 +1010,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[76], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -988,7 +1021,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[77], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -999,7 +1032,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[78], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1010,7 +1043,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[79], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1021,7 +1054,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[80], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1032,7 +1065,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[81], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1043,7 +1076,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[82], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1054,7 +1087,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[83], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1065,7 +1098,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[84], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1076,7 +1109,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[85], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1087,7 +1120,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[86], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1098,7 +1131,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[87], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1109,7 +1142,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[88], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1120,7 +1153,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[89], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1131,7 +1164,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[90], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1142,7 +1175,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[91], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1153,7 +1186,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[92], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1164,7 +1197,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[93], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1175,7 +1208,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[94], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1186,7 +1219,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[95], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1197,7 +1230,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[96], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1208,7 +1241,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[97], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1219,7 +1252,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[98], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1230,7 +1263,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[99], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for LAZY_EVAL:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1241,7 +1274,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[100], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1252,7 +1285,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[101], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1263,7 +1296,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[102], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1274,7 +1307,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[103], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1285,7 +1318,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[104], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1296,7 +1329,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[105], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1307,7 +1340,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[106], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1318,7 +1351,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[107], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1329,7 +1362,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[108], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1340,7 +1373,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[109], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1351,7 +1384,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[110], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1362,7 +1395,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[111], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1373,7 +1406,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[112], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1384,7 +1417,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[113], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1395,7 +1428,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[114], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1406,7 +1439,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[115], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1417,7 +1450,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[116], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1428,7 +1461,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[117], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1439,7 +1472,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[118], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1450,7 +1483,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[119], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1461,7 +1494,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[120], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1472,7 +1505,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[121], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1483,7 +1516,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[122], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1494,7 +1527,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[123], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1505,7 +1538,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[124], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1516,7 +1549,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[125], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1527,7 +1560,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[126], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1538,7 +1571,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[127], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1549,7 +1582,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[128], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1560,7 +1593,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[129], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1571,7 +1604,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[130], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1582,7 +1615,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[131], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1593,7 +1626,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[132], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1604,7 +1637,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[133], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1615,7 +1648,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[134], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1626,7 +1659,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[135], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1637,7 +1670,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[136], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1648,7 +1681,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[137], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1659,7 +1692,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[138], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1670,7 +1703,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[139], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1681,7 +1714,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[140], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1692,7 +1725,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[141], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1703,7 +1736,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[142], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1714,7 +1747,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[143], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1725,7 +1758,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[144], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1736,7 +1769,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[145], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1747,7 +1780,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[146], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1758,7 +1791,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[147], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1769,7 +1802,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[148], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1780,7 +1813,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[149], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1791,7 +1824,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[150], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1802,7 +1835,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[151], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1813,7 +1846,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[152], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1824,7 +1857,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[153], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1835,7 +1868,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[154], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1846,7 +1879,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[155], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1857,7 +1890,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[156], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1868,7 +1901,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[157], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1879,7 +1912,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[158], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1890,7 +1923,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[159], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1901,7 +1934,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[160], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1912,7 +1945,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[161], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1923,7 +1956,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[162], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1934,7 +1967,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[163], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1945,7 +1978,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[164], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1956,7 +1989,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[165], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1967,7 +2000,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[166], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1978,7 +2011,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[167], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -1989,7 +2022,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[168], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2000,7 +2033,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[169], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2011,7 +2044,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[170], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2022,7 +2055,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[171], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2033,7 +2066,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[172], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2044,7 +2077,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[173], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2055,7 +2088,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[174], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2066,7 +2099,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[175], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2077,7 +2110,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[176], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2088,7 +2121,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[177], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2099,7 +2132,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[178], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2110,7 +2143,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[179], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2121,7 +2154,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[180], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2132,7 +2165,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[181], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2143,7 +2176,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[182], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2154,7 +2187,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[183], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2165,7 +2198,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[184], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2176,7 +2209,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[185], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2187,7 +2220,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[186], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2198,7 +2231,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[187], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2209,7 +2242,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[188], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2220,7 +2253,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[189], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2231,7 +2264,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[190], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2242,7 +2275,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[191], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2253,7 +2286,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[192], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2264,7 +2297,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[193], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2275,7 +2308,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[194], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2286,7 +2319,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[195], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2297,7 +2330,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[196], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2308,7 +2341,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[197], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2319,7 +2352,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[198], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2330,7 +2363,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[199], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for MONAD_TRANS:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2341,7 +2374,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[200], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2352,7 +2385,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[201], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2363,7 +2396,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[202], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2374,7 +2407,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[203], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2385,7 +2418,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[204], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2396,7 +2429,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[205], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2407,7 +2440,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[206], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2418,7 +2451,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[207], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2429,7 +2462,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[208], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2440,7 +2473,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[209], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2451,7 +2484,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[210], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2462,7 +2495,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[211], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2473,7 +2506,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[212], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2484,7 +2517,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[213], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2495,7 +2528,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[214], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2506,7 +2539,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[215], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2517,7 +2550,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[216], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2528,7 +2561,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[217], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2539,7 +2572,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[218], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2550,7 +2583,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[219], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2561,7 +2594,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[220], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2572,7 +2605,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[221], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2583,7 +2616,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[222], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2594,7 +2627,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[223], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2605,7 +2638,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[224], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2616,7 +2649,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[225], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2627,7 +2660,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[226], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2638,7 +2671,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[227], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2649,7 +2682,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[228], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2660,7 +2693,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[229], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2671,7 +2704,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[230], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2682,7 +2715,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[231], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2693,7 +2726,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[232], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2704,7 +2737,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[233], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2715,7 +2748,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[234], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2726,7 +2759,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[235], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2737,7 +2770,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[236], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2748,7 +2781,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[237], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2759,7 +2792,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[238], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2770,7 +2803,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[239], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2781,7 +2814,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[240], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2792,7 +2825,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[241], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2803,7 +2836,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[242], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2814,7 +2847,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[243], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2825,7 +2858,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[244], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2836,7 +2869,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[245], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2847,7 +2880,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[246], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2858,7 +2891,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[247], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2869,7 +2902,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[248], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2880,7 +2913,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[249], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2891,7 +2924,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[250], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2902,7 +2935,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[251], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2913,7 +2946,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[252], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2924,7 +2957,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[253], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2935,7 +2968,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[254], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2946,7 +2979,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[255], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2957,7 +2990,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[256], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2968,7 +3001,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[257], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2979,7 +3012,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[258], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -2990,7 +3023,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[259], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3001,7 +3034,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[260], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3012,7 +3045,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[261], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3023,7 +3056,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[262], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3034,7 +3067,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[263], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3045,7 +3078,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[264], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3056,7 +3089,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[265], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3067,7 +3100,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[266], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3078,7 +3111,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[267], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3089,7 +3122,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[268], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3100,7 +3133,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[269], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3111,7 +3144,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[270], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3122,7 +3155,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[271], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3133,7 +3166,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[272], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3144,7 +3177,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[273], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3155,7 +3188,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[274], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3166,7 +3199,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[275], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3177,7 +3210,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[276], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3188,7 +3221,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[277], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3199,7 +3232,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[278], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3210,7 +3243,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[279], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3221,7 +3254,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[280], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3232,7 +3265,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[281], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3243,7 +3276,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[282], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3254,7 +3287,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[283], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3265,7 +3298,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[284], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3276,7 +3309,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[285], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3287,7 +3320,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[286], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3298,7 +3331,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[287], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3309,7 +3342,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[288], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3320,7 +3353,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[289], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3331,7 +3364,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[290], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3342,7 +3375,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[291], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3353,7 +3386,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[292], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3364,7 +3397,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[293], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3375,7 +3408,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[294], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3386,7 +3419,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[295], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3397,7 +3430,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[296], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3408,7 +3441,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[297], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3419,7 +3452,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[298], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3430,7 +3463,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[299], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for TYPE_CLASS:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3441,7 +3474,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[300], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3452,7 +3485,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[301], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3463,7 +3496,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[302], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3474,7 +3507,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[303], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3485,7 +3518,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[304], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3496,7 +3529,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[305], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3507,7 +3540,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[306], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3518,7 +3551,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[307], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3529,7 +3562,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[308], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3540,7 +3573,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[309], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3551,7 +3584,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[310], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3562,7 +3595,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[311], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3573,7 +3606,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[312], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3584,7 +3617,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[313], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3595,7 +3628,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[314], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3606,7 +3639,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[315], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3617,7 +3650,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[316], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3628,7 +3661,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[317], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3639,7 +3672,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[318], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3650,7 +3683,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[319], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3661,7 +3694,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[320], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3672,7 +3705,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[321], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3683,7 +3716,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[322], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3694,7 +3727,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[323], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3705,7 +3738,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[324], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3716,7 +3749,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[325], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3727,7 +3760,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[326], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3738,7 +3771,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[327], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3749,7 +3782,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[328], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3760,7 +3793,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[329], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3771,7 +3804,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[330], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3782,7 +3815,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[331], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3793,7 +3826,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[332], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3804,7 +3837,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[333], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3815,7 +3848,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[334], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3826,7 +3859,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[335], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3837,7 +3870,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[336], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3848,7 +3881,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[337], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3859,7 +3892,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[338], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3870,7 +3903,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[339], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3881,7 +3914,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[340], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3892,7 +3925,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[341], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3903,7 +3936,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[342], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3914,7 +3947,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[343], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3925,7 +3958,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[344], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3936,7 +3969,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[345], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3947,7 +3980,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[346], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3958,7 +3991,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[347], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3969,7 +4002,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[348], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3980,7 +4013,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[349], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -3991,7 +4024,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[350], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4002,7 +4035,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[351], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4013,7 +4046,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[352], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4024,7 +4057,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[353], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4035,7 +4068,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[354], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4046,7 +4079,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[355], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4057,7 +4090,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[356], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4068,7 +4101,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[357], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4079,7 +4112,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[358], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4090,7 +4123,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[359], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4101,7 +4134,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[360], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4112,7 +4145,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[361], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4123,7 +4156,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[362], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4134,7 +4167,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[363], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4145,7 +4178,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[364], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4156,7 +4189,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[365], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4167,7 +4200,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[366], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4178,7 +4211,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[367], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4189,7 +4222,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[368], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4200,7 +4233,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[369], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4211,7 +4244,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[370], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4222,7 +4255,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[371], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4233,7 +4266,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[372], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4244,7 +4277,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[373], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4255,7 +4288,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[374], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4266,7 +4299,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[375], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4277,7 +4310,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[376], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4288,7 +4321,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[377], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4299,7 +4332,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[378], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4310,7 +4343,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[379], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4321,7 +4354,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[380], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4332,7 +4365,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[381], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4343,7 +4376,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[382], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4354,7 +4387,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[383], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4365,7 +4398,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[384], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4376,7 +4409,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[385], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4387,7 +4420,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[386], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4398,7 +4431,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[387], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4409,7 +4442,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[388], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4420,7 +4453,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[389], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4431,7 +4464,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[390], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4442,7 +4475,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[391], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4453,7 +4486,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[392], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4464,7 +4497,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[393], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4475,7 +4508,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[394], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4486,7 +4519,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[395], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4497,7 +4530,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[396], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4508,7 +4541,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[397], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4519,7 +4552,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[398], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4530,7 +4563,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[399], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for STM_CONCUR:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4541,7 +4574,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[400], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4552,7 +4585,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[401], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4563,7 +4596,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[402], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4574,7 +4607,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[403], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4585,7 +4618,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[404], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4596,7 +4629,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[405], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4607,7 +4640,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[406], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4618,7 +4651,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[407], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4629,7 +4662,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[408], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4640,7 +4673,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[409], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4651,7 +4684,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[410], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4662,7 +4695,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[411], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4673,7 +4706,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[412], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4684,7 +4717,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[413], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4695,7 +4728,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[414], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4706,7 +4739,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[415], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4717,7 +4750,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[416], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4728,7 +4761,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[417], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4739,7 +4772,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[418], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4750,7 +4783,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[419], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4761,7 +4794,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[420], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4772,7 +4805,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[421], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4783,7 +4816,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[422], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4794,7 +4827,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[423], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4805,7 +4838,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[424], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4816,7 +4849,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[425], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4827,7 +4860,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[426], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4838,7 +4871,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[427], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4849,7 +4882,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[428], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4860,7 +4893,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[429], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4871,7 +4904,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[430], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4882,7 +4915,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[431], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4893,7 +4926,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[432], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4904,7 +4937,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[433], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4915,7 +4948,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[434], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4926,7 +4959,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[435], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4937,7 +4970,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[436], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4948,7 +4981,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[437], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4959,7 +4992,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[438], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4970,7 +5003,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[439], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4981,7 +5014,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[440], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -4992,7 +5025,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[441], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5003,7 +5036,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[442], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5014,7 +5047,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[443], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5025,7 +5058,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[444], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5036,7 +5069,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[445], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5047,7 +5080,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[446], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5058,7 +5091,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[447], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5069,7 +5102,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[448], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5080,7 +5113,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[449], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5091,7 +5124,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[450], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5102,7 +5135,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[451], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5113,7 +5146,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[452], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5124,7 +5157,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[453], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5135,7 +5168,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[454], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5146,7 +5179,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[455], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5157,7 +5190,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[456], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5168,7 +5201,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[457], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5179,7 +5212,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[458], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5190,7 +5223,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[459], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5201,7 +5234,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[460], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5212,7 +5245,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[461], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5223,7 +5256,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[462], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5234,7 +5267,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[463], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5245,7 +5278,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[464], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5256,7 +5289,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[465], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5267,7 +5300,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[466], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5278,7 +5311,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[467], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5289,7 +5322,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[468], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5300,7 +5333,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[469], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5311,7 +5344,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[470], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5322,7 +5355,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[471], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5333,7 +5366,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[472], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5344,7 +5377,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[473], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5355,7 +5388,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[474], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5366,7 +5399,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[475], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5377,7 +5410,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[476], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5388,7 +5421,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[477], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5399,7 +5432,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[478], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5410,7 +5443,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[479], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5421,7 +5454,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[480], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5432,7 +5465,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[481], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5443,7 +5476,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[482], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5454,7 +5487,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[483], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5465,7 +5498,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[484], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5476,7 +5509,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[485], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5487,7 +5520,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[486], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5498,7 +5531,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[487], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5509,7 +5542,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[488], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5520,7 +5553,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[489], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5531,7 +5564,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[490], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5542,7 +5575,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[491], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5553,7 +5586,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[492], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5564,7 +5597,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[493], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5575,7 +5608,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[494], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5586,7 +5619,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[495], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5597,7 +5630,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[496], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5608,7 +5641,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[497], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5619,7 +5652,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[498], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5630,7 +5663,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[499], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FUNCTOR_CAT:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5641,7 +5674,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[500], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5652,7 +5685,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[501], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5663,7 +5696,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[502], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5674,7 +5707,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[503], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5685,7 +5718,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[504], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5696,7 +5729,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[505], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5707,7 +5740,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[506], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5718,7 +5751,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[507], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5729,7 +5762,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[508], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5740,7 +5773,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[509], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5751,7 +5784,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[510], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5762,7 +5795,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[511], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5773,7 +5806,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[512], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5784,7 +5817,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[513], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5795,7 +5828,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[514], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5806,7 +5839,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[515], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5817,7 +5850,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[516], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5828,7 +5861,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[517], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5839,7 +5872,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[518], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5850,7 +5883,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[519], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5861,7 +5894,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[520], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5872,7 +5905,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[521], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5883,7 +5916,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[522], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5894,7 +5927,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[523], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5905,7 +5938,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[524], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5916,7 +5949,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[525], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5927,7 +5960,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[526], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5938,7 +5971,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[527], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5949,7 +5982,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[528], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5960,7 +5993,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[529], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5971,7 +6004,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[530], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5982,7 +6015,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[531], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -5993,7 +6026,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[532], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6004,7 +6037,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[533], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6015,7 +6048,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[534], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6026,7 +6059,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[535], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6037,7 +6070,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[536], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6048,7 +6081,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[537], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6059,7 +6092,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[538], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6070,7 +6103,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[539], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6081,7 +6114,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[540], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6092,7 +6125,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[541], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6103,7 +6136,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[542], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6114,7 +6147,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[543], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6125,7 +6158,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[544], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6136,7 +6169,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[545], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6147,7 +6180,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[546], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6158,7 +6191,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[547], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6169,7 +6202,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[548], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6180,7 +6213,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[549], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6191,7 +6224,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[550], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6202,7 +6235,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[551], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6213,7 +6246,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[552], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6224,7 +6257,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[553], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6235,7 +6268,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[554], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6246,7 +6279,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[555], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6257,7 +6290,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[556], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6268,7 +6301,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[557], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6279,7 +6312,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[558], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6290,7 +6323,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[559], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6301,7 +6334,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[560], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6312,7 +6345,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[561], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6323,7 +6356,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[562], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6334,7 +6367,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[563], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6345,7 +6378,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[564], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6356,7 +6389,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[565], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6367,7 +6400,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[566], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6378,7 +6411,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[567], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6389,7 +6422,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[568], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6400,7 +6433,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[569], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6411,7 +6444,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[570], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6422,7 +6455,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[571], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6433,7 +6466,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[572], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6444,7 +6477,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[573], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6455,7 +6488,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[574], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6466,7 +6499,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[575], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6477,7 +6510,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[576], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6488,7 +6521,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[577], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6499,7 +6532,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[578], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6510,7 +6543,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[579], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6521,7 +6554,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[580], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6532,7 +6565,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[581], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6543,7 +6576,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[582], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6554,7 +6587,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[583], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6565,7 +6598,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[584], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6576,7 +6609,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[585], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6587,7 +6620,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[586], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6598,7 +6631,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[587], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6609,7 +6642,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[588], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6620,7 +6653,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[589], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6631,7 +6664,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[590], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6642,7 +6675,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[591], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6653,7 +6686,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[592], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6664,7 +6697,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[593], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6675,7 +6708,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[594], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6686,7 +6719,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[595], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6697,7 +6730,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[596], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6708,7 +6741,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[597], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6719,7 +6752,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[598], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6730,7 +6763,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[599], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PARSER_MONAD:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6741,7 +6774,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[600], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6752,7 +6785,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[601], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6763,7 +6796,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[602], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6774,7 +6807,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[603], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6785,7 +6818,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[604], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6796,7 +6829,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[605], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6807,7 +6840,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[606], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6818,7 +6851,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[607], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6829,7 +6862,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[608], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6840,7 +6873,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[609], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6851,7 +6884,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[610], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6862,7 +6895,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[611], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6873,7 +6906,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[612], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6884,7 +6917,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[613], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6895,7 +6928,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[614], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6906,7 +6939,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[615], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6917,7 +6950,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[616], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6928,7 +6961,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[617], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6939,7 +6972,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[618], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6950,7 +6983,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[619], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6961,7 +6994,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[620], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6972,7 +7005,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[621], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6983,7 +7016,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[622], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -6994,7 +7027,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[623], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7005,7 +7038,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[624], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7016,7 +7049,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[625], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7027,7 +7060,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[626], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7038,7 +7071,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[627], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7049,7 +7082,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[628], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7060,7 +7093,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[629], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7071,7 +7104,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[630], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7082,7 +7115,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[631], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7093,7 +7126,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[632], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7104,7 +7137,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[633], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7115,7 +7148,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[634], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7126,7 +7159,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[635], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7137,7 +7170,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[636], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7148,7 +7181,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[637], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7159,7 +7192,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[638], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7170,7 +7203,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[639], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7181,7 +7214,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[640], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7192,7 +7225,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[641], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7203,7 +7236,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[642], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7214,7 +7247,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[643], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7225,7 +7258,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[644], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7236,7 +7269,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[645], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7247,7 +7280,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[646], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7258,7 +7291,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[647], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7269,7 +7302,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[648], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7280,7 +7313,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[649], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7291,7 +7324,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[650], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7302,7 +7335,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[651], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7313,7 +7346,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[652], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7324,7 +7357,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[653], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7335,7 +7368,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[654], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7346,7 +7379,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[655], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7357,7 +7390,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[656], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7368,7 +7401,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[657], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7379,7 +7412,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[658], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7390,7 +7423,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[659], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7401,7 +7434,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[660], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7412,7 +7445,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[661], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7423,7 +7456,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[662], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7434,7 +7467,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[663], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7445,7 +7478,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[664], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7456,7 +7489,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[665], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7467,7 +7500,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[666], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7478,7 +7511,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[667], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7489,7 +7522,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[668], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7500,7 +7533,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[669], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7511,7 +7544,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[670], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7522,7 +7555,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[671], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7533,7 +7566,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[672], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7544,7 +7577,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[673], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7555,7 +7588,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[674], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7566,7 +7599,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[675], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7577,7 +7610,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[676], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7588,7 +7621,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[677], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7599,7 +7632,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[678], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7610,7 +7643,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[679], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7621,7 +7654,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[680], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7632,7 +7665,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[681], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7643,7 +7676,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[682], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7654,7 +7687,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[683], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7665,7 +7698,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[684], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7676,7 +7709,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[685], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7687,7 +7720,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[686], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7698,7 +7731,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[687], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7709,7 +7742,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[688], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7720,7 +7753,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[689], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7731,7 +7764,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[690], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7742,7 +7775,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[691], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7753,7 +7786,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[692], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7764,7 +7797,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[693], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7775,7 +7808,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[694], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7786,7 +7819,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[695], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7797,7 +7830,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[696], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7808,7 +7841,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[697], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7819,7 +7852,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[698], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7830,7 +7863,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[699], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for PURE_MATH:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7841,7 +7874,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[700], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7852,7 +7885,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[701], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7863,7 +7896,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[702], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7874,7 +7907,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[703], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7885,7 +7918,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[704], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7896,7 +7929,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[705], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7907,7 +7940,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[706], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7918,7 +7951,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[707], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7929,7 +7962,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[708], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7940,7 +7973,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[709], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7951,7 +7984,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[710], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7962,7 +7995,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[711], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7973,7 +8006,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[712], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7984,7 +8017,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[713], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -7995,7 +8028,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[714], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8006,7 +8039,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[715], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8017,7 +8050,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[716], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8028,7 +8061,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[717], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8039,7 +8072,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[718], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8050,7 +8083,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[719], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8061,7 +8094,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[720], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8072,7 +8105,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[721], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8083,7 +8116,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[722], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8094,7 +8127,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[723], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8105,7 +8138,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[724], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8116,7 +8149,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[725], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8127,7 +8160,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[726], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8138,7 +8171,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[727], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8149,7 +8182,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[728], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8160,7 +8193,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[729], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8171,7 +8204,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[730], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8182,7 +8215,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[731], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8193,7 +8226,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[732], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8204,7 +8237,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[733], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8215,7 +8248,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[734], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8226,7 +8259,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[735], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8237,7 +8270,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[736], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8248,7 +8281,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[737], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8259,7 +8292,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[738], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8270,7 +8303,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[739], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8281,7 +8314,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[740], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8292,7 +8325,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[741], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8303,7 +8336,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[742], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8314,7 +8347,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[743], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8325,7 +8358,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[744], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8336,7 +8369,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[745], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8347,7 +8380,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[746], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8358,7 +8391,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[747], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8369,7 +8402,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[748], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8380,7 +8413,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[749], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8391,7 +8424,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[750], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8402,7 +8435,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[751], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8413,7 +8446,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[752], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8424,7 +8457,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[753], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8435,7 +8468,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[754], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8446,7 +8479,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[755], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8457,7 +8490,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[756], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8468,7 +8501,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[757], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8479,7 +8512,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[758], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8490,7 +8523,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[759], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8501,7 +8534,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[760], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8512,7 +8545,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[761], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8523,7 +8556,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[762], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8534,7 +8567,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[763], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8545,7 +8578,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[764], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8556,7 +8589,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[765], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8567,7 +8600,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[766], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8578,7 +8611,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[767], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8589,7 +8622,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[768], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8600,7 +8633,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[769], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8611,7 +8644,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[770], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8622,7 +8655,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[771], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8633,7 +8666,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[772], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8644,7 +8677,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[773], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8655,7 +8688,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[774], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8666,7 +8699,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[775], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8677,7 +8710,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[776], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8688,7 +8721,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[777], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8699,7 +8732,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[778], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8710,7 +8743,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[779], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8721,7 +8754,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[780], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8732,7 +8765,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[781], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8743,7 +8776,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[782], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8754,7 +8787,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[783], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8765,7 +8798,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[784], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8776,7 +8809,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[785], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8787,7 +8820,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[786], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8798,7 +8831,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[787], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8809,7 +8842,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[788], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8820,7 +8853,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[789], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8831,7 +8864,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[790], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8842,7 +8875,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[791], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8853,7 +8886,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[792], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8864,7 +8897,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[793], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8875,7 +8908,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[794], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8886,7 +8919,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[795], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8897,7 +8930,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[796], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8908,7 +8941,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[797], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8919,7 +8952,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[798], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8930,7 +8963,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[799], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FIBER_THREAD:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8941,7 +8974,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[800], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8952,7 +8985,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[801], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8963,7 +8996,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[802], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8974,7 +9007,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[803], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8985,7 +9018,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[804], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -8996,7 +9029,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[805], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9007,7 +9040,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[806], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9018,7 +9051,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[807], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9029,7 +9062,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[808], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9040,7 +9073,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[809], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9051,7 +9084,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[810], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9062,7 +9095,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[811], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9073,7 +9106,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[812], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9084,7 +9117,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[813], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9095,7 +9128,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[814], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9106,7 +9139,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[815], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9117,7 +9150,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[816], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9128,7 +9161,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[817], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9139,7 +9172,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[818], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9150,7 +9183,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[819], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9161,7 +9194,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[820], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9172,7 +9205,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[821], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9183,7 +9216,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[822], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9194,7 +9227,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[823], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9205,7 +9238,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[824], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9216,7 +9249,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[825], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9227,7 +9260,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[826], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9238,7 +9271,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[827], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9249,7 +9282,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[828], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9260,7 +9293,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[829], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9271,7 +9304,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[830], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9282,7 +9315,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[831], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9293,7 +9326,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[832], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9304,7 +9337,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[833], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9315,7 +9348,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[834], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9326,7 +9359,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[835], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9337,7 +9370,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[836], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9348,7 +9381,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[837], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9359,7 +9392,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[838], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9370,7 +9403,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[839], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9381,7 +9414,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[840], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9392,7 +9425,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[841], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9403,7 +9436,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[842], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9414,7 +9447,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[843], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9425,7 +9458,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[844], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9436,7 +9469,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[845], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9447,7 +9480,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[846], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9458,7 +9491,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[847], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9469,7 +9502,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[848], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9480,7 +9513,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[849], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9491,7 +9524,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[850], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9502,7 +9535,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[851], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9513,7 +9546,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[852], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9524,7 +9557,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[853], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9535,7 +9568,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[854], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9546,7 +9579,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[855], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9557,7 +9590,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[856], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9568,7 +9601,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[857], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9579,7 +9612,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[858], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9590,7 +9623,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[859], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9601,7 +9634,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[860], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9612,7 +9645,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[861], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9623,7 +9656,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[862], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9634,7 +9667,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[863], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9645,7 +9678,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[864], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9656,7 +9689,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[865], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9667,7 +9700,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[866], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9678,7 +9711,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[867], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9689,7 +9722,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[868], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9700,7 +9733,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[869], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9711,7 +9744,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[870], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9722,7 +9755,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[871], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9733,7 +9766,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[872], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9744,7 +9777,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[873], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9755,7 +9788,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[874], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9766,7 +9799,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[875], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9777,7 +9810,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[876], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9788,7 +9821,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[877], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9799,7 +9832,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[878], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9810,7 +9843,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[879], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9821,7 +9854,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[880], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9832,7 +9865,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[881], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9843,7 +9876,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[882], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9854,7 +9887,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[883], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9865,7 +9898,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[884], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9876,7 +9909,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[885], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9887,7 +9920,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[886], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9898,7 +9931,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[887], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9909,7 +9942,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[888], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9920,7 +9953,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[889], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9931,7 +9964,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[890], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9942,7 +9975,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[891], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9953,7 +9986,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[892], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9964,7 +9997,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[893], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9975,7 +10008,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[894], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9986,7 +10019,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[895], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -9997,7 +10030,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[896], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10008,7 +10041,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[897], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10019,7 +10052,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[898], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10030,7 +10063,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[899], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for FFI_SYSTEM:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10041,7 +10074,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[900], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10052,7 +10085,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[901], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10063,7 +10096,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[902], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10074,7 +10107,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[903], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10085,7 +10118,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[904], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10096,7 +10129,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[905], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10107,7 +10140,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[906], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10118,7 +10151,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[907], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10129,7 +10162,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[908], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10140,7 +10173,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[909], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:THUNK_FORCE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10151,7 +10184,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[910], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10162,7 +10195,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[911], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10173,7 +10206,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[912], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10184,7 +10217,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[913], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10195,7 +10228,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[914], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10206,7 +10239,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[915], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10217,7 +10250,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[916], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10228,7 +10261,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[917], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10239,7 +10272,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[918], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10250,7 +10283,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[919], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:BIND_EVAL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10261,7 +10294,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[920], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10272,7 +10305,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[921], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10283,7 +10316,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[922], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10294,7 +10327,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[923], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10305,7 +10338,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[924], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10316,7 +10349,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[925], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10327,7 +10360,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[926], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10338,7 +10371,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[927], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10349,7 +10382,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[928], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10360,7 +10393,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[929], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:MAP_APPLY:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10371,7 +10404,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[930], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10382,7 +10415,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[931], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10393,7 +10426,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[932], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10404,7 +10437,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[933], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10415,7 +10448,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[934], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10426,7 +10459,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[935], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10437,7 +10470,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[936], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10448,7 +10481,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[937], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10459,7 +10492,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[938], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10470,7 +10503,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[939], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:TX_ATOMIC:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10481,7 +10514,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[940], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10492,7 +10525,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[941], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10503,7 +10536,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[942], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10514,7 +10547,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[943], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10525,7 +10558,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[944], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10536,7 +10569,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[945], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10547,7 +10580,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[946], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10558,7 +10591,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[947], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10569,7 +10602,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[948], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10580,7 +10613,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[949], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:REDUCE_FOLD:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10591,7 +10624,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[950], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10602,7 +10635,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[951], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10613,7 +10646,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[952], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10624,7 +10657,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[953], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10635,7 +10668,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[954], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10646,7 +10679,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[955], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10657,7 +10690,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[956], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10668,7 +10701,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[957], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10679,7 +10712,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[958], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10690,7 +10723,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[959], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:PARSE_TOKEN:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10701,7 +10734,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[960], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10712,7 +10745,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[961], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10723,7 +10756,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[962], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10734,7 +10767,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[963], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10745,7 +10778,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[964], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10756,7 +10789,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[965], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10767,7 +10800,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[966], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10778,7 +10811,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[967], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10789,7 +10822,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[968], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10800,7 +10833,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[969], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:STATE_MUTATE:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10811,7 +10844,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[970], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10822,7 +10855,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[971], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10833,7 +10866,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[972], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10844,7 +10877,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[973], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10855,7 +10888,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[974], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10866,7 +10899,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[975], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10877,7 +10910,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[976], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10888,7 +10921,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[977], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10899,7 +10932,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[978], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10910,7 +10943,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[979], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:LIFT_EFFECT:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10921,7 +10954,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[980], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10932,7 +10965,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[981], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10943,7 +10976,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[982], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10954,7 +10987,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[983], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10965,7 +10998,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[984], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10976,7 +11009,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[985], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10987,7 +11020,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[986], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -10998,7 +11031,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[987], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11009,7 +11042,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[988], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11020,7 +11053,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[989], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FORK_SPARK:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11031,7 +11064,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[990], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:RAW
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11042,7 +11075,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[991], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:STRICT
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11053,7 +11086,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[992], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:LAZY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11064,7 +11097,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[993], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:READER_ENV
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11075,7 +11108,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[994], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:WRITER_LOG
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11086,7 +11119,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[995], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:EXCEPT_ERR
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11097,7 +11130,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[996], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:STM_RETRY
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11108,7 +11141,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[997], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:PARALLEL
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11119,7 +11152,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[998], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:CONT_CPS
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11130,7 +11163,7 @@ func InitHaskellKernel() {
 		atomic.AddUint64(&HaskellMetrics[999], 1)
 		vec.ExecutionCount++
 		// Execute Haskell functional update rules for COMPILER_GHC:FFI_CALL:IO_UNSAFE
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
+		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98+0.02*math.Cos(float64(id.Code)))
 		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
 		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
 		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
@@ -11152,6 +11185,8 @@ func DispatchHaskell(d, p, m byte, vec *HaskellStateVector) error {
 }
 
 func GetHaskellExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&HaskellMetrics[code])
 }

@@ -13,87 +13,120 @@ type ConstantsPrimitive int
 type ConstantsModifier int
 
 const (
-	ConstantsDomainGravitycosmo ConstantsDomain = 0
-	ConstantsDomainQuantumscale ConstantsDomain = 1
-	ConstantsDomainElectroweak ConstantsDomain = 2
-	ConstantsDomainPlancklength ConstantsDomain = 3
-	ConstantsDomainPlanckmass ConstantsDomain = 4
-	ConstantsDomainPlancktime ConstantsDomain = 5
+	ConstantsDomainGravitycosmo  ConstantsDomain = 0
+	ConstantsDomainQuantumscale  ConstantsDomain = 1
+	ConstantsDomainElectroweak   ConstantsDomain = 2
+	ConstantsDomainPlancklength  ConstantsDomain = 3
+	ConstantsDomainPlanckmass    ConstantsDomain = 4
+	ConstantsDomainPlancktime    ConstantsDomain = 5
 	ConstantsDomainFinestructure ConstantsDomain = 6
 	ConstantsDomainSchwarzschild ConstantsDomain = 7
-	ConstantsDomainHeisenberg ConstantsDomain = 8
+	ConstantsDomainHeisenberg    ConstantsDomain = 8
 	ConstantsDomainSemiclassical ConstantsDomain = 9
 
 	// Constants Primitives
-	ConstantsPrimitiveForcecalc ConstantsPrimitive = 0
-	ConstantsPrimitiveThesisvariation ConstantsPrimitive = 1
-	ConstantsPrimitiveWavefunction ConstantsPrimitive = 2
-	ConstantsPrimitiveMetricperturb ConstantsPrimitive = 3
-	ConstantsPrimitiveFieldcouple ConstantsPrimitive = 4
-	ConstantsPrimitiveThermalemission ConstantsPrimitive = 5
-	ConstantsPrimitiveVacuumpolar ConstantsPrimitive = 6
+	ConstantsPrimitiveForcecalc        ConstantsPrimitive = 0
+	ConstantsPrimitiveThesisvariation  ConstantsPrimitive = 1
+	ConstantsPrimitiveWavefunction     ConstantsPrimitive = 2
+	ConstantsPrimitiveMetricperturb    ConstantsPrimitive = 3
+	ConstantsPrimitiveFieldcouple      ConstantsPrimitive = 4
+	ConstantsPrimitiveThermalemission  ConstantsPrimitive = 5
+	ConstantsPrimitiveVacuumpolar      ConstantsPrimitive = 6
 	ConstantsPrimitiveUncertaintylimit ConstantsPrimitive = 7
 	ConstantsPrimitiveSingularitycheck ConstantsPrimitive = 8
-	ConstantsPrimitiveLedgerflush ConstantsPrimitive = 9
+	ConstantsPrimitiveLedgerflush      ConstantsPrimitive = 9
 
 	// Constants Modifiers
-	ConstantsModifierRaw ConstantsModifier = 0
-	ConstantsModifierStrict ConstantsModifier = 1
-	ConstantsModifierCovariant ConstantsModifier = 2
-	ConstantsModifierPerturbative ConstantsModifier = 3
+	ConstantsModifierRaw             ConstantsModifier = 0
+	ConstantsModifierStrict          ConstantsModifier = 1
+	ConstantsModifierCovariant       ConstantsModifier = 2
+	ConstantsModifierPerturbative    ConstantsModifier = 3
 	ConstantsModifierNonperturbative ConstantsModifier = 4
-	ConstantsModifierBosonic ConstantsModifier = 5
-	ConstantsModifierFermionic ConstantsModifier = 6
-	ConstantsModifierCoherent ConstantsModifier = 7
-	ConstantsModifierAsymptotic ConstantsModifier = 8
-	ConstantsModifierBftconsensus ConstantsModifier = 9
+	ConstantsModifierBosonic         ConstantsModifier = 5
+	ConstantsModifierFermionic       ConstantsModifier = 6
+	ConstantsModifierCoherent        ConstantsModifier = 7
+	ConstantsModifierAsymptotic      ConstantsModifier = 8
+	ConstantsModifierBftconsensus    ConstantsModifier = 9
 )
 
 func (d ConstantsDomain) String() string {
 	switch d {
-	case 0: return "GRAVITY_COSMO"
-	case 1: return "QUANTUM_SCALE"
-	case 2: return "ELECTRO_WEAK"
-	case 3: return "PLANCK_LENGTH"
-	case 4: return "PLANCK_MASS"
-	case 5: return "PLANCK_TIME"
-	case 6: return "FINE_STRUCTURE"
-	case 7: return "SCHWARZSCHILD"
-	case 8: return "HEISENBERG"
-	case 9: return "SEMI_CLASSICAL"
-	default: return "UNKNOWN"
+	case 0:
+		return "GRAVITY_COSMO"
+	case 1:
+		return "QUANTUM_SCALE"
+	case 2:
+		return "ELECTRO_WEAK"
+	case 3:
+		return "PLANCK_LENGTH"
+	case 4:
+		return "PLANCK_MASS"
+	case 5:
+		return "PLANCK_TIME"
+	case 6:
+		return "FINE_STRUCTURE"
+	case 7:
+		return "SCHWARZSCHILD"
+	case 8:
+		return "HEISENBERG"
+	case 9:
+		return "SEMI_CLASSICAL"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p ConstantsPrimitive) String() string {
 	switch p {
-	case 0: return "FORCE_CALC"
-	case 1: return "THESIS_VARIATION"
-	case 2: return "WAVE_FUNCTION"
-	case 3: return "METRIC_PERTURB"
-	case 4: return "FIELD_COUPLE"
-	case 5: return "THERMAL_EMISSION"
-	case 6: return "VACUUM_POLAR"
-	case 7: return "UNCERTAINTY_LIMIT"
-	case 8: return "SINGULARITY_CHECK"
-	case 9: return "LEDGER_FLUSH"
-	default: return "UNKNOWN"
+	case 0:
+		return "FORCE_CALC"
+	case 1:
+		return "THESIS_VARIATION"
+	case 2:
+		return "WAVE_FUNCTION"
+	case 3:
+		return "METRIC_PERTURB"
+	case 4:
+		return "FIELD_COUPLE"
+	case 5:
+		return "THERMAL_EMISSION"
+	case 6:
+		return "VACUUM_POLAR"
+	case 7:
+		return "UNCERTAINTY_LIMIT"
+	case 8:
+		return "SINGULARITY_CHECK"
+	case 9:
+		return "LEDGER_FLUSH"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m ConstantsModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "STRICT"
-	case 2: return "COVARIANT"
-	case 3: return "PERTURBATIVE"
-	case 4: return "NON_PERTURBATIVE"
-	case 5: return "BOSONIC"
-	case 6: return "FERMIONIC"
-	case 7: return "COHERENT"
-	case 8: return "ASYMPTOTIC"
-	case 9: return "BFT_CONSENSUS"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "STRICT"
+	case 2:
+		return "COVARIANT"
+	case 3:
+		return "PERTURBATIVE"
+	case 4:
+		return "NON_PERTURBATIVE"
+	case 5:
+		return "BOSONIC"
+	case 6:
+		return "FERMIONIC"
+	case 7:
+		return "COHERENT"
+	case 8:
+		return "ASYMPTOTIC"
+	case 9:
+		return "BFT_CONSENSUS"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -106,12 +139,12 @@ type ConstantsIdentity struct {
 }
 
 type ConstantsStateVector struct {
-	PlanckScaleRatio        float64
-	GravitationalCoupling   float64
+	PlanckScaleRatio         float64
+	GravitationalCoupling    float64
 	ElectromagneticShielding float64
-	QuantumEntropy          float64
-	SingularityDensity      float64
-	ExecutionCount          uint64
+	QuantumEntropy           float64
+	SingularityDensity       float64
+	ExecutionCount           uint64
 }
 
 func ResolveConstantsIdentity(d, p, m byte) (ConstantsIdentity, error) {
@@ -132,7 +165,7 @@ func ResolveConstantsIdentity(d, p, m byte) (ConstantsIdentity, error) {
 type ConstantsHandler func(id ConstantsIdentity, vec *ConstantsStateVector) error
 
 var (
-	ConstantsTable [1000]ConstantsHandler
+	ConstantsTable   [1000]ConstantsHandler
 	ConstantsMetrics [1000]uint64
 )
 
@@ -144,7 +177,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -155,7 +188,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -166,7 +199,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -177,7 +210,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -188,7 +221,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -199,7 +232,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -210,7 +243,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -221,7 +254,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -232,7 +265,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -243,7 +276,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -254,7 +287,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -265,7 +298,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -276,7 +309,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -287,7 +320,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -298,7 +331,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -309,7 +342,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -320,7 +353,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -331,7 +364,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -342,7 +375,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -353,7 +386,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -364,7 +397,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -375,7 +408,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -386,7 +419,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -397,7 +430,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -408,7 +441,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -419,7 +452,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -430,7 +463,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -441,7 +474,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -452,7 +485,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -463,7 +496,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -474,7 +507,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -485,7 +518,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -496,7 +529,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -507,7 +540,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -518,7 +551,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -529,7 +562,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -540,7 +573,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -551,7 +584,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -562,7 +595,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -573,7 +606,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -584,7 +617,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -595,7 +628,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -606,7 +639,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -617,7 +650,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -628,7 +661,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -639,7 +672,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -650,7 +683,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -661,7 +694,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -672,7 +705,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -683,7 +716,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -694,7 +727,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -705,7 +738,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -716,7 +749,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -727,7 +760,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -738,7 +771,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -749,7 +782,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -760,7 +793,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -771,7 +804,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -782,7 +815,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -793,7 +826,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -804,7 +837,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -815,7 +848,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -826,7 +859,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -837,7 +870,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -848,7 +881,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -859,7 +892,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -870,7 +903,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -881,7 +914,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -892,7 +925,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -903,7 +936,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -914,7 +947,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -925,7 +958,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -936,7 +969,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -947,7 +980,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -958,7 +991,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -969,7 +1002,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -980,7 +1013,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -991,7 +1024,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1002,7 +1035,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1013,7 +1046,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1024,7 +1057,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1035,7 +1068,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1046,7 +1079,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1057,7 +1090,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1068,7 +1101,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1079,7 +1112,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1090,7 +1123,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1101,7 +1134,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1112,7 +1145,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1123,7 +1156,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1134,7 +1167,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1145,7 +1178,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1156,7 +1189,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1167,7 +1200,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1178,7 +1211,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1189,7 +1222,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1200,7 +1233,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1211,7 +1244,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1222,7 +1255,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1233,7 +1266,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1244,7 +1277,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1255,7 +1288,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1266,7 +1299,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1277,7 +1310,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1288,7 +1321,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1299,7 +1332,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1310,7 +1343,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1321,7 +1354,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1332,7 +1365,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1343,7 +1376,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1354,7 +1387,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1365,7 +1398,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1376,7 +1409,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1387,7 +1420,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1398,7 +1431,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1409,7 +1442,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1420,7 +1453,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1431,7 +1464,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1442,7 +1475,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1453,7 +1486,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1464,7 +1497,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1475,7 +1508,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1486,7 +1519,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1497,7 +1530,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1508,7 +1541,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1519,7 +1552,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1530,7 +1563,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1541,7 +1574,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1552,7 +1585,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1563,7 +1596,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1574,7 +1607,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1585,7 +1618,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1596,7 +1629,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1607,7 +1640,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1618,7 +1651,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1629,7 +1662,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1640,7 +1673,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1651,7 +1684,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1662,7 +1695,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1673,7 +1706,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1684,7 +1717,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1695,7 +1728,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1706,7 +1739,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1717,7 +1750,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1728,7 +1761,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1739,7 +1772,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1750,7 +1783,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1761,7 +1794,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1772,7 +1805,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1783,7 +1816,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1794,7 +1827,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1805,7 +1838,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1816,7 +1849,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1827,7 +1860,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1838,7 +1871,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1849,7 +1882,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1860,7 +1893,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1871,7 +1904,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1882,7 +1915,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1893,7 +1926,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1904,7 +1937,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1915,7 +1948,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1926,7 +1959,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1937,7 +1970,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1948,7 +1981,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1959,7 +1992,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1970,7 +2003,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1981,7 +2014,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -1992,7 +2025,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2003,7 +2036,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2014,7 +2047,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2025,7 +2058,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2036,7 +2069,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2047,7 +2080,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2058,7 +2091,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2069,7 +2102,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2080,7 +2113,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2091,7 +2124,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2102,7 +2135,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2113,7 +2146,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2124,7 +2157,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2135,7 +2168,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2146,7 +2179,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2157,7 +2190,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2168,7 +2201,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2179,7 +2212,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2190,7 +2223,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2201,7 +2234,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2212,7 +2245,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2223,7 +2256,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2234,7 +2267,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2245,7 +2278,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2256,7 +2289,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2267,7 +2300,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2278,7 +2311,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2289,7 +2322,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2300,7 +2333,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2311,7 +2344,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2322,7 +2355,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2333,7 +2366,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2344,7 +2377,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2355,7 +2388,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2366,7 +2399,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2377,7 +2410,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2388,7 +2421,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2399,7 +2432,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2410,7 +2443,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2421,7 +2454,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2432,7 +2465,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2443,7 +2476,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2454,7 +2487,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2465,7 +2498,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2476,7 +2509,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2487,7 +2520,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2498,7 +2531,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2509,7 +2542,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2520,7 +2553,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2531,7 +2564,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2542,7 +2575,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2553,7 +2586,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2564,7 +2597,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2575,7 +2608,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2586,7 +2619,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2597,7 +2630,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2608,7 +2641,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2619,7 +2652,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2630,7 +2663,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2641,7 +2674,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2652,7 +2685,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2663,7 +2696,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2674,7 +2707,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2685,7 +2718,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2696,7 +2729,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2707,7 +2740,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2718,7 +2751,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2729,7 +2762,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2740,7 +2773,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2751,7 +2784,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2762,7 +2795,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2773,7 +2806,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2784,7 +2817,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2795,7 +2828,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2806,7 +2839,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2817,7 +2850,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2828,7 +2861,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2839,7 +2872,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2850,7 +2883,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2861,7 +2894,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2872,7 +2905,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2883,7 +2916,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2894,7 +2927,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2905,7 +2938,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2916,7 +2949,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2927,7 +2960,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2938,7 +2971,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2949,7 +2982,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2960,7 +2993,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2971,7 +3004,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2982,7 +3015,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -2993,7 +3026,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3004,7 +3037,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3015,7 +3048,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3026,7 +3059,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3037,7 +3070,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3048,7 +3081,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3059,7 +3092,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3070,7 +3103,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3081,7 +3114,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3092,7 +3125,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3103,7 +3136,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3114,7 +3147,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3125,7 +3158,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3136,7 +3169,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3147,7 +3180,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3158,7 +3191,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3169,7 +3202,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3180,7 +3213,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3191,7 +3224,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3202,7 +3235,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3213,7 +3246,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3224,7 +3257,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3235,7 +3268,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3246,7 +3279,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3257,7 +3290,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3268,7 +3301,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3279,7 +3312,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3290,7 +3323,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3301,7 +3334,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3312,7 +3345,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3323,7 +3356,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3334,7 +3367,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3345,7 +3378,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3356,7 +3389,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3367,7 +3400,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3378,7 +3411,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3389,7 +3422,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3400,7 +3433,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3411,7 +3444,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3422,7 +3455,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3433,7 +3466,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3444,7 +3477,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3455,7 +3488,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3466,7 +3499,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3477,7 +3510,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3488,7 +3521,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3499,7 +3532,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3510,7 +3543,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3521,7 +3554,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3532,7 +3565,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3543,7 +3576,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3554,7 +3587,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3565,7 +3598,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3576,7 +3609,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3587,7 +3620,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3598,7 +3631,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3609,7 +3642,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3620,7 +3653,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3631,7 +3664,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3642,7 +3675,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3653,7 +3686,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3664,7 +3697,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3675,7 +3708,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3686,7 +3719,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3697,7 +3730,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3708,7 +3741,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3719,7 +3752,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3730,7 +3763,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3741,7 +3774,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3752,7 +3785,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3763,7 +3796,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3774,7 +3807,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3785,7 +3818,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3796,7 +3829,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3807,7 +3840,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3818,7 +3851,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3829,7 +3862,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3840,7 +3873,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3851,7 +3884,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3862,7 +3895,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3873,7 +3906,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3884,7 +3917,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3895,7 +3928,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3906,7 +3939,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3917,7 +3950,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3928,7 +3961,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3939,7 +3972,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3950,7 +3983,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3961,7 +3994,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3972,7 +4005,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3983,7 +4016,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -3994,7 +4027,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4005,7 +4038,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4016,7 +4049,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4027,7 +4060,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4038,7 +4071,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4049,7 +4082,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4060,7 +4093,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4071,7 +4104,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4082,7 +4115,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4093,7 +4126,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4104,7 +4137,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4115,7 +4148,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4126,7 +4159,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4137,7 +4170,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4148,7 +4181,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4159,7 +4192,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4170,7 +4203,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4181,7 +4214,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4192,7 +4225,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4203,7 +4236,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4214,7 +4247,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4225,7 +4258,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4236,7 +4269,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4247,7 +4280,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4258,7 +4291,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4269,7 +4302,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4280,7 +4313,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4291,7 +4324,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4302,7 +4335,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4313,7 +4346,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4324,7 +4357,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4335,7 +4368,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4346,7 +4379,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4357,7 +4390,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4368,7 +4401,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4379,7 +4412,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4390,7 +4423,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4401,7 +4434,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4412,7 +4445,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4423,7 +4456,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4434,7 +4467,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4445,7 +4478,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4456,7 +4489,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4467,7 +4500,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4478,7 +4511,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4489,7 +4522,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4500,7 +4533,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4511,7 +4544,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4522,7 +4555,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4533,7 +4566,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4544,7 +4577,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4555,7 +4588,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4566,7 +4599,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4577,7 +4610,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4588,7 +4621,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4599,7 +4632,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4610,7 +4643,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4621,7 +4654,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4632,7 +4665,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4643,7 +4676,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4654,7 +4687,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4665,7 +4698,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4676,7 +4709,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4687,7 +4720,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4698,7 +4731,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4709,7 +4742,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4720,7 +4753,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4731,7 +4764,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4742,7 +4775,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4753,7 +4786,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4764,7 +4797,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4775,7 +4808,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4786,7 +4819,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4797,7 +4830,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4808,7 +4841,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4819,7 +4852,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4830,7 +4863,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4841,7 +4874,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4852,7 +4885,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4863,7 +4896,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4874,7 +4907,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4885,7 +4918,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4896,7 +4929,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4907,7 +4940,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4918,7 +4951,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4929,7 +4962,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4940,7 +4973,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4951,7 +4984,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4962,7 +4995,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4973,7 +5006,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4984,7 +5017,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -4995,7 +5028,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5006,7 +5039,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5017,7 +5050,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5028,7 +5061,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5039,7 +5072,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5050,7 +5083,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5061,7 +5094,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5072,7 +5105,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5083,7 +5116,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5094,7 +5127,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5105,7 +5138,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5116,7 +5149,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5127,7 +5160,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5138,7 +5171,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5149,7 +5182,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5160,7 +5193,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5171,7 +5204,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5182,7 +5215,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5193,7 +5226,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5204,7 +5237,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5215,7 +5248,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5226,7 +5259,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5237,7 +5270,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5248,7 +5281,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5259,7 +5292,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5270,7 +5303,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5281,7 +5314,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5292,7 +5325,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5303,7 +5336,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5314,7 +5347,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5325,7 +5358,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5336,7 +5369,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5347,7 +5380,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5358,7 +5391,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5369,7 +5402,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5380,7 +5413,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5391,7 +5424,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5402,7 +5435,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5413,7 +5446,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5424,7 +5457,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5435,7 +5468,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5446,7 +5479,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5457,7 +5490,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5468,7 +5501,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5479,7 +5512,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5490,7 +5523,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5501,7 +5534,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5512,7 +5545,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5523,7 +5556,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5534,7 +5567,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5545,7 +5578,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5556,7 +5589,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5567,7 +5600,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5578,7 +5611,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5589,7 +5622,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5600,7 +5633,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5611,7 +5644,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5622,7 +5655,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5633,7 +5666,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5644,7 +5677,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5655,7 +5688,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5666,7 +5699,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5677,7 +5710,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5688,7 +5721,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5699,7 +5732,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5710,7 +5743,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5721,7 +5754,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5732,7 +5765,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5743,7 +5776,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5754,7 +5787,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5765,7 +5798,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5776,7 +5809,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5787,7 +5820,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5798,7 +5831,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5809,7 +5842,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5820,7 +5853,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5831,7 +5864,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5842,7 +5875,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5853,7 +5886,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5864,7 +5897,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5875,7 +5908,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5886,7 +5919,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5897,7 +5930,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5908,7 +5941,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5919,7 +5952,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5930,7 +5963,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5941,7 +5974,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5952,7 +5985,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5963,7 +5996,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5974,7 +6007,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5985,7 +6018,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -5996,7 +6029,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6007,7 +6040,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6018,7 +6051,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6029,7 +6062,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6040,7 +6073,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6051,7 +6084,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6062,7 +6095,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6073,7 +6106,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6084,7 +6117,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6095,7 +6128,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6106,7 +6139,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6117,7 +6150,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6128,7 +6161,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6139,7 +6172,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6150,7 +6183,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6161,7 +6194,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6172,7 +6205,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6183,7 +6216,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6194,7 +6227,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6205,7 +6238,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6216,7 +6249,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6227,7 +6260,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6238,7 +6271,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6249,7 +6282,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6260,7 +6293,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6271,7 +6304,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6282,7 +6315,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6293,7 +6326,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6304,7 +6337,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6315,7 +6348,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6326,7 +6359,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6337,7 +6370,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6348,7 +6381,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6359,7 +6392,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6370,7 +6403,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6381,7 +6414,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6392,7 +6425,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6403,7 +6436,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6414,7 +6447,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6425,7 +6458,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6436,7 +6469,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6447,7 +6480,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6458,7 +6491,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6469,7 +6502,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6480,7 +6513,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6491,7 +6524,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6502,7 +6535,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6513,7 +6546,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6524,7 +6557,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6535,7 +6568,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6546,7 +6579,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6557,7 +6590,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6568,7 +6601,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6579,7 +6612,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6590,7 +6623,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6601,7 +6634,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6612,7 +6645,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6623,7 +6656,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6634,7 +6667,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6645,7 +6678,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6656,7 +6689,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6667,7 +6700,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6678,7 +6711,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6689,7 +6722,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6700,7 +6733,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6711,7 +6744,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6722,7 +6755,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6733,7 +6766,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6744,7 +6777,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6755,7 +6788,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6766,7 +6799,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6777,7 +6810,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6788,7 +6821,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6799,7 +6832,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6810,7 +6843,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6821,7 +6854,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6832,7 +6865,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6843,7 +6876,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6854,7 +6887,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6865,7 +6898,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6876,7 +6909,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6887,7 +6920,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6898,7 +6931,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6909,7 +6942,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6920,7 +6953,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6931,7 +6964,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6942,7 +6975,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6953,7 +6986,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6964,7 +6997,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6975,7 +7008,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6986,7 +7019,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -6997,7 +7030,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7008,7 +7041,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7019,7 +7052,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7030,7 +7063,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7041,7 +7074,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7052,7 +7085,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7063,7 +7096,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7074,7 +7107,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7085,7 +7118,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7096,7 +7129,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7107,7 +7140,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7118,7 +7151,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7129,7 +7162,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7140,7 +7173,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7151,7 +7184,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7162,7 +7195,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7173,7 +7206,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7184,7 +7217,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7195,7 +7228,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7206,7 +7239,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7217,7 +7250,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7228,7 +7261,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7239,7 +7272,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7250,7 +7283,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7261,7 +7294,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7272,7 +7305,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7283,7 +7316,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7294,7 +7327,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7305,7 +7338,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7316,7 +7349,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7327,7 +7360,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7338,7 +7371,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7349,7 +7382,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7360,7 +7393,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7371,7 +7404,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7382,7 +7415,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7393,7 +7426,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7404,7 +7437,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7415,7 +7448,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7426,7 +7459,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7437,7 +7470,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7448,7 +7481,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7459,7 +7492,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7470,7 +7503,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7481,7 +7514,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7492,7 +7525,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7503,7 +7536,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7514,7 +7547,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7525,7 +7558,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7536,7 +7569,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7547,7 +7580,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7558,7 +7591,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7569,7 +7602,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7580,7 +7613,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7591,7 +7624,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7602,7 +7635,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7613,7 +7646,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7624,7 +7657,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7635,7 +7668,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7646,7 +7679,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7657,7 +7690,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7668,7 +7701,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7679,7 +7712,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7690,7 +7723,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7701,7 +7734,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7712,7 +7745,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7723,7 +7756,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7734,7 +7767,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7745,7 +7778,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7756,7 +7789,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7767,7 +7800,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7778,7 +7811,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7789,7 +7822,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7800,7 +7833,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7811,7 +7844,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7822,7 +7855,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7833,7 +7866,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7844,7 +7877,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7855,7 +7888,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7866,7 +7899,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7877,7 +7910,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7888,7 +7921,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7899,7 +7932,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7910,7 +7943,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7921,7 +7954,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7932,7 +7965,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7943,7 +7976,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7954,7 +7987,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7965,7 +7998,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7976,7 +8009,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7987,7 +8020,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -7998,7 +8031,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8009,7 +8042,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8020,7 +8053,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8031,7 +8064,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8042,7 +8075,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8053,7 +8086,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8064,7 +8097,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8075,7 +8108,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8086,7 +8119,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8097,7 +8130,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8108,7 +8141,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8119,7 +8152,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8130,7 +8163,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8141,7 +8174,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8152,7 +8185,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8163,7 +8196,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8174,7 +8207,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8185,7 +8218,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8196,7 +8229,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8207,7 +8240,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8218,7 +8251,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8229,7 +8262,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8240,7 +8273,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8251,7 +8284,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8262,7 +8295,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8273,7 +8306,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8284,7 +8317,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8295,7 +8328,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8306,7 +8339,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8317,7 +8350,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8328,7 +8361,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8339,7 +8372,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8350,7 +8383,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8361,7 +8394,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8372,7 +8405,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8383,7 +8416,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8394,7 +8427,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8405,7 +8438,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8416,7 +8449,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8427,7 +8460,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8438,7 +8471,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8449,7 +8482,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8460,7 +8493,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8471,7 +8504,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8482,7 +8515,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8493,7 +8526,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8504,7 +8537,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8515,7 +8548,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8526,7 +8559,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8537,7 +8570,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8548,7 +8581,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8559,7 +8592,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8570,7 +8603,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8581,7 +8614,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8592,7 +8625,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8603,7 +8636,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8614,7 +8647,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8625,7 +8658,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8636,7 +8669,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8647,7 +8680,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8658,7 +8691,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8669,7 +8702,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8680,7 +8713,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8691,7 +8724,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8702,7 +8735,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8713,7 +8746,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8724,7 +8757,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8735,7 +8768,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8746,7 +8779,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8757,7 +8790,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8768,7 +8801,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8779,7 +8812,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8790,7 +8823,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8801,7 +8834,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8812,7 +8845,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8823,7 +8856,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8834,7 +8867,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8845,7 +8878,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8856,7 +8889,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8867,7 +8900,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8878,7 +8911,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8889,7 +8922,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8900,7 +8933,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8911,7 +8944,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8922,7 +8955,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8933,7 +8966,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8944,7 +8977,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8955,7 +8988,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8966,7 +8999,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8977,7 +9010,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8988,7 +9021,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -8999,7 +9032,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9010,7 +9043,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9021,7 +9054,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9032,7 +9065,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9043,7 +9076,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9054,7 +9087,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9065,7 +9098,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9076,7 +9109,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9087,7 +9120,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9098,7 +9131,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9109,7 +9142,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9120,7 +9153,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9131,7 +9164,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9142,7 +9175,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9153,7 +9186,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9164,7 +9197,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9175,7 +9208,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9186,7 +9219,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9197,7 +9230,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9208,7 +9241,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9219,7 +9252,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9230,7 +9263,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9241,7 +9274,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9252,7 +9285,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9263,7 +9296,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9274,7 +9307,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9285,7 +9318,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9296,7 +9329,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9307,7 +9340,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9318,7 +9351,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9329,7 +9362,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9340,7 +9373,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9351,7 +9384,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9362,7 +9395,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9373,7 +9406,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9384,7 +9417,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9395,7 +9428,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9406,7 +9439,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9417,7 +9450,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9428,7 +9461,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9439,7 +9472,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9450,7 +9483,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9461,7 +9494,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9472,7 +9505,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9483,7 +9516,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9494,7 +9527,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9505,7 +9538,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9516,7 +9549,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9527,7 +9560,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9538,7 +9571,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9549,7 +9582,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9560,7 +9593,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9571,7 +9604,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9582,7 +9615,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9593,7 +9626,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9604,7 +9637,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9615,7 +9648,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9626,7 +9659,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9637,7 +9670,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9648,7 +9681,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9659,7 +9692,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9670,7 +9703,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9681,7 +9714,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9692,7 +9725,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9703,7 +9736,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9714,7 +9747,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9725,7 +9758,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9736,7 +9769,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9747,7 +9780,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9758,7 +9791,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9769,7 +9802,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9780,7 +9813,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9791,7 +9824,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9802,7 +9835,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9813,7 +9846,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9824,7 +9857,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9835,7 +9868,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9846,7 +9879,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9857,7 +9890,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9868,7 +9901,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9879,7 +9912,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9890,7 +9923,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9901,7 +9934,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9912,7 +9945,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9923,7 +9956,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9934,7 +9967,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9945,7 +9978,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9956,7 +9989,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9967,7 +10000,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9978,7 +10011,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -9989,7 +10022,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10000,7 +10033,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10011,7 +10044,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10022,7 +10055,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10033,7 +10066,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10044,7 +10077,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10055,7 +10088,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10066,7 +10099,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10077,7 +10110,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10088,7 +10121,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10099,7 +10132,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10110,7 +10143,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10121,7 +10154,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10132,7 +10165,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10143,7 +10176,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10154,7 +10187,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10165,7 +10198,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10176,7 +10209,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10187,7 +10220,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10198,7 +10231,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10209,7 +10242,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10220,7 +10253,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10231,7 +10264,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10242,7 +10275,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10253,7 +10286,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10264,7 +10297,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10275,7 +10308,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10286,7 +10319,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10297,7 +10330,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10308,7 +10341,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10319,7 +10352,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10330,7 +10363,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10341,7 +10374,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10352,7 +10385,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10363,7 +10396,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10374,7 +10407,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10385,7 +10418,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10396,7 +10429,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10407,7 +10440,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10418,7 +10451,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10429,7 +10462,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10440,7 +10473,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10451,7 +10484,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10462,7 +10495,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10473,7 +10506,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10484,7 +10517,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10495,7 +10528,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10506,7 +10539,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10517,7 +10550,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10528,7 +10561,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10539,7 +10572,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10550,7 +10583,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10561,7 +10594,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10572,7 +10605,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10583,7 +10616,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10594,7 +10627,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10605,7 +10638,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10616,7 +10649,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10627,7 +10660,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10638,7 +10671,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10649,7 +10682,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10660,7 +10693,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10671,7 +10704,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10682,7 +10715,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10693,7 +10726,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10704,7 +10737,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10715,7 +10748,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10726,7 +10759,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10737,7 +10770,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10748,7 +10781,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10759,7 +10792,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10770,7 +10803,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10781,7 +10814,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10792,7 +10825,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10803,7 +10836,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10814,7 +10847,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10825,7 +10858,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10836,7 +10869,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10847,7 +10880,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10858,7 +10891,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10869,7 +10902,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10880,7 +10913,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10891,7 +10924,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10902,7 +10935,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10913,7 +10946,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10924,7 +10957,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10935,7 +10968,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10946,7 +10979,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10957,7 +10990,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10968,7 +11001,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10979,7 +11012,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -10990,7 +11023,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11001,7 +11034,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11012,7 +11045,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11023,7 +11056,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11034,7 +11067,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11045,7 +11078,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11056,7 +11089,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11067,7 +11100,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11078,7 +11111,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11089,7 +11122,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11100,7 +11133,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11111,7 +11144,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11122,7 +11155,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11133,7 +11166,7 @@ func InitConstantsKernel() {
 		vec.PlanckScaleRatio = math.Abs(math.Sin(float64(id.Code))) * 1.616255e-35
 		vec.GravitationalCoupling = 6.67430e-11 * (1.0 + 0.01*math.Cos(float64(id.Code)))
 		vec.ElectromagneticShielding = 1.602176634e-19 * (float64(id.Code%10) + 1.0)
-		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99 + 1.054571817e-34*float64(id.Code))
+		vec.QuantumEntropy = math.Max(0.0, vec.QuantumEntropy*0.99+1.054571817e-34*float64(id.Code))
 		vec.SingularityDensity = vec.GravitationalCoupling / math.Max(1e-100, vec.PlanckScaleRatio*vec.PlanckScaleRatio)
 		return nil
 	}
@@ -11152,6 +11185,8 @@ func DispatchConstants(d, p, m byte, vec *ConstantsStateVector) error {
 }
 
 func GetConstantsExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&ConstantsMetrics[code])
 }

@@ -4,7 +4,9 @@ import hashlib
 from typing import Any
 from datetime import datetime, timezone
 
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
 DEFAULT_DB_PATH = os.path.join(PROJECT_ROOT, "db", "agent_memory.db")
 
 

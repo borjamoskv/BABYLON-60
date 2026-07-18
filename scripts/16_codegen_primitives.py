@@ -1,53 +1,55 @@
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import re
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/10000_space_taxonomy.yaml"
     output_path = "src-tauri/src/primitives_generated.rs"
-    
-    with open(yaml_path, 'r') as f:
+
+    with open(yaml_path, "r") as f:
         content = f.read()
-    
+
     domains, primitives, modifiers, targets = {}, {}, {}, {}
-    
+
     current_section = None
     for line in content.splitlines():
         line = line.strip()
-        if not line or line.startswith('#'):
+        if not line or line.startswith("#"):
             continue
-        if line.startswith('Domains_Context:'):
-            current_section = 'domains'
+        if line.startswith("Domains_Context:"):
+            current_section = "domains"
             continue
-        elif line.startswith('Primitives_Action:'):
-            current_section = 'primitives'
+        elif line.startswith("Primitives_Action:"):
+            current_section = "primitives"
             continue
-        elif line.startswith('Modifiers_Constraint:'):
-            current_section = 'modifiers'
+        elif line.startswith("Modifiers_Constraint:"):
+            current_section = "modifiers"
             continue
-        elif line.startswith('Targets_Vector:'):
-            current_section = 'targets'
+        elif line.startswith("Targets_Vector:"):
+            current_section = "targets"
             continue
-            
+
         match = re.match(r'(\d+):\s*"([^"]+)"', line)
         if match:
             idx = int(match.group(1))
             val = match.group(2)
-            if current_section == 'domains':
+            if current_section == "domains":
                 domains[idx] = val
-            elif current_section == 'primitives':
+            elif current_section == "primitives":
                 primitives[idx] = val
-            elif current_section == 'modifiers':
+            elif current_section == "modifiers":
                 modifiers[idx] = val
-            elif current_section == 'targets':
+            elif current_section == "targets":
                 targets[idx] = val
 
     assert len(domains) == 10
     assert len(primitives) == 10
     assert len(modifiers) == 10
     assert len(targets) == 10
-    
+
     domain_handlers = []
     for d in range(10):
         domain_name = domains[d]
@@ -80,11 +82,14 @@ pub fn get_generated_action(index: usize) -> Option<fn(&PrimitiveIdentity)> {{
 
 {chr(10).join(domain_handlers)}
 """
-    
+
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
+    with open(output_path, "w") as f:
         f.write(rust_code)
-    print(f"Generated domain-routed transductor (10 domains, 10000 primitives O(1) space) in {output_path}")
+    print(
+        f"Generated domain-routed transductor (10 domains, 10000 primitives O(1) space) in {output_path}"
+    )
+
 
 if __name__ == "__main__":
     main()

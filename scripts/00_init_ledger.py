@@ -4,19 +4,20 @@ import os
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
 
+
 def init_ledger() -> None:
     if not os.path.exists(CORTEX_DIR):
         os.makedirs(CORTEX_DIR)
-        
+
     # Conectar y establecer PRAGMAS físicos (Ω10)
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
     cursor = conn.cursor()
-    
+
     # Tolerancia a concurrencia extrema (WAL + Busy Timeout 5000ms)
     cursor.execute("PRAGMA journal_mode = WAL;")
     cursor.execute("PRAGMA synchronous = NORMAL;")
     cursor.execute("PRAGMA busy_timeout = 5000;")
-    
+
     # Estructura del Ledger Inmutable (Ω11, Ω12)
     cursor.executescript("""
     CREATE TABLE IF NOT EXISTS bft_ledger (
@@ -45,7 +46,7 @@ def init_ledger() -> None:
         SELECT RAISE(ABORT, 'EpistemicHalt: Borrado de ledger inmutable prohibido (Ω11).');
     END;
     """)
-    
+
     # Inyectar el bloque Génesis si está vacío
     cursor.execute("SELECT COUNT(*) FROM bft_ledger")
     if cursor.fetchone()[0] == 0:
@@ -53,12 +54,21 @@ def init_ledger() -> None:
         cursor.execute(
             """INSERT INTO bft_ledger (agent_id, lamport_t, payload_hash, prev_hash, cortex_taint) 
                VALUES (?, ?, ?, ?, ?)""",
-            ("ROOT_OPERATOR_UID0", 0, "GENESIS_PAYLOAD", "0000000000000000000000000000000000000000000000000000000000000000", "CORTEX-TAINT:borjamoskv:genesis:2026")
+            (
+                "ROOT_OPERATOR_UID0",
+                0,
+                "GENESIS_PAYLOAD",
+                "0000000000000000000000000000000000000000000000000000000000000000",
+                "CORTEX-TAINT:borjamoskv:genesis:2026",
+            ),
         )
-    
+
     conn.commit()
     conn.close()
-    print(f"Master Ledger inicializado en {DB_PATH}. WAL activo. Inmutabilidad enforzada (Ω11).")
+    print(
+        f"Master Ledger inicializado en {DB_PATH}. WAL activo. Inmutabilidad enforzada (Ω11)."
+    )
+
 
 if __name__ == "__main__":
     init_ledger()

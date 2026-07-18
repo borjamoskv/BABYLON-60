@@ -1,8 +1,10 @@
 import os
 import sys
 from typing import Any
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from codegen_utils import parse_yaml  # noqa: E402
+
 
 def generate_go(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -20,96 +22,105 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
         "type NoetherPrimitive int",
         "type NoetherModifier int",
         "",
-        "const ("
+        "const (",
     ]
-    
+
     for i in range(10):
-        lines.append(f"\tNoetherDomain{domains[i].replace('_', '').capitalize()} NoetherDomain = {i}")
+        lines.append(
+            f"\tNoetherDomain{domains[i].replace('_', '').capitalize()} NoetherDomain = {i}"
+        )
     lines.append("\n\t// Noether Primitives")
     for i in range(10):
-        lines.append(f"\tNoetherPrimitive{primitives[i].replace('_', '').capitalize()} NoetherPrimitive = {i}")
+        lines.append(
+            f"\tNoetherPrimitive{primitives[i].replace('_', '').capitalize()} NoetherPrimitive = {i}"
+        )
     lines.append("\n\t// Noether Modifiers")
     for i in range(10):
-        lines.append(f"\tNoetherModifier{modifiers[i].replace('_', '').capitalize()} NoetherModifier = {i}")
+        lines.append(
+            f"\tNoetherModifier{modifiers[i].replace('_', '').capitalize()} NoetherModifier = {i}"
+        )
     lines.append(")\n")
 
-    lines.extend([
-        "func (d NoetherDomain) String() string {",
-        "\tswitch d {"
-    ])
+    lines.extend(["func (d NoetherDomain) String() string {", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (p NoetherPrimitive) String() string {",
-        "\tswitch p {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (p NoetherPrimitive) String() string {",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "func (m NoetherModifier) String() string {",
-        "\tswitch m {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "func (m NoetherModifier) String() string {",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        "type NoetherIdentity struct {",
-        "\tDomain    NoetherDomain",
-        "\tPrimitive NoetherPrimitive",
-        "\tModifier  NoetherModifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        "type NoetherStateVector struct {",
-        "\tActionVariation   float64",
-        "\tNoetherCurrentDiv float64",
-        "\tConservedCharge   float64",
-        "\tQuantumAnomaly    float64",
-        "\tEntropyGeneration float64",
-        "\tExecutionCount    uint64",
-        "}",
-        "",
-        "func ResolveNoetherIdentity(d, p, m byte) (NoetherIdentity, error) {",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        '\t\treturn NoetherIdentity{}, errors.New("noether index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        '\tname := fmt.Sprintf("NOETHER-%s-%s-%s", NoetherDomain(d).String(), NoetherPrimitive(p).String(), NoetherModifier(m).String())',
-        "\treturn NoetherIdentity{",
-        "\t\tDomain:    NoetherDomain(d),",
-        "\t\tPrimitive: NoetherPrimitive(p),",
-        "\t\tModifier:  NoetherModifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        "type NoetherHandler func(id NoetherIdentity, vec *NoetherStateVector) error",
-        "",
-        "var (",
-        "\tNoetherTable [1000]NoetherHandler",
-        "\tNoetherMetrics [1000]uint64",
-        ")",
-        "",
-        "func InitNoetherKernel() {"
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            "type NoetherIdentity struct {",
+            "\tDomain    NoetherDomain",
+            "\tPrimitive NoetherPrimitive",
+            "\tModifier  NoetherModifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            "type NoetherStateVector struct {",
+            "\tActionVariation   float64",
+            "\tNoetherCurrentDiv float64",
+            "\tConservedCharge   float64",
+            "\tQuantumAnomaly    float64",
+            "\tEntropyGeneration float64",
+            "\tExecutionCount    uint64",
+            "}",
+            "",
+            "func ResolveNoetherIdentity(d, p, m byte) (NoetherIdentity, error) {",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            '\t\treturn NoetherIdentity{}, errors.New("noether index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            '\tname := fmt.Sprintf("NOETHER-%s-%s-%s", NoetherDomain(d).String(), NoetherPrimitive(p).String(), NoetherModifier(m).String())',
+            "\treturn NoetherIdentity{",
+            "\t\tDomain:    NoetherDomain(d),",
+            "\t\tPrimitive: NoetherPrimitive(p),",
+            "\t\tModifier:  NoetherModifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            "type NoetherHandler func(id NoetherIdentity, vec *NoetherStateVector) error",
+            "",
+            "var (",
+            "\tNoetherTable [1000]NoetherHandler",
+            "\tNoetherMetrics [1000]uint64",
+            ")",
+            "",
+            "func InitNoetherKernel() {",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
-                code = d*100 + p*10 + m
+                code = d * 100 + p * 10 + m
                 domain_str = domains[d]
                 prim_str = primitives[p]
                 mod_str = modifiers[m]
@@ -129,31 +140,34 @@ def generate_go(domains, primitives, modifiers, output_path) -> Any:
 \t\treturn nil
 \t}}""")
 
-    lines.extend([
-        "}",
-        "",
-        "func DispatchNoether(d, p, m byte, vec *NoetherStateVector) error {",
-        "\tidentity, err := ResolveNoetherIdentity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        "\thandler := NoetherTable[identity.Code]",
-        "\tif handler == nil {",
-        '\t\treturn errors.New("noether kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, vec)",
-        "}",
-        "",
-        "func GetNoetherExecutionCount(code uint16) uint64 {",
-        "\tif code >= 1000 { return 0 }",
-        "\treturn atomic.LoadUint64(&NoetherMetrics[code])",
-        "}"
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            "func DispatchNoether(d, p, m byte, vec *NoetherStateVector) error {",
+            "\tidentity, err := ResolveNoetherIdentity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            "\thandler := NoetherTable[identity.Code]",
+            "\tif handler == nil {",
+            '\t\treturn errors.New("noether kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, vec)",
+            "}",
+            "",
+            "func GetNoetherExecutionCount(code uint16) uint64 {",
+            "\tif code >= 1000 { return 0 }",
+            "\treturn atomic.LoadUint64(&NoetherMetrics[code])",
+            "}",
+        ]
+    )
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go Noether primitives in {output_path}")
+
 
 def generate_rust(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -192,7 +206,7 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "",
         "pub fn dispatch_noether(d: u8, p: u8, m: u8, vec: &mut NoetherStateVector) -> Result<u16, String> {",
         "    if d > 9 || p > 9 || m > 9 {",
-        "        return Err(\"Noether indices out of bounds [0-9]\".to_string());",
+        '        return Err("Noether indices out of bounds [0-9]".to_string());',
         "    }",
         "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
         "    vec.execution_count += 1;",
@@ -202,13 +216,14 @@ def generate_rust(domains, primitives, modifiers, output_path) -> Any:
         "    vec.conserved_charge = (vec.conserved_charge * 0.99 + 0.1 * (code as f64).sin()).max(0.0);",
         "    vec.entropy_generation = vec.noether_current_div * vec.noether_current_div;",
         "    Ok(code)",
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Rust Noether in {output_path}")
+
 
 def generate_python(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -245,13 +260,14 @@ def generate_python(domains, primitives, modifiers, output_path) -> Any:
         "    vec.conserved_charge = max(0.0, vec.conserved_charge * 0.99 + 0.1 * math.sin(code))",
         "    vec.entropy_generation = vec.noether_current_div ** 2",
         "    return code, name, vec.entropy_generation",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python Noether in {output_path}")
+
 
 def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -286,13 +302,14 @@ def generate_go_test(domains, primitives, modifiers, output_path) -> Any:
         '\t\tt.Fatalf("Expected 1000 Noether primitives tested, got %d", count)',
         "\t}",
         '\tt.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Noether Primitives. Final Charge: %f", vec.ConservedCharge)',
-        "}"
+        "}",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Go test suite in {output_path}")
+
 
 def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
     lines = [
@@ -315,13 +332,14 @@ def generate_python_test(domains, primitives, modifiers, output_path) -> Any:
         "",
         "if __name__ == '__main__':",
         "    unittest.main()",
-        ""
+        "",
     ]
 
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(lines))
+    with open(output_path, "w") as f:
+        f.write("\n".join(lines))
     print(f"Generated Python test suite in {output_path}")
+
 
 def main() -> None:
     yaml_path = "cortex/ontology/noether_1000_taxonomy.yaml"
@@ -330,13 +348,14 @@ def main() -> None:
     py_output = "cortex/noether.py"
     go_test_output = "primitives/noether_test.go"
     py_test_output = "cortex/noether_test.py"
-    
+
     domains, primitives, modifiers = parse_yaml(yaml_path)
     generate_go(domains, primitives, modifiers, go_output)
     generate_rust(domains, primitives, modifiers, rust_output)
     generate_python(domains, primitives, modifiers, py_output)
     generate_go_test(domains, primitives, modifiers, go_test_output)
     generate_python_test(domains, primitives, modifiers, py_test_output)
+
 
 if __name__ == "__main__":
     main()

@@ -2,9 +2,43 @@
 import math
 from typing import Tuple
 
-DOMAINS = {0: 'LAZY_EVAL', 1: 'MONAD_TRANS', 2: 'TYPE_CLASS', 3: 'STM_CONCUR', 4: 'FUNCTOR_CAT', 5: 'PARSER_MONAD', 6: 'PURE_MATH', 7: 'FIBER_THREAD', 8: 'FFI_SYSTEM', 9: 'COMPILER_GHC'}
-PRIMITIVES = {0: 'THUNK_FORCE', 1: 'BIND_EVAL', 2: 'MAP_APPLY', 3: 'TX_ATOMIC', 4: 'REDUCE_FOLD', 5: 'PARSE_TOKEN', 6: 'STATE_MUTATE', 7: 'LIFT_EFFECT', 8: 'FORK_SPARK', 9: 'FFI_CALL'}
-MODIFIERS = {0: 'RAW', 1: 'STRICT', 2: 'LAZY', 3: 'READER_ENV', 4: 'WRITER_LOG', 5: 'EXCEPT_ERR', 6: 'STM_RETRY', 7: 'PARALLEL', 8: 'CONT_CPS', 9: 'IO_UNSAFE'}
+DOMAINS = {
+    0: "LAZY_EVAL",
+    1: "MONAD_TRANS",
+    2: "TYPE_CLASS",
+    3: "STM_CONCUR",
+    4: "FUNCTOR_CAT",
+    5: "PARSER_MONAD",
+    6: "PURE_MATH",
+    7: "FIBER_THREAD",
+    8: "FFI_SYSTEM",
+    9: "COMPILER_GHC",
+}
+PRIMITIVES = {
+    0: "THUNK_FORCE",
+    1: "BIND_EVAL",
+    2: "MAP_APPLY",
+    3: "TX_ATOMIC",
+    4: "REDUCE_FOLD",
+    5: "PARSE_TOKEN",
+    6: "STATE_MUTATE",
+    7: "LIFT_EFFECT",
+    8: "FORK_SPARK",
+    9: "FFI_CALL",
+}
+MODIFIERS = {
+    0: "RAW",
+    1: "STRICT",
+    2: "LAZY",
+    3: "READER_ENV",
+    4: "WRITER_LOG",
+    5: "EXCEPT_ERR",
+    6: "STM_RETRY",
+    7: "PARALLEL",
+    8: "CONT_CPS",
+    9: "IO_UNSAFE",
+}
+
 
 class HaskellStateVector:
     def __init__(self):
@@ -15,14 +49,18 @@ class HaskellStateVector:
         self.compile_cost = 0.0
         self.execution_count = 0
 
+
 def resolve_haskell_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
-        raise ValueError('Index out of range [0-9]')
+        raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
-    name = f'HS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}'
+    name = f"HS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
 
-def dispatch_haskell(d: int, p: int, m: int, vec: HaskellStateVector) -> Tuple[int, str, float]:
+
+def dispatch_haskell(
+    d: int, p: int, m: int, vec: HaskellStateVector
+) -> Tuple[int, str, float]:
     code, name = resolve_haskell_identity(d, p, m)
     vec.execution_count += 1
     vec.thunk_depth = max(0.01, vec.thunk_depth * 0.98 + 0.02 * math.cos(code))

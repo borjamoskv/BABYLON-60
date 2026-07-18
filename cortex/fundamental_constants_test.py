@@ -2,6 +2,7 @@
 import unittest
 from cortex.fundamental_constants import dispatch_constants, ConstantsStateVector
 
+
 class TestConstantsKernel(unittest.TestCase):
     def test_constants_coverage(self):
         vec = ConstantsStateVector()
@@ -10,10 +11,13 @@ class TestConstantsKernel(unittest.TestCase):
             for p in range(10):
                 for m in range(10):
                     code, name, density = dispatch_constants(d, p, m, vec)
-                    self.assertEqual(code, d*100 + p*10 + m)
+                    self.assertEqual(code, d * 100 + p * 10 + m)
                     count += 1
         self.assertEqual(count, 1000)
-        print(f'✅ Successfully verified 100% execution coverage for 1000 Python/Constants Primitives. Final Entropy: {vec.quantum_entropy}')
+        print(
+            f"✅ Successfully verified 100% execution coverage for 1000 Python/Constants Primitives. Final Entropy: {vec.quantum_entropy}"
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

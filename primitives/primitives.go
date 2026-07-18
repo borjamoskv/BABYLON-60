@@ -12,115 +12,159 @@ type Modifier int
 type Target int
 
 const (
-	DomainSource Domain = 0
-	DomainMatrix Domain = 1
-	DomainPulse Domain = 2
-	DomainKinetic Domain = 3
-	DomainLogic Domain = 4
-	DomainVector Domain = 5
-	DomainStorage Domain = 6
-	DomainOsint Domain = 7
-	DomainClock Domain = 8
+	DomainSource   Domain = 0
+	DomainMatrix   Domain = 1
+	DomainPulse    Domain = 2
+	DomainKinetic  Domain = 3
+	DomainLogic    Domain = 4
+	DomainVector   Domain = 5
+	DomainStorage  Domain = 6
+	DomainOsint    Domain = 7
+	DomainClock    Domain = 8
 	DomainCompiler Domain = 9
 
 	// Primitives
-	PrimitiveInit Primitive = 0
+	PrimitiveInit   Primitive = 0
 	PrimitiveMutate Primitive = 1
-	PrimitiveBind Primitive = 2
-	PrimitiveQuery Primitive = 3
+	PrimitiveBind   Primitive = 2
+	PrimitiveQuery  Primitive = 3
 	PrimitiveStream Primitive = 4
 	PrimitiveCommit Primitive = 5
-	PrimitiveSync Primitive = 6
-	PrimitiveHalt Primitive = 7
-	PrimitiveFork Primitive = 8
-	PrimitiveJoin Primitive = 9
+	PrimitiveSync   Primitive = 6
+	PrimitiveHalt   Primitive = 7
+	PrimitiveFork   Primitive = 8
+	PrimitiveJoin   Primitive = 9
 
 	// Modifiers
-	ModifierRaw Modifier = 0
-	ModifierAtomic Modifier = 1
-	ModifierPersist Modifier = 2
+	ModifierRaw       Modifier = 0
+	ModifierAtomic    Modifier = 1
+	ModifierPersist   Modifier = 2
 	ModifierEphemeral Modifier = 3
-	ModifierAsync Modifier = 4
-	ModifierSync Modifier = 5
+	ModifierAsync     Modifier = 4
+	ModifierSync      Modifier = 5
 	ModifierQuantized Modifier = 6
-	ModifierMapped Modifier = 7
-	ModifierWrapped Modifier = 8
-	ModifierLocked Modifier = 9
+	ModifierMapped    Modifier = 7
+	ModifierWrapped   Modifier = 8
+	ModifierLocked    Modifier = 9
 
 	// Targets
-	TargetLocal Target = 0
-	TargetNetwork Target = 1
-	TargetSwarm Target = 2
-	TargetLedger Target = 3
-	TargetMemory Target = 4
+	TargetLocal    Target = 0
+	TargetNetwork  Target = 1
+	TargetSwarm    Target = 2
+	TargetLedger   Target = 3
+	TargetMemory   Target = 4
 	TargetDispatch Target = 5
-	TargetUi Target = 6
-	TargetSystem Target = 7
-	TargetBft Target = 8
-	TargetCore Target = 9
+	TargetUi       Target = 6
+	TargetSystem   Target = 7
+	TargetBft      Target = 8
+	TargetCore     Target = 9
 )
 
 func (d Domain) String() string {
 	switch d {
-	case 0: return "SOURCE"
-	case 1: return "MATRIX"
-	case 2: return "PULSE"
-	case 3: return "KINETIC"
-	case 4: return "LOGIC"
-	case 5: return "VECTOR"
-	case 6: return "STORAGE"
-	case 7: return "OSINT"
-	case 8: return "CLOCK"
-	case 9: return "COMPILER"
-	default: return "UNKNOWN"
+	case 0:
+		return "SOURCE"
+	case 1:
+		return "MATRIX"
+	case 2:
+		return "PULSE"
+	case 3:
+		return "KINETIC"
+	case 4:
+		return "LOGIC"
+	case 5:
+		return "VECTOR"
+	case 6:
+		return "STORAGE"
+	case 7:
+		return "OSINT"
+	case 8:
+		return "CLOCK"
+	case 9:
+		return "COMPILER"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p Primitive) String() string {
 	switch p {
-	case 0: return "INIT"
-	case 1: return "MUTATE"
-	case 2: return "BIND"
-	case 3: return "QUERY"
-	case 4: return "STREAM"
-	case 5: return "COMMIT"
-	case 6: return "SYNC"
-	case 7: return "HALT"
-	case 8: return "FORK"
-	case 9: return "JOIN"
-	default: return "UNKNOWN"
+	case 0:
+		return "INIT"
+	case 1:
+		return "MUTATE"
+	case 2:
+		return "BIND"
+	case 3:
+		return "QUERY"
+	case 4:
+		return "STREAM"
+	case 5:
+		return "COMMIT"
+	case 6:
+		return "SYNC"
+	case 7:
+		return "HALT"
+	case 8:
+		return "FORK"
+	case 9:
+		return "JOIN"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m Modifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "ATOMIC"
-	case 2: return "PERSIST"
-	case 3: return "EPHEMERAL"
-	case 4: return "ASYNC"
-	case 5: return "SYNC"
-	case 6: return "QUANTIZED"
-	case 7: return "MAPPED"
-	case 8: return "WRAPPED"
-	case 9: return "LOCKED"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "ATOMIC"
+	case 2:
+		return "PERSIST"
+	case 3:
+		return "EPHEMERAL"
+	case 4:
+		return "ASYNC"
+	case 5:
+		return "SYNC"
+	case 6:
+		return "QUANTIZED"
+	case 7:
+		return "MAPPED"
+	case 8:
+		return "WRAPPED"
+	case 9:
+		return "LOCKED"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (t Target) String() string {
 	switch t {
-	case 0: return "LOCAL"
-	case 1: return "NETWORK"
-	case 2: return "SWARM"
-	case 3: return "LEDGER"
-	case 4: return "MEMORY"
-	case 5: return "DISPATCH"
-	case 6: return "UI"
-	case 7: return "SYSTEM"
-	case 8: return "BFT"
-	case 9: return "CORE"
-	default: return "UNKNOWN"
+	case 0:
+		return "LOCAL"
+	case 1:
+		return "NETWORK"
+	case 2:
+		return "SWARM"
+	case 3:
+		return "LEDGER"
+	case 4:
+		return "MEMORY"
+	case 5:
+		return "DISPATCH"
+	case 6:
+		return "UI"
+	case 7:
+		return "SYSTEM"
+	case 8:
+		return "BFT"
+	case 9:
+		return "CORE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -161,7 +205,7 @@ func InitKernel() {
 	for i := 0; i < 10000; i++ {
 		KernelTable[i] = defaultDispatchHandler
 	}
-	
+
 	KernelTable[0] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0000] SOURCE-INIT-RAW-LOCAL (Go retro-membrane)\n") }
 	KernelTable[1] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0001] SOURCE-INIT-RAW-NETWORK (Go retro-membrane)\n") }
 	KernelTable[2] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0002] SOURCE-INIT-RAW-SWARM (Go retro-membrane)\n") }
@@ -187,19 +231,31 @@ func InitKernel() {
 	KernelTable[22] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0022] SOURCE-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[23] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0023] SOURCE-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[24] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0024] SOURCE-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[25] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0025] SOURCE-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[25] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0025] SOURCE-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[26] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0026] SOURCE-INIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[27] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0027] SOURCE-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[28] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0028] SOURCE-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[29] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0029] SOURCE-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[30] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0030] SOURCE-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[31] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0031] SOURCE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[31] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0031] SOURCE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[32] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0032] SOURCE-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[33] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0033] SOURCE-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[34] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0034] SOURCE-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[35] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0035] SOURCE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[33] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0033] SOURCE-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[34] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0034] SOURCE-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[35] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0035] SOURCE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[36] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0036] SOURCE-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[37] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0037] SOURCE-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[37] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0037] SOURCE-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[38] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0038] SOURCE-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[39] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0039] SOURCE-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[40] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0040] SOURCE-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -223,13 +279,23 @@ func InitKernel() {
 	KernelTable[58] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0058] SOURCE-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[59] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0059] SOURCE-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[60] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0060] SOURCE-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[61] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0061] SOURCE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[61] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0061] SOURCE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[62] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0062] SOURCE-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[63] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0063] SOURCE-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[64] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0064] SOURCE-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[65] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0065] SOURCE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[63] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0063] SOURCE-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[64] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0064] SOURCE-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[65] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0065] SOURCE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[66] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0066] SOURCE-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[67] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0067] SOURCE-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[67] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0067] SOURCE-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[68] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0068] SOURCE-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[69] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0069] SOURCE-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[70] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0070] SOURCE-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -247,7 +313,9 @@ func InitKernel() {
 	KernelTable[82] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0082] SOURCE-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[83] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0083] SOURCE-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[84] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0084] SOURCE-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[85] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0085] SOURCE-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[85] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0085] SOURCE-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[86] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0086] SOURCE-INIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[87] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0087] SOURCE-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[88] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0088] SOURCE-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -273,41 +341,73 @@ func InitKernel() {
 	KernelTable[108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0108] SOURCE-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0109] SOURCE-MUTATE-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0110] SOURCE-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0111] SOURCE-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0111] SOURCE-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0112] SOURCE-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0113] SOURCE-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0114] SOURCE-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0115] SOURCE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0115] SOURCE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0116] SOURCE-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0117] SOURCE-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0118] SOURCE-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0119] SOURCE-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0120] SOURCE-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0121] SOURCE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0121] SOURCE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0122] SOURCE-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0123] SOURCE-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0124] SOURCE-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0125] SOURCE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0123] SOURCE-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0124] SOURCE-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0125] SOURCE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0126] SOURCE-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0127] SOURCE-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0127] SOURCE-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0128] SOURCE-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0129] SOURCE-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0130] SOURCE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0131] SOURCE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0132] SOURCE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0133] SOURCE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0134] SOURCE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0135] SOURCE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0130] SOURCE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0131] SOURCE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0132] SOURCE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0133] SOURCE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0134] SOURCE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0135] SOURCE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0136] SOURCE-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0137] SOURCE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0137] SOURCE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0138] SOURCE-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0139] SOURCE-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0139] SOURCE-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0140] SOURCE-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0141] SOURCE-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0142] SOURCE-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0143] SOURCE-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0144] SOURCE-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0145] SOURCE-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0145] SOURCE-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0146] SOURCE-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0147] SOURCE-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0148] SOURCE-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
@@ -322,42 +422,76 @@ func InitKernel() {
 	KernelTable[157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0157] SOURCE-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0158] SOURCE-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0159] SOURCE-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0160] SOURCE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0161] SOURCE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0162] SOURCE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0163] SOURCE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0164] SOURCE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0165] SOURCE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0160] SOURCE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0161] SOURCE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0162] SOURCE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0163] SOURCE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0164] SOURCE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0165] SOURCE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0166] SOURCE-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0167] SOURCE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0167] SOURCE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0168] SOURCE-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0169] SOURCE-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0169] SOURCE-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0170] SOURCE-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0171] SOURCE-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0171] SOURCE-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0172] SOURCE-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0173] SOURCE-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0174] SOURCE-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0175] SOURCE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0175] SOURCE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0176] SOURCE-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0177] SOURCE-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0178] SOURCE-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0179] SOURCE-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0180] SOURCE-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0181] SOURCE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0181] SOURCE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0182] SOURCE-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0183] SOURCE-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0184] SOURCE-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0185] SOURCE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0183] SOURCE-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0184] SOURCE-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0185] SOURCE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0186] SOURCE-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0187] SOURCE-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0187] SOURCE-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0188] SOURCE-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0189] SOURCE-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0190] SOURCE-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0191] SOURCE-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0191] SOURCE-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0192] SOURCE-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0193] SOURCE-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0194] SOURCE-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0195] SOURCE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0195] SOURCE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0196] SOURCE-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0197] SOURCE-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0198] SOURCE-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -387,19 +521,31 @@ func InitKernel() {
 	KernelTable[222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0222] SOURCE-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0223] SOURCE-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0224] SOURCE-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0225] SOURCE-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0225] SOURCE-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0226] SOURCE-BIND-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0227] SOURCE-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0228] SOURCE-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0229] SOURCE-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0230] SOURCE-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0231] SOURCE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0231] SOURCE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0232] SOURCE-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0233] SOURCE-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0234] SOURCE-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0235] SOURCE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0233] SOURCE-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0234] SOURCE-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0235] SOURCE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0236] SOURCE-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0237] SOURCE-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0237] SOURCE-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0238] SOURCE-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0239] SOURCE-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0240] SOURCE-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -423,13 +569,23 @@ func InitKernel() {
 	KernelTable[258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0258] SOURCE-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0259] SOURCE-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0260] SOURCE-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0261] SOURCE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0261] SOURCE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0262] SOURCE-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0263] SOURCE-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0264] SOURCE-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0265] SOURCE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0263] SOURCE-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0264] SOURCE-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0265] SOURCE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0266] SOURCE-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0267] SOURCE-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0267] SOURCE-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0268] SOURCE-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0269] SOURCE-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0270] SOURCE-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -447,7 +603,9 @@ func InitKernel() {
 	KernelTable[282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0282] SOURCE-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0283] SOURCE-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0284] SOURCE-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0285] SOURCE-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0285] SOURCE-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0286] SOURCE-BIND-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0287] SOURCE-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0288] SOURCE-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -477,29 +635,49 @@ func InitKernel() {
 	KernelTable[312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0312] SOURCE-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0313] SOURCE-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0314] SOURCE-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0315] SOURCE-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0315] SOURCE-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0316] SOURCE-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0317] SOURCE-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0318] SOURCE-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0319] SOURCE-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0320] SOURCE-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0321] SOURCE-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0321] SOURCE-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0322] SOURCE-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0323] SOURCE-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0324] SOURCE-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0325] SOURCE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0325] SOURCE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0326] SOURCE-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0327] SOURCE-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0328] SOURCE-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0329] SOURCE-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0330] SOURCE-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0331] SOURCE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0332] SOURCE-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0333] SOURCE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0334] SOURCE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0335] SOURCE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0330] SOURCE-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0331] SOURCE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0332] SOURCE-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0333] SOURCE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0334] SOURCE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0335] SOURCE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0336] SOURCE-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0337] SOURCE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0337] SOURCE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0338] SOURCE-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0339] SOURCE-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0340] SOURCE-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -522,14 +700,28 @@ func InitKernel() {
 	KernelTable[357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0357] SOURCE-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0358] SOURCE-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0359] SOURCE-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0360] SOURCE-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0361] SOURCE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0362] SOURCE-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0363] SOURCE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0364] SOURCE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0365] SOURCE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0360] SOURCE-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0361] SOURCE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0362] SOURCE-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0363] SOURCE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0364] SOURCE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0365] SOURCE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0366] SOURCE-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0367] SOURCE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0367] SOURCE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0368] SOURCE-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0369] SOURCE-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0370] SOURCE-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -537,17 +729,23 @@ func InitKernel() {
 	KernelTable[372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0372] SOURCE-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0373] SOURCE-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0374] SOURCE-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0375] SOURCE-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0375] SOURCE-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0376] SOURCE-QUERY-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0377] SOURCE-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0378] SOURCE-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0379] SOURCE-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0380] SOURCE-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0381] SOURCE-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0381] SOURCE-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0382] SOURCE-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0383] SOURCE-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0384] SOURCE-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0385] SOURCE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0385] SOURCE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0386] SOURCE-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0387] SOURCE-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0388] SOURCE-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -557,7 +755,9 @@ func InitKernel() {
 	KernelTable[392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0392] SOURCE-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0393] SOURCE-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0394] SOURCE-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0395] SOURCE-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0395] SOURCE-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0396] SOURCE-QUERY-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0397] SOURCE-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0398] SOURCE-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
@@ -573,41 +773,73 @@ func InitKernel() {
 	KernelTable[408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0408] SOURCE-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0409] SOURCE-STREAM-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0410] SOURCE-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0411] SOURCE-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0411] SOURCE-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0412] SOURCE-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0413] SOURCE-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0414] SOURCE-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0415] SOURCE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0415] SOURCE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0416] SOURCE-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0417] SOURCE-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0418] SOURCE-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0419] SOURCE-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0420] SOURCE-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0421] SOURCE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0421] SOURCE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0422] SOURCE-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0423] SOURCE-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0424] SOURCE-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0425] SOURCE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0423] SOURCE-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0424] SOURCE-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0425] SOURCE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0426] SOURCE-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0427] SOURCE-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0427] SOURCE-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0428] SOURCE-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0429] SOURCE-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0430] SOURCE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0431] SOURCE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0432] SOURCE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0433] SOURCE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0434] SOURCE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0435] SOURCE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0430] SOURCE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0431] SOURCE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0432] SOURCE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0433] SOURCE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0434] SOURCE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0435] SOURCE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0436] SOURCE-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0437] SOURCE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0437] SOURCE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0438] SOURCE-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0439] SOURCE-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0439] SOURCE-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0440] SOURCE-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0441] SOURCE-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0442] SOURCE-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0443] SOURCE-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0444] SOURCE-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0445] SOURCE-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0445] SOURCE-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0446] SOURCE-STREAM-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0447] SOURCE-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0448] SOURCE-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
@@ -622,42 +854,76 @@ func InitKernel() {
 	KernelTable[457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0457] SOURCE-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0458] SOURCE-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0459] SOURCE-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0460] SOURCE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0461] SOURCE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0462] SOURCE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0463] SOURCE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0464] SOURCE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0465] SOURCE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0460] SOURCE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0461] SOURCE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0462] SOURCE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0463] SOURCE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0464] SOURCE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0465] SOURCE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0466] SOURCE-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0467] SOURCE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0467] SOURCE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0468] SOURCE-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0469] SOURCE-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0469] SOURCE-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0470] SOURCE-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0471] SOURCE-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0471] SOURCE-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0472] SOURCE-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0473] SOURCE-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0474] SOURCE-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0475] SOURCE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0475] SOURCE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0476] SOURCE-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0477] SOURCE-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0478] SOURCE-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0479] SOURCE-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0480] SOURCE-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0481] SOURCE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0481] SOURCE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0482] SOURCE-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0483] SOURCE-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0484] SOURCE-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0485] SOURCE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0483] SOURCE-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0484] SOURCE-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0485] SOURCE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0486] SOURCE-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0487] SOURCE-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0487] SOURCE-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0488] SOURCE-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0489] SOURCE-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0490] SOURCE-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0491] SOURCE-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0491] SOURCE-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0492] SOURCE-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0493] SOURCE-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0494] SOURCE-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0495] SOURCE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0495] SOURCE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0496] SOURCE-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0497] SOURCE-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0498] SOURCE-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -673,41 +939,73 @@ func InitKernel() {
 	KernelTable[508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0508] SOURCE-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0509] SOURCE-COMMIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0510] SOURCE-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0511] SOURCE-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0511] SOURCE-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0512] SOURCE-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0513] SOURCE-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0514] SOURCE-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0515] SOURCE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0515] SOURCE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0516] SOURCE-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0517] SOURCE-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0518] SOURCE-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0519] SOURCE-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0520] SOURCE-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0521] SOURCE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0521] SOURCE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0522] SOURCE-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0523] SOURCE-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0524] SOURCE-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0525] SOURCE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0523] SOURCE-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0524] SOURCE-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0525] SOURCE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0526] SOURCE-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0527] SOURCE-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0527] SOURCE-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0528] SOURCE-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0529] SOURCE-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0530] SOURCE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0531] SOURCE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0532] SOURCE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0533] SOURCE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0534] SOURCE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0535] SOURCE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0530] SOURCE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0531] SOURCE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0532] SOURCE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0533] SOURCE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0534] SOURCE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0535] SOURCE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0536] SOURCE-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0537] SOURCE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0537] SOURCE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0538] SOURCE-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0539] SOURCE-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0539] SOURCE-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0540] SOURCE-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0541] SOURCE-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0542] SOURCE-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0543] SOURCE-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0544] SOURCE-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0545] SOURCE-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0545] SOURCE-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0546] SOURCE-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0547] SOURCE-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0548] SOURCE-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -722,42 +1020,76 @@ func InitKernel() {
 	KernelTable[557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0557] SOURCE-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0558] SOURCE-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0559] SOURCE-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0560] SOURCE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0561] SOURCE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0562] SOURCE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0563] SOURCE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0564] SOURCE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0565] SOURCE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0560] SOURCE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0561] SOURCE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0562] SOURCE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0563] SOURCE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0564] SOURCE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0565] SOURCE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0566] SOURCE-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0567] SOURCE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0567] SOURCE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0568] SOURCE-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0569] SOURCE-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0569] SOURCE-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0570] SOURCE-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0571] SOURCE-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0571] SOURCE-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0572] SOURCE-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0573] SOURCE-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0574] SOURCE-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0575] SOURCE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0575] SOURCE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0576] SOURCE-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0577] SOURCE-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0578] SOURCE-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0579] SOURCE-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0580] SOURCE-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0581] SOURCE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0581] SOURCE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0582] SOURCE-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0583] SOURCE-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0584] SOURCE-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0585] SOURCE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0583] SOURCE-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0584] SOURCE-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0585] SOURCE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0586] SOURCE-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0587] SOURCE-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0587] SOURCE-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0588] SOURCE-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0589] SOURCE-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0590] SOURCE-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0591] SOURCE-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0591] SOURCE-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0592] SOURCE-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0593] SOURCE-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0594] SOURCE-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0595] SOURCE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0595] SOURCE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0596] SOURCE-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0597] SOURCE-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0598] SOURCE-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -787,19 +1119,31 @@ func InitKernel() {
 	KernelTable[622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0622] SOURCE-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0623] SOURCE-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0624] SOURCE-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0625] SOURCE-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0625] SOURCE-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0626] SOURCE-SYNC-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0627] SOURCE-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0628] SOURCE-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0629] SOURCE-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0630] SOURCE-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0631] SOURCE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0631] SOURCE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0632] SOURCE-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0633] SOURCE-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0634] SOURCE-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0635] SOURCE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0633] SOURCE-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0634] SOURCE-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0635] SOURCE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0636] SOURCE-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0637] SOURCE-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0637] SOURCE-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0638] SOURCE-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0639] SOURCE-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0640] SOURCE-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -823,13 +1167,23 @@ func InitKernel() {
 	KernelTable[658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0658] SOURCE-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0659] SOURCE-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0660] SOURCE-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0661] SOURCE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0661] SOURCE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0662] SOURCE-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0663] SOURCE-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0664] SOURCE-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0665] SOURCE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0663] SOURCE-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0664] SOURCE-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0665] SOURCE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0666] SOURCE-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0667] SOURCE-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0667] SOURCE-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0668] SOURCE-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0669] SOURCE-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0670] SOURCE-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -847,7 +1201,9 @@ func InitKernel() {
 	KernelTable[682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0682] SOURCE-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0683] SOURCE-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0684] SOURCE-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0685] SOURCE-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0685] SOURCE-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0686] SOURCE-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0687] SOURCE-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0688] SOURCE-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -887,19 +1243,31 @@ func InitKernel() {
 	KernelTable[722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0722] SOURCE-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0723] SOURCE-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0724] SOURCE-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0725] SOURCE-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0725] SOURCE-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0726] SOURCE-HALT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0727] SOURCE-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0728] SOURCE-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0729] SOURCE-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0730] SOURCE-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0731] SOURCE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0731] SOURCE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0732] SOURCE-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0733] SOURCE-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0734] SOURCE-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0735] SOURCE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0733] SOURCE-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0734] SOURCE-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0735] SOURCE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0736] SOURCE-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0737] SOURCE-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0737] SOURCE-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0738] SOURCE-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0739] SOURCE-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0740] SOURCE-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -923,13 +1291,23 @@ func InitKernel() {
 	KernelTable[758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0758] SOURCE-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0759] SOURCE-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0760] SOURCE-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0761] SOURCE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0761] SOURCE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0762] SOURCE-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0763] SOURCE-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0764] SOURCE-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0765] SOURCE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0763] SOURCE-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0764] SOURCE-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0765] SOURCE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0766] SOURCE-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0767] SOURCE-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0767] SOURCE-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0768] SOURCE-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0769] SOURCE-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0770] SOURCE-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -947,7 +1325,9 @@ func InitKernel() {
 	KernelTable[782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0782] SOURCE-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0783] SOURCE-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0784] SOURCE-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0785] SOURCE-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0785] SOURCE-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0786] SOURCE-HALT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0787] SOURCE-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0788] SOURCE-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -987,19 +1367,31 @@ func InitKernel() {
 	KernelTable[822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0822] SOURCE-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0823] SOURCE-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0824] SOURCE-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0825] SOURCE-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0825] SOURCE-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0826] SOURCE-FORK-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0827] SOURCE-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0828] SOURCE-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0829] SOURCE-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0830] SOURCE-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0831] SOURCE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0831] SOURCE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0832] SOURCE-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0833] SOURCE-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0834] SOURCE-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0835] SOURCE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0833] SOURCE-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0834] SOURCE-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0835] SOURCE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0836] SOURCE-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0837] SOURCE-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0837] SOURCE-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0838] SOURCE-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0839] SOURCE-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0840] SOURCE-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1023,13 +1415,23 @@ func InitKernel() {
 	KernelTable[858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0858] SOURCE-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0859] SOURCE-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0860] SOURCE-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0861] SOURCE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0861] SOURCE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0862] SOURCE-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0863] SOURCE-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0864] SOURCE-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0865] SOURCE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0863] SOURCE-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0864] SOURCE-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0865] SOURCE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0866] SOURCE-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0867] SOURCE-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0867] SOURCE-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0868] SOURCE-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0869] SOURCE-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0870] SOURCE-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1047,7 +1449,9 @@ func InitKernel() {
 	KernelTable[882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0882] SOURCE-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0883] SOURCE-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0884] SOURCE-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0885] SOURCE-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0885] SOURCE-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0886] SOURCE-FORK-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0887] SOURCE-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0888] SOURCE-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1087,19 +1491,31 @@ func InitKernel() {
 	KernelTable[922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0922] SOURCE-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0923] SOURCE-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0924] SOURCE-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0925] SOURCE-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0925] SOURCE-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0926] SOURCE-JOIN-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0927] SOURCE-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0928] SOURCE-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0929] SOURCE-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0930] SOURCE-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0931] SOURCE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0931] SOURCE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0932] SOURCE-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0933] SOURCE-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0934] SOURCE-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0935] SOURCE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0933] SOURCE-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0934] SOURCE-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0935] SOURCE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0936] SOURCE-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0937] SOURCE-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0937] SOURCE-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0938] SOURCE-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0939] SOURCE-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0940] SOURCE-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1123,13 +1539,23 @@ func InitKernel() {
 	KernelTable[958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0958] SOURCE-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0959] SOURCE-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0960] SOURCE-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0961] SOURCE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0961] SOURCE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0962] SOURCE-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0963] SOURCE-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0964] SOURCE-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0965] SOURCE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0963] SOURCE-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0964] SOURCE-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0965] SOURCE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0966] SOURCE-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0967] SOURCE-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0967] SOURCE-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0968] SOURCE-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0969] SOURCE-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0970] SOURCE-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1147,7 +1573,9 @@ func InitKernel() {
 	KernelTable[982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0982] SOURCE-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0983] SOURCE-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0984] SOURCE-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0985] SOURCE-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [0985] SOURCE-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0986] SOURCE-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0987] SOURCE-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [0988] SOURCE-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1187,19 +1615,31 @@ func InitKernel() {
 	KernelTable[1022] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1022] MATRIX-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1023] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1023] MATRIX-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1024] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1024] MATRIX-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1025] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1025] MATRIX-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1025] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1025] MATRIX-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1026] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1026] MATRIX-INIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1027] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1027] MATRIX-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1028] MATRIX-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1029] MATRIX-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1030] MATRIX-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1031] MATRIX-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1031] MATRIX-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1032] MATRIX-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1033] MATRIX-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1034] MATRIX-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1035] MATRIX-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1033] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1033] MATRIX-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1034] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1034] MATRIX-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1035] MATRIX-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1036] MATRIX-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1037] MATRIX-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1037] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1037] MATRIX-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1038] MATRIX-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1039] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1039] MATRIX-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1040] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1040] MATRIX-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1223,13 +1663,23 @@ func InitKernel() {
 	KernelTable[1058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1058] MATRIX-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1059] MATRIX-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1060] MATRIX-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1061] MATRIX-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1061] MATRIX-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1062] MATRIX-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1063] MATRIX-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1064] MATRIX-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1065] MATRIX-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1063] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1063] MATRIX-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1064] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1064] MATRIX-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1065] MATRIX-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1066] MATRIX-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1067] MATRIX-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1067] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1067] MATRIX-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1068] MATRIX-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1069] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1069] MATRIX-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1070] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1070] MATRIX-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1247,7 +1697,9 @@ func InitKernel() {
 	KernelTable[1082] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1082] MATRIX-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1083] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1083] MATRIX-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1084] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1084] MATRIX-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1085] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1085] MATRIX-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1085] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1085] MATRIX-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1086] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1086] MATRIX-INIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1087] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1087] MATRIX-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1088] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1088] MATRIX-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1273,41 +1725,73 @@ func InitKernel() {
 	KernelTable[1108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1108] MATRIX-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[1109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1109] MATRIX-MUTATE-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[1110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1110] MATRIX-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1111] MATRIX-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1111] MATRIX-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1112] MATRIX-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1113] MATRIX-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1114] MATRIX-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1115] MATRIX-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1115] MATRIX-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1116] MATRIX-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[1117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1117] MATRIX-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1118] MATRIX-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[1119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1119] MATRIX-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[1120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1120] MATRIX-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1121] MATRIX-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1121] MATRIX-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1122] MATRIX-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[1123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1123] MATRIX-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1124] MATRIX-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1125] MATRIX-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1123] MATRIX-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1124] MATRIX-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1125] MATRIX-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1126] MATRIX-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[1127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1127] MATRIX-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1127] MATRIX-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1128] MATRIX-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1129] MATRIX-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[1130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1130] MATRIX-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1131] MATRIX-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1132] MATRIX-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1133] MATRIX-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1134] MATRIX-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1135] MATRIX-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1130] MATRIX-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1131] MATRIX-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1132] MATRIX-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1133] MATRIX-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1134] MATRIX-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1135] MATRIX-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1136] MATRIX-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1137] MATRIX-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1137] MATRIX-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1138] MATRIX-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[1139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1139] MATRIX-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[1139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1139] MATRIX-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1140] MATRIX-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[1141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1141] MATRIX-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[1142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1142] MATRIX-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1143] MATRIX-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1144] MATRIX-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1145] MATRIX-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1145] MATRIX-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1146] MATRIX-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[1147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1147] MATRIX-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1148] MATRIX-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
@@ -1322,42 +1806,76 @@ func InitKernel() {
 	KernelTable[1157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1157] MATRIX-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1158] MATRIX-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1159] MATRIX-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[1160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1160] MATRIX-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1161] MATRIX-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1162] MATRIX-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1163] MATRIX-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1164] MATRIX-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1165] MATRIX-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1160] MATRIX-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1161] MATRIX-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1162] MATRIX-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1163] MATRIX-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1164] MATRIX-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1165] MATRIX-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1166] MATRIX-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1167] MATRIX-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1167] MATRIX-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1168] MATRIX-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[1169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1169] MATRIX-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[1169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1169] MATRIX-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1170] MATRIX-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1171] MATRIX-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1171] MATRIX-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1172] MATRIX-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1173] MATRIX-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1174] MATRIX-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1175] MATRIX-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1175] MATRIX-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1176] MATRIX-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1177] MATRIX-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1178] MATRIX-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1179] MATRIX-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1180] MATRIX-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1181] MATRIX-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1181] MATRIX-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1182] MATRIX-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1183] MATRIX-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1184] MATRIX-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1185] MATRIX-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1183] MATRIX-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1184] MATRIX-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1185] MATRIX-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1186] MATRIX-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[1187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1187] MATRIX-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1187] MATRIX-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1188] MATRIX-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1189] MATRIX-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1190] MATRIX-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1191] MATRIX-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1191] MATRIX-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1192] MATRIX-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1193] MATRIX-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1194] MATRIX-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1195] MATRIX-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1195] MATRIX-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1196] MATRIX-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[1197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1197] MATRIX-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1198] MATRIX-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -1387,19 +1905,31 @@ func InitKernel() {
 	KernelTable[1222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1222] MATRIX-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1223] MATRIX-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1224] MATRIX-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1225] MATRIX-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1225] MATRIX-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1226] MATRIX-BIND-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1227] MATRIX-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1228] MATRIX-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1229] MATRIX-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1230] MATRIX-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1231] MATRIX-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1231] MATRIX-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1232] MATRIX-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1233] MATRIX-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1234] MATRIX-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1235] MATRIX-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1233] MATRIX-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1234] MATRIX-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1235] MATRIX-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1236] MATRIX-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1237] MATRIX-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1237] MATRIX-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1238] MATRIX-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1239] MATRIX-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1240] MATRIX-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1423,13 +1953,23 @@ func InitKernel() {
 	KernelTable[1258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1258] MATRIX-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1259] MATRIX-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1260] MATRIX-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1261] MATRIX-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1261] MATRIX-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1262] MATRIX-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1263] MATRIX-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1264] MATRIX-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1265] MATRIX-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1263] MATRIX-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1264] MATRIX-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1265] MATRIX-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1266] MATRIX-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1267] MATRIX-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1267] MATRIX-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1268] MATRIX-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1269] MATRIX-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1270] MATRIX-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1447,7 +1987,9 @@ func InitKernel() {
 	KernelTable[1282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1282] MATRIX-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1283] MATRIX-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1284] MATRIX-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1285] MATRIX-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1285] MATRIX-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1286] MATRIX-BIND-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1287] MATRIX-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1288] MATRIX-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1477,29 +2019,49 @@ func InitKernel() {
 	KernelTable[1312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1312] MATRIX-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1313] MATRIX-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1314] MATRIX-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1315] MATRIX-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1315] MATRIX-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1316] MATRIX-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[1317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1317] MATRIX-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1318] MATRIX-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[1319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1319] MATRIX-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[1320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1320] MATRIX-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1321] MATRIX-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1321] MATRIX-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1322] MATRIX-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1323] MATRIX-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1324] MATRIX-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1325] MATRIX-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1325] MATRIX-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1326] MATRIX-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1327] MATRIX-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1328] MATRIX-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1329] MATRIX-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[1330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1330] MATRIX-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1331] MATRIX-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1332] MATRIX-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1333] MATRIX-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1334] MATRIX-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1335] MATRIX-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1330] MATRIX-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1331] MATRIX-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1332] MATRIX-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1333] MATRIX-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1334] MATRIX-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1335] MATRIX-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1336] MATRIX-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1337] MATRIX-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1337] MATRIX-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1338] MATRIX-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1339] MATRIX-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1340] MATRIX-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1522,14 +2084,28 @@ func InitKernel() {
 	KernelTable[1357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1357] MATRIX-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1358] MATRIX-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1359] MATRIX-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[1360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1360] MATRIX-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1361] MATRIX-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1362] MATRIX-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1363] MATRIX-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1364] MATRIX-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1365] MATRIX-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1360] MATRIX-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1361] MATRIX-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1362] MATRIX-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1363] MATRIX-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1364] MATRIX-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1365] MATRIX-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1366] MATRIX-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1367] MATRIX-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1367] MATRIX-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1368] MATRIX-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1369] MATRIX-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1370] MATRIX-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1537,17 +2113,23 @@ func InitKernel() {
 	KernelTable[1372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1372] MATRIX-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1373] MATRIX-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1374] MATRIX-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1375] MATRIX-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1375] MATRIX-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1376] MATRIX-QUERY-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1377] MATRIX-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1378] MATRIX-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1379] MATRIX-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1380] MATRIX-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1381] MATRIX-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1381] MATRIX-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1382] MATRIX-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1383] MATRIX-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1384] MATRIX-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1385] MATRIX-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1385] MATRIX-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1386] MATRIX-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1387] MATRIX-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1388] MATRIX-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1557,7 +2139,9 @@ func InitKernel() {
 	KernelTable[1392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1392] MATRIX-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1393] MATRIX-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1394] MATRIX-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1395] MATRIX-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1395] MATRIX-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1396] MATRIX-QUERY-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[1397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1397] MATRIX-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1398] MATRIX-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
@@ -1573,41 +2157,73 @@ func InitKernel() {
 	KernelTable[1408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1408] MATRIX-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[1409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1409] MATRIX-STREAM-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[1410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1410] MATRIX-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1411] MATRIX-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1411] MATRIX-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1412] MATRIX-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1413] MATRIX-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1414] MATRIX-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1415] MATRIX-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1415] MATRIX-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1416] MATRIX-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[1417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1417] MATRIX-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1418] MATRIX-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[1419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1419] MATRIX-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[1420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1420] MATRIX-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1421] MATRIX-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1421] MATRIX-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1422] MATRIX-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[1423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1423] MATRIX-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1424] MATRIX-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1425] MATRIX-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1423] MATRIX-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1424] MATRIX-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1425] MATRIX-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1426] MATRIX-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[1427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1427] MATRIX-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1427] MATRIX-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1428] MATRIX-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1429] MATRIX-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[1430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1430] MATRIX-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1431] MATRIX-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1432] MATRIX-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1433] MATRIX-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1434] MATRIX-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1435] MATRIX-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1430] MATRIX-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1431] MATRIX-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1432] MATRIX-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1433] MATRIX-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1434] MATRIX-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1435] MATRIX-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1436] MATRIX-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1437] MATRIX-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1437] MATRIX-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1438] MATRIX-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[1439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1439] MATRIX-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[1439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1439] MATRIX-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1440] MATRIX-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[1441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1441] MATRIX-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[1442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1442] MATRIX-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1443] MATRIX-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1444] MATRIX-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1445] MATRIX-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1445] MATRIX-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1446] MATRIX-STREAM-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[1447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1447] MATRIX-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1448] MATRIX-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
@@ -1622,42 +2238,76 @@ func InitKernel() {
 	KernelTable[1457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1457] MATRIX-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1458] MATRIX-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1459] MATRIX-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[1460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1460] MATRIX-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1461] MATRIX-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1462] MATRIX-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1463] MATRIX-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1464] MATRIX-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1465] MATRIX-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1460] MATRIX-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1461] MATRIX-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1462] MATRIX-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1463] MATRIX-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1464] MATRIX-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1465] MATRIX-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1466] MATRIX-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1467] MATRIX-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1467] MATRIX-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1468] MATRIX-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[1469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1469] MATRIX-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[1469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1469] MATRIX-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1470] MATRIX-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1471] MATRIX-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1471] MATRIX-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1472] MATRIX-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1473] MATRIX-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1474] MATRIX-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1475] MATRIX-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1475] MATRIX-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1476] MATRIX-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1477] MATRIX-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1478] MATRIX-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1479] MATRIX-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1480] MATRIX-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1481] MATRIX-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1481] MATRIX-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1482] MATRIX-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1483] MATRIX-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1484] MATRIX-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1485] MATRIX-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1483] MATRIX-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1484] MATRIX-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1485] MATRIX-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1486] MATRIX-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[1487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1487] MATRIX-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1487] MATRIX-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1488] MATRIX-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1489] MATRIX-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1490] MATRIX-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1491] MATRIX-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1491] MATRIX-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1492] MATRIX-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1493] MATRIX-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1494] MATRIX-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1495] MATRIX-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1495] MATRIX-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1496] MATRIX-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[1497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1497] MATRIX-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1498] MATRIX-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -1673,41 +2323,73 @@ func InitKernel() {
 	KernelTable[1508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1508] MATRIX-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[1509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1509] MATRIX-COMMIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[1510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1510] MATRIX-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1511] MATRIX-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1511] MATRIX-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1512] MATRIX-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1513] MATRIX-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1514] MATRIX-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1515] MATRIX-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1515] MATRIX-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1516] MATRIX-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[1517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1517] MATRIX-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1518] MATRIX-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[1519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1519] MATRIX-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[1520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1520] MATRIX-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1521] MATRIX-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1521] MATRIX-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1522] MATRIX-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[1523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1523] MATRIX-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1524] MATRIX-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1525] MATRIX-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1523] MATRIX-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1524] MATRIX-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1525] MATRIX-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1526] MATRIX-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[1527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1527] MATRIX-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1527] MATRIX-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1528] MATRIX-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1529] MATRIX-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[1530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1530] MATRIX-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1531] MATRIX-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1532] MATRIX-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1533] MATRIX-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1534] MATRIX-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1535] MATRIX-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1530] MATRIX-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1531] MATRIX-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1532] MATRIX-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1533] MATRIX-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1534] MATRIX-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1535] MATRIX-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1536] MATRIX-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1537] MATRIX-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1537] MATRIX-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1538] MATRIX-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[1539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1539] MATRIX-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[1539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1539] MATRIX-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1540] MATRIX-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[1541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1541] MATRIX-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[1542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1542] MATRIX-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[1543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1543] MATRIX-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1544] MATRIX-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1545] MATRIX-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1545] MATRIX-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1546] MATRIX-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[1547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1547] MATRIX-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1548] MATRIX-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -1722,42 +2404,76 @@ func InitKernel() {
 	KernelTable[1557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1557] MATRIX-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1558] MATRIX-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1559] MATRIX-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[1560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1560] MATRIX-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1561] MATRIX-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[1562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1562] MATRIX-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1563] MATRIX-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1564] MATRIX-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1565] MATRIX-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1560] MATRIX-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[1561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1561] MATRIX-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[1562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1562] MATRIX-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[1563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1563] MATRIX-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1564] MATRIX-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1565] MATRIX-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1566] MATRIX-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1567] MATRIX-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1567] MATRIX-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1568] MATRIX-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[1569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1569] MATRIX-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[1569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1569] MATRIX-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[1570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1570] MATRIX-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1571] MATRIX-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1571] MATRIX-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1572] MATRIX-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1573] MATRIX-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1574] MATRIX-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1575] MATRIX-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1575] MATRIX-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1576] MATRIX-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1577] MATRIX-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1578] MATRIX-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1579] MATRIX-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1580] MATRIX-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1581] MATRIX-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1581] MATRIX-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1582] MATRIX-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1583] MATRIX-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1584] MATRIX-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1585] MATRIX-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1583] MATRIX-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1584] MATRIX-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1585] MATRIX-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1586] MATRIX-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[1587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1587] MATRIX-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1587] MATRIX-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1588] MATRIX-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[1589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1589] MATRIX-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[1590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1590] MATRIX-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1591] MATRIX-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1591] MATRIX-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1592] MATRIX-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1593] MATRIX-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1594] MATRIX-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1595] MATRIX-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1595] MATRIX-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1596] MATRIX-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[1597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1597] MATRIX-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1598] MATRIX-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -1787,19 +2503,31 @@ func InitKernel() {
 	KernelTable[1622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1622] MATRIX-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1623] MATRIX-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1624] MATRIX-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1625] MATRIX-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1625] MATRIX-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1626] MATRIX-SYNC-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1627] MATRIX-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1628] MATRIX-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1629] MATRIX-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1630] MATRIX-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1631] MATRIX-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1631] MATRIX-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1632] MATRIX-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1633] MATRIX-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1634] MATRIX-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1635] MATRIX-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1633] MATRIX-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1634] MATRIX-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1635] MATRIX-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1636] MATRIX-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1637] MATRIX-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1637] MATRIX-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1638] MATRIX-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1639] MATRIX-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1640] MATRIX-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1823,13 +2551,23 @@ func InitKernel() {
 	KernelTable[1658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1658] MATRIX-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1659] MATRIX-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1660] MATRIX-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1661] MATRIX-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1661] MATRIX-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1662] MATRIX-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1663] MATRIX-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1664] MATRIX-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1665] MATRIX-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1663] MATRIX-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1664] MATRIX-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1665] MATRIX-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1666] MATRIX-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1667] MATRIX-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1667] MATRIX-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1668] MATRIX-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1669] MATRIX-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1670] MATRIX-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1847,7 +2585,9 @@ func InitKernel() {
 	KernelTable[1682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1682] MATRIX-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1683] MATRIX-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1684] MATRIX-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1685] MATRIX-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1685] MATRIX-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1686] MATRIX-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1687] MATRIX-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1688] MATRIX-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1887,19 +2627,31 @@ func InitKernel() {
 	KernelTable[1722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1722] MATRIX-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1723] MATRIX-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1724] MATRIX-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1725] MATRIX-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1725] MATRIX-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1726] MATRIX-HALT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1727] MATRIX-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1728] MATRIX-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1729] MATRIX-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1730] MATRIX-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1731] MATRIX-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1731] MATRIX-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1732] MATRIX-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1733] MATRIX-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1734] MATRIX-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1735] MATRIX-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1733] MATRIX-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1734] MATRIX-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1735] MATRIX-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1736] MATRIX-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1737] MATRIX-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1737] MATRIX-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1738] MATRIX-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1739] MATRIX-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1740] MATRIX-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -1923,13 +2675,23 @@ func InitKernel() {
 	KernelTable[1758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1758] MATRIX-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1759] MATRIX-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1760] MATRIX-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1761] MATRIX-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1761] MATRIX-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1762] MATRIX-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1763] MATRIX-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1764] MATRIX-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1765] MATRIX-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1763] MATRIX-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1764] MATRIX-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1765] MATRIX-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1766] MATRIX-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1767] MATRIX-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1767] MATRIX-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1768] MATRIX-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1769] MATRIX-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1770] MATRIX-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -1947,7 +2709,9 @@ func InitKernel() {
 	KernelTable[1782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1782] MATRIX-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1783] MATRIX-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1784] MATRIX-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1785] MATRIX-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1785] MATRIX-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1786] MATRIX-HALT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1787] MATRIX-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1788] MATRIX-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -1987,19 +2751,31 @@ func InitKernel() {
 	KernelTable[1822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1822] MATRIX-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1823] MATRIX-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1824] MATRIX-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1825] MATRIX-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1825] MATRIX-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1826] MATRIX-FORK-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1827] MATRIX-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1828] MATRIX-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1829] MATRIX-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1830] MATRIX-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1831] MATRIX-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1831] MATRIX-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1832] MATRIX-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1833] MATRIX-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1834] MATRIX-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1835] MATRIX-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1833] MATRIX-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1834] MATRIX-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1835] MATRIX-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1836] MATRIX-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1837] MATRIX-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1837] MATRIX-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1838] MATRIX-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1839] MATRIX-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1840] MATRIX-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2023,13 +2799,23 @@ func InitKernel() {
 	KernelTable[1858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1858] MATRIX-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1859] MATRIX-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1860] MATRIX-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1861] MATRIX-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1861] MATRIX-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1862] MATRIX-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1863] MATRIX-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1864] MATRIX-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1865] MATRIX-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1863] MATRIX-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1864] MATRIX-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1865] MATRIX-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1866] MATRIX-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1867] MATRIX-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1867] MATRIX-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1868] MATRIX-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1869] MATRIX-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1870] MATRIX-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2047,7 +2833,9 @@ func InitKernel() {
 	KernelTable[1882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1882] MATRIX-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1883] MATRIX-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1884] MATRIX-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1885] MATRIX-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1885] MATRIX-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1886] MATRIX-FORK-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1887] MATRIX-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1888] MATRIX-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2087,19 +2875,31 @@ func InitKernel() {
 	KernelTable[1922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1922] MATRIX-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[1923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1923] MATRIX-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1924] MATRIX-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1925] MATRIX-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1925] MATRIX-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1926] MATRIX-JOIN-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[1927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1927] MATRIX-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1928] MATRIX-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[1929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1929] MATRIX-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[1930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1930] MATRIX-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1931] MATRIX-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1931] MATRIX-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1932] MATRIX-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[1933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1933] MATRIX-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1934] MATRIX-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1935] MATRIX-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1933] MATRIX-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1934] MATRIX-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1935] MATRIX-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1936] MATRIX-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[1937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1937] MATRIX-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1937] MATRIX-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1938] MATRIX-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[1939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1939] MATRIX-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[1940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1940] MATRIX-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2123,13 +2923,23 @@ func InitKernel() {
 	KernelTable[1958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1958] MATRIX-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[1959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1959] MATRIX-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[1960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1960] MATRIX-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[1961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1961] MATRIX-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[1961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1961] MATRIX-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[1962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1962] MATRIX-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[1963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1963] MATRIX-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[1964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1964] MATRIX-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1965] MATRIX-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1963] MATRIX-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[1964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1964] MATRIX-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[1965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1965] MATRIX-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1966] MATRIX-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[1967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1967] MATRIX-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[1967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1967] MATRIX-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[1968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1968] MATRIX-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[1969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1969] MATRIX-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[1970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1970] MATRIX-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2147,7 +2957,9 @@ func InitKernel() {
 	KernelTable[1982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1982] MATRIX-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[1983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1983] MATRIX-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[1984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1984] MATRIX-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[1985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1985] MATRIX-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[1985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [1985] MATRIX-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[1986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1986] MATRIX-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[1987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1987] MATRIX-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[1988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [1988] MATRIX-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2193,11 +3005,15 @@ func InitKernel() {
 	KernelTable[2028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2028] PULSE-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2029] PULSE-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2030] PULSE-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2031] PULSE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2031] PULSE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2032] PULSE-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2033] PULSE-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2034] PULSE-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2035] PULSE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2035] PULSE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2036] PULSE-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2037] PULSE-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2038] PULSE-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -2223,11 +3039,15 @@ func InitKernel() {
 	KernelTable[2058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2058] PULSE-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2059] PULSE-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2060] PULSE-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2061] PULSE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2061] PULSE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2062] PULSE-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2063] PULSE-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2064] PULSE-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2065] PULSE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2065] PULSE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2066] PULSE-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2067] PULSE-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2068] PULSE-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -2277,29 +3097,49 @@ func InitKernel() {
 	KernelTable[2112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2112] PULSE-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[2113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2113] PULSE-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2114] PULSE-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2115] PULSE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2115] PULSE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2116] PULSE-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[2117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2117] PULSE-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2118] PULSE-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[2119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2119] PULSE-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[2120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2120] PULSE-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2121] PULSE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2121] PULSE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2122] PULSE-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[2123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2123] PULSE-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2124] PULSE-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2125] PULSE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2125] PULSE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2126] PULSE-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[2127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2127] PULSE-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2128] PULSE-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2129] PULSE-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[2130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2130] PULSE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2131] PULSE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2132] PULSE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[2133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2133] PULSE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2134] PULSE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2135] PULSE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2130] PULSE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2131] PULSE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2132] PULSE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2133] PULSE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2134] PULSE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2135] PULSE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2136] PULSE-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[2137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2137] PULSE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2137] PULSE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2138] PULSE-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[2139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2139] PULSE-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[2140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2140] PULSE-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2322,14 +3162,28 @@ func InitKernel() {
 	KernelTable[2157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2157] PULSE-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2158] PULSE-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2159] PULSE-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[2160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2160] PULSE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2161] PULSE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2162] PULSE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[2163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2163] PULSE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2164] PULSE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2165] PULSE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2160] PULSE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2161] PULSE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2162] PULSE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2163] PULSE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2164] PULSE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2165] PULSE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2166] PULSE-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[2167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2167] PULSE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2167] PULSE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2168] PULSE-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[2169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2169] PULSE-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[2170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2170] PULSE-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2337,17 +3191,23 @@ func InitKernel() {
 	KernelTable[2172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2172] PULSE-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2173] PULSE-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2174] PULSE-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2175] PULSE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2175] PULSE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2176] PULSE-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2177] PULSE-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2178] PULSE-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[2179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2179] PULSE-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[2180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2180] PULSE-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2181] PULSE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2181] PULSE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2182] PULSE-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2183] PULSE-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2184] PULSE-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2185] PULSE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2185] PULSE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2186] PULSE-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2187] PULSE-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2188] PULSE-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2357,7 +3217,9 @@ func InitKernel() {
 	KernelTable[2192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2192] PULSE-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2193] PULSE-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2194] PULSE-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2195] PULSE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2195] PULSE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2196] PULSE-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[2197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2197] PULSE-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2198] PULSE-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -2393,11 +3255,15 @@ func InitKernel() {
 	KernelTable[2228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2228] PULSE-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2229] PULSE-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2230] PULSE-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2231] PULSE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2231] PULSE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2232] PULSE-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2233] PULSE-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2234] PULSE-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2235] PULSE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2235] PULSE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2236] PULSE-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2237] PULSE-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2238] PULSE-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -2423,11 +3289,15 @@ func InitKernel() {
 	KernelTable[2258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2258] PULSE-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2259] PULSE-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2260] PULSE-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2261] PULSE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2261] PULSE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2262] PULSE-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2263] PULSE-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2264] PULSE-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2265] PULSE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2265] PULSE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2266] PULSE-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2267] PULSE-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2268] PULSE-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -2487,19 +3357,31 @@ func InitKernel() {
 	KernelTable[2322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2322] PULSE-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[2323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2323] PULSE-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2324] PULSE-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2325] PULSE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2325] PULSE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2326] PULSE-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[2327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2327] PULSE-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2328] PULSE-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2329] PULSE-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2330] PULSE-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2331] PULSE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2331] PULSE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2332] PULSE-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[2333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2333] PULSE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2334] PULSE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2335] PULSE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2333] PULSE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2334] PULSE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2335] PULSE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2336] PULSE-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[2337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2337] PULSE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2337] PULSE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2338] PULSE-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[2339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2339] PULSE-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[2340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2340] PULSE-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2523,13 +3405,23 @@ func InitKernel() {
 	KernelTable[2358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2358] PULSE-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2359] PULSE-QUERY-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2360] PULSE-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2361] PULSE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2361] PULSE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2362] PULSE-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[2363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2363] PULSE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2364] PULSE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2365] PULSE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2363] PULSE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2364] PULSE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2365] PULSE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2366] PULSE-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[2367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2367] PULSE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2367] PULSE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2368] PULSE-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[2369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2369] PULSE-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[2370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2370] PULSE-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2547,7 +3439,9 @@ func InitKernel() {
 	KernelTable[2382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2382] PULSE-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2383] PULSE-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2384] PULSE-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2385] PULSE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2385] PULSE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2386] PULSE-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2387] PULSE-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2388] PULSE-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2577,29 +3471,49 @@ func InitKernel() {
 	KernelTable[2412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2412] PULSE-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[2413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2413] PULSE-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2414] PULSE-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2415] PULSE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2415] PULSE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2416] PULSE-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[2417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2417] PULSE-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2418] PULSE-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[2419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2419] PULSE-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[2420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2420] PULSE-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2421] PULSE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2421] PULSE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2422] PULSE-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[2423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2423] PULSE-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2424] PULSE-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2425] PULSE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2425] PULSE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2426] PULSE-STREAM-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[2427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2427] PULSE-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2428] PULSE-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2429] PULSE-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[2430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2430] PULSE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2431] PULSE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2432] PULSE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[2433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2433] PULSE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2434] PULSE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2435] PULSE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2430] PULSE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2431] PULSE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2432] PULSE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2433] PULSE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2434] PULSE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2435] PULSE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2436] PULSE-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[2437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2437] PULSE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2437] PULSE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2438] PULSE-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[2439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2439] PULSE-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[2440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2440] PULSE-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2622,14 +3536,28 @@ func InitKernel() {
 	KernelTable[2457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2457] PULSE-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2458] PULSE-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2459] PULSE-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[2460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2460] PULSE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2461] PULSE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2462] PULSE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[2463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2463] PULSE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2464] PULSE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2465] PULSE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2460] PULSE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2461] PULSE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2462] PULSE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2463] PULSE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2464] PULSE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2465] PULSE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2466] PULSE-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[2467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2467] PULSE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2467] PULSE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2468] PULSE-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[2469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2469] PULSE-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[2470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2470] PULSE-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2637,17 +3565,23 @@ func InitKernel() {
 	KernelTable[2472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2472] PULSE-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2473] PULSE-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2474] PULSE-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2475] PULSE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2475] PULSE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2476] PULSE-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2477] PULSE-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2478] PULSE-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[2479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2479] PULSE-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[2480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2480] PULSE-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2481] PULSE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2481] PULSE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2482] PULSE-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2483] PULSE-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2484] PULSE-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2485] PULSE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2485] PULSE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2486] PULSE-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2487] PULSE-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2488] PULSE-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2657,7 +3591,9 @@ func InitKernel() {
 	KernelTable[2492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2492] PULSE-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2493] PULSE-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2494] PULSE-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2495] PULSE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2495] PULSE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2496] PULSE-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[2497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2497] PULSE-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2498] PULSE-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -2677,29 +3613,49 @@ func InitKernel() {
 	KernelTable[2512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2512] PULSE-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[2513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2513] PULSE-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2514] PULSE-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2515] PULSE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2515] PULSE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2516] PULSE-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[2517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2517] PULSE-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2518] PULSE-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[2519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2519] PULSE-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[2520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2520] PULSE-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2521] PULSE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2521] PULSE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2522] PULSE-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[2523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2523] PULSE-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2524] PULSE-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2525] PULSE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2525] PULSE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2526] PULSE-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[2527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2527] PULSE-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2528] PULSE-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2529] PULSE-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[2530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2530] PULSE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2531] PULSE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2532] PULSE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[2533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2533] PULSE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2534] PULSE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2535] PULSE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2530] PULSE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2531] PULSE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2532] PULSE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2533] PULSE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2534] PULSE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2535] PULSE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2536] PULSE-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[2537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2537] PULSE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2537] PULSE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2538] PULSE-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[2539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2539] PULSE-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[2540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2540] PULSE-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -2722,14 +3678,28 @@ func InitKernel() {
 	KernelTable[2557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2557] PULSE-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2558] PULSE-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2559] PULSE-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[2560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2560] PULSE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2561] PULSE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[2562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2562] PULSE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[2563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2563] PULSE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[2564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2564] PULSE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2565] PULSE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2560] PULSE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[2561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2561] PULSE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[2562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2562] PULSE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[2563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2563] PULSE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[2564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2564] PULSE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[2565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2565] PULSE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2566] PULSE-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[2567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2567] PULSE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[2567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2567] PULSE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[2568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2568] PULSE-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[2569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2569] PULSE-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[2570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2570] PULSE-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -2737,17 +3707,23 @@ func InitKernel() {
 	KernelTable[2572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2572] PULSE-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2573] PULSE-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2574] PULSE-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2575] PULSE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2575] PULSE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2576] PULSE-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2577] PULSE-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2578] PULSE-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[2579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2579] PULSE-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[2580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2580] PULSE-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2581] PULSE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2581] PULSE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2582] PULSE-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2583] PULSE-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2584] PULSE-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2585] PULSE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2585] PULSE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2586] PULSE-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[2587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2587] PULSE-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2588] PULSE-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -2757,7 +3733,9 @@ func InitKernel() {
 	KernelTable[2592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2592] PULSE-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2593] PULSE-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2594] PULSE-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2595] PULSE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2595] PULSE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2596] PULSE-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[2597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2597] PULSE-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2598] PULSE-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -2793,11 +3771,15 @@ func InitKernel() {
 	KernelTable[2628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2628] PULSE-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2629] PULSE-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2630] PULSE-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2631] PULSE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2631] PULSE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2632] PULSE-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2633] PULSE-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2634] PULSE-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2635] PULSE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2635] PULSE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2636] PULSE-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2637] PULSE-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2638] PULSE-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -2823,11 +3805,15 @@ func InitKernel() {
 	KernelTable[2658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2658] PULSE-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2659] PULSE-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2660] PULSE-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2661] PULSE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2661] PULSE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2662] PULSE-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2663] PULSE-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2664] PULSE-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2665] PULSE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2665] PULSE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2666] PULSE-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2667] PULSE-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2668] PULSE-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -2893,11 +3879,15 @@ func InitKernel() {
 	KernelTable[2728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2728] PULSE-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2729] PULSE-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2730] PULSE-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2731] PULSE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2731] PULSE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2732] PULSE-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2733] PULSE-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2734] PULSE-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2735] PULSE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2735] PULSE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2736] PULSE-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2737] PULSE-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2738] PULSE-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -2923,11 +3913,15 @@ func InitKernel() {
 	KernelTable[2758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2758] PULSE-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2759] PULSE-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2760] PULSE-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2761] PULSE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2761] PULSE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2762] PULSE-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2763] PULSE-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2764] PULSE-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2765] PULSE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2765] PULSE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2766] PULSE-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2767] PULSE-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2768] PULSE-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -2993,11 +3987,15 @@ func InitKernel() {
 	KernelTable[2828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2828] PULSE-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2829] PULSE-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2830] PULSE-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2831] PULSE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2831] PULSE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2832] PULSE-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2833] PULSE-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2834] PULSE-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2835] PULSE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2835] PULSE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2836] PULSE-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2837] PULSE-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2838] PULSE-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -3023,11 +4021,15 @@ func InitKernel() {
 	KernelTable[2858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2858] PULSE-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2859] PULSE-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2860] PULSE-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2861] PULSE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2861] PULSE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2862] PULSE-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2863] PULSE-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2864] PULSE-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2865] PULSE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2865] PULSE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2866] PULSE-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2867] PULSE-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2868] PULSE-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -3093,11 +4095,15 @@ func InitKernel() {
 	KernelTable[2928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2928] PULSE-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[2929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2929] PULSE-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[2930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2930] PULSE-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2931] PULSE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2931] PULSE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2932] PULSE-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[2933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2933] PULSE-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2934] PULSE-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2935] PULSE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2935] PULSE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2936] PULSE-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[2937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2937] PULSE-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2938] PULSE-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -3123,11 +4129,15 @@ func InitKernel() {
 	KernelTable[2958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2958] PULSE-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[2959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2959] PULSE-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[2960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2960] PULSE-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[2961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2961] PULSE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[2961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2961] PULSE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[2962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2962] PULSE-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[2963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2963] PULSE-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[2964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2964] PULSE-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[2965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2965] PULSE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[2965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [2965] PULSE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[2966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2966] PULSE-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[2967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2967] PULSE-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[2968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [2968] PULSE-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -3177,29 +4187,49 @@ func InitKernel() {
 	KernelTable[3012] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3012] KINETIC-INIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3013] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3013] KINETIC-INIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3014] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3014] KINETIC-INIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3015] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3015] KINETIC-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3015] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3015] KINETIC-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3016] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3016] KINETIC-INIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3017] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3017] KINETIC-INIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3018] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3018] KINETIC-INIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3019] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3019] KINETIC-INIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3020] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3020] KINETIC-INIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3021] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3021] KINETIC-INIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3021] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3021] KINETIC-INIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3022] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3022] KINETIC-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3023] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3023] KINETIC-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3024] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3024] KINETIC-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3025] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3025] KINETIC-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3025] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3025] KINETIC-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3026] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3026] KINETIC-INIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3027] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3027] KINETIC-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3028] KINETIC-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3029] KINETIC-INIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3030] KINETIC-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3031] KINETIC-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3032] KINETIC-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3033] KINETIC-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3034] KINETIC-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3035] KINETIC-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3030] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3030] KINETIC-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3031] KINETIC-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3032] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3032] KINETIC-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3033] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3033] KINETIC-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3034] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3034] KINETIC-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3035] KINETIC-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3036] KINETIC-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3037] KINETIC-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3037] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3037] KINETIC-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3038] KINETIC-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3039] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3039] KINETIC-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3040] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3040] KINETIC-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -3222,14 +4252,28 @@ func InitKernel() {
 	KernelTable[3057] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3057] KINETIC-INIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3058] KINETIC-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3059] KINETIC-INIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3060] KINETIC-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3061] KINETIC-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3062] KINETIC-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3063] KINETIC-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3064] KINETIC-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3065] KINETIC-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3060] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3060] KINETIC-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3061] KINETIC-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3062] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3062] KINETIC-INIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3063] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3063] KINETIC-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3064] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3064] KINETIC-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3065] KINETIC-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3066] KINETIC-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3067] KINETIC-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3067] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3067] KINETIC-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3068] KINETIC-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3069] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3069] KINETIC-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3070] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3070] KINETIC-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -3237,17 +4281,23 @@ func InitKernel() {
 	KernelTable[3072] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3072] KINETIC-INIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3073] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3073] KINETIC-INIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3074] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3074] KINETIC-INIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3075] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3075] KINETIC-INIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3075] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3075] KINETIC-INIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3076] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3076] KINETIC-INIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3077] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3077] KINETIC-INIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3078] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3078] KINETIC-INIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3079] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3079] KINETIC-INIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3080] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3080] KINETIC-INIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3081] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3081] KINETIC-INIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3081] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3081] KINETIC-INIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3082] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3082] KINETIC-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3083] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3083] KINETIC-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3084] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3084] KINETIC-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3085] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3085] KINETIC-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3085] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3085] KINETIC-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3086] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3086] KINETIC-INIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3087] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3087] KINETIC-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3088] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3088] KINETIC-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -3257,7 +4307,9 @@ func InitKernel() {
 	KernelTable[3092] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3092] KINETIC-INIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3093] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3093] KINETIC-INIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3094] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3094] KINETIC-INIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3095] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3095] KINETIC-INIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3095] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3095] KINETIC-INIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3096] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3096] KINETIC-INIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3097] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3097] KINETIC-INIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3098] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3098] KINETIC-INIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -3273,41 +4325,87 @@ func InitKernel() {
 	KernelTable[3108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3108] KINETIC-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[3109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3109] KINETIC-MUTATE-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[3110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3110] KINETIC-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3111] KINETIC-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3111] KINETIC-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3112] KINETIC-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[3113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3113] KINETIC-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3114] KINETIC-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3115] KINETIC-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3113] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3113] KINETIC-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3114] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3114] KINETIC-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3115] KINETIC-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3116] KINETIC-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[3117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3117] KINETIC-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3117] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3117] KINETIC-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3118] KINETIC-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3119] KINETIC-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[3120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3120] KINETIC-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3121] KINETIC-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3122] KINETIC-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[3123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3123] KINETIC-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3124] KINETIC-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3125] KINETIC-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3120] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3120] KINETIC-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3121] KINETIC-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3122] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3122] KINETIC-MUTATE-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3123] KINETIC-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3124] KINETIC-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3125] KINETIC-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3126] KINETIC-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[3127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3127] KINETIC-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3127] KINETIC-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3128] KINETIC-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3129] KINETIC-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3130] KINETIC-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3131] KINETIC-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3132] KINETIC-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3133] KINETIC-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3134] KINETIC-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3135] KINETIC-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3130] KINETIC-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3131] KINETIC-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3132] KINETIC-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3133] KINETIC-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3134] KINETIC-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3135] KINETIC-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3136] KINETIC-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3137] KINETIC-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3138] KINETIC-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[3139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3139] KINETIC-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[3137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3137] KINETIC-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3138] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3138] KINETIC-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3139] KINETIC-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3140] KINETIC-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3141] KINETIC-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3141] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3141] KINETIC-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3142] KINETIC-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3143] KINETIC-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3144] KINETIC-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3145] KINETIC-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3145] KINETIC-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3146] KINETIC-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3147] KINETIC-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3148] KINETIC-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
@@ -3317,49 +4415,103 @@ func InitKernel() {
 	KernelTable[3152] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3152] KINETIC-MUTATE-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3153] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3153] KINETIC-MUTATE-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3154] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3154] KINETIC-MUTATE-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3155] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3155] KINETIC-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3155] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3155] KINETIC-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3156] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3156] KINETIC-MUTATE-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3157] KINETIC-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3158] KINETIC-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3159] KINETIC-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3160] KINETIC-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3161] KINETIC-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3162] KINETIC-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3163] KINETIC-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3164] KINETIC-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3165] KINETIC-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3160] KINETIC-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3161] KINETIC-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3162] KINETIC-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3163] KINETIC-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3164] KINETIC-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3165] KINETIC-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3166] KINETIC-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3167] KINETIC-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3168] KINETIC-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[3169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3169] KINETIC-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[3167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3167] KINETIC-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3168] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3168] KINETIC-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3169] KINETIC-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3170] KINETIC-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3171] KINETIC-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3171] KINETIC-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3172] KINETIC-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3173] KINETIC-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3174] KINETIC-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3175] KINETIC-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3173] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3173] KINETIC-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3174] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3174] KINETIC-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3175] KINETIC-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3176] KINETIC-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3177] KINETIC-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3177] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3177] KINETIC-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3178] KINETIC-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3179] KINETIC-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[3180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3180] KINETIC-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3181] KINETIC-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3182] KINETIC-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3183] KINETIC-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3184] KINETIC-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3185] KINETIC-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3180] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3180] KINETIC-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3181] KINETIC-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3182] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3182] KINETIC-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3183] KINETIC-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3184] KINETIC-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3185] KINETIC-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3186] KINETIC-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3187] KINETIC-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3187] KINETIC-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3188] KINETIC-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3189] KINETIC-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3190] KINETIC-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3191] KINETIC-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3191] KINETIC-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3192] KINETIC-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3193] KINETIC-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3194] KINETIC-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3195] KINETIC-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3193] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3193] KINETIC-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3194] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3194] KINETIC-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3195] KINETIC-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3196] KINETIC-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[3197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3197] KINETIC-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3197] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3197] KINETIC-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3198] KINETIC-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[3199] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3199] KINETIC-MUTATE-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[3200] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3200] KINETIC-BIND-RAW-LOCAL (Go retro-membrane)\n") }
@@ -3377,29 +4529,49 @@ func InitKernel() {
 	KernelTable[3212] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3212] KINETIC-BIND-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3213] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3213] KINETIC-BIND-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3214] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3214] KINETIC-BIND-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3215] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3215] KINETIC-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3215] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3215] KINETIC-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3216] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3216] KINETIC-BIND-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3217] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3217] KINETIC-BIND-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3218] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3218] KINETIC-BIND-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3219] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3219] KINETIC-BIND-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3220] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3220] KINETIC-BIND-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3221] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3221] KINETIC-BIND-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3221] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3221] KINETIC-BIND-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3222] KINETIC-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3223] KINETIC-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3224] KINETIC-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3225] KINETIC-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3225] KINETIC-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3226] KINETIC-BIND-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3227] KINETIC-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3228] KINETIC-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3229] KINETIC-BIND-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3230] KINETIC-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3231] KINETIC-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3232] KINETIC-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3233] KINETIC-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3234] KINETIC-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3235] KINETIC-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3230] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3230] KINETIC-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3231] KINETIC-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3232] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3232] KINETIC-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3233] KINETIC-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3234] KINETIC-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3235] KINETIC-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3236] KINETIC-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3237] KINETIC-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3237] KINETIC-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3238] KINETIC-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3239] KINETIC-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3240] KINETIC-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -3422,14 +4594,28 @@ func InitKernel() {
 	KernelTable[3257] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3257] KINETIC-BIND-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3258] KINETIC-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3259] KINETIC-BIND-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3260] KINETIC-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3261] KINETIC-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3262] KINETIC-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3263] KINETIC-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3264] KINETIC-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3265] KINETIC-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3260] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3260] KINETIC-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3261] KINETIC-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3262] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3262] KINETIC-BIND-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3263] KINETIC-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3264] KINETIC-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3265] KINETIC-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3266] KINETIC-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3267] KINETIC-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3267] KINETIC-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3268] KINETIC-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3269] KINETIC-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3270] KINETIC-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -3437,17 +4623,23 @@ func InitKernel() {
 	KernelTable[3272] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3272] KINETIC-BIND-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3273] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3273] KINETIC-BIND-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3274] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3274] KINETIC-BIND-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3275] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3275] KINETIC-BIND-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3275] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3275] KINETIC-BIND-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3276] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3276] KINETIC-BIND-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3277] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3277] KINETIC-BIND-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3278] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3278] KINETIC-BIND-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3279] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3279] KINETIC-BIND-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3280] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3280] KINETIC-BIND-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3281] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3281] KINETIC-BIND-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3281] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3281] KINETIC-BIND-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3282] KINETIC-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3283] KINETIC-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3284] KINETIC-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3285] KINETIC-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3285] KINETIC-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3286] KINETIC-BIND-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3287] KINETIC-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3288] KINETIC-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -3457,7 +4649,9 @@ func InitKernel() {
 	KernelTable[3292] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3292] KINETIC-BIND-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3293] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3293] KINETIC-BIND-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3294] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3294] KINETIC-BIND-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3295] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3295] KINETIC-BIND-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3295] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3295] KINETIC-BIND-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3296] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3296] KINETIC-BIND-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3297] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3297] KINETIC-BIND-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3298] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3298] KINETIC-BIND-LOCKED-BFT (Go retro-membrane)\n") }
@@ -3473,41 +4667,73 @@ func InitKernel() {
 	KernelTable[3308] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3308] KINETIC-QUERY-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[3309] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3309] KINETIC-QUERY-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[3310] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3310] KINETIC-QUERY-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3311] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3311] KINETIC-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3311] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3311] KINETIC-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3312] KINETIC-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3313] KINETIC-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3314] KINETIC-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3315] KINETIC-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3315] KINETIC-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3316] KINETIC-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3317] KINETIC-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3318] KINETIC-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3319] KINETIC-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3320] KINETIC-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3321] KINETIC-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3321] KINETIC-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3322] KINETIC-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[3323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3323] KINETIC-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3324] KINETIC-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3325] KINETIC-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3323] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3323] KINETIC-QUERY-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3324] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3324] KINETIC-QUERY-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3325] KINETIC-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3326] KINETIC-QUERY-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[3327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3327] KINETIC-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3327] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3327] KINETIC-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3328] KINETIC-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3329] KINETIC-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3330] KINETIC-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3331] KINETIC-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3332] KINETIC-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3333] KINETIC-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3334] KINETIC-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3335] KINETIC-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3330] KINETIC-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3331] KINETIC-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3332] KINETIC-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3333] KINETIC-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3334] KINETIC-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3335] KINETIC-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3336] KINETIC-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3337] KINETIC-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3337] KINETIC-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3338] KINETIC-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[3339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3339] KINETIC-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[3339] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3339] KINETIC-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3340] KINETIC-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[3341] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3341] KINETIC-QUERY-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[3342] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3342] KINETIC-QUERY-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3343] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3343] KINETIC-QUERY-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3344] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3344] KINETIC-QUERY-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3345] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3345] KINETIC-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3345] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3345] KINETIC-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3346] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3346] KINETIC-QUERY-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3347] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3347] KINETIC-QUERY-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3348] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3348] KINETIC-QUERY-ASYNC-BFT (Go retro-membrane)\n") }
@@ -3522,42 +4748,76 @@ func InitKernel() {
 	KernelTable[3357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3357] KINETIC-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3358] KINETIC-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3359] KINETIC-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3360] KINETIC-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3361] KINETIC-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3362] KINETIC-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3363] KINETIC-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3364] KINETIC-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3365] KINETIC-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3360] KINETIC-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3361] KINETIC-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3362] KINETIC-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3363] KINETIC-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3364] KINETIC-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3365] KINETIC-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3366] KINETIC-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3367] KINETIC-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3367] KINETIC-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3368] KINETIC-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[3369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3369] KINETIC-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[3369] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3369] KINETIC-QUERY-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3370] KINETIC-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3371] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3371] KINETIC-QUERY-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3371] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3371] KINETIC-QUERY-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3372] KINETIC-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3373] KINETIC-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3374] KINETIC-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3375] KINETIC-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3375] KINETIC-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3376] KINETIC-QUERY-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3377] KINETIC-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3378] KINETIC-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3379] KINETIC-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3380] KINETIC-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3381] KINETIC-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3381] KINETIC-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3382] KINETIC-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3383] KINETIC-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3384] KINETIC-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3385] KINETIC-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3383] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3383] KINETIC-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3384] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3384] KINETIC-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3385] KINETIC-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3386] KINETIC-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3387] KINETIC-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3387] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3387] KINETIC-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3388] KINETIC-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3389] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3389] KINETIC-QUERY-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3390] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3390] KINETIC-QUERY-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3391] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3391] KINETIC-QUERY-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3391] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3391] KINETIC-QUERY-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3392] KINETIC-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3393] KINETIC-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3394] KINETIC-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3395] KINETIC-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3395] KINETIC-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3396] KINETIC-QUERY-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3397] KINETIC-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3398] KINETIC-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
@@ -3573,41 +4833,87 @@ func InitKernel() {
 	KernelTable[3408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3408] KINETIC-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[3409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3409] KINETIC-STREAM-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[3410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3410] KINETIC-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3411] KINETIC-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3411] KINETIC-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3412] KINETIC-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[3413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3413] KINETIC-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3414] KINETIC-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3415] KINETIC-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3413] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3413] KINETIC-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3414] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3414] KINETIC-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3415] KINETIC-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3416] KINETIC-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[3417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3417] KINETIC-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3417] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3417] KINETIC-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3418] KINETIC-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3419] KINETIC-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[3420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3420] KINETIC-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3421] KINETIC-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3422] KINETIC-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[3423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3423] KINETIC-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3424] KINETIC-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3425] KINETIC-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3420] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3420] KINETIC-STREAM-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3421] KINETIC-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3422] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3422] KINETIC-STREAM-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3423] KINETIC-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3424] KINETIC-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3425] KINETIC-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3426] KINETIC-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[3427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3427] KINETIC-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3427] KINETIC-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3428] KINETIC-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3429] KINETIC-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3430] KINETIC-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3431] KINETIC-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3432] KINETIC-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3433] KINETIC-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3434] KINETIC-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3435] KINETIC-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3430] KINETIC-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3431] KINETIC-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3432] KINETIC-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3433] KINETIC-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3434] KINETIC-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3435] KINETIC-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3436] KINETIC-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3437] KINETIC-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3438] KINETIC-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[3439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3439] KINETIC-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[3437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3437] KINETIC-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3438] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3438] KINETIC-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3439] KINETIC-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3440] KINETIC-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3441] KINETIC-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3441] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3441] KINETIC-STREAM-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3442] KINETIC-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3443] KINETIC-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3444] KINETIC-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3445] KINETIC-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3445] KINETIC-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3446] KINETIC-STREAM-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3447] KINETIC-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3448] KINETIC-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
@@ -3617,49 +4923,103 @@ func InitKernel() {
 	KernelTable[3452] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3452] KINETIC-STREAM-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3453] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3453] KINETIC-STREAM-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3454] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3454] KINETIC-STREAM-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3455] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3455] KINETIC-STREAM-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3455] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3455] KINETIC-STREAM-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3456] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3456] KINETIC-STREAM-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3457] KINETIC-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3458] KINETIC-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3459] KINETIC-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3460] KINETIC-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3461] KINETIC-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3462] KINETIC-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3463] KINETIC-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3464] KINETIC-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3465] KINETIC-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3460] KINETIC-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3461] KINETIC-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3462] KINETIC-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3463] KINETIC-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3464] KINETIC-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3465] KINETIC-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3466] KINETIC-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3467] KINETIC-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3468] KINETIC-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[3469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3469] KINETIC-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[3467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3467] KINETIC-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3468] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3468] KINETIC-STREAM-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3469] KINETIC-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3470] KINETIC-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3471] KINETIC-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3471] KINETIC-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3472] KINETIC-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3473] KINETIC-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3474] KINETIC-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3475] KINETIC-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3473] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3473] KINETIC-STREAM-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3474] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3474] KINETIC-STREAM-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3475] KINETIC-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3476] KINETIC-STREAM-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3477] KINETIC-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3477] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3477] KINETIC-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3478] KINETIC-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3479] KINETIC-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[3480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3480] KINETIC-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3481] KINETIC-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3482] KINETIC-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3483] KINETIC-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3484] KINETIC-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3485] KINETIC-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3480] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3480] KINETIC-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3481] KINETIC-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3482] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3482] KINETIC-STREAM-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3483] KINETIC-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3484] KINETIC-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3485] KINETIC-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3486] KINETIC-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3487] KINETIC-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3487] KINETIC-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3488] KINETIC-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3489] KINETIC-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3490] KINETIC-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3491] KINETIC-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3491] KINETIC-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3492] KINETIC-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3493] KINETIC-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3494] KINETIC-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3495] KINETIC-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3493] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3493] KINETIC-STREAM-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3494] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3494] KINETIC-STREAM-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3495] KINETIC-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3496] KINETIC-STREAM-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[3497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3497] KINETIC-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3497] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3497] KINETIC-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3498] KINETIC-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[3499] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3499] KINETIC-STREAM-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[3500] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3500] KINETIC-COMMIT-RAW-LOCAL (Go retro-membrane)\n") }
@@ -3673,41 +5033,87 @@ func InitKernel() {
 	KernelTable[3508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3508] KINETIC-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[3509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3509] KINETIC-COMMIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[3510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3510] KINETIC-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3511] KINETIC-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3511] KINETIC-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3512] KINETIC-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[3513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3513] KINETIC-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3514] KINETIC-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3515] KINETIC-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3513] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3513] KINETIC-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3514] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3514] KINETIC-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3515] KINETIC-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3516] KINETIC-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[3517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3517] KINETIC-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3517] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3517] KINETIC-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3518] KINETIC-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3519] KINETIC-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[3520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3520] KINETIC-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3521] KINETIC-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3522] KINETIC-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[3523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3523] KINETIC-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3524] KINETIC-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3525] KINETIC-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3520] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3520] KINETIC-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3521] KINETIC-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3522] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3522] KINETIC-COMMIT-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3523] KINETIC-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3524] KINETIC-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3525] KINETIC-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3526] KINETIC-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[3527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3527] KINETIC-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3527] KINETIC-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3528] KINETIC-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3529] KINETIC-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3530] KINETIC-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3531] KINETIC-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3532] KINETIC-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3533] KINETIC-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3534] KINETIC-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3535] KINETIC-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3530] KINETIC-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3531] KINETIC-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3532] KINETIC-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3533] KINETIC-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3534] KINETIC-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3535] KINETIC-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3536] KINETIC-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3537] KINETIC-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3538] KINETIC-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[3539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3539] KINETIC-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[3537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3537] KINETIC-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3538] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3538] KINETIC-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3539] KINETIC-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3540] KINETIC-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3541] KINETIC-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3541] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3541] KINETIC-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3542] KINETIC-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3543] KINETIC-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3544] KINETIC-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3545] KINETIC-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3545] KINETIC-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3546] KINETIC-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3547] KINETIC-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3548] KINETIC-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -3717,49 +5123,103 @@ func InitKernel() {
 	KernelTable[3552] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3552] KINETIC-COMMIT-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3553] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3553] KINETIC-COMMIT-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3554] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3554] KINETIC-COMMIT-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3555] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3555] KINETIC-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3555] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3555] KINETIC-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3556] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3556] KINETIC-COMMIT-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[3557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3557] KINETIC-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3558] KINETIC-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3559] KINETIC-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3560] KINETIC-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3561] KINETIC-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3562] KINETIC-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3563] KINETIC-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3564] KINETIC-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3565] KINETIC-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3560] KINETIC-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3561] KINETIC-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3562] KINETIC-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3563] KINETIC-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3564] KINETIC-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3565] KINETIC-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3566] KINETIC-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3567] KINETIC-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[3568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3568] KINETIC-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[3569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3569] KINETIC-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[3567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3567] KINETIC-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[3568] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3568] KINETIC-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[3569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3569] KINETIC-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[3570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3570] KINETIC-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3571] KINETIC-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3571] KINETIC-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3572] KINETIC-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3573] KINETIC-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3574] KINETIC-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3575] KINETIC-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3573] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3573] KINETIC-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3574] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3574] KINETIC-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3575] KINETIC-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3576] KINETIC-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3577] KINETIC-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3577] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3577] KINETIC-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3578] KINETIC-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3579] KINETIC-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[3580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3580] KINETIC-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3581] KINETIC-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3582] KINETIC-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3583] KINETIC-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3584] KINETIC-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3585] KINETIC-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3580] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3580] KINETIC-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3581] KINETIC-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3582] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3582] KINETIC-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3583] KINETIC-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3584] KINETIC-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3585] KINETIC-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3586] KINETIC-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[3587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3587] KINETIC-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3587] KINETIC-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3588] KINETIC-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3589] KINETIC-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3590] KINETIC-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3591] KINETIC-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3591] KINETIC-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3592] KINETIC-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3593] KINETIC-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3594] KINETIC-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3595] KINETIC-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3593] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3593] KINETIC-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3594] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3594] KINETIC-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3595] KINETIC-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3596] KINETIC-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[3597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3597] KINETIC-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3597] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3597] KINETIC-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3598] KINETIC-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[3599] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3599] KINETIC-COMMIT-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[3600] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3600] KINETIC-SYNC-RAW-LOCAL (Go retro-membrane)\n") }
@@ -3777,29 +5237,49 @@ func InitKernel() {
 	KernelTable[3612] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3612] KINETIC-SYNC-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3613] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3613] KINETIC-SYNC-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3614] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3614] KINETIC-SYNC-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3615] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3615] KINETIC-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3615] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3615] KINETIC-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3616] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3616] KINETIC-SYNC-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3617] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3617] KINETIC-SYNC-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3618] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3618] KINETIC-SYNC-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3619] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3619] KINETIC-SYNC-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3620] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3620] KINETIC-SYNC-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3621] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3621] KINETIC-SYNC-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3621] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3621] KINETIC-SYNC-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3622] KINETIC-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3623] KINETIC-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3624] KINETIC-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3625] KINETIC-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3625] KINETIC-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3626] KINETIC-SYNC-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3627] KINETIC-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3628] KINETIC-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3629] KINETIC-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3630] KINETIC-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3631] KINETIC-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3632] KINETIC-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3633] KINETIC-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3634] KINETIC-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3635] KINETIC-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3630] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3630] KINETIC-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3631] KINETIC-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3632] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3632] KINETIC-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3633] KINETIC-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3634] KINETIC-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3635] KINETIC-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3636] KINETIC-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3637] KINETIC-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3637] KINETIC-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3638] KINETIC-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3639] KINETIC-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3640] KINETIC-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -3822,14 +5302,28 @@ func InitKernel() {
 	KernelTable[3657] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3657] KINETIC-SYNC-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3658] KINETIC-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3659] KINETIC-SYNC-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3660] KINETIC-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3661] KINETIC-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3662] KINETIC-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3663] KINETIC-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3664] KINETIC-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3665] KINETIC-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3660] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3660] KINETIC-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3661] KINETIC-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3662] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3662] KINETIC-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3663] KINETIC-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3664] KINETIC-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3665] KINETIC-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3666] KINETIC-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3667] KINETIC-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3667] KINETIC-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3668] KINETIC-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3669] KINETIC-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3670] KINETIC-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -3837,17 +5331,23 @@ func InitKernel() {
 	KernelTable[3672] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3672] KINETIC-SYNC-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3673] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3673] KINETIC-SYNC-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3674] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3674] KINETIC-SYNC-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3675] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3675] KINETIC-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3675] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3675] KINETIC-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3676] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3676] KINETIC-SYNC-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3677] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3677] KINETIC-SYNC-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3678] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3678] KINETIC-SYNC-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3679] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3679] KINETIC-SYNC-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3680] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3680] KINETIC-SYNC-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3681] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3681] KINETIC-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3681] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3681] KINETIC-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3682] KINETIC-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3683] KINETIC-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3684] KINETIC-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3685] KINETIC-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3685] KINETIC-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3686] KINETIC-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3687] KINETIC-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3688] KINETIC-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -3857,7 +5357,9 @@ func InitKernel() {
 	KernelTable[3692] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3692] KINETIC-SYNC-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3693] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3693] KINETIC-SYNC-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3694] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3694] KINETIC-SYNC-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3695] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3695] KINETIC-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3695] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3695] KINETIC-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3696] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3696] KINETIC-SYNC-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3697] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3697] KINETIC-SYNC-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3698] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3698] KINETIC-SYNC-LOCKED-BFT (Go retro-membrane)\n") }
@@ -3877,29 +5379,49 @@ func InitKernel() {
 	KernelTable[3712] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3712] KINETIC-HALT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3713] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3713] KINETIC-HALT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3714] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3714] KINETIC-HALT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3715] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3715] KINETIC-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3715] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3715] KINETIC-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3716] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3716] KINETIC-HALT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3717] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3717] KINETIC-HALT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3718] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3718] KINETIC-HALT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3719] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3719] KINETIC-HALT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3720] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3720] KINETIC-HALT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3721] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3721] KINETIC-HALT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3721] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3721] KINETIC-HALT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3722] KINETIC-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3723] KINETIC-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3724] KINETIC-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3725] KINETIC-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3725] KINETIC-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3726] KINETIC-HALT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3727] KINETIC-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3728] KINETIC-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3729] KINETIC-HALT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3730] KINETIC-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3731] KINETIC-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3732] KINETIC-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3733] KINETIC-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3734] KINETIC-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3735] KINETIC-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3730] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3730] KINETIC-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3731] KINETIC-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3732] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3732] KINETIC-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3733] KINETIC-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3734] KINETIC-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3735] KINETIC-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3736] KINETIC-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3737] KINETIC-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3737] KINETIC-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3738] KINETIC-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3739] KINETIC-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3740] KINETIC-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -3922,14 +5444,28 @@ func InitKernel() {
 	KernelTable[3757] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3757] KINETIC-HALT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3758] KINETIC-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3759] KINETIC-HALT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3760] KINETIC-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3761] KINETIC-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3762] KINETIC-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3763] KINETIC-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3764] KINETIC-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3765] KINETIC-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3760] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3760] KINETIC-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3761] KINETIC-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3762] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3762] KINETIC-HALT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3763] KINETIC-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3764] KINETIC-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3765] KINETIC-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3766] KINETIC-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3767] KINETIC-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3767] KINETIC-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3768] KINETIC-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3769] KINETIC-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3770] KINETIC-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -3937,17 +5473,23 @@ func InitKernel() {
 	KernelTable[3772] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3772] KINETIC-HALT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3773] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3773] KINETIC-HALT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3774] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3774] KINETIC-HALT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3775] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3775] KINETIC-HALT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3775] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3775] KINETIC-HALT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3776] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3776] KINETIC-HALT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3777] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3777] KINETIC-HALT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3778] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3778] KINETIC-HALT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3779] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3779] KINETIC-HALT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3780] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3780] KINETIC-HALT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3781] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3781] KINETIC-HALT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3781] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3781] KINETIC-HALT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3782] KINETIC-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3783] KINETIC-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3784] KINETIC-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3785] KINETIC-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3785] KINETIC-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3786] KINETIC-HALT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3787] KINETIC-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3788] KINETIC-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -3957,7 +5499,9 @@ func InitKernel() {
 	KernelTable[3792] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3792] KINETIC-HALT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3793] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3793] KINETIC-HALT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3794] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3794] KINETIC-HALT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3795] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3795] KINETIC-HALT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3795] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3795] KINETIC-HALT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3796] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3796] KINETIC-HALT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3797] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3797] KINETIC-HALT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3798] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3798] KINETIC-HALT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -3977,29 +5521,49 @@ func InitKernel() {
 	KernelTable[3812] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3812] KINETIC-FORK-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3813] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3813] KINETIC-FORK-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3814] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3814] KINETIC-FORK-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3815] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3815] KINETIC-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3815] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3815] KINETIC-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3816] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3816] KINETIC-FORK-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3817] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3817] KINETIC-FORK-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3818] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3818] KINETIC-FORK-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3819] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3819] KINETIC-FORK-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3820] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3820] KINETIC-FORK-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3821] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3821] KINETIC-FORK-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3821] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3821] KINETIC-FORK-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3822] KINETIC-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3823] KINETIC-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3824] KINETIC-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3825] KINETIC-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3825] KINETIC-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3826] KINETIC-FORK-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3827] KINETIC-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3828] KINETIC-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3829] KINETIC-FORK-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3830] KINETIC-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3831] KINETIC-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3832] KINETIC-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3833] KINETIC-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3834] KINETIC-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3835] KINETIC-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3830] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3830] KINETIC-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3831] KINETIC-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3832] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3832] KINETIC-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3833] KINETIC-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3834] KINETIC-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3835] KINETIC-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3836] KINETIC-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3837] KINETIC-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3837] KINETIC-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3838] KINETIC-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3839] KINETIC-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3840] KINETIC-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4022,14 +5586,28 @@ func InitKernel() {
 	KernelTable[3857] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3857] KINETIC-FORK-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3858] KINETIC-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3859] KINETIC-FORK-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3860] KINETIC-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3861] KINETIC-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3862] KINETIC-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3863] KINETIC-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3864] KINETIC-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3865] KINETIC-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3860] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3860] KINETIC-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3861] KINETIC-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3862] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3862] KINETIC-FORK-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3863] KINETIC-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3864] KINETIC-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3865] KINETIC-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3866] KINETIC-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3867] KINETIC-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3867] KINETIC-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3868] KINETIC-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3869] KINETIC-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3870] KINETIC-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4037,17 +5615,23 @@ func InitKernel() {
 	KernelTable[3872] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3872] KINETIC-FORK-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3873] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3873] KINETIC-FORK-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3874] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3874] KINETIC-FORK-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3875] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3875] KINETIC-FORK-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3875] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3875] KINETIC-FORK-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3876] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3876] KINETIC-FORK-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3877] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3877] KINETIC-FORK-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3878] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3878] KINETIC-FORK-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3879] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3879] KINETIC-FORK-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3880] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3880] KINETIC-FORK-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3881] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3881] KINETIC-FORK-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3881] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3881] KINETIC-FORK-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3882] KINETIC-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3883] KINETIC-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3884] KINETIC-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3885] KINETIC-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3885] KINETIC-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3886] KINETIC-FORK-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3887] KINETIC-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3888] KINETIC-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4057,7 +5641,9 @@ func InitKernel() {
 	KernelTable[3892] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3892] KINETIC-FORK-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3893] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3893] KINETIC-FORK-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3894] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3894] KINETIC-FORK-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3895] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3895] KINETIC-FORK-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3895] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3895] KINETIC-FORK-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3896] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3896] KINETIC-FORK-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3897] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3897] KINETIC-FORK-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3898] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3898] KINETIC-FORK-LOCKED-BFT (Go retro-membrane)\n") }
@@ -4077,29 +5663,49 @@ func InitKernel() {
 	KernelTable[3912] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3912] KINETIC-JOIN-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[3913] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3913] KINETIC-JOIN-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3914] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3914] KINETIC-JOIN-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3915] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3915] KINETIC-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3915] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3915] KINETIC-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3916] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3916] KINETIC-JOIN-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[3917] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3917] KINETIC-JOIN-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3918] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3918] KINETIC-JOIN-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[3919] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3919] KINETIC-JOIN-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[3920] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3920] KINETIC-JOIN-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3921] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3921] KINETIC-JOIN-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3921] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3921] KINETIC-JOIN-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3922] KINETIC-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[3923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3923] KINETIC-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3924] KINETIC-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3925] KINETIC-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3925] KINETIC-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3926] KINETIC-JOIN-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[3927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3927] KINETIC-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3928] KINETIC-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[3929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3929] KINETIC-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[3930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3930] KINETIC-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3931] KINETIC-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3932] KINETIC-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[3933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3933] KINETIC-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3934] KINETIC-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3935] KINETIC-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3930] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3930] KINETIC-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3931] KINETIC-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3932] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3932] KINETIC-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3933] KINETIC-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3934] KINETIC-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3935] KINETIC-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3936] KINETIC-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[3937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3937] KINETIC-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3937] KINETIC-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3938] KINETIC-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[3939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3939] KINETIC-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[3940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3940] KINETIC-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4122,14 +5728,28 @@ func InitKernel() {
 	KernelTable[3957] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3957] KINETIC-JOIN-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3958] KINETIC-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[3959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3959] KINETIC-JOIN-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[3960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3960] KINETIC-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3961] KINETIC-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[3962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3962] KINETIC-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[3963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3963] KINETIC-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[3964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3964] KINETIC-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3965] KINETIC-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3960] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3960] KINETIC-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[3961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3961] KINETIC-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[3962] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3962] KINETIC-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[3963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3963] KINETIC-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[3964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3964] KINETIC-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[3965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3965] KINETIC-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3966] KINETIC-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[3967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3967] KINETIC-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[3967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3967] KINETIC-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[3968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3968] KINETIC-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[3969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3969] KINETIC-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[3970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3970] KINETIC-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4137,17 +5757,23 @@ func InitKernel() {
 	KernelTable[3972] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3972] KINETIC-JOIN-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3973] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3973] KINETIC-JOIN-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3974] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3974] KINETIC-JOIN-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3975] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3975] KINETIC-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3975] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3975] KINETIC-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3976] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3976] KINETIC-JOIN-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3977] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3977] KINETIC-JOIN-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3978] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3978] KINETIC-JOIN-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[3979] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3979] KINETIC-JOIN-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[3980] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3980] KINETIC-JOIN-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[3981] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3981] KINETIC-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[3981] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3981] KINETIC-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[3982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3982] KINETIC-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3983] KINETIC-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3984] KINETIC-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3985] KINETIC-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3985] KINETIC-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3986] KINETIC-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[3987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3987] KINETIC-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3988] KINETIC-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4157,7 +5783,9 @@ func InitKernel() {
 	KernelTable[3992] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3992] KINETIC-JOIN-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[3993] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3993] KINETIC-JOIN-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[3994] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3994] KINETIC-JOIN-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[3995] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3995] KINETIC-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[3995] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [3995] KINETIC-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[3996] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3996] KINETIC-JOIN-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[3997] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3997] KINETIC-JOIN-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[3998] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [3998] KINETIC-JOIN-LOCKED-BFT (Go retro-membrane)\n") }
@@ -4193,11 +5821,15 @@ func InitKernel() {
 	KernelTable[4028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4028] LOGIC-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4029] LOGIC-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4030] LOGIC-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4031] LOGIC-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4031] LOGIC-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4032] LOGIC-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4033] LOGIC-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4034] LOGIC-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4035] LOGIC-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4035] LOGIC-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4036] LOGIC-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4037] LOGIC-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4038] LOGIC-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -4223,11 +5855,15 @@ func InitKernel() {
 	KernelTable[4058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4058] LOGIC-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4059] LOGIC-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4060] LOGIC-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4061] LOGIC-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4061] LOGIC-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4062] LOGIC-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4063] LOGIC-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4064] LOGIC-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4065] LOGIC-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4065] LOGIC-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4066] LOGIC-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4067] LOGIC-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4068] LOGIC-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -4277,29 +5913,49 @@ func InitKernel() {
 	KernelTable[4112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4112] LOGIC-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[4113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4113] LOGIC-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4114] LOGIC-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4115] LOGIC-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4115] LOGIC-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4116] LOGIC-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[4117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4117] LOGIC-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4118] LOGIC-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[4119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4119] LOGIC-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[4120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4120] LOGIC-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4121] LOGIC-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4121] LOGIC-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4122] LOGIC-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[4123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4123] LOGIC-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4124] LOGIC-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4125] LOGIC-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4125] LOGIC-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4126] LOGIC-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[4127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4127] LOGIC-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4128] LOGIC-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4129] LOGIC-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[4130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4130] LOGIC-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4131] LOGIC-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4132] LOGIC-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[4133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4133] LOGIC-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4134] LOGIC-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4135] LOGIC-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4130] LOGIC-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4131] LOGIC-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4132] LOGIC-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4133] LOGIC-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4134] LOGIC-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4135] LOGIC-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4136] LOGIC-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[4137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4137] LOGIC-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4137] LOGIC-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4138] LOGIC-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[4139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4139] LOGIC-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[4140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4140] LOGIC-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4322,14 +5978,28 @@ func InitKernel() {
 	KernelTable[4157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4157] LOGIC-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4158] LOGIC-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4159] LOGIC-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[4160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4160] LOGIC-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4161] LOGIC-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4162] LOGIC-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[4163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4163] LOGIC-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4164] LOGIC-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4165] LOGIC-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4160] LOGIC-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4161] LOGIC-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4162] LOGIC-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4163] LOGIC-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4164] LOGIC-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4165] LOGIC-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4166] LOGIC-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[4167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4167] LOGIC-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4167] LOGIC-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4168] LOGIC-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[4169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4169] LOGIC-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[4170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4170] LOGIC-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4337,17 +6007,23 @@ func InitKernel() {
 	KernelTable[4172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4172] LOGIC-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4173] LOGIC-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4174] LOGIC-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4175] LOGIC-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4175] LOGIC-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4176] LOGIC-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4177] LOGIC-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4178] LOGIC-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[4179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4179] LOGIC-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[4180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4180] LOGIC-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4181] LOGIC-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4181] LOGIC-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4182] LOGIC-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4183] LOGIC-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4184] LOGIC-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4185] LOGIC-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4185] LOGIC-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4186] LOGIC-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4187] LOGIC-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4188] LOGIC-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4357,7 +6033,9 @@ func InitKernel() {
 	KernelTable[4192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4192] LOGIC-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4193] LOGIC-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4194] LOGIC-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4195] LOGIC-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4195] LOGIC-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4196] LOGIC-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[4197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4197] LOGIC-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4198] LOGIC-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -4393,11 +6071,15 @@ func InitKernel() {
 	KernelTable[4228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4228] LOGIC-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4229] LOGIC-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4230] LOGIC-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4231] LOGIC-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4231] LOGIC-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4232] LOGIC-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4233] LOGIC-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4234] LOGIC-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4235] LOGIC-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4235] LOGIC-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4236] LOGIC-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4237] LOGIC-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4238] LOGIC-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -4423,11 +6105,15 @@ func InitKernel() {
 	KernelTable[4258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4258] LOGIC-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4259] LOGIC-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4260] LOGIC-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4261] LOGIC-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4261] LOGIC-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4262] LOGIC-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4263] LOGIC-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4264] LOGIC-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4265] LOGIC-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4265] LOGIC-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4266] LOGIC-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4267] LOGIC-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4268] LOGIC-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -4487,19 +6173,31 @@ func InitKernel() {
 	KernelTable[4322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4322] LOGIC-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[4323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4323] LOGIC-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4324] LOGIC-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4325] LOGIC-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4325] LOGIC-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4326] LOGIC-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[4327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4327] LOGIC-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4328] LOGIC-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4329] LOGIC-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4330] LOGIC-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4331] LOGIC-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4331] LOGIC-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4332] LOGIC-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[4333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4333] LOGIC-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4334] LOGIC-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4335] LOGIC-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4333] LOGIC-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4334] LOGIC-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4335] LOGIC-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4336] LOGIC-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[4337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4337] LOGIC-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4337] LOGIC-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4338] LOGIC-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[4339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4339] LOGIC-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[4340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4340] LOGIC-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4523,13 +6221,23 @@ func InitKernel() {
 	KernelTable[4358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4358] LOGIC-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4359] LOGIC-QUERY-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4360] LOGIC-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4361] LOGIC-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4361] LOGIC-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4362] LOGIC-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[4363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4363] LOGIC-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4364] LOGIC-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4365] LOGIC-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4363] LOGIC-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4364] LOGIC-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4365] LOGIC-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4366] LOGIC-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[4367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4367] LOGIC-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4367] LOGIC-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4368] LOGIC-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[4369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4369] LOGIC-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[4370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4370] LOGIC-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4547,7 +6255,9 @@ func InitKernel() {
 	KernelTable[4382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4382] LOGIC-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4383] LOGIC-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4384] LOGIC-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4385] LOGIC-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4385] LOGIC-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4386] LOGIC-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4387] LOGIC-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4388] LOGIC-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4577,29 +6287,49 @@ func InitKernel() {
 	KernelTable[4412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4412] LOGIC-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[4413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4413] LOGIC-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4414] LOGIC-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4415] LOGIC-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4415] LOGIC-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4416] LOGIC-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[4417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4417] LOGIC-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4418] LOGIC-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[4419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4419] LOGIC-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[4420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4420] LOGIC-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4421] LOGIC-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4421] LOGIC-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4422] LOGIC-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[4423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4423] LOGIC-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4424] LOGIC-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4425] LOGIC-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4425] LOGIC-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4426] LOGIC-STREAM-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[4427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4427] LOGIC-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4428] LOGIC-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4429] LOGIC-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[4430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4430] LOGIC-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4431] LOGIC-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4432] LOGIC-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[4433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4433] LOGIC-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4434] LOGIC-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4435] LOGIC-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4430] LOGIC-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4431] LOGIC-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4432] LOGIC-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4433] LOGIC-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4434] LOGIC-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4435] LOGIC-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4436] LOGIC-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[4437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4437] LOGIC-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4437] LOGIC-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4438] LOGIC-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[4439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4439] LOGIC-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[4440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4440] LOGIC-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4622,14 +6352,28 @@ func InitKernel() {
 	KernelTable[4457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4457] LOGIC-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4458] LOGIC-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4459] LOGIC-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[4460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4460] LOGIC-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4461] LOGIC-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4462] LOGIC-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[4463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4463] LOGIC-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4464] LOGIC-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4465] LOGIC-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4460] LOGIC-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4461] LOGIC-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4462] LOGIC-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4463] LOGIC-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4464] LOGIC-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4465] LOGIC-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4466] LOGIC-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[4467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4467] LOGIC-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4467] LOGIC-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4468] LOGIC-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[4469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4469] LOGIC-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[4470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4470] LOGIC-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4637,17 +6381,23 @@ func InitKernel() {
 	KernelTable[4472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4472] LOGIC-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4473] LOGIC-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4474] LOGIC-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4475] LOGIC-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4475] LOGIC-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4476] LOGIC-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4477] LOGIC-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4478] LOGIC-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[4479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4479] LOGIC-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[4480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4480] LOGIC-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4481] LOGIC-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4481] LOGIC-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4482] LOGIC-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4483] LOGIC-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4484] LOGIC-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4485] LOGIC-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4485] LOGIC-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4486] LOGIC-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4487] LOGIC-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4488] LOGIC-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4657,7 +6407,9 @@ func InitKernel() {
 	KernelTable[4492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4492] LOGIC-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4493] LOGIC-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4494] LOGIC-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4495] LOGIC-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4495] LOGIC-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4496] LOGIC-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[4497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4497] LOGIC-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4498] LOGIC-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -4677,29 +6429,49 @@ func InitKernel() {
 	KernelTable[4512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4512] LOGIC-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[4513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4513] LOGIC-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4514] LOGIC-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4515] LOGIC-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4515] LOGIC-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4516] LOGIC-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[4517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4517] LOGIC-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4518] LOGIC-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[4519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4519] LOGIC-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[4520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4520] LOGIC-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4521] LOGIC-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4521] LOGIC-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4522] LOGIC-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[4523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4523] LOGIC-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4524] LOGIC-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4525] LOGIC-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4525] LOGIC-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4526] LOGIC-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[4527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4527] LOGIC-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4528] LOGIC-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4529] LOGIC-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[4530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4530] LOGIC-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4531] LOGIC-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4532] LOGIC-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[4533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4533] LOGIC-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4534] LOGIC-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4535] LOGIC-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4530] LOGIC-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4531] LOGIC-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4532] LOGIC-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4533] LOGIC-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4534] LOGIC-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4535] LOGIC-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4536] LOGIC-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[4537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4537] LOGIC-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4537] LOGIC-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4538] LOGIC-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[4539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4539] LOGIC-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[4540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4540] LOGIC-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -4722,14 +6494,28 @@ func InitKernel() {
 	KernelTable[4557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4557] LOGIC-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4558] LOGIC-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4559] LOGIC-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[4560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4560] LOGIC-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4561] LOGIC-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[4562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4562] LOGIC-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[4563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4563] LOGIC-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[4564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4564] LOGIC-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4565] LOGIC-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4560] LOGIC-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[4561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4561] LOGIC-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[4562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4562] LOGIC-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[4563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4563] LOGIC-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[4564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4564] LOGIC-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[4565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4565] LOGIC-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4566] LOGIC-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[4567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4567] LOGIC-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[4567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4567] LOGIC-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[4568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4568] LOGIC-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[4569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4569] LOGIC-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[4570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4570] LOGIC-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -4737,17 +6523,23 @@ func InitKernel() {
 	KernelTable[4572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4572] LOGIC-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4573] LOGIC-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4574] LOGIC-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4575] LOGIC-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4575] LOGIC-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4576] LOGIC-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4577] LOGIC-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4578] LOGIC-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[4579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4579] LOGIC-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[4580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4580] LOGIC-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4581] LOGIC-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4581] LOGIC-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4582] LOGIC-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4583] LOGIC-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4584] LOGIC-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4585] LOGIC-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4585] LOGIC-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4586] LOGIC-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[4587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4587] LOGIC-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4588] LOGIC-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -4757,7 +6549,9 @@ func InitKernel() {
 	KernelTable[4592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4592] LOGIC-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4593] LOGIC-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4594] LOGIC-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4595] LOGIC-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4595] LOGIC-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4596] LOGIC-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[4597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4597] LOGIC-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4598] LOGIC-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -4793,11 +6587,15 @@ func InitKernel() {
 	KernelTable[4628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4628] LOGIC-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4629] LOGIC-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4630] LOGIC-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4631] LOGIC-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4631] LOGIC-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4632] LOGIC-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4633] LOGIC-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4634] LOGIC-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4635] LOGIC-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4635] LOGIC-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4636] LOGIC-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4637] LOGIC-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4638] LOGIC-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -4823,11 +6621,15 @@ func InitKernel() {
 	KernelTable[4658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4658] LOGIC-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4659] LOGIC-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4660] LOGIC-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4661] LOGIC-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4661] LOGIC-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4662] LOGIC-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4663] LOGIC-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4664] LOGIC-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4665] LOGIC-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4665] LOGIC-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4666] LOGIC-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4667] LOGIC-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4668] LOGIC-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -4893,11 +6695,15 @@ func InitKernel() {
 	KernelTable[4728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4728] LOGIC-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4729] LOGIC-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4730] LOGIC-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4731] LOGIC-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4731] LOGIC-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4732] LOGIC-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4733] LOGIC-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4734] LOGIC-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4735] LOGIC-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4735] LOGIC-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4736] LOGIC-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4737] LOGIC-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4738] LOGIC-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -4923,11 +6729,15 @@ func InitKernel() {
 	KernelTable[4758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4758] LOGIC-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4759] LOGIC-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4760] LOGIC-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4761] LOGIC-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4761] LOGIC-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4762] LOGIC-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4763] LOGIC-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4764] LOGIC-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4765] LOGIC-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4765] LOGIC-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4766] LOGIC-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4767] LOGIC-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4768] LOGIC-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -4993,11 +6803,15 @@ func InitKernel() {
 	KernelTable[4828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4828] LOGIC-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4829] LOGIC-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4830] LOGIC-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4831] LOGIC-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4831] LOGIC-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4832] LOGIC-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4833] LOGIC-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4834] LOGIC-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4835] LOGIC-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4835] LOGIC-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4836] LOGIC-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4837] LOGIC-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4838] LOGIC-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -5023,11 +6837,15 @@ func InitKernel() {
 	KernelTable[4858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4858] LOGIC-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4859] LOGIC-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4860] LOGIC-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4861] LOGIC-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4861] LOGIC-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4862] LOGIC-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4863] LOGIC-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4864] LOGIC-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4865] LOGIC-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4865] LOGIC-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4866] LOGIC-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4867] LOGIC-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4868] LOGIC-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -5093,11 +6911,15 @@ func InitKernel() {
 	KernelTable[4928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4928] LOGIC-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[4929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4929] LOGIC-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[4930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4930] LOGIC-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4931] LOGIC-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4931] LOGIC-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4932] LOGIC-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[4933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4933] LOGIC-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4934] LOGIC-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4935] LOGIC-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4935] LOGIC-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4936] LOGIC-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[4937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4937] LOGIC-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4938] LOGIC-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -5123,11 +6945,15 @@ func InitKernel() {
 	KernelTable[4958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4958] LOGIC-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[4959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4959] LOGIC-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[4960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4960] LOGIC-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[4961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4961] LOGIC-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[4961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4961] LOGIC-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[4962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4962] LOGIC-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[4963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4963] LOGIC-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[4964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4964] LOGIC-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[4965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4965] LOGIC-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[4965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [4965] LOGIC-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[4966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4966] LOGIC-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[4967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4967] LOGIC-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[4968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [4968] LOGIC-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -5187,19 +7013,31 @@ func InitKernel() {
 	KernelTable[5022] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5022] VECTOR-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5023] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5023] VECTOR-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5024] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5024] VECTOR-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5025] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5025] VECTOR-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5025] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5025] VECTOR-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5026] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5026] VECTOR-INIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5027] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5027] VECTOR-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5028] VECTOR-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5029] VECTOR-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5030] VECTOR-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5031] VECTOR-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5031] VECTOR-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5032] VECTOR-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5033] VECTOR-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5034] VECTOR-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5035] VECTOR-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5033] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5033] VECTOR-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5034] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5034] VECTOR-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5035] VECTOR-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5036] VECTOR-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5037] VECTOR-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5037] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5037] VECTOR-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5038] VECTOR-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5039] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5039] VECTOR-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5040] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5040] VECTOR-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -5223,13 +7061,23 @@ func InitKernel() {
 	KernelTable[5058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5058] VECTOR-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5059] VECTOR-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5060] VECTOR-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5061] VECTOR-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5061] VECTOR-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5062] VECTOR-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5063] VECTOR-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5064] VECTOR-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5065] VECTOR-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5063] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5063] VECTOR-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5064] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5064] VECTOR-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5065] VECTOR-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5066] VECTOR-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5067] VECTOR-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5067] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5067] VECTOR-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5068] VECTOR-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5069] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5069] VECTOR-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5070] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5070] VECTOR-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -5247,7 +7095,9 @@ func InitKernel() {
 	KernelTable[5082] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5082] VECTOR-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5083] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5083] VECTOR-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5084] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5084] VECTOR-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5085] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5085] VECTOR-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5085] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5085] VECTOR-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5086] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5086] VECTOR-INIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5087] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5087] VECTOR-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5088] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5088] VECTOR-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -5273,41 +7123,73 @@ func InitKernel() {
 	KernelTable[5108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5108] VECTOR-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[5109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5109] VECTOR-MUTATE-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[5110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5110] VECTOR-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5111] VECTOR-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5111] VECTOR-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5112] VECTOR-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5113] VECTOR-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5114] VECTOR-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5115] VECTOR-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5115] VECTOR-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5116] VECTOR-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[5117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5117] VECTOR-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5118] VECTOR-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[5119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5119] VECTOR-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[5120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5120] VECTOR-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5121] VECTOR-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5121] VECTOR-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5122] VECTOR-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[5123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5123] VECTOR-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5124] VECTOR-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5125] VECTOR-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5123] VECTOR-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5124] VECTOR-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5125] VECTOR-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5126] VECTOR-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[5127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5127] VECTOR-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5127] VECTOR-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5128] VECTOR-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5129] VECTOR-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[5130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5130] VECTOR-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5131] VECTOR-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5132] VECTOR-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5133] VECTOR-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5134] VECTOR-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5135] VECTOR-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5130] VECTOR-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5131] VECTOR-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5132] VECTOR-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5133] VECTOR-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5134] VECTOR-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5135] VECTOR-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5136] VECTOR-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5137] VECTOR-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5137] VECTOR-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5138] VECTOR-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[5139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5139] VECTOR-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[5139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5139] VECTOR-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5140] VECTOR-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[5141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5141] VECTOR-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[5142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5142] VECTOR-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5143] VECTOR-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5144] VECTOR-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5145] VECTOR-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5145] VECTOR-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5146] VECTOR-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[5147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5147] VECTOR-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5148] VECTOR-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
@@ -5322,42 +7204,76 @@ func InitKernel() {
 	KernelTable[5157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5157] VECTOR-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5158] VECTOR-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5159] VECTOR-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[5160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5160] VECTOR-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5161] VECTOR-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5162] VECTOR-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5163] VECTOR-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5164] VECTOR-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5165] VECTOR-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5160] VECTOR-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5161] VECTOR-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5162] VECTOR-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5163] VECTOR-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5164] VECTOR-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5165] VECTOR-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5166] VECTOR-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5167] VECTOR-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5167] VECTOR-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5168] VECTOR-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[5169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5169] VECTOR-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[5169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5169] VECTOR-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5170] VECTOR-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5171] VECTOR-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5171] VECTOR-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5172] VECTOR-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5173] VECTOR-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5174] VECTOR-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5175] VECTOR-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5175] VECTOR-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5176] VECTOR-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5177] VECTOR-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5178] VECTOR-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5179] VECTOR-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5180] VECTOR-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5181] VECTOR-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5181] VECTOR-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5182] VECTOR-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5183] VECTOR-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5184] VECTOR-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5185] VECTOR-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5183] VECTOR-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5184] VECTOR-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5185] VECTOR-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5186] VECTOR-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[5187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5187] VECTOR-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5187] VECTOR-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5188] VECTOR-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5189] VECTOR-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5190] VECTOR-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5191] VECTOR-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5191] VECTOR-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5192] VECTOR-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5193] VECTOR-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5194] VECTOR-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5195] VECTOR-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5195] VECTOR-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5196] VECTOR-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[5197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5197] VECTOR-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5198] VECTOR-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -5387,19 +7303,31 @@ func InitKernel() {
 	KernelTable[5222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5222] VECTOR-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5223] VECTOR-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5224] VECTOR-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5225] VECTOR-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5225] VECTOR-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5226] VECTOR-BIND-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5227] VECTOR-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5228] VECTOR-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5229] VECTOR-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5230] VECTOR-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5231] VECTOR-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5231] VECTOR-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5232] VECTOR-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5233] VECTOR-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5234] VECTOR-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5235] VECTOR-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5233] VECTOR-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5234] VECTOR-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5235] VECTOR-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5236] VECTOR-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5237] VECTOR-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5237] VECTOR-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5238] VECTOR-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5239] VECTOR-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5240] VECTOR-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -5423,13 +7351,23 @@ func InitKernel() {
 	KernelTable[5258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5258] VECTOR-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5259] VECTOR-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5260] VECTOR-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5261] VECTOR-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5261] VECTOR-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5262] VECTOR-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5263] VECTOR-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5264] VECTOR-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5265] VECTOR-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5263] VECTOR-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5264] VECTOR-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5265] VECTOR-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5266] VECTOR-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5267] VECTOR-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5267] VECTOR-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5268] VECTOR-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5269] VECTOR-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5270] VECTOR-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -5447,7 +7385,9 @@ func InitKernel() {
 	KernelTable[5282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5282] VECTOR-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5283] VECTOR-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5284] VECTOR-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5285] VECTOR-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5285] VECTOR-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5286] VECTOR-BIND-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5287] VECTOR-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5288] VECTOR-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -5477,29 +7417,49 @@ func InitKernel() {
 	KernelTable[5312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5312] VECTOR-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5313] VECTOR-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5314] VECTOR-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5315] VECTOR-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5315] VECTOR-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5316] VECTOR-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[5317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5317] VECTOR-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5318] VECTOR-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[5319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5319] VECTOR-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[5320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5320] VECTOR-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5321] VECTOR-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5321] VECTOR-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5322] VECTOR-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5323] VECTOR-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5324] VECTOR-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5325] VECTOR-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5325] VECTOR-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5326] VECTOR-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5327] VECTOR-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5328] VECTOR-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5329] VECTOR-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[5330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5330] VECTOR-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5331] VECTOR-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5332] VECTOR-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5333] VECTOR-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5334] VECTOR-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5335] VECTOR-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5330] VECTOR-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5331] VECTOR-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5332] VECTOR-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5333] VECTOR-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5334] VECTOR-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5335] VECTOR-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5336] VECTOR-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5337] VECTOR-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5337] VECTOR-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5338] VECTOR-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5339] VECTOR-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5340] VECTOR-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -5522,14 +7482,28 @@ func InitKernel() {
 	KernelTable[5357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5357] VECTOR-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5358] VECTOR-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5359] VECTOR-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[5360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5360] VECTOR-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5361] VECTOR-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5362] VECTOR-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5363] VECTOR-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5364] VECTOR-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5365] VECTOR-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5360] VECTOR-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5361] VECTOR-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5362] VECTOR-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5363] VECTOR-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5364] VECTOR-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5365] VECTOR-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5366] VECTOR-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5367] VECTOR-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5367] VECTOR-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5368] VECTOR-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5369] VECTOR-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5370] VECTOR-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -5537,17 +7511,23 @@ func InitKernel() {
 	KernelTable[5372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5372] VECTOR-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5373] VECTOR-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5374] VECTOR-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5375] VECTOR-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5375] VECTOR-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5376] VECTOR-QUERY-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5377] VECTOR-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5378] VECTOR-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5379] VECTOR-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5380] VECTOR-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5381] VECTOR-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5381] VECTOR-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5382] VECTOR-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5383] VECTOR-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5384] VECTOR-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5385] VECTOR-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5385] VECTOR-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5386] VECTOR-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5387] VECTOR-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5388] VECTOR-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -5557,7 +7537,9 @@ func InitKernel() {
 	KernelTable[5392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5392] VECTOR-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5393] VECTOR-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5394] VECTOR-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5395] VECTOR-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5395] VECTOR-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5396] VECTOR-QUERY-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[5397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5397] VECTOR-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5398] VECTOR-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
@@ -5573,41 +7555,73 @@ func InitKernel() {
 	KernelTable[5408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5408] VECTOR-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[5409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5409] VECTOR-STREAM-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[5410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5410] VECTOR-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5411] VECTOR-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5411] VECTOR-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5412] VECTOR-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5413] VECTOR-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5414] VECTOR-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5415] VECTOR-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5415] VECTOR-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5416] VECTOR-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[5417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5417] VECTOR-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5418] VECTOR-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[5419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5419] VECTOR-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[5420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5420] VECTOR-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5421] VECTOR-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5421] VECTOR-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5422] VECTOR-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[5423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5423] VECTOR-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5424] VECTOR-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5425] VECTOR-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5423] VECTOR-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5424] VECTOR-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5425] VECTOR-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5426] VECTOR-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[5427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5427] VECTOR-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5427] VECTOR-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5428] VECTOR-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5429] VECTOR-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[5430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5430] VECTOR-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5431] VECTOR-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5432] VECTOR-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5433] VECTOR-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5434] VECTOR-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5435] VECTOR-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5430] VECTOR-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5431] VECTOR-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5432] VECTOR-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5433] VECTOR-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5434] VECTOR-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5435] VECTOR-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5436] VECTOR-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5437] VECTOR-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5437] VECTOR-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5438] VECTOR-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[5439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5439] VECTOR-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[5439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5439] VECTOR-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5440] VECTOR-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[5441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5441] VECTOR-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[5442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5442] VECTOR-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5443] VECTOR-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5444] VECTOR-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5445] VECTOR-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5445] VECTOR-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5446] VECTOR-STREAM-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[5447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5447] VECTOR-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5448] VECTOR-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
@@ -5622,42 +7636,76 @@ func InitKernel() {
 	KernelTable[5457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5457] VECTOR-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5458] VECTOR-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5459] VECTOR-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[5460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5460] VECTOR-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5461] VECTOR-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5462] VECTOR-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5463] VECTOR-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5464] VECTOR-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5465] VECTOR-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5460] VECTOR-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5461] VECTOR-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5462] VECTOR-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5463] VECTOR-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5464] VECTOR-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5465] VECTOR-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5466] VECTOR-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5467] VECTOR-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5467] VECTOR-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5468] VECTOR-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[5469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5469] VECTOR-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[5469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5469] VECTOR-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5470] VECTOR-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5471] VECTOR-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5471] VECTOR-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5472] VECTOR-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5473] VECTOR-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5474] VECTOR-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5475] VECTOR-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5475] VECTOR-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5476] VECTOR-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5477] VECTOR-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5478] VECTOR-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5479] VECTOR-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5480] VECTOR-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5481] VECTOR-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5481] VECTOR-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5482] VECTOR-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5483] VECTOR-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5484] VECTOR-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5485] VECTOR-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5483] VECTOR-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5484] VECTOR-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5485] VECTOR-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5486] VECTOR-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[5487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5487] VECTOR-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5487] VECTOR-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5488] VECTOR-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5489] VECTOR-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5490] VECTOR-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5491] VECTOR-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5491] VECTOR-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5492] VECTOR-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5493] VECTOR-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5494] VECTOR-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5495] VECTOR-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5495] VECTOR-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5496] VECTOR-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[5497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5497] VECTOR-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5498] VECTOR-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -5673,41 +7721,73 @@ func InitKernel() {
 	KernelTable[5508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5508] VECTOR-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[5509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5509] VECTOR-COMMIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[5510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5510] VECTOR-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5511] VECTOR-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5511] VECTOR-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5512] VECTOR-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5513] VECTOR-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5514] VECTOR-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5515] VECTOR-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5515] VECTOR-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5516] VECTOR-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[5517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5517] VECTOR-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5518] VECTOR-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[5519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5519] VECTOR-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[5520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5520] VECTOR-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5521] VECTOR-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5521] VECTOR-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5522] VECTOR-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[5523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5523] VECTOR-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5524] VECTOR-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5525] VECTOR-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5523] VECTOR-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5524] VECTOR-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5525] VECTOR-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5526] VECTOR-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[5527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5527] VECTOR-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5527] VECTOR-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5528] VECTOR-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5529] VECTOR-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[5530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5530] VECTOR-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5531] VECTOR-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5532] VECTOR-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5533] VECTOR-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5534] VECTOR-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5535] VECTOR-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5530] VECTOR-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5531] VECTOR-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5532] VECTOR-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5533] VECTOR-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5534] VECTOR-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5535] VECTOR-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5536] VECTOR-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5537] VECTOR-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5537] VECTOR-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5538] VECTOR-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[5539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5539] VECTOR-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[5539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5539] VECTOR-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5540] VECTOR-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[5541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5541] VECTOR-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[5542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5542] VECTOR-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[5543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5543] VECTOR-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5544] VECTOR-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5545] VECTOR-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5545] VECTOR-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5546] VECTOR-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[5547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5547] VECTOR-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5548] VECTOR-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -5722,42 +7802,76 @@ func InitKernel() {
 	KernelTable[5557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5557] VECTOR-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5558] VECTOR-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5559] VECTOR-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[5560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5560] VECTOR-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5561] VECTOR-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[5562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5562] VECTOR-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5563] VECTOR-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5564] VECTOR-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5565] VECTOR-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5560] VECTOR-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[5561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5561] VECTOR-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[5562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5562] VECTOR-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[5563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5563] VECTOR-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5564] VECTOR-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5565] VECTOR-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5566] VECTOR-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5567] VECTOR-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5567] VECTOR-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5568] VECTOR-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[5569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5569] VECTOR-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[5569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5569] VECTOR-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[5570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5570] VECTOR-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5571] VECTOR-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5571] VECTOR-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5572] VECTOR-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5573] VECTOR-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5574] VECTOR-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5575] VECTOR-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5575] VECTOR-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5576] VECTOR-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5577] VECTOR-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5578] VECTOR-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5579] VECTOR-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5580] VECTOR-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5581] VECTOR-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5581] VECTOR-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5582] VECTOR-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5583] VECTOR-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5584] VECTOR-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5585] VECTOR-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5583] VECTOR-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5584] VECTOR-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5585] VECTOR-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5586] VECTOR-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[5587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5587] VECTOR-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5587] VECTOR-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5588] VECTOR-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[5589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5589] VECTOR-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[5590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5590] VECTOR-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5591] VECTOR-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5591] VECTOR-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5592] VECTOR-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5593] VECTOR-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5594] VECTOR-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5595] VECTOR-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5595] VECTOR-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5596] VECTOR-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[5597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5597] VECTOR-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5598] VECTOR-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -5787,19 +7901,31 @@ func InitKernel() {
 	KernelTable[5622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5622] VECTOR-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5623] VECTOR-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5624] VECTOR-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5625] VECTOR-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5625] VECTOR-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5626] VECTOR-SYNC-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5627] VECTOR-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5628] VECTOR-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5629] VECTOR-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5630] VECTOR-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5631] VECTOR-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5631] VECTOR-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5632] VECTOR-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5633] VECTOR-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5634] VECTOR-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5635] VECTOR-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5633] VECTOR-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5634] VECTOR-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5635] VECTOR-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5636] VECTOR-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5637] VECTOR-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5637] VECTOR-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5638] VECTOR-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5639] VECTOR-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5640] VECTOR-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -5823,13 +7949,23 @@ func InitKernel() {
 	KernelTable[5658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5658] VECTOR-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5659] VECTOR-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5660] VECTOR-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5661] VECTOR-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5661] VECTOR-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5662] VECTOR-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5663] VECTOR-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5664] VECTOR-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5665] VECTOR-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5663] VECTOR-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5664] VECTOR-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5665] VECTOR-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5666] VECTOR-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5667] VECTOR-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5667] VECTOR-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5668] VECTOR-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5669] VECTOR-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5670] VECTOR-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -5847,7 +7983,9 @@ func InitKernel() {
 	KernelTable[5682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5682] VECTOR-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5683] VECTOR-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5684] VECTOR-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5685] VECTOR-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5685] VECTOR-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5686] VECTOR-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5687] VECTOR-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5688] VECTOR-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -5887,19 +8025,31 @@ func InitKernel() {
 	KernelTable[5722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5722] VECTOR-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5723] VECTOR-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5724] VECTOR-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5725] VECTOR-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5725] VECTOR-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5726] VECTOR-HALT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5727] VECTOR-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5728] VECTOR-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5729] VECTOR-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5730] VECTOR-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5731] VECTOR-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5731] VECTOR-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5732] VECTOR-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5733] VECTOR-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5734] VECTOR-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5735] VECTOR-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5733] VECTOR-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5734] VECTOR-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5735] VECTOR-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5736] VECTOR-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5737] VECTOR-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5737] VECTOR-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5738] VECTOR-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5739] VECTOR-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5740] VECTOR-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -5923,13 +8073,23 @@ func InitKernel() {
 	KernelTable[5758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5758] VECTOR-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5759] VECTOR-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5760] VECTOR-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5761] VECTOR-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5761] VECTOR-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5762] VECTOR-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5763] VECTOR-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5764] VECTOR-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5765] VECTOR-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5763] VECTOR-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5764] VECTOR-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5765] VECTOR-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5766] VECTOR-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5767] VECTOR-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5767] VECTOR-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5768] VECTOR-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5769] VECTOR-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5770] VECTOR-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -5947,7 +8107,9 @@ func InitKernel() {
 	KernelTable[5782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5782] VECTOR-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5783] VECTOR-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5784] VECTOR-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5785] VECTOR-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5785] VECTOR-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5786] VECTOR-HALT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5787] VECTOR-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5788] VECTOR-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -5987,19 +8149,31 @@ func InitKernel() {
 	KernelTable[5822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5822] VECTOR-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5823] VECTOR-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5824] VECTOR-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5825] VECTOR-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5825] VECTOR-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5826] VECTOR-FORK-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5827] VECTOR-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5828] VECTOR-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5829] VECTOR-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5830] VECTOR-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5831] VECTOR-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5831] VECTOR-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5832] VECTOR-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5833] VECTOR-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5834] VECTOR-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5835] VECTOR-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5833] VECTOR-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5834] VECTOR-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5835] VECTOR-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5836] VECTOR-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5837] VECTOR-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5837] VECTOR-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5838] VECTOR-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5839] VECTOR-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5840] VECTOR-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6023,13 +8197,23 @@ func InitKernel() {
 	KernelTable[5858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5858] VECTOR-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5859] VECTOR-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5860] VECTOR-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5861] VECTOR-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5861] VECTOR-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5862] VECTOR-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5863] VECTOR-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5864] VECTOR-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5865] VECTOR-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5863] VECTOR-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5864] VECTOR-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5865] VECTOR-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5866] VECTOR-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5867] VECTOR-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5867] VECTOR-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5868] VECTOR-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5869] VECTOR-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5870] VECTOR-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6047,7 +8231,9 @@ func InitKernel() {
 	KernelTable[5882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5882] VECTOR-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5883] VECTOR-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5884] VECTOR-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5885] VECTOR-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5885] VECTOR-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5886] VECTOR-FORK-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5887] VECTOR-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5888] VECTOR-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6087,19 +8273,31 @@ func InitKernel() {
 	KernelTable[5922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5922] VECTOR-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[5923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5923] VECTOR-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5924] VECTOR-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5925] VECTOR-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5925] VECTOR-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5926] VECTOR-JOIN-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[5927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5927] VECTOR-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5928] VECTOR-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[5929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5929] VECTOR-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[5930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5930] VECTOR-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5931] VECTOR-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5931] VECTOR-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5932] VECTOR-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[5933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5933] VECTOR-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5934] VECTOR-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5935] VECTOR-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5933] VECTOR-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5934] VECTOR-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5935] VECTOR-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5936] VECTOR-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[5937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5937] VECTOR-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5937] VECTOR-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5938] VECTOR-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[5939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5939] VECTOR-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[5940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5940] VECTOR-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6123,13 +8321,23 @@ func InitKernel() {
 	KernelTable[5958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5958] VECTOR-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[5959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5959] VECTOR-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[5960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5960] VECTOR-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[5961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5961] VECTOR-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[5961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5961] VECTOR-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[5962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5962] VECTOR-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[5963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5963] VECTOR-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[5964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5964] VECTOR-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5965] VECTOR-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5963] VECTOR-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[5964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5964] VECTOR-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[5965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5965] VECTOR-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5966] VECTOR-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[5967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5967] VECTOR-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[5967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5967] VECTOR-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[5968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5968] VECTOR-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[5969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5969] VECTOR-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[5970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5970] VECTOR-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6147,7 +8355,9 @@ func InitKernel() {
 	KernelTable[5982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5982] VECTOR-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[5983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5983] VECTOR-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[5984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5984] VECTOR-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[5985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5985] VECTOR-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[5985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [5985] VECTOR-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[5986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5986] VECTOR-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[5987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5987] VECTOR-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[5988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [5988] VECTOR-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6177,29 +8387,49 @@ func InitKernel() {
 	KernelTable[6012] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6012] STORAGE-INIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6013] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6013] STORAGE-INIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6014] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6014] STORAGE-INIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6015] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6015] STORAGE-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6015] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6015] STORAGE-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6016] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6016] STORAGE-INIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6017] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6017] STORAGE-INIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6018] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6018] STORAGE-INIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6019] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6019] STORAGE-INIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6020] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6020] STORAGE-INIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6021] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6021] STORAGE-INIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6021] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6021] STORAGE-INIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6022] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6022] STORAGE-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6023] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6023] STORAGE-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6024] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6024] STORAGE-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6025] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6025] STORAGE-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6025] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6025] STORAGE-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6026] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6026] STORAGE-INIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6027] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6027] STORAGE-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6028] STORAGE-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6029] STORAGE-INIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6030] STORAGE-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6031] STORAGE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6032] STORAGE-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6033] STORAGE-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6034] STORAGE-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6035] STORAGE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6030] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6030] STORAGE-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6031] STORAGE-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6032] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6032] STORAGE-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6033] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6033] STORAGE-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6034] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6034] STORAGE-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6035] STORAGE-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6036] STORAGE-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6037] STORAGE-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6037] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6037] STORAGE-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6038] STORAGE-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6039] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6039] STORAGE-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6040] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6040] STORAGE-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6222,14 +8452,28 @@ func InitKernel() {
 	KernelTable[6057] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6057] STORAGE-INIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6058] STORAGE-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6059] STORAGE-INIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6060] STORAGE-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6061] STORAGE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6062] STORAGE-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6063] STORAGE-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6064] STORAGE-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6065] STORAGE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6060] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6060] STORAGE-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6061] STORAGE-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6062] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6062] STORAGE-INIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6063] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6063] STORAGE-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6064] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6064] STORAGE-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6065] STORAGE-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6066] STORAGE-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6067] STORAGE-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6067] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6067] STORAGE-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6068] STORAGE-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6069] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6069] STORAGE-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6070] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6070] STORAGE-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6237,17 +8481,23 @@ func InitKernel() {
 	KernelTable[6072] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6072] STORAGE-INIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6073] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6073] STORAGE-INIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6074] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6074] STORAGE-INIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6075] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6075] STORAGE-INIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6075] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6075] STORAGE-INIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6076] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6076] STORAGE-INIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6077] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6077] STORAGE-INIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6078] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6078] STORAGE-INIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6079] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6079] STORAGE-INIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6080] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6080] STORAGE-INIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6081] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6081] STORAGE-INIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6081] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6081] STORAGE-INIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6082] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6082] STORAGE-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6083] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6083] STORAGE-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6084] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6084] STORAGE-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6085] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6085] STORAGE-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6085] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6085] STORAGE-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6086] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6086] STORAGE-INIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6087] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6087] STORAGE-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6088] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6088] STORAGE-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6257,7 +8507,9 @@ func InitKernel() {
 	KernelTable[6092] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6092] STORAGE-INIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6093] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6093] STORAGE-INIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6094] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6094] STORAGE-INIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6095] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6095] STORAGE-INIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6095] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6095] STORAGE-INIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6096] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6096] STORAGE-INIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6097] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6097] STORAGE-INIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6098] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6098] STORAGE-INIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -6273,41 +8525,87 @@ func InitKernel() {
 	KernelTable[6108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6108] STORAGE-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[6109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6109] STORAGE-MUTATE-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[6110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6110] STORAGE-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6111] STORAGE-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6111] STORAGE-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6112] STORAGE-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[6113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6113] STORAGE-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6114] STORAGE-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6115] STORAGE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6113] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6113] STORAGE-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6114] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6114] STORAGE-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6115] STORAGE-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6116] STORAGE-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[6117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6117] STORAGE-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6117] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6117] STORAGE-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6118] STORAGE-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6119] STORAGE-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[6120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6120] STORAGE-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6121] STORAGE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6122] STORAGE-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[6123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6123] STORAGE-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6124] STORAGE-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6125] STORAGE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6120] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6120] STORAGE-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6121] STORAGE-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6122] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6122] STORAGE-MUTATE-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6123] STORAGE-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6124] STORAGE-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6125] STORAGE-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6126] STORAGE-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[6127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6127] STORAGE-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6127] STORAGE-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6128] STORAGE-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6129] STORAGE-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6130] STORAGE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6131] STORAGE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6132] STORAGE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6133] STORAGE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6134] STORAGE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6135] STORAGE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6130] STORAGE-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6131] STORAGE-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6132] STORAGE-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6133] STORAGE-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6134] STORAGE-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6135] STORAGE-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6136] STORAGE-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6137] STORAGE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6138] STORAGE-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[6139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6139] STORAGE-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[6137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6137] STORAGE-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6138] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6138] STORAGE-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6139] STORAGE-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6140] STORAGE-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6141] STORAGE-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6141] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6141] STORAGE-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6142] STORAGE-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6143] STORAGE-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6144] STORAGE-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6145] STORAGE-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6145] STORAGE-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6146] STORAGE-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6147] STORAGE-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6148] STORAGE-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
@@ -6317,49 +8615,103 @@ func InitKernel() {
 	KernelTable[6152] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6152] STORAGE-MUTATE-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6153] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6153] STORAGE-MUTATE-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6154] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6154] STORAGE-MUTATE-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6155] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6155] STORAGE-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6155] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6155] STORAGE-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6156] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6156] STORAGE-MUTATE-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6157] STORAGE-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6158] STORAGE-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6159] STORAGE-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6160] STORAGE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6161] STORAGE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6162] STORAGE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6163] STORAGE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6164] STORAGE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6165] STORAGE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6160] STORAGE-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6161] STORAGE-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6162] STORAGE-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6163] STORAGE-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6164] STORAGE-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6165] STORAGE-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6166] STORAGE-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6167] STORAGE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6168] STORAGE-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[6169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6169] STORAGE-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[6167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6167] STORAGE-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6168] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6168] STORAGE-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6169] STORAGE-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6170] STORAGE-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6171] STORAGE-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6171] STORAGE-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6172] STORAGE-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6173] STORAGE-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6174] STORAGE-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6175] STORAGE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6173] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6173] STORAGE-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6174] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6174] STORAGE-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6175] STORAGE-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6176] STORAGE-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6177] STORAGE-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6177] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6177] STORAGE-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6178] STORAGE-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6179] STORAGE-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[6180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6180] STORAGE-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6181] STORAGE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6182] STORAGE-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6183] STORAGE-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6184] STORAGE-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6185] STORAGE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6180] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6180] STORAGE-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6181] STORAGE-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6182] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6182] STORAGE-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6183] STORAGE-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6184] STORAGE-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6185] STORAGE-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6186] STORAGE-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6187] STORAGE-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6187] STORAGE-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6188] STORAGE-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6189] STORAGE-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6190] STORAGE-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6191] STORAGE-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6191] STORAGE-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6192] STORAGE-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6193] STORAGE-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6194] STORAGE-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6195] STORAGE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6193] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6193] STORAGE-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6194] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6194] STORAGE-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6195] STORAGE-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6196] STORAGE-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[6197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6197] STORAGE-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6197] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6197] STORAGE-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6198] STORAGE-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[6199] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6199] STORAGE-MUTATE-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[6200] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6200] STORAGE-BIND-RAW-LOCAL (Go retro-membrane)\n") }
@@ -6377,29 +8729,49 @@ func InitKernel() {
 	KernelTable[6212] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6212] STORAGE-BIND-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6213] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6213] STORAGE-BIND-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6214] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6214] STORAGE-BIND-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6215] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6215] STORAGE-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6215] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6215] STORAGE-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6216] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6216] STORAGE-BIND-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6217] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6217] STORAGE-BIND-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6218] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6218] STORAGE-BIND-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6219] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6219] STORAGE-BIND-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6220] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6220] STORAGE-BIND-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6221] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6221] STORAGE-BIND-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6221] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6221] STORAGE-BIND-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6222] STORAGE-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6223] STORAGE-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6224] STORAGE-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6225] STORAGE-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6225] STORAGE-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6226] STORAGE-BIND-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6227] STORAGE-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6228] STORAGE-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6229] STORAGE-BIND-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6230] STORAGE-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6231] STORAGE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6232] STORAGE-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6233] STORAGE-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6234] STORAGE-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6235] STORAGE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6230] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6230] STORAGE-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6231] STORAGE-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6232] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6232] STORAGE-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6233] STORAGE-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6234] STORAGE-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6235] STORAGE-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6236] STORAGE-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6237] STORAGE-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6237] STORAGE-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6238] STORAGE-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6239] STORAGE-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6240] STORAGE-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6422,14 +8794,28 @@ func InitKernel() {
 	KernelTable[6257] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6257] STORAGE-BIND-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6258] STORAGE-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6259] STORAGE-BIND-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6260] STORAGE-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6261] STORAGE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6262] STORAGE-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6263] STORAGE-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6264] STORAGE-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6265] STORAGE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6260] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6260] STORAGE-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6261] STORAGE-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6262] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6262] STORAGE-BIND-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6263] STORAGE-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6264] STORAGE-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6265] STORAGE-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6266] STORAGE-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6267] STORAGE-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6267] STORAGE-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6268] STORAGE-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6269] STORAGE-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6270] STORAGE-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6437,17 +8823,23 @@ func InitKernel() {
 	KernelTable[6272] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6272] STORAGE-BIND-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6273] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6273] STORAGE-BIND-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6274] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6274] STORAGE-BIND-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6275] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6275] STORAGE-BIND-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6275] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6275] STORAGE-BIND-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6276] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6276] STORAGE-BIND-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6277] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6277] STORAGE-BIND-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6278] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6278] STORAGE-BIND-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6279] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6279] STORAGE-BIND-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6280] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6280] STORAGE-BIND-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6281] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6281] STORAGE-BIND-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6281] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6281] STORAGE-BIND-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6282] STORAGE-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6283] STORAGE-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6284] STORAGE-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6285] STORAGE-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6285] STORAGE-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6286] STORAGE-BIND-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6287] STORAGE-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6288] STORAGE-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6457,7 +8849,9 @@ func InitKernel() {
 	KernelTable[6292] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6292] STORAGE-BIND-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6293] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6293] STORAGE-BIND-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6294] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6294] STORAGE-BIND-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6295] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6295] STORAGE-BIND-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6295] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6295] STORAGE-BIND-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6296] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6296] STORAGE-BIND-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6297] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6297] STORAGE-BIND-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6298] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6298] STORAGE-BIND-LOCKED-BFT (Go retro-membrane)\n") }
@@ -6473,41 +8867,73 @@ func InitKernel() {
 	KernelTable[6308] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6308] STORAGE-QUERY-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[6309] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6309] STORAGE-QUERY-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[6310] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6310] STORAGE-QUERY-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6311] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6311] STORAGE-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6311] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6311] STORAGE-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6312] STORAGE-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6313] STORAGE-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6314] STORAGE-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6315] STORAGE-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6315] STORAGE-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6316] STORAGE-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6317] STORAGE-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6318] STORAGE-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6319] STORAGE-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6320] STORAGE-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6321] STORAGE-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6321] STORAGE-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6322] STORAGE-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[6323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6323] STORAGE-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6324] STORAGE-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6325] STORAGE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6323] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6323] STORAGE-QUERY-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6324] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6324] STORAGE-QUERY-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6325] STORAGE-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6326] STORAGE-QUERY-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[6327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6327] STORAGE-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6327] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6327] STORAGE-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6328] STORAGE-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6329] STORAGE-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6330] STORAGE-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6331] STORAGE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6332] STORAGE-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6333] STORAGE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6334] STORAGE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6335] STORAGE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6330] STORAGE-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6331] STORAGE-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6332] STORAGE-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6333] STORAGE-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6334] STORAGE-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6335] STORAGE-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6336] STORAGE-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6337] STORAGE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6337] STORAGE-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6338] STORAGE-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[6339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6339] STORAGE-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[6339] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6339] STORAGE-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6340] STORAGE-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[6341] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6341] STORAGE-QUERY-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[6342] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6342] STORAGE-QUERY-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6343] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6343] STORAGE-QUERY-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6344] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6344] STORAGE-QUERY-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6345] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6345] STORAGE-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6345] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6345] STORAGE-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6346] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6346] STORAGE-QUERY-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6347] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6347] STORAGE-QUERY-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6348] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6348] STORAGE-QUERY-ASYNC-BFT (Go retro-membrane)\n") }
@@ -6522,42 +8948,76 @@ func InitKernel() {
 	KernelTable[6357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6357] STORAGE-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6358] STORAGE-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6359] STORAGE-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6360] STORAGE-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6361] STORAGE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6362] STORAGE-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6363] STORAGE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6364] STORAGE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6365] STORAGE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6360] STORAGE-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6361] STORAGE-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6362] STORAGE-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6363] STORAGE-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6364] STORAGE-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6365] STORAGE-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6366] STORAGE-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6367] STORAGE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6367] STORAGE-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6368] STORAGE-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[6369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6369] STORAGE-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[6369] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6369] STORAGE-QUERY-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6370] STORAGE-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6371] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6371] STORAGE-QUERY-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6371] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6371] STORAGE-QUERY-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6372] STORAGE-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6373] STORAGE-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6374] STORAGE-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6375] STORAGE-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6375] STORAGE-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6376] STORAGE-QUERY-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6377] STORAGE-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6378] STORAGE-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6379] STORAGE-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6380] STORAGE-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6381] STORAGE-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6381] STORAGE-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6382] STORAGE-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6383] STORAGE-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6384] STORAGE-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6385] STORAGE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6383] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6383] STORAGE-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6384] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6384] STORAGE-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6385] STORAGE-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6386] STORAGE-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6387] STORAGE-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6387] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6387] STORAGE-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6388] STORAGE-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6389] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6389] STORAGE-QUERY-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6390] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6390] STORAGE-QUERY-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6391] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6391] STORAGE-QUERY-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6391] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6391] STORAGE-QUERY-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6392] STORAGE-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6393] STORAGE-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6394] STORAGE-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6395] STORAGE-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6395] STORAGE-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6396] STORAGE-QUERY-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6397] STORAGE-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6398] STORAGE-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
@@ -6573,41 +9033,87 @@ func InitKernel() {
 	KernelTable[6408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6408] STORAGE-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[6409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6409] STORAGE-STREAM-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[6410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6410] STORAGE-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6411] STORAGE-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6411] STORAGE-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6412] STORAGE-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[6413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6413] STORAGE-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6414] STORAGE-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6415] STORAGE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6413] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6413] STORAGE-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6414] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6414] STORAGE-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6415] STORAGE-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6416] STORAGE-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[6417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6417] STORAGE-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6417] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6417] STORAGE-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6418] STORAGE-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6419] STORAGE-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[6420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6420] STORAGE-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6421] STORAGE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6422] STORAGE-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[6423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6423] STORAGE-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6424] STORAGE-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6425] STORAGE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6420] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6420] STORAGE-STREAM-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6421] STORAGE-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6422] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6422] STORAGE-STREAM-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6423] STORAGE-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6424] STORAGE-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6425] STORAGE-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6426] STORAGE-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[6427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6427] STORAGE-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6427] STORAGE-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6428] STORAGE-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6429] STORAGE-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6430] STORAGE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6431] STORAGE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6432] STORAGE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6433] STORAGE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6434] STORAGE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6435] STORAGE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6430] STORAGE-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6431] STORAGE-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6432] STORAGE-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6433] STORAGE-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6434] STORAGE-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6435] STORAGE-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6436] STORAGE-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6437] STORAGE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6438] STORAGE-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[6439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6439] STORAGE-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[6437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6437] STORAGE-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6438] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6438] STORAGE-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6439] STORAGE-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6440] STORAGE-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6441] STORAGE-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6441] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6441] STORAGE-STREAM-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6442] STORAGE-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6443] STORAGE-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6444] STORAGE-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6445] STORAGE-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6445] STORAGE-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6446] STORAGE-STREAM-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6447] STORAGE-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6448] STORAGE-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
@@ -6617,49 +9123,103 @@ func InitKernel() {
 	KernelTable[6452] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6452] STORAGE-STREAM-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6453] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6453] STORAGE-STREAM-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6454] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6454] STORAGE-STREAM-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6455] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6455] STORAGE-STREAM-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6455] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6455] STORAGE-STREAM-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6456] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6456] STORAGE-STREAM-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6457] STORAGE-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6458] STORAGE-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6459] STORAGE-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6460] STORAGE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6461] STORAGE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6462] STORAGE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6463] STORAGE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6464] STORAGE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6465] STORAGE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6460] STORAGE-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6461] STORAGE-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6462] STORAGE-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6463] STORAGE-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6464] STORAGE-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6465] STORAGE-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6466] STORAGE-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6467] STORAGE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6468] STORAGE-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[6469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6469] STORAGE-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[6467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6467] STORAGE-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6468] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6468] STORAGE-STREAM-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6469] STORAGE-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6470] STORAGE-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6471] STORAGE-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6471] STORAGE-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6472] STORAGE-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6473] STORAGE-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6474] STORAGE-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6475] STORAGE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6473] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6473] STORAGE-STREAM-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6474] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6474] STORAGE-STREAM-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6475] STORAGE-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6476] STORAGE-STREAM-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6477] STORAGE-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6477] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6477] STORAGE-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6478] STORAGE-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6479] STORAGE-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[6480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6480] STORAGE-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6481] STORAGE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6482] STORAGE-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6483] STORAGE-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6484] STORAGE-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6485] STORAGE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6480] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6480] STORAGE-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6481] STORAGE-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6482] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6482] STORAGE-STREAM-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6483] STORAGE-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6484] STORAGE-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6485] STORAGE-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6486] STORAGE-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6487] STORAGE-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6487] STORAGE-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6488] STORAGE-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6489] STORAGE-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6490] STORAGE-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6491] STORAGE-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6491] STORAGE-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6492] STORAGE-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6493] STORAGE-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6494] STORAGE-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6495] STORAGE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6493] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6493] STORAGE-STREAM-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6494] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6494] STORAGE-STREAM-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6495] STORAGE-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6496] STORAGE-STREAM-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[6497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6497] STORAGE-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6497] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6497] STORAGE-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6498] STORAGE-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[6499] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6499] STORAGE-STREAM-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[6500] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6500] STORAGE-COMMIT-RAW-LOCAL (Go retro-membrane)\n") }
@@ -6673,41 +9233,87 @@ func InitKernel() {
 	KernelTable[6508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6508] STORAGE-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[6509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6509] STORAGE-COMMIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[6510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6510] STORAGE-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6511] STORAGE-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6511] STORAGE-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6512] STORAGE-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[6513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6513] STORAGE-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6514] STORAGE-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6515] STORAGE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6513] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6513] STORAGE-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6514] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6514] STORAGE-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6515] STORAGE-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6516] STORAGE-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[6517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6517] STORAGE-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6517] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6517] STORAGE-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6518] STORAGE-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6519] STORAGE-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[6520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6520] STORAGE-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6521] STORAGE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6522] STORAGE-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[6523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6523] STORAGE-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6524] STORAGE-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6525] STORAGE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6520] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6520] STORAGE-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6521] STORAGE-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6522] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6522] STORAGE-COMMIT-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6523] STORAGE-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6524] STORAGE-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6525] STORAGE-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6526] STORAGE-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[6527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6527] STORAGE-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6527] STORAGE-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6528] STORAGE-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6529] STORAGE-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6530] STORAGE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6531] STORAGE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6532] STORAGE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6533] STORAGE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6534] STORAGE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6535] STORAGE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6530] STORAGE-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6531] STORAGE-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6532] STORAGE-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6533] STORAGE-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6534] STORAGE-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6535] STORAGE-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6536] STORAGE-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6537] STORAGE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6538] STORAGE-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[6539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6539] STORAGE-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[6537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6537] STORAGE-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6538] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6538] STORAGE-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6539] STORAGE-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6540] STORAGE-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6541] STORAGE-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6541] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6541] STORAGE-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6542] STORAGE-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6543] STORAGE-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6544] STORAGE-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6545] STORAGE-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6545] STORAGE-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6546] STORAGE-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6547] STORAGE-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6548] STORAGE-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -6717,49 +9323,103 @@ func InitKernel() {
 	KernelTable[6552] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6552] STORAGE-COMMIT-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6553] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6553] STORAGE-COMMIT-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6554] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6554] STORAGE-COMMIT-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6555] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6555] STORAGE-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6555] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6555] STORAGE-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6556] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6556] STORAGE-COMMIT-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[6557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6557] STORAGE-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6558] STORAGE-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6559] STORAGE-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6560] STORAGE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6561] STORAGE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6562] STORAGE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6563] STORAGE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6564] STORAGE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6565] STORAGE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6560] STORAGE-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6561] STORAGE-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6562] STORAGE-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6563] STORAGE-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6564] STORAGE-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6565] STORAGE-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6566] STORAGE-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6567] STORAGE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[6568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6568] STORAGE-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[6569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6569] STORAGE-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[6567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6567] STORAGE-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[6568] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6568] STORAGE-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[6569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6569] STORAGE-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[6570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6570] STORAGE-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6571] STORAGE-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6571] STORAGE-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6572] STORAGE-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6573] STORAGE-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6574] STORAGE-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6575] STORAGE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6573] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6573] STORAGE-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6574] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6574] STORAGE-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6575] STORAGE-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6576] STORAGE-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6577] STORAGE-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6577] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6577] STORAGE-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6578] STORAGE-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6579] STORAGE-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[6580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6580] STORAGE-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6581] STORAGE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6582] STORAGE-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6583] STORAGE-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6584] STORAGE-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6585] STORAGE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6580] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6580] STORAGE-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6581] STORAGE-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6582] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6582] STORAGE-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6583] STORAGE-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6584] STORAGE-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6585] STORAGE-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6586] STORAGE-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[6587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6587] STORAGE-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6587] STORAGE-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6588] STORAGE-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6589] STORAGE-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6590] STORAGE-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6591] STORAGE-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6591] STORAGE-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6592] STORAGE-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6593] STORAGE-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6594] STORAGE-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6595] STORAGE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6593] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6593] STORAGE-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6594] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6594] STORAGE-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6595] STORAGE-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6596] STORAGE-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[6597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6597] STORAGE-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6597] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6597] STORAGE-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6598] STORAGE-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[6599] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6599] STORAGE-COMMIT-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[6600] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6600] STORAGE-SYNC-RAW-LOCAL (Go retro-membrane)\n") }
@@ -6777,29 +9437,49 @@ func InitKernel() {
 	KernelTable[6612] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6612] STORAGE-SYNC-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6613] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6613] STORAGE-SYNC-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6614] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6614] STORAGE-SYNC-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6615] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6615] STORAGE-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6615] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6615] STORAGE-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6616] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6616] STORAGE-SYNC-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6617] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6617] STORAGE-SYNC-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6618] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6618] STORAGE-SYNC-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6619] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6619] STORAGE-SYNC-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6620] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6620] STORAGE-SYNC-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6621] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6621] STORAGE-SYNC-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6621] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6621] STORAGE-SYNC-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6622] STORAGE-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6623] STORAGE-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6624] STORAGE-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6625] STORAGE-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6625] STORAGE-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6626] STORAGE-SYNC-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6627] STORAGE-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6628] STORAGE-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6629] STORAGE-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6630] STORAGE-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6631] STORAGE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6632] STORAGE-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6633] STORAGE-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6634] STORAGE-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6635] STORAGE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6630] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6630] STORAGE-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6631] STORAGE-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6632] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6632] STORAGE-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6633] STORAGE-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6634] STORAGE-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6635] STORAGE-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6636] STORAGE-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6637] STORAGE-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6637] STORAGE-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6638] STORAGE-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6639] STORAGE-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6640] STORAGE-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6822,14 +9502,28 @@ func InitKernel() {
 	KernelTable[6657] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6657] STORAGE-SYNC-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6658] STORAGE-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6659] STORAGE-SYNC-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6660] STORAGE-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6661] STORAGE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6662] STORAGE-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6663] STORAGE-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6664] STORAGE-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6665] STORAGE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6660] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6660] STORAGE-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6661] STORAGE-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6662] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6662] STORAGE-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6663] STORAGE-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6664] STORAGE-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6665] STORAGE-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6666] STORAGE-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6667] STORAGE-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6667] STORAGE-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6668] STORAGE-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6669] STORAGE-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6670] STORAGE-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6837,17 +9531,23 @@ func InitKernel() {
 	KernelTable[6672] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6672] STORAGE-SYNC-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6673] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6673] STORAGE-SYNC-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6674] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6674] STORAGE-SYNC-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6675] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6675] STORAGE-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6675] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6675] STORAGE-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6676] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6676] STORAGE-SYNC-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6677] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6677] STORAGE-SYNC-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6678] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6678] STORAGE-SYNC-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6679] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6679] STORAGE-SYNC-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6680] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6680] STORAGE-SYNC-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6681] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6681] STORAGE-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6681] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6681] STORAGE-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6682] STORAGE-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6683] STORAGE-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6684] STORAGE-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6685] STORAGE-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6685] STORAGE-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6686] STORAGE-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6687] STORAGE-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6688] STORAGE-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6857,7 +9557,9 @@ func InitKernel() {
 	KernelTable[6692] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6692] STORAGE-SYNC-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6693] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6693] STORAGE-SYNC-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6694] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6694] STORAGE-SYNC-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6695] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6695] STORAGE-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6695] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6695] STORAGE-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6696] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6696] STORAGE-SYNC-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6697] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6697] STORAGE-SYNC-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6698] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6698] STORAGE-SYNC-LOCKED-BFT (Go retro-membrane)\n") }
@@ -6877,29 +9579,49 @@ func InitKernel() {
 	KernelTable[6712] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6712] STORAGE-HALT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6713] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6713] STORAGE-HALT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6714] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6714] STORAGE-HALT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6715] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6715] STORAGE-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6715] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6715] STORAGE-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6716] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6716] STORAGE-HALT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6717] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6717] STORAGE-HALT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6718] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6718] STORAGE-HALT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6719] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6719] STORAGE-HALT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6720] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6720] STORAGE-HALT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6721] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6721] STORAGE-HALT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6721] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6721] STORAGE-HALT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6722] STORAGE-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6723] STORAGE-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6724] STORAGE-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6725] STORAGE-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6725] STORAGE-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6726] STORAGE-HALT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6727] STORAGE-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6728] STORAGE-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6729] STORAGE-HALT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6730] STORAGE-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6731] STORAGE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6732] STORAGE-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6733] STORAGE-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6734] STORAGE-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6735] STORAGE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6730] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6730] STORAGE-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6731] STORAGE-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6732] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6732] STORAGE-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6733] STORAGE-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6734] STORAGE-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6735] STORAGE-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6736] STORAGE-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6737] STORAGE-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6737] STORAGE-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6738] STORAGE-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6739] STORAGE-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6740] STORAGE-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -6922,14 +9644,28 @@ func InitKernel() {
 	KernelTable[6757] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6757] STORAGE-HALT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6758] STORAGE-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6759] STORAGE-HALT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6760] STORAGE-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6761] STORAGE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6762] STORAGE-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6763] STORAGE-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6764] STORAGE-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6765] STORAGE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6760] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6760] STORAGE-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6761] STORAGE-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6762] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6762] STORAGE-HALT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6763] STORAGE-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6764] STORAGE-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6765] STORAGE-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6766] STORAGE-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6767] STORAGE-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6767] STORAGE-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6768] STORAGE-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6769] STORAGE-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6770] STORAGE-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -6937,17 +9673,23 @@ func InitKernel() {
 	KernelTable[6772] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6772] STORAGE-HALT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6773] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6773] STORAGE-HALT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6774] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6774] STORAGE-HALT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6775] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6775] STORAGE-HALT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6775] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6775] STORAGE-HALT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6776] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6776] STORAGE-HALT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6777] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6777] STORAGE-HALT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6778] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6778] STORAGE-HALT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6779] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6779] STORAGE-HALT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6780] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6780] STORAGE-HALT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6781] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6781] STORAGE-HALT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6781] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6781] STORAGE-HALT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6782] STORAGE-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6783] STORAGE-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6784] STORAGE-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6785] STORAGE-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6785] STORAGE-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6786] STORAGE-HALT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6787] STORAGE-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6788] STORAGE-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -6957,7 +9699,9 @@ func InitKernel() {
 	KernelTable[6792] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6792] STORAGE-HALT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6793] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6793] STORAGE-HALT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6794] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6794] STORAGE-HALT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6795] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6795] STORAGE-HALT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6795] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6795] STORAGE-HALT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6796] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6796] STORAGE-HALT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6797] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6797] STORAGE-HALT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6798] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6798] STORAGE-HALT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -6977,29 +9721,49 @@ func InitKernel() {
 	KernelTable[6812] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6812] STORAGE-FORK-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6813] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6813] STORAGE-FORK-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6814] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6814] STORAGE-FORK-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6815] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6815] STORAGE-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6815] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6815] STORAGE-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6816] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6816] STORAGE-FORK-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6817] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6817] STORAGE-FORK-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6818] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6818] STORAGE-FORK-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6819] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6819] STORAGE-FORK-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6820] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6820] STORAGE-FORK-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6821] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6821] STORAGE-FORK-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6821] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6821] STORAGE-FORK-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6822] STORAGE-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6823] STORAGE-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6824] STORAGE-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6825] STORAGE-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6825] STORAGE-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6826] STORAGE-FORK-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6827] STORAGE-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6828] STORAGE-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6829] STORAGE-FORK-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6830] STORAGE-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6831] STORAGE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6832] STORAGE-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6833] STORAGE-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6834] STORAGE-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6835] STORAGE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6830] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6830] STORAGE-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6831] STORAGE-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6832] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6832] STORAGE-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6833] STORAGE-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6834] STORAGE-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6835] STORAGE-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6836] STORAGE-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6837] STORAGE-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6837] STORAGE-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6838] STORAGE-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6839] STORAGE-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6840] STORAGE-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7022,14 +9786,28 @@ func InitKernel() {
 	KernelTable[6857] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6857] STORAGE-FORK-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6858] STORAGE-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6859] STORAGE-FORK-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6860] STORAGE-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6861] STORAGE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6862] STORAGE-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6863] STORAGE-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6864] STORAGE-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6865] STORAGE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6860] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6860] STORAGE-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6861] STORAGE-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6862] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6862] STORAGE-FORK-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6863] STORAGE-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6864] STORAGE-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6865] STORAGE-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6866] STORAGE-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6867] STORAGE-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6867] STORAGE-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6868] STORAGE-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6869] STORAGE-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6870] STORAGE-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7037,17 +9815,23 @@ func InitKernel() {
 	KernelTable[6872] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6872] STORAGE-FORK-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6873] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6873] STORAGE-FORK-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6874] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6874] STORAGE-FORK-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6875] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6875] STORAGE-FORK-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6875] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6875] STORAGE-FORK-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6876] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6876] STORAGE-FORK-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6877] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6877] STORAGE-FORK-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6878] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6878] STORAGE-FORK-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6879] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6879] STORAGE-FORK-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6880] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6880] STORAGE-FORK-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6881] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6881] STORAGE-FORK-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6881] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6881] STORAGE-FORK-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6882] STORAGE-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6883] STORAGE-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6884] STORAGE-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6885] STORAGE-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6885] STORAGE-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6886] STORAGE-FORK-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6887] STORAGE-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6888] STORAGE-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7057,7 +9841,9 @@ func InitKernel() {
 	KernelTable[6892] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6892] STORAGE-FORK-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6893] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6893] STORAGE-FORK-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6894] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6894] STORAGE-FORK-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6895] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6895] STORAGE-FORK-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6895] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6895] STORAGE-FORK-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6896] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6896] STORAGE-FORK-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6897] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6897] STORAGE-FORK-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6898] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6898] STORAGE-FORK-LOCKED-BFT (Go retro-membrane)\n") }
@@ -7077,29 +9863,49 @@ func InitKernel() {
 	KernelTable[6912] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6912] STORAGE-JOIN-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[6913] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6913] STORAGE-JOIN-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6914] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6914] STORAGE-JOIN-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6915] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6915] STORAGE-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6915] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6915] STORAGE-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6916] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6916] STORAGE-JOIN-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[6917] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6917] STORAGE-JOIN-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6918] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6918] STORAGE-JOIN-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[6919] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6919] STORAGE-JOIN-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[6920] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6920] STORAGE-JOIN-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6921] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6921] STORAGE-JOIN-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6921] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6921] STORAGE-JOIN-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6922] STORAGE-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[6923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6923] STORAGE-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6924] STORAGE-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6925] STORAGE-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6925] STORAGE-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6926] STORAGE-JOIN-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[6927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6927] STORAGE-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6928] STORAGE-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[6929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6929] STORAGE-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[6930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6930] STORAGE-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6931] STORAGE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6932] STORAGE-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[6933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6933] STORAGE-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6934] STORAGE-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6935] STORAGE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6930] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6930] STORAGE-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6931] STORAGE-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6932] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6932] STORAGE-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6933] STORAGE-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6934] STORAGE-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6935] STORAGE-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6936] STORAGE-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[6937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6937] STORAGE-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6937] STORAGE-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6938] STORAGE-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[6939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6939] STORAGE-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[6940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6940] STORAGE-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7122,14 +9928,28 @@ func InitKernel() {
 	KernelTable[6957] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6957] STORAGE-JOIN-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6958] STORAGE-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[6959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6959] STORAGE-JOIN-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[6960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6960] STORAGE-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6961] STORAGE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[6962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6962] STORAGE-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[6963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6963] STORAGE-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[6964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6964] STORAGE-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6965] STORAGE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6960] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6960] STORAGE-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[6961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6961] STORAGE-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[6962] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6962] STORAGE-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[6963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6963] STORAGE-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[6964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6964] STORAGE-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[6965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6965] STORAGE-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6966] STORAGE-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[6967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6967] STORAGE-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[6967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6967] STORAGE-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[6968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6968] STORAGE-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[6969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6969] STORAGE-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[6970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6970] STORAGE-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7137,17 +9957,23 @@ func InitKernel() {
 	KernelTable[6972] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6972] STORAGE-JOIN-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6973] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6973] STORAGE-JOIN-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6974] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6974] STORAGE-JOIN-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6975] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6975] STORAGE-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6975] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6975] STORAGE-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6976] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6976] STORAGE-JOIN-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6977] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6977] STORAGE-JOIN-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6978] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6978] STORAGE-JOIN-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[6979] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6979] STORAGE-JOIN-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[6980] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6980] STORAGE-JOIN-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[6981] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6981] STORAGE-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[6981] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6981] STORAGE-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[6982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6982] STORAGE-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6983] STORAGE-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6984] STORAGE-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6985] STORAGE-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6985] STORAGE-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6986] STORAGE-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[6987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6987] STORAGE-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6988] STORAGE-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7157,7 +9983,9 @@ func InitKernel() {
 	KernelTable[6992] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6992] STORAGE-JOIN-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[6993] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6993] STORAGE-JOIN-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[6994] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6994] STORAGE-JOIN-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[6995] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6995] STORAGE-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[6995] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [6995] STORAGE-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[6996] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6996] STORAGE-JOIN-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[6997] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6997] STORAGE-JOIN-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[6998] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [6998] STORAGE-JOIN-LOCKED-BFT (Go retro-membrane)\n") }
@@ -7193,11 +10021,15 @@ func InitKernel() {
 	KernelTable[7028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7028] OSINT-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7029] OSINT-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7030] OSINT-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7031] OSINT-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7031] OSINT-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7032] OSINT-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7033] OSINT-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7034] OSINT-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7035] OSINT-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7035] OSINT-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7036] OSINT-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7037] OSINT-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7038] OSINT-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -7223,11 +10055,15 @@ func InitKernel() {
 	KernelTable[7058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7058] OSINT-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7059] OSINT-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7060] OSINT-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7061] OSINT-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7061] OSINT-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7062] OSINT-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7063] OSINT-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7064] OSINT-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7065] OSINT-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7065] OSINT-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7066] OSINT-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7067] OSINT-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7068] OSINT-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -7277,29 +10113,49 @@ func InitKernel() {
 	KernelTable[7112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7112] OSINT-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[7113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7113] OSINT-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7114] OSINT-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7115] OSINT-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7115] OSINT-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7116] OSINT-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[7117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7117] OSINT-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7118] OSINT-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[7119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7119] OSINT-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[7120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7120] OSINT-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7121] OSINT-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7121] OSINT-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7122] OSINT-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[7123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7123] OSINT-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7124] OSINT-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7125] OSINT-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7125] OSINT-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7126] OSINT-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[7127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7127] OSINT-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7128] OSINT-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7129] OSINT-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[7130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7130] OSINT-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7131] OSINT-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7132] OSINT-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[7133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7133] OSINT-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7134] OSINT-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7135] OSINT-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7130] OSINT-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7131] OSINT-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7132] OSINT-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7133] OSINT-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7134] OSINT-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7135] OSINT-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7136] OSINT-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[7137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7137] OSINT-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7137] OSINT-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7138] OSINT-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[7139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7139] OSINT-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[7140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7140] OSINT-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7322,14 +10178,28 @@ func InitKernel() {
 	KernelTable[7157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7157] OSINT-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7158] OSINT-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7159] OSINT-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[7160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7160] OSINT-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7161] OSINT-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7162] OSINT-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[7163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7163] OSINT-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7164] OSINT-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7165] OSINT-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7160] OSINT-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7161] OSINT-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7162] OSINT-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7163] OSINT-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7164] OSINT-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7165] OSINT-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7166] OSINT-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[7167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7167] OSINT-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7167] OSINT-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7168] OSINT-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[7169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7169] OSINT-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[7170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7170] OSINT-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7337,17 +10207,23 @@ func InitKernel() {
 	KernelTable[7172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7172] OSINT-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7173] OSINT-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7174] OSINT-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7175] OSINT-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7175] OSINT-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7176] OSINT-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7177] OSINT-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7178] OSINT-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[7179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7179] OSINT-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[7180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7180] OSINT-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7181] OSINT-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7181] OSINT-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7182] OSINT-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7183] OSINT-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7184] OSINT-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7185] OSINT-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7185] OSINT-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7186] OSINT-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7187] OSINT-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7188] OSINT-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7357,7 +10233,9 @@ func InitKernel() {
 	KernelTable[7192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7192] OSINT-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7193] OSINT-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7194] OSINT-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7195] OSINT-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7195] OSINT-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7196] OSINT-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[7197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7197] OSINT-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7198] OSINT-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -7393,11 +10271,15 @@ func InitKernel() {
 	KernelTable[7228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7228] OSINT-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7229] OSINT-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7230] OSINT-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7231] OSINT-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7231] OSINT-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7232] OSINT-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7233] OSINT-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7234] OSINT-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7235] OSINT-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7235] OSINT-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7236] OSINT-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7237] OSINT-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7238] OSINT-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -7423,11 +10305,15 @@ func InitKernel() {
 	KernelTable[7258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7258] OSINT-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7259] OSINT-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7260] OSINT-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7261] OSINT-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7261] OSINT-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7262] OSINT-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7263] OSINT-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7264] OSINT-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7265] OSINT-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7265] OSINT-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7266] OSINT-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7267] OSINT-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7268] OSINT-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -7487,19 +10373,31 @@ func InitKernel() {
 	KernelTable[7322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7322] OSINT-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[7323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7323] OSINT-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7324] OSINT-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7325] OSINT-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7325] OSINT-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7326] OSINT-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[7327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7327] OSINT-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7328] OSINT-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7329] OSINT-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7330] OSINT-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7331] OSINT-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7331] OSINT-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7332] OSINT-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[7333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7333] OSINT-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7334] OSINT-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7335] OSINT-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7333] OSINT-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7334] OSINT-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7335] OSINT-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7336] OSINT-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[7337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7337] OSINT-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7337] OSINT-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7338] OSINT-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[7339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7339] OSINT-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[7340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7340] OSINT-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7523,13 +10421,23 @@ func InitKernel() {
 	KernelTable[7358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7358] OSINT-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7359] OSINT-QUERY-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7360] OSINT-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7361] OSINT-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7361] OSINT-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7362] OSINT-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[7363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7363] OSINT-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7364] OSINT-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7365] OSINT-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7363] OSINT-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7364] OSINT-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7365] OSINT-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7366] OSINT-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[7367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7367] OSINT-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7367] OSINT-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7368] OSINT-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[7369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7369] OSINT-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[7370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7370] OSINT-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7547,7 +10455,9 @@ func InitKernel() {
 	KernelTable[7382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7382] OSINT-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7383] OSINT-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7384] OSINT-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7385] OSINT-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7385] OSINT-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7386] OSINT-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7387] OSINT-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7388] OSINT-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7577,29 +10487,49 @@ func InitKernel() {
 	KernelTable[7412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7412] OSINT-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[7413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7413] OSINT-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7414] OSINT-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7415] OSINT-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7415] OSINT-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7416] OSINT-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[7417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7417] OSINT-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7418] OSINT-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[7419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7419] OSINT-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[7420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7420] OSINT-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7421] OSINT-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7421] OSINT-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7422] OSINT-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[7423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7423] OSINT-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7424] OSINT-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7425] OSINT-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7425] OSINT-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7426] OSINT-STREAM-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[7427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7427] OSINT-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7428] OSINT-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7429] OSINT-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[7430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7430] OSINT-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7431] OSINT-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7432] OSINT-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[7433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7433] OSINT-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7434] OSINT-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7435] OSINT-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7430] OSINT-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7431] OSINT-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7432] OSINT-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7433] OSINT-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7434] OSINT-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7435] OSINT-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7436] OSINT-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[7437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7437] OSINT-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7437] OSINT-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7438] OSINT-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[7439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7439] OSINT-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[7440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7440] OSINT-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7622,14 +10552,28 @@ func InitKernel() {
 	KernelTable[7457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7457] OSINT-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7458] OSINT-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7459] OSINT-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[7460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7460] OSINT-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7461] OSINT-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7462] OSINT-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[7463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7463] OSINT-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7464] OSINT-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7465] OSINT-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7460] OSINT-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7461] OSINT-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7462] OSINT-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7463] OSINT-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7464] OSINT-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7465] OSINT-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7466] OSINT-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[7467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7467] OSINT-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7467] OSINT-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7468] OSINT-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[7469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7469] OSINT-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[7470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7470] OSINT-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7637,17 +10581,23 @@ func InitKernel() {
 	KernelTable[7472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7472] OSINT-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7473] OSINT-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7474] OSINT-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7475] OSINT-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7475] OSINT-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7476] OSINT-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7477] OSINT-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7478] OSINT-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[7479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7479] OSINT-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[7480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7480] OSINT-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7481] OSINT-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7481] OSINT-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7482] OSINT-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7483] OSINT-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7484] OSINT-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7485] OSINT-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7485] OSINT-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7486] OSINT-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7487] OSINT-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7488] OSINT-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7657,7 +10607,9 @@ func InitKernel() {
 	KernelTable[7492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7492] OSINT-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7493] OSINT-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7494] OSINT-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7495] OSINT-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7495] OSINT-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7496] OSINT-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[7497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7497] OSINT-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7498] OSINT-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -7677,29 +10629,49 @@ func InitKernel() {
 	KernelTable[7512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7512] OSINT-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[7513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7513] OSINT-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7514] OSINT-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7515] OSINT-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7515] OSINT-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7516] OSINT-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[7517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7517] OSINT-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7518] OSINT-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[7519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7519] OSINT-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[7520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7520] OSINT-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7521] OSINT-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7521] OSINT-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7522] OSINT-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[7523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7523] OSINT-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7524] OSINT-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7525] OSINT-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7525] OSINT-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7526] OSINT-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[7527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7527] OSINT-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7528] OSINT-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7529] OSINT-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[7530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7530] OSINT-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7531] OSINT-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7532] OSINT-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[7533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7533] OSINT-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7534] OSINT-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7535] OSINT-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7530] OSINT-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7531] OSINT-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7532] OSINT-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7533] OSINT-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7534] OSINT-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7535] OSINT-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7536] OSINT-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[7537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7537] OSINT-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7537] OSINT-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7538] OSINT-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[7539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7539] OSINT-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[7540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7540] OSINT-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -7722,14 +10694,28 @@ func InitKernel() {
 	KernelTable[7557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7557] OSINT-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7558] OSINT-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7559] OSINT-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[7560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7560] OSINT-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7561] OSINT-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[7562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7562] OSINT-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[7563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7563] OSINT-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[7564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7564] OSINT-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7565] OSINT-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7560] OSINT-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[7561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7561] OSINT-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[7562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7562] OSINT-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[7563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7563] OSINT-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[7564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7564] OSINT-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[7565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7565] OSINT-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7566] OSINT-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[7567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7567] OSINT-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[7567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7567] OSINT-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[7568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7568] OSINT-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[7569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7569] OSINT-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[7570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7570] OSINT-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -7737,17 +10723,23 @@ func InitKernel() {
 	KernelTable[7572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7572] OSINT-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7573] OSINT-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7574] OSINT-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7575] OSINT-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7575] OSINT-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7576] OSINT-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7577] OSINT-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7578] OSINT-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[7579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7579] OSINT-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[7580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7580] OSINT-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7581] OSINT-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7581] OSINT-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7582] OSINT-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7583] OSINT-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7584] OSINT-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7585] OSINT-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7585] OSINT-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7586] OSINT-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[7587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7587] OSINT-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7588] OSINT-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -7757,7 +10749,9 @@ func InitKernel() {
 	KernelTable[7592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7592] OSINT-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7593] OSINT-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7594] OSINT-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7595] OSINT-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7595] OSINT-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7596] OSINT-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[7597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7597] OSINT-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7598] OSINT-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -7793,11 +10787,15 @@ func InitKernel() {
 	KernelTable[7628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7628] OSINT-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7629] OSINT-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7630] OSINT-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7631] OSINT-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7631] OSINT-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7632] OSINT-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7633] OSINT-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7634] OSINT-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7635] OSINT-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7635] OSINT-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7636] OSINT-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7637] OSINT-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7638] OSINT-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -7823,11 +10821,15 @@ func InitKernel() {
 	KernelTable[7658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7658] OSINT-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7659] OSINT-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7660] OSINT-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7661] OSINT-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7661] OSINT-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7662] OSINT-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7663] OSINT-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7664] OSINT-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7665] OSINT-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7665] OSINT-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7666] OSINT-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7667] OSINT-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7668] OSINT-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -7893,11 +10895,15 @@ func InitKernel() {
 	KernelTable[7728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7728] OSINT-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7729] OSINT-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7730] OSINT-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7731] OSINT-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7731] OSINT-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7732] OSINT-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7733] OSINT-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7734] OSINT-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7735] OSINT-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7735] OSINT-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7736] OSINT-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7737] OSINT-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7738] OSINT-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -7923,11 +10929,15 @@ func InitKernel() {
 	KernelTable[7758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7758] OSINT-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7759] OSINT-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7760] OSINT-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7761] OSINT-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7761] OSINT-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7762] OSINT-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7763] OSINT-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7764] OSINT-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7765] OSINT-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7765] OSINT-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7766] OSINT-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7767] OSINT-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7768] OSINT-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -7993,11 +11003,15 @@ func InitKernel() {
 	KernelTable[7828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7828] OSINT-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7829] OSINT-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7830] OSINT-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7831] OSINT-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7831] OSINT-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7832] OSINT-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7833] OSINT-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7834] OSINT-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7835] OSINT-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7835] OSINT-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7836] OSINT-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7837] OSINT-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7838] OSINT-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8023,11 +11037,15 @@ func InitKernel() {
 	KernelTable[7858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7858] OSINT-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7859] OSINT-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7860] OSINT-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7861] OSINT-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7861] OSINT-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7862] OSINT-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7863] OSINT-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7864] OSINT-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7865] OSINT-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7865] OSINT-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7866] OSINT-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7867] OSINT-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7868] OSINT-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8093,11 +11111,15 @@ func InitKernel() {
 	KernelTable[7928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7928] OSINT-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[7929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7929] OSINT-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[7930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7930] OSINT-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7931] OSINT-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7931] OSINT-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7932] OSINT-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[7933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7933] OSINT-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7934] OSINT-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7935] OSINT-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7935] OSINT-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7936] OSINT-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[7937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7937] OSINT-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7938] OSINT-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8123,11 +11145,15 @@ func InitKernel() {
 	KernelTable[7958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7958] OSINT-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[7959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7959] OSINT-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[7960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7960] OSINT-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[7961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7961] OSINT-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[7961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7961] OSINT-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[7962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7962] OSINT-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[7963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7963] OSINT-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[7964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7964] OSINT-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[7965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7965] OSINT-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[7965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [7965] OSINT-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[7966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7966] OSINT-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[7967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7967] OSINT-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[7968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [7968] OSINT-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8193,11 +11219,15 @@ func InitKernel() {
 	KernelTable[8028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8028] CLOCK-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8029] CLOCK-INIT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8030] CLOCK-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8031] CLOCK-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8031] CLOCK-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8032] CLOCK-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8033] CLOCK-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8034] CLOCK-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8035] CLOCK-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8035] CLOCK-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8036] CLOCK-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8037] CLOCK-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8038] CLOCK-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8223,11 +11253,15 @@ func InitKernel() {
 	KernelTable[8058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8058] CLOCK-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8059] CLOCK-INIT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8060] CLOCK-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8061] CLOCK-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8061] CLOCK-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8062] CLOCK-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8063] CLOCK-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8064] CLOCK-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8065] CLOCK-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8065] CLOCK-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8066] CLOCK-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8067] CLOCK-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8068] CLOCK-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8277,29 +11311,49 @@ func InitKernel() {
 	KernelTable[8112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8112] CLOCK-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[8113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8113] CLOCK-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8114] CLOCK-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8115] CLOCK-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8115] CLOCK-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8116] CLOCK-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[8117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8117] CLOCK-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8118] CLOCK-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[8119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8119] CLOCK-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[8120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8120] CLOCK-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8121] CLOCK-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8121] CLOCK-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8122] CLOCK-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[8123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8123] CLOCK-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8124] CLOCK-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8125] CLOCK-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8125] CLOCK-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8126] CLOCK-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[8127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8127] CLOCK-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8128] CLOCK-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8129] CLOCK-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[8130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8130] CLOCK-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8131] CLOCK-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8132] CLOCK-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[8133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8133] CLOCK-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8134] CLOCK-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8135] CLOCK-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8130] CLOCK-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8131] CLOCK-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8132] CLOCK-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8133] CLOCK-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8134] CLOCK-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8135] CLOCK-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8136] CLOCK-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[8137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8137] CLOCK-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8137] CLOCK-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8138] CLOCK-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[8139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8139] CLOCK-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[8140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8140] CLOCK-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -8322,14 +11376,28 @@ func InitKernel() {
 	KernelTable[8157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8157] CLOCK-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8158] CLOCK-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8159] CLOCK-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[8160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8160] CLOCK-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8161] CLOCK-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8162] CLOCK-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[8163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8163] CLOCK-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8164] CLOCK-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8165] CLOCK-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8160] CLOCK-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8161] CLOCK-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8162] CLOCK-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8163] CLOCK-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8164] CLOCK-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8165] CLOCK-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8166] CLOCK-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[8167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8167] CLOCK-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8167] CLOCK-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8168] CLOCK-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[8169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8169] CLOCK-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[8170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8170] CLOCK-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -8337,17 +11405,23 @@ func InitKernel() {
 	KernelTable[8172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8172] CLOCK-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8173] CLOCK-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8174] CLOCK-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8175] CLOCK-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8175] CLOCK-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8176] CLOCK-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8177] CLOCK-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8178] CLOCK-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[8179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8179] CLOCK-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[8180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8180] CLOCK-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8181] CLOCK-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8181] CLOCK-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8182] CLOCK-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8183] CLOCK-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8184] CLOCK-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8185] CLOCK-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8185] CLOCK-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8186] CLOCK-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8187] CLOCK-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8188] CLOCK-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -8357,7 +11431,9 @@ func InitKernel() {
 	KernelTable[8192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8192] CLOCK-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8193] CLOCK-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8194] CLOCK-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8195] CLOCK-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8195] CLOCK-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8196] CLOCK-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[8197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8197] CLOCK-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8198] CLOCK-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
@@ -8393,11 +11469,15 @@ func InitKernel() {
 	KernelTable[8228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8228] CLOCK-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8229] CLOCK-BIND-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8230] CLOCK-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8231] CLOCK-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8231] CLOCK-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8232] CLOCK-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8233] CLOCK-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8234] CLOCK-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8235] CLOCK-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8235] CLOCK-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8236] CLOCK-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8237] CLOCK-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8238] CLOCK-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8423,11 +11503,15 @@ func InitKernel() {
 	KernelTable[8258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8258] CLOCK-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8259] CLOCK-BIND-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8260] CLOCK-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8261] CLOCK-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8261] CLOCK-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8262] CLOCK-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8263] CLOCK-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8264] CLOCK-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8265] CLOCK-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8265] CLOCK-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8266] CLOCK-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8267] CLOCK-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8268] CLOCK-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8487,19 +11571,31 @@ func InitKernel() {
 	KernelTable[8322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8322] CLOCK-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[8323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8323] CLOCK-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8324] CLOCK-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8325] CLOCK-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8325] CLOCK-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8326] CLOCK-QUERY-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[8327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8327] CLOCK-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8328] CLOCK-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8329] CLOCK-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8330] CLOCK-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8331] CLOCK-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8331] CLOCK-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8332] CLOCK-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[8333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8333] CLOCK-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8334] CLOCK-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8335] CLOCK-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8333] CLOCK-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8334] CLOCK-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8335] CLOCK-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8336] CLOCK-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[8337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8337] CLOCK-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8337] CLOCK-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8338] CLOCK-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[8339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8339] CLOCK-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[8340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8340] CLOCK-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -8523,13 +11619,23 @@ func InitKernel() {
 	KernelTable[8358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8358] CLOCK-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8359] CLOCK-QUERY-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8360] CLOCK-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8361] CLOCK-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8361] CLOCK-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8362] CLOCK-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[8363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8363] CLOCK-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8364] CLOCK-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8365] CLOCK-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8363] CLOCK-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8364] CLOCK-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8365] CLOCK-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8366] CLOCK-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[8367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8367] CLOCK-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8367] CLOCK-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8368] CLOCK-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[8369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8369] CLOCK-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[8370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8370] CLOCK-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -8547,7 +11653,9 @@ func InitKernel() {
 	KernelTable[8382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8382] CLOCK-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8383] CLOCK-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8384] CLOCK-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8385] CLOCK-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8385] CLOCK-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8386] CLOCK-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8387] CLOCK-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8388] CLOCK-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -8577,29 +11685,49 @@ func InitKernel() {
 	KernelTable[8412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8412] CLOCK-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[8413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8413] CLOCK-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8414] CLOCK-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8415] CLOCK-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8415] CLOCK-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8416] CLOCK-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[8417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8417] CLOCK-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8418] CLOCK-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[8419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8419] CLOCK-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[8420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8420] CLOCK-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8421] CLOCK-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8421] CLOCK-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8422] CLOCK-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[8423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8423] CLOCK-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8424] CLOCK-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8425] CLOCK-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8425] CLOCK-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8426] CLOCK-STREAM-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[8427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8427] CLOCK-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8428] CLOCK-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8429] CLOCK-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[8430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8430] CLOCK-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8431] CLOCK-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8432] CLOCK-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[8433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8433] CLOCK-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8434] CLOCK-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8435] CLOCK-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8430] CLOCK-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8431] CLOCK-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8432] CLOCK-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8433] CLOCK-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8434] CLOCK-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8435] CLOCK-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8436] CLOCK-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[8437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8437] CLOCK-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8437] CLOCK-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8438] CLOCK-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[8439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8439] CLOCK-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[8440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8440] CLOCK-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -8622,14 +11750,28 @@ func InitKernel() {
 	KernelTable[8457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8457] CLOCK-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8458] CLOCK-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8459] CLOCK-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[8460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8460] CLOCK-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8461] CLOCK-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8462] CLOCK-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[8463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8463] CLOCK-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8464] CLOCK-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8465] CLOCK-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8460] CLOCK-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8461] CLOCK-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8462] CLOCK-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8463] CLOCK-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8464] CLOCK-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8465] CLOCK-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8466] CLOCK-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[8467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8467] CLOCK-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8467] CLOCK-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8468] CLOCK-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[8469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8469] CLOCK-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[8470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8470] CLOCK-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -8637,17 +11779,23 @@ func InitKernel() {
 	KernelTable[8472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8472] CLOCK-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8473] CLOCK-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8474] CLOCK-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8475] CLOCK-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8475] CLOCK-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8476] CLOCK-STREAM-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8477] CLOCK-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8478] CLOCK-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[8479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8479] CLOCK-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[8480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8480] CLOCK-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8481] CLOCK-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8481] CLOCK-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8482] CLOCK-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8483] CLOCK-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8484] CLOCK-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8485] CLOCK-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8485] CLOCK-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8486] CLOCK-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8487] CLOCK-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8488] CLOCK-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -8657,7 +11805,9 @@ func InitKernel() {
 	KernelTable[8492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8492] CLOCK-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8493] CLOCK-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8494] CLOCK-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8495] CLOCK-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8495] CLOCK-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8496] CLOCK-STREAM-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[8497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8497] CLOCK-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8498] CLOCK-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
@@ -8677,29 +11827,49 @@ func InitKernel() {
 	KernelTable[8512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8512] CLOCK-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[8513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8513] CLOCK-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8514] CLOCK-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8515] CLOCK-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8515] CLOCK-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8516] CLOCK-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[8517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8517] CLOCK-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8518] CLOCK-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[8519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8519] CLOCK-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[8520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8520] CLOCK-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8521] CLOCK-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8521] CLOCK-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8522] CLOCK-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
 	KernelTable[8523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8523] CLOCK-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8524] CLOCK-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8525] CLOCK-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8525] CLOCK-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8526] CLOCK-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
 	KernelTable[8527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8527] CLOCK-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8528] CLOCK-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8529] CLOCK-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[8530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8530] CLOCK-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8531] CLOCK-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8532] CLOCK-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[8533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8533] CLOCK-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8534] CLOCK-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8535] CLOCK-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8530] CLOCK-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8531] CLOCK-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8532] CLOCK-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8533] CLOCK-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8534] CLOCK-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8535] CLOCK-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8536] CLOCK-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[8537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8537] CLOCK-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8537] CLOCK-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8538] CLOCK-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
 	KernelTable[8539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8539] CLOCK-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
 	KernelTable[8540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8540] CLOCK-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
@@ -8722,14 +11892,28 @@ func InitKernel() {
 	KernelTable[8557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8557] CLOCK-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8558] CLOCK-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8559] CLOCK-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[8560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8560] CLOCK-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8561] CLOCK-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[8562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8562] CLOCK-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[8563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8563] CLOCK-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[8564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8564] CLOCK-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8565] CLOCK-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8560] CLOCK-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[8561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8561] CLOCK-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[8562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8562] CLOCK-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[8563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8563] CLOCK-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[8564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8564] CLOCK-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[8565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8565] CLOCK-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8566] CLOCK-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[8567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8567] CLOCK-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[8567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8567] CLOCK-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[8568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8568] CLOCK-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
 	KernelTable[8569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8569] CLOCK-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
 	KernelTable[8570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8570] CLOCK-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
@@ -8737,17 +11921,23 @@ func InitKernel() {
 	KernelTable[8572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8572] CLOCK-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8573] CLOCK-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8574] CLOCK-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8575] CLOCK-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8575] CLOCK-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8576] CLOCK-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8577] CLOCK-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8578] CLOCK-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[8579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8579] CLOCK-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[8580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8580] CLOCK-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8581] CLOCK-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8581] CLOCK-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8582] CLOCK-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8583] CLOCK-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8584] CLOCK-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8585] CLOCK-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8585] CLOCK-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8586] CLOCK-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[8587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8587] CLOCK-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8588] CLOCK-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
@@ -8757,7 +11947,9 @@ func InitKernel() {
 	KernelTable[8592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8592] CLOCK-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8593] CLOCK-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8594] CLOCK-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8595] CLOCK-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8595] CLOCK-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8596] CLOCK-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[8597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8597] CLOCK-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8598] CLOCK-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -8793,11 +11985,15 @@ func InitKernel() {
 	KernelTable[8628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8628] CLOCK-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8629] CLOCK-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8630] CLOCK-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8631] CLOCK-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8631] CLOCK-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8632] CLOCK-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8633] CLOCK-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8634] CLOCK-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8635] CLOCK-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8635] CLOCK-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8636] CLOCK-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8637] CLOCK-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8638] CLOCK-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8823,11 +12019,15 @@ func InitKernel() {
 	KernelTable[8658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8658] CLOCK-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8659] CLOCK-SYNC-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8660] CLOCK-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8661] CLOCK-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8661] CLOCK-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8662] CLOCK-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8663] CLOCK-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8664] CLOCK-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8665] CLOCK-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8665] CLOCK-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8666] CLOCK-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8667] CLOCK-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8668] CLOCK-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8893,11 +12093,15 @@ func InitKernel() {
 	KernelTable[8728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8728] CLOCK-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8729] CLOCK-HALT-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8730] CLOCK-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8731] CLOCK-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8731] CLOCK-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8732] CLOCK-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8733] CLOCK-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8734] CLOCK-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8735] CLOCK-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8735] CLOCK-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8736] CLOCK-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8737] CLOCK-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8738] CLOCK-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -8923,11 +12127,15 @@ func InitKernel() {
 	KernelTable[8758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8758] CLOCK-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8759] CLOCK-HALT-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8760] CLOCK-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8761] CLOCK-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8761] CLOCK-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8762] CLOCK-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8763] CLOCK-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8764] CLOCK-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8765] CLOCK-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8765] CLOCK-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8766] CLOCK-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8767] CLOCK-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8768] CLOCK-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -8993,11 +12201,15 @@ func InitKernel() {
 	KernelTable[8828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8828] CLOCK-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8829] CLOCK-FORK-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8830] CLOCK-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8831] CLOCK-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8831] CLOCK-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8832] CLOCK-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8833] CLOCK-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8834] CLOCK-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8835] CLOCK-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8835] CLOCK-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8836] CLOCK-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8837] CLOCK-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8838] CLOCK-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -9023,11 +12235,15 @@ func InitKernel() {
 	KernelTable[8858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8858] CLOCK-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8859] CLOCK-FORK-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8860] CLOCK-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8861] CLOCK-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8861] CLOCK-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8862] CLOCK-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8863] CLOCK-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8864] CLOCK-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8865] CLOCK-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8865] CLOCK-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8866] CLOCK-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8867] CLOCK-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8868] CLOCK-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -9093,11 +12309,15 @@ func InitKernel() {
 	KernelTable[8928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8928] CLOCK-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[8929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8929] CLOCK-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
 	KernelTable[8930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8930] CLOCK-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8931] CLOCK-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8931] CLOCK-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8932] CLOCK-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
 	KernelTable[8933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8933] CLOCK-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8934] CLOCK-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8935] CLOCK-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8935] CLOCK-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8936] CLOCK-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
 	KernelTable[8937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8937] CLOCK-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8938] CLOCK-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
@@ -9123,11 +12343,15 @@ func InitKernel() {
 	KernelTable[8958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8958] CLOCK-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[8959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8959] CLOCK-JOIN-SYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[8960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8960] CLOCK-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[8961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8961] CLOCK-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[8961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8961] CLOCK-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[8962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8962] CLOCK-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
 	KernelTable[8963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8963] CLOCK-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[8964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8964] CLOCK-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[8965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8965] CLOCK-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[8965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [8965] CLOCK-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[8966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8966] CLOCK-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
 	KernelTable[8967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8967] CLOCK-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[8968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [8968] CLOCK-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
@@ -9173,41 +12397,73 @@ func InitKernel() {
 	KernelTable[9008] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9008] COMPILER-INIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9009] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9009] COMPILER-INIT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9010] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9010] COMPILER-INIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9011] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9011] COMPILER-INIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9011] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9011] COMPILER-INIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9012] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9012] COMPILER-INIT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9013] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9013] COMPILER-INIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9014] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9014] COMPILER-INIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9015] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9015] COMPILER-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9015] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9015] COMPILER-INIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9016] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9016] COMPILER-INIT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9017] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9017] COMPILER-INIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9018] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9018] COMPILER-INIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9019] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9019] COMPILER-INIT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9020] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9020] COMPILER-INIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9021] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9021] COMPILER-INIT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9021] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9021] COMPILER-INIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9022] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9022] COMPILER-INIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9023] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9023] COMPILER-INIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9024] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9024] COMPILER-INIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9025] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9025] COMPILER-INIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9023] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9023] COMPILER-INIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9024] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9024] COMPILER-INIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9025] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9025] COMPILER-INIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9026] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9026] COMPILER-INIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9027] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9027] COMPILER-INIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9027] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9027] COMPILER-INIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9028] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9028] COMPILER-INIT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9029] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9029] COMPILER-INIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9030] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9030] COMPILER-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9031] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9031] COMPILER-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9032] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9032] COMPILER-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9033] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9033] COMPILER-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9034] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9034] COMPILER-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9035] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9035] COMPILER-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9030] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9030] COMPILER-INIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9031] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9031] COMPILER-INIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9032] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9032] COMPILER-INIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9033] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9033] COMPILER-INIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9034] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9034] COMPILER-INIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9035] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9035] COMPILER-INIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9036] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9036] COMPILER-INIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9037] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9037] COMPILER-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9037] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9037] COMPILER-INIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9038] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9038] COMPILER-INIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9039] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9039] COMPILER-INIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9039] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9039] COMPILER-INIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9040] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9040] COMPILER-INIT-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9041] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9041] COMPILER-INIT-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9042] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9042] COMPILER-INIT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9043] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9043] COMPILER-INIT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9044] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9044] COMPILER-INIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9045] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9045] COMPILER-INIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9045] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9045] COMPILER-INIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9046] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9046] COMPILER-INIT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9047] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9047] COMPILER-INIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9048] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9048] COMPILER-INIT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -9222,42 +12478,76 @@ func InitKernel() {
 	KernelTable[9057] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9057] COMPILER-INIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9058] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9058] COMPILER-INIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9059] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9059] COMPILER-INIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9060] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9060] COMPILER-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9061] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9061] COMPILER-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9062] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9062] COMPILER-INIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9063] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9063] COMPILER-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9064] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9064] COMPILER-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9065] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9065] COMPILER-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9060] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9060] COMPILER-INIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9061] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9061] COMPILER-INIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9062] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9062] COMPILER-INIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9063] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9063] COMPILER-INIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9064] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9064] COMPILER-INIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9065] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9065] COMPILER-INIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9066] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9066] COMPILER-INIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9067] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9067] COMPILER-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9067] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9067] COMPILER-INIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9068] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9068] COMPILER-INIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9069] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9069] COMPILER-INIT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9069] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9069] COMPILER-INIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9070] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9070] COMPILER-INIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9071] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9071] COMPILER-INIT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9071] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9071] COMPILER-INIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9072] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9072] COMPILER-INIT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9073] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9073] COMPILER-INIT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9074] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9074] COMPILER-INIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9075] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9075] COMPILER-INIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9075] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9075] COMPILER-INIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9076] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9076] COMPILER-INIT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9077] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9077] COMPILER-INIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9078] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9078] COMPILER-INIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9079] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9079] COMPILER-INIT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9080] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9080] COMPILER-INIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9081] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9081] COMPILER-INIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9081] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9081] COMPILER-INIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9082] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9082] COMPILER-INIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9083] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9083] COMPILER-INIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9084] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9084] COMPILER-INIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9085] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9085] COMPILER-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9083] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9083] COMPILER-INIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9084] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9084] COMPILER-INIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9085] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9085] COMPILER-INIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9086] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9086] COMPILER-INIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9087] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9087] COMPILER-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9087] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9087] COMPILER-INIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9088] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9088] COMPILER-INIT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9089] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9089] COMPILER-INIT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9090] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9090] COMPILER-INIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9091] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9091] COMPILER-INIT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9091] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9091] COMPILER-INIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9092] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9092] COMPILER-INIT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9093] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9093] COMPILER-INIT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9094] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9094] COMPILER-INIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9095] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9095] COMPILER-INIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9095] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9095] COMPILER-INIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9096] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9096] COMPILER-INIT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9097] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9097] COMPILER-INIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9098] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9098] COMPILER-INIT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -9267,99 +12557,229 @@ func InitKernel() {
 	KernelTable[9102] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9102] COMPILER-MUTATE-RAW-SWARM (Go retro-membrane)\n") }
 	KernelTable[9103] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9103] COMPILER-MUTATE-RAW-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9104] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9104] COMPILER-MUTATE-RAW-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9105] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9105] COMPILER-MUTATE-RAW-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9105] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9105] COMPILER-MUTATE-RAW-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9106] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9106] COMPILER-MUTATE-RAW-UI (Go retro-membrane)\n") }
 	KernelTable[9107] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9107] COMPILER-MUTATE-RAW-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9108] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9108] COMPILER-MUTATE-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9109] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9109] COMPILER-MUTATE-RAW-CORE (Go retro-membrane)\n") }
-	KernelTable[9110] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9110] COMPILER-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9111] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9111] COMPILER-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9112] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9112] COMPILER-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9113] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9113] COMPILER-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9114] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9114] COMPILER-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9115] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9115] COMPILER-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9110] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9110] COMPILER-MUTATE-ATOMIC-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9111] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9111] COMPILER-MUTATE-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9112] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9112] COMPILER-MUTATE-ATOMIC-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9113] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9113] COMPILER-MUTATE-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9114] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9114] COMPILER-MUTATE-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9115] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9115] COMPILER-MUTATE-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9116] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9116] COMPILER-MUTATE-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[9117] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9117] COMPILER-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9117] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9117] COMPILER-MUTATE-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9118] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9118] COMPILER-MUTATE-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9119] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9119] COMPILER-MUTATE-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[9120] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9120] COMPILER-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9121] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9121] COMPILER-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9122] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9122] COMPILER-MUTATE-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9123] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9123] COMPILER-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9124] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9124] COMPILER-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9125] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9125] COMPILER-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9120] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9120] COMPILER-MUTATE-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9121] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9121] COMPILER-MUTATE-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9122] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9122] COMPILER-MUTATE-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9123] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9123] COMPILER-MUTATE-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9124] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9124] COMPILER-MUTATE-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9125] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9125] COMPILER-MUTATE-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9126] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9126] COMPILER-MUTATE-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9127] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9127] COMPILER-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9127] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9127] COMPILER-MUTATE-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9128] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9128] COMPILER-MUTATE-PERSIST-BFT (Go retro-membrane)\n") }
-	KernelTable[9129] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9129] COMPILER-MUTATE-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9130] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9130] COMPILER-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9131] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9131] COMPILER-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9132] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9132] COMPILER-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9133] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9133] COMPILER-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9134] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9134] COMPILER-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9135] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9135] COMPILER-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9136] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9136] COMPILER-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9137] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9137] COMPILER-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9138] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9138] COMPILER-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9139] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9139] COMPILER-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9129] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9129] COMPILER-MUTATE-PERSIST-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9130] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9130] COMPILER-MUTATE-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9131] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9131] COMPILER-MUTATE-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9132] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9132] COMPILER-MUTATE-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9133] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9133] COMPILER-MUTATE-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9134] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9134] COMPILER-MUTATE-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9135] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9135] COMPILER-MUTATE-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9136] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9136] COMPILER-MUTATE-EPHEMERAL-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9137] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9137] COMPILER-MUTATE-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9138] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9138] COMPILER-MUTATE-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9139] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9139] COMPILER-MUTATE-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9140] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9140] COMPILER-MUTATE-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9141] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9141] COMPILER-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9141] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9141] COMPILER-MUTATE-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9142] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9142] COMPILER-MUTATE-ASYNC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9143] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9143] COMPILER-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9144] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9144] COMPILER-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9145] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9145] COMPILER-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9143] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9143] COMPILER-MUTATE-ASYNC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9144] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9144] COMPILER-MUTATE-ASYNC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9145] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9145] COMPILER-MUTATE-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9146] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9146] COMPILER-MUTATE-ASYNC-UI (Go retro-membrane)\n") }
-	KernelTable[9147] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9147] COMPILER-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9147] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9147] COMPILER-MUTATE-ASYNC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9148] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9148] COMPILER-MUTATE-ASYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9149] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9149] COMPILER-MUTATE-ASYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[9150] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9150] COMPILER-MUTATE-SYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9151] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9151] COMPILER-MUTATE-SYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9151] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9151] COMPILER-MUTATE-SYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9152] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9152] COMPILER-MUTATE-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9153] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9153] COMPILER-MUTATE-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9154] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9154] COMPILER-MUTATE-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9155] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9155] COMPILER-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9155] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9155] COMPILER-MUTATE-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9156] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9156] COMPILER-MUTATE-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9157] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9157] COMPILER-MUTATE-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9158] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9158] COMPILER-MUTATE-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9159] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9159] COMPILER-MUTATE-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9160] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9160] COMPILER-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9161] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9161] COMPILER-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9162] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9162] COMPILER-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9163] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9163] COMPILER-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9164] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9164] COMPILER-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9165] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9165] COMPILER-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9166] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9166] COMPILER-MUTATE-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9167] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9167] COMPILER-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9168] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9168] COMPILER-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9169] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9169] COMPILER-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n") }
-	KernelTable[9170] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9170] COMPILER-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9171] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9171] COMPILER-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9172] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9172] COMPILER-MUTATE-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9173] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9173] COMPILER-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9174] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9174] COMPILER-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9175] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9175] COMPILER-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9160] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9160] COMPILER-MUTATE-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9161] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9161] COMPILER-MUTATE-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9162] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9162] COMPILER-MUTATE-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9163] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9163] COMPILER-MUTATE-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9164] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9164] COMPILER-MUTATE-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9165] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9165] COMPILER-MUTATE-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9166] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9166] COMPILER-MUTATE-QUANTIZED-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9167] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9167] COMPILER-MUTATE-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9168] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9168] COMPILER-MUTATE-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9169] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9169] COMPILER-MUTATE-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9170] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9170] COMPILER-MUTATE-MAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9171] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9171] COMPILER-MUTATE-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9172] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9172] COMPILER-MUTATE-MAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9173] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9173] COMPILER-MUTATE-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9174] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9174] COMPILER-MUTATE-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9175] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9175] COMPILER-MUTATE-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9176] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9176] COMPILER-MUTATE-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9177] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9177] COMPILER-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9177] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9177] COMPILER-MUTATE-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9178] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9178] COMPILER-MUTATE-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9179] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9179] COMPILER-MUTATE-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9180] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9180] COMPILER-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9181] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9181] COMPILER-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9182] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9182] COMPILER-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9183] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9183] COMPILER-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9184] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9184] COMPILER-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9185] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9185] COMPILER-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9180] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9180] COMPILER-MUTATE-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9181] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9181] COMPILER-MUTATE-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9182] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9182] COMPILER-MUTATE-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9183] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9183] COMPILER-MUTATE-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9184] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9184] COMPILER-MUTATE-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9185] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9185] COMPILER-MUTATE-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9186] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9186] COMPILER-MUTATE-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9187] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9187] COMPILER-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9187] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9187] COMPILER-MUTATE-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9188] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9188] COMPILER-MUTATE-WRAPPED-BFT (Go retro-membrane)\n") }
-	KernelTable[9189] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9189] COMPILER-MUTATE-WRAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9190] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9190] COMPILER-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9191] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9191] COMPILER-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9192] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9192] COMPILER-MUTATE-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9193] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9193] COMPILER-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9194] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9194] COMPILER-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9195] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9195] COMPILER-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9189] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9189] COMPILER-MUTATE-WRAPPED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9190] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9190] COMPILER-MUTATE-LOCKED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9191] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9191] COMPILER-MUTATE-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9192] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9192] COMPILER-MUTATE-LOCKED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9193] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9193] COMPILER-MUTATE-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9194] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9194] COMPILER-MUTATE-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9195] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9195] COMPILER-MUTATE-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9196] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9196] COMPILER-MUTATE-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[9197] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9197] COMPILER-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9197] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9197] COMPILER-MUTATE-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9198] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9198] COMPILER-MUTATE-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[9199] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9199] COMPILER-MUTATE-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[9200] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9200] COMPILER-BIND-RAW-LOCAL (Go retro-membrane)\n") }
@@ -9373,41 +12793,73 @@ func InitKernel() {
 	KernelTable[9208] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9208] COMPILER-BIND-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9209] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9209] COMPILER-BIND-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9210] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9210] COMPILER-BIND-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9211] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9211] COMPILER-BIND-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9211] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9211] COMPILER-BIND-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9212] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9212] COMPILER-BIND-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9213] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9213] COMPILER-BIND-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9214] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9214] COMPILER-BIND-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9215] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9215] COMPILER-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9215] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9215] COMPILER-BIND-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9216] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9216] COMPILER-BIND-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9217] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9217] COMPILER-BIND-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9218] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9218] COMPILER-BIND-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9219] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9219] COMPILER-BIND-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9220] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9220] COMPILER-BIND-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9221] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9221] COMPILER-BIND-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9221] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9221] COMPILER-BIND-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9222] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9222] COMPILER-BIND-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9223] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9223] COMPILER-BIND-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9224] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9224] COMPILER-BIND-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9225] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9225] COMPILER-BIND-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9223] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9223] COMPILER-BIND-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9224] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9224] COMPILER-BIND-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9225] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9225] COMPILER-BIND-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9226] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9226] COMPILER-BIND-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9227] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9227] COMPILER-BIND-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9227] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9227] COMPILER-BIND-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9228] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9228] COMPILER-BIND-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9229] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9229] COMPILER-BIND-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9230] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9230] COMPILER-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9231] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9231] COMPILER-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9232] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9232] COMPILER-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9233] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9233] COMPILER-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9234] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9234] COMPILER-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9235] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9235] COMPILER-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9230] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9230] COMPILER-BIND-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9231] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9231] COMPILER-BIND-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9232] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9232] COMPILER-BIND-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9233] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9233] COMPILER-BIND-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9234] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9234] COMPILER-BIND-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9235] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9235] COMPILER-BIND-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9236] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9236] COMPILER-BIND-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9237] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9237] COMPILER-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9237] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9237] COMPILER-BIND-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9238] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9238] COMPILER-BIND-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9239] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9239] COMPILER-BIND-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9239] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9239] COMPILER-BIND-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9240] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9240] COMPILER-BIND-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9241] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9241] COMPILER-BIND-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9242] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9242] COMPILER-BIND-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9243] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9243] COMPILER-BIND-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9244] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9244] COMPILER-BIND-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9245] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9245] COMPILER-BIND-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9245] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9245] COMPILER-BIND-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9246] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9246] COMPILER-BIND-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9247] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9247] COMPILER-BIND-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9248] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9248] COMPILER-BIND-ASYNC-BFT (Go retro-membrane)\n") }
@@ -9422,42 +12874,76 @@ func InitKernel() {
 	KernelTable[9257] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9257] COMPILER-BIND-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9258] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9258] COMPILER-BIND-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9259] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9259] COMPILER-BIND-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9260] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9260] COMPILER-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9261] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9261] COMPILER-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9262] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9262] COMPILER-BIND-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9263] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9263] COMPILER-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9264] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9264] COMPILER-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9265] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9265] COMPILER-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9260] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9260] COMPILER-BIND-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9261] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9261] COMPILER-BIND-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9262] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9262] COMPILER-BIND-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9263] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9263] COMPILER-BIND-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9264] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9264] COMPILER-BIND-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9265] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9265] COMPILER-BIND-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9266] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9266] COMPILER-BIND-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9267] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9267] COMPILER-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9267] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9267] COMPILER-BIND-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9268] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9268] COMPILER-BIND-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9269] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9269] COMPILER-BIND-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9269] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9269] COMPILER-BIND-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9270] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9270] COMPILER-BIND-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9271] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9271] COMPILER-BIND-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9271] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9271] COMPILER-BIND-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9272] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9272] COMPILER-BIND-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9273] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9273] COMPILER-BIND-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9274] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9274] COMPILER-BIND-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9275] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9275] COMPILER-BIND-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9275] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9275] COMPILER-BIND-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9276] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9276] COMPILER-BIND-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9277] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9277] COMPILER-BIND-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9278] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9278] COMPILER-BIND-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9279] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9279] COMPILER-BIND-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9280] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9280] COMPILER-BIND-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9281] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9281] COMPILER-BIND-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9281] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9281] COMPILER-BIND-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9282] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9282] COMPILER-BIND-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9283] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9283] COMPILER-BIND-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9284] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9284] COMPILER-BIND-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9285] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9285] COMPILER-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9283] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9283] COMPILER-BIND-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9284] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9284] COMPILER-BIND-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9285] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9285] COMPILER-BIND-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9286] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9286] COMPILER-BIND-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9287] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9287] COMPILER-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9287] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9287] COMPILER-BIND-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9288] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9288] COMPILER-BIND-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9289] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9289] COMPILER-BIND-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9290] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9290] COMPILER-BIND-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9291] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9291] COMPILER-BIND-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9291] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9291] COMPILER-BIND-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9292] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9292] COMPILER-BIND-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9293] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9293] COMPILER-BIND-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9294] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9294] COMPILER-BIND-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9295] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9295] COMPILER-BIND-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9295] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9295] COMPILER-BIND-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9296] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9296] COMPILER-BIND-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9297] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9297] COMPILER-BIND-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9298] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9298] COMPILER-BIND-LOCKED-BFT (Go retro-membrane)\n") }
@@ -9473,41 +12959,87 @@ func InitKernel() {
 	KernelTable[9308] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9308] COMPILER-QUERY-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9309] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9309] COMPILER-QUERY-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9310] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9310] COMPILER-QUERY-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9311] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9311] COMPILER-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9311] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9311] COMPILER-QUERY-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9312] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9312] COMPILER-QUERY-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9313] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9313] COMPILER-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9314] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9314] COMPILER-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9315] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9315] COMPILER-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9313] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9313] COMPILER-QUERY-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9314] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9314] COMPILER-QUERY-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9315] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9315] COMPILER-QUERY-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9316] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9316] COMPILER-QUERY-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[9317] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9317] COMPILER-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9317] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9317] COMPILER-QUERY-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9318] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9318] COMPILER-QUERY-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9319] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9319] COMPILER-QUERY-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[9320] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9320] COMPILER-QUERY-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9321] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9321] COMPILER-QUERY-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9322] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9322] COMPILER-QUERY-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9323] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9323] COMPILER-QUERY-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9324] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9324] COMPILER-QUERY-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9325] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9325] COMPILER-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9320] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9320] COMPILER-QUERY-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9321] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9321] COMPILER-QUERY-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9322] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9322] COMPILER-QUERY-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9323] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9323] COMPILER-QUERY-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9324] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9324] COMPILER-QUERY-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9325] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9325] COMPILER-QUERY-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9326] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9326] COMPILER-QUERY-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9327] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9327] COMPILER-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9327] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9327] COMPILER-QUERY-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9328] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9328] COMPILER-QUERY-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9329] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9329] COMPILER-QUERY-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9330] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9330] COMPILER-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9331] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9331] COMPILER-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9332] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9332] COMPILER-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9333] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9333] COMPILER-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9334] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9334] COMPILER-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9335] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9335] COMPILER-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9330] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9330] COMPILER-QUERY-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9331] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9331] COMPILER-QUERY-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9332] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9332] COMPILER-QUERY-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9333] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9333] COMPILER-QUERY-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9334] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9334] COMPILER-QUERY-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9335] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9335] COMPILER-QUERY-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9336] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9336] COMPILER-QUERY-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9337] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9337] COMPILER-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9338] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9338] COMPILER-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9339] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9339] COMPILER-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9337] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9337] COMPILER-QUERY-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9338] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9338] COMPILER-QUERY-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9339] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9339] COMPILER-QUERY-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9340] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9340] COMPILER-QUERY-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9341] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9341] COMPILER-QUERY-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9341] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9341] COMPILER-QUERY-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9342] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9342] COMPILER-QUERY-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9343] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9343] COMPILER-QUERY-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9344] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9344] COMPILER-QUERY-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9345] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9345] COMPILER-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9345] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9345] COMPILER-QUERY-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9346] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9346] COMPILER-QUERY-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9347] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9347] COMPILER-QUERY-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9348] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9348] COMPILER-QUERY-ASYNC-BFT (Go retro-membrane)\n") }
@@ -9517,49 +13049,103 @@ func InitKernel() {
 	KernelTable[9352] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9352] COMPILER-QUERY-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9353] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9353] COMPILER-QUERY-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9354] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9354] COMPILER-QUERY-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9355] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9355] COMPILER-QUERY-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9355] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9355] COMPILER-QUERY-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9356] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9356] COMPILER-QUERY-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9357] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9357] COMPILER-QUERY-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9358] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9358] COMPILER-QUERY-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9359] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9359] COMPILER-QUERY-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9360] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9360] COMPILER-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9361] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9361] COMPILER-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9362] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9362] COMPILER-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9363] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9363] COMPILER-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9364] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9364] COMPILER-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9365] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9365] COMPILER-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9360] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9360] COMPILER-QUERY-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9361] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9361] COMPILER-QUERY-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9362] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9362] COMPILER-QUERY-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9363] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9363] COMPILER-QUERY-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9364] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9364] COMPILER-QUERY-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9365] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9365] COMPILER-QUERY-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9366] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9366] COMPILER-QUERY-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9367] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9367] COMPILER-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9368] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9368] COMPILER-QUERY-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9369] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9369] COMPILER-QUERY-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9367] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9367] COMPILER-QUERY-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9368] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9368] COMPILER-QUERY-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9369] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9369] COMPILER-QUERY-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9370] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9370] COMPILER-QUERY-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9371] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9371] COMPILER-QUERY-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9371] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9371] COMPILER-QUERY-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9372] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9372] COMPILER-QUERY-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9373] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9373] COMPILER-QUERY-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9374] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9374] COMPILER-QUERY-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9375] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9375] COMPILER-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9373] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9373] COMPILER-QUERY-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9374] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9374] COMPILER-QUERY-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9375] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9375] COMPILER-QUERY-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9376] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9376] COMPILER-QUERY-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9377] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9377] COMPILER-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9377] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9377] COMPILER-QUERY-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9378] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9378] COMPILER-QUERY-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9379] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9379] COMPILER-QUERY-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9380] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9380] COMPILER-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9381] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9381] COMPILER-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9382] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9382] COMPILER-QUERY-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9383] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9383] COMPILER-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9384] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9384] COMPILER-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9385] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9385] COMPILER-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9380] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9380] COMPILER-QUERY-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9381] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9381] COMPILER-QUERY-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9382] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9382] COMPILER-QUERY-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9383] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9383] COMPILER-QUERY-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9384] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9384] COMPILER-QUERY-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9385] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9385] COMPILER-QUERY-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9386] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9386] COMPILER-QUERY-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9387] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9387] COMPILER-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9387] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9387] COMPILER-QUERY-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9388] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9388] COMPILER-QUERY-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9389] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9389] COMPILER-QUERY-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9390] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9390] COMPILER-QUERY-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9391] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9391] COMPILER-QUERY-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9391] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9391] COMPILER-QUERY-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9392] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9392] COMPILER-QUERY-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9393] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9393] COMPILER-QUERY-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9394] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9394] COMPILER-QUERY-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9395] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9395] COMPILER-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9393] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9393] COMPILER-QUERY-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9394] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9394] COMPILER-QUERY-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9395] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9395] COMPILER-QUERY-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9396] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9396] COMPILER-QUERY-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[9397] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9397] COMPILER-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9397] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9397] COMPILER-QUERY-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9398] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9398] COMPILER-QUERY-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[9399] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9399] COMPILER-QUERY-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[9400] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9400] COMPILER-STREAM-RAW-LOCAL (Go retro-membrane)\n") }
@@ -9567,99 +13153,229 @@ func InitKernel() {
 	KernelTable[9402] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9402] COMPILER-STREAM-RAW-SWARM (Go retro-membrane)\n") }
 	KernelTable[9403] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9403] COMPILER-STREAM-RAW-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9404] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9404] COMPILER-STREAM-RAW-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9405] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9405] COMPILER-STREAM-RAW-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9405] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9405] COMPILER-STREAM-RAW-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9406] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9406] COMPILER-STREAM-RAW-UI (Go retro-membrane)\n") }
 	KernelTable[9407] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9407] COMPILER-STREAM-RAW-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9408] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9408] COMPILER-STREAM-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9409] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9409] COMPILER-STREAM-RAW-CORE (Go retro-membrane)\n") }
-	KernelTable[9410] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9410] COMPILER-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9411] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9411] COMPILER-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9412] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9412] COMPILER-STREAM-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9413] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9413] COMPILER-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9414] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9414] COMPILER-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9415] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9415] COMPILER-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9410] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9410] COMPILER-STREAM-ATOMIC-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9411] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9411] COMPILER-STREAM-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9412] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9412] COMPILER-STREAM-ATOMIC-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9413] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9413] COMPILER-STREAM-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9414] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9414] COMPILER-STREAM-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9415] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9415] COMPILER-STREAM-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9416] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9416] COMPILER-STREAM-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[9417] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9417] COMPILER-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9417] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9417] COMPILER-STREAM-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9418] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9418] COMPILER-STREAM-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9419] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9419] COMPILER-STREAM-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[9420] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9420] COMPILER-STREAM-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9421] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9421] COMPILER-STREAM-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9422] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9422] COMPILER-STREAM-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9423] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9423] COMPILER-STREAM-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9424] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9424] COMPILER-STREAM-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9425] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9425] COMPILER-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9420] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9420] COMPILER-STREAM-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9421] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9421] COMPILER-STREAM-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9422] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9422] COMPILER-STREAM-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9423] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9423] COMPILER-STREAM-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9424] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9424] COMPILER-STREAM-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9425] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9425] COMPILER-STREAM-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9426] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9426] COMPILER-STREAM-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9427] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9427] COMPILER-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9427] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9427] COMPILER-STREAM-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9428] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9428] COMPILER-STREAM-PERSIST-BFT (Go retro-membrane)\n") }
-	KernelTable[9429] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9429] COMPILER-STREAM-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9430] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9430] COMPILER-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9431] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9431] COMPILER-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9432] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9432] COMPILER-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9433] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9433] COMPILER-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9434] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9434] COMPILER-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9435] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9435] COMPILER-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9436] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9436] COMPILER-STREAM-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9437] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9437] COMPILER-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9438] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9438] COMPILER-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9439] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9439] COMPILER-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9429] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9429] COMPILER-STREAM-PERSIST-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9430] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9430] COMPILER-STREAM-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9431] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9431] COMPILER-STREAM-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9432] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9432] COMPILER-STREAM-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9433] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9433] COMPILER-STREAM-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9434] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9434] COMPILER-STREAM-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9435] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9435] COMPILER-STREAM-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9436] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9436] COMPILER-STREAM-EPHEMERAL-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9437] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9437] COMPILER-STREAM-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9438] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9438] COMPILER-STREAM-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9439] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9439] COMPILER-STREAM-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9440] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9440] COMPILER-STREAM-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9441] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9441] COMPILER-STREAM-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9441] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9441] COMPILER-STREAM-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9442] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9442] COMPILER-STREAM-ASYNC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9443] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9443] COMPILER-STREAM-ASYNC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9444] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9444] COMPILER-STREAM-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9445] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9445] COMPILER-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9443] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9443] COMPILER-STREAM-ASYNC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9444] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9444] COMPILER-STREAM-ASYNC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9445] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9445] COMPILER-STREAM-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9446] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9446] COMPILER-STREAM-ASYNC-UI (Go retro-membrane)\n") }
-	KernelTable[9447] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9447] COMPILER-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9447] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9447] COMPILER-STREAM-ASYNC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9448] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9448] COMPILER-STREAM-ASYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9449] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9449] COMPILER-STREAM-ASYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[9450] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9450] COMPILER-STREAM-SYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9451] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9451] COMPILER-STREAM-SYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9451] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9451] COMPILER-STREAM-SYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9452] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9452] COMPILER-STREAM-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9453] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9453] COMPILER-STREAM-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9454] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9454] COMPILER-STREAM-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9455] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9455] COMPILER-STREAM-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9455] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9455] COMPILER-STREAM-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9456] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9456] COMPILER-STREAM-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9457] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9457] COMPILER-STREAM-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9458] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9458] COMPILER-STREAM-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9459] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9459] COMPILER-STREAM-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9460] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9460] COMPILER-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9461] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9461] COMPILER-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9462] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9462] COMPILER-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9463] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9463] COMPILER-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9464] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9464] COMPILER-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9465] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9465] COMPILER-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9466] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9466] COMPILER-STREAM-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9467] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9467] COMPILER-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9468] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9468] COMPILER-STREAM-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9469] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9469] COMPILER-STREAM-QUANTIZED-CORE (Go retro-membrane)\n") }
-	KernelTable[9470] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9470] COMPILER-STREAM-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9471] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9471] COMPILER-STREAM-MAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9472] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9472] COMPILER-STREAM-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9473] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9473] COMPILER-STREAM-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9474] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9474] COMPILER-STREAM-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9475] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9475] COMPILER-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9460] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9460] COMPILER-STREAM-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9461] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9461] COMPILER-STREAM-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9462] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9462] COMPILER-STREAM-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9463] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9463] COMPILER-STREAM-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9464] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9464] COMPILER-STREAM-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9465] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9465] COMPILER-STREAM-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9466] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9466] COMPILER-STREAM-QUANTIZED-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9467] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9467] COMPILER-STREAM-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9468] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9468] COMPILER-STREAM-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9469] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9469] COMPILER-STREAM-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9470] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9470] COMPILER-STREAM-MAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9471] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9471] COMPILER-STREAM-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9472] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9472] COMPILER-STREAM-MAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9473] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9473] COMPILER-STREAM-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9474] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9474] COMPILER-STREAM-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9475] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9475] COMPILER-STREAM-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9476] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9476] COMPILER-STREAM-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9477] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9477] COMPILER-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9477] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9477] COMPILER-STREAM-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9478] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9478] COMPILER-STREAM-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9479] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9479] COMPILER-STREAM-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9480] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9480] COMPILER-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9481] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9481] COMPILER-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9482] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9482] COMPILER-STREAM-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9483] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9483] COMPILER-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9484] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9484] COMPILER-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9485] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9485] COMPILER-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9480] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9480] COMPILER-STREAM-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9481] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9481] COMPILER-STREAM-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9482] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9482] COMPILER-STREAM-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9483] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9483] COMPILER-STREAM-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9484] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9484] COMPILER-STREAM-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9485] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9485] COMPILER-STREAM-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9486] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9486] COMPILER-STREAM-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9487] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9487] COMPILER-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9487] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9487] COMPILER-STREAM-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9488] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9488] COMPILER-STREAM-WRAPPED-BFT (Go retro-membrane)\n") }
-	KernelTable[9489] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9489] COMPILER-STREAM-WRAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9490] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9490] COMPILER-STREAM-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9491] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9491] COMPILER-STREAM-LOCKED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9492] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9492] COMPILER-STREAM-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9493] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9493] COMPILER-STREAM-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9494] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9494] COMPILER-STREAM-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9495] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9495] COMPILER-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9489] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9489] COMPILER-STREAM-WRAPPED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9490] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9490] COMPILER-STREAM-LOCKED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9491] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9491] COMPILER-STREAM-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9492] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9492] COMPILER-STREAM-LOCKED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9493] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9493] COMPILER-STREAM-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9494] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9494] COMPILER-STREAM-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9495] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9495] COMPILER-STREAM-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9496] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9496] COMPILER-STREAM-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[9497] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9497] COMPILER-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9497] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9497] COMPILER-STREAM-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9498] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9498] COMPILER-STREAM-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[9499] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9499] COMPILER-STREAM-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[9500] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9500] COMPILER-COMMIT-RAW-LOCAL (Go retro-membrane)\n") }
@@ -9667,99 +13383,229 @@ func InitKernel() {
 	KernelTable[9502] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9502] COMPILER-COMMIT-RAW-SWARM (Go retro-membrane)\n") }
 	KernelTable[9503] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9503] COMPILER-COMMIT-RAW-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9504] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9504] COMPILER-COMMIT-RAW-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9505] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9505] COMPILER-COMMIT-RAW-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9505] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9505] COMPILER-COMMIT-RAW-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9506] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9506] COMPILER-COMMIT-RAW-UI (Go retro-membrane)\n") }
 	KernelTable[9507] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9507] COMPILER-COMMIT-RAW-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9508] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9508] COMPILER-COMMIT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9509] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9509] COMPILER-COMMIT-RAW-CORE (Go retro-membrane)\n") }
-	KernelTable[9510] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9510] COMPILER-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9511] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9511] COMPILER-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9512] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9512] COMPILER-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9513] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9513] COMPILER-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9514] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9514] COMPILER-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9515] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9515] COMPILER-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9510] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9510] COMPILER-COMMIT-ATOMIC-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9511] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9511] COMPILER-COMMIT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9512] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9512] COMPILER-COMMIT-ATOMIC-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9513] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9513] COMPILER-COMMIT-ATOMIC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9514] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9514] COMPILER-COMMIT-ATOMIC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9515] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9515] COMPILER-COMMIT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9516] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9516] COMPILER-COMMIT-ATOMIC-UI (Go retro-membrane)\n") }
-	KernelTable[9517] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9517] COMPILER-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9517] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9517] COMPILER-COMMIT-ATOMIC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9518] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9518] COMPILER-COMMIT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9519] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9519] COMPILER-COMMIT-ATOMIC-CORE (Go retro-membrane)\n") }
-	KernelTable[9520] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9520] COMPILER-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9521] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9521] COMPILER-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9522] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9522] COMPILER-COMMIT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9523] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9523] COMPILER-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9524] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9524] COMPILER-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9525] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9525] COMPILER-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9520] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9520] COMPILER-COMMIT-PERSIST-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9521] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9521] COMPILER-COMMIT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9522] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9522] COMPILER-COMMIT-PERSIST-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9523] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9523] COMPILER-COMMIT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9524] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9524] COMPILER-COMMIT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9525] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9525] COMPILER-COMMIT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9526] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9526] COMPILER-COMMIT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9527] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9527] COMPILER-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9527] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9527] COMPILER-COMMIT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9528] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9528] COMPILER-COMMIT-PERSIST-BFT (Go retro-membrane)\n") }
-	KernelTable[9529] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9529] COMPILER-COMMIT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9530] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9530] COMPILER-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9531] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9531] COMPILER-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9532] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9532] COMPILER-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9533] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9533] COMPILER-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9534] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9534] COMPILER-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9535] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9535] COMPILER-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9536] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9536] COMPILER-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9537] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9537] COMPILER-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9538] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9538] COMPILER-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9539] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9539] COMPILER-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9529] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9529] COMPILER-COMMIT-PERSIST-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9530] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9530] COMPILER-COMMIT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9531] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9531] COMPILER-COMMIT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9532] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9532] COMPILER-COMMIT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9533] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9533] COMPILER-COMMIT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9534] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9534] COMPILER-COMMIT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9535] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9535] COMPILER-COMMIT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9536] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9536] COMPILER-COMMIT-EPHEMERAL-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9537] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9537] COMPILER-COMMIT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9538] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9538] COMPILER-COMMIT-EPHEMERAL-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9539] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9539] COMPILER-COMMIT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9540] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9540] COMPILER-COMMIT-ASYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9541] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9541] COMPILER-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9541] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9541] COMPILER-COMMIT-ASYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9542] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9542] COMPILER-COMMIT-ASYNC-SWARM (Go retro-membrane)\n") }
-	KernelTable[9543] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9543] COMPILER-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9544] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9544] COMPILER-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9545] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9545] COMPILER-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9543] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9543] COMPILER-COMMIT-ASYNC-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9544] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9544] COMPILER-COMMIT-ASYNC-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9545] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9545] COMPILER-COMMIT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9546] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9546] COMPILER-COMMIT-ASYNC-UI (Go retro-membrane)\n") }
-	KernelTable[9547] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9547] COMPILER-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9547] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9547] COMPILER-COMMIT-ASYNC-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9548] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9548] COMPILER-COMMIT-ASYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9549] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9549] COMPILER-COMMIT-ASYNC-CORE (Go retro-membrane)\n") }
 	KernelTable[9550] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9550] COMPILER-COMMIT-SYNC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9551] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9551] COMPILER-COMMIT-SYNC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9551] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9551] COMPILER-COMMIT-SYNC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9552] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9552] COMPILER-COMMIT-SYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9553] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9553] COMPILER-COMMIT-SYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9554] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9554] COMPILER-COMMIT-SYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9555] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9555] COMPILER-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9555] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9555] COMPILER-COMMIT-SYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9556] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9556] COMPILER-COMMIT-SYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9557] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9557] COMPILER-COMMIT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9558] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9558] COMPILER-COMMIT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9559] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9559] COMPILER-COMMIT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9560] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9560] COMPILER-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9561] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9561] COMPILER-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9562] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9562] COMPILER-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9563] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9563] COMPILER-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9564] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9564] COMPILER-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9565] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9565] COMPILER-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
-	KernelTable[9566] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9566] COMPILER-COMMIT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9567] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9567] COMPILER-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
-	KernelTable[9568] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9568] COMPILER-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9569] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9569] COMPILER-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n") }
-	KernelTable[9570] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9570] COMPILER-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9571] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9571] COMPILER-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9572] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9572] COMPILER-COMMIT-MAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9573] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9573] COMPILER-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9574] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9574] COMPILER-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9575] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9575] COMPILER-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9560] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9560] COMPILER-COMMIT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9561] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9561] COMPILER-COMMIT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9562] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9562] COMPILER-COMMIT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9563] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9563] COMPILER-COMMIT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9564] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9564] COMPILER-COMMIT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9565] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9565] COMPILER-COMMIT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
+	KernelTable[9566] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9566] COMPILER-COMMIT-QUANTIZED-UI (Go retro-membrane)\n")
+	}
+	KernelTable[9567] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9567] COMPILER-COMMIT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
+	KernelTable[9568] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9568] COMPILER-COMMIT-QUANTIZED-BFT (Go retro-membrane)\n")
+	}
+	KernelTable[9569] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9569] COMPILER-COMMIT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9570] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9570] COMPILER-COMMIT-MAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9571] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9571] COMPILER-COMMIT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9572] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9572] COMPILER-COMMIT-MAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9573] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9573] COMPILER-COMMIT-MAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9574] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9574] COMPILER-COMMIT-MAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9575] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9575] COMPILER-COMMIT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9576] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9576] COMPILER-COMMIT-MAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9577] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9577] COMPILER-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9577] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9577] COMPILER-COMMIT-MAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9578] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9578] COMPILER-COMMIT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9579] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9579] COMPILER-COMMIT-MAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9580] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9580] COMPILER-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9581] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9581] COMPILER-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9582] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9582] COMPILER-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9583] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9583] COMPILER-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9584] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9584] COMPILER-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9585] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9585] COMPILER-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9580] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9580] COMPILER-COMMIT-WRAPPED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9581] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9581] COMPILER-COMMIT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9582] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9582] COMPILER-COMMIT-WRAPPED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9583] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9583] COMPILER-COMMIT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9584] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9584] COMPILER-COMMIT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9585] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9585] COMPILER-COMMIT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9586] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9586] COMPILER-COMMIT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9587] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9587] COMPILER-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9587] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9587] COMPILER-COMMIT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9588] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9588] COMPILER-COMMIT-WRAPPED-BFT (Go retro-membrane)\n") }
-	KernelTable[9589] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9589] COMPILER-COMMIT-WRAPPED-CORE (Go retro-membrane)\n") }
-	KernelTable[9590] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9590] COMPILER-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9591] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9591] COMPILER-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9592] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9592] COMPILER-COMMIT-LOCKED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9593] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9593] COMPILER-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9594] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9594] COMPILER-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9595] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9595] COMPILER-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9589] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9589] COMPILER-COMMIT-WRAPPED-CORE (Go retro-membrane)\n")
+	}
+	KernelTable[9590] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9590] COMPILER-COMMIT-LOCKED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9591] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9591] COMPILER-COMMIT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9592] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9592] COMPILER-COMMIT-LOCKED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9593] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9593] COMPILER-COMMIT-LOCKED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9594] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9594] COMPILER-COMMIT-LOCKED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9595] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9595] COMPILER-COMMIT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9596] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9596] COMPILER-COMMIT-LOCKED-UI (Go retro-membrane)\n") }
-	KernelTable[9597] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9597] COMPILER-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9597] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9597] COMPILER-COMMIT-LOCKED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9598] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9598] COMPILER-COMMIT-LOCKED-BFT (Go retro-membrane)\n") }
 	KernelTable[9599] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9599] COMPILER-COMMIT-LOCKED-CORE (Go retro-membrane)\n") }
 	KernelTable[9600] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9600] COMPILER-SYNC-RAW-LOCAL (Go retro-membrane)\n") }
@@ -9773,41 +13619,73 @@ func InitKernel() {
 	KernelTable[9608] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9608] COMPILER-SYNC-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9609] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9609] COMPILER-SYNC-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9610] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9610] COMPILER-SYNC-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9611] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9611] COMPILER-SYNC-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9611] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9611] COMPILER-SYNC-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9612] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9612] COMPILER-SYNC-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9613] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9613] COMPILER-SYNC-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9614] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9614] COMPILER-SYNC-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9615] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9615] COMPILER-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9615] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9615] COMPILER-SYNC-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9616] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9616] COMPILER-SYNC-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9617] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9617] COMPILER-SYNC-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9618] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9618] COMPILER-SYNC-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9619] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9619] COMPILER-SYNC-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9620] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9620] COMPILER-SYNC-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9621] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9621] COMPILER-SYNC-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9621] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9621] COMPILER-SYNC-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9622] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9622] COMPILER-SYNC-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9623] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9623] COMPILER-SYNC-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9624] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9624] COMPILER-SYNC-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9625] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9625] COMPILER-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9623] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9623] COMPILER-SYNC-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9624] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9624] COMPILER-SYNC-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9625] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9625] COMPILER-SYNC-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9626] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9626] COMPILER-SYNC-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9627] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9627] COMPILER-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9627] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9627] COMPILER-SYNC-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9628] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9628] COMPILER-SYNC-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9629] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9629] COMPILER-SYNC-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9630] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9630] COMPILER-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9631] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9631] COMPILER-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9632] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9632] COMPILER-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9633] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9633] COMPILER-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9634] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9634] COMPILER-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9635] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9635] COMPILER-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9630] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9630] COMPILER-SYNC-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9631] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9631] COMPILER-SYNC-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9632] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9632] COMPILER-SYNC-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9633] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9633] COMPILER-SYNC-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9634] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9634] COMPILER-SYNC-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9635] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9635] COMPILER-SYNC-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9636] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9636] COMPILER-SYNC-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9637] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9637] COMPILER-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9637] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9637] COMPILER-SYNC-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9638] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9638] COMPILER-SYNC-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9639] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9639] COMPILER-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9639] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9639] COMPILER-SYNC-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9640] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9640] COMPILER-SYNC-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9641] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9641] COMPILER-SYNC-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9642] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9642] COMPILER-SYNC-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9643] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9643] COMPILER-SYNC-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9644] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9644] COMPILER-SYNC-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9645] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9645] COMPILER-SYNC-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9645] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9645] COMPILER-SYNC-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9646] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9646] COMPILER-SYNC-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9647] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9647] COMPILER-SYNC-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9648] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9648] COMPILER-SYNC-ASYNC-BFT (Go retro-membrane)\n") }
@@ -9822,42 +13700,76 @@ func InitKernel() {
 	KernelTable[9657] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9657] COMPILER-SYNC-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9658] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9658] COMPILER-SYNC-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9659] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9659] COMPILER-SYNC-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9660] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9660] COMPILER-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9661] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9661] COMPILER-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9662] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9662] COMPILER-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9663] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9663] COMPILER-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9664] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9664] COMPILER-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9665] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9665] COMPILER-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9660] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9660] COMPILER-SYNC-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9661] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9661] COMPILER-SYNC-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9662] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9662] COMPILER-SYNC-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9663] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9663] COMPILER-SYNC-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9664] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9664] COMPILER-SYNC-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9665] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9665] COMPILER-SYNC-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9666] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9666] COMPILER-SYNC-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9667] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9667] COMPILER-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9667] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9667] COMPILER-SYNC-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9668] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9668] COMPILER-SYNC-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9669] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9669] COMPILER-SYNC-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9669] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9669] COMPILER-SYNC-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9670] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9670] COMPILER-SYNC-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9671] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9671] COMPILER-SYNC-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9671] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9671] COMPILER-SYNC-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9672] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9672] COMPILER-SYNC-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9673] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9673] COMPILER-SYNC-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9674] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9674] COMPILER-SYNC-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9675] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9675] COMPILER-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9675] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9675] COMPILER-SYNC-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9676] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9676] COMPILER-SYNC-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9677] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9677] COMPILER-SYNC-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9678] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9678] COMPILER-SYNC-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9679] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9679] COMPILER-SYNC-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9680] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9680] COMPILER-SYNC-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9681] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9681] COMPILER-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9681] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9681] COMPILER-SYNC-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9682] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9682] COMPILER-SYNC-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9683] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9683] COMPILER-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9684] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9684] COMPILER-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9685] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9685] COMPILER-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9683] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9683] COMPILER-SYNC-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9684] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9684] COMPILER-SYNC-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9685] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9685] COMPILER-SYNC-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9686] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9686] COMPILER-SYNC-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9687] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9687] COMPILER-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9687] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9687] COMPILER-SYNC-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9688] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9688] COMPILER-SYNC-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9689] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9689] COMPILER-SYNC-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9690] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9690] COMPILER-SYNC-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9691] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9691] COMPILER-SYNC-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9691] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9691] COMPILER-SYNC-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9692] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9692] COMPILER-SYNC-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9693] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9693] COMPILER-SYNC-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9694] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9694] COMPILER-SYNC-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9695] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9695] COMPILER-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9695] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9695] COMPILER-SYNC-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9696] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9696] COMPILER-SYNC-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9697] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9697] COMPILER-SYNC-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9698] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9698] COMPILER-SYNC-LOCKED-BFT (Go retro-membrane)\n") }
@@ -9873,41 +13785,73 @@ func InitKernel() {
 	KernelTable[9708] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9708] COMPILER-HALT-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9709] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9709] COMPILER-HALT-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9710] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9710] COMPILER-HALT-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9711] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9711] COMPILER-HALT-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9711] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9711] COMPILER-HALT-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9712] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9712] COMPILER-HALT-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9713] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9713] COMPILER-HALT-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9714] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9714] COMPILER-HALT-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9715] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9715] COMPILER-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9715] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9715] COMPILER-HALT-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9716] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9716] COMPILER-HALT-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9717] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9717] COMPILER-HALT-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9718] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9718] COMPILER-HALT-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9719] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9719] COMPILER-HALT-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9720] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9720] COMPILER-HALT-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9721] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9721] COMPILER-HALT-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9721] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9721] COMPILER-HALT-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9722] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9722] COMPILER-HALT-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9723] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9723] COMPILER-HALT-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9724] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9724] COMPILER-HALT-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9725] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9725] COMPILER-HALT-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9723] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9723] COMPILER-HALT-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9724] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9724] COMPILER-HALT-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9725] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9725] COMPILER-HALT-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9726] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9726] COMPILER-HALT-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9727] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9727] COMPILER-HALT-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9727] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9727] COMPILER-HALT-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9728] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9728] COMPILER-HALT-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9729] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9729] COMPILER-HALT-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9730] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9730] COMPILER-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9731] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9731] COMPILER-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9732] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9732] COMPILER-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9733] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9733] COMPILER-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9734] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9734] COMPILER-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9735] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9735] COMPILER-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9730] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9730] COMPILER-HALT-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9731] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9731] COMPILER-HALT-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9732] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9732] COMPILER-HALT-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9733] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9733] COMPILER-HALT-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9734] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9734] COMPILER-HALT-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9735] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9735] COMPILER-HALT-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9736] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9736] COMPILER-HALT-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9737] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9737] COMPILER-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9737] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9737] COMPILER-HALT-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9738] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9738] COMPILER-HALT-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9739] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9739] COMPILER-HALT-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9739] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9739] COMPILER-HALT-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9740] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9740] COMPILER-HALT-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9741] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9741] COMPILER-HALT-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9742] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9742] COMPILER-HALT-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9743] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9743] COMPILER-HALT-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9744] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9744] COMPILER-HALT-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9745] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9745] COMPILER-HALT-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9745] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9745] COMPILER-HALT-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9746] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9746] COMPILER-HALT-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9747] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9747] COMPILER-HALT-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9748] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9748] COMPILER-HALT-ASYNC-BFT (Go retro-membrane)\n") }
@@ -9922,42 +13866,76 @@ func InitKernel() {
 	KernelTable[9757] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9757] COMPILER-HALT-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9758] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9758] COMPILER-HALT-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9759] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9759] COMPILER-HALT-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9760] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9760] COMPILER-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9761] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9761] COMPILER-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9762] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9762] COMPILER-HALT-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9763] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9763] COMPILER-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9764] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9764] COMPILER-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9765] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9765] COMPILER-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9760] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9760] COMPILER-HALT-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9761] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9761] COMPILER-HALT-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9762] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9762] COMPILER-HALT-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9763] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9763] COMPILER-HALT-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9764] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9764] COMPILER-HALT-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9765] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9765] COMPILER-HALT-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9766] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9766] COMPILER-HALT-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9767] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9767] COMPILER-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9767] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9767] COMPILER-HALT-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9768] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9768] COMPILER-HALT-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9769] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9769] COMPILER-HALT-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9769] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9769] COMPILER-HALT-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9770] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9770] COMPILER-HALT-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9771] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9771] COMPILER-HALT-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9771] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9771] COMPILER-HALT-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9772] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9772] COMPILER-HALT-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9773] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9773] COMPILER-HALT-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9774] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9774] COMPILER-HALT-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9775] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9775] COMPILER-HALT-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9775] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9775] COMPILER-HALT-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9776] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9776] COMPILER-HALT-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9777] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9777] COMPILER-HALT-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9778] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9778] COMPILER-HALT-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9779] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9779] COMPILER-HALT-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9780] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9780] COMPILER-HALT-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9781] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9781] COMPILER-HALT-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9781] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9781] COMPILER-HALT-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9782] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9782] COMPILER-HALT-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9783] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9783] COMPILER-HALT-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9784] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9784] COMPILER-HALT-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9785] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9785] COMPILER-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9783] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9783] COMPILER-HALT-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9784] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9784] COMPILER-HALT-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9785] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9785] COMPILER-HALT-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9786] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9786] COMPILER-HALT-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9787] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9787] COMPILER-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9787] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9787] COMPILER-HALT-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9788] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9788] COMPILER-HALT-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9789] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9789] COMPILER-HALT-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9790] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9790] COMPILER-HALT-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9791] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9791] COMPILER-HALT-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9791] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9791] COMPILER-HALT-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9792] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9792] COMPILER-HALT-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9793] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9793] COMPILER-HALT-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9794] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9794] COMPILER-HALT-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9795] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9795] COMPILER-HALT-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9795] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9795] COMPILER-HALT-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9796] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9796] COMPILER-HALT-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9797] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9797] COMPILER-HALT-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9798] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9798] COMPILER-HALT-LOCKED-BFT (Go retro-membrane)\n") }
@@ -9973,41 +13951,73 @@ func InitKernel() {
 	KernelTable[9808] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9808] COMPILER-FORK-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9809] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9809] COMPILER-FORK-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9810] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9810] COMPILER-FORK-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9811] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9811] COMPILER-FORK-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9811] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9811] COMPILER-FORK-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9812] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9812] COMPILER-FORK-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9813] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9813] COMPILER-FORK-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9814] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9814] COMPILER-FORK-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9815] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9815] COMPILER-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9815] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9815] COMPILER-FORK-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9816] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9816] COMPILER-FORK-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9817] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9817] COMPILER-FORK-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9818] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9818] COMPILER-FORK-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9819] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9819] COMPILER-FORK-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9820] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9820] COMPILER-FORK-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9821] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9821] COMPILER-FORK-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9821] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9821] COMPILER-FORK-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9822] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9822] COMPILER-FORK-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9823] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9823] COMPILER-FORK-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9824] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9824] COMPILER-FORK-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9825] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9825] COMPILER-FORK-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9823] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9823] COMPILER-FORK-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9824] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9824] COMPILER-FORK-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9825] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9825] COMPILER-FORK-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9826] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9826] COMPILER-FORK-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9827] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9827] COMPILER-FORK-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9827] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9827] COMPILER-FORK-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9828] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9828] COMPILER-FORK-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9829] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9829] COMPILER-FORK-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9830] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9830] COMPILER-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9831] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9831] COMPILER-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9832] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9832] COMPILER-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9833] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9833] COMPILER-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9834] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9834] COMPILER-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9835] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9835] COMPILER-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9830] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9830] COMPILER-FORK-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9831] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9831] COMPILER-FORK-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9832] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9832] COMPILER-FORK-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9833] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9833] COMPILER-FORK-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9834] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9834] COMPILER-FORK-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9835] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9835] COMPILER-FORK-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9836] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9836] COMPILER-FORK-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9837] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9837] COMPILER-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9837] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9837] COMPILER-FORK-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9838] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9838] COMPILER-FORK-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9839] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9839] COMPILER-FORK-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9839] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9839] COMPILER-FORK-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9840] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9840] COMPILER-FORK-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9841] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9841] COMPILER-FORK-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9842] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9842] COMPILER-FORK-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9843] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9843] COMPILER-FORK-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9844] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9844] COMPILER-FORK-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9845] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9845] COMPILER-FORK-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9845] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9845] COMPILER-FORK-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9846] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9846] COMPILER-FORK-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9847] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9847] COMPILER-FORK-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9848] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9848] COMPILER-FORK-ASYNC-BFT (Go retro-membrane)\n") }
@@ -10022,42 +14032,76 @@ func InitKernel() {
 	KernelTable[9857] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9857] COMPILER-FORK-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9858] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9858] COMPILER-FORK-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9859] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9859] COMPILER-FORK-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9860] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9860] COMPILER-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9861] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9861] COMPILER-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9862] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9862] COMPILER-FORK-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9863] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9863] COMPILER-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9864] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9864] COMPILER-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9865] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9865] COMPILER-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9860] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9860] COMPILER-FORK-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9861] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9861] COMPILER-FORK-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9862] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9862] COMPILER-FORK-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9863] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9863] COMPILER-FORK-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9864] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9864] COMPILER-FORK-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9865] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9865] COMPILER-FORK-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9866] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9866] COMPILER-FORK-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9867] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9867] COMPILER-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9867] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9867] COMPILER-FORK-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9868] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9868] COMPILER-FORK-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9869] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9869] COMPILER-FORK-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9869] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9869] COMPILER-FORK-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9870] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9870] COMPILER-FORK-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9871] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9871] COMPILER-FORK-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9871] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9871] COMPILER-FORK-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9872] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9872] COMPILER-FORK-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9873] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9873] COMPILER-FORK-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9874] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9874] COMPILER-FORK-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9875] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9875] COMPILER-FORK-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9875] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9875] COMPILER-FORK-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9876] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9876] COMPILER-FORK-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9877] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9877] COMPILER-FORK-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9878] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9878] COMPILER-FORK-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9879] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9879] COMPILER-FORK-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9880] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9880] COMPILER-FORK-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9881] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9881] COMPILER-FORK-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9881] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9881] COMPILER-FORK-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9882] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9882] COMPILER-FORK-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9883] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9883] COMPILER-FORK-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9884] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9884] COMPILER-FORK-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9885] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9885] COMPILER-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9883] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9883] COMPILER-FORK-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9884] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9884] COMPILER-FORK-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9885] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9885] COMPILER-FORK-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9886] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9886] COMPILER-FORK-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9887] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9887] COMPILER-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9887] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9887] COMPILER-FORK-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9888] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9888] COMPILER-FORK-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9889] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9889] COMPILER-FORK-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9890] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9890] COMPILER-FORK-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9891] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9891] COMPILER-FORK-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9891] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9891] COMPILER-FORK-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9892] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9892] COMPILER-FORK-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9893] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9893] COMPILER-FORK-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9894] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9894] COMPILER-FORK-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9895] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9895] COMPILER-FORK-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9895] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9895] COMPILER-FORK-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9896] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9896] COMPILER-FORK-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9897] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9897] COMPILER-FORK-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9898] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9898] COMPILER-FORK-LOCKED-BFT (Go retro-membrane)\n") }
@@ -10073,41 +14117,73 @@ func InitKernel() {
 	KernelTable[9908] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9908] COMPILER-JOIN-RAW-BFT (Go retro-membrane)\n") }
 	KernelTable[9909] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9909] COMPILER-JOIN-RAW-CORE (Go retro-membrane)\n") }
 	KernelTable[9910] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9910] COMPILER-JOIN-ATOMIC-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9911] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9911] COMPILER-JOIN-ATOMIC-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9911] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9911] COMPILER-JOIN-ATOMIC-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9912] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9912] COMPILER-JOIN-ATOMIC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9913] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9913] COMPILER-JOIN-ATOMIC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9914] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9914] COMPILER-JOIN-ATOMIC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9915] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9915] COMPILER-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9915] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9915] COMPILER-JOIN-ATOMIC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9916] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9916] COMPILER-JOIN-ATOMIC-UI (Go retro-membrane)\n") }
 	KernelTable[9917] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9917] COMPILER-JOIN-ATOMIC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9918] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9918] COMPILER-JOIN-ATOMIC-BFT (Go retro-membrane)\n") }
 	KernelTable[9919] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9919] COMPILER-JOIN-ATOMIC-CORE (Go retro-membrane)\n") }
 	KernelTable[9920] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9920] COMPILER-JOIN-PERSIST-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9921] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9921] COMPILER-JOIN-PERSIST-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9921] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9921] COMPILER-JOIN-PERSIST-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9922] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9922] COMPILER-JOIN-PERSIST-SWARM (Go retro-membrane)\n") }
-	KernelTable[9923] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9923] COMPILER-JOIN-PERSIST-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9924] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9924] COMPILER-JOIN-PERSIST-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9925] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9925] COMPILER-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9923] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9923] COMPILER-JOIN-PERSIST-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9924] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9924] COMPILER-JOIN-PERSIST-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9925] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9925] COMPILER-JOIN-PERSIST-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9926] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9926] COMPILER-JOIN-PERSIST-UI (Go retro-membrane)\n") }
-	KernelTable[9927] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9927] COMPILER-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9927] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9927] COMPILER-JOIN-PERSIST-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9928] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9928] COMPILER-JOIN-PERSIST-BFT (Go retro-membrane)\n") }
 	KernelTable[9929] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9929] COMPILER-JOIN-PERSIST-CORE (Go retro-membrane)\n") }
-	KernelTable[9930] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9930] COMPILER-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9931] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9931] COMPILER-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9932] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9932] COMPILER-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n") }
-	KernelTable[9933] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9933] COMPILER-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9934] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9934] COMPILER-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9935] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9935] COMPILER-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9930] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9930] COMPILER-JOIN-EPHEMERAL-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9931] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9931] COMPILER-JOIN-EPHEMERAL-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9932] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9932] COMPILER-JOIN-EPHEMERAL-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9933] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9933] COMPILER-JOIN-EPHEMERAL-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9934] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9934] COMPILER-JOIN-EPHEMERAL-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9935] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9935] COMPILER-JOIN-EPHEMERAL-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9936] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9936] COMPILER-JOIN-EPHEMERAL-UI (Go retro-membrane)\n") }
-	KernelTable[9937] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9937] COMPILER-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9937] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9937] COMPILER-JOIN-EPHEMERAL-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9938] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9938] COMPILER-JOIN-EPHEMERAL-BFT (Go retro-membrane)\n") }
-	KernelTable[9939] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9939] COMPILER-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n") }
+	KernelTable[9939] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9939] COMPILER-JOIN-EPHEMERAL-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9940] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9940] COMPILER-JOIN-ASYNC-LOCAL (Go retro-membrane)\n") }
 	KernelTable[9941] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9941] COMPILER-JOIN-ASYNC-NETWORK (Go retro-membrane)\n") }
 	KernelTable[9942] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9942] COMPILER-JOIN-ASYNC-SWARM (Go retro-membrane)\n") }
 	KernelTable[9943] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9943] COMPILER-JOIN-ASYNC-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9944] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9944] COMPILER-JOIN-ASYNC-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9945] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9945] COMPILER-JOIN-ASYNC-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9945] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9945] COMPILER-JOIN-ASYNC-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9946] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9946] COMPILER-JOIN-ASYNC-UI (Go retro-membrane)\n") }
 	KernelTable[9947] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9947] COMPILER-JOIN-ASYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9948] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9948] COMPILER-JOIN-ASYNC-BFT (Go retro-membrane)\n") }
@@ -10122,42 +14198,76 @@ func InitKernel() {
 	KernelTable[9957] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9957] COMPILER-JOIN-SYNC-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9958] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9958] COMPILER-JOIN-SYNC-BFT (Go retro-membrane)\n") }
 	KernelTable[9959] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9959] COMPILER-JOIN-SYNC-CORE (Go retro-membrane)\n") }
-	KernelTable[9960] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9960] COMPILER-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9961] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9961] COMPILER-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n") }
-	KernelTable[9962] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9962] COMPILER-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9963] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9963] COMPILER-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9964] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9964] COMPILER-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9965] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9965] COMPILER-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9960] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9960] COMPILER-JOIN-QUANTIZED-LOCAL (Go retro-membrane)\n")
+	}
+	KernelTable[9961] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9961] COMPILER-JOIN-QUANTIZED-NETWORK (Go retro-membrane)\n")
+	}
+	KernelTable[9962] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9962] COMPILER-JOIN-QUANTIZED-SWARM (Go retro-membrane)\n")
+	}
+	KernelTable[9963] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9963] COMPILER-JOIN-QUANTIZED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9964] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9964] COMPILER-JOIN-QUANTIZED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9965] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9965] COMPILER-JOIN-QUANTIZED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9966] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9966] COMPILER-JOIN-QUANTIZED-UI (Go retro-membrane)\n") }
-	KernelTable[9967] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9967] COMPILER-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9967] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9967] COMPILER-JOIN-QUANTIZED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9968] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9968] COMPILER-JOIN-QUANTIZED-BFT (Go retro-membrane)\n") }
-	KernelTable[9969] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9969] COMPILER-JOIN-QUANTIZED-CORE (Go retro-membrane)\n") }
+	KernelTable[9969] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9969] COMPILER-JOIN-QUANTIZED-CORE (Go retro-membrane)\n")
+	}
 	KernelTable[9970] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9970] COMPILER-JOIN-MAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9971] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9971] COMPILER-JOIN-MAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9971] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9971] COMPILER-JOIN-MAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9972] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9972] COMPILER-JOIN-MAPPED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9973] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9973] COMPILER-JOIN-MAPPED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9974] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9974] COMPILER-JOIN-MAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9975] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9975] COMPILER-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9975] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9975] COMPILER-JOIN-MAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9976] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9976] COMPILER-JOIN-MAPPED-UI (Go retro-membrane)\n") }
 	KernelTable[9977] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9977] COMPILER-JOIN-MAPPED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9978] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9978] COMPILER-JOIN-MAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9979] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9979] COMPILER-JOIN-MAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9980] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9980] COMPILER-JOIN-WRAPPED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9981] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9981] COMPILER-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9981] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9981] COMPILER-JOIN-WRAPPED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9982] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9982] COMPILER-JOIN-WRAPPED-SWARM (Go retro-membrane)\n") }
-	KernelTable[9983] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9983] COMPILER-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n") }
-	KernelTable[9984] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9984] COMPILER-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9985] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9985] COMPILER-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9983] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9983] COMPILER-JOIN-WRAPPED-LEDGER (Go retro-membrane)\n")
+	}
+	KernelTable[9984] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9984] COMPILER-JOIN-WRAPPED-MEMORY (Go retro-membrane)\n")
+	}
+	KernelTable[9985] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9985] COMPILER-JOIN-WRAPPED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9986] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9986] COMPILER-JOIN-WRAPPED-UI (Go retro-membrane)\n") }
-	KernelTable[9987] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9987] COMPILER-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n") }
+	KernelTable[9987] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9987] COMPILER-JOIN-WRAPPED-SYSTEM (Go retro-membrane)\n")
+	}
 	KernelTable[9988] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9988] COMPILER-JOIN-WRAPPED-BFT (Go retro-membrane)\n") }
 	KernelTable[9989] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9989] COMPILER-JOIN-WRAPPED-CORE (Go retro-membrane)\n") }
 	KernelTable[9990] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9990] COMPILER-JOIN-LOCKED-LOCAL (Go retro-membrane)\n") }
-	KernelTable[9991] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9991] COMPILER-JOIN-LOCKED-NETWORK (Go retro-membrane)\n") }
+	KernelTable[9991] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9991] COMPILER-JOIN-LOCKED-NETWORK (Go retro-membrane)\n")
+	}
 	KernelTable[9992] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9992] COMPILER-JOIN-LOCKED-SWARM (Go retro-membrane)\n") }
 	KernelTable[9993] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9993] COMPILER-JOIN-LOCKED-LEDGER (Go retro-membrane)\n") }
 	KernelTable[9994] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9994] COMPILER-JOIN-LOCKED-MEMORY (Go retro-membrane)\n") }
-	KernelTable[9995] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9995] COMPILER-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n") }
+	KernelTable[9995] = func(id PrimitiveIdentity) {
+		fmt.Printf("⚡ [9995] COMPILER-JOIN-LOCKED-DISPATCH (Go retro-membrane)\n")
+	}
 	KernelTable[9996] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9996] COMPILER-JOIN-LOCKED-UI (Go retro-membrane)\n") }
 	KernelTable[9997] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9997] COMPILER-JOIN-LOCKED-SYSTEM (Go retro-membrane)\n") }
 	KernelTable[9998] = func(id PrimitiveIdentity) { fmt.Printf("⚡ [9998] COMPILER-JOIN-LOCKED-BFT (Go retro-membrane)\n") }
@@ -10169,16 +14279,16 @@ func Dispatch(d, p, m, t byte) error {
 	if err != nil {
 		return err
 	}
-	
+
 	if KernelTable[identity.Code] == nil {
 		return errors.New("kernel not initialized")
 	}
-	
+
 	if identity.Modifier == 4 { // ModifierAsync
 		go KernelTable[identity.Code](identity)
 		return nil
 	}
-	
+
 	KernelTable[identity.Code](identity)
 	return nil
 }

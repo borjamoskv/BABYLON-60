@@ -14,87 +14,120 @@ type ObserverPrimitive int
 type ObserverModifier int
 
 const (
-	ObserverDomainSource ObserverDomain = 0
-	ObserverDomainMatrix ObserverDomain = 1
-	ObserverDomainPulse ObserverDomain = 2
-	ObserverDomainKinetic ObserverDomain = 3
-	ObserverDomainLogic ObserverDomain = 4
-	ObserverDomainVector ObserverDomain = 5
-	ObserverDomainStorage ObserverDomain = 6
-	ObserverDomainOsint ObserverDomain = 7
-	ObserverDomainClock ObserverDomain = 8
+	ObserverDomainSource   ObserverDomain = 0
+	ObserverDomainMatrix   ObserverDomain = 1
+	ObserverDomainPulse    ObserverDomain = 2
+	ObserverDomainKinetic  ObserverDomain = 3
+	ObserverDomainLogic    ObserverDomain = 4
+	ObserverDomainVector   ObserverDomain = 5
+	ObserverDomainStorage  ObserverDomain = 6
+	ObserverDomainOsint    ObserverDomain = 7
+	ObserverDomainClock    ObserverDomain = 8
 	ObserverDomainCompiler ObserverDomain = 9
 
 	// Observer Primitives
-	ObserverPrimitiveInit ObserverPrimitive = 0
-	ObserverPrimitivePredict ObserverPrimitive = 1
-	ObserverPrimitiveUpdate ObserverPrimitive = 2
-	ObserverPrimitiveInnovation ObserverPrimitive = 3
-	ObserverPrimitiveGain ObserverPrimitive = 4
-	ObserverPrimitiveCovariance ObserverPrimitive = 5
-	ObserverPrimitiveDriftcheck ObserverPrimitive = 6
-	ObserverPrimitiveReconstruct ObserverPrimitive = 7
+	ObserverPrimitiveInit         ObserverPrimitive = 0
+	ObserverPrimitivePredict      ObserverPrimitive = 1
+	ObserverPrimitiveUpdate       ObserverPrimitive = 2
+	ObserverPrimitiveInnovation   ObserverPrimitive = 3
+	ObserverPrimitiveGain         ObserverPrimitive = 4
+	ObserverPrimitiveCovariance   ObserverPrimitive = 5
+	ObserverPrimitiveDriftcheck   ObserverPrimitive = 6
+	ObserverPrimitiveReconstruct  ObserverPrimitive = 7
 	ObserverPrimitiveSanityassert ObserverPrimitive = 8
-	ObserverPrimitiveFlushledger ObserverPrimitive = 9
+	ObserverPrimitiveFlushledger  ObserverPrimitive = 9
 
 	// Observer Modifiers
-	ObserverModifierRaw ObserverModifier = 0
-	ObserverModifierAtomic ObserverModifier = 1
-	ObserverModifierKalmanextended ObserverModifier = 2
+	ObserverModifierRaw             ObserverModifier = 0
+	ObserverModifierAtomic          ObserverModifier = 1
+	ObserverModifierKalmanextended  ObserverModifier = 2
 	ObserverModifierLuenbergerrigid ObserverModifier = 3
-	ObserverModifierParticlepf ObserverModifier = 4
-	ObserverModifierSlidingmode ObserverModifier = 5
-	ObserverModifierQuantized ObserverModifier = 6
-	ObserverModifierAdaptiver ObserverModifier = 7
-	ObserverModifierNeurallatent ObserverModifier = 8
-	ObserverModifierBftconsensus ObserverModifier = 9
+	ObserverModifierParticlepf      ObserverModifier = 4
+	ObserverModifierSlidingmode     ObserverModifier = 5
+	ObserverModifierQuantized       ObserverModifier = 6
+	ObserverModifierAdaptiver       ObserverModifier = 7
+	ObserverModifierNeurallatent    ObserverModifier = 8
+	ObserverModifierBftconsensus    ObserverModifier = 9
 )
 
 func (d ObserverDomain) String() string {
 	switch d {
-	case 0: return "SOURCE"
-	case 1: return "MATRIX"
-	case 2: return "PULSE"
-	case 3: return "KINETIC"
-	case 4: return "LOGIC"
-	case 5: return "VECTOR"
-	case 6: return "STORAGE"
-	case 7: return "OSINT"
-	case 8: return "CLOCK"
-	case 9: return "COMPILER"
-	default: return "UNKNOWN"
+	case 0:
+		return "SOURCE"
+	case 1:
+		return "MATRIX"
+	case 2:
+		return "PULSE"
+	case 3:
+		return "KINETIC"
+	case 4:
+		return "LOGIC"
+	case 5:
+		return "VECTOR"
+	case 6:
+		return "STORAGE"
+	case 7:
+		return "OSINT"
+	case 8:
+		return "CLOCK"
+	case 9:
+		return "COMPILER"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p ObserverPrimitive) String() string {
 	switch p {
-	case 0: return "INIT"
-	case 1: return "PREDICT"
-	case 2: return "UPDATE"
-	case 3: return "INNOVATION"
-	case 4: return "GAIN"
-	case 5: return "COVARIANCE"
-	case 6: return "DRIFT_CHECK"
-	case 7: return "RECONSTRUCT"
-	case 8: return "SANITY_ASSERT"
-	case 9: return "FLUSH_LEDGER"
-	default: return "UNKNOWN"
+	case 0:
+		return "INIT"
+	case 1:
+		return "PREDICT"
+	case 2:
+		return "UPDATE"
+	case 3:
+		return "INNOVATION"
+	case 4:
+		return "GAIN"
+	case 5:
+		return "COVARIANCE"
+	case 6:
+		return "DRIFT_CHECK"
+	case 7:
+		return "RECONSTRUCT"
+	case 8:
+		return "SANITY_ASSERT"
+	case 9:
+		return "FLUSH_LEDGER"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m ObserverModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "ATOMIC"
-	case 2: return "KALMAN_EXTENDED"
-	case 3: return "LUENBERGER_RIGID"
-	case 4: return "PARTICLE_PF"
-	case 5: return "SLIDING_MODE"
-	case 6: return "QUANTIZED"
-	case 7: return "ADAPTIVE_R"
-	case 8: return "NEURAL_LATENT"
-	case 9: return "BFT_CONSENSUS"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "ATOMIC"
+	case 2:
+		return "KALMAN_EXTENDED"
+	case 3:
+		return "LUENBERGER_RIGID"
+	case 4:
+		return "PARTICLE_PF"
+	case 5:
+		return "SLIDING_MODE"
+	case 6:
+		return "QUANTIZED"
+	case 7:
+		return "ADAPTIVE_R"
+	case 8:
+		return "NEURAL_LATENT"
+	case 9:
+		return "BFT_CONSENSUS"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -107,11 +140,11 @@ type StateObserverIdentity struct {
 }
 
 type StateVector struct {
-	States      [4]float64
-	Covariance  [4][4]float64
-	Innovation  [4]float64
-	Gain        [4][4]float64
-	NormError   float64
+	States         [4]float64
+	Covariance     [4][4]float64
+	Innovation     [4]float64
+	Gain           [4][4]float64
+	NormError      float64
 	ExecutionCount uint64
 }
 
@@ -133,9 +166,9 @@ func ResolveStateObserverIdentity(d, p, m byte) (StateObserverIdentity, error) {
 type StateObserverHandler func(id StateObserverIdentity, state *StateVector) error
 
 var (
-	StateObserverTable [1000]StateObserverHandler
+	StateObserverTable   [1000]StateObserverHandler
 	StateObserverMetrics [1000]uint64
-	ObserverMutex sync.RWMutex
+	ObserverMutex        sync.RWMutex
 )
 
 func InitStateObserverKernel() {
@@ -144,9 +177,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -156,9 +189,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -168,9 +201,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -180,9 +213,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -192,9 +225,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -204,9 +237,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -216,9 +249,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -228,9 +261,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -240,9 +273,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -252,9 +285,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -264,9 +297,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -276,9 +309,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -288,9 +321,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -300,9 +333,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -312,9 +345,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -324,9 +357,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -336,9 +369,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -348,9 +381,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -360,9 +393,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -372,9 +405,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -384,9 +417,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -396,9 +429,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -408,9 +441,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -420,9 +453,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -432,9 +465,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -444,9 +477,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -456,9 +489,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -468,9 +501,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -480,9 +513,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -492,9 +525,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -504,9 +537,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -516,9 +549,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -528,9 +561,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -540,9 +573,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -552,9 +585,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -564,9 +597,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -576,9 +609,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -588,9 +621,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -600,9 +633,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -612,9 +645,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -624,9 +657,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -636,9 +669,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -648,9 +681,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -660,9 +693,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -672,9 +705,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -684,9 +717,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -696,9 +729,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -708,9 +741,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -720,9 +753,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -732,9 +765,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -744,9 +777,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -756,9 +789,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -768,9 +801,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -780,9 +813,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -792,9 +825,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -804,9 +837,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -816,9 +849,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -828,9 +861,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -840,9 +873,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -852,9 +885,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -864,9 +897,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -876,9 +909,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -888,9 +921,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -900,9 +933,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -912,9 +945,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -924,9 +957,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -936,9 +969,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -948,9 +981,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -960,9 +993,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -972,9 +1005,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -984,9 +1017,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -996,9 +1029,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1008,9 +1041,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1020,9 +1053,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1032,9 +1065,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1044,9 +1077,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1056,9 +1089,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1068,9 +1101,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1080,9 +1113,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1092,9 +1125,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1104,9 +1137,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1116,9 +1149,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1128,9 +1161,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1140,9 +1173,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1152,9 +1185,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1164,9 +1197,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1176,9 +1209,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1188,9 +1221,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1200,9 +1233,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1212,9 +1245,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1224,9 +1257,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1236,9 +1269,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1248,9 +1281,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1260,9 +1293,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1272,9 +1305,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1284,9 +1317,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1296,9 +1329,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1308,9 +1341,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1320,9 +1353,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1332,9 +1365,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for SOURCE:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1344,9 +1377,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1356,9 +1389,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1368,9 +1401,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1380,9 +1413,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1392,9 +1425,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1404,9 +1437,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1416,9 +1449,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1428,9 +1461,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1440,9 +1473,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1452,9 +1485,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1464,9 +1497,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1476,9 +1509,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1488,9 +1521,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1500,9 +1533,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1512,9 +1545,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1524,9 +1557,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1536,9 +1569,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1548,9 +1581,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1560,9 +1593,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1572,9 +1605,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1584,9 +1617,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1596,9 +1629,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1608,9 +1641,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1620,9 +1653,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1632,9 +1665,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1644,9 +1677,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1656,9 +1689,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1668,9 +1701,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1680,9 +1713,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1692,9 +1725,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1704,9 +1737,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1716,9 +1749,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1728,9 +1761,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1740,9 +1773,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1752,9 +1785,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1764,9 +1797,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1776,9 +1809,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1788,9 +1821,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1800,9 +1833,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1812,9 +1845,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1824,9 +1857,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1836,9 +1869,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1848,9 +1881,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1860,9 +1893,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1872,9 +1905,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1884,9 +1917,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1896,9 +1929,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1908,9 +1941,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1920,9 +1953,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1932,9 +1965,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1944,9 +1977,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1956,9 +1989,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1968,9 +2001,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1980,9 +2013,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -1992,9 +2025,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2004,9 +2037,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2016,9 +2049,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2028,9 +2061,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2040,9 +2073,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2052,9 +2085,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2064,9 +2097,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2076,9 +2109,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2088,9 +2121,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2100,9 +2133,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2112,9 +2145,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2124,9 +2157,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2136,9 +2169,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2148,9 +2181,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2160,9 +2193,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2172,9 +2205,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2184,9 +2217,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2196,9 +2229,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2208,9 +2241,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2220,9 +2253,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2232,9 +2265,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2244,9 +2277,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2256,9 +2289,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2268,9 +2301,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2280,9 +2313,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2292,9 +2325,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2304,9 +2337,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2316,9 +2349,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2328,9 +2361,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2340,9 +2373,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2352,9 +2385,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2364,9 +2397,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2376,9 +2409,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2388,9 +2421,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2400,9 +2433,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2412,9 +2445,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2424,9 +2457,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2436,9 +2469,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2448,9 +2481,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2460,9 +2493,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2472,9 +2505,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2484,9 +2517,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2496,9 +2529,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2508,9 +2541,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2520,9 +2553,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2532,9 +2565,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for MATRIX:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2544,9 +2577,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2556,9 +2589,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2568,9 +2601,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2580,9 +2613,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2592,9 +2625,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2604,9 +2637,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2616,9 +2649,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2628,9 +2661,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2640,9 +2673,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2652,9 +2685,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2664,9 +2697,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2676,9 +2709,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2688,9 +2721,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2700,9 +2733,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2712,9 +2745,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2724,9 +2757,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2736,9 +2769,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2748,9 +2781,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2760,9 +2793,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2772,9 +2805,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2784,9 +2817,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2796,9 +2829,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2808,9 +2841,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2820,9 +2853,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2832,9 +2865,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2844,9 +2877,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2856,9 +2889,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2868,9 +2901,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2880,9 +2913,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2892,9 +2925,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2904,9 +2937,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2916,9 +2949,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2928,9 +2961,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2940,9 +2973,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2952,9 +2985,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2964,9 +2997,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2976,9 +3009,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -2988,9 +3021,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3000,9 +3033,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3012,9 +3045,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3024,9 +3057,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3036,9 +3069,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3048,9 +3081,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3060,9 +3093,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3072,9 +3105,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3084,9 +3117,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3096,9 +3129,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3108,9 +3141,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3120,9 +3153,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3132,9 +3165,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3144,9 +3177,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3156,9 +3189,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3168,9 +3201,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3180,9 +3213,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3192,9 +3225,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3204,9 +3237,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3216,9 +3249,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3228,9 +3261,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3240,9 +3273,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3252,9 +3285,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3264,9 +3297,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3276,9 +3309,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3288,9 +3321,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3300,9 +3333,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3312,9 +3345,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3324,9 +3357,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3336,9 +3369,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3348,9 +3381,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3360,9 +3393,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3372,9 +3405,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3384,9 +3417,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3396,9 +3429,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3408,9 +3441,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3420,9 +3453,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3432,9 +3465,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3444,9 +3477,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3456,9 +3489,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3468,9 +3501,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3480,9 +3513,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3492,9 +3525,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3504,9 +3537,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3516,9 +3549,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3528,9 +3561,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3540,9 +3573,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3552,9 +3585,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3564,9 +3597,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3576,9 +3609,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3588,9 +3621,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3600,9 +3633,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3612,9 +3645,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3624,9 +3657,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3636,9 +3669,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3648,9 +3681,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3660,9 +3693,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3672,9 +3705,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3684,9 +3717,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3696,9 +3729,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3708,9 +3741,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3720,9 +3753,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3732,9 +3765,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for PULSE:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3744,9 +3777,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3756,9 +3789,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3768,9 +3801,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3780,9 +3813,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3792,9 +3825,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3804,9 +3837,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3816,9 +3849,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3828,9 +3861,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3840,9 +3873,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3852,9 +3885,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3864,9 +3897,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3876,9 +3909,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3888,9 +3921,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3900,9 +3933,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3912,9 +3945,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3924,9 +3957,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3936,9 +3969,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3948,9 +3981,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3960,9 +3993,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3972,9 +4005,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3984,9 +4017,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -3996,9 +4029,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4008,9 +4041,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4020,9 +4053,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4032,9 +4065,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4044,9 +4077,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4056,9 +4089,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4068,9 +4101,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4080,9 +4113,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4092,9 +4125,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4104,9 +4137,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4116,9 +4149,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4128,9 +4161,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4140,9 +4173,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4152,9 +4185,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4164,9 +4197,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4176,9 +4209,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4188,9 +4221,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4200,9 +4233,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4212,9 +4245,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4224,9 +4257,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4236,9 +4269,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4248,9 +4281,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4260,9 +4293,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4272,9 +4305,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4284,9 +4317,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4296,9 +4329,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4308,9 +4341,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4320,9 +4353,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4332,9 +4365,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4344,9 +4377,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4356,9 +4389,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4368,9 +4401,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4380,9 +4413,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4392,9 +4425,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4404,9 +4437,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4416,9 +4449,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4428,9 +4461,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4440,9 +4473,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4452,9 +4485,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4464,9 +4497,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4476,9 +4509,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4488,9 +4521,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4500,9 +4533,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4512,9 +4545,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4524,9 +4557,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4536,9 +4569,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4548,9 +4581,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4560,9 +4593,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4572,9 +4605,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4584,9 +4617,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4596,9 +4629,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4608,9 +4641,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4620,9 +4653,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4632,9 +4665,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4644,9 +4677,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4656,9 +4689,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4668,9 +4701,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4680,9 +4713,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4692,9 +4725,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4704,9 +4737,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4716,9 +4749,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4728,9 +4761,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4740,9 +4773,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4752,9 +4785,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4764,9 +4797,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4776,9 +4809,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4788,9 +4821,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4800,9 +4833,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4812,9 +4845,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4824,9 +4857,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4836,9 +4869,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4848,9 +4881,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4860,9 +4893,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4872,9 +4905,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4884,9 +4917,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4896,9 +4929,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4908,9 +4941,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4920,9 +4953,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4932,9 +4965,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for KINETIC:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4944,9 +4977,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4956,9 +4989,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4968,9 +5001,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4980,9 +5013,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -4992,9 +5025,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5004,9 +5037,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5016,9 +5049,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5028,9 +5061,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5040,9 +5073,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5052,9 +5085,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5064,9 +5097,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5076,9 +5109,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5088,9 +5121,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5100,9 +5133,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5112,9 +5145,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5124,9 +5157,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5136,9 +5169,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5148,9 +5181,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5160,9 +5193,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5172,9 +5205,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5184,9 +5217,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5196,9 +5229,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5208,9 +5241,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5220,9 +5253,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5232,9 +5265,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5244,9 +5277,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5256,9 +5289,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5268,9 +5301,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5280,9 +5313,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5292,9 +5325,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5304,9 +5337,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5316,9 +5349,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5328,9 +5361,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5340,9 +5373,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5352,9 +5385,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5364,9 +5397,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5376,9 +5409,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5388,9 +5421,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5400,9 +5433,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5412,9 +5445,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5424,9 +5457,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5436,9 +5469,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5448,9 +5481,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5460,9 +5493,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5472,9 +5505,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5484,9 +5517,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5496,9 +5529,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5508,9 +5541,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5520,9 +5553,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5532,9 +5565,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5544,9 +5577,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5556,9 +5589,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5568,9 +5601,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5580,9 +5613,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5592,9 +5625,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5604,9 +5637,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5616,9 +5649,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5628,9 +5661,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5640,9 +5673,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5652,9 +5685,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5664,9 +5697,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5676,9 +5709,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5688,9 +5721,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5700,9 +5733,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5712,9 +5745,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5724,9 +5757,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5736,9 +5769,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5748,9 +5781,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5760,9 +5793,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5772,9 +5805,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5784,9 +5817,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5796,9 +5829,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5808,9 +5841,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5820,9 +5853,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5832,9 +5865,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5844,9 +5877,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5856,9 +5889,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5868,9 +5901,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5880,9 +5913,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5892,9 +5925,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5904,9 +5937,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5916,9 +5949,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5928,9 +5961,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5940,9 +5973,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5952,9 +5985,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5964,9 +5997,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5976,9 +6009,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -5988,9 +6021,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6000,9 +6033,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6012,9 +6045,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6024,9 +6057,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6036,9 +6069,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6048,9 +6081,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6060,9 +6093,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6072,9 +6105,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6084,9 +6117,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6096,9 +6129,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6108,9 +6141,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6120,9 +6153,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6132,9 +6165,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for LOGIC:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6144,9 +6177,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6156,9 +6189,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6168,9 +6201,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6180,9 +6213,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6192,9 +6225,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6204,9 +6237,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6216,9 +6249,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6228,9 +6261,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6240,9 +6273,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6252,9 +6285,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6264,9 +6297,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6276,9 +6309,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6288,9 +6321,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6300,9 +6333,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6312,9 +6345,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6324,9 +6357,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6336,9 +6369,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6348,9 +6381,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6360,9 +6393,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6372,9 +6405,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6384,9 +6417,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6396,9 +6429,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6408,9 +6441,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6420,9 +6453,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6432,9 +6465,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6444,9 +6477,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6456,9 +6489,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6468,9 +6501,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6480,9 +6513,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6492,9 +6525,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6504,9 +6537,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6516,9 +6549,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6528,9 +6561,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6540,9 +6573,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6552,9 +6585,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6564,9 +6597,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6576,9 +6609,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6588,9 +6621,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6600,9 +6633,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6612,9 +6645,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6624,9 +6657,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6636,9 +6669,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6648,9 +6681,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6660,9 +6693,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6672,9 +6705,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6684,9 +6717,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6696,9 +6729,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6708,9 +6741,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6720,9 +6753,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6732,9 +6765,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6744,9 +6777,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6756,9 +6789,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6768,9 +6801,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6780,9 +6813,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6792,9 +6825,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6804,9 +6837,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6816,9 +6849,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6828,9 +6861,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6840,9 +6873,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6852,9 +6885,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6864,9 +6897,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6876,9 +6909,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6888,9 +6921,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6900,9 +6933,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6912,9 +6945,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6924,9 +6957,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6936,9 +6969,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6948,9 +6981,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6960,9 +6993,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6972,9 +7005,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6984,9 +7017,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -6996,9 +7029,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7008,9 +7041,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7020,9 +7053,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7032,9 +7065,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7044,9 +7077,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7056,9 +7089,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7068,9 +7101,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7080,9 +7113,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7092,9 +7125,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7104,9 +7137,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7116,9 +7149,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7128,9 +7161,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7140,9 +7173,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7152,9 +7185,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7164,9 +7197,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7176,9 +7209,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7188,9 +7221,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7200,9 +7233,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7212,9 +7245,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7224,9 +7257,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7236,9 +7269,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7248,9 +7281,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7260,9 +7293,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7272,9 +7305,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7284,9 +7317,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7296,9 +7329,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7308,9 +7341,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7320,9 +7353,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7332,9 +7365,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for VECTOR:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7344,9 +7377,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7356,9 +7389,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7368,9 +7401,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7380,9 +7413,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7392,9 +7425,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7404,9 +7437,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7416,9 +7449,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7428,9 +7461,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7440,9 +7473,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7452,9 +7485,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7464,9 +7497,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7476,9 +7509,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7488,9 +7521,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7500,9 +7533,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7512,9 +7545,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7524,9 +7557,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7536,9 +7569,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7548,9 +7581,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7560,9 +7593,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7572,9 +7605,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7584,9 +7617,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7596,9 +7629,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7608,9 +7641,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7620,9 +7653,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7632,9 +7665,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7644,9 +7677,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7656,9 +7689,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7668,9 +7701,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7680,9 +7713,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7692,9 +7725,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7704,9 +7737,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7716,9 +7749,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7728,9 +7761,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7740,9 +7773,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7752,9 +7785,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7764,9 +7797,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7776,9 +7809,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7788,9 +7821,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7800,9 +7833,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7812,9 +7845,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7824,9 +7857,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7836,9 +7869,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7848,9 +7881,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7860,9 +7893,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7872,9 +7905,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7884,9 +7917,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7896,9 +7929,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7908,9 +7941,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7920,9 +7953,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7932,9 +7965,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7944,9 +7977,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7956,9 +7989,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7968,9 +8001,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7980,9 +8013,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -7992,9 +8025,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8004,9 +8037,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8016,9 +8049,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8028,9 +8061,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8040,9 +8073,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8052,9 +8085,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8064,9 +8097,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8076,9 +8109,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8088,9 +8121,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8100,9 +8133,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8112,9 +8145,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8124,9 +8157,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8136,9 +8169,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8148,9 +8181,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8160,9 +8193,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8172,9 +8205,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8184,9 +8217,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8196,9 +8229,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8208,9 +8241,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8220,9 +8253,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8232,9 +8265,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8244,9 +8277,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8256,9 +8289,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8268,9 +8301,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8280,9 +8313,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8292,9 +8325,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8304,9 +8337,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8316,9 +8349,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8328,9 +8361,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8340,9 +8373,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8352,9 +8385,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8364,9 +8397,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8376,9 +8409,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8388,9 +8421,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8400,9 +8433,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8412,9 +8445,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8424,9 +8457,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8436,9 +8469,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8448,9 +8481,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8460,9 +8493,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8472,9 +8505,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8484,9 +8517,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8496,9 +8529,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8508,9 +8541,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8520,9 +8553,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8532,9 +8565,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for STORAGE:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8544,9 +8577,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8556,9 +8589,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8568,9 +8601,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8580,9 +8613,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8592,9 +8625,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8604,9 +8637,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8616,9 +8649,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8628,9 +8661,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8640,9 +8673,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8652,9 +8685,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8664,9 +8697,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8676,9 +8709,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8688,9 +8721,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8700,9 +8733,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8712,9 +8745,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8724,9 +8757,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8736,9 +8769,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8748,9 +8781,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8760,9 +8793,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8772,9 +8805,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8784,9 +8817,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8796,9 +8829,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8808,9 +8841,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8820,9 +8853,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8832,9 +8865,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8844,9 +8877,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8856,9 +8889,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8868,9 +8901,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8880,9 +8913,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8892,9 +8925,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8904,9 +8937,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8916,9 +8949,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8928,9 +8961,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8940,9 +8973,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8952,9 +8985,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8964,9 +8997,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8976,9 +9009,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -8988,9 +9021,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9000,9 +9033,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9012,9 +9045,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9024,9 +9057,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9036,9 +9069,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9048,9 +9081,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9060,9 +9093,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9072,9 +9105,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9084,9 +9117,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9096,9 +9129,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9108,9 +9141,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9120,9 +9153,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9132,9 +9165,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9144,9 +9177,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9156,9 +9189,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9168,9 +9201,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9180,9 +9213,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9192,9 +9225,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9204,9 +9237,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9216,9 +9249,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9228,9 +9261,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9240,9 +9273,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9252,9 +9285,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9264,9 +9297,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9276,9 +9309,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9288,9 +9321,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9300,9 +9333,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9312,9 +9345,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9324,9 +9357,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9336,9 +9369,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9348,9 +9381,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9360,9 +9393,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9372,9 +9405,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9384,9 +9417,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9396,9 +9429,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9408,9 +9441,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9420,9 +9453,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9432,9 +9465,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9444,9 +9477,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9456,9 +9489,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9468,9 +9501,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9480,9 +9513,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9492,9 +9525,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9504,9 +9537,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9516,9 +9549,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9528,9 +9561,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9540,9 +9573,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9552,9 +9585,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9564,9 +9597,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9576,9 +9609,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9588,9 +9621,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9600,9 +9633,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9612,9 +9645,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9624,9 +9657,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9636,9 +9669,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9648,9 +9681,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9660,9 +9693,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9672,9 +9705,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9684,9 +9717,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9696,9 +9729,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9708,9 +9741,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9720,9 +9753,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9732,9 +9765,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for OSINT:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9744,9 +9777,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9756,9 +9789,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9768,9 +9801,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9780,9 +9813,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9792,9 +9825,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9804,9 +9837,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9816,9 +9849,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9828,9 +9861,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9840,9 +9873,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9852,9 +9885,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9864,9 +9897,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9876,9 +9909,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9888,9 +9921,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9900,9 +9933,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9912,9 +9945,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9924,9 +9957,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9936,9 +9969,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9948,9 +9981,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9960,9 +9993,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9972,9 +10005,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9984,9 +10017,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -9996,9 +10029,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10008,9 +10041,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10020,9 +10053,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10032,9 +10065,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10044,9 +10077,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10056,9 +10089,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10068,9 +10101,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10080,9 +10113,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10092,9 +10125,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10104,9 +10137,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10116,9 +10149,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10128,9 +10161,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10140,9 +10173,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10152,9 +10185,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10164,9 +10197,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10176,9 +10209,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10188,9 +10221,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10200,9 +10233,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10212,9 +10245,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10224,9 +10257,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10236,9 +10269,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10248,9 +10281,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10260,9 +10293,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10272,9 +10305,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10284,9 +10317,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10296,9 +10329,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10308,9 +10341,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10320,9 +10353,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10332,9 +10365,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10344,9 +10377,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10356,9 +10389,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10368,9 +10401,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10380,9 +10413,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10392,9 +10425,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10404,9 +10437,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10416,9 +10449,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10428,9 +10461,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10440,9 +10473,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10452,9 +10485,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10464,9 +10497,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10476,9 +10509,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10488,9 +10521,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10500,9 +10533,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10512,9 +10545,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10524,9 +10557,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10536,9 +10569,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10548,9 +10581,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10560,9 +10593,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10572,9 +10605,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10584,9 +10617,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10596,9 +10629,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10608,9 +10641,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10620,9 +10653,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10632,9 +10665,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10644,9 +10677,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10656,9 +10689,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10668,9 +10701,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10680,9 +10713,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10692,9 +10725,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10704,9 +10737,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10716,9 +10749,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10728,9 +10761,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10740,9 +10773,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10752,9 +10785,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10764,9 +10797,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10776,9 +10809,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10788,9 +10821,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10800,9 +10833,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10812,9 +10845,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10824,9 +10857,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10836,9 +10869,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10848,9 +10881,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10860,9 +10893,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10872,9 +10905,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10884,9 +10917,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10896,9 +10929,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10908,9 +10941,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10920,9 +10953,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10932,9 +10965,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for CLOCK:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10944,9 +10977,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10956,9 +10989,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10968,9 +11001,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10980,9 +11013,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -10992,9 +11025,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11004,9 +11037,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11016,9 +11049,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11028,9 +11061,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11040,9 +11073,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11052,9 +11085,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INIT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11064,9 +11097,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11076,9 +11109,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11088,9 +11121,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11100,9 +11133,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11112,9 +11145,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11124,9 +11157,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11136,9 +11169,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11148,9 +11181,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11160,9 +11193,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11172,9 +11205,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:PREDICT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11184,9 +11217,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11196,9 +11229,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11208,9 +11241,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11220,9 +11253,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11232,9 +11265,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11244,9 +11277,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11256,9 +11289,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11268,9 +11301,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11280,9 +11313,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11292,9 +11325,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:UPDATE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11304,9 +11337,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11316,9 +11349,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11328,9 +11361,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11340,9 +11373,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11352,9 +11385,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11364,9 +11397,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11376,9 +11409,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11388,9 +11421,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11400,9 +11433,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11412,9 +11445,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:INNOVATION:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11424,9 +11457,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11436,9 +11469,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11448,9 +11481,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11460,9 +11493,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11472,9 +11505,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11484,9 +11517,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11496,9 +11529,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11508,9 +11541,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11520,9 +11553,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11532,9 +11565,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:GAIN:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11544,9 +11577,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11556,9 +11589,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11568,9 +11601,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11580,9 +11613,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11592,9 +11625,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11604,9 +11637,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11616,9 +11649,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11628,9 +11661,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11640,9 +11673,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11652,9 +11685,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:COVARIANCE:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11664,9 +11697,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11676,9 +11709,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11688,9 +11721,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11700,9 +11733,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11712,9 +11745,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11724,9 +11757,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11736,9 +11769,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11748,9 +11781,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11760,9 +11793,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11772,9 +11805,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:DRIFT_CHECK:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11784,9 +11817,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11796,9 +11829,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11808,9 +11841,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11820,9 +11853,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11832,9 +11865,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11844,9 +11877,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11856,9 +11889,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11868,9 +11901,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11880,9 +11913,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11892,9 +11925,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:RECONSTRUCT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11904,9 +11937,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11916,9 +11949,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11928,9 +11961,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11940,9 +11973,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11952,9 +11985,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11964,9 +11997,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11976,9 +12009,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -11988,9 +12021,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12000,9 +12033,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12012,9 +12045,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:SANITY_ASSERT:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12024,9 +12057,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:RAW
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12036,9 +12069,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:ATOMIC
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12048,9 +12081,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:KALMAN_EXTENDED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12060,9 +12093,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:LUENBERGER_RIGID
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12072,9 +12105,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:PARTICLE_PF
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12084,9 +12117,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:SLIDING_MODE
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12096,9 +12129,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:QUANTIZED
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12108,9 +12141,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:ADAPTIVE_R
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12120,9 +12153,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:NEURAL_LATENT
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12132,9 +12165,9 @@ func InitStateObserverKernel() {
 		state.ExecutionCount++
 		// Execute observer dynamical update rule for COMPILER:FLUSH_LEDGER:BFT_CONSENSUS
 		for i := 0; i < 4; i++ {
-			state.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
+			state.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
 			state.Innovation[i] = (math.Cos(float64(id.Code)) - state.States[i]) * 0.1
-			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99 + 0.0001)
+			state.Covariance[i][i] = math.Max(0.001, state.Covariance[i][i]*0.99+0.0001)
 		}
 		state.NormError = math.Sqrt(state.Innovation[0]*state.Innovation[0] + state.Innovation[1]*state.Innovation[1] + state.Innovation[2]*state.Innovation[2] + state.Innovation[3]*state.Innovation[3])
 		return nil
@@ -12154,6 +12187,8 @@ func DispatchStateObserver(d, p, m byte, state *StateVector) error {
 }
 
 func GetStateObserverExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&StateObserverMetrics[code])
 }

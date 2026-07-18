@@ -13,87 +13,120 @@ type KimiPrimitive int
 type KimiModifier int
 
 const (
-	KimiDomainDaimoncore KimiDomain = 0
-	KimiDomainKaosexec KimiDomain = 1
-	KimiDomainKosongllm KimiDomain = 2
-	KimiDomainAcpadapter KimiDomain = 3
-	KimiDomainOpenclawshim KimiDomain = 4
-	KimiDomainGatewayapi KimiDomain = 5
-	KimiDomainWebbridgedesk KimiDomain = 6
-	KimiDomainMemorylancedb KimiDomain = 7
-	KimiDomainPythonrun KimiDomain = 8
+	KimiDomainDaimoncore     KimiDomain = 0
+	KimiDomainKaosexec       KimiDomain = 1
+	KimiDomainKosongllm      KimiDomain = 2
+	KimiDomainAcpadapter     KimiDomain = 3
+	KimiDomainOpenclawshim   KimiDomain = 4
+	KimiDomainGatewayapi     KimiDomain = 5
+	KimiDomainWebbridgedesk  KimiDomain = 6
+	KimiDomainMemorylancedb  KimiDomain = 7
+	KimiDomainPythonrun      KimiDomain = 8
 	KimiDomainObsdiagnostics KimiDomain = 9
 
 	// Kimi Primitives
-	KimiPrimitiveInitruntime KimiPrimitive = 0
-	KimiPrimitiveExecshell KimiPrimitive = 1
-	KimiPrimitiveResolveskill KimiPrimitive = 2
-	KimiPrimitiveStatemutate KimiPrimitive = 3
+	KimiPrimitiveInitruntime   KimiPrimitive = 0
+	KimiPrimitiveExecshell     KimiPrimitive = 1
+	KimiPrimitiveResolveskill  KimiPrimitive = 2
+	KimiPrimitiveStatemutate   KimiPrimitive = 3
 	KimiPrimitiveComposeprompt KimiPrimitive = 4
-	KimiPrimitiveQueryvector KimiPrimitive = 5
+	KimiPrimitiveQueryvector   KimiPrimitive = 5
 	KimiPrimitiveStreamgateway KimiPrimitive = 6
-	KimiPrimitiveSecuretaint KimiPrimitive = 7
+	KimiPrimitiveSecuretaint   KimiPrimitive = 7
 	KimiPrimitiveSynchronizeuv KimiPrimitive = 8
-	KimiPrimitivePurgearchive KimiPrimitive = 9
+	KimiPrimitivePurgearchive  KimiPrimitive = 9
 
 	// Kimi Modifiers
-	KimiModifierRaw KimiModifier = 0
-	KimiModifierSecure KimiModifier = 1
-	KimiModifierBypass KimiModifier = 2
-	KimiModifierAtomic KimiModifier = 3
-	KimiModifierEphemeral KimiModifier = 4
-	KimiModifierManaged KimiModifier = 5
-	KimiModifierObfuscated KimiModifier = 6
+	KimiModifierRaw          KimiModifier = 0
+	KimiModifierSecure       KimiModifier = 1
+	KimiModifierBypass       KimiModifier = 2
+	KimiModifierAtomic       KimiModifier = 3
+	KimiModifierEphemeral    KimiModifier = 4
+	KimiModifierManaged      KimiModifier = 5
+	KimiModifierObfuscated   KimiModifier = 6
 	KimiModifierBftconsensus KimiModifier = 7
-	KimiModifierCached KimiModifier = 8
-	KimiModifierAsyncwal KimiModifier = 9
+	KimiModifierCached       KimiModifier = 8
+	KimiModifierAsyncwal     KimiModifier = 9
 )
 
 func (d KimiDomain) String() string {
 	switch d {
-	case 0: return "DAIMON_CORE"
-	case 1: return "KAOS_EXEC"
-	case 2: return "KOSONG_LLM"
-	case 3: return "ACP_ADAPTER"
-	case 4: return "OPENCLAW_SHIM"
-	case 5: return "GATEWAY_API"
-	case 6: return "WEBBRIDGE_DESK"
-	case 7: return "MEMORY_LANCEDB"
-	case 8: return "PYTHON_RUN"
-	case 9: return "OBS_DIAGNOSTICS"
-	default: return "UNKNOWN"
+	case 0:
+		return "DAIMON_CORE"
+	case 1:
+		return "KAOS_EXEC"
+	case 2:
+		return "KOSONG_LLM"
+	case 3:
+		return "ACP_ADAPTER"
+	case 4:
+		return "OPENCLAW_SHIM"
+	case 5:
+		return "GATEWAY_API"
+	case 6:
+		return "WEBBRIDGE_DESK"
+	case 7:
+		return "MEMORY_LANCEDB"
+	case 8:
+		return "PYTHON_RUN"
+	case 9:
+		return "OBS_DIAGNOSTICS"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p KimiPrimitive) String() string {
 	switch p {
-	case 0: return "INIT_RUNTIME"
-	case 1: return "EXEC_SHELL"
-	case 2: return "RESOLVE_SKILL"
-	case 3: return "STATE_MUTATE"
-	case 4: return "COMPOSE_PROMPT"
-	case 5: return "QUERY_VECTOR"
-	case 6: return "STREAM_GATEWAY"
-	case 7: return "SECURE_TAINT"
-	case 8: return "SYNCHRONIZE_UV"
-	case 9: return "PURGE_ARCHIVE"
-	default: return "UNKNOWN"
+	case 0:
+		return "INIT_RUNTIME"
+	case 1:
+		return "EXEC_SHELL"
+	case 2:
+		return "RESOLVE_SKILL"
+	case 3:
+		return "STATE_MUTATE"
+	case 4:
+		return "COMPOSE_PROMPT"
+	case 5:
+		return "QUERY_VECTOR"
+	case 6:
+		return "STREAM_GATEWAY"
+	case 7:
+		return "SECURE_TAINT"
+	case 8:
+		return "SYNCHRONIZE_UV"
+	case 9:
+		return "PURGE_ARCHIVE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m KimiModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "SECURE"
-	case 2: return "BYPASS"
-	case 3: return "ATOMIC"
-	case 4: return "EPHEMERAL"
-	case 5: return "MANAGED"
-	case 6: return "OBFUSCATED"
-	case 7: return "BFT_CONSENSUS"
-	case 8: return "CACHED"
-	case 9: return "ASYNC_WAL"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "SECURE"
+	case 2:
+		return "BYPASS"
+	case 3:
+		return "ATOMIC"
+	case 4:
+		return "EPHEMERAL"
+	case 5:
+		return "MANAGED"
+	case 6:
+		return "OBFUSCATED"
+	case 7:
+		return "BFT_CONSENSUS"
+	case 8:
+		return "CACHED"
+	case 9:
+		return "ASYNC_WAL"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -132,7 +165,7 @@ func ResolveKimiIdentity(d, p, m byte) (KimiIdentity, error) {
 type KimiHandler func(id KimiIdentity, vec *KimiStateVector) error
 
 var (
-	KimiTable [1000]KimiHandler
+	KimiTable   [1000]KimiHandler
 	KimiMetrics [1000]uint64
 )
 
@@ -141,9 +174,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[0], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -152,9 +185,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[1], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -163,9 +196,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[2], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -174,9 +207,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[3], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -185,9 +218,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[4], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -196,9 +229,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[5], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -207,9 +240,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[6], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -218,9 +251,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[7], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -229,9 +262,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[8], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -240,9 +273,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[9], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -251,9 +284,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[10], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -262,9 +295,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[11], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -273,9 +306,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[12], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -284,9 +317,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[13], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -295,9 +328,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[14], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -306,9 +339,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[15], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -317,9 +350,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[16], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -328,9 +361,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[17], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -339,9 +372,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[18], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -350,9 +383,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[19], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -361,9 +394,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[20], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -372,9 +405,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[21], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -383,9 +416,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[22], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -394,9 +427,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[23], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -405,9 +438,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[24], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -416,9 +449,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[25], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -427,9 +460,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[26], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -438,9 +471,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[27], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -449,9 +482,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[28], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -460,9 +493,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[29], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -471,9 +504,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[30], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -482,9 +515,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[31], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -493,9 +526,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[32], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -504,9 +537,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[33], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -515,9 +548,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[34], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -526,9 +559,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[35], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -537,9 +570,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[36], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -548,9 +581,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[37], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -559,9 +592,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[38], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -570,9 +603,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[39], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -581,9 +614,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[40], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -592,9 +625,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[41], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -603,9 +636,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[42], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -614,9 +647,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[43], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -625,9 +658,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[44], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -636,9 +669,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[45], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -647,9 +680,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[46], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -658,9 +691,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[47], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -669,9 +702,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[48], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -680,9 +713,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[49], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -691,9 +724,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[50], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -702,9 +735,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[51], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -713,9 +746,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[52], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -724,9 +757,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[53], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -735,9 +768,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[54], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -746,9 +779,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[55], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -757,9 +790,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[56], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -768,9 +801,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[57], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -779,9 +812,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[58], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -790,9 +823,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[59], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -801,9 +834,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[60], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -812,9 +845,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[61], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -823,9 +856,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[62], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -834,9 +867,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[63], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -845,9 +878,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[64], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -856,9 +889,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[65], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -867,9 +900,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[66], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -878,9 +911,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[67], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -889,9 +922,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[68], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -900,9 +933,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[69], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -911,9 +944,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[70], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -922,9 +955,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[71], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -933,9 +966,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[72], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -944,9 +977,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[73], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -955,9 +988,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[74], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -966,9 +999,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[75], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -977,9 +1010,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[76], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -988,9 +1021,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[77], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -999,9 +1032,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[78], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1010,9 +1043,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[79], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1021,9 +1054,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[80], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1032,9 +1065,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[81], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1043,9 +1076,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[82], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1054,9 +1087,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[83], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1065,9 +1098,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[84], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1076,9 +1109,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[85], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1087,9 +1120,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[86], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1098,9 +1131,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[87], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1109,9 +1142,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[88], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1120,9 +1153,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[89], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1131,9 +1164,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[90], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1142,9 +1175,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[91], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1153,9 +1186,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[92], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1164,9 +1197,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[93], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1175,9 +1208,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[94], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1186,9 +1219,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[95], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1197,9 +1230,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[96], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1208,9 +1241,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[97], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1219,9 +1252,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[98], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1230,9 +1263,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[99], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for DAIMON_CORE:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1241,9 +1274,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[100], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1252,9 +1285,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[101], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1263,9 +1296,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[102], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1274,9 +1307,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[103], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1285,9 +1318,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[104], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1296,9 +1329,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[105], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1307,9 +1340,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[106], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1318,9 +1351,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[107], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1329,9 +1362,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[108], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1340,9 +1373,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[109], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1351,9 +1384,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[110], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1362,9 +1395,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[111], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1373,9 +1406,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[112], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1384,9 +1417,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[113], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1395,9 +1428,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[114], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1406,9 +1439,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[115], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1417,9 +1450,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[116], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1428,9 +1461,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[117], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1439,9 +1472,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[118], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1450,9 +1483,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[119], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1461,9 +1494,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[120], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1472,9 +1505,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[121], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1483,9 +1516,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[122], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1494,9 +1527,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[123], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1505,9 +1538,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[124], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1516,9 +1549,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[125], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1527,9 +1560,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[126], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1538,9 +1571,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[127], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1549,9 +1582,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[128], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1560,9 +1593,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[129], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1571,9 +1604,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[130], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1582,9 +1615,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[131], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1593,9 +1626,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[132], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1604,9 +1637,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[133], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1615,9 +1648,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[134], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1626,9 +1659,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[135], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1637,9 +1670,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[136], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1648,9 +1681,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[137], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1659,9 +1692,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[138], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1670,9 +1703,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[139], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1681,9 +1714,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[140], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1692,9 +1725,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[141], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1703,9 +1736,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[142], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1714,9 +1747,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[143], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1725,9 +1758,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[144], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1736,9 +1769,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[145], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1747,9 +1780,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[146], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1758,9 +1791,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[147], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1769,9 +1802,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[148], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1780,9 +1813,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[149], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1791,9 +1824,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[150], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1802,9 +1835,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[151], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1813,9 +1846,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[152], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1824,9 +1857,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[153], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1835,9 +1868,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[154], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1846,9 +1879,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[155], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1857,9 +1890,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[156], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1868,9 +1901,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[157], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1879,9 +1912,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[158], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1890,9 +1923,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[159], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1901,9 +1934,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[160], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1912,9 +1945,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[161], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1923,9 +1956,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[162], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1934,9 +1967,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[163], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1945,9 +1978,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[164], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1956,9 +1989,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[165], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1967,9 +2000,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[166], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1978,9 +2011,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[167], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -1989,9 +2022,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[168], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2000,9 +2033,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[169], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2011,9 +2044,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[170], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2022,9 +2055,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[171], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2033,9 +2066,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[172], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2044,9 +2077,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[173], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2055,9 +2088,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[174], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2066,9 +2099,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[175], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2077,9 +2110,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[176], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2088,9 +2121,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[177], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2099,9 +2132,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[178], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2110,9 +2143,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[179], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2121,9 +2154,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[180], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2132,9 +2165,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[181], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2143,9 +2176,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[182], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2154,9 +2187,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[183], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2165,9 +2198,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[184], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2176,9 +2209,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[185], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2187,9 +2220,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[186], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2198,9 +2231,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[187], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2209,9 +2242,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[188], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2220,9 +2253,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[189], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2231,9 +2264,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[190], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2242,9 +2275,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[191], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2253,9 +2286,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[192], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2264,9 +2297,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[193], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2275,9 +2308,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[194], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2286,9 +2319,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[195], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2297,9 +2330,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[196], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2308,9 +2341,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[197], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2319,9 +2352,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[198], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2330,9 +2363,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[199], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KAOS_EXEC:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2341,9 +2374,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[200], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2352,9 +2385,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[201], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2363,9 +2396,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[202], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2374,9 +2407,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[203], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2385,9 +2418,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[204], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2396,9 +2429,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[205], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2407,9 +2440,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[206], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2418,9 +2451,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[207], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2429,9 +2462,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[208], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2440,9 +2473,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[209], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2451,9 +2484,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[210], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2462,9 +2495,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[211], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2473,9 +2506,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[212], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2484,9 +2517,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[213], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2495,9 +2528,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[214], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2506,9 +2539,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[215], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2517,9 +2550,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[216], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2528,9 +2561,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[217], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2539,9 +2572,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[218], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2550,9 +2583,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[219], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2561,9 +2594,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[220], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2572,9 +2605,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[221], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2583,9 +2616,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[222], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2594,9 +2627,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[223], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2605,9 +2638,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[224], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2616,9 +2649,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[225], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2627,9 +2660,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[226], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2638,9 +2671,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[227], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2649,9 +2682,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[228], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2660,9 +2693,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[229], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2671,9 +2704,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[230], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2682,9 +2715,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[231], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2693,9 +2726,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[232], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2704,9 +2737,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[233], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2715,9 +2748,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[234], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2726,9 +2759,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[235], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2737,9 +2770,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[236], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2748,9 +2781,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[237], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2759,9 +2792,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[238], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2770,9 +2803,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[239], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2781,9 +2814,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[240], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2792,9 +2825,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[241], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2803,9 +2836,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[242], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2814,9 +2847,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[243], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2825,9 +2858,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[244], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2836,9 +2869,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[245], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2847,9 +2880,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[246], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2858,9 +2891,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[247], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2869,9 +2902,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[248], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2880,9 +2913,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[249], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2891,9 +2924,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[250], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2902,9 +2935,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[251], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2913,9 +2946,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[252], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2924,9 +2957,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[253], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2935,9 +2968,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[254], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2946,9 +2979,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[255], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2957,9 +2990,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[256], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2968,9 +3001,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[257], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2979,9 +3012,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[258], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -2990,9 +3023,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[259], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3001,9 +3034,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[260], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3012,9 +3045,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[261], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3023,9 +3056,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[262], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3034,9 +3067,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[263], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3045,9 +3078,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[264], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3056,9 +3089,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[265], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3067,9 +3100,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[266], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3078,9 +3111,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[267], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3089,9 +3122,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[268], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3100,9 +3133,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[269], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3111,9 +3144,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[270], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3122,9 +3155,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[271], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3133,9 +3166,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[272], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3144,9 +3177,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[273], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3155,9 +3188,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[274], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3166,9 +3199,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[275], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3177,9 +3210,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[276], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3188,9 +3221,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[277], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3199,9 +3232,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[278], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3210,9 +3243,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[279], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3221,9 +3254,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[280], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3232,9 +3265,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[281], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3243,9 +3276,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[282], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3254,9 +3287,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[283], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3265,9 +3298,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[284], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3276,9 +3309,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[285], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3287,9 +3320,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[286], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3298,9 +3331,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[287], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3309,9 +3342,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[288], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3320,9 +3353,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[289], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3331,9 +3364,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[290], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3342,9 +3375,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[291], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3353,9 +3386,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[292], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3364,9 +3397,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[293], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3375,9 +3408,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[294], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3386,9 +3419,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[295], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3397,9 +3430,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[296], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3408,9 +3441,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[297], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3419,9 +3452,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[298], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3430,9 +3463,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[299], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for KOSONG_LLM:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3441,9 +3474,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[300], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3452,9 +3485,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[301], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3463,9 +3496,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[302], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3474,9 +3507,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[303], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3485,9 +3518,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[304], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3496,9 +3529,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[305], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3507,9 +3540,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[306], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3518,9 +3551,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[307], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3529,9 +3562,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[308], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3540,9 +3573,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[309], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3551,9 +3584,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[310], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3562,9 +3595,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[311], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3573,9 +3606,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[312], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3584,9 +3617,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[313], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3595,9 +3628,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[314], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3606,9 +3639,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[315], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3617,9 +3650,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[316], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3628,9 +3661,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[317], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3639,9 +3672,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[318], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3650,9 +3683,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[319], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3661,9 +3694,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[320], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3672,9 +3705,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[321], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3683,9 +3716,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[322], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3694,9 +3727,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[323], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3705,9 +3738,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[324], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3716,9 +3749,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[325], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3727,9 +3760,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[326], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3738,9 +3771,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[327], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3749,9 +3782,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[328], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3760,9 +3793,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[329], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3771,9 +3804,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[330], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3782,9 +3815,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[331], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3793,9 +3826,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[332], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3804,9 +3837,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[333], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3815,9 +3848,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[334], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3826,9 +3859,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[335], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3837,9 +3870,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[336], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3848,9 +3881,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[337], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3859,9 +3892,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[338], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3870,9 +3903,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[339], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3881,9 +3914,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[340], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3892,9 +3925,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[341], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3903,9 +3936,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[342], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3914,9 +3947,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[343], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3925,9 +3958,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[344], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3936,9 +3969,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[345], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3947,9 +3980,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[346], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3958,9 +3991,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[347], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3969,9 +4002,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[348], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3980,9 +4013,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[349], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -3991,9 +4024,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[350], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4002,9 +4035,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[351], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4013,9 +4046,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[352], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4024,9 +4057,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[353], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4035,9 +4068,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[354], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4046,9 +4079,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[355], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4057,9 +4090,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[356], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4068,9 +4101,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[357], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4079,9 +4112,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[358], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4090,9 +4123,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[359], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4101,9 +4134,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[360], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4112,9 +4145,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[361], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4123,9 +4156,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[362], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4134,9 +4167,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[363], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4145,9 +4178,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[364], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4156,9 +4189,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[365], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4167,9 +4200,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[366], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4178,9 +4211,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[367], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4189,9 +4222,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[368], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4200,9 +4233,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[369], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4211,9 +4244,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[370], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4222,9 +4255,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[371], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4233,9 +4266,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[372], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4244,9 +4277,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[373], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4255,9 +4288,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[374], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4266,9 +4299,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[375], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4277,9 +4310,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[376], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4288,9 +4321,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[377], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4299,9 +4332,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[378], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4310,9 +4343,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[379], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4321,9 +4354,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[380], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4332,9 +4365,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[381], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4343,9 +4376,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[382], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4354,9 +4387,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[383], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4365,9 +4398,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[384], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4376,9 +4409,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[385], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4387,9 +4420,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[386], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4398,9 +4431,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[387], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4409,9 +4442,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[388], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4420,9 +4453,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[389], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4431,9 +4464,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[390], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4442,9 +4475,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[391], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4453,9 +4486,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[392], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4464,9 +4497,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[393], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4475,9 +4508,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[394], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4486,9 +4519,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[395], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4497,9 +4530,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[396], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4508,9 +4541,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[397], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4519,9 +4552,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[398], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4530,9 +4563,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[399], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for ACP_ADAPTER:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4541,9 +4574,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[400], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4552,9 +4585,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[401], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4563,9 +4596,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[402], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4574,9 +4607,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[403], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4585,9 +4618,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[404], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4596,9 +4629,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[405], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4607,9 +4640,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[406], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4618,9 +4651,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[407], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4629,9 +4662,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[408], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4640,9 +4673,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[409], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4651,9 +4684,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[410], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4662,9 +4695,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[411], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4673,9 +4706,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[412], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4684,9 +4717,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[413], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4695,9 +4728,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[414], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4706,9 +4739,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[415], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4717,9 +4750,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[416], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4728,9 +4761,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[417], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4739,9 +4772,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[418], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4750,9 +4783,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[419], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4761,9 +4794,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[420], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4772,9 +4805,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[421], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4783,9 +4816,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[422], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4794,9 +4827,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[423], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4805,9 +4838,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[424], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4816,9 +4849,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[425], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4827,9 +4860,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[426], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4838,9 +4871,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[427], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4849,9 +4882,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[428], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4860,9 +4893,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[429], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4871,9 +4904,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[430], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4882,9 +4915,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[431], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4893,9 +4926,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[432], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4904,9 +4937,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[433], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4915,9 +4948,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[434], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4926,9 +4959,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[435], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4937,9 +4970,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[436], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4948,9 +4981,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[437], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4959,9 +4992,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[438], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4970,9 +5003,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[439], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4981,9 +5014,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[440], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -4992,9 +5025,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[441], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5003,9 +5036,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[442], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5014,9 +5047,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[443], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5025,9 +5058,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[444], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5036,9 +5069,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[445], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5047,9 +5080,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[446], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5058,9 +5091,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[447], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5069,9 +5102,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[448], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5080,9 +5113,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[449], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5091,9 +5124,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[450], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5102,9 +5135,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[451], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5113,9 +5146,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[452], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5124,9 +5157,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[453], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5135,9 +5168,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[454], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5146,9 +5179,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[455], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5157,9 +5190,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[456], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5168,9 +5201,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[457], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5179,9 +5212,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[458], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5190,9 +5223,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[459], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5201,9 +5234,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[460], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5212,9 +5245,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[461], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5223,9 +5256,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[462], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5234,9 +5267,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[463], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5245,9 +5278,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[464], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5256,9 +5289,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[465], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5267,9 +5300,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[466], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5278,9 +5311,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[467], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5289,9 +5322,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[468], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5300,9 +5333,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[469], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5311,9 +5344,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[470], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5322,9 +5355,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[471], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5333,9 +5366,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[472], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5344,9 +5377,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[473], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5355,9 +5388,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[474], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5366,9 +5399,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[475], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5377,9 +5410,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[476], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5388,9 +5421,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[477], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5399,9 +5432,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[478], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5410,9 +5443,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[479], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5421,9 +5454,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[480], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5432,9 +5465,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[481], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5443,9 +5476,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[482], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5454,9 +5487,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[483], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5465,9 +5498,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[484], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5476,9 +5509,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[485], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5487,9 +5520,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[486], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5498,9 +5531,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[487], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5509,9 +5542,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[488], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5520,9 +5553,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[489], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5531,9 +5564,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[490], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5542,9 +5575,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[491], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5553,9 +5586,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[492], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5564,9 +5597,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[493], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5575,9 +5608,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[494], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5586,9 +5619,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[495], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5597,9 +5630,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[496], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5608,9 +5641,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[497], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5619,9 +5652,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[498], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5630,9 +5663,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[499], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OPENCLAW_SHIM:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5641,9 +5674,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[500], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5652,9 +5685,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[501], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5663,9 +5696,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[502], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5674,9 +5707,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[503], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5685,9 +5718,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[504], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5696,9 +5729,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[505], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5707,9 +5740,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[506], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5718,9 +5751,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[507], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5729,9 +5762,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[508], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5740,9 +5773,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[509], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5751,9 +5784,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[510], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5762,9 +5795,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[511], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5773,9 +5806,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[512], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5784,9 +5817,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[513], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5795,9 +5828,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[514], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5806,9 +5839,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[515], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5817,9 +5850,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[516], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5828,9 +5861,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[517], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5839,9 +5872,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[518], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5850,9 +5883,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[519], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5861,9 +5894,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[520], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5872,9 +5905,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[521], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5883,9 +5916,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[522], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5894,9 +5927,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[523], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5905,9 +5938,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[524], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5916,9 +5949,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[525], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5927,9 +5960,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[526], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5938,9 +5971,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[527], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5949,9 +5982,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[528], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5960,9 +5993,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[529], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5971,9 +6004,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[530], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5982,9 +6015,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[531], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -5993,9 +6026,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[532], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6004,9 +6037,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[533], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6015,9 +6048,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[534], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6026,9 +6059,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[535], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6037,9 +6070,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[536], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6048,9 +6081,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[537], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6059,9 +6092,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[538], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6070,9 +6103,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[539], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6081,9 +6114,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[540], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6092,9 +6125,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[541], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6103,9 +6136,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[542], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6114,9 +6147,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[543], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6125,9 +6158,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[544], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6136,9 +6169,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[545], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6147,9 +6180,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[546], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6158,9 +6191,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[547], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6169,9 +6202,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[548], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6180,9 +6213,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[549], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6191,9 +6224,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[550], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6202,9 +6235,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[551], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6213,9 +6246,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[552], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6224,9 +6257,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[553], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6235,9 +6268,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[554], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6246,9 +6279,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[555], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6257,9 +6290,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[556], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6268,9 +6301,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[557], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6279,9 +6312,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[558], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6290,9 +6323,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[559], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6301,9 +6334,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[560], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6312,9 +6345,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[561], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6323,9 +6356,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[562], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6334,9 +6367,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[563], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6345,9 +6378,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[564], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6356,9 +6389,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[565], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6367,9 +6400,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[566], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6378,9 +6411,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[567], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6389,9 +6422,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[568], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6400,9 +6433,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[569], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6411,9 +6444,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[570], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6422,9 +6455,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[571], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6433,9 +6466,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[572], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6444,9 +6477,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[573], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6455,9 +6488,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[574], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6466,9 +6499,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[575], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6477,9 +6510,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[576], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6488,9 +6521,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[577], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6499,9 +6532,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[578], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6510,9 +6543,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[579], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6521,9 +6554,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[580], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6532,9 +6565,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[581], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6543,9 +6576,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[582], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6554,9 +6587,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[583], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6565,9 +6598,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[584], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6576,9 +6609,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[585], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6587,9 +6620,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[586], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6598,9 +6631,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[587], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6609,9 +6642,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[588], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6620,9 +6653,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[589], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6631,9 +6664,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[590], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6642,9 +6675,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[591], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6653,9 +6686,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[592], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6664,9 +6697,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[593], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6675,9 +6708,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[594], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6686,9 +6719,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[595], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6697,9 +6730,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[596], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6708,9 +6741,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[597], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6719,9 +6752,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[598], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6730,9 +6763,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[599], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for GATEWAY_API:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6741,9 +6774,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[600], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6752,9 +6785,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[601], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6763,9 +6796,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[602], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6774,9 +6807,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[603], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6785,9 +6818,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[604], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6796,9 +6829,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[605], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6807,9 +6840,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[606], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6818,9 +6851,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[607], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6829,9 +6862,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[608], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6840,9 +6873,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[609], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6851,9 +6884,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[610], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6862,9 +6895,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[611], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6873,9 +6906,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[612], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6884,9 +6917,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[613], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6895,9 +6928,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[614], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6906,9 +6939,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[615], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6917,9 +6950,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[616], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6928,9 +6961,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[617], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6939,9 +6972,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[618], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6950,9 +6983,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[619], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6961,9 +6994,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[620], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6972,9 +7005,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[621], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6983,9 +7016,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[622], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -6994,9 +7027,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[623], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7005,9 +7038,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[624], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7016,9 +7049,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[625], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7027,9 +7060,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[626], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7038,9 +7071,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[627], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7049,9 +7082,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[628], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7060,9 +7093,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[629], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7071,9 +7104,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[630], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7082,9 +7115,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[631], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7093,9 +7126,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[632], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7104,9 +7137,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[633], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7115,9 +7148,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[634], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7126,9 +7159,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[635], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7137,9 +7170,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[636], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7148,9 +7181,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[637], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7159,9 +7192,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[638], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7170,9 +7203,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[639], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7181,9 +7214,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[640], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7192,9 +7225,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[641], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7203,9 +7236,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[642], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7214,9 +7247,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[643], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7225,9 +7258,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[644], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7236,9 +7269,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[645], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7247,9 +7280,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[646], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7258,9 +7291,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[647], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7269,9 +7302,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[648], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7280,9 +7313,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[649], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7291,9 +7324,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[650], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7302,9 +7335,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[651], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7313,9 +7346,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[652], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7324,9 +7357,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[653], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7335,9 +7368,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[654], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7346,9 +7379,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[655], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7357,9 +7390,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[656], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7368,9 +7401,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[657], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7379,9 +7412,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[658], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7390,9 +7423,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[659], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7401,9 +7434,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[660], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7412,9 +7445,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[661], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7423,9 +7456,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[662], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7434,9 +7467,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[663], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7445,9 +7478,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[664], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7456,9 +7489,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[665], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7467,9 +7500,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[666], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7478,9 +7511,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[667], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7489,9 +7522,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[668], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7500,9 +7533,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[669], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7511,9 +7544,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[670], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7522,9 +7555,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[671], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7533,9 +7566,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[672], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7544,9 +7577,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[673], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7555,9 +7588,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[674], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7566,9 +7599,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[675], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7577,9 +7610,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[676], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7588,9 +7621,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[677], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7599,9 +7632,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[678], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7610,9 +7643,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[679], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7621,9 +7654,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[680], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7632,9 +7665,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[681], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7643,9 +7676,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[682], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7654,9 +7687,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[683], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7665,9 +7698,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[684], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7676,9 +7709,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[685], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7687,9 +7720,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[686], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7698,9 +7731,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[687], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7709,9 +7742,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[688], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7720,9 +7753,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[689], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7731,9 +7764,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[690], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7742,9 +7775,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[691], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7753,9 +7786,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[692], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7764,9 +7797,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[693], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7775,9 +7808,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[694], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7786,9 +7819,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[695], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7797,9 +7830,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[696], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7808,9 +7841,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[697], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7819,9 +7852,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[698], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7830,9 +7863,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[699], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for WEBBRIDGE_DESK:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7841,9 +7874,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[700], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7852,9 +7885,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[701], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7863,9 +7896,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[702], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7874,9 +7907,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[703], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7885,9 +7918,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[704], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7896,9 +7929,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[705], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7907,9 +7940,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[706], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7918,9 +7951,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[707], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7929,9 +7962,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[708], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7940,9 +7973,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[709], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7951,9 +7984,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[710], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7962,9 +7995,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[711], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7973,9 +8006,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[712], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7984,9 +8017,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[713], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -7995,9 +8028,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[714], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8006,9 +8039,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[715], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8017,9 +8050,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[716], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8028,9 +8061,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[717], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8039,9 +8072,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[718], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8050,9 +8083,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[719], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8061,9 +8094,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[720], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8072,9 +8105,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[721], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8083,9 +8116,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[722], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8094,9 +8127,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[723], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8105,9 +8138,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[724], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8116,9 +8149,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[725], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8127,9 +8160,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[726], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8138,9 +8171,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[727], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8149,9 +8182,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[728], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8160,9 +8193,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[729], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8171,9 +8204,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[730], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8182,9 +8215,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[731], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8193,9 +8226,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[732], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8204,9 +8237,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[733], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8215,9 +8248,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[734], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8226,9 +8259,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[735], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8237,9 +8270,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[736], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8248,9 +8281,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[737], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8259,9 +8292,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[738], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8270,9 +8303,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[739], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8281,9 +8314,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[740], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8292,9 +8325,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[741], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8303,9 +8336,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[742], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8314,9 +8347,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[743], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8325,9 +8358,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[744], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8336,9 +8369,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[745], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8347,9 +8380,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[746], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8358,9 +8391,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[747], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8369,9 +8402,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[748], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8380,9 +8413,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[749], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8391,9 +8424,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[750], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8402,9 +8435,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[751], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8413,9 +8446,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[752], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8424,9 +8457,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[753], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8435,9 +8468,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[754], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8446,9 +8479,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[755], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8457,9 +8490,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[756], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8468,9 +8501,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[757], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8479,9 +8512,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[758], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8490,9 +8523,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[759], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8501,9 +8534,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[760], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8512,9 +8545,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[761], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8523,9 +8556,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[762], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8534,9 +8567,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[763], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8545,9 +8578,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[764], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8556,9 +8589,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[765], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8567,9 +8600,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[766], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8578,9 +8611,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[767], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8589,9 +8622,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[768], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8600,9 +8633,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[769], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8611,9 +8644,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[770], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8622,9 +8655,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[771], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8633,9 +8666,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[772], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8644,9 +8677,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[773], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8655,9 +8688,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[774], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8666,9 +8699,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[775], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8677,9 +8710,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[776], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8688,9 +8721,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[777], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8699,9 +8732,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[778], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8710,9 +8743,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[779], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8721,9 +8754,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[780], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8732,9 +8765,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[781], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8743,9 +8776,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[782], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8754,9 +8787,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[783], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8765,9 +8798,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[784], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8776,9 +8809,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[785], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8787,9 +8820,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[786], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8798,9 +8831,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[787], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8809,9 +8842,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[788], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8820,9 +8853,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[789], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8831,9 +8864,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[790], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8842,9 +8875,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[791], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8853,9 +8886,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[792], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8864,9 +8897,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[793], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8875,9 +8908,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[794], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8886,9 +8919,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[795], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8897,9 +8930,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[796], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8908,9 +8941,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[797], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8919,9 +8952,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[798], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8930,9 +8963,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[799], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for MEMORY_LANCEDB:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8941,9 +8974,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[800], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8952,9 +8985,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[801], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8963,9 +8996,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[802], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8974,9 +9007,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[803], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8985,9 +9018,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[804], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -8996,9 +9029,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[805], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9007,9 +9040,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[806], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9018,9 +9051,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[807], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9029,9 +9062,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[808], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9040,9 +9073,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[809], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9051,9 +9084,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[810], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9062,9 +9095,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[811], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9073,9 +9106,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[812], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9084,9 +9117,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[813], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9095,9 +9128,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[814], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9106,9 +9139,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[815], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9117,9 +9150,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[816], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9128,9 +9161,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[817], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9139,9 +9172,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[818], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9150,9 +9183,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[819], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9161,9 +9194,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[820], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9172,9 +9205,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[821], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9183,9 +9216,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[822], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9194,9 +9227,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[823], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9205,9 +9238,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[824], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9216,9 +9249,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[825], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9227,9 +9260,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[826], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9238,9 +9271,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[827], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9249,9 +9282,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[828], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9260,9 +9293,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[829], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9271,9 +9304,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[830], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9282,9 +9315,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[831], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9293,9 +9326,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[832], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9304,9 +9337,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[833], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9315,9 +9348,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[834], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9326,9 +9359,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[835], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9337,9 +9370,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[836], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9348,9 +9381,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[837], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9359,9 +9392,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[838], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9370,9 +9403,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[839], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9381,9 +9414,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[840], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9392,9 +9425,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[841], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9403,9 +9436,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[842], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9414,9 +9447,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[843], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9425,9 +9458,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[844], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9436,9 +9469,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[845], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9447,9 +9480,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[846], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9458,9 +9491,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[847], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9469,9 +9502,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[848], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9480,9 +9513,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[849], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9491,9 +9524,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[850], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9502,9 +9535,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[851], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9513,9 +9546,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[852], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9524,9 +9557,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[853], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9535,9 +9568,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[854], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9546,9 +9579,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[855], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9557,9 +9590,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[856], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9568,9 +9601,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[857], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9579,9 +9612,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[858], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9590,9 +9623,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[859], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9601,9 +9634,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[860], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9612,9 +9645,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[861], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9623,9 +9656,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[862], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9634,9 +9667,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[863], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9645,9 +9678,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[864], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9656,9 +9689,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[865], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9667,9 +9700,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[866], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9678,9 +9711,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[867], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9689,9 +9722,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[868], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9700,9 +9733,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[869], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9711,9 +9744,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[870], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9722,9 +9755,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[871], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9733,9 +9766,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[872], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9744,9 +9777,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[873], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9755,9 +9788,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[874], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9766,9 +9799,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[875], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9777,9 +9810,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[876], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9788,9 +9821,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[877], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9799,9 +9832,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[878], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9810,9 +9843,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[879], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9821,9 +9854,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[880], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9832,9 +9865,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[881], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9843,9 +9876,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[882], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9854,9 +9887,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[883], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9865,9 +9898,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[884], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9876,9 +9909,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[885], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9887,9 +9920,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[886], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9898,9 +9931,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[887], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9909,9 +9942,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[888], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9920,9 +9953,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[889], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9931,9 +9964,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[890], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9942,9 +9975,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[891], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9953,9 +9986,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[892], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9964,9 +9997,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[893], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9975,9 +10008,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[894], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9986,9 +10019,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[895], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -9997,9 +10030,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[896], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10008,9 +10041,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[897], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10019,9 +10052,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[898], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10030,9 +10063,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[899], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for PYTHON_RUN:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10041,9 +10074,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[900], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10052,9 +10085,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[901], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10063,9 +10096,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[902], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10074,9 +10107,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[903], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10085,9 +10118,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[904], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10096,9 +10129,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[905], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10107,9 +10140,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[906], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10118,9 +10151,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[907], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10129,9 +10162,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[908], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10140,9 +10173,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[909], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:INIT_RUNTIME:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10151,9 +10184,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[910], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10162,9 +10195,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[911], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10173,9 +10206,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[912], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10184,9 +10217,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[913], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10195,9 +10228,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[914], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10206,9 +10239,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[915], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10217,9 +10250,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[916], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10228,9 +10261,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[917], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10239,9 +10272,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[918], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10250,9 +10283,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[919], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:EXEC_SHELL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10261,9 +10294,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[920], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10272,9 +10305,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[921], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10283,9 +10316,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[922], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10294,9 +10327,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[923], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10305,9 +10338,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[924], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10316,9 +10349,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[925], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10327,9 +10360,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[926], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10338,9 +10371,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[927], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10349,9 +10382,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[928], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10360,9 +10393,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[929], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:RESOLVE_SKILL:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10371,9 +10404,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[930], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10382,9 +10415,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[931], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10393,9 +10426,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[932], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10404,9 +10437,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[933], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10415,9 +10448,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[934], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10426,9 +10459,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[935], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10437,9 +10470,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[936], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10448,9 +10481,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[937], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10459,9 +10492,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[938], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10470,9 +10503,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[939], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STATE_MUTATE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10481,9 +10514,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[940], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10492,9 +10525,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[941], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10503,9 +10536,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[942], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10514,9 +10547,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[943], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10525,9 +10558,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[944], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10536,9 +10569,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[945], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10547,9 +10580,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[946], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10558,9 +10591,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[947], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10569,9 +10602,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[948], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10580,9 +10613,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[949], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:COMPOSE_PROMPT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10591,9 +10624,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[950], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10602,9 +10635,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[951], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10613,9 +10646,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[952], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10624,9 +10657,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[953], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10635,9 +10668,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[954], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10646,9 +10679,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[955], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10657,9 +10690,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[956], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10668,9 +10701,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[957], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10679,9 +10712,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[958], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10690,9 +10723,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[959], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:QUERY_VECTOR:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10701,9 +10734,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[960], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10712,9 +10745,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[961], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10723,9 +10756,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[962], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10734,9 +10767,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[963], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10745,9 +10778,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[964], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10756,9 +10789,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[965], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10767,9 +10800,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[966], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10778,9 +10811,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[967], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10789,9 +10822,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[968], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10800,9 +10833,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[969], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:STREAM_GATEWAY:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10811,9 +10844,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[970], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10822,9 +10855,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[971], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10833,9 +10866,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[972], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10844,9 +10877,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[973], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10855,9 +10888,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[974], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10866,9 +10899,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[975], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10877,9 +10910,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[976], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10888,9 +10921,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[977], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10899,9 +10932,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[978], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10910,9 +10943,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[979], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SECURE_TAINT:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10921,9 +10954,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[980], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10932,9 +10965,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[981], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10943,9 +10976,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[982], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10954,9 +10987,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[983], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10965,9 +10998,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[984], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10976,9 +11009,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[985], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10987,9 +11020,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[986], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -10998,9 +11031,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[987], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11009,9 +11042,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[988], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11020,9 +11053,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[989], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:SYNCHRONIZE_UV:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11031,9 +11064,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[990], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:RAW
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11042,9 +11075,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[991], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:SECURE
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11053,9 +11086,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[992], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:BYPASS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11064,9 +11097,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[993], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:ATOMIC
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11075,9 +11108,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[994], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:EPHEMERAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11086,9 +11119,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[995], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:MANAGED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11097,9 +11130,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[996], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:OBFUSCATED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11108,9 +11141,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[997], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:BFT_CONSENSUS
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11119,9 +11152,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[998], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:CACHED
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11130,9 +11163,9 @@ func InitKimiKernel() {
 		atomic.AddUint64(&KimiMetrics[999], 1)
 		vec.ExecutionCount++
 		// Execute Kimi transductive updates for OBS_DIAGNOSTICS:PURGE_ARCHIVE:ASYNC_WAL
-		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95 + 0.05*math.Abs(math.Sin(float64(id.Code))))
-		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore + math.Cos(float64(id.Code))*5.0))
-		vec.PromptSize = math.Max(0.0, vec.PromptSize + float64(id.Code%50) - 25.0)
+		vec.DaimonLatency = math.Max(0.001, vec.DaimonLatency*0.95+0.05*math.Abs(math.Sin(float64(id.Code))))
+		vec.TaintScore = math.Min(100.0, math.Max(0.0, vec.TaintScore+math.Cos(float64(id.Code))*5.0))
+		vec.PromptSize = math.Max(0.0, vec.PromptSize+float64(id.Code%50)-25.0)
 		vec.CacheHits = vec.CacheHits*0.99 + 0.01*float64(id.Code%2)
 		vec.BftValidationCount += uint64(id.Code % 5)
 		return nil
@@ -11152,6 +11185,8 @@ func DispatchKimi(d, p, m byte, vec *KimiStateVector) error {
 }
 
 func GetKimiExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&KimiMetrics[code])
 }

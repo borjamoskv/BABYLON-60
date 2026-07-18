@@ -14,6 +14,7 @@ CDP_PORT = 9222
 CDP_URL = f"http://127.0.0.1:{CDP_PORT}/json/version"
 LEDGER_PATH = os.path.join(PROJECT_ROOT, "db", "cdp_ledger.db")
 
+
 def init_ledger() -> sqlite3.Connection:
     conn = sqlite3.connect(LEDGER_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
@@ -27,6 +28,7 @@ def init_ledger() -> sqlite3.Connection:
         )
     """)
     return conn
+
 
 def fetch_cdp_status() -> dict[str, str]:
     try:
@@ -42,8 +44,9 @@ def fetch_cdp_status() -> dict[str, str]:
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
             "V8-Version": "12.0.267.14",
             "WebKit-Version": "537.36 (@c2174c35bd21a3641bdad28b8d0092c608f51dfa)",
-            "webSocketDebuggerUrl": f"ws://127.0.0.1:{CDP_PORT}/devtools/browser/fbf5fb2b-db5f-4a62-97b4-3a9d3e8e2c65"
+            "webSocketDebuggerUrl": f"ws://127.0.0.1:{CDP_PORT}/devtools/browser/fbf5fb2b-db5f-4a62-97b4-3a9d3e8e2c65",
         }
+
 
 def commit_to_ledger(conn: sqlite3.Connection, data: dict[str, str]) -> None:
     ts = datetime.now(timezone.utc).isoformat()
@@ -52,12 +55,18 @@ def commit_to_ledger(conn: sqlite3.Connection, data: dict[str, str]) -> None:
     try:
         conn.execute(
             "INSERT INTO cdp_events (timestamp, browser, web_socket_debugger_url, hash) VALUES (?, ?, ?, ?)",
-            (ts, data.get('Browser', 'UNKNOWN'), data.get('webSocketDebuggerUrl', ''), h)
+            (
+                ts,
+                data.get("Browser", "UNKNOWN"),
+                data.get("webSocketDebuggerUrl", ""),
+                h,
+            ),
         )
         conn.commit()
         print(f"C5-REAL: CDP State crystallized. Hash: {h}")
     except sqlite3.IntegrityError:
         print(f"C5-REAL: Idempotency Lock active. Hash {h} already exists.")
+
 
 if __name__ == "__main__":
     conn = init_ledger()

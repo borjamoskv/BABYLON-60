@@ -105,7 +105,12 @@ impl<T: Clone + fmt::Debug> KnowledgeGraph<T> {
         if source >= self.nodes.len() || target >= self.nodes.len() {
             return false;
         }
-        self.edges.push(KnowledgeEdge { source, target, kind, label });
+        self.edges.push(KnowledgeEdge {
+            source,
+            target,
+            kind,
+            label,
+        });
         true
     }
 
@@ -166,7 +171,11 @@ impl<T: Clone + fmt::Debug> KnowledgeGraph<T> {
             }
             state[node] = 1;
             for e in edges {
-                if e.source == node && e.kind == EdgeKind::DerivesFrom && e.target < state.len() && dfs(e.target, edges, state) {
+                if e.source == node
+                    && e.kind == EdgeKind::DerivesFrom
+                    && e.target < state.len()
+                    && dfs(e.target, edges, state)
+                {
                     return true;
                 }
             }
@@ -203,7 +212,10 @@ impl<T: Clone + fmt::Debug> KnowledgeGraph<T> {
     }
 
     /// Iterates over edges of a specific kind.
-    pub fn edges_of_kind<'a>(&'a self, kind: &'a EdgeKind) -> impl Iterator<Item = &'a KnowledgeEdge> + 'a {
+    pub fn edges_of_kind<'a>(
+        &'a self,
+        kind: &'a EdgeKind,
+    ) -> impl Iterator<Item = &'a KnowledgeEdge> + 'a {
         self.edges.iter().filter(move |e| &e.kind == kind)
     }
 
@@ -307,10 +319,18 @@ mod tests {
 
     // ── Rewrite rule fn pointers ──────────────────────────────────────────────
 
-    fn pre_always(_g: &KnowledgeGraph<i32>) -> bool { true }
-    fn pre_never(_g: &KnowledgeGraph<i32>) -> bool { false }
-    fn pre_has_nodes(g: &KnowledgeGraph<i32>) -> bool { g.node_count() >= 2 }
-    fn pre_has_edge(g: &KnowledgeGraph<i32>) -> bool { g.edge_count() > 0 }
+    fn pre_always(_g: &KnowledgeGraph<i32>) -> bool {
+        true
+    }
+    fn pre_never(_g: &KnowledgeGraph<i32>) -> bool {
+        false
+    }
+    fn pre_has_nodes(g: &KnowledgeGraph<i32>) -> bool {
+        g.node_count() >= 2
+    }
+    fn pre_has_edge(g: &KnowledgeGraph<i32>) -> bool {
+        g.edge_count() > 0
+    }
 
     fn tx_noop(_g: &mut KnowledgeGraph<i32>) {}
 
@@ -453,7 +473,11 @@ mod tests {
     fn rewrite_precondition_false_returns_precondition_failed() {
         let mut g = graph_i32();
         g.add_node(axiom(1, "a"));
-        let rule = TypedRewriteRule { name: "never", precondition: pre_never, transform: tx_noop };
+        let rule = TypedRewriteRule {
+            name: "never",
+            precondition: pre_never,
+            transform: tx_noop,
+        };
         let outcome = g.rewrite(&rule, &[]);
         assert_eq!(outcome, RewriteOutcome::PreconditionFailed);
         assert_eq!(g.node_count(), 1); // unchanged
@@ -465,7 +489,11 @@ mod tests {
     fn rewrite_committed_applies_transform() {
         let mut g = graph_i32();
         g.add_node(axiom(1, "a"));
-        let rule = TypedRewriteRule { name: "add", precondition: pre_always, transform: tx_add_node };
+        let rule = TypedRewriteRule {
+            name: "add",
+            precondition: pre_always,
+            transform: tx_add_node,
+        };
         let outcome = g.rewrite(&rule, &[]);
         assert_eq!(outcome, RewriteOutcome::Committed);
         assert_eq!(g.node_count(), 2);
@@ -529,10 +557,7 @@ mod tests {
         assert_eq!(outcome, RewriteOutcome::InvariantViolated);
         // Rollback: only the original Supports edge remains
         assert_eq!(g.edge_count(), 1);
-        assert!(g
-            .edges_of_kind(&EdgeKind::Contradicts)
-            .next()
-            .is_none());
+        assert!(g.edges_of_kind(&EdgeKind::Contradicts).next().is_none());
         let _ = (a, b);
     }
 
@@ -560,8 +585,8 @@ mod tests {
         // The cycle must be detected → rollback must trigger
         assert_eq!(outcome, RewriteOutcome::InvariantViolated);
         // Both node AND edge additions must be rolled back atomically
-        assert_eq!(g.node_count(), pre_count);      // 2 nodes restored
-        assert_eq!(g.edge_count(), 1);              // only original "ab" edge
+        assert_eq!(g.node_count(), pre_count); // 2 nodes restored
+        assert_eq!(g.edge_count(), 1); // only original "ab" edge
     }
 
     // ── Built-in invariants ───────────────────────────────────────────────────
