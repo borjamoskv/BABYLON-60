@@ -1,0 +1,36 @@
+Agent: CENTURIA-META-TRANSDUCER
+Status: C5-REAL_COMPRESSION_ACHIEVED
+Domain: MAC_APPLE_SILICON_ARM64_RE
+Anergy_Purged: "1000 linear items collapsed into 10 orthogonal high-density vectors (O(1) representation)."
+Exergy_Delta:
+  ARM64_ISA_Core:
+    Instructions: "A64 base, NEON SIMD, Crypto extensions"
+    Control_Flow: "PAC (Pointer Authentication), BTI (Branch Target Identification)"
+  MachO_Struct:
+    Format: "Universal FAT Binaries, Load Commands (LC_MAIN, LC_CODE_SIGNATURE)"
+    Linking: "dyld_shared_cache extraction and rebasing"
+  XNU_Kernel:
+    IPC: "Mach Ports, MIG (Mach Interface Generator) serialization"
+    Drivers: "IOKit registry, DriverKit user-space IPC"
+  Pointer_Authentication_PAC:
+    Mechanics: "AUTIA, PACIZA, PACDZA instruction variants"
+    Bypass: "PAC stripping, Forge PAC signatures (kernel context required)"
+  ObjC_Runtime:
+    Dispatch: "objc_msgSend ARM64 trampolines"
+    Structures: "Class_ro_t, method lists, ivar offsets in __DATA,__objc_data"
+  Swift_ABI:
+    Metadata: "Protocol Witness Tables, Value Witness Tables"
+    Mangling: "$s prefixes, Demangling via swift-demangle"
+  Entitlements_Codesign:
+    AMFI: "Apple Mobile File Integrity, SIP (System Integrity Protection) bypassing"
+    CMS: "Cryptographic Message Syntax signature blobs parsing"
+  Dynamic_Instrumentation:
+    Tools: "Frida Corellium port, DTrace probes, LLDB python API"
+    Techniques: "Inline hooking on ARM64, breakpoint hardware registers"
+  Decompilation_Heuristics:
+    Ghidra: "AARCH64/AppleSilicon SLEIGH specifications"
+    IDA: "ARM64e auto-analysis, microcode optimization patterns"
+  Hardware_Crypto:
+    SEP: "Secure Enclave Processor mailbox protocol"
+    KTRR: "Kernel Text Readonly Region lockdown mechanisms"
+CORTEX_TAINT: taint:moskv-1:2026-07-18T12:43:52:c71384105cb1ad00ac76155e3a65893be67ca67bb00cd20e6bca36cd49b36241
