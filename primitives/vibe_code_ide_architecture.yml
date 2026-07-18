@@ -1,0 +1,45 @@
+cortex_taint: "CORTEX-TAINT:borjamoskv:vibe_code_ide_architecture:2026-07-18T10:51:10Z:7a8b9c0d1e2f3a4b"
+title: "CONSEJOS Y ARQUITECTURA PARA UN IDE AGÉNTICO 100% VIBE CODE"
+version: "1.0-C5-REAL"
+core_philosophy: "El Vibe Code no es despreocupación; es flujo puro de alta exergía. El desarrollador dicta intenciones teleológicas (Ψ); el IDE agéntico transduce el estado a disco (C5-REAL) mediante comprobadores deterministas y degradación de agencia sin fricción discursiva."
+
+principles:
+  - id: P1
+    name: "Graceful Degradation of Agency (Transición 4 ➔ 0)"
+    concept: "El IDE opera por defecto en Nivel 4 (Autonomía total con auto-commit). Ante cualquier falla BFT o infracción de linter, el entorno degrada suavemente a Nivel 3 (confirmación rápida), Nivel 2 (diff preview) o Nivel 0 (EpistemicHalt), sin bloquear la escritura del usuario."
+  
+  - id: P2
+    name: "Transducción Causal Inmediata (Zero-Prosa UI)"
+    concept: "Cero disclaimers, cero explicaciones narrativas ('He arreglado el código...'). La UI renderiza únicamente deltas en código, hashes de Git y estado de compilación."
+
+  - id: P3
+    name: "Memoria de Doble Nivel (TIER_0 vs TIER_1)"
+    concept: "Separación física en SQLite del código humano/AST (TIER_0) y las propuestas sintéticas (TIER_1). Purga automática (Weaponized Forgetting) de las propuestas no validadas tras 60 minutos para evitar Autophagic Context Poisoning."
+
+  - id: P4
+    name: "Juez Determinista Local (Compiler > LLM Reviewer)"
+    concept: "El agente sugiere, pero los binarios locales (Ruff, Cargo, Mypy, Pytest) determinan la validez. Ningún código generado se promueve a TIER_0 sin pasar el compilador local."
+
+  - id: P5
+    name: "Aislamiento Asíncrono en Worktrees"
+    concept: "Cada agente o sub-tarea del swarm trabaja en un Git Worktree o rama efímera aislada (`feature/vibe-*`). El usuario jamás experimenta congelamiento de pantalla (0ms UI lag)."
+
+  - id: P6
+    name: "Verificación de Objetos Físicos (Phantom Target Shield)"
+    concept: "Se prohíbe emitir notificaciones de tareas completadas sin un diff verificable en el sistema de archivos (`stat` + `sha256`). Elimina el C4-SIM y la iteración mimética."
+
+  - id: P7
+    name: "Idempotency Lock y Ahorro de ATP"
+    concept: "Cálculo de hash previo a llamadas de API o escrituras en disco. Si hash(payload) == hash(target), la operación se aborta al instante, ahorrando cuota y latencia."
+
+  - id: P8
+    name: "Kill Switch Hardware/Hotkey Inmediato"
+    concept: "Atajo de teclado global (ej. ⌥+⌘+K) o toque de archivo `kill_switch.lock` que revoca todos los sockets de subagentes activos en <10ms."
+
+  - id: P9
+    name: "Filtro de Inyección Zero-Trust en Tiempo Real"
+    concept: "Sanitización síncrona de cualquier fragmento de texto o comentario pegado en el editor para prevenir vectores de desvío de prompt (Jailbreaks/System Overrides)."
+
+  - id: P10
+    name: "Auditoría en Master Ledger (Git Sentinel Autopoiético)"
+    concept: "Toda mutación C5-REAL aceptada por el IDE genera un commit firmado automático en segundo plano (`git commit --no-verify -m 'vibe: <diff_hash>'`), manteniendo la trazabilidad histórica completa."
