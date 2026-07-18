@@ -7,7 +7,7 @@
 
 - Proyecto: **Teorema-Robinson-Moskv** (linaje local = canónico)
 - Versión de proyecto: **1.0.2** — fuente única: `pyproject.toml`. `AGENTS.md` declara "Version: 1.1.0" pero es la versión del *documento de comportamiento*, no del proyecto: namespaces distintos, no hay conflicto (verificado 2026-07-17).
-- HEAD: `3460e62a5` · 759 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
+- HEAD: `5c62f056a` · 761 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
 
 ## Topología del fork CORTEX↔BABYLON-60 — RESUELTA
 
@@ -61,3 +61,5 @@
 | 2026-07-18 | C5-REAL ULTRATHINK: Consolidación de 21 sessions al Memory Vault (`cortex_memory.db` WAL/busy_timeout) y motor de inferencia local (`src-tauri/src/inference.rs` + `backend/routes/inference.py`) con política Zero-Network | Git Sentinel `8f15fcddb` (188 tests, 144 linter files clean) |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `3c2ffa601578`) | Git Sentinel `c67f60428` |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `79c453e457e2`) | Git Sentinel `41de4bfca` |
+| 2026-07-18 | C5-REAL IDE & PACKAGING: Integración del panel de inferencia local (dropdown de modelos + Mamba/Ollama) y compilación nativa exitosa de macOS `.dmg` de producción (`com.babylon60.ide`) | Git Sentinel `0e63ff520` (Compilador Tauri verde, DMG generado) |
+| 2026-07-18 | C5-REAL ITERA: Reparación de orden de importaciones (E402) en suite de pruebas y validación final de regresión (195 tests green) | Git Sentinel `5c62f056a` (Ruff linter e integraciones 100% OK) |
