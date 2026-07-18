@@ -117,3 +117,18 @@ async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path, monkeypatch)
         "Fix: hashear la MISMA representación (texto plano en ambos caminos, "
         "o cifrado en ambos) en INSERT y en verify_chain."
     )
+
+
+def test_inv_c5_10_pynacl_serialization():
+    """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""
+    hits = _scan({".py"}, r'\._seed\b|\._public_key\b')
+    # Filter out library self-references if any
+    hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h]
+    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)
+
+
+def test_inv_c5_11_gh_purge_constraints():
+    """INV_C5_11 — Abort git push --mirror/mirror-rewrites if gh auth fails or Broken pipe detected."""
+    # Scan for Option B retries in error catching blocks
+    hits = _scan({".py", ".sh"}, r'git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B')
+    assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)
