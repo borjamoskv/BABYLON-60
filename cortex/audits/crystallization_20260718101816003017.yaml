@@ -1,0 +1,12 @@
+Claim: Crystallization_a566e274
+Proof:
+  Base: Extraction from session a566e274-bc7f-4661-9f36-17374737b082
+  Payload: |
+    conversation_id: "a566e274-bc7f-4661-9f36-17374737b082"
+    date: "2026-07-18T06:59:05Z"
+    objective: |
+      https://pypi.org/project/cortex-persist/
+    files_mutated: []
+    commands_executed: ['ruff check .', 'which ruff']
+  Confidence: C5
+CORTEX_TAINT: 43b64ad868b47945dd55cc798d0123c70c9f0debab89be2bb3f02c087ea64ef3

@@ -1,0 +1,12 @@
+Claim: Crystallization_da5e3347
+Proof:
+  Base: Extraction from session da5e3347-adcf-49f5-aae7-b9d731ed4e0a
+  Payload: |
+    conversation_id: "da5e3347-adcf-49f5-aae7-b9d731ed4e0a"
+    date: "2026-07-18T02:59:43Z"
+    objective: |
+      New Chat
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: 295741ddd2a1509561f07719a11d210aba671ba4fa4e6a62383e2f303d39cf77

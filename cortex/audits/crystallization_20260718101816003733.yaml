@@ -1,0 +1,12 @@
+Claim: Crystallization_d886357c
+Proof:
+  Base: Extraction from session d886357c-fc33-46b2-ab1f-50467739966d
+  Payload: |
+    conversation_id: "d886357c-fc33-46b2-ab1f-50467739966d"
+    date: "2026-07-18T08:15:41Z"
+    objective: |
+      Audit Python code quality in /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex and /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scripts.
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: d616191cf77d2f13df8450d81424556ef785bb5fecdc12d50f61da405b25d0f4

@@ -1,0 +1,12 @@
+Claim: Crystallization_f0459779
+Proof:
+  Base: Extraction from session f0459779-08d1-4dfb-b84e-1b3598c545f7
+  Payload: |
+    conversation_id: "f0459779-08d1-4dfb-b84e-1b3598c545f7"
+    date: "2026-07-18T01:41:14Z"
+    objective: |
+      arregla  https://support.brave.app/hc/en-us/articles/360018192251-How-do-I-fix-page-crashes-and-other-page-loading-errors /goal
+    files_mutated: ['AGENTS.md', 'inspect_brave_prefs.py', 'inspect_extensions.py', 'isolate_extensions.py', 'repair_brave.py']
+    commands_executed: ['cp \\"/Users/borjafernandezangulo/Library/Application Support/BraveSoftware/Brave-Browser/Crashpad/completed/f6f51435-b9e1-48bb-afd1-79becfd023fb.dmp\\" \\"/Users/borjafernandezangulo/.gemini/antigravity/brain/f0459779-08d1-4dfb-b84e-1b3598c545f7/scratch/\\"', 'ls -l \\"/Users/borjafernandezangulo/Library/Application Support/BraveSoftware/Brave-Browser/Crashpad/completed/f6f51435-b9e1-48bb-afd1-79becfd023fb.dmp\\"', 'strings \\"/Users/borjafernandezangulo/Library/Application Support/BraveSoftware/Brave-Browser/Crashpad/completed/f6f51435-b9e1-48bb-afd1-79becfd023fb.dmp\\" | grep -i \\"signal\\" | head -n 20', 'ls -lt \\"\'/Users/borjafernandezangulo/Library/Application Support/BraveSoftware/Brave-Browser/Crashpad/completed\'\\"', 'ls -1 \\"\'/Users/borjafernandezangulo/Library/Application Support/BraveSoftware/Brave-Browser/Crashpad/completed\'\\"']
+  Confidence: C5
+CORTEX_TAINT: c85e6859de4e4b7651dfd79aeeced184f0b3a416781d8c0ef523c290a9c7a6ec

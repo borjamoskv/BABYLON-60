@@ -1,0 +1,12 @@
+Claim: Crystallization_0565d6f7
+Proof:
+  Base: Extraction from session 0565d6f7-0b1a-4548-9c2f-89ac5277bf44
+  Payload: |
+    conversation_id: "0565d6f7-0b1a-4548-9c2f-89ac5277bf44"
+    date: "2026-07-17T23:06:20Z"
+    objective: |
+      Nube
+    files_mutated: []
+    commands_executed: []
+  Confidence: C5
+CORTEX_TAINT: b24172515e064800a7741efef13fbb0a0ff71cbad8c5307b2fd3c98b2bf6a1f1

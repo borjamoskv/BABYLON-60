@@ -1,0 +1,12 @@
+Claim: Crystallization_0a7383c9
+Proof:
+  Base: Extraction from session 0a7383c9-6234-46f2-95b6-7cb8c86f0e3a
+  Payload: |
+    conversation_id: "0a7383c9-6234-46f2-95b6-7cb8c86f0e3a"
+    date: "2026-07-18T08:16:13Z"
+    objective: |
+      WikipediaLa enciclopedia libre
+    files_mutated: []
+    commands_executed: ['git -c commit.gpgsign=false commit --no-verify -m \\"fix(bft): recompile Rust strike_rs bindings and verify 207 invariant test suites [bridge]\\"', 'git rev-parse HEAD', '.venv/bin/python scratch/prepare_and_crystallize.py || .venv/bin/python scripts/autodetect_invariants.py && PYTHONPATH=. .venv/bin/pytest tests/ -v', '.venv/bin/maturin develop --manifest-path strike_rs/Cargo.toml && .venv/bin/python scripts/autodetect_invariants.py && PYTHONPATH=. .venv/bin/pytest tests/ -v', 'python3 /Users/borjafernandezangulo/.gemini/config/skills/Log_Crystallization_Parser/scripts/consolidate_babylon.py --scan']
+  Confidence: C5
+CORTEX_TAINT: 4cbf8f189eff079c2328cc6c40c5576fd06c645e2409db7ea960f0fc688ff55e

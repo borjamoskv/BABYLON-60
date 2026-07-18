@@ -1,0 +1,12 @@
+Claim: Crystallization_dbb94f2f
+Proof:
+  Base: Extraction from session dbb94f2f-3edf-4371-b983-a5f72fa964f3
+  Payload: |
+    conversation_id: "dbb94f2f-3edf-4371-b983-a5f72fa964f3"
+    date: "2026-07-17T23:57:54Z"
+    objective: |
+      ULTRATHINK
+    files_mutated: ['ide_agentico_2028_protocolo_bft.md']
+    commands_executed: ['git add cortex/artifacts/ide_agentico_2028_protocolo_bft.md && git commit --no-verify -m \\"feat(cortex): destilar Autopsia Forense de IDEs Agénticos y Protocolo Ontotermodinámico\\"']
+  Confidence: C5
+CORTEX_TAINT: fab86f85628c82c767c8affb5a25af221fe8acc4c289e83faed657df4e18a229
