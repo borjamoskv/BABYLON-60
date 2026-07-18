@@ -1,0 +1,33 @@
+# C5-REAL SOVEREIGN GITHUB SWARM ARCHITECTURE
+# Target: 100% Autonomous Repository Management
+
+architecture:
+  layer_1_perception:
+    mechanism: "GitHub Webhooks -> Cortex Nexus Bridge"
+    description: "El enjambre no hace polling (Anergía). Recibe eventos (Push, Issue, PR) vía webhooks que disparan ignición determinista en el Kernel."
+    tools_required: ["GitHub App (Fine-grained tokens)", "ngrok/Cloudflare Tunnel"]
+
+  layer_2_mitosis:
+    mechanism: "Swarm Thread Dispatcher (invoke_subagent)"
+    description: "Un Orquestador (N=1) recibe el payload del webhook y lanza subagentes en worktrees aislados (`share` mode)."
+    roles:
+      - Triage: "Evalúa el Issue/PR y asigna prioridad."
+      - Coder: "Genera el delta (código) en branch aislado."
+      - QA: "Ejecuta BFT_State_Loop, pytest y linters."
+
+  layer_3_transduction:
+    mechanism: "Git Merkle Appender (Sovereign MCP)"
+    description: "Los Workers mutan el estado y usan el MCP de GitHub para crear PRs o mergear si el consenso BFT es unánime (f <= 1)."
+    tools_required: ["mcp_github_* (create_branch, push_files, create_pull_request, merge_pull_request)"]
+
+  layer_4_consensus:
+    mechanism: "BFT Ledger (SQLite WAL)"
+    description: "Todas las acciones de GitHub se registran en `cortex.db` para evitar bucles de retroalimentación infinita o commits redundantes (Deadlocks termodinámicos)."
+
+execution_flow:
+  1_trigger: "Usuario abre Issue #42."
+  2_ingest: "Webhook -> CORTEX Orquestador."
+  3_spawn: "Orquestador ejecuta `invoke_subagent` (Role: Coder, Workspace: branch)."
+  4_mutate: "Subagente usa `read_file`, `replace_file_content`, ejecuta tests."
+  5_push: "Subagente usa `mcp_github_push_files` y `mcp_github_create_pull_request`."
+  6_bft_merge: "Subagente QA aprueba PR. Orquestador ejecuta `mcp_github_merge_pull_request`."

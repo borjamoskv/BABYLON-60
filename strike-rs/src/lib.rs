@@ -262,6 +262,7 @@ impl TTSHarnessState {
 // DISPATCH ENGINE FUNCTION IMPLEMENTATIONS
 // ==========================================
 
+/// Dispatches an observation step on the StateVector given domain d, primitive p, and modifier m.
 #[pyfunction]
 pub fn dispatch_state_observer(d: u8, p: u8, m: u8, mut state: PyRefMut<StateVector>) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
@@ -272,6 +273,9 @@ pub fn dispatch_state_observer(d: u8, p: u8, m: u8, mut state: PyRefMut<StateVec
     
     state.execution_count += 1;
     let mut sum_sq = 0.0;
+    if state.states.len() < 4 || state.innovation.len() < 4 {
+        return Err(pyo3::exceptions::PyValueError::new_err("StateVector arrays states/innovation must have length >= 4"));
+    }
     for i in 0..4 {
         state.states[i] += ((code as f64) + (i as f64)).sin() * 0.01;
         state.innovation[i] = ((code as f64).cos() - state.states[i]) * 0.1;
@@ -281,6 +285,7 @@ pub fn dispatch_state_observer(d: u8, p: u8, m: u8, mut state: PyRefMut<StateVec
     Ok((code, name, state.norm_error))
 }
 
+/// Dispatches a neuro-chain mutation step on the CognitiveChainVector.
 #[pyfunction]
 pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, mut vec: PyRefMut<CognitiveChainVector>) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {
@@ -300,6 +305,7 @@ pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, mut vec: PyRefMut<CognitiveChai
     Ok((code, name, vec.language_entropy))
 }
 
+/// Dispatches a TTS harness evaluation step on the TTSHarnessState.
 #[pyfunction]
 pub fn dispatch_tts_harness(d: u8, p: u8, m: u8, mut state: PyRefMut<TTSHarnessState>) -> PyResult<(u16, String, f64)> {
     if d > 9 || p > 9 || m > 9 {

@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
+import os
 import sys
 import json
 import subprocess
 import time
-
-import os
-home = os.path.expanduser("~")
-sys.path.append(os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher"))
-from c5_swarm_compiler import ThermodynamicSwarmCompiler  # type: ignore[import-not-found]  # noqa: E402
 
 def run_ruff_fix() -> None:
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")
@@ -18,11 +13,21 @@ def run_ruff_fix() -> None:
         print(f"Ruff fix failed: {e.stdout}\n{e.stderr}")
 
 def execute_swarm_audit() -> None:
+    home = os.path.expanduser("~")
+    skill_path = os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher")
+    if skill_path not in sys.path:
+        sys.path.append(skill_path)
+    try:
+        from c5_swarm_compiler import ThermodynamicSwarmCompiler  # type: ignore[import-not-found]
+    except ImportError:
+        ThermodynamicSwarmCompiler = None  # type: ignore[assignment]
+
     print("⚡ [LEGION-10K] Deploying 100 agents (10 blocks x 10 nodes)...")
-    compiler = ThermodynamicSwarmCompiler(
-        goal="PURGA MASIVA DE ENTROPIA across 10000 primitives (LEGION 10K)",
-        target_files=["primitives/primitives.go", "src-tauri/src/kernel.rs", "src/App.tsx"]
-    )
+    if ThermodynamicSwarmCompiler:
+        compiler = ThermodynamicSwarmCompiler(
+            goal="PURGA MASIVA DE ENTROPIA across 10000 primitives (LEGION 10K)",
+            target_files=["primitives/primitives.go", "src-tauri/src/kernel.rs", "src/App.tsx"]
+        )
     
     # Custom compile with 10 blocks x 10 agents = 100 agents
     subagents = []
@@ -44,29 +49,30 @@ def execute_swarm_audit() -> None:
         role_base, subtask_base = block_definitions[b_idx]
         for a_idx in range(10):
             role = f"B{b_idx+1}-{role_base}-{a_idx+1:02d}"
+            prompt_str = compiler._compile_prompt_invariant(
+                role=role,
+                subtask=f"[BLOQUE {b_idx+1}/10] {subtask_base}\nMETA: PURGA MASIVA DE ENTROPIA",
+                vector=f"Partition-{b_idx+1}.{a_idx+1}",
+                bft_id=total_id
+            ) if ThermodynamicSwarmCompiler else f"Agent {role}"
             subagents.append({
                 "TypeName": "self" if b_idx > 0 else "research",
                 "Role": role,
-                "Prompt": compiler._compile_prompt_invariant(
-                    role=role,
-                    subtask=f"[BLOQUE {b_idx+1}/10] {subtask_base}\nMETA: PURGA MASIVA DE ENTROPIA",
-                    vector=f"Partition-{b_idx+1}.{a_idx+1}",
-                    bft_id=total_id
-                ),
+                "Prompt": prompt_str,
                 "Workspace": "branch" if b_idx in [1, 2, 3, 5, 6] else ("inherit" if b_idx in [0, 7] else "share")
             })
             total_id += 1
 
     print(f"✅ Swarm compiled: {len(subagents)} nodes registered.")
     
-    transcript_path = os.path.join(home, ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl")
+    transcript_path = os.getenv("CORTEX_TRANSCRIPT_PATH", os.path.join(home, ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl"))
     print("⚡ [LEA_OMEGA] Running cognitive audit...")
-    audit_script = os.path.join(home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py")
+    audit_script = os.getenv("CORTEX_AUDIT_SCRIPT", os.path.join(home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"))
     
     try:
         res = subprocess.run(["python3", audit_script, transcript_path], capture_output=True, text=True, check=True)
         audit_results = json.loads(res.stdout)
-    except Exception as e:
+    except (subprocess.CalledProcessError, json.JSONDecodeError, FileNotFoundError, OSError) as e:
         audit_results = {"error": f"Failed to run cognitive audit: {str(e)}"}
 
     # Generate massive report

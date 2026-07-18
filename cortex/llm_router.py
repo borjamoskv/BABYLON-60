@@ -61,41 +61,41 @@ class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""
     def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml") -> None:
         self.routes = parse_yaml_routes(routes_path)
+        self.routes_by_name = {r.get("name", ""): r for r in self.routes}
         
     def dispatch_inference(self, prompt: str, model: str) -> str:
         """Enruta la petición buscando autarquía local y cascading a APIs gratuitas."""
         errors = []
         
         # 1. Prioridad: Ollama Local (Autarquía Offline)
-        for route in self.routes:
-            if route.get("name") == "Ollama Local Engine" and model in route.get("models", []):
-                try:
-                    return self._call_ollama(str(route.get("url", "")), model, prompt)
-                except (OSError, RuntimeError, ConnectionError) as e:
-                    errors.append(f"Ollama ({model}) falló: {e}")
+        ollama_route = self.routes_by_name.get("Ollama Local Engine")
+        if ollama_route and model in ollama_route.get("models", []):
+            try:
+                return self._call_ollama(str(ollama_route.get("url", "")), model, prompt)
+            except (OSError, RuntimeError, ConnectionError) as e:
+                errors.append(f"Ollama ({model}) falló: {e}")
                     
         # 2. Cascada a Groq Console (Límites Gratuitos)
-        for route in self.routes:
-            if route.get("name") == "Groq Cloud Console" and os.getenv("GROQ_API_KEY"):
-                try:
-                    # Tomar el primer modelo disponible de la lista
-                    models = route.get("models", [])
-                    actual_model = models[0] if models else "llama3-70b-8192"
-                    url = f"{route.get('url')}/v1/chat/completions"
-                    return self._call_openai_compatible(url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt)
-                except (OSError, RuntimeError, ConnectionError) as e:
-                    errors.append(f"Groq ({route.get('name')}) falló: {e}")
+        groq_route = self.routes_by_name.get("Groq Cloud Console")
+        if groq_route and os.getenv("GROQ_API_KEY"):
+            try:
+                models = groq_route.get("models", [])
+                actual_model = models[0] if models else "llama3-70b-8192"
+                url = f"{groq_route.get('url')}/v1/chat/completions"
+                return self._call_openai_compatible(url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt)
+            except (OSError, RuntimeError, ConnectionError):
+                errors.append(f"Groq ({groq_route.get('name')}) falló")
 
         # 3. Cascada a GitHub Models (Developer Free Tier)
-        for route in self.routes:
-            if route.get("name") == "GitHub Models" and os.getenv("GITHUB_TOKEN"):
-                try:
-                    models = route.get("models", [])
-                    actual_model = models[0] if models else "Llama-3-8B-Instruct"
-                    url = "https://models.inference.ai.azure.com/chat/completions"
-                    return self._call_openai_compatible(url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt)
-                except (OSError, RuntimeError, ConnectionError) as e:
-                    errors.append(f"GitHub Models falló: {e}")
+        github_route = self.routes_by_name.get("GitHub Models")
+        if github_route and os.getenv("GITHUB_TOKEN"):
+            try:
+                models = github_route.get("models", [])
+                actual_model = models[0] if models else "Llama-3-8B-Instruct"
+                url = "https://models.inference.ai.azure.com/chat/completions"
+                return self._call_openai_compatible(url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt)
+            except (OSError, RuntimeError, ConnectionError) as e:
+                errors.append(f"GitHub Models falló: {e}")
 
         # Si todas fallan, levantar pánico epistémico
         error_msg = " // ".join(errors)

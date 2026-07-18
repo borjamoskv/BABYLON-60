@@ -1,5 +1,6 @@
 name: C5-REAL Soverign Cloud Allocation (GCP)
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -10,6 +11,7 @@ on:
 env:
   PROJECT_ID: cortex-babylon-60
   REGION: europe-west1
+  WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
 jobs:
   terraform-apply:
@@ -26,7 +28,7 @@ jobs:
       - name: Authenticate via Workload Identity Federation (C5-REAL Zero-Trust)
         uses: google-github-actions/auth@v2
         with:
-          workload_identity_provider: 'projects/123456789012/locations/global/workloadIdentityPools/github/providers/my-repo'
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: 'c5-deployer@cortex-babylon-60.iam.gserviceaccount.com'
 
       - name: Setup Terraform
@@ -36,6 +38,11 @@ jobs:
         run: terraform init
         working-directory: ./infra
 
-      - name: Terraform Apply (Auto-Approve / R7 Override)
-        run: terraform apply -auto-approve
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
         working-directory: ./infra
+
+      - name: Terraform Apply (Auto-Approve / R7 Override)
+        run: terraform apply -auto-approve tfplan
+        working-directory: ./infra
+

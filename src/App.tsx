@@ -314,14 +314,22 @@ export default function BabylonCompleteIDE() {
           }
         }
       };
-      recognition.onerror = () => setIsDictating(false);
-      recognition.onend = () => isDictating && recognition.start();
+      recognition.onerror = (err: any) => {
+        console.error('SpeechRecognition error:', err);
+        setIsDictating(false);
+      };
+      recognition.onend = () => {
+        setIsDictating(false);
+      };
       
       try {
         recognition.start();
         recognitionRef.current = recognition;
         setIsDictating(true);
-      } catch (err) {}
+      } catch (err) {
+        console.error('Failed to start SpeechRecognition:', err);
+        setIsDictating(false);
+      }
     }
   };
 

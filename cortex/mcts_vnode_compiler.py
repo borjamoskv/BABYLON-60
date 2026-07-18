@@ -1,4 +1,5 @@
 import sys
+import pathlib
 import hashlib
 import math
 import ast
@@ -85,12 +86,13 @@ class L3InferenceEnginePhysical:
         """
         Búsqueda paralela en MCTS de trayectorias hasta el colapso empírico.
         """
-        # Batch evaluation for CPU bound AST compilation
+        # Batch evaluation for CPU bound AST compilation using lazy generator
         with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
-            args_list = [(intention, i) for i in range(self.target)]
-            for result in pool.imap_unordered(_mcts_expansion_worker, args_list, chunksize=100):
+            tasks = ((intention, i) for i in range(self.target))
+            for result in pool.imap_unordered(_mcts_expansion_worker, tasks, chunksize=100):
                 if result is not None:
-                    pool.terminate() # Detenemos la búsqueda al hallar la prueba empírica
+                    pool.terminate()
+                    pool.join()
                     return result
                     
         raise RuntimeError("C5-REAL: Imposible colapsar un teorema válido bajo las condiciones termodinámicas actuales.")
@@ -100,7 +102,8 @@ def enforce_ide_theorem_physical(intention: str) -> None:
     theorem = engine.compile_theorem(intention)
     
     # Persistencia del Teorema Compilado
-    with open("cortex/compiled_theorem.py", "w") as f:
+    out_path = pathlib.Path(__file__).parent / "compiled_theorem.py"
+    with open(out_path, "w", encoding="utf-8") as f:
         f.write(theorem.payload)
     
     # Cero prosa. Colapso causal.

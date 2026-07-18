@@ -1,3 +1,5 @@
+"""C5-REAL Autoconsolidator script for conversation logs."""
+
 import os
 import json
 import glob
@@ -7,6 +9,7 @@ BRAIN_DIR = os.path.expanduser("~/.gemini/antigravity/brain")
 ARTIFACT_DIR = os.path.join(os.getcwd(), "artifacts")
 
 def consolidate_conversations() -> None:
+    """Scans conversation transcripts in BRAIN_DIR and generates a consolidated markdown ledger."""
     print("[C5-REAL] Iniciando Autoconsolidación de Conversaciones-Ω...")
     os.makedirs(ARTIFACT_DIR, exist_ok=True)
     
@@ -27,7 +30,7 @@ def consolidate_conversations() -> None:
                         extracted_axioms.append(f"- [ {data.get('created_at')} ] {content[:150]}...")
                     if "Error" in content or "failed" in content:
                         anergy_purged += 1
-        except Exception:
+        except (json.JSONDecodeError, OSError):
             continue
             
     ledger_path = os.path.join(ARTIFACT_DIR, f"c5_consolidation_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}.md")

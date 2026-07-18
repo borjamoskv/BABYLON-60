@@ -135,8 +135,14 @@ class BFTOrchestrator:
         self.queue: asyncio.Queue[tuple[int, int, int]] = asyncio.Queue()
         self.nodes = [BFTNode(i) for i in range(num_nodes)]
         self.step_index = 0
-        self.last_committed_hash = "GENESIS_HASH_00000000000000000000000000000000000000000000000000000"
+        self.last_committed_hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.is_running = False
+        self._conn: sqlite3.Connection | None = None
+
+    def _get_connection(self) -> sqlite3.Connection:
+        if self._conn is None:
+            self._conn = sqlite3.connect(DB_PATH, timeout=5.0)
+        return self._conn
 
     async def enqueue_task(self, d: int, p: int, m: int) -> None:
         """Enqueues an action tuple (domain, primitive, modifier) for asynchronous BFT processing.
@@ -223,7 +229,7 @@ class BFTOrchestrator:
             vote_count = hash_votes[majority_hash]
             
             # Consensus achieved if majority matches simple majority of active nodes
-            active_count = len([n for n in self.nodes if n.is_healthy])
+            active_count = len(hashes)
             if vote_count >= (active_count // 2 + 1):
                 # Valid transition, commit to Master Ledger (Ω11)
                 prev_hash_to_write = self.last_committed_hash
@@ -245,13 +251,14 @@ class BFTOrchestrator:
             self.queue.task_done()
             steps_executed += 1
 
+        if self._conn:
+            self._conn.close()
+            self._conn = None
+
     def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11)."""
         taint = f"[CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{int(time.time())}]"
-        
-        conn = sqlite3.connect(DB_PATH, timeout=5.0)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        conn.execute("PRAGMA busy_timeout=5000;")
+        conn = self._get_connection()
         try:
             conn.execute(
                 "INSERT INTO bft_ledger (step_index, domain, primitive, modifier, prev_hash, current_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?, ?);",
@@ -261,14 +268,12 @@ class BFTOrchestrator:
         except sqlite3.IntegrityError as e:
             print(f"⚠️ Double write or uniqueness constraint violation on prev_hash: {e}")
             conn.rollback()
-        finally:
-            conn.close()
 
     def get_ledger_count(self) -> int:
         """Returns the current number of rows in the Master Ledger."""
-        conn = sqlite3.connect(DB_PATH, timeout=5.0)
-        cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) FROM bft_ledger;")
-        count = cursor.fetchone()[0]
-        conn.close()
-        return count
+        with sqlite3.connect(DB_PATH, timeout=5.0) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM bft_ledger;")
+            count = cursor.fetchone()[0]
+            return int(count)
+

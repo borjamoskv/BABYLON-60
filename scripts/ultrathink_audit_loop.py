@@ -39,9 +39,9 @@ def phase_3_idempotency_lock(target_path: str, payload: str) -> bool:
         return False
     
     with open(target_path, 'rb') as f:
-        current_hash = hashlib.sha256(f.read()).hexdigest()
+        current_hash = hashlib.sha3_256(f.read()).hexdigest()
     
-    new_hash = hashlib.sha256(payload.encode('utf-8')).hexdigest()
+    new_hash = hashlib.sha3_256(payload.encode('utf-8')).hexdigest()
     
     if current_hash == new_hash:
         print(f"[ATP Ahorrado] Colisión de Hash en {target_path}. Abortando I/O.")
@@ -147,7 +147,7 @@ def write_to_cortex_ledger(commit_hash: str, payload: str, agent_id: str = "audi
         last_lamport = 0
         
     new_lamport = last_lamport + 1
-    new_hash = hashlib.sha256(payload.encode('utf-8')).hexdigest()
+    new_hash = hashlib.sha3_256(payload.encode('utf-8')).hexdigest()
     
     # Firma obligatoria CORTEX-TAINT (Ω11)
     taint_signature = f"CORTEX-TAINT:borjamoskv:mutation:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{commit_hash[:8]}"

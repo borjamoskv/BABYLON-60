@@ -17,15 +17,21 @@ fsharp_kernel/bin/
 fsharp_kernel/obj/
 strike-rs/target/
 .venv/
+# Secrets and credentials
+.env
+.env.*
+*.key
+*.pem
+
+# Database files and Master Ledger
+.cortex/
+cognitive_state.db
+cortex.db*
 cortex_bft_ledger.db*
-
-# Haskell build artifacts
-*.hi
-*.o
-primitives/Haskell1000Test
-
-# Scratch / temp artifacts (R9 — Anti-dirty-loop)
-scratch/
+*.db
+*.db-wal
+*.db-shm
 
 # Compiled Go Portal Daemon
 bin/portal_daemon
+
