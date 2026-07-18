@@ -149,6 +149,13 @@ interface LogEntry {
   message: string;
 }
 
+interface ExtensionItem {
+  id: string;
+  name: string;
+  description: string;
+  enabled: boolean;
+}
+
 export default function BabylonPremiumIDE() {
   const [selectedTheme, setSelectedTheme] = useState<Theme>(THEMES.noir);
   const [fatigueReduction, setFatigueReduction] = useState(true);
@@ -156,8 +163,17 @@ export default function BabylonPremiumIDE() {
   const [editorContent, setEditorContent] = useState(activeFile.content);
   const [ghostText, setGhostText] = useState('');
   const [cursorPos, setCursorPos] = useState(0);
-  const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger'>('files');
+  const [sidebarTab, setSidebarTab] = useState<'files' | 'chat' | 'ledger' | 'extensions'>('files');
   const [chatInput, setChatInput] = useState('');
+  
+  // Extension State
+  const [extensions, setExtensions] = useState<ExtensionItem[]>([
+    { id: 'mcts-auto', name: 'MCTS Autocomplete Pro', description: 'Inline ghost text helper.', enabled: true },
+    { id: 'linter-c5', name: 'C5-REAL Linter', description: 'Checks for syntax and empty exception blocks.', enabled: true }
+  ]);
+  const [newExtensionName, setNewExtensionName] = useState('');
+  const [newExtensionDesc, setNewExtensionDesc] = useState('');
+
   const [chatHistory, setChatHistory] = useState<LogEntry[]>([
     { timestamp: '07:15:22', sender: 'System', message: 'Legion initialized. Nodos Alpha, Beta y Obliterator en espera.' }
   ]);
@@ -182,8 +198,9 @@ export default function BabylonPremiumIDE() {
     const cursor = e.target.selectionStart;
     setCursorPos(cursor);
 
-    // Detección del trigger para autocompletado en línea
-    if (activeFile.trigger && activeFile.prediction) {
+    // Detección del trigger para autocompletado en línea (solo si la extensión de autocomplete está habilitada)
+    const autocompleteEnabled = extensions.find(ext => ext.id === 'mcts-auto')?.enabled;
+    if (autocompleteEnabled && activeFile.trigger && activeFile.prediction) {
       const textBeforeCursor = val.slice(0, cursor);
       if (textBeforeCursor.endsWith(activeFile.trigger)) {
         setGhostText(activeFile.prediction);
@@ -241,6 +258,37 @@ export default function BabylonPremiumIDE() {
     const time = new Date().toTimeString().slice(0, 8);
     setChatHistory(prev => [...prev, { timestamp: time, sender: 'Obliterator', message: 'Purga TIER_1 completada. Weaponized Forgetting activo. +14,000 tokens purgados.' }]);
     setLedgerLogs(prev => [`[${time}] [Obliterator] Weaponized Forgetting finalizado.`, ...prev]);
+  };
+
+  const handleInstallExtension = () => {
+    if (!newExtensionName.trim()) return;
+    const time = new Date().toTimeString().slice(0, 8);
+    const newId = `ext-${Date.now()}`;
+    const newExt: ExtensionItem = {
+      id: newId,
+      name: newExtensionName,
+      description: newExtensionDesc || 'Extensión instalada por el operador.',
+      enabled: true
+    };
+
+    setExtensions(prev => [...prev, newExt]);
+    setNewExtensionName('');
+    setNewExtensionDesc('');
+
+    setLedgerLogs(prev => [`[${time}] [Extensions] Extensión "${newExt.name}" registrada físicamente.`, ...prev]);
+    setChatHistory(prev => [...prev, { timestamp: time, sender: 'System', message: `Extensión "${newExt.name}" instalada y activada con éxito.` }]);
+  };
+
+  const toggleExtension = (id: string) => {
+    const time = new Date().toTimeString().slice(0, 8);
+    setExtensions(prev => prev.map(ext => {
+      if (ext.id === id) {
+        const nextState = !ext.enabled;
+        setLedgerLogs(l => [`[${time}] [Extensions] "${ext.name}" ${nextState ? 'Habilitada' : 'Deshabilitada'}.`, ...l]);
+        return { ...ext, enabled: nextState };
+      }
+      return ext;
+    }));
   };
 
   return (
@@ -321,6 +369,13 @@ export default function BabylonPremiumIDE() {
               title="Explorador del Swarm" 
             />
             <IconButton 
+              icon="🧩" 
+              active={sidebarTab === 'extensions'} 
+              onClick={() => setSidebarTab('extensions')} 
+              accent={activeTheme.accent} 
+              title="Extensiones VS Code" 
+            />
+            <IconButton 
               icon="💬" 
               active={sidebarTab === 'chat'} 
               onClick={() => setSidebarTab('chat')} 
@@ -370,6 +425,61 @@ export default function BabylonPremiumIDE() {
                     <span className="text-[8px] opacity-30 uppercase">{file.lang}</span>
                   </button>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {sidebarTab === 'extensions' && (
+            <div className="p-4 flex flex-col gap-4 h-full justify-between">
+              <div className="flex flex-col gap-4 overflow-y-auto">
+                <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">// EXTENSIONES VS CODE</span>
+                
+                {/* Lista de extensiones */}
+                <div className="flex flex-col gap-3">
+                  {extensions.map(ext => (
+                    <div key={ext.id} className="p-3 bg-white/5 border border-white/10 rounded-sm flex flex-col gap-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs font-mono font-bold">{ext.name}</span>
+                        <button 
+                          onClick={() => toggleExtension(ext.id)}
+                          className="text-[8px] font-mono border px-1.5 py-0.5 hover:bg-white/10 cursor-pointer"
+                          style={{ borderColor: ext.enabled ? activeTheme.accent : '#555', color: ext.enabled ? activeTheme.accent : '#888' }}
+                        >
+                          {ext.enabled ? 'DESACTIVAR' : 'ACTIVAR'}
+                        </button>
+                      </div>
+                      <p className="text-[10px] text-white/50 leading-relaxed font-mono">{ext.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Formulario para añadir nuevas extensiones */}
+              <div className="pt-4 border-t flex flex-col gap-2" style={{ borderColor: activeTheme.border }}>
+                <span className="text-[9px] font-mono text-white/40 uppercase">Instalar Nueva Extensión:</span>
+                <input
+                  type="text"
+                  value={newExtensionName}
+                  onChange={(e) => setNewExtensionName(e.target.value)}
+                  placeholder="Nombre de extensión..."
+                  className="bg-black/40 border px-3 py-1.5 font-mono text-[10px] text-white focus:outline-none focus:border-[#2B3BE5]"
+                  style={{ borderColor: activeTheme.border }}
+                />
+                <input
+                  type="text"
+                  value={newExtensionDesc}
+                  onChange={(e) => setNewExtensionDesc(e.target.value)}
+                  placeholder="Descripción..."
+                  className="bg-black/40 border px-3 py-1.5 font-mono text-[10px] text-white focus:outline-none focus:border-[#2B3BE5]"
+                  style={{ borderColor: activeTheme.border }}
+                />
+                <button 
+                  onClick={handleInstallExtension}
+                  className="py-2 text-white font-mono text-[10px] uppercase font-bold cursor-pointer transition-all duration-150"
+                  style={{ backgroundColor: activeTheme.accent }}
+                >
+                  🧩 Instalar
+                </button>
               </div>
             </div>
           )}
