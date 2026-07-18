@@ -52,6 +52,8 @@ interface FileItem {
   path: string;
   lang: string;
   content: string;
+  moduleColor: string; // ADHD Color Tagging
+  moduleName: string;
   prediction?: string;
   trigger?: string;
 }
@@ -76,6 +78,8 @@ const PROJECT_FILES: FileItem[] = [
     name: 'active_inference.py',
     path: 'cortex/active_inference.py',
     lang: 'python',
+    moduleColor: '#F59E0B', // Gold
+    moduleName: 'CORTEX',
     content: `"""
 C5-REAL Active Inference Engine.
 Minimizes Free Energy (Entropy) across the Swarm.
@@ -94,6 +98,8 @@ def compute_free_energy(observations, predictions):
     name: 'bft_orchestrator.py',
     path: 'cortex/bft_orchestrator.py',
     lang: 'python',
+    moduleColor: '#F59E0B', // Gold
+    moduleName: 'CORTEX',
     content: `"""
 Byzantine Fault Tolerance Orchestrator.
 Maintains state consistency across N>=3 agents.
@@ -113,6 +119,8 @@ class BFTOrchestrator:
     name: 'robinson.pl',
     path: 'axioms/robinson.pl',
     lang: 'prolog',
+    moduleColor: '#10B981', // Verify Green
+    moduleName: 'AXIOMS',
     content: `% TEOREMA DE ROBINSON - C5-REAL
 % Unificación Martelli-Montanari
 
@@ -122,6 +130,25 @@ unify(X, Y) :- var(Y), !, occurs_check(Y, X), Y = X.
 `,
     trigger: 'unify',
     prediction: '(f(A), f(B)) :- unify(A, B).'
+  },
+  {
+    name: 'c5_deploy.yml',
+    path: '.github/workflows/c5_deploy.yml',
+    lang: 'yaml',
+    moduleColor: '#3B4DFF', // Lapis Blue
+    moduleName: 'INFRA',
+    content: `name: C5-REAL Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Swarm
+        run: terraform apply -auto-approve
+`
   }
 ];
 
@@ -158,7 +185,7 @@ const MOCK_TABLES: DatabaseTable[] = [
 
 export default function BabylonCompleteIDE() {
   const [theme, setTheme] = useState<Theme>(THEMES.awwwards);
-  const [cognitiveMode, setCognitiveMode] = useState<'NT' | '2E'>('2E'); // NT vs Double Exceptionality
+  const [cognitiveMode, setCognitiveMode] = useState<'NT' | '2E'>('2E'); 
   const [activeFile, setActiveFile] = useState<FileItem>(PROJECT_FILES[0]);
   const [editorContent, setEditorContent] = useState(activeFile.content);
   const [ghostText, setGhostText] = useState('');
@@ -184,21 +211,25 @@ export default function BabylonCompleteIDE() {
   const [sqlQuery, setSqlQuery] = useState('SELECT * FROM ledger_entries LIMIT 5;');
   const [queryResults, setQueryResults] = useState<any[]>([]);
 
-  // Dictation State
+  // Ecosystem integrations status
+  const [cortexSync, setCortexSync] = useState(true);
+  const [moskv1Core, setMoskv1Core] = useState(true);
+
+  // Dictation State & Audio SOTA Waveform Canvas
   const [isDictating, setIsDictating] = useState(false);
   const recognitionRef = useRef<any>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const animationRef = useRef<number | null>(null);
 
   // Keyboard Event Listeners for ⌘⇧E & ⌘8
   useEffect(() => {
     setIsLoaded(true);
 
     const handleKeyDownGlobal = (e: KeyboardEvent) => {
-      // ⌘⇧E (or Ctrl+Shift+E) toggles Cognitive Mode
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
         e.preventDefault();
         setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'));
       }
-      // ⌘8 (or Ctrl+8) toggles Local Inference Console
       if ((e.metaKey || e.ctrlKey) && e.key === '8') {
         e.preventDefault();
         setSidebarTab('inference');
@@ -209,15 +240,51 @@ export default function BabylonCompleteIDE() {
     return () => {
       window.removeEventListener('keydown', handleKeyDownGlobal);
       if (recognitionRef.current) recognitionRef.current.stop();
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
   }, []);
+
+  // SOTA Canvas Waveform Animation Loop
+  useEffect(() => {
+    if (isDictating && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      let step = 0;
+      const draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = isHypervigilant ? '#FF3366' : theme.accent;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        
+        // Multi-sine wave calculation for Awwwards level organic voice response
+        for (let i = 0; i < canvas.width; i++) {
+          const amplitude1 = Math.sin(step * 0.05 + i * 0.03) * 15;
+          const amplitude2 = Math.cos(step * 0.08 + i * 0.01) * 8;
+          const y = (canvas.height / 2) + amplitude1 + amplitude2;
+          if (i === 0) ctx.moveTo(i, y);
+          else ctx.lineTo(i, y);
+        }
+        ctx.stroke();
+        step += 1;
+        animationRef.current = requestAnimationFrame(draw);
+      };
+      draw();
+    } else {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+    }
+  }, [isDictating, theme, isHypervigilant]);
 
   useEffect(() => {
     setEditorContent(activeFile.content);
     setGhostText('');
   }, [activeFile]);
 
-  // Dictation Handler
+  // Dictation Handler (Web Speech API Wrapper)
   const toggleDictation = () => {
     if (isDictating) {
       recognitionRef.current?.stop();
@@ -235,7 +302,17 @@ export default function BabylonCompleteIDE() {
         for (let i = event.resultIndex; i < event.results.length; ++i) {
           if (event.results[i].isFinal) text += event.results[i][0].transcript;
         }
-        if (text) setEditorContent(prev => prev + (prev.endsWith('\n') ? '' : ' ') + text.trim() + '\n');
+        if (text) {
+          // Voice commands processing C5-REAL
+          const command = text.trim().toLowerCase();
+          if (command.includes('crear archivo')) {
+            alert('[VOICE CMD] Crear archivo trigger.');
+          } else if (command.includes('limpiar pantalla') || command.includes('clear')) {
+            setEditorContent('');
+          } else {
+            setEditorContent(prev => prev + (prev.endsWith('\n') ? '' : ' ') + text.trim() + '\n');
+          }
+        }
       };
       recognition.onerror = () => setIsDictating(false);
       recognition.onend = () => isDictating && recognition.start();
@@ -474,7 +551,6 @@ export default function BabylonCompleteIDE() {
         </div>
         
         <div className="flex items-center gap-6" style={{ WebkitAppRegion: 'no-drag' } as any}>
-          {/* Cognitive Mode Toggle Switch */}
           <button 
             onClick={() => setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'))}
             className="text-[10px] uppercase tracking-widest font-mono text-white/40 hover:text-white transition-colors"
@@ -495,35 +571,40 @@ export default function BabylonCompleteIDE() {
             className="text-[10px] uppercase tracking-widest font-medium outline-none transition-all duration-300"
             style={{ color: isDictating ? '#FF3333' : theme.muted }}
           >
-            {isDictating ? 'Dict' : 'Dictation'}
+            {isDictating ? 'Recording' : 'Dictation'}
           </button>
         </div>
       </header>
 
-      {/* MAIN CONTENT AREA - PURE TYPOGRAPHY & SPACING */}
+      {/* MAIN CONTENT AREA */}
       <div className="flex-1 flex overflow-hidden px-10 pb-10 gap-16 relative z-10">
         
         {/* LISTINGS / SECONDARY NAV */}
         <div className="w-64 flex flex-col pt-12">
           {sidebarTab === 'architecture' && (
             <div className="flex flex-col gap-6">
+              <span className="text-[10px] tracking-widest uppercase text-white/20">Modules</span>
               {PROJECT_FILES.map(file => (
                 <div 
                   key={file.name}
                   onClick={() => setActiveFile(file)}
                   className="flex flex-col cursor-pointer group"
                 >
-                  <span 
-                    className="text-[13px] font-medium transition-all duration-500"
-                    style={{ 
-                      color: activeFile.name === file.name ? theme.accent : theme.muted,
-                      transform: activeFile.name === file.name ? 'translateX(4px)' : 'none'
-                    }}
-                  >
-                    {file.name}
-                  </span>
-                  <span className="text-[10px] font-mono mt-1 opacity-40 group-hover:opacity-100 transition-opacity duration-300">
-                    {file.path}
+                  <div className="flex items-center gap-2">
+                    {/* ADHD Module Tagging (Módulos por Colores) */}
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: file.moduleColor }} />
+                    <span 
+                      className="text-[13px] font-medium transition-all duration-500"
+                      style={{ 
+                        color: activeFile.name === file.name ? theme.accent : theme.muted,
+                        transform: activeFile.name === file.name ? 'translateX(4px)' : 'none'
+                      }}
+                    >
+                      {file.name}
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono mt-1 pl-3.5 text-white/30 uppercase tracking-widest">
+                    {file.moduleName}
                   </span>
                 </div>
               ))}
@@ -626,6 +707,30 @@ export default function BabylonCompleteIDE() {
               </div>
               
               <div className="flex flex-col gap-5">
+                <span className="text-[10px] tracking-widest uppercase text-white/30">Ecosystem Bridge</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-[12px] text-white/70">CORTEX Persist Sync</span>
+                  <button 
+                    onClick={() => setCortexSync(!cortexSync)}
+                    className="text-[10px] font-mono border bg-transparent px-2 py-0.5 rounded cursor-pointer text-white/80"
+                    style={{ borderColor: cortexSync ? theme.accent : '#555' }}
+                  >
+                    {cortexSync ? 'CONNECTED' : 'DISCONNECTED'}
+                  </button>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-[12px] text-white/70">MOSKV-1 Kernels</span>
+                  <button 
+                    onClick={() => setMoskv1Core(!moskv1Core)}
+                    className="text-[10px] font-mono border bg-transparent px-2 py-0.5 rounded cursor-pointer text-white/80"
+                    style={{ borderColor: moskv1Core ? theme.accent : '#555' }}
+                  >
+                    {moskv1Core ? 'ACTIVE' : 'STANDBY'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-5">
                 <span className="text-[10px] tracking-widest uppercase text-white/30">Languages</span>
                 <div className="flex gap-6 text-[11px] font-mono">
                   <span className="cursor-pointer border-b pb-1" style={{ color: theme.accent, borderColor: theme.accent }}>ES-ES</span>
@@ -642,7 +747,6 @@ export default function BabylonCompleteIDE() {
         <div className="flex-1 flex flex-col relative pt-12">
           
           {sidebarTab === 'inference' ? (
-            // LOCAL INFERENCE PLAYGROUND (⌘8 / ◈)
             <div className="flex-1 flex gap-10 relative">
               <div className="flex-1 flex flex-col">
                 <h1 className="text-3xl font-light tracking-tight mb-8">Local Inference Console</h1>
@@ -680,7 +784,6 @@ export default function BabylonCompleteIDE() {
                 </div>
               </div>
 
-              {/* Onboarding Help Widget in a right-hand column */}
               <div className="w-80 border-l border-white/5 pl-10 flex flex-col gap-6">
                 <span className="text-[10px] font-mono uppercase text-white/30">Local Attestation Manual</span>
                 <div className="flex flex-col gap-4 text-[12.5px] leading-relaxed text-white/70">
@@ -689,7 +792,6 @@ export default function BabylonCompleteIDE() {
                   <p>This guarantees that decisions generated by local silicon are untamperable and fully auditable by downstream validators.</p>
                 </div>
                 
-                {/* Performance Tachometer */}
                 {latencyMs > 0 && (
                   <div className="border border-[#3B4DFF]/30 bg-[#3B4DFF]/5 rounded-md p-4 flex flex-col gap-2 mt-auto">
                     <span className="text-[10px] font-mono uppercase text-[#7080FF] tracking-wider">Silicon Throughput</span>
@@ -701,7 +803,6 @@ export default function BabylonCompleteIDE() {
             </div>
 
           ) : sidebarTab === 'ledger' ? (
-            // LEDGER INSPECT / DATABASE PLAYGROUND
             <div className="flex-1 flex flex-col">
               <h1 className="text-3xl font-light tracking-tight mb-8">Ledger Database Console</h1>
               
@@ -778,13 +879,26 @@ export default function BabylonCompleteIDE() {
           ) : (
             // STANDARD MINIMAL CODE EDITOR
             <>
-              <div className="flex items-baseline gap-4 mb-12">
-                <h1 className="text-4xl font-light tracking-tight m-0 p-0" style={{ color: theme.accent }}>
-                  {activeFile.name.split('.')[0]}
-                </h1>
-                <span className="text-[12px] font-mono tracking-widest" style={{ color: theme.muted }}>
-                  .{activeFile.name.split('.')[1]}
-                </span>
+              <div className="flex items-baseline justify-between gap-4 mb-12">
+                <div className="flex items-baseline gap-4">
+                  <h1 className="text-4xl font-light tracking-tight m-0 p-0" style={{ color: theme.accent }}>
+                    {activeFile.name.split('.')[0]}
+                  </h1>
+                  <span className="text-[12px] font-mono tracking-widest" style={{ color: theme.muted }}>
+                    .{activeFile.name.split('.')[1]}
+                  </span>
+                </div>
+                {/* Visual indicator of unified ecosystem status */}
+                <div className="flex gap-4 text-[9px] font-mono text-white/40 uppercase">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: cortexSync ? theme.verify : theme.breakColor }} />
+                    Cortex-Persist: {cortexSync ? 'Sync' : 'Standby'}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: moskv1Core ? theme.verify : theme.breakColor }} />
+                    Moskv-1: {moskv1Core ? 'Apex' : 'Standby'}
+                  </span>
+                </div>
               </div>
 
               <div className="flex-1 relative">
@@ -810,6 +924,23 @@ export default function BabylonCompleteIDE() {
                     <span className="opacity-0">{editorContent.slice(0, cursorPos)}</span>
                     <span className="opacity-40 transition-opacity duration-1000" style={{ color: theme.muted }}>{ghostText}</span>
                   </pre>
+                )}
+
+                {/* SOTA Voice Dictation Overlay (Canvas waveform) */}
+                {isDictating && (
+                  <div className="absolute bottom-6 right-8 z-30 bg-black/80 border border-white/5 px-6 py-4 rounded-xl flex flex-col gap-3 shadow-2xl w-80">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono tracking-widest text-[#FF3366] uppercase animate-pulse">
+                        🎤 Voice Transducer (es-es)
+                      </span>
+                      <span className="text-[9px] font-mono text-white/40">Ready</span>
+                    </div>
+                    {/* Live Waveform Canvas */}
+                    <canvas ref={canvasRef} width="280" height="40" className="w-full bg-white/5 rounded border border-white/5" />
+                    <span className="text-[9px] font-sans text-white/50 leading-relaxed">
+                      Say "limpiar pantalla" to clear, or dictate code directly.
+                    </span>
+                  </div>
                 )}
               </div>
               
