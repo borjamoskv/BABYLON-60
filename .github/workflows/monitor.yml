@@ -1,0 +1,14 @@
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+
+jobs:
+  check-health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check endpoint
+        run: |
+          # Replace with actual health check
+          curl -f https://google.com || (echo "FAIL" && gh issue create --title "Rollback needed" --body "Monitor detectó fallo en healthcheck" --label agent-task)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

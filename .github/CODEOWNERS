@@ -3,3 +3,8 @@
 /infra/                  @platform-team
 /docker/                 @platform-team
 package-lock.json        @dependency-reviewers
+
+# Autonomous Swarm Gateways
+* @autonomous-team
+cortex/ @agent-coder @agent-reviewer
+.github/workflows/ @agent-ops
