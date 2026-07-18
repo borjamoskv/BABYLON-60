@@ -99,7 +99,10 @@ func mountDMGHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("[%s] POST /mount-dmg from %s", time.Now().Format(time.RFC3339), r.RemoteAddr)
 	resp := Response{Status: "error", Message: "Ruta no configurada"}
 
-	dmgPath := "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv.dmg"
+	dmgPath := os.Getenv("CORTEX_DMG_PATH")
+	if dmgPath == "" {
+		dmgPath = "Teorema-Robinson-Moskv.dmg"
+	}
 	if _, err := os.Stat(dmgPath); os.IsNotExist(err) {
 		resp.Message = "Archivo DMG no encontrado en la ruta raíz"
 		log.Printf("[WARN] /mount-dmg: DMG not found at %s", dmgPath)
