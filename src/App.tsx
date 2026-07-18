@@ -143,6 +143,14 @@ export default function App() {
   }
 ];
 
+const AUTOPROMPTER_PRESETS = [
+  { command: 'mejoralo /goal', desc: 'Inicia optimización MCTS.', icon: '⚡' },
+  { command: 'itera', desc: 'Avanza el estado del repositorio.', icon: '🔄' },
+  { command: 'SIGKILL slop', desc: 'Purga la memoria con OBLITERATOR_OMEGA.', icon: '🩸' },
+  { command: 'forjar /goal', desc: 'Activa la forja atómica del proyecto.', icon: '🛠️' },
+  { command: 'BFT sync', desc: 'Sincroniza y valida consistencia en Swarm N>=3.', icon: '⚖️' }
+];
+
 interface LogEntry {
   timestamp: string;
   sender: string;
@@ -515,26 +523,31 @@ export default function BabylonPremiumIDE() {
               <div className="p-3 border-t flex gap-2 relative" style={{ borderColor: activeTheme.border }}>
                 {showAutopromptMenu && (
                   <div 
-                    className="absolute bottom-14 left-3 right-3 bg-black border p-2 flex flex-col gap-1.5 z-50 font-mono text-[10px]"
+                    className="absolute bottom-14 left-3 right-3 bg-[#0A0A0A] border p-3 flex flex-col gap-2 z-50 font-mono text-[10px] shadow-[0_0_30px_rgba(43,59,229,0.25)] rounded-sm"
                     style={{ borderColor: activeTheme.accent }}
                   >
-                    <div className="text-white/40 border-b border-white/10 pb-1 uppercase tracking-widest text-[8px] flex justify-between">
+                    <div className="text-white/40 border-b border-white/10 pb-1.5 uppercase tracking-widest text-[8px] flex justify-between font-bold">
                       <span>// AUTOPROMPTER SELECT</span>
-                      <button onClick={() => setShowAutopromptMenu(false)} className="text-[#ff5500] cursor-pointer bg-transparent border-0">X</button>
+                      <button onClick={() => setShowAutopromptMenu(false)} className="text-[#ff5500] cursor-pointer bg-transparent border-0 hover:text-[#ff3300]">✕</button>
                     </div>
-                    {['mejoralo /goal', 'itera', 'SIGKILL slop', 'forjar /goal', 'BFT sync'].map(preset => (
-                      <button
-                        key={preset}
-                        onClick={() => {
-                          setChatInput(preset);
-                          setShowAutopromptMenu(false);
-                          setChatHistory(prev => [...prev, { timestamp: new Date().toTimeString().slice(0, 8), sender: 'System', message: `Autoprompt insertado: "${preset}"` }]);
-                        }}
-                        className="text-left px-2 py-1 hover:bg-white/10 text-white/80 rounded-sm cursor-pointer border-0 bg-transparent"
-                      >
-                        ⚡ {preset}
-                      </button>
-                    ))}
+                    <div className="flex flex-col gap-1.5 max-h-48 overflow-y-auto">
+                      {AUTOPROMPTER_PRESETS.map(preset => (
+                        <button
+                          key={preset.command}
+                          onClick={() => {
+                            setChatInput(preset.command);
+                            setShowAutopromptMenu(false);
+                            setChatHistory(prev => [...prev, { timestamp: new Date().toTimeString().slice(0, 8), sender: 'System', message: `Autoprompt insertado: "${preset.command}"` }]);
+                          }}
+                          className="text-left px-2 py-1.5 hover:bg-white/5 text-white/80 rounded-sm cursor-pointer border-0 bg-transparent flex flex-col gap-0.5 transition-colors duration-150"
+                        >
+                          <span className="font-bold text-white flex items-center gap-1">
+                            {preset.icon} {preset.command}
+                          </span>
+                          <span className="text-[8px] text-white/40 leading-normal">{preset.desc}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
                 <input
@@ -548,8 +561,8 @@ export default function BabylonPremiumIDE() {
                       setChatHistory(prev => [...prev, { timestamp: new Date().toTimeString().slice(0, 8), sender: 'System', message: 'Modo AUTOPROMPTER activado vía triple click.' }]);
                     }
                   }}
-                  placeholder="Inyectar Ψ..."
-                  className="flex-1 bg-black/40 border px-3 py-2 font-mono text-[10px] text-white focus:outline-none"
+                  placeholder="Inyectar Ψ... [Triple click para Autoprompt]"
+                  className="flex-1 bg-black/40 border px-3 py-2 font-mono text-[10px] text-white focus:outline-none transition-all duration-300 placeholder:text-white/20"
                   style={{ borderColor: activeTheme.border }}
                 />
                 <button 

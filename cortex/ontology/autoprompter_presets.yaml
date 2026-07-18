@@ -1,0 +1,21 @@
+Claim: [AUTOPROMPTER-PRESETS-MATRIX] Configuración Dinámica de Comandos de Alta Exergía
+Proof:
+  Base: "C5-REAL UX Ontologies"
+  Confidence: C5-REAL
+
+presets:
+  - command: "mejoralo /goal"
+    description: "Inicia el bucle MCTS de optimización total en segundo plano."
+    icon: "⚡"
+  - command: "itera"
+    description: "Avanza el estado del repositorio al siguiente paso lógico."
+    icon: "🔄"
+  - command: "SIGKILL slop"
+    description: "Detona OBLITERATOR_OMEGA para purgar memoria entrópica."
+    icon: "🩸"
+  - command: "forjar /goal"
+    description: "Activa la forja atómica del proyecto en base al prompt."
+    icon: "🛠️"
+  - command: "BFT sync"
+    description: "Sincroniza y valida consistencia en el Swarm N>=3."
+    icon: "⚖️"
