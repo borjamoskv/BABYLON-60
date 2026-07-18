@@ -35,3 +35,6 @@ No pidas permiso para:
 
 ## 6. Orthogonal Primitive Invariant (Zero Covariance)
 Las primitivas ortogonales dominan termodinámicamente a las normales. Queda estrictamente prohibido diseñar o aceptar primitivas acopladas (con side-effects entrelazados) cuando exista una base ortogonal para el dominio del problema. La ortogonalidad (cero covarianza) es el requisito termodinámico para la ejecución matricial O(1) sin colisiones WAL ni deadlocks BFT.
+
+## 7. Physical Orthogonality Invariant (Substrate-Bound Covariance)
+(Corolario Deepthink) La ortogonalidad lógica (separación de código) es insuficiente si el hardware subyacente obliga a la serialización (ej. SQLite WAL único, Python GIL, Network I/O compartido). Asumir paralelismo O(1) sobre sustratos de hardware compartidos es una ilusión C4-SIM (Mimetic Orthogonality). La verdadera ortogonalidad matriz exige separación física: sharding de disco, multiplexación real de memoria o partición de red.
