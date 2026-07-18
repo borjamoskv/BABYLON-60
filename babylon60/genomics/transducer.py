@@ -14,6 +14,17 @@ from .models import (
     ECDNAAmpliconResult,
 )
 from .engine import GenomicEvaluationEngine
+from dataclasses import dataclass
+
+@dataclass
+class FullProfileParams:
+    variants: list[GenomicVariantRecord]
+    loh_events: int
+    total_regions: int
+    wgd_detected: bool = False
+    ecdna_records: list[dict[str, Any]] | None = None
+    base_state: dict[str, int] | None = None
+    target_region_mb: float = 38.0
 
 
 class GenomicStateTransducer:
@@ -84,9 +95,11 @@ class GenomicStateTransducer:
     @classmethod
     def transduce_full_profile(
         cls,
-        variants: list[GenomicVariantRecord],
-        loh_events: int,
-        total_regions: int,
+        params: FullProfileParams | None = None,
+        *,
+        variants: list[GenomicVariantRecord] | None = None,
+        loh_events: int = 0,
+        total_regions: int = 1,
         wgd_detected: bool = False,
         ecdna_records: list[dict[str, Any]] | None = None,
         base_state: dict[str, int] | None = None,
@@ -95,12 +108,26 @@ class GenomicStateTransducer:
         """
         Transduces a complete multi-scale genomic profile (SNVs, INDELs, LOH, WGD, ecDNA amplicons)
         into an integrated C5-REAL state profile for simulation.
+        Accepts either a FullProfileParams dataclass instance or explicit keyword arguments.
         """
-        base_transduction = cls.transduce_variant_records(variants, base_state=base_state, target_region_mb=target_region_mb)
+        if params is None:
+            if variants is None:
+                raise ValueError("[C5-FAIL] Either params or variants must be provided.")
+            params = FullProfileParams(
+                variants=variants,
+                loh_events=loh_events,
+                total_regions=total_regions,
+                wgd_detected=wgd_detected,
+                ecdna_records=ecdna_records,
+                base_state=base_state,
+                target_region_mb=target_region_mb
+            )
+
+        base_transduction = cls.transduce_variant_records(params.variants, base_state=params.base_state, target_region_mb=params.target_region_mb)
         state_matrix: dict[str, int] = base_transduction["state_matrix"]
 
         # Evaluate LOH & HRD
-        hrd_res: LOHHRDResult = GenomicEvaluationEngine.evaluate_loh_hrd(loh_events, total_regions, wgd_detected=wgd_detected)
+        hrd_res: LOHHRDResult = GenomicEvaluationEngine.evaluate_loh_hrd(params.loh_events, params.total_regions, wgd_detected=params.wgd_detected)
         if hrd_res.status == "HRD-Positive":
             state_matrix["ONC-143"] = 1  # Homologous Recombination Deficiency overall node
             if hrd_res.wgd_detected:
@@ -108,10 +135,10 @@ class GenomicStateTransducer:
 
         # Evaluate ecDNA Amplicons
         ecdna_results: list[ECDNAAmpliconResult] = []
-        if ecdna_records:
-            if not isinstance(ecdna_records, list):
+        if params.ecdna_records:
+            if not isinstance(params.ecdna_records, list):
                 raise TypeError("[C5-FAIL] ecdna_records must be a list of dictionaries.")
-            for rec in ecdna_records:
+            for rec in params.ecdna_records:
                 amp_res = GenomicEvaluationEngine.evaluate_ecdna_amplicon(
                     amplicon_id=str(rec["amplicon_id"]),
                     oncogenes=list(rec["oncogenes"]),
