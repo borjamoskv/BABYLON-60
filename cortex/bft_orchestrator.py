@@ -167,20 +167,9 @@ class BFTOrchestrator:
         await self.queue.put((d, p, m))
 
     async def start_loop(self, max_steps: int = -1) -> None:
-        """Runs the main BFT State Loop, consuming tasks from the asyncio.Queue.
-
-        Args:
-            max_steps: Maximum number of BFT steps to execute before stopping.
-                       Use -1 (default) for an unbounded run. Must be -1 or a
-                       positive integer.
-
-        Raises:
-            ValueError: If max_steps is zero or a negative integer other than -1.
-        """
+        """Runs the main BFT State Loop, consuming tasks from the asyncio.Queue."""
         if not isinstance(max_steps, int) or (max_steps != -1 and max_steps < 1):
-            raise ValueError(
-                f"start_loop: 'max_steps' must be -1 (unbounded) or a positive integer, got {max_steps!r}"
-            )
+            raise ValueError(f"start_loop: 'max_steps' must be -1 or a positive integer, got {max_steps!r}")
         self.is_running = True
         steps_executed = 0
         
@@ -189,7 +178,6 @@ class BFTOrchestrator:
                 break
                 
             try:
-                # Retrieve next task with a short timeout to allow clean shutdown
                 task = await asyncio.wait_for(self.queue.get(), timeout=0.5)
             except asyncio.TimeoutError:
                 continue
@@ -197,59 +185,8 @@ class BFTOrchestrator:
             d, p, m = task
             self.step_index += 1
             
-            # 1. Parallel execution across all nodes via Rust strike_rs
-            hashes: dict[int, str] = {}
-            for node in self.nodes:
-                if not node.is_healthy:
-                    continue
-                try:
-                    # Delegate mutation of the 3000 primitives to Rust compiled core
-                    strike_rs.dispatch_state_observer(d, p, m, node.state_vector)
-                    strike_rs.dispatch_neuro_chain(d, p, m, node.cognitive_chain_vector)
-                    strike_rs.dispatch_tts_harness(d, p, m, node.tts_harness_state)
-                    
-                    # Compute state hash
-                    h = node.compute_state_hash()
-                    hashes[node.node_id] = h
-                except (OSError, RuntimeError, ValueError) as e:
-                    # Mark node as Byzantine/unhealthy if execution throws
-                    node.is_healthy = False
-                    print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
-
-            # 2. BFT Consensus voting (N >= 3 consensus check)
-            hash_votes: dict[str, int] = {}
-            for node_id, h in hashes.items():
-                hash_votes[h] = hash_votes.get(h, 0) + 1
-
-            if not hash_votes:
-                print("❌ Fatal: All nodes failed execution. Apoptosis triggered.")
-                self.is_running = False
-                self.queue.task_done()
-                break
-
-            # Find majority hash
-            majority_hash = max(hash_votes, key=lambda k: hash_votes[k])
-            vote_count = hash_votes[majority_hash]
-            
-            # Consensus achieved if majority matches simple majority of active nodes
-            active_count = len(hashes)
-            if vote_count >= (active_count // 2 + 1):
-                # Valid transition, commit to Master Ledger (Ω11)
-                prev_hash_to_write = self.last_committed_hash
-                self.last_committed_hash = majority_hash
-                
-                # Write to the immutable SQLite WAL database
-                self._write_to_ledger(d, p, m, prev_hash_to_write, majority_hash)
-                
-                # Correct any Byzantine outlier node
-                for node in self.nodes:
-                    if node.node_id in hashes and hashes[node.node_id] != majority_hash:
-                        print(f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority.")
-                        # Find a healthy node with the majority hash
-                        leader_node = next(n for n in self.nodes if hashes.get(n.node_id) == majority_hash)
-                        node.sync_from(leader_node)
-            else:
-                print("❌ BFT consensus could not be reached! Splitting or fault limit exceeded.")
+            hashes = self._process_task_parallel(d, p, m)
+            self._evaluate_consensus(d, p, m, hashes)
 
             self.queue.task_done()
             steps_executed += 1
@@ -257,6 +194,50 @@ class BFTOrchestrator:
         if self._conn:
             self._conn.close()
             self._conn = None
+
+    def _process_task_parallel(self, d: int, p: int, m: int) -> dict[int, str]:
+        """Executes the task across all active nodes and returns their hashes."""
+        hashes: dict[int, str] = {}
+        for node in self.nodes:
+            if not node.is_healthy:
+                continue
+            try:
+                strike_rs.dispatch_state_observer(d, p, m, node.state_vector)
+                strike_rs.dispatch_neuro_chain(d, p, m, node.cognitive_chain_vector)
+                strike_rs.dispatch_tts_harness(d, p, m, node.tts_harness_state)
+                hashes[node.node_id] = node.compute_state_hash()
+            except (OSError, RuntimeError, ValueError) as e:
+                node.is_healthy = False
+                print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
+        return hashes
+
+    def _evaluate_consensus(self, d: int, p: int, m: int, hashes: dict[int, str]) -> None:
+        """Evaluates consensus among nodes and commits to ledger if majority is reached."""
+        hash_votes: dict[str, int] = {}
+        for h in hashes.values():
+            hash_votes[h] = hash_votes.get(h, 0) + 1
+
+        if not hash_votes:
+            print("❌ Fatal: All nodes failed execution. Apoptosis triggered.")
+            self.is_running = False
+            return
+
+        majority_hash = max(hash_votes, key=lambda k: hash_votes[k])
+        vote_count = hash_votes[majority_hash]
+        
+        active_count = len(hashes)
+        if vote_count >= (active_count // 2 + 1):
+            prev_hash_to_write = self.last_committed_hash
+            self.last_committed_hash = majority_hash
+            self._write_to_ledger(d, p, m, prev_hash_to_write, majority_hash)
+            
+            for node in self.nodes:
+                if node.node_id in hashes and hashes[node.node_id] != majority_hash:
+                    print(f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority.")
+                    leader_node = next(n for n in self.nodes if hashes.get(n.node_id) == majority_hash)
+                    node.sync_from(leader_node)
+        else:
+            print("❌ BFT consensus could not be reached! Splitting or fault limit exceeded.")
 
     def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11)."""
