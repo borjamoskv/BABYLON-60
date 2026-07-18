@@ -97,3 +97,7 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ### Python 3.12+ Testing Environment Isolation
 - **INV_C5_09:** Test execution must run against `.venv` (Python 3.12) synced with `uv sync --all-extras` and executed with `BypassSandbox: true` to bypass dynamic loading limitations.
+
+### Memory Vault Session Synchronizer
+- **INV_C5_15:** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
+

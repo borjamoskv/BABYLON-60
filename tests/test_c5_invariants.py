@@ -158,3 +158,12 @@ def test_inv_c5_14_exergy_agent():
     
     db_path = pathlib.Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
     assert db_path.exists(), "Exergy agent ledger database missing."
+
+
+def test_inv_c5_15_sync_vault_uuids():
+    """INV_C5_15 — sync_vault_uuids.py must exist and be executable."""
+    import os
+    script_path = ROOT / "scripts" / "sync_vault_uuids.py"
+    assert script_path.exists(), "sync_vault_uuids.py missing."
+    assert os.access(script_path, os.X_OK), "sync_vault_uuids.py is not executable."
+
