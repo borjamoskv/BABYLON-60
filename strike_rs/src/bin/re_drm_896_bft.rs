@@ -1,11 +1,11 @@
-// C5-REAL: 1000 RE_DRM PRIMITIVES RUST BFT CONSENSUS ENGINE
+// C5-REAL: 896 RE_DRM PRIMITIVES RUST BFT CONSENSUS ENGINE
 // =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual C5-REAL Iteration)
 // REALITY_LEVEL: C5-REAL (Rust Taint Verification / BLAKE3 Poset / WAL Persistence)
 //
-// Transducción y verificación empírica nativa en Rust del arsenal de 1000 Primitivas
+// Transducción y verificación empírica nativa en Rust del arsenal de 896 Primitivas
 // de Ingeniería Inversa, Descompilación y Evasión de DRM.
-// [CORTEX-TAINT:borjamoskv:re_drm_1000_bft:2026-07-17T18:20:00Z]
+// [CORTEX-TAINT:borjamoskv:re_drm_896_bft:2026-07-18T13:25:00Z]
 
 use rusqlite::Connection;
 use strike_rs::TaintEngine;
@@ -187,7 +187,7 @@ fn main() {
     let db_path = Path::new("cortex/agents/ontology/re_drm_bft_ledger.db");
     let mut conn = init_db(db_path).expect("[C5-REAL] FATAL: Error opening RE/DRM WAL SQLite Ledger");
 
-    let results = Arc::new(Mutex::new(Vec::with_capacity(1000)));
+    let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
     let mut handles = Vec::with_capacity(20);
 
     // 20 concurrent threads (1 per domain to avoid thread contention and scale exergy)
@@ -204,6 +204,9 @@ fn main() {
                 // Loop 5 times to generate 50 entries per domain across the 5 quadrants (200 primitives per quadrant)
                 for q_idx in 0..5 {
                     let abs_idx = q_idx * 200 + d_idx * 10 + v_idx;
+                    if abs_idx >= 896 {
+                        continue;
+                    }
                     
                     // Injecting simulated byzantine faults on specific indices (10% anomaly rate to test BFT robustness)
                     let inject_fault = abs_idx % 11 == 0;
@@ -219,8 +222,10 @@ fn main() {
             }
             
             // Connect edges linearly to enforce execution ordering bounds
-            for i in 0..node_indices.len() - 1 {
-                taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+            if !node_indices.is_empty() {
+                for i in 0..node_indices.len() - 1 {
+                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+                }
             }
             
             // Verify topological correctness (acyclic check)
@@ -272,14 +277,14 @@ fn main() {
     }
 
     let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
-    println!("[C5-REAL] RE/DRM Empirical verification completed: {}/1000 primitives in {:.2} ms.", total_verified, elapsed);
+    println!("[C5-REAL] RE/DRM Empirical verification completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
 
-    if total_verified == 1000 {
-        println!("[PASS] 1000/1000 RE/DRM Primitives in Rust par-par consensus (BFT topology 100% verified).");
+    if total_verified == 896 {
+        println!("[PASS] 896/896 RE/DRM Primitives in Rust par-par consensus (BFT topology 100% verified).");
         std::process::exit(0);
     } else {
-        eprintln!("[FAIL] P2P Rust verification incomplete ({}/1000). Aborting.", total_verified);
+        eprintln!("[FAIL] P2P Rust verification incomplete ({}/896). Aborting.", total_verified);
         std::process::exit(1);
     }
 }

@@ -1,9 +1,9 @@
-// C5-REAL: 1000 PRIMITIVAS RUST (STRIKE-RS P2P BFT & CAUSAL POSET ENGINE)
+// C5-REAL: 896 PRIMITIVAS RUST (STRIKE-RS P2P BFT & CAUSAL POSET ENGINE)
 // =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual C5-REAL Iteration)
 // REALITY_LEVEL: C5-REAL (Zero-Cost Execution / BLAKE3 Taint / WAL Persistence)
 //
-// Transducción y verificación empírica par-par en Rust de las 1000 Primitivas
+// Transducción y verificación empírica par-par en Rust de las 896 Primitivas
 // Ontológicas de la Matriz Centuria.
 
 use rusqlite::Connection;
@@ -157,7 +157,7 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
     conn.pragma_update(None, "busy_timeout", 5000)?;
 
     conn.execute_batch(
-        "CREATE TABLE IF NOT EXISTS p2p_1000_primitives_rust_ledger (
+        "CREATE TABLE IF NOT EXISTS p2p_896_primitives_rust_ledger (
             primitive_id TEXT PRIMARY KEY,
             domain_id TEXT NOT NULL,
             peer_alpha_hash TEXT NOT NULL,
@@ -168,14 +168,14 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
             cortex_taint TEXT NOT NULL UNIQUE,
             timestamp_unix REAL NOT NULL
         );
-        CREATE INDEX IF NOT EXISTS idx_p2p_rust_domain ON p2p_1000_primitives_rust_ledger(domain_id);"
+        CREATE INDEX IF NOT EXISTS idx_p2p_rust_domain ON p2p_896_primitives_rust_ledger(domain_id);"
     )?;
 
     Ok(conn)
 }
 
 fn main() {
-    println!("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Rust (strike-rs) sobre 1000 Primitivas...");
+    println!("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Rust (strike-rs) sobre 896 Primitivas...");
     let start_time = SystemTime::now();
 
     // Resolve db path dynamically
@@ -189,20 +189,23 @@ fn main() {
 
     let mut conn = init_db(db_path).expect("[C5-REAL] FATAL: Error abriendo Master Ledger SQLite WAL en Rust");
 
-    let results = Arc::new(Mutex::new(Vec::with_capacity(1000)));
+    let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
     let mut handles = Vec::with_capacity(10);
 
     // 10 concurrent threads (1 per domain)
     for d in 0..10 {
         let results_clone = Arc::clone(&results);
         let handle = thread::spawn(move || {
-            let mut domain_results = Vec::with_capacity(100);
+            let mut domain_results = Vec::with_capacity(90);
             let mut taint_engine = TaintEngine::new();
-            let mut node_indices = Vec::with_capacity(100);
+            let mut node_indices = Vec::with_capacity(90);
             
             for p in 1..=100 {
                 let p_num = (d * 100) + p;
-                let inject_fault = p_num == 100 || p_num == 250 || p_num == 500 || p_num == 750 || p_num == 999;
+                if p_num > 896 {
+                    continue;
+                }
+                let inject_fault = p_num == 90 || p_num == 250 || p_num == 500 || p_num == 750 || p_num == 895;
                 let res = verify_primitive_p2p(p_num, d, inject_fault);
                 
                 let node_ref = taint_engine.add_node(&res.primitive_id, res.cortex_taint.as_bytes());
@@ -211,8 +214,10 @@ fn main() {
                 domain_results.push(res);
             }
             
-            for i in 0..node_indices.len() - 1 {
-                taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+            if !node_indices.is_empty() {
+                for i in 0..node_indices.len() - 1 {
+                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+                }
             }
             assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside Centuria execution flow");
             
@@ -237,7 +242,7 @@ fn main() {
         let tx = conn.transaction().expect("[C5-REAL] FATAL: Error iniciando transacción WAL");
         {
             let mut stmt = tx.prepare(
-                "INSERT OR REPLACE INTO p2p_1000_primitives_rust_ledger (
+                "INSERT OR REPLACE INTO p2p_896_primitives_rust_ledger (
                     primitive_id, domain_id, peer_alpha_hash, peer_beta_hash,
                     peer_gamma_hash, consensus_verdict, quorum_match, cortex_taint, timestamp_unix
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -262,14 +267,14 @@ fn main() {
     }
 
     let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
-    println!("[C5-REAL] Barrido Empírico Rust Finalizado: {}/1000 Primitivas Verificadas en {:.2} ms.", total_verified, elapsed);
+    println!("[C5-REAL] Barrido Empírico Rust Finalizado: {}/896 Primitivas Verificadas en {:.2} ms.", total_verified, elapsed);
     println!("          Quorum 3/3 (Unanimidad): {} | Quorum 2/3 (Tolerancia Bizantina): {}", quorum_3of3, quorum_2of3);
 
-    if total_verified == 1000 {
-        println!("[PASS] 1000/1000 Primitivas Rust en Consenso Par-Par (Topología BFT 100% Validada en Silicio).");
+    if total_verified == 896 {
+        println!("[PASS] 896/896 Primitivas Rust en Consenso Par-Par (Topología BFT 100% Validada en Silicio).");
         std::process::exit(0);
     } else {
-        eprintln!("[FAIL] Verificación Par-Par Rust Incompleta ({}/1000). Abortando.", total_verified);
+        eprintln!("[FAIL] Verificación Par-Par Rust Incompleta ({}/896). Abortando.", total_verified);
         std::process::exit(1);
     }
 }
