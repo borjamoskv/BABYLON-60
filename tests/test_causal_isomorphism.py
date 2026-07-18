@@ -402,6 +402,101 @@ def test_full_pipeline_irpautomata() -> None:
     print("  ✅ Full pipeline on IRPAutomata.fs")
 
 
+def test_linear_type_checker() -> None:
+    """Verify linear and affine type checker rules."""
+    from causal_isomorphism.ir import (
+        IRFunction,
+        IRParam,
+        IRType,
+        IRTypeKind,
+        IRExpr,
+        IRExprKind,
+        IRMatchArm,
+        IRPattern,
+    )
+    from causal_isomorphism.linear_checker import LinearTypeChecker
+
+    # 1. Valid Linear: consumed exactly once
+    p1 = IRParam(
+        name="x",
+        ir_type=IRType(IRTypeKind.INT, is_linear=True),
+    )
+    # Body: just return x (variable access)
+    body1 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="x")
+    f1 = IRFunction(name="f1", params=[p1], body=body1)
+
+    checker = LinearTypeChecker()
+    violations = checker.check_function(f1)
+    assert not violations, f"Expected no violations, got: {violations}"
+
+    # 2. Invalid Linear: consumed zero times
+    body2 = IRExpr(kind=IRExprKind.LITERAL, literal_value="42", literal_type=IR_FLOAT)
+    f2 = IRFunction(name="f2", params=[p1], body=body2)
+    violations = checker.check_function(f2)
+    assert len(violations) == 1
+    assert "must be consumed exactly once" in violations[0].message
+    assert "Found 0" in violations[0].message
+
+    # 3. Invalid Linear: consumed twice
+    body3 = IRExpr(
+        kind=IRExprKind.BINARY_OP,
+        op="+",
+        left=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
+        right=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
+    )
+    f3 = IRFunction(name="f3", params=[p1], body=body3)
+    violations = checker.check_function(f3)
+    assert len(violations) == 1
+    assert "Found 2" in violations[0].message
+
+    # 4. Valid Affine: consumed once
+    p2 = IRParam(
+        name="y",
+        ir_type=IRType(IRTypeKind.INT, is_affine=True),
+    )
+    f4 = IRFunction(name="f4", params=[p2], body=body1) # body1 consumes x, but we need y
+    body4 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="y")
+    f4 = IRFunction(name="f4", params=[p2], body=body4)
+    violations = checker.check_function(f4)
+    assert not violations
+
+    # 5. Valid Affine: consumed zero times (affine allows 0 or 1)
+    f5 = IRFunction(name="f5", params=[p2], body=body2)
+    violations = checker.check_function(f5)
+    assert not violations
+
+    # 6. Invalid Affine: consumed twice
+    body6 = IRExpr(
+        kind=IRExprKind.BINARY_OP,
+        op="+",
+        left=IRExpr(kind=IRExprKind.VARIABLE, variable_name="y"),
+        right=IRExpr(kind=IRExprKind.VARIABLE, variable_name="y"),
+    )
+    f6 = IRFunction(name="f6", params=[p2], body=body6)
+    violations = checker.check_function(f6)
+    assert len(violations) == 1
+
+    # 7. Non-uniform consumption in Match arms: x consumed in one branch but not another
+    arm1 = IRMatchArm(
+        pattern=IRPattern(case_name="A"),
+        body=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
+    )
+    arm2 = IRMatchArm(
+        pattern=IRPattern(case_name="B"),
+        body=body2, # literal 42
+    )
+    body7 = IRExpr(
+        kind=IRExprKind.MATCH,
+        match_expr=IRExpr(kind=IRExprKind.VARIABLE, variable_name="state"),
+        match_arms=[arm1, arm2],
+    )
+    f7 = IRFunction(name="f7", params=[p1], body=body7)
+    violations = checker.check_function(f7)
+    assert len(violations) == 1
+
+    print("  ✅ Linear type checker logic")
+
+
 # ============================================================
 # RUNNER
 # ============================================================
@@ -434,6 +529,9 @@ def main() -> int:
             test_solidity_emitter_tagged_union,
             test_rust_emitter_enum,
             test_rust_emitter_taint_trait,
+        ]),
+        ("Linear Type Checker", [
+            test_linear_type_checker,
         ]),
         ("Integration", [
             test_full_pipeline_irpautomata,

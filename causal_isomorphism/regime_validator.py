@@ -171,6 +171,19 @@ class RegimeValidator:
                         ))
                         break
 
+        # Linear/Affine type checks
+        from causal_isomorphism.linear_checker import LinearTypeChecker
+        checker = LinearTypeChecker()
+        for viol in checker.check_module(module):
+            report.violations.append(RegimeViolation(
+                severity=ViolationSeverity.ERROR,
+                source_layer=module.source_layer,
+                target_layer=target_layer,
+                construct_name=viol.function_name,
+                rule="LinearTypeCheck",
+                message=viol.message,
+            ))
+
         return report
 
     def validate_cross_regime(
