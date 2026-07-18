@@ -54,3 +54,4 @@
 | 2026-07-17 | STATUS.md como fuente única de verdad | este fichero + commit que lo introduce |
 | 2026-07-17 | **BABYLON60 IDE v1.1.0**: contrato frontend↔backend reparado (stats/entries/verify/databases/query alineados con rutas reales), modo cognitivo dual NT○/2E◐ (⌘⇧E), Git Sentinel (`/api/sentinel/status`: identidad de repo recalcada en barra de estado + lineage guard con intuición de repo incorrecto + cola de delegación git 100% al agente), panel de detalle de entrada (micro-túnel), fix sockets zombi WS, fix RSS ru_maxrss (KB en Linux vs bytes en macOS), boot inmune a localStorage corrupto | `babylon60-ide/` · E2E Playwright: consenso VERIFIED 2/2 contra `master_ledger.db`, 0 pageerrors en 6 rutas × 2 modos · ruff limpio |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `87dad3dba9d9`) | Git Sentinel `ac2c1dd63` |
+| 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `ceb66b2e8b65`) | Git Sentinel `e86d80f79` |
