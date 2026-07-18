@@ -81,14 +81,22 @@ def execute_swarm_audit() -> None:
 
     print(f"✅ Swarm compiled: {len(subagents)} nodes registered.")
 
-    transcript_path = os.getenv(
-        "CORTEX_TRANSCRIPT_PATH",
-        os.path.join(
-            home,
-            ".gemini/antigravity/brain/e95d6d93-ac3c-41f7-bc62-345b5c81277a/.system_generated/logs/transcript.jsonl",
-        ),
+    import glob
+
+    brain_dir = os.path.join(home, ".gemini", "antigravity", "brain")
+    transcripts = glob.glob(
+        os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
     )
-    print("⚡ [LEA_OMEGA] Running cognitive audit...")
+    if transcripts:
+        transcripts.sort(key=os.path.getmtime, reverse=True)
+        transcript_path = transcripts[0]
+    else:
+        transcript_path = os.path.join(
+            brain_dir,
+            "0a631cd8-b609-4dd3-8566-73f8f9d4aaa3/.system_generated/logs/transcript.jsonl",
+        )
+
+    print(f"⚡ [LEA_OMEGA] Running cognitive audit on: {transcript_path}")
     audit_script = os.getenv(
         "CORTEX_AUDIT_SCRIPT",
         os.path.join(
