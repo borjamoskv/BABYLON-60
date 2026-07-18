@@ -1630,14 +1630,26 @@ async function renderSentinelPage(container) {
 
   container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⎇</div><div class="desc">Leyendo identidad del repo...</div></div>`;
 
-  try { S.sentinel = await get('/api/sentinel/status'); } catch (err) {
+  let s;
+  let exergyHistory = [];
+  try {
+    s = await get('/api/sentinel/status');
+    S.sentinel = s;
+  } catch (err) {
     container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
     return;
   }
+  
+  try {
+    const ex_res = await get('/api/sentinel/exergy');
+    exergyHistory = ex_res.history || [];
+  } catch (err) {
+    console.error("No se pudo obtener historial de exergía:", err);
+  }
+
   updateRepoSegment();
   renderContextPaneContent();
 
-  const s = S.sentinel;
   const reds = s.warnings.filter(w => w.level === 'red');
   const ambers = s.warnings.filter(w => w.level === 'amber');
   const lineageOk = reds.length === 0;
@@ -1654,6 +1666,19 @@ async function renderSentinelPage(container) {
   const remotesHtml = s.remotes.length === 0
     ? `<div style="color:var(--verify);font-size:0.66rem">✓ Sin remoto configurado (política P0 activa: nada sale a la nube hasta rotar claves)</div>`
     : s.remotes.map(r => `<div style="font-family:var(--font-mono);font-size:0.64rem;color:var(--dust-dim)">${escapeHtml(r.name)} → ${escapeHtml(r.url)}</div>`).join('');
+
+  const exergyHtml = exergyHistory.length === 0
+    ? `<div style="color:var(--dust-ghost);font-size:0.64rem">Sin auditorías de exergía registradas en el Ledger.</div>`
+    : exergyHistory.slice(0, 10).map(e => `
+        <div class="delegation-item" style="border-left:2px solid ${e.exergy_score >= 700.0 ? 'var(--verify)' : 'var(--break)'}; padding-left: 8px; margin-bottom: 6px; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+            <span style="font-weight:bold; font-size:0.7rem; color:${e.exergy_score >= 700.0 ? 'var(--verify)' : 'var(--break)'}">${e.exergy_score.toFixed(1)}/1000.0</span>
+            <span style="font-family:var(--font-mono); font-size:0.6rem; color:var(--dust-dim)">HEAD: ${escapeHtml(e.commit_hash.slice(0, 8))}</span>
+          </div>
+          <div style="color:var(--dust-heavy); font-size:0.62rem; line-height: 1.2;">G: ${escapeHtml(e.gradient)}</div>
+          <div style="color:var(--dust-dim); font-size:0.58rem; margin-top: 1px;">E: ${escapeHtml(e.entropy)}</div>
+        </div>
+      `).join('');
 
   container.innerHTML = `
     <div class="stats-grid slide-in">
@@ -1680,6 +1705,16 @@ async function renderSentinelPage(container) {
       <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--edge-soft)">
         <div style="font-size:0.6rem;color:var(--dust-ghost);margin-bottom:4px">CANON: ${escapeHtml(s.canonical.repo_name)} @ ${escapeHtml(s.canonical.branch)} · remotos: ${escapeHtml(s.canonical.remote_policy)}</div>
         ${remotesHtml}
+      </div>
+    </div>
+
+    <div class="card fade-in" style="margin-bottom:14px">
+      <div class="card-title" style="margin-bottom:8px">GELABP Exergy Ledger (Auditoría Termodinámica)</div>
+      <div style="font-size:0.66rem;color:var(--dust-dim);margin-bottom:10px">
+        Historial de exergía de las mutaciones físicas en el AST, calculado autónomamente según la matriz GELABP.
+      </div>
+      <div style="max-height: 250px; overflow-y: auto;">
+        ${exergyHtml}
       </div>
     </div>
 

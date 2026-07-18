@@ -13,6 +13,7 @@ Causal contract (STATUS.md · P0):
 
 from __future__ import annotations
 
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -120,3 +121,36 @@ def sentinel_status() -> dict[str, Any]:
         },
         "warnings": warnings,
     }
+
+
+@router.get("/exergy")
+def get_exergy_history() -> dict[str, Any]:
+    """Retrieve exergy audit history from the SQLite ledger."""
+    import sqlite3
+    db_path = Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
+    if not db_path.exists():
+        return {"history": []}
+    try:
+        conn = sqlite3.connect(str(db_path), timeout=5.0)
+        conn.execute("PRAGMA journal_mode=WAL;")
+        cursor = conn.cursor()
+        cursor.execute("SELECT timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml FROM ledger ORDER BY id DESC")
+        rows = cursor.fetchall()
+        conn.close()
+        
+        history = []
+        for r in rows:
+            history.append({
+                "timestamp": r[0],
+                "commit_hash": r[1],
+                "exergy_score": r[2],
+                "gradient": r[3],
+                "entropy": r[4],
+                "leverage": r[5],
+                "autoloop": r[6],
+                "bottleneck": r[7],
+                "verdict_yaml": r[8]
+            })
+        return {"history": history}
+    except sqlite3.Error as e:
+        return {"error": str(e), "history": []}
