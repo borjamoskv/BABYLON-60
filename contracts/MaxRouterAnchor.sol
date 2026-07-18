@@ -25,6 +25,7 @@ contract MaxRouterAnchor {
     
     event AttesterAdded(address indexed attester);
     event AttesterRemoved(address indexed attester);
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     // --- State ---
     mapping(bytes32 => bool) public anchoredRoots;
@@ -77,19 +78,30 @@ contract MaxRouterAnchor {
     }
 
     // --- Administration ---
+    /// @notice Añade un nuevo attester al quorum
+    /// @dev Solo callable por owner. El attester debe ser una address válida
+    /// @param attester Dirección del nuevo attester
     function addAttester(address attester) external onlyOwner {
         require(attester != address(0), "Invalid address");
         authorizedAttesters[attester] = true;
         emit AttesterAdded(attester);
     }
 
+    /// @notice Elimina un attester del quorum
+    /// @dev Solo callable por owner
+    /// @param attester Dirección del attester a eliminar
     function removeAttester(address attester) external onlyOwner {
         authorizedAttesters[attester] = false;
         emit AttesterRemoved(attester);
     }
     
+    /// @notice Transfiere la propiedad del contrato
+    /// @dev Solo el owner actual puede llamar esta función
+    /// @param newOwner Dirección del nuevo propietario
     function transferOwnership(address newOwner) external onlyOwner {
         require(newOwner != address(0), "Invalid address");
+        address oldOwner = owner;
         owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
     }
 }
