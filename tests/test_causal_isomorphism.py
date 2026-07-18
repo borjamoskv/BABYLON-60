@@ -453,7 +453,8 @@ def main() -> int:
                 passed += 1
             except Exception as e:
                 failed += 1
-                print(f"  ❌ {test_fn.__name__}: {e}")  # type: ignore[union-attr]
+                name = getattr(test_fn, "__name__", str(test_fn))
+                print(f"  ❌ {name}: {e}")
 
     print(f"\n{'='*50}")
     print(f"Results: {passed}/{total} passed, {failed} failed")
