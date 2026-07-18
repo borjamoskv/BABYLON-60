@@ -1,3 +1,15 @@
+---
+name: bft_node_alpha
+description: BFT Node Alpha (Sintaxis y Tipos) - Validador aislado del Consenso BFT contra las leyes del AST.
+triggers:
+  - "/bft-alpha"
+  - "bft_node_alpha"
+  - "bft node alpha"
+  - "validador aislado 1"
+  - "consenso bft"
+  - "ast rules"
+  - "except pass checking"
+---
 # 📐 BFT NODE ALPHA (Sintaxis y Tipos)
 **SYS_ID:** `BFT_ALPHA` | **ESTADO:** `ACTIVO`
 

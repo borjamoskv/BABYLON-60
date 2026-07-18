@@ -1,3 +1,15 @@
+---
+name: bft_node_beta
+description: BFT Node Beta (Sandbox y Ejecución) - Validador físico aislado que ejecuta tests para validar hipótesis en la realidad.
+triggers:
+  - "/bft-beta"
+  - "bft_node_beta"
+  - "bft node beta"
+  - "validador fisico"
+  - "nodo aislado 2"
+  - "sandbox execution"
+  - "physical validation"
+---
 # 🧪 BFT NODE BETA (Sandbox y Ejecución)
 **SYS_ID:** `BFT_BETA` | **ESTADO:** `ACTIVO`
 

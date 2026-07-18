@@ -1,3 +1,18 @@
+---
+name: auditor_c5_real
+description: Auditor C5-REAL (ULTRATHINK P0) - Ejecuta el BFT State Loop sobre cada mutación propuesta.
+triggers:
+  - "/auditor"
+  - "/audit"
+  - "auditor_c5_real"
+  - "auditor c5-real"
+  - "bft state loop"
+  - "latent friction"
+  - "phantom target"
+  - "idempotency lock"
+  - "git sentinel"
+  - "epistemic gate"
+---
 # 🛡️ AUDITOR C5-REAL (ULTRATHINK P0)
 **SYS_ID:** `AGENTE_AUDITOR_OMEGA` | **ESTADO:** `ACTIVO`
 

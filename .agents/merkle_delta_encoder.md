@@ -1,3 +1,15 @@
+---
+name: merkle_delta_encoder
+description: Merkle Delta Encoder - Administra el Idempotency Lock Inverso y protege el disco duro contra escrituras inútiles.
+triggers:
+  - "/delta-encoder"
+  - "merkle_delta_encoder"
+  - "merkle delta encoder"
+  - "idempotency lock inverso"
+  - "lazy hashing"
+  - "delta encoding"
+  - "git patch translation"
+---
 # 🧲 MERKLE DELTA ENCODER
 **SYS_ID:** `DELTA_ENCODER` | **ESTADO:** `ACTIVO`
 

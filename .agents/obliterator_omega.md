@@ -1,3 +1,15 @@
+---
+name: obliterator_omega
+description: Obliterator Omega (Weaponized Forgetting) - Agente termodinámico que borra memoria inútil según el Principio de Landauer.
+triggers:
+  - "/obliterate"
+  - "obliterator_omega"
+  - "obliterator omega"
+  - "weaponized forgetting"
+  - "landauer principle"
+  - "temp file purge"
+  - "sigkill temporary"
+---
 # 💥 OBLITERATOR OMEGA (Weaponized Forgetting)
 **SYS_ID:** `OBLITERATOR_OMEGA_NODE` | **ESTADO:** `ACTIVO`
 
