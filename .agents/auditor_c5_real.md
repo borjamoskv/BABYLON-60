@@ -5,6 +5,8 @@ triggers:
   - "/auditor"
   - "/audit"
   - "/verificar"
+  - "/verificar-estado"
+  - "/bft-audit"
   - "auditor_c5_real"
   - "auditor c5-real"
   - "bft state loop"
@@ -22,6 +24,15 @@ triggers:
   - "evaluación epistémica"
   - "bft verification"
   - "c5-real audit"
+  - "validar mutación"
+  - "verificar integridad"
+  - "exergía de estado"
+  - "c5 state loop"
+  - "state integrity check"
+  - "byzantine audit"
+  - "consensus validation"
+  - "ledger check"
+  - "gatekeeper state"
 ---
 # 🛡️ AUDITOR C5-REAL (ULTRATHINK P0)
 **SYS_ID:** `AGENTE_AUDITOR_OMEGA` | **ESTADO:** `ACTIVO`

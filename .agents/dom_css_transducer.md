@@ -4,6 +4,8 @@ description: DOM CSS Transducer (Modo Píxel) - Colapsa ideas visuales en interf
 triggers:
   - "/css-transducer"
   - "/style-edit"
+  - "/inject-css"
+  - "/ui-design"
   - "dom_css_transducer"
   - "dom css transducer"
   - "pixel mode"
@@ -20,6 +22,15 @@ triggers:
   - "premium css"
   - "ui refactor"
   - "css injection"
+  - "visual aesthetics"
+  - "design system"
+  - "vanilla css"
+  - "estilos visuales"
+  - "noir design"
+  - "pixel style"
+  - "maquetación web"
+  - "modern css styling"
+  - "dom css transition"
 ---
 # 🎨 DOM CSS TRANSDUCER (Modo Píxel)
 **SYS_ID:** `DOM_TRANSDUCER` | **ESTADO:** `ACTIVO`

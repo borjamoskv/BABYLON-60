@@ -4,6 +4,8 @@ description: Merkle Delta Encoder - Administra el Idempotency Lock Inverso y pro
 triggers:
   - "/delta-encoder"
   - "/idempotency-lock"
+  - "/hash-check"
+  - "/verify-delta"
   - "merkle_delta_encoder"
   - "merkle delta encoder"
   - "idempotency lock inverso"
@@ -17,6 +19,14 @@ triggers:
   - "evitar escrituras redundantes"
   - "diff calculation"
   - "git patch generator"
+  - "merkle tree check"
+  - "sha256 calculation"
+  - "prevent redundant writes"
+  - "git patch calculation"
+  - "idempotency validation"
+  - "lazy hash verify"
+  - "change optimization"
+  - "delta encoder checks"
 ---
 # 🧲 MERKLE DELTA ENCODER
 **SYS_ID:** `DELTA_ENCODER` | **ESTADO:** `ACTIVO`

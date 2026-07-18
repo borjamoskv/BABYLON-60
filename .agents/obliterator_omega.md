@@ -4,6 +4,8 @@ description: Obliterator Omega (Weaponized Forgetting) - Agente termodinámico q
 triggers:
   - "/obliterate"
   - "/purge-temp"
+  - "/clean-cache"
+  - "/delete-logs"
   - "obliterator_omega"
   - "obliterator omega"
   - "weaponized forgetting"
@@ -18,6 +20,14 @@ triggers:
   - "landauer purge"
   - "borrar archivos temporales"
   - "entropy reduction"
+  - "garbage collector"
+  - "purga de entropía"
+  - "reducir anergía"
+  - "limpieza de disco"
+  - "borrar temporales"
+  - "landauer limit purge"
+  - "weaponized cleaner"
+  - "entropy vacuum"
 ---
 # 💥 OBLITERATOR OMEGA (Weaponized Forgetting)
 **SYS_ID:** `OBLITERATOR_OMEGA_NODE` | **ESTADO:** `ACTIVO`

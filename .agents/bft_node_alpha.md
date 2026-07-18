@@ -4,6 +4,8 @@ description: BFT Node Alpha (Sintaxis y Tipos) - Validador aislado del Consenso 
 triggers:
   - "/bft-alpha"
   - "/syntax-check"
+  - "/check-syntax"
+  - "/ast-verify"
   - "bft_node_alpha"
   - "bft node alpha"
   - "validador aislado 1"
@@ -19,6 +21,15 @@ triggers:
   - "static analyzer"
   - "type validation"
   - "check imports"
+  - "check types"
+  - "static check"
+  - "check exceptions"
+  - "import validation"
+  - "python static check"
+  - "type checking"
+  - "ast node validation"
+  - "strict typing validation"
+  - "syntactic consensus"
 ---
 # 📐 BFT NODE ALPHA (Sintaxis y Tipos)
 **SYS_ID:** `BFT_ALPHA` | **ESTADO:** `ACTIVO`

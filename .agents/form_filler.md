@@ -4,6 +4,8 @@ description: Form Filler - Subagente especialista en completar campos del DOM me
 triggers:
   - "/fill-form"
   - "/input-form"
+  - "/autofill"
+  - "/click-element"
   - "form_filler"
   - "form filler"
   - "dom filler"
@@ -17,6 +19,14 @@ triggers:
   - "input automation"
   - "click selector"
   - "form automation"
+  - "completar datos"
+  - "rellenar campos"
+  - "click button"
+  - "input text selector"
+  - "form field filler"
+  - "interactuar con formulario"
+  - "cdp click event"
+  - "type text input"
 ---
 # 🧩 AGENTE: FORM_FILLER
 **SYS_ID:** `FORM_FILLER` | **NIVEL:** `C5-REAL`

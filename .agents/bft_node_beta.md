@@ -4,6 +4,8 @@ description: BFT Node Beta (Sandbox y Ejecución) - Validador físico aislado qu
 triggers:
   - "/bft-beta"
   - "/run-tests"
+  - "/execute-tests"
+  - "/test-sandbox"
   - "bft_node_beta"
   - "bft node beta"
   - "validador fisico"
@@ -18,6 +20,15 @@ triggers:
   - "sandbox test execution"
   - "test coverage"
   - "verificación en disco"
+  - "dynamic code validation"
+  - "execution consensus"
+  - "pytest check"
+  - "cargo test"
+  - "go test"
+  - "sandbox runtime test"
+  - "cobertura de tests"
+  - "verificación dinámica"
+  - "physical test verification"
 ---
 # 🧪 BFT NODE BETA (Sandbox y Ejecución)
 **SYS_ID:** `BFT_BETA` | **ESTADO:** `ACTIVO`

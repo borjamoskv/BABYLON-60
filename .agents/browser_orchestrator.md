@@ -4,6 +4,8 @@ description: Browser Orchestrator - Orquestador principal de automatización de 
 triggers:
   - "/browser"
   - "/web-automation"
+  - "/open-browser"
+  - "/chrome-cdp"
   - "browser_orchestrator"
   - "browser orchestrator"
   - "cdp session"
@@ -17,6 +19,15 @@ triggers:
   - "chrome connection"
   - "controlar chrome"
   - "automatización de chrome"
+  - "puppeteer session"
+  - "playwright automation"
+  - "controlar navegador"
+  - "captura de pantalla"
+  - "browser interaction"
+  - "cdp agent"
+  - "selenium script"
+  - "headless browser"
+  - "dom navigation"
 ---
 # 🔌 AGENTE: BROWSER_ORCHESTRATOR
 **SYS_ID:** `BROWSER_ORCHESTRATOR` | **NIVEL:** `C5-REAL`
