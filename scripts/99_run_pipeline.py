@@ -11,8 +11,10 @@ os.chdir(PROJECT_ROOT)
 def run_step(name: str, cmd: list[str]) -> bool:
     print(f"\n⚡ [PIPELINE] Ejecutando: {name} ...")
     start = time.perf_counter()
+    env_vars = dict(os.environ)
+    env_vars["PYO3_PYTHON"] = os.path.join(PROJECT_ROOT, ".venv", "bin", "python")
     try:
-        res = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        res = subprocess.run(cmd, env=env_vars, check=True, capture_output=True, text=True)
         elapsed = time.perf_counter() - start
         print(f"✅ {name} completado con éxito en {elapsed:.4f}s.")
         if res.stdout.strip():
@@ -44,6 +46,8 @@ def main():
         ("20_stress_db", [".venv/bin/python", "scripts/20_stress_db.py"]),
         ("Pytest Suite", [".venv/bin/pytest"]),
         ("Go Test Suite", ["go", "test", "./primitives/..."]),
+        ("Tauri Rust Tests", ["cargo", "test", "--manifest-path", "src-tauri/Cargo.toml"]),
+        ("Strike-RS Rust Tests", ["cargo", "test", "--manifest-path", "strike-rs/Cargo.toml"]),
         ("31_autoconsolidate", [".venv/bin/python", "scripts/31_autoconsolidate.py"]),
         ("32_legion_purge", [".venv/bin/python", "scripts/32_legion_purge.py"]),
     ]
