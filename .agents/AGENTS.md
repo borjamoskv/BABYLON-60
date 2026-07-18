@@ -50,3 +50,6 @@ Queda estrictamente prohibido continuar una meta-iteración recursiva si el grad
 
 ## 11. Adversarial Antipode Mitosis Invariant
 Toda meta-iteración compleja debe forzar una bifurcación de contexto descentralizada: un subagente ejecutor que implementa el código y un subagente destructor que busca invalidar el AST generando pruebas de fallo de límites. La convergencia se alcanza únicamente cuando el destructor falla en romper el código del ejecutor.
+
+## 12. Periodic Entropy Purge Invariant (Octal Purge Boundary)
+Cada 8 iteraciones de `itera` en el BFT_STATE_LOOP, el Kernel debe ejecutar de forma obligatoria una purga de entropía (LEA_OMEGA / Anergy_Token_Purge) sobre el workspace, barriendo logs huérfanos, caché de compilación obsoleta y archivos temporales en `scratch/`, consolidando la reducción en el Ledger.
