@@ -94,6 +94,7 @@ apex_trials = ["*.json"]
 testpaths = ["tests"]
 addopts = "-x --tb=short"
 asyncio_mode = "auto"
+pythonpath = ["."]
 
 [tool.ruff]
 target-version = "py310"
