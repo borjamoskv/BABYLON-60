@@ -42,20 +42,22 @@ class ReplayKernel:
     Este kernel decide qué propuesta entra al ledger.
     """
 
-    def __init__(self, db: sqlite3.Connection, policy_version: str):
+    def __init__(self, db: Any, policy_version: str):
         self.db = db
         self.policy_version = policy_version
 
     async def current_head_hash(self) -> str:
-        row = await self.db.execute_fetchone(
+        async with self.db.execute(
             """
             SELECT event_hash
             FROM ledger_events
             ORDER BY sequence_id DESC
             LIMIT 1
             """
-        )
+        ) as cursor:
+            row = await cursor.fetchone()
         return row[0] if row else "GENESIS"
+
 
     async def propose_model_output(
         self,
