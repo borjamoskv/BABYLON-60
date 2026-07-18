@@ -2,12 +2,14 @@
 C5-REAL Swarm Orchestrator
 Transduce issues y tareas de GitHub en PRs autónomos procesados por la FSM y evaluados por el Architect Agent.
 """
+
 from typing import Dict, Any
 
 from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.engine_fsm import SwarmFSM
 from cortex.swarm.architect_agent import ArchitectAgent
 from cortex.swarm.sanitizer import ZeroTrustSanitizer
+
 
 class OrchestratorEngine:
     """Orquestador unificado de Swarm C5-REAL."""
@@ -30,14 +32,16 @@ class OrchestratorEngine:
             "body": body,
             "code": f"# Auto-generated patch for issue {issue_id}: {title}\ndef fix_issue(): pass",
             "diff": f"+++ src/patch_{issue_id}.py\n+ def fix_issue(): pass",
-            "retries": 0
+            "retries": 0,
         }
 
         state = "UNPROCESSED"
         while state not in ["MERGE_READY", "DEAD_LETTER"]:
             state = self.fsm.transition_state(issue_id, state, payload)
 
-        self.memory.log(issue_id, "orchestrator", "issue_processed", f"FinalState={state}")
+        self.memory.log(
+            issue_id, "orchestrator", "issue_processed", f"FinalState={state}"
+        )
         return state
 
     def run_maintenance_cycle(self) -> bool:
@@ -45,6 +49,7 @@ class OrchestratorEngine:
         print("[Orchestrator] Iniciando ciclo de mantenimiento nocturno...")
         has_debt = self.architect.trigger_refactoring(threshold=10)
         return has_debt
+
 
 def autonomous_loop() -> None:
     """Bucle principal de orquestación C5-REAL."""
@@ -58,9 +63,10 @@ def autonomous_loop() -> None:
     final_state = orchestrator.process_issue(
         issue_id=2026,
         title="Optimizar bloqueos WAL en SQLite",
-        body="Mejorar la tolerancia a la concurrencia en memory_store.py bajo carga extrema."
+        body="Mejorar la tolerancia a la concurrencia en memory_store.py bajo carga extrema.",
     )
     print(f"[Orchestrator] Issue #2026 procesado. Estado final: {final_state}")
+
 
 if __name__ == "__main__":
     autonomous_loop()

@@ -2,26 +2,64 @@
 import math
 from typing import Tuple
 
-DOMAINS = {0: 'SOURCE', 1: 'MATRIX', 2: 'PULSE', 3: 'KINETIC', 4: 'LOGIC', 5: 'VECTOR', 6: 'STORAGE', 7: 'OSINT', 8: 'CLOCK', 9: 'COMPILER'}
-PRIMITIVES = {0: 'INIT', 1: 'PREDICT', 2: 'UPDATE', 3: 'INNOVATION', 4: 'GAIN', 5: 'COVARIANCE', 6: 'DRIFT_CHECK', 7: 'RECONSTRUCT', 8: 'SANITY_ASSERT', 9: 'FLUSH_LEDGER'}
-MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'KALMAN_EXTENDED', 3: 'LUENBERGER_RIGID', 4: 'PARTICLE_PF', 5: 'SLIDING_MODE', 6: 'QUANTIZED', 7: 'ADAPTIVE_R', 8: 'NEURAL_LATENT', 9: 'BFT_CONSENSUS'}
+DOMAINS = {
+    0: "SOURCE",
+    1: "MATRIX",
+    2: "PULSE",
+    3: "KINETIC",
+    4: "LOGIC",
+    5: "VECTOR",
+    6: "STORAGE",
+    7: "OSINT",
+    8: "CLOCK",
+    9: "COMPILER",
+}
+PRIMITIVES = {
+    0: "INIT",
+    1: "PREDICT",
+    2: "UPDATE",
+    3: "INNOVATION",
+    4: "GAIN",
+    5: "COVARIANCE",
+    6: "DRIFT_CHECK",
+    7: "RECONSTRUCT",
+    8: "SANITY_ASSERT",
+    9: "FLUSH_LEDGER",
+}
+MODIFIERS = {
+    0: "RAW",
+    1: "ATOMIC",
+    2: "KALMAN_EXTENDED",
+    3: "LUENBERGER_RIGID",
+    4: "PARTICLE_PF",
+    5: "SLIDING_MODE",
+    6: "QUANTIZED",
+    7: "ADAPTIVE_R",
+    8: "NEURAL_LATENT",
+    9: "BFT_CONSENSUS",
+}
+
 
 class StateVector:
     def __init__(self) -> None:
         self.states = [0.0, 0.0, 0.0, 0.0]
-        self.covariance = [[1.0 if i==j else 0.0 for j in range(4)] for i in range(4)]
+        self.covariance = [[1.0 if i == j else 0.0 for j in range(4)] for i in range(4)]
         self.innovation = [0.0, 0.0, 0.0, 0.0]
         self.norm_error = 0.0
         self.execution_count = 0
 
+
 def resolve_observer_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
-        raise ValueError('Index out of range [0-9]')
+        raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
-    name = f'OBS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}'
+    name = f"OBS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
 
-def dispatch_state_observer(d: int, p: int, m: int, state: StateVector) -> Tuple[int, str, float]:
+
+def dispatch_state_observer(
+    d: int, p: int, m: int, state: StateVector
+) -> Tuple[int, str, float]:
     code, name = resolve_observer_identity(d, p, m)
     state.execution_count += 1
     for i in range(4):

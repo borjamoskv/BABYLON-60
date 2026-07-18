@@ -2,6 +2,7 @@
 import unittest
 from cortex.haskell_1000 import dispatch_haskell, HaskellStateVector
 
+
 class TestHaskellKernel(unittest.TestCase):
     def test_haskell_coverage(self) -> None:
         vec = HaskellStateVector()
@@ -10,10 +11,13 @@ class TestHaskellKernel(unittest.TestCase):
             for p in range(10):
                 for m in range(10):
                     code, name, cost = dispatch_haskell(d, p, m, vec)
-                    self.assertEqual(code, d*100 + p*10 + m)
+                    self.assertEqual(code, d * 100 + p * 10 + m)
                     count += 1
         self.assertEqual(count, 1000)
-        print(f'✅ Successfully verified 100% execution coverage for 1000 Python/Haskell Primitives. Final Cost: {vec.compile_cost}')
+        print(
+            f"✅ Successfully verified 100% execution coverage for 1000 Python/Haskell Primitives. Final Cost: {vec.compile_cost}"
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

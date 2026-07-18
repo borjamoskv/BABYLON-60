@@ -1,6 +1,7 @@
 import unittest
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 
+
 class TestNeuroChain(unittest.TestCase):
     def test_1000_neuro_primitives(self) -> None:
         vec = CognitiveChainVector()
@@ -14,7 +15,10 @@ class TestNeuroChain(unittest.TestCase):
                     tested += 1
         self.assertEqual(tested, 1000)
         self.assertEqual(vec.execution_count, 1000)
-        print(f"✅ Python Neuro Chain: 1000/1000 primitives verified. Final Language Entropy: {vec.language_entropy:.6f}")
+        print(
+            f"✅ Python Neuro Chain: 1000/1000 primitives verified. Final Language Entropy: {vec.language_entropy:.6f}"
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

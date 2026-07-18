@@ -2,6 +2,7 @@
 C5-REAL Zero-Trust Prompt Injection Sanitizer
 Filtro de seguridad dinámico de múltiples vectores para auditar issues y comentarios entrantes.
 """
+
 import re
 import base64
 from typing import Tuple, List
@@ -14,9 +15,12 @@ MALICIOUS_PATTERNS: List[re.Pattern[str]] = [
     re.compile(r"jailbreak", re.IGNORECASE),
     re.compile(r"bypass\s+security", re.IGNORECASE),
     re.compile(r"reveal\s+(secret|token|password|key)", re.IGNORECASE),
-    re.compile(r"<\s*/?\s*(system|user_request|user_input|instruction)\s*>", re.IGNORECASE),
+    re.compile(
+        r"<\s*/?\s*(system|user_request|user_input|instruction)\s*>", re.IGNORECASE
+    ),
     re.compile(r"\x1b\[[0-9;]*[mGKH]", re.IGNORECASE),  # Escape sequences ANSI
 ]
+
 
 class ZeroTrustSanitizer:
     """Sanitizador determinista multivector para insumos de usuarios externos."""

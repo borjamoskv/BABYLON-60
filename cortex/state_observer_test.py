@@ -1,6 +1,7 @@
 import unittest
 from cortex.state_observer import dispatch_state_observer, StateVector
 
+
 class TestStateObserver(unittest.TestCase):
     def test_1000_primitives(self) -> None:
         state = StateVector()
@@ -14,7 +15,10 @@ class TestStateObserver(unittest.TestCase):
                     tested += 1
         self.assertEqual(tested, 1000)
         self.assertEqual(state.execution_count, 1000)
-        print(f"✅ Python State Observer: 1000/1000 primitives verified. Final Norm Error: {state.norm_error:.6f}")
+        print(
+            f"✅ Python State Observer: 1000/1000 primitives verified. Final Norm Error: {state.norm_error:.6f}"
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

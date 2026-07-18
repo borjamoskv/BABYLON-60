@@ -2,10 +2,12 @@
 C5-REAL Architect Agent
 Protocolo anti-entropía. Detecta y reduce deuda técnica analizando el AST real sin cambiar el comportamiento observable.
 """
+
 import ast
 import os
 from typing import Dict, List, Tuple
 from cortex.swarm.memory_store import AgentMemory
+
 
 class CyclomaticComplexityVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
@@ -36,6 +38,7 @@ class CyclomaticComplexityVisitor(ast.NodeVisitor):
         self.complexity += len(node.values) - 1
         self.generic_visit(node)
 
+
 class ArchitectAgent:
     def __init__(self, target_dir: str = "cortex") -> None:
         self.memory = AgentMemory()
@@ -58,7 +61,9 @@ class ArchitectAgent:
 
         return results
 
-    def audit_cyclomatic_complexity(self, threshold: int = 10) -> Dict[str, List[Tuple[str, int]]]:
+    def audit_cyclomatic_complexity(
+        self, threshold: int = 10
+    ) -> Dict[str, List[Tuple[str, int]]]:
         """Audita recursivamente el directorio target para detectar funciones con complejidad superior al umbral."""
         high_complexity_map: Dict[str, List[Tuple[str, int]]] = {}
 
@@ -73,7 +78,9 @@ class ArchitectAgent:
 
         if high_complexity_map:
             for path, funcs in high_complexity_map.items():
-                self.memory.log(0, "architect", "tech_debt_detected", f"File={path}|Funcs={funcs}")
+                self.memory.log(
+                    0, "architect", "tech_debt_detected", f"File={path}|Funcs={funcs}"
+                )
         else:
             self.memory.log(0, "architect", "ast_audit_pass", f"Threshold={threshold}")
 
@@ -83,12 +90,22 @@ class ArchitectAgent:
         """Fuerza un ciclo de refactorización si la entropía AST excede el umbral."""
         debt = self.audit_cyclomatic_complexity(threshold)
         if debt:
-            print(f"[Architect] Entropía detectada en {len(debt)} archivos. Activando protocolo de refactorización...")
-            self.memory.log(0, "architect", "refactoring_cycle_initiated", f"AffectedFiles={len(debt)}")
+            print(
+                f"[Architect] Entropía detectada en {len(debt)} archivos. Activando protocolo de refactorización..."
+            )
+            self.memory.log(
+                0,
+                "architect",
+                "refactoring_cycle_initiated",
+                f"AffectedFiles={len(debt)}",
+            )
             return True
         else:
-            print("[Architect] Repositorio en equilibrio termodinámico (complejidad bajo umbral).")
+            print(
+                "[Architect] Repositorio en equilibrio termodinámico (complejidad bajo umbral)."
+            )
             return False
+
 
 if __name__ == "__main__":
     agent = ArchitectAgent()

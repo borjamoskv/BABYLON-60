@@ -1,6 +1,7 @@
 import unittest
 from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
+
 class TestTTSHarness(unittest.TestCase):
     def test_1000_tts_primitives(self) -> None:
         state = TTSHarnessState()
@@ -14,7 +15,10 @@ class TestTTSHarness(unittest.TestCase):
                     tested += 1
         self.assertEqual(tested, 1000)
         self.assertEqual(state.execution_count, 1000)
-        print(f"✅ Python TTS & Harness: 1000/1000 primitives verified. Final Harness Score: {state.harness_score:.6f}")
+        print(
+            f"✅ Python TTS & Harness: 1000/1000 primitives verified. Final Harness Score: {state.harness_score:.6f}"
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
