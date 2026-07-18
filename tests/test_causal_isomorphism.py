@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# ruff: noqa: E402
 # tests/test_causal_isomorphism.py — C5-REAL Verification Suite
 # Author: Borja Moskv (borjamoskv)
 """
@@ -8,14 +7,11 @@ Verification suite for the Causal Isomorphism Transpiler.
 Tests the full pipeline: F# parse → IR → regime validation → {Solidity, Rust} emit.
 Uses the actual IRPAutomata.fs from domain_kernel/ as ground truth.
 """
+
 from __future__ import annotations
 
 import sys
 from pathlib import Path
-
-# Ensure project root is on path
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
 
 from causal_isomorphism.ir import (
     IR_FLOAT,
@@ -33,6 +29,11 @@ from causal_isomorphism.emitter_solidity import SolidityEmitter, ir_type_to_soli
 from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
 from causal_isomorphism.regime_validator import RegimeValidator, ViolationSeverity
 from causal_isomorphism.transpiler import CausalIsomorphismTranspiler
+
+# Raíz del repo para localizar fixtures (domain_kernel/) y artefactos generados.
+# El paquete causal_isomorphism es importable vía `pythonpath = ["."]`
+# en pyproject [tool.pytest.ini_options] — no hace falta manipular sys.path.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 # ============================================================
@@ -454,7 +455,7 @@ def test_linear_type_checker() -> None:
         name="y",
         ir_type=IRType(IRTypeKind.INT, is_affine=True),
     )
-    f4 = IRFunction(name="f4", params=[p2], body=body1) # body1 consumes x, but we need y
+    f4 = IRFunction(name="f4", params=[p2], body=body1)  # body1 consumes x, but we need y
     body4 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="y")
     f4 = IRFunction(name="f4", params=[p2], body=body4)
     violations = checker.check_function(f4)
@@ -483,7 +484,7 @@ def test_linear_type_checker() -> None:
     )
     arm2 = IRMatchArm(
         pattern=IRPattern(case_name="B"),
-        body=body2, # literal 42
+        body=body2,  # literal 42
     )
     body7 = IRExpr(
         kind=IRExprKind.MATCH,
@@ -507,35 +508,53 @@ def main() -> int:
     print()
 
     test_groups: list[tuple[str, list[object]]] = [
-        ("Type Resolution", [
-            test_fsharp_type_resolution,
-            test_solidity_type_mapping,
-            test_rust_type_mapping,
-        ]),
-        ("F# Parser", [
-            test_parse_simple_union,
-            test_parse_tagged_union,
-            test_parse_record_type,
-            test_parse_function_with_match,
-        ]),
-        ("Regime Validator", [
-            test_regime_blocks_physics_in_solidity,
-            test_regime_permits_commit_in_solidity,
-            test_regime_blocks_hash_in_solidity,
-            test_regime_permits_hash_in_rust,
-        ]),
-        ("Emitters", [
-            test_solidity_emitter_simple_enum,
-            test_solidity_emitter_tagged_union,
-            test_rust_emitter_enum,
-            test_rust_emitter_taint_trait,
-        ]),
-        ("Linear Type Checker", [
-            test_linear_type_checker,
-        ]),
-        ("Integration", [
-            test_full_pipeline_irpautomata,
-        ]),
+        (
+            "Type Resolution",
+            [
+                test_fsharp_type_resolution,
+                test_solidity_type_mapping,
+                test_rust_type_mapping,
+            ],
+        ),
+        (
+            "F# Parser",
+            [
+                test_parse_simple_union,
+                test_parse_tagged_union,
+                test_parse_record_type,
+                test_parse_function_with_match,
+            ],
+        ),
+        (
+            "Regime Validator",
+            [
+                test_regime_blocks_physics_in_solidity,
+                test_regime_permits_commit_in_solidity,
+                test_regime_blocks_hash_in_solidity,
+                test_regime_permits_hash_in_rust,
+            ],
+        ),
+        (
+            "Emitters",
+            [
+                test_solidity_emitter_simple_enum,
+                test_solidity_emitter_tagged_union,
+                test_rust_emitter_enum,
+                test_rust_emitter_taint_trait,
+            ],
+        ),
+        (
+            "Linear Type Checker",
+            [
+                test_linear_type_checker,
+            ],
+        ),
+        (
+            "Integration",
+            [
+                test_full_pipeline_irpautomata,
+            ],
+        ),
     ]
 
     total = 0
@@ -554,7 +573,7 @@ def main() -> int:
                 name = getattr(test_fn, "__name__", str(test_fn))
                 print(f"  ❌ {name}: {e}")
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print(f"Results: {passed}/{total} passed, {failed} failed")
 
     if failed == 0:
