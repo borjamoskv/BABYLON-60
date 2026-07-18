@@ -118,12 +118,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let shutdown_flag = Arc::new(AtomicBool::new(false));
 
     // 1. Manejador de señales (Graceful SIGTERM/SIGINT)
-    let mut signals = Signals::new(&[SIGINT, SIGTERM])?;
+    let mut signals = Signals::new([SIGINT, SIGTERM])?;
     let sf = Arc::clone(&shutdown_flag);
     thread::spawn(move || {
-        for _sig in signals.forever() {
+        if signals.forever().next().is_some() {
             sf.store(true, Ordering::SeqCst);
-            break;
         }
     });
 

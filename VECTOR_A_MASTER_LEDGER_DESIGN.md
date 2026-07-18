@@ -1,8 +1,9 @@
 # VECTOR A — Master Ledger & ATMS Persistence · Diseño
 
-> Estado: **DISEÑADO, NO CONSTRUIDO.** C4-SIM hasta que exista `ledger.rs` que
-> compile y pase tests. Este documento es el esquema del colapso, no una
-> aserción de victoria (regla STATUS.md).
+> Estado: **CONSTRUIDO — C5-REAL (2026-07-18).** `ledger.rs` compila y pasa tests.
+> Prueba: `cargo clippy --all-targets -- -D warnings` limpio + `cargo test` 37/37
+> verde (rustc 1.95, edition 2024). Condición de promoción C4-SIM→C5-REAL satisfecha.
+> BFT real (réplicas + consenso) permanece trabajo futuro (§1).
 
 ## 0. Qué YA es C5-REAL (esta iteración)
 

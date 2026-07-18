@@ -7,7 +7,6 @@
 // de Ingeniería Inversa, Descompilación y Evasión de DRM.
 // [CORTEX-TAINT:borjamoskv:re_drm_1000_bft:2026-07-17T18:20:00Z]
 
-use blake3;
 use rusqlite::Connection;
 use strike_rs::TaintEngine;
 use std::fs;

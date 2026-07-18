@@ -6,7 +6,6 @@
 // Transducción y verificación empírica par-par en Rust de las 1000 Primitivas
 // Ontológicas de la Matriz Centuria.
 
-use blake3;
 use rusqlite::Connection;
 use strike_rs::TaintEngine;
 use std::fs;

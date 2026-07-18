@@ -1,10 +1,10 @@
-/// Ω₀ — The Irreducible Kernel of a Research Operating System
-///
-/// Formal identity: Ω₀ ≅ Hereditary Harrop fragment of intuitionistic logic
-///
-/// Kernel = {Statement⟨M⟩, Justification} × {derive, verify, optimize}
-///
-/// Two types. Three operators. Everything else is runtime.
+//! Ω₀ — The Irreducible Kernel of a Research Operating System
+//!
+//! Formal identity: Ω₀ ≅ Hereditary Harrop fragment of intuitionistic logic
+//!
+//! Kernel = {Statement⟨M⟩, Justification} × {derive, verify, optimize}
+//!
+//! Two types. Three operators. Everything else is runtime.
 
 // ──────────────────────────────────────────────────────────
 // TYPES
@@ -424,7 +424,7 @@ mod tests {
                 domain: "test".into(),
             },
         };
-        let once = optimize(&[js.clone()]);
+        let once = optimize(std::slice::from_ref(&js));
         let twice = optimize(&once);
         assert_eq!(once, twice);
     }

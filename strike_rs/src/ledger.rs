@@ -1,8 +1,8 @@
-/// VECTOR A.2: Master Ledger & ATMS Hardening
-///
-/// Elevates the append-only ledger into a verifiable Causal Hash Chain.
-/// Acts as a Transactional Local Ledger (SQLite WAL mode), reconstructing 
-/// the ATMS in-memory state via deterministic replay.
+//! VECTOR A.2: Master Ledger & ATMS Hardening
+//!
+//! Elevates the append-only ledger into a verifiable Causal Hash Chain.
+//! Acts as a Transactional Local Ledger (SQLite WAL mode), reconstructing 
+//! the ATMS in-memory state via deterministic replay.
 
 use crate::omega0::{JustifiedStatement, Statement, Justification};
 use rusqlite::{params, Connection, Result};
