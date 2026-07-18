@@ -46,7 +46,7 @@ class BFT_Ledger:
         )
 
     def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: Dict[str, str]) -> bool:
-        required_votes = (2 * f) + 1
+        required_votes = 3 * f + 1
         mutation_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
         valid_votes = sum(
             1 for node_id, sig in swarm_signatures.items() if self._verify_signature(node_id, mutation_hash, sig)

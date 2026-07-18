@@ -162,7 +162,7 @@ class CenturiaMetaTransducer:
                 combined = hashlib.sha3_256(left + right).digest()
                 next_level.append(combined)
             current_level = next_level
-        return current_level[0].hex()
+        return hashlib.sha3_256(current_level[0]).hexdigest()
 
 
 async def main():

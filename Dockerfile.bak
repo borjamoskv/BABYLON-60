@@ -35,4 +35,4 @@ RUN uv sync --frozen --no-dev
 COPY . .
 
 # Default ignition command
-CMD ["uv", "run", "python", "-m", "babylon60.cli.onco_transducer"]
+CMD ["uv", "run", "python", "-m", "cli.onco_transducer"]

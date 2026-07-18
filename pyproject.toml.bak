@@ -80,6 +80,8 @@ cortex-char-attest = "babylon60.cli.attest_character_count:main"
 [tool.setuptools.packages.find]
 include = ["babylon60*", "apex_trials*"]
 exclude = [
+    "babylon60.crypto",
+    "babylon60.crypto.*",
     "babylon60.extensions",
     "babylon60.extensions.*",
     "babylon60.utils",

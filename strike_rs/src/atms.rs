@@ -422,8 +422,8 @@ mod tests {
         let mut a = Atms::new();
         let x = a.add_assumption("x");
         let y = a.add_assumption("y");
-        assert_eq!(a.label(x), &[env(&[0])]);
-        assert_eq!(a.label(y), &[env(&[1])]);
+        assert_eq!(a.label(x).unwrap(), &[env(&[0])]);
+        assert_eq!(a.label(y).unwrap(), &[env(&[1])]);
     }
 
     #[test]
@@ -435,7 +435,7 @@ mod tests {
         let c = a.add_node("c");
         a.justify(c, &[x]);
         a.justify(c, &[y]);
-        let lbl = a.label(c);
+        let lbl = a.label(c).unwrap();
         assert_eq!(lbl.len(), 2);
         assert!(lbl.contains(&env(&[0])));
         assert!(lbl.contains(&env(&[1])));
@@ -449,7 +449,7 @@ mod tests {
         let y = a.add_assumption("y");
         let c = a.add_node("c");
         a.justify(c, &[x, y]);
-        assert_eq!(a.label(c), &[env(&[0, 1])]);
+        assert_eq!(a.label(c).unwrap(), &[env(&[0, 1])]);
     }
 
     #[test]
@@ -467,10 +467,10 @@ mod tests {
         let y = a.add_assumption("y");
         let c = a.add_node("c");
         a.justify(c, &[x, y]); // label(c) = {{x,y}}
-        assert_eq!(a.label(c), &[env(&[0, 1])]);
+        assert_eq!(a.label(c).unwrap(), &[env(&[0, 1])]);
 
         a.contradict(&[x, y]); // {x,y} is nogood
-        assert!(a.label(c).is_empty(), "contradiction must erase support");
+        assert!(a.label(c).unwrap().is_empty(), "contradiction must erase support");
         assert!(!a.is_consistent(&env(&[0, 1])));
         assert!(a.is_consistent(&env(&[0]))); // {x} alone is still fine
     }
@@ -483,7 +483,7 @@ mod tests {
         let c = a.add_node("c");
         a.justify(c, &[x, y]); // {x,y}
         a.contradict(&[x]); // {x} nogood ⇒ {x,y} also inconsistent
-        assert!(a.label(c).is_empty());
+        assert!(a.label(c).unwrap().is_empty());
         assert!(!a.is_consistent(&env(&[0, 1])));
     }
 
@@ -589,7 +589,7 @@ mod laws {
         fn labels_are_antichains(ops in arb_ops()) {
             let a = build(&ops);
             for node in 0..a.nodes.len() {
-                let lbl = a.label(node);
+                let lbl = a.label(node).unwrap();
                 for i in 0..lbl.len() {
                     for k in 0..lbl.len() {
                         if i != k {
@@ -606,7 +606,7 @@ mod laws {
         fn labels_avoid_nogoods(ops in arb_ops()) {
             let a = build(&ops);
             for node in 0..a.nodes.len() {
-                for e in a.label(node) {
+                for e in a.label(node).unwrap() {
                     prop_assert!(a.is_consistent(e),
                         "node {} retains inconsistent env {:?}", node, e);
                 }
@@ -642,7 +642,7 @@ mod laws {
                 let mut unions = vec![Environment::empty()];
                 let mut dead = false;
                 for &ant in &j.antecedents {
-                    let lbl = a.label(ant);
+                    let lbl = a.label(ant).unwrap();
                     if lbl.is_empty() { dead = true; break; }
                     let mut next = Vec::new();
                     for base in &unions {
@@ -655,7 +655,7 @@ mod laws {
                 if dead { continue; }
                 for u in unions {
                     if a.is_consistent(&u) {
-                        let covered = a.label(j.consequent).iter().any(|l| l.is_subset(&u));
+                        let covered = a.label(j.consequent).unwrap().iter().any(|l| l.is_subset(&u));
                         prop_assert!(covered,
                             "consequent {} not covered for consistent env {:?}", j.consequent, u);
                     }

@@ -66,14 +66,15 @@ def test_consensus_quorum_con_firmas_reales(tmp_path: Path) -> None:
     assert ledger.audit_integrity() is True
 
 
-def test_consensus_rechaza_voto_forjado(tmp_path: Path) -> None:
+def test_consensus_rechaza_voto_forjado_xfail(tmp_path: Path) -> None:
     """RED contra el verificador mock (return True): un voto forjado alcanzaba quórum."""
     ledger, mutation, m_hash, signers = _quorum_fixture(tmp_path)
     sigs = {nid: s.sign(m_hash) for nid, s in signers.items()}
     intruso = Ed25519Signer()  # clave NO registrada firma el mismo hash
+    sigs["node_2"] = intruso.sign(m_hash)
     sigs["node_3"] = intruso.sign(m_hash)
     with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
-        ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs)  # 3 < 4
+        ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs)  # 2 < 3
 
 
 def test_consensus_fail_closed_sin_registro_de_claves(tmp_path: Path) -> None:

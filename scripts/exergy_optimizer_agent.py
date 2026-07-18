@@ -4,7 +4,6 @@
 Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
-import os
 import sys
 from pathlib import Path
 
