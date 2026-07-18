@@ -1,16 +1,32 @@
 """
-BFT Orchestrator Module.
-Provides Byzantine Fault Tolerance consensus orchestration and immutable ledgering.
-"""
+bft_orchestrator — Byzantine Fault-Tolerant Consensus Orchestrator (C5-REAL / Ω17 / Ω26).
 
-__all__ = ["init_bft_database", "BFTNode", "BFTOrchestrator"]
+This module implements a 3-node virtual BFT consensus layer that:
+  - Routes action tuples (domain, primitive, modifier) through an asyncio Queue.
+  - Executes each tuple in parallel across N BFT replica nodes backed by the
+    Rust `strike_rs` extension (StateVector, CognitiveChainVector, TTSHarnessState).
+  - Reaches simple-majority consensus on the resulting SHA3-256 state hash.
+  - Commits accepted transitions to an immutable SQLite WAL ledger with
+    append-only triggers (Ω11 / R10).
+  - Detects and heals Byzantine outlier nodes by syncing state from a majority leader.
+
+Rule references: R10 (persistence), Ω11 (immutability), Ω17 (type annotations),
+                 Ω24 (SHA3-256 integrity), Ω26 (typed exceptions).
+"""
 
 import asyncio
 import sqlite3
 import hashlib
 import time
-from typing import Tuple, Dict, Any
+from typing import Any
 import strike_rs  # type: ignore[import-untyped]
+
+__all__ = [
+    "BFTNode",
+    "BFTOrchestrator",
+    "init_bft_database",
+    "DB_PATH",
+]
 
 # DB Concurrency & Persist Configurations (R10)
 DB_PATH = "cortex_bft_ledger.db"
@@ -117,22 +133,46 @@ class BFTOrchestrator:
         if not isinstance(num_nodes, int) or num_nodes < 1:
             raise ValueError("num_nodes must be a positive integer")
         init_bft_database()
-        self.queue: asyncio.Queue[Tuple[int, int, int]] = asyncio.Queue()
+        self.queue: asyncio.Queue[tuple[int, int, int]] = asyncio.Queue()
         self.nodes = [BFTNode(i) for i in range(num_nodes)]
         self.step_index = 0
         self.last_committed_hash = "GENESIS_HASH_00000000000000000000000000000000000000000000000000000"
         self.is_running = False
 
-    async def enqueue_task(self, d: int, p: int, m: int):
-        """Enqueues an action tuple to be processed asynchronously."""
-        if not all(isinstance(x, int) for x in (d, p, m)):
-            raise ValueError("Task arguments must be integers")
+    async def enqueue_task(self, d: int, p: int, m: int) -> None:
+        """Enqueues an action tuple (domain, primitive, modifier) for asynchronous BFT processing.
+
+        Args:
+            d: Domain index. Must be a non-negative integer.
+            p: Primitive index. Must be a non-negative integer.
+            m: Modifier index. Must be a non-negative integer.
+
+        Raises:
+            ValueError: If any argument is not a non-negative integer.
+        """
+        if not isinstance(d, int) or d < 0:
+            raise ValueError(f"enqueue_task: 'd' must be a non-negative integer, got {d!r}")
+        if not isinstance(p, int) or p < 0:
+            raise ValueError(f"enqueue_task: 'p' must be a non-negative integer, got {p!r}")
+        if not isinstance(m, int) or m < 0:
+            raise ValueError(f"enqueue_task: 'm' must be a non-negative integer, got {m!r}")
         await self.queue.put((d, p, m))
 
-    async def start_loop(self, max_steps: int = -1):
-        """Runs the main BFT State Loop consuming tasks from the asyncio.Queue."""
-        if not isinstance(max_steps, int):
-            raise ValueError("max_steps must be an integer")
+    async def start_loop(self, max_steps: int = -1) -> None:
+        """Runs the main BFT State Loop, consuming tasks from the asyncio.Queue.
+
+        Args:
+            max_steps: Maximum number of BFT steps to execute before stopping.
+                       Use -1 (default) for an unbounded run. Must be -1 or a
+                       positive integer.
+
+        Raises:
+            ValueError: If max_steps is zero or a negative integer other than -1.
+        """
+        if not isinstance(max_steps, int) or (max_steps != -1 and max_steps < 1):
+            raise ValueError(
+                f"start_loop: 'max_steps' must be -1 (unbounded) or a positive integer, got {max_steps!r}"
+            )
         self.is_running = True
         steps_executed = 0
         
@@ -150,7 +190,7 @@ class BFTOrchestrator:
             self.step_index += 1
             
             # 1. Parallel execution across all nodes via Rust strike_rs
-            hashes: dict[str, Any] = {}
+            hashes: dict[int, str] = {}
             for node in self.nodes:
                 if not node.is_healthy:
                     continue
@@ -162,16 +202,16 @@ class BFTOrchestrator:
                     
                     # Compute state hash
                     h = node.compute_state_hash()
-                    hashes[str(node.node_id)] = h
+                    hashes[node.node_id] = h
                 except (OSError, RuntimeError, ValueError) as e:
                     # Mark node as Byzantine/unhealthy if execution throws
                     node.is_healthy = False
                     print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
 
             # 2. BFT Consensus voting (N >= 3 consensus check)
-            hash_votes: dict[str, Any] = {}
+            hash_votes: dict[str, int] = {}
             for node_id, h in hashes.items():
-                hash_votes[str(h)] = hash_votes.get(str(h), 0) + 1
+                hash_votes[h] = hash_votes.get(h, 0) + 1
 
             if not hash_votes:
                 print("❌ Fatal: All nodes failed execution. Apoptosis triggered.")
@@ -195,11 +235,10 @@ class BFTOrchestrator:
                 
                 # Correct any Byzantine outlier node
                 for node in self.nodes:
-                    nid_str = str(node.node_id)
-                    if nid_str in hashes and hashes[nid_str] != majority_hash:
+                    if node.node_id in hashes and hashes[node.node_id] != majority_hash:
                         print(f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority.")
                         # Find a healthy node with the majority hash
-                        leader_node = next(n for n in self.nodes if hashes.get(str(n.node_id)) == majority_hash)
+                        leader_node = next(n for n in self.nodes if hashes.get(n.node_id) == majority_hash)
                         node.sync_from(leader_node)
             else:
                 print("❌ BFT consensus could not be reached! Splitting or fault limit exceeded.")
