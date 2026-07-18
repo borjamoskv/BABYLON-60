@@ -36,7 +36,7 @@ LEDGER_TABLES = [
 
 def _git(args: list[str]) -> str:
     result = subprocess.run(
-        ["git", *args],
+        ["git", "-c", "commit.gpgsign=false", *args],
         cwd=str(ROOT_DIR),
         capture_output=True,
         text=True,
@@ -63,13 +63,16 @@ def audit_git_entropy() -> dict[str, str | int | list[str]]:
 
 def audit_databases() -> dict[str, dict[str, int]]:
     census: dict[str, dict[str, int]] = {}
-    for db_name in DB_TARGETS:
-        db_path = ROOT_DIR / db_name
-        if not db_path.exists():
-            continue
+    db_paths = [
+        p for p in ROOT_DIR.rglob("*.db")
+        if not any(part in ("venv", ".venv", ".git", "__pycache__") for part in p.parts)
+    ]
+    for db_path in sorted(db_paths):
+        rel_name = str(db_path.relative_to(ROOT_DIR))
         try:
             conn = sqlite3.connect(str(db_path), timeout=2.0)
             conn.execute("PRAGMA journal_mode=WAL;")
+            conn.execute("PRAGMA busy_timeout=5000;")
             tables = [
                 t[0]
                 for t in conn.execute(
@@ -86,15 +89,17 @@ def audit_databases() -> dict[str, dict[str, int]]:
                 except sqlite3.OperationalError:
                     pass
             conn.close()
-            census[db_name] = counts
+            census[rel_name] = counts
         except sqlite3.DatabaseError:
-            census[db_name] = {"ERROR": -1}
+            census[rel_name] = {"ERROR": -1}
     return census
 
 
 def audit_ruff() -> dict[str, int]:
+    ruff_bin = ROOT_DIR / ".venv" / "bin" / "ruff"
+    cmd = [str(ruff_bin) if ruff_bin.exists() else "ruff", "check", ".", "--select", "E,F", "--statistics", "-q"]
     result = subprocess.run(
-        ["python3", "-m", "ruff", "check", ".", "--select", "E,F", "--statistics", "-q"],
+        cmd,
         cwd=str(ROOT_DIR),
         capture_output=True,
         text=True,
@@ -124,9 +129,22 @@ def audit_ruff() -> dict[str, int]:
 def audit_tests() -> dict[str, int | str]:
     tests_dir = ROOT_DIR / "tests"
     if not tests_dir.exists():
-        return {"test_files": 0, "status": "NO_TESTS_DIR"}
+        return {"test_files": 0, "status": "NO_TESTS_DIR", "passed": 0}
     test_files = list(tests_dir.rglob("test_*.py"))
-    return {"test_files": len(test_files), "status": "PRESENT"}
+    pytest_bin = ROOT_DIR / ".venv" / "bin" / "pytest"
+    cmd = [str(pytest_bin) if pytest_bin.exists() else "pytest", "-q", "--tb=no", "--disable-warnings"]
+    result = subprocess.run(cmd, cwd=str(ROOT_DIR), capture_output=True, text=True)
+    passed_count = 0
+    for line in result.stdout.splitlines():
+        if "passed" in line:
+            parts = line.split()
+            for i, p in enumerate(parts):
+                if p.startswith("passed") or (i + 1 < len(parts) and parts[i+1].startswith("passed")):
+                    try:
+                        passed_count = int(parts[i])
+                    except ValueError:
+                        pass
+    return {"test_files": len(test_files), "status": "PRESENT", "passed": passed_count}
 
 
 def crystallize_status(report: dict[str, object]) -> str:
@@ -187,7 +205,7 @@ def c5_real_colapso() -> None:
 
     # Phase 4: Tests
     test_report = audit_tests()
-    print(f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']}")
+    print(f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']} | Passed: {test_report.get('passed', 0)}")
 
     # Phase 5: Crystallize
     status_hash = crystallize_status({
