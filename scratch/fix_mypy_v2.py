@@ -1,5 +1,4 @@
 import os
-import re
 
 def fix_file(path):
     with open(path, 'r') as f:

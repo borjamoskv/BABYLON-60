@@ -1,4 +1,3 @@
-import pytest
 from cortex.swarm.reviewer_agent import evaluate_diff
 
 def test_reviewer_clean_diff() -> None:

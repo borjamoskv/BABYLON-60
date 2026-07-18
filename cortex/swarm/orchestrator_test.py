@@ -1,4 +1,3 @@
-import pytest
 from cortex.swarm.orchestrator import OrchestratorEngine
 
 def test_orchestrator_process_clean_issue() -> None:

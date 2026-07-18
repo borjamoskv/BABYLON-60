@@ -5,7 +5,7 @@ Motor físico determinista que implementa la arquitectura Vibe Code de 10 princi
 import os
 import hashlib
 import time
-from typing import Dict, Any, Tuple, Optional
+from typing import Dict, Tuple
 
 from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.sanitizer import ZeroTrustSanitizer

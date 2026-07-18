@@ -81,6 +81,7 @@ class BFTNode:
         self.state_vector = strike_rs.StateVector()
         self.cognitive_chain_vector = strike_rs.CognitiveChainVector()
         self.tts_harness_state = strike_rs.TTSHarnessState()
+        self.arm64_re_matrix = strike_rs.Arm64ReMatrix()
         self.is_healthy = True
 
     def compute_state_hash(self) -> str:
@@ -97,7 +98,9 @@ class BFTNode:
             f"language_entropy:{self.cognitive_chain_vector.language_entropy},"
             f"mcts_budget:{self.tts_harness_state.mcts_budget_tokens},"
             f"latent_value:{self.tts_harness_state.latent_value},"
-            f"kv_eff:{self.tts_harness_state.kv_cache_efficiency}"
+            f"kv_eff:{self.tts_harness_state.kv_cache_efficiency},"
+            f"arm64_pac:{self.arm64_re_matrix.pac_bypass_entropy},"
+            f"arm64_dyld:{self.arm64_re_matrix.dyld_cache_hit_rate}"
         )
         return hashlib.sha3_256(state_data.encode("utf-8")).hexdigest()
 
@@ -125,6 +128,12 @@ class BFTNode:
         self.tts_harness_state.kv_cache_efficiency = source_node.tts_harness_state.kv_cache_efficiency
         self.tts_harness_state.pruning_rate = source_node.tts_harness_state.pruning_rate
         self.tts_harness_state.execution_count = source_node.tts_harness_state.execution_count
+        
+        # Synchronize Arm64ReMatrix
+        self.arm64_re_matrix.execution_count = source_node.arm64_re_matrix.execution_count
+        self.arm64_re_matrix.pac_bypass_entropy = source_node.arm64_re_matrix.pac_bypass_entropy
+        self.arm64_re_matrix.dyld_cache_hit_rate = source_node.arm64_re_matrix.dyld_cache_hit_rate
+        self.arm64_re_matrix.amfi_enforcement_level = source_node.arm64_re_matrix.amfi_enforcement_level
         
         self.is_healthy = True
 
@@ -205,6 +214,7 @@ class BFTOrchestrator:
                 strike_rs.dispatch_state_observer(d, p, m, node.state_vector)
                 strike_rs.dispatch_neuro_chain(d, p, m, node.cognitive_chain_vector)
                 strike_rs.dispatch_tts_harness(d, p, m, node.tts_harness_state)
+                strike_rs.dispatch_arm64_re(d, p, m, node.arm64_re_matrix)
                 hashes[node.node_id] = node.compute_state_hash()
             except (OSError, RuntimeError, ValueError) as e:
                 node.is_healthy = False

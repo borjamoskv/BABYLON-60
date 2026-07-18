@@ -2,7 +2,6 @@
 C5-REAL Sovereign Swarm CLI Harness
 Interfaz de comandos unificada para orquestación, auditoría y control de desastres del Swarm.
 """
-import sys
 import os
 import argparse
 from cortex.swarm.engine_fsm import run_fsm_cycle

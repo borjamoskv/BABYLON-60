@@ -11,7 +11,8 @@ def itera_100():
     for i in range(100):
         try:
             # Silenciar stdout para evitar inundación de logs, excepto en errores
-            import sys, os
+            import sys
+            import os
             old_stdout = sys.stdout
             sys.stdout = open(os.devnull, 'w')
             

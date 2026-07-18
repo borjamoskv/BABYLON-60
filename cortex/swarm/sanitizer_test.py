@@ -1,4 +1,3 @@
-import pytest
 from cortex.swarm.sanitizer import ZeroTrustSanitizer
 
 def test_sanitizer_clean_input() -> None:

@@ -1,5 +1,4 @@
 import os
-import re
 
 def fix_generators_any():
     for root, dirs, files in os.walk("scripts"):

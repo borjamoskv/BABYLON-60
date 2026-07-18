@@ -1,6 +1,5 @@
 import concurrent.futures
 import time
-import sqlite3
 import sys
 from cortex.swarm.memory_store import AgentMemory
 
@@ -8,7 +7,7 @@ def worker(worker_id: int):
     try:
         memory = AgentMemory()
         start = time.perf_counter()
-        cortex_taint = memory.log(issue_id=worker_id, agent_role="STRESS_TESTER", action="FIRE", result="OK")
+        _ = memory.log(issue_id=worker_id, agent_role="STRESS_TESTER", action="FIRE", result="OK")
         elapsed = time.perf_counter() - start
         return ("OK", worker_id, elapsed)
     except Exception as e:

@@ -1,4 +1,3 @@
-import os
 import pytest
 from cortex.swarm.engine_fsm import SwarmFSM
 

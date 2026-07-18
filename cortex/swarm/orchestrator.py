@@ -2,9 +2,7 @@
 C5-REAL Swarm Orchestrator
 Transduce issues y tareas de GitHub en PRs autónomos procesados por la FSM y evaluados por el Architect Agent.
 """
-import os
-import sys
-from typing import Dict, Any, Tuple
+from typing import Dict, Any
 
 from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.engine_fsm import SwarmFSM

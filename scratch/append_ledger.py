@@ -1,4 +1,3 @@
-import os
 import sys
 
 LEDGER_PATH = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/mundo_f_ledger.yml"

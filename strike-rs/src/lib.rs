@@ -324,6 +324,9 @@ pub fn dispatch_tts_harness(d: u8, p: u8, m: u8, mut state: PyRefMut<TTSHarnessS
     Ok((code, name, state.harness_score))
 }
 
+mod arm64_re;
+use arm64_re::{Arm64ReMatrix, dispatch_arm64_re};
+
 // ==========================================
 // PYMOD PYFUNCTION SIGNATURE
 // ==========================================
@@ -333,9 +336,11 @@ fn strike_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<StateVector>()?;
     m.add_class::<CognitiveChainVector>()?;
     m.add_class::<TTSHarnessState>()?;
+    m.add_class::<Arm64ReMatrix>()?;
     m.add_function(wrap_pyfunction!(dispatch_state_observer, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_neuro_chain, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_tts_harness, m)?)?;
+    m.add_function(wrap_pyfunction!(dispatch_arm64_re, m)?)?;
     Ok(())
 }
 

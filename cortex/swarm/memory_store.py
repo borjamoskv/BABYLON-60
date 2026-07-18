@@ -1,7 +1,6 @@
-import os
 import sqlite3
 import hashlib
-from typing import Dict, Any, Optional
+from typing import Any
 from datetime import datetime, timezone
 
 class AgentMemory:
