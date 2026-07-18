@@ -1,9 +1,10 @@
 use fastembed::{EmbeddingModel, InitOptions, TextEmbedding};
 use rusqlite::{params, Connection, Result, OptionalExtension};
+use std::sync::Mutex;
 
 pub struct CortexLedger {
-    conn: Connection,
-    embedder: TextEmbedding,
+    conn: Mutex<Connection>,
+    embedder: Mutex<TextEmbedding>,
 }
 
 impl CortexLedger {
@@ -38,29 +39,31 @@ impl CortexLedger {
              );",
         )?;
 
-        let embedder = TextEmbedding::try_new(InitOptions {
-            model_name: EmbeddingModel::BGESmallENV15,
-            ..Default::default()
-        })
+        let embedder = TextEmbedding::try_new(InitOptions::new(EmbeddingModel::BGESmallENV15))
         .unwrap();
 
-        Ok(Self { conn, embedder })
+        Ok(Self {
+            conn: Mutex::new(conn),
+            embedder: Mutex::new(embedder),
+        })
     }
 
     pub fn write(&self, payload: &str, causal_taint: &str) -> Result<()> {
-        let vec = &self.embedder.embed(vec![payload], None).unwrap()[0];
+        let mut embedder = self.embedder.lock().unwrap();
+        let vec = &embedder.embed(vec![payload], None).unwrap()[0];
         let vec_bytes: Vec<u8> = vec.iter().flat_map(|f| f.to_le_bytes()).collect();
 
+        let conn = self.conn.lock().unwrap();
         // Transaction for atomic write
-        self.conn.execute("BEGIN IMMEDIATE", [])?;
+        conn.execute("BEGIN IMMEDIATE", [])?;
 
         // Lamport ordering: MAX(lamport_t) + 1
-        let mut stmt = self.conn.prepare("SELECT IFNULL(MAX(lamport_t), 0) FROM events")?;
+        let mut stmt = conn.prepare("SELECT IFNULL(MAX(lamport_t), 0) FROM events")?;
         let max_lamport: i64 = stmt.query_row([], |row| row.get(0))?;
         let new_lamport = max_lamport + 1;
 
         // Get prev_hash (cortex_taint of the highest lamport_t)
-        let mut stmt = self.conn.prepare("SELECT cortex_taint FROM events ORDER BY lamport_t DESC LIMIT 1")?;
+        let mut stmt = conn.prepare("SELECT cortex_taint FROM events ORDER BY lamport_t DESC LIMIT 1")?;
         let prev_hash: Option<String> = stmt.query_row([], |row| row.get(0)).optional()?;
 
         // Calculate cortex_taint using blake3
@@ -84,26 +87,26 @@ impl CortexLedger {
         let id = uuid::Uuid::new_v5(&uuid::Uuid::NAMESPACE_OID, new_cortex_taint.as_bytes()).to_string();
 
         // Check idempotency: If ID exists, silently ignore and rollback
-        let mut check_stmt = self.conn.prepare("SELECT 1 FROM events WHERE id = ?1")?;
+        let mut check_stmt = conn.prepare("SELECT 1 FROM events WHERE id = ?1")?;
         let exists: Option<i64> = check_stmt.query_row(params![id], |row| row.get(0)).optional()?;
         if exists.is_some() {
-            self.conn.execute("ROLLBACK", [])?;
+            conn.execute("ROLLBACK", [])?;
             return Ok(());
         }
 
         // Insert into events
-        self.conn.execute(
+        conn.execute(
             "INSERT INTO events (id, payload, lamport_t, cortex_taint, prev_hash) VALUES (?1, ?2, ?3, ?4, ?5)",
             params![id, payload, new_lamport, new_cortex_taint, prev_hash],
         )?;
 
         // Insert into vectors
-        self.conn.execute(
+        conn.execute(
             "INSERT INTO vectors (id, vec) VALUES (?1, ?2)",
             params![id, vec_bytes],
         )?;
 
-        self.conn.execute("COMMIT", [])?;
+        conn.execute("COMMIT", [])?;
 
         Ok(())
     }

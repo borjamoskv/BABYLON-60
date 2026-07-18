@@ -1,7 +1,6 @@
 use std::sync::Arc;
-use tokio::sync::Mutex;
 use std::time::Instant;
-use crate::ledger::CortexLedger;
+use crate::void::CortexLedger;
 use crate::dsp_clock;
 
 pub struct CognitiveDwell {
@@ -10,7 +9,7 @@ pub struct CognitiveDwell {
     pub is_paralyzed: bool,
 }
 
-pub async fn ignite_precognition_daemon(db_state: Arc<Mutex<CortexLedger>>) {
+pub async fn ignite_precognition_daemon(db_state: Arc<CortexLedger>) {
     println!("👁️ [PRECOGNITION] Motor de escáner de Exergía arrancado (10Hz).");
     let mut ticker = tokio::time::interval(std::time::Duration::from_millis(100));
     
@@ -31,9 +30,7 @@ pub async fn ignite_precognition_daemon(db_state: Arc<Mutex<CortexLedger>>) {
             println!("⚠️ [PRECOGNITION] Parálisis detectada en nodo: {}. Exergía cayendo.", focus_data.ast_node_id);
             println!("🌀 [ORBIT] Generando Shadow Branches (Superposición Cuántica)...");
             
-            let db = db_state.lock().await;
-            let _ = db.write("PRECOGNITION_EVENT", &format!("Parálisis en {}", focus_data.ast_node_id));
-            drop(db);
+            let _ = db_state.write("PRECOGNITION_EVENT", &format!("Parálisis en {}", focus_data.ast_node_id));
 
             // Simulación Asíncrona del Fix
             tokio::spawn(async move {

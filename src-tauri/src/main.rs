@@ -3,6 +3,10 @@
 pub mod void;
 pub mod ear;
 pub mod silence;
+pub mod llm_bridge;
+pub mod antigravity;
+pub mod dsp_clock;
+pub mod precognition;
 
 use std::sync::Arc;
 
@@ -23,11 +27,21 @@ impl Apex {
     }
 }
 
-// Execution: Initialization of the Trinity
+// Execution: Initialization of the Trinity & CORTEX Bridge
 #[tokio::main]
 async fn main() {
-    let state = Apex::init(); // Memory + Audio + Swarm
+    let state = Apex::init(); // Memory + Audio + Swarm + Antigravity
     
+    let bridge_state = state.void_state.clone();
+    tokio::spawn(async move {
+        llm_bridge::ignite_cortex_bridge(bridge_state).await;
+    });
+
+    let precog_state = state.void_state.clone();
+    tokio::spawn(async move {
+        precognition::ignite_precognition_daemon(precog_state).await;
+    });
+
     // Antigravity execution
     tauri::Builder::default()
         .manage(state)

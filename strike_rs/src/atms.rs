@@ -190,6 +190,11 @@ impl Atms {
         &self.nodes[node].datum
     }
 
+    /// Look up a node by its human-readable datum.
+    pub fn find_node_by_datum(&self, datum: &str) -> Option<NodeId> {
+        self.nodes.iter().position(|n| n.datum == datum)
+    }
+
     /// Whether a node is an assumption, and which one.
     pub fn assumption_of(&self, node: NodeId) -> Option<AssumptionId> {
         self.nodes[node].assumption

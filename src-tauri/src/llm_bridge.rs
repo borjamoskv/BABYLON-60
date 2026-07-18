@@ -1,8 +1,7 @@
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use std::sync::Arc;
-use tokio::sync::Mutex;
-use crate::ledger::CortexLedger;
+use crate::void::CortexLedger;
 use std::process::Command;
 use serde::Deserialize;
 
@@ -18,7 +17,7 @@ struct LlmTask {
     resp_tx: tokio::sync::oneshot::Sender<String>,
 }
 
-pub async fn ignite_cortex_bridge(db_state: Arc<Mutex<CortexLedger>>) {
+pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
     // Ω25: Zero static HMAC fallback invariant.
     let _bft_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
@@ -41,11 +40,9 @@ pub async fn ignite_cortex_bridge(db_state: Arc<Mutex<CortexLedger>>) {
             if std::fs::write(&mutation.target_file, &mutation.content).is_ok() {
                 
                 // 2. Sello en CORTEX Ledger
-                let db = db_for_writer.lock().await;
                 // INV_BFT_03: causal taint
                 let taint = format!("LLM_BRIDGE:{}", mutation.target_file);
-                let _ = db.write(&mutation.content, &taint);
-                drop(db);
+                let _ = db_for_writer.write(&mutation.content, &taint);
 
                 // 3. Git Sentinel Autosync (BFT)
                 let _ = Command::new("git").args(["add", &mutation.target_file]).output();
