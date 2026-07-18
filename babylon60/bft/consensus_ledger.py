@@ -54,7 +54,7 @@ class BFT_Ledger:
         if valid_votes < required_votes:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
         self.conn.execute(
-            "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
+            "INSERT OR IGNORE INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
             (mutation_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint),
         )
         return True

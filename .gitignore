@@ -99,3 +99,8 @@ domain_kernel/obj/
 *.npz
 *.dmg
 cortex/audits/*.yaml
+
+# SQLite databases (runtime artifacts)
+scripts/cib_async_ledger.db
+scripts/cib_master_ledger.db
+scripts/*.db

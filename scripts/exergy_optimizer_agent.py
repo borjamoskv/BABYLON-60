@@ -21,9 +21,9 @@ import time  # noqa: E402
 import subprocess  # noqa: E402
 
 # Invariants
-DB_PATH = Path(os.path.expanduser("~") + "/.babylon60/exergy_agent_ledger.db")
-VAULT_DIR = Path("~/.gemini/config/.cortex/memory_vault").expanduser()
-BRAIN_DIR = Path("~/.gemini/antigravity/brain").expanduser()
+DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
+VAULT_DIR = Path.home() / ".gemini/config/.cortex/memory_vault"
+BRAIN_DIR = Path.home() / ".gemini/antigravity/brain"
 
 @dataclass(frozen=True)
 class ExergyScore:

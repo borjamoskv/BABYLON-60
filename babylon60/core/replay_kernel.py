@@ -1,6 +1,7 @@
 import json
 import hashlib
 import time
+import sqlite3
 from typing import Any, Dict, Optional
 
 
@@ -41,7 +42,7 @@ class ReplayKernel:
     Este kernel decide qué propuesta entra al ledger.
     """
 
-    def __init__(self, db, policy_version: str):
+    def __init__(self, db: sqlite3.Connection, policy_version: str):
         self.db = db
         self.policy_version = policy_version
 

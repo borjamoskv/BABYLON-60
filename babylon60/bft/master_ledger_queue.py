@@ -77,10 +77,12 @@ class MasterLedgerQueue:
         await self.queue.put((query, parameters))
 
     async def shutdown(self) -> None:
-        await self.queue.put(None)
-        if self._writer_task and not self._writer_task.done():
-            await self._writer_task
-        if self.db:
-            await self.db.close()
+        try:
+            await self.queue.put(None)
+            if self._writer_task and not self._writer_task.done():
+                await self._writer_task
+        finally:
+            if self.db:
+                await self.db.close()
 
         logger.info("BFT Master Ledger Queue shut down cleanly.")

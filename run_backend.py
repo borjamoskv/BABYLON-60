@@ -5,6 +5,7 @@ Launcher script for the BABYLON60 IDE FastAPI backend.
 import os
 import sys
 import subprocess
+import signal
 
 # Ensure we are in the correct directory
 root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,6 +36,6 @@ try:
 except KeyboardInterrupt:
     print("\n🛑 Backend halted by Operator.")
     sys.exit(0)
-except Exception as e:
+except (OSError, RuntimeError) as e:
     print(f"\n❌ Failed to launch backend: {e}")
-    sys.exit(1)
+    os.kill(os.getpid(), signal.SIGKILL)

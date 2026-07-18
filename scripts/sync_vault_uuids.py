@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # C5-REAL: Memory Vault Session UUID Synchronizer
-import os
 import re
 from pathlib import Path
 

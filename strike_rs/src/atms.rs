@@ -25,6 +25,22 @@
 use crate::omega0::{Justification, JustifiedStatement, verify};
 use std::collections::BTreeSet;
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum AtmsError {
+    InvalidNode(NodeId),
+}
+
+impl std::fmt::Display for AtmsError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            AtmsError::InvalidNode(id) => write!(f, "Invalid node ID: {}", id),
+        }
+    }
+}
+
+impl std::error::Error for AtmsError {}
+
+
 pub type AssumptionId = usize;
 pub type NodeId = usize;
 
@@ -181,8 +197,8 @@ impl Atms {
 
     // ── queries ─────────────────────────────────────────────
 
-    pub fn label(&self, node: NodeId) -> &[Environment] {
-        &self.nodes[node].label
+    pub fn label(&self, node: NodeId) -> Result<&[Environment], AtmsError> {
+        self.nodes.get(node).map(|n| n.label.as_slice()).ok_or(AtmsError::InvalidNode(node))
     }
 
     /// The datum attached to a node (its human-readable content).

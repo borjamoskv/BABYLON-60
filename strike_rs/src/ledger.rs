@@ -136,7 +136,8 @@ impl MasterLedger {
         environment_id: &str,
     ) -> Result<String> {
         let statement_hash = Self::hash_statement(&js.statement);
-        let payload_json = serde_json::to_string(&js.justification).unwrap_or_else(|_| "{}".to_string());
+        let payload_json = serde_json::to_string(&js.justification)
+            .map_err(|e| rusqlite::Error::ToSqlConversionFailure(Box::new(e)))?;
         let justification_hash = Self::hash_justification(&js.justification, &payload_json);
         
         let assertion_seed = format!("{}:{}:{}", statement_hash, justification_hash, environment_id);
@@ -158,7 +159,8 @@ impl MasterLedger {
 
         let tx = self.conn.transaction()?;
 
-        let obligations_json = serde_json::to_string(&js.statement.obligations).unwrap_or_else(|_| "[]".to_string());
+        let obligations_json = serde_json::to_string(&js.statement.obligations)
+            .map_err(|e| rusqlite::Error::ToSqlConversionFailure(Box::new(e)))?;
         tx.execute(
             "INSERT OR IGNORE INTO statements (statement_hash, content, modality, obligations_json) VALUES (?1, ?2, ?3, ?4)",
             params![

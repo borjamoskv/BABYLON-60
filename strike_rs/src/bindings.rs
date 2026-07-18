@@ -92,7 +92,8 @@ impl CortexKernel {
             justification: Justification::Conjecture,
         };
         // Ensure statement is recorded in Master Ledger so nogood replay can find it
-        let _ = self.ledger.assert_knowledge(&js, environment_id);
+        self.ledger.assert_knowledge(&js, environment_id)
+            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
 
         let statement_hash = MasterLedger::hash_statement(&stmt);
         let taint = self.ledger.assert_nogood(&statement_hash, environment_id)

@@ -11,6 +11,7 @@ import datetime
 import hashlib
 import json
 import yaml
+from typing import List, Dict, Tuple, Any
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 ARCHIVE_ROOT = os.path.join(PROJECT_ROOT, ".cortex", "archive")
@@ -34,14 +35,14 @@ PROTECTED_FILES = {
     "io_persist_ledger.py", "net_mamba_ledger_engine.py", "index.html"
 }
 
-def ensure_dirs():
+def ensure_dirs() -> None:
     for d in [ARCHIVE_SCRIPTS, ARCHIVE_DATA, ARCHIVE_DBS]:
         os.makedirs(d, exist_ok=True)
 
-def categorize_and_move():
-    moved_count = 0
-    moved_bytes = 0
-    actions = []
+def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
+    moved_count: int = 0
+    moved_bytes: int = 0
+    actions: List[Dict[str, Any]] = []
 
     for item in os.listdir(PROJECT_ROOT):
         item_path = os.path.join(PROJECT_ROOT, item)
@@ -73,7 +74,7 @@ def categorize_and_move():
             
     return moved_count, moved_bytes, actions
 
-def main():
+def main() -> None:
     print("[*] C5-REAL: Iniciando Anergy Token Purge (Root Directory Entropy Collapse)...")
     ensure_dirs()
     count, total_bytes, actions = categorize_and_move()

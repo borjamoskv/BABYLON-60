@@ -4,6 +4,7 @@ import json
 import signal
 from datetime import datetime, timezone
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any, Dict, List
 
 # -----------------------------------------------------------------------------
@@ -29,7 +30,7 @@ class CortexOntologyLedger:
         self.project_id = project_id
         
         # Rutas físicas inmutables
-        self.base_dir = "/Users/borjafernandezangulo/.agent/memory"
+        self.base_dir = str(Path.home() / ".agent/memory")
         self.projects_dir = os.path.join(self.base_dir, "projects")
         self.ghosts_file = os.path.join(self.base_dir, "ghosts.json")
         self.system_file = os.path.join(self.base_dir, "system.json")
