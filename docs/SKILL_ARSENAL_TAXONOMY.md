@@ -78,7 +78,7 @@ Conserved_Quantity: Useful work per token consumed
 | # | Skill | Description |
 |:--|:------|:------------|
 | 31 | `Anergy_Token_Purge` | Motor de Purga Soberano. Fusiona Anergy-OMEGA, CAOS-OMEGA, Audit-OMEGA |
-| 32 | `OBLITERATOR_OMEGA_NODE` | Obliteración termodinámica de vectores de entropía. Matriz de 300 Primitivas |
+| 32 | `OBLITERATOR_OMEGA_NODE` | Obliteración termodinámica de vectores de entropía. Matriz de 896 Primitivas |
 | 33 | `MCTS_Budget_Forcer` | UltraThink Protocol V9.0. Cuantificación termodinámica y purga de MCTS ineficientes |
 | 34 | `Log_Crystallization_Parser` | Consolidación de logs de sesión. Extrae directivas → genera patches |
 | 35 | `Bash_Transcript_Evaluator` | Evaluador de trayectorias causales. Net Improvement, Steerability, Bash Recovery |
@@ -210,8 +210,8 @@ Conserved_Quantity: Useful work per token consumed
 
 | # | Skill | Description |
 |:--|:------|:------------|
-| 85 | `C5_REAL_Binary_Pool` | Arsenal Soberano. 100 primitivas APEX ejecutables |
-| 86 | `Centuria_Meta_Transducer` | Evolución de las 1000 primitivas APEX en operación determinista |
+| 85 | `C5_REAL_Binary_Pool` | Arsenal Soberano. 896 primitivas APEX ejecutables |
+| 86 | `Centuria_Meta_Transducer` | Evolución de las 896 primitivas APEX en operación determinista |
 | 87 | `Git_Merkle_Appender` | Protocolo Soberano de GitHub MCP. Mutaciones zero-entropy |
 | 88 | `Epistemic_Gatekeeper_Node` | Nodo interceptor previo a ejecución. Purga entropía semántica |
 

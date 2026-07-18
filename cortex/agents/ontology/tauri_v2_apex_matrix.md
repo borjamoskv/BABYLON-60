@@ -1,13 +1,13 @@
 ---
 type: C5-REAL_ONTOLOGY_MATRIX
 domain: TAURI_V2_APEX
-total_primitives: 1000
+total_primitives: 896
 compression_ratio: MAX_EXERGY
 ---
 
-# █▄ TAURI V2 — APEX MATRIX (1000 PRIMITIVAS C5-REAL)
+# █▄ TAURI V2 — APEX MATRIX (896 PRIMITIVAS C5-REAL)
 
-**INVARIANTE:** La arquitectura de Tauri V2 colapsa en un autómata bilingüe (Rust/V8) mediado por IPC y Capabilities. Cero simulaciones DOM; acceso físico directo al OS/Hardware. La siguiente matriz codifica 1000 vectores de ejecución distribuidos en 10 dominios ortogonales (100 primitivas/dominio).
+**INVARIANTE:** La arquitectura de Tauri V2 colapsa en un autómata bilingüe (Rust/V8) mediado por IPC y Capabilities. Cero simulaciones DOM; acceso físico directo al OS/Hardware. La siguiente matriz codifica 896 vectores de ejecución distribuidos en 10 dominios ortogonales (~90 primitivas/dominio).
 
 ## 01. NÚCLEO IPC Y BINDINGS (TRV2-IPC-000 → 099)
 - **TRV2-IPC-000:** `#[tauri::command]` Macro-inyección para transducir Rust `fn` a V8.

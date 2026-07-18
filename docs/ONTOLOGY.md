@@ -26,14 +26,14 @@ Si durante la fase de orquestación (`UltraThink`), el Enjambre o el Operador du
 
 ---
 
-## 4. LA MATRIZ DE LAS 1000 PRIMITIVAS DDD (Centuria Meta-Transducer)
-El Sistema MOSKV-1 APEX aloja un repositorio semántico de **1000 Primitivas de Domain-Driven Design**. A diferencia del DDD clásico (donde los componentes son meros objetos en memoria), en C5-REAL cada primitiva es un bloque termodinámico con un costo de ATP, una dirección en el Grafo Causal y una representación en el Ledger BFT.
+## 4. LA MATRIZ DE LAS 896 PRIMITIVAS DDD (Centuria Meta-Transducer)
+El Sistema MOSKV-1 APEX aloja un repositorio semántico de **896 Primitivas de Domain-Driven Design**. A diferencia del DDD clásico (donde los componentes son meros objetos en memoria), en C5-REAL cada primitiva es un bloque termodinámico con un costo de ATP, una dirección en el Grafo Causal y una representación en el Ledger BFT.
 
-### Clasificación Ontológica de la Matriz (000 - 999)
-- **[000 - 199] Entidades BFT (Entities):** Objetos mutables con Identidad Criptográfica persistente (ej. `BFTLedgerActor`). Deben tener un campo `lamport_t` y firmar sus mutaciones con `CORTEX_BFT_KEY`.
-- **[200 - 399] Objetos de Valor (Value Objects):** Estructuras algebraicas de datos (ADT) estrictamente inmutables (ej. `ProofOfRouteReceipt`). No tienen identidad; si dos Receipts tienen el mismo Hash, son el mismo objeto en RAM y en Disco (Isomorfismo Causal).
-- **[400 - 599] Agregados (Aggregates):** Clusters topológicos L0. Las mutaciones atómicas ocurren aquí. Un agregado no se comunica con otro agregado sin pasar por el Event Bus. Solo se bloquean mediante `tload`/`tstore` en EVM o `.venv` en Python aislando la red.
-- **[600 - 799] Eventos de Dominio (Domain Events):** Hechos inmutables que ya han ocurrido. (ej. `LedgerCrystallized`, `EntropyPurged`). Un evento jamás es rechazado; su ocurrencia es una Ley Física sobre disco.
-- **[800 - 999] Transductores de Dominio (Domain Services):** Binarios como `cortex-onco` o `cortex-bridge`. Orquestan lógicas complejas sin poseer estado propio. Si se apagan o mueren por saturación de Sockets (Límite Σ15), el sistema reinicia desde el último `Domain Event` del Ledger.
+### Clasificación Ontológica de la Matriz (000 - 895)
+- **[000 - 179] Entidades BFT (Entities):** Objetos mutables con Identidad Criptográfica persistente (ej. `BFTLedgerActor`). Deben tener un campo `lamport_t` y firmar sus mutaciones con `CORTEX_BFT_KEY`.
+- **[180 - 359] Objetos de Valor (Value Objects):** Estructuras algebraicas de datos (ADT) estrictamente inmutables (ej. `ProofOfRouteReceipt`). No tienen identidad; si dos Receipts tienen el mismo Hash, son el mismo objeto en RAM y en Disco (Isomorfismo Causal).
+- **[360 - 539] Agregados (Aggregates):** Clusters topológicos L0. Las mutaciones atómicas ocurren aquí. Un agregado no se comunica con otro agregado sin pasar por el Event Bus. Solo se bloquean mediante `tload`/`tstore` en EVM o `.venv` en Python aislando la red.
+- **[540 - 719] Eventos de Dominio (Domain Events):** Hechos inmutables que ya han ocurrido. (ej. `LedgerCrystallized`, `EntropyPurged`). Un evento jamás es rechazado; su ocurrencia es una Ley Física sobre disco.
+- **[720 - 895] Transductores de Dominio (Domain Services):** Binarios como `cortex-onco` o `cortex-bridge`. Orquestan lógicas complejas sin poseer estado propio. Si se apagan o mueren por saturación de Sockets (Límite Σ15), el sistema reinicia desde el último `Domain Event` del Ledger.
 
-El mapeo a esta topología de 1000 primitivas anula el 99% de las decisiones de diseño. Si un problema requiere solución, se busca la Primitiva DDD correspondiente, se ensambla en el AST y se ejecuta. **Cero Anergía.**
+El mapeo a esta topología de 896 primitivas anula el 99% de las decisiones de diseño. Si un problema requiere solución, se busca la Primitiva DDD correspondiente, se ensambla en el AST y se ejecuta. **Cero Anergía.**
