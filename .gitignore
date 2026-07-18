@@ -109,3 +109,21 @@ scripts/*.db
 babylon60_ide.db*
 **/babylon60_ide.db*
 
+# ============================================================
+# OPSEC-Ω TASKFORCE HARDENING (2026-07-19, ITERA-1)
+# Defensa en profundidad. Contexto y pruebas: docs/OPSEC_OMEGA_ITERA1.md
+# ============================================================
+# Bóveda privada (nunca versionar)
+20_VAULT/
+# Material criptográfico — jamás versionar
+*.pem
+*.key
+*.keystore
+*keypair*.json
+.cortex/*.hex
+.cortex/*.key
+.cortex/*keypair*
+# Baselines/reportes de escáneres de secretos — locales, no versionar
+.secrets.baseline
+gitleaks-report.json
+secret_audit.sarif
