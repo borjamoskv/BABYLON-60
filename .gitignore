@@ -3,6 +3,8 @@ target/
 src-tauri/target/
 node_modules/
 .ruff_cache/
+.mypy_cache/
+.pytest_cache/
 .vite/
 *.log
 *.tmp
@@ -21,3 +23,6 @@ cortex_bft_ledger.db*
 *.hi
 *.o
 primitives/Haskell1000Test
+
+# Scratch / temp artifacts (R9 — Anti-dirty-loop)
+scratch/
