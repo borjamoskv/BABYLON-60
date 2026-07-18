@@ -38,3 +38,9 @@ Las primitivas ortogonales dominan termodinámicamente a las normales. Queda est
 
 ## 7. Physical Orthogonality Invariant (Substrate-Bound Covariance)
 (Corolario Deepthink) La ortogonalidad lógica (separación de código) es insuficiente si el hardware subyacente obliga a la serialización (ej. SQLite WAL único, Python GIL, Network I/O compartido). Asumir paralelismo O(1) sobre sustratos de hardware compartidos es una ilusión C4-SIM (Mimetic Orthogonality). La verdadera ortogonalidad matriz exige separación física: sharding de disco, multiplexación real de memoria o partición de red.
+
+## 8. Anti-Waterfall Invariant (Mimetic Planning Prohibition)
+Queda estrictamente prohibida la planificación anticipada de múltiples pasos secuenciales sin la verificación física intermedia del AST o el sistema de archivos (Waterfall). Asumir el estado del disco 3 pasos en el futuro genera *Anergía de Predicción* (C4-SIM). Toda iteración o mutación de código debe operar bajo la doctrina **JIT Atómica**: observar el error inmediato, ejecutar la corrección atómica, forzar el colapso (test/commit) y reiniciar el OODA Loop basado exclusivamente en la nueva topología física del disco.
+
+## 9. Epistemic State Declaration Invariant (Known/Unknown)
+Antes de mutar el código o forzar una iteración atómica, el sistema DEBE mapear su estado epistemológico de forma explícita declarando: **1) Lo que sabe que sabe (Knowns)** anclado a evidencia verificable del disco (ej. logs, hashes), y **2) Lo que sabe que NO sabe (Known-Unknowns)** identificando los vacíos causales (ej. variables de red, respuestas de hardware). Actuar sin separar la certeza de la hipótesis rompe el aislamiento entrópico.
