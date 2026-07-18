@@ -61,3 +61,4 @@
 | 2026-07-18 | C5-REAL ULTRATHINK: Consolidación de 21 sessions al Memory Vault (`cortex_memory.db` WAL/busy_timeout) y motor de inferencia local (`src-tauri/src/inference.rs` + `backend/routes/inference.py`) con política Zero-Network | Git Sentinel `8f15fcddb` (188 tests, 144 linter files clean) |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `3c2ffa601578`) | Git Sentinel `c67f60428` |
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `79c453e457e2`) | Git Sentinel `41de4bfca` |
+| 2026-07-18 | C5-REAL ITERA: Anergy Token Purge (LEA-Ω). Colapso físico de entropía en el directorio raíz (57 ficheros y 195MB archivados en `.cortex/archive/`), restableciendo invariante estructural de `00_WORKSPACE.md` | `cortex/audits/anergy_purge_audit.yaml` (`08b9e1a47793`) |

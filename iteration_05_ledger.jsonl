@@ -1,1 +1,0 @@
-{"N_Primitives": 512, "Dimensions": 9, "Bit_Space_Hash_SHA256": "9f2182e29d90c1c8c9b7c64dcdfbbba470ed11dc6e4f5c06b418a85053eadc07", "Hamming_Distribution_From_Origin": {"0": 1, "1": 9, "2": 36, "3": 84, "4": 126, "5": 126, "6": 84, "7": 36, "8": 9, "9": 1}, "Thermodynamic_Boundary": "2^9 states exactly addressable without routing decay.", "Status": "C5-REAL"}
