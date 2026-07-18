@@ -114,3 +114,40 @@ module LedgerValidation =
                     state with Nodes = state.Nodes.Add(nodeId, newNode)
                 }
                 Ok (newState, newNode)
+
+    /// Trazado de ruta puramente funcional y recursivo de cola (Tail-Recursive)
+    let getPath (state: LedgerState) (headId: string) : Result<StateNode list, string> =
+        let rec loop currId acc =
+            if currId = state.GenesisId then
+                Ok acc
+            else
+                match state.Nodes.TryFind(currId) with
+                | Some node -> loop node.ParentId (node :: acc)
+                | None -> Error (sprintf "Fail-fast: Missing node in path trace: %s" currId)
+        loop headId []
+
+module LedgerTests =
+    open LedgerValidation
+
+    let runVerificationSuite () : unit =
+        let state0 = genesisLedger()
+        let payload1 = String.replicate 64 "a"
+        let payload2 = String.replicate 64 "b"
+
+        // 1. Insert Node 1
+        match validateAndAppend state0 state0.GenesisId "Node 1" payload1 with
+        | Error err -> failwithf "Test failed: Node 1 insertion error: %A" err
+        | Ok (state1, n1) ->
+            // 2. Insert Node 2 pointing to Node 1
+            match validateAndAppend state1 n1.NodeId "Node 2" payload2 with
+            | Error err -> failwithf "Test failed: Node 2 insertion error: %A" err
+            | Ok (state2, n2) ->
+                // 3. Trace path and assert length and order
+                match getPath state2 n2.NodeId with
+                | Error msg -> failwithf "Test failed: getPath trace error: %s" msg
+                | Ok path ->
+                    if path.Length <> 2 then
+                        failwithf "Test failed: expected path length 2, got %d" path.Length
+                    if path.[0].NodeId <> n1.NodeId || path.[1].NodeId <> n2.NodeId then
+                        failwith "Test failed: path nodes order or identity mismatch"
+                    printfn "✅ F# Domain Kernel: All native assertions passed."
