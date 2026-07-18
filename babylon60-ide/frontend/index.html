@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BABYLON·60 — Sovereign Agentic IDE</title>
+  <meta name="description" content="Agentic IDE for 2e (ADHD+AACC) developers. BFT ledger inspection, semantic graph, shadow branching, cognitive tachometer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles/babylon60.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       COGNITIVE TACHOMETER
+       3px ambient line: agent workload indicator
+       ADHD rationale: peripheral confirmation,
+       no intrusive notifications.
+       ══════════════════════════════════════════ -->
+  <div id="tachometer" class="tachometer" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════
+       COMMAND PALETTE (CMD+K)
+       Keyboard-first: eliminates visual hunting.
+       AACC rationale: fastest path to any action.
+       ══════════════════════════════════════════ -->
+  <div id="palette-overlay" class="palette-overlay" role="dialog" aria-label="Command Palette" aria-hidden="true">
+    <div class="palette-box">
+      <div class="palette-input-wrap">
+        <span class="palette-chevron">❯</span>
+        <input
+          id="palette-input"
+          class="palette-input"
+          type="text"
+          placeholder="Navigate, query, delegate..."
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <span class="palette-hint">ESC to close</span>
+      </div>
+      <div id="palette-results" class="palette-results"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCRATCHPAD (CMD+Shift+Space)
+       Mental dump without breaking flow.
+       TDAH rationale: externalizes working memory,
+       captures "thought bursts" instantly.
+       ══════════════════════════════════════════ -->
+  <div id="scratchpad-modal" class="scratchpad-modal" role="dialog" aria-label="Mental Scratchpad" aria-hidden="true">
+    <div class="scratchpad-header">
+      <span class="scratchpad-title">⬡ Scratchpad</span>
+      <button class="btn btn-icon" id="scratchpad-close" aria-label="Close scratchpad">✕</button>
+    </div>
+    <textarea
+      id="scratchpad-input"
+      class="scratchpad-textarea"
+      placeholder="Dump a thought, leave a note for the agent... (Enter to save)"
+      rows="3"
+      spellcheck="false"
+    ></textarea>
+    <div class="scratchpad-footer">
+      <span class="scratchpad-hint">↵ save · ESC close</span>
+      <button class="btn btn-primary" id="scratchpad-save" style="font-size:0.58rem; padding:3px 10px;">SAVE</button>
+    </div>
+    <div id="scratchpad-items" class="scratchpad-items"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       AGENT INTERVENTION MODAL
+       Body Doubling: proactive attention guard.
+       Drops from top when loop detected or
+       approval needed. Disappears after action.
+       ══════════════════════════════════════════ -->
+  <div id="agent-modal" class="agent-modal" role="dialog" aria-label="Agent Intervention" aria-hidden="true">
+    <div class="agent-modal-icon" id="agent-modal-icon">⬡</div>
+    <div class="agent-modal-msg" id="agent-modal-msg"></div>
+    <div class="agent-modal-actions" id="agent-modal-actions"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       MAIN APP — 3-ZONE ARCHITECTURE
+       ══════════════════════════════════════════ -->
+  <div id="app">
+
+    <!-- ZONE 1: SPINE — icon-only, 56px -->
+    <nav id="spine" class="spine" aria-label="Primary navigation">
+      <div class="spine-logo" aria-label="BABYLON 60">
+        <div class="spine-logo-dot"></div>
+      </div>
+      <!-- Icons injected by main.js -->
+    </nav>
+
+    <!-- ZONE 2: CONTEXT PANE — semantic map, collapsible -->
+    <aside id="context-pane" class="context-pane" aria-label="Context map">
+      <div class="context-pane-header">
+        <span class="context-pane-title">Context</span>
+        <button class="btn btn-icon" id="btn-collapse-ctx" aria-label="Collapse context pane" style="width:24px;height:24px;font-size:0.7rem;">⟨</button>
+      </div>
+      <div id="context-pane-body" class="context-pane-body"></div>
+    </aside>
+
+    <!-- ZONE 3: FOCUS ZONE — the ONE thing -->
+    <main id="focus-zone" class="focus-zone" aria-label="Focus area">
+      <!-- Focus header injected per route -->
+      <div id="focus-header" class="focus-header">
+        <span id="focus-breadcrumb" class="breadcrumb"></span>
+        <div class="focus-actions" id="focus-actions"></div>
+      </div>
+
+      <!-- Context restore banner (shown on return to project) -->
+      <div id="restore-banner" class="restore-banner" style="display:none;">
+        <span class="restore-banner-icon">↺</span>
+        <span id="restore-msg">Restoring last session context...</span>
+        <div class="restore-points" id="restore-points"></div>
+        <button class="btn btn-icon" id="restore-dismiss" style="width:20px;height:20px;font-size:0.6rem;">✕</button>
+      </div>
+
+      <!-- Main content area -->
+      <div id="main-content" class="focus-body">
+        <div class="loading-screen">
+          <div class="loading-logo">BABYLON·60</div>
+          <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+          <div class="loading-text">Initializing sovereign agentic IDE...</div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- STATUS BAR — single line of ground truth -->
+  <footer id="status-bar" class="status-bar" aria-label="Status bar">
+    <div class="status-segment">
+      <div class="status-dot" id="status-conn-dot"></div>
+      <span class="status-value" id="status-conn-text">CONNECTING</span>
+    </div>
+    <div class="status-segment">
+      <span style="color:var(--dust-ghost)">DBS</span>
+      <span class="status-value gold" id="status-db-count">—</span>
+    </div>
+    <div class="status-segment">
+      <span style="color:var(--dust-ghost)">LEDGER</span>
+      <span class="status-value lapis" id="status-ledger-entries">—</span>
+    </div>
+    <div class="status-segment" id="status-agent-segment" style="display:none;">
+      <div class="status-dot loading" id="status-agent-dot"></div>
+      <span class="status-value" id="status-agent-text">Agent working...</span>
+    </div>
+    <div class="status-spacer"></div>
+    <div class="status-segment">
+      <span style="color:var(--dust-ghost)">HEAP</span>
+      <span class="status-value" id="status-lamport">—</span>
+    </div>
+    <div class="status-segment">
+      <button class="status-bifocal" id="btn-bifocal" title="Toggle Macro/Micro mode (CMD+M)">MICRO ⊞</button>
+    </div>
+    <div class="status-segment">
+      <span style="color:var(--dust-ghost)">v1.1.0</span>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -206,6 +206,7 @@ const SPINE_ROUTES = [
   { id: 'swarm',     icon: '⚡',  label: 'Swarm',      tip: 'Agent Swarm (telemetría en vivo)  ⌘4' },
   { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación)  ⌘6' },
   { id: 'arena',     icon: '⚔',  label: 'Arena',      tip: 'Arena Matrix (Chatbot Arena)  ⌘7' },
+  { id: 'inference', icon: '◈',  label: 'Inference',  tip: 'Local Inference Console — ⌘8' },
 ];
 
 function setupSpine() {
@@ -723,7 +724,7 @@ function showRestoreBanner(lastRoute) {
    KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'arena' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'arena', '8': 'inference' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
@@ -754,6 +755,7 @@ function setupRouter() {
   registerRoute('swarm',     renderSwarmPage);
   registerRoute('sentinel',  renderSentinelPage);
   registerRoute('arena',     renderArenaPage);
+  registerRoute('inference', renderInferencePage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
@@ -2013,4 +2015,165 @@ function openConversationDetail(c) {
     </div>
   `;
   panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
+}
+
+async function renderInferencePage(container) {
+  onRouteEnter('inference');
+  setFocusHeader({
+    breadcrumb: setBreadcrumb('BABYLON·60', 'Local Inference Console'),
+    actions: `<span class="focus-badge live">LOCAL SILICON</span>`,
+  });
+
+  container.innerHTML = `
+    <div class="arena-layout" style="grid-template-columns: 1.15fr 0.85fr; gap: 16px;">
+      <!-- GENERATION CARD -->
+      <div class="card slide-in" style="margin-bottom:0; display:flex; flex-direction:column; gap:12px; height:100%;">
+        <div class="card-title">Sovereign Local Generation</div>
+        
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+          <div style="flex:1; min-width:200px;">
+            <label class="detail-field-label" for="inference-model-select">Target Silicon Model</label>
+            <select class="select" id="inference-model-select" style="width:100%;">
+              <option value="mamba">Native Mamba SSM (Integrated DAG Ledger)</option>
+            </select>
+          </div>
+          
+          <div style="width:100px;">
+            <label class="detail-field-label" for="inference-max-tokens">Max Tokens</label>
+            <input class="input" type="number" id="inference-max-tokens" value="30" min="5" max="100" style="width:100%; height:32px;">
+          </div>
+        </div>
+
+        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+          <label class="detail-field-label" for="inference-prompt">Prompt Input</label>
+          <textarea id="inference-prompt" placeholder="Type a prompt for local generation..." style="flex:1; min-height:100px; font-family:var(--body); padding:10px; background:rgba(0,0,0,0.3); border:1px solid var(--edge); border-radius:4px; color:var(--dust); resize:none;" spellcheck="false">Verification of local execution path</textarea>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.58rem; color:var(--dust-ghost)">zero_network=ON · Enforcing C5-REAL Zero-Network Policy</span>
+          <button class="btn btn-primary" id="btn-run-inference">▶ Generate</button>
+        </div>
+
+        <div style="flex:1.2; display:flex; flex-direction:column; gap:6px;">
+          <label class="detail-field-label">Generated Output</label>
+          <div id="inference-output" style="flex:1; min-height:120px; font-family:var(--mono); font-size:0.75rem; padding:10px; background:rgba(10,10,10,0.5); border:1px solid var(--edge); border-radius:4px; color:var(--dust-dim); overflow-y:auto; white-space:pre-wrap;">Output will appear here...</div>
+        </div>
+      </div>
+
+      <!-- AUDIT TRACE & LEDGER PANEL -->
+      <div style="display:flex; flex-direction:column; gap:16px; height:100%; overflow:hidden;">
+        <!-- STATS PANEL -->
+        <div class="card" style="padding:12px; margin-bottom:0;">
+          <div class="card-title" style="margin-bottom:8px;">Silicon Performance</div>
+          <div id="inference-meta" style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+            <div class="detail-field">
+              <span class="detail-field-label">Throughput</span>
+              <span class="detail-field-value" id="inference-tps">— tps</span>
+            </div>
+            <div class="detail-field">
+              <span class="detail-field-label">Latency</span>
+              <span class="detail-field-value" id="inference-latency">— ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAG LEDGER PANEL -->
+        <div class="arena-panel" style="flex:1; overflow:hidden; display:flex; flex-direction:column; margin-bottom:0;">
+          <div class="arena-panel-header">
+            <span>🛡 Tamper-Evident DAG Trace</span>
+          </div>
+          <div class="arena-panel-body" id="inference-dag-body" style="flex:1; overflow-y:auto; padding:12px; font-family:var(--mono); font-size:0.65rem;">
+            <div style="color:var(--dust-faint); text-align:center; padding:20px;">No generation trace logged. Run inference.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Fetch available Ollama models to populate dropdown
+  try {
+    const status = await get('/api/inference/local/status');
+    const select = document.getElementById('inference-model-select');
+    if (select && status && status.status === 'ONLINE' && status.models) {
+      status.models.forEach(m => {
+        const opt = document.createElement('option');
+        opt.value = `ollama:${m}`;
+        opt.textContent = `${m} (Ollama daemon)`;
+        select.appendChild(opt);
+      });
+    }
+  } catch (e) {
+    console.error("Failed to load local models:", e);
+  }
+
+  const runInference = async () => {
+    const select = document.getElementById('inference-model-select');
+    const prompt = document.getElementById('inference-prompt')?.value?.trim();
+    const maxTokens = parseInt(document.getElementById('inference-max-tokens')?.value || '30', 10);
+    const outputEl = document.getElementById('inference-output');
+    const tpsEl = document.getElementById('inference-tps');
+    const latencyEl = document.getElementById('inference-latency');
+    const dagBody = document.getElementById('inference-dag-body');
+
+    if (!prompt || !select) return;
+
+    setTachometer('working');
+    if (outputEl) outputEl.innerHTML = `<span style="color:var(--dust-faint);">Inference ignited...</span>`;
+    if (dagBody) dagBody.innerHTML = `<div style="color:var(--dust-faint); text-align:center; padding:20px;">Computing state transitions...</div>`;
+
+    const selectedModel = select.value;
+    const startTime = performance.now();
+
+    try {
+      let res;
+      if (selectedModel === 'mamba') {
+        res = await post('/api/inference/local/mamba/generate', { prompt, max_tokens: maxTokens });
+      } else {
+        const modelId = selectedModel.replace('ollama:', '');
+        res = await post('/api/inference/local/generate', { prompt, model: modelId, max_tokens: maxTokens });
+      }
+
+      const elapsed = Math.round(performance.now() - startTime);
+
+      if (outputEl) outputEl.textContent = res.text || "(empty response)";
+      if (tpsEl) tpsEl.textContent = `${res.tps ?? '—'} tps`;
+      if (latencyEl) latencyEl.textContent = `${res.latency_ms ?? elapsed} ms`;
+
+      // Render DAG trace if returned (Mamba native ledger)
+      if (dagBody) {
+        if (res.nodes && res.nodes.length > 0) {
+          dagBody.innerHTML = `
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              ${res.nodes.map((node, i) => `
+                <div style="border: 1px solid var(--edge); border-radius: 4px; padding: 6px; background: rgba(5,5,5,0.4);">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+                    <span style="color:var(--gold); font-weight:700;">Node #${i}</span>
+                    <span style="color:var(--verify); font-weight:700;">Verified</span>
+                  </div>
+                  <div style="color:var(--dust-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">ID: ${node.node_id.slice(0, 16)}...</div>
+                  <div style="color:var(--dust-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Parent: ${node.parent_id.slice(0, 16)}...</div>
+                  <div style="margin-top:4px; font-weight:700; color:var(--dust); border-top:1px dashed var(--edge); padding-top:4px;">Claim: "${escapeHtml(node.claim)}"</div>
+                </div>
+              `).join('<div style="text-align:center; color:var(--lapis-bright); font-size:0.8rem; margin:2px 0;">↓ parent link</div>')}
+            </div>
+          `;
+        } else {
+          dagBody.innerHTML = `
+            <div style="color:var(--dust-faint); text-align:center; padding:20px;">
+              No DAG trace returned for this model provider.
+              <div style="font-size:0.55rem; margin-top:4px; color:var(--dust-ghost);">Only Native Mamba SSM records state transitions into the GraphLedger.</div>
+            </div>
+          `;
+        }
+      }
+      setTachometer('done');
+      setTimeout(() => setTachometer('idle'), 2000);
+    } catch (err) {
+      if (outputEl) outputEl.innerHTML = `<span style="color:var(--break);">Error: ${escapeHtml(err.message)}</span>`;
+      if (dagBody) dagBody.innerHTML = `<div style="color:var(--break); text-align:center; padding:20px;">Failed to verify state trace.</div>`;
+      setTachometer('idle');
+    }
+  };
+
+  document.getElementById('btn-run-inference')?.addEventListener('click', runInference);
 }
