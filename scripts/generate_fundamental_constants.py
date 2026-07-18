@@ -1,43 +1,5 @@
 import os
-import re
-
-def parse_yaml(yaml_path):
-    with open(yaml_path, 'r') as f:
-        content = f.read()
-
-    domains, primitives, modifiers = {}, {}, {}
-    current_section = None
-    
-    for line in content.splitlines():
-        line = line.strip()
-        if not line or line.startswith('#') or line.startswith('Claim:') or line.startswith('Proof:') or line.startswith('Formula:'):
-            continue
-        if line.startswith('Domains_Context:'):
-            current_section = 'domains'
-            continue
-        elif line.startswith('Primitives_Action:'):
-            current_section = 'primitives'
-            continue
-        elif line.startswith('Modifiers_Constraint:'):
-            current_section = 'modifiers'
-            continue
-            
-        match = re.match(r'(\d+):\s*"([^"]+)"', line)
-        if match:
-            idx = int(match.group(1))
-            val = match.group(2)
-            if current_section == 'domains':
-                domains[idx] = val
-            elif current_section == 'primitives':
-                primitives[idx] = val
-            elif current_section == 'modifiers':
-                modifiers[idx] = val
-
-    assert len(domains) == 10, f"Expected 10 domains, got {len(domains)}"
-    assert len(primitives) == 10, f"Expected 10 primitives, got {len(primitives)}"
-    assert len(modifiers) == 10, f"Expected 10 modifiers, got {len(modifiers)}"
-    
-    return domains, primitives, modifiers
+from codegen_utils import parse_yaml  # noqa: E402
 
 def generate_go(domains, primitives, modifiers, output_path):
     lines = [
