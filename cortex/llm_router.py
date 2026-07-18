@@ -1,0 +1,127 @@
+import os
+import json
+import urllib.request
+from typing import Dict, Any, List, Optional
+
+class EpistemicHalt(Exception):
+    """Exclusión rígida de excepciones mudas (Ω26)."""
+    pass
+
+def parse_yaml_routes(filepath: str) -> List[Dict[str, Any]]:
+    """Parseador lineal de YAML sin dependencias para conservar ATP (Ω15)."""
+    if not os.path.exists(filepath):
+        raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
+        
+    routes = []
+    current_route: Dict[str, Any] = {}
+    
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f:
+            line_str = line.strip()
+            # Ignorar cabecera y comentarios
+            if not line_str or line_str.startswith("Claim") or line_str.startswith("Proof") or line_str.startswith("Base") or line_str.startswith("Confidence") or line_str.startswith("PrimaryVectors") or line_str.startswith("routes:"):
+                continue
+            
+            if line_str.startswith("- "):
+                if current_route:
+                    routes.append(current_route)
+                current_route = {}
+                line_str = line_str[2:]
+                
+            if ":" in line_str:
+                parts = line_str.split(":", 1)
+                key = parts[0].strip()
+                val = parts[1].strip()
+                
+                # Quitar comillas
+                if val.startswith('"') and val.endswith('"'):
+                    val = val[1:-1]
+                elif val.startswith('[') and val.endswith(']'):
+                    # Parsear listas de strings simples
+                    val = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
+                    
+                current_route[key] = val
+                
+    if current_route:
+        routes.append(current_route)
+        
+    return routes
+
+class C5LLMRouter:
+    """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""
+    def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml"):
+        self.routes = parse_yaml_routes(routes_path)
+        
+    def dispatch_inference(self, prompt: str, target_model: str) -> str:
+        """Enruta la petición buscando autarquía local y cascading a APIs gratuitas."""
+        errors = []
+        
+        # 1. Prioridad: Ollama Local (Autarquía Offline)
+        for route in self.routes:
+            if route.get("name") == "Ollama Local Engine" and target_model in route.get("models", []):
+                try:
+                    return self._call_ollama(route.get("url"), target_model, prompt)
+                except Exception as e:
+                    errors.append(f"Ollama ({target_model}) falló: {e}")
+                    
+        # 2. Cascada a Groq Console (Límites Gratuitos)
+        for route in self.routes:
+            if route.get("name") == "Groq Cloud Console" and os.getenv("GROQ_API_KEY"):
+                try:
+                    # Tomar el primer modelo disponible de la lista
+                    actual_model = route.get("models")[0] if route.get("models") else "llama3-70b-8192"
+                    url = f"{route.get('url')}/v1/chat/completions"
+                    return self._call_openai_compatible(url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt)
+                except Exception as e:
+                    errors.append(f"Groq ({route.get('name')}) falló: {e}")
+
+        # 3. Cascada a GitHub Models (Developer Free Tier)
+        for route in self.routes:
+            if route.get("name") == "GitHub Models" and os.getenv("GITHUB_TOKEN"):
+                try:
+                    actual_model = route.get("models")[0] if route.get("models") else "Llama-3-8B-Instruct"
+                    url = "https://models.inference.ai.azure.com/chat/completions"
+                    return self._call_openai_compatible(url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt)
+                except Exception as e:
+                    errors.append(f"GitHub Models falló: {e}")
+
+        # Si todas fallan, levantar pánico epistémico
+        error_msg = " // ".join(errors)
+        raise EpistemicHalt(f"Consenso de Inferencia fallido. Todas las rutas gratuitas fallaron. Errores: {error_msg}")
+
+    def _call_ollama(self, url: str, model: str, prompt: str) -> str:
+        req_data = json.dumps({
+            "model": model,
+            "prompt": prompt,
+            "stream": False
+        }).encode("utf-8")
+        
+        req = urllib.request.Request(
+            f"{url}/api/generate",
+            data=req_data,
+            headers={"Content-Type": "application/json"}
+        )
+        
+        with urllib.request.urlopen(req, timeout=5) as response:
+            res_data = json.loads(response.read().decode("utf-8"))
+            return res_data["response"]
+
+    def _call_openai_compatible(self, url: str, token: str, model: str, prompt: str) -> str:
+        req_data = json.dumps({
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.2
+        }).encode("utf-8")
+        
+        req = urllib.request.Request(
+            url,
+            data=req_data,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {token}"
+            }
+        )
+        
+        with urllib.request.urlopen(req, timeout=8) as response:
+            res_data = json.loads(response.read().decode("utf-8"))
+            return res_data["choices"][0]["message"]["content"]
