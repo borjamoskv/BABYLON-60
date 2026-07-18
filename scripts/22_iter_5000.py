@@ -33,7 +33,7 @@ def itera_5000():
                 run_fsm_cycle()
                 latencies.append(time.time() - t0)
                 success_count += 1
-            except Exception as e:
+            except (RuntimeError, OSError, ValueError) as e:
                 sys.stdout = old_stdout
                 print(f"\\n[ITERA-5000] FALLO ESTRUCTURAL EN CICLO {i + 1}: {e}")
                 failure_count += 1

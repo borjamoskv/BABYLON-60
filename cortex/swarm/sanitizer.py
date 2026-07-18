@@ -40,7 +40,7 @@ class ZeroTrustSanitizer:
                 for pattern in MALICIOUS_PATTERNS:
                     if pattern.search(decoded):
                         return False
-            except Exception:
+            except (ValueError, UnicodeDecodeError):
                 continue
         return True
 

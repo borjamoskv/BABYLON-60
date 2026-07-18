@@ -83,7 +83,7 @@ class AgentMemory:
             )
             self.conn.execute("COMMIT")
             return cortex_taint
-        except Exception:
+        except sqlite3.Error:
             self.conn.execute("ROLLBACK")
             raise
 

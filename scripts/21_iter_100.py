@@ -61,7 +61,7 @@ def itera_100() -> None:
             success_count += 1
             if (i + 1) % 10 == 0:
                 print(f"[ITERA-100] Ciclos completados: {i + 1}/100")
-        except Exception as e:
+        except (RuntimeError, OSError, ValueError) as e:
             sys.stdout = old_stdout
             print(f"[ITERA-100] FALLO ESTRUCTURAL EN CICLO {i + 1}: {e}")
             failure_count += 1

@@ -163,7 +163,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
                     "[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado."
                 )
 
-        except Exception as e:
+        except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as e:
             print(f"[ITERA-ULTRATHINK] FALLO ESTRUCTURAL EN CICLO {cycle_num}: {e}")
             failure_count += 1
             break

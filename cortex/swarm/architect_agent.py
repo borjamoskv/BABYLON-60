@@ -49,7 +49,7 @@ class ArchitectAgent:
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 tree = ast.parse(f.read(), filename=filepath)
-        except Exception:
+        except (OSError, SyntaxError):
             return []
 
         results: List[Tuple[str, int]] = []

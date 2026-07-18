@@ -75,7 +75,7 @@ def run_script(script_name: str) -> bool:
             )
             return False
 
-    except Exception as e:
+    except (OSError, ValueError, subprocess.SubprocessError) as e:
         print(f"💥 [CRITICAL] Excepción al lanzar {script_name}: {e}")
         return False
 

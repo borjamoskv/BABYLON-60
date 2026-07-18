@@ -2,6 +2,7 @@ import concurrent.futures
 import time
 import sys
 import os
+import sqlite3
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -18,7 +19,7 @@ def worker(worker_id: int):
         )
         elapsed = time.perf_counter() - start
         return ("OK", worker_id, elapsed)
-    except Exception as e:
+    except sqlite3.Error as e:
         return ("ERROR", worker_id, str(e))
 
 
