@@ -33,6 +33,12 @@ class OrchestratorEngine:
             "code": f"# Auto-generated patch for issue {issue_id}: {title}\ndef fix_issue(): pass",
             "diff": f"+++ src/patch_{issue_id}.py\n+ def fix_issue(): pass",
             "retries": 0,
+            "epistemic_matrix": {
+                "primitiva": "ORCHESTRATE_ISSUE",
+                "objetivo": f"Resolve issue {issue_id}",
+                "knowns": "Issue body exists and is sanitized",
+                "unknowns": "Diff validity",
+            },
         }
 
         state = "UNPROCESSED"

@@ -29,6 +29,20 @@ class SwarmFSM:
         is_valid, _ = self.sanitizer.validate(issue_body)
         return is_valid
 
+    def validate_epistemic_matrix(self, issue_id: int, payload: dict[str, Any]) -> bool:
+        """Aplica el Invariante [Ω9]: Matriz Epistémica de 4 Ejes."""
+        matrix = payload.get("epistemic_matrix")
+        if not matrix or not isinstance(matrix, dict):
+            self.memory.log(issue_id, "fsm", "epistemic_violation", "MISSING_MATRIX")
+            return False
+            
+        required_axes = {"primitiva", "objetivo", "knowns", "unknowns"}
+        if not required_axes.issubset(matrix.keys()):
+            self.memory.log(issue_id, "fsm", "epistemic_violation", "INCOMPLETE_AXES")
+            return False
+            
+        return True
+
     def transition_state(
         self, issue_id: int, current_state: str, payload: dict[str, Any]
     ) -> str:
@@ -40,6 +54,9 @@ class SwarmFSM:
             raise RuntimeError(
                 "CORTEX_KILL_SWITCH: Swarm execution physically halted by Operator."
             )
+
+        if not self.validate_epistemic_matrix(issue_id, payload):
+            return "DEAD_LETTER"
 
         retries = payload.get("retries", 0)
 
@@ -94,6 +111,12 @@ def run_fsm_cycle() -> None:
         "code": "print('ok')",
         "diff": "+++ docs.md",
         "retries": 0,
+        "epistemic_matrix": {
+            "primitiva": "AST_MUTATE",
+            "objetivo": "Fix typo in docs",
+            "knowns": "Typo is present",
+            "unknowns": "Exact line number",
+        },
     }
     state = "UNPROCESSED"
 
