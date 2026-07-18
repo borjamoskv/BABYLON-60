@@ -8,6 +8,17 @@ def itera_100():
     success_count = 0
     failure_count = 0
     
+    import hashlib
+    
+    def get_ledger_hash():
+        try:
+            with open("mundo_f_ledger.yml", "rb") as f:
+                return hashlib.sha256(f.read()).hexdigest()
+        except FileNotFoundError:
+            return None
+
+    last_hash = get_ledger_hash()
+
     for i in range(100):
         try:
             # Silenciar stdout para evitar inundación de logs, excepto en errores
@@ -20,6 +31,18 @@ def itera_100():
             
             sys.stdout.close()
             sys.stdout = old_stdout
+            
+            current_hash = get_ledger_hash()
+            if current_hash == last_hash:
+                print(f"[ITERA-100] Ω39 IDEMPOTENCY LOCK: Ciclo {i+1} fue Zero-Yield (Anergía). Abortando bucle O(1).")
+                break
+            else:
+                # El estado ha mutado (Gradiente Entrópico superado). Forzando Git Sentinel (Ω3).
+                os.system(f'git add . && git commit -m "chore(cortex): [ITERA-100] BFT State Collapse Cycle {i+1} - Hash: {current_hash[:8]}" > /dev/null 2>&1')
+                print(f"[ITERA-100] Mutación física confirmada en Ciclo {i+1}. Git Sentinel activado. Hash: {current_hash[:8]}")
+
+            last_hash = current_hash
+            
             success_count += 1
             if (i+1) % 10 == 0:
                 print(f"[ITERA-100] Ciclos completados: {i+1}/100")
