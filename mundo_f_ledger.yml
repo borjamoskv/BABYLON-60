@@ -8,3 +8,11 @@ Metrics:
   Total_Information: 14447.7238 bits
 Assertion: El texto fundacional de Mundo F (Arena) ha sido colapsado físicamente en una métrica de entropía.
 ---
+Ethos_Anchor: IDE_MCTS_THEOREM_GENERATED
+Timestamp: 2026-07-18T04:53:27+02:00
+Payload_Hash_SHA3_256: d37971456b79aa25dd1dc0890cdc809b9be7d452d3ff7239e5b639278549c4c4
+Metrics:
+  MCTS_Simulations: 10000
+  VNode_Sandbox: vnode-5
+Assertion: Inferencia L3 iterada sobre Sandbox efímero. Rama validada y anclada al BFT Ledger tras descartes silenciosos.
+---
