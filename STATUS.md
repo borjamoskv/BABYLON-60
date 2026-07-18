@@ -14,22 +14,23 @@
 - `github.com/borjamoskv/BABYLON-60` (HEAD `a289204`, público) es un **fork de publicación muerto**: historia NO relacionada con el linaje local. Verificado: `git cat-file -t a289204` → objeto inexistente en local; `merge-base --is-ancestor` → NOT-ANCESTOR.
 - Decisión: **canónico = linaje local.** El remoto queda pendiente de estado terminal — OPCIÓN A (borrar/reemplazar: aniquilación total de su entropía) u OPCIÓN B (purga quirúrgica y sigue vivo como corpus doc). Runbook: `COLLAPSE_P0.sh` (v2).
 
-## P0 — Exposición de claves — ROTACIÓN EJECUTADA (2026-07-18) · queda estado terminal del remoto
+## P0 — Exposición de claves — **CERRADO (2026-07-18)** · OPCIÓN A completada
 
-- El remoto trackea `.cortex/master_key.hex` (256-bit) y `.cortex/solana_keypair.json` en `a289204`, repo público → **ambas claves comprometidas por definición**.
+- El remoto trackeaba `.cortex/master_key.hex` (256-bit) y `.cortex/solana_keypair.json` en `a289204`, repo público → **ambas claves comprometidas por definición**.
 - **Rotación ejecutada (2026-07-18, C5-REAL):**
   - Wallet vieja verificada on-chain **vacía** (RPC mainnet: 0 SOL, 0 token accounts, 0 transacciones en su historia — pubkey vieja `CqrUNg4o…2yvb`) → nada que transferir; keypair viejo abandonado.
   - `master_key.hex` rotada (`openssl rand 32`, raw bytes, `chmod 600`). Verificado: 0 payloads `C5ENC:` en DBs locales → no requiere re-cifrado ni migración de hash-chain. Ningún código local lee el fichero (los consumidores usan env vars); verificado que ningún shell rc exporta `CORTEX_*`.
   - `solana_keypair.json` rotado (Ed25519 vía pynacl; nueva pubkey `HR36xxpL…thsU`, verificado round-trip desde disco). `chmod 600`.
-  - Viejas claves en `~/.cortex_p0_backup/` (fuera del árbol del repo, 700/600) por si la pubkey vieja resultara ser autoridad de algún programa desplegado desde otra wallet (improbable: 0 actividad on-chain).
-- El remoto trackea `20_VAULT/` (PKM/CRM/OSINT con individuos nombrados) → exposición de privacidad; purga incluida en el mismo rewrite.
-- El linaje local **jamás** trackeó claves ni vault (`git log --all -- <path>` vacío para los tres paths).
-- Secuencia: ~~rotar claves~~ ✅ → **OPCIÓN A elegida (2026-07-18)** → remoto **PRIVATIZADO** ✅ → borrado + republicación pendiente de scope.
-- **OPCIÓN A en curso (2026-07-18, C5-REAL):**
-  - Backups pre-aniquilación en `~/.cortex_p0_backup/`: `BABYLON-60-main-tip.tar.gz` (7,1 MB, tip de main `57282100`) y `BABYLON-60-corpus-a289204.tar.gz` (5,7 MB — verificado: 629 `.md`, incluye el corpus documental del fork muerto). El mirror completo (1,35 GB) no cabía en una sola ventana de clonado; los tarballs preservan el contenido de ambos árboles.
-  - `github.com/borjamoskv/BABYLON-60` → **PRIVATE** (verificado: acceso anónimo HTTP 404). Las claves y `20_VAULT/` ya NO son públicamente accesibles. 0 forks → sin copias externas del objeto `a289204` fuera de GitHub.
-  - **Bloqueo restante:** `gh repo delete` exige scope `delete_repo` (ausente en el token actual). Pendiente: `gh auth refresh -h github.com -s delete_repo` (humano, flujo navegador) → borrar repo → recrear → push del linaje canónico (`main`, 805+ commits, jamás trackeó claves ni vault) → secret scanning → decidir visibilidad final.
-  - Nota: `main` del remoto ya no apunta a `a289204` (movió a `57282100` vía pushes de agentes copilot); las claves viven en ramas `copilot/*`. El borrado del repo aniquila TODAS las ramas de un golpe — por eso A es superior a B.
+  - Viejas claves en `~/.cortex_p0_backup/` (fuera del árbol del repo, 700/600).
+- El remoto trackeaba `20_VAULT/` (PKM/CRM/OSINT con individuos nombrados) → aniquilado con el borrado del repo.
+- El linaje local **jamás** trackeó claves ni vault (`git log --all -- <path>` vacío para los tres paths; re-verificado antes del push).
+- **OPCIÓN A — COMPLETADA (2026-07-18, C5-REAL):**
+  - Backups pre-aniquilación en `~/.cortex_p0_backup/`: `BABYLON-60-main-tip.tar.gz` (7,1 MB, tip `57282100`) y `BABYLON-60-corpus-a289204.tar.gz` (5,7 MB — verificado: 629 `.md`).
+  - Remoto viejo **PRIVATIZADO** (404 anónimo) y luego **BORRADO** (`gh repo delete`, scope `delete_repo` concedido vía `gh auth refresh`). Todas las ramas `copilot/*` con las claves y `20_VAULT/` aniquiladas de un golpe. 0 forks.
+  - Repo **recreado** y linaje canónico publicado: push por chunks (857 commits, 1,03 GiB, 7+1 pushes) → remoto `main` = local `main` = `462d9c25ee` (paridad verificada). Se eliminó la regla global `url.git@github.com:.insteadof` (no había clave SSH en la máquina; restaurar con `git config --global url.git@github.com:.insteadOf https://github.com/`).
+  - Higiene pre-push: basura `tmp_obj_*` y `.keep` huérfano eliminados de `.git/objects`. Blobs mayores en historia: artefactos de build (`src-tauri/target`, `node_modules`) y `guarded_ledger.db` (74,5 MB, muestra strings: solo hashes/IDs — sin datos personales ni claves). Historia NO reescrita: los anchors OTS del Git Sentinel siguen válidos.
+  - gitleaks sobre árbol HEAD: 2 hallazgos = **2 falsos positivos** (`crypto.py` parámetro tipado sin material; `demo_exergy_poc.py` señuelo plantado dentro de un mock diff de test).
+  - Repo **PÚBLICO** de nuevo (HTTP 200) con **secret scanning + push protection ENABLED**. GitHub escanea la historia completa en background; `secret_audit.yml` corre como gate CI en cada push.
 
 ## Métricas medidas (no estimadas)
 
@@ -48,7 +49,7 @@
 ## Trabajo abierto (lo que NO está hecho)
 
 - [x] **P0**: rotación de master key + keypair Solana (ejecutada 2026-07-18 — ver §P0; wallet vieja vacía on-chain, sin C5ENC local → sin migraciones)
-- [ ] **P0**: estado terminal del remoto — OPCIÓN A o B + force-push/borrado
+- [x] **P0**: estado terminal del remoto — OPCIÓN A ejecutada (2026-07-18): remoto viejo borrado, linaje canónico republicado en `main` = `462d9c25ee`, secret scanning + push protection activos
 - [x] **Dedupe JSONs**: `fitted_weights.json` y `module_models.json` deduplicados en el path canónico `apex_trials/` (completado 2026-07-17).
 - [x] **Re-verificar FIND-001/002**: verificado que no aplican a la línea local; los ficheros vulnerables del remoto (`swarm/state_store.py`, Stripe webhooks) no existen en este linaje.
 - [x] **Triage de `.md`**: todos los md físicos están trackeados, ignorados en `.gitignore` (`.agents/`, `.pytest_cache/`, etc.) o pertenecen al submódulo Git `docs/aie-book`.
