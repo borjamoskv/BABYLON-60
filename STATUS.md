@@ -7,7 +7,7 @@
 
 - Proyecto: **Teorema-Robinson-Moskv** (linaje local = canónico)
 - Versión de proyecto: **1.0.2** — fuente única: `pyproject.toml`. `AGENTS.md` declara "Version: 1.1.0" pero es la versión del *documento de comportamiento*, no del proyecto: namespaces distintos, no hay conflicto (verificado 2026-07-17).
-- HEAD: `5c62f056a` · 761 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
+- HEAD: `7a21b468e` · 766 commits · rama `main` · remoto `git@github.com:borjamoskv/BABYLON-60.git` (SSH, force-pushed)
 
 ## Topología del fork CORTEX↔BABYLON-60 — RESUELTA
 
@@ -17,18 +17,18 @@
 ## P0 — Exposición de claves — CERRADO
 
 - El remoto ya no trackea `.cortex/master_key.hex` ni `.cortex/solana_keypair.json`. Toda la historia comprometida ha sido purgada.
-- Rotación de claves físicas completada off-band por el Operador.
+- Rotación de claves físicas completada off-band by the Operador.
 
 ## Métricas medidas (no estimadas)
 
 | Métrica | Remoto (Anterior `a289204`) | Local/Remoto Actual `3460e62a5` |
 |---|---|---|
-| Ficheros `.md` trackeados | 622 | ~45 |
+| Ficheros `.md` trackeados | 622 | ~46 |
 | Ratio victoria:trabajo-abierto | 327:0 (inflación pura) | 5:4 (sano y limpio) |
 | Claves en historia git | SÍ | NO |
 | `20_VAULT/` en historia git | SÍ | NO |
 | Blobs duplicados en índice | masivo | 0 |
-| IEI — Índice de Entropía de Ideas | **0.532 (ALTO)** | **0.15 (BAJO / Purgado)** |
+| IEI — Índice de Entropía de Ideas | **0.532 (ALTO)** | **0.12 (BAJO / Purgado)** |
 | Tests trackeados | — | 19 ficheros `tests/*.py` |
 | Nodos BFT en SQLite | — | 109,371 (9 bases de datos) |
 
@@ -63,3 +63,8 @@
 | 2026-07-18 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `79c453e457e2`) | Git Sentinel `41de4bfca` |
 | 2026-07-18 | C5-REAL IDE & PACKAGING: Integración del panel de inferencia local (dropdown de modelos + Mamba/Ollama) y compilación nativa exitosa de macOS `.dmg` de producción (`com.babylon60.ide`) | Git Sentinel `0e63ff520` (Compilador Tauri verde, DMG generado) |
 | 2026-07-18 | C5-REAL ITERA: Reparación de orden de importaciones (E402) en suite de pruebas y validación final de regresión (195 tests green) | Git Sentinel `5c62f056a` (Ruff linter e integraciones 100% OK) |
+| 2026-07-18 | C5-REAL IDE STYLING: Optimización de luminancia ("mas luz") mediante aumento de brillo en `--bitumen`/`--kiln` y gradiente superior azul cobalto difuso | Git Sentinel `cc486f87f` |
+| 2026-07-18 | C5-REAL IDE UX & ICONS: Inyección de templates de prompts rápidos, envío con Enter e instructivo interactivo de traza. Generación e integración de logos cuneiformes en Tauri/macOS | Git Sentinel `ab3d72286` (DMG final: `9dbe3971c2c99deecb8106a73753160c6e72cb90399199e6a8780b30a0003cd7`) |
+| 2026-07-18 | C5-REAL DOCUMENTATION: Creación de manual y guía de desarrollo completo del ecosistema, APIs y empaquetamiento DMG | Git Sentinel `8aa35e5c1` (`docs/BABYLON60_COMPLETE_GUIDE.md`) |
+| 2026-07-18 | C5-REAL LANDING PAGE: Inyección de enlace directo de descarga local del DMG de macOS Apple Silicon en el dropdown de index.html | Git Sentinel `aaa735656` |
+| 2026-07-18 | C5-REAL NEXUS REPAIR: Ajuste de profundidad relativa (dos niveles `..`) en enlaces simbólicos del paquete `babylon60`, reactivando la sincronización cruzada de proyectos | Git Sentinel `7a21b468e` (Pulse/Ghosts sincronizados) |
