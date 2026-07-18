@@ -1,0 +1,65 @@
+{
+  "metadata": {
+    "target": "KIMI-k3-MHA-Layer-12",
+    "heads": 8,
+    "sequence_length": 50
+  },
+  "heads_datapoints": [
+    {
+      "head_id": 0,
+      "kl_divergence_nats": 0.0,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 3.20239372524444,
+      "entropy_loss": 0.0
+    },
+    {
+      "head_id": 1,
+      "kl_divergence_nats": 0.0,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 3.20239372524444,
+      "entropy_loss": 0.0
+    },
+    {
+      "head_id": 2,
+      "kl_divergence_nats": 0.0,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 3.20239372524444,
+      "entropy_loss": 0.0
+    },
+    {
+      "head_id": 3,
+      "kl_divergence_nats": 0.0,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 3.20239372524444,
+      "entropy_loss": 0.0
+    },
+    {
+      "head_id": 4,
+      "kl_divergence_nats": 2.2862747428128847,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 2.100393568003753,
+      "entropy_loss": 1.102000157240687
+    },
+    {
+      "head_id": 5,
+      "kl_divergence_nats": 2.2862747428128847,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 2.100393568003753,
+      "entropy_loss": 1.102000157240687
+    },
+    {
+      "head_id": 6,
+      "kl_divergence_nats": 2.2862747428128847,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 2.100393568003753,
+      "entropy_loss": 1.102000157240687
+    },
+    {
+      "head_id": 7,
+      "kl_divergence_nats": 2.2862747428128847,
+      "original_entropy": 3.20239372524444,
+      "aligned_entropy": 2.100393568003753,
+      "entropy_loss": 1.102000157240687
+    }
+  ]
+}

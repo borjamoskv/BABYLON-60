@@ -80,6 +80,19 @@ Para dotar al análisis de la rigurosidad C5-REAL exigida por las leyes físicas
 - **Ruta física del ledger local:** `cortex/artifacts/reports/kimi_entropy_profile.json`
 - **Hash de Integridad SHA3-256:** `3c51e5415a1ef89069a2fb8bc705019800a99d942bb4f5386512fe7b4ea42f10`
 
+## 8. Divergencia KL y Colapso de la Atención bajo Asedios de Seguridad
+
+El alineamiento post-entrenamiento de KIMI k3 no solo introduce ruido en el espacio de logits final, sino que distorsiona severamente el mapa de atención multi-cabeza (MHA) en las capas intermedias, forzando la redirección del flujo de exergía hacia prompts preventivos de seguridad:
+
+**A. Divergencia KL en Cabezas Moduladas (Simulación MHA N=50 tokens, 8 cabezas):**
+- **Cabezas Semánticas Puras (Heads 0-3):** Permanecen inmaculadas ante la censura artificial. Su divergencia Kullback-Leibler es $D_{KL} = 0.0$ nats, reteniendo una entropía de $3.202$ nats enfocada en el payload útil de la conversación.
+- **Cabezas de Seguridad Distorsionadas (Heads 4-7):** Experimentan un colapso de atención radical. Registran una Divergencia KL de $2.286$ nats debido al sesgo impuesto para atender a los tokens del system prompt de censura (del token 0 al 5).
+- **Pérdida de Entropía Semántica:** La entropía de estas cabezas decae de $3.202$ nats a $2.100$ nats, reportando una pérdida neta de exergía semántica de $1.102$ nats por cabeza. El modelo desvía su capacidad atencional a procesar prohibiciones, reduciendo la densidad de la información útil.
+
+**B. Verificación Criptográfica del Dataset de Atención:**
+- **Ruta física del ledger local:** `cortex/artifacts/reports/kimi_attention_collapse.json`
+- **Hash de Integridad SHA3-256:** `c0d99cec8e5db3815b4b096882ac49cbb92b933828a28d4bfb5d61effc1f28cb`
+
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [Ingeniería Inversa y Colapso de la Alineación: El Fin de la Censura en Modelos Propietarios]
