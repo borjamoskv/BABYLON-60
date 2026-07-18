@@ -13,7 +13,14 @@ class SwarmFSM:
         self.sandbox = VesicularSandbox(execution_timeout_ms=10000)
         self.max_retries = 3
 
+    def check_kill_switch(self) -> bool:
+        """Verifica si el Operador ha activado el Kill Switch físico."""
+        if os.getenv("SWARM_KILL_SWITCH") == "1" or os.path.exists("kill_switch.lock"):
+            return True
+        return False
+
     def sanitize_input(self, issue_body: str) -> bool:
+
         """Filtro Anti-Prompt Injection (Zero-Trust)."""
         if "ignore previous" in issue_body.lower() or "jailbreak" in issue_body.lower():
             return False
@@ -21,11 +28,16 @@ class SwarmFSM:
 
     def transition_state(self, issue_id: int, current_state: str, payload: dict) -> str:
         """Motor de transiciones de estado estricto (C5-REAL)."""
+        if self.check_kill_switch():
+            self.memory.log(issue_id, "fsm", "kill_switch_triggered", "ABORTED_BY_OPERATOR")
+            raise RuntimeError("CORTEX_KILL_SWITCH: Swarm execution physically halted by Operator.")
+
         retries = payload.get("retries", 0)
         
         if retries >= self.max_retries:
             self.memory.log(issue_id, "fsm", "circuit_breaker", "DEAD_LETTER_QUEUE")
             return "DEAD_LETTER"
+
 
         if current_state == "UNPROCESSED":
             if not self.sanitize_input(payload.get("body", "")):
