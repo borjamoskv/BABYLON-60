@@ -1,0 +1,53 @@
+cortex_taint: "CORTEX-TAINT:borjamoskv:swarm_v4_blueprint:2026-07-18T10:36:10Z:cf23a890de894bc7"
+version: "4.0"
+architecture_name: "Sovereign Swarm Gatekeeper"
+fundamental_principle: "Autonomía operativa descentralizada 100%, con Gobernanza y Privilegio Mínimo (Zero-Trust) sobre la rama de producción."
+
+roles_and_permissions:
+  bots:
+    bot_triage:
+      scope: "issues, labels, project boards"
+      permissions: "write:issues"
+    bot_coder:
+      scope: "create feature branches, push changes, open PRs"
+      permissions: "write:contents (restricted to branches matching 'feature/*' and 'fix/*')"
+    bot_reviewer:
+      scope: "adversarial LLM review, comment, status checks validation"
+      permissions: "write:pull_requests, write:checks"
+    bot_release:
+      scope: "create tags, compile release assets, update changelogs"
+      permissions: "write:contents (releases)"
+    bot_security:
+      scope: "dependency monitoring, vulnerability analysis"
+      permissions: "read:contents, write:issues"
+    bot_deployer:
+      scope: "OIDC connection, temporal cloud authorization"
+      permissions: "read:contents, id-token:write"
+
+control_flow:
+  deterministic_gatekeeper: "GitHub Actions CI/CD es el juez inapelable. Si fallan linters, tests o auditorías de secretos, el código no avanza independientemente de la aprobación de los agentes."
+  risk_based_automerge:
+    low_risk:
+      scope: "Format, docs, additions to tests, version patches"
+      action: "Auto-merge si CI/CD y Bot-Reviewer están en PASS."
+    high_risk:
+      scope: "Infrastructure, DB migrations, cloud permissions, security modifications, API-breaking changes"
+      action: "Bloqueo de Auto-merge. Requiere aprobación manual de Operador (Humano)."
+
+resilience_mechanisms:
+  circuit_breaker:
+    max_retries: 3
+    action_on_fail: "DEAD_LETTER_QUEUE (Cierra issue, remueve etiquetas de automatización, alerta al Operador)."
+  kill_switch:
+    env_trigger: "SWARM_KILL_SWITCH=1"
+    file_trigger: "kill_switch.lock"
+    action: "Halt físico instantáneo de las transiciones de la FSM."
+  sandboxing:
+    runtime: "Docker / Vesicular MicroVM"
+    network: "disabled (network_disabled=True)"
+    memory_limit: "512m"
+
+anti_entropy:
+  architect_agent:
+    schedule: "Cron nocturno"
+    action: "Inspecciona radon/complexity. Abre issues internos y PRs exclusivos de refactorización pura (sin mutación de features)."
