@@ -1,6 +1,5 @@
 import sqlite3
 import os
-import sys
 
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")

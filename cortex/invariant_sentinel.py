@@ -5,7 +5,6 @@ Autonomously detects state drifts and updates invariants to prevent false halts.
 import os
 import sys
 import subprocess
-import re
 
 RULES_FILE = ".cursorrules"
 AGENTS_RULES = ".agents/auditor_c5_real.md"
@@ -55,7 +54,7 @@ def audit_and_align_invariants():
     if os.path.exists(RULES_FILE):
         try:
             with open(RULES_FILE, "r", encoding="utf-8") as f:
-                rules_content = f.read()
+                f.read()
             
             # Ejemplo: si hubiera una regla estricta sobre Python 3.12 y estamos en 3.14
             # actualizamos el patrón correspondientemente.

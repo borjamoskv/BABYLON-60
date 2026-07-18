@@ -1,11 +1,10 @@
-import os
 import sys
 import hashlib
 import math
 import ast
 import multiprocessing
 import collections
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Optional, Tuple
 import dataclasses
 
 # C5-REAL MCTS IDE INVARIANT (v2.0)
@@ -105,7 +104,7 @@ def enforce_ide_theorem_physical(intention: str) -> None:
         f.write(theorem.payload)
     
     # Cero prosa. Colapso causal.
-    sys.stdout.write(f"Claim: IDE_MCTS_PHYSICAL_THEOREM_GENERATED\n")
+    sys.stdout.write("Claim: IDE_MCTS_PHYSICAL_THEOREM_GENERATED\n")
     sys.stdout.write(f"Proof: {{ Base: {theorem.code_hash}, Entropy: {theorem.shannon_entropy:.4f}, AST_Nodes: {theorem.ast_nodes}, Confidence: C5-REAL, VNode: {theorem.ephemeral_vnode} }}\n")
 
 if __name__ == "__main__":

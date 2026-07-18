@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import json
-from cortex.llm_router import parse_yaml_routes, C5LLMRouter, EpistemicHalt
+from cortex.llm_router import parse_yaml_routes, C5LLMRouter
 
 class TestLLMRouter(unittest.TestCase):
     def test_parse_yaml_routes(self):

@@ -18,7 +18,6 @@ import asyncio
 import sqlite3
 import hashlib
 import time
-from typing import Any
 import strike_rs  # type: ignore[import-untyped]
 
 __all__ = [
