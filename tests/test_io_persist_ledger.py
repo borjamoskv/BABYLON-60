@@ -1,7 +1,6 @@
 # test_io_persist_ledger.py
 # Prefix: test_ (empirical falsification for the persistence layer)
 
-import os
 import pytest
 from core_graph_ledger import GraphLedger, core_calc_sha256
 from io_persist_ledger import LedgerPersist

@@ -3,7 +3,6 @@
 # Prefix: io_ (disk I/O operations, non-pure)
 
 import sqlite3
-from typing import Optional
 from core_graph_ledger import GraphLedger, StateNode
 
 
