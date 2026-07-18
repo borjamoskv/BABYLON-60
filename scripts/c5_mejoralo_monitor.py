@@ -38,8 +38,13 @@ def c5_real_colapso() -> None:
     if os.path.exists(db_path):
         try:
             with sqlite3.connect(db_path, timeout=5.0) as conn:
-                count = conn.execute("SELECT count(*) FROM master_ledger").fetchone()[0]
-                print(f"[✓] master_ledger.db conectado. Nodos de exergía: {count}")
+                tables_query = conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+                tables = [t[0] for t in tables_query]
+                exergy_nodes = 0
+                for table in ['master_ledger', 'ledger_entries', 'state_log', 'ledger']:
+                    if table in tables:
+                        exergy_nodes += conn.execute(f"SELECT count(*) FROM {table}").fetchone()[0]
+                print(f"[✓] master_ledger.db conectado. Nodos de exergía consolidados: {exergy_nodes}")
         except Exception as e:
             print(f"[!] SQLite Error: {e}")
             
