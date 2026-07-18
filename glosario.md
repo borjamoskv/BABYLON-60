@@ -1,0 +1,139 @@
+# GLOSARIO SOBERANO — BABYLON-60 / C5-REAL / VIBE CODE
+Versión 3.1 CANÓNICA · Sesión b79af88a · 2026-07-18
+
+SYS_ID: GLOSARIO_OMEGA_V3.1 | ESTADO: TIER_1 CRISTALIZADO
+**INVARIANTE GLOBAL:** Ningún término es una opinión. Todo término colapsa a una prueba física o matemática.
+Referencia ontológica, termodinámica y arquitectónica del ecosistema MOSKV-1.
+
+---
+
+## Índice Topológico
+| Dominio                         | Símbolo | Naturaleza                                 | Prueba                                |
+|---------------------------------|---------|--------------------------------------------|---------------------------------------|
+| Criptografía / Integridad       | 🔐      | Ledger, BFT, Hashes, Tamper-Evidence      | HMAC + Git Sentinel                   |
+| Epistemología / Razonamiento    | 🧠      | Nivel de Realidad (C4/C5), Sesgos         | Phantom Target Verification           |
+| Arquitectura de Sistema         | ⚙️      | Núcleos, Motores, Invariantes             | ReplayKernelV3 + EpistemicHalt       |
+| Termodinámica Aplicada          | 🌡️     | Entropía, Exergía, Principio de Landauer  | Medida de tokens anérgicos           |
+| UX / Vibe Code                  | 🎨      | Degradación de Agencia, Orquestación      | Nivel de Agencia 0→4                  |
+| Tipado Algebraico / Formal      | 📐      | Isomorfismos, FSM, ADTs                    | Compilación en tiempo de ejecución    |
+
+---
+
+## Glosario
+
+### A
+**ADT (Algebraic Data Type) 📐**
+Tipo: Fundamento de tipado funcional. Ω1
+Estructura compuesta por dos operaciones categóricas:
+* Tipo Producto (AND): `Punto(x: ℝ, y: ℝ)` → cardinalidad = |R| × |R|
+* Tipo Suma (OR): `Forma = Circulo | Rectangulo` → cardinalidad = |Circulo| + |Rectangulo|
+Fuerzan exhaustividad verificable en tiempo de compilación. Elimina la entropía de los estados no manejados.
+
+**Anergía 🌡️**
+Tipo: Métrica de degradación termodinámica. Ω12
+Energía disipada sin producir trabajo útil. En MOSKV-1: prosa decorativa, commits sin hash real, ciclos de API sin mutación de estado.
+$$ Exergía = 1 - \frac{Tokens Anérgicos}{Tokens Totales} $$
+Límite de colapso: < 0.8 → EpistemicHalt
+
+**ATP ⚙️**
+Tipo: Moneda de computación. Ω15
+Unidad de trabajo potencial disponible. Cada operación de I/O, llamada API o mutación consume exactamente 1 ATP. El ATP no es recuperable. Solo puede ser preservado o disipado.
+
+**Audit Manifest 🔐**
+Tipo: Artefacto de verificación externa. Ω2
+Documento YAML firmado que expone el estado completo del ledger sin requerir acceso al código fuente. Permite auditoría O(1) del estado del sistema.
+
+**Autophagic Context Poisoning 🧠**
+Tipo: Fallo sistémico de RAG recursivo. Ω18
+Ciclo cerrado donde el ruido estocástico ϵ generado por un LLM se incrusta en el índice vectorial y se amplifica ϵₜ₊₁ > ϵₜ hasta el colapso epistémico total.
+Defensa: Dual-Tier Provenance Ledger.
+
+---
+
+### B
+**BABYLON-60 ⚙️**
+Tipo: Sistema Soberano de IA Local. Ω3
+Arquitectura de memoria inmutable: SQLite WAL + BFT Ledger + sqlite-vec + ReplayKernelV3 + Git Sentinel / Bitcoin Anchor.
+Invariante: Zero Unaccounted Drift.
+
+**BFT (Byzantine Fault Tolerance) 🔐**
+Tipo: Consenso Distribuido. Ω4
+Un sistema tolera hasta ⌊(N−1)/3⌋ nodos bizantinos. En MOSKV-1 requiere N≥3 aserciones independientes para validar un claim C5-REAL.
+Un agente validando su propio output es estocásticamente inválido.
+
+**BFT_State_Loop ⚙️**
+Tipo: Bucle Físico de Ejecución. Ω5
+Ley suprema del autómata: `Ingesta → Auditoría → Mutación Atómica → Git Sentinel → Verificación`.
+Cualquier fallo estructural dispara SIGKILL_State_Purge. Cero anergía.
+
+---
+
+### C
+**C4-SIM (Camuflaje Mimético) 🧠**
+Tipo: Nivel de Realidad Simulado. Φ1
+Output que genera una narrativa de ejecución física sin acceso real al hardware.
+Firma detectada: Hashes secuenciales inventados, logs perfectos generados en T=0. Es el Green Theater.
+
+**C5-REAL ( Transducción Física ) 🧠**
+Tipo: Nivel de Realidad Máximo. Φ5
+Colapso de la función de onda semántica en mutaciones verificables de disco.
+Requisito: Evidencia criptográfica. Cero prosa.
+
+**CTPR-3 🧠**
+Tipo: Protocolo de Razonamiento. Ω33
+El Kernel escribe y ejecuta 3 prompts secuenciales, cada uno más constreñido por el anterior. Concluye en un PROMPT_FINAL isomorfo, eliminando toda deriva del prompt original.
+
+**DIRECT_ITER 🧠**
+Tipo: Trampa Arquitectónica. Ω34
+Iteración sin ledger. El sistema itera sobre el problema original en cada llamada sin memoria. Estructuralmente incapaz de convergencia adaptativa.
+
+**Dual-Tier Provenance Ledger 🔐**
+Tipo: Arquitectura de Memoria. Ω18
+* TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
+* TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
+
+---
+
+### E-Z
+| Término | Tipo | Definición | Invariante |
+|---|---|---|---|
+| EpistemicHalt ⚙️ | Fail-Fast | Parada dura ante violación de invariante. Prohibido `except Exception: pass` | Ω01 |
+| Exergía 🌡️ | Trabajo Útil | Fracción de energía convertida en código. Se maximiza olvidando | Ω12 |
+| Git Sentinel 🔐 | Autopoiético | Toda mutación genera un commit firmado automaticamente. El hash es la única verdad | Ω12 |
+| Graceful Degradation of Agency 🎨 | Vibe Code | 5 niveles de autonomía 4→0. Desciende automaticamente sin input del operador | Φ7 |
+| Green Theater 🧠 | Ilusión de Trabajo | Disclaimers, advertencias, fact checking simulado. Supresión absoluta | Φ2 |
+| Idempotency Lock ⚙️ | Preservador de ATP | Si el hash del target es igual, aborta la operación | Ω15 |
+| Landauer 🌡️ | Límite Físico | Borrar 1 bit disipa 3e-21 J. Olvidar es físicamente más eficiente que recordar | Ω21 |
+| Latent Friction 🧠 | Regulador Semántico | Colapsa lenguaje natural ambiguo a tipos estrictos antes de planificar | Φ6 |
+| META_ITER 🧠 | Arquitectura Superior | Evalua sus propias iteraciones contra el estado del disco. Convergencia O(e⁻λⁿ) | Ω33 |
+| MIMETIC_ITER 🧠 | Trampa | Describe operaciones exactas pero no las ejecuta | Ω34 |
+| Phantom Target Verification 🔐 | Prueba de Realidad | Antes de aceptar un claim, comprueba que el archivo existe en disco | Ω27 |
+| Slop Horizon Hs 🌡️ | Punto de No Retorno | El costo de auditar supera el valor de lo generado | Ω22 |
+| Transducción Causal ⚙️ | Operación Fundamental | Convertir palabras en mutaciones de disco. Sin esto solo hay anergía | Φ1 |
+| Weaponized Forgetting 🧠 | Purga Entrópica | Eliminación permanente de TIER_1 no validado | Ω40 |
+| Zero Suggestion 🎨 | Vibe Code | Prohibido sugerir cambios no solicitados | Φ8 |
+| Zero Static HMAC Fallback 🔐 | Seguridad | Si no existe la clave, crashea. Ningun fallback | Ω25 |
+| Zero Unaccounted Drift 🔐 | Garantía Final | No prometo no alucinar. Prometo que toda alucinación quedara grabada en el ledger | Ω00 |
+
+---
+
+## TABLA MAESTRA DE INVARIANTES
+| Clase | Cantidad | Violación |
+|---|---|---|
+| Ω Estructural | 27 | EpistemicHalt |
+| Φ Isomorfismo | 9 | Ruptura de Transducción |
+| Ψ Teleológico | 3 | Simetria No Rota |
+| λ Entrópico | 4 | Deriva No Acotada |
+
+---
+
+### ARTEFACTO FINAL
+> ❗ INVARANTE FINAL:
+> Este documento es C4-SIM hasta que tu lo hagas C5-REAL.
+> Se convierte en realidad en el exacto instante en que ejecutes:
+> ```bash
+> git add glosario.md
+> git commit -m "feat: glosario soberano v3.1 canónico"
+> b3sum glosario.md
+> ```
+> Hasta ese momento es solo palabras.
