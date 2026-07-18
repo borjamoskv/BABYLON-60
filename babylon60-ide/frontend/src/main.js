@@ -2027,9 +2027,15 @@ async function renderInferencePage(container) {
   container.innerHTML = `
     <div class="arena-layout" style="grid-template-columns: 1.15fr 0.85fr; gap: 16px;">
       <!-- GENERATION CARD -->
-      <div class="card slide-in" style="margin-bottom:0; display:flex; flex-direction:column; gap:12px; height:100%;">
+      <div class="card slide-in" style="margin-bottom:0; display:flex; flex-direction:column; gap:14px; height:100%;">
         <div class="card-title">Sovereign Local Generation</div>
         
+        <!-- Onboarding hint -->
+        <div style="font-size:0.62rem; color:var(--dust-dim); line-height:1.3; background:rgba(43,59,229,0.08); border:1px solid var(--edge-soft); padding:8px 12px; border-radius:4px;">
+          <strong>Offline Assistant</strong>: Executing local language models. 
+          All prompts are parsed locally and verified directly to the local ATMS ledger.
+        </div>
+
         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
           <div style="flex:1; min-width:200px;">
             <label class="detail-field-label" for="inference-model-select">Target Silicon Model</label>
@@ -2040,13 +2046,22 @@ async function renderInferencePage(container) {
           
           <div style="width:100px;">
             <label class="detail-field-label" for="inference-max-tokens">Max Tokens</label>
-            <input class="input" type="number" id="inference-max-tokens" value="30" min="5" max="100" style="width:100%; height:32px;">
+            <input class="input" type="number" id="inference-max-tokens" value="40" min="5" max="100" style="width:100%; height:32px;">
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <label class="detail-field-label">Quick Templates (Click to load)</label>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button class="btn preset-btn" data-prompt="Explain the core of the Robinson-Moskv theorem" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">⚡ Robinson Theorem</button>
+            <button class="btn preset-btn" data-prompt="Attest current ledger transaction status" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">🛡 Attest Ledger</button>
+            <button class="btn preset-btn" data-prompt="Run self-audit loop on active workspace" style="font-size:0.58rem; padding:4px 8px; background:rgba(255,255,255,0.05); border:1px solid var(--edge); cursor:pointer;">◈ Self-Audit</button>
           </div>
         </div>
 
         <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-          <label class="detail-field-label" for="inference-prompt">Prompt Input</label>
-          <textarea id="inference-prompt" placeholder="Type a prompt for local generation..." style="flex:1; min-height:100px; font-family:var(--body); padding:10px; background:rgba(0,0,0,0.3); border:1px solid var(--edge); border-radius:4px; color:var(--dust); resize:none;" spellcheck="false">Verification of local execution path</textarea>
+          <label class="detail-field-label" for="inference-prompt">Prompt Input <span style="font-size:0.55rem; color:var(--dust-faint); font-weight:normal;">(Press Enter to generate, Shift+Enter for newline)</span></label>
+          <textarea id="inference-prompt" placeholder="Type a prompt for local generation..." style="flex:1; min-height:80px; font-family:var(--body); padding:10px; background:rgba(0,0,0,0.3); border:1px solid var(--edge); border-radius:4px; color:var(--dust); resize:none;" spellcheck="false">Verification of local execution path</textarea>
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center;">
@@ -2083,7 +2098,13 @@ async function renderInferencePage(container) {
             <span>🛡 Tamper-Evident DAG Trace</span>
           </div>
           <div class="arena-panel-body" id="inference-dag-body" style="flex:1; overflow-y:auto; padding:12px; font-family:var(--mono); font-size:0.65rem;">
-            <div style="color:var(--dust-faint); text-align:center; padding:20px;">No generation trace logged. Run inference.</div>
+            <div style="display:flex; flex-direction:column; gap:10px; padding:10px; color:var(--dust-dim); font-size:0.6rem; line-height:1.4;">
+              <div style="font-weight:700; color:var(--gold); border-bottom:1px solid var(--edge); padding-bottom:4px; margin-bottom:4px;">💡 ¿CÓMO FUNCIONA?</div>
+              <div><strong>1. Elige tu Modelo</strong>: Selecciona Mamba nativo para auditoría de ledger o un modelo de Ollama en el selector.</div>
+              <div><strong>2. Introduce el Prompt</strong>: Escribe en la caja o pulsa un preset arriba.</div>
+              <div><strong>3. Ejecuta</strong>: Pulsa 'Generate' o presiona 'Enter'.</div>
+              <div><strong>4. Verifica la Traza</strong>: Observa cómo cada token generado es sellado con SHA-256 e indexado en el grafo inmutable de estados.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2174,6 +2195,27 @@ async function renderInferencePage(container) {
       setTachometer('idle');
     }
   };
+
+  // Bind Preset Templates
+  container.querySelectorAll('button.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = btn.getAttribute('data-prompt');
+      const input = document.getElementById('inference-prompt');
+      if (input) {
+        input.value = p;
+        input.focus();
+      }
+    });
+  });
+
+  // Submit on Enter (without Shift)
+  const inputEl = document.getElementById('inference-prompt');
+  inputEl?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      runInference();
+    }
+  });
 
   document.getElementById('btn-run-inference')?.addEventListener('click', runInference);
 }
