@@ -1,6 +1,5 @@
 import json
 import sqlite3
-import sys
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
