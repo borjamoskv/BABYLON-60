@@ -6,11 +6,13 @@ import os
 from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.sandbox import VesicularSandbox
 from cortex.swarm.reviewer_agent import evaluate_diff
+from cortex.swarm.sanitizer import ZeroTrustSanitizer
 
 class SwarmFSM:
     def __init__(self) -> None:
         self.memory = AgentMemory()
         self.sandbox = VesicularSandbox(execution_timeout_ms=10000)
+        self.sanitizer = ZeroTrustSanitizer()
         self.max_retries = 3
 
     def check_kill_switch(self) -> bool:
@@ -20,11 +22,10 @@ class SwarmFSM:
         return False
 
     def sanitize_input(self, issue_body: str) -> bool:
-
         """Filtro Anti-Prompt Injection (Zero-Trust)."""
-        if "ignore previous" in issue_body.lower() or "jailbreak" in issue_body.lower():
-            return False
-        return True
+        is_valid, _ = self.sanitizer.validate(issue_body)
+        return is_valid
+
 
     def transition_state(self, issue_id: int, current_state: str, payload: dict) -> str:
         """Motor de transiciones de estado estricto (C5-REAL)."""
