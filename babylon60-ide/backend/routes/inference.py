@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import time
 import urllib.request
+import urllib.parse
 import json
 from pathlib import Path
 from typing import Any
@@ -34,7 +35,8 @@ def validate_zero_network(url: str) -> None:
                 status_code=403,
                 detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
             )
-    if not lower.startswith("http://127.0.0.1") and not lower.startswith("http://localhost"):
+    parsed = urllib.parse.urlparse(lower)
+    if parsed.hostname not in ["127.0.0.1", "localhost", "::1"]:
         raise HTTPException(
             status_code=403,
             detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (127.0.0.1 / localhost)."
