@@ -385,3 +385,13 @@ Metrics:
   VNode_Sandbox: vnode-0
 Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempotency Lock evadido.
 ---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-19T14:56:12.396511+00:00
+Payload_Hash_SHA3_256: 8e1e572773a25695c5f8eb72ffda44a7d1f89f47c8e6d3c5b7b8481b31fcf4b4
+Metrics:
+  Shannon_Entropy: 5.1211
+  AST_Nodes: 8
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempotency Lock evadido.
+---
