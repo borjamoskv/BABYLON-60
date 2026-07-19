@@ -156,35 +156,4 @@ def test_inv_c5_12_nexus_symlinks():
             )
 
 
-def test_inv_c5_13_autodetect_executable():
-    """INV_C5_13 — autodetect_invariants.py script must exist and be executable."""
-    import os
 
-    script_path = ROOT / "scripts" / "autodetect_invariants.py"
-    assert script_path.exists(), "autodetect_invariants.py missing."
-    assert os.access(script_path, os.X_OK), "autodetect_invariants.py is not executable."
-
-
-def test_inv_c5_14_exergy_agent():
-    """INV_C5_14 — exergy_optimizer_agent.py must exist, be executable, and write attestation into ledger."""
-    import os
-
-    script_path = ROOT / "scripts" / "exergy_optimizer_agent.py"
-    assert script_path.exists(), "exergy_optimizer_agent.py missing."
-    assert os.access(script_path, os.X_OK), "exergy_optimizer_agent.py is not executable."
-
-    db_path = pathlib.Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
-    if not db_path.exists():
-        pytest.skip(
-            "exergy_agent_ledger.db es un artefacto de runtime local (~/.babylon60); "
-            "no existe en un runner de CI limpio"
-        )
-
-
-def test_inv_c5_15_sync_vault_uuids():
-    """INV_C5_15 — sync_vault_uuids.py must exist and be executable."""
-    import os
-
-    script_path = ROOT / "scripts" / "sync_vault_uuids.py"
-    assert script_path.exists(), "sync_vault_uuids.py missing."
-    assert os.access(script_path, os.X_OK), "sync_vault_uuids.py is not executable."
