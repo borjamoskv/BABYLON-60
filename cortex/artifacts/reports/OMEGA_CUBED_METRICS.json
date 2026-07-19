@@ -1,0 +1,14 @@
+{
+  "Raw_Counts": {
+    "Total_Operators": 1818,
+    "Pure_Operators": 894,
+    "Total_Modules": 588,
+    "Pure_Modules": 313
+  },
+  "Metrics": {
+    "Architectural_Purity_Index": 0.4917,
+    "Orthogonality_Index": 0.5323,
+    "Invariant_Density": 5.0,
+    "Compression_Ratio": 588.0
+  }
+}
