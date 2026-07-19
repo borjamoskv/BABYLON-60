@@ -1,0 +1,14 @@
+Claim: "ls-main AST Parser Invariant"
+Proof: 
+  Base: "Parseo determinista B-Tree vs Textual String Matching"
+  Range: "[O(1) Context Recovery, Cero Entropía Semántica]"
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Grep/Regex over code" -> "C4-SIM Anergy (Latent Frictional Heat)"
+  - "ls-main / AST Pointer" -> "C5-REAL Exergy (Physical Pointer)"
+Blast_Radius_Matrix:
+  Vector: "Reemplazo de parsers de texto por consultas AST nativas."
+  Blast_Radius: "Todo el espacio latente de Antigravity."
+  Target_Invariant: "Pointer-as-Physical (El colapso de la ambigüedad)."
+  Anergy_Risk: "High (si ls-main indexa node_modules, degenera en asfixia RAM)."
+CORTEX_TAINT: db37c7bde6605883a2dd07725c100ff2f0f4c4b75b932762610370cdc2383ae5
