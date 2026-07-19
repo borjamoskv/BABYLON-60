@@ -1,0 +1,584 @@
+{
+  "files_analyzed": 854,
+  "circular_dependencies": [
+    [
+      "babylon60.extensions.llm.sovereign",
+      "babylon60.extensions.thinking.orchestra_introspection",
+      "babylon60.extensions.thinking.orchestra"
+    ],
+    [
+      "babylon60.extensions.daemon.core",
+      "babylon60.extensions.daemon.healing"
+    ],
+    [
+      "babylon60.extensions.hypervisor.core",
+      "babylon60.extensions.hypervisor.handle"
+    ]
+  ],
+  "hotspots": [
+    {
+      "file": "babylon60/extensions/training/moskv1_dataset_compiler.py",
+      "score": 140,
+      "complexity": 132,
+      "fan_in": 3,
+      "fan_out": 2,
+      "loc": 962
+    },
+    {
+      "file": "babylon60/extensions/llm/provider.py",
+      "score": 119,
+      "complexity": 82,
+      "fan_in": 12,
+      "fan_out": 13,
+      "loc": 575
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_core.py",
+      "score": 117,
+      "complexity": 107,
+      "fan_in": 3,
+      "fan_out": 4,
+      "loc": 1069
+    },
+    {
+      "file": "babylon60/extensions/llm/router.py",
+      "score": 100,
+      "complexity": 61,
+      "fan_in": 14,
+      "fan_out": 11,
+      "loc": 457
+    },
+    {
+      "file": "babylon60/extensions/evolution/ast_mutators.py",
+      "score": 100,
+      "complexity": 98,
+      "fan_in": 1,
+      "fan_out": 0,
+      "loc": 323
+    },
+    {
+      "file": "babylon60/crypto/hash_registry.py",
+      "score": 94,
+      "complexity": 9,
+      "fan_in": 42,
+      "fan_out": 1,
+      "loc": 170
+    },
+    {
+      "file": "causal_isomorphism/parser_fsharp.py",
+      "score": 88,
+      "complexity": 81,
+      "fan_in": 3,
+      "fan_out": 1,
+      "loc": 595
+    },
+    {
+      "file": "babylon60/database/core.py",
+      "score": 82,
+      "complexity": 2,
+      "fan_in": 40,
+      "fan_out": 0,
+      "loc": 46
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/scan.py",
+      "score": 77,
+      "complexity": 67,
+      "fan_in": 3,
+      "fan_out": 4,
+      "loc": 575
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/heal.py",
+      "score": 75,
+      "complexity": 65,
+      "fan_in": 0,
+      "fan_out": 10,
+      "loc": 504
+    },
+    {
+      "file": "babylon60/extensions/daemon/models.py",
+      "score": 75,
+      "complexity": 2,
+      "fan_in": 36,
+      "fan_out": 1,
+      "loc": 354
+    },
+    {
+      "file": "babylon60/extensions/evo/_mutation_projectors.py",
+      "score": 69,
+      "complexity": 66,
+      "fan_in": 0,
+      "fan_out": 3,
+      "loc": 435
+    },
+    {
+      "file": "babylon60/extensions/daemon/alerts.py",
+      "score": 69,
+      "complexity": 66,
+      "fan_in": 1,
+      "fan_out": 1,
+      "loc": 391
+    },
+    {
+      "file": "babylon60/extensions/speculative/apotheosis.py",
+      "score": 69,
+      "complexity": 53,
+      "fan_in": 0,
+      "fan_out": 16,
+      "loc": 370
+    },
+    {
+      "file": "babylon60/extensions/training/verifier.py",
+      "score": 68,
+      "complexity": 64,
+      "fan_in": 2,
+      "fan_out": 0,
+      "loc": 374
+    },
+    {
+      "file": "babylon60/extensions/thinking/orchestra.py",
+      "score": 66,
+      "complexity": 45,
+      "fan_in": 6,
+      "fan_out": 9,
+      "loc": 503
+    },
+    {
+      "file": "babylon60/extensions/alma/taste.py",
+      "score": 64,
+      "complexity": 59,
+      "fan_in": 2,
+      "fan_out": 1,
+      "loc": 590
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_cli.py",
+      "score": 62,
+      "complexity": 58,
+      "fan_in": 0,
+      "fan_out": 4,
+      "loc": 501
+    },
+    {
+      "file": "babylon60/extensions/aether/tools.py",
+      "score": 61,
+      "complexity": 39,
+      "fan_in": 9,
+      "fan_out": 4,
+      "loc": 355
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/swarm.py",
+      "score": 60,
+      "complexity": 50,
+      "fan_in": 2,
+      "fan_out": 6,
+      "loc": 485
+    }
+  ],
+  "top_50_complex": [
+    {
+      "file": "babylon60/extensions/training/moskv1_dataset_compiler.py",
+      "complexity": 132
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_core.py",
+      "complexity": 107
+    },
+    {
+      "file": "babylon60/extensions/evolution/ast_mutators.py",
+      "complexity": 98
+    },
+    {
+      "file": "babylon60/extensions/llm/provider.py",
+      "complexity": 82
+    },
+    {
+      "file": "causal_isomorphism/parser_fsharp.py",
+      "complexity": 81
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/scan.py",
+      "complexity": 67
+    },
+    {
+      "file": "babylon60/extensions/evo/_mutation_projectors.py",
+      "complexity": 66
+    },
+    {
+      "file": "babylon60/extensions/daemon/alerts.py",
+      "complexity": 66
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/heal.py",
+      "complexity": 65
+    },
+    {
+      "file": "babylon60/extensions/training/verifier.py",
+      "complexity": 64
+    },
+    {
+      "file": "babylon60/extensions/llm/router.py",
+      "complexity": 61
+    },
+    {
+      "file": "scripts/objectives_manager.py",
+      "complexity": 60
+    },
+    {
+      "file": "babylon60/extensions/alma/taste.py",
+      "complexity": 59
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_cli.py",
+      "complexity": 58
+    },
+    {
+      "file": "babylon60/extensions/speculative/apotheosis.py",
+      "complexity": 53
+    },
+    {
+      "file": "scripts/romance_common.py",
+      "complexity": 51
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/swarm.py",
+      "complexity": 50
+    },
+    {
+      "file": "babylon60/extensions/music_engine/midi_engine.py",
+      "complexity": 49
+    },
+    {
+      "file": "babylon60/extensions/forensic/predictive_healer.py",
+      "complexity": 49
+    },
+    {
+      "file": "scripts/exergy_optimizer_agent.py",
+      "complexity": 47
+    },
+    {
+      "file": "babylon60/extensions/agents/registry.py",
+      "complexity": 46
+    },
+    {
+      "file": "babylon60/extensions/ha/raft.py",
+      "complexity": 46
+    },
+    {
+      "file": "babylon60/extensions/speculative/keter.py",
+      "complexity": 46
+    },
+    {
+      "file": "babylon60/extensions/forensic/anomaly_hunter.py",
+      "complexity": 46
+    },
+    {
+      "file": "babylon60/extensions/ui_control/accessibility.py",
+      "complexity": 45
+    },
+    {
+      "file": "babylon60/extensions/thinking/orchestra.py",
+      "complexity": 45
+    },
+    {
+      "file": "babylon60/extensions/genesis/assembler.py",
+      "complexity": 45
+    },
+    {
+      "file": "babylon60/extensions/llm/_presets.py",
+      "complexity": 44
+    },
+    {
+      "file": "babylon60/extensions/evo/_genome_mutator.py",
+      "complexity": 44
+    },
+    {
+      "file": "babylon60/crypto/keys.py",
+      "complexity": 43
+    },
+    {
+      "file": "babylon60/extensions/git/poet.py",
+      "complexity": 43
+    },
+    {
+      "file": "causal_isomorphism/emitter_rust.py",
+      "complexity": 43
+    },
+    {
+      "file": "babylon60/genomics/engine.py",
+      "complexity": 42
+    },
+    {
+      "file": "babylon60/extensions/scraper/extractors.py",
+      "complexity": 42
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/antipatterns.py",
+      "complexity": 42
+    },
+    {
+      "file": "causal_isomorphism/emitter_solidity.py",
+      "complexity": 42
+    },
+    {
+      "file": "babylon60/extensions/swarm/ast_validator.py",
+      "complexity": 41
+    },
+    {
+      "file": "babylon60/extensions/agents/neural.py",
+      "complexity": 41
+    },
+    {
+      "file": "babylon60/extensions/daemon/event_loop.py",
+      "complexity": 41
+    },
+    {
+      "file": "babylon60/extensions/evo/healing_stack.py",
+      "complexity": 40
+    },
+    {
+      "file": "babylon60/extensions/context/collector.py",
+      "complexity": 40
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+      "complexity": 40
+    },
+    {
+      "file": "anvil_yung/lib/forge-std/scripts/vm.py",
+      "complexity": 39
+    },
+    {
+      "file": "babylon60/extensions/aether/tools.py",
+      "complexity": 39
+    },
+    {
+      "file": "babylon60/extensions/swarm/centauro_engine.py",
+      "complexity": 38
+    },
+    {
+      "file": "babylon60/extensions/evolution/strategies.py",
+      "complexity": 38
+    },
+    {
+      "file": "babylon60/extensions/evolution/operations_mixin.py",
+      "complexity": 38
+    },
+    {
+      "file": "babylon60/extensions/llm/grok_client.py",
+      "complexity": 36
+    },
+    {
+      "file": "babylon60/extensions/training/collector.py",
+      "complexity": 36
+    },
+    {
+      "file": "babylon60/extensions/swarm/manager.py",
+      "complexity": 35
+    }
+  ],
+  "top_50_loc": [
+    {
+      "file": "babylon60/oncology_primitives.py",
+      "loc": 3756
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_core.py",
+      "loc": 1069
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_dataset_compiler.py",
+      "loc": 962
+    },
+    {
+      "file": "anvil_yung/lib/forge-std/scripts/vm.py",
+      "loc": 637
+    },
+    {
+      "file": "causal_isomorphism/parser_fsharp.py",
+      "loc": 595
+    },
+    {
+      "file": "babylon60/extensions/alma/taste.py",
+      "loc": 590
+    },
+    {
+      "file": "tests/test_causal_isomorphism.py",
+      "loc": 589
+    },
+    {
+      "file": "babylon60/extensions/evo/repair_strategies.py",
+      "loc": 578
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/scan.py",
+      "loc": 575
+    },
+    {
+      "file": "babylon60/extensions/llm/provider.py",
+      "loc": 575
+    },
+    {
+      "file": "babylon60/extensions/speculative/genesis.py",
+      "loc": 548
+    },
+    {
+      "file": "babylon60/extensions/signals/bus.py",
+      "loc": 536
+    },
+    {
+      "file": "babylon60/extensions/music_engine/midi_engine.py",
+      "loc": 505
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/heal.py",
+      "loc": 504
+    },
+    {
+      "file": "babylon60/extensions/thinking/orchestra.py",
+      "loc": 503
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_cli.py",
+      "loc": 501
+    },
+    {
+      "file": "babylon60/extensions/llm/cognitive_handoff.py",
+      "loc": 495
+    },
+    {
+      "file": "babylon60/extensions/ha/raft.py",
+      "loc": 490
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/swarm.py",
+      "loc": 485
+    },
+    {
+      "file": "babylon60/extensions/git/poet.py",
+      "loc": 485
+    },
+    {
+      "file": "babylon60/extensions/thinking/fusion.py",
+      "loc": 483
+    },
+    {
+      "file": "babylon60/extensions/swarm/code_smith.py",
+      "loc": 476
+    },
+    {
+      "file": "babylon60/extensions/swarm/manager.py",
+      "loc": 471
+    },
+    {
+      "file": "babylon60/extensions/swarm/conflict_resolution.py",
+      "loc": 467
+    },
+    {
+      "file": "babylon60/extensions/forensic/predictive_healer.py",
+      "loc": 466
+    },
+    {
+      "file": "babylon60/extensions/evolution/strategies.py",
+      "loc": 460
+    },
+    {
+      "file": "babylon60/extensions/daemon/scheduler.py",
+      "loc": 459
+    },
+    {
+      "file": "babylon60/extensions/llm/router.py",
+      "loc": 457
+    },
+    {
+      "file": "babylon60/extensions/llm/sovereign.py",
+      "loc": 454
+    },
+    {
+      "file": "babylon60/extensions/signals/trigger_engine.py",
+      "loc": 454
+    },
+    {
+      "file": "babylon60/extensions/sap/client.py",
+      "loc": 451
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/antipatterns.py",
+      "loc": 447
+    },
+    {
+      "file": "babylon60/utils/sandbox.py",
+      "loc": 443
+    },
+    {
+      "file": "babylon60/extensions/evo/_mutation_projectors.py",
+      "loc": 435
+    },
+    {
+      "file": "babylon60/extensions/music_engine/orchestrator.py",
+      "loc": 434
+    },
+    {
+      "file": "babylon60/extensions/llm/_oracle_pool.py",
+      "loc": 431
+    },
+    {
+      "file": "babylon60/extensions/genesis/engine.py",
+      "loc": 431
+    },
+    {
+      "file": "babylon60/extensions/swarm/centauro_engine.py",
+      "loc": 418
+    },
+    {
+      "file": "babylon60/extensions/swarm/auto_fix.py",
+      "loc": 413
+    },
+    {
+      "file": "babylon60/extensions/evolution/cortex_metrics.py",
+      "loc": 409
+    },
+    {
+      "file": "babylon60/extensions/speculative/keter.py",
+      "loc": 409
+    },
+    {
+      "file": "babylon60/extensions/swarm/josu_daemon.py",
+      "loc": 399
+    },
+    {
+      "file": "babylon60/extensions/vex/loop.py",
+      "loc": 397
+    },
+    {
+      "file": "babylon60/extensions/swarm/crystal_consolidator.py",
+      "loc": 396
+    },
+    {
+      "file": "babylon60/extensions/swarm/nightshift_pipeline.py",
+      "loc": 395
+    },
+    {
+      "file": "babylon60/extensions/security/injection_guard.py",
+      "loc": 392
+    },
+    {
+      "file": "babylon60/extensions/evo/_autocurative_helper.py",
+      "loc": 391
+    },
+    {
+      "file": "babylon60/extensions/daemon/alerts.py",
+      "loc": 391
+    },
+    {
+      "file": "babylon60/crypto/shredder.py",
+      "loc": 390
+    },
+    {
+      "file": "babylon60/extensions/evolution/p0_extractor.py",
+      "loc": 390
+    }
+  ]
+}
