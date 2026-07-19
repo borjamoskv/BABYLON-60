@@ -6,7 +6,10 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 
 def obliterate_zero_operators(target_dir):
-    json_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_THEOREM_OMEGA.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    json_path = os.path.join(
+        project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json"
+    )
 
     if not os.path.exists(json_path):
         logging.error(f"Cannot find {json_path}")
@@ -37,4 +40,4 @@ def obliterate_zero_operators(target_dir):
 
 
 if __name__ == "__main__":
-    obliterate_zero_operators("/Users/borjafernandezangulo/BABYLON-60")
+    obliterate_zero_operators(os.path.expanduser("~/BABYLON-60"))

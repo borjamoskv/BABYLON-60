@@ -36,7 +36,7 @@ class CallGraphVisitor(ast.NodeVisitor):
 
 
 def main():
-    target_dir = "/Users/borjafernandezangulo/BABYLON-60"
+    target_dir = os.path.expanduser("~/BABYLON-60")
 
     global_call_graph = {}
 
@@ -72,7 +72,10 @@ def main():
     # 1. Routes mapping
     # 2. TaintEngine / ledger calls
 
-    out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_CALL_GRAPH.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_json = os.path.join(
+        project_root, "cortex", "artifacts", "reports", "BABYLON_60_CALL_GRAPH.json"
+    )
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(global_call_graph, f, indent=2)

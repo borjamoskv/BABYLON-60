@@ -209,6 +209,7 @@ def write_to_cortex_ledger(
 if __name__ == "__main__":
     print("Módulo ULTRATHINK P0 Audit Loop (C5-REAL) cargado.")
     import sys
+
     if len(sys.argv) >= 4:
         prompt = sys.argv[1]
         target = sys.argv[2]

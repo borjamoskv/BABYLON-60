@@ -2,8 +2,11 @@ import os
 import re
 import json
 
-TARGET_DIR = "/Users/borjafernandezangulo/BABYLON-60"
-OUTPUT_JSON = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_EPISTEMOLOGY.json"
+TARGET_DIR = os.path.expanduser("~/BABYLON-60")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTPUT_JSON = os.path.join(
+    PROJECT_ROOT, "cortex", "artifacts", "reports", "BABYLON_60_EPISTEMOLOGY.json"
+)
 
 
 def scan_file(filepath):

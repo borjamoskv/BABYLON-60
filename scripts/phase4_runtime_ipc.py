@@ -75,7 +75,10 @@ def analyze_ipc_and_runtime(target_dir):
                 except Exception:
                     pass
 
-    out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_RUNTIME_IPC.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_json = os.path.join(
+        project_root, "cortex", "artifacts", "reports", "BABYLON_60_RUNTIME_IPC.json"
+    )
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(report, f, indent=2)
@@ -83,4 +86,4 @@ def analyze_ipc_and_runtime(target_dir):
 
 
 if __name__ == "__main__":
-    analyze_ipc_and_runtime("/Users/borjafernandezangulo/BABYLON-60")
+    analyze_ipc_and_runtime(os.path.expanduser("~/BABYLON-60"))

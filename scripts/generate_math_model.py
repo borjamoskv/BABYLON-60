@@ -1,9 +1,11 @@
+import os
 import json
 from collections import defaultdict
 
 
 def summarize_graphs():
-    base_dir = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    base_dir = os.path.join(project_root, "cortex", "artifacts", "reports")
 
     # 1. Load Call Graph (Dependency DAG)
     try:

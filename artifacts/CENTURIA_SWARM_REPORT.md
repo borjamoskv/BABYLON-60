@@ -8,7 +8,7 @@ Proof:
   Centuria_III_Exergy: "111 Nodes (Clippy & Formatting Enforcement)"
   Confidence: C5-REAL (BFT Swarm Division)
   ExergyRatio: 0.0481
-  OP_TAINT_SEAL: borjamoskv:centuria_division:333_agents:1784473007
+  OP_TAINT_SEAL: borjamoskv:centuria_division:333_agents:1784480602
 ```
 
 ## 1. Organización del Enjambre (División Centuria)

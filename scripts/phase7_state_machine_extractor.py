@@ -56,7 +56,10 @@ def extract_state_machine_graphs(target_dir):
                 except Exception:
                     pass
 
-    out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_STATE_MACHINE.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_json = os.path.join(
+        project_root, "cortex", "artifacts", "reports", "BABYLON_60_STATE_MACHINE.json"
+    )
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(graphs, f, indent=2)
@@ -64,4 +67,4 @@ def extract_state_machine_graphs(target_dir):
 
 
 if __name__ == "__main__":
-    extract_state_machine_graphs("/Users/borjafernandezangulo/BABYLON-60")
+    extract_state_machine_graphs(os.path.expanduser("~/BABYLON-60"))

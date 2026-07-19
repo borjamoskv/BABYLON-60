@@ -79,7 +79,7 @@ def tarjan(graph):
 
 
 def main():
-    target_dir = "/Users/borjafernandezangulo/BABYLON-60"
+    target_dir = os.path.expanduser("~/BABYLON-60")
     internal_namespaces = ["babylon60", "causal_isomorphism", "strike_rs", "cortex"]
 
     stats = {}
@@ -192,7 +192,14 @@ def main():
     }
 
     # Guardar JSON
-    out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_QUANTITATIVE_AST.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_json = os.path.join(
+        project_root,
+        "cortex",
+        "artifacts",
+        "reports",
+        "BABYLON_60_QUANTITATIVE_AST.json",
+    )
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(report, f, indent=2)

@@ -91,7 +91,10 @@ def classify_omega_theorem(target_dir):
             except Exception:
                 pass
 
-    out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_THEOREM_OMEGA.json"
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_json = os.path.join(
+        project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json"
+    )
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(classification, f, indent=2)
@@ -99,4 +102,4 @@ def classify_omega_theorem(target_dir):
 
 
 if __name__ == "__main__":
-    classify_omega_theorem("/Users/borjafernandezangulo/BABYLON-60")
+    classify_omega_theorem(os.path.expanduser("~/BABYLON-60"))
