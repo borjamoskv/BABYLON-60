@@ -73,7 +73,10 @@ def phase_4_bft_consensus(state: AuditState) -> bool:
     try:
         router = C5LLMRouter()
         # Intentar consultar con un modelo local registrado
-        critique = router.dispatch_inference(prompt, "deepseek-r1:8b")
+        try:
+            critique = router.dispatch_inference(prompt, "deepseek-r1:8b")
+        except EpistemicHalt as e:
+            raise RuntimeError(f"Fallo de enrutamiento: {e}")
         print(f"[Consenso BFT] Crítica recibida:\n{critique.strip()}")
 
         if "VALID" in critique.upper():
