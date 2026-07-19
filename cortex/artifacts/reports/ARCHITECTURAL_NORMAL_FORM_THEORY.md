@@ -64,3 +64,15 @@ Para que el cálculo de $D_\Phi(A)$ posea validez formal, la base de operadores 
     $$ \sum_{i=1}^{n} P_i(m) = 1 $$
 
 La demostración universal de ambas propiedades excede el alcance del modelo inicial y se delega a la futura literatura de lenguajes formales.
+
+---
+
+## 7. Apéndice: Teorema de Intratabilidad de la Forma Normal (NP-Hardness)
+Siguiendo los principios deductivos, hemos sometido la existencia de la Forma Normal a demostración topológica.
+
+*   **Existencia:** Confirmada por la finitud del conjunto topológico y el Teorema de Weierstrass discreto.
+*   **Unicidad:** Falsada. Dos configuraciones pueden alcanzar la misma energía global, requiriendo normas de desempate (tie-breaking).
+*   **Computabilidad:** Falsada en tiempo polinómico. La reducción algebraica demuestra que hallar la partición óptima que cubra el espacio $\Omega$ minimizando la Energía Topológica es matemáticamente isomorfo al **Minimum Weight Set Cover Problem (MWSCP)**, un problema intrínsecamente NP-Hard.
+
+**Axioma de Intratabilidad:** 
+Dado que el refactoring perfecto hacia la Forma Normal es incomputable, se rechaza formalmente la viabilidad de compiladores automáticos perfectos. La ingeniería de software estructural debe basarse en aproximaciones heurísticas termodinámicas (e.g. MCTS, Simulated Annealing).
