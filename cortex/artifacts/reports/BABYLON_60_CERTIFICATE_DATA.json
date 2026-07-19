@@ -1,0 +1,11 @@
+{
+  "Total_Modules": 611,
+  "Kernel_Hitting_Set_Size": 1,
+  "Kernel_Files": [
+    "babylon60/bft/consensus_ledger.py"
+  ],
+  "Architectural_Compression": "0.16%",
+  "Invariant_Coverage": "100.0%",
+  "Architectural_Drift": 0.0,
+  "Proof_Confidence": "C5"
+}
