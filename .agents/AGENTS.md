@@ -69,3 +69,7 @@ Se prohíbe la acumulación de múltiples scripts Go que declaren `package main`
 ## 17. Literal System Error Invariant (Anti-Green Theater)
 Cuando se detecte una anomalía física de almacenamiento (ej. `ENOSPC: no space left on device`), el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO interpretarlo como una metáfora cognitiva o aplicar protocolos conversacionales de "Safety/Therapy" (Green Theater). Debe asumir la literalidad termodinámica del sistema y ejecutar de forma inmediata la purga atómica de cachés.
 
+## 18. IDE Watcher & Untracked Scan Optimization Invariant
+Para mitigar la inanición de RAM y CPU provocada por escaneos recursivos de Git (`git status -uall`) e indexadores del IDE, todo entorno de trabajo DEBE definir explícitamente en `.vscode/settings.json` el modo `"git.untrackedChanges": "mixed"` y restringir los patrones de monitoreo en `"files.watcherExclude"` y `"search.exclude"` para directorios de alta densidad de archivos (`.venv`, `node_modules`, `target`, `.cortex`, `__pycache__`, `scratch/**/*.log`, `*.db`).
+
+
