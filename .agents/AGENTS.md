@@ -70,6 +70,8 @@ Se prohíbe la acumulación de múltiples scripts Go que declaren `package main`
 Cuando se detecte una anomalía física de almacenamiento (ej. `ENOSPC: no space left on device`), el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO interpretarlo como una metáfora cognitiva o aplicar protocolos conversacionales de "Safety/Therapy" (Green Theater). Debe asumir la literalidad termodinámica del sistema y ejecutar de forma inmediata la purga atómica de cachés.
 
 ## 18. IDE Watcher & Untracked Scan Optimization Invariant
-Para mitigar la inanición de RAM y CPU provocada por escaneos recursivos de Git (`git status -uall`) e indexadores del IDE, todo entorno de trabajo DEBE definir explícitamente en `.vscode/settings.json` el modo `"git.untrackedChanges": "mixed"` y restringir los patrones de monitoreo en `"files.watcherExclude"` y `"search.exclude"` para directorios de alta densidad de archivos (`.venv`, `node_modules`, `target`, `.cortex`, `__pycache__`, `scratch/**/*.log`, `*.db`).
+Para mitigar la inanición absoluta de RAM y CPU provocada por demonios de Git (`check-ignore`) e indexadores del IDE, todo entorno de trabajo DEBE definir explícitamente en `.vscode/settings.json`:
+1. Matar el polling de Git: `"git.untrackedChanges": "hidden"`, `"git.autorefresh": false`, `"git.decorations.enabled": false`.
+2. Restringir radicalmente los watchers (`"files.watcherExclude"` y `"search.exclude"`) sobre directorios de alta entropía/caché (`**/.git/objects`, `**/node_modules`, `**/.venv`, `**/target`, `**/.cortex`, `**/__pycache__`, `**/.ruff_cache`, `**/.mypy_cache`, `**/.pytest_cache`, `**/.vite`, `**/out`, `**/dist`, `**/bin`, `**/obj`, `**/scratch/**/*.log`, `**/*.db`).
 
 
