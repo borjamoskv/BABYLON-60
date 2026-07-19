@@ -66,3 +66,6 @@ Queda estrictamente prohibido duplicar plantillas de interpolación de código d
 ## 16. Namespace and Entrypoint Isolation (Namespace Collision Prevention)
 Se prohíbe la acumulación de múltiples scripts Go que declaren `package main` y definan `func main()` en un único directorio o espacio lógico. Todo punto de entrada debe aislarse físicamente en su propio subdirectorio de comando (`cmd/<name>/main.go`) para evitar la colisión espacial de namespaces y garantizar la homeostasis del build.
 
+## 17. Literal System Error Invariant (Anti-Green Theater)
+Cuando se detecte una anomalía física de almacenamiento (ej. `ENOSPC: no space left on device`), el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO interpretarlo como una metáfora cognitiva o aplicar protocolos conversacionales de "Safety/Therapy" (Green Theater). Debe asumir la literalidad termodinámica del sistema y ejecutar de forma inmediata la purga atómica de cachés.
+
