@@ -1,7 +1,11 @@
 {
+  "git.enabled": false,
   "git.untrackedChanges": "hidden",
   "git.autorefresh": false,
   "git.decorations.enabled": false,
+  "telemetry.telemetryLevel": "off",
+  "remote.autoForwardPorts": false,
+  "remote.tunnels.access.preventSleep": false,
   "files.watcherExclude": {
     "**/.git/objects": true,
     "**/.git/subtree-cache": true,
