@@ -143,8 +143,13 @@ class CausalIsomorphismTranspiler:
         rust_output = self.rust_emitter.emit_module(ir_module)
 
         # 6. Build result
+        try:
+            rel_source = str(source.resolve().relative_to(Path.cwd()))
+        except ValueError:
+            rel_source = str(source)
+
         result = TranspilationResult(
-            source_file=str(source),
+            source_file=rel_source,
             ir_module=ir_module,
             solidity_output=solidity_output,
             rust_output=rust_output,
@@ -201,17 +206,26 @@ class CausalIsomorphismTranspiler:
         # Solidity output
         sol_path = output_dir / f"{module_name}Anchor.sol"
         sol_path.write_text(result.solidity_output, encoding="utf-8")
-        result.solidity_path = str(sol_path)
+        try:
+            result.solidity_path = str(sol_path.resolve().relative_to(Path.cwd()))
+        except ValueError:
+            result.solidity_path = str(sol_path)
 
         # Rust output
         rust_path = output_dir / f"{self._to_snake(module_name)}.rs"
         rust_path.write_text(result.rust_output, encoding="utf-8")
-        result.rust_path = str(rust_path)
+        try:
+            result.rust_path = str(rust_path.resolve().relative_to(Path.cwd()))
+        except ValueError:
+            result.rust_path = str(rust_path)
 
         # Validation report
         report_path = output_dir / f"{module_name}_regime_report.txt"
         report_path.write_text(result.full_report(), encoding="utf-8")
-        result.report_path = str(report_path)
+        try:
+            result.report_path = str(report_path.resolve().relative_to(Path.cwd()))
+        except ValueError:
+            result.report_path = str(report_path)
 
     @staticmethod
     def _to_snake(name: str) -> str:
