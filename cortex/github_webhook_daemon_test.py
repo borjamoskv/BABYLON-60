@@ -1,14 +1,10 @@
 """Tests C5-REAL para github_webhook_daemon.py (O1)."""
 
-import json
 import hmac
 import hashlib
 import os
 import sqlite3
-import tempfile
-import unittest
 from io import BytesIO
-from http.server import HTTPServer
 from unittest.mock import patch, MagicMock
 
 import pytest
@@ -29,13 +25,20 @@ def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
 
 class TestInitPerceptionLedger:
     def test_creates_db_and_table(self, tmp_path: "pytest.TempPathFactory") -> None:
-        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")):
-            with patch("cortex.github_webhook_daemon.os.path.exists", return_value=True):
+        with patch(
+            "cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")
+        ):
+            with patch(
+                "cortex.github_webhook_daemon.os.path.exists", return_value=True
+            ):
                 from cortex.github_webhook_daemon import init_perception_ledger
+
                 init_perception_ledger()
                 conn = sqlite3.connect(str(tmp_path / "test.db"))
                 cursor = conn.cursor()
-                cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='github_events'")
+                cursor.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='github_events'"
+                )
                 assert cursor.fetchone() is not None
                 conn.close()
 
@@ -45,14 +48,18 @@ class TestLogEvent:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
+
             init_perception_ledger()
             result = log_event("push", b"unique-payload-abc")
             assert result is True
 
-    def test_log_event_idempotency_lock(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_log_event_idempotency_lock(
+        self, tmp_path: "pytest.TempPathFactory"
+    ) -> None:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
+
             init_perception_ledger()
             log_event("push", b"duplicate-payload")
             result = log_event("push", b"duplicate-payload")
@@ -62,6 +69,7 @@ class TestLogEvent:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
+
             init_perception_ledger()
             log_event("push", b"payload-a")
             log_event("pull_request", b"payload-b")
@@ -85,6 +93,7 @@ class TestGitHubWebhookHandler:
         include_content_length: bool = True,
     ) -> MagicMock:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         handler = MagicMock(spec=GitHubWebhookHandler)
         handler.rfile = BytesIO(payload)
         headers: dict[str, str] = {}
@@ -103,6 +112,7 @@ class TestGitHubWebhookHandler:
 
     def test_missing_content_length_returns_411(self) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         handler = MagicMock(spec=GitHubWebhookHandler)
         handler.headers = FakeHeaders({})
         handler.send_response = MagicMock()
@@ -112,6 +122,7 @@ class TestGitHubWebhookHandler:
 
     def test_missing_signature_returns_401(self) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         handler = MagicMock(spec=GitHubWebhookHandler)
         handler.headers = FakeHeaders({"Content-Length": "5"})
         handler.rfile = BytesIO(b"hello")
@@ -120,15 +131,20 @@ class TestGitHubWebhookHandler:
         GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
         handler.send_response.assert_called_once_with(401)
 
-    def test_invalid_signature_returns_403(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_invalid_signature_returns_403(
+        self, tmp_path: "pytest.TempPathFactory"
+    ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         payload = b'{"ref": "main"}'
         handler = MagicMock(spec=GitHubWebhookHandler)
-        handler.headers = FakeHeaders({
-            "Content-Length": str(len(payload)),
-            "X-Hub-Signature-256": "sha256=wrongsig",
-            "X-GitHub-Event": "push",
-        })
+        handler.headers = FakeHeaders(
+            {
+                "Content-Length": str(len(payload)),
+                "X-Hub-Signature-256": "sha256=wrongsig",
+                "X-GitHub-Event": "push",
+            }
+        )
         handler.rfile = BytesIO(payload)
         handler.send_response = MagicMock()
         handler.end_headers = MagicMock()
@@ -136,16 +152,21 @@ class TestGitHubWebhookHandler:
             GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
         handler.send_response.assert_called_once_with(403)
 
-    def test_valid_new_event_returns_202(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_valid_new_event_returns_202(
+        self, tmp_path: "pytest.TempPathFactory"
+    ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         payload = b'{"ref": "unique-main-branch"}'
         sig = make_sig(payload)
         handler = MagicMock(spec=GitHubWebhookHandler)
-        handler.headers = FakeHeaders({
-            "Content-Length": str(len(payload)),
-            "X-Hub-Signature-256": sig,
-            "X-GitHub-Event": "push",
-        })
+        handler.headers = FakeHeaders(
+            {
+                "Content-Length": str(len(payload)),
+                "X-Hub-Signature-256": sig,
+                "X-GitHub-Event": "push",
+            }
+        )
         handler.rfile = BytesIO(payload)
         handler.send_response = MagicMock()
         handler.send_header = MagicMock()
@@ -163,16 +184,21 @@ class TestGitHubWebhookHandler:
             GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
         handler.send_response.assert_called_once_with(202)
 
-    def test_duplicate_event_returns_200_idempotency(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_duplicate_event_returns_200_idempotency(
+        self, tmp_path: "pytest.TempPathFactory"
+    ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
+
         payload = b'{"ref": "duplicate-ref"}'
         sig = make_sig(payload)
         handler = MagicMock(spec=GitHubWebhookHandler)
-        handler.headers = FakeHeaders({
-            "Content-Length": str(len(payload)),
-            "X-Hub-Signature-256": sig,
-            "X-GitHub-Event": "push",
-        })
+        handler.headers = FakeHeaders(
+            {
+                "Content-Length": str(len(payload)),
+                "X-Hub-Signature-256": sig,
+                "X-GitHub-Event": "push",
+            }
+        )
         handler.rfile = BytesIO(payload)
         handler.send_response = MagicMock()
         handler.send_header = MagicMock()

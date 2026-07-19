@@ -1,10 +1,10 @@
 import json
-import os
 from collections import defaultdict
+
 
 def summarize_graphs():
     base_dir = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports"
-    
+
     # 1. Load Call Graph (Dependency DAG)
     try:
         with open(f"{base_dir}/BABYLON_60_CALL_GRAPH.json", "r") as f:
@@ -18,15 +18,15 @@ def summarize_graphs():
             ipc_graph = json.load(f)
     except FileNotFoundError:
         ipc_graph = {}
-        
+
     modules = set(call_graph.keys())
     for cat in ipc_graph.values():
         for item in cat:
             modules.add(item["file"])
-            
+
     fan_out = defaultdict(int)
     fan_in = defaultdict(int)
-    
+
     # Build a simple dependency edge list (module -> called functions)
     edges = []
     for mod, data in call_graph.items():
@@ -38,10 +38,10 @@ def summarize_graphs():
         for c in calls:
             fan_in[c] += 1
             edges.append((mod, c))
-            
+
     # Kernel calculation: Highest fan-in, part of IPC / Core
     kernel_candidates = sorted(fan_in.items(), key=lambda x: x[1], reverse=True)[:20]
-    
+
     summary = {
         "V": len(modules),
         "E": len(edges),
@@ -49,12 +49,13 @@ def summarize_graphs():
         "top_fan_out": sorted(fan_out.items(), key=lambda x: x[1], reverse=True)[:10],
         "ffi_nodes": len(ipc_graph.get("ffi_bindings", [])),
         "wal_nodes": len(ipc_graph.get("database_locks", [])),
-        "network_nodes": len(ipc_graph.get("network_endpoints", []))
+        "network_nodes": len(ipc_graph.get("network_endpoints", [])),
     }
-    
+
     with open(f"{base_dir}/BABYLON_60_MATH_SUMMARY.json", "w") as f:
         json.dump(summary, f, indent=2)
     print(f"Summary written to {base_dir}/BABYLON_60_MATH_SUMMARY.json")
+
 
 if __name__ == "__main__":
     summarize_graphs()

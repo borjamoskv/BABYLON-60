@@ -3,6 +3,7 @@ import ast
 import json
 from collections import defaultdict
 
+
 class CallGraphVisitor(ast.NodeVisitor):
     def __init__(self):
         self.call_graph = defaultdict(set)
@@ -30,50 +31,54 @@ class CallGraphVisitor(ast.NodeVisitor):
             self.call_graph[self.current_function].add(func_name)
         else:
             self.module_calls.add(func_name)
-        
+
         self.generic_visit(node)
+
 
 def main():
     target_dir = "/Users/borjafernandezangulo/BABYLON-60"
-    
+
     global_call_graph = {}
-    
+
     for root, dirs, files in os.walk(target_dir):
-        if any(x in root for x in ['.venv', 'node_modules', '__pycache__', '.git']):
+        if any(x in root for x in [".venv", "node_modules", "__pycache__", ".git"]):
             continue
         for file in files:
-            if file.endswith('.py'):
+            if file.endswith(".py"):
                 filepath = os.path.join(root, file)
                 rel_path = os.path.relpath(filepath, target_dir)
-                
+
                 try:
-                    with open(filepath, 'r', encoding='utf-8') as f:
+                    with open(filepath, "r", encoding="utf-8") as f:
                         source = f.read()
-                    
+
                     tree = ast.parse(source)
                     visitor = CallGraphVisitor()
                     visitor.visit(tree)
-                    
+
                     # Store as serializable dict
-                    serializable_cg = {k: list(v) for k, v in visitor.call_graph.items()}
+                    serializable_cg = {
+                        k: list(v) for k, v in visitor.call_graph.items()
+                    }
                     if serializable_cg or visitor.module_calls:
                         global_call_graph[rel_path] = {
                             "functions": serializable_cg,
-                            "module_level_calls": list(visitor.module_calls)
+                            "module_level_calls": list(visitor.module_calls),
                         }
-                except Exception as e:
+                except Exception:
                     pass
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)
     # 1. Routes mapping
     # 2. TaintEngine / ledger calls
-    
+
     out_json = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_CALL_GRAPH.json"
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
-    with open(out_json, 'w') as f:
+    with open(out_json, "w") as f:
         json.dump(global_call_graph, f, indent=2)
-        
+
     print(out_json)
+
 
 if __name__ == "__main__":
     main()

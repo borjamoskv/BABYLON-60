@@ -23,7 +23,7 @@ class TestCalculateShannonEntropy:
 
     def test_single_byte_zero_entropy(self) -> None:
         # All identical bytes → entropy 0
-        data = b"\xAA" * 100
+        data = b"\xaa" * 100
         entropy = calculate_shannon_entropy(data)
         assert entropy == 0.0
 
@@ -36,7 +36,9 @@ class TestCalculateShannonEntropy:
 class TestEphemeralVNodePhysical:
     def test_valid_python_code_passes(self) -> None:
         vnode = EphemeralVNodePhysical("vnode-test-01")
-        payload = "def synthesized_theorem_1():\n    # Intention: test\n    return 1 ** 2"
+        payload = (
+            "def synthesized_theorem_1():\n    # Intention: test\n    return 1 ** 2"
+        )
         is_valid, entropy, nodes = vnode.execute_physical_test(payload)
         assert is_valid is True
         assert entropy > 3.0
@@ -79,7 +81,7 @@ class TestMCTSExpansionWorker:
     def test_code_hash_is_sha3_256(self) -> None:
         result = _mcts_expansion_worker(("hash_check", 1))
         assert result is not None
-        payload = f"def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1 ** 2"
+        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1 ** 2"
         expected = hashlib.sha3_256(payload.encode()).hexdigest()
         assert result.code_hash == expected
 
@@ -95,6 +97,7 @@ class TestL3InferenceEnginePhysical:
 
     def test_compiled_theorem_payload_is_python(self) -> None:
         import ast as ast_module
+
         engine = L3InferenceEnginePhysical(target_trajectories=50)
         theorem = engine.compile_theorem("test_syntax_valid")
         # Should parse without SyntaxError

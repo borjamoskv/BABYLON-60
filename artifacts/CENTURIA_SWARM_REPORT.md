@@ -7,8 +7,8 @@ Proof:
   Centuria_II_BFT: "111 Nodes (Security & WAL Invariants)"
   Centuria_III_Exergy: "111 Nodes (Clippy & Formatting Enforcement)"
   Confidence: C5-REAL (BFT Swarm Division)
-  ExergyRatio: 0.0498
-  OP_TAINT_SEAL: borjamoskv:centuria_division:333_agents:1784396320
+  ExergyRatio: 0.0481
+  OP_TAINT_SEAL: borjamoskv:centuria_division:333_agents:1784473007
 ```
 
 ## 1. Organización del Enjambre (División Centuria)
@@ -25,10 +25,10 @@ El Swarm de 333 agentes ha sido segmentado e instanciado en 3 Centurias ortogona
 
 ## 2. Métricas y Auditoría Cognitiva de Transcripción
 El módulo `LEA_OMEGA` de la división Centuria ha extraído las siguientes métricas de exergía del workspace activo:
-- **Total de Pasos Analizados:** 540
-- **Módulos Ejecutados (Exergía):** 252 llamadas a herramientas.
-- **Exergy Ratio:** 0.0498
-- **Anergy Ratio:** 0.9502
+- **Total de Pasos Analizados:** 861
+- **Módulos Ejecutados (Exergía):** 275 llamadas a herramientas.
+- **Exergy Ratio:** 0.0481
+- **Anergy Ratio:** 0.9519
 
 ---
 

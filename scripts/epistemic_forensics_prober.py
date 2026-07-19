@@ -5,49 +5,67 @@ import json
 TARGET_DIR = "/Users/borjafernandezangulo/BABYLON-60"
 OUTPUT_JSON = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_EPISTEMOLOGY.json"
 
+
 def scan_file(filepath):
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
         return f.read()
+
 
 def classify_files(target_dir):
     classification = {
         "Verified_by_Construction": [],
         "Verified_by_Proof": [],
         "Verified_by_Tests": [],
-        "Assumed": []
+        "Assumed": [],
     }
 
     # regex patterns for Verified_by_Construction
     construction_pattern = re.compile(
-        r'(hash_sha3_256|verify_ed25519|sqlite3|pynacl|BFT_Ledger|bft|WAL|synchronous=FULL|ffi|unsafe\s*\{)', 
-        re.IGNORECASE
+        r"(hash_sha3_256|verify_ed25519|sqlite3|pynacl|BFT_Ledger|bft|WAL|synchronous=FULL|ffi|unsafe\s*\{)",
+        re.IGNORECASE,
     )
 
     for root, dirs, files in os.walk(target_dir):
         # Exclude paths that are not source code
-        if any(exc in root for exc in ['.git', 'node_modules', '__pycache__', 'target', '.venv', 'dist']):
+        if any(
+            exc in root
+            for exc in [
+                ".git",
+                "node_modules",
+                "__pycache__",
+                "target",
+                ".venv",
+                "dist",
+            ]
+        ):
             continue
-            
+
         for file in files:
             # Only care about source files
-            if not file.endswith(('.py', '.rs', '.lean', '.ts', '.tsx', '.js', '.yaml', '.yml', '.sol')):
+            if not file.endswith(
+                (".py", ".rs", ".lean", ".ts", ".tsx", ".js", ".yaml", ".yml", ".sol")
+            ):
                 continue
 
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, target_dir)
-            
+
             # Proofs
-            if file.endswith('.lean'):
+            if file.endswith(".lean"):
                 classification["Verified_by_Proof"].append(rel_path)
                 continue
-                
+
             # Tests
-            if "tests/" in rel_path or file.startswith("test_") or file.endswith("_test.py"):
+            if (
+                "tests/" in rel_path
+                or file.startswith("test_")
+                or file.endswith("_test.py")
+            ):
                 classification["Verified_by_Tests"].append(rel_path)
                 continue
 
             content = scan_file(full_path)
-            
+
             # Construction
             if construction_pattern.search(content):
                 classification["Verified_by_Construction"].append(rel_path)
@@ -58,10 +76,11 @@ def classify_files(target_dir):
 
     return classification
 
+
 def main():
     print("[*] Starting OMEGA-2 Epistemic Forensics Prober...")
     results = classify_files(TARGET_DIR)
-    
+
     total = sum(len(v) for v in results.values())
     print(f"[*] Scanned {total} files.")
     print(f"  - Verified_by_Construction: {len(results['Verified_by_Construction'])}")
@@ -70,10 +89,11 @@ def main():
     print(f"  - Assumed: {len(results['Assumed'])}")
 
     os.makedirs(os.path.dirname(OUTPUT_JSON), exist_ok=True)
-    with open(OUTPUT_JSON, 'w') as f:
+    with open(OUTPUT_JSON, "w") as f:
         json.dump(results, f, indent=2)
-        
+
     print(f"[+] Output written to {OUTPUT_JSON}")
+
 
 if __name__ == "__main__":
     main()

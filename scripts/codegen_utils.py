@@ -9,7 +9,8 @@ from __future__ import annotations
 import hashlib
 import os
 import re
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict
+
 
 def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int, str]]:
     """Parse a 1000-primitive YAML taxonomy into (domains, primitives, modifiers)."""
@@ -57,6 +58,7 @@ def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int
     assert len(modifiers) == 10, f"Expected 10 modifiers, got {len(modifiers)}"
 
     return domains, primitives, modifiers
+
 
 def write_output(path: str, lines: list[Any]) -> None:
     """Atomically write generated source lines to *path*, creating parent dirs."""
@@ -568,11 +570,12 @@ CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {
     },
 }
 
+
 def run_meta_codegen(prefix: str) -> None:
     """Master parameterization entry point for codegen pipeline (DRY AP-R1)."""
     cfg = CODEGEN_CONFIGS[prefix]
     domains, primitives, modifiers = parse_yaml(cfg["yaml"])
-    
+
     prefix_lower = prefix.lower()
     # Special naming overrides
     if prefix == "Observer":
@@ -591,6 +594,6 @@ def run_meta_codegen(prefix: str) -> None:
     generate_go(prefix, domains, primitives, modifiers, go_path)
     generate_rust(prefix, rust_path)
     generate_python(prefix, domains, primitives, modifiers, py_path)
-    
+
     if cfg.get("has_haskell_native"):
         generate_haskell_native(prefix, domains, primitives, modifiers, cfg["hs_file"])
