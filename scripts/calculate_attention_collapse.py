@@ -14,7 +14,7 @@ def calculate_kl_divergence(p, q):
 
 def softmax(logits):
     max_logit = max(logits)
-    exp_logits = [math.exp(l - max_logit) for l in logits]
+    exp_logits = [math.exp(logit - max_logit) for logit in logits]
     sum_exp = sum(exp_logits)
     return [e / sum_exp for e in exp_logits]
 

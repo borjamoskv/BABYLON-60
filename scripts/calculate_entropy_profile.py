@@ -7,7 +7,7 @@ import hashlib
 def softmax(logits, temperature):
     # Stabilize logits by subtracting the max value
     max_logit = max(logits)
-    scaled = [(l - max_logit) / temperature for l in logits]
+    scaled = [(logit - max_logit) / temperature for logit in logits]
     exp_scaled = [math.exp(s) for s in scaled]
     sum_exp = sum(exp_scaled)
     return [e / sum_exp for e in exp_scaled]

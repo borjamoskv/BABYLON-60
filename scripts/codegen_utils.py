@@ -569,31 +569,3 @@ CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {
         "hs_file": "primitives/Kimi1000.hs",
     },
 }
-
-
-def run_meta_codegen(prefix: str) -> None:
-    """Master parameterization entry point for codegen pipeline (DRY AP-R1)."""
-    cfg = CODEGEN_CONFIGS[prefix]
-    domains, primitives, modifiers = parse_yaml(cfg["yaml"])
-
-    prefix_lower = prefix.lower()
-    # Special naming overrides
-    if prefix == "Observer":
-        prefix_lower = "state_observer"
-    elif prefix == "Neuro":
-        prefix_lower = "neuro_chain"
-    elif prefix == "Tts":
-        prefix_lower = "tts_harness"
-    elif prefix in ["Haskell", "Kimi"]:
-        prefix_lower = f"{prefix_lower}_1000"
-
-    go_path = f"primitives/{prefix_lower}.go"
-    rust_path = f"src-tauri/src/{prefix_lower}.rs"
-    py_path = f"cortex/{prefix_lower}.py"
-
-    generate_go(prefix, domains, primitives, modifiers, go_path)
-    generate_rust(prefix, rust_path)
-    generate_python(prefix, domains, primitives, modifiers, py_path)
-
-    if cfg.get("has_haskell_native"):
-        generate_haskell_native(prefix, domains, primitives, modifiers, cfg["hs_file"])

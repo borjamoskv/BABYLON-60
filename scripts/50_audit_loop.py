@@ -2,17 +2,17 @@
 
 import os
 import sys
-
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(PROJECT_ROOT)
-os.chdir(PROJECT_ROOT)
-
 import hashlib
 import subprocess
 import time
 import sqlite3
 from typing import TypedDict, Optional
-from cortex.llm_router import C5LLMRouter, EpistemicHalt  # AP-1: no local redefinition
+
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(PROJECT_ROOT)
+os.chdir(PROJECT_ROOT)
+
+from cortex.llm_router import C5LLMRouter, EpistemicHalt  # noqa: E402
 
 
 class AuditState(TypedDict):
