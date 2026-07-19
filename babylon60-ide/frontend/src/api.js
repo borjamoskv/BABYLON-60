@@ -52,3 +52,5 @@ export function connectWebSocket(path, onMessage, onError) {
   dial();
   return controller;
 }
+
+export const isTauri = typeof window !== 'undefined' && (window.__TAURI__ !== undefined || window.__TAURI_INTERNALS__ !== undefined || window.__TAURI_METADATA__ !== undefined);

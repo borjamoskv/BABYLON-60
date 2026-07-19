@@ -3,6 +3,7 @@
 [C5-REAL] Exergy Optimizer Agent Proof of Concept.
 Simulates high-entropy vs. high-exergy code changes and evaluates them using the GELABP framework.
 """
+
 import sys
 import os
 
@@ -39,14 +40,16 @@ index e456f78..b890c12 100644
 +    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)
 """
 
+
 def print_banner(title: str):
     print("=" * 60)
     print(f"🔹 {title.upper()}")
     print("=" * 60)
 
+
 def run_poc():
     print_banner("C5-REAL Exergy Agent Proof of Concept")
-    
+
     # Test Scenario 1: Bad code (leak + broad exception + weak pattern)
     print_banner("Scenario 1: Code Mutation containing High Entropy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_ENTROPY.strip()}\n")
@@ -72,6 +75,7 @@ def run_poc():
     print(f"  B (Bottleneck):{b2}")
     print(f"Veredicto: {'🟢 PASS' if exergy2 >= 700.0 else '🔴 FAIL (Fallo síncrono provocado)'}")
     print()
+
 
 if __name__ == "__main__":
     run_poc()

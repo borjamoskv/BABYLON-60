@@ -18,6 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "cortex_memory.db"
 AUDIT_DIR = REPO_ROOT / "cortex" / "audits"
 
+
 def get_conversation_id() -> str:
     cid = os.getenv("ANTIGRAVITY_CONVERSATION_ID") or os.getenv("CONVERSATION_ID")
     if cid:
@@ -34,10 +35,13 @@ def get_conversation_id() -> str:
         return candidates[0][0]
     return "unknown-session"
 
+
 CONV_ID = get_conversation_id()
 CONV_ID_SHORT = CONV_ID[:8]
 AUDIT_FILE = AUDIT_DIR / f"autocognition_omega_audit_{CONV_ID_SHORT}.yaml"
-TRANSCRIPT_PATH = Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
+TRANSCRIPT_PATH = (
+    Path.home() / ".gemini" / "antigravity" / "brain" / CONV_ID / ".system_generated" / "logs" / "transcript.jsonl"
+)
 
 
 def compute_sha3(data: str) -> str:
@@ -86,12 +90,16 @@ def run_autocognition_audit() -> None:
                     yaml_claims = re.findall(r"Claim:[\s\S]*?Proof:[\s\S]*?\}", content)
                     table_rows = [r for r in content.splitlines() if r.strip().startswith("|")]
 
-                    struct_chars = sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
+                    struct_chars = (
+                        sum(len(b) for b in code_blocks)
+                        + sum(len(y) for y in yaml_claims)
+                        + sum(len(t) for t in table_rows)
+                    )
                     struct_words = struct_chars / 5.0
                     struct_tokens = min(approx_tokens, int(struct_words * 1.33))
-                    
+
                     structured_tokens += struct_tokens
-                    narrative_tokens += (approx_tokens - struct_tokens)
+                    narrative_tokens += approx_tokens - struct_tokens
 
                 # Track commands to detect command repeats
                 for call in step.get("tool_calls", []):
@@ -108,7 +116,9 @@ def run_autocognition_audit() -> None:
     cmd_repeat_index = round((repeat_commands / len(commands_executed)), 4) if commands_executed else 0.0
 
     print(f"[+] Transcript Steps: {total_steps} | Total Approx Tokens: {total_tokens}")
-    print(f"[+] Structured Tokens: {structured_tokens} ({exergy_ratio*100:.1f}%) | Narrative Tokens: {narrative_tokens} ({anergy_ratio*100:.1f}%)")
+    print(
+        f"[+] Structured Tokens: {structured_tokens} ({exergy_ratio * 100:.1f}%) | Narrative Tokens: {narrative_tokens} ({anergy_ratio * 100:.1f}%)"
+    )
     print(f"[+] Command Repeat Index: {cmd_repeat_index} ({repeat_commands} duplicated shell executions)")
     print(f"[+] Tool Errors: {tool_errors}")
 
@@ -122,7 +132,7 @@ SYS_ID: AUTOCOGNITION_OMEGA
 STATE: C5-REAL
 AESTHETIC: INDUSTRIAL_NOIR_2026
 SESSION_ID: {CONV_ID}
-TIMESTAMP: {time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+TIMESTAMP: {time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
 
 Metrics:
   total_transcript_steps: {total_steps}
@@ -170,15 +180,27 @@ OP_TAINT_SEAL:
         )
     """)
 
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT OR REPLACE INTO L3_inference_cache (query_hash, active_mode, retrieved_nodes, applied_isomorphisms, trace_payload, hits)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, (sha3_seal, "AUTOCOGNITION_OMEGA", "LEA_OMEGA.C5_REAL", "ZERO_ANERGY_PURGE", json.dumps({
-        "exergy_ratio": exergy_ratio,
-        "anergy_ratio": anergy_ratio,
-        "cmd_repeat_index": cmd_repeat_index,
-        "seal": sha3_seal
-    }), 1))
+    """,
+        (
+            sha3_seal,
+            "AUTOCOGNITION_OMEGA",
+            "LEA_OMEGA.C5_REAL",
+            "ZERO_ANERGY_PURGE",
+            json.dumps(
+                {
+                    "exergy_ratio": exergy_ratio,
+                    "anergy_ratio": anergy_ratio,
+                    "cmd_repeat_index": cmd_repeat_index,
+                    "seal": sha3_seal,
+                }
+            ),
+            1,
+        ),
+    )
 
     conn.commit()
     conn.close()

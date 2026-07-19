@@ -1,147 +1,2529 @@
 from __future__ import annotations
 import os
 from typing import Any
+
 DISCLAIMER_ES = "AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios."
 DISCLAIMER_EN = "NOTICE. This is a KNOWLEDGE ONTOLOGY of cancer molecular biology and its therapeutic targets. It is NOT a cure, NOT a treatment protocol and NOT medical advice. No single primitive nor the whole set 'cures cancer'. Cancer is 200+ distinct diseases; diagnosis and treatment are clinical and individualized. Consult qualified healthcare professionals."
-CATS = {'hallmark': ('Hallmarks del cancer', 'meta'), 'oncogene': ('Oncogenes', 'molecular'), 'suppressor': ('Genes supresores de tumores', 'molecular'), 'pathway': ('Vias de senalizacion', 'pathway'), 'cellcycle': ('Ciclo celular y checkpoints', 'cellular'), 'apoptosis': ('Apoptosis y muerte celular regulada', 'cellular'), 'ddr': ('Respuesta al dano y reparacion de ADN', 'molecular'), 'genome': ('Inestabilidad genomica y mutagenesis', 'molecular'), 'telomere': ('Telomeros, senescencia e inmortalidad', 'cellular'), 'angio': ('Angiogenesis', 'cellular'), 'metastasis': ('Invasion, EMT y metastasis', 'cellular'), 'metabolism': ('Metabolismo tumoral', 'molecular'), 'epigenetic': ('Epigenetica y cromatina', 'molecular'), 'tme': ('Microambiente tumoral (TME)', 'tissue'), 'immuno': ('Inmuno-oncologia y evasion inmune', 'tissue'), 'modality': ('Modalidades terapeuticas', 'therapy'), 'drug': ('Primitivas farmaco -> diana', 'therapy')}
-R_HW00 = 'Hanahan & Weinberg, Cell 2000'
-R_HW11 = 'Hanahan & Weinberg, Cell 2011'
-R_H22 = 'Hanahan, Cancer Discov 2022 (New Dimensions)'
-R_WBC = 'Weinberg RA, The Biology of Cancer, 2nd ed. 2014'
-R_VOG = 'Vogelstein et al., Science 2013 (Cancer Genome Landscapes)'
-PRIMS = [('Sustaining proliferative signaling', 'hallmark', 'process', 'Las celulas tumorales generan y sostienen senales mitogenicas de forma autonoma (p.ej. via RTK/RAS).', 'Objetivo de inhibidores de RTK y de la via MAPK.', R_HW11), ('Evading growth suppressors', 'hallmark', 'process', 'Elusion de frenos antiproliferativos como RB y TP53.', 'Restaurar checkpoints; inhibidores CDK4/6; reactivadores de p53.', R_HW11), ('Resisting cell death', 'hallmark', 'process', 'Bloqueo de apoptosis por sobreexpresion de anti-apoptoticos o perdida de sensores.', 'Mimeticos BH3 (venetoclax) restauran la muerte.', R_HW11), ('Enabling replicative immortality', 'hallmark', 'process', 'Mantenimiento telomerico (telomerasa/ALT) que evita la senescencia replicativa.', 'Inhibicion de telomerasa (investigacion).', R_HW11), ('Inducing angiogenesis', 'hallmark', 'process', 'Activacion del switch angiogenico para vascularizar el tumor.', 'Anti-VEGF (bevacizumab), TKI antiangiogenicos.', R_HW11), ('Activating invasion and metastasis', 'hallmark', 'process', 'Adquisicion de motilidad, invasion local y diseminacion a distancia.', 'Diana de terapias sobre EMT y microambiente.', R_HW11), ('Deregulating cellular energetics', 'hallmark', 'process', 'Reprogramacion metabolica (efecto Warburg) para soportar proliferacion.', 'Inhibidores metabolicos (IDH mutante, glutaminasa).', R_HW11), ('Avoiding immune destruction', 'hallmark', 'process', 'Escape del reconocimiento y eliminacion por el sistema inmune.', 'Bloqueo de checkpoints (anti-PD-1/PD-L1/CTLA-4).', R_HW11), ('Genome instability and mutation', 'hallmark', 'process', 'Caracteristica facilitadora: tasa mutacional elevada que genera diversidad clonal.', 'Explotable por sintesis letal (PARPi en HRD).', R_HW11), ('Tumor-promoting inflammation', 'hallmark', 'process', 'Caracteristica facilitadora: inflamacion que aporta factores pro-tumorales.', 'Objetivo de estrategias anti-inflamatorias.', R_HW11), ('Unlocking phenotypic plasticity', 'hallmark', 'process', 'Nuevo hallmark 2022: desdiferenciacion/transdiferenciacion que evade el destino celular.', 'Terapias de diferenciacion; reto en resistencia.', R_H22), ('Nonmutational epigenetic reprogramming', 'hallmark', 'process', 'Nuevo hallmark 2022: adquisicion de capacidades por cambios epigeneticos sin mutacion.', 'Farmacos epigeneticos (DNMTi, HDACi, EZH2i).', R_H22), ('Polymorphic microbiomes', 'hallmark', 'process', 'Nuevo hallmark 2022: microbiota que modula iniciacion, progresion y respuesta terapeutica.', 'Modulacion del microbioma; impacto en inmunoterapia.', R_H22), ('Senescent cells', 'hallmark', 'process', 'Nuevo hallmark 2022: celulas senescentes y su SASP modulan capacidades tumorales.', 'Senoliticos (investigacion).', R_H22), ('Clonal evolution and intratumoral heterogeneity', 'hallmark', 'process', 'Seleccion darwiniana de subclones que genera heterogeneidad espacial y temporal.', 'Base de la resistencia; terapias adaptativas.', 'Nowell, Science 1976; Greaves & Maley, Nature 2012'), ('Two-hit hypothesis (Knudson)', 'hallmark', 'process', 'Los supresores tumorales suelen requerir inactivacion bialelica para perder funcion.', 'Marco de riesgo hereditario (RB1, BRCA).', 'Knudson, PNAS 1971'), ('KRAS', 'oncogene', 'oncogene', 'GTPasa RAS; mutaciones (G12/G13/Q61) la fijan activa y disparan MAPK/PI3K.', 'KRAS G12C: sotorasib, adagrasib.', 'Prior et al., Cancer Res 2020'), ('HRAS', 'oncogene', 'oncogene', 'Isoforma RAS mutada en tumores de cabeza y cuello y vejiga.', 'Inhibidor de farnesiltransferasa (tipifarnib) en HRAS-mut.', R_WBC), ('NRAS', 'oncogene', 'oncogene', 'Isoforma RAS frecuentemente mutada en melanoma y leucemias.', 'Diana indirecta via MEK; sin inhibidor directo aprobado.', R_WBC), ('BRAF', 'oncogene', 'oncogene', 'Cinasa RAF; V600E constitutivamente activa la via MAPK.', 'Vemurafenib/dabrafenib + inhibidor MEK.', 'Davies et al., Nature 2002'), ('EGFR', 'oncogene', 'oncogene', 'RTK cuya activacion/mutacion (ex19del, L858R) impulsa proliferacion.', 'TKI de EGFR (gefitinib, osimertinib).', 'Lynch et al., NEJM 2004'), ('ERBB2 / HER2', 'oncogene', 'oncogene', 'RTK amplificado en subtipos de mama y gastrico.', 'Trastuzumab, pertuzumab, T-DXd.', 'Slamon et al., Science 1987'), ('MYC', 'oncogene', 'oncogene', 'Factor de transcripcion maestro de crecimiento; amplificado/translocado.', "Diana 'undruggable'; BET-i indirectos.", 'Dang, Cell 2012'), ('MYCN', 'oncogene', 'oncogene', 'Parologo de MYC amplificado en neuroblastoma de alto riesgo.', 'Biomarcador pronostico; BET/Aurora-A indirectos.', R_WBC), ('MET', 'oncogene', 'oncogene', 'RTK (receptor de HGF); amplificacion o exon 14 skipping activan la via.', 'Capmatinib, tepotinib, crizotinib.', R_WBC), ('ALK', 'oncogene', 'oncogene', 'RTK activada por fusiones (EML4-ALK) en NSCLC.', 'Crizotinib, alectinib, lorlatinib.', 'Soda et al., Nature 2007'), ('ROS1', 'oncogene', 'oncogene', 'RTK activada por fusiones en un subconjunto de NSCLC.', 'Crizotinib, entrectinib.', R_WBC), ('RET', 'oncogene', 'oncogene', 'RTK activada por fusiones o mutaciones puntuales (MEN2).', 'Selpercatinib, pralsetinib.', R_WBC), ('FLT3', 'oncogene', 'oncogene', 'RTK mutada (ITD/TKD) en leucemia mieloide aguda.', 'Midostaurina, gilteritinib.', R_WBC), ('KIT', 'oncogene', 'oncogene', 'RTK con mutaciones activadoras en GIST y mastocitosis.', 'Imatinib, avapritinib.', 'Hirota et al., Science 1998'), ('PDGFRA', 'oncogene', 'oncogene', 'RTK relacionada con KIT; mutada en subgrupos de GIST.', 'Avapritinib (D842V), imatinib.', R_WBC), ('ABL1 (BCR-ABL)', 'oncogene', 'oncogene', 'Fusion del cromosoma Filadelfia con tirosina-cinasa constitutiva en LMC.', 'Imatinib y TKI de siguiente generacion.', 'Rowley, Nature 1973'), ('JAK2', 'oncogene', 'oncogene', 'Cinasa citoplasmatica; V617F impulsa neoplasias mieloproliferativas.', 'Ruxolitinib (JAK1/2).', 'James et al., Nature 2005'), ('PIK3CA', 'oncogene', 'oncogene', 'Subunidad p110-alfa de PI3K; mutaciones activan PI3K-AKT.', 'Alpelisib en mama HR+ PIK3CA-mut.', 'Samuels et al., Science 2004'), ('AKT1', 'oncogene', 'oncogene', 'Cinasa central de supervivencia/crecimiento aguas abajo de PI3K.', 'Inhibidores de AKT (capivasertib).', R_WBC), ('MTOR', 'oncogene', 'oncogene', 'Cinasa que integra nutrientes y crecimiento; activacion aberrante en tumores.', 'Everolimus, temsirolimus.', R_WBC), ('MDM2', 'oncogene', 'oncogene', 'E3 ligasa que degrada p53; su amplificacion inactiva p53 sin mutarlo.', 'Inhibidores MDM2-p53 (investigacion).', 'Momand et al., Cell 1992'), ('CCND1 (Cyclin D1)', 'oncogene', 'oncogene', 'Ciclina que activa CDK4/6 e impulsa la transicion G1/S.', 'Sensibiliza a inhibidores CDK4/6.', R_WBC), ('CDK4', 'oncogene', 'oncogene', 'Cinasa dependiente de ciclina que fosforila RB en G1.', 'Palbociclib, ribociclib, abemaciclib.', R_WBC), ('CDK6', 'oncogene', 'oncogene', 'Parologo de CDK4 en el eje ciclina D-RB.', 'Inhibidores CDK4/6.', R_WBC), ('BCL2', 'oncogene', 'oncogene', 'Proteina anti-apoptotica sobreexpresada (t(14;18)) que bloquea la muerte.', 'Venetoclax (mimetico BH3).', 'Tsujimoto et al., Science 1984'), ('EZH2', 'oncogene', 'oncogene', 'Metiltransferasa de PRC2 (H3K27me3); mutaciones GOF en linfoma folicular.', 'Tazemetostat.', R_WBC), ('IDH1', 'oncogene', 'oncogene', 'Mutacion neomorfica que produce el oncometabolito 2-HG (glioma, LMA).', 'Ivosidenib.', 'Dang et al., Nature 2009'), ('IDH2', 'oncogene', 'oncogene', 'Isoforma mitocondrial con mutacion neomorfica productora de 2-HG.', 'Enasidenib.', R_WBC), ('FGFR1', 'oncogene', 'oncogene', 'RTK de la familia FGFR; amplificacion/fusion en varios tumores.', 'Inhibidores pan-FGFR (erdafitinib, pemigatinib).', R_WBC), ('CTNNB1 (beta-catenina)', 'oncogene', 'oncogene', 'Efector de Wnt; mutaciones lo estabilizan y activan transcripcion pro-tumoral.', 'Diana dificil; via Wnt en investigacion.', R_WBC), ('TP53', 'suppressor', 'suppressor', 'Guardian del genoma; induce arresto/apoptosis ante estres; mutado en ~50% de tumores.', 'Reactivadores de p53 mutante (investigacion).', 'Levine, Cell 1997'), ('RB1', 'suppressor', 'suppressor', 'Freno del ciclo celular que secuestra E2F; su perdida libera G1/S.', 'Perdida de RB confiere resistencia a CDK4/6i.', 'Weinberg, Cell 1995'), ('PTEN', 'suppressor', 'suppressor', 'Fosfatasa que antagoniza PI3K; su perdida hiperactiva AKT.', 'Sensibiliza a inhibidores de PI3K/AKT.', R_WBC), ('APC', 'suppressor', 'suppressor', 'Regulador negativo de beta-catenina; su perdida inicia cancer colorrectal.', 'Marco de la via Wnt en CCR.', 'Kinzler & Vogelstein, Cell 1996'), ('VHL', 'suppressor', 'suppressor', 'E3 ligasa que degrada HIF; su perdida activa pseudohipoxia (renal).', 'Belzutifan (HIF-2 alfa).', R_WBC), ('BRCA1', 'suppressor', 'suppressor', 'Reparacion por recombinacion homologa; su perdida causa HRD.', 'Sintesis letal con inhibidores de PARP.', 'Miki et al., Science 1994'), ('BRCA2', 'suppressor', 'suppressor', 'Carga RAD51 en la HR; su perdida sensibiliza a dano de ADN.', 'Olaparib y otros PARPi.', 'Wooster et al., Nature 1995'), ('PALB2', 'suppressor', 'suppressor', 'Puente entre BRCA1 y BRCA2 en la HR; su perdida da fenotipo BRCAness.', 'PARPi en HRD.', R_WBC), ('NF1', 'suppressor', 'suppressor', 'GAP que apaga RAS; su perdida sostiene senal MAPK.', 'Sensibilidad a inhibidores de MEK.', R_WBC), ('NF2 (Merlin)', 'suppressor', 'suppressor', 'Activador de Hippo; su perdida activa YAP/TAZ (meningioma, mesotelioma).', 'Inhibidores de YAP/TEAD (investigacion).', R_WBC), ('CDKN2A (p16INK4a)', 'suppressor', 'suppressor', 'Inhibe CDK4/6 manteniendo RB activo; deleccion frecuente.', 'Predice dependencia de CDK4/6.', R_WBC), ('CDKN1A (p21)', 'suppressor', 'suppressor', 'Inhibidor de CDK inducido por p53 que impone arresto del ciclo.', 'Mediador de senescencia terapeutica.', R_WBC), ('CDKN1B (p27)', 'suppressor', 'suppressor', 'Inhibidor de CDK que frena la transicion G1/S.', 'Su degradacion marca agresividad.', R_WBC), ('SMAD4', 'suppressor', 'suppressor', 'Mediador central de TGF-beta; su perdida elude su efecto citostatico.', 'Contexto de senalizacion TGF-beta.', R_WBC), ('STK11 (LKB1)', 'suppressor', 'suppressor', 'Cinasa que activa AMPK y frena mTOR; su perdida altera metabolismo e inmunidad.', 'Asociada a resistencia a anti-PD-1.', R_WBC), ('TSC1', 'suppressor', 'suppressor', 'Con TSC2 inhibe mTORC1; su perdida hiperactiva mTOR.', 'Sensibilidad a inhibidores de mTOR.', R_WBC), ('TSC2', 'suppressor', 'suppressor', 'GAP de RHEB que reprime mTORC1.', 'Everolimus en tumores asociados a TSC.', R_WBC), ('WT1', 'suppressor', 'suppressor', 'Factor de transcripcion supresor en tumor de Wilms (rol dual).', 'Antigeno para inmunoterapia.', R_WBC), ('MEN1 (menina)', 'suppressor', 'suppressor', 'Supresor en tumores neuroendocrinos; interacciona con complejos MLL.', 'Inhibidores menina-MLL en leucemias.', R_WBC), ('PTCH1', 'suppressor', 'suppressor', 'Receptor que reprime Hedgehog; su perdida activa la via (basocelular, meduloblastoma).', 'Vismodegib, sonidegib.', R_WBC), ('ARID1A', 'suppressor', 'suppressor', 'Subunidad de SWI/SNF (BAF); mutaciones alteran la accesibilidad de cromatina.', 'Sintesis letal con EZH2/ATR (investigacion).', R_WBC), ('SMARCB1', 'suppressor', 'suppressor', 'Subunidad nuclear de SWI/SNF; su perdida define tumores rabdoides.', 'Dependencia de EZH2 (tazemetostat).', R_WBC), ('FBXW7', 'suppressor', 'suppressor', 'Receptor de E3 ligasa que degrada MYC, ciclina E y NOTCH.', 'Su perdida estabiliza oncoproteinas.', R_WBC), ('CDH1 (E-cadherina)', 'suppressor', 'suppressor', 'Adhesion celula-celula; su perdida favorece invasion (gastrico difuso, lobulillar).', 'Biomarcador hereditario (CDH1).', R_WBC), ('Receptor tyrosine kinase (RTK) signaling', 'pathway', 'process', 'Receptores de superficie que traducen factores de crecimiento a senales intracelulares.', 'Nodo mayor de inhibidores dirigidos.', R_WBC), ('RAS-RAF-MEK-ERK (MAPK)', 'pathway', 'process', 'Cascada mitogenica central; hiperactivada por RAS/RAF/RTK.', 'Inhibidores de BRAF y MEK.', R_WBC), ('PI3K-AKT-mTOR', 'pathway', 'process', 'Eje de supervivencia, crecimiento y metabolismo.', 'Alpelisib, capivasertib, everolimus.', R_WBC), ('Wnt / beta-catenin', 'pathway', 'process', 'Via de stemness y proliferacion; aberrante en CCR y otros.', 'Diana dificil; en investigacion.', 'Clevers, Cell 2006'), ('Hedgehog', 'pathway', 'process', 'Via del desarrollo reactivada en basocelular y meduloblastoma.', 'Vismodegib, sonidegib.', R_WBC), ('Notch', 'pathway', 'process', 'Senal de contacto con rol oncogenico o supresor segun contexto.', 'Gamma-secretasa (investigacion).', R_WBC), ('JAK-STAT', 'pathway', 'process', 'Transduce citocinas hacia transcripcion de supervivencia/proliferacion.', 'Ruxolitinib (JAK1/2).', R_WBC), ('TGF-beta / SMAD', 'pathway', 'process', 'Citostatica temprana pero pro-invasiva y pro-inmunosupresora tardia.', 'Diana dual segun estadio.', R_WBC), ('Hippo-YAP/TAZ', 'pathway', 'process', 'Controla tamano de organo; su desregulacion activa coactivadores YAP/TAZ.', 'Inhibidores TEAD (investigacion).', R_WBC), ('NF-kappaB', 'pathway', 'process', 'Factor de transcripcion de inflamacion y supervivencia.', 'Diana en neoplasias hematologicas.', R_WBC), ('p53 network', 'pathway', 'process', 'Red de respuesta a estres que decide arresto, reparacion o apoptosis.', 'Restauracion/estabilizacion de p53.', 'Vousden & Prives, Cell 2009'), ('RB-E2F axis', 'pathway', 'process', 'Controla la entrada en fase S liberando E2F al fosforilarse RB.', 'Inhibidores CDK4/6.', R_WBC), ('MYC transcriptional program', 'pathway', 'process', 'Amplifica la transcripcion global que sostiene crecimiento y metabolismo.', 'BET-i, inhibicion de sintesis (indirecta).', 'Dang, Cell 2012'), ('HIF / hypoxia response', 'pathway', 'process', 'Adaptacion a hipoxia que induce angiogenesis y glucolisis.', 'Belzutifan (HIF-2 alfa).', 'Semenza, Cell 2012'), ('NRF2-KEAP1', 'pathway', 'process', 'Respuesta antioxidante secuestrada por tumores para tolerar ROS.', 'Diana metabolica emergente.', R_WBC), ('Estrogen receptor (ER) signaling', 'pathway', 'process', 'Impulsa proliferacion en cancer de mama ER+.', 'Tamoxifeno, inhibidores de aromatasa, SERD.', R_WBC), ('Androgen receptor (AR) signaling', 'pathway', 'process', 'Motor del cancer de prostata.', 'Enzalutamida, abiraterona.', R_WBC), ('cGAS-STING', 'pathway', 'process', 'Sensor de ADN citosolico que activa inmunidad innata tipo I.', 'Agonistas STING (investigacion inmuno).', R_WBC), ('G1/S checkpoint (restriction point)', 'cellcycle', 'process', 'Punto de compromiso a la division controlado por RB-E2F.', 'Inhibidores CDK4/6 lo bloquean.', R_WBC), ('G2/M checkpoint', 'cellcycle', 'process', 'Impide entrar en mitosis con ADN danado (ATR-CHK1-WEE1).', 'Inhibidores de WEE1/ATR/CHK1.', R_WBC), ('Spindle assembly checkpoint (SAC)', 'cellcycle', 'process', 'Retrasa la anafase hasta el correcto anclaje de cromosomas.', 'Diana de taxanos y alcaloides de la vinca.', R_WBC), ('Cyclin D-CDK4/6', 'cellcycle', 'process', 'Complejo que inicia la fosforilacion de RB en G1.', 'Palbociclib, ribociclib, abemaciclib.', R_WBC), ('Cyclin E-CDK2', 'cellcycle', 'process', 'Completa la inactivacion de RB y dispara la fase S.', 'Inhibidores de CDK2 (investigacion).', R_WBC), ('Cyclin A-CDK2', 'cellcycle', 'process', 'Sostiene la progresion en fase S y replicacion del ADN.', 'Contexto de estres replicativo.', R_WBC), ('Cyclin B-CDK1', 'cellcycle', 'process', 'Factor promotor de la mitosis (MPF) que desencadena la mitosis.', 'Diana indirecta antimitotica.', R_WBC), ('RB phosphorylation', 'cellcycle', 'process', 'La hiperfosforilacion de RB libera E2F y permite la fase S.', 'Bloqueada por inhibidores CDK4/6.', R_WBC), ('E2F transcriptional release', 'cellcycle', 'process', 'E2F activa genes de replicacion al liberarse de RB.', 'Nodo del control G1/S.', R_WBC), ('p16-CDK4/6-RB axis', 'cellcycle', 'process', 'Eje supresor que mantiene RB activo; a menudo inactivado en tumores.', 'Predice respuesta a CDK4/6i.', R_WBC), ('CDC25 phosphatases', 'cellcycle', 'process', 'Activan complejos CDK removiendo fosfatos inhibidores.', 'Diana experimental.', R_WBC), ('WEE1 kinase', 'cellcycle', 'process', 'Frena CDK1 imponiendo el checkpoint G2/M.', 'Adavosertib (WEE1i).', R_WBC), ('APC/C (anaphase-promoting complex)', 'cellcycle', 'process', 'E3 ligasa que degrada ciclinas y securina para la anafase.', 'Objeto de estudio antimitotico.', R_WBC), ('Intrinsic (mitochondrial) apoptosis', 'apoptosis', 'process', 'Estres interno provoca MOMP y liberacion de citocromo c.', 'Restaurada por mimeticos BH3.', 'Green & Kroemer, Science 2004'), ('Extrinsic (death receptor) apoptosis', 'apoptosis', 'process', 'Ligandos de muerte activan caspasa-8 via receptores.', 'Agonistas de DR (investigacion).', R_WBC), ('BCL2 (anti-apoptotic)', 'apoptosis', 'target', 'Secuestra proteinas pro-apoptoticas impidiendo la MOMP.', 'Venetoclax.', 'Souers et al., Nat Med 2013'), ('BCL-XL (BCL2L1)', 'apoptosis', 'target', 'Guardian anti-apoptotico clave en plaquetas y tumores solidos.', 'Inhibidores BCL-XL (toxicidad plaquetaria).', R_WBC), ('MCL1', 'apoptosis', 'target', 'Anti-apoptotica de vida corta que media resistencia.', 'Inhibidores de MCL1 (investigacion).', R_WBC), ('BAX', 'apoptosis', 'process', 'Efector que oligomeriza y permeabiliza la membrana mitocondrial.', 'Activacion promuerte deseada.', R_WBC), ('BAK', 'apoptosis', 'process', 'Efector complementario de BAX en la MOMP.', 'Restaurar su activacion.', R_WBC), ('BIM (BCL2L11)', 'apoptosis', 'process', 'BH3-only activador que dispara BAX/BAK.', 'Su induccion media respuesta a TKI.', R_WBC), ('PUMA (BBC3)', 'apoptosis', 'process', 'BH3-only inducido por p53 que sensibiliza a apoptosis.', 'Efector de terapias que activan p53.', R_WBC), ('NOXA (PMAIP1)', 'apoptosis', 'process', 'BH3-only que neutraliza MCL1 preferentemente.', 'Sinergiza con inhibidores BCL2.', R_WBC), ('Cytochrome c / apoptosome (APAF1)', 'apoptosis', 'process', 'El citocromo c liberado ensambla el apoptosoma que activa caspasa-9.', 'Nodo central de la via intrinseca.', R_WBC), ('Caspase-8 (initiator)', 'apoptosis', 'process', 'Iniciadora de la via extrinseca en el DISC.', 'Diana de estrategias pro-muerte.', R_WBC), ('Caspase-9 (initiator)', 'apoptosis', 'process', 'Iniciadora activada por el apoptosoma.', 'Nodo intrinseco.', R_WBC), ('Caspase-3 (executioner)', 'apoptosis', 'process', 'Ejecutora que degrada sustratos y desmantela la celula.', 'Marcador de muerte efectiva.', R_WBC), ('FAS-FASL', 'apoptosis', 'process', 'Par receptor-ligando de muerte de la via extrinseca.', 'Modulacion inmune de la muerte.', R_WBC), ('TRAIL-DR4/DR5', 'apoptosis', 'target', 'Ligando y receptores que inducen apoptosis selectiva en tumores.', 'Agonistas de DR5 (investigacion).', R_WBC), ('XIAP', 'apoptosis', 'target', 'IAP que inhibe caspasas ejecutoras.', 'Antagonistas SMAC-mimeticos.', R_WBC), ('Survivin (BIRC5)', 'apoptosis', 'target', 'IAP sobreexpresada que bloquea apoptosis y regula mitosis.', 'Diana e inmunodiana.', R_WBC), ('SMAC/DIABLO', 'apoptosis', 'process', 'Neutraliza IAP al liberarse de la mitocondria.', 'Base de los SMAC-mimeticos.', R_WBC), ('Necroptosis (RIPK3-MLKL)', 'apoptosis', 'process', 'Muerte litica programada independiente de caspasas.', 'Explotable ante apoptosis bloqueada.', 'Vandenabeele et al., Nat Rev Mol Cell Biol 2010'), ('Ferroptosis (GPX4)', 'apoptosis', 'target', 'Muerte por peroxidacion lipidica dependiente de hierro; GPX4 la reprime.', 'Inductores de ferroptosis (investigacion).', 'Dixon et al., Cell 2012'), ('Pyroptosis (gasdermin)', 'apoptosis', 'process', 'Muerte inflamatoria mediada por poros de gasdermina.', 'Interfaz con inmunidad antitumoral.', 'Shi et al., Nature 2015'), ('ATM kinase', 'ddr', 'process', 'Sensor apical de roturas de doble cadena que coordina el DDR.', 'Su perdida sensibiliza a inhibidores.', 'Shiloh, Nat Rev Cancer 2003'), ('ATR kinase', 'ddr', 'process', 'Sensor de estres replicativo y ADN monocatenario.', 'Inhibidores de ATR (investigacion).', R_WBC), ('CHK1', 'ddr', 'process', 'Efector de ATR que impone el checkpoint intra-S y G2/M.', 'Inhibidores de CHK1.', R_WBC), ('CHK2', 'ddr', 'process', 'Efector de ATM que propaga la senal de dano a p53/CDC25.', 'Contexto de checkpoints.', R_WBC), ('DNA-PKcs', 'ddr', 'process', 'Cinasa central del NHEJ que une extremos rotos.', 'Radiosensibilizacion.', R_WBC), ('Homologous recombination (RAD51)', 'ddr', 'process', 'Reparacion fiel de DSB usando la cromatida hermana.', 'Su deficiencia (HRD) sensibiliza a PARPi/platino.', 'Farmer et al., Nature 2005'), ('Non-homologous end joining (NHEJ)', 'ddr', 'process', 'Reparacion rapida y propensa a error que religa extremos.', 'Radiosensibilizacion.', R_WBC), ('Mismatch repair (MMR)', 'ddr', 'process', 'Corrige errores de apareamiento; su perdida causa MSI e hipermutacion.', 'dMMR/MSI-H predice respuesta a anti-PD-1.', 'Le et al., NEJM 2015'), ('Base excision repair (BER)', 'ddr', 'process', 'Repara bases danadas por oxidacion/alquilacion.', 'Contexto de sensibilidad a PARP.', R_WBC), ('Nucleotide excision repair (NER)', 'ddr', 'process', 'Elimina lesiones voluminosas como aductos de platino/UV.', 'Modula respuesta al platino.', R_WBC), ('PARP1', 'ddr', 'target', 'Detecta roturas de cadena simple e inicia su reparacion.', 'Olaparib y otros PARPi (sintesis letal).', 'Bryant et al., Nature 2005'), ('Fanconi anemia pathway', 'ddr', 'process', 'Resuelve enlaces cruzados interhebra coordinando HR.', 'Sensibilidad a agentes de cross-link.', R_WBC), ('53BP1', 'ddr', 'process', 'Favorece NHEJ y antagoniza la reseccion; su perdida da resistencia a PARPi.', 'Biomarcador de resistencia.', R_WBC), ('gamma-H2AX', 'ddr', 'biomarker', 'Fosforilacion de H2AX que marca focos de dano de doble cadena.', 'Biomarcador de dano/eficacia.', R_WBC), ('MRN complex (MRE11-RAD50-NBS1)', 'ddr', 'process', 'Sensa y resecciona DSB reclutando ATM.', 'Nodo temprano del DDR.', R_WBC), ('Replication stress response', 'ddr', 'process', 'Gestion de horquillas de replicacion estancadas o colapsadas.', 'Explotable con ATR/WEE1/CHK1i.', R_WBC), ('Synthetic lethality', 'ddr', 'mechanism', 'Dos defectos individualmente tolerables son letales juntos.', 'Paradigma PARPi en HRD.', 'Kaelin, Nat Rev Cancer 2005'), ('BRCAness', 'ddr', 'biomarker', 'Fenotipo de deficiencia de HR sin mutacion germinal de BRCA.', 'Amplia la poblacion candidata a PARPi.', 'Lord & Ashworth, Nat Med 2013'), ('Chromosomal instability (CIN)', 'genome', 'process', 'Tasa elevada de errores en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana.', 'Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC.', 'Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018'), ('Microsatellite instability (MSI)', 'genome', 'biomarker', 'Hipermutabilidad y expansion/contraccion aberrante de secuencias repetitivas mononucleotidas y dinucleotidas provocada por deficiencia en el sistema de reparacion de apareamientos erroneos (dMMR: MLH1, MSH2, MSH6, PMS2).', 'Biomarcador agnostico tumor-independiente (MSI-H/dMMR) que predice respuesta excepcional y duradera al bloqueo de puntos de control inmunitario (anti-PD-1 pembrolizumab/nivolumab).', 'Vogelstein et al., Science 2013; Le et al., NEJM 2017'), ('Aneuploidy', 'genome', 'process', 'Estado genomico con numero anomalo de cromosomas enteros (monosomia/trisomia/tetrasomia) que altera el balance de dosis genica, induce estres proteotoxico endoplasmico y activa checkpoints de spindle.', 'Las celulas aneuploides presentan vulnerabilidades emergentes acopladas al estres del reticulo endoplasmico y dependencia hipertrofica del punto de control del huso mitotico (SAC: BUB1B/MPS1).', 'Ben-David & Amon, Nat Rev Cancer 2020'), ('Tumor mutational burden (TMB)', 'genome', 'biomarker', 'Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb).', 'TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos.', 'Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020'), ('Mutational signatures (COSMIC)', 'genome', 'biomarker', 'Deconstruccion matematica de perfiles trinucleotidos (catálogo COSMIC v3.4 SBS/ID/CN) que revela las huellas digitales mutacionales de procesos endogenos y exogenos (desaminacion 5mC SBS1, APOBEC SBS2/13, HRD SBS3, tabaco SBS4, UV SBS7).', 'Permiten inferir la etiologia oncogenica subyacente, estratificar la agresividad tumoral y predecir dianas accionables (ej. firma HRD/SBS3 predice sensibilidad a platino y PARPi).', 'Alexandrov et al., Nature 2013; Alexandrov et al., Nature 2020'), ('APOBEC mutagenesis', 'genome', 'process', 'Hiperactividad desregulada de enzimas citidina-desaminasas (APOBEC3A/APOBEC3B) sobre ADN de cadena sencilla que catalizan C->T o C->G preferentemente en contextos trinucleotidos TCW (W = A o T).', 'Genera lluvias mutacionales agrupadas y alto volumen de neoantigenos; su actividad sostenida promueve evolucion clonal, evasión inmunológica y resistencia adquirida a terapias dirigidas.', 'Swanton et al., Cancer Discov 2015; Bozek et al., Genome Biol 2023'), ('Chromothripsis', 'genome', 'process', 'Evento catastrofico en una sola division celular (a menudo en micronucleos tras segregacion anomala) donde uno o varios cromosomas se fragmentan masivamente y re-ensamblan aleatoriamente por NHEJ/MMEJ propensos a error.', 'Origina amplificaciones masivas en aglomerados de oncogenes clave (ecDNA que contiene MYC, MDM2, CDK4 o EGFR) al tiempo que deleciona supresores tumorales en los puntos de fractura.', 'Stephens et al., Cell 2011; Ly et al., Nat Genet 2019'), ('Kataegis', 'genome', 'process', 'Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB.', 'Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal.', 'Nik-Zainal et al., Cell 2012'), ('Whole-genome doubling', 'genome', 'process', 'Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide.', 'Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global.', 'Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020'), ('Loss of heterozygosity (LOH)', 'genome', 'process', 'Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental.', 'El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama.', 'Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012'), ('Oncogene-induced replication stress', 'genome', 'process', 'Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, colapso de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA.', 'Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib).', 'Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014'), ('Extrachromosomal DNA (ecDNA)', 'genome', 'process', 'Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta.', 'Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales).', 'Turner et al., Nature 2017; Wu et al., Nature 2019'), ('Telomerase (TERT)', 'telomere', 'target', 'Transcriptasa inversa que elonga telomeros y confiere inmortalidad.', 'Inhibicion de telomerasa (investigacion).', 'Kim et al., Science 1994'), ('TERT promoter mutations', 'telomere', 'biomarker', 'Mutaciones que reactivan TERT (melanoma, glioma, vejiga).', 'Biomarcador diagnostico/pronostico.', R_WBC), ('Alternative lengthening of telomeres (ALT)', 'telomere', 'process', 'Mantenimiento telomerico por recombinacion, sin telomerasa.', 'Diana de ATR (investigacion).', R_WBC), ('Replicative senescence', 'telomere', 'process', 'Arresto permanente por acortamiento telomerico critico.', 'Barrera a superar por el tumor.', R_WBC), ('Oncogene-induced senescence (OIS)', 'telomere', 'process', 'Freno protector ante oncogenes hiperactivos.', 'Su elusion favorece progresion.', 'Serrano et al., Cell 1997'), ('SASP (senescence-associated secretory phenotype)', 'telomere', 'process', 'Secretoma inflamatorio de celulas senescentes que remodela el TME.', 'Diana de senomorficos.', R_WBC), ('Therapy-induced senescence', 'telomere', 'process', 'Senescencia inducida por quimio/radio con efectos duales.', 'Estrategias one-two punch (senoliticos).', R_WBC), ('Hayflick limit', 'telomere', 'process', 'Numero finito de divisiones de celulas somaticas normales.', 'Marco conceptual de la inmortalizacion.', 'Hayflick & Moorhead, Exp Cell Res 1961'), ('VEGF-A', 'angio', 'target', 'Ligando maestro que induce proliferacion y permeabilidad endotelial.', 'Bevacizumab, aflibercept.', 'Ferrara et al., Nat Med 2003'), ('VEGFR2 (KDR)', 'angio', 'target', 'Receptor principal de la senal angiogenica de VEGF.', 'Ramucirumab; TKI antiangiogenicos.', R_WBC), ('Angiogenic switch', 'angio', 'process', 'Cambio hacia fenotipo pro-angiogenico que vasculariza el tumor.', 'Blanco de la terapia antiangiogenica.', 'Hanahan & Folkman, Cell 1996'), ('HIF-1 alpha', 'angio', 'process', 'Factor de transcripcion de hipoxia que induce VEGF y glucolisis.', 'Diana indirecta; HIF-2 con belzutifan.', R_WBC), ('Tumor hypoxia', 'angio', 'process', 'Baja oxigenacion que selecciona clones agresivos y resistencia.', 'Radiorresistencia; profarmacos hipoxicos.', R_WBC), ('Angiopoietin-Tie2', 'angio', 'target', 'Regula estabilidad y maduracion vascular.', 'Inhibicion dual con VEGF (investigacion).', R_WBC), ('FGF-driven angiogenesis', 'angio', 'process', 'FGF como via alternativa de escape antiangiogenico.', 'Inhibidores pan-FGFR.', R_WBC), ('PDGF pericyte recruitment', 'angio', 'process', 'Reclutamiento de pericitos que estabiliza neovasos.', 'Diana combinada con VEGF.', R_WBC), ('Vascular normalization', 'angio', 'mechanism', 'La antiangiogenica juiciosa normaliza vasos y mejora la entrega de farmaco.', 'Ventana de sinergia con quimio.', 'Jain, Science 2005'), ('Anti-angiogenic therapy', 'angio', 'modality', 'Bloqueo del suministro vascular del tumor.', 'Bevacizumab, sunitinib, sorafenib.', R_WBC), ('Epithelial-mesenchymal transition (EMT)', 'metastasis', 'process', 'Reprogramacion que otorga motilidad e invasividad.', 'Diana de la plasticidad tumoral.', 'Thiery, Nat Rev Cancer 2002'), ('E-cadherin loss', 'metastasis', 'process', 'Perdida de adhesion epitelial que libera celulas invasivas.', 'Marcador de EMT.', R_WBC), ('SNAIL', 'metastasis', 'process', 'Factor de transcripcion que reprime E-cadherina e induce EMT.', 'Diana de EMT (investigacion).', R_WBC), ('TWIST', 'metastasis', 'process', 'Inductor de EMT y stemness metastasica.', 'Contexto de plasticidad.', R_WBC), ('ZEB1', 'metastasis', 'process', 'Represor de epitelialidad que refuerza el estado mesenquimal.', 'Nodo de resistencia/plasticidad.', R_WBC), ('Matrix metalloproteinases (MMPs)', 'metastasis', 'process', 'Proteasas que degradan la matriz y liberan factores.', 'Historicos MMPi (reto de especificidad).', R_WBC), ('Invadopodia', 'metastasis', 'process', 'Protrusiones que focalizan la degradacion de matriz.', 'Diana estructural (investigacion).', R_WBC), ('Basement membrane degradation', 'metastasis', 'process', 'Ruptura de la barrera que separa epitelio y estroma.', 'Paso definitorio de invasion.', R_WBC), ('Intravasation', 'metastasis', 'process', 'Entrada de celulas tumorales a la circulacion.', 'Diana del cascada metastasica.', R_WBC), ('Circulating tumor cells (CTCs)', 'metastasis', 'biomarker', 'Celulas tumorales en sangre; siembra metastasica y biopsia liquida.', 'Monitorizacion no invasiva.', R_WBC), ('Extravasation', 'metastasis', 'process', 'Salida de la circulacion hacia el tejido diana.', 'Paso de la colonizacion.', R_WBC), ('Pre-metastatic niche', 'metastasis', 'process', 'Acondicionamiento a distancia del organo diana antes de la llegada.', 'Diana preventiva (investigacion).', 'Kaplan et al., Nature 2005'), ('Metastatic colonization', 'metastasis', 'process', 'Etapa limitante: crecer en un organo ajeno.', 'Objetivo terapeutico critico.', R_WBC), ('Tumor dormancy', 'metastasis', 'process', 'Celulas diseminadas quiescentes que recaen anos despues.', 'Reto de erradicacion.', R_WBC), ('Organotropism (seed and soil)', 'metastasis', 'process', 'Patrones organo-especificos de metastasis.', 'Explica tropismos clinicos.', 'Paget 1889; Fidler, Nat Rev Cancer 2003'), ('Integrins', 'metastasis', 'target', 'Receptores de matriz que guian adhesion y supervivencia.', 'Modulan tropismo y farmacorresistencia.', R_WBC), ('Focal adhesion kinase (FAK)', 'metastasis', 'target', 'Integra senal de adhesion con supervivencia y motilidad.', 'Inhibidores de FAK (investigacion).', R_WBC), ('Rho/Rac cytoskeletal dynamics', 'metastasis', 'process', 'GTPasas que reorganizan el citoesqueleto para migrar.', 'Diana de motilidad (investigacion).', R_WBC), ('Warburg effect (aerobic glycolysis)', 'metabolism', 'process', 'Preferencia por glucolisis con lactato pese a haber oxigeno.', 'Base de PET-FDG; dianas metabolicas.', 'Warburg 1956; Vander Heiden et al., Science 2009'), ('Glutaminolysis', 'metabolism', 'process', 'Uso de glutamina como carbono/nitrogeno anaplerotico.', 'Inhibidores de glutaminasa (investigacion).', R_WBC), ('Lactate / MCT shuttle', 'metabolism', 'process', 'Exportacion e intercambio de lactato que acidifica el TME.', 'Inhibidores de MCT (investigacion).', R_WBC), ('PKM2', 'metabolism', 'process', 'Isoforma de piruvato-cinasa que favorece biosintesis.', 'Diana metabolica (investigacion).', R_WBC), ('LDHA', 'metabolism', 'process', 'Convierte piruvato en lactato regenerando NAD+.', 'Inhibicion de LDHA (investigacion).', R_WBC), ('GLUT1 (SLC2A1)', 'metabolism', 'process', 'Transportador que eleva la captacion de glucosa.', 'Correlato de PET-FDG.', R_WBC), ('One-carbon / folate metabolism', 'metabolism', 'process', 'Aporta unidades de carbono para nucleotidos y metilacion.', 'Antifolatos (metotrexato, pemetrexed).', R_WBC), ('Serine-glycine biosynthesis', 'metabolism', 'process', 'Ruta biosintetica reprogramada que alimenta el one-carbon.', 'Diana metabolica emergente.', R_WBC), ('Fatty acid synthesis (FASN)', 'metabolism', 'process', 'Lipogenesis de novo para membranas y senalizacion.', 'Inhibidores de FASN (investigacion).', R_WBC), ('2-HG oncometabolite (IDH-mut)', 'metabolism', 'biomarker', 'IDH mutante produce 2-hidroxiglutarato que altera la epigenetica.', 'Ivosidenib/enasidenib; biomarcador.', 'Dang et al., Nature 2009'), ('TCA cycle rewiring', 'metabolism', 'process', 'Reprogramacion del ciclo de Krebs para biosintesis.', 'Vulnerabilidades contextuales.', R_WBC), ('NAD+ metabolism', 'metabolism', 'process', 'Cofactor redox y de senalizacion elevado en proliferacion.', 'Inhibidores de NAMPT (investigacion).', R_WBC), ('Autophagy', 'metabolism', 'process', 'Reciclaje de organelas/proteinas para sobrevivir al estres.', 'Modulacion (cloroquina, investigacion).', 'Levine & Kroemer, Cell 2008'), ('Reductive carboxylation', 'metabolism', 'process', 'Sintesis de citrato desde glutamina en hipoxia.', 'Vulnerabilidad metabolica.', R_WBC), ('ROS / redox homeostasis', 'metabolism', 'process', 'Equilibrio de especies reactivas que el tumor debe tamponar.', 'Estrategias pro-oxidantes selectivas.', R_WBC), ('Amino-acid dependency (Asn/Arg)', 'metabolism', 'process', 'Adiccion a aminoacidos no sintetizables por ciertos tumores.', 'L-asparaginasa (LLA); depledores de arginina.', R_WBC), ('DNA methylation (5mC)', 'epigenetic', 'process', 'Marca en CpG que regula la expresion sin cambiar la secuencia.', 'Base de terapias hipometilantes.', 'Jones & Baylin, Nat Rev Genet 2002'), ('DNMTs (DNMT1/3A/3B)', 'epigenetic', 'target', 'Enzimas que escriben la metilacion del ADN.', 'Azacitidina, decitabina.', R_WBC), ('CpG island hypermethylation', 'epigenetic', 'process', 'Silenciamiento de supresores por metilacion de promotores.', 'Reversible con DNMTi.', R_WBC), ('Global hypomethylation', 'epigenetic', 'process', 'Perdida global de metilacion que favorece inestabilidad.', 'Marca epigenetica tumoral.', R_WBC), ('Histone acetyltransferases (HATs)', 'epigenetic', 'process', 'Anaden acetilo abriendo cromatina para transcripcion.', 'Contexto de balance con HDAC.', R_WBC), ('Histone deacetylases (HDACs)', 'epigenetic', 'target', 'Retiran acetilos compactando cromatina.', 'Vorinostat, romidepsina.', R_WBC), ('Histone methylation', 'epigenetic', 'process', 'Marcas activadoras o represoras segun residuo y grado.', 'Diana de escritores/borradores.', R_WBC), ('EZH2 / PRC2 (H3K27me3)', 'epigenetic', 'target', 'Deposita marca represiva que silencia supresores.', 'Tazemetostat.', R_WBC), ('DOT1L (H3K79me)', 'epigenetic', 'target', 'Metiltransferasa esencial en leucemias con reordenamiento MLL.', 'Inhibidores de DOT1L (investigacion).', R_WBC), ('BET / BRD4', 'epigenetic', 'target', 'Lectores de acetil-lisina que sostienen la transcripcion de MYC.', 'Inhibidores BET (investigacion).', 'Filippakopoulos et al., Nature 2010'), ('SWI/SNF (BAF) remodeling', 'epigenetic', 'process', 'Complejo que reposiciona nucleosomas; frecuentemente mutado.', 'Sintesis letal con EZH2.', R_WBC), ('TET enzymes / 5hmC', 'epigenetic', 'process', 'Oxidan 5mC iniciando desmetilacion activa.', 'Alterada por 2-HG en IDH-mut.', R_WBC), ('Super-enhancers', 'epigenetic', 'process', 'Grandes clusters regulatorios que sostienen oncogenes de identidad.', 'Vulnerables a inhibicion transcripcional.', 'Hnisz et al., Cell 2013'), ('Histone variants', 'epigenetic', 'process', 'Variantes (p.ej. H3.3) que alteran cromatina; mutadas en gliomas pediatricos.', 'Biomarcador diagnostico.', R_WBC), ('Chromatin accessibility', 'epigenetic', 'process', 'Paisaje abierto/cerrado que define programas transcripcionales.', 'Perfilable por ATAC-seq.', R_WBC), ('Cancer-associated fibroblasts (CAFs)', 'tme', 'process', 'Fibroblastos activados que remodelan matriz y secretan factores.', 'Diana estromal (investigacion).', R_WBC), ('Tumor-associated macrophages (TAMs, M2)', 'tme', 'target', 'Macrofagos pro-tumorales que suprimen inmunidad y favorecen angiogenesis.', 'Reprogramacion; anti-CSF1R.', R_WBC), ('Myeloid-derived suppressor cells (MDSCs)', 'tme', 'process', 'Poblacion mieloide inmadura que inhibe linfocitos T.', 'Objetivo de combinaciones inmunes.', R_WBC), ('Regulatory T cells (Tregs)', 'tme', 'target', 'Linfocitos que amortiguan la respuesta antitumoral.', 'Deplecion selectiva (investigacion).', R_WBC), ('Extracellular matrix remodeling', 'tme', 'process', 'Rigidez y composicion de matriz que guian invasion y farmacorresistencia.', 'Normalizacion estromal.', R_WBC), ('Hypoxic niche', 'tme', 'process', 'Regiones hipoxicas que fomentan stemness y resistencia.', 'Radiorresistencia; profarmacos.', R_WBC), ('Abnormal tumor vasculature', 'tme', 'process', 'Vasos tortuosos y permeables que dificultan la entrega de farmacos.', 'Normalizacion vascular.', R_WBC), ('Desmoplasia', 'tme', 'process', 'Estroma denso (p.ej. pancreas) que actua de barrera fisica.', 'Reto de penetracion terapeutica.', R_WBC), ('Tumor-derived exosomes', 'tme', 'process', 'Vesiculas que transportan senales pro-tumorales a distancia.', 'Biomarcadores y dianas emergentes.', R_WBC), ('Cytokine/chemokine milieu', 'tme', 'process', 'Red soluble que recluta y polariza celulas inmunes.', 'Modulacion inmune dirigida.', R_WBC), ('Tertiary lymphoid structures (TLS)', 'tme', 'biomarker', 'Agregados linfoides intratumorales asociados a mejor respuesta inmune.', 'Predictor de respuesta a checkpoint.', R_WBC), ('Immune-excluded phenotype', 'tme', 'biomarker', 'Linfocitos confinados al estroma sin infiltrar el nido tumoral.', 'Estratifica respuesta a inmunoterapia.', R_WBC), ('Metabolic competition in TME', 'tme', 'process', 'El tumor priva de glucosa y aminoacidos a linfocitos.', 'Reprogramacion metabolica inmune.', R_WBC), ('PD-1 (PDCD1)', 'immuno', 'target', 'Checkpoint inhibidor en linfocitos T que limita su activacion.', 'Pembrolizumab, nivolumab.', 'Ishida et al., EMBO J 1992'), ('PD-L1 (CD274)', 'immuno', 'target', 'Ligando tumoral de PD-1 que apaga la respuesta T.', 'Atezolizumab; biomarcador (TPS/CPS).', 'Dong et al., Nat Med 2002'), ('CTLA-4', 'immuno', 'target', 'Checkpoint que compite con CD28 frenando el cebado T.', 'Ipilimumab.', 'Leach, Krummel & Allison, Science 1996'), ('Immune checkpoint blockade', 'immuno', 'modality', 'Liberar frenos inmunes para reactivar linfocitos antitumorales.', 'Paradigma anti-PD-1/PD-L1/CTLA-4.', 'Sharma & Allison, Science 2015'), ('T-cell exhaustion', 'immuno', 'process', 'Disfuncion progresiva de T por estimulacion cronica.', 'Reversible parcialmente con checkpoint.', R_WBC), ('Neoantigens', 'immuno', 'biomarker', 'Peptidos mutados tumor-especificos reconocidos por linfocitos T.', 'Base de vacunas personalizadas.', 'Schumacher & Schreiber, Science 2015'), ('MHC-I antigen presentation', 'immuno', 'process', 'Presentacion de peptidos a CD8; su perdida evade inmunidad.', 'Su restauracion mejora respuesta.', R_WBC), ('Tumor-infiltrating lymphocytes (TILs)', 'immuno', 'biomarker', 'Linfocitos infiltrantes; su densidad predice pronostico/respuesta.', 'Base de la terapia con TIL.', R_WBC), ('CD8+ cytotoxic T cells', 'immuno', 'process', 'Efectores que lisan celulas tumorales reconocidas.', 'Objetivo a potenciar en inmunoterapia.', R_WBC), ('Natural killer (NK) cells', 'immuno', 'process', 'Inmunidad innata que mata celulas sin MHC-I (missing self).', 'Terapias NK y CAR-NK.', R_WBC), ('CAR-T cells', 'immuno', 'modality', 'Linfocitos T con receptor quimerico contra antigeno tumoral.', 'Anti-CD19 en linfoma/leucemia; anti-BCMA en mieloma.', 'June & Sadelain, NEJM 2018'), ('Bispecific T-cell engagers (BiTE)', 'immuno', 'modality', 'Anticuerpos que unen CD3 de T con antigeno tumoral.', 'Blinatumomab (CD19xCD3).', R_WBC), ('TCR-engineered T cells', 'immuno', 'modality', 'T con TCR redirigido a antigenos intracelulares via MHC.', 'Anti-antigenos de cancer/testiculo.', R_WBC), ('Cancer vaccines', 'immuno', 'modality', 'Inmunizacion con antigenos tumorales para inducir respuesta T.', 'Vacunas de neoantigeno (mRNA).', R_WBC), ('Oncolytic viruses', 'immuno', 'modality', 'Virus que lisan tumores e inducen inmunidad in situ.', 'Talimogene laherparepvec (T-VEC).', R_WBC), ('LAG-3', 'immuno', 'target', 'Checkpoint co-inhibidor que sinergiza con PD-1.', 'Relatlimab (combinado con nivolumab).', R_WBC), ('TIM-3 (HAVCR2)', 'immuno', 'target', 'Marcador/regulador de agotamiento T.', 'Inhibidores en investigacion.', R_WBC), ('TIGIT', 'immuno', 'target', 'Checkpoint que compite por ligandos con CD226.', 'Anti-TIGIT en investigacion.', R_WBC), ('IDO1', 'immuno', 'target', 'Enzima que degrada triptofano creando entorno inmunosupresor.', 'Inhibidores de IDO (investigacion).', R_WBC), ('Adenosine / CD73 axis', 'immuno', 'target', 'Adenosina extracelular que suprime linfocitos T.', 'Anti-CD39/CD73/A2AR (investigacion).', R_WBC), ('CD47-SIRP alpha (dont eat me)', 'immuno', 'target', 'Senal que protege al tumor de la fagocitosis.', 'Bloqueo de CD47 (investigacion).', R_WBC), ('Immunogenic cell death (ICD)', 'immuno', 'process', 'Muerte que libera senales de peligro y activa inmunidad.', 'Inducida por ciertas quimio/radio.', 'Galluzzi et al., Nat Rev Immunol 2017'), ('Cytotoxic chemotherapy', 'modality', 'modality', 'Farmacos que danan celulas en division rapida.', 'Columna vertebral historica del tratamiento.', R_WBC), ('Alkylating agents', 'modality', 'modality', 'Anaden grupos alquilo al ADN generando enlaces cruzados.', 'Ciclofosfamida, temozolomida.', R_WBC), ('Platinum agents', 'modality', 'modality', 'Forman aductos de ADN que bloquean replicacion.', 'Cisplatino, carboplatino, oxaliplatino.', R_WBC), ('Antimetabolites', 'modality', 'modality', 'Analogos que interfieren sintesis de nucleotidos/ADN.', '5-FU, metotrexato, gemcitabina.', R_WBC), ('Topoisomerase inhibitors', 'modality', 'modality', 'Bloquean topoisomerasas provocando roturas de ADN.', 'Irinotecan, etoposido, doxorrubicina.', R_WBC), ('Taxanes', 'modality', 'modality', 'Estabilizan microtubulos e impiden la mitosis.', 'Paclitaxel, docetaxel.', R_WBC), ('Vinca alkaloids', 'modality', 'modality', 'Impiden el ensamblaje de microtubulos.', 'Vincristina, vinblastina.', R_WBC), ('Anthracyclines', 'modality', 'modality', 'Intercalan ADN e inhiben topoisomerasa II.', 'Doxorrubicina (toxicidad cardiaca).', R_WBC), ('Small-molecule kinase inhibitors', 'modality', 'modality', 'Bloquean cinasas oncogenicas especificas.', 'Imatinib, osimertinib, muchos mas.', R_WBC), ('Monoclonal antibodies', 'modality', 'modality', 'Anticuerpos que marcan o bloquean dianas de superficie.', 'Rituximab, trastuzumab, cetuximab.', R_WBC), ('Antibody-drug conjugates (ADCs)', 'modality', 'modality', 'Anticuerpo unido a citotoxico para entrega dirigida.', 'T-DXd, sacituzumab govitecan.', R_WBC), ('Radiotherapy', 'modality', 'modality', 'Radiacion ionizante que induce dano letal de ADN.', 'Curativa/paliativa segun contexto.', R_WBC), ('Endocrine / hormonal therapy', 'modality', 'modality', 'Bloquea senal hormonal que impulsa el tumor.', 'Tamoxifeno, inhibidores de aromatasa, ADT.', R_WBC), ('Proteasome inhibitors', 'modality', 'modality', 'Bloquean la degradacion proteica generando estres.', 'Bortezomib (mieloma).', R_WBC), ('PROTAC degraders', 'modality', 'modality', 'Reclutan una E3 ligasa para degradar la diana.', 'Degradadores de AR/ER (investigacion).', R_WBC), ('Differentiation therapy', 'modality', 'modality', 'Fuerza la maduracion de celulas malignas.', 'ATRA + arsenico en LPA.', 'Huang et al., Blood 1988'), ('Immunomodulatory drugs (IMiDs)', 'modality', 'modality', 'Modulan cereblon y la inmunidad (mieloma).', 'Lenalidomida, pomalidomida.', R_WBC), ('Epigenetic therapy', 'modality', 'modality', 'Revierte silenciamientos aberrantes de la cromatina.', 'DNMTi, HDACi, EZH2i.', R_WBC), ('Imatinib -> BCR-ABL', 'drug', 'drug-target', 'Inhibidor de tirosina-cinasa que apaga BCR-ABL en LMC.', 'Transformo la LMC en enfermedad cronica.', 'Druker et al., NEJM 2001'), ('Trastuzumab -> HER2', 'drug', 'drug-target', 'Anticuerpo que bloquea HER2 en tumores HER2+.', 'Mama y gastrico HER2+.', 'Slamon et al., NEJM 2001'), ('Trastuzumab deruxtecan -> HER2 (ADC)', 'drug', 'drug-target', 'ADC que entrega un inhibidor de topoisomerasa I a celulas HER2.', 'Activo incluso en HER2-bajo.', 'Modi et al., NEJM 2022'), ('Osimertinib -> EGFR (T790M)', 'drug', 'drug-target', 'TKI de 3a generacion contra EGFR mutante y T790M.', '1a linea en NSCLC EGFR-mut.', 'Soria et al., NEJM 2018'), ('Gefitinib/Erlotinib -> EGFR', 'drug', 'drug-target', 'TKI de 1a generacion para EGFR con mutacion sensibilizante.', 'NSCLC EGFR-mut.', 'Mok et al., NEJM 2009'), ('Vemurafenib -> BRAF V600E', 'drug', 'drug-target', 'Inhibidor selectivo de BRAF V600E.', 'Melanoma BRAF-mut.', 'Chapman et al., NEJM 2011'), ('Dabrafenib + Trametinib -> BRAF + MEK', 'drug', 'drug-target', 'Doble bloqueo de la via MAPK que retrasa resistencia.', 'Melanoma y otros BRAF V600.', 'Long et al., NEJM 2014'), ('Sotorasib -> KRAS G12C', 'drug', 'drug-target', 'Inhibidor covalente que atrapa KRAS G12C inactivo (bolsillo switch-II).', 'NSCLC KRAS G12C.', 'Skoulidis et al., NEJM 2021'), ('Adagrasib -> KRAS G12C', 'drug', 'drug-target', 'Segundo inhibidor covalente de KRAS G12C.', 'NSCLC y CCR KRAS G12C.', 'Janne et al., NEJM 2022'), ('Crizotinib -> ALK/ROS1', 'drug', 'drug-target', 'TKI para fusiones ALK y ROS1.', 'NSCLC ALK+ o ROS1+.', 'Shaw et al., NEJM 2013'), ('Alectinib -> ALK', 'drug', 'drug-target', 'TKI de ALK de nueva generacion con actividad en SNC.', '1a linea NSCLC ALK+.', 'Peters et al., NEJM 2017'), ('Larotrectinib -> NTRK fusion', 'drug', 'drug-target', 'Inhibidor TRK agnostico de tipo tumoral.', 'Tumores con fusion NTRK.', 'Drilon et al., NEJM 2018'), ('Olaparib -> PARP', 'drug', 'drug-target', 'Inhibidor de PARP letal en tumores con deficiencia de HR.', 'Ovario/mama BRCA-mut.', 'Ledermann et al., NEJM 2012'), ('Venetoclax -> BCL2', 'drug', 'drug-target', 'Mimetico BH3 que restaura la apoptosis.', 'LLC y LMA.', 'Souers et al., Nat Med 2013'), ('Palbociclib -> CDK4/6', 'drug', 'drug-target', 'Inhibidor de CDK4/6 que frena la fosforilacion de RB.', 'Mama HR+/HER2-.', 'Finn et al., NEJM 2016'), ('Rituximab -> CD20', 'drug', 'drug-target', 'Anticuerpo anti-CD20 que deplecciona linfocitos B.', 'Linfomas B y LLC.', 'Coiffier et al., NEJM 2002'), ('Bevacizumab -> VEGF-A', 'drug', 'drug-target', 'Anticuerpo que neutraliza VEGF-A y priva de angiogenesis.', 'Colorrectal, pulmon, otros.', 'Hurwitz et al., NEJM 2004'), ('Sunitinib -> VEGFR (multi-TKI)', 'drug', 'drug-target', 'Inhibidor multicinasa antiangiogenico.', 'Renal, GIST, TNE.', R_WBC), ('Ibrutinib -> BTK', 'drug', 'drug-target', 'Inhibidor covalente de BTK en la senal del receptor B.', 'LLC y linfoma del manto.', 'Byrd et al., NEJM 2013'), ('Ruxolitinib -> JAK1/2', 'drug', 'drug-target', 'Inhibidor de JAK que bloquea la senal JAK-STAT.', 'Mielofibrosis y policitemia vera.', R_WBC), ('Ivosidenib -> IDH1 mutante', 'drug', 'drug-target', 'Inhibidor del IDH1 mutante que reduce el 2-HG.', 'LMA y colangiocarcinoma IDH1-mut.', R_WBC), ('Enasidenib -> IDH2 mutante', 'drug', 'drug-target', 'Inhibidor del IDH2 mutante que induce diferenciacion.', 'LMA IDH2-mut.', R_WBC), ('Tazemetostat -> EZH2', 'drug', 'drug-target', 'Inhibidor de EZH2 que revierte silenciamiento represivo.', 'Linfoma folicular y sarcoma epitelioide.', R_WBC), ('Pembrolizumab -> PD-1', 'drug', 'drug-target', 'Anti-PD-1 que reactiva linfocitos T antitumorales.', 'Multiples tumores; agnostico en MSI-H.', 'Le et al., NEJM 2015'), ('Nivolumab -> PD-1', 'drug', 'drug-target', 'Anti-PD-1 con amplio desarrollo clinico.', 'Melanoma, pulmon, renal, otros.', 'Topalian et al., NEJM 2012'), ('Atezolizumab -> PD-L1', 'drug', 'drug-target', 'Anticuerpo anti-PD-L1 que bloquea el eje PD-1/PD-L1.', 'Pulmon, vejiga, mama TN.', R_WBC), ('Ipilimumab -> CTLA-4', 'drug', 'drug-target', 'Anti-CTLA-4, primer checkpoint con beneficio en supervivencia.', 'Melanoma; combinaciones.', 'Hodi et al., NEJM 2010')]
+CATS = {
+    "hallmark": ("Hallmarks del cancer", "meta"),
+    "oncogene": ("Oncogenes", "molecular"),
+    "suppressor": ("Genes supresores de tumores", "molecular"),
+    "pathway": ("Vias de senalizacion", "pathway"),
+    "cellcycle": ("Ciclo celular y checkpoints", "cellular"),
+    "apoptosis": ("Apoptosis y muerte celular regulada", "cellular"),
+    "ddr": ("Respuesta al dano y reparacion de ADN", "molecular"),
+    "genome": ("Inestabilidad genomica y mutagenesis", "molecular"),
+    "telomere": ("Telomeros, senescencia e inmortalidad", "cellular"),
+    "angio": ("Angiogenesis", "cellular"),
+    "metastasis": ("Invasion, EMT y metastasis", "cellular"),
+    "metabolism": ("Metabolismo tumoral", "molecular"),
+    "epigenetic": ("Epigenetica y cromatina", "molecular"),
+    "tme": ("Microambiente tumoral (TME)", "tissue"),
+    "immuno": ("Inmuno-oncologia y evasion inmune", "tissue"),
+    "modality": ("Modalidades terapeuticas", "therapy"),
+    "drug": ("Primitivas farmaco -> diana", "therapy"),
+}
+R_HW00 = "Hanahan & Weinberg, Cell 2000"
+R_HW11 = "Hanahan & Weinberg, Cell 2011"
+R_H22 = "Hanahan, Cancer Discov 2022 (New Dimensions)"
+R_WBC = "Weinberg RA, The Biology of Cancer, 2nd ed. 2014"
+R_VOG = "Vogelstein et al., Science 2013 (Cancer Genome Landscapes)"
+PRIMS = [
+    (
+        "Sustaining proliferative signaling",
+        "hallmark",
+        "process",
+        "Las celulas tumorales generan y sostienen senales mitogenicas de forma autonoma (p.ej. via RTK/RAS).",
+        "Objetivo de inhibidores de RTK y de la via MAPK.",
+        R_HW11,
+    ),
+    (
+        "Evading growth suppressors",
+        "hallmark",
+        "process",
+        "Elusion de frenos antiproliferativos como RB y TP53.",
+        "Restaurar checkpoints; inhibidores CDK4/6; reactivadores de p53.",
+        R_HW11,
+    ),
+    (
+        "Resisting cell death",
+        "hallmark",
+        "process",
+        "Bloqueo de apoptosis por sobreexpresion de anti-apoptoticos o perdida de sensores.",
+        "Mimeticos BH3 (venetoclax) restauran la muerte.",
+        R_HW11,
+    ),
+    (
+        "Enabling replicative immortality",
+        "hallmark",
+        "process",
+        "Mantenimiento telomerico (telomerasa/ALT) que evita la senescencia replicativa.",
+        "Inhibicion de telomerasa (investigacion).",
+        R_HW11,
+    ),
+    (
+        "Inducing angiogenesis",
+        "hallmark",
+        "process",
+        "Activacion del switch angiogenico para vascularizar el tumor.",
+        "Anti-VEGF (bevacizumab), TKI antiangiogenicos.",
+        R_HW11,
+    ),
+    (
+        "Activating invasion and metastasis",
+        "hallmark",
+        "process",
+        "Adquisicion de motilidad, invasion local y diseminacion a distancia.",
+        "Diana de terapias sobre EMT y microambiente.",
+        R_HW11,
+    ),
+    (
+        "Deregulating cellular energetics",
+        "hallmark",
+        "process",
+        "Reprogramacion metabolica (efecto Warburg) para soportar proliferacion.",
+        "Inhibidores metabolicos (IDH mutante, glutaminasa).",
+        R_HW11,
+    ),
+    (
+        "Avoiding immune destruction",
+        "hallmark",
+        "process",
+        "Escape del reconocimiento y eliminacion por el sistema inmune.",
+        "Bloqueo de checkpoints (anti-PD-1/PD-L1/CTLA-4).",
+        R_HW11,
+    ),
+    (
+        "Genome instability and mutation",
+        "hallmark",
+        "process",
+        "Caracteristica facilitadora: tasa mutacional elevada que genera diversidad clonal.",
+        "Explotable por sintesis letal (PARPi en HRD).",
+        R_HW11,
+    ),
+    (
+        "Tumor-promoting inflammation",
+        "hallmark",
+        "process",
+        "Caracteristica facilitadora: inflamacion que aporta factores pro-tumorales.",
+        "Objetivo de estrategias anti-inflamatorias.",
+        R_HW11,
+    ),
+    (
+        "Unlocking phenotypic plasticity",
+        "hallmark",
+        "process",
+        "Nuevo hallmark 2022: desdiferenciacion/transdiferenciacion que evade el destino celular.",
+        "Terapias de diferenciacion; reto en resistencia.",
+        R_H22,
+    ),
+    (
+        "Nonmutational epigenetic reprogramming",
+        "hallmark",
+        "process",
+        "Nuevo hallmark 2022: adquisicion de capacidades por cambios epigeneticos sin mutacion.",
+        "Farmacos epigeneticos (DNMTi, HDACi, EZH2i).",
+        R_H22,
+    ),
+    (
+        "Polymorphic microbiomes",
+        "hallmark",
+        "process",
+        "Nuevo hallmark 2022: microbiota que modula iniciacion, progresion y respuesta terapeutica.",
+        "Modulacion del microbioma; impacto en inmunoterapia.",
+        R_H22,
+    ),
+    (
+        "Senescent cells",
+        "hallmark",
+        "process",
+        "Nuevo hallmark 2022: celulas senescentes y su SASP modulan capacidades tumorales.",
+        "Senoliticos (investigacion).",
+        R_H22,
+    ),
+    (
+        "Clonal evolution and intratumoral heterogeneity",
+        "hallmark",
+        "process",
+        "Seleccion darwiniana de subclones que genera heterogeneidad espacial y temporal.",
+        "Base de la resistencia; terapias adaptativas.",
+        "Nowell, Science 1976; Greaves & Maley, Nature 2012",
+    ),
+    (
+        "Two-hit hypothesis (Knudson)",
+        "hallmark",
+        "process",
+        "Los supresores tumorales suelen requerir inactivacion bialelica para perder funcion.",
+        "Marco de riesgo hereditario (RB1, BRCA).",
+        "Knudson, PNAS 1971",
+    ),
+    (
+        "KRAS",
+        "oncogene",
+        "oncogene",
+        "GTPasa RAS; mutaciones (G12/G13/Q61) la fijan activa y disparan MAPK/PI3K.",
+        "KRAS G12C: sotorasib, adagrasib.",
+        "Prior et al., Cancer Res 2020",
+    ),
+    (
+        "HRAS",
+        "oncogene",
+        "oncogene",
+        "Isoforma RAS mutada en tumores de cabeza y cuello y vejiga.",
+        "Inhibidor de farnesiltransferasa (tipifarnib) en HRAS-mut.",
+        R_WBC,
+    ),
+    (
+        "NRAS",
+        "oncogene",
+        "oncogene",
+        "Isoforma RAS frecuentemente mutada en melanoma y leucemias.",
+        "Diana indirecta via MEK; sin inhibidor directo aprobado.",
+        R_WBC,
+    ),
+    (
+        "BRAF",
+        "oncogene",
+        "oncogene",
+        "Cinasa RAF; V600E constitutivamente activa la via MAPK.",
+        "Vemurafenib/dabrafenib + inhibidor MEK.",
+        "Davies et al., Nature 2002",
+    ),
+    (
+        "EGFR",
+        "oncogene",
+        "oncogene",
+        "RTK cuya activacion/mutacion (ex19del, L858R) impulsa proliferacion.",
+        "TKI de EGFR (gefitinib, osimertinib).",
+        "Lynch et al., NEJM 2004",
+    ),
+    (
+        "ERBB2 / HER2",
+        "oncogene",
+        "oncogene",
+        "RTK amplificado en subtipos de mama y gastrico.",
+        "Trastuzumab, pertuzumab, T-DXd.",
+        "Slamon et al., Science 1987",
+    ),
+    (
+        "MYC",
+        "oncogene",
+        "oncogene",
+        "Factor de transcripcion maestro de crecimiento; amplificado/translocado.",
+        "Diana 'undruggable'; BET-i indirectos.",
+        "Dang, Cell 2012",
+    ),
+    (
+        "MYCN",
+        "oncogene",
+        "oncogene",
+        "Parologo de MYC amplificado en neuroblastoma de alto riesgo.",
+        "Biomarcador pronostico; BET/Aurora-A indirectos.",
+        R_WBC,
+    ),
+    (
+        "MET",
+        "oncogene",
+        "oncogene",
+        "RTK (receptor de HGF); amplificacion o exon 14 skipping activan la via.",
+        "Capmatinib, tepotinib, crizotinib.",
+        R_WBC,
+    ),
+    (
+        "ALK",
+        "oncogene",
+        "oncogene",
+        "RTK activada por fusiones (EML4-ALK) en NSCLC.",
+        "Crizotinib, alectinib, lorlatinib.",
+        "Soda et al., Nature 2007",
+    ),
+    (
+        "ROS1",
+        "oncogene",
+        "oncogene",
+        "RTK activada por fusiones en un subconjunto de NSCLC.",
+        "Crizotinib, entrectinib.",
+        R_WBC,
+    ),
+    (
+        "RET",
+        "oncogene",
+        "oncogene",
+        "RTK activada por fusiones o mutaciones puntuales (MEN2).",
+        "Selpercatinib, pralsetinib.",
+        R_WBC,
+    ),
+    (
+        "FLT3",
+        "oncogene",
+        "oncogene",
+        "RTK mutada (ITD/TKD) en leucemia mieloide aguda.",
+        "Midostaurina, gilteritinib.",
+        R_WBC,
+    ),
+    (
+        "KIT",
+        "oncogene",
+        "oncogene",
+        "RTK con mutaciones activadoras en GIST y mastocitosis.",
+        "Imatinib, avapritinib.",
+        "Hirota et al., Science 1998",
+    ),
+    (
+        "PDGFRA",
+        "oncogene",
+        "oncogene",
+        "RTK relacionada con KIT; mutada en subgrupos de GIST.",
+        "Avapritinib (D842V), imatinib.",
+        R_WBC,
+    ),
+    (
+        "ABL1 (BCR-ABL)",
+        "oncogene",
+        "oncogene",
+        "Fusion del cromosoma Filadelfia con tirosina-cinasa constitutiva en LMC.",
+        "Imatinib y TKI de siguiente generacion.",
+        "Rowley, Nature 1973",
+    ),
+    (
+        "JAK2",
+        "oncogene",
+        "oncogene",
+        "Cinasa citoplasmatica; V617F impulsa neoplasias mieloproliferativas.",
+        "Ruxolitinib (JAK1/2).",
+        "James et al., Nature 2005",
+    ),
+    (
+        "PIK3CA",
+        "oncogene",
+        "oncogene",
+        "Subunidad p110-alfa de PI3K; mutaciones activan PI3K-AKT.",
+        "Alpelisib en mama HR+ PIK3CA-mut.",
+        "Samuels et al., Science 2004",
+    ),
+    (
+        "AKT1",
+        "oncogene",
+        "oncogene",
+        "Cinasa central de supervivencia/crecimiento aguas abajo de PI3K.",
+        "Inhibidores de AKT (capivasertib).",
+        R_WBC,
+    ),
+    (
+        "MTOR",
+        "oncogene",
+        "oncogene",
+        "Cinasa que integra nutrientes y crecimiento; activacion aberrante en tumores.",
+        "Everolimus, temsirolimus.",
+        R_WBC,
+    ),
+    (
+        "MDM2",
+        "oncogene",
+        "oncogene",
+        "E3 ligasa que degrada p53; su amplificacion inactiva p53 sin mutarlo.",
+        "Inhibidores MDM2-p53 (investigacion).",
+        "Momand et al., Cell 1992",
+    ),
+    (
+        "CCND1 (Cyclin D1)",
+        "oncogene",
+        "oncogene",
+        "Ciclina que activa CDK4/6 e impulsa la transicion G1/S.",
+        "Sensibiliza a inhibidores CDK4/6.",
+        R_WBC,
+    ),
+    (
+        "CDK4",
+        "oncogene",
+        "oncogene",
+        "Cinasa dependiente de ciclina que fosforila RB en G1.",
+        "Palbociclib, ribociclib, abemaciclib.",
+        R_WBC,
+    ),
+    ("CDK6", "oncogene", "oncogene", "Parologo de CDK4 en el eje ciclina D-RB.", "Inhibidores CDK4/6.", R_WBC),
+    (
+        "BCL2",
+        "oncogene",
+        "oncogene",
+        "Proteina anti-apoptotica sobreexpresada (t(14;18)) que bloquea la muerte.",
+        "Venetoclax (mimetico BH3).",
+        "Tsujimoto et al., Science 1984",
+    ),
+    (
+        "EZH2",
+        "oncogene",
+        "oncogene",
+        "Metiltransferasa de PRC2 (H3K27me3); mutaciones GOF en linfoma folicular.",
+        "Tazemetostat.",
+        R_WBC,
+    ),
+    (
+        "IDH1",
+        "oncogene",
+        "oncogene",
+        "Mutacion neomorfica que produce el oncometabolito 2-HG (glioma, LMA).",
+        "Ivosidenib.",
+        "Dang et al., Nature 2009",
+    ),
+    (
+        "IDH2",
+        "oncogene",
+        "oncogene",
+        "Isoforma mitocondrial con mutacion neomorfica productora de 2-HG.",
+        "Enasidenib.",
+        R_WBC,
+    ),
+    (
+        "FGFR1",
+        "oncogene",
+        "oncogene",
+        "RTK de la familia FGFR; amplificacion/fusion en varios tumores.",
+        "Inhibidores pan-FGFR (erdafitinib, pemigatinib).",
+        R_WBC,
+    ),
+    (
+        "CTNNB1 (beta-catenina)",
+        "oncogene",
+        "oncogene",
+        "Efector de Wnt; mutaciones lo estabilizan y activan transcripcion pro-tumoral.",
+        "Diana dificil; via Wnt en investigacion.",
+        R_WBC,
+    ),
+    (
+        "TP53",
+        "suppressor",
+        "suppressor",
+        "Guardian del genoma; induce arresto/apoptosis ante estres; mutado en ~50% de tumores.",
+        "Reactivadores de p53 mutante (investigacion).",
+        "Levine, Cell 1997",
+    ),
+    (
+        "RB1",
+        "suppressor",
+        "suppressor",
+        "Freno del ciclo celular que secuestra E2F; su perdida libera G1/S.",
+        "Perdida de RB confiere resistencia a CDK4/6i.",
+        "Weinberg, Cell 1995",
+    ),
+    (
+        "PTEN",
+        "suppressor",
+        "suppressor",
+        "Fosfatasa que antagoniza PI3K; su perdida hiperactiva AKT.",
+        "Sensibiliza a inhibidores de PI3K/AKT.",
+        R_WBC,
+    ),
+    (
+        "APC",
+        "suppressor",
+        "suppressor",
+        "Regulador negativo de beta-catenina; su perdida inicia cancer colorrectal.",
+        "Marco de la via Wnt en CCR.",
+        "Kinzler & Vogelstein, Cell 1996",
+    ),
+    (
+        "VHL",
+        "suppressor",
+        "suppressor",
+        "E3 ligasa que degrada HIF; su perdida activa pseudohipoxia (renal).",
+        "Belzutifan (HIF-2 alfa).",
+        R_WBC,
+    ),
+    (
+        "BRCA1",
+        "suppressor",
+        "suppressor",
+        "Reparacion por recombinacion homologa; su perdida causa HRD.",
+        "Sintesis letal con inhibidores de PARP.",
+        "Miki et al., Science 1994",
+    ),
+    (
+        "BRCA2",
+        "suppressor",
+        "suppressor",
+        "Carga RAD51 en la HR; su perdida sensibiliza a dano de ADN.",
+        "Olaparib y otros PARPi.",
+        "Wooster et al., Nature 1995",
+    ),
+    (
+        "PALB2",
+        "suppressor",
+        "suppressor",
+        "Puente entre BRCA1 y BRCA2 en la HR; su perdida da fenotipo BRCAness.",
+        "PARPi en HRD.",
+        R_WBC,
+    ),
+    (
+        "NF1",
+        "suppressor",
+        "suppressor",
+        "GAP que apaga RAS; su perdida sostiene senal MAPK.",
+        "Sensibilidad a inhibidores de MEK.",
+        R_WBC,
+    ),
+    (
+        "NF2 (Merlin)",
+        "suppressor",
+        "suppressor",
+        "Activador de Hippo; su perdida activa YAP/TAZ (meningioma, mesotelioma).",
+        "Inhibidores de YAP/TEAD (investigacion).",
+        R_WBC,
+    ),
+    (
+        "CDKN2A (p16INK4a)",
+        "suppressor",
+        "suppressor",
+        "Inhibe CDK4/6 manteniendo RB activo; deleccion frecuente.",
+        "Predice dependencia de CDK4/6.",
+        R_WBC,
+    ),
+    (
+        "CDKN1A (p21)",
+        "suppressor",
+        "suppressor",
+        "Inhibidor de CDK inducido por p53 que impone arresto del ciclo.",
+        "Mediador de senescencia terapeutica.",
+        R_WBC,
+    ),
+    (
+        "CDKN1B (p27)",
+        "suppressor",
+        "suppressor",
+        "Inhibidor de CDK que frena la transicion G1/S.",
+        "Su degradacion marca agresividad.",
+        R_WBC,
+    ),
+    (
+        "SMAD4",
+        "suppressor",
+        "suppressor",
+        "Mediador central de TGF-beta; su perdida elude su efecto citostatico.",
+        "Contexto de senalizacion TGF-beta.",
+        R_WBC,
+    ),
+    (
+        "STK11 (LKB1)",
+        "suppressor",
+        "suppressor",
+        "Cinasa que activa AMPK y frena mTOR; su perdida altera metabolismo e inmunidad.",
+        "Asociada a resistencia a anti-PD-1.",
+        R_WBC,
+    ),
+    (
+        "TSC1",
+        "suppressor",
+        "suppressor",
+        "Con TSC2 inhibe mTORC1; su perdida hiperactiva mTOR.",
+        "Sensibilidad a inhibidores de mTOR.",
+        R_WBC,
+    ),
+    (
+        "TSC2",
+        "suppressor",
+        "suppressor",
+        "GAP de RHEB que reprime mTORC1.",
+        "Everolimus en tumores asociados a TSC.",
+        R_WBC,
+    ),
+    (
+        "WT1",
+        "suppressor",
+        "suppressor",
+        "Factor de transcripcion supresor en tumor de Wilms (rol dual).",
+        "Antigeno para inmunoterapia.",
+        R_WBC,
+    ),
+    (
+        "MEN1 (menina)",
+        "suppressor",
+        "suppressor",
+        "Supresor en tumores neuroendocrinos; interacciona con complejos MLL.",
+        "Inhibidores menina-MLL en leucemias.",
+        R_WBC,
+    ),
+    (
+        "PTCH1",
+        "suppressor",
+        "suppressor",
+        "Receptor que reprime Hedgehog; su perdida activa la via (basocelular, meduloblastoma).",
+        "Vismodegib, sonidegib.",
+        R_WBC,
+    ),
+    (
+        "ARID1A",
+        "suppressor",
+        "suppressor",
+        "Subunidad de SWI/SNF (BAF); mutaciones alteran la accesibilidad de cromatina.",
+        "Sintesis letal con EZH2/ATR (investigacion).",
+        R_WBC,
+    ),
+    (
+        "SMARCB1",
+        "suppressor",
+        "suppressor",
+        "Subunidad nuclear de SWI/SNF; su perdida define tumores rabdoides.",
+        "Dependencia de EZH2 (tazemetostat).",
+        R_WBC,
+    ),
+    (
+        "FBXW7",
+        "suppressor",
+        "suppressor",
+        "Receptor de E3 ligasa que degrada MYC, ciclina E y NOTCH.",
+        "Su perdida estabiliza oncoproteinas.",
+        R_WBC,
+    ),
+    (
+        "CDH1 (E-cadherina)",
+        "suppressor",
+        "suppressor",
+        "Adhesion celula-celula; su perdida favorece invasion (gastrico difuso, lobulillar).",
+        "Biomarcador hereditario (CDH1).",
+        R_WBC,
+    ),
+    (
+        "Receptor tyrosine kinase (RTK) signaling",
+        "pathway",
+        "process",
+        "Receptores de superficie que traducen factores de crecimiento a senales intracelulares.",
+        "Nodo mayor de inhibidores dirigidos.",
+        R_WBC,
+    ),
+    (
+        "RAS-RAF-MEK-ERK (MAPK)",
+        "pathway",
+        "process",
+        "Cascada mitogenica central; hiperactivada por RAS/RAF/RTK.",
+        "Inhibidores de BRAF y MEK.",
+        R_WBC,
+    ),
+    (
+        "PI3K-AKT-mTOR",
+        "pathway",
+        "process",
+        "Eje de supervivencia, crecimiento y metabolismo.",
+        "Alpelisib, capivasertib, everolimus.",
+        R_WBC,
+    ),
+    (
+        "Wnt / beta-catenin",
+        "pathway",
+        "process",
+        "Via de stemness y proliferacion; aberrante en CCR y otros.",
+        "Diana dificil; en investigacion.",
+        "Clevers, Cell 2006",
+    ),
+    (
+        "Hedgehog",
+        "pathway",
+        "process",
+        "Via del desarrollo reactivada en basocelular y meduloblastoma.",
+        "Vismodegib, sonidegib.",
+        R_WBC,
+    ),
+    (
+        "Notch",
+        "pathway",
+        "process",
+        "Senal de contacto con rol oncogenico o supresor segun contexto.",
+        "Gamma-secretasa (investigacion).",
+        R_WBC,
+    ),
+    (
+        "JAK-STAT",
+        "pathway",
+        "process",
+        "Transduce citocinas hacia transcripcion de supervivencia/proliferacion.",
+        "Ruxolitinib (JAK1/2).",
+        R_WBC,
+    ),
+    (
+        "TGF-beta / SMAD",
+        "pathway",
+        "process",
+        "Citostatica temprana pero pro-invasiva y pro-inmunosupresora tardia.",
+        "Diana dual segun estadio.",
+        R_WBC,
+    ),
+    (
+        "Hippo-YAP/TAZ",
+        "pathway",
+        "process",
+        "Controla tamano de organo; su desregulacion activa coactivadores YAP/TAZ.",
+        "Inhibidores TEAD (investigacion).",
+        R_WBC,
+    ),
+    (
+        "NF-kappaB",
+        "pathway",
+        "process",
+        "Factor de transcripcion de inflamacion y supervivencia.",
+        "Diana en neoplasias hematologicas.",
+        R_WBC,
+    ),
+    (
+        "p53 network",
+        "pathway",
+        "process",
+        "Red de respuesta a estres que decide arresto, reparacion o apoptosis.",
+        "Restauracion/estabilizacion de p53.",
+        "Vousden & Prives, Cell 2009",
+    ),
+    (
+        "RB-E2F axis",
+        "pathway",
+        "process",
+        "Controla la entrada en fase S liberando E2F al fosforilarse RB.",
+        "Inhibidores CDK4/6.",
+        R_WBC,
+    ),
+    (
+        "MYC transcriptional program",
+        "pathway",
+        "process",
+        "Amplifica la transcripcion global que sostiene crecimiento y metabolismo.",
+        "BET-i, inhibicion de sintesis (indirecta).",
+        "Dang, Cell 2012",
+    ),
+    (
+        "HIF / hypoxia response",
+        "pathway",
+        "process",
+        "Adaptacion a hipoxia que induce angiogenesis y glucolisis.",
+        "Belzutifan (HIF-2 alfa).",
+        "Semenza, Cell 2012",
+    ),
+    (
+        "NRF2-KEAP1",
+        "pathway",
+        "process",
+        "Respuesta antioxidante secuestrada por tumores para tolerar ROS.",
+        "Diana metabolica emergente.",
+        R_WBC,
+    ),
+    (
+        "Estrogen receptor (ER) signaling",
+        "pathway",
+        "process",
+        "Impulsa proliferacion en cancer de mama ER+.",
+        "Tamoxifeno, inhibidores de aromatasa, SERD.",
+        R_WBC,
+    ),
+    (
+        "Androgen receptor (AR) signaling",
+        "pathway",
+        "process",
+        "Motor del cancer de prostata.",
+        "Enzalutamida, abiraterona.",
+        R_WBC,
+    ),
+    (
+        "cGAS-STING",
+        "pathway",
+        "process",
+        "Sensor de ADN citosolico que activa inmunidad innata tipo I.",
+        "Agonistas STING (investigacion inmuno).",
+        R_WBC,
+    ),
+    (
+        "G1/S checkpoint (restriction point)",
+        "cellcycle",
+        "process",
+        "Punto de compromiso a la division controlado por RB-E2F.",
+        "Inhibidores CDK4/6 lo bloquean.",
+        R_WBC,
+    ),
+    (
+        "G2/M checkpoint",
+        "cellcycle",
+        "process",
+        "Impide entrar en mitosis con ADN danado (ATR-CHK1-WEE1).",
+        "Inhibidores de WEE1/ATR/CHK1.",
+        R_WBC,
+    ),
+    (
+        "Spindle assembly checkpoint (SAC)",
+        "cellcycle",
+        "process",
+        "Retrasa la anafase hasta el correcto anclaje de cromosomas.",
+        "Diana de taxanos y alcaloides de la vinca.",
+        R_WBC,
+    ),
+    (
+        "Cyclin D-CDK4/6",
+        "cellcycle",
+        "process",
+        "Complejo que inicia la fosforilacion de RB en G1.",
+        "Palbociclib, ribociclib, abemaciclib.",
+        R_WBC,
+    ),
+    (
+        "Cyclin E-CDK2",
+        "cellcycle",
+        "process",
+        "Completa la inactivacion de RB y dispara la fase S.",
+        "Inhibidores de CDK2 (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Cyclin A-CDK2",
+        "cellcycle",
+        "process",
+        "Sostiene la progresion en fase S y replicacion del ADN.",
+        "Contexto de estres replicativo.",
+        R_WBC,
+    ),
+    (
+        "Cyclin B-CDK1",
+        "cellcycle",
+        "process",
+        "Factor promotor de la mitosis (MPF) que desencadena la mitosis.",
+        "Diana indirecta antimitotica.",
+        R_WBC,
+    ),
+    (
+        "RB phosphorylation",
+        "cellcycle",
+        "process",
+        "La hiperfosforilacion de RB libera E2F y permite la fase S.",
+        "Bloqueada por inhibidores CDK4/6.",
+        R_WBC,
+    ),
+    (
+        "E2F transcriptional release",
+        "cellcycle",
+        "process",
+        "E2F activa genes de replicacion al liberarse de RB.",
+        "Nodo del control G1/S.",
+        R_WBC,
+    ),
+    (
+        "p16-CDK4/6-RB axis",
+        "cellcycle",
+        "process",
+        "Eje supresor que mantiene RB activo; a menudo inactivado en tumores.",
+        "Predice respuesta a CDK4/6i.",
+        R_WBC,
+    ),
+    (
+        "CDC25 phosphatases",
+        "cellcycle",
+        "process",
+        "Activan complejos CDK removiendo fosfatos inhibidores.",
+        "Diana experimental.",
+        R_WBC,
+    ),
+    ("WEE1 kinase", "cellcycle", "process", "Frena CDK1 imponiendo el checkpoint G2/M.", "Adavosertib (WEE1i).", R_WBC),
+    (
+        "APC/C (anaphase-promoting complex)",
+        "cellcycle",
+        "process",
+        "E3 ligasa que degrada ciclinas y securina para la anafase.",
+        "Objeto de estudio antimitotico.",
+        R_WBC,
+    ),
+    (
+        "Intrinsic (mitochondrial) apoptosis",
+        "apoptosis",
+        "process",
+        "Estres interno provoca MOMP y liberacion de citocromo c.",
+        "Restaurada por mimeticos BH3.",
+        "Green & Kroemer, Science 2004",
+    ),
+    (
+        "Extrinsic (death receptor) apoptosis",
+        "apoptosis",
+        "process",
+        "Ligandos de muerte activan caspasa-8 via receptores.",
+        "Agonistas de DR (investigacion).",
+        R_WBC,
+    ),
+    (
+        "BCL2 (anti-apoptotic)",
+        "apoptosis",
+        "target",
+        "Secuestra proteinas pro-apoptoticas impidiendo la MOMP.",
+        "Venetoclax.",
+        "Souers et al., Nat Med 2013",
+    ),
+    (
+        "BCL-XL (BCL2L1)",
+        "apoptosis",
+        "target",
+        "Guardian anti-apoptotico clave en plaquetas y tumores solidos.",
+        "Inhibidores BCL-XL (toxicidad plaquetaria).",
+        R_WBC,
+    ),
+    (
+        "MCL1",
+        "apoptosis",
+        "target",
+        "Anti-apoptotica de vida corta que media resistencia.",
+        "Inhibidores de MCL1 (investigacion).",
+        R_WBC,
+    ),
+    (
+        "BAX",
+        "apoptosis",
+        "process",
+        "Efector que oligomeriza y permeabiliza la membrana mitocondrial.",
+        "Activacion promuerte deseada.",
+        R_WBC,
+    ),
+    ("BAK", "apoptosis", "process", "Efector complementario de BAX en la MOMP.", "Restaurar su activacion.", R_WBC),
+    (
+        "BIM (BCL2L11)",
+        "apoptosis",
+        "process",
+        "BH3-only activador que dispara BAX/BAK.",
+        "Su induccion media respuesta a TKI.",
+        R_WBC,
+    ),
+    (
+        "PUMA (BBC3)",
+        "apoptosis",
+        "process",
+        "BH3-only inducido por p53 que sensibiliza a apoptosis.",
+        "Efector de terapias que activan p53.",
+        R_WBC,
+    ),
+    (
+        "NOXA (PMAIP1)",
+        "apoptosis",
+        "process",
+        "BH3-only que neutraliza MCL1 preferentemente.",
+        "Sinergiza con inhibidores BCL2.",
+        R_WBC,
+    ),
+    (
+        "Cytochrome c / apoptosome (APAF1)",
+        "apoptosis",
+        "process",
+        "El citocromo c liberado ensambla el apoptosoma que activa caspasa-9.",
+        "Nodo central de la via intrinseca.",
+        R_WBC,
+    ),
+    (
+        "Caspase-8 (initiator)",
+        "apoptosis",
+        "process",
+        "Iniciadora de la via extrinseca en el DISC.",
+        "Diana de estrategias pro-muerte.",
+        R_WBC,
+    ),
+    (
+        "Caspase-9 (initiator)",
+        "apoptosis",
+        "process",
+        "Iniciadora activada por el apoptosoma.",
+        "Nodo intrinseco.",
+        R_WBC,
+    ),
+    (
+        "Caspase-3 (executioner)",
+        "apoptosis",
+        "process",
+        "Ejecutora que degrada sustratos y desmantela la celula.",
+        "Marcador de muerte efectiva.",
+        R_WBC,
+    ),
+    (
+        "FAS-FASL",
+        "apoptosis",
+        "process",
+        "Par receptor-ligando de muerte de la via extrinseca.",
+        "Modulacion inmune de la muerte.",
+        R_WBC,
+    ),
+    (
+        "TRAIL-DR4/DR5",
+        "apoptosis",
+        "target",
+        "Ligando y receptores que inducen apoptosis selectiva en tumores.",
+        "Agonistas de DR5 (investigacion).",
+        R_WBC,
+    ),
+    ("XIAP", "apoptosis", "target", "IAP que inhibe caspasas ejecutoras.", "Antagonistas SMAC-mimeticos.", R_WBC),
+    (
+        "Survivin (BIRC5)",
+        "apoptosis",
+        "target",
+        "IAP sobreexpresada que bloquea apoptosis y regula mitosis.",
+        "Diana e inmunodiana.",
+        R_WBC,
+    ),
+    (
+        "SMAC/DIABLO",
+        "apoptosis",
+        "process",
+        "Neutraliza IAP al liberarse de la mitocondria.",
+        "Base de los SMAC-mimeticos.",
+        R_WBC,
+    ),
+    (
+        "Necroptosis (RIPK3-MLKL)",
+        "apoptosis",
+        "process",
+        "Muerte litica programada independiente de caspasas.",
+        "Explotable ante apoptosis bloqueada.",
+        "Vandenabeele et al., Nat Rev Mol Cell Biol 2010",
+    ),
+    (
+        "Ferroptosis (GPX4)",
+        "apoptosis",
+        "target",
+        "Muerte por peroxidacion lipidica dependiente de hierro; GPX4 la reprime.",
+        "Inductores de ferroptosis (investigacion).",
+        "Dixon et al., Cell 2012",
+    ),
+    (
+        "Pyroptosis (gasdermin)",
+        "apoptosis",
+        "process",
+        "Muerte inflamatoria mediada por poros de gasdermina.",
+        "Interfaz con inmunidad antitumoral.",
+        "Shi et al., Nature 2015",
+    ),
+    (
+        "ATM kinase",
+        "ddr",
+        "process",
+        "Sensor apical de roturas de doble cadena que coordina el DDR.",
+        "Su perdida sensibiliza a inhibidores.",
+        "Shiloh, Nat Rev Cancer 2003",
+    ),
+    (
+        "ATR kinase",
+        "ddr",
+        "process",
+        "Sensor de estres replicativo y ADN monocatenario.",
+        "Inhibidores de ATR (investigacion).",
+        R_WBC,
+    ),
+    (
+        "CHK1",
+        "ddr",
+        "process",
+        "Efector de ATR que impone el checkpoint intra-S y G2/M.",
+        "Inhibidores de CHK1.",
+        R_WBC,
+    ),
+    (
+        "CHK2",
+        "ddr",
+        "process",
+        "Efector de ATM que propaga la senal de dano a p53/CDC25.",
+        "Contexto de checkpoints.",
+        R_WBC,
+    ),
+    ("DNA-PKcs", "ddr", "process", "Cinasa central del NHEJ que une extremos rotos.", "Radiosensibilizacion.", R_WBC),
+    (
+        "Homologous recombination (RAD51)",
+        "ddr",
+        "process",
+        "Reparacion fiel de DSB usando la cromatida hermana.",
+        "Su deficiencia (HRD) sensibiliza a PARPi/platino.",
+        "Farmer et al., Nature 2005",
+    ),
+    (
+        "Non-homologous end joining (NHEJ)",
+        "ddr",
+        "process",
+        "Reparacion rapida y propensa a error que religa extremos.",
+        "Radiosensibilizacion.",
+        R_WBC,
+    ),
+    (
+        "Mismatch repair (MMR)",
+        "ddr",
+        "process",
+        "Corrige errores de apareamiento; su perdida causa MSI e hipermutacion.",
+        "dMMR/MSI-H predice respuesta a anti-PD-1.",
+        "Le et al., NEJM 2015",
+    ),
+    (
+        "Base excision repair (BER)",
+        "ddr",
+        "process",
+        "Repara bases danadas por oxidacion/alquilacion.",
+        "Contexto de sensibilidad a PARP.",
+        R_WBC,
+    ),
+    (
+        "Nucleotide excision repair (NER)",
+        "ddr",
+        "process",
+        "Elimina lesiones voluminosas como aductos de platino/UV.",
+        "Modula respuesta al platino.",
+        R_WBC,
+    ),
+    (
+        "PARP1",
+        "ddr",
+        "target",
+        "Detecta roturas de cadena simple e inicia su reparacion.",
+        "Olaparib y otros PARPi (sintesis letal).",
+        "Bryant et al., Nature 2005",
+    ),
+    (
+        "Fanconi anemia pathway",
+        "ddr",
+        "process",
+        "Resuelve enlaces cruzados interhebra coordinando HR.",
+        "Sensibilidad a agentes de cross-link.",
+        R_WBC,
+    ),
+    (
+        "53BP1",
+        "ddr",
+        "process",
+        "Favorece NHEJ y antagoniza la reseccion; su perdida da resistencia a PARPi.",
+        "Biomarcador de resistencia.",
+        R_WBC,
+    ),
+    (
+        "gamma-H2AX",
+        "ddr",
+        "biomarker",
+        "Fosforilacion de H2AX que marca focos de dano de doble cadena.",
+        "Biomarcador de dano/eficacia.",
+        R_WBC,
+    ),
+    (
+        "MRN complex (MRE11-RAD50-NBS1)",
+        "ddr",
+        "process",
+        "Sensa y resecciona DSB reclutando ATM.",
+        "Nodo temprano del DDR.",
+        R_WBC,
+    ),
+    (
+        "Replication stress response",
+        "ddr",
+        "process",
+        "Gestion de horquillas de replicacion estancadas o colapsadas.",
+        "Explotable con ATR/WEE1/CHK1i.",
+        R_WBC,
+    ),
+    (
+        "Synthetic lethality",
+        "ddr",
+        "mechanism",
+        "Dos defectos individualmente tolerables son letales juntos.",
+        "Paradigma PARPi en HRD.",
+        "Kaelin, Nat Rev Cancer 2005",
+    ),
+    (
+        "BRCAness",
+        "ddr",
+        "biomarker",
+        "Fenotipo de deficiencia de HR sin mutacion germinal de BRCA.",
+        "Amplia la poblacion candidata a PARPi.",
+        "Lord & Ashworth, Nat Med 2013",
+    ),
+    (
+        "Chromosomal instability (CIN)",
+        "genome",
+        "process",
+        "Tasa elevada de errores en segregacion cromosomica que induce ganancias/perdidas sub- y cromosomicas continuas, generando heterogeneidad intratumoral y evolucion adaptativa darwiniana.",
+        "Explotable terapeuticamente via sintesis letal con inhibidores de PARP y ATR en contextos de HRD, o induciendo catastrofe mitotica con inhibidores SAC.",
+        "Lengauer et al., Nature 1998; Bakhoum et al., Nature 2018",
+    ),
+    (
+        "Microsatellite instability (MSI)",
+        "genome",
+        "biomarker",
+        "Hipermutabilidad y expansion/contraccion aberrante de secuencias repetitivas mononucleotidas y dinucleotidas provocada por deficiencia en el sistema de reparacion de apareamientos erroneos (dMMR: MLH1, MSH2, MSH6, PMS2).",
+        "Biomarcador agnostico tumor-independiente (MSI-H/dMMR) que predice respuesta excepcional y duradera al bloqueo de puntos de control inmunitario (anti-PD-1 pembrolizumab/nivolumab).",
+        "Vogelstein et al., Science 2013; Le et al., NEJM 2017",
+    ),
+    (
+        "Aneuploidy",
+        "genome",
+        "process",
+        "Estado genomico con numero anomalo de cromosomas enteros (monosomia/trisomia/tetrasomia) que altera el balance de dosis genica, induce estres proteotoxico endoplasmico y activa checkpoints de spindle.",
+        "Las celulas aneuploides presentan vulnerabilidades emergentes acopladas al estres del reticulo endoplasmico y dependencia hipertrofica del punto de control del huso mitotico (SAC: BUB1B/MPS1).",
+        "Ben-David & Amon, Nat Rev Cancer 2020",
+    ),
+    (
+        "Tumor mutational burden (TMB)",
+        "genome",
+        "biomarker",
+        "Densidad cuantitativa de mutaciones somaticas (SNVs e indels) por megabase en la region codificante (corte clinico estandar >= 10 mut/Mb en panel estandarizado de 38 Mb).",
+        "TMB alto incrementa la probabilidad de presentacion de neoantigenos inmunogenicos en el complejo MHC-I, prediciendo beneficio clinico al bloqueo de PD-1 en tumores solidos.",
+        "Schumacher & Schreiber, Science 2015; Marabelle et al., Lancet Oncol 2020",
+    ),
+    (
+        "Mutational signatures (COSMIC)",
+        "genome",
+        "biomarker",
+        "Deconstruccion matematica de perfiles trinucleotidos (catálogo COSMIC v3.4 SBS/ID/CN) que revela las huellas digitales mutacionales de procesos endogenos y exogenos (desaminacion 5mC SBS1, APOBEC SBS2/13, HRD SBS3, tabaco SBS4, UV SBS7).",
+        "Permiten inferir la etiologia oncogenica subyacente, estratificar la agresividad tumoral y predecir dianas accionables (ej. firma HRD/SBS3 predice sensibilidad a platino y PARPi).",
+        "Alexandrov et al., Nature 2013; Alexandrov et al., Nature 2020",
+    ),
+    (
+        "APOBEC mutagenesis",
+        "genome",
+        "process",
+        "Hiperactividad desregulada de enzimas citidina-desaminasas (APOBEC3A/APOBEC3B) sobre ADN de cadena sencilla que catalizan C->T o C->G preferentemente en contextos trinucleotidos TCW (W = A o T).",
+        "Genera lluvias mutacionales agrupadas y alto volumen de neoantigenos; su actividad sostenida promueve evolucion clonal, evasión inmunológica y resistencia adquirida a terapias dirigidas.",
+        "Swanton et al., Cancer Discov 2015; Bozek et al., Genome Biol 2023",
+    ),
+    (
+        "Chromothripsis",
+        "genome",
+        "process",
+        "Evento catastrofico en una sola division celular (a menudo en micronucleos tras segregacion anomala) donde uno o varios cromosomas se fragmentan masivamente y re-ensamblan aleatoriamente por NHEJ/MMEJ propensos a error.",
+        "Origina amplificaciones masivas en aglomerados de oncogenes clave (ecDNA que contiene MYC, MDM2, CDK4 o EGFR) al tiempo que deleciona supresores tumorales en los puntos de fractura.",
+        "Stephens et al., Cell 2011; Ly et al., Nat Genet 2019",
+    ),
+    (
+        "Kataegis",
+        "genome",
+        "process",
+        "Hipermutacion focal y ultra-densa (lluvia mutacional co-localizada con distancia intermutacional <= 1000 pb) comunmente coordinada en la misma hebra de ADN y catalizada de forma procesiva por encimas APOBEC en horquillas colapsadas o roturas DSB.",
+        "Marca regiones de extrema inestabilidad estructural y co-ocurre con eventos de reordenamiento genómico y cromotripsis, sirviendo como huella de estres replicativo terminal.",
+        "Nik-Zainal et al., Cell 2012",
+    ),
+    (
+        "Whole-genome doubling",
+        "genome",
+        "process",
+        "Duplicacion completa del genoma (WGD) mediada por fallo en citoquinesis o endorreduplicacion que transforma una celula diploide en tetraploide transitoria o aneuploide pseudodiploide.",
+        "Amortigua el impacto letal de perdidas cromosomicas sub-o-cromosomicas, facilita la tolerancia a aneuploidias severas, confiere resistencia multiresistente y predice mal pronostico global.",
+        "Bielski et al., Nat Genet 2018; Lopez et al., Nat Genet 2020",
+    ),
+    (
+        "Loss of heterozygosity (LOH)",
+        "genome",
+        "process",
+        "Perdida del alelo funcional restante o silenciado en un gen supresor tumoral (ej. BRCA1/2, TP53, RB1), concretando el segundo golpe de la hipotesis de Knudson ya sea por delecion fisica, recombinacion mitotica o disomia uniparental.",
+        "El calculo de la fraccion genomica con LOH subcromosomica (>15 Mb) compone el indice HRD-LOH score, validado clínicamente para indicar sensibilidad a inhibidores de PARP en cancer de ovario y mama.",
+        "Knudson, PNAS 1971; Abkevich et al., Br J Cancer 2012",
+    ),
+    (
+        "Oncogene-induced replication stress",
+        "genome",
+        "process",
+        "Estres mecanico en la maquinaria de replicacion inducido por oncogenes hiperactivos (MYC, CCND1, KRAS) que fuerzan la activacion prematura de origenes, colapso de horquillas de replicacion y acumulacion de ADN monocatenario cubierto por RPA.",
+        "Crea una dependencia existencial del tumor sobre el punto de control intra-S y G2/M dependiente del eje ATR-CHK1-WEE1, explotable mediante inhibidores selectivos (adavosertib, ceralasertib).",
+        "Halazonetis, Gorgoulis & Bartek, Science 2008; Zeman & Cimprich, Nat Cell Biol 2014",
+    ),
+    (
+        "Extrachromosomal DNA (ecDNA)",
+        "genome",
+        "process",
+        "Amplicones de ADN circular sin centromero ni telomeros (tamaños de 1 a 3 Mb) que se replican y segregan de manera aleatoria y no mendeliana durante la mitosis, concentrando oncogenes (EGFR, MYC, ERBB2) en un estado de cromatina ultra-abierta.",
+        "Confieren enorme plasticidad transcripcional (hasta 100x copias de oncogene), posibilitan la adaptacion ultrarrapida bajo presion farmacologica por fluctuacion de copias y representan una diana terapeutica de vanguardia (intervencion en hubs transcripcionales).",
+        "Turner et al., Nature 2017; Wu et al., Nature 2019",
+    ),
+    (
+        "Telomerase (TERT)",
+        "telomere",
+        "target",
+        "Transcriptasa inversa que elonga telomeros y confiere inmortalidad.",
+        "Inhibicion de telomerasa (investigacion).",
+        "Kim et al., Science 1994",
+    ),
+    (
+        "TERT promoter mutations",
+        "telomere",
+        "biomarker",
+        "Mutaciones que reactivan TERT (melanoma, glioma, vejiga).",
+        "Biomarcador diagnostico/pronostico.",
+        R_WBC,
+    ),
+    (
+        "Alternative lengthening of telomeres (ALT)",
+        "telomere",
+        "process",
+        "Mantenimiento telomerico por recombinacion, sin telomerasa.",
+        "Diana de ATR (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Replicative senescence",
+        "telomere",
+        "process",
+        "Arresto permanente por acortamiento telomerico critico.",
+        "Barrera a superar por el tumor.",
+        R_WBC,
+    ),
+    (
+        "Oncogene-induced senescence (OIS)",
+        "telomere",
+        "process",
+        "Freno protector ante oncogenes hiperactivos.",
+        "Su elusion favorece progresion.",
+        "Serrano et al., Cell 1997",
+    ),
+    (
+        "SASP (senescence-associated secretory phenotype)",
+        "telomere",
+        "process",
+        "Secretoma inflamatorio de celulas senescentes que remodela el TME.",
+        "Diana de senomorficos.",
+        R_WBC,
+    ),
+    (
+        "Therapy-induced senescence",
+        "telomere",
+        "process",
+        "Senescencia inducida por quimio/radio con efectos duales.",
+        "Estrategias one-two punch (senoliticos).",
+        R_WBC,
+    ),
+    (
+        "Hayflick limit",
+        "telomere",
+        "process",
+        "Numero finito de divisiones de celulas somaticas normales.",
+        "Marco conceptual de la inmortalizacion.",
+        "Hayflick & Moorhead, Exp Cell Res 1961",
+    ),
+    (
+        "VEGF-A",
+        "angio",
+        "target",
+        "Ligando maestro que induce proliferacion y permeabilidad endotelial.",
+        "Bevacizumab, aflibercept.",
+        "Ferrara et al., Nat Med 2003",
+    ),
+    (
+        "VEGFR2 (KDR)",
+        "angio",
+        "target",
+        "Receptor principal de la senal angiogenica de VEGF.",
+        "Ramucirumab; TKI antiangiogenicos.",
+        R_WBC,
+    ),
+    (
+        "Angiogenic switch",
+        "angio",
+        "process",
+        "Cambio hacia fenotipo pro-angiogenico que vasculariza el tumor.",
+        "Blanco de la terapia antiangiogenica.",
+        "Hanahan & Folkman, Cell 1996",
+    ),
+    (
+        "HIF-1 alpha",
+        "angio",
+        "process",
+        "Factor de transcripcion de hipoxia que induce VEGF y glucolisis.",
+        "Diana indirecta; HIF-2 con belzutifan.",
+        R_WBC,
+    ),
+    (
+        "Tumor hypoxia",
+        "angio",
+        "process",
+        "Baja oxigenacion que selecciona clones agresivos y resistencia.",
+        "Radiorresistencia; profarmacos hipoxicos.",
+        R_WBC,
+    ),
+    (
+        "Angiopoietin-Tie2",
+        "angio",
+        "target",
+        "Regula estabilidad y maduracion vascular.",
+        "Inhibicion dual con VEGF (investigacion).",
+        R_WBC,
+    ),
+    (
+        "FGF-driven angiogenesis",
+        "angio",
+        "process",
+        "FGF como via alternativa de escape antiangiogenico.",
+        "Inhibidores pan-FGFR.",
+        R_WBC,
+    ),
+    (
+        "PDGF pericyte recruitment",
+        "angio",
+        "process",
+        "Reclutamiento de pericitos que estabiliza neovasos.",
+        "Diana combinada con VEGF.",
+        R_WBC,
+    ),
+    (
+        "Vascular normalization",
+        "angio",
+        "mechanism",
+        "La antiangiogenica juiciosa normaliza vasos y mejora la entrega de farmaco.",
+        "Ventana de sinergia con quimio.",
+        "Jain, Science 2005",
+    ),
+    (
+        "Anti-angiogenic therapy",
+        "angio",
+        "modality",
+        "Bloqueo del suministro vascular del tumor.",
+        "Bevacizumab, sunitinib, sorafenib.",
+        R_WBC,
+    ),
+    (
+        "Epithelial-mesenchymal transition (EMT)",
+        "metastasis",
+        "process",
+        "Reprogramacion que otorga motilidad e invasividad.",
+        "Diana de la plasticidad tumoral.",
+        "Thiery, Nat Rev Cancer 2002",
+    ),
+    (
+        "E-cadherin loss",
+        "metastasis",
+        "process",
+        "Perdida de adhesion epitelial que libera celulas invasivas.",
+        "Marcador de EMT.",
+        R_WBC,
+    ),
+    (
+        "SNAIL",
+        "metastasis",
+        "process",
+        "Factor de transcripcion que reprime E-cadherina e induce EMT.",
+        "Diana de EMT (investigacion).",
+        R_WBC,
+    ),
+    ("TWIST", "metastasis", "process", "Inductor de EMT y stemness metastasica.", "Contexto de plasticidad.", R_WBC),
+    (
+        "ZEB1",
+        "metastasis",
+        "process",
+        "Represor de epitelialidad que refuerza el estado mesenquimal.",
+        "Nodo de resistencia/plasticidad.",
+        R_WBC,
+    ),
+    (
+        "Matrix metalloproteinases (MMPs)",
+        "metastasis",
+        "process",
+        "Proteasas que degradan la matriz y liberan factores.",
+        "Historicos MMPi (reto de especificidad).",
+        R_WBC,
+    ),
+    (
+        "Invadopodia",
+        "metastasis",
+        "process",
+        "Protrusiones que focalizan la degradacion de matriz.",
+        "Diana estructural (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Basement membrane degradation",
+        "metastasis",
+        "process",
+        "Ruptura de la barrera que separa epitelio y estroma.",
+        "Paso definitorio de invasion.",
+        R_WBC,
+    ),
+    (
+        "Intravasation",
+        "metastasis",
+        "process",
+        "Entrada de celulas tumorales a la circulacion.",
+        "Diana del cascada metastasica.",
+        R_WBC,
+    ),
+    (
+        "Circulating tumor cells (CTCs)",
+        "metastasis",
+        "biomarker",
+        "Celulas tumorales en sangre; siembra metastasica y biopsia liquida.",
+        "Monitorizacion no invasiva.",
+        R_WBC,
+    ),
+    (
+        "Extravasation",
+        "metastasis",
+        "process",
+        "Salida de la circulacion hacia el tejido diana.",
+        "Paso de la colonizacion.",
+        R_WBC,
+    ),
+    (
+        "Pre-metastatic niche",
+        "metastasis",
+        "process",
+        "Acondicionamiento a distancia del organo diana antes de la llegada.",
+        "Diana preventiva (investigacion).",
+        "Kaplan et al., Nature 2005",
+    ),
+    (
+        "Metastatic colonization",
+        "metastasis",
+        "process",
+        "Etapa limitante: crecer en un organo ajeno.",
+        "Objetivo terapeutico critico.",
+        R_WBC,
+    ),
+    (
+        "Tumor dormancy",
+        "metastasis",
+        "process",
+        "Celulas diseminadas quiescentes que recaen anos despues.",
+        "Reto de erradicacion.",
+        R_WBC,
+    ),
+    (
+        "Organotropism (seed and soil)",
+        "metastasis",
+        "process",
+        "Patrones organo-especificos de metastasis.",
+        "Explica tropismos clinicos.",
+        "Paget 1889; Fidler, Nat Rev Cancer 2003",
+    ),
+    (
+        "Integrins",
+        "metastasis",
+        "target",
+        "Receptores de matriz que guian adhesion y supervivencia.",
+        "Modulan tropismo y farmacorresistencia.",
+        R_WBC,
+    ),
+    (
+        "Focal adhesion kinase (FAK)",
+        "metastasis",
+        "target",
+        "Integra senal de adhesion con supervivencia y motilidad.",
+        "Inhibidores de FAK (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Rho/Rac cytoskeletal dynamics",
+        "metastasis",
+        "process",
+        "GTPasas que reorganizan el citoesqueleto para migrar.",
+        "Diana de motilidad (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Warburg effect (aerobic glycolysis)",
+        "metabolism",
+        "process",
+        "Preferencia por glucolisis con lactato pese a haber oxigeno.",
+        "Base de PET-FDG; dianas metabolicas.",
+        "Warburg 1956; Vander Heiden et al., Science 2009",
+    ),
+    (
+        "Glutaminolysis",
+        "metabolism",
+        "process",
+        "Uso de glutamina como carbono/nitrogeno anaplerotico.",
+        "Inhibidores de glutaminasa (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Lactate / MCT shuttle",
+        "metabolism",
+        "process",
+        "Exportacion e intercambio de lactato que acidifica el TME.",
+        "Inhibidores de MCT (investigacion).",
+        R_WBC,
+    ),
+    (
+        "PKM2",
+        "metabolism",
+        "process",
+        "Isoforma de piruvato-cinasa que favorece biosintesis.",
+        "Diana metabolica (investigacion).",
+        R_WBC,
+    ),
+    (
+        "LDHA",
+        "metabolism",
+        "process",
+        "Convierte piruvato en lactato regenerando NAD+.",
+        "Inhibicion de LDHA (investigacion).",
+        R_WBC,
+    ),
+    (
+        "GLUT1 (SLC2A1)",
+        "metabolism",
+        "process",
+        "Transportador que eleva la captacion de glucosa.",
+        "Correlato de PET-FDG.",
+        R_WBC,
+    ),
+    (
+        "One-carbon / folate metabolism",
+        "metabolism",
+        "process",
+        "Aporta unidades de carbono para nucleotidos y metilacion.",
+        "Antifolatos (metotrexato, pemetrexed).",
+        R_WBC,
+    ),
+    (
+        "Serine-glycine biosynthesis",
+        "metabolism",
+        "process",
+        "Ruta biosintetica reprogramada que alimenta el one-carbon.",
+        "Diana metabolica emergente.",
+        R_WBC,
+    ),
+    (
+        "Fatty acid synthesis (FASN)",
+        "metabolism",
+        "process",
+        "Lipogenesis de novo para membranas y senalizacion.",
+        "Inhibidores de FASN (investigacion).",
+        R_WBC,
+    ),
+    (
+        "2-HG oncometabolite (IDH-mut)",
+        "metabolism",
+        "biomarker",
+        "IDH mutante produce 2-hidroxiglutarato que altera la epigenetica.",
+        "Ivosidenib/enasidenib; biomarcador.",
+        "Dang et al., Nature 2009",
+    ),
+    (
+        "TCA cycle rewiring",
+        "metabolism",
+        "process",
+        "Reprogramacion del ciclo de Krebs para biosintesis.",
+        "Vulnerabilidades contextuales.",
+        R_WBC,
+    ),
+    (
+        "NAD+ metabolism",
+        "metabolism",
+        "process",
+        "Cofactor redox y de senalizacion elevado en proliferacion.",
+        "Inhibidores de NAMPT (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Autophagy",
+        "metabolism",
+        "process",
+        "Reciclaje de organelas/proteinas para sobrevivir al estres.",
+        "Modulacion (cloroquina, investigacion).",
+        "Levine & Kroemer, Cell 2008",
+    ),
+    (
+        "Reductive carboxylation",
+        "metabolism",
+        "process",
+        "Sintesis de citrato desde glutamina en hipoxia.",
+        "Vulnerabilidad metabolica.",
+        R_WBC,
+    ),
+    (
+        "ROS / redox homeostasis",
+        "metabolism",
+        "process",
+        "Equilibrio de especies reactivas que el tumor debe tamponar.",
+        "Estrategias pro-oxidantes selectivas.",
+        R_WBC,
+    ),
+    (
+        "Amino-acid dependency (Asn/Arg)",
+        "metabolism",
+        "process",
+        "Adiccion a aminoacidos no sintetizables por ciertos tumores.",
+        "L-asparaginasa (LLA); depledores de arginina.",
+        R_WBC,
+    ),
+    (
+        "DNA methylation (5mC)",
+        "epigenetic",
+        "process",
+        "Marca en CpG que regula la expresion sin cambiar la secuencia.",
+        "Base de terapias hipometilantes.",
+        "Jones & Baylin, Nat Rev Genet 2002",
+    ),
+    (
+        "DNMTs (DNMT1/3A/3B)",
+        "epigenetic",
+        "target",
+        "Enzimas que escriben la metilacion del ADN.",
+        "Azacitidina, decitabina.",
+        R_WBC,
+    ),
+    (
+        "CpG island hypermethylation",
+        "epigenetic",
+        "process",
+        "Silenciamiento de supresores por metilacion de promotores.",
+        "Reversible con DNMTi.",
+        R_WBC,
+    ),
+    (
+        "Global hypomethylation",
+        "epigenetic",
+        "process",
+        "Perdida global de metilacion que favorece inestabilidad.",
+        "Marca epigenetica tumoral.",
+        R_WBC,
+    ),
+    (
+        "Histone acetyltransferases (HATs)",
+        "epigenetic",
+        "process",
+        "Anaden acetilo abriendo cromatina para transcripcion.",
+        "Contexto de balance con HDAC.",
+        R_WBC,
+    ),
+    (
+        "Histone deacetylases (HDACs)",
+        "epigenetic",
+        "target",
+        "Retiran acetilos compactando cromatina.",
+        "Vorinostat, romidepsina.",
+        R_WBC,
+    ),
+    (
+        "Histone methylation",
+        "epigenetic",
+        "process",
+        "Marcas activadoras o represoras segun residuo y grado.",
+        "Diana de escritores/borradores.",
+        R_WBC,
+    ),
+    (
+        "EZH2 / PRC2 (H3K27me3)",
+        "epigenetic",
+        "target",
+        "Deposita marca represiva que silencia supresores.",
+        "Tazemetostat.",
+        R_WBC,
+    ),
+    (
+        "DOT1L (H3K79me)",
+        "epigenetic",
+        "target",
+        "Metiltransferasa esencial en leucemias con reordenamiento MLL.",
+        "Inhibidores de DOT1L (investigacion).",
+        R_WBC,
+    ),
+    (
+        "BET / BRD4",
+        "epigenetic",
+        "target",
+        "Lectores de acetil-lisina que sostienen la transcripcion de MYC.",
+        "Inhibidores BET (investigacion).",
+        "Filippakopoulos et al., Nature 2010",
+    ),
+    (
+        "SWI/SNF (BAF) remodeling",
+        "epigenetic",
+        "process",
+        "Complejo que reposiciona nucleosomas; frecuentemente mutado.",
+        "Sintesis letal con EZH2.",
+        R_WBC,
+    ),
+    (
+        "TET enzymes / 5hmC",
+        "epigenetic",
+        "process",
+        "Oxidan 5mC iniciando desmetilacion activa.",
+        "Alterada por 2-HG en IDH-mut.",
+        R_WBC,
+    ),
+    (
+        "Super-enhancers",
+        "epigenetic",
+        "process",
+        "Grandes clusters regulatorios que sostienen oncogenes de identidad.",
+        "Vulnerables a inhibicion transcripcional.",
+        "Hnisz et al., Cell 2013",
+    ),
+    (
+        "Histone variants",
+        "epigenetic",
+        "process",
+        "Variantes (p.ej. H3.3) que alteran cromatina; mutadas en gliomas pediatricos.",
+        "Biomarcador diagnostico.",
+        R_WBC,
+    ),
+    (
+        "Chromatin accessibility",
+        "epigenetic",
+        "process",
+        "Paisaje abierto/cerrado que define programas transcripcionales.",
+        "Perfilable por ATAC-seq.",
+        R_WBC,
+    ),
+    (
+        "Cancer-associated fibroblasts (CAFs)",
+        "tme",
+        "process",
+        "Fibroblastos activados que remodelan matriz y secretan factores.",
+        "Diana estromal (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Tumor-associated macrophages (TAMs, M2)",
+        "tme",
+        "target",
+        "Macrofagos pro-tumorales que suprimen inmunidad y favorecen angiogenesis.",
+        "Reprogramacion; anti-CSF1R.",
+        R_WBC,
+    ),
+    (
+        "Myeloid-derived suppressor cells (MDSCs)",
+        "tme",
+        "process",
+        "Poblacion mieloide inmadura que inhibe linfocitos T.",
+        "Objetivo de combinaciones inmunes.",
+        R_WBC,
+    ),
+    (
+        "Regulatory T cells (Tregs)",
+        "tme",
+        "target",
+        "Linfocitos que amortiguan la respuesta antitumoral.",
+        "Deplecion selectiva (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Extracellular matrix remodeling",
+        "tme",
+        "process",
+        "Rigidez y composicion de matriz que guian invasion y farmacorresistencia.",
+        "Normalizacion estromal.",
+        R_WBC,
+    ),
+    (
+        "Hypoxic niche",
+        "tme",
+        "process",
+        "Regiones hipoxicas que fomentan stemness y resistencia.",
+        "Radiorresistencia; profarmacos.",
+        R_WBC,
+    ),
+    (
+        "Abnormal tumor vasculature",
+        "tme",
+        "process",
+        "Vasos tortuosos y permeables que dificultan la entrega de farmacos.",
+        "Normalizacion vascular.",
+        R_WBC,
+    ),
+    (
+        "Desmoplasia",
+        "tme",
+        "process",
+        "Estroma denso (p.ej. pancreas) que actua de barrera fisica.",
+        "Reto de penetracion terapeutica.",
+        R_WBC,
+    ),
+    (
+        "Tumor-derived exosomes",
+        "tme",
+        "process",
+        "Vesiculas que transportan senales pro-tumorales a distancia.",
+        "Biomarcadores y dianas emergentes.",
+        R_WBC,
+    ),
+    (
+        "Cytokine/chemokine milieu",
+        "tme",
+        "process",
+        "Red soluble que recluta y polariza celulas inmunes.",
+        "Modulacion inmune dirigida.",
+        R_WBC,
+    ),
+    (
+        "Tertiary lymphoid structures (TLS)",
+        "tme",
+        "biomarker",
+        "Agregados linfoides intratumorales asociados a mejor respuesta inmune.",
+        "Predictor de respuesta a checkpoint.",
+        R_WBC,
+    ),
+    (
+        "Immune-excluded phenotype",
+        "tme",
+        "biomarker",
+        "Linfocitos confinados al estroma sin infiltrar el nido tumoral.",
+        "Estratifica respuesta a inmunoterapia.",
+        R_WBC,
+    ),
+    (
+        "Metabolic competition in TME",
+        "tme",
+        "process",
+        "El tumor priva de glucosa y aminoacidos a linfocitos.",
+        "Reprogramacion metabolica inmune.",
+        R_WBC,
+    ),
+    (
+        "PD-1 (PDCD1)",
+        "immuno",
+        "target",
+        "Checkpoint inhibidor en linfocitos T que limita su activacion.",
+        "Pembrolizumab, nivolumab.",
+        "Ishida et al., EMBO J 1992",
+    ),
+    (
+        "PD-L1 (CD274)",
+        "immuno",
+        "target",
+        "Ligando tumoral de PD-1 que apaga la respuesta T.",
+        "Atezolizumab; biomarcador (TPS/CPS).",
+        "Dong et al., Nat Med 2002",
+    ),
+    (
+        "CTLA-4",
+        "immuno",
+        "target",
+        "Checkpoint que compite con CD28 frenando el cebado T.",
+        "Ipilimumab.",
+        "Leach, Krummel & Allison, Science 1996",
+    ),
+    (
+        "Immune checkpoint blockade",
+        "immuno",
+        "modality",
+        "Liberar frenos inmunes para reactivar linfocitos antitumorales.",
+        "Paradigma anti-PD-1/PD-L1/CTLA-4.",
+        "Sharma & Allison, Science 2015",
+    ),
+    (
+        "T-cell exhaustion",
+        "immuno",
+        "process",
+        "Disfuncion progresiva de T por estimulacion cronica.",
+        "Reversible parcialmente con checkpoint.",
+        R_WBC,
+    ),
+    (
+        "Neoantigens",
+        "immuno",
+        "biomarker",
+        "Peptidos mutados tumor-especificos reconocidos por linfocitos T.",
+        "Base de vacunas personalizadas.",
+        "Schumacher & Schreiber, Science 2015",
+    ),
+    (
+        "MHC-I antigen presentation",
+        "immuno",
+        "process",
+        "Presentacion de peptidos a CD8; su perdida evade inmunidad.",
+        "Su restauracion mejora respuesta.",
+        R_WBC,
+    ),
+    (
+        "Tumor-infiltrating lymphocytes (TILs)",
+        "immuno",
+        "biomarker",
+        "Linfocitos infiltrantes; su densidad predice pronostico/respuesta.",
+        "Base de la terapia con TIL.",
+        R_WBC,
+    ),
+    (
+        "CD8+ cytotoxic T cells",
+        "immuno",
+        "process",
+        "Efectores que lisan celulas tumorales reconocidas.",
+        "Objetivo a potenciar en inmunoterapia.",
+        R_WBC,
+    ),
+    (
+        "Natural killer (NK) cells",
+        "immuno",
+        "process",
+        "Inmunidad innata que mata celulas sin MHC-I (missing self).",
+        "Terapias NK y CAR-NK.",
+        R_WBC,
+    ),
+    (
+        "CAR-T cells",
+        "immuno",
+        "modality",
+        "Linfocitos T con receptor quimerico contra antigeno tumoral.",
+        "Anti-CD19 en linfoma/leucemia; anti-BCMA en mieloma.",
+        "June & Sadelain, NEJM 2018",
+    ),
+    (
+        "Bispecific T-cell engagers (BiTE)",
+        "immuno",
+        "modality",
+        "Anticuerpos que unen CD3 de T con antigeno tumoral.",
+        "Blinatumomab (CD19xCD3).",
+        R_WBC,
+    ),
+    (
+        "TCR-engineered T cells",
+        "immuno",
+        "modality",
+        "T con TCR redirigido a antigenos intracelulares via MHC.",
+        "Anti-antigenos de cancer/testiculo.",
+        R_WBC,
+    ),
+    (
+        "Cancer vaccines",
+        "immuno",
+        "modality",
+        "Inmunizacion con antigenos tumorales para inducir respuesta T.",
+        "Vacunas de neoantigeno (mRNA).",
+        R_WBC,
+    ),
+    (
+        "Oncolytic viruses",
+        "immuno",
+        "modality",
+        "Virus que lisan tumores e inducen inmunidad in situ.",
+        "Talimogene laherparepvec (T-VEC).",
+        R_WBC,
+    ),
+    (
+        "LAG-3",
+        "immuno",
+        "target",
+        "Checkpoint co-inhibidor que sinergiza con PD-1.",
+        "Relatlimab (combinado con nivolumab).",
+        R_WBC,
+    ),
+    (
+        "TIM-3 (HAVCR2)",
+        "immuno",
+        "target",
+        "Marcador/regulador de agotamiento T.",
+        "Inhibidores en investigacion.",
+        R_WBC,
+    ),
+    (
+        "TIGIT",
+        "immuno",
+        "target",
+        "Checkpoint que compite por ligandos con CD226.",
+        "Anti-TIGIT en investigacion.",
+        R_WBC,
+    ),
+    (
+        "IDO1",
+        "immuno",
+        "target",
+        "Enzima que degrada triptofano creando entorno inmunosupresor.",
+        "Inhibidores de IDO (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Adenosine / CD73 axis",
+        "immuno",
+        "target",
+        "Adenosina extracelular que suprime linfocitos T.",
+        "Anti-CD39/CD73/A2AR (investigacion).",
+        R_WBC,
+    ),
+    (
+        "CD47-SIRP alpha (dont eat me)",
+        "immuno",
+        "target",
+        "Senal que protege al tumor de la fagocitosis.",
+        "Bloqueo de CD47 (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Immunogenic cell death (ICD)",
+        "immuno",
+        "process",
+        "Muerte que libera senales de peligro y activa inmunidad.",
+        "Inducida por ciertas quimio/radio.",
+        "Galluzzi et al., Nat Rev Immunol 2017",
+    ),
+    (
+        "Cytotoxic chemotherapy",
+        "modality",
+        "modality",
+        "Farmacos que danan celulas en division rapida.",
+        "Columna vertebral historica del tratamiento.",
+        R_WBC,
+    ),
+    (
+        "Alkylating agents",
+        "modality",
+        "modality",
+        "Anaden grupos alquilo al ADN generando enlaces cruzados.",
+        "Ciclofosfamida, temozolomida.",
+        R_WBC,
+    ),
+    (
+        "Platinum agents",
+        "modality",
+        "modality",
+        "Forman aductos de ADN que bloquean replicacion.",
+        "Cisplatino, carboplatino, oxaliplatino.",
+        R_WBC,
+    ),
+    (
+        "Antimetabolites",
+        "modality",
+        "modality",
+        "Analogos que interfieren sintesis de nucleotidos/ADN.",
+        "5-FU, metotrexato, gemcitabina.",
+        R_WBC,
+    ),
+    (
+        "Topoisomerase inhibitors",
+        "modality",
+        "modality",
+        "Bloquean topoisomerasas provocando roturas de ADN.",
+        "Irinotecan, etoposido, doxorrubicina.",
+        R_WBC,
+    ),
+    (
+        "Taxanes",
+        "modality",
+        "modality",
+        "Estabilizan microtubulos e impiden la mitosis.",
+        "Paclitaxel, docetaxel.",
+        R_WBC,
+    ),
+    (
+        "Vinca alkaloids",
+        "modality",
+        "modality",
+        "Impiden el ensamblaje de microtubulos.",
+        "Vincristina, vinblastina.",
+        R_WBC,
+    ),
+    (
+        "Anthracyclines",
+        "modality",
+        "modality",
+        "Intercalan ADN e inhiben topoisomerasa II.",
+        "Doxorrubicina (toxicidad cardiaca).",
+        R_WBC,
+    ),
+    (
+        "Small-molecule kinase inhibitors",
+        "modality",
+        "modality",
+        "Bloquean cinasas oncogenicas especificas.",
+        "Imatinib, osimertinib, muchos mas.",
+        R_WBC,
+    ),
+    (
+        "Monoclonal antibodies",
+        "modality",
+        "modality",
+        "Anticuerpos que marcan o bloquean dianas de superficie.",
+        "Rituximab, trastuzumab, cetuximab.",
+        R_WBC,
+    ),
+    (
+        "Antibody-drug conjugates (ADCs)",
+        "modality",
+        "modality",
+        "Anticuerpo unido a citotoxico para entrega dirigida.",
+        "T-DXd, sacituzumab govitecan.",
+        R_WBC,
+    ),
+    (
+        "Radiotherapy",
+        "modality",
+        "modality",
+        "Radiacion ionizante que induce dano letal de ADN.",
+        "Curativa/paliativa segun contexto.",
+        R_WBC,
+    ),
+    (
+        "Endocrine / hormonal therapy",
+        "modality",
+        "modality",
+        "Bloquea senal hormonal que impulsa el tumor.",
+        "Tamoxifeno, inhibidores de aromatasa, ADT.",
+        R_WBC,
+    ),
+    (
+        "Proteasome inhibitors",
+        "modality",
+        "modality",
+        "Bloquean la degradacion proteica generando estres.",
+        "Bortezomib (mieloma).",
+        R_WBC,
+    ),
+    (
+        "PROTAC degraders",
+        "modality",
+        "modality",
+        "Reclutan una E3 ligasa para degradar la diana.",
+        "Degradadores de AR/ER (investigacion).",
+        R_WBC,
+    ),
+    (
+        "Differentiation therapy",
+        "modality",
+        "modality",
+        "Fuerza la maduracion de celulas malignas.",
+        "ATRA + arsenico en LPA.",
+        "Huang et al., Blood 1988",
+    ),
+    (
+        "Immunomodulatory drugs (IMiDs)",
+        "modality",
+        "modality",
+        "Modulan cereblon y la inmunidad (mieloma).",
+        "Lenalidomida, pomalidomida.",
+        R_WBC,
+    ),
+    (
+        "Epigenetic therapy",
+        "modality",
+        "modality",
+        "Revierte silenciamientos aberrantes de la cromatina.",
+        "DNMTi, HDACi, EZH2i.",
+        R_WBC,
+    ),
+    (
+        "Imatinib -> BCR-ABL",
+        "drug",
+        "drug-target",
+        "Inhibidor de tirosina-cinasa que apaga BCR-ABL en LMC.",
+        "Transformo la LMC en enfermedad cronica.",
+        "Druker et al., NEJM 2001",
+    ),
+    (
+        "Trastuzumab -> HER2",
+        "drug",
+        "drug-target",
+        "Anticuerpo que bloquea HER2 en tumores HER2+.",
+        "Mama y gastrico HER2+.",
+        "Slamon et al., NEJM 2001",
+    ),
+    (
+        "Trastuzumab deruxtecan -> HER2 (ADC)",
+        "drug",
+        "drug-target",
+        "ADC que entrega un inhibidor de topoisomerasa I a celulas HER2.",
+        "Activo incluso en HER2-bajo.",
+        "Modi et al., NEJM 2022",
+    ),
+    (
+        "Osimertinib -> EGFR (T790M)",
+        "drug",
+        "drug-target",
+        "TKI de 3a generacion contra EGFR mutante y T790M.",
+        "1a linea en NSCLC EGFR-mut.",
+        "Soria et al., NEJM 2018",
+    ),
+    (
+        "Gefitinib/Erlotinib -> EGFR",
+        "drug",
+        "drug-target",
+        "TKI de 1a generacion para EGFR con mutacion sensibilizante.",
+        "NSCLC EGFR-mut.",
+        "Mok et al., NEJM 2009",
+    ),
+    (
+        "Vemurafenib -> BRAF V600E",
+        "drug",
+        "drug-target",
+        "Inhibidor selectivo de BRAF V600E.",
+        "Melanoma BRAF-mut.",
+        "Chapman et al., NEJM 2011",
+    ),
+    (
+        "Dabrafenib + Trametinib -> BRAF + MEK",
+        "drug",
+        "drug-target",
+        "Doble bloqueo de la via MAPK que retrasa resistencia.",
+        "Melanoma y otros BRAF V600.",
+        "Long et al., NEJM 2014",
+    ),
+    (
+        "Sotorasib -> KRAS G12C",
+        "drug",
+        "drug-target",
+        "Inhibidor covalente que atrapa KRAS G12C inactivo (bolsillo switch-II).",
+        "NSCLC KRAS G12C.",
+        "Skoulidis et al., NEJM 2021",
+    ),
+    (
+        "Adagrasib -> KRAS G12C",
+        "drug",
+        "drug-target",
+        "Segundo inhibidor covalente de KRAS G12C.",
+        "NSCLC y CCR KRAS G12C.",
+        "Janne et al., NEJM 2022",
+    ),
+    (
+        "Crizotinib -> ALK/ROS1",
+        "drug",
+        "drug-target",
+        "TKI para fusiones ALK y ROS1.",
+        "NSCLC ALK+ o ROS1+.",
+        "Shaw et al., NEJM 2013",
+    ),
+    (
+        "Alectinib -> ALK",
+        "drug",
+        "drug-target",
+        "TKI de ALK de nueva generacion con actividad en SNC.",
+        "1a linea NSCLC ALK+.",
+        "Peters et al., NEJM 2017",
+    ),
+    (
+        "Larotrectinib -> NTRK fusion",
+        "drug",
+        "drug-target",
+        "Inhibidor TRK agnostico de tipo tumoral.",
+        "Tumores con fusion NTRK.",
+        "Drilon et al., NEJM 2018",
+    ),
+    (
+        "Olaparib -> PARP",
+        "drug",
+        "drug-target",
+        "Inhibidor de PARP letal en tumores con deficiencia de HR.",
+        "Ovario/mama BRCA-mut.",
+        "Ledermann et al., NEJM 2012",
+    ),
+    (
+        "Venetoclax -> BCL2",
+        "drug",
+        "drug-target",
+        "Mimetico BH3 que restaura la apoptosis.",
+        "LLC y LMA.",
+        "Souers et al., Nat Med 2013",
+    ),
+    (
+        "Palbociclib -> CDK4/6",
+        "drug",
+        "drug-target",
+        "Inhibidor de CDK4/6 que frena la fosforilacion de RB.",
+        "Mama HR+/HER2-.",
+        "Finn et al., NEJM 2016",
+    ),
+    (
+        "Rituximab -> CD20",
+        "drug",
+        "drug-target",
+        "Anticuerpo anti-CD20 que deplecciona linfocitos B.",
+        "Linfomas B y LLC.",
+        "Coiffier et al., NEJM 2002",
+    ),
+    (
+        "Bevacizumab -> VEGF-A",
+        "drug",
+        "drug-target",
+        "Anticuerpo que neutraliza VEGF-A y priva de angiogenesis.",
+        "Colorrectal, pulmon, otros.",
+        "Hurwitz et al., NEJM 2004",
+    ),
+    (
+        "Sunitinib -> VEGFR (multi-TKI)",
+        "drug",
+        "drug-target",
+        "Inhibidor multicinasa antiangiogenico.",
+        "Renal, GIST, TNE.",
+        R_WBC,
+    ),
+    (
+        "Ibrutinib -> BTK",
+        "drug",
+        "drug-target",
+        "Inhibidor covalente de BTK en la senal del receptor B.",
+        "LLC y linfoma del manto.",
+        "Byrd et al., NEJM 2013",
+    ),
+    (
+        "Ruxolitinib -> JAK1/2",
+        "drug",
+        "drug-target",
+        "Inhibidor de JAK que bloquea la senal JAK-STAT.",
+        "Mielofibrosis y policitemia vera.",
+        R_WBC,
+    ),
+    (
+        "Ivosidenib -> IDH1 mutante",
+        "drug",
+        "drug-target",
+        "Inhibidor del IDH1 mutante que reduce el 2-HG.",
+        "LMA y colangiocarcinoma IDH1-mut.",
+        R_WBC,
+    ),
+    (
+        "Enasidenib -> IDH2 mutante",
+        "drug",
+        "drug-target",
+        "Inhibidor del IDH2 mutante que induce diferenciacion.",
+        "LMA IDH2-mut.",
+        R_WBC,
+    ),
+    (
+        "Tazemetostat -> EZH2",
+        "drug",
+        "drug-target",
+        "Inhibidor de EZH2 que revierte silenciamiento represivo.",
+        "Linfoma folicular y sarcoma epitelioide.",
+        R_WBC,
+    ),
+    (
+        "Pembrolizumab -> PD-1",
+        "drug",
+        "drug-target",
+        "Anti-PD-1 que reactiva linfocitos T antitumorales.",
+        "Multiples tumores; agnostico en MSI-H.",
+        "Le et al., NEJM 2015",
+    ),
+    (
+        "Nivolumab -> PD-1",
+        "drug",
+        "drug-target",
+        "Anti-PD-1 con amplio desarrollo clinico.",
+        "Melanoma, pulmon, renal, otros.",
+        "Topalian et al., NEJM 2012",
+    ),
+    (
+        "Atezolizumab -> PD-L1",
+        "drug",
+        "drug-target",
+        "Anticuerpo anti-PD-L1 que bloquea el eje PD-1/PD-L1.",
+        "Pulmon, vejiga, mama TN.",
+        R_WBC,
+    ),
+    (
+        "Ipilimumab -> CTLA-4",
+        "drug",
+        "drug-target",
+        "Anti-CTLA-4, primer checkpoint con beneficio en supervivencia.",
+        "Melanoma; combinaciones.",
+        "Hodi et al., NEJM 2010",
+    ),
+]
 
 GENOME_MECHANICS: dict[str, dict[str, Any]] = {
-    'ONC-143': {
-        'coordinate_hygiene': 'BED_0based_vs_VCF_1based',
-        'seg_threshold': 'log2_cnv_delta > 0.3',
-        'hrd_cin_score_cut': 42.0,
-        'synthetic_lethality_target': 'PARP1/ATR',
-        'chromosomal_imbalance_index': 'fraction_genome_altered > 0.2'
+    "ONC-143": {
+        "coordinate_hygiene": "BED_0based_vs_VCF_1based",
+        "seg_threshold": "log2_cnv_delta > 0.3",
+        "hrd_cin_score_cut": 42.0,
+        "synthetic_lethality_target": "PARP1/ATR",
+        "chromosomal_imbalance_index": "fraction_genome_altered > 0.2",
     },
-    'ONC-144': {
-        'mmr_genes': ['MLH1', 'MSH2', 'MSH6', 'PMS2'],
-        'bat25_bat26_threshold': '>= 2 unstable mononucleotide loci',
-        'immunotherapy_biomarker': 'pembrolizumab_agnostic_approval',
-        'hypermutability_rate': '> 100 mutations per genome'
+    "ONC-144": {
+        "mmr_genes": ["MLH1", "MSH2", "MSH6", "PMS2"],
+        "bat25_bat26_threshold": ">= 2 unstable mononucleotide loci",
+        "immunotherapy_biomarker": "pembrolizumab_agnostic_approval",
+        "hypermutability_rate": "> 100 mutations per genome",
     },
-    'ONC-145': {
-        'chromosomal_imbalance_index': 'fraction_genome_altered > 0.2',
-        'gene_dosage_leverage': 'proteotoxic_stress_dependency',
-        'target_pathway': 'SAC_bub1b_mps1',
-        'mitotic_spindle_checkpoint': 'active_surveillance'
+    "ONC-145": {
+        "chromosomal_imbalance_index": "fraction_genome_altered > 0.2",
+        "gene_dosage_leverage": "proteotoxic_stress_dependency",
+        "target_pathway": "SAC_bub1b_mps1",
+        "mitotic_spindle_checkpoint": "active_surveillance",
     },
-    'ONC-146': {
-        'calculation': 'somatic_snv_indel_count / target_region_mb',
-        'tmb_high_threshold_per_mb': 10.0,
-        'target_region_default_mb': 38.0,
-        'biomarker_clinical_utility': 'anti_pd1_response_prediction'
+    "ONC-146": {
+        "calculation": "somatic_snv_indel_count / target_region_mb",
+        "tmb_high_threshold_per_mb": 10.0,
+        "target_region_default_mb": 38.0,
+        "biomarker_clinical_utility": "anti_pd1_response_prediction",
     },
-    'ONC-147': {
-        'sbs_catalog_version': 'COSMIC_v3.4',
-        'deconstruct_sigs_metric': 'cosine_similarity >= 0.85',
-        'etiology_mapping': {
-            'SBS1': '5mC_deamination',
-            'SBS2_SBS13': 'APOBEC_cytidine_deaminase',
-            'SBS3': 'HRD_BRCAness',
-            'SBS4': 'tobacco_PAH',
-            'SBS7': 'UV_pyrimidine_dimers'
-        }
+    "ONC-147": {
+        "sbs_catalog_version": "COSMIC_v3.4",
+        "deconstruct_sigs_metric": "cosine_similarity >= 0.85",
+        "etiology_mapping": {
+            "SBS1": "5mC_deamination",
+            "SBS2_SBS13": "APOBEC_cytidine_deaminase",
+            "SBS3": "HRD_BRCAness",
+            "SBS4": "tobacco_PAH",
+            "SBS7": "UV_pyrimidine_dimers",
+        },
     },
-    'ONC-148': {
-        'motif_context': 'TCW -> TTW / TGW (W = A or T)',
-        'enrichment_ratio_cut': 2.0,
-        'cosmic_signatures': ['SBS2', 'SBS13'],
-        'driver_neoantigen_leverage': 'high_immunogenicity_clusters'
+    "ONC-148": {
+        "motif_context": "TCW -> TTW / TGW (W = A or T)",
+        "enrichment_ratio_cut": 2.0,
+        "cosmic_signatures": ["SBS2", "SBS13"],
+        "driver_neoantigen_leverage": "high_immunogenicity_clusters",
     },
-    'ONC-149': {
-        'genomic_hallmark': 'localized_shattering_and_re_ligation',
-        'copy_number_oscillations': '2_to_3_states_in_dense_cluster',
-        'oncogene_amplification_link': ['MYC', 'MDM2', 'CDK4', 'EGFR'],
-        'repair_mechanism': 'NHEJ_MMEJ_catastrophe'
+    "ONC-149": {
+        "genomic_hallmark": "localized_shattering_and_re_ligation",
+        "copy_number_oscillations": "2_to_3_states_in_dense_cluster",
+        "oncogene_amplification_link": ["MYC", "MDM2", "CDK4", "EGFR"],
+        "repair_mechanism": "NHEJ_MMEJ_catastrophe",
     },
-    'ONC-150': {
-        'definition': 'localized_hypermutation_rain',
-        'intermutational_distance_bp': '<= 1000',
-        'associated_enzyme': 'APOBEC3A_APOBEC3B',
-        'strand_coordination': 'processive_deamination_on_ssDNA'
+    "ONC-150": {
+        "definition": "localized_hypermutation_rain",
+        "intermutational_distance_bp": "<= 1000",
+        "associated_enzyme": "APOBEC3A_APOBEC3B",
+        "strand_coordination": "processive_deamination_on_ssDNA",
     },
-    'ONC-151': {
-        'ploidy_state': 'tetraploid_or_near_tetraploid_transition',
-        'buffer_capacity': 'tolerates_deleterious_chromosomal_losses',
-        'prognostic_impact': 'high_relapse_risk_and_multidrug_resistance'
+    "ONC-151": {
+        "ploidy_state": "tetraploid_or_near_tetraploid_transition",
+        "buffer_capacity": "tolerates_deleterious_chromosomal_losses",
+        "prognostic_impact": "high_relapse_risk_and_multidrug_resistance",
     },
-    'ONC-152': {
-        'mechanism': 'biallelic_inactivation_knudson_2nd_hit',
-        'hrd_loh_score': 'number_of_subchromosomal_LOH_regions > 15Mb',
-        'diagnostic_panel': 'SNP_array_or_WGS_b_allele_frequency_shift'
+    "ONC-152": {
+        "mechanism": "biallelic_inactivation_knudson_2nd_hit",
+        "hrd_loh_score": "number_of_subchromosomal_LOH_regions > 15Mb",
+        "diagnostic_panel": "SNP_array_or_WGS_b_allele_frequency_shift",
     },
-    'ONC-153': {
-        'origin_firing_aberration': 'premature_S_phase_entry_fork_stalling',
-        'checkpoint_dependency': ['ATR', 'CHK1', 'WEE1'],
-        'biomarker': 'RPA_ssDNA_accumulation_and_gamma_H2AX'
+    "ONC-153": {
+        "origin_firing_aberration": "premature_S_phase_entry_fork_stalling",
+        "checkpoint_dependency": ["ATR", "CHK1", "WEE1"],
+        "biomarker": "RPA_ssDNA_accumulation_and_gamma_H2AX",
     },
-    'ONC-154': {
-        'topology': 'circular_amplicon_lacking_centromere',
-        'copy_number_leverage': 'up_to_100x_oncogene_amplification',
-        'chromatin_state': 'highly_accessible_super_enhancer_hub',
-        'segregation_dynamics': 'non_mendelian_random_segregation_under_drug_selection'
-    }
+    "ONC-154": {
+        "topology": "circular_amplicon_lacking_centromere",
+        "copy_number_leverage": "up_to_100x_oncogene_amplification",
+        "chromatin_state": "highly_accessible_super_enhancer_hub",
+        "segregation_dynamics": "non_mendelian_random_segregation_under_drug_selection",
+    },
 }
+
 
 def build_records() -> list[dict[str, Any]]:
     recs: list[dict[str, Any]] = []
     for i, (name, cat, role, desc, therapy, ref) in enumerate(PRIMS, start=1):
         label, layer = CATS[cat]
         rec: dict[str, Any] = {
-            'id': f'ONC-{i:03d}',
-            'name': name,
-            'category': cat,
-            'category_label': label,
-            'layer': layer,
-            'role': role,
-            'description': desc,
-            'therapeutic_relevance': therapy,
-            'reference': ref,
-            'confidence': 'C5-established'
+            "id": f"ONC-{i:03d}",
+            "name": name,
+            "category": cat,
+            "category_label": label,
+            "layer": layer,
+            "role": role,
+            "description": desc,
+            "therapeutic_relevance": therapy,
+            "reference": ref,
+            "confidence": "C5-established",
         }
-        if rec['id'] in GENOME_MECHANICS:
-            rec['genomic_mechanics'] = GENOME_MECHANICS[rec['id']]
+        if rec["id"] in GENOME_MECHANICS:
+            rec["genomic_mechanics"] = GENOME_MECHANICS[rec["id"]]
         recs.append(rec)
     return recs
 
+
 def q(s: str) -> str:
-    return '"' + s.replace('\\', '\\\\').replace('"', '\\"') + '"'
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
 
 def write_if_changed(path: str, content: str) -> None:
     if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path, "r", encoding="utf-8") as f:
             if f.read() == content:
                 return
-    with open(path, 'w', encoding='utf-8') as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.write(content)
+
 
 def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
     lines = []
-    lines.append('# CORTEX / BABYLON-60 :: Oncology Molecular Primitives Ontology')
-    lines.append(f'# count: {len(recs)} | source of truth: scripts/gen_oncology_primitives.py')
-    lines.append('# authorship (AKA): Borja Moskv (borjamoskv)')
-    lines.append('---')
-    lines.append(f'disclaimer_es: {q(DISCLAIMER_ES)}')
-    lines.append(f'disclaimer_en: {q(DISCLAIMER_EN)}')
-    lines.append('ontology:')
-    lines.append('  name: oncology_300_primitives')
-    lines.append('  version: 1.0.0')
-    lines.append(f'  count: {len(recs)}')
-    lines.append('  confidence_scale: C5-established')
-    lines.append('  categories:')
+    lines.append("# CORTEX / BABYLON-60 :: Oncology Molecular Primitives Ontology")
+    lines.append(f"# count: {len(recs)} | source of truth: scripts/gen_oncology_primitives.py")
+    lines.append("# authorship (AKA): Borja Moskv (borjamoskv)")
+    lines.append("---")
+    lines.append(f"disclaimer_es: {q(DISCLAIMER_ES)}")
+    lines.append(f"disclaimer_en: {q(DISCLAIMER_EN)}")
+    lines.append("ontology:")
+    lines.append("  name: oncology_300_primitives")
+    lines.append("  version: 1.0.0")
+    lines.append(f"  count: {len(recs)}")
+    lines.append("  confidence_scale: C5-established")
+    lines.append("  categories:")
     for k, (label, layer) in CATS.items():
-        n = sum((1 for r in recs if r['category'] == k))
-        lines.append(f'    - key: {k}')
-        lines.append(f'      label: {q(label)}')
-        lines.append(f'      layer: {layer}')
-        lines.append(f'      count: {n}')
-    lines.append('  primitives:')
+        n = sum((1 for r in recs if r["category"] == k))
+        lines.append(f"    - key: {k}")
+        lines.append(f"      label: {q(label)}")
+        lines.append(f"      layer: {layer}")
+        lines.append(f"      count: {n}")
+    lines.append("  primitives:")
     for r in recs:
         lines.append(f"    - id: {r['id']}")
         lines.append(f"      name: {q(r['name'])}")
@@ -152,9 +2534,9 @@ def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
         lines.append(f"      therapeutic_relevance: {q(r['therapeutic_relevance'])}")
         lines.append(f"      reference: {q(r['reference'])}")
         lines.append(f"      confidence: {r['confidence']}")
-        if 'genomic_mechanics' in r:
+        if "genomic_mechanics" in r:
             lines.append("      genomic_mechanics:")
-            for k_mech, v_mech in r['genomic_mechanics'].items():
+            for k_mech, v_mech in r["genomic_mechanics"].items():
                 if isinstance(v_mech, dict):
                     lines.append(f"        {k_mech}:")
                     for sub_k, sub_v in v_mech.items():
@@ -165,82 +2547,108 @@ def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
                         lines.append(f"          - {repr(item) if not isinstance(item, str) else q(item)}")
                 else:
                     lines.append(f"        {k_mech}: {repr(v_mech) if not isinstance(v_mech, str) else q(v_mech)}")
-    write_if_changed(path, '\n'.join(lines) + '\n')
+    write_if_changed(path, "\n".join(lines) + "\n")
+
 
 def emit_python(recs: list[dict[str, Any]], path: str) -> None:
-    header = '# -*- coding: utf-8 -*-\n"""\nCORTEX / BABYLON-60 :: oncology_primitives\nModulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.\n\nGENERADO por scripts/gen_oncology_primitives.py -- NO editar a mano.\nAutoria artistica/arquitectonica (AKA): Borja Moskv (borjamoskv).\n\n%s\n"""\nfrom __future__ import annotations\nfrom typing import Optional, Any\n\nDISCLAIMER = %r\n\nCATEGORIES: dict[str, dict[str, str]] = %r\n\nPRIMITIVES: list[dict[str, Any]] = [\n' % (DISCLAIMER_ES, DISCLAIMER_ES, {k: {'label': v[0], 'layer': v[1]} for k, v in CATS.items()})
+    header = (
+        '# -*- coding: utf-8 -*-\n"""\nCORTEX / BABYLON-60 :: oncology_primitives\nModulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.\n\nGENERADO por scripts/gen_oncology_primitives.py -- NO editar a mano.\nAutoria artistica/arquitectonica (AKA): Borja Moskv (borjamoskv).\n\n%s\n"""\nfrom __future__ import annotations\nfrom typing import Optional, Any\n\nDISCLAIMER = %r\n\nCATEGORIES: dict[str, dict[str, str]] = %r\n\nPRIMITIVES: list[dict[str, Any]] = [\n'
+        % (DISCLAIMER_ES, DISCLAIMER_ES, {k: {"label": v[0], "layer": v[1]} for k, v in CATS.items()})
+    )
     body: list[str] = []
     for r in recs:
-        body.append('    ' + repr(r) + ',')
+        body.append("    " + repr(r) + ",")
     footer = '\n]\n\nassert len(PRIMITIVES) == 300, "La ontologia debe contener exactamente 300 primitivas"\n\n_BY_ID: dict[str, dict[str, Any]] = {str(p["id"]): p for p in PRIMITIVES}\n\n\ndef get(primitive_id: str) -> Optional[dict[str, Any]]:\n    """Devuelve la primitiva por id (p.ej. \'ONC-001\') o None."""\n    return _BY_ID.get(primitive_id)\n\n\ndef by_category(category: str) -> list[dict[str, Any]]:\n    """Todas las primitivas de una categoria (clave de CATEGORIES)."""\n    return [p for p in PRIMITIVES if p["category"] == category]\n\n\ndef by_role(role: str) -> list[dict[str, Any]]:\n    """Filtra por rol: process, oncogene, suppressor, target, biomarker, modality, mechanism, drug-target."""\n    return [p for p in PRIMITIVES if p["role"] == role]\n\n\ndef search(term: str) -> list[dict[str, Any]]:\n    """Busqueda de subcadena (case-insensitive) en nombre y descripcion."""\n    t = term.lower()\n    return [p for p in PRIMITIVES if t in str(p["name"]).lower() or t in str(p["description"]).lower()]\n\n\ndef counts() -> dict[str, int]:\n    """Conteo por categoria."""\n    out: dict[str, int] = {}\n    for p in PRIMITIVES:\n        cat_key = str(p["category"])\n        out[cat_key] = out.get(cat_key, 0) + 1\n    return out\n\n\nif __name__ == "__main__":\n    print(DISCLAIMER)\n    print()\n    print(f"Total primitivas: {len(PRIMITIVES)}")\n    for k, n in counts().items():\n        print(f"  {k:12s} {n:3d}  {CATEGORIES[k][\'label\']}")\n'
-    write_if_changed(path, header + '\n'.join(body) + footer)
+    write_if_changed(path, header + "\n".join(body) + footer)
+
 
 def emit_markdown(recs: list[dict[str, Any]], path: str) -> None:
-    role_es: dict[str, str] = {'process': 'proceso', 'oncogene': 'oncogen', 'suppressor': 'supresor', 'target': 'diana', 'biomarker': 'biomarcador', 'modality': 'modalidad', 'mechanism': 'mecanismo', 'drug-target': 'farmaco->diana'}
+    role_es: dict[str, str] = {
+        "process": "proceso",
+        "oncogene": "oncogen",
+        "suppressor": "supresor",
+        "target": "diana",
+        "biomarker": "biomarcador",
+        "modality": "modalidad",
+        "mechanism": "mecanismo",
+        "drug-target": "farmaco->diana",
+    }
     L: list[str] = []
-    L.append('# 300 Primitivas de Oncologia Molecular')
-    L.append('### Ontologia CORTEX / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca')
-    L.append('')
-    L.append('*Generado deterministicamente | 300 primitivas | escala de confianza C5-established | fuente unica: `scripts/gen_oncology_primitives.py`*')
-    L.append('')
-    L.append('> **AVISO IMPORTANTE.** ' + DISCLAIMER_ES)
-    L.append('')
-    L.append('> *NOTICE.* ' + DISCLAIMER_EN)
-    L.append('')
-    L.append('Autoria artistica/arquitectonica del sustrato (AKA): **Borja Moskv** (`borjamoskv`).')
-    L.append('')
-    L.append('---')
-    L.append('')
-    L.append('## Indice de categorias')
-    L.append('')
-    L.append('| # | Categoria | Capa | Primitivas |')
-    L.append('| :--- | :--- | :--- | :---: |')
+    L.append("# 300 Primitivas de Oncologia Molecular")
+    L.append(
+        "### Ontologia CORTEX / BABYLON-60 -- bloques fundamentales que la investigacion del cancer estudia y ataca"
+    )
+    L.append("")
+    L.append(
+        "*Generado deterministicamente | 300 primitivas | escala de confianza C5-established | fuente unica: `scripts/gen_oncology_primitives.py`*"
+    )
+    L.append("")
+    L.append("> **AVISO IMPORTANTE.** " + DISCLAIMER_ES)
+    L.append("")
+    L.append("> *NOTICE.* " + DISCLAIMER_EN)
+    L.append("")
+    L.append("Autoria artistica/arquitectonica del sustrato (AKA): **Borja Moskv** (`borjamoskv`).")
+    L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Indice de categorias")
+    L.append("")
+    L.append("| # | Categoria | Capa | Primitivas |")
+    L.append("| :--- | :--- | :--- | :---: |")
     for idx, (k, (label, layer)) in enumerate(CATS.items(), start=1):
-        n = sum((1 for r in recs if r['category'] == k))
-        anchor = label.lower().replace(' ', '-').replace('(', '').replace(')', '').replace('/', '').replace(',', '')
-        L.append(f'| {idx} | [{label}](#{anchor}) | {layer} | {n} |')
-    L.append(f'| | **TOTAL** | | **{len(recs)}** |')
-    L.append('')
-    L.append('---')
-    L.append('')
+        n = sum((1 for r in recs if r["category"] == k))
+        anchor = label.lower().replace(" ", "-").replace("(", "").replace(")", "").replace("/", "").replace(",", "")
+        L.append(f"| {idx} | [{label}](#{anchor}) | {layer} | {n} |")
+    L.append(f"| | **TOTAL** | | **{len(recs)}** |")
+    L.append("")
+    L.append("---")
+    L.append("")
     for k, (label, layer) in CATS.items():
-        cat_recs = [r for r in recs if r['category'] == k]
-        anchor = label.lower().replace(' ', '-').replace('(', '').replace(')', '').replace('/', '').replace(',', '')
-        L.append(f'## {label}')
+        cat_recs = [r for r in recs if r["category"] == k]
+        anchor = label.lower().replace(" ", "-").replace("(", "").replace(")", "").replace("/", "").replace(",", "")
+        L.append(f"## {label}")
         L.append(f'<a id="{anchor}"></a>')
-        L.append(f'*Capa: {layer} | {len(cat_recs)} primitivas*')
-        L.append('')
-        L.append('| ID | Primitiva | Rol | Mecanismo | Relevancia terapeutica | Referencia |')
-        L.append('| :--- | :--- | :--- | :--- | :--- | :--- |')
+        L.append(f"*Capa: {layer} | {len(cat_recs)} primitivas*")
+        L.append("")
+        L.append("| ID | Primitiva | Rol | Mecanismo | Relevancia terapeutica | Referencia |")
+        L.append("| :--- | :--- | :--- | :--- | :--- | :--- |")
         for r in cat_recs:
-            L.append(f"| `{r['id']}` | **{r['name']}** | {role_es.get(r['role'], r['role'])} | {r['description']} | {r['therapeutic_relevance']} | {r['reference']} |")
-        L.append('')
-    L.append('---')
-    L.append('')
-    L.append('## Nota metodologica')
-    L.append('')
-    L.append('Las primitivas cubren desde los *hallmarks* de Hanahan & Weinberg (Cell 2000, 2011; Cancer Discovery 2022) hasta pares farmaco->diana con evidencia clinica registrada. Las referencias citan articulos o revisiones canonicas; los mecanismos reflejan conocimiento establecido a la fecha de generacion. Esto es material educativo y de modelado ontologico: **no sustituye juicio clinico ni investigacion primaria.**')
-    L.append('')
-    write_if_changed(path, '\n'.join(L) + '\n')
+            L.append(
+                f"| `{r['id']}` | **{r['name']}** | {role_es.get(r['role'], r['role'])} | {r['description']} | {r['therapeutic_relevance']} | {r['reference']} |"
+            )
+        L.append("")
+    L.append("---")
+    L.append("")
+    L.append("## Nota metodologica")
+    L.append("")
+    L.append(
+        "Las primitivas cubren desde los *hallmarks* de Hanahan & Weinberg (Cell 2000, 2011; Cancer Discovery 2022) hasta pares farmaco->diana con evidencia clinica registrada. Las referencias citan articulos o revisiones canonicas; los mecanismos reflejan conocimiento establecido a la fecha de generacion. Esto es material educativo y de modelado ontologico: **no sustituye juicio clinico ni investigacion primaria.**"
+    )
+    L.append("")
+    write_if_changed(path, "\n".join(L) + "\n")
+
 
 def main() -> None:
     root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     recs = build_records()
-    assert len(recs) == 300, f'Se esperaban 300 primitivas, hay {len(recs)}'
-    ids = [r['id'] for r in recs]
-    assert len(set(ids)) == len(ids), 'IDs duplicados detectados'
-    yaml_path = os.path.join(root, 'cortex', 'ontologies', 'oncology_300_primitives.yaml')
-    py_path = os.path.join(root, 'babylon60', 'oncology_primitives.py')
-    md_path = os.path.join(root, 'docs', 'ONCOLOGIA_300_PRIMITIVAS.md')
+    assert len(recs) == 300, f"Se esperaban 300 primitivas, hay {len(recs)}"
+    ids = [r["id"] for r in recs]
+    assert len(set(ids)) == len(ids), "IDs duplicados detectados"
+    yaml_path = os.path.join(root, "cortex", "ontologies", "oncology_300_primitives.yaml")
+    py_path = os.path.join(root, "babylon60", "oncology_primitives.py")
+    md_path = os.path.join(root, "docs", "ONCOLOGIA_300_PRIMITIVAS.md")
     for p in (yaml_path, py_path, md_path):
         os.makedirs(os.path.dirname(p), exist_ok=True)
     emit_yaml(recs, yaml_path)
     emit_python(recs, py_path)
     emit_markdown(recs, md_path)
     from collections import Counter
-    c = Counter((r['category'] for r in recs))
-    print(f'OK -> {len(recs)} primitivas, IDs unicos, 3 formatos emitidos.')
+
+    c = Counter((r["category"] for r in recs))
+    print(f"OK -> {len(recs)} primitivas, IDs unicos, 3 formatos emitidos.")
     for k in CATS:
-        print(f'  {k:12s} {c[k]:3d}')
-if __name__ == '__main__':
+        print(f"  {k:12s} {c[k]:3d}")
+
+
+if __name__ == "__main__":
     main()

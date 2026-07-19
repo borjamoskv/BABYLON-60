@@ -6,6 +6,7 @@ from pathlib import Path
 VAULT_DIR = Path("~/.gemini/config/.cortex/memory_vault").expanduser()
 BRAIN_DIR = Path("~/.gemini/antigravity/brain").expanduser()
 
+
 def sync():
     VAULT_DIR.mkdir(parents=True, exist_ok=True)
     consolidated = set()
@@ -27,15 +28,19 @@ def sync():
                 transcript = entry / ".system_generated/logs/transcript.jsonl"
                 if transcript.exists():
                     vfile = VAULT_DIR / f"b60_crystallized_{cid}.md"
-                    vfile.write_text(f"""---
+                    vfile.write_text(
+                        f"""---
 conversation_id: "{cid}"
 status: "crystallized"
 ---
 # B60 Session {cid}
 Crystallized into memory vault.
-""", encoding="utf-8")
+""",
+                        encoding="utf-8",
+                    )
                     synced += 1
     print(f"[+] Synchronized {synced} session UUIDs into {VAULT_DIR}")
+
 
 if __name__ == "__main__":
     sync()

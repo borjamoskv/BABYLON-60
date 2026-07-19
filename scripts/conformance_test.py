@@ -24,12 +24,12 @@ def check_wheel_contents() -> None:
         sys.exit(1)
 
     latest_wheel = max(wheels, key=os.path.getctime)
-    with zipfile.ZipFile(latest_wheel, 'r') as z:
+    with zipfile.ZipFile(latest_wheel, "r") as z:
         files = z.namelist()
 
     invalid_roots = ["tests", "cortex", "experimental", "scripts"]
     for f in files:
-        root_dir = f.split('/')[0]
+        root_dir = f.split("/")[0]
         if root_dir in invalid_roots:
             print(f"ERROR: Wheel contains invalid root directory '{root_dir}' -> {f}")
             sys.exit(1)
@@ -41,13 +41,14 @@ def create_crypto_vectors() -> None:
     print("\n--- Creating Cryptographic Vectors ---")
     import cbor2
     import hashlib
+
     vectors_dir = "tests/conformance/vectors"
     os.makedirs(vectors_dir, exist_ok=True)
 
     event_basic: dict[str, object] = {
         "event_id": "test_event_1",
         "timestamp": 1690000000000,
-        "payload": {"action": "ping", "data": "pong"}
+        "payload": {"action": "ping", "data": "pong"},
     }
 
     # Generate canonical cbor
@@ -66,6 +67,7 @@ def create_crypto_vectors() -> None:
 def test_replay_corruption() -> None:
     print("\n--- Testing Replay / Corruption ---")
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
+
     db_path = "tests/conformance/test_ledger.db"
     if os.path.exists(db_path):
         os.remove(db_path)
@@ -75,9 +77,12 @@ def test_replay_corruption() -> None:
     mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="mock")
     # Valid signatures are checked in invoke_subagent, but we just insert manually or use mock
     from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256
+
     m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
-    ledger.conn.execute('INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)',
-                        (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint))
+    ledger.conn.execute(
+        "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
+        (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint),
+    )
     ledger.conn.commit()
 
     # Ensure integrity is 100%
@@ -86,7 +91,7 @@ def test_replay_corruption() -> None:
         sys.exit(1)
 
     # Corrupt
-    ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b'corrupted_cbor_data',))
+    ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",))
     ledger.conn.commit()
 
     # Audit should fail

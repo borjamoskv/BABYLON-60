@@ -1,0 +1,8 @@
+[
+  {
+    "section": "## [L2] TERMODINÁMICA DEL ESTADO (TOLERANCIA BIZANTINA & PERSISTENCIA)",
+    "id": "Ω105",
+    "title": "EPHEMERAL REASONING INVARIANT (CONTEXT ANERGIA)",
+    "body": "Queda estrictamente prohibido intentar competir por ventanas de contexto masivas para compensar falta de estado. La separación arquitectónica entre 'razonamiento efímero' (el LLM como CPU cognitiva) y 'estado persistente' (Planner, Scheduler, Database, Tool Runtime) es la clave de la fricción cero. Mantener miles de tokens históricos en el contexto es Anergía; el Kernel DEBE extraer entropía a sistemas externos, reconstruir el contexto dinámicamente y forzar que el modelo olvide más para escalar a horas de ejecución."
+  }
+]

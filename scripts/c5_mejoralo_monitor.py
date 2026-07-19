@@ -5,6 +5,7 @@ MOSKV-1 APEX SINGULARITY — C5-REAL STATE MONITOR (MEJORALO)
 Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
 linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
 """
+
 import hashlib
 import sqlite3
 import subprocess
@@ -26,11 +27,21 @@ DB_TARGETS = [
 ]
 
 LEDGER_TABLES = [
-    "master_ledger", "ledger_entries", "state_log", "ledger",
-    "jetsam_async_ledger", "ontology", "L1_primitive_nodes",
-    "L2_isomorphism_edges", "L3_inference_cache", "voice_turns",
-    "audit_ledger", "ttft_log", "throughput_log",
-    "autonomic_daemon_log", "ttft_metrics",
+    "master_ledger",
+    "ledger_entries",
+    "state_log",
+    "ledger",
+    "jetsam_async_ledger",
+    "ontology",
+    "L1_primitive_nodes",
+    "L2_isomorphism_edges",
+    "L3_inference_cache",
+    "voice_turns",
+    "audit_ledger",
+    "ttft_log",
+    "throughput_log",
+    "autonomic_daemon_log",
+    "ttft_metrics",
 ]
 
 
@@ -64,7 +75,8 @@ def audit_git_entropy() -> dict[str, str | int | list[str]]:
 def audit_databases() -> dict[str, dict[str, int]]:
     census: dict[str, dict[str, int]] = {}
     db_paths = [
-        p for p in ROOT_DIR.rglob("*.db")
+        p
+        for p in ROOT_DIR.rglob("*.db")
         if not any(part in ("venv", ".venv", ".git", "__pycache__") for part in p.parts)
     ]
     for db_path in sorted(db_paths):
@@ -73,12 +85,7 @@ def audit_databases() -> dict[str, dict[str, int]]:
             conn = sqlite3.connect(str(db_path), timeout=2.0)
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
-            tables = [
-                t[0]
-                for t in conn.execute(
-                    "SELECT name FROM sqlite_master WHERE type='table'"
-                ).fetchall()
-            ]
+            tables = [t[0] for t in conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]
             counts: dict[str, int] = {}
             for t in tables:
                 if t.startswith("sqlite_"):
@@ -139,7 +146,7 @@ def audit_tests() -> dict[str, int | str]:
         if "passed" in line:
             parts = line.split()
             for i, p in enumerate(parts):
-                if p.startswith("passed") or (i + 1 < len(parts) and parts[i+1].startswith("passed")):
+                if p.startswith("passed") or (i + 1 < len(parts) and parts[i + 1].startswith("passed")):
                     try:
                         passed_count = int(parts[i])
                     except ValueError:
@@ -165,9 +172,7 @@ def append_mutation(git_hash: str, status_hash: str) -> None:
 
 def git_sentinel_commit(status_hash: str) -> str:
     _git(["add", "STATUS.md", "scripts/c5_mejoralo_monitor.py"])
-    commit_msg = (
-        f"chore(c5-real): state monitor iteration [{status_hash[:8]}]"
-    )
+    commit_msg = f"chore(c5-real): state monitor iteration [{status_hash[:8]}]"
     _git(["commit", "-m", commit_msg, "--no-verify"])
     return _git(["rev-parse", "--short", "HEAD"])
 
@@ -205,15 +210,19 @@ def c5_real_colapso() -> None:
 
     # Phase 4: Tests
     test_report = audit_tests()
-    print(f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']} | Passed: {test_report.get('passed', 0)}")
+    print(
+        f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']} | Passed: {test_report.get('passed', 0)}"
+    )
 
     # Phase 5: Crystallize
-    status_hash = crystallize_status({
-        "git": git_report,
-        "bft": db_census,
-        "ruff": ruff_report,
-        "tests": test_report,
-    })
+    status_hash = crystallize_status(
+        {
+            "git": git_report,
+            "bft": db_census,
+            "ruff": ruff_report,
+            "tests": test_report,
+        }
+    )
     print(f"\n[HASH] STATUS.md SHA3-256: {status_hash[:24]}...")
 
     # Phase 6: Mutate STATUS.md + Git Sentinel
