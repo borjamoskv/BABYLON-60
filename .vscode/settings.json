@@ -6,6 +6,7 @@
   "telemetry.telemetryLevel": "off",
   "remote.autoForwardPorts": false,
   "remote.tunnels.access.preventSleep": false,
+  "terminal.integrated.enablePersistentSessions": false,
   "files.watcherExclude": {
     "**/.git/objects": true,
     "**/.git/subtree-cache": true,
