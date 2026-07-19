@@ -15,9 +15,9 @@ Este reporte documenta el análisis estático y forense de la arquitectura del r
 ## 2. Arquitectura de Sistemas y Flujo de Datos
 
 **A. Topología de Componentes:**
-- **Núcleo de Cómputo Causal (`strike_rs`):** Desarrollado en Rust. Implementa el Poset Causal (Grafo Dirigido Acíclico de Eventos) y el motor de Taint basado en BLAKE3. Valida la **Invariante de Kahn (INV-GCM-003)** para prevenir bucles de causalidad.
-- **Micro-Kernel Lógico (Ω₀):** Formalizado en Rust. Implementa el fragmento Hereditario Harrop de lógica intuicionista para type-checking de justificaciones agénticas y hace cumplir estrictamente la **Guillotina de Hume** (prohibición de derivar Deontic a partir de premisas Epistemic).
-- **Cortex-Ledger (`babylon60.bft`):** Capa de almacenamiento inmutable en Python/SQLite con Event Sourcing y journal_mode=WAL para tolerancia BFT. Utiliza firmas Ed25519 para validación de quórum de subagentes en enjambre ($2f + 1$).
+- **Núcleo de Cómputo Causal (`strike_rs`):** Desarrollado en Rust. En `strike_rs/src/lib.rs` implementa el Poset Causal (Grafo Dirigido Acíclico de Eventos) y el motor de Taint basado en BLAKE3. Valida la **Invariante de Kahn (INV-GCM-003)** para prevenir bucles de causalidad.
+- **Micro-Kernel Lógico (Ω₀):** Formalizado en `strike_rs/src/omega0.rs`. Implementa el fragmento Hereditario Harrop de lógica intuicionista para type-checking de justificaciones agénticas y hace cumplir estrictamente la **Guillotina de Hume** (prohibición de derivar Deontic a partir de premisas Epistemic).
+- **Cortex-Ledger (`babylon60.bft`):** Capa de almacenamiento inmutable en Python/SQLite con Event Sourcing y journal_mode=WAL para tolerancia BFT. En `babylon60/bft/consensus_ledger.py` utiliza firmas Ed25519 para validación de quórum de subagentes en enjambre ($2f + 1$).
 - **IDE agéntico Decapitado (`babylon60-ide`):** Interfaz híbrida con extensión de navegador Chrome (Manifest V3), frontend en Vite/React y servidor de comunicaciones MCP local (`mcp_symbol_helper.py`).
 - **LISP Metamembrane (`lisp_metamembrane`):** Capa experimental para evaluar la autopoiesis de la memoria a nivel simbiótico.
 
@@ -59,8 +59,8 @@ Este reporte documenta el análisis estático y forense de la arquitectura del r
 - **Memoria Inmutable:** El CortexLedger y los ganchos de atestación implementan un esquema de almacenamiento a prueba de manipulaciones semánticas (Event Sourcing).
 - **Atenuación Atencional:** El IDE implementa un buffer Notch (Notch Bridge) para body-doubling asíncrono y descarga cognitiva de tareas no urgentes.
 
-**B. Evaluación de la Guillotina de Hume en Ω₀:**
-- El núcleo `omega0.rs` implementa de forma excelente el type-checking de modalidades.
+**B. Heurísticas y Cumplimiento Lógico:**
+- El núcleo `omega0.rs` implementa de forma excelente el type-checking de las afirmaciones y la Guillotina de Hume.
 - **Ejemplo Práctico:** El sistema rechaza correctamente la derivación de la directiva deontológica *"We should boil water"* a partir del hecho epistémico *"Water boils at 100C"*, previniendo la corrupción moral o lógica del enjambre al intentar forzar de forma autónoma reglas de conducta basadas en observaciones sesgadas.
 
 ---
@@ -83,8 +83,81 @@ Este reporte documenta el análisis estático y forense de la arquitectura del r
 - **Consistencia de Agentes (Ω₀ implementation):** 100/100
 - **PUNTUACIÓN GLOBAL:** **87 / 100**
 
+---
+
+## 8. Diagrama de Flujo Arquitectónico en Mermaid
+
+El siguiente diagrama detalla la interacción multi-lenguaje (Rust, Python, TypeScript, SQLite WAL) de la pila tecnológica de BABYLON-60:
+
+```mermaid
+graph TD
+    User([Operador Humano])
+    subgraph Frontend [Capa de Interfaz / babylon60-ide]
+        MV3[Chrome Extension MV3]
+        Vite[Vite React App]
+    end
+    subgraph API [FastAPI Backend]
+        Inference[inference.py]
+        LedgerRoute[ledger.py]
+        BFTLedgerActor[BFTLedgerActor]
+    end
+    subgraph CoreRust [Kernel Causal / strike_rs]
+        TaintEngine[TaintEngine BLAKE3]
+        Omega0[Omega0 Harrop Logic Kernel]
+    end
+    subgraph DB [Persistencia Local]
+        SQLite[SQLite WAL / cortex.db]
+    end
+    
+    User -->|Modificaciones & Eventos AST| MV3
+    MV3 -->|Forward Pass| Vite
+    Vite -->|Local Loopback HTTP| API
+    Inference -->|Ollama/MLX Bridge| LocalOllama[Ollama Local Silicon]
+    LedgerRoute --> BFTLedgerActor
+    BFTLedgerActor -->|Causal Nodes| TaintEngine
+    TaintEngine -->|Topological Sort & Kahn Invariant| Omega0
+    Omega0 -->|Verify Justifications / Hume Guillotine| BFTLedgerActor
+    BFTLedgerActor -->|Atomic Writes WAL| SQLite
+```
+
+---
+
+## 9. Análisis Detallado de Vulnerabilidades de Red (Bypass de Zero-Network)
+
+Se ha localizado un fallo lógico severo en el sistema de aislamiento de red de la API de inferencia local.
+
+**A. El Mecanismo Vulnerable:**
+- **Ubicación:** `babylon60-ide/backend/routes/inference.py#L28-L41`
+- **Código Crítico:**
+```python
+def validate_zero_network(url: str) -> None:
+    lower = url.lower()
+    # ... check forbidden domains ...
+    if not lower.startswith("http://127.0.0.1") and not lower.startswith("http://localhost"):
+        raise HTTPException(...)
+```
+- **Fallo Causal:** La verificación se basa únicamente en un prefijo con `.startswith()`. Esto ignora la gramática RFC 3986 para URIs, permitiendo a un atacante construir una URL que empiece con el prefijo permitido pero resuelva a un host remoto:
+  - **Ejemplo 1 (Subdominio):** `http://localhost.attacker.com:11434/v1`
+  - **Ejemplo 2 (UserInfo / Autoridad):** `http://localhost@attacker.com:11434/v1`
+- **Blast Radius:** RUPTURA ABSOLUTA de la Zero-Network Policy. Un atacante puede desviar las peticiones de inferencia a un endpoint externo controlado por él, robando la telemetría e inyectando respuestas falsas en el Ledger BFT.
+
+**B. Parche de Mitigación Propuesto (C5-REAL):**
+Reemplazar la validación basada en strings planos por un parser estructurado de URL:
+```python
+from urllib.parse import urlparse
+
+def validate_zero_network(url: str) -> None:
+    parsed = urlparse(url)
+    hostname = parsed.hostname
+    if hostname not in ("127.0.0.1", "localhost"):
+        raise HTTPException(
+            status_code=403,
+            detail="C5-REAL VIOLATION: Endpoint must resolve strictly to 127.0.0.1 or localhost."
+        )
+```
+
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
-- [Ingeniería Inversa de BABYLON-60: Auditoría Forense de la Memoria Agéntica]
+- [Ingeniería Inversa de BABYLON-60: Auditoría Forense de la Memoria Agéntica](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/artifacts/reports/BABYLON_60_AUDIT_REPORT.md)
 - [El Fragmento Hereditario Harrop y la Guillotina de Hume en Sistemas Inteligentes]
 - [Causal Poset y Kahn Invariant: Prevención de Bucles Cíclicos en Rust]
