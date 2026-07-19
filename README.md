@@ -22,6 +22,7 @@
   <a href="docs/ARCHITECTURE.md">Architecture</a> ·
   <a href="docs/SECURITY_MODEL.md">Security Model</a> ·
   <a href="docs/EXPERIMENTAL.md">Experimental</a> ·
+  <a href="docs/SOTA_2026-07_cortex-persist.md">SOTA 2026-07</a> ·
   <a href="STATUS.md">Status</a>
 </p>
 
@@ -57,6 +58,8 @@ Optionally, payloads are **encrypted at rest** (Fernet, `C5ENC:` prefix) when `C
 
 > [!IMPORTANT]
 > **tamper-evident ≠ tamper-proof.** Hash-chains detect modifications _after the fact_. They do not prevent an attacker with filesystem access from replacing the entire database. See [SECURITY_MODEL.md](docs/SECURITY_MODEL.md) for the full threat model.
+
+**State of the art (July 2026).** None of the current agent-memory systems (Mem0, Zep/Graphiti, Letta, LangMem, Cognee) ship cryptographic integrity; verifiable ledgers (immudb, Trillian/Tessera, Rekor) have no agent semantics or embedded Python form factor; and the checkpointing layers the industry actually uses (LangGraph, AutoGen, OpenAI Agents SDK) are neither tamper-evident nor tamper-resistant (CVE-2025-64439, CVE-2025-67644). With Amazon QLDB discontinued (end of support 2025-07-31), the intersection `cortex-persist` occupies — embedded single-writer SQLite + per-event hash chain + Lamport clock + causal taint + UUIDv5 idempotency + OpenTimestamps anchoring — is currently unoccupied. *The agent memory you can cryptographically verify, not just query.* Full sourced analysis: [docs/SOTA_2026-07_cortex-persist.md](docs/SOTA_2026-07_cortex-persist.md).
 
 ---
 
