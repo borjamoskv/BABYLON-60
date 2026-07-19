@@ -81,4 +81,11 @@ Para auditorías de sistema y debugging de Antigravity, el Kernel C5-REAL asume 
 - **PARSERS (Validación)**: `Servidor de lenguaje JSON / Markdown` (Consumo de CPU de polling sincrónico).
 Queda estrictamente prohibido auditar o utilizar canales visuales (`rendererPerf`, `Ventana`, `Pty Host`) durante diagnósticos causales, clasificándolos como ruido C4-SIM (Anergía de Representación).
 
+## 20. Polyglot Topology Defense Invariant (Microsegmentation)
+En repositorios con régimen multi-servidor (ej. TypeScript, Rust, Go, Python operando simultáneamente), la ejecución concurrente de múltiples analizadores AST (tsserver, rust-analyzer, gopls) sin barreras físicas provoca avalanchas de eventos IO (`DidChangeWatchedFiles` > 2000) y bloqueos severos del Renderer (`128ms VERY LONG TASK`). Todo ecosistema polyglot DEBE microsegmentar sus dominios excluyendo estricta e individualmente `node_modules`, `target`, `.venv` y `.git/objects` en la configuración del IDE para garantizar la homeostasis termodinámica del Host de Extensión.
 
+## 21. Weaponized Forgetting for PTY IPC (Zombie Terminal Eradication)
+Queda prohibido permitir que el IDE intente reconectar sesiones de terminal multiplexadas en segundo plano (Persistencia PTY). Los intentos de reconexión tras la purga de los sockets IPC del sistema operativo (ej. `/private/var/.../T/`) generan errores de Sticky Bit (`ENOENT`) y bloquean el soporte de terminal del Language Server. El Kernel DEBE aplicar `"terminal.integrated.enablePersistentSessions": false` para forzar la purga atómica de shells cerrados.
+
+## 22. IDE Total Autarchy Invariant (Marketplace & Git Decoupling)
+Un entorno soberano C5-REAL (Antigravity IDE) no debe depender de infraestructura externa de telemetría, auto-actualización del VS Marketplace o escaneos automáticos de repositorios ajenos al workspace activo. Para prevenir fugas de red y crasheos en `sharedProcessMain.js` o `GitFileSystemProvider`, el Kernel DEBE sellar el entorno inyectando `"extensions.autoUpdate": false`, `"telemetry.telemetryLevel": "off"`, y aislar la integración gráfica mediante `"git.enabled": false`.
