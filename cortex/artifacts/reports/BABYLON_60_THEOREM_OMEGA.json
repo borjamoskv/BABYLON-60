@@ -1,0 +1,3108 @@
+{
+  "Observe": [
+    "babylon60/crypto/rekor_client.py",
+    "babylon60/crypto/rfc3161.py",
+    "babylon60/cli/bridge.py",
+    "babylon60/extensions/mejoralo/daemon.py",
+    "babylon60/extensions/mcp/comfyui_tool.py",
+    "babylon60/extensions/growth/kinetic_extractor.py",
+    "babylon60/extensions/daemon/substack_follower_bot.py",
+    "babylon60/extensions/daemon/nightshift.py",
+    "babylon60/extensions/daemon/substack_publisher_bot.py",
+    "babylon60/extensions/sovereign/engine.py",
+    "babylon60/extensions/songlines/emitter.py",
+    "babylon60/extensions/genesis/models.py",
+    "babylon60/extensions/genesis/assembler.py",
+    "babylon60/extensions/genesis/renderers/cli.py",
+    "babylon60/extensions/notifications/__init__.py",
+    "babylon60/extensions/notifications/adapters/base.py",
+    "babylon60/extensions/billing/gateway.py",
+    "causal_isomorphism/cli.py"
+  ],
+  "Transform": [
+    "run_backend.py",
+    "cortex_mamba_inference.py",
+    "apex_trials/features.py",
+    "apex_trials/risk_engine.py",
+    "apex_trials/cli.py",
+    "apex_trials/modules.py",
+    "apex_trials/report.py",
+    "tests/test_syntax_integrity.py",
+    "babylon60/database/tlru_cache.py",
+    "babylon60/crypto/__init__.py",
+    "babylon60/crypto/keyring.py",
+    "babylon60/types/__init__.py",
+    "babylon60/core/c5_memory_shield.py",
+    "babylon60/genomics/__init__.py",
+    "babylon60/utils/void_vec.py",
+    "babylon60/utils/compression.py",
+    "babylon60/utils/turboquant.py",
+    "babylon60/utils/cache.py",
+    "babylon60/utils/export.py",
+    "babylon60/utils/result.py",
+    "babylon60/utils/errors.py",
+    "babylon60/utils/landauer.py",
+    "babylon60/extensions/registry.py",
+    "babylon60/extensions/scraper/models.py",
+    "babylon60/extensions/encryption/zk_hardware.py",
+    "babylon60/extensions/ui/swarm_board.py",
+    "babylon60/extensions/causality/models.py",
+    "babylon60/extensions/swarm/crystal_synthesis.py",
+    "babylon60/extensions/swarm/auto_fix.py",
+    "babylon60/extensions/swarm/zenoh_crdt.py",
+    "babylon60/extensions/swarm/swarm_heartbeat.py",
+    "babylon60/extensions/swarm/nightshift_daemon.py",
+    "babylon60/extensions/swarm/autodidact_actuator.py",
+    "babylon60/extensions/swarm/error_ghost_pipeline.py",
+    "babylon60/extensions/swarm/infinite_minds.py",
+    "babylon60/extensions/swarm/manager.py",
+    "babylon60/extensions/dopamine_loop/modulator.py",
+    "babylon60/extensions/mejoralo/models.py",
+    "babylon60/extensions/mejoralo/heal_prompts.py",
+    "babylon60/extensions/mejoralo/effectiveness.py",
+    "babylon60/extensions/mejoralo/ledger.py",
+    "babylon60/extensions/llm/metacognitive_boundary.py",
+    "babylon60/extensions/llm/_cache.py",
+    "babylon60/extensions/llm/fable_poc.py",
+    "babylon60/extensions/llm/fable_stress_test.py",
+    "babylon60/extensions/llm/_hedging.py",
+    "babylon60/extensions/llm/_router_shannon.py",
+    "babylon60/extensions/llm/vllm_edge.py",
+    "babylon60/extensions/llm/_pool.py",
+    "babylon60/extensions/llm/_telemetry.py",
+    "babylon60/extensions/llm/client.py",
+    "babylon60/extensions/llm/__init__.py",
+    "babylon60/extensions/llm/_stealth.py",
+    "babylon60/extensions/llm/_provider_config.py",
+    "babylon60/extensions/llm/_provider_fable.py",
+    "babylon60/extensions/llm/_validation.py",
+    "babylon60/extensions/llm/sovereign.py",
+    "babylon60/extensions/llm/mlx_ffi.py",
+    "babylon60/extensions/llm/_router_hedging.py",
+    "babylon60/extensions/llm/_provider_gemini.py",
+    "babylon60/extensions/llm/router.py",
+    "babylon60/extensions/llm/cognitive_handoff.py",
+    "babylon60/extensions/llm/manager.py",
+    "babylon60/extensions/llm/gemini_cache.py",
+    "babylon60/extensions/llm/_cascade.py",
+    "babylon60/extensions/axioms/registry.py",
+    "babylon60/extensions/axioms/ttl.py",
+    "babylon60/extensions/axioms/topological_id.py",
+    "babylon60/extensions/tutor_agent/agent.py",
+    "babylon60/extensions/evo/autopoiesis.py",
+    "babylon60/extensions/evo/healing_stack.py",
+    "babylon60/extensions/evo/growth.py",
+    "babylon60/extensions/evo/genome.py",
+    "babylon60/extensions/evo/_autopoietic_state.py",
+    "babylon60/extensions/context/hiagent.py",
+    "babylon60/extensions/fingerprint/scanner.py",
+    "babylon60/extensions/fingerprint/models.py",
+    "babylon60/extensions/fingerprint/extractor.py",
+    "babylon60/extensions/bci/osc_bridge.py",
+    "babylon60/extensions/security/threat_feed.py",
+    "babylon60/extensions/security/anomaly_detector.py",
+    "babylon60/extensions/security/security_sync.py",
+    "babylon60/extensions/security/threat_signatures.py",
+    "babylon60/extensions/security/injection_guard.py",
+    "babylon60/extensions/training/ttt_engine.py",
+    "babylon60/extensions/training/__init__.py",
+    "babylon60/extensions/health/health_mixin.py",
+    "babylon60/extensions/health/collectors/ledger.py",
+    "babylon60/extensions/episodic/boot.py",
+    "babylon60/extensions/signals/trigger_engine.py",
+    "babylon60/extensions/signals/trigger_registry.py",
+    "babylon60/extensions/ui_control/maestro.py",
+    "babylon60/extensions/ui_control/keyboard.py",
+    "babylon60/extensions/agents/mac_maestro.py",
+    "babylon60/extensions/agents/neural.py",
+    "babylon60/extensions/agents/handoff.py",
+    "babylon60/extensions/agents/llm.py",
+    "babylon60/extensions/agents/scavenger_governance.py",
+    "babylon60/extensions/agents/scavenger_core.py",
+    "babylon60/extensions/agents/pitches.py",
+    "babylon60/extensions/agents/apis_omega.py",
+    "babylon60/extensions/alma/__init__.py",
+    "babylon60/extensions/alma/engine.py",
+    "babylon60/extensions/market_maker/mvp_generator.py",
+    "babylon60/extensions/aether/planner.py",
+    "babylon60/extensions/aether/runner.py",
+    "babylon60/extensions/aether/redteam.py",
+    "babylon60/extensions/aether/critic.py",
+    "babylon60/extensions/aether/daemon.py",
+    "babylon60/extensions/aether/executor.py",
+    "babylon60/extensions/nous/sql_synthesizer.py",
+    "babylon60/extensions/nous/compiler_v2.py",
+    "babylon60/extensions/timing/chronos.py",
+    "babylon60/extensions/browser/agent.py",
+    "babylon60/extensions/vex/planner.py",
+    "babylon60/extensions/manifold/dimensions.py",
+    "babylon60/extensions/immune/breaker.py",
+    "babylon60/extensions/immune/metastability.py",
+    "babylon60/extensions/immune/arbiter.py",
+    "babylon60/extensions/immune/filters/entropy.py",
+    "babylon60/extensions/thinking/presets.py",
+    "babylon60/extensions/thinking/reflection.py",
+    "babylon60/extensions/thinking/semantic_router.py",
+    "babylon60/extensions/thinking/fusion_models.py",
+    "babylon60/extensions/thinking/orchestra_introspection.py",
+    "babylon60/extensions/thinking/pool.py",
+    "babylon60/extensions/shannon/scanner.py",
+    "babylon60/extensions/shannon/analyzer.py",
+    "babylon60/extensions/shannon/epistemology.py",
+    "babylon60/extensions/shannon/exergy.py",
+    "babylon60/extensions/shannon/report.py",
+    "babylon60/extensions/daemon/health_loop.py",
+    "babylon60/extensions/daemon/alerts.py",
+    "babylon60/extensions/daemon/epistemic_breaker.py",
+    "babylon60/extensions/daemon/models.py",
+    "babylon60/extensions/daemon/notifier.py",
+    "babylon60/extensions/daemon/watchers.py",
+    "babylon60/extensions/daemon/core_support.py",
+    "babylon60/extensions/daemon/__init__.py",
+    "babylon60/extensions/daemon/sync_manager.py",
+    "babylon60/extensions/daemon/loops_mixin.py",
+    "babylon60/extensions/daemon/event_loop.py",
+    "babylon60/extensions/daemon/zero_prompting.py",
+    "babylon60/extensions/daemon/metabolism.py",
+    "babylon60/extensions/daemon/reaper_death_protocol.py",
+    "babylon60/extensions/daemon/frontier.py",
+    "babylon60/extensions/daemon/monitors/disk.py",
+    "babylon60/extensions/daemon/monitors/epistemic.py",
+    "babylon60/extensions/daemon/monitors/shield_monitor.py",
+    "babylon60/extensions/daemon/monitors/memory.py",
+    "babylon60/extensions/daemon/monitors/ast_oracle.py",
+    "babylon60/extensions/daemon/monitors/evaluation.py",
+    "babylon60/extensions/daemon/monitors/agy2_planner.py",
+    "babylon60/extensions/daemon/monitors/thermodynamic.py",
+    "babylon60/extensions/daemon/monitors/network.py",
+    "babylon60/extensions/daemon/monitors/auto_audit.py",
+    "babylon60/extensions/daemon/monitors/compaction.py",
+    "babylon60/extensions/daemon/monitors/trends.py",
+    "babylon60/extensions/daemon/monitors/heartbeat.py",
+    "babylon60/extensions/daemon/monitors/base.py",
+    "babylon60/extensions/daemon/loops/audio.py",
+    "babylon60/extensions/daemon/loops/watcher.py",
+    "babylon60/extensions/daemon/sidecar/telemetry/__init__.py",
+    "babylon60/extensions/daemon/sidecar/telemetry/fiat_oracle.py",
+    "babylon60/extensions/ha/crdt.py",
+    "babylon60/extensions/ha/gossip.py",
+    "babylon60/extensions/sovereign/infrastructure.py",
+    "babylon60/extensions/evolution/free_energy.py",
+    "babylon60/extensions/evolution/telemetry.py",
+    "babylon60/extensions/evolution/action.py",
+    "babylon60/extensions/evolution/agents.py",
+    "babylon60/extensions/evolution/lnn.py",
+    "babylon60/extensions/evolution/psi_sap.py",
+    "babylon60/extensions/evolution/demiurge.py",
+    "babylon60/extensions/evolution/landscape.py",
+    "babylon60/extensions/federation/gossip.py",
+    "babylon60/extensions/langbase/pipe.py",
+    "babylon60/extensions/ttt/ghost_harvester.py",
+    "babylon60/extensions/music_engine/_synth.py",
+    "babylon60/extensions/music_engine/dsp_apotheosis.py",
+    "babylon60/extensions/music_engine/midi_engine.py",
+    "babylon60/extensions/music_engine/adapters.py",
+    "babylon60/extensions/metering/middleware.py",
+    "babylon60/extensions/skills/__init__.py",
+    "babylon60/extensions/skills/taxonomy.py",
+    "babylon60/extensions/skills/router.py",
+    "babylon60/extensions/skills/newsletter_crystallizer/boletin_compiler.py",
+    "babylon60/extensions/skills/autodidact/canary_emulator.py",
+    "babylon60/extensions/skills/autodidact/actuator.py",
+    "babylon60/extensions/skills/niche_arbitrage/pipeline.py",
+    "babylon60/extensions/skills/cadastral/models.py",
+    "babylon60/extensions/skills/cadastral/__init__.py",
+    "babylon60/extensions/skills/cadastral/engine.py",
+    "babylon60/extensions/speculative/apotheosis_audits_mixin.py",
+    "babylon60/extensions/speculative/genesis.py",
+    "babylon60/extensions/perception/observer.py",
+    "babylon60/extensions/perception/pipeline.py",
+    "babylon60/extensions/perception/inference.py",
+    "babylon60/extensions/perception/metabolism.py",
+    "babylon60/extensions/perception/base.py",
+    "babylon60/extensions/forensic/predictive_healer.py",
+    "babylon60/extensions/forensic/data_surgery.py",
+    "babylon60/extensions/forensic/circuit_breaker.py",
+    "babylon60/extensions/protocols/zenon_1.py",
+    "babylon60/extensions/genesis/renderers/__init__.py",
+    "babylon60/extensions/hypervisor/models.py",
+    "babylon60/extensions/hypervisor/compressor.py",
+    "babylon60/extensions/billing/models.py",
+    "babylon60/extensions/git/poet.py",
+    "babylon60/extensions/git/poet_data.py",
+    "babylon60/extensions/policy/models.py",
+    "babylon60/extensions/policy/__init__.py",
+    "babylon60/extensions/policy/engine.py",
+    "babylon60/extensions/interfaces/telegram_daemon.py",
+    "babylon60/compiler/lean_backend.py",
+    "scripts/quadrilingual_enforcer.py",
+    "src-tauri/src/precognition.rs",
+    "src-tauri/src/antigravity.rs",
+    "src-tauri/src/main.rs",
+    "src-tauri/src/dsp_clock.rs",
+    "src-tauri/src/llm_bridge.rs",
+    "causal_isomorphism/parser_fsharp.py",
+    "causal_isomorphism/__init__.py",
+    "babylon60-ide/src-tauri/src/lib.rs",
+    "babylon60-ide/src-tauri/src/inference.rs",
+    "strike_rs/src/lib.rs",
+    "strike_rs/src/atms.rs",
+    "strike_rs/src/publisher.rs",
+    "strike_rs/src/orchestrator.rs",
+    "strike_rs/src/omega0.rs"
+  ],
+  "Verify": [
+    "tests/test_onco_transducer.py",
+    "tests/test_cortex_mamba_network.py",
+    "tests/test_hotstuff_consensus.py",
+    "tests/test_causal_isomorphism.py",
+    "tests/test_base60.py",
+    "tests/test_crypto_canonical.py",
+    "tests/test_cortex_mamba_inference.py",
+    "tests/test_cortex_bpe_tokenizer.py",
+    "tests/test_c5_memory_shield.py",
+    "tests/test_cortex_mamba_block.py",
+    "tests/apex/test_history.py",
+    "babylon60/genomics/engine.py",
+    "babylon60/utils/void_mih.py",
+    "babylon60/extensions/llamaindex_bridge.py",
+    "babylon60/extensions/temporal/rem_cycle.py",
+    "babylon60/extensions/swarm/knowledge_radar.py",
+    "babylon60/extensions/swarm/nightshift_pipeline.py",
+    "babylon60/extensions/mac_maestro/security_control.py",
+    "babylon60/extensions/taas/market.py",
+    "babylon60/extensions/wealth/scanner.py",
+    "babylon60/extensions/zkortex/test_integration.py",
+    "babylon60/extensions/llm/grok_client.py",
+    "babylon60/extensions/sap/sync.py",
+    "babylon60/extensions/sap/mapper.py",
+    "babylon60/extensions/bci/maestro_bridge.py",
+    "babylon60/extensions/training/daemon.py",
+    "babylon60/extensions/training/reward_engine.py",
+    "babylon60/extensions/health/registry.py",
+    "babylon60/extensions/signals/models.py",
+    "babylon60/extensions/red_team/swarm_chaos.py",
+    "babylon60/extensions/ui_control/accessibility.py",
+    "babylon60/extensions/agents/degradation_executor.py",
+    "babylon60/extensions/agents/tools/hypothesis_tool.py",
+    "babylon60/extensions/agents/tools/crystallization_tool.py",
+    "babylon60/extensions/market_maker/__init__.py",
+    "babylon60/extensions/market_maker/orchestrator.py",
+    "babylon60/extensions/vex/receipt.py",
+    "babylon60/extensions/audio/altozano.py",
+    "babylon60/extensions/immune/chaos.py",
+    "babylon60/extensions/daemon/platform.py",
+    "babylon60/extensions/daemon/monitors/mejoralo.py",
+    "babylon60/extensions/kapso/types.py",
+    "babylon60/extensions/federation/main.py",
+    "babylon60/extensions/langbase/sync.py",
+    "babylon60/extensions/skills/niche_arbitrage/models.py",
+    "babylon60/extensions/sync/gitops.py",
+    "babylon60/extensions/sync/obsidian.py",
+    "babylon60/extensions/sync/github_bridge.py",
+    "babylon60/extensions/genesis/__init__.py",
+    "babylon60/extensions/genesis/renderers/python.py",
+    "scripts/autodetect_invariants.py",
+    "causal_isomorphism/regime_validator.py",
+    "causal_isomorphism/emitter_solidity.py"
+  ],
+  "Commit": [
+    "scratch/improved_map_primitives.py",
+    "babylon60/crypto/bootstrap.py",
+    "babylon60/core/crypto.py",
+    "babylon60/utils/pulmones_worker.py",
+    "babylon60/cli/attest_character_count.py",
+    "babylon60/extensions/zkortex/commitment.py",
+    "babylon60/extensions/zkortex/range_proof.py",
+    "babylon60/extensions/evo/evaporator.py",
+    "babylon60/extensions/health/collectors/db.py",
+    "babylon60/extensions/aether/queue.py",
+    "babylon60/extensions/aether/tools.py",
+    "babylon60/extensions/vex/loop.py",
+    "babylon60/extensions/nexus/db.py",
+    "babylon60/extensions/daemon/centaur/queue.py",
+    "babylon60/extensions/daemon/monitors/signals.py",
+    "babylon60/extensions/daemon/sidecar/compaction_monitor/circuit_breaker.py",
+    "babylon60/extensions/evolution/db_persistence.py",
+    "babylon60/extensions/forensic/slashing.py",
+    "scripts/automejora_1000_cache.py",
+    "scripts/conformance_test.py",
+    "scripts/c5_isomorphism_sabu_agent.py",
+    "scripts/prigogine_boltzmann_simulation.py",
+    "babylon60-ide/backend/mcp_symbol_helper.py",
+    "babylon60-ide/src-tauri/src/kernel.rs",
+    "babylon60-ide/src-tauri/src/context.rs"
+  ],
+  "Accidental_Complexity": [
+    {
+      "file": "net_mamba_ledger_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "cortex_mamba_block.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "core_graph_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "cortex_bpe_tokenizer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "io_persist_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "cortex_mamba_network.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "cortex_purge_anergy.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "cortex_ssm_mamba_core.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "apex_trials/transducer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "apex_trials/ctgov.py",
+      "reason": "Overlapping Operators",
+      "matches": 4
+    },
+    {
+      "file": "apex_trials/copilot.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "apex_trials/ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "apex_trials/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "apex_trials/backtest.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "ultrathink/ultrathink_scheduler.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "ultrathink/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "tests/test_ide_inference.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_io_persist_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_itera2_invariants.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/test_bittensor_yuma_consensus.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_cortex_ssm_mamba.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_master_ledger_queue.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/test_ast_sandbox_evasion.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_net_mamba_ledger_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_c5_invariants.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/test_shadow_router_c5.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "tests/test_atms_hardening.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_thermo_ast_pruner.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_ledger_resilience.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_core_graph_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_ledger_vault_verify.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_re_drm_rust.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/test_genomics_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/test_inference_security.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/apex/test_risk_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/apex/test_fitted.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/apex/test_integration.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "tests/apex/test_modules.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "tests/apex/test_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "anvil_yung/lib/forge-std/scripts/vm.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scratch/map_primitives_thermodynamics.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/oncology_primitives.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/database/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/database/core.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/crypto/provider.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/crypto/aes.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/crypto/shredder.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/crypto/keys.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/crypto/hash_registry.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/crypto/vault.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/crypto/identity.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/crypto/serialization.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/core/thermo_ast_pruner.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/core/replay_kernel.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/core/cortex_persist.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/core/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/core/shadow_router.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/core/evaluation_engine.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/core/master_ledger.sql",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/core/moskv_kernel.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/genomics/transducer.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/genomics/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/genomics/hygiene.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/analysis/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/analysis/isomorfismo_validador_vf2.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/applescript.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/linguistic_entropy.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/utils/base60.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/respiration.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/locks.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/semantic_heartbeat.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/sandbox.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/canonical.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/http.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/sql_identifiers.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/hygiene.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/syscall.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/i18n.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/utils/sanitize.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/utils/pulmones.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/cli/llm_attest.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/cli/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/cli/onco_transducer.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/scraper/extractors.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/scraper/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/scraper/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/temporal/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/temporal/chronos_roi.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/temporal/event_sovereignty.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/temporal/divergence.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/temporal/forgetting_models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/temporal/history.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/encryption/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui/pulmones.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/causality/taint.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/causality/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/kv_prefix_registry.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/crystal_consolidator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/protocols.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/budget.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/josu_daemon.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/crystal_thermometer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/escalation.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/langgraph_supervisor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/byzantine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/orchestrator_deep_think.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/centuria_10k_forge.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/github_auditor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/mailbox.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/worktree_isolation.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/verification_gate.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/swarm/sortu_jit_executor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/ast_validator.py",
+      "reason": "Overlapping Operators",
+      "matches": 4
+    },
+    {
+      "file": "babylon60/extensions/swarm/code_smith.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/swarm/psychohistory.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/conflict_resolution.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/centauro_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/swarm/telemetry_gate.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/taas/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/dopamine_loop/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/taint.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/swarm.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/deps.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/heal.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/antipatterns.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/constants.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/utils.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/scan.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/_scanner_import_graph.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/ship.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/_scanner_visitors.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/chronos.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mejoralo/stack_detector.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/wealth/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/wealth/growth.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/wealth/risk.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/zkortex/merkle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/zkortex/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/zkortex/prover.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/zkortex/verifier.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/zkortex/opacity_layer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hardware/schgen_router.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/llm/_constants.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/llm/boundary.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/provider.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_audit.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/llm/_presets.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/quota.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/fable_steerability_poc.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_backoff.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/fable_ffi.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/llm/_router_policy.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_resilience.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/raw_client.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_result_cache.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_oracle_pool.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_models.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/llm/_provider_stream.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/axioms/generate_docs.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/axioms/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/tutor_agent/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/_genome_mutator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/_autocurative_state.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/_mutation_projectors.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/_autocurative_helper.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/repair_strategies.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/_genome_types.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/evolution_types.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/_autopoietic_helper.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/reaper.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/_autocurative_config.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evo/evolution_metrics.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/_genome_tree_helper.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evo/decalcifier.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/context/signals.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/context/collector.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/context/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/context/inference.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/fingerprint/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sap/client.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sap/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sap/agents/tom.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sap/agents/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sap/agents/oliver.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/bci/daemon.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/fiscal/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/fiscal/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/fiscal/decorators.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/security/tenant.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/integrity_audit.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/t_cell.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/security/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/guard_runtime.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/utils.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/signatures.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/abac.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/security/honeypot.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/substrate/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/cuatrida/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/cuatrida/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/cuatrida/orchestrator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/run_daemon.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_core.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/test_braintrust_rlhf.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/training/collector.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_dataset_compiler.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/moskv1_cli.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/training/verifier.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/health/models.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/health/trend.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/health/health_protocol.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/collector.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/prometheus.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/health/invariants.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/health/scorer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/collectors/system.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/collectors/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/health/collectors/mnemonic.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/episodic/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/episodic/main.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/episodic/base.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/signals/reactor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/signals/sharded_bus.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/signals/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/signals/bus.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/signals/fact_hook.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/platform/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/platform/sys.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/red_team/discovery.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/red_team/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/red_team/hydra_chaos.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/web3/oracle.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/ui_control/applescript.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/bootstrapper.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/window.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/vision.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ui_control/mouse.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/ui_control/feedback_loop.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/agents/registry.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/agents/system_prompt.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/degradation.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/loader.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/degradation_types.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/mejoralo_omega.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/agents/friction_annihilator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/agents/schema.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/agents/tools/autodidact_tool.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/alma/taste.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/market_maker/validator.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/market_maker/detector.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/market_maker/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/market_maker/scorer.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mcp/server.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mcp/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/mcp/claude_tool.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/aether/tester.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/aether/hooks.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/aether/models.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/aether/github_ingestor.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/aether/cdp_agentkit.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/aether/__init__.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/aether/cli.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/aether/sovereign_apis.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/compliance/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/compliance/pipeline.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nous/dry_run.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nous/compiler.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/nous/models.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/nous/runtime.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/nous/interpreter.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/timing/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/timing/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/timing/tracker.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/browser/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/browser/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/launchpad/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/launchpad/main.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/vex/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/vex/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/manifold/convergence.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/manifold/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/manifold/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/manifold/core.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/nexus/convenience.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nexus/config.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nexus/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nexus/types.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/nexus/model.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/nexus/symlink_engine.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/membrane.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/immune/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/validate.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/falsification.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/immune/error_boundary.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/reversibility.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/confidence.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/entropic_quarantine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/adversarial.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/causal.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/immune/filters/base.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/thinking/orchestra.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/thinking/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/thinking/fusion.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/shannon/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/shannon/immortality.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/resource_mgr.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/t_cell_ihelp_purge.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/healing.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/entropic_wake.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/core.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/actuators.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/gmail_magic_link.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/zero_toil.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/apoptosis_daemon.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/cli.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/daemon/utils.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/ccr_proxy.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/daemon/scheduler.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/hot_state.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/daemon/state.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/centaur/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/centaur/heartbeat.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/dependency_health.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/tombstone.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/neural.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/ghosts.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/cloud.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/canary.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/swarm_heartbeat.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/security.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/drift.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/cert.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/engine.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/auto_immune.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/l2_drain.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/workflow.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/monitors/perception.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/loops/peripherals.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/loops/evolution.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/loops/context.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/runner.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/legion_integration.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/memory_wrapper.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/sentinel_monitor/monitor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/sentinel_monitor/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/config.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/telemetry/network_void_oracle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/telemetry/fs_entropy_oracle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/telemetry/iot_oracle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/daemon/sidecar/telemetry/thermodynamics_oracle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/kapso/gateway.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/kapso/webhook.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/kapso/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/kapso/demo.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ha/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ha/raft.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sovereign/autopoiesis.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sovereign/bridge.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sovereign/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sovereign/endocrine.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sovereign/observability.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sovereign/dashboard.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/ast_mutators.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/persistence.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/skill_bridge.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/quantum_memory.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/shannon_metrics.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/strategies.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/cortex_metrics.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/ouroboros_omega.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/ledger_db.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/evolution/ouroboros_hook.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/phoenix_omega.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/tournament.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/evolution/p0_extractor.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/daemon.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/evolution/operations_mixin.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/federation/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/langbase/client.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/langbase/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/ttt/forge.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/gate/enums.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/gate/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/gate/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/gate/core.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/gate/ouroboros.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/gate/errors.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hive/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hive/main.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/music_engine/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/music_engine/orchestrator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/trust/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/trust/bayesian.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/songlines/sensor.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/songlines/economy.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/songlines/decay.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/songlines/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/metering/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/metering/tracker.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/metering/quotas.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/skills/registry.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/skills/autodidact/fetchers.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/skills/autodidact/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/skills/autodidact/epistemology.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/skills/autodidact/synthesis.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/skills/niche_arbitrage/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/edge_cloudflare/edge_bridge.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/edge_cloudflare/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/speculative/apotheosis.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/speculative/keter.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/speculative/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/speculative/substack_sidecar.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/perception/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/perception/diffing.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sync/system.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sync/write.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sync/crdt.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sync/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sync/common.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/sync/hlc.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/sync/snapshot.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/sync/read.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/forensic/forensic_strike_config.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/forensic/platform_registry.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/forensic/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/forensic/replay.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/forensic/anomaly_hunter.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/forensic/forensic_commander.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/revenue/models.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/revenue/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/revenue/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/genesis/validator.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/genesis/templates.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/genesis/engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/extensions/genesis/renderers/docs.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/genesis/renderers/api.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/genesis/renderers/utils.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/genesis/renderers/data.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/events.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/setup.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/bus.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/adapters/macos.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/adapters/telegram.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/adapters/imessage.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/notifications/adapters/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/belief_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/handle.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/core.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/belief_object.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/projector.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/hypervisor/isolator.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/billing/metering.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/extensions/billing/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/git/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/policy/jis_auditor.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/policy/memory_os.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/interfaces/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/extensions/interfaces/engine.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/bft/master_ledger_queue.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60/bft/consensus_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 4
+    },
+    {
+      "file": "babylon60/bft/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60/bft/ledger_actor.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60/compiler/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/c5_preserve_claude_local_logs.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/romance_common.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/c5_organize_captures_ultrathink.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/exergy_optimizer_agent.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/verify_Anergy_Token_Purge.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/objectives_manager.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/proto_mcmc_reconstruction.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/ejemplo_logos_ethos_ship.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/verify_captures.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/cancer_isomorphism_pipeline.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/validate_luhmann.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/consolidate_babylon_vault.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/sync_vault_uuids.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/fetch_missing_dates.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/proto_romance_reconstruction.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/entropy_sweeper.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/c5_graph_isomorphism.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/sample_task.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "scripts/gen_oncology_primitives.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/c5_logos_ethos_ship_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/demo_exergy_poc.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/bootstrap_cortex_memory.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/luhmann_autopoiesis_simulation.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/centuria_swarm_commander.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/opsec_sentinel_c5.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/c5_mejoralo_monitor.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/exergy_arbitrage_engine.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/secret_swarm_auditor.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/benchmark_ledger_throughput.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/c5_preserve_agent_local_logs.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "scripts/ouroboros_infinity.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "scripts/bittensor_yuma_consensus_c5.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "src-tauri/build.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "src-tauri/src/void.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "src-tauri/src/silence.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "src-tauri/src/ear.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "src-tauri/src/inference.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "causal_isomorphism/ir.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "causal_isomorphism/emitter_rust.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "causal_isomorphism/transpiler.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "causal_isomorphism/linear_checker.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "causal_isomorphism/generated/domain.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/backend/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/backend/main.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/routes/query.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60-ide/backend/routes/ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/routes/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/backend/routes/telemetry.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60-ide/backend/routes/ontology.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/routes/inference.py",
+      "reason": "Overlapping Operators",
+      "matches": 4
+    },
+    {
+      "file": "babylon60-ide/backend/routes/analytics.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/routes/delegation.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60-ide/backend/routes/sentinel.py",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "babylon60-ide/backend/routes/arena.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/services/chain_verifier.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/services/cortex_ledger.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/backend/services/__init__.py",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/backend/services/db_pool.py",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/src-tauri/build.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/src-tauri/src/ledger.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "babylon60-ide/src-tauri/src/main.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "babylon60-ide/src-tauri/src/lexicon.rs",
+      "reason": "No Logical Operator",
+      "matches": 0
+    },
+    {
+      "file": "strike_rs/src/ledger.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "strike_rs/src/shield.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "strike_rs/src/bindings.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "strike_rs/src/bin/re_drm_896_bft.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    },
+    {
+      "file": "strike_rs/src/bin/bft_interceptor.rs",
+      "reason": "Overlapping Operators",
+      "matches": 3
+    },
+    {
+      "file": "strike_rs/src/bin/centuria_896_bft.rs",
+      "reason": "Overlapping Operators",
+      "matches": 2
+    }
+  ]
+}
