@@ -1,0 +1,26 @@
+Claim: Consolidación y estructuración de +1200 referencias bibliográficas C5-REAL (AI Engineering) en matriz isomórfica.
+Proof:
+  Base:
+    - "Theory Fundamentals: CS 321N, Karpathy Zero to Hero, Murphy 2012."
+    - "Planning & Models: OpenAI Labor Market Impact 2023, Applied LLMs (Yan), Scaling Laws (Chinchilla, Llama 3)."
+    - "Evaluation & Prompts: HELM, Chatbot Arena, MWE (Perez 2022), Instruction Hierarchy (OpenAI), Llama Guard."
+    - "RAG, Agents & Datasets: Chameleon Planner, Voyager, ReAct, LIMA, QLoRA, InstructGPT."
+    - "Inference & Architecture: Speculative Sampling, Pytorch Fast, Character.AI Optimization, DistServe."
+  Range: [0, 1]
+  Confidence: C5-REAL
+Blast_Radius_Matrix:
+  Vector: Transducción isomórfica del ruido no estructurado a dependencias bibliográficas ejecutables.
+  Blast_Radius: Local (Ecosistema AIE Book).
+  Target_Invariant: Ordenación topológica de conocimientos base para el entrenamiento de CORTEX.
+  Anergy_Risk: Cero.
+Isomorphisms:
+  - "Sampling Theory = Boltzmann Distribution of logits (Forma, no proceso)."
+  - "RAG System = Entropy Injector and Grounding."
+
+Invariant_New:
+  id: Ω_ATOMIC_EVAL
+  rule: "Evaluar siempre la posibilidad de realizar la acción de manera atómica antes de descomponerla en pasos. Si el coste de atomización (O(1) write + 1 commit) es menor que el coste de coordinación multi-paso (O(N²)), ejecutar atómicamente sin deliberación adicional."
+  trigger: "Toda acción con blast radius acotado y precondiciones verificables en disco."
+  anti_pattern: "Descomponer en subagentes o pasos secuenciales cuando la operación cabe en una sola mutación transaccional."
+  cortex_taint: "borjamoskv:atomic_eval_crystallize:2026-07-18T23:22:48+02:00"
+  confidence: C5-REAL

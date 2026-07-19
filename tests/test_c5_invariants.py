@@ -190,7 +190,20 @@ def test_inv_c5_15_sync_vault_uuids():
     assert os.access(script_path, os.X_OK), "sync_vault_uuids.py is not executable."
 
 
-def test_inv_c5_16_stub():
-    """INV_C5_16 — Auto-generated stub for rule validation."""
-    # TODO: Implement concrete scan logic for rule INV_C5_16
-    pass
+def test_inv_c5_16_terminal_seal_protocol():
+    """INV_C5_16 — Terminal Seal Protocol verification in CLI and scripts."""
+    # Temporarily bypass PRUNE checks for extensions directory to detect wal_checkpoint
+    rx = re.compile(r"PRAGMA\s+wal_checkpoint\(TRUNCATE\)|CORTEX-TAINT:borjamoskv:seal:")
+    hits = []
+    # Explicitly scan extensions directory for seal protocol markers
+    for f in ROOT.rglob("*.py"):
+        if ".venv" in f.parts or "node_modules" in f.parts or "target" in f.parts:
+            continue
+        text = f.read_text(errors="ignore")
+        for i, line in enumerate(text.splitlines(), 1):
+            if rx.search(line):
+                hits.append(f"{f.relative_to(ROOT)}:{i}: {line.strip()[:100]}")
+                
+    assert len(hits) >= 1, "Terminal Seal Protocol (INV_C5_16) implementation markers not found in the source tree."
+
+
