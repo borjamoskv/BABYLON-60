@@ -1,7 +1,7 @@
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use std::sync::Arc;
-use crate::void::CortexLedger;
+use crate::void::VoidLedger;
 use std::process::Command;
 use serde::Deserialize;
 
@@ -17,7 +17,7 @@ struct LlmTask {
     resp_tx: tokio::sync::oneshot::Sender<String>,
 }
 
-pub async fn ignite_cortex_bridge(db_state: Arc<CortexLedger>) {
+pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
     // Ω25: Zero static HMAC fallback invariant.
     let _bft_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))

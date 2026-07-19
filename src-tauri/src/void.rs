@@ -2,12 +2,12 @@ use fastembed::{EmbeddingModel, InitOptions, TextEmbedding};
 use rusqlite::{params, Connection, Result, OptionalExtension};
 use std::sync::Mutex;
 
-pub struct CortexLedger {
+pub struct VoidLedger {
     conn: Mutex<Connection>,
     embedder: Mutex<TextEmbedding>,
 }
 
-impl CortexLedger {
+impl VoidLedger {
     pub fn init() -> Result<Self> {
         let conn = Connection::open("cortex.db")?;
         

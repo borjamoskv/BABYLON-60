@@ -1,6 +1,6 @@
 use std::sync::Arc;
 use std::time::Instant;
-use crate::void::CortexLedger;
+use crate::void::VoidLedger;
 use crate::dsp_clock;
 
 pub struct CognitiveDwell {
@@ -9,7 +9,7 @@ pub struct CognitiveDwell {
     pub is_paralyzed: bool,
 }
 
-pub async fn ignite_precognition_daemon(db_state: Arc<CortexLedger>) {
+pub async fn ignite_precognition_daemon(db_state: Arc<VoidLedger>) {
     println!("👁️ [PRECOGNITION] Motor de escáner de Exergía arrancado (10Hz).");
     let mut ticker = tokio::time::interval(std::time::Duration::from_millis(100));
     

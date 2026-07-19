@@ -15,7 +15,7 @@ Una nomenclatura de máxima exergía logra el **Isomorfismo Absoluto**: $N \equi
 
 ## 2. LENGUAJE UBICUO (DDD EN C5-REAL)
 La fricción termodinámica ($F_{mtc}$) entre la mente del Operador y la CPU debe ser nula. 
-- **Invariante de Continuidad:** El nombre declarado en la Ontología, el identificador en la base de datos WAL SQLite, el struct de Rust (`struct CortexLedger`), y el comando CLI (`cortex-bridge`) **DEBEN** compartir la misma raíz semántica exacta. 
+- **Invariante de Continuidad:** El nombre declarado en la Ontología, el identificador en la base de datos WAL SQLite, el struct de Rust (`struct VoidLedger`), y el comando CLI (`cortex-bridge`) **DEBEN** compartir la misma raíz semántica exacta. 
 - **Penalización por Sinonimia:** El uso de sinónimos para referirse a la misma entidad arquitectónica se considera una inyección de "Anergía Estocástica" y debe ser purgado de inmediato por el `Anergy_Token_Purge`.
 
 ## 3. DIAGNÓSTICO DE AMBIGÜEDAD (FAIL-FAST)

@@ -9,7 +9,7 @@ use std::time::Instant;
 use tokio::net::TcpStream;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use serde::{Deserialize, Serialize};
-use crate::void::CortexLedger;
+use crate::void::VoidLedger;
 
 #[derive(Serialize, Debug)]
 struct OllamaRequest {
@@ -37,7 +37,7 @@ pub struct InferenceAuditRecord {
 }
 
 pub struct LocalInferenceMotor {
-    pub db_state: Arc<CortexLedger>,
+    pub db_state: Arc<VoidLedger>,
     pub default_model: String,
     pub fallback_model: String,
     pub endpoint_host: String,
@@ -45,7 +45,7 @@ pub struct LocalInferenceMotor {
 }
 
 impl LocalInferenceMotor {
-    pub fn new(db_state: Arc<CortexLedger>) -> Self {
+    pub fn new(db_state: Arc<VoidLedger>) -> Self {
         Self {
             db_state,
             default_model: "qwen2.5:32b".to_string(),
@@ -193,11 +193,11 @@ pub async fn check_inference_health_command(
 mod tests {
     use super::*;
     use std::sync::Arc;
-    use crate::void::CortexLedger;
+    use crate::void::VoidLedger;
 
     #[test]
     fn test_local_inference_motor_init() {
-        if let Ok(db) = CortexLedger::init() {
+        if let Ok(db) = VoidLedger::init() {
             let motor = LocalInferenceMotor::new(Arc::new(db));
             assert_eq!(motor.default_model, "qwen2.5:32b");
             assert_eq!(motor.fallback_model, "llama3:8b");
