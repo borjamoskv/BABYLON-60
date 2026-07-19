@@ -1,4 +1,4 @@
-# [AUDITORÍA] La Necrosis Ontológica del Juguete Virtual: Por qué llamar "Simulación" a la Computación in silico es un EpistemicHalt Industrial
+# [AUDITORÍA] ¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?
 
 #C5-REAL #C4-SIM
 
