@@ -1,10 +1,10 @@
 
 Claim: METACOGNITIVE_AUDIT_COMPLETED
-Proof: { Base: 5d537fb9e4fab063232378a794896f2e0139a33118d76d2f6deb4d9a67f95c64, Range: [0,1], Confidence: C5-REAL }
+Proof: { Base: e414364c9db9eb95ff5d3c6e85fac7b353c73c5e1f9abe0da4b77352e5c72b8f, Range: [0,1], Confidence: C5-REAL }
 
 Autocognition Metrics:
 exergy_ratio: 1.0000
-circular_loop_density: 2
-token_signal_ratio: 0.0000
+circular_loop_density: 0
+token_signal_ratio: 1.0000
 
 Adjustments: Proceed with zero anergy.
