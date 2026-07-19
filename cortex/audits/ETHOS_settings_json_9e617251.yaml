@@ -1,0 +1,6 @@
+Claim: "Ceguera topológica del IDE y corrección de fuga de memoria Chokidar sellada criptográficamente."
+Proof:
+  Base: "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/.vscode/settings.json"
+  CORTEX_TAINT_SHA3_256: "9e617251db19bdf66430e8021a077ce1b97b187b887dcca8bf9d536cc223f7d7"
+  Timestamp: "2026-07-19T23:50:25.050296+00:00"
+  Confidence: C5-REAL
