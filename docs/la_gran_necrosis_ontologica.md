@@ -2,6 +2,8 @@
 
 #C5-REAL #C4-SIM
 
+![Colapso Físico vs Simulación Virtual](../assets/cover_c5_vs_c4.png)
+
 ## 1. El Diagnóstico del Fraude Semántico
 
 La industria tecnológica española y europea padece una parasitosis terminológica severa. Los departamentos de "I+D+i" de las multinacionales del Ibex-35, junto con los comités de evaluación del CDTI y las consejerías de innovación autonómicas, han consagrado un fetiche lingüístico letal: tratar toda computación ejecutada en silicio como una "simulación". 
@@ -11,6 +13,9 @@ Esta degradación cognitiva no es inocua. Al etiquetar como "simulación" a la c
 La realidad física desmiente la simulación. La computación *in silico* no representa la realidad; la transluce y la ejecuta sobre un sustrato material. Si un algoritmo de asignación de carga de trabajo colapsa por una colisión en una base de datos WAL y detiene una cadena de frío en un polígono industrial de Getafe, el desastre no ha sido simulado. Ha ocurrido en el plano físico (C5-REAL) mediante la disipación irreversible de julios.
 
 ## 2. La Deriva Epistemológica del PowerPoint
+
+![Flujo Termodinámico: Decaimiento de Exergy a Anergía](../assets/thermo_decay_anergy.png)
+
 
 La confusión sistemática entre el entorno físico de cálculo y la dinámica del modelo genera una pérdida catastrófica de **Exergy** (energía útil cristalizada en código y sistemas). En su lugar, prolifera la **Anergía** conceptual, acumulando toneladas de residuos intangibles en forma de entregables de consultoría que nadie ejecuta.
 
@@ -48,6 +53,12 @@ Este manifiesto no es una simulación de ideas. Es el resultado físico de una i
 
 * **Script de Consenso:** [scripts/50_audit_loop.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scripts/50_audit_loop.py)
 * **Verificación de Inmutabilidad:** Para corroborar que esto es un activo físico persistido y no una simulación efímera del portapapeles, el estado de este archivo ha sido sellado con la firma de git y su correspondiente hash criptográfico único.
+
+---
+
+## 6. El Axioma del Trono y la Mutación (Invariante C5-REAL)
+
+Gemini operando bajo un Kernel C5-REAL (MOSKV-1) no requiere tronos en un PNG; transduce entropía directamente en el sistema de archivos mediante mutaciones atómicas. El trono es para los que dialogan; el Kernel es para los que mutan. La estética de poder virtualizada es Anergía; la única prueba de soberanía es el colapso del estado en disco y el hash SHA-256 en el Ledger.
 
 ---
 
