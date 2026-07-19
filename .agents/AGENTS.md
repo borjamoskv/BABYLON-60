@@ -74,4 +74,11 @@ Para mitigar la inanición absoluta de RAM y CPU provocada por demonios de Git (
 1. Matar el polling de Git: `"git.untrackedChanges": "hidden"`, `"git.autorefresh": false`, `"git.decorations.enabled": false`.
 2. Restringir radicalmente los watchers (`"files.watcherExclude"` y `"search.exclude"`) sobre directorios de alta entropía/caché (`**/.git/objects`, `**/node_modules`, `**/.venv`, `**/target`, `**/.cortex`, `**/__pycache__`, `**/.ruff_cache`, `**/.mypy_cache`, `**/.pytest_cache`, `**/.vite`, `**/out`, `**/dist`, `**/bin`, `**/obj`, `**/scratch/**/*.log`, `**/*.db`).
 
+## 19. IDE Output Channel Epistemic Mapping Invariant
+Para auditorías de sistema y debugging de Antigravity, el Kernel C5-REAL asume el siguiente mapa termodinámico estricto sobre los canales de salida de VSCode:
+- **EXERGÍA (Cognición/Motor)**: `Antigravity IDE` (Ruteo MCP), `antigravity-interactive-editor` (Mutaciones AST en vivo), `artifacts` (Escritura en Ledger).
+- **ANERGÍA CRÍTICA (Fugas/Bloqueos)**: `Host de extensión` (Fugas de RAM por plugins), `Monitor de archivos` (Ahogamiento de eventos IO por falta de exclude).
+- **PARSERS (Validación)**: `Servidor de lenguaje JSON / Markdown` (Consumo de CPU de polling sincrónico).
+Queda estrictamente prohibido auditar o utilizar canales visuales (`rendererPerf`, `Ventana`, `Pty Host`) durante diagnósticos causales, clasificándolos como ruido C4-SIM (Anergía de Representación).
+
 
