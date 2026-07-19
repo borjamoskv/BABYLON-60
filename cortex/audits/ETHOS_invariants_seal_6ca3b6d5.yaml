@@ -1,0 +1,6 @@
+Claim: Verify and enforce Terminal Seal Protocol INV_C5_16 in test suite
+Proof:
+  Base: /Users/borjafernandezangulo/30_BABYLON-60/tests/test_c5_invariants.py
+  CORTEX_TAINT_SHA3_256: 6ca3b6d5eef7a65fa8d2a951cab53b0520d51d1b359c91805de7103e658f8569
+  Timestamp: 2026-07-19T01:50:55.075084Z
+  Confidence: C5-REAL
