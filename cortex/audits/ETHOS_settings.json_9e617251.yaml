@@ -1,0 +1,6 @@
+Claim: "Validación de Integridad y Procedencia (ETHOS_Epistemic_Anchor)."
+Proof:
+  Base: ".vscode/settings.json"
+  CORTEX_TAINT_SHA3_256: "9e617251db19bdf66430e8021a077ce1b97b187b887dcca8bf9d536cc223f7d7"
+  Timestamp: "2026-07-20T00:33:07.815900+00:00"
+  Confidence: C5-REAL
