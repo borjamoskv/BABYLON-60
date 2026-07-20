@@ -107,7 +107,7 @@ def classify_omega_theorem(target_dir):
 
 
 if __name__ == "__main__":
-    target = os.environ.get("CORTEX_TARGET_DIR")
+    target = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not target:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
     classify_omega_theorem(target)

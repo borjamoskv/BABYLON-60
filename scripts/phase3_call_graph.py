@@ -36,7 +36,7 @@ class CallGraphVisitor(ast.NodeVisitor):
 
 
 def main() -> None:
-    target_dir = os.environ.get("CORTEX_TARGET_DIR")
+    target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not target_dir:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
 

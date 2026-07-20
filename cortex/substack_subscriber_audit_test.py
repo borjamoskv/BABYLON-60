@@ -9,7 +9,6 @@ import tempfile
 import unittest
 from pathlib import Path
 from cortex.substack_subscriber_audit import (
-    SubscriberRecord,
     SubstackSubscriberAuditor,
 )
 

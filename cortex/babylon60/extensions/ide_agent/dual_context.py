@@ -21,7 +21,7 @@ class DualContextAgent:
             logging.error("[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga.")
             os.kill(os.getpid(), signal.SIGKILL)
             
-        self.socket_path = socket_env
+        self.socket_path: str = socket_env or ""
         logging.basicConfig(level=logging.INFO)
 
     async def ingest_code_context(self, file_path: str, ast_data: dict[str, Any]) -> None:
@@ -80,7 +80,7 @@ class DualContextAgent:
 
 def cleanup_socket(signum: Any, frame: Any) -> None:
     """Ω43: Prevención de Zombie IPC (Desvinculado Atómico)."""
-    sock = os.environ.get("CORTEX_IPC_SOCKET")
+    sock: str = os.environ.get("CORTEX_IPC_SOCKET", "")
     if sock and os.path.exists(sock):
         os.remove(sock)
         logging.info("[C5-REAL] Socket unlinked atomically. Purging process.")

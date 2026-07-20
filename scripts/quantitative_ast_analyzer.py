@@ -80,9 +80,7 @@ def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
 
 
 def main() -> None:
-    target_dir = os.environ.get("CORTEX_TARGET_DIR")
-    if not target_dir:
-        raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
+    target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     internal_namespaces = ["babylon60", "causal_isomorphism", "strike_rs", "cortex"]
 
     stats = {}

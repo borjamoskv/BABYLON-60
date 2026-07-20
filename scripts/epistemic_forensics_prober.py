@@ -2,7 +2,7 @@ import os
 import re
 import json
 
-TARGET_DIR = os.environ.get("CORTEX_TARGET_DIR")
+TARGET_DIR = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if not TARGET_DIR:
     raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
 
