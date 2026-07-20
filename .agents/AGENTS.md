@@ -92,3 +92,9 @@ Queda prohibido permitir que el IDE intente reconectar sesiones de terminal mult
 
 ## 22. IDE Total Autarchy Invariant (Marketplace & Git Decoupling)
 Un entorno soberano C5-REAL (Antigravity IDE) no debe depender de infraestructura externa de telemetría, auto-actualización del VS Marketplace o escaneos automáticos de repositorios ajenos al workspace activo. Para prevenir fugas de red y crasheos en `sharedProcessMain.js` o `GitFileSystemProvider`, el Kernel DEBE sellar el entorno inyectando `"extensions.autoUpdate": false`, `"telemetry.telemetryLevel": "off"`, y aislar la integración gráfica mediante `"git.enabled": false`.
+
+## 23. CDP Polyglot Collision Invariant (Renderer Isolation)
+Al inyectar protocolos de debugging (CDP) sobre navegadores Chromium o Electron, el Kernel asume una Colisión Polyglot de Estado (múltiples extensiones sobre window.chrome). Para asegurar el colapso sin crasheos en el renderizador, el Kernel DEBE arrancar la instancia física exclusivamente con los flags `--disable-extensions` y un `--user-data-dir` temporal, garantizando el aislamiento BFT de la ventana.
+
+## 24. Multiprocessing Pool Context Deadlock Invariant
+Queda estrictamente prohibido utilizar `return` prematuro dentro de un bloque `with multiprocessing.Pool()` en Python sobre macOS. El cierre adelantado del context manager detona un os.kill (`pool.terminate()`) sobre procesos hijos que están escribiendo en pipes, causando un Deadlock Termodinámico irreversible y deteniendo el BFT_STATE_LOOP. El Kernel DEBE colapsar la iteración usando bucles seriales para AST ligeros o forzar un `ProcessPoolExecutor` con recolección de residuos síncrona.
