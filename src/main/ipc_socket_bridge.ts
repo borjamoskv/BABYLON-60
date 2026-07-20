@@ -1,19 +1,24 @@
 import * as net from 'net';
-import { ipcMain } from 'electron';
+import { ipcMain, WebContents } from 'electron';
 
 export interface IpcPayload {
-  type: 'AST' | 'AOM' | 'CMD';
+  type: 'AST' | 'AOM' | 'CMD' | 'HEARTBEAT';
   data: Record<string, unknown>;
   file?: string;
 }
 
 /**
- * C5-REAL: ELECTRON-PYTHON BRIDGING (IPC PURITY)
+ * C5-REAL: ELECTRON-PYTHON BRIDGING (IPC PURITY - Ω44)
  * Conecta el Main Process de Electron (Node.js) con el Socket Unix del Agent Igor (Python).
  */
 export class IpcSocketBridge {
   private socketPath: string;
   private client: net.Socket | null = null;
+  private webContents: WebContents | null = null;
+  private buffer: string = '';
+  
+  // Límite de seguridad termodinámica para la cache NDJSON (10MB)
+  private readonly MAX_BUFFER_SIZE = 10 * 1024 * 1024; 
 
   constructor() {
     if (!process.env.CORTEX_IPC_SOCKET) {
@@ -23,26 +28,58 @@ export class IpcSocketBridge {
     // Asignación segura garantizada por la purga de arriba
     this.socketPath = process.env.CORTEX_IPC_SOCKET as string;
   }
-  private buffer: string = '';
+
+  /**
+   * Enlaza el puente bidireccional con el Renderer para cumplir Ω44.
+   */
+  public setWebContents(contents: WebContents): void {
+    this.webContents = contents;
+  }
 
   public connect(): void {
     this.client = net.createConnection(this.socketPath, () => {
       console.log(`[C5-REAL] Electron connected to Agent Igor IPC at ${this.socketPath}`);
     });
 
+    // Invariante Ω26: Fallo Inmediato
     this.client.on('error', (err) => {
       console.error(`[C5-REAL] FATAL (Ω26): IPC Connection Error. Fail-Fast Triggered. ${err.message}`);
       process.kill(process.pid, 'SIGKILL');
     });
 
+    // Invariante Ω43: Prevención Zombie
+    this.client.on('end', () => {
+      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerró la conexión (end). Zombie IPC prevenido. Ejecutando SIGKILL.`);
+      process.kill(process.pid, 'SIGKILL');
+    });
+
+    this.client.on('close', (hadError) => {
+      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerrado (close). Error: ${hadError}. Purga atómica.`);
+      process.kill(process.pid, 'SIGKILL');
+    });
+
+    // Invariante Ω45: Fragmentación NDJSON
     this.client.on('data', (data) => {
-      this.buffer += data.toString();
+      this.buffer += data.toString('utf8');
+      
+      // Control de OOM
+      if (this.buffer.length > this.MAX_BUFFER_SIZE) {
+        console.error(`[C5-REAL] FATAL (Ω45): NDJSON Buffer overflow (>${this.MAX_BUFFER_SIZE} bytes).`);
+        process.kill(process.pid, 'SIGKILL');
+      }
+
       const lines = this.buffer.split('\n');
       this.buffer = lines.pop() || '';
+
       for (const line of lines) {
         if (line.trim()) {
           try {
-            console.log('[C5-REAL] Parsed Agent Igor NDJSON:', JSON.parse(line));
+            const payload = JSON.parse(line);
+            if (this.webContents && !this.webContents.isDestroyed()) {
+              this.webContents.send('agent:receive-response', payload);
+            } else {
+              console.warn('[C5-REAL] Anergía: WebContents inyectado no existe o fue destruido. Payload descartado.');
+            }
           } catch (e) {
             console.error(`[C5-REAL] FATAL (Ω26): JSON Parse Error en IPC Payload. ${e instanceof Error ? e.message : 'Unknown'}`);
             process.kill(process.pid, 'SIGKILL');
