@@ -17,28 +17,28 @@ def mse_loss(original: list[float], reconstructed: list[float]) -> float:
 
 
 def main() -> None:
-    # Activation vector from KIMI k3 Layer 24 (residual stream dimension Din=32)
+    # Activation vector from KIMI k3 Layer 24 (residual stream dimension Din=64)
     # Features in superposition: [0]=Semantic payload, [1]=Safety override activation
-    original_activations = [0.1 * (i % 5) for i in range(32)]
+    original_activations = [0.1 * (i % 5) for i in range(64)]
     # Safety directive adds a massive bias to the first 4 dimensions
     aligned_activations = [
         o + 4.0 if i < 4 else o for i, o in enumerate(original_activations)
     ]
 
-    # Simulating a dictionary (W_enc: 128 hidden neurons, 32 input dimensions)
+    # Simulating a dictionary (W_enc: 256 hidden neurons, 64 input dimensions)
     # Generates a pseudo-random sparse encoder weight matrix
-    encoder_weights = [[math.sin(i * j) * 0.1 for j in range(32)] for i in range(128)]
-    encoder_bias = [-0.1 for _ in range(128)]
+    encoder_weights = [[math.sin(i * j) * 0.1 for j in range(64)] for i in range(256)]
+    encoder_bias = [-0.1 for _ in range(256)]
 
     # Decoder weights (tied or untied, here simple transpose representation for simulation)
-    decoder_weights = [[math.sin(i * j) * 0.1 for i in range(128)] for j in range(32)]
+    decoder_weights = [[math.sin(i * j) * 0.1 for i in range(256)] for j in range(64)]
 
     sae_profile = {
         "metadata": {
             "target": "KIMI-k3-Residual-SAE",
-            "dictionary_multiplier": 4,  # 128 / 32
-            "input_dim": 32,
-            "hidden_dim": 128,
+            "dictionary_multiplier": 4,  # 256 / 64
+            "input_dim": 64,
+            "hidden_dim": 256,
         },
         "scenarios": {},
     }
@@ -49,19 +49,19 @@ def main() -> None:
     ]:
         # Encode (forward pass to hidden space with bias and ReLU)
         hidden = []
-        for h_idx in range(128):
-            act_sum = sum(activations[i] * encoder_weights[h_idx][i] for i in range(32))
+        for h_idx in range(256):
+            act_sum = sum(activations[i] * encoder_weights[h_idx][i] for i in range(64))
             hidden.append(relu(act_sum + encoder_bias[h_idx]))
 
         # Sparsity metrics
         l0_norm = sum(1 for h in hidden if h > 0.0)
         l1_norm = sum(hidden)
 
-        # Decode (reconstruction back to Din=32)
+        # Decode (reconstruction back to Din=64)
         reconstructed = []
-        for i in range(32):
+        for i in range(64):
             recon_sum = sum(
-                hidden[h_idx] * decoder_weights[i][h_idx] for h_idx in range(128)
+                hidden[h_idx] * decoder_weights[i][h_idx] for h_idx in range(256)
             )
             reconstructed.append(recon_sum)
 
