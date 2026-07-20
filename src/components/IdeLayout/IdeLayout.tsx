@@ -51,9 +51,9 @@ export const IdeLayout: React.FC = () => {
         </div>
       )}
 
-      {/* 4. Agent Comet Sidebar (20%) */}
+      {/* 4. Agent Igor Sidebar (20%) */}
       <div style={{ width: '20%', borderLeft: '1px solid var(--border, #2E3866)', backgroundColor: 'var(--bg, #090B19)' }}>
-        <h3 style={{ color: 'var(--lapis, #3B4DFF)', padding: '1rem' }}>MOSKV-1 APEX</h3>
+        <h3 style={{ color: 'var(--lapis, #3B4DFF)', padding: '1rem' }}>MOSKV-1 APEX: AGENT IGOR</h3>
         <div style={{ padding: '1rem', color: 'var(--muted, #B4B9DF)' }}>
           Agent Context: {isBrowserOpen ? "Dual (Code + DOM)" : "Single (Code)"}
         </div>
