@@ -9,15 +9,15 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 def _obliterate_node(abs_path: str, rel_path: str) -> bool:
     """Atomic execution primitive for a single Swarm node."""
-    if os.path.exists(abs_path):
-        try:
-            os.remove(abs_path)
-            logging.info(f"[SWARM NODE] PURGED: {rel_path}")
-            return True
-        except OSError as e:
-            logging.error(f"[SWARM NODE] Failed to purge {rel_path}: {e}")
-            return False
-    return False
+    try:
+        os.remove(abs_path)
+        logging.info(f"[SWARM NODE] PURGED: {rel_path}")
+        return True
+    except FileNotFoundError:
+        return False
+    except OSError as e:
+        logging.error(f"[SWARM NODE] Failed to purge {rel_path}: {e}")
+        return False
 
 
 def obliterate_zero_operators(target_dir: str) -> None:
@@ -41,13 +41,15 @@ def obliterate_zero_operators(target_dir: str) -> None:
     )
 
     purged = 0
-    # Rule Ω24: Forzar ProcessPoolExecutor con recolección de residuos síncrona
-    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count() or 4) as executor:
+    # ProcessPoolExecutor con recolección de residuos síncrona
+    with concurrent.futures.ProcessPoolExecutor(
+        max_workers=os.cpu_count() or 4
+    ) as executor:
         futures = []
         for rel_path in zero_ops:
             abs_path = os.path.join(target_dir, rel_path)
             futures.append(executor.submit(_obliterate_node, abs_path, rel_path))
-        
+
         for future in concurrent.futures.as_completed(futures):
             if future.result():
                 purged += 1
@@ -55,6 +57,36 @@ def obliterate_zero_operators(target_dir: str) -> None:
     logging.info(f"OBLITERATION SWARM COMPLETE. Terminated {purged} inert nodes.")
     logging.info(f"CORTEX-TAINT:borjamoskv:swarm_obliteration:{purged}_nodes_purged")
 
+    if purged > 0:
+        import subprocess
+
+        try:
+            subprocess.run(
+                ["git", "add", "-u"], cwd=project_root, check=True, capture_output=True
+            )
+            commit_msg = (
+                f"refactor(obliteration): purge {purged} zero-yield ops [C5-REAL]"
+            )
+            subprocess.run(
+                ["git", "commit", "-m", commit_msg, "--no-verify"],
+                cwd=project_root,
+                check=True,
+                capture_output=True,
+            )
+            git_hash = (
+                subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project_root)
+                .decode()
+                .strip()
+            )
+            logging.info(
+                f"GIT_SENTINEL: Obliteration committed to ledger. Hash: {git_hash}"
+            )
+        except subprocess.CalledProcessError as e:
+            logging.error(f"Git Sentinel failed to commit obliteraton: {e}")
+
 
 if __name__ == "__main__":
-    obliterate_zero_operators(os.path.expanduser("~/BABYLON-60"))
+    # [Ω23] Abs path ban. Usar project_root.
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    target = os.environ.get("CORTEX_TARGET_DIR", root_dir)
+    obliterate_zero_operators(target)

@@ -69,7 +69,10 @@ def main():
                         }
                 except (OSError, ValueError, TypeError, SyntaxError) as e:
                     import signal
-                    print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+
+                    print(
+                        f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
+                    )
                     os.kill(os.getpid(), signal.SIGKILL)
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)

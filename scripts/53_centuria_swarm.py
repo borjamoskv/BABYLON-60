@@ -84,8 +84,9 @@ def deploy_centuria_swarm() -> None:
     brain_dir = os.environ.get("CORTEX_BRAIN_DIR")
     if not brain_dir:
         raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
-        
+
     import glob
+
     transcripts = glob.glob(
         os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
     )

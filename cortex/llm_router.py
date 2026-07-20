@@ -110,9 +110,7 @@ class C5LLMRouter:
                 models = groq_route.get("models", [])
                 actual_model = models[0] if models else "llama3-70b-8192"
                 url = f"{groq_route.get('url')}/v1/chat/completions"
-                return self._call_openai_compatible(
-                    url, groq_key, actual_model, prompt
-                )
+                return self._call_openai_compatible(url, groq_key, actual_model, prompt)
             except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"Groq ({groq_route.get('name')}) falló: {e}")
 

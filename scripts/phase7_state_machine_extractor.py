@@ -55,7 +55,10 @@ def extract_state_machine_graphs(target_dir):
 
                 except (OSError, ValueError, SyntaxError, TypeError) as e:
                     import signal
-                    print(f"Error parsing {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+
+                    print(
+                        f"Error parsing {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
+                    )
                     os.kill(os.getpid(), signal.SIGKILL)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -73,4 +76,3 @@ if __name__ == "__main__":
     if not target:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
     extract_state_machine_graphs(target)
-

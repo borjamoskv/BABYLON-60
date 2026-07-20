@@ -90,7 +90,10 @@ def classify_omega_theorem(target_dir):
 
             except (OSError, ValueError, TypeError, SyntaxError) as e:
                 import signal
-                print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+
+                print(
+                    f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
+                )
                 os.kill(os.getpid(), signal.SIGKILL)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -3,7 +3,6 @@ import pathlib
 import hashlib
 import math
 import ast
-import multiprocessing
 import collections
 from typing import Optional, Tuple
 import dataclasses
@@ -84,23 +83,19 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
 
 
 class L3InferenceEnginePhysical:
-    """Motor de Inferencia L3 acoplado a MCTS con colapso multiproceso."""
+    """Motor de Inferencia L3 acoplado a MCTS con colapso serial sin overhead multiprocessing."""
 
     def __init__(self, target_trajectories: int = 10000) -> None:
         self.target = target_trajectories
 
     def compile_theorem(self, intention: str) -> ASTTheorem:
         """
-        Búsqueda paralela en MCTS de trayectorias hasta el colapso empírico.
+        Búsqueda serial en MCTS de trayectorias hasta el colapso empírico.
         """
-        # Batch evaluation for CPU bound AST compilation using lazy generator
-        with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
-            tasks = ((intention, i) for i in range(self.target))
-            for result in pool.imap_unordered(
-                _mcts_expansion_worker, tasks, chunksize=100
-            ):
-                if result is not None:
-                    return result
+        for i in range(self.target):
+            result = _mcts_expansion_worker((intention, i))
+            if result is not None:
+                return result
 
         raise RuntimeError(
             "C5-REAL: Imposible colapsar un teorema válido bajo las condiciones termodinámicas actuales."
@@ -117,9 +112,9 @@ def enforce_ide_theorem_physical(intention: str) -> None:
         f.write(theorem.payload)
 
     # Cero prosa. Colapso causal.
-    sys.stdout.write("Claim: IDE_MCTS_PHYSICAL_THEOREM_GENERATED\n")
+    sys.stdout.write("Claim: IDE_MCTS_PHYSICAL_THEOREM_GENERATED\\n")
     sys.stdout.write(
-        f"Proof: {{ Base: {theorem.code_hash}, Entropy: {theorem.shannon_entropy:.4f}, AST_Nodes: {theorem.ast_nodes}, Confidence: C5-REAL, VNode: {theorem.ephemeral_vnode} }}\n"
+        f"Proof: {{ Base: {theorem.code_hash}, Entropy: {theorem.shannon_entropy:.4f}, AST_Nodes: {theorem.ast_nodes}, Confidence: C5-REAL, VNode: {theorem.ephemeral_vnode} }}\\n"
     )
 
 

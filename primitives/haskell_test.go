@@ -5,19 +5,19 @@ import (
 	"testing"
 )
 
-func TestNoetherKernelCoverage(t *testing.T) {
-	InitNoetherKernel()
-	vec := &NoetherStateVector{}
+func TestHaskellKernelCoverage(t *testing.T) {
+	InitHaskellKernel()
+	vec := &HaskellStateVector{}
 	count := 0
 	for d := byte(0); d < 10; d++ {
 		for p := byte(0); p < 10; p++ {
 			for m := byte(0); m < 10; m++ {
-				err := DispatchNoether(d, p, m, vec)
+				err := DispatchHaskell(d, p, m, vec)
 				if err != nil {
-					t.Fatalf("Failed to dispatch Noether primitives [%d,%d,%d]: %v", d, p, m, err)
+					t.Fatalf("Failed to dispatch Haskell primitives [%d,%d,%d]: %v", d, p, m, err)
 				}
 				code := uint16(d)*100 + uint16(p)*10 + uint16(m)
-				execCount := GetNoetherExecutionCount(code)
+				execCount := GetHaskellExecutionCount(code)
 				if execCount < 1 {
 					t.Errorf("Expected execution count 1 for code %d, got %d", code, execCount)
 				}
@@ -26,7 +26,7 @@ func TestNoetherKernelCoverage(t *testing.T) {
 		}
 	}
 	if count != 1000 {
-		t.Fatalf("Expected 1000 Noether primitives tested, got %d", count)
+		t.Fatalf("Expected 1000 Haskell primitives tested, got %d", count)
 	}
-	t.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Noether Primitives.")
+	t.Logf("✅ Successfully verified 100%% execution coverage across all 1000 Haskell Primitives.")
 }

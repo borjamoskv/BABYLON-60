@@ -1,6 +1,6 @@
 import math
 from typing import Tuple
-from cortex.state_observer import dispatch_state_observer, StateVector
+from cortex.observer import dispatch_state_observer, StateVector
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 

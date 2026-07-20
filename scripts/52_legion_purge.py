@@ -20,7 +20,7 @@ def execute_swarm_audit() -> None:
     skill_dir = os.environ.get("CORTEX_SKILLS_DIR")
     if not skill_dir:
         raise RuntimeError("CORTEX_SKILLS_DIR env var is required (Ω23).")
-        
+
     skill_path = os.path.join(skill_dir, "Swarm_Thread_Dispatcher")
     if skill_path not in sys.path:
         sys.path.append(skill_path)
@@ -89,7 +89,7 @@ def execute_swarm_audit() -> None:
     brain_dir = os.environ.get("CORTEX_BRAIN_DIR")
     if not brain_dir:
         raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
-        
+
     transcripts = glob.glob(
         os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
     )

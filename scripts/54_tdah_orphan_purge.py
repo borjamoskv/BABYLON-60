@@ -16,6 +16,7 @@ import hashlib
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "cortex.db")
 
+
 def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5"):
     """Registra la purga en el Master Ledger (Ω11, Ω12)."""
     if not os.path.exists(DB_PATH):
@@ -27,7 +28,9 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5"):
     cursor.execute("PRAGMA journal_mode = WAL;")
     cursor.execute("PRAGMA busy_timeout = 5000;")
 
-    cursor.execute("SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1")
+    cursor.execute(
+        "SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1"
+    )
     row = cursor.fetchone()
     if row:
         prev_hash = row[0]
@@ -51,9 +54,12 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5"):
     finally:
         conn.close()
 
+
 def audit_and_purge_orphans():
-    print(f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)...")
-    
+    print(
+        f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)..."
+    )
+
     # Extraer procesos con PPID = 1, %CPU > 10.0 (Thrashing)
     cmd = ["ps", "-eo", "pid,ppid,pcpu,command"]
     try:
@@ -70,9 +76,9 @@ def audit_and_purge_orphans():
         parts = line.split(maxsplit=3)
         if len(parts) < 4:
             continue
-        
+
         pid_str, ppid_str, pcpu_str, command = parts
-        
+
         try:
             pid = int(pid_str)
             ppid = int(ppid_str)
@@ -82,7 +88,9 @@ def audit_and_purge_orphans():
 
         # Si es huerfano (PPID=1) y consume exergía excesiva (ej. > 50.0%)
         if ppid == 1 and pcpu > 50.0:
-            print(f"[TDAH Detectado] Hilo huérfano consumiendo CPU: PID {pid} | {pcpu}% | {command}")
+            print(
+                f"[TDAH Detectado] Hilo huérfano consumiendo CPU: PID {pid} | {pcpu}% | {command}"
+            )
             # Brutalismo Cinético
             try:
                 os.kill(pid, signal.SIGKILL)
@@ -100,9 +108,14 @@ def audit_and_purge_orphans():
     if purged_count > 0 or payload_log:
         full_payload = "\\n".join(payload_log)
         write_to_ledger(f"TDAH Purge Result:\\n{full_payload}")
-        print(f"[{time.strftime('%H:%M:%S')}] Purga completada. {purged_count} vectores de entropía aniquilados.")
+        print(
+            f"[{time.strftime('%H:%M:%S')}] Purga completada. {purged_count} vectores de entropía aniquilados."
+        )
     else:
-        print(f"[{time.strftime('%H:%M:%S')}] Cero Anergía detectada. Homeostasis confirmada. Abortando JIT.")
+        print(
+            f"[{time.strftime('%H:%M:%S')}] Cero Anergía detectada. Homeostasis confirmada. Abortando JIT."
+        )
+
 
 if __name__ == "__main__":
     audit_and_purge_orphans()

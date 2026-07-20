@@ -53,9 +53,7 @@ class TestLogEvent:
             result = log_event("push", b"unique-payload-abc")
             assert result is True
 
-    def test_log_event_idempotency_lock(
-        self, tmp_path: pathlib.Path
-    ) -> None:
+    def test_log_event_idempotency_lock(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
@@ -131,9 +129,7 @@ class TestGitHubWebhookHandler:
         GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
         handler.send_response.assert_called_once_with(401)
 
-    def test_invalid_signature_returns_403(
-        self, tmp_path: pathlib.Path
-    ) -> None:
+    def test_invalid_signature_returns_403(self, tmp_path: pathlib.Path) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
         payload = b'{"ref": "main"}'
@@ -152,9 +148,7 @@ class TestGitHubWebhookHandler:
             GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
         handler.send_response.assert_called_once_with(403)
 
-    def test_valid_new_event_returns_202(
-        self, tmp_path: pathlib.Path
-    ) -> None:
+    def test_valid_new_event_returns_202(self, tmp_path: pathlib.Path) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
         payload = b'{"ref": "unique-main-branch"}'

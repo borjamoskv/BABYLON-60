@@ -137,7 +137,10 @@ def main():
 
                 except (SyntaxError, OSError, RuntimeError, ValueError, TypeError) as e:
                     import signal
-                    print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+
+                    print(
+                        f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
+                    )
                     os.kill(os.getpid(), signal.SIGKILL)
 
     # 2. Calcular Fan-in

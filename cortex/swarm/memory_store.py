@@ -17,16 +17,27 @@ class AgentMemory:
     Cumple con Ω11: Ledger inmutable (RAISE ABORT), prev_hash, y CORTEX-TAINT obligatorio.
     """
 
-    def __init__(self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH) -> None:
+    def __init__(
+        self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH
+    ) -> None:
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         # Habilitar WAL para concurrencia BFT segura (R10)
         self.conn.execute("PRAGMA journal_mode=WAL;")
         self.conn.execute("PRAGMA busy_timeout=5000;")
         self._init_table()
-        
+
         import chromadb
-        self.chroma_client = chromadb.PersistentClient(path=chroma_path)
-        self.collection = self.chroma_client.get_or_create_collection(name="agent_memory")
+
+        if (
+            "PYTEST_CURRENT_TEST" in os.environ
+            or os.environ.get("CORTEX_TEST_MODE") == "1"
+        ):
+            self.chroma_client = chromadb.EphemeralClient()
+        else:
+            self.chroma_client = chromadb.PersistentClient(path=chroma_path)
+        self.collection = self.chroma_client.get_or_create_collection(
+            name="agent_memory"
+        )
 
     def _init_table(self) -> None:
         self.conn.execute("""
@@ -86,14 +97,21 @@ class AgentMemory:
                 "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
                 (issue_id, agent_role, action, result, prev_hash, cortex_taint),
             )
-            
+
             doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
             self.collection.add(
                 documents=[doc_content],
-                metadatas=[{"issue_id": issue_id, "agent_role": agent_role, "cortex_taint": cortex_taint, "timestamp": timestamp_iso}],
-                ids=[cortex_taint]
+                metadatas=[
+                    {
+                        "issue_id": issue_id,
+                        "agent_role": agent_role,
+                        "cortex_taint": cortex_taint,
+                        "timestamp": timestamp_iso,
+                    }
+                ],
+                ids=[cortex_taint],
             )
-            
+
             self.conn.execute("COMMIT")
             return cortex_taint
         except sqlite3.Error:
@@ -107,9 +125,6 @@ class AgentMemory:
             raise
 
     def query_similar(self, issue_text: str) -> list[Any]:
-        results = self.collection.query(
-            query_texts=[issue_text],
-            n_results=10
-        )
+        results = self.collection.query(query_texts=[issue_text], n_results=10)
         docs = results.get("documents")
         return docs[0] if docs else []

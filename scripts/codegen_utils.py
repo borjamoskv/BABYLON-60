@@ -285,9 +285,9 @@ CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {
         ],
         "py_sim": [
             "for i in range(4):",
-            "        state.states[i] += math.sin(code + i) * 0.01",
-            "        state.innovation[i] = (math.cos(code) - state.states[i]) * 0.1",
-            "    state.norm_error = math.sqrt(sum(x**2 for x in state.innovation))",
+            "    state.states[i] += math.sin(code + i) * 0.01",
+            "    state.innovation[i] = (math.cos(code) - state.states[i]) * 0.1",
+            "state.norm_error = math.sqrt(sum(x**2 for x in state.innovation))",
         ],
     },
     "Haskell": {
