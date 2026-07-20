@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = "==3.12.*"
 
+[manifest]
+members = [
+    "strike-rs",
+    "teorema-robinson-moskv",
+]
+
 [[package]]
 name = "aiohappyeyeballs"
 version = "2.7.1"
@@ -1208,6 +1214,10 @@ wheels = [
 ]
 
 [[package]]
+name = "strike-rs"
+source = { editable = "strike-rs" }
+
+[[package]]
 name = "tenacity"
 version = "9.1.4"
 source = { registry = "https://pypi.org/simple" }
@@ -1227,6 +1237,7 @@ dependencies = [
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pyyaml" },
+    { name = "strike-rs" },
     { name = "websocket-client" },
 ]
 
@@ -1243,6 +1254,7 @@ requires-dist = [
     { name = "pytest", specifier = ">=8.0.0" },
     { name = "pytest-cov", specifier = ">=7.1.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
+    { name = "strike-rs", editable = "strike-rs" },
     { name = "websocket-client", specifier = ">=1.9.0" },
 ]
 

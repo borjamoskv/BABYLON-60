@@ -11,6 +11,7 @@ dependencies = [
     "pytest>=8.0.0",
     "pytest-cov>=7.1.0",
     "pyyaml>=6.0.3",
+    "strike-rs",
     "websocket-client>=1.9.0",
 ]
 
@@ -24,3 +25,11 @@ namespace_packages = false
 exclude = [
     "^scratch/",
 ]
+
+[tool.uv.workspace]
+members = [
+    "strike-rs",
+]
+
+[tool.uv.sources]
+strike-rs = { workspace = true }
