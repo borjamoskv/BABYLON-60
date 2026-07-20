@@ -20,6 +20,7 @@ dev = [
 ]
 
 [tool.mypy]
-mypy_path = "scripts"
-explicit_package_bases = true
-namespace_packages = true
+namespace_packages = false
+exclude = [
+    "^scratch/",
+]

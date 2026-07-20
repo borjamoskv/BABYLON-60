@@ -8,7 +8,7 @@ sys.path.append(PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
 
 from cortex.swarm.engine_fsm import run_fsm_cycle  # noqa: E402
-from scripts.codegen_utils import get_ledger_hash  # noqa: E402
+from codegen_utils import get_ledger_hash  # noqa: E402
 
 
 def itera_100() -> None:
