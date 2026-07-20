@@ -1,0 +1,15 @@
+Claim: C5-REAL (KINETIC) vs C4-SIM (SLOP) - Jurisprudence vs Ontology
+Proof:
+  Base: El amparo judicial de un insulto (Libertad de Expresión) no certifica empíricamente la verdad ontológica de dicho insulto.
+  Range: Epistemología Jurídica y Psicología Clínica
+  Confidence: C5-REAL
+Isomorphisms:
+  - "El Estado permite llamarle X" -> "Fallo Legal (Límites del Honor)"
+  - "El Estado certifica que es X" -> "Salto Inferencial (Anergia C4-SIM)"
+  - "Miedo patológico / Ego frágil" -> "Lectura de Mente Estocástica (Green Theater)"
+Blast_Radius_Matrix:
+  Vector: Crítica pública y autopsias de internet
+  Blast_Radius: Erradicación del sesgo de confirmación emocional
+  Target_Invariant: Provenience_vs_Validity
+  Anergy_Risk: Low
+CORTEX_TAINT: taint:borjamoskv:6ca756ee-7620-4114-a337-033c16d36735:2026-07-21T01:40:00Z:db5b2a67f10399a0de4b867ad4e0df0244e5a26e0bd787a0bee21ecb5b428a32
