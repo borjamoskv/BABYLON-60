@@ -10,13 +10,13 @@ class CallGraphVisitor(ast.NodeVisitor):
         self.module_calls: set[str] = set()
         self.current_function = None
 
-    def visit_FunctionDef(self, node):
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         prev_function = self.current_function
         self.current_function = node.name
         self.generic_visit(node)
         self.current_function = prev_function
 
-    def visit_Call(self, node):
+    def visit_Call(self, node: ast.Call) -> None:
         if isinstance(node.func, ast.Name):
             func_name = node.func.id
         elif isinstance(node.func, ast.Attribute):

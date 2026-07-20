@@ -3,7 +3,7 @@ import json
 from collections import defaultdict
 
 
-def summarize_graphs():
+def summarize_graphs() -> None:
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     base_dir = os.path.join(project_root, "cortex", "artifacts", "reports")
 
@@ -27,7 +27,7 @@ def summarize_graphs():
             modules.add(item["file"])
 
     fan_out = defaultdict(int)
-    fan_in = defaultdict(int)
+    fan_in: dict[str, int] = defaultdict(int)
 
     # Build a simple dependency edge list (module -> called functions)
     edges = []

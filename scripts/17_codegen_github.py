@@ -51,7 +51,7 @@ ACTION_VERBS = [
 # We will generate 10 categories * 10 verbs = 100 base archetypes.
 
 
-def generate_centuria():
+def generate_centuria() -> list[dict[str, str]]:
     base_archetypes = []
     idx = 1
     for cat in CATEGORIES:
@@ -94,7 +94,7 @@ def generate_centuria():
     return primitives
 
 
-def save_to_markdown(primitives, filepath):
+def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w") as f:
         f.write(
@@ -115,7 +115,7 @@ def save_to_markdown(primitives, filepath):
             f.write(f"- **CORTEX-TAINT**: `{p['taint_hash']}`\n\n")
 
 
-def save_to_sqlite(primitives, db_path):
+def save_to_sqlite(primitives: list[dict[str, str]], db_path: str) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)
 

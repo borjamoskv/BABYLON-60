@@ -15,7 +15,7 @@ TARGET_DIRS = [
     os.path.expanduser("~/10_PROJECTS")
 ]
 
-def find_git_repos(base_dirs):
+def find_git_repos(base_dirs: list[str]) -> list[str]:
     repos = []
     for base in base_dirs:
         if not os.path.exists(base):
@@ -26,7 +26,7 @@ def find_git_repos(base_dirs):
                 dirs.remove('.git') # No bajar más allá del repo
     return repos
 
-def obliterate_repo_entropy(repo_path):
+def obliterate_repo_entropy(repo_path: str) -> int:
     print(f"\n[OMEGA-PURGE] Iniciando colapso entrópico en: {repo_path}")
     os.chdir(repo_path)
     
@@ -75,7 +75,7 @@ def obliterate_repo_entropy(repo_path):
                 
     return purged_bytes
 
-def main():
+def main() -> None:
     print("=== INICIANDO OBLITERATOR OMEGA NODE: PURGA DE ENTROPÍA MASIVA ===")
     repos = find_git_repos(TARGET_DIRS)
     print(f"Detectados {len(repos)} repositorios para aniquilación termodinámica.")

@@ -12,13 +12,13 @@ OUTPUT_JSON = os.path.join(
 )
 
 
-def scan_file(filepath):
+def scan_file(filepath: str) -> str:
     with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
         return f.read()
 
 
-def classify_files(target_dir):
-    classification = {
+def classify_files(target_dir: str) -> dict[str, list[str]]:
+    classification: dict[str, list[str]] = {
         "Verified_by_Construction": [],
         "Verified_by_Proof": [],
         "Verified_by_Tests": [],
