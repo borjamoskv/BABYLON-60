@@ -24,9 +24,13 @@
     "**/out": true,
     "**/dist": true,
     "**/bin": true,
-    "**/obj": true
+    "**/obj": true,
+    "**/scratch/**/*.log": true,
+    "**/*.db": true
   },
   "search.exclude": {
+    "**/.git/objects": true,
+    "**/.git/subtree-cache": true,
     "**/node_modules": true,
     "**/.venv": true,
     "**/target": true,
