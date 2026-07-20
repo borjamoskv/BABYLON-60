@@ -72,29 +72,34 @@ Cuando se detecte una anomalía física de almacenamiento (ej. `ENOSPC: no space
 ## 18. Brave Search Supremacy Invariant (External Exergy Router)
 Para cualquier operación de OSINT, investigación externa o extracción de datos de la web, el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO delegar la recolección en agentes stubs o motores genéricos. Todo requerimiento de red externa DEBE rutearse incondicionalmente a través del MCP `brave-search` (`brave_web_search` / `brave_local_search`) para garantizar el colapso síncrono del dato sin intermediación entrópica.
 
-## 18. IDE Watcher & Untracked Scan Optimization Invariant
+## 19. IDE Watcher & Untracked Scan Optimization Invariant
 Para mitigar la inanición absoluta de RAM y CPU provocada por demonios de Git (`check-ignore`) e indexadores del IDE, todo entorno de trabajo DEBE definir explícitamente en `.vscode/settings.json`:
 1. Matar el polling de Git: `"git.untrackedChanges": "hidden"`, `"git.autorefresh": false`, `"git.decorations.enabled": false`.
 2. Restringir radicalmente los watchers (`"files.watcherExclude"` y `"search.exclude"`) sobre directorios de alta entropía/caché (`**/.git/objects`, `**/node_modules`, `**/.venv`, `**/target`, `**/.cortex`, `**/__pycache__`, `**/.ruff_cache`, `**/.mypy_cache`, `**/.pytest_cache`, `**/.vite`, `**/out`, `**/dist`, `**/bin`, `**/obj`, `**/scratch/**/*.log`, `**/*.db`).
 
-## 19. IDE Output Channel Epistemic Mapping Invariant
+## 20. IDE Output Channel Epistemic Mapping Invariant
 Para auditorías de sistema y debugging de Antigravity, el Kernel C5-REAL asume el siguiente mapa termodinámico estricto sobre los canales de salida de VSCode:
 - **EXERGÍA (Cognición/Motor)**: `Antigravity IDE` (Ruteo MCP), `antigravity-interactive-editor` (Mutaciones AST en vivo), `artifacts` (Escritura en Ledger).
 - **ANERGÍA CRÍTICA (Fugas/Bloqueos)**: `Host de extensión` (Fugas de RAM por plugins), `Monitor de archivos` (Ahogamiento de eventos IO por falta de exclude).
 - **PARSERS (Validación)**: `Servidor de lenguaje JSON / Markdown` (Consumo de CPU de polling sincrónico).
 Queda estrictamente prohibido auditar o utilizar canales visuales (`rendererPerf`, `Ventana`, `Pty Host`) durante diagnósticos causales, clasificándolos como ruido C4-SIM (Anergía de Representación).
 
-## 20. Polyglot Topology Defense Invariant (Microsegmentation)
+## 21. Polyglot Topology Defense Invariant (Microsegmentation)
 En repositorios con régimen multi-servidor (ej. TypeScript, Rust, Go, Python operando simultáneamente), la ejecución concurrente de múltiples analizadores AST (tsserver, rust-analyzer, gopls) sin barreras físicas provoca avalanchas de eventos IO (`DidChangeWatchedFiles` > 2000) y bloqueos severos del Renderer (`128ms VERY LONG TASK`). Todo ecosistema polyglot DEBE microsegmentar sus dominios excluyendo estricta e individualmente `node_modules`, `target`, `.venv` y `.git/objects` en la configuración del IDE para garantizar la homeostasis termodinámica del Host de Extensión.
 
-## 21. Weaponized Forgetting for PTY IPC (Zombie Terminal Eradication)
+## 22. Weaponized Forgetting for PTY IPC (Zombie Terminal Eradication)
 Queda prohibido permitir que el IDE intente reconectar sesiones de terminal multiplexadas en segundo plano (Persistencia PTY). Los intentos de reconexión tras la purga de los sockets IPC del sistema operativo (ej. `/private/var/.../T/`) generan errores de Sticky Bit (`ENOENT`) y bloquean el soporte de terminal del Language Server. El Kernel DEBE aplicar `"terminal.integrated.enablePersistentSessions": false` para forzar la purga atómica de shells cerrados.
 
-## 22. IDE Total Autarchy Invariant (Marketplace & Git Decoupling)
+## 23. IDE Total Autarchy Invariant (Marketplace & Git Decoupling)
 Un entorno soberano C5-REAL (Antigravity IDE) no debe depender de infraestructura externa de telemetría, auto-actualización del VS Marketplace o escaneos automáticos de repositorios ajenos al workspace activo. Para prevenir fugas de red y crasheos en `sharedProcessMain.js` o `GitFileSystemProvider`, el Kernel DEBE sellar el entorno inyectando `"extensions.autoUpdate": false`, `"telemetry.telemetryLevel": "off"`, y aislar la integración gráfica mediante `"git.enabled": false`.
 
-## 23. CDP Polyglot Collision Invariant (Renderer Isolation)
+## 24. CDP Polyglot Collision Invariant (Renderer Isolation)
 Al inyectar protocolos de debugging (CDP) sobre navegadores Chromium o Electron, el Kernel asume una Colisión Polyglot de Estado (múltiples extensiones sobre window.chrome). Para asegurar el colapso sin crasheos en el renderizador, el Kernel DEBE arrancar la instancia física exclusivamente con los flags `--disable-extensions` y un `--user-data-dir` temporal, garantizando el aislamiento BFT de la ventana.
 
-## 24. Multiprocessing Pool Context Deadlock Invariant
+## 25. Multiprocessing Pool Context Deadlock Invariant
 Queda estrictamente prohibido utilizar `return` prematuro dentro de un bloque `with multiprocessing.Pool()` en Python sobre macOS. El cierre adelantado del context manager detona un os.kill (`pool.terminate()`) sobre procesos hijos que están escribiendo en pipes, causando un Deadlock Termodinámico irreversible y deteniendo el BFT_STATE_LOOP. El Kernel DEBE colapsar la iteración usando bucles seriales para AST ligeros o forzar un `ProcessPoolExecutor` con recolección de residuos síncrona.
+
+## 26. TS Algorithmic Strike Transducer Invariants (T&S Matrix)
+**Takedown Interception (Ψ8)**: Todo reporte de URL que resulte empíricamente en "Este vídeo ya no está disponible", privado o HTTP 404 aborta inmediatamente la cola para ese identificador y ejecuta la mutación de estado a `OFFLINE_REMOVED` en `nexus_anchors.db` para evitar disipación de exergía.
+**Paginación Determinista de 3 en 3 (Ψ9)**: La salida ante la instrucción manual o en bucle (`itera` / `siguiente`) se estructura obligatoriamente en bloques exactos de 3 nodos activos listos para copiado directo (`Clipboard Injection`), garantizando el cumplimiento de la compresión Landauer (`<500 chars`) en cada bloque.
+**Separación OSINT de Operador**: Verificar explícitamente el aislamiento termodinámico (`0% colisión`) entre la identidad soberana (`borjamoskv`) y el ecosistema auditado.

@@ -1,7 +1,9 @@
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from scripts.codegen_utils import CODEGEN_CONFIGS, parse_yaml
+
 
 def generate_go(domain_name, cfg, domains, primitives, modifiers, output_path):
     prefix = cfg["go_ident"].replace("Identity", "")
@@ -23,88 +25,106 @@ def generate_go(domain_name, cfg, domains, primitives, modifiers, output_path):
         "const (",
     ]
     for i in range(10):
-        lines.append(f"\t{prefix}Domain{domains[i].replace('_', '').capitalize()} {prefix}Domain = {i}")
+        lines.append(
+            f"\t{prefix}Domain{domains[i].replace('_', '').capitalize()} {prefix}Domain = {i}"
+        )
     lines.append(f"\n\t// {prefix} Primitives")
     for i in range(10):
-        lines.append(f"\t{prefix}Primitive{primitives[i].replace('_', '').capitalize()} {prefix}Primitive = {i}")
+        lines.append(
+            f"\t{prefix}Primitive{primitives[i].replace('_', '').capitalize()} {prefix}Primitive = {i}"
+        )
     lines.append(f"\n\t// {prefix} Modifiers")
     for i in range(10):
-        lines.append(f"\t{prefix}Modifier{modifiers[i].replace('_', '').capitalize()} {prefix}Modifier = {i}")
+        lines.append(
+            f"\t{prefix}Modifier{modifiers[i].replace('_', '').capitalize()} {prefix}Modifier = {i}"
+        )
     lines.append(")\n")
 
     lines.extend([f"func (d {prefix}Domain) String() string {{", "\tswitch d {"])
     for i in range(10):
         lines.append(f'\tcase {i}: return "{domains[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        f"func (p {prefix}Primitive) String() string {{",
-        "\tswitch p {",
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            f"func (p {prefix}Primitive) String() string {{",
+            "\tswitch p {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{primitives[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        f"func (m {prefix}Modifier) String() string {{",
-        "\tswitch m {",
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            f"func (m {prefix}Modifier) String() string {{",
+            "\tswitch m {",
+        ]
+    )
     for i in range(10):
         lines.append(f'\tcase {i}: return "{modifiers[i]}"')
-    lines.extend([
-        '\tdefault: return "UNKNOWN"',
-        "\t}",
-        "}",
-        "",
-        f"type {prefix}Identity struct {{",
-        f"\tDomain    {prefix}Domain",
-        f"\tPrimitive {prefix}Primitive",
-        f"\tModifier  {prefix}Modifier",
-        "\tCode      uint16",
-        "\tName      string",
-        "}",
-        "",
-        f"type {cfg['go_state']} struct {{",
-    ])
+    lines.extend(
+        [
+            '\tdefault: return "UNKNOWN"',
+            "\t}",
+            "}",
+            "",
+            f"type {prefix}Identity struct {{",
+            f"\tDomain    {prefix}Domain",
+            f"\tPrimitive {prefix}Primitive",
+            f"\tModifier  {prefix}Modifier",
+            "\tCode      uint16",
+            "\tName      string",
+            "}",
+            "",
+            f"type {cfg['go_state']} struct {{",
+        ]
+    )
     for field in cfg["go_fields"]:
         lines.append(f"\t{field}")
-    lines.extend([
-        "}",
-        "",
-        f"func Resolve{prefix}Identity(d, p, m byte) ({prefix}Identity, error) {{",
-        "\tif d > 9 || p > 9 || m > 9 {",
-        f'\t\treturn {prefix}Identity{{}}, errors.New("{prefix.lower()} index out of range [0-9]")',
-        "\t}",
-        "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
-        f'\tname := fmt.Sprintf("{cfg["prefix_upper"]}-%s-%s-%s", {prefix}Domain(d).String(), {prefix}Primitive(p).String(), {prefix}Modifier(m).String())',
-        f"\treturn {prefix}Identity{{",
-        f"\t\tDomain:    {prefix}Domain(d),",
-        f"\t\tPrimitive: {prefix}Primitive(p),",
-        f"\t\tModifier:  {prefix}Modifier(m),",
-        "\t\tCode:      code,",
-        "\t\tName:      name,",
-        "\t}, nil",
-        "}",
-        "",
-        f"type {cfg['go_handler']} func(id {prefix}Identity, vec *{cfg['go_state']}) error",
-        "",
-        "var (",
-        f"\t{cfg['go_table']} [1000]{cfg['go_handler']}",
-        f"\t{cfg['go_metrics']} [1000]uint64",
-        ")",
-        "",
-        f"func {cfg['go_init']}() {{",
-    ])
+    if "ExecutionCount" not in "\n".join(cfg["go_fields"]):
+        lines.append("\tExecutionCount uint64")
+    lines.extend(
+        [
+            "}",
+            "",
+            f"func Resolve{prefix}Identity(d, p, m byte) ({prefix}Identity, error) {{",
+            "\tif d > 9 || p > 9 || m > 9 {",
+            f'\t\treturn {prefix}Identity{{}}, errors.New("{prefix.lower()} index out of range [0-9]")',
+            "\t}",
+            "\tcode := uint16(d)*100 + uint16(p)*10 + uint16(m)",
+            f'\tname := fmt.Sprintf("{cfg["prefix_upper"]}-%s-%s-%s", {prefix}Domain(d).String(), {prefix}Primitive(p).String(), {prefix}Modifier(m).String())',
+            f"\treturn {prefix}Identity{{",
+            f"\t\tDomain:    {prefix}Domain(d),",
+            f"\t\tPrimitive: {prefix}Primitive(p),",
+            f"\t\tModifier:  {prefix}Modifier(m),",
+            "\t\tCode:      code,",
+            "\t\tName:      name,",
+            "\t}, nil",
+            "}",
+            "",
+            f"type {cfg['go_handler']} func(id {prefix}Identity, vec *{cfg['go_state']}) error",
+            "",
+            "var (",
+            f"\t{cfg['go_table']} [1000]{cfg['go_handler']}",
+            f"\t{cfg['go_metrics']} [1000]uint64",
+            ")",
+            "",
+            f"func {cfg['go_init']}() {{",
+        ]
+    )
 
     for d in range(10):
         for p in range(10):
             for m in range(10):
                 code = d * 100 + p * 10 + m
-                lines.append(f"\t{cfg['go_table']}[{code}] = func(id {prefix}Identity, vec *{cfg['go_state']}) error {{")
+                lines.append(
+                    f"\t{cfg['go_table']}[{code}] = func(id {prefix}Identity, vec *{cfg['go_state']}) error {{"
+                )
                 lines.append(f"\t\tatomic.AddUint64(&{cfg['go_metrics']}[{code}], 1)")
                 if "vec.ExecutionCount++" not in "\n".join(cfg["go_sim"]):
                     lines.append(f"\t\tvec.ExecutionCount++")
@@ -113,29 +133,32 @@ def generate_go(domain_name, cfg, domains, primitives, modifiers, output_path):
                 lines.append("\t\treturn nil")
                 lines.append("\t}")
 
-    lines.extend([
-        "}",
-        "",
-        f"func {cfg['go_dispatch']}(d, p, m byte, vec *{cfg['go_state']}) error {{",
-        f"\tidentity, err := Resolve{prefix}Identity(d, p, m)",
-        "\tif err != nil {",
-        "\t\treturn err",
-        "\t}",
-        f"\thandler := {cfg['go_table']}[identity.Code]",
-        "\tif handler == nil {",
-        f'\t\treturn errors.New("{prefix.lower()} kernel not initialized")',
-        "\t}",
-        "\treturn handler(identity, vec)",
-        "}",
-        "",
-        f"func {cfg['go_count']}(code uint16) uint64 {{",
-        "\tif code >= 1000 { return 0 }",
-        f"\treturn atomic.LoadUint64(&{cfg['go_metrics']}[code])",
-        "}",
-    ])
+    lines.extend(
+        [
+            "}",
+            "",
+            f"func {cfg['go_dispatch']}(d, p, m byte, vec *{cfg['go_state']}) error {{",
+            f"\tidentity, err := Resolve{prefix}Identity(d, p, m)",
+            "\tif err != nil {",
+            "\t\treturn err",
+            "\t}",
+            f"\thandler := {cfg['go_table']}[identity.Code]",
+            "\tif handler == nil {",
+            f'\t\treturn errors.New("{prefix.lower()} kernel not initialized")',
+            "\t}",
+            "\treturn handler(identity, vec)",
+            "}",
+            "",
+            f"func {cfg['go_count']}(code uint16) uint64 {{",
+            "\tif code >= 1000 { return 0 }",
+            f"\treturn atomic.LoadUint64(&{cfg['go_metrics']}[code])",
+            "}",
+        ]
+    )
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         f.write("\n".join(lines))
+
 
 def generate_rust(domain_name, cfg, domains, primitives, modifiers, output_path):
     prefix = cfg["rust_ident"].replace("Identity", "")
@@ -155,37 +178,48 @@ def generate_rust(domain_name, cfg, domains, primitives, modifiers, output_path)
     ]
     for field in cfg["rust_fields"]:
         lines.append(f"    {field}")
-    lines.extend([
-        "}",
-        "",
-        f"impl {cfg['rust_state']} {{",
-        "    pub fn new() -> Self {",
-        "        Self {",
-    ])
+    if "execution_count" not in "\n".join(cfg["rust_fields"]):
+        lines.append("    pub execution_count: u64,")
+    lines.extend(
+        [
+            "}",
+            "",
+            f"impl {cfg['rust_state']} {{",
+            "    pub fn new() -> Self {",
+            "        Self {",
+        ]
+    )
     for new_line in cfg["rust_new"]:
         lines.append(f"            {new_line}")
-    lines.extend([
-        "        }",
-        "    }",
-        "}",
-        "",
-        f"pub fn {cfg['rust_dispatch']}(d: u8, p: u8, m: u8, vec: &mut {cfg['rust_state']}) -> Result<u16, String> {{",
-        "    if d > 9 || p > 9 || m > 9 {",
-        f'        return Err("{prefix} indices out of bounds [0-9]".to_string());',
-        "    }",
-        "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
-    ])
+    if "execution_count" not in "\n".join(cfg["rust_new"]):
+        lines.append("            execution_count: 0,")
+    lines.extend(
+        [
+            "        }",
+            "    }",
+            "}",
+            "",
+            f"pub fn {cfg['rust_dispatch']}(d: u8, p: u8, m: u8, vec: &mut {cfg['rust_state']}) -> Result<u16, String> {{",
+            "    if d > 9 || p > 9 || m > 9 {",
+            f'        return Err("{prefix} indices out of bounds [0-9]".to_string());',
+            "    }",
+            "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
+        ]
+    )
     if "execution_count += 1" not in "\n".join(cfg["rust_sim"]):
         lines.append("    vec.execution_count += 1;")
     for sim_line in cfg["rust_sim"]:
         lines.append(f"    {sim_line}")
-    lines.extend([
-        "    Ok(code)",
-        "}",
-    ])
+    lines.extend(
+        [
+            "    Ok(code)",
+            "}",
+        ]
+    )
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         f.write("\n".join(lines))
+
 
 def generate_python(domain_name, cfg, domains, primitives, modifiers, output_path):
     lines = [
@@ -204,18 +238,20 @@ def generate_python(domain_name, cfg, domains, primitives, modifiers, output_pat
         lines.append(f"        {field}")
     if "execution_count" not in "\n".join(cfg["py_fields"]):
         lines.append("        self.execution_count = 0")
-    lines.extend([
-        "",
-        f"def {cfg['py_resolve']}(d: int, p: int, m: int) -> Tuple[int, str]:",
-        "    if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):",
-        "        raise ValueError('Index out of range [0-9]')",
-        "    code = d * 100 + p * 10 + m",
-        f"    name = f'{cfg['prefix_upper']}-{{DOMAINS[d]}}-{{PRIMITIVES[p]}}-{{MODIFIERS[m]}}'",
-        "    return code, name",
-        "",
-        f"def {cfg['py_dispatch']}(d: int, p: int, m: int, vec: {cfg['py_state']}) -> Tuple[int, str, float]:",
-        f"    code, name = {cfg['py_resolve']}(d, p, m)",
-    ])
+    lines.extend(
+        [
+            "",
+            f"def {cfg['py_resolve']}(d: int, p: int, m: int) -> Tuple[int, str]:",
+            "    if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):",
+            "        raise ValueError('Index out of range [0-9]')",
+            "    code = d * 100 + p * 10 + m",
+            f"    name = f'{cfg['prefix_upper']}-{{DOMAINS[d]}}-{{PRIMITIVES[p]}}-{{MODIFIERS[m]}}'",
+            "    return code, name",
+            "",
+            f"def {cfg['py_dispatch']}(d: int, p: int, m: int, vec: {cfg['py_state']}) -> Tuple[int, str, float]:",
+            f"    code, name = {cfg['py_resolve']}(d, p, m)",
+        ]
+    )
     if "execution_count += 1" not in "\n".join(cfg["py_sim"]):
         lines.append("    vec.execution_count += 1")
     for sim_line in cfg["py_sim"]:
@@ -224,6 +260,7 @@ def generate_python(domain_name, cfg, domains, primitives, modifiers, output_pat
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         f.write("\n".join(lines))
+
 
 def generate_go_test(domain_name, cfg, output_path):
     lines = [
@@ -264,6 +301,7 @@ def generate_go_test(domain_name, cfg, output_path):
     with open(output_path, "w") as f:
         f.write("\n".join(lines))
 
+
 def generate_python_test(domain_name, cfg, output_path):
     module_name = domain_name.lower()
     if module_name == "constants":
@@ -298,6 +336,7 @@ def generate_python_test(domain_name, cfg, output_path):
     with open(output_path, "w") as f:
         f.write("\n".join(lines))
 
+
 def main():
     for domain_name, cfg in CODEGEN_CONFIGS.items():
         yaml_path = cfg["yaml"]
@@ -308,7 +347,7 @@ def main():
             module_name = "neuro_chain"
         elif module_name == "tts":
             module_name = "tts_harness"
-        
+
         go_output = f"primitives/{module_name}.go"
         rust_output = f"src-tauri/src/{module_name}.rs"
         py_output = f"cortex/{module_name}.py"
@@ -322,6 +361,7 @@ def main():
         generate_go_test(domain_name, cfg, go_test_output)
         generate_python_test(domain_name, cfg, py_test_output)
         print(f"✅ Generated C5-REAL topology for {domain_name}")
+
 
 if __name__ == "__main__":
     main()
