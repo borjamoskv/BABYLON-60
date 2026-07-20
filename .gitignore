@@ -40,3 +40,4 @@ bin/portal_daemon
 scratch/
 
 bin/babylon60.sh.bak
+db/chroma_memory/

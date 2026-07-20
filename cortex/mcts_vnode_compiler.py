@@ -100,8 +100,6 @@ class L3InferenceEnginePhysical:
                 _mcts_expansion_worker, tasks, chunksize=100
             ):
                 if result is not None:
-                    pool.terminate()
-                    pool.join()
                     return result
 
         raise RuntimeError(
