@@ -15,7 +15,7 @@ class TestNeuroKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print(
-            f"✅ Successfully verified 100% execution coverage for 1000 Python/Neuro Primitives."
+            "✅ Successfully verified 100% execution coverage for 1000 Python/Neuro Primitives."
         )
 
 
