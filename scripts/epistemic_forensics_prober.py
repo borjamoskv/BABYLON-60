@@ -2,7 +2,10 @@ import os
 import re
 import json
 
-TARGET_DIR = os.path.expanduser("~/BABYLON-60")
+TARGET_DIR = os.environ.get("CORTEX_TARGET_DIR")
+if not TARGET_DIR:
+    raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_JSON = os.path.join(
     PROJECT_ROOT, "cortex", "artifacts", "reports", "BABYLON_60_EPISTEMOLOGY.json"

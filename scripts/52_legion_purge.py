@@ -17,8 +17,11 @@ def run_ruff_fix() -> None:
 
 
 def execute_swarm_audit() -> None:
-    home = os.path.expanduser("~")
-    skill_path = os.path.join(home, ".gemini/config/skills/Swarm_Thread_Dispatcher")
+    skill_dir = os.environ.get("CORTEX_SKILLS_DIR")
+    if not skill_dir:
+        raise RuntimeError("CORTEX_SKILLS_DIR env var is required (Ω23).")
+        
+    skill_path = os.path.join(skill_dir, "Swarm_Thread_Dispatcher")
     if skill_path not in sys.path:
         sys.path.append(skill_path)
     try:
@@ -83,7 +86,10 @@ def execute_swarm_audit() -> None:
 
     import glob
 
-    brain_dir = os.path.join(home, ".gemini", "antigravity", "brain")
+    brain_dir = os.environ.get("CORTEX_BRAIN_DIR")
+    if not brain_dir:
+        raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
+        
     transcripts = glob.glob(
         os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
     )
@@ -97,12 +103,9 @@ def execute_swarm_audit() -> None:
         )
 
     print(f"⚡ [LEA_OMEGA] Running cognitive audit on: {transcript_path}")
-    audit_script = os.getenv(
-        "CORTEX_AUDIT_SCRIPT",
-        os.path.join(
-            home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"
-        ),
-    )
+    audit_script = os.environ.get("CORTEX_AUDIT_SCRIPT")
+    if not audit_script:
+        raise RuntimeError("CORTEX_AUDIT_SCRIPT env var is required (Ω23).")
 
     try:
         res = subprocess.run(

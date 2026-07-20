@@ -88,8 +88,10 @@ def classify_omega_theorem(target_dir):
                         {"file": rel_path, "reason": reason, "matches": matches}
                     )
 
-            except (OSError, ValueError, TypeError, SyntaxError):
-                pass
+            except (OSError, ValueError, TypeError, SyntaxError) as e:
+                import signal
+                print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+                os.kill(os.getpid(), signal.SIGKILL)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_json = os.path.join(
@@ -102,4 +104,7 @@ def classify_omega_theorem(target_dir):
 
 
 if __name__ == "__main__":
-    classify_omega_theorem(os.path.expanduser("~/BABYLON-60"))
+    target = os.environ.get("CORTEX_TARGET_DIR")
+    if not target:
+        raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
+    classify_omega_theorem(target)

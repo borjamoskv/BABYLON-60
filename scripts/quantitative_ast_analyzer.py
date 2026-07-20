@@ -79,7 +79,9 @@ def tarjan(graph):
 
 
 def main():
-    target_dir = os.path.expanduser("~/BABYLON-60")
+    target_dir = os.environ.get("CORTEX_TARGET_DIR")
+    if not target_dir:
+        raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
     internal_namespaces = ["babylon60", "causal_isomorphism", "strike_rs", "cortex"]
 
     stats = {}
@@ -133,10 +135,10 @@ def main():
                     import_graph[rel_path] = list(internal_imports)
                     fan_out[rel_path] = len(internal_imports)
 
-                except SyntaxError:
-                    pass
-                except (OSError, RuntimeError, ValueError, TypeError) as e:
-                    print(f"Error parseando {rel_path}: {e}")
+                except (SyntaxError, OSError, RuntimeError, ValueError, TypeError) as e:
+                    import signal
+                    print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+                    os.kill(os.getpid(), signal.SIGKILL)
 
     # 2. Calcular Fan-in
     for node, imports in import_graph.items():

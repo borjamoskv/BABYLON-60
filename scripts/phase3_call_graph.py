@@ -36,7 +36,9 @@ class CallGraphVisitor(ast.NodeVisitor):
 
 
 def main():
-    target_dir = os.path.expanduser("~/BABYLON-60")
+    target_dir = os.environ.get("CORTEX_TARGET_DIR")
+    if not target_dir:
+        raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
 
     global_call_graph = {}
 
@@ -65,8 +67,10 @@ def main():
                             "functions": serializable_cg,
                             "module_level_calls": list(visitor.module_calls),
                         }
-                except (OSError, ValueError, TypeError, SyntaxError):
-                    pass
+                except (OSError, ValueError, TypeError, SyntaxError) as e:
+                    import signal
+                    print(f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+                    os.kill(os.getpid(), signal.SIGKILL)
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)
     # 1. Routes mapping
