@@ -1,3 +1,3 @@
-def synthesized_theorem_0():
-    # Intention: ULTRATHINK_PHYSICAL_COLLAPSE_ITER_2_1784508895.506465
-    return 0 ** 2
+def synthesized_theorem_300():
+    # Intention: ULTRATHINK_PHYSICAL_COLLAPSE_ITER_3_1784508896.9075332
+    return 300 ** 2
