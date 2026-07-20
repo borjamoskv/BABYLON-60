@@ -645,7 +645,8 @@ CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {
         ],
         "py_sim": [
             "vec.browser_active = d != 0 or p != 9",
-            "if d == 0 and p == 0: vec.page_count += 1",
+            "if d == 0 and p == 0:",
+            "    vec.page_count += 1",
             "vec.last_load_time_ms = abs(math.sin(code)) * 120.0",
             "vec.dom_stability_index = max(0.0, min(1.0, vec.dom_stability_index * 0.95 + 0.05 * math.cos(code)))",
             "vec.network_idle_state = m == 3",
