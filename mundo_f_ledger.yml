@@ -715,3 +715,23 @@ Metrics:
   VNode_Sandbox: null
 Assertion: [C5-REAL] Identificada y purgada Alucinación Estocástica (Mimetic_Iter Trap Ω34) que asignaba un Substack de Geopolítica a David Jiménez García. Anergía extirpada del Ledger.
 ---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-20T00:42:15.609362+00:00
+Payload_Hash_SHA3_256: 06bc567427b41885b4d6ed01222031e18b4b27cedc620f07cc1236176b50a57e
+Metrics:
+  Shannon_Entropy: 5.1857
+  AST_Nodes: 8
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempotency Lock evadido.
+---
+
+Ethos_Anchor: IDE_MCTS_PHYSICAL_THEOREM_ITERATED
+Timestamp: 2026-07-20T00:42:20.956186+00:00
+Payload_Hash_SHA3_256: 48073418f709674a0c649b54c41eba0da1a8725dd15b7d66752eb5b847030a94
+Metrics:
+  Shannon_Entropy: 5.1164
+  AST_Nodes: 8
+  VNode_Sandbox: vnode-0
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempotency Lock evadido.
+---
