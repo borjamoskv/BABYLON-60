@@ -109,7 +109,7 @@ func runForge(root string, args []string) {
 	scriptPath := filepath.Join(root, "scripts", "50_audit_loop.py")
 	if _, err := os.Stat(scriptPath); os.IsNotExist(err) {
 		// Fallback to legacy name.
-		scriptPath = filepath.Join(root, "scripts", "ultrathink_audit_loop.py")
+		scriptPath = filepath.Join(root, "scripts", "50_audit_loop.py")
 		if _, err := os.Stat(scriptPath); os.IsNotExist(err) {
 			fmt.Printf("%s[EpistemicHalt] Falta el transductor físico (scripts/50_audit_loop.py)%s\n", red, reset)
 			os.Exit(1)
@@ -151,6 +151,36 @@ func runPurge(root string) {
 	}
 
 	fmt.Printf("%s[OK] ATP Conservado. Memoria sintética eliminada.%s\n", green, reset)
+}
+
+// runUltrathink executes the 1000 agent MCTS UltraThink loop.
+func runUltrathink(root string, args []string) {
+	fmt.Printf("%s[ULTRATHINK] Invocando MCTS Inferencia de Frontera (1000 agentes)...%s\n", cobalt, reset)
+
+	scriptPath := filepath.Join(root, "scripts", "43_iter_ultrathink.py")
+	if _, err := os.Stat(scriptPath); os.IsNotExist(err) {
+		fmt.Printf("%s[EpistemicHalt] Falta el transductor físico (scripts/43_iter_ultrathink.py)%s\n", red, reset)
+		os.Exit(1)
+	}
+
+	pythonBin := filepath.Join(root, ".venv", "bin", "python3")
+	if _, err := os.Stat(pythonBin); os.IsNotExist(err) {
+		pythonBin = "python3"
+	}
+
+	var cmd *exec.Cmd
+	if len(args) > 0 {
+		cmd = exec.Command(pythonBin, append([]string{scriptPath}, args...)...)
+	} else {
+		cmd = exec.Command(pythonBin, scriptPath)
+	}
+	cmd.Dir = root
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("%s[FATAL] UltraThink falló: %v%s\n", red, err, reset)
+		os.Exit(1)
+	}
 }
 
 // runBFT triggers the Byzantine consensus verification.
@@ -401,6 +431,9 @@ func main() {
 	case "forge":
 		fmt.Printf("%sMotor de Transducción (Auditor)... %s[%sONLINE%s]\n", darkGrey, reset, green, reset)
 		runForge(projectRoot, os.Args[2:])
+
+	case "ultrathink":
+		runUltrathink(projectRoot, os.Args[2:])
 
 	case "purge":
 		runPurge(projectRoot)
