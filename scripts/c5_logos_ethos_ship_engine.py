@@ -1,9 +1,13 @@
 import hashlib
 import os
 import sqlite3
+import string
 import sys
 import time
+from typing import Literal
 from decimal import getcontext
+
+StateKind = Literal["C5_Real_Atomic", "C4_Simulated_Buffer"]
 
 getcontext().prec = 38
 
@@ -35,12 +39,20 @@ class SexagesimalCoordinate:
 
 
 class PhysicalMembraneState:
-    def __init__(self, state_type: str, payload_hash: str, lamport_clock: int) -> None:
-        valid_states = {"C5_Real_Atomic", "C4_Simulated_Buffer"}
-        if state_type not in valid_states:
+    __slots__ = ("state_type", "payload_hash", "lamport_clock")
+
+    def __init__(self, state_type: StateKind, payload_hash: str, lamport_clock: int) -> None:
+        if state_type not in ("C5_Real_Atomic", "C4_Simulated_Buffer"):
             raise TypeError(f"[SIGKILL_State_Purge] Illegal state unrepresentable: {state_type}")
         if state_type == "C4_Simulated_Buffer":
             raise RuntimeError("[SIGKILL_State_Purge] C4-SIM state rejected by C5-REAL physical membrane during SHIP.")
+        
+        if len(payload_hash) != 64 or not all(c in string.hexdigits for c in payload_hash):
+            raise ValueError(f"[SIGKILL_State_Purge] Invalid payload_hash: Must be 64-char SHA3-256 hex. Got: {payload_hash}")
+            
+        if lamport_clock <= 0:
+            raise ValueError(f"[SIGKILL_State_Purge] lamport_clock must be strictly positive. Got: {lamport_clock}")
+
         self.state_type = state_type
         self.payload_hash = payload_hash
         self.lamport_clock = lamport_clock
