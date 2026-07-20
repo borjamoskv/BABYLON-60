@@ -82,6 +82,9 @@ class C5LLMRouter:
     def __init__(
         self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml"
     ) -> None:
+        if not os.path.isabs(routes_path):
+            project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            routes_path = os.path.join(project_root, routes_path)
         self.routes = parse_yaml_routes(routes_path)
         self.routes_by_name = {r.get("name", ""): r for r in self.routes}
 
@@ -96,33 +99,35 @@ class C5LLMRouter:
                 return self._call_ollama(
                     str(ollama_route.get("url", "")), model, prompt
                 )
-            except (OSError, RuntimeError, ConnectionError) as e:
+            except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"Ollama ({model}) falló: {e}")
 
         # 2. Cascada a Groq Console (Límites Gratuitos)
         groq_route = self.routes_by_name.get("Groq Cloud Console")
-        if groq_route and os.getenv("GROQ_API_KEY"):
+        groq_key = os.environ.get("GROQ_API_KEY")
+        if groq_route and groq_key:
             try:
                 models = groq_route.get("models", [])
                 actual_model = models[0] if models else "llama3-70b-8192"
                 url = f"{groq_route.get('url')}/v1/chat/completions"
                 return self._call_openai_compatible(
-                    url, os.getenv("GROQ_API_KEY", ""), actual_model, prompt
+                    url, groq_key, actual_model, prompt
                 )
-            except (OSError, RuntimeError, ConnectionError):
-                errors.append(f"Groq ({groq_route.get('name')}) falló")
+            except (OSError, RuntimeError, ConnectionError, ValueError) as e:
+                errors.append(f"Groq ({groq_route.get('name')}) falló: {e}")
 
         # 3. Cascada a GitHub Models (Developer Free Tier)
         github_route = self.routes_by_name.get("GitHub Models")
-        if github_route and os.getenv("GITHUB_TOKEN"):
+        github_key = os.environ.get("GITHUB_TOKEN")
+        if github_route and github_key:
             try:
                 models = github_route.get("models", [])
                 actual_model = models[0] if models else "Llama-3-8B-Instruct"
                 url = "https://models.inference.ai.azure.com/chat/completions"
                 return self._call_openai_compatible(
-                    url, os.getenv("GITHUB_TOKEN", ""), actual_model, prompt
+                    url, github_key, actual_model, prompt
                 )
-            except (OSError, RuntimeError, ConnectionError) as e:
+            except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"GitHub Models falló: {e}")
 
         # Si todas fallan, levantar pánico epistémico

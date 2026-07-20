@@ -12,7 +12,9 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 
 # C5-REAL Invariant: Zero External Dependencies for perception.
 CORTEX_DB_PATH = ".cortex/cortex.db"
-SECRET_KEY = os.getenv("CORTEX_GITHUB_SECRET", "cortex-fallback-secret-strict")
+SECRET_KEY = os.environ.get("CORTEX_GITHUB_SECRET")
+if not SECRET_KEY:
+    raise RuntimeError("CORTEX_GITHUB_SECRET env var is required (Ω25).")
 TRIGGER_PATH = ".cortex/.trigger_swarm"
 
 
