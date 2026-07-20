@@ -18,3 +18,8 @@ dependencies = [
 dev = [
     "pytest>=8.0.0",
 ]
+
+[tool.mypy]
+mypy_path = "scripts"
+explicit_package_bases = true
+namespace_packages = true
