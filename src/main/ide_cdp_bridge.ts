@@ -52,6 +52,8 @@ export class IdeCdpBridge extends EventEmitter {
     if (!this.cdpSession) throw new Error('CDP not attached');
     await this.cdpSession.sendCommand('Accessibility.enable');
     const result = await this.cdpSession.sendCommand('Accessibility.getFullAXTree');
+    // Disable to prevent continuous AOM calculation overhead (Anergía)
+    await this.cdpSession.sendCommand('Accessibility.disable');
     return result;
   }
 

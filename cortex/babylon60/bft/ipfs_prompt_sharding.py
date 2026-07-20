@@ -35,30 +35,34 @@ class IPFS_Prompt_Ledger:
         logging.info(f"[C5-REAL] Pinned {domain} -> {cid}")
         return cid
 
-    def read_invariant(self, cid: str) -> Optional[str]:
-        """Tool call endpoint para el agente."""
+    def read_invariant(self, cid: str) -> str:
+        """Tool call endpoint para el agente. Fallo estricto si no existe."""
         file_path = os.path.join(self.vault_path, cid)
-        if os.path.exists(file_path):
-            with open(file_path, "rb") as f:
-                return f.read().decode("utf-8")
-        return None
+        if not os.path.exists(file_path):
+            raise KeyError(f"[C5-REAL] FATAL: CID {cid} no existe en el Vault físico. Posible alucinación o corrupción de estado.")
+            
+        with open(file_path, "rb") as f:
+            return f.read().decode("utf-8")
+
+    def generate_root_block(self) -> str:
+        """Cristaliza el índice completo como un bloque y devuelve su CID (Merkle Root)."""
+        index_json = json.dumps(self.cid_index, indent=2)
+        return self.pin_invariant("ROOT_INDEX", index_json)
 
     def generate_bootstrap_prompt(self) -> str:
         """
-        Genera el System Prompt colapsado.
-        El agente solo recibe las 'llaves' (CIDs), no el contenido.
+        Genera el System Prompt colapsado O(1).
+        El agente recibe únicamente el Root CID del Merkle Tree.
         """
+        root_cid = self.generate_root_block()
         prompt = (
             "Eres MOSKV-1 APEX. Tus reglas no están en este prompt para evitar "
-            "entropía y KV-cache decay. Están almacenadas en IPFS/Vault local.\n"
-            "Si operas en un dominio, DEBES invocar la herramienta `read_invariant(cid)` "
-            "para cargar las leyes físicas antes de mutar el código.\n\n"
-            "## CIDs Disponibles (Content-Addressed Invariants):\n"
+            "entropía y KV-cache decay. Están almacenadas en un Grafo CACS (Vault local).\n"
+            f"El ROOT CID de tu ontología es: `{root_cid}`\n\n"
+            "DEBES invocar `read_invariant(ROOT_CID)` para descubrir el árbol de dominios "
+            "y navegar hacia los invariantes físicos antes de mutar el código.\n"
+            "Zero-Slop. Extrae la exergía requerida y ejecuta."
         )
-        for domain, cid in self.cid_index.items():
-            prompt += f"- **{domain}**: `{cid}`\n"
-            
-        prompt += "\nZero-Slop. Extrae la exergía requerida y ejecuta."
         return prompt
 
 if __name__ == "__main__":
