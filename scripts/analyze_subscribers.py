@@ -1,49 +1,78 @@
-import csv
-from collections import Counter
+"""
+CLI Transducer for Substack Subscriber Thermodynamic Audit.
+"""
 
-filepath = '/Users/borjafernandezangulo/Downloads/subscriber-export-2026-07-20-02-35-19.csv'
+import os
+import sys
+from pathlib import Path
 
-subscribers = []
-with open(filepath, 'r', encoding='utf-8') as f:
-    reader = csv.DictReader(f)
-    for row in reader:
-        subscribers.append(row)
+# Add project root to sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-total = len(subscribers)
-types = Counter(r['Type'] for r in subscribers)
-activity = Counter(r['Activity'] for r in subscribers)
-has_name = sum(1 for r in subscribers if r['Name'].strip())
+import yaml
+from cortex.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary
 
-domains = Counter(r['Email'].split('@')[-1] for r in subscribers)
 
-dates = [r['Start date'][:10] for r in subscribers if r['Start date']]
-date_spikes = Counter(dates).most_common(10)
+def main() -> None:
+    if len(sys.argv) > 1:
+        csv_path = Path(sys.argv[1])
+    else:
+        env_path = os.environ.get("SUBSTACK_CSV_PATH")
+        if env_path:
+            csv_path = Path(env_path)
+        else:
+            default_downloads = Path.home() / "Downloads" / "subscriber-export-2026-07-20-02-35-19.csv"
+            if default_downloads.exists():
+                csv_path = default_downloads
+            else:
+                print("Usage: python analyze_subscribers.py <path_to_substack_csv>")
+                sys.exit(1)
 
-rev_total = sum(float(r['Revenue'].replace('$', '').replace(',', '')) for r in subscribers if r['Revenue'])
+    print(f"Executing C5-REAL Audit on: {csv_path}")
+    auditor = SubstackSubscriberAuditor.from_csv(csv_path)
+    summary: AuditSummary = auditor.generate_summary()
 
-print(f"TOTAL SUBSCRIBERS: {total}")
-print(f"TYPES: {dict(types)}")
-print(f"ACTIVITY DISTRIBUTION: {dict(sorted(activity.items()))}")
-print(f"WITH NAME: {has_name} / {total}")
-print(f"REVENUE TOTAL: ${rev_total:.2f}")
+    print("\n--- MACRO ESTRUCTURAL ---")
+    print(f"Total Subscribers: {summary.total_subscribers}")
+    print(f"Total Revenue: ${summary.total_revenue:.2f}")
+    print(f"Comp: {summary.comp_count} | Free: {summary.free_count} | Author: {summary.author_count}")
+    print(f"Activity Distribution: {summary.activity_distribution}")
+    print(f"VIP Institutional Accounts: {summary.vip_count}")
+    print(f"High Exergy Audience (Activity >= 3): {summary.high_exergy_count}")
+    print(f"Deliverability Hazard Candidates (Comp & Act 0): {summary.deliverability_hazard_count}")
 
-print("\nTOP 15 DOMAINS:")
-for d, c in domains.most_common(15):
-    print(f"  {d}: {c}")
+    print("\n--- COHORT RETENTION & DECAY BREAKDOWN ---")
+    sorted_cohorts = sorted(summary.cohorts.items(), key=lambda x: x[1]["total"], reverse=True)[:8]
+    for date_key, data in sorted_cohorts:
+        print(f"Date: {date_key:10s} | Total: {data['total']:3d} | Comp: {data['comp']:3d} | Active(>=3): {data['active_ge_3']:2d} | Retention: {data['retention_rate']:5.1f}% | Zombies(0): {data['zombies_act_0']:3d}")
 
-print("\nTOP 10 DATE SPIKES (SIGNUPS/IMPORTS):")
-for dt, c in date_spikes:
-    print(f"  {dt}: {c} subs")
+    # Export Segmented CSVs
+    output_dir = Path("artifacts") / "substack_segmented_subscribers"
+    exported = auditor.export_segmented_csvs(output_dir)
+    print(f"\n[OK] Segmented CSVs exported to: {output_dir}")
+    for tier, pth in exported.items():
+        print(f"  - {tier}: {pth}")
 
-# Segment notable key accounts / domains
-vip_keywords = ['openai', 'huggingface', 'foundersfund', 'microstrategy', 'bittensor', 'sentient', 'nillion', 'dydx', 'ninjatune', 'mixmag', 'ostgut', 'sohoradio', 'hypebeast', 'audaxrenovables', 'berria', 'media-attack', 'audioshake', 'loudwomen', 'convequity', 'securebio']
+    # Export YAML receipt
+    audit_report = {
+        "Claim": "AUDITORÍA DE BASE DE SUSCRIPTORES (SUBSTACK EXPORT)",
+        "Target": str(csv_path),
+        "Proof": {
+            "TotalSubscribers": summary.total_subscribers,
+            "HighExergyReaders": summary.high_exergy_count,
+            "DeliverabilityHazards": summary.deliverability_hazard_count,
+            "VIPCount": summary.vip_count,
+            "Confidence": "C5-REAL",
+        },
+    }
+    
+    report_file = Path("artifacts") / "substack_subscriber_audit_report.yml"
+    report_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(report_file, "w", encoding="utf-8") as f:
+        yaml.dump(audit_report, f, default_flow_style=False, allow_unicode=True)
 
-vips = [r for r in subscribers if any(k in r['Email'].lower() for k in vip_keywords)]
-print(f"\nNOTABLE TECH/MEDIA/FINANCE/MUSIC ACCOUNTS ({len(vips)}):")
-for v in vips[:20]:
-    print(f"  - {v['Email']} (Activity: {v['Activity']}, Type: {v['Type']}, Date: {v['Start date'][:10]})")
+    print(f"[OK] Audit receipt written to: {report_file}")
 
-influencer_gmails = [r for r in subscribers if 'contacto@gmail.com' in r['Email'].lower() or any(x in r['Email'].lower() for x in ['elxokas', 'wallstreetwolverine', 'alxelmundo', 'pedritoviral', 'davooxeneize', 'kiddkeo', 'dalasito', 'trilineyt'])]
-print(f"\nNOTABLE CREATOR/INFLUENCER GMAILS ({len(influencer_gmails)}):")
-for v in influencer_gmails[:25]:
-    print(f"  - {v['Email']} (Activity: {v['Activity']}, Type: {v['Type']})")
+
+if __name__ == "__main__":
+    main()
