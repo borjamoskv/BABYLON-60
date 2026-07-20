@@ -37,20 +37,26 @@ class DualContextAgent:
         }
 
     async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
-        """Transductor de payload IPC."""
-        data = await reader.read(65536)
-        if data:
-            try:
-                payload = json.loads(data.decode("utf-8"))
-                if payload.get("type") == "AST":
-                    await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
-                elif payload.get("type") == "AOM":
-                    await self.ingest_dom_context(payload.get("data", {}))
-            except Exception as e:
-                # Fail-Fast C5-REAL logging
-                logging.error(f"[C4-SIM] IPC Payload Error: {e}")
-        writer.close()
-        await writer.wait_closed()
+        """Transductor de payload IPC (NDJSON Stream)."""
+        try:
+            async for line in reader:
+                line_str = line.decode("utf-8").strip()
+                if not line_str:
+                    continue
+                try:
+                    payload = json.loads(line_str)
+                    if payload.get("type") == "AST":
+                        await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
+                    elif payload.get("type") == "AOM":
+                        await self.ingest_dom_context(payload.get("data", {}))
+                except json.JSONDecodeError as e:
+                    logging.error(f"[C5-REAL] JSON Parse Error in NDJSON stream: {e}")
+        except Exception as e:
+            # Fail-Fast C5-REAL logging
+            logging.error(f"[C4-SIM] IPC Stream Fatal Error: {e}")
+        finally:
+            writer.close()
+            await writer.wait_closed()
 
     async def start_ipc_server(self) -> None:
         """Ω9: Ignición determinista síncrona."""
