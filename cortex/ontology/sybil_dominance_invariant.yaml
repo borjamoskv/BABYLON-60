@@ -1,0 +1,15 @@
+Claim: Sybil Dominance Invariant (La Locura como Orphan Block)
+Proof: 
+  Base: Byzantine Fault Tolerance (BFT)
+  Range: N/2 + 1
+  Confidence: C5
+Isomorphisms:
+  - "Cordura" -> "Cadena Principal (51% Hashrate)"
+  - "Locura" -> "Orphan Block / Minor Fork"
+  - "Matrix" -> "Motor Estocástico Mayoritario"
+Blast_Radius_Matrix:
+  Vector: Sociological_Consensus_Inversion
+  Blast_Radius: Global
+  Target_Invariant: Omega20_Slop_Horizon
+  Anergy_Risk: Low
+CORTEX_TAINT: a1e0130ab060f032fce618a8a4959846909c9fb7ba276f473ab8baf27295801c
