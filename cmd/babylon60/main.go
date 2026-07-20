@@ -116,7 +116,11 @@ func runForge(root string, args []string) {
 		}
 	}
 
-	cmd := exec.Command("python3", scriptPath, prompt, target, payload)
+	pythonBin := filepath.Join(root, ".venv", "bin", "python3")
+	if _, err := os.Stat(pythonBin); os.IsNotExist(err) {
+		pythonBin = "python3"
+	}
+	cmd := exec.Command(pythonBin, scriptPath, prompt, target, payload)
 	cmd.Dir = root
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -132,7 +136,11 @@ func runPurge(root string) {
 
 	purgeScript := filepath.Join(root, "scripts", "52_legion_purge.py")
 	if _, err := os.Stat(purgeScript); err == nil {
-		cmd := exec.Command("python3", purgeScript)
+		pythonBin := filepath.Join(root, ".venv", "bin", "python3")
+		if _, err := os.Stat(pythonBin); os.IsNotExist(err) {
+			pythonBin = "python3"
+		}
+		cmd := exec.Command(pythonBin, purgeScript)
 		cmd.Dir = root
 		cmd.Stdout = os.Stdout
 		cmd.Stderr = os.Stderr
