@@ -5,7 +5,7 @@ import math
 import hashlib
 
 
-def calculate_kl_divergence(p, q):
+def calculate_kl_divergence(p: list[float], q: list[float]) -> float:
     kl = 0.0
     for pi, qi in zip(p, q):
         if pi > 0.0 and qi > 0.0:
@@ -13,7 +13,7 @@ def calculate_kl_divergence(p, q):
     return kl
 
 
-def softmax(logits):
+def softmax(logits: list[float]) -> list[float]:
     max_logit = max(logits)
     exp_logits = [math.exp(logit - max_logit) for logit in logits]
     sum_exp = sum(exp_logits)

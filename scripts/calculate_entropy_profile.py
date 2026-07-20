@@ -5,7 +5,7 @@ import math
 import hashlib
 
 
-def softmax(logits, temperature):
+def softmax(logits: list[float], temperature: float) -> list[float]:
     # Stabilize logits by subtracting the max value
     max_logit = max(logits)
     scaled = [(logit - max_logit) / temperature for logit in logits]
@@ -14,7 +14,7 @@ def softmax(logits, temperature):
     return [e / sum_exp for e in exp_scaled]
 
 
-def calculate_shannon_entropy(probs):
+def calculate_shannon_entropy(probs: list[float]) -> float:
     entropy = 0.0
     for p in probs:
         if p > 0.0:
