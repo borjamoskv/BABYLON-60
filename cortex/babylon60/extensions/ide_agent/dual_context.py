@@ -12,10 +12,16 @@ class DualContextAgent:
     C5-REAL: Agente de Contexto Dual (Agent Igor)
     Servidor IPC (Unix Socket) para ingestión de grafos AST y AOM.
     """
-    def __init__(self, socket_path: str = "/tmp/babylon60_igor.sock") -> None:
+    def __init__(self) -> None:
         self.code_ast: dict[str, Any] | None = None
         self.dom_aom: dict[str, Any] | None = None
-        self.socket_path = socket_path
+        
+        socket_env = os.environ.get("CORTEX_IPC_SOCKET")
+        if not socket_env:
+            logging.error("[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga.")
+            os.kill(os.getpid(), signal.SIGKILL)
+            
+        self.socket_path = socket_env
         logging.basicConfig(level=logging.INFO)
 
     async def ingest_code_context(self, file_path: str, ast_data: dict[str, Any]) -> None:
@@ -44,12 +50,16 @@ class DualContextAgent:
                     continue
                 try:
                     payload = json.loads(line_str)
-                    if payload.get("type") == "AST":
+                    ptype = payload.get("type")
+                    if ptype == "AST":
                         await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
-                    elif payload.get("type") == "AOM":
+                    elif ptype == "AOM":
                         await self.ingest_dom_context(payload.get("data", {}))
+                    elif ptype == "HEARTBEAT":
+                        pass # Ω43: Mantiene el liveness del socket
                 except json.JSONDecodeError as e:
-                    logging.error(f"[C5-REAL] JSON Parse Error in NDJSON stream: {e}")
+                    logging.error(f"[C5-REAL] FATAL (Ω26): JSON Parse Error en NDJSON stream: {e}")
+                    os.kill(os.getpid(), signal.SIGKILL)
         except Exception as e:
             # Fail-Fast C5-REAL logging
             logging.error(f"[C4-SIM] IPC Stream Fatal Error: {e}")
@@ -70,8 +80,8 @@ class DualContextAgent:
 
 def cleanup_socket(signum: Any, frame: Any) -> None:
     """Ω43: Prevención de Zombie IPC (Desvinculado Atómico)."""
-    sock = "/tmp/babylon60_igor.sock"
-    if os.path.exists(sock):
+    sock = os.environ.get("CORTEX_IPC_SOCKET")
+    if sock and os.path.exists(sock):
         os.remove(sock)
         logging.info("[C5-REAL] Socket unlinked atomically. Purging process.")
     os.kill(os.getpid(), signal.SIGKILL)
