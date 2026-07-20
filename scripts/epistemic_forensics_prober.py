@@ -83,7 +83,7 @@ def classify_files(target_dir):
     return classification
 
 
-def main():
+def main() -> None:
     print("[*] Starting OMEGA-2 Epistemic Forensics Prober...")
     results = classify_files(TARGET_DIR)
 

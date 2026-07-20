@@ -88,7 +88,7 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             return
 
         expected_mac = hmac.new(
-            SECRET_KEY.encode("utf-8"), payload_bytes, hashlib.sha256
+            (SECRET_KEY or "").encode("utf-8"), payload_bytes, hashlib.sha256
         ).hexdigest()
 
         expected_sig = f"sha256={expected_mac}"

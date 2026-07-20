@@ -5,10 +5,10 @@ from collections import defaultdict
 
 
 class CallGraphVisitor(ast.NodeVisitor):
-    def __init__(self):
-        self.call_graph = defaultdict(set)
+    def __init__(self) -> None:
+        self.call_graph: dict[str, set[str]] = defaultdict(set)
+        self.module_calls: set[str] = set()
         self.current_function = None
-        self.module_calls = set()
 
     def visit_FunctionDef(self, node):
         prev_function = self.current_function
@@ -35,7 +35,7 @@ class CallGraphVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def main():
+def main() -> None:
     target_dir = os.environ.get("CORTEX_TARGET_DIR")
     if not target_dir:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")

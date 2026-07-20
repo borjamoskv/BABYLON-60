@@ -55,7 +55,7 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5"):
         conn.close()
 
 
-def audit_and_purge_orphans():
+def audit_and_purge_orphans() -> None:
     print(
         f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)..."
     )

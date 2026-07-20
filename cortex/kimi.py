@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'INIT_RUNTIME', 1: 'EXEC_SHELL', 2: 'RESOLVE_SKILL', 3: 'STATE_
 MODIFIERS = {0: 'RAW', 1: 'SECURE', 2: 'BYPASS', 3: 'ATOMIC', 4: 'EPHEMERAL', 5: 'MANAGED', 6: 'OBFUSCATED', 7: 'BFT_CONSENSUS', 8: 'CACHED', 9: 'ASYNC_WAL'}
 
 class KimiStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.daimon_latency = 0.0
         self.taint_score = 0.0
         self.prompt_size = 0.0

@@ -2,54 +2,55 @@ import os
 import ast
 import json
 from collections import defaultdict
+from typing import Any
 
 
 class ComplexityVisitor(ast.NodeVisitor):
-    def __init__(self):
+    def __init__(self) -> None:
         self.complexity = 1
 
-    def visit_If(self, node):
+    def visit_If(self, node: Any) -> None:
         self.complexity += 1
         self.generic_visit(node)
 
-    def visit_For(self, node):
+    def visit_For(self, node: Any) -> None:
         self.complexity += 1
         self.generic_visit(node)
 
-    def visit_While(self, node):
+    def visit_While(self, node: Any) -> None:
         self.complexity += 1
         self.generic_visit(node)
 
-    def visit_BoolOp(self, node):
+    def visit_BoolOp(self, node: Any) -> None:
         self.complexity += len(node.values) - 1
         self.generic_visit(node)
 
-    def visit_ExceptHandler(self, node):
+    def visit_ExceptHandler(self, node: Any) -> None:
         self.complexity += 1
         self.generic_visit(node)
 
 
 class ImportVisitor(ast.NodeVisitor):
-    def __init__(self):
-        self.imports = set()
+    def __init__(self) -> None:
+        self.imports: set[str] = set()
 
-    def visit_Import(self, node):
+    def visit_Import(self, node: Any) -> None:
         for alias in node.names:
             self.imports.add(alias.name)
 
-    def visit_ImportFrom(self, node):
+    def visit_ImportFrom(self, node: Any) -> None:
         if node.module:
             self.imports.add(node.module)
 
 
-def tarjan(graph):
+def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
     index_counter = [0]
     stack = []
     lowlink = {}
     index = {}
     result = []
 
-    def strongconnect(node):
+    def strongconnect(node: str) -> None:
         index[node] = index_counter[0]
         lowlink[node] = index_counter[0]
         index_counter[0] += 1
@@ -78,7 +79,7 @@ def tarjan(graph):
     return result
 
 
-def main():
+def main() -> None:
     target_dir = os.environ.get("CORTEX_TARGET_DIR")
     if not target_dir:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
@@ -86,8 +87,8 @@ def main():
 
     stats = {}
     import_graph = defaultdict(list)
-    fan_in = defaultdict(int)
-    fan_out = defaultdict(int)
+    fan_in: dict[str, int] = defaultdict(int)
+    fan_out: dict[str, int] = defaultdict(int)
 
     # 1. Recorrer archivos y parsear AST
     for root, dirs, files in os.walk(target_dir):
@@ -161,8 +162,8 @@ def main():
     sccs = tarjan(module_graph)
 
     # 4. Generar reporte
-    top_loc = sorted(stats.items(), key=lambda x: x[1]["loc"], reverse=True)[:50]
-    top_complex = sorted(stats.items(), key=lambda x: x[1]["complexity"], reverse=True)[
+    top_loc = sorted(stats.items(), key=lambda x: int(str(x[1]["loc"])), reverse=True)[:50]
+    top_complex = sorted(stats.items(), key=lambda x: int(str(x[1]["complexity"])), reverse=True)[
         :50
     ]
 
@@ -172,7 +173,7 @@ def main():
     for rel_path, s in stats.items():
         base_module = rel_path.replace(".py", "").replace("/", ".")
         score = (
-            s["complexity"] + fan_in.get(base_module, 0) * 2 + fan_out.get(rel_path, 0)
+            int(str(s["complexity"])) + fan_in.get(base_module, 0) * 2 + fan_out.get(rel_path, 0)
         )
         hotspots.append(
             {
@@ -184,7 +185,7 @@ def main():
                 "loc": s["loc"],
             }
         )
-    hotspots = sorted(hotspots, key=lambda x: x["score"], reverse=True)[:20]
+    hotspots = sorted(hotspots, key=lambda x: int(str(x["score"])), reverse=True)[:20]
 
     report = {
         "files_analyzed": len(stats),

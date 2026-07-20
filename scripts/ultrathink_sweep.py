@@ -1,9 +1,8 @@
 import os
 import subprocess
-import time
 
 
-def ultrathink_sweep():
+def ultrathink_sweep() -> None:
     print("[ULTRATHINK P0] Iniciando Barrido Termodinámico Profundo (C5-REAL)...")
 
     # 1. Verificar zombies Node/Extension Host

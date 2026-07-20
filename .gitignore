@@ -41,3 +41,5 @@ scratch/
 
 bin/babylon60.sh.bak
 db/chroma_memory/
+mypy_errors.txt
+fix_mypy.py

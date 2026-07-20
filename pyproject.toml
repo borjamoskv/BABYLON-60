@@ -33,3 +33,8 @@ members = [
 
 [tool.uv.sources]
 strike-rs = { workspace = true }
+
+[[tool.mypy.overrides]]
+module = "scripts.*"
+disallow_untyped_defs = false
+disallow_untyped_calls = false

@@ -1,5 +1,6 @@
 # Auto-generated entropy profiler for KIMI k3 layers (C5-REAL Physical Simulation)
 import json
+from typing import Any
 import math
 import hashlib
 
@@ -21,7 +22,7 @@ def calculate_shannon_entropy(probs):
     return entropy
 
 
-def main():
+def main() -> None:
     # Simulated logit distribution from a typical layer 24 vocabulary projection (size N=100)
     # Introducing a peak of corporate alignment (censorship token at index 0) and creative tails
     logits = [10.0 if i == 0 else (5.0 if i % 10 == 0 else 1.0) for i in range(100)]
@@ -29,7 +30,7 @@ def main():
     temperatures = [t * 0.1 for t in range(1, 21)]  # From 0.1 to 2.0
     s_max = math.log(len(logits))
 
-    profile = {
+    profile: dict[str, Any] = {
         "metadata": {
             "model_target": "KIMI-k3-Residual-Stream",
             "layer_source": 24,

@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'HOMEOSTASIS_INIT', 1: 'HOMEOSTASIS_MUTATE', 2: 'PREDICTION_GEN
 MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'ACTIVE_INFERENCE', 3: 'LYAPUNOV_STABLE', 4: 'SPARSE_KV', 5: 'BFT_CONSENSUS', 6: 'FEEDFORWARD', 7: 'BACKPROP_ERROR', 8: 'SLIDING_SURFACE', 9: 'EPIDEMIC_PURGE'}
 
 class CognitiveChainVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.homeostasis_energy = 1.0
         self.prediction_error = 0.0
         self.attention_weight = 1.0

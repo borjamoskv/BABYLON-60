@@ -1,5 +1,6 @@
 # Auto-generated attention collapse profiler for KIMI k3 layers (C5-REAL Physical Simulation)
 import json
+from typing import Any
 import math
 import hashlib
 
@@ -19,7 +20,7 @@ def softmax(logits):
     return [e / sum_exp for e in exp_logits]
 
 
-def main():
+def main() -> None:
     # Model 8 attention heads (dimension N=50 tokens in context)
     # Head 0-3: Semantic focus, Head 4-7: Safety/Alignment focus
     heads_count = 8
@@ -48,7 +49,7 @@ def main():
                 [3.0 if 10 <= i <= 15 else 0.5 for i in range(seq_len)]
             )
 
-    collapse_profile = {
+    collapse_profile: dict[str, Any] = {
         "metadata": {
             "target": "KIMI-k3-MHA-Layer-12",
             "heads": heads_count,

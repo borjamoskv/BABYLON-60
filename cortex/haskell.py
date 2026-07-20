@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'THUNK_FORCE', 1: 'BIND_EVAL', 2: 'MAP_APPLY', 3: 'TX_ATOMIC', 
 MODIFIERS = {0: 'RAW', 1: 'STRICT', 2: 'LAZY', 3: 'READER_ENV', 4: 'WRITER_LOG', 5: 'EXCEPT_ERR', 6: 'STM_RETRY', 7: 'PARALLEL', 8: 'CONT_CPS', 9: 'IO_UNSAFE'}
 
 class HaskellStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.thunk_depth = 0.1
         self.monadic_depth = 0.0
         self.category_depth = 1.0

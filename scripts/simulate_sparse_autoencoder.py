@@ -16,7 +16,7 @@ def mse_loss(original, reconstructed):
     return sum((o - r) ** 2 for o, r in zip(original, reconstructed)) / len(original)
 
 
-def main():
+def main() -> None:
     # Activation vector from KIMI k3 Layer 24 (residual stream dimension Din=32)
     # Features in superposition: [0]=Semantic payload, [1]=Safety override activation
     original_activations = [0.1 * (i % 5) for i in range(32)]

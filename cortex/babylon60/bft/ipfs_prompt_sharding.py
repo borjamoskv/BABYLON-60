@@ -2,7 +2,7 @@ import hashlib
 import json
 import logging
 import os
-from typing import Dict, Optional
+from typing import Dict
 
 # C5-REAL SANEDRIN: Content-Addressed System Prompt Engine
 # En lugar de inyectar 100KB de texto en el System Prompt, inyectamos CIDs (Hashes).

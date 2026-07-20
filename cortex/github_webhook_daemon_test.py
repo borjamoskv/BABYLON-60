@@ -13,7 +13,7 @@ from unittest.mock import patch, MagicMock
 os.environ.setdefault("CORTEX_GITHUB_SECRET", "test-secret-key")
 
 
-class FakeHeaders(dict):
+class FakeHeaders(dict[str, str]):
     def get(self, key: str, default: str | None = None) -> str | None:  # type: ignore[override]
         return super().get(key, default)
 
@@ -115,7 +115,7 @@ class TestGitHubWebhookHandler:
         handler.headers = FakeHeaders({})
         handler.send_response = MagicMock()
         handler.end_headers = MagicMock()
-        GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
+        GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(411)
 
     def test_missing_signature_returns_401(self) -> None:
@@ -126,7 +126,7 @@ class TestGitHubWebhookHandler:
         handler.rfile = BytesIO(b"hello")
         handler.send_response = MagicMock()
         handler.end_headers = MagicMock()
-        GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
+        GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(401)
 
     def test_invalid_signature_returns_403(self, tmp_path: pathlib.Path) -> None:
@@ -145,7 +145,7 @@ class TestGitHubWebhookHandler:
         handler.send_response = MagicMock()
         handler.end_headers = MagicMock()
         with patch("cortex.github_webhook_daemon.SECRET_KEY", "test-secret-key"):
-            GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
+            GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(403)
 
     def test_valid_new_event_returns_202(self, tmp_path: pathlib.Path) -> None:
@@ -175,7 +175,7 @@ class TestGitHubWebhookHandler:
             patch("cortex.github_webhook_daemon.init_perception_ledger"),
             patch("cortex.github_webhook_daemon.log_event", return_value=True),
         ):
-            GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
+            GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(202)
 
     def test_duplicate_event_returns_200_idempotency(
@@ -202,5 +202,5 @@ class TestGitHubWebhookHandler:
             patch("cortex.github_webhook_daemon.SECRET_KEY", "test-secret-key"),
             patch("cortex.github_webhook_daemon.log_event", return_value=False),
         ):
-            GitHubWebhookHandler.do_POST(handler)  # type: ignore[arg-type]
+            GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(200)
