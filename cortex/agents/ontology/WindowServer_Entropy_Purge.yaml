@@ -1,0 +1,14 @@
+Claim: C5-REAL (KINETIC) vs C4-SIM (SLOP) - WindowServer Starvation Purge
+Proof: 
+  Base: Thermodynamic Blockade Annihilation (PIDs 15364, 15365)
+  Range: Global (macOS SkyLight Queue)
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Pantalla negra" -> "WindowServer ping timeout (Starvation)"
+  - "Esperar/Reiniciar (Green Theater)" -> "SIGKILL (Brutalismo Cinético)"
+Blast_Radius_Matrix:
+  Vector: SkyLight queue daemons (studentd, universalaccessd)
+  Blast_Radius: Local UI lockup elimination
+  Target_Invariant: Void_Topology (Huecos lógicos = Vacíos Causales explícitos)
+  Anergy_Risk: Low
+CORTEX_TAINT: taint:borjamoskv:6ca756ee-7620-4114-a337-033c16d36735:2026-07-21T00:20:00Z:9945972dd163cb9da110e48c9af251848c979c2b673a8cfce85cee030da64167
