@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'INIT', 1: 'EXPAND', 2: 'EVALUATE', 3: 'BACKPROP', 4: 'PRUNE', 
 MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'ADAPTIVE_COT', 3: 'RETRO_ATTENTION', 4: 'FORWARD_INFLUENCE', 5: 'TURBO_QUANT', 6: 'META_PROPOSER', 7: 'FEEDFORWARD_OPEN', 8: 'SLIDING_WINDOW', 9: 'EPIDEMIC_PURGE'}
 
 class TTSHarnessState:
-    def __init__(self) -> None:
+    def __init__(self):
         self.mcts_budget_tokens = 0
         self.latent_value = 0.0
         self.harness_score = 0.0

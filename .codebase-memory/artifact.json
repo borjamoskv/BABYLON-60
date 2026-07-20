@@ -1,0 +1,11 @@
+{
+    "schema_version": 1,
+    "commit": "9e9467e5645dbbd2b0816413986611ac46f3f156",
+    "indexed_at": "2026-07-20T11:00:53Z",
+    "project": "Users-borjafernandezangulo-borjamoskv-Teorema-Robinson-Moskv",
+    "nodes": 30003,
+    "edges": 73730,
+    "original_size": 39976960,
+    "compressed_size": 3250679,
+    "compression_level": 9
+}

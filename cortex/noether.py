@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'INF_VARIATION', 1: 'LAGRANGIAN_DERIV', 2: 'ACTION_INTEGRAL', 3
 MODIFIERS = {0: 'RAW', 1: 'STRICT', 2: 'QUANTUM_QFT', 3: 'RELATIVISTIC', 4: 'NON_RELATIVISTIC', 5: 'COVARIANT', 6: 'CHIRAL', 7: 'SPONTANEOUS', 8: 'ANOMALOUS', 9: 'BFT_PERSISTENCE'}
 
 class NoetherStateVector:
-    def __init__(self) -> None:
+    def __init__(self):
         self.action_variation = 0.0
         self.noether_current_div = 0.0
         self.conserved_charge = 1.0

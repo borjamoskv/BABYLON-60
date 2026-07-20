@@ -8,7 +8,7 @@ class CallGraphVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
         self.call_graph: dict[str, set[str]] = defaultdict(set)
         self.module_calls: set[str] = set()
-        self.current_function = None
+        self.current_function: str | None = None
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         prev_function = self.current_function

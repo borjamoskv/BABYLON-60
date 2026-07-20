@@ -14,7 +14,7 @@ from typing import Any, Dict
 
 def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int, str]]:
     """Parse a 1000-primitive YAML taxonomy into (domains, primitives, modifiers)."""
-    with open(yaml_path) as f:
+    with open(yaml_path, encoding="utf-8") as f:
         content = f.read()
 
     domains: dict[int, str] = {}
@@ -61,11 +61,24 @@ def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int
 
 
 def write_output(path: str, lines: list[Any]) -> None:
-    """Atomically write generated source lines to *path*, creating parent dirs."""
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w") as f:
-        f.write("\n".join(str(ln) for ln in lines))
+    """Atomically write generated source lines to *path*, creating parent dirs (Ω41)."""
+    dir_name = os.path.dirname(path)
+    if dir_name:
+        os.makedirs(dir_name, exist_ok=True)
+    tmp_path = path + ".tmp"
+    try:
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(str(ln) for ln in lines))
+        os.replace(tmp_path, path)
+    except Exception as e:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
+        raise e
     print(f"Generated: {path}")
+
 
 
 def get_ledger_hash(ledger_path: str = "mundo_f_ledger.yml") -> str | None:
@@ -568,4 +581,73 @@ CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {
         "hs_module": "Primitives.Kimi1000",
         "hs_file": "primitives/Kimi1000.hs",
     },
+    "Playwright": {
+        "yaml": "cortex/ontology/playwright_1000_taxonomy.yaml",
+        "prefix_upper": "PW",
+        "go_ident": "PlaywrightIdentity",
+        "go_state": "PlaywrightStateVector",
+        "go_handler": "PlaywrightHandler",
+        "go_table": "PlaywrightTable",
+        "go_metrics": "PlaywrightMetrics",
+        "go_init": "InitPlaywrightKernel",
+        "go_dispatch": "DispatchPlaywright",
+        "go_count": "GetPlaywrightExecutionCount",
+        "rust_ident": "PlaywrightIdentity",
+        "rust_state": "PlaywrightStateVector",
+        "rust_dispatch": "dispatch_playwright",
+        "py_state": "PlaywrightStateVector",
+        "py_resolve": "resolve_playwright_identity",
+        "py_dispatch": "dispatch_playwright",
+        "py_key": "dom_stability_index",
+        "go_fields": [
+            "BrowserActive     bool",
+            "PageCount         uint64",
+            "LastLoadTimeMS    float64",
+            "DomStabilityIndex float64",
+            "NetworkIdleState  bool",
+        ],
+        "rust_fields": [
+            "pub browser_active: bool,",
+            "pub page_count: u64,",
+            "pub last_load_time_ms: f64,",
+            "pub dom_stability_index: f64,",
+            "pub network_idle_state: bool,",
+        ],
+        "rust_new": [
+            "browser_active: false,",
+            "page_count: 0,",
+            "last_load_time_ms: 0.0,",
+            "dom_stability_index: 1.0,",
+            "network_idle_state: true,",
+        ],
+        "py_fields": [
+            "self.browser_active = False",
+            "self.page_count = 0",
+            "self.last_load_time_ms = 0.0",
+            "self.dom_stability_index = 1.0",
+            "self.network_idle_state = True",
+        ],
+        "go_sim": [
+            "vec.BrowserActive = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose",
+            "if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount++ }",
+            "vec.LastLoadTimeMS = math.Abs(math.Sin(float64(id.Code))) * 120.0",
+            "vec.DomStabilityIndex = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex * 0.95 + 0.05 * math.Cos(float64(id.Code))))",
+            "vec.NetworkIdleState = id.Modifier == PlaywrightModifierWaitidle",
+        ],
+        "rust_sim": [
+            "vec.browser_active = d != 0 || p != 9;",
+            "if d == 0 && p == 0 { vec.page_count += 1; }",
+            "vec.last_load_time_ms = (code as f64).sin().abs() * 120.0;",
+            "vec.dom_stability_index = f64::max(0.0, f64::min(1.0, vec.dom_stability_index * 0.95 + 0.05 * (code as f64).cos()));",
+            "vec.network_idle_state = m == 3;",
+        ],
+        "py_sim": [
+            "vec.browser_active = d != 0 or p != 9",
+            "if d == 0 and p == 0: vec.page_count += 1",
+            "vec.last_load_time_ms = abs(math.sin(code)) * 120.0",
+            "vec.dom_stability_index = max(0.0, min(1.0, vec.dom_stability_index * 0.95 + 0.05 * math.cos(code)))",
+            "vec.network_idle_state = m == 3",
+        ],
+    },
 }
+

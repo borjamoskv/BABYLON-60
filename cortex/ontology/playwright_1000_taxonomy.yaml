@@ -1,0 +1,40 @@
+Claim: [PLAYWRIGHT-1000-SPACE] Playwright Browser Automation Taxonomy
+Proof: { Base: "Combinatorial Playwright Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+
+Formula: "[Domain][PlaywrightPrimitive][Modifier] = 1000 Playwright Automation States (300 Active Primitives)"
+
+Domains_Context:
+  0: "BROWSER_NAV"       # Browser Navigation and Tab Management
+  1: "DOM_INTERACT"      # Physical DOM Gestures and Inputs
+  2: "ASSERT_EXTRACT"    # Invariant Verification and Extraction
+  3: "RESERVED_3"        # Reserved for Network Interception
+  4: "RESERVED_4"        # Reserved for Session Hijacking Prevention
+  5: "RESERVED_5"        # Reserved for Multi-Tab Synchronization
+  6: "RESERVED_6"        # Reserved for Anti-Fingerprinting Spoofing
+  7: "RESERVED_7"        # Reserved for Local Storage Mocking
+  8: "RESERVED_8"        # Reserved for Accessibility Tree Audits
+  9: "RESERVED_9"        # Reserved for DevTools Protocol Raw Intercept
+
+Primitives_Action:
+  0: "INIT"             # Instantiate Browser / Session Page Context
+  1: "NAVIGATE"         # Go to URL / History Back & Forward / Refresh
+  2: "CLICK"            # Perform physical/virtual click or double-click
+  3: "TYPE"             # Inject characters or fill input boxes
+  4: "WAIT"             # Await selector, network idle, or timeout
+  5: "QUERY"            # Read text, HTML, attributes or element states
+  6: "CAPTURE"          # Take screenshot, export PDF or record trace
+  7: "MUTATE"           # Update viewport, cookies, or localStorage
+  8: "EVALUATE"         # Evaluate Javascript execution in page context
+  9: "CLOSE"            # Tear down page, context, or browser process
+
+Modifiers_Constraint:
+  0: "RAW"              # Unprocessed direct Playwright default execution
+  1: "ATOMIC"           # Atomic isolation, lock-free session state
+  2: "FORCE"            # Force action bypassing visibility checks
+  3: "WAIT_IDLE"        # Await network idle state after execution
+  4: "STEALTH"          # Enable antibot evasion and user-agent spoofing
+  5: "SYNC"             # Blocking execution flow on main daemon thread
+  6: "ASYNC"            # Non-blocking async event loop delegation
+  7: "SECURE"           # Incognito isolated context sandboxing
+  8: "RETRY"            # Automatic retry logic with exponential backoff
+  9: "SHADOW"           # Penetrate Shadow DOM hierarchy recursively

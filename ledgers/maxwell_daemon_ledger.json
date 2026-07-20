@@ -22,5 +22,17 @@
     "mutations_applied": 12,
     "status": "C5-REAL",
     "cortex_taint_signature": "taint:borjamoskv:bee4dcf3-21d8-46bb-97c4-c933ed4c6415:1784543777:16892499435654efeb9b2c045e9ec93af4b2771452e2b7060d2645524ccca973"
+  },
+  {
+    "session_id": "bee4dcf3-21d8-46bb-97c4-c933ed4c6415",
+    "timestamp": 1784543897,
+    "exergy_ratio": 0.6667,
+    "anergy_density": 0.04,
+    "tool_yield": 0.5,
+    "context_saturation": 0.42,
+    "thermal_waste": 1,
+    "mutations_applied": 12,
+    "status": "C5-REAL",
+    "cortex_taint_signature": "taint:borjamoskv:bee4dcf3-21d8-46bb-97c4-c933ed4c6415:1784543897:445f1758c0ae45832cadc721e67f05b5ddfd5f8e935f1e74343dd0f18beafe4d"
   }
 ]

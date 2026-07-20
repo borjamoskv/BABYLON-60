@@ -7,7 +7,7 @@ PRIMITIVES = {0: 'FORCE_CALC', 1: 'THESIS_VARIATION', 2: 'WAVE_FUNCTION', 3: 'ME
 MODIFIERS = {0: 'RAW', 1: 'STRICT', 2: 'COVARIANT', 3: 'PERTURBATIVE', 4: 'NON_PERTURBATIVE', 5: 'BOSONIC', 6: 'FERMIONIC', 7: 'COHERENT', 8: 'ASYMPTOTIC', 9: 'BFT_CONSENSUS'}
 
 class ConstantsStateVector:
-    def __init__(self) -> None:
+    def __init__(self):
         self.planck_scale_ratio = 1.616255e-35
         self.gravitational_coupling = 6.67430e-11
         self.electromagnetic_shielding = 1.602176634e-19
