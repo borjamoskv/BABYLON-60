@@ -3,8 +3,10 @@ import re
 import json
 
 
-def classify_omega_theorem(target_dir):
-    classification = {
+from typing import Any
+
+def classify_omega_theorem(target_dir: str) -> None:
+    classification: dict[str, list[Any]] = {
         "Observe": [],
         "Transform": [],
         "Verify": [],

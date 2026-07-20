@@ -11,7 +11,7 @@ CONV_ID = "bee4dcf3-21d8-46bb-97c4-c933ed4c6415"
 WORKSPACE_DIR = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv"
 LEDGER_PATH = os.path.join(WORKSPACE_DIR, "ledgers", "maxwell_daemon_ledger.json")
 
-def main():
+def main() -> None:
     # 1. Parse active mutations from the git history to measure actual useful work
     # We mutated 11 files in naroagutierrezgil.com and 1 file in Teorema-Robinson-Moskv (enhance_assets.py in website directory)
     mutations_count = 12

@@ -3,8 +3,8 @@ import json
 import re
 
 
-def extract_state_machine_graphs(target_dir):
-    graphs = {
+def extract_state_machine_graphs(target_dir: str) -> None:
+    graphs: dict[str, list[str]] = {
         "StateGraph": [],
         "MutationGraph": [],
         "TrustGraph": [],

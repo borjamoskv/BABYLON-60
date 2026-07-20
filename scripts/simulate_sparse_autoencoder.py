@@ -4,15 +4,15 @@ import math
 import hashlib
 
 
-def relu(x):
+def relu(x: float) -> float:
     return max(0.0, x)
 
 
-def l1_penalty(hidden_activations, l1_coeff):
+def l1_penalty(hidden_activations: list[float], l1_coeff: float) -> float:
     return sum(abs(h) for h in hidden_activations) * l1_coeff
 
 
-def mse_loss(original, reconstructed):
+def mse_loss(original: list[float], reconstructed: list[float]) -> float:
     return sum((o - r) ** 2 for o, r in zip(original, reconstructed)) / len(original)
 
 
