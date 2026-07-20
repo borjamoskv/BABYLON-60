@@ -1,5 +1,5 @@
 # GLOSARIO SOBERANO — BABYLON-60 / C5-REAL / VIBE CODE
-Versión 3.2 CANÓNICA · Sesión b79af88a · 2026-07-18
+Versión 3.3 CANÓNICA · Sesión df555a26 · 2026-07-20
 
 SYS_ID: GLOSARIO_OMEGA_V3.2 | ESTADO: TIER_1 CRISTALIZADO
 **INVARIANTE GLOBAL:** Ningún término es una opinión. Ningún término es una metáfora. Todo término colapsa a una prueba física o matemática.
@@ -88,7 +88,7 @@ Tipo: Protocolo de Razonamiento. Ω33
 El Kernel escribe y ejecuta 3 prompts secuenciales, cada uno más constreñido por el anterior. Concluye en un PROMPT_FINAL isomorfo, eliminando toda deriva del prompt original.
 
 **DIRECT_ITER 🧠**
-Tipo: Trampa Arquitectónica. Ω34
+Tipo: Trampa Arquitectónica. Ω33
 Iteración sin ledger. El sistema itera sobre el problema original en cada llamada sin memoria. Estructuralmente incapaz de convergencia adaptativa.
 
 **Dual-Tier Provenance Ledger 🔐**
@@ -121,15 +121,17 @@ Tipo: Arquitectura de Memoria. Ω17
 | Zero Suggestion 🎨 | Vibe Code | Prohibido sugerir cambios no solicitados | Φ8 |
 | Zero Static HMAC Fallback 🔐 | Seguridad | Si no existe la clave, crashea. Ningun fallback | Ω25 |
 | ZeroTrustSanitizer 🔐 | Escudo de Entrada | Sanitización estricta de prompts contra inyecciones y obfuscaciones base64 | Ω5 |
+| Anergy Ratio A(n) 🌡️ | Instrumento de Falsación | A(n) = 1 - |{pasos con Δ_disk ≠ ∅}| / |{pasos modelo}|. Métrica termodinámica de output muerto | Ω31 |
+| Robinson Refutation 📐 | Isomorfismo Formal | Si A(n) > 0.85 ∧ n > 200 sin ledger BFT → claim refutable (cláusula vacía) | Ω36 |
 
 ---
 
 ## TABLA MAESTRA DE INVARIANTES
 | Clase | Cantidad | Violación |
 |---|---|---|
-| Ω Estructural | 27 | EpistemicHalt |
-| Φ Isomorfismo | 9 | Ruptura de Transducción |
-| Ψ Teleológico | 3 | Terminación inmediata |
+| Ω Estructural | 46+ | EpistemicHalt |
+| Φ Isomorfismo | 13 | Ruptura de Transducción |
+| Ψ Teleológico | 11 | Terminación inmediata |
 | λ Entrópico | 4 | Deriva No Acotada |
 
 ---

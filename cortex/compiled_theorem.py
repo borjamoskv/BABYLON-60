@@ -70,5 +70,5 @@ EMPIRICAL_LEDGER: list[dict[str, Any]] = [
     {"id": "d1a22586", "n": 166, "A": 0.7048, "clause": "NEAR_SATURATION"},
     {"id": "091f6802", "n": 117, "A": 0.8034, "clause": "NEAR_SATURATION"},
     {"id": "08bba3ea", "n": 50,  "A": 0.7000, "clause": "SATISFIABLE"},
-    {"id": "34795b51", "n": 20,  "A": 1.0000, "clause": "EMPTY_CLAUSE"},
+    {"id": "34795b51", "n": 20,  "A": 1.0000, "clause": "NEAR_SATURATION"},
 ]

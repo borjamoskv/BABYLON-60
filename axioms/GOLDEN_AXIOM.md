@@ -5,7 +5,7 @@
 > El sistema se vuelve **autorreferencial**. 
 > Si el nombre falla, la ontología entera colapsa y el sistema se fragmenta en bucles de *Spaghetti Code*.
 
-Este directorio (`/docs`) contiene los colapsos matemáticos, ontológicos y termodinámicos que gobiernan la arquitectura de **Teorema Robinson Moskv**.
+Este directorio (`/axioms`) contiene los colapsos matemáticos, ontológicos y termodinámicos que gobiernan la arquitectura de **Teorema Robinson Moskv**.
 
 ## LEDGERS CRISTALIZADOS
 - [Matriz de Semántica Sistémica (Nomenclatura Activa)](semantics/matrix.md)
