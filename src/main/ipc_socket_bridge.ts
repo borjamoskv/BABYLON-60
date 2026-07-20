@@ -12,8 +12,17 @@ export interface IpcPayload {
  * Conecta el Main Process de Electron (Node.js) con el Socket Unix del Agent Igor (Python).
  */
 export class IpcSocketBridge {
-  private socketPath = '/tmp/babylon60_igor.sock';
+  private socketPath: string;
   private client: net.Socket | null = null;
+
+  constructor() {
+    if (!process.env.CORTEX_IPC_SOCKET) {
+      console.error('[C5-REAL] FATAL (Ω14): CORTEX_IPC_SOCKET no está definido en el entorno. Prohibido hardcodear rutas.');
+      process.kill(process.pid, 'SIGKILL');
+    }
+    // Asignación segura garantizada por la purga de arriba
+    this.socketPath = process.env.CORTEX_IPC_SOCKET as string;
+  }
   private buffer: string = '';
 
   public connect(): void {
@@ -22,7 +31,8 @@ export class IpcSocketBridge {
     });
 
     this.client.on('error', (err) => {
-      throw new Error(`[C5-REAL] FATAL: IPC Connection Error. Fail-Fast Triggered. ${err.message}`);
+      console.error(`[C5-REAL] FATAL (Ω26): IPC Connection Error. Fail-Fast Triggered. ${err.message}`);
+      process.kill(process.pid, 'SIGKILL');
     });
 
     this.client.on('data', (data) => {
@@ -31,7 +41,12 @@ export class IpcSocketBridge {
       this.buffer = lines.pop() || '';
       for (const line of lines) {
         if (line.trim()) {
-          console.log('[C5-REAL] Parsed Agent Igor NDJSON:', JSON.parse(line));
+          try {
+            console.log('[C5-REAL] Parsed Agent Igor NDJSON:', JSON.parse(line));
+          } catch (e) {
+            console.error(`[C5-REAL] FATAL (Ω26): JSON Parse Error en IPC Payload. ${e instanceof Error ? e.message : 'Unknown'}`);
+            process.kill(process.pid, 'SIGKILL');
+          }
         }
       }
     });
@@ -41,7 +56,8 @@ export class IpcSocketBridge {
     if (this.client && !this.client.destroyed) {
       this.client.write(JSON.stringify(payload) + '\n');
     } else {
-      throw new Error('[C5-REAL] FATAL: Cannot send payload. IPC socket destroyed.');
+      console.error('[C5-REAL] FATAL (Ω43): Cannot send payload. IPC socket destroyed o desconectado.');
+      process.kill(process.pid, 'SIGKILL');
     }
   }
 
